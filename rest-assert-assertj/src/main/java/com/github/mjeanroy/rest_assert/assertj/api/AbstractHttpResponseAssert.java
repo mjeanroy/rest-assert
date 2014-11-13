@@ -123,4 +123,9 @@ public abstract class AbstractHttpResponseAssert<S extends AbstractHttpResponseA
 		httpResponses.assertIsSuccess(info, actual);
 		return myself;
 	}
+
+	public S isRedirection() {
+		httpResponses.assertIsRedirection(info, actual);
+		return myself;
+	}
 }

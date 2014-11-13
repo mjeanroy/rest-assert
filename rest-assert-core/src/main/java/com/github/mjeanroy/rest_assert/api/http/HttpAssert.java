@@ -390,6 +390,29 @@ public final class HttpAssert {
 		check(message, assertions.isSuccess(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is a redirection (i.e between
+	 * 300 and 399, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsRedirection(HttpResponse response) {
+		assertIsRedirection(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is a success (i.e between
+	 * 300 and 399, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsRedirection(String message, HttpResponse response) {
+		check(message, assertions.isRedirection(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());

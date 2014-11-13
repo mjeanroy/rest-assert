@@ -281,4 +281,19 @@ public class HttpResponses extends AbstractRestAssertions {
 		assertNotNull(info, actual);
 		check(info, assertions.isSuccess(actual));
 	}
+
+	/**
+	 * Asserts that http response status code is a redirection code (i.e between
+	 * 300 and 399, inclusive).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not between 300 and 399.
+	 */
+	public void assertIsRedirection(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isRedirection(actual));
+	}
 }

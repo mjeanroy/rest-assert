@@ -219,6 +219,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is a redirection status (i.e
+	 * between 300 and 399).
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is a success, false otherwise.
+	 */
+	public AssertionResult isRedirection(HttpResponse httpResponse) {
+		return isStatusBetween(httpResponse, 300, 399);
+	}
+
+	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.
