@@ -436,6 +436,29 @@ public final class HttpAssert {
 		check(message, assertions.isClientError(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is a client error (i.e between
+	 * 500 and 599, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsServerError(HttpResponse response) {
+		assertIsServerError(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is a server error (i.e between
+	 * 500 and 599, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsServerError(String message, HttpResponse response) {
+		check(message, assertions.isServerError(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());

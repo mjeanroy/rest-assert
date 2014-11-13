@@ -133,4 +133,9 @@ public abstract class AbstractHttpResponseAssert<S extends AbstractHttpResponseA
 		httpResponses.assertIsClientError(info, actual);
 		return myself;
 	}
+
+	public S isServerError() {
+		httpResponses.assertIsServerError(info, actual);
+		return myself;
+	}
 }

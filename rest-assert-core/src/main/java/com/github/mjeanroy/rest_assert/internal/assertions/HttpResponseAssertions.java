@@ -230,6 +230,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is a server error status (i.e
+	 * between 500 and 599).
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is a server error, false otherwise.
+	 */
+	public AssertionResult isServerError(HttpResponse httpResponse) {
+		return isStatusBetween(httpResponse, 500, 599);
+	}
+
+	/**
 	 * Check that status code of http response is a client error status (i.e
 	 * between 400 and 499).
 	 *
