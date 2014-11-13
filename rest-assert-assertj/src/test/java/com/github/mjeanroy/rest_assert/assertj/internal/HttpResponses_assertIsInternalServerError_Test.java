@@ -22,29 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.assertj.internal;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import org.assertj.core.api.AssertionInfo;
 
-/**
- * Error thrown when an http response status is not equals
- * to an expected status code.
- */
-public class ShouldHaveStatus extends AbstractError {
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveStatus(String message, Object... args) {
-		super(message, args);
+public class HttpResponses_assertIsInternalServerError_Test extends AbstractHttpResponsesTest {
+
+	@Override
+	protected int status() {
+		return 500;
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param actualStatus Actual status (a.k.a http response status code).
-	 * @param expectedStatus Expected status code.
-	 * @return Error.
-	 */
-	public static ShouldHaveStatus shouldHaveStatus(int actualStatus, int expectedStatus) {
-		return new ShouldHaveStatus("Expecting status code to be %s but was %s", expectedStatus, actualStatus);
+	@Override
+	protected void test(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsInternalServerError(info, httpResponse);
 	}
 }

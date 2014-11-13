@@ -45,4 +45,20 @@ public final class Utils {
 	public static <T> T firstNonNull(T obj1, T obj2) {
 		return obj1 != null ? obj1 : obj2;
 	}
+
+	/**
+	 * Check that a given value is not null.
+	 * If value is null, a {@link NullPointerException} will be thrown
+	 * with given message.
+	 * @param obj Value to check.
+	 * @param message Message given in {@link NullPointerException}.
+	 * @param <T> Type of object.
+	 * @return Original object if it is not null.
+	 */
+	public static <T> T notNull(T obj, String message) {
+		if (obj == null) {
+			throw new NullPointerException(message);
+		}
+		return obj;
+	}
 }

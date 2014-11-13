@@ -22,29 +22,40 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
-
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+package com.github.mjeanroy.rest_assert.error;
 
 /**
- * Error thrown when an http response status is not equals
- * to an expected status code.
+ * Simple contract to rest-assert error object.
+ * Each error object must provide:
+ * - A message with placeholders.
+ * - Arguments array that can be used to replace placeholders in original
+ *   message.
+ * - A formatted message (original message built with placeholders arguments).
  */
-public class ShouldHaveStatus extends AbstractError {
-
-	// Private constructor, use static factory instead
-	private ShouldHaveStatus(String message, Object... args) {
-		super(message, args);
-	}
+public interface RestAssertError {
 
 	/**
-	 * Build error.
+	 * Original message.
+	 * This message may contain placeholders patterns.
 	 *
-	 * @param actualStatus Actual status (a.k.a http response status code).
-	 * @param expectedStatus Expected status code.
-	 * @return Error.
+	 * @return Original message.
 	 */
-	public static ShouldHaveStatus shouldHaveStatus(int actualStatus, int expectedStatus) {
-		return new ShouldHaveStatus("Expecting status code to be %s but was %s", expectedStatus, actualStatus);
-	}
+	String message();
+
+	/**
+	 * Arguments array that will replace placeholders patterns.
+	 * This array may be empty, no placeholders will be replaced.
+	 *
+	 * @return Arguments array.
+	 */
+	Object[] args();
+
+	/**
+	 * Build formatted error message.
+	 * Arguments array will be used in ordre to replace placeholders pattern
+	 * in original message.
+	 *
+	 * @return Formatted message.
+	 */
+	String buildMessage();
 }

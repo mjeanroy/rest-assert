@@ -1,0 +1,115 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+package com.github.mjeanroy.rest_assert.assertj.internal;
+
+import org.assertj.core.api.AssertionInfo;
+
+import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+/**
+ * Reusable assertions of http response.
+ * This class is implemented as a singleton.
+ * This class is thread safe.
+ */
+public class HttpResponses extends AbstractRestAssertions {
+
+	/**
+	 * Singleton instance.
+	 */
+	private static final HttpResponses INSTANCE = new HttpResponses();
+
+	/**
+	 * Returns the singleton instance of this class.
+	 */
+	public static HttpResponses instance() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Original assertions object, retrieved from core module.
+	 */
+	private HttpResponseAssertions assertions = HttpResponseAssertions.instance();
+
+	// Private constructor to ensure class is a singleton
+	private HttpResponses() {
+	}
+
+	/**
+	 * Asserts that http response status code is OK (200).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 200.
+	 */
+	public void assertIsOk(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isOk(actual));
+	}
+
+	/**
+	 * Asserts that http response status code is BAD REQUEST (400).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 400.
+	 */
+	public void assertIsBadRequest(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isBadRequest(actual));
+	}
+
+	/**
+	 * Asserts that http response status code is NOT FOUND (404).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 404.
+	 */
+	public void assertIsNotFound(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isNotFound(actual));
+	}
+
+	/**
+	 * Asserts that http response status code is INTERNAL SERVER ERROR (500).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 500.
+	 */
+	public void assertIsInternalServerError(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isInternalServerError(actual));
+	}
+}

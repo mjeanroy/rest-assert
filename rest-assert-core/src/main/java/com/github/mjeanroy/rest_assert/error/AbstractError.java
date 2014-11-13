@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.error;
 
-import java.util.Arrays;
+import static java.util.Arrays.copyOf;
 
 /**
  * Abstraction of error message.
  * String representation of error message should be formatted error.
  */
-public abstract class AbstractError {
+public abstract class AbstractError implements RestAssertError {
 
 	/**
 	 * Error message, with placeholders.
@@ -52,12 +52,7 @@ public abstract class AbstractError {
 	 */
 	protected AbstractError(String message, Object[] args) {
 		this.message = message;
-		if (args != null) {
-			this.args = args;
-		}
-		else {
-			this.args = new Object[]{};
-		}
+		this.args = copyOf(args, args.length);
 	}
 
 	/**
@@ -65,7 +60,8 @@ public abstract class AbstractError {
 	 *
 	 * @return Original message.
 	 */
-	public String getMessage() {
+	@Override
+	public String message() {
 		return message;
 	}
 
@@ -74,8 +70,9 @@ public abstract class AbstractError {
 	 *
 	 * @return Arguments.
 	 */
-	public Object[] getArgs() {
-		return Arrays.copyOf(args, args.length);
+	@Override
+	public Object[] args() {
+		return copyOf(args, args.length);
 	}
 
 	/**
@@ -83,7 +80,8 @@ public abstract class AbstractError {
 	 *
 	 * @return Formatted error message.
 	 */
-	protected String buildMessage() {
+	@Override
+	public String buildMessage() {
 		return String.format(message, args);
 	}
 

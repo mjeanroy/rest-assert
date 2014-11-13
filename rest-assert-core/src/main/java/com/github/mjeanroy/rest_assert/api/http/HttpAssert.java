@@ -24,60 +24,118 @@
 
 package com.github.mjeanroy.rest_assert.api.http;
 
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpStatus.BAD_REQUEST;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpStatus.INTERNAL_SERVER_ERROR;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpStatus.NOT_FOUND;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpStatus.OK;
 import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import com.github.mjeanroy.rest_assert.error.RestAssertError;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
+/**
+ * Static assertions.
+ */
 public final class HttpAssert {
 
+	private static HttpResponseAssertions assertions = HttpResponseAssertions.instance();
+
+	// Private constructor to ensure no instantiation
 	private HttpAssert() {
 	}
 
+	/**
+	 * Asserts that an status code of http response is "OK" (a.k.a 200).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
 	public static void assertIsOk(HttpResponse response) {
 		assertIsOk(null, response);
 	}
 
+	/**
+	 * Asserts that an status code of http response is "OK" (a.k.a 200).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
 	public static void assertIsOk(String message, HttpResponse response) {
-		assertIsStatusEqual(message, OK.getStatus(), response.getStatus());
+		check(message, assertions.isOk(response));
 	}
 
+
+	/**
+	 * Asserts that an status code of http response is "BAD REQUEST" (a.k.a 400).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
 	public static void assertIsBadRequest(HttpResponse response) {
 		assertIsBadRequest(null, response);
 	}
 
+	/**
+	 * Asserts that an status code of http response is "BAD REQUEST" (a.k.a 400).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
 	public static void assertIsBadRequest(String message, HttpResponse response) {
-		assertIsStatusEqual(message, BAD_REQUEST.getStatus(), response.getStatus());
+		check(message, assertions.isBadRequest(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is "NOT FOUND" (a.k.a 404).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param response Http response to check.
+	 */
 	public static void assertIsNotFound(HttpResponse response) {
 		assertIsNotFound(null, response);
 	}
 
+	/**
+	 * Asserts that an status code of http response is "NOT FOUND" (a.k.a 404).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
 	public static void assertIsNotFound(String message, HttpResponse response) {
-		assertIsStatusEqual(message, NOT_FOUND.getStatus(), response.getStatus());
+		check(message, assertions.isNotFound(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is "INTERNAL SERVER ERROR"
+	 * (a.k.a 500).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param response Http response to check.
+	 */
 	public static void assertIsInternalServerError(HttpResponse response) {
 		assertIsInternalServerError(null, response);
 	}
 
+	/**
+	 * Asserts that an status code of http response is "INTERNAL SERVER ERROR"
+	 * (a.k.a 500).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
 	public static void assertIsInternalServerError(String message, HttpResponse response) {
-		assertIsStatusEqual(message, INTERNAL_SERVER_ERROR.getStatus(), response.getStatus());
+		check(message, assertions.isInternalServerError(response));
 	}
 
-	private static void assertIsStatusEqual(String message, int status, int expectedStatus) {
-		if (status != expectedStatus) {
-			fail(message, shouldHaveStatus(status, expectedStatus));
+	private static void check(String message, AssertionResult result) {
+		if (result.isFailure()) {
+			fail(message, result.getError());
 		}
 	}
 
-	private static void fail(String message1, AbstractError message2) {
-		throw new AssertionError(firstNonNull(message1, message2.toString()));
+	private static void fail(String message1, RestAssertError message2) {
+		throw new AssertionError(firstNonNull(message1, message2.buildMessage()));
 	}
 }

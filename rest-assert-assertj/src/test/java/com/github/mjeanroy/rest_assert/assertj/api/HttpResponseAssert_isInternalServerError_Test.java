@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,29 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.assertj.api;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import static org.mockito.Mockito.*;
 
-/**
- * Error thrown when an http response status is not equals
- * to an expected status code.
- */
-public class ShouldHaveStatus extends AbstractError {
+import org.assertj.core.api.AssertionInfo;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveStatus(String message, Object... args) {
-		super(message, args);
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+public class HttpResponseAssert_isInternalServerError_Test extends AbstractHttpResponseTest {
+
+	@Override
+	protected int status() {
+		return 500;
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param actualStatus Actual status (a.k.a http response status code).
-	 * @param expectedStatus Expected status code.
-	 * @return Error.
-	 */
-	public static ShouldHaveStatus shouldHaveStatus(int actualStatus, int expectedStatus) {
-		return new ShouldHaveStatus("Expecting status code to be %s but was %s", expectedStatus, actualStatus);
+	@Override
+	protected HttpResponseAssert invoke() {
+		return assertions.isInternalServerError();
+	}
+
+	@Override
+	protected void verifyApiCall() {
+		verify(httpResponses).assertIsInternalServerError(any(AssertionInfo.class), any(HttpResponse.class));
 	}
 }

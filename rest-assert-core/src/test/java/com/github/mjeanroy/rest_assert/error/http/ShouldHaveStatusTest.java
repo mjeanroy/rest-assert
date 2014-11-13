@@ -33,7 +33,7 @@ public class ShouldHaveStatusTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldHaveStatus shouldHaveStatus = shouldHaveStatus(200, 400);
+		ShouldHaveStatus shouldHaveStatus = shouldHaveStatus(400, 200);
 		assertThat(shouldHaveStatus).isNotNull();
 		assertThat(shouldHaveStatus.toString()).isEqualTo("Expecting status code to be 200 but was 400");
 	}

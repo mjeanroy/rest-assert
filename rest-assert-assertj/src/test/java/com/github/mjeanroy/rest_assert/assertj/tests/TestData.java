@@ -22,29 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.assertj.tests;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-/**
- * Error thrown when an http response status is not equals
- * to an expected status code.
- */
-public class ShouldHaveStatus extends AbstractError {
+import org.assertj.core.api.AssertionInfo;
+import org.assertj.core.api.WritableAssertionInfo;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveStatus(String message, Object... args) {
-		super(message, args);
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+public final class TestData {
+
+	public static AssertionInfo someInfo() {
+		return new WritableAssertionInfo();
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param actualStatus Actual status (a.k.a http response status code).
-	 * @param expectedStatus Expected status code.
-	 * @return Error.
-	 */
-	public static ShouldHaveStatus shouldHaveStatus(int actualStatus, int expectedStatus) {
-		return new ShouldHaveStatus("Expecting status code to be %s but was %s", expectedStatus, actualStatus);
+	public static HttpResponse newHttpResponseWithStatus(int status) {
+		HttpResponse httpResponse = mock(HttpResponse.class);
+		when(httpResponse.getStatus()).thenReturn(status);
+		return httpResponse;
 	}
 }
