@@ -226,6 +226,20 @@ public class HttpResponses extends AbstractRestAssertions {
 	}
 
 	/**
+	 * Asserts that http response status code is UNSUPPORTED MEDIA TYPE (415).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 415.
+	 */
+	public void assertIsUnsupportedMediaType(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isUnsupportedMediaType(actual));
+	}
+
+	/**
 	 * Asserts that http response status code is INTERNAL SERVER ERROR (500).
 	 *
 	 * @param info contains information about the assertion.

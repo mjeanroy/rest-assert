@@ -187,6 +187,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#UNSUPPORTED_MEDIA_TYPE}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is UNSUPPORTED MEDIA TYPE, false otherwise.
+	 */
+	public AssertionResult isUnsupportedMediaType(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.
