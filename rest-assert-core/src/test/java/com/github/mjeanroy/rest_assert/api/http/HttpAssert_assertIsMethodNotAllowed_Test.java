@@ -22,44 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.api.http;
 
-/**
- * List of http status.
- */
-public enum  HttpStatus {
+import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsMethodNotAllowed;
 
-	// 2XX
-	OK(200),
-	CREATED(201),
-	ACCEPTED(202),
-	NO_CONTENT(204),
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-	// 3XX
-	NOT_MODIFIED(304),
+public class HttpAssert_assertIsMethodNotAllowed_Test extends AbstractHttpStatusTest {
 
-	// 4XX
-	BAD_REQUEST(400),
-	UNAUTHORIZED(401),
-	FORBIDDEN(403),
-	NOT_FOUND(404),
-	METHOD_NOT_ALLOWED(405),
-	PRE_CONDITION_FAILED(412),
-
-	// 5XX
-	INTERNAL_SERVER_ERROR(500);
-
-	/**
-	 * Http status value.
-	 * This code is a valid http status.
-	 */
-	private final int status;
-
-	private HttpStatus(int status) {
-		this.status = status;
+	@Override
+	protected int status() {
+		return 405;
 	}
 
-	public int getStatus() {
-		return status;
+	@Override
+	protected void test(HttpResponse response) {
+		assertIsMethodNotAllowed(response);
+	}
+
+	@Override
+	protected void test(String message, HttpResponse response) {
+		assertIsMethodNotAllowed(message, response);
 	}
 }

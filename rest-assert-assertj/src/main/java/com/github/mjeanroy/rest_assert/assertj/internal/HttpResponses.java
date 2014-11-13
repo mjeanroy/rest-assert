@@ -198,6 +198,20 @@ public class HttpResponses extends AbstractRestAssertions {
 	}
 
 	/**
+	 * Asserts that http response status code is METHOD NOT ALLOWED (405).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 405.
+	 */
+	public void assertIsMethodNotAllowed(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isMethodNotAllowed(actual));
+	}
+
+	/**
 	 * Asserts that http response status code is INTERNAL SERVER ERROR (500).
 	 *
 	 * @param info contains information about the assertion.

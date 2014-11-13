@@ -167,6 +167,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#METHOD_NOT_ALLOWED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is METHOD NOT ALLOWED, false otherwise.
+	 */
+	public AssertionResult isMethodNotAllowed(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.METHOD_NOT_ALLOWED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.

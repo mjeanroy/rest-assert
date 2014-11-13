@@ -84,6 +84,11 @@ public abstract class AbstractHttpResponseAssert<S extends AbstractHttpResponseA
 		return myself;
 	}
 
+	public S isMethodNotAllowed() {
+		httpResponses.assertIsMethodNotAllowed(info, actual);
+		return myself;
+	}
+
 	public S isBadRequest() {
 		httpResponses.assertIsBadRequest(info, actual);
 		return myself;
