@@ -22,21 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal;
+package com.github.mjeanroy.rest_assert.api.http;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsSuccess;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpResponses_assertIsMethodNotAllowed_Test extends AbstractHttpResponsesStatusTest {
+public class HttpAssert_assertIsSuccess_Test extends AbstractHttpStatusBetweenTest {
 
 	@Override
-	protected int status() {
-		return 405;
+	protected int start() {
+		return 200;
 	}
 
 	@Override
-	protected void test(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertIsMethodNotAllowed(info, httpResponse);
+	protected int end() {
+		return 299;
+	}
+
+	@Override
+	protected void invoke(HttpResponse response) {
+		assertIsSuccess(response);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse response) {
+		assertIsSuccess(message, response);
 	}
 }

@@ -28,7 +28,7 @@ import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpResponses_assertIsNotModified_Test extends AbstractHttpResponsesTest {
+public class HttpResponses_assertIsNotModified_Test extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {

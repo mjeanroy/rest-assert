@@ -367,6 +367,29 @@ public final class HttpAssert {
 		check(message, assertions.isNotImplemented(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is a success (i.e between
+	 * 200 and 299, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsSuccess(HttpResponse response) {
+		assertIsSuccess(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is a success (i.e between
+	 * 200 and 299, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsSuccess(String message, HttpResponse response) {
+		check(message, assertions.isSuccess(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());

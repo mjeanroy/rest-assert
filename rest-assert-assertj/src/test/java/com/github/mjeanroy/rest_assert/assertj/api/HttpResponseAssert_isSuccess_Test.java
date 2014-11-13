@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,21 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal;
+package com.github.mjeanroy.rest_assert.assertj.api;
+
+import static org.mockito.Mockito.*;
 
 import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpResponses_assertIsMethodNotAllowed_Test extends AbstractHttpResponsesStatusTest {
+public class HttpResponseAssert_isSuccess_Test extends AbstractHttpResponseTest {
 
 	@Override
 	protected int status() {
-		return 405;
+		return 200;
 	}
 
 	@Override
-	protected void test(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertIsMethodNotAllowed(info, httpResponse);
+	protected HttpResponseAssert invoke() {
+		return assertions.isSuccess();
+	}
+
+	@Override
+	protected void verifyApiCall() {
+		verify(httpResponses).assertIsSuccess(any(AssertionInfo.class), any(HttpResponse.class));
 	}
 }

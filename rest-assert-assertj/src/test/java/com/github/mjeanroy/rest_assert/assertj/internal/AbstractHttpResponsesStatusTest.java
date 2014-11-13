@@ -35,7 +35,7 @@ import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public abstract class AbstractHttpResponsesTest {
+public abstract class AbstractHttpResponsesStatusTest {
 
 	protected HttpResponses httpResponses = HttpResponses.instance();
 

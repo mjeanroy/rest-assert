@@ -266,4 +266,19 @@ public class HttpResponses extends AbstractRestAssertions {
 		assertNotNull(info, actual);
 		check(info, assertions.isInternalServerError(actual));
 	}
+
+	/**
+	 * Asserts that http response status code is a success code (i.e between
+	 * 200 and 299, inclusive).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not between 200 and 299.
+	 */
+	public void assertIsSuccess(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isSuccess(actual));
+	}
 }

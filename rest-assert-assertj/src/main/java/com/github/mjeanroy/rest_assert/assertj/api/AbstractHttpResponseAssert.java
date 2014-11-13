@@ -118,4 +118,9 @@ public abstract class AbstractHttpResponseAssert<S extends AbstractHttpResponseA
 		httpResponses.assertIsInternalServerError(info, actual);
 		return myself;
 	}
+
+	public S isSuccess() {
+		httpResponses.assertIsSuccess(info, actual);
+		return myself;
+	}
 }

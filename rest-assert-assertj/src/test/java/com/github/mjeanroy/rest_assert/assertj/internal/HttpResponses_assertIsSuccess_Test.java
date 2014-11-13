@@ -28,15 +28,20 @@ import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpResponses_assertIsMethodNotAllowed_Test extends AbstractHttpResponsesStatusTest {
+public class HttpResponses_assertIsSuccess_Test extends AbstractHttpResponsesStatusBetweenTest {
 
 	@Override
-	protected int status() {
-		return 405;
+	protected int start() {
+		return 200;
 	}
 
 	@Override
-	protected void test(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertIsMethodNotAllowed(info, httpResponse);
+	protected int end() {
+		return 299;
+	}
+
+	@Override
+	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsSuccess(info, httpResponse);
 	}
 }

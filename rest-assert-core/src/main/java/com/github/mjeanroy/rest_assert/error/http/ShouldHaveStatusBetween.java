@@ -22,21 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+/**
+ * Error thrown when an http response status is not between
+ * lower and upper bound
+ */
+public class ShouldHaveStatusBetween extends AbstractError {
 
-public class HttpResponses_assertIsMethodNotAllowed_Test extends AbstractHttpResponsesStatusTest {
-
-	@Override
-	protected int status() {
-		return 405;
+	// Private constructor, use static factory instead
+	private ShouldHaveStatusBetween(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected void test(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertIsMethodNotAllowed(info, httpResponse);
+	/**
+	 * Build error.
+	 *
+	 * @param actualStatus Actual status (a.k.a http response status code).
+	 * @param start Lower bound (inclusive).
+	 * @param end Upper bound (inclusive).
+	 * @return Error.
+	 */
+	public static ShouldHaveStatusBetween shouldHaveStatusBetween(int actualStatus, int start, int end) {
+		return new ShouldHaveStatusBetween("Expecting status code to be between %s and %s but was %s", start, end, actualStatus);
 	}
 }
