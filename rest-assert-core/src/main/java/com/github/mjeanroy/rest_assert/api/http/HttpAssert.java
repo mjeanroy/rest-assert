@@ -127,6 +127,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that an status code of http response is "NOT MODIFIED" (a.k.a 304).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsNotModified(HttpResponse response) {
+		assertIsNotModified(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "NOT MODIFIED" (a.k.a 304).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsNotModified(String message, HttpResponse response) {
+		check(message, assertions.isNotModified(response));
+	}
+
+	/**
 	 * Asserts that an status code of http response is "BAD REQUEST" (a.k.a 400).
 	 * If it isn't it throws an {@link AssertionError} with default message.
 	 *

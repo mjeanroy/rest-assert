@@ -142,6 +142,20 @@ public class HttpResponses extends AbstractRestAssertions {
 	}
 
 	/**
+	 * Asserts that http response status code is NOT MODIFIED (304).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 404.
+	 */
+	public void assertIsNotModified(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isNotModified(actual));
+	}
+
+	/**
 	 * Asserts that http response status code is INTERNAL SERVER ERROR (500).
 	 *
 	 * @param info contains information about the assertion.

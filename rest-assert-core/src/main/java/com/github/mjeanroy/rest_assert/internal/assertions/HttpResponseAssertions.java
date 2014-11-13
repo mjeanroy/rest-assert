@@ -97,6 +97,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is NOT MODIFIED, false otherwise.
+	 */
+	public AssertionResult isNotModified(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.NOT_MODIFIED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
 	 *
 	 * @param httpResponse Http response.
