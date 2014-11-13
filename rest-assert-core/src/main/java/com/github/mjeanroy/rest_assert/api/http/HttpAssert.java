@@ -257,6 +257,29 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that an status code of http response is "CONFLICT"
+	 * (a.k.a 409).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsConflict(HttpResponse response) {
+		assertIsConflict(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "CONFLICT"
+	 * (a.k.a 409).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsConflict(String message, HttpResponse response) {
+		check(message, assertions.isConflict(response));
+	}
+
+	/**
 	 * Asserts that an status code of http response is "NOT FOUND" (a.k.a 404).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *

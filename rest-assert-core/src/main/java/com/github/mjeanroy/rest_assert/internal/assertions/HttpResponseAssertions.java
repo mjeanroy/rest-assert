@@ -177,6 +177,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#CONFLICT}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is CONFLICT, false otherwise.
+	 */
+	public AssertionResult isConflict(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.CONFLICT.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.

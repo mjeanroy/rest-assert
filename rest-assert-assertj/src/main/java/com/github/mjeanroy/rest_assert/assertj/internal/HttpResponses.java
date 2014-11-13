@@ -212,6 +212,20 @@ public class HttpResponses extends AbstractRestAssertions {
 	}
 
 	/**
+	 * Asserts that http response status code is CONFLICT (409).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 409.
+	 */
+	public void assertIsConflict(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isConflict(actual));
+	}
+
+	/**
 	 * Asserts that http response status code is INTERNAL SERVER ERROR (500).
 	 *
 	 * @param info contains information about the assertion.
