@@ -87,6 +87,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#NO_CONTENT}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is NO CONTENT, false otherwise.
+	 */
+	public AssertionResult isNoContent(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.NO_CONTENT.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
 	 *
 	 * @param httpResponse Http response.
