@@ -148,11 +148,25 @@ public class HttpResponses extends AbstractRestAssertions {
 	 * @param actual the actual http response.
 	 * @throws AssertionError if the actual value is {@code null}.
 	 *                        if the status code of the actual http response is
-	 *                        not 404.
+	 *                        not 304.
 	 */
 	public void assertIsNotModified(AssertionInfo info, HttpResponse actual) {
 		assertNotNull(info, actual);
 		check(info, assertions.isNotModified(actual));
+	}
+
+	/**
+	 * Asserts that http response status code is UNAUTHORIZED (401).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 401.
+	 */
+	public void assertIsUnauthorized(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isUnautorized(actual));
 	}
 
 	/**

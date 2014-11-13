@@ -107,6 +107,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#UNAUTHORIZED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is UNAUTHORIZED, false otherwise.
+	 */
+	public AssertionResult isUnautorized(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.UNAUTHORIZED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
 	 *
 	 * @param httpResponse Http response.
