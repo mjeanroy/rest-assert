@@ -67,6 +67,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#CREATED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is CREATED, false otherwise.
+	 */
+	public AssertionResult isCreated(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.CREATED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
 	 *
 	 * @param httpResponse Http response.

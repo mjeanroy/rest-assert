@@ -72,6 +72,20 @@ public class HttpResponses extends AbstractRestAssertions {
 	}
 
 	/**
+	 * Asserts that http response status code is OK (201).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 201.
+	 */
+	public void assertIsCreated(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isCreated(actual));
+	}
+
+	/**
 	 * Asserts that http response status code is BAD REQUEST (400).
 	 *
 	 * @param info contains information about the assertion.

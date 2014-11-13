@@ -63,6 +63,26 @@ public final class HttpAssert {
 		check(message, assertions.isOk(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is "OK" (a.k.a 200).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsCreated(HttpResponse response) {
+		assertIsCreated(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "CREATED" (a.k.a 201).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsCreated(String message, HttpResponse response) {
+		check(message, assertions.isCreated(response));
+	}
 
 	/**
 	 * Asserts that an status code of http response is "BAD REQUEST" (a.k.a 400).
