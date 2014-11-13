@@ -154,7 +154,28 @@ public final class HttpAssert {
 	 * @param response Http response to check.
 	 */
 	public static void assertIsUnauthorized(String message, HttpResponse response) {
-		check(message, assertions.isUnautorized(response));
+		check(message, assertions.isUnauthorized(response));
+	}
+
+	/**
+	 * Asserts that an status code of http response is "FORBIDDEN" (a.k.a 403).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsForbidden(HttpResponse response) {
+		assertIsForbidden(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "FORBIDDEN" (a.k.a 403).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsForbidden(String message, HttpResponse response) {
+		check(message, assertions.isForbidden(response));
 	}
 
 	/**

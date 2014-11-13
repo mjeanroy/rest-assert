@@ -112,8 +112,18 @@ public final class HttpResponseAssertions {
 	 * @param httpResponse Http response.
 	 * @return True if http response is UNAUTHORIZED, false otherwise.
 	 */
-	public AssertionResult isUnautorized(HttpResponse httpResponse) {
+	public AssertionResult isUnauthorized(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.UNAUTHORIZED.getStatus());
+	}
+
+	/**
+	 * Check that status code of http response is {@link HttpStatus#FORBIDDEN}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is FORBIDDEN, false otherwise.
+	 */
+	public AssertionResult isForbidden(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.FORBIDDEN.getStatus());
 	}
 
 	/**

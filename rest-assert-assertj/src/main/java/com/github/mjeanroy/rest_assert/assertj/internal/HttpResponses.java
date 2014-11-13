@@ -166,7 +166,21 @@ public class HttpResponses extends AbstractRestAssertions {
 	 */
 	public void assertIsUnauthorized(AssertionInfo info, HttpResponse actual) {
 		assertNotNull(info, actual);
-		check(info, assertions.isUnautorized(actual));
+		check(info, assertions.isUnauthorized(actual));
+	}
+
+	/**
+	 * Asserts that http response status code is FORBIDDEN (403).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 403.
+	 */
+	public void assertIsForbidden(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isForbidden(actual));
 	}
 
 	/**
