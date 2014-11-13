@@ -157,6 +157,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#PRE_CONDITION_FAILED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is PRE CONDITION FAILED, false otherwise.
+	 */
+	public AssertionResult isPreConditionFailed(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.PRE_CONDITION_FAILED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.

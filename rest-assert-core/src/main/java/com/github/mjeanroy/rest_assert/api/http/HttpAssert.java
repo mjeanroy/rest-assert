@@ -211,6 +211,29 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that an status code of http response is "PRE CONDITION FAILED"
+	 * (a.k.a 412).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsPreConditionFailed(HttpResponse response) {
+		assertIsPreConditionFailed(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "PRE CONDITION FAILED"
+	 * (a.k.a 412).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsPreConditionFailed(String message, HttpResponse response) {
+		check(message, assertions.isPreConditionFailed(response));
+	}
+
+	/**
 	 * Asserts that an status code of http response is "NOT FOUND" (a.k.a 404).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
