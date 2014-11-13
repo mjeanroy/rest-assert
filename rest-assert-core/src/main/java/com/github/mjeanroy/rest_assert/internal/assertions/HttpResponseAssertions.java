@@ -197,6 +197,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#NOT_IMPLEMENTED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is NOT IMPLEMENTED, false otherwise.
+	 */
+	public AssertionResult isNotImplemented(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.NOT_IMPLEMENTED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.

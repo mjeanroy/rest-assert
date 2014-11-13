@@ -99,6 +99,11 @@ public abstract class AbstractHttpResponseAssert<S extends AbstractHttpResponseA
 		return myself;
 	}
 
+	public S isNotImplemented() {
+		httpResponses.assertIsNotImplemented(info, actual);
+		return myself;
+	}
+
 	public S isBadRequest() {
 		httpResponses.assertIsBadRequest(info, actual);
 		return myself;

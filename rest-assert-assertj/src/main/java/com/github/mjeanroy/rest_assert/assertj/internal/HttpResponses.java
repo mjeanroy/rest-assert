@@ -240,6 +240,20 @@ public class HttpResponses extends AbstractRestAssertions {
 	}
 
 	/**
+	 * Asserts that http response status code is NOT IMPLEMENTED (401).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not 401.
+	 */
+	public void assertIsNotImplemented(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isNotImplemented(actual));
+	}
+
+	/**
 	 * Asserts that http response status code is INTERNAL SERVER ERROR (500).
 	 *
 	 * @param info contains information about the assertion.

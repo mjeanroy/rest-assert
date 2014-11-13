@@ -346,6 +346,27 @@ public final class HttpAssert {
 		check(message, assertions.isInternalServerError(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is "NOT IMPLEMENTED" (a.k.a 501).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsNotImplemented(HttpResponse response) {
+		assertIsNotImplemented(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "NOT IMPLEMENTED" (a.k.a 501).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsNotImplemented(String message, HttpResponse response) {
+		check(message, assertions.isNotImplemented(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());
