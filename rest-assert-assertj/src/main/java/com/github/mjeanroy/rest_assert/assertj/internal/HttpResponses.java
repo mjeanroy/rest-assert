@@ -296,4 +296,19 @@ public class HttpResponses extends AbstractRestAssertions {
 		assertNotNull(info, actual);
 		check(info, assertions.isRedirection(actual));
 	}
+
+	/**
+	 * Asserts that http response status code is a client error code (i.e between
+	 * 400 and 499, inclusive).
+	 *
+	 * @param info contains information about the assertion.
+	 * @param actual the actual http response.
+	 * @throws AssertionError if the actual value is {@code null}.
+	 *                        if the status code of the actual http response is
+	 *                        not between 400 and 499.
+	 */
+	public void assertIsClientError(AssertionInfo info, HttpResponse actual) {
+		assertNotNull(info, actual);
+		check(info, assertions.isClientError(actual));
+	}
 }

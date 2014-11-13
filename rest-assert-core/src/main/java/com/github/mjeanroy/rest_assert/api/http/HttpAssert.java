@@ -413,6 +413,29 @@ public final class HttpAssert {
 		check(message, assertions.isRedirection(response));
 	}
 
+	/**
+	 * Asserts that an status code of http response is a client error (i.e between
+	 * 400 and 499, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsClientError(HttpResponse response) {
+		assertIsClientError(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is a client error (i.e between
+	 * 400 and 499, inclusive).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsClientError(String message, HttpResponse response) {
+		check(message, assertions.isClientError(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());
