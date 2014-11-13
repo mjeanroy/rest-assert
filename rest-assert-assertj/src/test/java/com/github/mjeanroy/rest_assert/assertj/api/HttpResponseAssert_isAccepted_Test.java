@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,36 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.api;
 
-/**
- * List of http status.
- */
-public enum  HttpStatus {
+import static org.mockito.Mockito.*;
 
-	// 2XX
-	OK(200),
-	CREATED(201),
-	ACCEPTED(202),
+import org.assertj.core.api.AssertionInfo;
 
-	// 4XX
-	BAD_REQUEST(400),
-	NOT_FOUND(404),
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-	// 5XX
-	INTERNAL_SERVER_ERROR(500);
+public class HttpResponseAssert_isAccepted_Test extends AbstractHttpResponseTest {
 
-	/**
-	 * Http status value.
-	 * This code is a valid http status.
-	 */
-	private final int status;
-
-	private HttpStatus(int status) {
-		this.status = status;
+	@Override
+	protected int status() {
+		return 202;
 	}
 
-	public int getStatus() {
-		return status;
+	@Override
+	protected HttpResponseAssert invoke() {
+		return assertions.isAccepted();
+	}
+
+	@Override
+	protected void verifyApiCall() {
+		verify(httpResponses).assertIsAccepted(any(AssertionInfo.class), any(HttpResponse.class));
 	}
 }

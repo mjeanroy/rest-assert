@@ -77,6 +77,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#ACCEPTED}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return True if http response is ACCEPTED, false otherwise.
+	 */
+	public AssertionResult isAccepted(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.ACCEPTED.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
 	 *
 	 * @param httpResponse Http response.

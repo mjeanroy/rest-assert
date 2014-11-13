@@ -54,6 +54,11 @@ public abstract class AbstractHttpResponseAssert<S extends AbstractHttpResponseA
 		return myself;
 	}
 
+	public S isAccepted() {
+		httpResponses.assertIsAccepted(info, actual);
+		return myself;
+	}
+
 	public S isBadRequest() {
 		httpResponses.assertIsBadRequest(info, actual);
 		return myself;

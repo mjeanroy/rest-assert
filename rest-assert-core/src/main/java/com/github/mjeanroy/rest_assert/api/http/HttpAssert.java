@@ -85,6 +85,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that an status code of http response is "OK" (a.k.a 200).
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsAccepted(HttpResponse response) {
+		assertIsAccepted(null, response);
+	}
+
+	/**
+	 * Asserts that an status code of http response is "ACCEPTED" (a.k.a 202).
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsAccepted(String message, HttpResponse response) {
+		check(message, assertions.isAccepted(response));
+	}
+
+	/**
 	 * Asserts that an status code of http response is "BAD REQUEST" (a.k.a 400).
 	 * If it isn't it throws an {@link AssertionError} with default message.
 	 *

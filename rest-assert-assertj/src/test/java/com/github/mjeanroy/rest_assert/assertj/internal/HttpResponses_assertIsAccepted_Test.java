@@ -22,36 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.internal;
 
-/**
- * List of http status.
- */
-public enum  HttpStatus {
+import org.assertj.core.api.AssertionInfo;
 
-	// 2XX
-	OK(200),
-	CREATED(201),
-	ACCEPTED(202),
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-	// 4XX
-	BAD_REQUEST(400),
-	NOT_FOUND(404),
+public class HttpResponses_assertIsAccepted_Test extends AbstractHttpResponsesTest {
 
-	// 5XX
-	INTERNAL_SERVER_ERROR(500);
-
-	/**
-	 * Http status value.
-	 * This code is a valid http status.
-	 */
-	private final int status;
-
-	private HttpStatus(int status) {
-		this.status = status;
+	@Override
+	protected int status() {
+		return 202;
 	}
 
-	public int getStatus() {
-		return status;
+	@Override
+	protected void test(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsAccepted(info, httpResponse);
 	}
 }
