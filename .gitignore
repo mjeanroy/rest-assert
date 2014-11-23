@@ -3,6 +3,7 @@
 ########################
 *.class
 jsp/
+rest-assert-assertj/src/main/generated/
 
 ########################
 # Maven files          #

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal;
+package com.github.mjeanroy.rest_assert.assertj;
 
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.core.error.BasicErrorMessageFactory;

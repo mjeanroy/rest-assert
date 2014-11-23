@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,53 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api;
+package com.github.mjeanroy.rest_assert.generator.templates.tmpls;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithStatus;
-import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
+import static com.github.mjeanroy.rest_assert.generator.templates.tmpls.ClassAssertTemplate.classAssertTemplate;
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+public class ClassAssertTemplateTest {
 
-public abstract class AbstractHttpResponseTest {
-
-	protected HttpResponses httpResponses;
-
-	protected HttpResponseAssert assertions;
+	private ClassAssertTemplate template;
 
 	@Before
-	public void setUp() throws Exception {
-		httpResponses = mock(HttpResponses.class);
-		assertions = new HttpResponseAssert(newHttpResponseWithStatus(status()));
-		inject();
+	public void setUp() {
+		template = classAssertTemplate();
 	}
 
 	@Test
-	public void it_should_invoke_internal_api() throws Exception {
-		invoke();
-		verifyApiCall();
-		verifyNoMoreInteractions(httpResponses);
+	public void it_should_get_path() {
+		assertThat(template.getPath()).isEqualTo("/ClassAssertTemplate.txt");
 	}
 
 	@Test
-	public void it_should_return_instance() {
-		HttpResponseAssert result = invoke();
-		assertThat(result)
-				.isNotNull()
-				.isSameAs(assertions);
+	public void it_should_starts_with_license() throws Exception {
+		String license = IOUtils.toString(getClass().getResourceAsStream("/license.txt"));
+		assertThat(template.read()).startsWith(license);
 	}
-
-	protected void inject() throws Exception {
-		writeField(assertions, "assertions", httpResponses, true);
-	}
-
-	protected abstract int status();
-
-	protected abstract HttpResponseAssert invoke();
-
-	protected abstract void verifyApiCall();
 }

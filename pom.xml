@@ -11,6 +11,7 @@
 
 	<modules>
 		<module>rest-assert-core</module>
+		<module>rest-assert-generator</module>
 		<module>rest-assert-assertj</module>
 	</modules>
 
@@ -23,6 +24,7 @@
 		<assertj.version>1.6.1</assertj.version>
 		<mockito.version>1.9.5</mockito.version>
 		<commons-lang3.version>3.3.2</commons-lang3.version>
+		<commons-io.version>2.4</commons-io.version>
 	</properties>
 
 	<dependencyManagement>
@@ -46,6 +48,11 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-io</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
