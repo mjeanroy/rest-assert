@@ -22,54 +22,40 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import org.assertj.core.api.AssertionInfo;
-
-import com.github.mjeanroy.rest_assert.assertj.internal.AbstractRestAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.ning.http.client.Response;
 
 /**
- * Reusable assertions of http response.
- * This class is implemented as a singleton.
- * This class is thread safe.
- * This class is automatically generated during build.
+ * Implementation of {@link HttpResponse}
+ * using Async-Http framework as real implementation.
  */
-public class {{class_name}} extends AbstractRestAssertions {
+public class AsyncHttpResponse implements HttpResponse {
 
 	/**
-	 * Singleton instance.
-	 */
-	private static final {{class_name}} INSTANCE = new {{class_name}}();
-
-	/**
-	 * Returns the singleton instance of this class.
-	 */
-	public static {{class_name}} instance() {
-		return INSTANCE;
-	}
-
-	/**
-	 * Original assertions object, retrieved from core module.
-	 */
-	private {{core_class_name}} assertions = {{core_class_name}}.instance();
-
-	// Private constructor to ensure class is a singleton
-	private {{class_name}}() {
-	}
-
-	{{#methods}}
-	/**
-	 * @see {{core_class_name}}#{{core_method_name}}
+	 * Create new {@link HttpResponse} using instance
+	 * of {@link Response}.
 	 *
-	 * @param info contains information about the assertion.
-	 * @param actual actual object.
-	 * @throws AssertionError
+	 * @param response Original response object.
+	 * @return Http response that can be used with rest-assert.
 	 */
-	public void {{method_name}}(AssertionInfo info, {{actual_class}} actual{{#arguments}}, {{type}} {{name}}{{/arguments}}) {
-		assertNotNull(info, actual);
-		check(info, assertions.{{core_method_name}}(actual{{#arguments}}, {{name}}{{/arguments}}));
+	public static AsyncHttpResponse httpResponse(Response response) {
+		return new AsyncHttpResponse(response);
 	}
 
-	{{/methods}}
+	/**
+	 * Original Async-Http response.
+	 */
+	private final Response response;
+
+	// Use static factory
+	private AsyncHttpResponse(Response response) {
+		this.response = response;
+	}
+
+	@Override
+	public int getStatus() {
+		return response.getStatusCode();
+	}
 }
