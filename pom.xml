@@ -22,6 +22,7 @@
 		<maven-compiler-plugin.version>3.1</maven-compiler-plugin.version>
 		<async-http-client.version>1.8.15</async-http-client.version>
 		<httpclient.version>4.3.6</httpclient.version>
+		<google-http-client.version>1.19.0</google-http-client.version>
 		<junit.version>4.11</junit.version>
 		<assertj.version>1.6.1</assertj.version>
 		<mockito.version>1.9.5</mockito.version>
@@ -40,6 +41,11 @@
 				<groupId>org.apache.httpcomponents</groupId>
 				<artifactId>httpclient</artifactId>
 				<version>${httpclient.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.google.http-client</groupId>
+				<artifactId>google-http-client</artifactId>
+				<version>${google-http-client.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>

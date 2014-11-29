@@ -27,6 +27,11 @@
 			<artifactId>httpclient</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>com.google.http-client</groupId>
+			<artifactId>google-http-client</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<!-- Generator -->
 		<dependency>
