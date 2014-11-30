@@ -298,6 +298,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Cache-Control header.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, "Cache-Control");
+	}
+
+	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
 	 * @param headerName Header name.
