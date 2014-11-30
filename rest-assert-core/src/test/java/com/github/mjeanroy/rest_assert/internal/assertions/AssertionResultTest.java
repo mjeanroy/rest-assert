@@ -22,20 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal;
+package com.github.mjeanroy.rest_assert.internal.assertions;
+
+import com.github.mjeanroy.rest_assert.error.RestAssertError;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import com.github.mjeanroy.rest_assert.error.RestAssertError;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
 public class AssertionResultTest {
 
