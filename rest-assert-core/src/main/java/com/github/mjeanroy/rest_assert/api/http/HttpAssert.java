@@ -547,6 +547,31 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that http response contains Content-Type header
+	 * with expected value.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 * @param contentTypeValue Expected content type value.
+	 */
+	public static void assertIsContentTypeEqualTo(HttpResponse response, String contentTypeValue) {
+		assertIsContentTypeEqualTo(null, response, contentTypeValue);
+	}
+
+	/**
+	 * Asserts that http response contains Content-Type header
+	 * with expected value.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 * @param contentTypeValue Expected content type value.
+	 */
+	public static void assertIsContentTypeEqualTo(String message, HttpResponse response, String contentTypeValue) {
+		check(message, assertions.isContentTypeEqualTo(response, contentTypeValue));
+	}
+
+	/**
 	 * Asserts that http response contains Content-Length header.
 	 * If it isn't it throws an {@link AssertionError} with default message.
 	 *

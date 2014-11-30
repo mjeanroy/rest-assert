@@ -33,6 +33,8 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.should
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
 
 /**
  * Reusable Assertions of http response.
@@ -259,7 +261,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasETag(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, "ETag");
+		return hasHeader(httpResponse, ETAG);
 	}
 
 	/**
@@ -270,7 +272,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isETagEqualTo(HttpResponse httpResponse, String etagValue) {
-		return isHeaderEqualTo(httpResponse, "ETag", etagValue);
+		return isHeaderEqualTo(httpResponse, ETAG, etagValue);
 	}
 
 	/**
@@ -279,7 +281,18 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentType(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, "Content-Type");
+		return hasHeader(httpResponse, CONTENT_TYPE);
+	}
+
+	/**
+	 * Check that http response contains Content-Type header with
+	 * expected value.
+	 * @param httpResponse Http response.
+	 * @param contentTypeValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, String contentTypeValue) {
+		return isHeaderEqualTo(httpResponse, CONTENT_TYPE, contentTypeValue);
 	}
 
 	/**
