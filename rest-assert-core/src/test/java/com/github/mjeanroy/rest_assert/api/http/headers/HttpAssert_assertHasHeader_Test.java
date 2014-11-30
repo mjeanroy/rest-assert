@@ -24,66 +24,27 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers;
 
+import com.github.mjeanroy.rest_assert.api.http.AbstractHttpHeaderTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.Header;
-import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertHasHeader;
 import static com.github.mjeanroy.rest_assert.tests.Header.header;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public class HttpAssert_assertHasHeader_Test {
+public class HttpAssert_assertHasHeader_Test extends AbstractHttpHeaderTest {
 
-	@Test
-	public void it_should_pass_with_expected_header() {
-		Header header = header("foo", "bar");
-		invoke(newResponse(header), header.getName());
-		invoke("foo", newResponse(header), header.getName());
+	@Override
+	protected Header getHeader() {
+		return header("foo", "bar");
 	}
 
-	@Test
-	public void it_should_fail_if_header_is_not_available() {
-		final Header expectedHeader = header("foo", "bar");
-		final Header header = header("bar", "foo");
-		final String message = format("Expecting response to have header %s", expectedHeader.getName());
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(newResponse(header), expectedHeader.getName());
-			}
-		});
+	@Override
+	protected void invoke(HttpResponse response) {
+		assertHasHeader(response, getHeader().getName());
 	}
 
-	@Test
-	public void it_should_pass_with_custom_message_with_response_different_than_200() {
-		final Header expectedHeader = header("foo", "bar");
-		final Header header = header("bar", "foo");
-		final String message = format("Expecting response to have header %s", expectedHeader.getName());
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, newResponse(header), expectedHeader.getName());
-			}
-		});
-	}
-
-	private void invoke(HttpResponse httpResponse, String headerName) {
-		assertHasHeader(httpResponse, headerName);
-	}
-
-	private void invoke(String message, HttpResponse httpResponse, String headerName) {
-		assertHasHeader(message, httpResponse, headerName);
-	}
-
-	private HttpResponse newResponse(Header header) {
-		HttpResponse response = mock(HttpResponse.class);
-		when(response.hasHeader(header.getName())).thenReturn(true);
-		return response;
+	@Override
+	protected void invoke(String message, HttpResponse response) {
+		assertHasHeader(message, response, getHeader().getName());
 	}
 }

@@ -253,6 +253,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains ETag header.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasETag(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, "ETag");
+	}
+
+	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
 	 * @param headerName Header name.

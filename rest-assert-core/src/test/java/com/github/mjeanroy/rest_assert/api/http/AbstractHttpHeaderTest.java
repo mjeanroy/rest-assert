@@ -26,54 +26,58 @@ package com.github.mjeanroy.rest_assert.api.http;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.Header;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
+import static com.github.mjeanroy.rest_assert.tests.Header.header;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static java.lang.String.format;
 
-public abstract class AbstractHttpStatusTest {
+public abstract class AbstractHttpHeaderTest {
 
 	@Test
-	public void it_should_pass_with_correct_status() {
-		test(newResponse(status()));
-		test("foo", newResponse(status()));
+	public void it_should_pass_with_expected_header() {
+		Header header = getHeader();
+		invoke(newResponse(header));
+		invoke("foo", newResponse(header));
 	}
 
 	@Test
-	public void it_should_fail_with_response_different_than_expected_status() {
-		final int expectedStatus = status();
-		final int status = expectedStatus + 1;
-		final String message = format("Expecting status code to be %s but was %s", expectedStatus, status);
+	public void it_should_fail_with_if_response_does_not_contain_header() {
+		final Header expectedHeader = getHeader();
+		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
+		final String message = format("Expecting response to have header %s", expectedHeader.getName());
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				test(newResponse(status));
+				invoke(newResponse(header));
 			}
 		});
 	}
 
 	@Test
-	public void it_should_pass_with_custom_message_with_response_different_than_200() {
+	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		final Header expectedHeader = getHeader();
+		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
 		final String message = "foo";
-		final int status = status() + 1;
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				test(message, newResponse(status));
+				invoke(message, newResponse(header));
 			}
 		});
 	}
 
-	protected HttpResponse newResponse(int status) {
-		return newHttpResponseWithStatus(status);
+	protected HttpResponse newResponse(Header header) {
+		return newHttpResponseWithHeader(header);
 	}
 
-	protected abstract int status();
+	protected abstract Header getHeader();
 
-	protected abstract void test(HttpResponse response);
+	protected abstract void invoke(HttpResponse response);
 
-	protected abstract void test(String message, HttpResponse response);
+	protected abstract void invoke(String message, HttpResponse response);
 }

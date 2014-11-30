@@ -31,15 +31,15 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
 import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
 
-public class HttpResponses_assertHasHeader_Test extends AbstractHttpResponsesHeaderTest {
+public class HttpResponses_assertHasETag_Test extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertHasHeader(someInfo(), httpResponse, getHeader().getName());
+		httpResponses.assertHasETag(someInfo(), httpResponse);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("foo", "bar");
+		return header("ETag", "123");
 	}
 }

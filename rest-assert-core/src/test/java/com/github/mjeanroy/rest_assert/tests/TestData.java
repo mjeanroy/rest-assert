@@ -22,24 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.headers;
+package com.github.mjeanroy.rest_assert.tests;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesHeaderTest;
-import com.github.mjeanroy.rest_assert.assertj.tests.Header;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class HttpResponses_assertHasHeader_Test extends AbstractHttpResponsesHeaderTest {
+public final class TestData {
 
-	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertHasHeader(someInfo(), httpResponse, getHeader().getName());
+	private TestData() {
 	}
 
-	@Override
-	protected Header getHeader() {
-		return header("foo", "bar");
+	public static HttpResponse newHttpResponseWithStatus(int status) {
+		HttpResponse httpResponse = mock(HttpResponse.class);
+		when(httpResponse.getStatus()).thenReturn(status);
+		return httpResponse;
+	}
+
+	public static HttpResponse newHttpResponseWithHeader(Header header) {
+		HttpResponse httpResponse = mock(HttpResponse.class);
+		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
+		return httpResponse;
 	}
 }

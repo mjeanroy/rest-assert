@@ -22,24 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.headers;
+package com.github.mjeanroy.rest_assert.api.http.headers;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesHeaderTest;
-import com.github.mjeanroy.rest_assert.assertj.tests.Header;
+import com.github.mjeanroy.rest_assert.api.http.AbstractHttpHeaderTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Header;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertHasETag;
+import static com.github.mjeanroy.rest_assert.tests.Header.header;
 
-public class HttpResponses_assertHasHeader_Test extends AbstractHttpResponsesHeaderTest {
-
-	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertHasHeader(someInfo(), httpResponse, getHeader().getName());
-	}
+public class HttpAssert_assertHasETag_Test extends AbstractHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("foo", "bar");
+		return header("ETag", "123");
+	}
+
+	@Override
+	protected void invoke(HttpResponse response) {
+		assertHasETag(response);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse response) {
+		assertHasETag(message, response);
 	}
 }

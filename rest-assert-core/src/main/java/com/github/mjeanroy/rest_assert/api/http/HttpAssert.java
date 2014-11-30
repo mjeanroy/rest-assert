@@ -56,7 +56,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "OK" (a.k.a 200).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsOk(String message, HttpResponse response) {
@@ -77,7 +77,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "CREATED" (a.k.a 201).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsCreated(String message, HttpResponse response) {
@@ -98,7 +98,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "ACCEPTED" (a.k.a 202).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsAccepted(String message, HttpResponse response) {
@@ -119,7 +119,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "NO CONTENT" (a.k.a 204).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsNoContent(String message, HttpResponse response) {
@@ -150,7 +150,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "UNAUTHORIZED" (a.k.a 401).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsUnauthorized(String message, HttpResponse response) {
@@ -171,7 +171,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "FORBIDDEN" (a.k.a 403).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsForbidden(String message, HttpResponse response) {
@@ -182,7 +182,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "NOT MODIFIED" (a.k.a 304).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsNotModified(String message, HttpResponse response) {
@@ -203,7 +203,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "BAD REQUEST" (a.k.a 400).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsBadRequest(String message, HttpResponse response) {
@@ -226,7 +226,7 @@ public final class HttpAssert {
 	 * (a.k.a 412).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsPreConditionFailed(String message, HttpResponse response) {
@@ -249,7 +249,7 @@ public final class HttpAssert {
 	 * (a.k.a 405).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsMethodNotAllowed(String message, HttpResponse response) {
@@ -272,7 +272,7 @@ public final class HttpAssert {
 	 * (a.k.a 409).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsConflict(String message, HttpResponse response) {
@@ -295,7 +295,7 @@ public final class HttpAssert {
 	 * (a.k.a 415).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsUnsupportedMediaType(String message, HttpResponse response) {
@@ -316,7 +316,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "NOT FOUND" (a.k.a 404).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsNotFound(String message, HttpResponse response) {
@@ -339,7 +339,7 @@ public final class HttpAssert {
 	 * (a.k.a 500).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsInternalServerError(String message, HttpResponse response) {
@@ -360,7 +360,7 @@ public final class HttpAssert {
 	 * Asserts that an status code of http response is "NOT IMPLEMENTED" (a.k.a 501).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsNotImplemented(String message, HttpResponse response) {
@@ -383,7 +383,7 @@ public final class HttpAssert {
 	 * 200 and 299, inclusive).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsSuccess(String message, HttpResponse response) {
@@ -406,7 +406,7 @@ public final class HttpAssert {
 	 * 300 and 399, inclusive).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsRedirection(String message, HttpResponse response) {
@@ -429,7 +429,7 @@ public final class HttpAssert {
 	 * 400 and 499, inclusive).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsClientError(String message, HttpResponse response) {
@@ -452,7 +452,7 @@ public final class HttpAssert {
 	 * 500 and 599, inclusive).
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertIsServerError(String message, HttpResponse response) {
@@ -466,18 +466,39 @@ public final class HttpAssert {
 	 * @param response Http response to check.
 	 */
 	public static void assertHasHeader(HttpResponse response, String headerName) {
-		check(null, assertions.hasHeader(response,headerName));
+		check(null, assertions.hasHeader(response, headerName));
 	}
 
 	/**
 	 * Asserts that http response contains expected header.
 	 * If it isn't it throws an {@link AssertionError} with given message.
 	 *
-	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param response Http response to check.
 	 */
 	public static void assertHasHeader(String message, HttpResponse response, String headerName) {
-		check(message, assertions.hasHeader(response,headerName));
+		check(message, assertions.hasHeader(response, headerName));
+	}
+
+	/**
+	 * Asserts that http response contains ETag header.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertHasETag(HttpResponse response) {
+		assertHasETag(null, response);
+	}
+
+	/**
+	 * Asserts that http response contains ETag header.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertHasETag(String message, HttpResponse response) {
+		check(message, assertions.hasETag(response));
 	}
 
 	private static void check(String message, AssertionResult result) {
