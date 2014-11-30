@@ -37,6 +37,7 @@ import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResul
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.XML;
 
@@ -362,6 +363,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, XML);
+	}
+
+	/**
+	 * Check that http response is "application/javascript".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isJavascript(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, JAVASCRIPT);
 	}
 
 	/**

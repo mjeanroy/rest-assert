@@ -722,6 +722,27 @@ public final class HttpAssert {
 		check(message, assertions.isXml(response));
 	}
 
+	/**
+	 * Asserts that http response is "application/javascript".
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertIsJavascript(HttpResponse response) {
+		assertIsJavascript(null, response);
+	}
+
+	/**
+	 * Asserts that http response is "application/javascript".
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertIsJavascript(String message, HttpResponse response) {
+		check(message, assertions.isJavascript(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());

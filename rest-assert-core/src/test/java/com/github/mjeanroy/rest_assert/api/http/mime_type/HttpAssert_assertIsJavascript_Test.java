@@ -21,17 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.mjeanroy.rest_assert.internal.data;
 
-/**
- * List of mime types.
- */
-public final class MimeType {
+package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
-	private MimeType() {
+import com.github.mjeanroy.rest_assert.api.http.AbstractMimeTypeTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsJavascript;
+
+public class HttpAssert_assertIsJavascript_Test extends AbstractMimeTypeTest {
+
+	@Override
+	protected String getMimeType() {
+		return "application/javascript";
 	}
 
-	public static final String JSON = "application/json";
-	public static final String XML = "application/xml";
-	public static final String JAVASCRIPT = "application/javascript";
+	@Override
+	protected void invoke(HttpResponse response) {
+		assertIsJavascript(response);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse response) {
+		assertIsJavascript(message, response);
+	}
 }
