@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -21,16 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.mjeanroy.rest_assert.internal.data;
 
-/**
- * List of mime types.
- */
-public final class MimeType {
+package com.github.mjeanroy.rest_assert.assertj.api.mime_type;
 
-	private MimeType() {
+import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseHeaderTest;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
+public class HttpResponseAssert_jsXml_Test extends AbstractHttpResponseHeaderTest {
+
+
+	@Override
+	protected HttpResponseAssert invoke() {
+		return assertions.isXml();
 	}
 
-	public static final String JSON = "application/json";
-	public static final String XML = "application/xml";
+	@Override
+	protected void verifyApiCall() {
+		verify(httpResponses).assertIsXml(any(AssertionInfo.class), any(HttpResponse.class));
+	}
 }

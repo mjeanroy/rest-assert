@@ -21,16 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.mjeanroy.rest_assert.internal.data;
 
-/**
- * List of mime types.
- */
-public final class MimeType {
+package com.github.mjeanroy.rest_assert.assertj.internal.mime_type;
 
-	private MimeType() {
+import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+
+public class HttpResponses_assertIsXml_Test extends AbstractHttpResponsesMimeTypeTest {
+
+	@Override
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertIsXml(someInfo(), httpResponse);
 	}
 
-	public static final String JSON = "application/json";
-	public static final String XML = "application/xml";
+	@Override
+	protected String getMimeType() {
+		return "application/xml";
+	}
 }

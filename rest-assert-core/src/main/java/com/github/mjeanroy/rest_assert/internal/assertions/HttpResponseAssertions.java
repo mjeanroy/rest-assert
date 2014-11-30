@@ -38,6 +38,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_T
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.XML;
 
 /**
  * Reusable Assertions of http response.
@@ -352,6 +353,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isJson(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, JSON);
+	}
+
+	/**
+	 * Check that http response is "application/xml".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isXml(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, XML);
 	}
 
 	/**
