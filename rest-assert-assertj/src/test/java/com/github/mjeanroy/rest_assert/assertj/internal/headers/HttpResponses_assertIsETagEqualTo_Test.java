@@ -22,40 +22,24 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.assertj.internal.headers;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesHeaderEqualToTest;
+import com.github.mjeanroy.rest_assert.assertj.tests.Header;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-/**
- * Error thrown when an http response should contain
- * specific header.
- */
-public class ShouldHaveHeader extends AbstractError {
+import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveHeader(String message, Object... args) {
-		super(message, args);
+public class HttpResponses_assertIsETagEqualTo_Test extends AbstractHttpResponsesHeaderEqualToTest {
+
+	@Override
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertIsETagEqualTo(someInfo(), httpResponse, getHeader().getValue());
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @return Error.
-	 */
-	public static ShouldHaveHeader shouldHaveHeader(String headerName) {
-		return new ShouldHaveHeader("Expecting response to have header %s", headerName);
-	}
-
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @param headerValue Expected header value.
-	 * @param actualValue Actual header value.
-	 * @return Error.
-	 */
-	public static ShouldHaveHeader shouldHaveHeaderWithValue(String headerName, String headerValue, String actualValue) {
-		return new ShouldHaveHeader("Expecting response to have header %s equal to %s but was %s", headerName, headerValue, actualValue);
+	@Override
+	protected Header getHeader() {
+		return header("ETag", "123");
 	}
 }

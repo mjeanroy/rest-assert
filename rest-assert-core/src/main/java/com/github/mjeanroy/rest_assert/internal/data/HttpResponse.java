@@ -44,4 +44,14 @@ public interface HttpResponse {
 	 * @return True if http response contains header, false otherwise.
 	 */
 	boolean hasHeader(String name);
+
+	/**
+	 * Get (first) header value.
+	 * If http response does not contain header, it returns
+	 * null.
+	 *
+	 * @param name Header name.
+	 * @return Header value, null if response does not contain header.
+	 */
+	String getHeader(String name);
 }

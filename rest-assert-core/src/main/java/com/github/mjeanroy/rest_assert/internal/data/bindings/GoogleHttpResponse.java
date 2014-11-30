@@ -62,4 +62,9 @@ public class GoogleHttpResponse implements HttpResponse {
 	public boolean hasHeader(String name) {
 		return response.getHeaders().getFirstHeaderStringValue(name) != null;
 	}
+
+	@Override
+	public String getHeader(String name) {
+		return response.getHeaders().getFirstHeaderStringValue(name);
+	}
 }

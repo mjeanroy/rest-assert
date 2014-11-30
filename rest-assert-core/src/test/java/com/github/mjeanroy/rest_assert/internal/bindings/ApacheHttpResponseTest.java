@@ -58,9 +58,9 @@ public class ApacheHttpResponseTest {
 	public void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
 
-		Header header1 = newHeader("foo");
-		Header header2 = newHeader(headerName);
-		Header header3 = newHeader("bar");
+		Header header1 = newHeader("foo", "foo");
+		Header header2 = newHeader(headerName, headerName);
+		Header header3 = newHeader("bar", "bar");
 		Header[] headers = new Header[] {
 				header1, header2, header3
 		};
@@ -78,9 +78,41 @@ public class ApacheHttpResponseTest {
 		verify(header3, never()).getName();
 	}
 
-	private Header newHeader(String name) {
+	@Test
+	public void it_should_return_header_value() {
+		String headerName = "header-name";
+		String headerValue = "header-value";
+
+		Header header1 = newHeader("foo", "bar");
+		Header header2 = newHeader(headerName, headerValue);
+		Header header3 = newHeader("bar", "foo");
+		Header[] headers = new Header[] {
+				header1, header2, header3
+		};
+
+		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
+		when(response.getAllHeaders()).thenReturn(headers);
+
+		HttpResponse httpResponse = ApacheHttpResponse.httpResponse(response);
+		String result = httpResponse.getHeader(headerName);
+
+		assertThat(result).isEqualTo(headerValue);
+		verify(response).getAllHeaders();
+
+		verify(header1).getName();
+		verify(header1, never()).getValue();
+
+		verify(header2).getName();
+		verify(header2).getValue();
+
+		verify(header3, never()).getName();
+		verify(header3, never()).getValue();
+	}
+
+	private Header newHeader(String name, String value) {
 		Header header = mock(Header.class);
 		when(header.getName()).thenReturn(name);
+		when(header.getValue()).thenReturn(value);
 		return header;
 	}
 }

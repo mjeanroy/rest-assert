@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse;
+import com.google.api.client.http.HttpHeaders;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -51,5 +52,41 @@ public class GoogleHttpResponseTest {
 
 		assertThat(status).isEqualTo(expectedStatus);
 		verify(response).getStatusCode();
+	}
+
+	@Test
+	public void it_should_check_if_response_contains_header() {
+		String headerName = "header-name";
+		String headerValue = "header-value";
+
+		HttpHeaders httpHeaders = mock(HttpHeaders.class);
+		when(httpHeaders.getFirstHeaderStringValue(headerName)).thenReturn(headerValue);
+		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
+		when(response.getHeaders()).thenReturn(httpHeaders);
+
+		HttpResponse httpResponse = GoogleHttpResponse.httpResponse(response);
+		boolean containsHeader = httpResponse.hasHeader(headerName);
+
+		assertThat(containsHeader).isTrue();
+		verify(response).getHeaders();
+		verify(httpHeaders).getFirstHeaderStringValue(headerName);
+	}
+
+	@Test
+	public void it_should_return_header_value() {
+		String headerName = "header-name";
+		String headerValue = "header-value";
+
+		HttpHeaders httpHeaders = mock(HttpHeaders.class);
+		when(httpHeaders.getFirstHeaderStringValue(headerName)).thenReturn(headerValue);
+		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
+		when(response.getHeaders()).thenReturn(httpHeaders);
+
+		HttpResponse httpResponse = GoogleHttpResponse.httpResponse(response);
+		String result = httpResponse.getHeader(headerName);
+
+		assertThat(result).isEqualTo(headerValue);
+		verify(response).getHeaders();
+		verify(httpHeaders).getFirstHeaderStringValue(headerName);
 	}
 }

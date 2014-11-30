@@ -43,6 +43,7 @@ public final class TestData {
 	public static HttpResponse newHttpResponseWithHeader(Header header) {
 		HttpResponse httpResponse = mock(HttpResponse.class);
 		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
+		when(httpResponse.getHeader(header.getName())).thenReturn(header.getValue());
 		return httpResponse;
 	}
 }

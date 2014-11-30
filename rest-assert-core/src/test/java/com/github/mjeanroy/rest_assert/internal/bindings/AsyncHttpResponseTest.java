@@ -66,4 +66,22 @@ public class AsyncHttpResponseTest {
 		verify(response).getHeaders();
 		verify(map).containsKey(headerName);
 	}
+
+	@Test
+	public void it_should_return_header_value() {
+		String headerName = "header-name";
+		String headerValue = "header-value";
+		FluentCaseInsensitiveStringsMap map = mock(FluentCaseInsensitiveStringsMap.class);
+		when(map.containsKey(headerName)).thenReturn(true);
+
+		Response response = mock(Response.class);
+		when(response.getHeaders()).thenReturn(map);
+		when(response.getHeader(headerName)).thenReturn(headerValue);
+
+		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		String result = httpResponse.getHeader(headerName);
+
+		assertThat(result).isEqualTo(headerValue);
+		verify(response).getHeader(headerName);
+	}
 }

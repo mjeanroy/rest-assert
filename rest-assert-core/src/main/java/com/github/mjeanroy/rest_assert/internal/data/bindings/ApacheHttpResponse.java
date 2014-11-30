@@ -64,6 +64,12 @@ public class ApacheHttpResponse implements HttpResponse {
 		return findFirstHeader(name) != null;
 	}
 
+	@Override
+	public String getHeader(String name) {
+		Header header = findFirstHeader(name);
+		return header == null ? null : header.getValue();
+	}
+
 	private Header findFirstHeader(String name) {
 		Header[] headers = response.getAllHeaders();
 		for (Header header : headers) {

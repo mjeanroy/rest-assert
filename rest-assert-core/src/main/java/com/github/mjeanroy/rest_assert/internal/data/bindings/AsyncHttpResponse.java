@@ -63,4 +63,9 @@ public class AsyncHttpResponse implements HttpResponse {
 	public boolean hasHeader(String name) {
 		return response.getHeaders().containsKey(name);
 	}
+
+	@Override
+	public String getHeader(String name) {
+		return hasHeader(name) ? response.getHeader(name) : null;
+	}
 }

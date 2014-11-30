@@ -502,6 +502,30 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that http response contains ETag header
+	 * with expected value.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 * @param etagValue ETag value.
+	 */
+	public static void assertIsETagEqualTo(HttpResponse response, String etagValue) {
+		assertIsETagEqualTo(null, response, etagValue);
+	}
+
+	/**
+	 * Asserts that http response contains ETag header.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 * @param etagValue ETag value.
+	 */
+	public static void assertIsETagEqualTo(String message, HttpResponse response, String etagValue) {
+		check(message, assertions.isETagEqualTo(response, etagValue));
+	}
+
+	/**
 	 * Asserts that http response contains Content-Type header.
 	 * If it isn't it throws an {@link AssertionError} with default message.
 	 *

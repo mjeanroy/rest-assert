@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,31 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.tests;
+package com.github.mjeanroy.rest_assert.assertj.api.headers;
 
+import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseHeaderTest;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
-import org.assertj.core.api.WritableAssertionInfo;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
-public final class TestData {
+public class HttpResponseAssert_isETagEqualTo_Test extends AbstractHttpResponseHeaderTest {
 
-	public static AssertionInfo someInfo() {
-		return new WritableAssertionInfo();
+
+	@Override
+	protected HttpResponseAssert invoke() {
+		return assertions.isETagEqualTo(getHeader().getValue());
 	}
 
-	public static HttpResponse newHttpResponseWithStatus(int status) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.getStatus()).thenReturn(status);
-		return httpResponse;
-	}
-
-	public static HttpResponse newHttpResponseWithHeader(Header header) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
-		when(httpResponse.getHeader(header.getName())).thenReturn(header.getValue());
-		return httpResponse;
+	@Override
+	protected void verifyApiCall() {
+		verify(httpResponses).assertIsETagEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
 	}
 }

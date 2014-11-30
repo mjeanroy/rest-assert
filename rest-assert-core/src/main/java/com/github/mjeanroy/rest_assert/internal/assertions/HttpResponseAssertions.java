@@ -28,6 +28,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
@@ -262,6 +263,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains ETag header with
+	 * expected value.
+	 * @param httpResponse Http response.
+	 * @param etagValue ETag value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isETagEqualTo(HttpResponse httpResponse, String etagValue) {
+		return isHeaderEqualTo(httpResponse, "ETag", etagValue);
+	}
+
+	/**
 	 * Check that http response contains Content-Type header.
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
@@ -316,6 +328,26 @@ public final class HttpResponseAssertions {
 		return httpResponse.hasHeader(headerName) ?
 				success() :
 				failure(shouldHaveHeader(headerName));
+	}
+
+	/**
+	 * Check that http response contains expected header with
+	 * expected value.
+	 * @param httpResponse Http response.
+	 * @param headerName Header name.
+	 * @param headerValue Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue) {
+		AssertionResult result = hasHeader(httpResponse, headerName);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		String actualValue = httpResponse.getHeader(headerName);
+		return actualValue.equals(headerValue) ?
+				success() :
+				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValue));
 	}
 
 	/**
