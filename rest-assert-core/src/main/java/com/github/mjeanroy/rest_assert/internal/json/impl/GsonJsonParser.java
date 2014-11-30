@@ -25,19 +25,32 @@
 package com.github.mjeanroy.rest_assert.internal.json.impl;
 
 import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
-import org.junit.Before;
+import com.google.gson.Gson;
 
-public class Jackson2JsonParserTest extends AbstractJJsonParserTest {
+import java.util.List;
+import java.util.Map;
 
-	private JsonParser parser;
+/**
+ * Implementation of {@link JsonParser}
+ * using Google Gson as internal implementation.
+ */
+public class GsonJsonParser implements JsonParser {
 
-	@Before
-	public void setUp() {
-		parser = new Jackson2JsonParser();
+	private final Gson gson;
+
+	public GsonJsonParser() {
+		this.gson = new Gson();
 	}
 
 	@Override
-	protected JsonParser parser() {
-		return parser;
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> parseObject(String json) {
+		return gson.fromJson(json, Map.class);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Object> parseArray(String json) {
+		return gson.fromJson(json, List.class);
 	}
 }

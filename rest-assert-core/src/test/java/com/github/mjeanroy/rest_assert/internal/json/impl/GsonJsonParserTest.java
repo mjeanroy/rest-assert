@@ -27,13 +27,13 @@ package com.github.mjeanroy.rest_assert.internal.json.impl;
 import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
 import org.junit.Before;
 
-public class Jackson2JsonParserTest extends AbstractJJsonParserTest {
+public class GsonJsonParserTest extends AbstractJJsonParserTest {
 
 	private JsonParser parser;
 
 	@Before
 	public void setUp() {
-		parser = new Jackson2JsonParser();
+		parser = new GsonJsonParser();
 	}
 
 	@Override
