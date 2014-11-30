@@ -262,6 +262,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Content-Type header.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasContentType(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, "Content-Type");
+	}
+
+	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
 	 * @param headerName Header name.

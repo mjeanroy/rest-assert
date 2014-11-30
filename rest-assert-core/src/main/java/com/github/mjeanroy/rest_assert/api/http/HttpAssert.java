@@ -501,6 +501,27 @@ public final class HttpAssert {
 		check(message, assertions.hasETag(response));
 	}
 
+	/**
+	 * Asserts that http response contains Content-Type header.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertHasContentType(HttpResponse response) {
+		assertHasContentType(null, response);
+	}
+
+	/**
+	 * Asserts that http response contains Content-Type header.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertHasContentType(String message, HttpResponse response) {
+		check(message, assertions.hasContentType(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());
