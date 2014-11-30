@@ -522,6 +522,27 @@ public final class HttpAssert {
 		check(message, assertions.hasContentType(response));
 	}
 
+	/**
+	 * Asserts that http response contains Location header.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertHasLocation(HttpResponse response) {
+		assertHasLocation(null, response);
+	}
+
+	/**
+	 * Asserts that http response contains Location header.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertHasLocation(String message, HttpResponse response) {
+		check(message, assertions.hasLocation(response));
+	}
+
 	private static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(message, result.getError());

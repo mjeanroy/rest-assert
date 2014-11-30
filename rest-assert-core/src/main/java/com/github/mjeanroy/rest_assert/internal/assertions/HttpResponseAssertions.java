@@ -271,6 +271,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Location header.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasLocation(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, "Location");
+	}
+
+	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
 	 * @param headerName Header name.
