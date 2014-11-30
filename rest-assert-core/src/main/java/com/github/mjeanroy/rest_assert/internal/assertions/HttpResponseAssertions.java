@@ -289,6 +289,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Last-Modified header.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasLastModified(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, "Last-Modified");
+	}
+
+	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
 	 * @param headerName Header name.
