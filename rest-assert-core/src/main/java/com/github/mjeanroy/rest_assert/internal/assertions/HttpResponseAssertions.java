@@ -271,6 +271,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Content-Length header.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasContentLength(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, "Content-Length");
+	}
+
+	/**
 	 * Check that http response contains Location header.
 	 * @param httpResponse Http response.
 	 * @return Assertion result.

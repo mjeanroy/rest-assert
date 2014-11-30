@@ -523,6 +523,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that http response contains Content-Length header.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertHasContentLength(HttpResponse response) {
+		assertHasContentLength(null, response);
+	}
+
+	/**
+	 * Asserts that http response contains Content-Length header.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertHasContentLength(String message, HttpResponse response) {
+		check(message, assertions.hasContentLength(response));
+	}
+
+	/**
 	 * Asserts that http response contains Location header.
 	 * If it isn't it throws an {@link AssertionError} with default message.
 	 *
