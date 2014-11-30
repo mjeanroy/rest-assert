@@ -35,6 +35,7 @@ import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResul
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
 
 /**
  * Reusable Assertions of http response.
@@ -310,7 +311,18 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasLocation(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, "Location");
+		return hasHeader(httpResponse, LOCATION);
+	}
+
+	/**
+	 * Check that http response contains Location header with
+	 * expected value.
+	 * @param httpResponse Http response.
+	 * @param locationValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, String locationValue) {
+		return isHeaderEqualTo(httpResponse, LOCATION, locationValue);
 	}
 
 	/**

@@ -614,6 +614,31 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * Asserts that http response contains Location header
+	 * with expected value.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 * @param locationValue Expected location value.
+	 */
+	public static void assertIsLocationEqualTo(HttpResponse response, String locationValue) {
+		assertIsLocationEqualTo(null, response, locationValue);
+	}
+
+	/**
+	 * Asserts that http response contains Location header
+	 * with expected value.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 * @param locationValue Expected location value.
+	 */
+	public static void assertIsLocationEqualTo(String message, HttpResponse response, String locationValue) {
+		check(message, assertions.isLocationEqualTo(response, locationValue));
+	}
+
+	/**
 	 * Asserts that http response contains Last-Modified header.
 	 * If it isn't it throws an {@link AssertionError} with default message.
 	 *
