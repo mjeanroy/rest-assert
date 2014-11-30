@@ -29,6 +29,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
@@ -36,6 +37,7 @@ import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResul
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 
 /**
  * Reusable Assertions of http response.
@@ -344,6 +346,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response is "application/json".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isJson(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, JSON);
+	}
+
+	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
 	 * @param headerName Header name.
@@ -353,6 +364,25 @@ public final class HttpResponseAssertions {
 		return httpResponse.hasHeader(headerName) ?
 				success() :
 				failure(shouldHaveHeader(headerName));
+	}
+
+	/**
+	 * Check that http response is expected mime type.
+	 * @param httpResponse Http response.
+	 * @param expectedMimeType Expected mime type.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasMimeType(HttpResponse httpResponse, String expectedMimeType) {
+		AssertionResult result = hasHeader(httpResponse, CONTENT_TYPE);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		String contentType = httpResponse.getHeader(CONTENT_TYPE);
+		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
+		return actualMimeType.equals(expectedMimeType) ?
+				success() :
+				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 	}
 
 	/**
