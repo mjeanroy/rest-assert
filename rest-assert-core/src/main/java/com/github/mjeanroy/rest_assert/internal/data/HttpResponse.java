@@ -35,4 +35,13 @@ public interface HttpResponse {
 	 * @return Http status.
 	 */
 	int getStatus();
+
+	/**
+	 * Check that http response contains header.
+	 * Header name should be case insensitive.
+	 *
+	 * @param name Header name.
+	 * @return True if http response contains header, false otherwise.
+	 */
+	boolean hasHeader(String name);
 }

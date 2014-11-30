@@ -22,30 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.between;
+package com.github.mjeanroy.rest_assert.assertj.api.headers;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseStatusTest;
+import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class HttpResponseAssert_isServerError_Test extends AbstractHttpResponseStatusTest {
+public class HttpResponseAssert_hasHeader_Test extends AbstractHttpResponseHeaderTest {
 
-	@Override
-	protected int status() {
-		return 500;
-	}
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return assertions.isServerError();
+		return assertions.hasHeader("foo");
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(httpResponses).assertIsServerError(any(AssertionInfo.class), any(HttpResponse.class));
+		verify(httpResponses).assertHasHeader(any(AssertionInfo.class), any(HttpResponse.class), eq("foo"));
 	}
 }

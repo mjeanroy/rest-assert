@@ -24,13 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.assertj.tests;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.core.api.WritableAssertionInfo;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class TestData {
 
@@ -41,6 +40,12 @@ public final class TestData {
 	public static HttpResponse newHttpResponseWithStatus(int status) {
 		HttpResponse httpResponse = mock(HttpResponse.class);
 		when(httpResponse.getStatus()).thenReturn(status);
+		return httpResponse;
+	}
+
+	public static HttpResponse newHttpResponseWithHeader(Header header) {
+		HttpResponse httpResponse = mock(HttpResponse.class);
+		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
 		return httpResponse;
 	}
 }

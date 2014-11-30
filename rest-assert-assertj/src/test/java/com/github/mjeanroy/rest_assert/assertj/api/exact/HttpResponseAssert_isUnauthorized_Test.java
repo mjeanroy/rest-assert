@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api.exact;
 
-import static org.mockito.Mockito.*;
-
-import org.assertj.core.api.AssertionInfo;
-
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseTest;
+import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseStatusTest;
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-public class HttpResponseAssert_isUnauthorized_Test extends AbstractHttpResponseTest {
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
+public class HttpResponseAssert_isUnauthorized_Test extends AbstractHttpResponseStatusTest {
 
 	@Override
 	protected int status() {

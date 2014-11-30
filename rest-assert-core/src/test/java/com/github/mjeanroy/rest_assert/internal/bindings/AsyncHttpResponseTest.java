@@ -26,8 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
+import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import com.ning.http.client.Response;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,5 +48,22 @@ public class AsyncHttpResponseTest {
 
 		assertThat(status).isEqualTo(expectedStatus);
 		verify(response).getStatusCode();
+	}
+
+	@Test
+	public void it_should_check_if_http_response_contains_header() {
+		String headerName = "header-name";
+		FluentCaseInsensitiveStringsMap map = mock(FluentCaseInsensitiveStringsMap.class);
+		when(map.containsKey(headerName)).thenReturn(true);
+
+		Response response = mock(Response.class);
+		when(response.getHeaders()).thenReturn(map);
+
+		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		boolean containsHeader = httpResponse.hasHeader(headerName);
+
+		assertThat(containsHeader).isTrue();
+		verify(response).getHeaders();
+		verify(map).containsKey(headerName);
 	}
 }

@@ -57,4 +57,9 @@ public class GoogleHttpResponse implements HttpResponse {
 	public int getStatus() {
 		return response.getStatusCode();
 	}
+
+	@Override
+	public boolean hasHeader(String name) {
+		return response.getHeaders().getFirstHeaderStringValue(name) != null;
+	}
 }

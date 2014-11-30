@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithStatus;
-import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
+import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public abstract class AbstractHttpResponseTest {
 
@@ -43,7 +42,7 @@ public abstract class AbstractHttpResponseTest {
 	@Before
 	public void setUp() throws Exception {
 		httpResponses = mock(HttpResponses.class);
-		assertions = new HttpResponseAssert(newHttpResponseWithStatus(status()));
+		assertions = createAssertions();
 		inject();
 	}
 
@@ -66,7 +65,7 @@ public abstract class AbstractHttpResponseTest {
 		writeField(assertions, "assertions", httpResponses, true);
 	}
 
-	protected abstract int status();
+	protected abstract HttpResponseAssert createAssertions();
 
 	protected abstract HttpResponseAssert invoke();
 

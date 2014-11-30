@@ -22,30 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.between;
+package com.github.mjeanroy.rest_assert.assertj.api;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseStatusTest;
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.assertj.tests.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithHeader;
 
-public class HttpResponseAssert_isServerError_Test extends AbstractHttpResponseStatusTest {
+public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
 
 	@Override
-	protected int status() {
-		return 500;
+	protected HttpResponseAssert createAssertions() {
+		return new HttpResponseAssert(newHttpResponseWithHeader(getHeader()));
 	}
 
-	@Override
-	protected HttpResponseAssert invoke() {
-		return assertions.isServerError();
+	protected Header getHeader() {
+		return header("foo", "bar");
 	}
 
-	@Override
-	protected void verifyApiCall() {
-		verify(httpResponses).assertIsServerError(any(AssertionInfo.class), any(HttpResponse.class));
-	}
+	protected abstract HttpResponseAssert invoke();
+
+	protected abstract void verifyApiCall();
 }

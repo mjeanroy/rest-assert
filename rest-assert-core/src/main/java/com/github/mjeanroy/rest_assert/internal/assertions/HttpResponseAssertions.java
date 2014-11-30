@@ -24,13 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
+
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 
 /**
  * Reusable Assertions of http response.
@@ -61,7 +62,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#OK}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is OK, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isOk(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.OK.getStatus());
@@ -71,7 +72,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#CREATED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is CREATED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isCreated(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.CREATED.getStatus());
@@ -81,7 +82,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#ACCEPTED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is ACCEPTED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isAccepted(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.ACCEPTED.getStatus());
@@ -91,7 +92,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#NO_CONTENT}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is NO CONTENT, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isNoContent(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.NO_CONTENT.getStatus());
@@ -101,7 +102,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is NOT MODIFIED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isNotModified(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.NOT_MODIFIED.getStatus());
@@ -111,7 +112,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#UNAUTHORIZED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is UNAUTHORIZED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isUnauthorized(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.UNAUTHORIZED.getStatus());
@@ -121,7 +122,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#FORBIDDEN}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is FORBIDDEN, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isForbidden(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.FORBIDDEN.getStatus());
@@ -131,7 +132,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is BAD REQUEST, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isBadRequest(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.BAD_REQUEST.getStatus());
@@ -141,7 +142,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#NOT_FOUND}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is NOT FOUND, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isNotFound(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.NOT_FOUND.getStatus());
@@ -151,7 +152,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#INTERNAL_SERVER_ERROR}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is INTERNAL SERVER ERROR, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isInternalServerError(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.INTERNAL_SERVER_ERROR.getStatus());
@@ -161,7 +162,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#PRE_CONDITION_FAILED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is PRE CONDITION FAILED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isPreConditionFailed(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.PRE_CONDITION_FAILED.getStatus());
@@ -171,7 +172,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#METHOD_NOT_ALLOWED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is METHOD NOT ALLOWED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isMethodNotAllowed(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.METHOD_NOT_ALLOWED.getStatus());
@@ -181,7 +182,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#CONFLICT}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is CONFLICT, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isConflict(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.CONFLICT.getStatus());
@@ -191,7 +192,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#UNSUPPORTED_MEDIA_TYPE}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is UNSUPPORTED MEDIA TYPE, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isUnsupportedMediaType(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE.getStatus());
@@ -201,7 +202,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is {@link HttpStatus#NOT_IMPLEMENTED}.
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is NOT IMPLEMENTED, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isNotImplemented(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatus.NOT_IMPLEMENTED.getStatus());
@@ -212,7 +213,7 @@ public final class HttpResponseAssertions {
 	 * between 200 and 299).
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is a success, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isSuccess(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 200, 299);
@@ -223,7 +224,7 @@ public final class HttpResponseAssertions {
 	 * between 300 and 399).
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is a redirection, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isRedirection(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 300, 399);
@@ -234,7 +235,7 @@ public final class HttpResponseAssertions {
 	 * between 500 and 599).
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is a server error, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isServerError(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 500, 599);
@@ -245,10 +246,22 @@ public final class HttpResponseAssertions {
 	 * between 400 and 499).
 	 *
 	 * @param httpResponse Http response.
-	 * @return True if http response is a client error, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isClientError(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 400, 499);
+	}
+
+	/**
+	 * Check that http response contains expected header.
+	 * @param httpResponse Http response.
+	 * @param headerName Header name.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasHeader(HttpResponse httpResponse, String headerName) {
+		return httpResponse.hasHeader(headerName) ?
+				success() :
+				failure(shouldHaveHeader(headerName));
 	}
 
 	/**
@@ -256,7 +269,7 @@ public final class HttpResponseAssertions {
 	 *
 	 * @param httpResponse Http response.
 	 * @param status Expected status.
-	 * @return True if http response has expected status, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusEqual(HttpResponse httpResponse, int status) {
 		return httpResponse.getStatus() == status ?
@@ -271,7 +284,7 @@ public final class HttpResponseAssertions {
 	 * @param httpResponse Http response.
 	 * @param start Lower bound.
 	 * @param end Upper bound.
-	 * @return True if http response is included in bounds, false otherwise.
+	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusBetween(HttpResponse httpResponse, int start, int end) {
 		int actualStatus = httpResponse.getStatus();

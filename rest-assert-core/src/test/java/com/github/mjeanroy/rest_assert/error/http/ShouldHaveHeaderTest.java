@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,30 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.between;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseStatusTest;
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class HttpResponseAssert_isServerError_Test extends AbstractHttpResponseStatusTest {
+public class ShouldHaveHeaderTest {
 
-	@Override
-	protected int status() {
-		return 500;
-	}
-
-	@Override
-	protected HttpResponseAssert invoke() {
-		return assertions.isServerError();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(httpResponses).assertIsServerError(any(AssertionInfo.class), any(HttpResponse.class));
+	@Test
+	public void it_should_format_error_message() {
+		String headerName = "foo";
+		ShouldHaveHeader shouldHaveHeader = shouldHaveHeader(headerName);
+		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo");
 	}
 }

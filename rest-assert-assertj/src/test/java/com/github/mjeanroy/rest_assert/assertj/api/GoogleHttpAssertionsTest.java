@@ -27,16 +27,19 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(com.google.api.client.http.HttpResponse.class)
 public class GoogleHttpAssertionsTest {
 
 	@Test
-	@Ignore("Need to mock final class")
 	public void it_should_create_new_assertion_object() throws Exception {
 		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
 		HttpResponseAssert assertions = GoogleHttpAssertions.assertThat(response);

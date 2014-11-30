@@ -22,30 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.between;
+package com.github.mjeanroy.rest_assert.assertj.api;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseStatusTest;
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithStatus;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-
-public class HttpResponseAssert_isServerError_Test extends AbstractHttpResponseStatusTest {
+public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
 
 	@Override
-	protected int status() {
-		return 500;
+	protected HttpResponseAssert createAssertions() {
+		return new HttpResponseAssert(newHttpResponseWithStatus(status()));
 	}
 
-	@Override
-	protected HttpResponseAssert invoke() {
-		return assertions.isServerError();
-	}
+	protected abstract int status();
 
-	@Override
-	protected void verifyApiCall() {
-		verify(httpResponses).assertIsServerError(any(AssertionInfo.class), any(HttpResponse.class));
-	}
+	protected abstract HttpResponseAssert invoke();
+
+	protected abstract void verifyApiCall();
 }

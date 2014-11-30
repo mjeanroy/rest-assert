@@ -26,18 +26,21 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mock;
 
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(com.google.api.client.http.HttpResponse.class)
 public class GoogleHttpResponseTest {
 
 	@Test
-	@Ignore("Need to mock final class")
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
 		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);

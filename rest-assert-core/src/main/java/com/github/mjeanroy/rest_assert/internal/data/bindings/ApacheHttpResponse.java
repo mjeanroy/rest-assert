@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.apache.http.Header;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
@@ -56,5 +57,20 @@ public class ApacheHttpResponse implements HttpResponse {
 	@Override
 	public int getStatus() {
 		return response.getStatusLine().getStatusCode();
+	}
+
+	@Override
+	public boolean hasHeader(String name) {
+		return findFirstHeader(name) != null;
+	}
+
+	private Header findFirstHeader(String name) {
+		Header[] headers = response.getAllHeaders();
+		for (Header header : headers) {
+			if (header.getName().toLowerCase().equals(name.toLowerCase())) {
+				return header;
+			}
+		}
+		return null;
 	}
 }

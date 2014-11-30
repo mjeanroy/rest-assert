@@ -26,11 +26,13 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse;
+import org.apache.http.Header;
 import org.apache.http.StatusLine;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -50,5 +52,35 @@ public class ApacheHttpResponseTest {
 		assertThat(status).isEqualTo(expectedStatus);
 		verify(response).getStatusLine();
 		verify(statusLine).getStatusCode();
+	}
+
+	@Test
+	public void it_should_check_if_http_response_contains_header() {
+		String headerName = "header-name";
+
+		Header header1 = newHeader("foo");
+		Header header2 = newHeader(headerName);
+		Header header3 = newHeader("bar");
+		Header[] headers = new Header[] {
+				header1, header2, header3
+		};
+
+		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
+		when(response.getAllHeaders()).thenReturn(headers);
+
+		HttpResponse httpResponse = ApacheHttpResponse.httpResponse(response);
+		boolean containsHeader = httpResponse.hasHeader(headerName);
+
+		assertThat(containsHeader).isTrue();
+		verify(response).getAllHeaders();
+		verify(header1).getName();
+		verify(header2).getName();
+		verify(header3, never()).getName();
+	}
+
+	private Header newHeader(String name) {
+		Header header = mock(Header.class);
+		when(header.getName()).thenReturn(name);
+		return header;
 	}
 }

@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.api.http;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
-
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
 
 /**
  * Static assertions.
@@ -457,6 +457,27 @@ public final class HttpAssert {
 	 */
 	public static void assertIsServerError(String message, HttpResponse response) {
 		check(message, assertions.isServerError(response));
+	}
+
+	/**
+	 * Asserts that http response contains expected header.
+	 * If it isn't it throws an {@link AssertionError} with default message.
+	 *
+	 * @param response Http response to check.
+	 */
+	public static void assertHasHeader(HttpResponse response, String headerName) {
+		check(null, assertions.hasHeader(response,headerName));
+	}
+
+	/**
+	 * Asserts that http response contains expected header.
+	 * If it isn't it throws an {@link AssertionError} with given message.
+	 *
+	 * @param message The identifying message for the {@link AssertionError}.
+	 * @param response Http response to check.
+	 */
+	public static void assertHasHeader(String message, HttpResponse response, String headerName) {
+		check(message, assertions.hasHeader(response,headerName));
 	}
 
 	private static void check(String message, AssertionResult result) {

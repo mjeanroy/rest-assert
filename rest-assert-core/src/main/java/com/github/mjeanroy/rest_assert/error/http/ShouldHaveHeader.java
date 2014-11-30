@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,30 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.between;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractHttpResponseStatusTest;
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+/**
+ * Error thrown when an http response should contain
+ * specific header.
+ */
+public class ShouldHaveHeader extends AbstractError {
 
-public class HttpResponseAssert_isServerError_Test extends AbstractHttpResponseStatusTest {
-
-	@Override
-	protected int status() {
-		return 500;
+	// Private constructor, use static factory instead
+	private ShouldHaveHeader(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected HttpResponseAssert invoke() {
-		return assertions.isServerError();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(httpResponses).assertIsServerError(any(AssertionInfo.class), any(HttpResponse.class));
+	/**
+	 * Build error.
+	 *
+	 * @param headerName Expected header name.
+	 * @return Error.
+	 */
+	public static ShouldHaveHeader shouldHaveHeader(String headerName) {
+		return new ShouldHaveHeader("Expecting response to have header %s", headerName);
 	}
 }
