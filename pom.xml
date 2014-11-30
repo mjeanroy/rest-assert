@@ -24,6 +24,7 @@
 		<httpclient.version>4.3.6</httpclient.version>
 		<google-http-client.version>1.19.0</google-http-client.version>
 		<jackson-2.version>2.4.0</jackson-2.version>
+		<jackson-1.version>1.9.13</jackson-1.version>
 		<gson.version>2.3.1</gson.version>
 		<junit.version>4.11</junit.version>
 		<assertj.version>1.6.1</assertj.version>
@@ -59,6 +60,11 @@
 				<groupId>com.google.code.gson</groupId>
 				<artifactId>gson</artifactId>
 				<version>${gson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>${jackson-1.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>junit</groupId>
