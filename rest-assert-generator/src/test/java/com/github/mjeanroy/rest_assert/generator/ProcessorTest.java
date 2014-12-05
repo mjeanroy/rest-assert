@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.generator;
 
 import static org.assertj.core.api.Assertions.*;
 
+import com.github.mjeanroy.rest_assert.generator.processors.AssertJProcessor;
 import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.generator.templates.engine.MustacheTemplateEngine;
@@ -34,7 +35,7 @@ public class ProcessorTest {
 
 	@Test
 	public void it_should_build_http_assertions() {
-		Processor processor = Processor.HTTP_RESPONSES;
+		AssertJProcessor processor = AssertJProcessor.HTTP_RESPONSES;
 		ClassFile classFile = processor.process(MustacheTemplateEngine.instance());
 		assertThat(classFile).isNotNull();
 		assertThat(classFile.getClassName()).isEqualTo("HttpResponses");

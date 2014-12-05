@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.assertj.tests;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.core.api.WritableAssertionInfo;
 

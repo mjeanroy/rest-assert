@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.tests;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

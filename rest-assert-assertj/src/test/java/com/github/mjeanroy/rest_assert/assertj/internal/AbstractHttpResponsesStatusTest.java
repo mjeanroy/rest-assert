@@ -24,16 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.Failures.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithStatus;
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
-
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithStatus;
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesStatusTest {
 

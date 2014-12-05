@@ -25,11 +25,11 @@
 package com.github.mjeanroy.rest_assert.assertj.internal.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesHeaderTest;
-import com.github.mjeanroy.rest_assert.assertj.tests.Header;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
 import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponses_assertHasContentLength_Test extends AbstractHttpResponsesHeaderTest {
 

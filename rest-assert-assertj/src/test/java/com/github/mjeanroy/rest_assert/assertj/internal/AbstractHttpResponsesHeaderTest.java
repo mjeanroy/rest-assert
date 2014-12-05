@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal;
 
-import com.github.mjeanroy.rest_assert.assertj.tests.Header;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.Failures.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.assertj.tests.Header.header;
 import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 

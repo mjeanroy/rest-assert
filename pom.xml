@@ -12,7 +12,9 @@
 	<modules>
 		<module>rest-assert-core</module>
 		<module>rest-assert-generator</module>
+		<module>rest-assert-unit</module>
 		<module>rest-assert-assertj</module>
+		<module>rest-assert-test</module>
 	</modules>
 
 	<properties>
