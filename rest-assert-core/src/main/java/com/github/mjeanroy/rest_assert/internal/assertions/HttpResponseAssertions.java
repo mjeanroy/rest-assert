@@ -42,9 +42,10 @@ import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_T
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_XML;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
@@ -372,6 +373,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(APPLICATION_XML, TEXT_XML));
+	}
+
+	/**
+	 * Check that http response is "text/css".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isCss(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, CSS);
 	}
 
 	/**
