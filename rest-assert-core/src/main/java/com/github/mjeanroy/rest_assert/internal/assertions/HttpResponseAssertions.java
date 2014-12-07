@@ -47,9 +47,11 @@ import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSV;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.PDF;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_HTML;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_PLAIN;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.XHTML;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
 import static java.util.Arrays.asList;
@@ -412,6 +414,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isPdf(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, PDF);
+	}
+
+	/**
+	 * Check that http response is "text/html" or "application/xhtml+xml".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isHtml(HttpResponse httpResponse) {
+		return hasMimeTypeIn(httpResponse, asList(TEXT_HTML, XHTML));
 	}
 
 	/**

@@ -21,25 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.mjeanroy.rest_assert.internal.data;
 
-/**
- * List of mime types.
- */
-public final class MimeType {
+package com.github.mjeanroy.rest_assert.assertj.internal.mime_type;
 
-	private MimeType() {
+import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeInTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+import java.util.List;
+
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static java.util.Arrays.asList;
+
+public class HttpResponses_assertIsHtml_Test extends AbstractHttpResponsesMimeTypeInTest {
+
+	@Override
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertIsHtml(someInfo(), httpResponse);
 	}
 
-	public static final String TEXT_PLAIN = "text/plain";
-	public static final String CSV = "text/csv";
-	public static final String PDF = "application/pdf";
-	public static final String TEXT_HTML = "text/html";
-	public static final String XHTML = "application/xhtml+xml";
-	public static final String CSS = "text/css";
-	public static final String JSON = "application/json";
-	public static final String APPLICATION_XML = "application/xml";
-	public static final String TEXT_XML = "text/xml";
-	public static final String APPLICATION_JAVASCRIPT = "application/javascript";
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
+	@Override
+	protected List<String> getMimeTypes() {
+		return asList(
+				"text/html",
+				"application/xhtml+xml"
+		);
+	}
 }
