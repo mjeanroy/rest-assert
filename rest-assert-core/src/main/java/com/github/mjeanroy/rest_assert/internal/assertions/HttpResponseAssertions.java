@@ -44,6 +44,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_XML;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSV;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_PLAIN;
@@ -392,6 +393,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isText(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, TEXT_PLAIN);
+	}
+
+	/**
+	 * Check that http response is "text/csv".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isCsv(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, CSV);
 	}
 
 	/**

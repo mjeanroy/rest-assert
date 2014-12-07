@@ -44,7 +44,7 @@ public abstract class {{class_name}}<S extends {{class_name}}<S>> extends Abstra
 	}
 
 	{{#methods}}
-	public S {{method_name}}({{#arguments}}{{^first}}, {{/first}}{{type}} {{name}}{{/arguments}}) {
+	public S {{method_name}}({{#arguments}}{{^first}}, {{/first}}{{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		assertions.{{core_method_name}}(info, actual{{#arguments}}, {{name}}{{/arguments}});
 		return myself;
 	}
