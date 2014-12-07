@@ -21,21 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.github.mjeanroy.rest_assert.internal.data;
 
-/**
- * List of mime types.
- */
-public final class MimeType {
+package com.github.mjeanroy.rest_assert.internal.assertions.http.mime_type;
 
-	private MimeType() {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.assertions.http.AbstractMimeTypeTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+
+public class HttpAssert_assertIsText_Test extends AbstractMimeTypeTest {
+
+	@Override
+	protected String getMimeType() {
+		return "text/plain";
 	}
 
-	public static final String TEXT_PLAIN = "text/plain";
-	public static final String CSS = "text/css";
-	public static final String JSON = "application/json";
-	public static final String APPLICATION_XML = "application/xml";
-	public static final String TEXT_XML = "text/xml";
-	public static final String APPLICATION_JAVASCRIPT = "application/javascript";
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isText(response);
+	}
 }

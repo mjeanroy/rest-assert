@@ -46,6 +46,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_PLAIN;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
@@ -382,6 +383,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isCss(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, CSS);
+	}
+
+	/**
+	 * Check that http response is "text/plain".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isText(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, TEXT_PLAIN);
 	}
 
 	/**
