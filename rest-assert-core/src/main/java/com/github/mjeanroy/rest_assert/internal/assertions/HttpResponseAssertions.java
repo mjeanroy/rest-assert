@@ -44,7 +44,8 @@ import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
 import static java.util.Arrays.asList;
@@ -365,12 +366,12 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response is "application/xml".
+	 * Check that http response is "application/xml" or "text/xml".
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
-		return hasMimeType(httpResponse, XML);
+		return hasMimeTypeIn(httpResponse, asList(APPLICATION_XML, TEXT_XML));
 	}
 
 	/**

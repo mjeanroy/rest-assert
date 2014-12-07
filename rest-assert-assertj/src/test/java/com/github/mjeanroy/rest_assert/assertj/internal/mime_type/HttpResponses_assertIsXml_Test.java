@@ -24,12 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.mime_type;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeTest;
+import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeInTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import java.util.List;
 
-public class HttpResponses_assertIsXml_Test extends AbstractHttpResponsesMimeTypeTest {
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static java.util.Arrays.asList;
+
+public class HttpResponses_assertIsXml_Test extends AbstractHttpResponsesMimeTypeInTest {
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -37,7 +40,10 @@ public class HttpResponses_assertIsXml_Test extends AbstractHttpResponsesMimeTyp
 	}
 
 	@Override
-	protected String getMimeType() {
-		return "application/xml";
+	protected List<String> getMimeTypes() {
+		return asList(
+				"application/xml",
+				"text/xml"
+		);
 	}
 }

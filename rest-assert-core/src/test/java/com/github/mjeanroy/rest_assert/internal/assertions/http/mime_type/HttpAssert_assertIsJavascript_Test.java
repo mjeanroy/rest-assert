@@ -35,7 +35,7 @@ import static java.util.Arrays.asList;
 public class HttpAssert_assertIsJavascript_Test extends AbstractMimeTypeInTest {
 
 	@Override
-	protected List<String> getMimeType() {
+	protected List<String> getMimeTypes() {
 		return asList(
 				"application/javascript",
 				"text/javascript"

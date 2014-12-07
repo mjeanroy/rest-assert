@@ -51,7 +51,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest {
 
 	@Test
 	public void it_should_pass_with_expected_mime_type() {
-		List<Header> headers = getHeader();
+		List<Header> headers = getHeaders();
 		for (Header header : headers) {
 			AssertionResult result = invoke(newResponse(header));
 			checkSuccess(result);
@@ -60,8 +60,8 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest {
 
 	@Test
 	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		final List<Header> headers = getHeader();
-		final List<String> mimeType = getMimeType();
+		final List<Header> headers = getHeaders();
+		final List<String> mimeType = getMimeTypes();
 
 		int i = 0;
 		for (Header h : headers) {
@@ -89,10 +89,10 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest {
 		return newHttpResponseWithHeader(header);
 	}
 
-	protected abstract List<String> getMimeType();
+	protected abstract List<String> getMimeTypes();
 
-	protected List<Header> getHeader() {
-		return Utils.map(getMimeType(), new Mapper<String, Header>() {
+	protected List<Header> getHeaders() {
+		return Utils.map(getMimeTypes(), new Mapper<String, Header>() {
 			@Override
 			public Header apply(String input) {
 				return header("Content-Type", input + ";charset=UTF-8");
