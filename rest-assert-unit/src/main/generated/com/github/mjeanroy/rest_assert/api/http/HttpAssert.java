@@ -669,6 +669,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isPdf}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsPdf(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		assertIsPdf(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isPdf}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsPdf(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		check(message, assertions.isPdf(actual));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isPreConditionFailed}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *

@@ -46,6 +46,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSV;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeType.PDF;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_PLAIN;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
@@ -402,6 +403,15 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isCsv(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, CSV);
+	}
+
+	/**
+	 * Check that http response is "application/pdf".
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isPdf(HttpResponse httpResponse) {
+		return hasMimeType(httpResponse, PDF);
 	}
 
 	/**
