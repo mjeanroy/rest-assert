@@ -22,27 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.utils;
 
-import org.junit.Test;
+/**
+ * Mapper implementation that turn a string to
+ * a lowercase string.
+ * This class is thread safe.
+ * This class is implemented as a singleton.
+ */
+public final class LowercaseMapper implements Mapper<String, String> {
 
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
+	/**
+	 * Singleton instance.
+	 */
+	private static final LowercaseMapper INSTANCE = new LowercaseMapper();
 
-public class ShouldHaveMimeTypeTest {
-
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType("application/json", "application/xml");
-		assertThat(shouldHaveMimeType).isNotNull();
-		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type application/json but was application/xml");
+	/**
+	 * Return mapper.
+	 *
+	 * @return Mapper.
+	 */
+	public static LowercaseMapper lowercaseMapper() {
+		return INSTANCE;
 	}
 
-	@Test
-	public void it_should_format_error_message_with_list() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(asList("application/json", "application/javascript"), "application/xml");
-		assertThat(shouldHaveMimeType).isNotNull();
-		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type in [application/json, application/javascript] but was application/xml");
+	// Ensure non instantiation
+	private LowercaseMapper() {
+	}
+
+	@Override
+	public String apply(String input) {
+		return input.toLowerCase();
 	}
 }

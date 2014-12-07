@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.internal;
 
+import java.util.Objects;
+
 /**
  * Argument representation.
  * An argument is defined by:
@@ -40,12 +42,18 @@ public class Arg {
 	private final String type;
 
 	/**
+	 * Argument generic type.
+	 */
+	private final String genericType;
+
+	/**
 	 * Argument name.
 	 */
 	private final String name;
 
-	public Arg(String type, String name) {
+	public Arg(String type, String genericType, String name) {
 		this.type = type;
+		this.genericType = genericType;
 		this.name = name;
 	}
 
@@ -68,6 +76,15 @@ public class Arg {
 	}
 
 	/**
+	 * Get {@link #genericType}
+	 *
+	 * @return {@link #genericType}
+	 */
+	public String getGenericType() {
+		return genericType;
+	}
+
+	/**
 	 * Check if argument is the first of the method.
 	 * This method is used to know if argument must be prepended
 	 * with a comma during rendering.
@@ -85,18 +102,20 @@ public class Arg {
 		}
 		if (o instanceof Arg) {
 			Arg a = (Arg) o;
-			return getType().equals(a.getType()) && getName().equals(a.getName());
+			return Objects.equals(getType(), a.getType()) &&
+					Objects.equals(getName(), a.getName()) &&
+					Objects.equals(getGenericType(), a.getGenericType());
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return getName().hashCode() + getType().hashCode();
+		return Objects.hash(getName(), getType(), getGenericType());
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Arg{type=%s, name=%s}", getType(), getName());
+		return String.format("Arg{type=%s, genericType=%s, name=%s}", getType(), getGenericType(), getName());
 	}
 }

@@ -25,14 +25,21 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.mime_type;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.http.AbstractMimeTypeTest;
+import com.github.mjeanroy.rest_assert.internal.assertions.http.AbstractMimeTypeInTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpAssert_assertIsJavascript_Test extends AbstractMimeTypeTest {
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
+public class HttpAssert_assertIsJavascript_Test extends AbstractMimeTypeInTest {
 
 	@Override
-	protected String getMimeType() {
-		return "application/javascript";
+	protected List<String> getMimeType() {
+		return asList(
+				"application/javascript",
+				"text/javascript"
+		);
 	}
 
 	@Override

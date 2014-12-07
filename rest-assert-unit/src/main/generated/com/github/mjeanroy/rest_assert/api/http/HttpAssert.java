@@ -207,6 +207,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#hasMimeTypeIn}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertHasMimeTypeIn(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual, java.util.Collection<java.lang.String> arg1) {
+		assertHasMimeTypeIn(null, actual, arg1);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#hasMimeTypeIn}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertHasMimeTypeIn(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual, java.util.Collection<java.lang.String> arg1) {
+		check(message, assertions.hasMimeTypeIn(actual, arg1));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isAccepted}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *

@@ -22,27 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.assertj.tests;
 
-import org.junit.Test;
+import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
+public final class AssertJUtils {
 
-public class ShouldHaveMimeTypeTest {
-
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType("application/json", "application/xml");
-		assertThat(shouldHaveMimeType).isNotNull();
-		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type application/json but was application/xml");
+	private AssertJUtils() {
 	}
 
-	@Test
-	public void it_should_format_error_message_with_list() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(asList("application/json", "application/javascript"), "application/xml");
-		assertThat(shouldHaveMimeType).isNotNull();
-		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type in [application/json, application/javascript] but was application/xml");
+	public static String formatList(List<String> list) {
+		StringBuilder sb = new StringBuilder();
+		String separator = ", ";
+		for (String item : list) {
+			sb.append("\"").append(item).append("\"").append(separator);
+		}
+
+		return new StringBuilder()
+				.append("[")
+				.append(sb.substring(0, sb.length() - separator.length()))
+				.append("]")
+				.toString();
 	}
 }

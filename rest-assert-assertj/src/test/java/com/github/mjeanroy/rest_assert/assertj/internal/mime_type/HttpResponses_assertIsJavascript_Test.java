@@ -24,12 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.mime_type;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeTest;
+import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeInTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import java.util.List;
 
-public class HttpResponses_assertIsJavascript_Test extends AbstractHttpResponsesMimeTypeTest {
+import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static java.util.Arrays.asList;
+
+public class HttpResponses_assertIsJavascript_Test extends AbstractHttpResponsesMimeTypeInTest {
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -37,7 +40,10 @@ public class HttpResponses_assertIsJavascript_Test extends AbstractHttpResponses
 	}
 
 	@Override
-	protected String getMimeType() {
-		return "application/javascript";
+	protected List<String> getMimeTypes() {
+		return asList(
+				"application/javascript",
+				"text/javascript"
+		);
 	}
 }

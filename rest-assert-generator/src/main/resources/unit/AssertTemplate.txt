@@ -45,7 +45,7 @@ public final class {{class_name}} {
 	 *
 	 * @param actual Actual object.
 	 */
-	public static void {{method_name}}({{actual_class}} actual{{#arguments}}, {{type}} {{name}}{{/arguments}}) {
+	public static void {{method_name}}({{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		{{method_name}}(null, actual{{#arguments}}, {{name}}{{/arguments}});
 	}
 
@@ -56,7 +56,7 @@ public final class {{class_name}} {
 	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param actual Actual object.
 	 */
-	public static void {{method_name}}(String message, {{actual_class}} actual{{#arguments}}, {{type}} {{name}}{{/arguments}}) {
+	public static void {{method_name}}(String message, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		check(message, assertions.{{core_method_name}}(actual{{#arguments}}, {{name}}{{/arguments}}));
 	}
 

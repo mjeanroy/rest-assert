@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Static utilities.
  */
@@ -39,7 +42,7 @@ public final class Utils {
 	 *
 	 * @param obj1 First parameter.
 	 * @param obj2 Second parameter.
-	 * @param <T> Type of parameters.
+	 * @param <T>  Type of parameters.
 	 * @return First non null parameters.
 	 */
 	public static <T> T firstNonNull(T obj1, T obj2) {
@@ -50,9 +53,10 @@ public final class Utils {
 	 * Check that a given value is not null.
 	 * If value is null, a {@link NullPointerException} will be thrown
 	 * with given message.
-	 * @param obj Value to check.
+	 *
+	 * @param obj     Value to check.
 	 * @param message Message given in {@link NullPointerException}.
-	 * @param <T> Type of object.
+	 * @param <T>     Type of object.
 	 * @return Original object if it is not null.
 	 */
 	public static <T> T notNull(T obj, String message) {
@@ -60,5 +64,22 @@ public final class Utils {
 			throw new NullPointerException(message);
 		}
 		return obj;
+	}
+
+	/**
+	 * Map each element of input list to an output list.
+	 *
+	 * @param inputs Input list.
+	 * @param mapper Mapper function.
+	 * @param <T>    Input type.
+	 * @param <U>    Output type.
+	 * @return Outputs.
+	 */
+	public static <T, U> List<U> map(List<T> inputs, Mapper<T, U> mapper) {
+		List<U> outputs = new ArrayList<>(inputs.size());
+		for (T input : inputs) {
+			outputs.add(mapper.apply(input));
+		}
+		return outputs;
 	}
 }

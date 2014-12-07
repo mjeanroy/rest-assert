@@ -29,7 +29,10 @@ import com.github.mjeanroy.rest_assert.generator.templates.internal.Arg;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -112,12 +115,25 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		String coreMethodName = method.getName();
 
 		List<Arg> args;
-		Class[] paramTypes = method.getParameterTypes();
+		Class[] classTypes = method.getParameterTypes();
+		Type[] paramTypes = method.getGenericParameterTypes();
 		int size = paramTypes == null ? 0 : paramTypes.length;
 		if (size > 1) {
 			args = new ArrayList<>(size);
 			for (int i = 1; i < paramTypes.length; i++) {
-				args.add(new Arg(paramTypes[i].getName(), "arg" + i));
+				Class genericType = null;
+				Class paramType = classTypes[i];
+
+				if (Collection.class.isAssignableFrom(paramType)) {
+					ParameterizedType parameterizedType = (ParameterizedType) paramTypes[i];
+					genericType = (Class) parameterizedType.getActualTypeArguments()[0];
+				}
+
+				args.add(new Arg(
+						paramType.getName(),
+						genericType == null ? null : genericType.getName(),
+						"arg" + i
+				));
 			}
 		} else {
 			args = emptyList();

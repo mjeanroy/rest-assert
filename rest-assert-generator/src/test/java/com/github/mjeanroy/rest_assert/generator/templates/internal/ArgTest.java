@@ -32,16 +32,17 @@ public class ArgTest {
 
 	@Test
 	public void it_should_build_argument_object() {
-		Arg arg = new Arg("int", "arg1");
+		Arg arg = new Arg("int", "foo", "arg1");
 		assertThat(arg.getName()).isEqualTo("arg1");
 		assertThat(arg.getType()).isEqualTo("int");
+		assertThat(arg.getGenericType()).isEqualTo("foo");
 	}
 
 	@Test
 	public void it_should_check_if_argument_is_the_first() {
-		assertThat(new Arg("int", "arg1").isFirst()).isTrue();
-		assertThat(new Arg("int", "arg0").isFirst()).isFalse();
-		assertThat(new Arg("int", "arg2").isFirst()).isFalse();
-		assertThat(new Arg("int", "arg11").isFirst()).isFalse();
+		assertThat(new Arg("int", null, "arg1").isFirst()).isTrue();
+		assertThat(new Arg("int", null, "arg0").isFirst()).isFalse();
+		assertThat(new Arg("int", null, "arg2").isFirst()).isFalse();
+		assertThat(new Arg("int", null, "arg11").isFirst()).isFalse();
 	}
 }

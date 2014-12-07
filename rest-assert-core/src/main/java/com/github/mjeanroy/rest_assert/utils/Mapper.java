@@ -22,27 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.http;
+package com.github.mjeanroy.rest_assert.utils;
 
-import org.junit.Test;
+/**
+ * Mapper function.
+ */
+public interface Mapper<T, U> {
 
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class ShouldHaveMimeTypeTest {
-
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType("application/json", "application/xml");
-		assertThat(shouldHaveMimeType).isNotNull();
-		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type application/json but was application/xml");
-	}
-
-	@Test
-	public void it_should_format_error_message_with_list() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(asList("application/json", "application/javascript"), "application/xml");
-		assertThat(shouldHaveMimeType).isNotNull();
-		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type in [application/json, application/javascript] but was application/xml");
-	}
+	/**
+	 * Transform input to a new output.
+	 *
+	 * @param input Input.
+	 * @return Output.
+	 */
+	U apply(T input);
 }
