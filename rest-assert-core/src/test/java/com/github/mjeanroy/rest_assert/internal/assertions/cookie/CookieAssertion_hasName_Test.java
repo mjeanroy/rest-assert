@@ -26,44 +26,49 @@ package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-import org.junit.Test;
-
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
-	@Test
-	public void it_should_pass() {
-		Cookie cookie = cookie(expectedName());
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
-	}
-
-	@Test
-	public void it_should_fail() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
-
-		AssertionResult result = invoke(cookie);
-		checkError(result,
-				ShouldHaveName.class,
-				"Expecting cookie to have name %s but was %s",
-				expectedName, actualName);
+	@Override
+	protected AssertionResult invoke(Cookie cookie) {
+		return cookieAssertions.hasName(cookie, successFixture().getName());
 	}
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, expectedName());
+	protected Cookie successFixture() {
+		return cookie("foo");
+	}
+
+	@Override
+	protected Cookie failFixture() {
+		final String expectedName = successFixture().getName();
+		final String actualName = expectedName + "foo";
+		return cookie(actualName);
+	}
+
+	@Override
+	protected Class error() {
+		return ShouldHaveName.class;
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to have name %s but was %s";
+	}
+
+	@Override
+	protected Object[] params() {
+		final String expectedName = successFixture().getName();
+		final String actualName = failFixture().getName();
+		return new String[] {
+			expectedName, actualName
+		};
 	}
 
 	protected Cookie cookie(String name) {
 		return newCookie(name, "value", true);
-	}
-
-	protected String expectedName() {
-		return "foo";
 	}
 }

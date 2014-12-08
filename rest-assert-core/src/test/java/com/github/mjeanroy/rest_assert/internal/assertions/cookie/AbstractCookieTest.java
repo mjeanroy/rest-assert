@@ -24,7 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
+import org.junit.Test;
+
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
@@ -32,4 +35,33 @@ public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> 
 
 	protected CookieAssertions cookieAssertions = CookieAssertions.instance();
 
+	@Test
+	public void it_should_pass() {
+		Cookie cookie = successFixture();
+		AssertionResult result = invoke(cookie);
+		checkSuccess(result);
+	}
+
+	@Test
+	public void it_should_fail() {
+		final Cookie cookie = failFixture();
+
+		AssertionResult result = invoke(cookie);
+
+		checkError(result,
+				error(),
+				pattern(),
+				params()
+		);
+	}
+
+	protected abstract Cookie successFixture();
+
+	protected abstract Cookie failFixture();
+
+	protected abstract Class error();
+
+	protected abstract String pattern();
+
+	protected abstract Object[] params();
 }

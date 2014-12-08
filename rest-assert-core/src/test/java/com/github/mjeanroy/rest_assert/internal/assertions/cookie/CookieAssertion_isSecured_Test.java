@@ -26,34 +26,40 @@ package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-import org.junit.Test;
-
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class CookieAssertion_isSecured_Test extends AbstractCookieTest {
 
-	@Test
-	public void it_should_pass() {
-		Cookie cookie = cookie(true);
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
-	}
-
-	@Test
-	public void it_should_fail() {
-		final Cookie cookie = cookie(false);
-
-		AssertionResult result = invoke(cookie);
-		checkError(result,
-				ShouldBeSecured.class,
-				"Expecting cookie to be secured");
-	}
-
 	@Override
 	protected AssertionResult invoke(Cookie cookie) {
 		return cookieAssertions.isSecured(cookie);
+	}
+
+	@Override
+	protected Cookie successFixture() {
+		return cookie(true);
+	}
+
+	@Override
+	protected Cookie failFixture() {
+		return cookie(false);
+	}
+
+	@Override
+	protected Class error() {
+		return ShouldBeSecured.class;
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to be secured";
+	}
+
+	@Override
+	protected Object[] params() {
+		return new Object[0];
 	}
 
 	protected Cookie cookie(boolean secured) {

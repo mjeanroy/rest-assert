@@ -24,7 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
@@ -33,5 +39,36 @@ public abstract class AbstractCookiesTest {
 
 	protected Cookies cookies = Cookies.instance();
 
+	@Test
+	public void should_pass() {
+		Cookie cookie = success();
+		invoke(someInfo(), cookie);
+	}
+
+	@Test
+	public void should_fail() {
+		final AssertionInfo info = someInfo();
+		final Cookie cookie = failure();
+
+		try {
+			invoke(info, cookie);
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage())
+					.isNotNull()
+					.isNotEmpty()
+					.isEqualTo(format(pattern(), placeholders()));
+		}
+	}
+
 	protected abstract void invoke(AssertionInfo info, Cookie cookie);
+
+	protected abstract Cookie success();
+
+	protected abstract Cookie failure();
+
+	protected abstract String pattern();
+
+	protected abstract Object[] placeholders();
 }

@@ -24,54 +24,46 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class Cookies_assertHasValue_Test extends AbstractCookiesTest {
 
-	@Test
-	public void should_pass() {
-		Cookie cookie = cookie(expectedValue());
-		invoke(someInfo(), cookie);
-	}
-
-	@Test
-	public void should_fail() {
-		final AssertionInfo info = someInfo();
-		final String expectedValue = expectedValue();
-		final String actualValue = expectedValue + "foo";
-		final Cookie cookie = cookie(actualValue);
-
-		try {
-			invoke(info, cookie);
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		}
-		catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting cookie to have value \"%s\" but was \"%s\"", expectedValue, actualValue));
-		}
+	@Override
+	protected void invoke(AssertionInfo info, Cookie cookie) {
+		cookies.assertHasValue(info, cookie, success().getValue());
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertHasValue(info, cookie, expectedValue());
+	protected Cookie success() {
+		return cookie("foo");
+	}
+
+	@Override
+	protected Cookie failure() {
+		final String expectedValue = success().getValue();
+		final String actualValue = expectedValue + "foo";
+		return cookie(actualValue);
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to have value \"%s\" but was \"%s\"";
+	}
+
+	@Override
+	protected Object[] placeholders() {
+		final String expectedValue = success().getValue();
+		final String actualValue = failure().getValue();
+		return new Object[] {
+				expectedValue, actualValue
+		};
 	}
 
 	protected Cookie cookie(String value) {
 		return newCookie("name", value, true);
-	}
-
-	protected String expectedValue() {
-		return "foo";
 	}
 }

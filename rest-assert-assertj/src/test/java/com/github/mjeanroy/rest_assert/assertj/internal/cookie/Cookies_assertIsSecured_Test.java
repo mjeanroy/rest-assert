@@ -24,45 +24,37 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class Cookies_assertIsSecured_Test extends AbstractCookiesTest {
 
-	@Test
-	public void should_pass() {
-		Cookie cookie = cookie(true);
-		invoke(someInfo(), cookie);
-	}
-
-	@Test
-	public void should_fail() {
-		final AssertionInfo info = someInfo();
-		final Cookie cookie = cookie(false);
-
-		try {
-			invoke(info, cookie);
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		}
-		catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting cookie to be secured"));
-		}
-	}
-
 	@Override
 	protected void invoke(AssertionInfo info, Cookie cookie) {
 		cookies.assertIsSecured(info, cookie);
+	}
+
+	@Override
+	protected Cookie success() {
+		return cookie(true);
+	}
+
+	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to be secured";
+	}
+
+	@Override
+	protected Object[] placeholders() {
+		return new Object[0];
 	}
 
 	protected Cookie cookie(boolean secured) {

@@ -24,50 +24,44 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasValue;
+import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsNotSecured;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public class CookieAssert_assertHasValue_Test extends AbstractCookieTest {
+public class CookieAssert_assertIsNotSecured_Test extends AbstractCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertHasValue(actual, success().getValue());
+		assertIsNotSecured(actual);
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertHasValue(message, actual, success().getValue());
+		assertIsNotSecured(message, actual);
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie("foo");
+		return cookie(false);
 	}
 
 	@Override
 	protected Cookie failure() {
-		final String expectedValue = success().getValue();
-		final String actualValue = expectedValue + "foo";
-		return cookie(actualValue);
+		return cookie(true);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have value %s but was %s";
+		return "Expecting cookie not to be secured";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedValue = success().getValue();
-		final String actualValue = failure().getValue();
-		return new Object[] {
-			expectedValue, actualValue
-		};
+		return new Object[0];
 	}
 
-	protected Cookie cookie(String value) {
-		return newCookie("name", value, true);
+	protected Cookie cookie(boolean secured) {
+		return newCookie("name", "value", secured);
 	}
 }

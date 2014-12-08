@@ -24,50 +24,55 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasValue;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static java.lang.String.format;
 
+import org.junit.Test;
+
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.Function;
 
-public class CookieAssert_assertHasValue_Test extends AbstractCookieTest {
+public abstract class AbstractCookieTest extends AbstractAssertTest<Cookie> {
 
-	@Override
-	protected void invoke(Cookie actual) {
-		assertHasValue(actual, success().getValue());
+	@Test
+	public void it_should_pass() {
+		Cookie cookie = success();
+		invoke(cookie);
+		invoke("message", cookie);
 	}
 
-	@Override
-	protected void invoke(String message, Cookie actual) {
-		assertHasValue(message, actual, success().getValue());
+	@Test
+	public void it_should_fail() {
+		final Cookie cookie = failure();
+		final String message = format(pattern(), placeholders());
+
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invoke(cookie);
+			}
+		});
 	}
 
-	@Override
-	protected Cookie success() {
-		return cookie("foo");
+	@Test
+	public void it_should_fail_with_custom_message() {
+		final Cookie cookie = failure();
+		final String message = "foo";
+
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invoke(message, cookie);
+			}
+		});
 	}
 
-	@Override
-	protected Cookie failure() {
-		final String expectedValue = success().getValue();
-		final String actualValue = expectedValue + "foo";
-		return cookie(actualValue);
-	}
+	protected abstract Cookie success();
 
-	@Override
-	protected String pattern() {
-		return "Expecting cookie to have value %s but was %s";
-	}
+	protected abstract Cookie failure();
 
-	@Override
-	protected Object[] placeholders() {
-		final String expectedValue = success().getValue();
-		final String actualValue = failure().getValue();
-		return new Object[] {
-			expectedValue, actualValue
-		};
-	}
+	protected abstract String pattern();
 
-	protected Cookie cookie(String value) {
-		return newCookie("name", value, true);
-	}
+	protected abstract Object[] placeholders();
 }

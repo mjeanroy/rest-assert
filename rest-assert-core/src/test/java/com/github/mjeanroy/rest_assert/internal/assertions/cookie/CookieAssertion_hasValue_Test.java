@@ -26,44 +26,49 @@ package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-import org.junit.Test;
-
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class CookieAssertion_hasValue_Test extends AbstractCookieTest {
 
-	@Test
-	public void it_should_pass_() {
-		Cookie cookie = cookie(expectedValue());
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
-	}
-
-	@Test
-	public void it_should_fail() {
-		final String expectedValue = expectedValue();
-		final String actualValue = expectedValue + "foo";
-		final Cookie cookie = cookie(actualValue);
-
-		AssertionResult result = invoke(cookie);
-		checkError(result,
-				ShouldHaveValue.class,
-				"Expecting cookie to have value %s but was %s",
-				expectedValue, actualValue);
+	@Override
+	protected AssertionResult invoke(Cookie cookie) {
+		return cookieAssertions.hasValue(cookie, successFixture().getValue());
 	}
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasValue(cookie, expectedValue());
+	protected Cookie successFixture() {
+		return cookie("foo");
+	}
+
+	@Override
+	protected Cookie failFixture() {
+		final String expectedValue = successFixture().getValue();
+		final String actualValue = expectedValue + "foo";
+		return cookie(actualValue);
+	}
+
+	@Override
+	protected Class error() {
+		return ShouldHaveValue.class;
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to have value %s but was %s";
+	}
+
+	@Override
+	protected Object[] params() {
+		final String expectedValue = successFixture().getValue();
+		final String actualValue = failFixture().getValue();
+		return new String[] {
+			expectedValue, actualValue
+		};
 	}
 
 	protected Cookie cookie(String value) {
 		return newCookie("name", value, true);
-	}
-
-	protected String expectedValue() {
-		return "foo";
 	}
 }

@@ -25,70 +25,49 @@
 package com.github.mjeanroy.rest_assert.api.cookie;
 
 import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasName;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-import static java.lang.String.format;
 
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.Function;
 
-public class CookieAssert_assertHasName_Test extends AbstractAssertTest<Cookie> {
-
-	@Test
-	public void it_should_pass_with_correct_name() {
-		Cookie cookie = cookie(expectedName());
-		invoke(cookie);
-		invoke("message", cookie);
-	}
-
-	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
-		final String message = format("Expecting cookie to have name %s but was %s", expectedName, actualName);
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(cookie);
-			}
-		});
-	}
-
-	@Test
-	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, cookie);
-			}
-		});
-	}
+public class CookieAssert_assertHasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertHasName(actual, expectedName());
+		assertHasName(actual, success().getName());
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertHasName(message, actual, expectedName());
+		assertHasName(message, actual, success().getName());
+	}
+
+	@Override
+	protected Cookie success() {
+		return cookie("foo");
+	}
+
+	@Override
+	protected Cookie failure() {
+		final String expectedName = success().getName();
+		final String actualName = expectedName + "foo";
+		return cookie(actualName);
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to have name %s but was %s";
+	}
+
+	@Override
+	protected Object[] placeholders() {
+		final String expectedName = success().getName();
+		final String actualName = failure().getName();
+		return new Object[] {
+				expectedName, actualName
+		};
 	}
 
 	protected Cookie cookie(String name) {
 		return newCookie(name, "value", true);
-	}
-
-	protected String expectedName() {
-		return "foo";
 	}
 }
