@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules;
 
-import org.assertj.core.api.Condition;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import org.assertj.core.api.Condition;
+import org.junit.Test;
 
 public abstract class AbstractTemplateModelTest {
 
@@ -42,7 +41,9 @@ public abstract class AbstractTemplateModelTest {
 
 	protected abstract String getExpectedClassName();
 
-	protected abstract String getExpectedCoreClass();
+	protected abstract String getExpectedCoreClassName();
+
+	protected abstract Class getExpectedCoreClass();
 
 	protected abstract String getExpectedActualClass();
 
@@ -65,8 +66,15 @@ public abstract class AbstractTemplateModelTest {
 	}
 
 	@Test
+	public void it_should_define_core_class_name() {
+		assertThat(getTemplateModel().getCoreClassName())
+				.isNotNull()
+				.isEqualTo(getExpectedCoreClassName());
+	}
+
+	@Test
 	public void it_should_define_core_class() {
-		assertThat(getTemplateModel().getCoreClass())
+		assertThat(getTemplateModel().coreClass())
 				.isNotNull()
 				.isEqualTo(getExpectedCoreClass());
 	}
@@ -112,7 +120,7 @@ public abstract class AbstractTemplateModelTest {
 				.hasSize(5)
 				.containsKey("methods")
 				.contains(
-						entry("core_class_name", getExpectedCoreClass()),
+						entry("core_class_name", getExpectedCoreClassName()),
 						entry("actual_class", getExpectedActualClass()),
 						entry("class_name", getExpectedClassName()),
 						entry("package", getExpectedPackageName())

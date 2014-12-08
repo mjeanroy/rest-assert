@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
 
+import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
+
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-
-import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
  * Template model for rest-assert-unit HttpAssert class.
@@ -61,8 +61,13 @@ public class HttpAssert extends AbstractTemplateModel implements TemplateModel {
 	}
 
 	@Override
-	public String getCoreClass() {
-		return HttpResponseAssertions.class.getName();
+	public String getCoreClassName() {
+		return coreClass().getName();
+	}
+
+	@Override
+	public Class coreClass() {
+		return HttpResponseAssertions.class;
 	}
 
 	@Override

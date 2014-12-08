@@ -39,12 +39,12 @@ public class HttpAssert_assertHasLocation_Test extends AbstractHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasLocation(response);
+	protected void invoke(HttpResponse actual) {
+		assertHasLocation(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasLocation(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasLocation(message, actual);
 	}
 }

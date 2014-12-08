@@ -42,12 +42,12 @@ public class HttpAssert_assertIsSuccess_Test extends AbstractHttpStatusBetweenTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsSuccess(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsSuccess(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsSuccess(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsSuccess(message, actual);
 	}
 }

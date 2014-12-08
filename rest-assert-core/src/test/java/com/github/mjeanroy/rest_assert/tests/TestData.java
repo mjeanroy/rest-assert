@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.tests;
 
+import static org.mockito.Mockito.*;
+
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public final class TestData {
 
@@ -46,5 +46,11 @@ public final class TestData {
 		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
 		when(httpResponse.getHeader(header.getName())).thenReturn(header.getValue());
 		return httpResponse;
+	}
+
+	public static Cookie newCookie(String name) {
+		Cookie cookie = mock(Cookie.class);
+		when(cookie.getName()).thenReturn(name);
+		return cookie;
 	}
 }

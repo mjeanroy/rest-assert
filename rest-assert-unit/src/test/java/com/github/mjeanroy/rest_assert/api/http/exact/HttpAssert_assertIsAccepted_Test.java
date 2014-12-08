@@ -37,12 +37,12 @@ public class HttpAssert_assertIsAccepted_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsAccepted(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsAccepted(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsAccepted(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsAccepted(message, actual);
 	}
 }

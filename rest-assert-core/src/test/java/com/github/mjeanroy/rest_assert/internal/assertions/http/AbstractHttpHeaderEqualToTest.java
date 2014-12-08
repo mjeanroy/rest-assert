@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http;
 
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
-import org.junit.Before;
-import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-
-public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest {
+public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
 
 	protected HttpResponseAssertions assertions;
 

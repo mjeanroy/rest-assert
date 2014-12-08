@@ -37,12 +37,12 @@ public class HttpAssert_assertIsCsv_Test extends AbstractMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsCsv(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsCsv(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsCsv(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsCsv(message, actual);
 	}
 }

@@ -39,12 +39,12 @@ public class HttpAssert_assertHasHeader_Test extends AbstractHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasHeader(response, getHeader().getName());
+	protected void invoke(HttpResponse actual) {
+		assertHasHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasHeader(message, response, getHeader().getName());
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasHeader(message, actual, getHeader().getName());
 	}
 }

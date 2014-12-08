@@ -39,12 +39,12 @@ public class HttpAssert_assertHasContentType_Test extends AbstractHttpHeaderTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasContentType(response);
+	protected void invoke(HttpResponse actual) {
+		assertHasContentType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasContentType(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasContentType(message, actual);
 	}
 }

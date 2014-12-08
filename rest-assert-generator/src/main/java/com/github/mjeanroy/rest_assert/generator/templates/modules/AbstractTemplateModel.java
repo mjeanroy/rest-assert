@@ -24,9 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules;
 
-import com.github.mjeanroy.rest_assert.generator.TemplateModel;
-import com.github.mjeanroy.rest_assert.generator.templates.internal.Arg;
-import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
+import static com.github.mjeanroy.rest_assert.generator.utils.ClassUtils.findPublicMethods;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableMap;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -38,10 +40,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.mjeanroy.rest_assert.generator.utils.ClassUtils.findPublicMethods;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.sort;
-import static java.util.Collections.unmodifiableMap;
+import com.github.mjeanroy.rest_assert.generator.TemplateModel;
+import com.github.mjeanroy.rest_assert.generator.templates.internal.Arg;
 
 /**
  * Abstract representation of template model.
@@ -59,7 +59,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		Map<String, Object> map = new HashMap<>();
 		map.put("package", getPackageName());
 		map.put("class_name", getClassName());
-		map.put("core_class_name", getCoreClass());
+		map.put("core_class_name", getCoreClassName());
 		map.put("actual_class", getActualClass());
 		map.put("methods", getMethods());
 		return unmodifiableMap(map);
@@ -80,7 +80,15 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Core class.
 	 */
-	public abstract String getCoreClass();
+	public abstract String getCoreClassName();
+
+	/**
+	 * Get Rest-Assert core class that will be used
+	 * to extract assertion methods.
+	 *
+	 * @return Core class.
+	 */
+	public abstract Class coreClass();
 
 	/**
 	 * Get list of methods data to proxify.
@@ -90,7 +98,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 * @return List of methods.
 	 */
 	public List<Map<String, Object>> getMethods() {
-		List<Method> methods = findPublicMethods(HttpResponseAssertions.class);
+		List<Method> methods = findPublicMethods(coreClass());
 
 		// Sort methods by name
 		// Not mandatory but useful for tests and to group
@@ -108,7 +116,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 			models.add(getMethod(method));
 		}
 
-		return models;
+		return unmodifiableList(models);
 	}
 
 	protected Map<String, Object> getMethod(Method method) {

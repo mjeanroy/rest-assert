@@ -37,12 +37,12 @@ public class HttpAssert_assertIsCreated_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsCreated(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsCreated(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsCreated(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsCreated(message, actual);
 	}
 }

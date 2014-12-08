@@ -39,12 +39,12 @@ public class HttpAssert_assertHasLastModified_Test extends AbstractHttpHeaderTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasLastModified(response);
+	protected void invoke(HttpResponse actual) {
+		assertHasLastModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasLastModified(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasLastModified(message, actual);
 	}
 }

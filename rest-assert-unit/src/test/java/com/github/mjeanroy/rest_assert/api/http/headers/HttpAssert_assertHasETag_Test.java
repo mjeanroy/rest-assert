@@ -39,12 +39,12 @@ public class HttpAssert_assertHasETag_Test extends AbstractHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasETag(response);
+	protected void invoke(HttpResponse actual) {
+		assertHasETag(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasETag(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasETag(message, actual);
 	}
 }

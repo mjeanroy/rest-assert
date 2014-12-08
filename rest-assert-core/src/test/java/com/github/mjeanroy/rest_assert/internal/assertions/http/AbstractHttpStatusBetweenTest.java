@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http;
 
+import static org.mockito.Mockito.*;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.junit.Before;
-import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTest {
+public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTest<HttpResponse> {
 
 	protected HttpResponseAssertions assertions;
 

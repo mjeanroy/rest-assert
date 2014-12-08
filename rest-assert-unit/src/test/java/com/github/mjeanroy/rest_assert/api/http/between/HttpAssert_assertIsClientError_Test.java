@@ -42,12 +42,12 @@ public class HttpAssert_assertIsClientError_Test extends AbstractHttpStatusBetwe
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsClientError(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsClientError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsClientError(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsClientError(message, actual);
 	}
 }

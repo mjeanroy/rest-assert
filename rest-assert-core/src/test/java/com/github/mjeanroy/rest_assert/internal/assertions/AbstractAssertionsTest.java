@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import com.github.mjeanroy.rest_assert.error.RestAssertError;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-
 import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
-public abstract class AbstractAssertionsTest {
+import com.github.mjeanroy.rest_assert.error.RestAssertError;
 
-	protected abstract AssertionResult invoke(HttpResponse response);
+public abstract class AbstractAssertionsTest<T> {
+
+	protected abstract AssertionResult invoke(T testedObject);
 
 	protected void checkSuccess(AssertionResult result) {
 		assertThat(result).isNotNull();

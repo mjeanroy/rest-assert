@@ -37,12 +37,12 @@ public class HttpAssert_assertIsNotModified_Test extends AbstractHttpStatusTest 
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsNotModified(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsNotModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsNotModified(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsNotModified(message, actual);
 	}
 }

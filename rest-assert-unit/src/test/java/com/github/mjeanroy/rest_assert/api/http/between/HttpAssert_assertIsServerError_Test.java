@@ -42,12 +42,12 @@ public class HttpAssert_assertIsServerError_Test extends AbstractHttpStatusBetwe
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsServerError(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsServerError(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsServerError(message, actual);
 	}
 }

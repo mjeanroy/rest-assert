@@ -39,12 +39,12 @@ public class HttpAssert_assertHasCacheControl_Test extends AbstractHttpHeaderTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasCacheControl(response);
+	protected void invoke(HttpResponse actual) {
+		assertHasCacheControl(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasCacheControl(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasCacheControl(message, actual);
 	}
 }

@@ -39,12 +39,12 @@ public class HttpAssert_assertHasContentLength_Test extends AbstractHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertHasContentLength(response);
+	protected void invoke(HttpResponse actual) {
+		assertHasContentLength(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertHasContentLength(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertHasContentLength(message, actual);
 	}
 }

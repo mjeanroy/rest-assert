@@ -37,12 +37,12 @@ public class HttpAssert_assertIsForbidden_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsForbidden(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsForbidden(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsForbidden(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsForbidden(message, actual);
 	}
 }

@@ -24,17 +24,18 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http;
 
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.junit.Before;
-import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
-
-public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest {
+public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpResponse> {
 
 	protected HttpResponseAssertions assertions;
 

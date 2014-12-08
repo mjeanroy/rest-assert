@@ -37,12 +37,12 @@ public class HttpAssert_assertIsPreConditionFailed_Test extends AbstractHttpStat
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsPreConditionFailed(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsPreConditionFailed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsPreConditionFailed(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsPreConditionFailed(message, actual);
 	}
 }

@@ -43,12 +43,12 @@ public class HttpAssert_assertIsHtml_Test extends AbstractMimeTypeInTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsHtml(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsHtml(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsHtml(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsHtml(message, actual);
 	}
 }

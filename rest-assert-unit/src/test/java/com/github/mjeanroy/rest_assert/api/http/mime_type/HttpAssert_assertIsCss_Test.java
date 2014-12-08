@@ -37,12 +37,12 @@ public class HttpAssert_assertIsCss_Test extends AbstractMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsCss(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsCss(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsCss(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsCss(message, actual);
 	}
 }

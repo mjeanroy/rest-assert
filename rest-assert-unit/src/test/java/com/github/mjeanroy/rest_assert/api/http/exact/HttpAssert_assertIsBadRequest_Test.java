@@ -37,12 +37,12 @@ public class HttpAssert_assertIsBadRequest_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsBadRequest(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsBadRequest(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsBadRequest(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsBadRequest(message, actual);
 	}
 }

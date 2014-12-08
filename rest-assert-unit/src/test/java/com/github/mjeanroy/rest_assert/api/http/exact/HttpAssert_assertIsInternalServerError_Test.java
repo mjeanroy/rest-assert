@@ -37,12 +37,12 @@ public class HttpAssert_assertIsInternalServerError_Test extends AbstractHttpSta
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsInternalServerError(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsInternalServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsInternalServerError(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsInternalServerError(message, actual);
 	}
 }

@@ -31,7 +31,6 @@ import org.assertj.core.internal.Objects;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 /**
  * Commons methods to class assertions.
@@ -43,7 +42,7 @@ public abstract class AbstractRestAssertions {
 	 */
 	protected final Failures failures = Failures.instance();
 
-	protected void assertNotNull(AssertionInfo info, HttpResponse actual) {
+	protected void assertNotNull(AssertionInfo info, Object actual) {
 		Objects.instance().assertNotNull(info, actual);
 	}
 

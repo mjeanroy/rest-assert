@@ -35,7 +35,7 @@ public final class {{class_name}} {
 	private static {{core_class_name}} assertions = {{core_class_name}}.instance();
 
 	// Private constructor to ensure no instantiation
-	private HttpAssert() {
+	private {{class_name}}() {
 	}
 
 	{{#methods}}

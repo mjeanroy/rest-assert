@@ -37,12 +37,12 @@ public class HttpAssert_assertIsUnauthorized_Test extends AbstractHttpStatusTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsUnauthorized(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsUnauthorized(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsUnauthorized(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsUnauthorized(message, actual);
 	}
 }

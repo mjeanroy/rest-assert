@@ -28,7 +28,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseAssert> {
 
-	protected HttpResponseAssert(HttpResponse actual) {
+	public HttpResponseAssert(HttpResponse actual) {
 		super(actual, HttpResponseAssert.class);
 	}
 

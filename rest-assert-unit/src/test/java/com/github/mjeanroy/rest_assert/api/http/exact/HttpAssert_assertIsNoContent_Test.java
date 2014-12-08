@@ -37,12 +37,12 @@ public class HttpAssert_assertIsNoContent_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsNoContent(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsNoContent(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsNoContent(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsNoContent(message, actual);
 	}
 }

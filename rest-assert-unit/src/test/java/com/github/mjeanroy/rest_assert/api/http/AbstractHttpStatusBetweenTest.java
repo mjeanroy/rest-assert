@@ -30,10 +30,11 @@ import static org.mockito.Mockito.*;
 
 import org.junit.Test;
 
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
 
-public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertTest {
+public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {

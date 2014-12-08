@@ -37,12 +37,12 @@ public class HttpAssert_assertIsUnsupportedMediaType_Test extends AbstractHttpSt
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsUnsupportedMediaType(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsUnsupportedMediaType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsUnsupportedMediaType(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsUnsupportedMediaType(message, actual);
 	}
 }

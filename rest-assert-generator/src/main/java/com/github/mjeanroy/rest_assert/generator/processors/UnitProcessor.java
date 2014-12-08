@@ -24,19 +24,25 @@
 
 package com.github.mjeanroy.rest_assert.generator.processors;
 
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.CookieAssert.cookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
+
 import com.github.mjeanroy.rest_assert.generator.ClassFile;
 import com.github.mjeanroy.rest_assert.generator.Template;
 import com.github.mjeanroy.rest_assert.generator.TemplateEngine;
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
-
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
 
 public enum UnitProcessor {
 
 	HTTP_RESPONSE(
 			assertTemplate(),
 			httpAssert()
+	),
+
+	COOKIES(
+			assertTemplate(),
+			cookieAssert()
 	);
 
 	/**

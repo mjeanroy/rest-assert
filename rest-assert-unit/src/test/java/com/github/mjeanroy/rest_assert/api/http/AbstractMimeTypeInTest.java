@@ -34,12 +34,13 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import com.github.mjeanroy.rest_assert.utils.Mapper;
 
-public abstract class AbstractMimeTypeInTest extends AbstractAssertTest {
+public abstract class AbstractMimeTypeInTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
 	public void it_should_pass_with_expected_mime_type() {

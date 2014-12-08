@@ -39,12 +39,12 @@ public class HttpAssert_assertIsLocationEqualTo_Test extends AbstractHttpHeaderE
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsLocationEqualTo(response, getHeader().getValue());
+	protected void invoke(HttpResponse actual) {
+		assertIsLocationEqualTo(actual, getHeader().getValue());
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsLocationEqualTo(message, response, getHeader().getValue());
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsLocationEqualTo(message, actual, getHeader().getValue());
 	}
 }

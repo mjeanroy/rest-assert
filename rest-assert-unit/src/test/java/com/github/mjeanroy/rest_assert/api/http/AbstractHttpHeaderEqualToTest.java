@@ -31,11 +31,12 @@ import static java.lang.String.format;
 
 import org.junit.Test;
 
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertTest {
+public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
 	public void it_should_pass_with_expected_header() {

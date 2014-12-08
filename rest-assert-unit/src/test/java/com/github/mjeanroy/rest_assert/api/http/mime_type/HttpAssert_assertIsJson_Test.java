@@ -37,12 +37,12 @@ public class HttpAssert_assertIsJson_Test extends AbstractMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsJson(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsJson(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsJson(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsJson(message, actual);
 	}
 }

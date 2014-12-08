@@ -37,12 +37,12 @@ public class HttpAssert_assertIsMethodNotAllowed_Test extends AbstractHttpStatus
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsMethodNotAllowed(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsMethodNotAllowed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsMethodNotAllowed(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsMethodNotAllowed(message, actual);
 	}
 }

@@ -24,15 +24,17 @@
 
 package com.github.mjeanroy.rest_assert.generator.processors;
 
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.cookie.CookieAssert.cookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.cookie.Cookies.cookiesModel;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.http.HttpResponseAssert.httpResponseAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.http.HttpResponses.httpResponsesModel;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.tmpls.ClassAssertTemplate.classAssertTemplate;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.tmpls.ClassAssertionsTemplate.classAssertionsTemplate;
+
 import com.github.mjeanroy.rest_assert.generator.ClassFile;
 import com.github.mjeanroy.rest_assert.generator.Template;
 import com.github.mjeanroy.rest_assert.generator.TemplateEngine;
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
-
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.http_responses.HttpResponseAssert.httpResponseAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.http_responses.HttpResponses.httpResponsesModel;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.tmpls.ClassAssertTemplate.classAssertTemplate;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.tmpls.ClassAssertionsTemplate.classAssertionsTemplate;
 
 public enum AssertJProcessor {
 
@@ -44,6 +46,16 @@ public enum AssertJProcessor {
 	HTTP_RESPONSES_ASSERT(
 			classAssertTemplate(),
 			httpResponseAssert()
+	),
+
+	COOKIES(
+			classAssertionsTemplate(),
+			cookiesModel()
+	),
+
+	COOKIES_ASSERT(
+			classAssertTemplate(),
+			cookieAssert()
 	);
 
 	/**

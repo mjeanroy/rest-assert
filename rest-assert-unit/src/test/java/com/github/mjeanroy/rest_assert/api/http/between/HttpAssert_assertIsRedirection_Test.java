@@ -42,12 +42,12 @@ public class HttpAssert_assertIsRedirection_Test extends AbstractHttpStatusBetwe
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsRedirection(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsRedirection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsRedirection(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsRedirection(message, actual);
 	}
 }

@@ -37,12 +37,12 @@ public class HttpAssert_assertIsNotImplemented_Test extends AbstractHttpStatusTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsNotImplemented(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsNotImplemented(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsNotImplemented(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsNotImplemented(message, actual);
 	}
 }

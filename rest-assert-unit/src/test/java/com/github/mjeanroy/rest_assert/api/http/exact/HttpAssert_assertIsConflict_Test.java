@@ -37,12 +37,12 @@ public class HttpAssert_assertIsConflict_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsConflict(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsConflict(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsConflict(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsConflict(message, actual);
 	}
 }

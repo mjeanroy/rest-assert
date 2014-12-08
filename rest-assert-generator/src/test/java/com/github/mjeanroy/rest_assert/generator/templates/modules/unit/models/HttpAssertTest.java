@@ -24,16 +24,17 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
 
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
+
+import java.util.Map;
+
+import org.assertj.core.api.Condition;
+import org.junit.Before;
+
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.Condition;
-import org.junit.Before;
-
-import java.util.Map;
-
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
 
 public class HttpAssertTest extends AbstractTemplateModelTest {
 
@@ -43,6 +44,7 @@ public class HttpAssertTest extends AbstractTemplateModelTest {
 	public void setUp() {
 		httpAssert = httpAssert();
 	}
+
 	@Override
 	protected AbstractTemplateModel getTemplateModel() {
 		return httpAssert;
@@ -59,8 +61,13 @@ public class HttpAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected String getExpectedCoreClass() {
+	protected String getExpectedCoreClassName() {
 		return HttpResponseAssertions.class.getName();
+	}
+
+	@Override
+	protected Class getExpectedCoreClass() {
+		return HttpResponseAssertions.class;
 	}
 
 	@Override

@@ -37,12 +37,12 @@ public class HttpAssert_assertIsOk_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsOk(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsOk(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsOk(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsOk(message, actual);
 	}
 }

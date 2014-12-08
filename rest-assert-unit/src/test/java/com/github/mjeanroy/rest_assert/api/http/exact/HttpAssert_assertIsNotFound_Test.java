@@ -37,12 +37,12 @@ public class HttpAssert_assertIsNotFound_Test extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsNotFound(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsNotFound(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsNotFound(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsNotFound(message, actual);
 	}
 }

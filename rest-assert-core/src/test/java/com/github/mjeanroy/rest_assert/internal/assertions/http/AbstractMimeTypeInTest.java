@@ -24,6 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http;
 
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+
+import java.util.List;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
@@ -32,15 +40,8 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import com.github.mjeanroy.rest_assert.utils.Mapper;
 import com.github.mjeanroy.rest_assert.utils.Utils;
-import org.junit.Before;
-import org.junit.Test;
 
-import java.util.List;
-
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-
-public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest {
+public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
 
 	protected HttpResponseAssertions assertions;
 

@@ -43,12 +43,12 @@ public class HttpAssert_assertIsJavascript_Test extends AbstractMimeTypeInTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsJavascript(response);
+	protected void invoke(HttpResponse actual) {
+		assertIsJavascript(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsJavascript(message, response);
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsJavascript(message, actual);
 	}
 }

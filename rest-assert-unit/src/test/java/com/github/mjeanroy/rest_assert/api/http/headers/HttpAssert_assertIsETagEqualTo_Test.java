@@ -39,12 +39,12 @@ public class HttpAssert_assertIsETagEqualTo_Test extends AbstractHttpHeaderEqual
 	}
 
 	@Override
-	protected void invoke(HttpResponse response) {
-		assertIsETagEqualTo(response, getHeader().getValue());
+	protected void invoke(HttpResponse actual) {
+		assertIsETagEqualTo(actual, getHeader().getValue());
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse response) {
-		assertIsETagEqualTo(message, response, getHeader().getValue());
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsETagEqualTo(message, actual, getHeader().getValue());
 	}
 }
