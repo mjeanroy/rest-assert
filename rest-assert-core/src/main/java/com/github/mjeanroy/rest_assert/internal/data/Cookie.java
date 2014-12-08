@@ -42,4 +42,11 @@ public interface Cookie {
 	 * @return Value.
 	 */
 	String getValue();
+
+	/**
+	 * Check if cookie is flagged as secured.
+	 *
+	 * @return True if cookie is secured, false otherwise.
+	 */
+	boolean isSecured();
 }

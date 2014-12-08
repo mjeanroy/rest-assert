@@ -80,5 +80,47 @@ public final class CookieAssert {
 		check(message, assertions.hasValue(actual, arg1));
 	}
 
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isNotSecured}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotSecured(com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		assertIsNotSecured(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isNotSecured}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotSecured(String message, com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		check(message, assertions.isNotSecured(actual));
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isSecured}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsSecured(com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		assertIsSecured(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isSecured}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsSecured(String message, com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		check(message, assertions.isSecured(actual));
+	}
+
 }
 

@@ -68,7 +68,7 @@ public class Cookies_assertHasValue_Test extends AbstractCookiesTest {
 	}
 
 	protected Cookie cookie(String value) {
-		return newCookie("name", value);
+		return newCookie("name", value, true);
 	}
 
 	protected String expectedValue() {

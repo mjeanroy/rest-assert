@@ -28,42 +28,35 @@ import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue;
+import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public class CookieAssertion_hasValue_Test extends AbstractCookieTest {
+public class CookieAssertion_isSecured_Test extends AbstractCookieTest {
 
 	@Test
-	public void it_should_pass_() {
-		Cookie cookie = cookie(expectedValue());
+	public void it_should_pass() {
+		Cookie cookie = cookie(true);
 		AssertionResult result = invoke(cookie);
 		checkSuccess(result);
 	}
 
 	@Test
 	public void it_should_fail() {
-		final String expectedValue = expectedValue();
-		final String actualValue = expectedValue + "foo";
-		final Cookie cookie = cookie(actualValue);
+		final Cookie cookie = cookie(false);
 
 		AssertionResult result = invoke(cookie);
 		checkError(result,
-				ShouldHaveValue.class,
-				"Expecting cookie to have value %s but was %s",
-				expectedValue, actualValue);
+				ShouldBeSecured.class,
+				"Expecting cookie to be secured");
 	}
 
 	@Override
 	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasValue(cookie, expectedValue());
+		return cookieAssertions.isSecured(cookie);
 	}
 
-	protected Cookie cookie(String value) {
-		return newCookie("name", value, true);
-	}
-
-	protected String expectedValue() {
-		return "foo";
+	protected Cookie cookie(boolean secured) {
+		return newCookie("name", "value", secured);
 	}
 }

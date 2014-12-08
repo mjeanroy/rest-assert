@@ -57,6 +57,6 @@ public class CookieAssert_hasValue_Test extends AbstractApiTest<Cookies, CookieA
 	}
 
 	protected Cookie actual() {
-		return TestData.newCookie("foo", "bar");
+		return TestData.newCookie("foo", "bar", true);
 	}
 }

@@ -22,48 +22,50 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.*;
 
+import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public class CookieAssertion_hasValue_Test extends AbstractCookieTest {
+public class Cookies_assertIsNotSecured_Test extends AbstractCookiesTest {
 
 	@Test
-	public void it_should_pass_() {
-		Cookie cookie = cookie(expectedValue());
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
+	public void should_pass() {
+		Cookie cookie = cookie(false);
+		invoke(someInfo(), cookie);
 	}
 
 	@Test
-	public void it_should_fail() {
-		final String expectedValue = expectedValue();
-		final String actualValue = expectedValue + "foo";
-		final Cookie cookie = cookie(actualValue);
+	public void should_fail() {
+		final AssertionInfo info = someInfo();
+		final Cookie cookie = cookie(true);
 
-		AssertionResult result = invoke(cookie);
-		checkError(result,
-				ShouldHaveValue.class,
-				"Expecting cookie to have value %s but was %s",
-				expectedValue, actualValue);
+		try {
+			invoke(info, cookie);
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage())
+					.isNotNull()
+					.isNotEmpty()
+					.isEqualTo(format("Expecting cookie not to be secured"));
+		}
 	}
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasValue(cookie, expectedValue());
+	protected void invoke(AssertionInfo info, Cookie cookie) {
+		cookies.assertIsNotSecured(info, cookie);
 	}
 
-	protected Cookie cookie(String value) {
-		return newCookie("name", value, true);
-	}
-
-	protected String expectedValue() {
-		return "foo";
+	protected Cookie cookie(boolean secured) {
+		return newCookie("name", "value", secured);
 	}
 }

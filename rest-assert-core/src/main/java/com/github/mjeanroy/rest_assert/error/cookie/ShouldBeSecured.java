@@ -22,37 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import static org.mockito.Mockito.*;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+/**
+ * Error thrown when a cookie does not have
+ * expected value.
+ */
+public class ShouldBeSecured extends AbstractError {
 
-public final class TestData {
-
-	private TestData() {
+	// Private constructor, use static factory instead
+	private ShouldBeSecured(String message, Object... args) {
+		super(message, args);
 	}
 
-	public static HttpResponse newHttpResponseWithStatus(int status) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.getStatus()).thenReturn(status);
-		return httpResponse;
+	/**
+	 * Build error.
+	 *
+	 * @return Error.
+	 */
+	public static ShouldBeSecured shouldBeSecured() {
+		return new ShouldBeSecured("Expecting cookie to be secured");
 	}
 
-	public static HttpResponse newHttpResponseWithHeader(Header header) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
-		when(httpResponse.getHeader(header.getName())).thenReturn(header.getValue());
-		return httpResponse;
-	}
-
-	public static Cookie newCookie(String name, String value, boolean secured) {
-		Cookie cookie = mock(Cookie.class);
-		when(cookie.getName()).thenReturn(name);
-		when(cookie.getValue()).thenReturn(value);
-		when(cookie.isSecured()).thenReturn(secured);
-		return cookie;
+	/**
+	 * Build error.
+	 *
+	 * @return Error.
+	 */
+	public static ShouldBeSecured shouldNotBeSecured() {
+		return new ShouldBeSecured("Expecting cookie not to be secured");
 	}
 }

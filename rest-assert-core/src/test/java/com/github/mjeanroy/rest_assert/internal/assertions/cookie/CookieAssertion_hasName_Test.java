@@ -35,14 +35,14 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
 	@Test
-	public void it_should_pass_with_correct_name() {
+	public void it_should_pass() {
 		Cookie cookie = cookie(expectedName());
 		AssertionResult result = invoke(cookie);
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_fail_with_wrong_name() {
+	public void it_should_fail() {
 		final String expectedName = expectedName();
 		final String actualName = expectedName + "foo";
 		final Cookie cookie = cookie(actualName);
@@ -56,11 +56,11 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, "foo");
+		return cookieAssertions.hasName(cookie, expectedName());
 	}
 
 	protected Cookie cookie(String name) {
-		return newCookie(name, "value");
+		return newCookie(name, "value", true);
 	}
 
 	protected String expectedName() {

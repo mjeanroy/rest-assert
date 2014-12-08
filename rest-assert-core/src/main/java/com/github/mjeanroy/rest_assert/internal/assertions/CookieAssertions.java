@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldBeSecured;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldNotBeSecured;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
@@ -80,5 +82,29 @@ public final class CookieAssertions {
 		return actualValue.equals(value) ?
 				success() :
 				failure(shouldHaveValue(value, actualValue));
+	}
+
+	/**
+	 * Check that cookie is secured.
+	 *
+	 * @param cookie Cookie.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isSecured(Cookie cookie) {
+		return cookie.isSecured() ?
+				success() :
+				failure(shouldBeSecured());
+	}
+
+	/**
+	 * Check that cookie is secured.
+	 *
+	 * @param cookie Cookie.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotSecured(Cookie cookie) {
+		return !cookie.isSecured() ?
+				success() :
+				failure(shouldNotBeSecured());
 	}
 }
