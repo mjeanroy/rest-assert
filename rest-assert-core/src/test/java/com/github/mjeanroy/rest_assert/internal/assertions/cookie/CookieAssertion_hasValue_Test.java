@@ -22,56 +22,48 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
+package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
+import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public class Cookies_assertHasName_Test extends AbstractCookiesTest {
+public class CookieAssertion_hasValue_Test extends AbstractCookieTest {
 
 	@Test
-	public void should_pass() {
-		Cookie cookie = cookie(expectedName());
-		invoke(someInfo(), cookie);
+	public void it_should_pass_with_correct_name() {
+		Cookie cookie = cookie(expectedValue());
+		AssertionResult result = invoke(cookie);
+		checkSuccess(result);
 	}
 
 	@Test
-	public void should_fail() {
-		final AssertionInfo info = someInfo();
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
+	public void it_should_fail_with_wrong_name() {
+		final String expectedValue = expectedValue();
+		final String actualValue = expectedValue + "foo";
+		final Cookie cookie = cookie(actualValue);
 
-		try {
-			invoke(info, cookie);
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		}
-		catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting cookie to have name \"%s\" but was \"%s\"", expectedName, actualName));
-		}
+		AssertionResult result = invoke(cookie);
+		checkError(result,
+				ShouldHaveValue.class,
+				"Expecting cookie to have value %s but was %s",
+				expectedValue, actualValue);
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertHasName(info, cookie, expectedName());
+	protected AssertionResult invoke(Cookie cookie) {
+		return cookieAssertions.hasValue(cookie, "foo");
 	}
 
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value");
+	protected Cookie cookie(String value) {
+		return newCookie("name", value);
 	}
 
-	protected String expectedName() {
+	protected String expectedValue() {
 		return "foo";
 	}
 }

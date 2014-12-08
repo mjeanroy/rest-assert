@@ -59,5 +59,26 @@ public final class CookieAssert {
 		check(message, assertions.hasName(actual, arg1));
 	}
 
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#hasValue}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertHasValue(com.github.mjeanroy.rest_assert.internal.data.Cookie actual, java.lang.String arg1) {
+		assertHasValue(null, actual, arg1);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#hasValue}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertHasValue(String message, com.github.mjeanroy.rest_assert.internal.data.Cookie actual, java.lang.String arg1) {
+		check(message, assertions.hasValue(actual, arg1));
+	}
+
 }
 

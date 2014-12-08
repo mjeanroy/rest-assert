@@ -35,20 +35,20 @@ import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public class Cookies_assertHasName_Test extends AbstractCookiesTest {
+public class Cookies_assertHasValue_Test extends AbstractCookiesTest {
 
 	@Test
 	public void should_pass() {
-		Cookie cookie = cookie(expectedName());
+		Cookie cookie = cookie(expectedValue());
 		invoke(someInfo(), cookie);
 	}
 
 	@Test
 	public void should_fail() {
 		final AssertionInfo info = someInfo();
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
+		final String expectedValue = expectedValue();
+		final String actualValue = expectedValue + "foo";
+		final Cookie cookie = cookie(actualValue);
 
 		try {
 			invoke(info, cookie);
@@ -58,20 +58,20 @@ public class Cookies_assertHasName_Test extends AbstractCookiesTest {
 			assertThat(e.getMessage())
 					.isNotNull()
 					.isNotEmpty()
-					.isEqualTo(format("Expecting cookie to have name \"%s\" but was \"%s\"", expectedName, actualName));
+					.isEqualTo(format("Expecting cookie to have value \"%s\" but was \"%s\"", expectedValue, actualValue));
 		}
 	}
 
 	@Override
 	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertHasName(info, cookie, expectedName());
+		cookies.assertHasValue(info, cookie, expectedValue());
 	}
 
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value");
+	protected Cookie cookie(String value) {
+		return newCookie("name", value);
 	}
 
-	protected String expectedName() {
+	protected String expectedValue() {
 		return "foo";
 	}
 }

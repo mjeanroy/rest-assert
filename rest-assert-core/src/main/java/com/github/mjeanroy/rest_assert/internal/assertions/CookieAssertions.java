@@ -24,10 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName.shouldHaveName;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 
+import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 /**
@@ -54,7 +55,7 @@ public final class CookieAssertions {
 	}
 
 	/**
-	 * Check that status code of http response is {@link com.github.mjeanroy.rest_assert.internal.data.HttpStatus#OK}.
+	 * Check that cookie has expected name.
 	 *
 	 * @param cookie Cookie.
 	 * @param name Expected name.
@@ -64,7 +65,20 @@ public final class CookieAssertions {
 		String actualName = cookie.getName();
 		return actualName.equals(name) ?
 				success() :
-				failure(shouldHaveName(name, actualName));
+				failure(ShouldHaveName.shouldHaveName(name, actualName));
 	}
 
+	/**
+	 * Check that cookie has expected value.
+	 *
+	 * @param cookie Cookie.
+	 * @param value Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasValue(Cookie cookie, String value) {
+		String actualValue = cookie.getValue();
+		return actualValue.equals(value) ?
+				success() :
+				failure(shouldHaveValue(value, actualValue));
+	}
 }

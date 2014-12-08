@@ -48,9 +48,10 @@ public final class TestData {
 		return httpResponse;
 	}
 
-	public static Cookie newCookie(String name) {
+	public static Cookie newCookie(String name, String value) {
 		Cookie cookie = mock(Cookie.class);
 		when(cookie.getName()).thenReturn(name);
+		when(cookie.getValue()).thenReturn(value);
 		return cookie;
 	}
 }

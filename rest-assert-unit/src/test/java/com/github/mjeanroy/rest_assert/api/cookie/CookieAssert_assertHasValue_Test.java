@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasName;
+import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasValue;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 import static java.lang.String.format;
@@ -35,21 +35,21 @@ import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.Function;
 
-public class CookieAssert_assertHasName_Test extends AbstractAssertTest<Cookie> {
+public class CookieAssert_assertHasValue_Test extends AbstractAssertTest<Cookie> {
 
 	@Test
 	public void it_should_pass_with_correct_name() {
-		Cookie cookie = cookie(expectedName());
+		Cookie cookie = cookie(expectedValue());
 		invoke(cookie);
 		invoke("message", cookie);
 	}
 
 	@Test
 	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
-		final String message = format("Expecting cookie to have name %s but was %s", expectedName, actualName);
+		final String expectedValue = expectedValue();
+		final String actualValue = expectedValue + "foo";
+		final Cookie cookie = cookie(actualValue);
+		final String message = format("Expecting cookie to have value %s but was %s", expectedValue, actualValue);
 
 		assertFailure(message, new Function() {
 			@Override
@@ -61,9 +61,9 @@ public class CookieAssert_assertHasName_Test extends AbstractAssertTest<Cookie> 
 
 	@Test
 	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
+		final String expectedValue = expectedValue();
+		final String actualValue = expectedValue + "foo";
+		final Cookie cookie = cookie(actualValue);
 		final String message = "foo";
 
 		assertFailure(message, new Function() {
@@ -76,19 +76,19 @@ public class CookieAssert_assertHasName_Test extends AbstractAssertTest<Cookie> 
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertHasName(actual, expectedName());
+		assertHasValue(actual, expectedValue());
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertHasName(message, actual, expectedName());
+		assertHasValue(message, actual, expectedValue());
 	}
 
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value");
+	protected Cookie cookie(String value) {
+		return newCookie("name", value);
 	}
 
-	protected String expectedName() {
+	protected String expectedValue() {
 		return "foo";
 	}
 }

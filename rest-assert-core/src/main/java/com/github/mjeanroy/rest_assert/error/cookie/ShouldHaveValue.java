@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,41 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import static org.mockito.Mockito.*;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import org.assertj.core.api.AssertionInfo;
+/**
+ * Error thrown when a cookie does not have
+ * expected value.
+ */
+public class ShouldHaveValue extends AbstractError {
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.TestData;
-
-public class CookieAssert_hasName_Test extends AbstractApiTest<Cookies, CookieAssert> {
-
-	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	// Private constructor, use static factory instead
+	private ShouldHaveValue(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
-	}
-
-	@Override
-	protected CookieAssert invoke() {
-		return api.hasName(actual().getName());
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasName(any(AssertionInfo.class), any(Cookie.class), any(String.class));
-	}
-
-	protected Cookie actual() {
-		return TestData.newCookie("foo", "bar");
+	/**
+	 * Build error.
+	 *
+	 * @param expectedValue Expected cookie name.
+	 * @param actualValue Actual cookie name.
+	 * @return Error.
+	 */
+	public static ShouldHaveValue shouldHaveValue(String expectedValue, String actualValue) {
+		return new ShouldHaveValue("Expecting cookie to have value %s but was %s", expectedValue, actualValue);
 	}
 }

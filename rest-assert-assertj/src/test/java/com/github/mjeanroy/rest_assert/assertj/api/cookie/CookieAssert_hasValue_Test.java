@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,48 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static org.mockito.Mockito.*;
 
-import org.junit.Test;
+import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
+import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
+import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.TestData;
 
-public class CookieAssertion_hasName_Test extends AbstractCookieTest {
+public class CookieAssert_hasValue_Test extends AbstractApiTest<Cookies, CookieAssert> {
 
-	@Test
-	public void it_should_pass_with_correct_name() {
-		Cookie cookie = cookie(expectedName());
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
-	}
-
-	@Test
-	public void it_should_fail_with_wrong_name() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
-
-		AssertionResult result = invoke(cookie);
-		checkError(result,
-				ShouldHaveName.class,
-				"Expecting cookie to have name %s but was %s",
-				expectedName, actualName);
+	@Override
+	protected Cookies createAssertions() {
+		return mock(Cookies.class);
 	}
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, "foo");
+	protected CookieAssert createApi() {
+		return new CookieAssert(actual());
 	}
 
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value");
+	@Override
+	protected CookieAssert invoke() {
+		return api.hasValue(actual().getName());
 	}
 
-	protected String expectedName() {
-		return "foo";
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertHasValue(any(AssertionInfo.class), any(Cookie.class), any(String.class));
+	}
+
+	protected Cookie actual() {
+		return TestData.newCookie("foo", "bar");
 	}
 }

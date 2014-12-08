@@ -22,48 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue.shouldHaveValue;
+import static org.assertj.core.api.Assertions.*;
 
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-
-public class CookieAssertion_hasName_Test extends AbstractCookieTest {
+public class ShouldHaveValueTest {
 
 	@Test
-	public void it_should_pass_with_correct_name() {
-		Cookie cookie = cookie(expectedName());
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
-	}
-
-	@Test
-	public void it_should_fail_with_wrong_name() {
-		final String expectedName = expectedName();
-		final String actualName = expectedName + "foo";
-		final Cookie cookie = cookie(actualName);
-
-		AssertionResult result = invoke(cookie);
-		checkError(result,
-				ShouldHaveName.class,
-				"Expecting cookie to have name %s but was %s",
-				expectedName, actualName);
-	}
-
-	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, "foo");
-	}
-
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value");
-	}
-
-	protected String expectedName() {
-		return "foo";
+	public void it_should_format_error_message() {
+		String actualValue = "foo";
+		String expectedValue = "bar";
+		ShouldHaveValue shouldHaveValue = shouldHaveValue(expectedValue, actualValue);
+		assertThat(shouldHaveValue).isNotNull();
+		assertThat(shouldHaveValue.toString()).isEqualTo("Expecting cookie to have value bar but was foo");
 	}
 }
