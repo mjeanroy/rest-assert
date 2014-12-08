@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.utils;
+package com.github.mjeanroy.rest_assert.tests;
 
 /**
  * Function representation.

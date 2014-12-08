@@ -28,7 +28,7 @@ import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesHea
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponses_assertHasLocation_Test extends AbstractHttpResponsesHeaderTest {

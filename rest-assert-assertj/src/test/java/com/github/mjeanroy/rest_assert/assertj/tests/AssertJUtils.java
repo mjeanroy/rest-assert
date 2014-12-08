@@ -26,9 +26,16 @@ package com.github.mjeanroy.rest_assert.assertj.tests;
 
 import java.util.List;
 
+import org.assertj.core.api.AssertionInfo;
+import org.assertj.core.api.WritableAssertionInfo;
+
 public final class AssertJUtils {
 
 	private AssertJUtils() {
+	}
+
+	public static AssertionInfo someInfo() {
+		return new WritableAssertionInfo();
 	}
 
 	public static String formatList(List<String> list) {

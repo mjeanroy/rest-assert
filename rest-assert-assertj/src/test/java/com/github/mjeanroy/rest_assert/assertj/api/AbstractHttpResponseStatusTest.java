@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithStatus;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
 
 public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
 

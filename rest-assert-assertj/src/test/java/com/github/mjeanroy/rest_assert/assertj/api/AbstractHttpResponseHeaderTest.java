@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
-import com.github.mjeanroy.rest_assert.tests.models.Header;
-
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
 

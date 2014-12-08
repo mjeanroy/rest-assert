@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.api.http;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
-import com.github.mjeanroy.rest_assert.tests.utils.Function;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static java.lang.String.format;
+
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.api.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 public abstract class AbstractHttpHeaderTest extends AbstractAssertTest {
 

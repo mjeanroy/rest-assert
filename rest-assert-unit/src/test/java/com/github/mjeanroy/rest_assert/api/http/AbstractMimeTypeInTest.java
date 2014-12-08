@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.rest_assert.api.http;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
-import com.github.mjeanroy.rest_assert.tests.utils.Function;
-import com.github.mjeanroy.rest_assert.utils.Mapper;
-import org.junit.Test;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.github.mjeanroy.rest_assert.utils.Utils.map;
+import static java.lang.String.format;
 
 import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.api.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.rest_assert.utils.Utils.map;
-import static java.lang.String.format;
+import org.junit.Test;
+
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.utils.Mapper;
 
 public abstract class AbstractMimeTypeInTest extends AbstractAssertTest {
 

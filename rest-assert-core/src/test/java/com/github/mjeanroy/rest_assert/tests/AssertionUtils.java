@@ -22,36 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.json;
+package com.github.mjeanroy.rest_assert.tests;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 
-import static com.github.mjeanroy.rest_assert.tests.utils.Strings.join;
-import static java.util.Arrays.asList;
+public abstract class AssertionUtils {
 
-public class JsonArray implements JsonValue {
-	public static JsonArray jsonArray(Object... values) {
-		return new JsonArray(values);
-	}
-
-	private final List<Object> values;
-
-	private JsonArray(Object... values) {
-		this.values = asList(values);
-	}
-
-	@Override
-	public String toJson() {
-		return "[" + join(formatValues(), ", ") + "]";
-	}
-
-	private List<String> formatValues() {
-		List<String> vals = new ArrayList<>();
-		for (Object value : values) {
-			String val = JsonUtil.formatValue(value);
-			vals.add(val);
+	public static void assertFailure(String message, Function test) {
+		try {
+			test.apply();
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		} catch (AssertionError error) {
+			assertThat(error.getMessage()).isEqualTo(message);
 		}
-		return vals;
+	}
+
+	public static void failBecauseExpectedAssertionErrorWasNotThrown() {
+		fail("Exception was not thrown");
 	}
 }

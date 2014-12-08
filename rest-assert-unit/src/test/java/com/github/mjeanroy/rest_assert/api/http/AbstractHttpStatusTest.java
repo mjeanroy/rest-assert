@@ -24,13 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.api.http;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.utils.Function;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
+import static java.lang.String.format;
+
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.api.tests.TestData.newHttpResponseWithStatus;
-import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
 
 public abstract class AbstractHttpStatusTest extends AbstractAssertTest {
 

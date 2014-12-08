@@ -24,20 +24,21 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
-import com.github.mjeanroy.rest_assert.utils.Mapper;
-import org.junit.Test;
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.formatList;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.github.mjeanroy.rest_assert.utils.Utils.map;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.formatList;
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.utils.Utils.map;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
+
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.utils.Mapper;
 
 public abstract class AbstractHttpResponsesMimeTypeInTest {
 

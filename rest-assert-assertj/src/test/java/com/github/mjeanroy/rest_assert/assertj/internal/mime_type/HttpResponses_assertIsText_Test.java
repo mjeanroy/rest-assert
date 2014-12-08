@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.mime_type;
 
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+
 import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
 
 public class HttpResponses_assertIsText_Test extends AbstractHttpResponsesMimeTypeTest {
 

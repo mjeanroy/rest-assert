@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.api.http;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.utils.Function;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static java.lang.String.format;
+import static org.mockito.Mockito.*;
+
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.utils.AssertionUtils.assertFailure;
-import static java.lang.String.format;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
 
 public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertTest {
 

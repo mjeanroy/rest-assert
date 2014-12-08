@@ -22,29 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.tests;
+package com.github.mjeanroy.rest_assert.tests;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import java.util.Collection;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+public final class Strings {
 
-public final class TestData {
-
-	private TestData() {
+	private Strings() {
 	}
 
-	public static HttpResponse newHttpResponseWithStatus(int status) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.getStatus()).thenReturn(status);
-		return httpResponse;
-	}
-
-	public static HttpResponse newHttpResponseWithHeader(Header header) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.hasHeader(header.getName())).thenReturn(true);
-		when(httpResponse.getHeader(header.getName())).thenReturn(header.getValue());
-		return httpResponse;
+	public static String join(Collection<String> strings, String separator) {
+		StringBuilder sb = new StringBuilder();
+		for (String str : strings) {
+			sb.append(str).append(separator);
+		}
+		return sb.substring(0, sb.length() - separator.length());
 	}
 }

@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.mime_type;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeInTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesMimeTypeInTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponses_assertIsJavascript_Test extends AbstractHttpResponsesMimeTypeInTest {
 

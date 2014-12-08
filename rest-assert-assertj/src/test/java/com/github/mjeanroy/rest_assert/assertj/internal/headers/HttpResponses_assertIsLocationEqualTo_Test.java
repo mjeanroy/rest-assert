@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.headers;
 
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+
 import com.github.mjeanroy.rest_assert.assertj.internal.AbstractHttpResponsesHeaderEqualToTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
-
-import static com.github.mjeanroy.rest_assert.assertj.tests.TestData.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponses_assertIsLocationEqualTo_Test extends AbstractHttpResponsesHeaderEqualToTest {
 
