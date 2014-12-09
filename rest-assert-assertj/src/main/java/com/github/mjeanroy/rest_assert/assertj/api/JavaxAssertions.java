@@ -25,40 +25,27 @@
 package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpCookie.apacheHttpCookie;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.JavaxCookie.javaxCookie;
 
 /**
- * Entry point for assertion methods for Apache HttpClient
+ * Entry point for assertion methods for Javax api
  * library.
  */
-public final class ApacheHttpAssertions {
+public final class JavaxAssertions {
 
 	// Ensure non instantiation
-	private ApacheHttpAssertions() {
+	private JavaxAssertions() {
 	}
 
 	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert}.
+	 * Creates a new instance of {@link CookieAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static HttpResponseAssert assertThat(org.apache.http.HttpResponse actual) {
-		HttpResponse httpResponse = httpResponse(actual);
-		return new HttpResponseAssert(httpResponse);
-	}
-
-	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.CookieAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
-	public static CookieAssert assertThat(org.apache.http.cookie.Cookie actual) {
-		Cookie cookie = apacheHttpCookie(actual);
+	public static CookieAssert assertThat(javax.servlet.http.Cookie actual) {
+		Cookie cookie = javaxCookie(actual);
 		return new CookieAssert(cookie);
 	}
 }

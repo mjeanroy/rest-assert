@@ -24,7 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpCookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
@@ -35,7 +37,7 @@ import static org.mockito.Mockito.mock;
 public class ApacheHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() throws Exception {
+	public void it_should_create_new_http_assertion_object() throws Exception {
 		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
 
@@ -44,5 +46,17 @@ public class ApacheHttpAssertionsTest {
 		assertThat(httpResponse)
 				.isNotNull()
 				.isExactlyInstanceOf(ApacheHttpResponse.class);
+	}
+
+	@Test
+	public void it_should_create_new_cookie_assertion_object() throws Exception {
+		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
+		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
+
+		assertThat(assertions).isNotNull();
+		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
+		assertThat(cookie)
+				.isNotNull()
+				.isExactlyInstanceOf(ApacheHttpCookie.class);
 	}
 }

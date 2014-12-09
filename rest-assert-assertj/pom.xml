@@ -13,6 +13,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>com.github.mjeanroy</groupId>
 			<artifactId>rest-assert-core</artifactId>
 			<version>${project.version}</version>

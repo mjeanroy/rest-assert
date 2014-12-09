@@ -24,9 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.ning.http.client.Response;
 
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie.asyncHttpCookie;
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse.httpResponse;
 
 /**
@@ -48,5 +50,16 @@ public final class AsyncHttpAssertions {
 	public static HttpResponseAssert assertThat(Response actual) {
 		HttpResponse httpResponse = httpResponse(actual);
 		return new HttpResponseAssert(httpResponse);
+	}
+
+	/**
+	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.CookieAssert}.
+	 *
+	 * @param actual the actual value.
+	 * @return the created assertion object.
+	 */
+	public static CookieAssert assertThat(com.ning.http.client.cookie.Cookie actual) {
+		Cookie cookie = asyncHttpCookie(actual);
+		return new CookieAssert(cookie);
 	}
 }

@@ -25,39 +25,24 @@
 package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
-import com.ning.http.client.Response;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.JavaxCookie;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-public class AsyncHttpAssertionsTest {
-
-	@Test
-	public void it_should_create_new_assertion_object() throws Exception {
-		Response response = mock(Response.class);
-		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
-
-		assertThat(assertions).isNotNull();
-		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse)
-				.isNotNull()
-				.isExactlyInstanceOf(AsyncHttpResponse.class);
-	}
+public class JavaxAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = mock(com.ning.http.client.cookie.Cookie.class);
-		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
+		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
+		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
 
 		assertThat(assertions).isNotNull();
 		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
 		assertThat(cookie)
 				.isNotNull()
-				.isExactlyInstanceOf(AsyncHttpCookie.class);
+				.isExactlyInstanceOf(JavaxCookie.class);
 	}
 }
