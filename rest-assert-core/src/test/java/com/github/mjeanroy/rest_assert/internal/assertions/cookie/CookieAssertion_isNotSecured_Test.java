@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 public class CookieAssertion_isNotSecured_Test extends AbstractCookieTest {
 
@@ -38,12 +38,12 @@ public class CookieAssertion_isNotSecured_Test extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Cookie successFixture() {
+	protected Cookie success() {
 		return cookie(false);
 	}
 
 	@Override
-	protected Cookie failFixture() {
+	protected Cookie failure() {
 		return cookie(true);
 	}
 
@@ -63,6 +63,6 @@ public class CookieAssertion_isNotSecured_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", secured);
+		return newCookie("name", "value", secured, true);
 	}
 }

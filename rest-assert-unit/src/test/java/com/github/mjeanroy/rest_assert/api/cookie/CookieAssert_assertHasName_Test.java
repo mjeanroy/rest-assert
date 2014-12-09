@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
 import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasName;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class CookieAssert_assertHasName_Test extends AbstractCookieTest {
 
@@ -68,6 +68,6 @@ public class CookieAssert_assertHasName_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(String name) {
-		return newCookie(name, "value", true);
+		return newCookie(name, "value", true, true);
 	}
 }

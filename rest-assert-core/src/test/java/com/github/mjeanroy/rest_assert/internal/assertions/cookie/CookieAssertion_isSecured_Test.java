@@ -38,12 +38,12 @@ public class CookieAssertion_isSecured_Test extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Cookie successFixture() {
+	protected Cookie success() {
 		return cookie(true);
 	}
 
 	@Override
-	protected Cookie failFixture() {
+	protected Cookie failure() {
 		return cookie(false);
 	}
 
@@ -63,6 +63,6 @@ public class CookieAssertion_isSecured_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", secured);
+		return newCookie("name", "value", secured, true);
 	}
 }

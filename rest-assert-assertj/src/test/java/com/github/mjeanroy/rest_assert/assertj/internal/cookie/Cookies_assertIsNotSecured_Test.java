@@ -58,6 +58,6 @@ public class Cookies_assertIsNotSecured_Test extends AbstractCookiesTest {
 	}
 
 	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", secured);
+		return newCookie("name", "value", secured, true);
 	}
 }

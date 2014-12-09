@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
+import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldBeSecured;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldNotBeSecured;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 /**
  * Re-usable assertion for {@link Cookie} objects.
@@ -106,5 +108,29 @@ public final class CookieAssertions {
 		return !cookie.isSecured() ?
 				success() :
 				failure(shouldNotBeSecured());
+	}
+
+	/**
+	 * Check that cookie is flagged as "http only'.
+	 *
+	 * @param cookie Cookie.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isHttpOnly(Cookie cookie) {
+		return cookie.isHttpOnly() ?
+				success() :
+				failure(shouldBeHttpOnly());
+	}
+
+	/**
+	 * Check that cookie is flagged as "http only'.
+	 *
+	 * @param cookie Cookie.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotHttpOnly(Cookie cookie) {
+		return !cookie.isHttpOnly() ?
+				success() :
+				failure(shouldNotBeHttpOnly());
 	}
 }

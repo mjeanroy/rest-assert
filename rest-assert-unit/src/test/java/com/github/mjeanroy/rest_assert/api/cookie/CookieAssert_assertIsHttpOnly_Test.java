@@ -22,46 +22,46 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie;
 
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
+import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsHttpOnly;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-	protected CookieAssertions cookieAssertions = CookieAssertions.instance();
+public class CookieAssert_assertIsHttpOnly_Test extends AbstractCookieTest {
 
-	@Test
-	public void it_should_pass() {
-		Cookie cookie = success();
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
+	@Override
+	protected void invoke(Cookie actual) {
+		assertIsHttpOnly(actual);
 	}
 
-	@Test
-	public void it_should_fail() {
-		final Cookie cookie = failure();
-
-		AssertionResult result = invoke(cookie);
-
-		checkError(result,
-				error(),
-				pattern(),
-				params()
-		);
+	@Override
+	protected void invoke(String message, Cookie actual) {
+		assertIsHttpOnly(message, actual);
 	}
 
-	protected abstract Cookie success();
+	@Override
+	protected Cookie success() {
+		return cookie(true);
+	}
 
-	protected abstract Cookie failure();
+	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
 
-	protected abstract Class error();
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to be 'http only'";
+	}
 
-	protected abstract String pattern();
+	@Override
+	protected Object[] placeholders() {
+		return new Object[0];
+	}
 
-	protected abstract Object[] params();
+	protected Cookie cookie(boolean httpOnly) {
+		return newCookie("name", "value", true, httpOnly);
+	}
 }

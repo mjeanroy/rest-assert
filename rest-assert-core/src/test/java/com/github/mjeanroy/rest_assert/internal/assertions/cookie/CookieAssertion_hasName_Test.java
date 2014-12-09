@@ -24,27 +24,27 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, successFixture().getName());
+		return cookieAssertions.hasName(cookie, success().getName());
 	}
 
 	@Override
-	protected Cookie successFixture() {
+	protected Cookie success() {
 		return cookie("foo");
 	}
 
 	@Override
-	protected Cookie failFixture() {
-		final String expectedName = successFixture().getName();
+	protected Cookie failure() {
+		final String expectedName = success().getName();
 		final String actualName = expectedName + "foo";
 		return cookie(actualName);
 	}
@@ -61,14 +61,14 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final String expectedName = successFixture().getName();
-		final String actualName = failFixture().getName();
+		final String expectedName = success().getName();
+		final String actualName = failure().getName();
 		return new String[] {
 			expectedName, actualName
 		};
 	}
 
 	protected Cookie cookie(String name) {
-		return newCookie(name, "value", true);
+		return newCookie(name, "value", true, true);
 	}
 }

@@ -24,27 +24,27 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 public class CookieAssertion_hasValue_Test extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasValue(cookie, successFixture().getValue());
+		return cookieAssertions.hasValue(cookie, success().getValue());
 	}
 
 	@Override
-	protected Cookie successFixture() {
+	protected Cookie success() {
 		return cookie("foo");
 	}
 
 	@Override
-	protected Cookie failFixture() {
-		final String expectedValue = successFixture().getValue();
+	protected Cookie failure() {
+		final String expectedValue = success().getValue();
 		final String actualValue = expectedValue + "foo";
 		return cookie(actualValue);
 	}
@@ -61,14 +61,14 @@ public class CookieAssertion_hasValue_Test extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final String expectedValue = successFixture().getValue();
-		final String actualValue = failFixture().getValue();
+		final String expectedValue = success().getValue();
+		final String actualValue = failure().getValue();
 		return new String[] {
 			expectedValue, actualValue
 		};
 	}
 
 	protected Cookie cookie(String value) {
-		return newCookie("name", value, true);
+		return newCookie("name", value, true, true);
 	}
 }

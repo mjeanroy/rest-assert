@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
 import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsNotSecured;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public class CookieAssert_assertIsNotSecured_Test extends AbstractCookieTest {
 
@@ -62,6 +62,6 @@ public class CookieAssert_assertIsNotSecured_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", secured);
+		return newCookie("name", "value", secured, true);
 	}
 }

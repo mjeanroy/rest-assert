@@ -57,6 +57,6 @@ public class CookieAssert_hasName_Test extends AbstractApiTest<Cookies, CookieAs
 	}
 
 	protected Cookie actual() {
-		return TestData.newCookie("foo", "bar", true);
+		return TestData.newCookie("foo", "bar", true, true);
 	}
 }

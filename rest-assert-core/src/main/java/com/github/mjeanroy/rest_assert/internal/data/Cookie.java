@@ -49,4 +49,11 @@ public interface Cookie {
 	 * @return True if cookie is secured, false otherwise.
 	 */
 	boolean isSecured();
+
+	/**
+	 * Check if cookie is flagged as http only.
+	 *
+	 * @return True if cookie is "http only", false otherwise.
+	 */
+	boolean isHttpOnly();
 }

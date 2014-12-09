@@ -22,46 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.assertj.core.api.AssertionInfo;
 
-public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-	protected CookieAssertions cookieAssertions = CookieAssertions.instance();
+public class Cookies_assertIsHttpOnly_Test extends AbstractCookiesTest {
 
-	@Test
-	public void it_should_pass() {
-		Cookie cookie = success();
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
+	@Override
+	protected void invoke(AssertionInfo info, Cookie cookie) {
+		cookies.assertIsHttpOnly(info, cookie);
 	}
 
-	@Test
-	public void it_should_fail() {
-		final Cookie cookie = failure();
-
-		AssertionResult result = invoke(cookie);
-
-		checkError(result,
-				error(),
-				pattern(),
-				params()
-		);
+	@Override
+	protected Cookie success() {
+		return cookie(true);
 	}
 
-	protected abstract Cookie success();
+	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
 
-	protected abstract Cookie failure();
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to be 'http only'";
+	}
 
-	protected abstract Class error();
+	@Override
+	protected Object[] placeholders() {
+		return new Object[0];
+	}
 
-	protected abstract String pattern();
-
-	protected abstract Object[] params();
+	protected Cookie cookie(boolean httpOnly) {
+		return newCookie("name", "value", true, httpOnly);
+	}
 }

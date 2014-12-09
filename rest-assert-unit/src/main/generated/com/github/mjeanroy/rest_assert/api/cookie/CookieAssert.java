@@ -81,6 +81,48 @@ public final class CookieAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isHttpOnly}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsHttpOnly(com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		assertIsHttpOnly(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isHttpOnly}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsHttpOnly(String message, com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		check(message, assertions.isHttpOnly(actual));
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isNotHttpOnly}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotHttpOnly(com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		assertIsNotHttpOnly(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isNotHttpOnly}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotHttpOnly(String message, com.github.mjeanroy.rest_assert.internal.data.Cookie actual) {
+		check(message, assertions.isNotHttpOnly(actual));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#isNotSecured}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *

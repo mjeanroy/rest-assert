@@ -22,46 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+/**
+ * Error thrown when a cookie is (or is not)
+ * http only.
+ */
+public class ShouldBeHttpOnly extends AbstractError {
 
-public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
-
-	protected CookieAssertions cookieAssertions = CookieAssertions.instance();
-
-	@Test
-	public void it_should_pass() {
-		Cookie cookie = success();
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
+	// Private constructor, use static factory instead
+	private ShouldBeHttpOnly(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Test
-	public void it_should_fail() {
-		final Cookie cookie = failure();
-
-		AssertionResult result = invoke(cookie);
-
-		checkError(result,
-				error(),
-				pattern(),
-				params()
-		);
+	/**
+	 * Build error.
+	 *
+	 * @return Error.
+	 */
+	public static ShouldBeHttpOnly shouldBeHttpOnly() {
+		return new ShouldBeHttpOnly("Expecting cookie to be 'http only'");
 	}
 
-	protected abstract Cookie success();
-
-	protected abstract Cookie failure();
-
-	protected abstract Class error();
-
-	protected abstract String pattern();
-
-	protected abstract Object[] params();
+	/**
+	 * Build error.
+	 *
+	 * @return Error.
+	 */
+	public static ShouldBeHttpOnly shouldNotBeHttpOnly() {
+		return new ShouldBeHttpOnly("Expecting cookie not to be 'http only'");
+	}
 }

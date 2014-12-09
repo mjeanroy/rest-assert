@@ -22,46 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
-
-	protected CookieAssertions cookieAssertions = CookieAssertions.instance();
+public class ShouldBeHttpOnlyTest {
 
 	@Test
-	public void it_should_pass() {
-		Cookie cookie = success();
-		AssertionResult result = invoke(cookie);
-		checkSuccess(result);
+	public void it_should_format_error_message() {
+		ShouldBeHttpOnly shouldBeHttpOnly = shouldBeHttpOnly();
+		assertThat(shouldBeHttpOnly).isNotNull();
+		assertThat(shouldBeHttpOnly.toString()).isEqualTo("Expecting cookie to be 'http only'");
 	}
 
 	@Test
-	public void it_should_fail() {
-		final Cookie cookie = failure();
-
-		AssertionResult result = invoke(cookie);
-
-		checkError(result,
-				error(),
-				pattern(),
-				params()
-		);
+	public void it_should_format_error_message_with_negation() {
+		ShouldBeHttpOnly shouldNotBeHttpOnly = shouldNotBeHttpOnly();
+		assertThat(shouldNotBeHttpOnly).isNotNull();
+		assertThat(shouldNotBeHttpOnly.toString()).isEqualTo("Expecting cookie not to be 'http only'");
 	}
-
-	protected abstract Cookie success();
-
-	protected abstract Cookie failure();
-
-	protected abstract Class error();
-
-	protected abstract String pattern();
-
-	protected abstract Object[] params();
 }
