@@ -49,10 +49,11 @@ public final class TestData {
 		return httpResponse;
 	}
 
-	public static Cookie newCookie(String name, String value, boolean secured, boolean httpOnly) {
+	public static Cookie newCookie(String name, String value, String domain, boolean secured, boolean httpOnly) {
 		Cookie cookie = mock(Cookie.class);
 		when(cookie.getName()).thenReturn(name);
 		when(cookie.getValue()).thenReturn(value);
+		when(cookie.getDomain()).thenReturn(domain);
 		when(cookie.isSecured()).thenReturn(secured);
 		when(cookie.isHttpOnly()).thenReturn(httpOnly);
 		return cookie;

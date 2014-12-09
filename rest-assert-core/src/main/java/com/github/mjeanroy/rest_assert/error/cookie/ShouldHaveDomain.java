@@ -22,47 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+/**
+ * Error thrown when a cookie does not have
+ * expected domain.
+ */
+public class ShouldHaveDomain extends AbstractError {
 
-public class Cookies_assertHasName_Test extends AbstractCookiesTest {
-
-	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertHasName(info, cookie, success().getName());
+	// Private constructor, use static factory instead
+	private ShouldHaveDomain(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected Cookie success() {
-		return cookie("foo");
-	}
-
-	@Override
-	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
-		return cookie(actualName);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie to have name \"%s\" but was \"%s\"";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
-		return new Object[] {
-				expectedName, actualName
-		};
-	}
-
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value", "domain", true, true);
+	/**
+	 * Build error.
+	 *
+	 * @param expectedDomain Expected cookie domain.
+	 * @param actualDomain Actual cookie domain.
+	 * @return Error.
+	 */
+	public static ShouldHaveDomain shouldHaveDomain(String expectedDomain, String actualDomain) {
+		return new ShouldHaveDomain("Expecting cookie to have domain %s but was %s", expectedDomain, actualDomain);
 	}
 }

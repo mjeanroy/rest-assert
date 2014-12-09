@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
-
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 public class Cookies_assertHasValue_Test extends AbstractCookiesTest {
 
@@ -64,6 +63,6 @@ public class Cookies_assertHasValue_Test extends AbstractCookiesTest {
 	}
 
 	protected Cookie cookie(String value) {
-		return newCookie("name", value, true, true);
+		return newCookie("name", value, "domain", true, true);
 	}
 }

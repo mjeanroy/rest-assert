@@ -28,9 +28,9 @@ import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
 import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.TestData;
 import org.assertj.core.api.AssertionInfo;
 
+import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -58,6 +58,6 @@ public class CookieAssert_isNotSecured_Test extends AbstractApiTest<Cookies, Coo
 	}
 
 	protected Cookie actual() {
-		return TestData.newCookie("foo", "bar", true, true);
+		return newCookie("foo", "bar", "domain", true, true);
 	}
 }

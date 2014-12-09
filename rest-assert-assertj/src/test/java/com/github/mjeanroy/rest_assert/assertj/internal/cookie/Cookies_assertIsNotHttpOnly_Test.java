@@ -57,6 +57,6 @@ public class Cookies_assertIsNotHttpOnly_Test extends AbstractCookiesTest {
 	}
 
 	protected Cookie cookie(boolean httpOnly) {
-		return newCookie("name", "value", true, httpOnly);
+		return newCookie("name", "value", "domain", true, httpOnly);
 	}
 }

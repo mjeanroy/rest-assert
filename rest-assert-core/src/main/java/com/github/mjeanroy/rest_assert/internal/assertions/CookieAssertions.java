@@ -31,6 +31,7 @@ import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shou
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldBeSecured;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldNotBeSecured;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveDomain.shouldHaveDomain;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
@@ -84,6 +85,20 @@ public final class CookieAssertions {
 		return actualValue.equals(value) ?
 				success() :
 				failure(shouldHaveValue(value, actualValue));
+	}
+
+	/**
+	 * Check that cookie has expected domain.
+	 *
+	 * @param cookie Cookie.
+	 * @param domain Expected domain.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasDomain(Cookie cookie, String domain) {
+		String actualDomain = cookie.getDomain();
+		return actualDomain.equals(domain) ?
+				success() :
+				failure(shouldHaveDomain(domain, actualDomain));
 	}
 
 	/**

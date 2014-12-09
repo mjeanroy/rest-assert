@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
+import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveDomain;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-public class CookieAssertion_hasName_Test extends AbstractCookieTest {
+public class CookieAssertion_hasDomain_Test extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, success().getName());
+		return cookieAssertions.hasDomain(cookie, success().getDomain());
 	}
 
 	@Override
@@ -44,31 +44,31 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
-		return cookie(actualName);
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = expectedDomain + "foo";
+		return cookie(actualDomain);
 	}
 
 	@Override
 	protected Class error() {
-		return ShouldHaveName.class;
+		return ShouldHaveDomain.class;
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have name %s but was %s";
+		return "Expecting cookie to have domain %s but was %s";
 	}
 
 	@Override
 	protected Object[] params() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = failure().getDomain();
 		return new String[] {
-			expectedName, actualName
+			expectedDomain, actualDomain
 		};
 	}
 
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value", "domain", true, true);
+	protected Cookie cookie(String domain) {
+		return newCookie("name", "value", domain, true, true);
 	}
 }

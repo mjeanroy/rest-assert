@@ -22,47 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveDomain.shouldHaveDomain;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class Cookies_assertHasName_Test extends AbstractCookiesTest {
+public class ShouldHaveDomainTest {
 
-	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertHasName(info, cookie, success().getName());
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie("foo");
-	}
-
-	@Override
-	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
-		return cookie(actualName);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie to have name \"%s\" but was \"%s\"";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
-		return new Object[] {
-				expectedName, actualName
-		};
-	}
-
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value", "domain", true, true);
+	@Test
+	public void it_should_format_error_message() {
+		String actualDomain = "foo";
+		String expectedDomain = "bar";
+		ShouldHaveDomain shouldHaveDomain = shouldHaveDomain(expectedDomain, actualDomain);
+		assertThat(shouldHaveDomain).isNotNull();
+		assertThat(shouldHaveDomain.toString()).isEqualTo("Expecting cookie to have domain bar but was foo");
 	}
 }

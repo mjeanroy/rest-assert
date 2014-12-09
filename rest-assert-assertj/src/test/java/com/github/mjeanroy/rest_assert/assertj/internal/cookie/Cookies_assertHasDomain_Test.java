@@ -22,19 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-public class CookieAssertion_hasName_Test extends AbstractCookieTest {
+public class Cookies_assertHasDomain_Test extends AbstractCookiesTest {
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.hasName(cookie, success().getName());
+	protected void invoke(AssertionInfo info, Cookie cookie) {
+		cookies.assertHasDomain(info, cookie, success().getDomain());
 	}
 
 	@Override
@@ -44,31 +43,26 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
-		return cookie(actualName);
-	}
-
-	@Override
-	protected Class error() {
-		return ShouldHaveName.class;
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = expectedDomain + "foo";
+		return cookie(actualDomain);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have name %s but was %s";
+		return "Expecting cookie to have domain \"%s\" but was \"%s\"";
 	}
 
 	@Override
-	protected Object[] params() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
-		return new String[] {
-			expectedName, actualName
+	protected Object[] placeholders() {
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = failure().getDomain();
+		return new Object[] {
+				expectedDomain, actualDomain
 		};
 	}
 
-	protected Cookie cookie(String name) {
-		return newCookie(name, "value", "domain", true, true);
+	protected Cookie cookie(String domain) {
+		return newCookie("name", "value", domain, true, true);
 	}
 }
