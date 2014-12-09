@@ -22,47 +22,47 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
-public class CookieAssertion_isNotHttpOnly_Test extends AbstractCookieTest {
+public class Cookies_assertHasPath_Test extends AbstractCookiesTest {
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.isNotHttpOnly(cookie);
+	protected void invoke(AssertionInfo info, Cookie cookie) {
+		cookies.assertHasPath(info, cookie, success().getPath());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie("foo");
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected Class error() {
-		return ShouldBeHttpOnly.class;
+		final String expectedPath = success().getPath();
+		final String actualPath = expectedPath + "foo";
+		return cookie(actualPath);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to have path \"%s\" but was \"%s\"";
 	}
 
 	@Override
-	protected Object[] params() {
-		return new Object[0];
+	protected Object[] placeholders() {
+		final String expectedPath = success().getPath();
+		final String actualPath = failure().getPath();
+		return new Object[] {
+				expectedPath, actualPath
+		};
 	}
 
-	protected Cookie cookie(boolean httpOnly) {
-		return newCookie("name", "value", "domain", "path", true, httpOnly);
+	protected Cookie cookie(String path) {
+		return newCookie("name", "value", "domain", path, true, true);
 	}
 }

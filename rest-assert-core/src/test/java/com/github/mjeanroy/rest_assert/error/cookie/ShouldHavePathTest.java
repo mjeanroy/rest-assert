@@ -22,47 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHavePath.shouldHavePath;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class CookieAssertion_isNotHttpOnly_Test extends AbstractCookieTest {
+public class ShouldHavePathTest {
 
-	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.isNotHttpOnly(cookie);
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected Class error() {
-		return ShouldBeHttpOnly.class;
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
-	}
-
-	@Override
-	protected Object[] params() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean httpOnly) {
-		return newCookie("name", "value", "domain", "path", true, httpOnly);
+	@Test
+	public void it_should_format_error_message() {
+		String actualPath = "foo";
+		String expectedPath = "bar";
+		ShouldHavePath shouldHavePath = shouldHavePath(expectedPath, actualPath);
+		assertThat(shouldHavePath).isNotNull();
+		assertThat(shouldHavePath.toString()).isEqualTo("Expecting cookie to have path bar but was foo");
 	}
 }

@@ -51,6 +51,13 @@ public interface Cookie {
 	String getDomain();
 
 	/**
+	 * Cookie path.
+	 *
+	 * @return path.
+	 */
+	String getPath();
+
+	/**
 	 * Check if cookie is flagged as secured.
 	 *
 	 * @return True if cookie is secured, false otherwise.

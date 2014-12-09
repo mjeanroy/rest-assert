@@ -22,47 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+/**
+ * Error thrown when a cookie does not have
+ * expected path.
+ */
+public class ShouldHavePath extends AbstractError {
 
-public class CookieAssertion_isNotHttpOnly_Test extends AbstractCookieTest {
-
-	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.isNotHttpOnly(cookie);
+	// Private constructor, use static factory instead
+	private ShouldHavePath(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected Class error() {
-		return ShouldBeHttpOnly.class;
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
-	}
-
-	@Override
-	protected Object[] params() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean httpOnly) {
-		return newCookie("name", "value", "domain", "path", true, httpOnly);
+	/**
+	 * Build error.
+	 *
+	 * @param expectedPath Expected cookie domain.
+	 * @param actualPath Actual cookie domain.
+	 * @return Error.
+	 */
+	public static ShouldHavePath shouldHavePath(String expectedPath, String actualPath) {
+		return new ShouldHavePath("Expecting cookie to have path %s but was %s", expectedPath, actualPath);
 	}
 }

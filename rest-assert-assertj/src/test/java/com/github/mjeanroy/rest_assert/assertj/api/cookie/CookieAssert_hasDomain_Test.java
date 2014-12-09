@@ -58,6 +58,6 @@ public class CookieAssert_hasDomain_Test extends AbstractApiTest<Cookies, Cookie
 	}
 
 	protected Cookie actual() {
-		return newCookie("foo", "bar", "domain", true, true);
+		return newCookie("foo", "bar", "domain", "path", true, true);
 	}
 }

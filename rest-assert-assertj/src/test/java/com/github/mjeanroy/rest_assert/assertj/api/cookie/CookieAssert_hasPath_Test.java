@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,47 +22,42 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.cookie;
 
-import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
+import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
+import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
-public class CookieAssertion_isNotHttpOnly_Test extends AbstractCookieTest {
+public class CookieAssert_hasPath_Test extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
-		return cookieAssertions.isNotHttpOnly(cookie);
+	protected Cookies createAssertions() {
+		return mock(Cookies.class);
 	}
 
 	@Override
-	protected Cookie success() {
-		return cookie(false);
+	protected CookieAssert createApi() {
+		return new CookieAssert(actual());
 	}
 
 	@Override
-	protected Cookie failure() {
-		return cookie(true);
+	protected CookieAssert invoke() {
+		return api.hasPath(actual().getPath());
 	}
 
 	@Override
-	protected Class error() {
-		return ShouldBeHttpOnly.class;
+	protected void verifyApiCall() {
+		verify(assertions).assertHasPath(any(AssertionInfo.class), any(Cookie.class), any(String.class));
 	}
 
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
-	}
-
-	@Override
-	protected Object[] params() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean httpOnly) {
-		return newCookie("name", "value", "domain", "path", true, httpOnly);
+	protected Cookie actual() {
+		return newCookie("foo", "bar", "domain", "path", true, true);
 	}
 }
