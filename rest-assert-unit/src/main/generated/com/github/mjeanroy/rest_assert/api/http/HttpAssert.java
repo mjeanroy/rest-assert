@@ -669,6 +669,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotRedirection}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotRedirection(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		assertIsNotRedirection(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotRedirection}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotRedirection(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		check(message, assertions.isNotRedirection(actual));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotSuccess}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *

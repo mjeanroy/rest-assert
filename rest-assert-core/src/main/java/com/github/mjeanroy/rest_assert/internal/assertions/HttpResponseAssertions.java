@@ -266,6 +266,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is not a redirection status (i.e
+	 * not between 300 and 399).
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotRedirection(HttpResponse httpResponse) {
+		return isStatusOutOf(httpResponse, 300, 399);
+	}
+
+	/**
 	 * Check that status code of http response is a server error status (i.e
 	 * between 500 and 599).
 	 *
