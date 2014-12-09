@@ -288,6 +288,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is not a server error status (i.e
+	 * not between 500 and 599).
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotServerError(HttpResponse httpResponse) {
+		return isStatusOutOf(httpResponse, 500, 599);
+	}
+
+	/**
 	 * Check that status code of http response is a client error status (i.e
 	 * between 400 and 499).
 	 *

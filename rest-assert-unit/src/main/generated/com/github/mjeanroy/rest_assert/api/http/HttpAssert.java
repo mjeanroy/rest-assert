@@ -690,6 +690,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotServerError}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotServerError(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		assertIsNotServerError(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotServerError}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotServerError(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		check(message, assertions.isNotServerError(actual));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotSuccess}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *
