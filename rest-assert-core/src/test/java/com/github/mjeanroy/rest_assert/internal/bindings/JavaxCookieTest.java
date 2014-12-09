@@ -112,4 +112,17 @@ public class JavaxCookieTest {
 		assertThat(httpOnly).isEqualTo(expectedHttpOnly);
 		verify(javaxCookie).isHttpOnly();
 	}
+
+	@Test
+	public void it_should_get_max_age() {
+		int expectedMaxAge = 10;
+		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
+		when(javaxCookie.getMaxAge()).thenReturn(expectedMaxAge);
+
+		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		int maxAge = cookie.getMaxAge();
+
+		assertThat(maxAge).isEqualTo(expectedMaxAge);
+		verify(javaxCookie).getMaxAge();
+	}
 }

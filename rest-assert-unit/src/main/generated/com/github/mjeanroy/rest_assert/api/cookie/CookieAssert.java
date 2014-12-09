@@ -60,6 +60,27 @@ public final class CookieAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#hasMaxAge}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertHasMaxAge(com.github.mjeanroy.rest_assert.internal.data.Cookie actual, int arg1) {
+		assertHasMaxAge(null, actual, arg1);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#hasMaxAge}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertHasMaxAge(String message, com.github.mjeanroy.rest_assert.internal.data.Cookie actual, int arg1) {
+		check(message, assertions.hasMaxAge(actual, arg1));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions#hasName}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *

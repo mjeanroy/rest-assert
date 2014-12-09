@@ -58,6 +58,6 @@ public class CookieAssert_isHttpOnly_Test extends AbstractApiTest<Cookies, Cooki
 	}
 
 	protected Cookie actual() {
-		return newCookie("foo", "bar", "domain", "path", true, true);
+		return newCookie("foo", "bar", "domain", "path", 10, true, true);
 	}
 }

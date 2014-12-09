@@ -82,4 +82,9 @@ public class JavaxCookie implements Cookie {
 	public boolean isHttpOnly() {
 		return cookie.isHttpOnly();
 	}
+
+	@Override
+	public int getMaxAge() {
+		return cookie.getMaxAge();
+	}
 }

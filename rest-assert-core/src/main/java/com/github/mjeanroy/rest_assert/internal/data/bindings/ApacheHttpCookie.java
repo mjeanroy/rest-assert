@@ -83,4 +83,10 @@ public class ApacheHttpCookie implements Cookie {
 		// Not supported
 		return false;
 	}
+
+	@Override
+	public int getMaxAge() {
+		// Not supported
+		return 0;
+	}
 }

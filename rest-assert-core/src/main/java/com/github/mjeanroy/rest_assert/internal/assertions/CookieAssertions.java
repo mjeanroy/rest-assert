@@ -32,6 +32,7 @@ import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shou
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldBeSecured;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured.shouldNotBeSecured;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveDomain.shouldHaveDomain;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveMaxAge.shouldHaveMaxAge;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHavePath.shouldHavePath;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
@@ -114,6 +115,20 @@ public final class CookieAssertions {
 		return actualPath.equals(path) ?
 				success() :
 				failure(shouldHavePath(path, actualPath));
+	}
+
+	/**
+	 * Check that cookie has expected max age.
+	 *
+	 * @param cookie Cookie.
+	 * @param maxAge Expected max age.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasMaxAge(Cookie cookie, int maxAge) {
+		int actualMaxAge = cookie.getMaxAge();
+		return actualMaxAge == maxAge ?
+				success() :
+				failure(shouldHaveMaxAge(maxAge, actualMaxAge));
 	}
 
 	/**

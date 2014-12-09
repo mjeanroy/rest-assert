@@ -69,6 +69,6 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(String name) {
-		return newCookie(name, "value", "domain", "path", true, true);
+		return newCookie(name, "value", "domain", "path", 10, true, true);
 	}
 }

@@ -35,7 +35,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotSecured_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class CookieAssert_hasMaxAge_Test extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
 	protected Cookies createAssertions() {
@@ -49,12 +49,12 @@ public class CookieAssert_isNotSecured_Test extends AbstractApiTest<Cookies, Coo
 
 	@Override
 	protected CookieAssert invoke() {
-		return api.isNotSecured();
+		return api.hasMaxAge(actual().getMaxAge());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsNotSecured(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertHasMaxAge(any(AssertionInfo.class), any(Cookie.class), any(Integer.class));
 	}
 
 	protected Cookie actual() {

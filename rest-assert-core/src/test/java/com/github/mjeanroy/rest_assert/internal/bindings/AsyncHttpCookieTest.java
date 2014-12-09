@@ -112,4 +112,17 @@ public class AsyncHttpCookieTest {
 		assertThat(httpOnly).isEqualTo(expectedHttpOnly);
 		verify(asyncHttpCookie).isHttpOnly();
 	}
+
+	@Test
+	public void it_should_get_max_age() {
+		int expectedMaxAge = 10;
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = mock(com.ning.http.client.cookie.Cookie.class);
+		when(asyncHttpCookie.getMaxAge()).thenReturn(expectedMaxAge);
+
+		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		int maxAge = cookie.getMaxAge();
+
+		assertThat(maxAge).isEqualTo(expectedMaxAge);
+		verify(asyncHttpCookie).getMaxAge();
+	}
 }

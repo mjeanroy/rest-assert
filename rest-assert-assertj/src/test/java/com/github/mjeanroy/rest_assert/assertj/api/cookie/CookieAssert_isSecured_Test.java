@@ -58,6 +58,6 @@ public class CookieAssert_isSecured_Test extends AbstractApiTest<Cookies, Cookie
 	}
 
 	protected Cookie actual() {
-		return newCookie("foo", "bar", "domain", "path", true, true);
+		return newCookie("foo", "bar", "domain", "path", 10, true, true);
 	}
 }

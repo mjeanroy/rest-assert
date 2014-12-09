@@ -22,41 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+/**
+ * Error thrown when a cookie does not have
+ * expected max-age.
+ */
+public class ShouldHaveMaxAge extends AbstractError {
 
-public class Cookies_assertIsNotSecured_Test extends AbstractCookiesTest {
-
-	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertIsNotSecured(info, cookie);
+	// Private constructor, use static factory instead
+	private ShouldHaveMaxAge(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be secured";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", "domain", "path", 10, secured, true);
+	/**
+	 * Build error.
+	 *
+	 * @param expectedPath Expected cookie domain.
+	 * @param actualPath Actual cookie domain.
+	 * @return Error.
+	 */
+	public static ShouldHaveMaxAge shouldHaveMaxAge(int expectedMaxAge, int actualMaxAge) {
+		return new ShouldHaveMaxAge("Expecting cookie to have max-age %s but was %s", expectedMaxAge, actualMaxAge);
 	}
 }

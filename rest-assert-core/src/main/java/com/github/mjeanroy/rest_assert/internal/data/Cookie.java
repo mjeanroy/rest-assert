@@ -70,4 +70,11 @@ public interface Cookie {
 	 * @return True if cookie is "http only", false otherwise.
 	 */
 	boolean isHttpOnly();
+
+	/**
+	 * Get cookie max age.
+	 *
+	 * @return Max age (in seconds).
+	 */
+	int getMaxAge();
 }

@@ -22,41 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
+package com.github.mjeanroy.rest_assert.error.cookie;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import static com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveMaxAge.shouldHaveMaxAge;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class Cookies_assertIsNotSecured_Test extends AbstractCookiesTest {
+public class ShouldHaveMaxAgeTest {
 
-	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
-		cookies.assertIsNotSecured(info, cookie);
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be secured";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", "domain", "path", 10, secured, true);
+	@Test
+	public void it_should_format_error_message() {
+		int actualMaxAge = 10;
+		int expectedMaxAge = actualMaxAge + 1;
+		ShouldHaveMaxAge shouldHaveMaxAge = shouldHaveMaxAge(expectedMaxAge, actualMaxAge);
+		assertThat(shouldHaveMaxAge).isNotNull();
+		assertThat(shouldHaveMaxAge.toString()).isEqualTo("Expecting cookie to have max-age 11 but was 10");
 	}
 }

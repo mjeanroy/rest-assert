@@ -57,6 +57,6 @@ public class Cookies_assertIsSecured_Test extends AbstractCookiesTest {
 	}
 
 	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", "domain", "path", secured, true);
+		return newCookie("name", "value", "domain", "path", 10, secured, true);
 	}
 }
