@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractMimeTypeInTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 import java.util.List;

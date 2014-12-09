@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractMimeTypeTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsJson;

@@ -22,42 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.out_of;
+
+import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
 import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-
-public abstract class AbstractHttpResponsesStatusBetweenTest {
+public abstract class AbstractHttpResponsesStatusOutOfTest {
 
 	protected HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_status_code_is_in_bounds() {
-		for (int i = start(); i <= end(); i++) {
-			HttpResponse httpResponse = newHttpResponseWithStatus(i);
-			invoke(someInfo(), httpResponse);
+	public void should_pass() {
+		for (int i = 0; i <= 999; i++) {
+			if (i < start() && i > end()) {
+				HttpResponse httpResponse = newHttpResponseWithStatus(i);
+				invoke(someInfo(), httpResponse);
+			}
 		}
 	}
 
 	@Test
-	public void should_fail_if_status_code_are_not_in_bounds() {
+	public void should_fail() {
 		final AssertionInfo info = someInfo();
 		final int start = start();
 		final int end = end();
-		for (int status = 100; status <= 599; status++) {
-			if (status >= start && status <= end) {
-				continue;
-			}
-
+		for (int status = start; status <= end; status++) {
 			final HttpResponse httpResponse = newHttpResponseWithStatus(status);
 
 			try {
@@ -67,7 +64,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 				assertThat(e.getMessage())
 						.isNotNull()
 						.isNotEmpty()
-						.isEqualTo(format("Expecting status code to be between %s and %s but was %s", start, end, status));
+						.isEqualTo(format("Expecting status code to be out of %s and %s but was %s", start, end, status));
 			}
 		}
 	}

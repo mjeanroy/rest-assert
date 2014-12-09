@@ -29,7 +29,6 @@ import static org.mockito.Mockito.*;
 import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseStatusTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponseAssert_isNotImplemented_Test extends AbstractHttpResponseStatusTest {

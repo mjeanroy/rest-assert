@@ -26,7 +26,6 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.between;
 
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.http.AbstractHttpResponsesStatusBetweenTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponses_assertIsServerError_Test extends AbstractHttpResponsesStatusBetweenTest {

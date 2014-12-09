@@ -22,22 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.exact;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
+public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpResponse> {
 
 	protected HttpResponseAssertions assertions;
 
@@ -47,33 +45,28 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	}
 
 	@Test
-	public void it_should_pass_with_expected_header() {
-		Header header = getHeader();
-		AssertionResult result = invoke(newResponse(header));
+	public void it_should_pass_with_correct_status() {
+		AssertionResult result = invoke(newResponse(status()));
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		final Header expectedHeader = getHeader();
+	public void it_should_fail_with_response_different_than_expected_status() {
+		final int expectedStatus = status();
+		final int status = expectedStatus + 1;
 
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue + "foo";
-		final Header header = header(expectedName, actualValue);
-
-		AssertionResult result = invoke(newResponse(header));
+		AssertionResult result = invoke(newResponse(status));
 
 		checkError(result,
-				ShouldHaveHeader.class,
-				"Expecting response to have header %s equal to %s but was %s",
-				expectedHeader.getName(), expectedHeader.getValue(), header.getValue()
+				ShouldHaveStatus.class,
+				"Expecting status code to be %s but was %s",
+				expectedStatus, status
 		);
 	}
 
-	protected HttpResponse newResponse(Header header) {
-		return newHttpResponseWithHeader(header);
+	protected HttpResponse newResponse(int status) {
+		return newHttpResponseWithStatus(status);
 	}
 
-	protected abstract Header getHeader();
+	protected abstract int status();
 }

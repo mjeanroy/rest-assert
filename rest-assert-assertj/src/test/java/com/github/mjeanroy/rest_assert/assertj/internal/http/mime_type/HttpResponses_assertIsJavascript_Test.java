@@ -29,7 +29,6 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.http.AbstractHttpResponsesMimeTypeInTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponses_assertIsJavascript_Test extends AbstractHttpResponsesMimeTypeInTest {

@@ -22,17 +22,17 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.http;
-
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
-import static org.mockito.Mockito.*;
-
-import org.junit.Test;
+package com.github.mjeanroy.rest_assert.api.http.between;
 
 import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import org.junit.Test;
+
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static java.lang.String.format;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertTest<HttpResponse> {
 

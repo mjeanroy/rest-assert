@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.http;
+package com.github.mjeanroy.rest_assert.api.http.headers;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
@@ -36,7 +36,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpHeaderTest extends AbstractAssertTest<HttpResponse> {
+public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
 	public void it_should_pass_with_expected_header() {
@@ -48,8 +48,13 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertTest<HttpResp
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header() {
 		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
-		final String message = format("Expecting response to have header %s", expectedHeader.getName());
+
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = expectedValue + "foo";
+		final Header header = header(expectedName, actualValue);
+
+		final String message = format("Expecting response to have header %s equal to %s but was %s", expectedName, expectedValue, actualValue);
 
 		assertFailure(message, new Function() {
 			@Override
@@ -62,7 +67,12 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertTest<HttpResp
 	@Test
 	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
 		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
+
+		final String expectedName = expectedHeader.getName();
+		final String expectedValue = expectedHeader.getValue();
+		final String actualValue = expectedValue + "foo";
+		final Header header = header(expectedName, actualValue);
+
 		final String message = "foo";
 
 		assertFailure(message, new Function() {

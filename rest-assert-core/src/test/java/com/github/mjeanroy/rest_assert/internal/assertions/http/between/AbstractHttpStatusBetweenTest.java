@@ -22,22 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.between;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static org.mockito.Mockito.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<HttpResponse> {
+public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTest<HttpResponse> {
 
 	protected HttpResponseAssertions assertions;
 
@@ -47,29 +45,40 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 	}
 
 	@Test
-	public void it_should_pass_with_expected_header() {
-		Header header = getHeader();
-		AssertionResult result = invoke(newResponse(header));
-		checkSuccess(result);
+	public void it_should_pass_with_status_in_bounds() {
+		for (int i = start(); i <= end(); i++) {
+			AssertionResult result = invoke(newResponse(i));
+			checkSuccess(result);
+		}
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
+	public void it_should_fail_with_response_not_in_bounds() {
+		final int start = start();
+		final int end = end();
 
-		AssertionResult result = invoke(newResponse(header));
+		for (int status = 100; status <= 599; status++) {
+			if (status >= start && status <= end) {
+				continue;
+			}
 
-		checkError(result,
-				ShouldHaveHeader.class,
-				"Expecting response to have header %s",
-				expectedHeader.getName()
-		);
+			AssertionResult result = invoke(newResponse(status));
+
+			checkError(result,
+					ShouldHaveStatusBetween.class,
+					"Expecting status code to be between %s and %s but was %s",
+					start, end, status
+			);
+		}
 	}
 
-	protected HttpResponse newResponse(Header header) {
-		return newHttpResponseWithHeader(header);
+	protected HttpResponse newResponse(int status) {
+		HttpResponse httpResponse = mock(HttpResponse.class);
+		when(httpResponse.getStatus()).thenReturn(status);
+		return httpResponse;
 	}
 
-	protected abstract Header getHeader();
+	protected abstract int start();
+
+	protected abstract int end();
 }

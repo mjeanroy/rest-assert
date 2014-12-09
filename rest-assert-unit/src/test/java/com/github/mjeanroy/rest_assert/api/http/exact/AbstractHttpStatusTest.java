@@ -22,49 +22,56 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http;
+package com.github.mjeanroy.rest_assert.api.http.exact;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
 import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 
-import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
 
-public abstract class AbstractHttpResponsesStatusTest {
-
-	protected HttpResponses httpResponses = HttpResponses.instance();
+public abstract class AbstractHttpStatusTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
-	public void should_pass_if_status_code_is_ok() {
-		HttpResponse httpResponse = newHttpResponseWithStatus(status());
-		invoke(someInfo(), httpResponse);
+	public void it_should_pass_with_correct_status() {
+		invoke(newResponse(status()));
+		invoke("foo", newResponse(status()));
 	}
 
 	@Test
-	public void should_fail_if_status_code_are_not_equal() {
-		final AssertionInfo info = someInfo();
-		final int status = status();
-		final int expectedStatus = status + 1;
-		final HttpResponse httpResponse = newHttpResponseWithStatus(expectedStatus);
+	public void it_should_fail_with_response_different_than_expected_status() {
+		final int expectedStatus = status();
+		final int status = expectedStatus + 1;
+		final String message = format("Expecting status code to be %s but was %s", expectedStatus, status);
 
-		try {
-			invoke(info, httpResponse);
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting status code to be %s but was %s", status(), expectedStatus));
-		}
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invoke(newResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void it_should_pass_with_custom_message_with_response_different_than_200() {
+		final String message = "foo";
+		final int status = status() + 1;
+
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invoke(message, newResponse(status));
+			}
+		});
+	}
+
+	protected HttpResponse newResponse(int status) {
+		return newHttpResponseWithStatus(status);
 	}
 
 	protected abstract int status();
-
-	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 }

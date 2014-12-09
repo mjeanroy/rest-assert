@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractHttpHeaderTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 

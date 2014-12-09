@@ -26,7 +26,6 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.exact;
 
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.http.AbstractHttpResponsesStatusTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponses_assertIsBadRequest_Test extends AbstractHttpResponsesStatusTest {

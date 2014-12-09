@@ -22,20 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
+public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(newHttpResponseWithStatus(status()));
+		return new HttpResponseAssert(newHttpResponseWithHeader(getHeader()));
 	}
 
-	protected abstract int status();
+	protected Header getHeader() {
+		return header("foo", "bar");
+	}
 
 	protected abstract HttpResponseAssert invoke();
 

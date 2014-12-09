@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api.http.between;
 
-import static org.mockito.Mockito.*;
-
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseStatusTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
-public class HttpResponseAssert_isClientError_Test extends AbstractHttpResponseStatusTest {
+public class HttpResponseAssert_isClientError_Test extends AbstractHttpResponseStatusBetweenTest {
 
 	@Override
 	protected int status() {

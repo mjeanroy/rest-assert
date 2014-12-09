@@ -669,6 +669,27 @@ public final class HttpAssert {
 	}
 
 	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotSuccess}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotSuccess(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		assertIsNotSuccess(null, actual);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isNotSuccess}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsNotSuccess(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		check(message, assertions.isNotSuccess(actual));
+	}
+
+	/**
 	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isOk}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *
@@ -813,6 +834,27 @@ public final class HttpAssert {
 	 */
 	public static void assertIsStatusEqual(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual, int arg1) {
 		check(message, assertions.isStatusEqual(actual, arg1));
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isStatusOutOf}
+	 * Throws an {@link AssertionError} with default message if test failed.
+	 *
+	 * @param actual Actual object.
+	 */
+	public static void assertIsStatusOutOf(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual, int arg1, int arg2) {
+		assertIsStatusOutOf(null, actual, arg1, arg2);
+	}
+
+	/**
+	 * @see {@link com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isStatusOutOf}
+	 * Throws an {@link AssertionError} with given message if test failed.
+	 *
+	 * @param message  The identifying message for the {@link AssertionError}.
+	 * @param actual Actual object.
+	 */
+	public static void assertIsStatusOutOf(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual, int arg1, int arg2) {
+		check(message, assertions.isStatusOutOf(actual, arg1, arg2));
 	}
 
 	/**

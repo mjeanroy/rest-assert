@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.api.http.exact;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsNotFound;

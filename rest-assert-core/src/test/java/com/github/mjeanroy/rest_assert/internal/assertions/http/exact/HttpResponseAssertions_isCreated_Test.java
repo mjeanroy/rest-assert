@@ -25,7 +25,6 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.exact;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponseAssertions_isCreated_Test extends AbstractHttpStatusTest {

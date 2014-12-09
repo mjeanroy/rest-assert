@@ -22,51 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.out_of;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus;
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpResponse> {
+public class HttpResponseAssertions_isNotSuccess_Test extends AbstractHttpStatusOutOfTest {
 
-	protected HttpResponseAssertions assertions;
-
-	@Before
-	public void setUp() {
-		assertions = HttpResponseAssertions.instance();
+	@Override
+	protected int start() {
+		return 200;
 	}
 
-	@Test
-	public void it_should_pass_with_correct_status() {
-		AssertionResult result = invoke(newResponse(status()));
-		checkSuccess(result);
+	@Override
+	protected int end() {
+		return 299;
 	}
 
-	@Test
-	public void it_should_fail_with_response_different_than_expected_status() {
-		final int expectedStatus = status();
-		final int status = expectedStatus + 1;
-
-		AssertionResult result = invoke(newResponse(status));
-
-		checkError(result,
-				ShouldHaveStatus.class,
-				"Expecting status code to be %s but was %s",
-				expectedStatus, status
-		);
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isNotSuccess(response);
 	}
-
-	protected HttpResponse newResponse(int status) {
-		return newHttpResponseWithStatus(status);
-	}
-
-	protected abstract int status();
 }

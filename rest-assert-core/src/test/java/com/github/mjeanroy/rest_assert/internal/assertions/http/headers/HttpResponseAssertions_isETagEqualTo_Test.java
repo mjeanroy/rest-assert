@@ -27,7 +27,6 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.http.AbstractHttpHeaderEqualToTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 

@@ -22,53 +22,62 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http;
+package com.github.mjeanroy.rest_assert.api.http.out_of;
 
-import static org.mockito.Mockito.*;
-
-import org.junit.Before;
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween;
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
+import static java.lang.String.format;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTest<HttpResponse> {
-
-	protected HttpResponseAssertions assertions;
-
-	@Before
-	public void setUp() {
-		assertions = HttpResponseAssertions.instance();
-	}
+public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
-	public void it_should_pass_with_status_in_bounds() {
-		for (int i = start(); i <= end(); i++) {
-			AssertionResult result = invoke(newResponse(i));
-			checkSuccess(result);
+	public void it_should_pass() {
+		for (int i = 0; i <= 999; i++) {
+			if (i < start() && i > end()) {
+				invoke(newResponse(i));
+				invoke("foo", newResponse(i));
+			}
 		}
 	}
 
 	@Test
-	public void it_should_fail_with_response_not_in_bounds() {
+	public void it_should_fail() {
 		final int start = start();
 		final int end = end();
 
-		for (int status = 100; status <= 599; status++) {
-			if (status >= start && status <= end) {
-				continue;
-			}
+		for (int i = start; i <= end; i++) {
+			final int status = i;
+			final String message = format("Expecting status code to be out of %s and %s but was %s", start, end, status);
 
-			AssertionResult result = invoke(newResponse(status));
+			assertFailure(message, new Function() {
+				@Override
+				public void apply() {
+					invoke(newResponse(status));
+				}
+			});
+		}
+	}
 
-			checkError(result,
-					ShouldHaveStatusBetween.class,
-					"Expecting status code to be between %s and %s but was %s",
-					start, end, status
-			);
+	@Test
+	public void it_should_fail_with_custom_message() {
+		final String message = "foo";
+		final int start = start();
+		final int end = end();
+
+		for (int i = start; i <= end; i++) {
+			final int status = i;
+			assertFailure(message, new Function() {
+				@Override
+				public void apply() {
+					invoke(message, newResponse(status));
+				}
+			});
 		}
 	}
 

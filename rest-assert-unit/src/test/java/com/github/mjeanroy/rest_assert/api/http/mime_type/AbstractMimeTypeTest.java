@@ -22,35 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http;
+package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static java.lang.String.format;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType;
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse> {
-
-	protected HttpResponseAssertions assertions;
-
-	@Before
-	public void setUp() {
-		assertions = HttpResponseAssertions.instance();
-	}
+public abstract class AbstractMimeTypeTest extends AbstractAssertTest<HttpResponse> {
 
 	@Test
 	public void it_should_pass_with_expected_mime_type() {
 		Header header = getHeader();
-		AssertionResult result = invoke(newResponse(header));
-		checkSuccess(result);
+		invoke(newResponse(header));
+		invoke("foo", newResponse(header));
 	}
 
 	@Test
@@ -65,13 +57,33 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
 		final Header header = header(expectedName, actualValue);
 
-		AssertionResult result = invoke(newResponse(header));
+		final String message = format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
 
-		checkError(result,
-				ShouldHaveMimeType.class,
-				"Expecting response to have mime type %s but was %s",
-				expectedMimeType, actualMimeType
-		);
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invoke(newResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		final Header expectedHeader = getHeader();
+
+		final String expectedName = expectedHeader.getName();
+		final String expectedValue = expectedHeader.getValue();
+		final String actualValue = expectedValue.replace(getMimeType(), getMimeType() + "foo");
+		final Header header = header(expectedName, actualValue);
+
+		final String message = "foo";
+
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invoke(message, newResponse(header));
+			}
+		});
 	}
 
 	protected HttpResponse newResponse(Header header) {

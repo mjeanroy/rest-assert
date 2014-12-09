@@ -25,7 +25,6 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.between;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponseAssertions_isSuccess_Test extends AbstractHttpStatusBetweenTest {

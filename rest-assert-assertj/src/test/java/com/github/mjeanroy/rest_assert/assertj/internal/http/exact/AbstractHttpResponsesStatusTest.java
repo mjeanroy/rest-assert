@@ -22,52 +22,49 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.exact;
 
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.*;
 
+import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpResponsesHeaderTest {
+public abstract class AbstractHttpResponsesStatusTest {
 
 	protected HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_header_is_ok() {
-		HttpResponse httpResponse = newHttpResponse(getHeader());
-		invoke(httpResponse);
+	public void should_pass_if_status_code_is_ok() {
+		HttpResponse httpResponse = newHttpResponseWithStatus(status());
+		invoke(someInfo(), httpResponse);
 	}
 
 	@Test
-	public void should_fail_if_header_is_not_available() {
-		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
-		final HttpResponse httpResponse = newHttpResponse(header);
+	public void should_fail_if_status_code_are_not_equal() {
+		final AssertionInfo info = someInfo();
+		final int status = status();
+		final int expectedStatus = status + 1;
+		final HttpResponse httpResponse = newHttpResponseWithStatus(expectedStatus);
 
 		try {
-			invoke(httpResponse);
+			invoke(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			assertThat(e.getMessage())
 					.isNotNull()
 					.isNotEmpty()
-					.isEqualTo(format("Expecting response to have header \"%s\"", expectedHeader.getName()));
+					.isEqualTo(format("Expecting status code to be %s but was %s", status(), expectedStatus));
 		}
 	}
 
-	protected abstract Header getHeader();
+	protected abstract int status();
 
-	protected HttpResponse newHttpResponse(Header header) {
-		return newHttpResponseWithHeader(header);
-	}
-
-	protected abstract void invoke(HttpResponse httpResponse);
+	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 }

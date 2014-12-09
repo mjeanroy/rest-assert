@@ -30,7 +30,6 @@ import static org.mockito.Mockito.*;
 import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponseAssert_hasHeader_Test extends AbstractHttpResponseHeaderTest {

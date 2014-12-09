@@ -26,7 +26,6 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.mime_type;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.http.AbstractHttpResponsesMimeTypeTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public class HttpResponses_assertIsCsv_Test extends AbstractHttpResponsesMimeTypeTest {

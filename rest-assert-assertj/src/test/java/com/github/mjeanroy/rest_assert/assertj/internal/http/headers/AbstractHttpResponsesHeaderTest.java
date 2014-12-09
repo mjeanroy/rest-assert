@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
@@ -36,27 +36,20 @@ import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpResponsesMimeTypeTest {
+public abstract class AbstractHttpResponsesHeaderTest {
 
 	protected HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_mime_type_is_ok() {
+	public void should_pass_if_header_is_ok() {
 		HttpResponse httpResponse = newHttpResponse(getHeader());
 		invoke(httpResponse);
 	}
 
 	@Test
 	public void should_fail_if_header_is_not_available() {
-		final String expectedMimeType = getMimeType();
-		final String actualMimeType = expectedMimeType + "foo";
-
 		final Header expectedHeader = getHeader();
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-		final Header header = header(expectedName, actualValue);
-
+		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
@@ -66,15 +59,11 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 			assertThat(e.getMessage())
 					.isNotNull()
 					.isNotEmpty()
-					.isEqualTo(format("Expecting response to have mime type \"%s\" but was \"%s\"", expectedMimeType, actualMimeType));
+					.isEqualTo(format("Expecting response to have header \"%s\"", expectedHeader.getName()));
 		}
 	}
 
-	protected abstract String getMimeType();
-
-	protected Header getHeader() {
-		return header("Content-Type", getMimeType() + ";charset=UTF-8");
-	}
+	protected abstract Header getHeader();
 
 	protected HttpResponse newHttpResponse(Header header) {
 		return newHttpResponseWithHeader(header);

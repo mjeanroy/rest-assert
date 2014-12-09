@@ -36,6 +36,7 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.should
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
@@ -240,6 +241,17 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isSuccess(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 200, 299);
+	}
+
+	/**
+	 * Check that status code of http response is not a success status (i.e
+	 * not between 200 and 299).
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotSuccess(HttpResponse httpResponse) {
+		return isStatusOutOf(httpResponse, 200, 299);
 	}
 
 	/**
@@ -535,5 +547,21 @@ public final class HttpResponseAssertions {
 		return actualStatus >= start && actualStatus <= end ?
 				success() :
 				failure(shouldHaveStatusBetween(actualStatus, start, end));
+	}
+
+	/**
+	 * Check that status code of http response is not included between
+	 * a lower bound and an upper bound (inclusive).
+	 *
+	 * @param httpResponse Http response.
+	 * @param start Lower bound.
+	 * @param end Upper bound.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isStatusOutOf(HttpResponse httpResponse, int start, int end) {
+		int actualStatus = httpResponse.getStatus();
+		return actualStatus < start && actualStatus > end ?
+				success() :
+				failure(shouldHaveStatusOutOf(actualStatus, start, end));
 	}
 }

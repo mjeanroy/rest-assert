@@ -22,50 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.http;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static java.lang.String.format;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertTest<HttpResponse> {
+public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
+
+	protected HttpResponseAssertions assertions;
+
+	@Before
+	public void setUp() {
+		assertions = HttpResponseAssertions.instance();
+	}
 
 	@Test
 	public void it_should_pass_with_expected_header() {
 		Header header = getHeader();
-		invoke(newResponse(header));
-		invoke("foo", newResponse(header));
+		AssertionResult result = invoke(newResponse(header));
+		checkSuccess(result);
 	}
 
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header() {
-		final Header expectedHeader = getHeader();
-
-		String expectedName = expectedHeader.getName();
-		String expectedValue = expectedHeader.getValue();
-		String actualValue = expectedValue + "foo";
-		final Header header = header(expectedName, actualValue);
-
-		final String message = format("Expecting response to have header %s equal to %s but was %s", expectedName, expectedValue, actualValue);
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(newResponse(header));
-			}
-		});
-	}
-
-	@Test
-	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
 		final Header expectedHeader = getHeader();
 
 		final String expectedName = expectedHeader.getName();
@@ -73,14 +62,13 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertTest<H
 		final String actualValue = expectedValue + "foo";
 		final Header header = header(expectedName, actualValue);
 
-		final String message = "foo";
+		AssertionResult result = invoke(newResponse(header));
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, newResponse(header));
-			}
-		});
+		checkError(result,
+				ShouldHaveHeader.class,
+				"Expecting response to have header %s equal to %s but was %s",
+				expectedHeader.getName(), expectedHeader.getValue(), header.getValue()
+		);
 	}
 
 	protected HttpResponse newResponse(Header header) {

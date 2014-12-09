@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,26 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+/**
+ * Error thrown when an http response status is between
+ * lower and upper bound but must be out of this range.
+ */
+public class ShouldHaveStatusOutOf extends AbstractError {
 
-public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
-
-	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(newHttpResponseWithHeader(getHeader()));
+	// Private constructor, use static factory instead
+	private ShouldHaveStatusOutOf(String message, Object... args) {
+		super(message, args);
 	}
 
-	protected Header getHeader() {
-		return header("foo", "bar");
+	/**
+	 * Build error.
+	 *
+	 * @param actualStatus Actual status (a.k.a http response status code).
+	 * @param start Lower bound (inclusive).
+	 * @param end Upper bound (inclusive).
+	 * @return Error.
+	 */
+	public static ShouldHaveStatusOutOf shouldHaveStatusOutOf(int actualStatus, int start, int end) {
+		return new ShouldHaveStatusOutOf("Expecting status code to be out of %s and %s but was %s", start, end, actualStatus);
 	}
-
-	protected abstract HttpResponseAssert invoke();
-
-	protected abstract void verifyApiCall();
 }

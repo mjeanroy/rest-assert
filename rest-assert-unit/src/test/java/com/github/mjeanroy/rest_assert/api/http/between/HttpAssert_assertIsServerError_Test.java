@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.api.http.between;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsServerError;

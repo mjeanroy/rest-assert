@@ -22,84 +22,82 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.mime_type;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.formatList;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static com.github.mjeanroy.rest_assert.utils.Utils.map;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType;
+import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import com.github.mjeanroy.rest_assert.utils.Mapper;
+import com.github.mjeanroy.rest_assert.utils.Utils;
 
-public abstract class AbstractHttpResponsesMimeTypeInTest {
+public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	protected HttpResponseAssertions assertions;
+
+	@Before
+	public void setUp() {
+		assertions = HttpResponseAssertions.instance();
+	}
 
 	@Test
-	public void should_pass_if_mime_type_is_ok() {
-		List<Header> headers = getHeader();
+	public void it_should_pass_with_expected_mime_type() {
+		List<Header> headers = getHeaders();
 		for (Header header : headers) {
-			HttpResponse httpResponse = newHttpResponse(header);
-			invoke(httpResponse);
+			AssertionResult result = invoke(newResponse(header));
+			checkSuccess(result);
 		}
 	}
 
 	@Test
-	public void should_fail_if_header_is_not_available() {
-		final List<Header> headers = getHeader();
-		final List<String> mimeTypes = getMimeTypes();
+	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+		final List<Header> headers = getHeaders();
+		final List<String> mimeType = getMimeTypes();
 
 		int i = 0;
-		for (Header expectedHeader : headers) {
-			final String expectedMimeType = mimeTypes.get(i);
+		for (Header h : headers) {
+			final String expectedMimeType = mimeType.get(i);
 			i++;
 
 			final String actualMimeType = expectedMimeType + "foo";
 
-			final String expectedName = expectedHeader.getName();
-			final String expectedValue = expectedHeader.getValue();
+			final String expectedName = h.getName();
+			final String expectedValue = h.getValue();
 			final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
 			final Header header = header(expectedName, actualValue);
 
-			final HttpResponse httpResponse = newHttpResponse(header);
+			AssertionResult result = invoke(newResponse(header));
 
-			try {
-				invoke(httpResponse);
-				failBecauseExpectedAssertionErrorWasNotThrown();
-			}
-			catch (AssertionError e) {
-				assertThat(e.getMessage())
-						.isNotNull()
-						.isNotEmpty()
-						.isEqualTo(format("Expecting response to have mime type in %s but was \"%s\"", formatList(mimeTypes), actualMimeType));
-			}
+			checkError(result,
+					ShouldHaveMimeType.class,
+					"Expecting response to have mime type in %s but was %s",
+					mimeType, actualMimeType
+			);
 		}
+	}
+
+	protected HttpResponse newResponse(Header header) {
+		return newHttpResponseWithHeader(header);
 	}
 
 	protected abstract List<String> getMimeTypes();
 
-	protected List<Header> getHeader() {
-		return map(getMimeTypes(), new Mapper<String, Header>() {
+	protected List<Header> getHeaders() {
+		return Utils.map(getMimeTypes(), new Mapper<String, Header>() {
 			@Override
 			public Header apply(String input) {
 				return header("Content-Type", input + ";charset=UTF-8");
 			}
 		});
 	}
-
-	protected HttpResponse newHttpResponse(Header header) {
-		return newHttpResponseWithHeader(header);
-	}
-
-	protected abstract void invoke(HttpResponse httpResponse);
 }
