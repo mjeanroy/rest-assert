@@ -310,6 +310,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is not a client error status (i.e
+	 * not between 400 and 499).
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotClientError(HttpResponse httpResponse) {
+		return isStatusOutOf(httpResponse, 400, 499);
+	}
+
+	/**
 	 * Check that http response contains ETag header.
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
