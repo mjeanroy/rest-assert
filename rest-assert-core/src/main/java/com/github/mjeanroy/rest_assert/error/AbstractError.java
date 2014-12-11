@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.error;
 
+import static java.lang.String.format;
 import static java.util.Arrays.copyOf;
 
 /**
@@ -82,7 +83,7 @@ public abstract class AbstractError implements RestAssertError {
 	 */
 	@Override
 	public String buildMessage() {
-		return String.format(message, args);
+		return args.length == 0 ? message : format(message, args);
 	}
 
 	@Override
