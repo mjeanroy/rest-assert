@@ -22,30 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
-/**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
- */
-public class ShouldBeEqualTo extends AbstractError {
+import java.net.URI;
+import java.net.URL;
 
-	// Private constructor, use static factory instead
-	private ShouldBeEqualTo(String message, Object... args) {
-		super(message, args);
+public class JsonAssertion_isEqualToUri_Test extends AbstractJsonAssertion_isEqualTo_Test<URI> {
+
+	@Override
+	protected AssertionResult invoke(String actual, URI expected) {
+		return assertions.isEqualTo(actual, expected);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualValue Actual value.
-	 * @param expectedValue Expected value.
-	 * @return Error.
-	 */
-	public static ShouldBeEqualTo shouldBeEqualTo(String entry, Object actualValue, Object expectedValue) {
-		return new ShouldBeEqualTo("Expecting json entry %s to be equal to %s but was %s", entry, actualValue, expectedValue);
+	@Override
+	protected URI successObject() throws Exception {
+		URL url = getClass().getResource("/success.json");
+		return url.toURI();
+	}
+
+	@Override
+	protected URI failureObject() throws Exception {
+		URL url = getClass().getResource("/failure.json");
+		return url.toURI();
 	}
 }

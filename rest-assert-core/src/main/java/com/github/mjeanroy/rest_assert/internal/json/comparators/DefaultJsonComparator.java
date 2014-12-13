@@ -37,9 +37,9 @@ import java.util.Set;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnObject.shouldBeAnObject;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeEntryOf.shouldBeEntryOf;
-import static com.github.mjeanroy.rest_assert.error.json.ShouldBeEqualTo.shouldBeEqualTo;
+import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry.shouldHaveEntry;
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveSize.shouldHaveSize;
+import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
 import static com.github.mjeanroy.rest_assert.internal.json.JsonType.parseType;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonContext.rootContext;
@@ -174,7 +174,7 @@ public class DefaultJsonComparator implements JsonComparator {
 			}
 			else if (actualType != JsonType.NULL && !actualObject.equals(expectedObject)) {
 				// Not null and not equals
-				errors.add(shouldBeEqualTo(contexts.get().toPath(key), actualObject, expectedObject));
+				errors.add(shouldHaveEntryEqualTo(contexts.get().toPath(key), actualObject, expectedObject));
 			}
 		}
 
@@ -187,7 +187,7 @@ public class DefaultJsonComparator implements JsonComparator {
 		int actualSize = actualArray.size();
 		int expectedSize = expectedArray.size();
 		if (actualSize != expectedSize) {
-			errors.add(shouldHaveSize(contexts.get().toPath(""), actualSize, expectedSize));
+			errors.add(shouldHaveEntryWithSize(contexts.get().toPath(""), actualSize, expectedSize));
 		}
 
 		// Same size

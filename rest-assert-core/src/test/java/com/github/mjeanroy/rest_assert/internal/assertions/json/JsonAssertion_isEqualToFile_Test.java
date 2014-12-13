@@ -22,19 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json;
 
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.io.File;
+import java.net.URL;
 
-public class ShouldBeEqualToTest {
+public class JsonAssertion_isEqualToFile_Test extends AbstractJsonAssertion_isEqualTo_Test<File> {
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
-		assertThat(shouldBeEqualTo).isNotNull();
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 1 but was 2");
+	@Override
+	protected AssertionResult invoke(String actual, File expected) {
+		return assertions.isEqualTo(actual, expected);
+	}
+
+	@Override
+	protected File successObject() throws Exception {
+		URL url = getClass().getResource("/success.json");
+		return new File(url.toURI());
+	}
+
+	@Override
+	protected File failureObject() throws Exception {
+		URL url = getClass().getResource("/failure.json");
+		return new File(url.toURI());
 	}
 }

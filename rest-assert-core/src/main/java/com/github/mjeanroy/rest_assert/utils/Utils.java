@@ -24,6 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.utils;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,28 +88,27 @@ public final class Utils {
 	}
 
 	/**
-	 * Check if value is a valid number.
+	 * Read file and return text content.
 	 *
-	 * @param value Value to check.
-	 * @return True if value is a number, false otherwise.
+	 * @param file File.
+	 * @return File content.
 	 */
-	public static boolean isNumber(String value) {
-		try {
-			Double.valueOf(value);
-			return true;
-		}
-		catch (NumberFormatException ex) {
-			return false;
-		}
-	}
+	public static String readFileToString(File file) {
+		StringBuilder sb = new StringBuilder();
+		String separator = System.getProperty("line.separator");
 
-	/**
-	 * Check if a string value is a boolean (i.e false or true).
-	 *
-	 * @param value Value to check.
-	 * @return True if value is strictly equal to false or true.
-	 */
-	public static boolean isBoolean(String value) {
-		return "true".equals(value) || "false".equals(value);
+		try (FileReader fReader = new FileReader(file);
+				 BufferedReader br = new BufferedReader(fReader)) {
+
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line).append(separator);
+			}
+
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		return sb.toString().trim();
 	}
 }

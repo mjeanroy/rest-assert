@@ -22,19 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.error;
 
-import org.junit.Test;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static org.assertj.core.api.Assertions.assertThat;
+import static java.util.Collections.addAll;
 
-public class ShouldBeEqualToTest {
+/**
+ * Composite error representation.
+ */
+public class CompositeError extends AbstractError {
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
-		assertThat(shouldBeEqualTo).isNotNull();
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 1 but was 2");
+	private CompositeError(Collection<RestAssertError> errors) {
+		super(message(errors), args(errors));
+	}
+
+	private static String message(Collection<RestAssertError> errors) {
+		String separator = "," + System.getProperty("line.separator");
+		StringBuilder sb = new StringBuilder();
+		for (RestAssertError error : errors) {
+			sb.append(error.message()).append(separator);
+		}
+		return sb.substring(0, sb.length() - separator.length()).trim();
+	}
+
+	private static Object[] args(Collection<RestAssertError> errors) {
+		List<Object> args = new LinkedList<>();
+		for (RestAssertError error : errors) {
+			addAll(args, error.args());
+		}
+		return args.toArray();
+	}
+
+	public static CompositeError composeErrors(Collection<RestAssertError> errors) {
+		return new CompositeError(errors);
 	}
 }

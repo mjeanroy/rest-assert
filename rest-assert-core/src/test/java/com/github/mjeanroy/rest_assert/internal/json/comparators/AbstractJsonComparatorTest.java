@@ -28,7 +28,7 @@ import com.github.mjeanroy.rest_assert.error.RestAssertError;
 import com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray;
 import com.github.mjeanroy.rest_assert.error.json.ShouldBeAnObject;
 import com.github.mjeanroy.rest_assert.error.json.ShouldBeEntryOf;
-import com.github.mjeanroy.rest_assert.error.json.ShouldBeEqualTo;
+import com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo;
 import com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry;
 import com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
@@ -314,7 +314,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	private void checkShouldBeEqualTo(String actual, String expected, Object... args) {
-		checkComparison(actual, expected, ShouldBeEqualTo.class, args);
+		checkComparison(actual, expected, ShouldHaveEntryEqualTo.class, args);
 	}
 
 	private void checkShouldBeEntryOf(JsonObject actual, JsonObject expected, JsonType actualType, JsonType expectedType) {

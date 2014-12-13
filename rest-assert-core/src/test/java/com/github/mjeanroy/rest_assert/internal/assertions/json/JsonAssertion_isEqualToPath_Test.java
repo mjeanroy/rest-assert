@@ -22,30 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveSize extends AbstractError {
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveSize(String message, Object... args) {
-		super(message, args);
+public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+
+	@Override
+	protected AssertionResult invoke(String actual, Path expected) {
+		return assertions.isEqualTo(actual, expected);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveSize shouldHaveSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveSize("Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected Path successObject() throws Exception {
+		URL url = getClass().getResource("/success.json");
+		return Paths.get(url.toURI());
+	}
+
+	@Override
+	protected Path failureObject() throws Exception {
+		URL url = getClass().getResource("/failure.json");
+		return Paths.get(url.toURI());
 	}
 }

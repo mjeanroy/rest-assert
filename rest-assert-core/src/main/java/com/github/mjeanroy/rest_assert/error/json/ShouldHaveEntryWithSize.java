@@ -24,17 +24,28 @@
 
 package com.github.mjeanroy.rest_assert.error.json;
 
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * Error thrown when a json array is not of expected
+ * size.
+ */
+public class ShouldHaveEntryWithSize extends AbstractError {
 
-public class ShouldBeEqualToTest {
+	// Private constructor, use static factory instead
+	private ShouldHaveEntryWithSize(String message, Object... args) {
+		super(message, args);
+	}
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
-		assertThat(shouldBeEqualTo).isNotNull();
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 1 but was 2");
+	/**
+	 * Build error.
+	 *
+	 * @param entry Entry name.
+	 * @param actualSize Actual size.
+	 * @param expectedSize Expected size.
+	 * @return Error.
+	 */
+	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
+		return new ShouldHaveEntryWithSize("Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
 	}
 }

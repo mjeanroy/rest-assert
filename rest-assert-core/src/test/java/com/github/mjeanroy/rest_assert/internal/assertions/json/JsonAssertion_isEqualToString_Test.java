@@ -22,19 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json;
 
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonArray.jsonArray;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 
-public class ShouldBeEqualToTest {
+public class JsonAssertion_isEqualToString_Test extends AbstractJsonAssertion_isEqualTo_Test<String> {
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
-		assertThat(shouldBeEqualTo).isNotNull();
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 1 but was 2");
+	@Override
+	protected AssertionResult invoke(String actual, String expected) {
+		return assertions.isEqualTo(actual, expected);
+	}
+
+	@Override
+	protected String successObject() throws Exception {
+		return actual();
+	}
+
+	@Override
+	protected String failureObject() throws Exception {
+		JsonObject failureObject = jsonObject(
+				jsonEntry("str", "barfoo"),
+				jsonEntry("nb", 2.0),
+				jsonEntry("bool", false),
+				jsonEntry("array", jsonArray(3.0, true, "foobarfoo"))
+		);
+
+		return failureObject.toJson();
 	}
 }

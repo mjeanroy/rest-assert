@@ -22,56 +22,59 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests;
+package com.github.mjeanroy.rest_assert.error;
 
-import com.github.mjeanroy.rest_assert.error.RestAssertError;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import org.junit.Test;
 
-import static java.lang.String.format;
+import static com.github.mjeanroy.rest_assert.error.CompositeError.composeErrors;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public abstract class AssertionUtils {
+public class CompositeErrorTest {
 
-	public static void assertSuccessResult(AssertionResult result) {
-		assertThat(result).isNotNull();
-		assertThat(result.isSuccess()).isTrue();
-		assertThat(result.isFailure()).isFalse();
-		assertThat(result.getError()).isNull();
-	}
+	@Test
+	public void it_should_compose_errors() {
+		RestAssertError error1 = createError("foo");
+		RestAssertError error2 = createError("bar %s %s", 1, 2);
+		RestAssertError error3 = createError("foobar %s", "hello");
 
-	public static void assertFailureResult(AssertionResult result, Class klassError, String pattern, Object[] args) {
-		assertThat(result).isNotNull();
-		assertThat(result.isSuccess()).isFalse();
-		assertThat(result.isFailure()).isTrue();
+		CompositeError error = composeErrors(asList(error1, error2, error3));
 
-		RestAssertError error = result.getError();
-		assertThat(error)
+		assertThat(error).isNotNull();
+
+		String separator = System.getProperty("line.separator");
+
+		assertThat(error.message())
 				.isNotNull()
-				.isInstanceOf(klassError);
+				.isNotEmpty()
+				.isEqualTo("" +
+								"foo," + separator +
+								"bar %s %s," + separator +
+								"foobar %s"
+				);
 
 		assertThat(error.args())
 				.isNotNull()
-				.hasSameSizeAs(args)
-				.contains(args);
+				.isNotEmpty()
+				.hasSize(3)
+				.contains(1, 2, "hello");
 
-		String expectedMessage = format(pattern, args);
 		assertThat(error.buildMessage())
 				.isNotNull()
 				.isNotEmpty()
-				.isEqualTo(expectedMessage);
+				.isEqualTo("" +
+								"foo," + separator +
+								"bar 1 2," + separator +
+								"foobar hello"
+				);
 	}
 
-	public static void assertFailure(String message, Function test) {
-		try {
-			test.apply();
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError error) {
-			assertThat(error.getMessage()).isEqualTo(message);
-		}
-	}
-
-	public static void failBecauseExpectedAssertionErrorWasNotThrown() {
-		fail("Exception was not thrown");
+	private RestAssertError createError(String message, Object... args) {
+		RestAssertError error = mock(RestAssertError.class);
+		when(error.message()).thenReturn(message);
+		when(error.args()).thenReturn(args);
+		return error;
 	}
 }

@@ -24,41 +24,18 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
-
-import com.github.mjeanroy.rest_assert.error.RestAssertError;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailureResult;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertSuccessResult;
 
 public abstract class AbstractAssertionsTest<T> {
 
 	protected abstract AssertionResult invoke(T testedObject);
 
 	protected void checkSuccess(AssertionResult result) {
-		assertThat(result).isNotNull();
-		assertThat(result.isSuccess()).isTrue();
-		assertThat(result.isFailure()).isFalse();
-		assertThat(result.getError()).isNull();
+		assertSuccessResult(result);
 	}
 
 	protected void checkError(AssertionResult result, Class klassError, String pattern, Object... args) {
-		assertThat(result).isNotNull();
-		assertThat(result.isSuccess()).isFalse();
-		assertThat(result.isFailure()).isTrue();
-
-		RestAssertError error = result.getError();
-		assertThat(error)
-				.isNotNull()
-				.isInstanceOf(klassError);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSameSizeAs(args)
-				.contains(args);
-
-		String expectedMessage = format(pattern, args);
-		assertThat(error.buildMessage())
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo(expectedMessage);
+		assertFailureResult(result, klassError, pattern, args);
 	}
 }

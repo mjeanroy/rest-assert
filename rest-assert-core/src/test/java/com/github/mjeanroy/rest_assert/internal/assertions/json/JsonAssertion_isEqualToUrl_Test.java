@@ -22,19 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json;
 
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.net.URL;
 
-public class ShouldBeEqualToTest {
+public class JsonAssertion_isEqualToUrl_Test extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
-		assertThat(shouldBeEqualTo).isNotNull();
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 1 but was 2");
+	@Override
+	protected AssertionResult invoke(String actual, URL expected) {
+		return assertions.isEqualTo(actual, expected);
+	}
+
+	@Override
+	protected URL successObject() throws Exception {
+		return getClass().getResource("/success.json");
+	}
+
+	@Override
+	protected URL failureObject() throws Exception {
+		return getClass().getResource("/failure.json");
 	}
 }
