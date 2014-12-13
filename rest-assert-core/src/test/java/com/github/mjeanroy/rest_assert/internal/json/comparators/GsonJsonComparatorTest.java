@@ -26,19 +26,11 @@ package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
 import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.impl.GsonJsonParser;
-import org.junit.Before;
 
 public class GsonJsonComparatorTest extends AbstractJsonComparatorTest {
 
-	private GsonJsonParser parser;
-
-	@Before
-	public void setUp() {
-		parser = new GsonJsonParser();
-	}
-
 	@Override
 	protected JsonParser jsonParser() {
-		return parser;
+		return new GsonJsonParser();
 	}
 }

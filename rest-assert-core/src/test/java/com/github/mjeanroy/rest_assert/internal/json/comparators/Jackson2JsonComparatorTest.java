@@ -26,19 +26,11 @@ package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
 import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.impl.Jackson2JsonParser;
-import org.junit.Before;
 
 public class Jackson2JsonComparatorTest extends AbstractJsonComparatorTest {
 
-	private Jackson2JsonParser parser;
-
-	@Before
-	public void setUp() {
-		parser = new Jackson2JsonParser();
-	}
-
 	@Override
 	protected JsonParser jsonParser() {
-		return parser;
+		return new Jackson2JsonParser();
 	}
 }

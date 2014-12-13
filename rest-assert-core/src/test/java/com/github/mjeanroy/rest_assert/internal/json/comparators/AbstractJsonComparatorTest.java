@@ -35,6 +35,7 @@ import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 import com.github.mjeanroy.rest_assert.tests.json.JsonArray;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -45,6 +46,13 @@ import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractJsonComparatorTest {
+
+	private JsonComparator comparator;
+
+	@Before
+	public void setUp() {
+		comparator = new DefaultJsonComparator(jsonParser());
+	}
 
 	protected abstract JsonParser jsonParser();
 
@@ -60,18 +68,7 @@ public abstract class AbstractJsonComparatorTest {
 				)
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeAnArray.class);
+		checkComparison(actual.toJson(), expected.toJson(), ShouldBeAnArray.class);
 	}
 
 	@Test
@@ -86,18 +83,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", "bar")
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeAnObject.class);
+		checkComparison(actual.toJson(), expected.toJson(), ShouldBeAnObject.class);
 	}
 
 	@Test
@@ -111,23 +97,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("bar", "foo")
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldHaveEntry.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(1)
-				.contains("bar");
+		checkComparison(actual.toJson(), expected.toJson(), ShouldHaveEntry.class, "bar");
 	}
 
 	@Test
@@ -141,23 +111,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", "bar")
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldNotHaveEntry.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(1)
-				.contains("bar");
+		checkComparison(actual.toJson(), expected.toJson(), ShouldNotHaveEntry.class, "bar");
 	}
 
 	@Test
@@ -170,7 +124,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", "bar")
 		);
 
-		checkTypes(actual, expected, JsonType.NULL, JsonType.STRING);
+		checkShouldBeEntryOf(actual, expected, JsonType.NULL, JsonType.STRING);
 	}
 
 	@Test
@@ -183,7 +137,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", 0)
 		);
 
-		checkTypes(actual, expected, JsonType.STRING, JsonType.NUMBER);
+		checkShouldBeEntryOf(actual, expected, JsonType.STRING, JsonType.NUMBER);
 	}
 
 	@Test
@@ -196,7 +150,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", 0)
 		);
 
-		checkTypes(actual, expected, JsonType.BOOLEAN, JsonType.NUMBER);
+		checkShouldBeEntryOf(actual, expected, JsonType.BOOLEAN, JsonType.NUMBER);
 	}
 
 	@Test
@@ -211,7 +165,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", 0)
 		);
 
-		checkTypes(actual, expected, JsonType.OBJECT, JsonType.NUMBER);
+		checkShouldBeEntryOf(actual, expected, JsonType.OBJECT, JsonType.NUMBER);
 	}
 
 	@Test
@@ -228,27 +182,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", 0)
 		);
 
-		checkTypes(actual, expected, JsonType.ARRAY, JsonType.NUMBER);
-	}
-
-	private void checkTypes(JsonObject actual, JsonObject expected, JsonType actualType, JsonType expectedType) {
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEntryOf.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo", actualType.getFormattedName(), expectedType.getFormattedName());
+		checkShouldBeEntryOf(actual, expected, JsonType.ARRAY, JsonType.NUMBER);
 	}
 
 	@Test
@@ -261,23 +195,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", 2.0)
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo", 1.0, 2.0);
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "foo", 1.0, 2.0);
 	}
 
 	@Test
@@ -290,23 +208,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", "bar2")
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo", "bar1", "bar2");
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "foo", "bar1", "bar2");
 	}
 
 	@Test
@@ -319,23 +221,7 @@ public abstract class AbstractJsonComparatorTest {
 				jsonEntry("foo", false)
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo", true, false);
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "foo", true, false);
 	}
 
 	@Test
@@ -352,23 +238,7 @@ public abstract class AbstractJsonComparatorTest {
 				))
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo.bar", true, false);
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "foo.bar", true, false);
 	}
 
 	@Test
@@ -378,26 +248,10 @@ public abstract class AbstractJsonComparatorTest {
 		);
 
 		JsonObject expected = jsonObject(
-				jsonEntry("foo", jsonArray("bar", 2.0, false))
+				jsonEntry("foo", jsonArray("bar", 1.0, true))
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(3);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo[0]", "foo", "bar");
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "foo[0]", "foo", "bar");
 	}
 
 	@Test
@@ -418,95 +272,28 @@ public abstract class AbstractJsonComparatorTest {
 				))
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("foo[0].bar", "foo", "bar");
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "foo[0].bar", "foo", "bar");
 	}
 
 	@Test
 	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_numbers() {
 		JsonArray actual = jsonArray("foo", 1.0);
 		JsonArray expected = jsonArray("foo", 2.0);
-
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("[1]", 1.0, 2.0);
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[1]", 1.0, 2.0);
 	}
 
 	@Test
 	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_strings() {
 		JsonArray actual = jsonArray("foo", 1.0);
 		JsonArray expected = jsonArray("bar", 1.0);
-
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("[0]", "foo", "bar");
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[0]", "foo", "bar");
 	}
 
 	@Test
 	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_booleans() {
 		JsonArray actual = jsonArray("foo", true);
 		JsonArray expected = jsonArray("foo", false);
-
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
-
-		assertThat(errors)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1);
-
-		RestAssertError error = errors.get(0);
-		assertThat(error)
-				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSize(3)
-				.contains("[1]", true, false);
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[1]", true, false);
 	}
 
 	@Test
@@ -523,8 +310,19 @@ public abstract class AbstractJsonComparatorTest {
 				)
 		);
 
-		JsonComparator comparator = new JsonComparator(jsonParser(), actual.toJson(), expected.toJson());
-		List<RestAssertError> errors = comparator.compare();
+		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[0].foo", "foo", "bar");
+	}
+
+	private void checkShouldBeEqualTo(String actual, String expected, Object... args) {
+		checkComparison(actual, expected, ShouldBeEqualTo.class, args);
+	}
+
+	private void checkShouldBeEntryOf(JsonObject actual, JsonObject expected, JsonType actualType, JsonType expectedType) {
+		checkComparison(actual.toJson(), expected.toJson(), ShouldBeEntryOf.class, "foo", actualType.getFormattedName(), expectedType.getFormattedName());
+	}
+
+	private void checkComparison(String actual, String expected, Class errorKlass, Object... args) {
+		List<RestAssertError> errors = comparator.compare(actual, expected);
 
 		assertThat(errors)
 				.isNotNull()
@@ -534,11 +332,11 @@ public abstract class AbstractJsonComparatorTest {
 		RestAssertError error = errors.get(0);
 		assertThat(error)
 				.isNotNull()
-				.isExactlyInstanceOf(ShouldBeEqualTo.class);
+				.isExactlyInstanceOf(errorKlass);
 
 		assertThat(error.args())
 				.isNotNull()
-				.hasSize(3)
-				.contains("[0].foo", "foo", "bar");
+				.hasSize(args.length)
+				.contains(args);
 	}
 }
