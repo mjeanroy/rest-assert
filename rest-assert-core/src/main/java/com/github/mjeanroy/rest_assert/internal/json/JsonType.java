@@ -36,12 +36,22 @@ public enum JsonType {
 		protected boolean isValid(Object object) {
 			return object instanceof Boolean;
 		}
+
+		@Override
+		protected boolean doCheck(String json) {
+			return "true".equals(json) || "false".equals(json);
+		}
 	},
 
 	NUMBER {
 		@Override
 		protected boolean isValid(Object object) {
 			return object instanceof Number;
+		}
+
+		@Override
+		protected boolean doCheck(String json) {
+			return json.matches("-?\\d+(\\.\\d+)?");
 		}
 	},
 
@@ -50,12 +60,24 @@ public enum JsonType {
 		protected boolean isValid(Object object) {
 			return object instanceof String;
 		}
+
+		@Override
+		protected boolean doCheck(String json) {
+			return json.charAt(0) == '"' &&
+					json.charAt(json.length() - 1) == '"';
+		}
 	},
 
 	OBJECT {
 		@Override
 		protected boolean isValid(Object object) {
 			return object instanceof Map;
+		}
+
+		@Override
+		protected boolean doCheck(String json) {
+			return json.charAt(0) == '{' &&
+					json.charAt(json.length() - 1) == '}';
 		}
 	},
 
@@ -65,12 +87,23 @@ public enum JsonType {
 			return object instanceof Iterable ||
 					object instanceof Object[];
 		}
+
+		@Override
+		protected boolean doCheck(String json) {
+			return json.charAt(0) == '[' &&
+					json.charAt(json.length() - 1) == ']';
+		}
 	},
 
 	NULL {
 		@Override
 		protected boolean isValid(Object object) {
 			return object == null;
+		}
+
+		@Override
+		protected boolean doCheck(String json) {
+			return json.equals("null");
 		}
 	};
 
@@ -81,6 +114,24 @@ public enum JsonType {
 	 * @return True if object is valid for type, false otherwise.
 	 */
 	protected abstract boolean isValid(Object object);
+
+	/**
+	 * Check if json value is of expected json type.
+	 *
+	 * @param json Json value.
+	 * @return True if json is that type, false otherwise.
+	 */
+	protected abstract boolean doCheck(String json);
+
+	/**
+	 * Check if json value is of expected json type.
+	 *
+	 * @param json Json value.
+	 * @return True if json is that type, false otherwise.
+	 */
+	public boolean is(String json) {
+		return json != null && doCheck(json.trim());
+	}
 
 	/**
 	 * Get name of json type, that can be used in error

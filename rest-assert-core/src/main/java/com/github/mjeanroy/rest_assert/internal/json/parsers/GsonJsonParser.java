@@ -22,45 +22,55 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.impl;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.mjeanroy.rest_assert.internal.json.JsonException;
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Map;
 
 /**
  * Implementation of {@link JsonParser}
- * using Jackson2 as internal implementation.
+ * using Google Gson as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
  */
-public class Jackson2JsonParser implements JsonParser {
+public class GsonJsonParser extends AbstractJsonParser {
 
-	private final ObjectMapper mapper;
+	/**
+	 * Singleton instance.
+	 */
+	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
 
-	public Jackson2JsonParser() {
-		this.mapper = new ObjectMapper();
+	/**
+	 * Get parser.
+	 *
+	 * @return Parser.
+	 */
+	public static GsonJsonParser gsonParser() {
+		return INSTANCE;
 	}
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * Internal parser.
+	 */
+	private final Gson gson;
+
+	private GsonJsonParser() {
+		super();
+		this.gson = new Gson();
+	}
+
 	@Override
+	@SuppressWarnings("unchecked")
 	public Map<String, Object> parseObject(String json) {
-		return parse(json, Map.class);
+		return gson.fromJson(json, Map.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Object> parseArray(String json) {
-		return parse(json, List.class);
-	}
-
-	private <T> T parse(String json, Class<T> klass) {
-		try {
-			return mapper.readValue(json, klass);
-		}
-		catch (Exception ex) {
-			throw new JsonException(ex);
-		}
+		return gson.fromJson(json, List.class);
 	}
 }

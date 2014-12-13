@@ -22,45 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.impl;
-
-import com.github.mjeanroy.rest_assert.internal.json.JsonException;
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
-
-import java.util.List;
-import java.util.Map;
+package com.github.mjeanroy.rest_assert.utils;
 
 /**
- * Implementation of {@link JsonParser}
- * using Jackson1 as internal implementation.
+ * Static class utilities.
  */
-public class Jackson1JsonParser implements JsonParser {
+public final class ClassUtils {
 
-	private final ObjectMapper mapper;
-
-	public Jackson1JsonParser() {
-		this.mapper = new ObjectMapper();
+	private ClassUtils() {
 	}
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public Map<String, Object> parseObject(String json) {
-		return parse(json, Map.class);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Object> parseArray(String json) {
-		return parse(json, List.class);
-	}
-
-	private <T> T parse(String json, Class<T> klass) {
+	/**
+	 * Check if given class is available.
+	 *
+	 * @param klass Fully qualified class name.
+	 * @return True if class is available on classpath, false otherwise.
+	 */
+	public static boolean isPresent(String klass) {
 		try {
-			return mapper.readValue(json, klass);
+			Class.forName(klass);
+			return true;
 		}
-		catch (Exception ex) {
-			throw new JsonException(ex);
+		catch (ClassNotFoundException ex) {
+			return false;
 		}
 	}
 }

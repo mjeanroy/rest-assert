@@ -82,4 +82,30 @@ public final class Utils {
 		}
 		return outputs;
 	}
+
+	/**
+	 * Check if value is a valid number.
+	 *
+	 * @param value Value to check.
+	 * @return True if value is a number, false otherwise.
+	 */
+	public static boolean isNumber(String value) {
+		try {
+			Double.valueOf(value);
+			return true;
+		}
+		catch (NumberFormatException ex) {
+			return false;
+		}
+	}
+
+	/**
+	 * Check if a string value is a boolean (i.e false or true).
+	 *
+	 * @param value Value to check.
+	 * @return True if value is strictly equal to false or true.
+	 */
+	public static boolean isBoolean(String value) {
+		return "true".equals(value) || "false".equals(value);
+	}
 }

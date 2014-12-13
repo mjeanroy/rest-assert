@@ -24,13 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
-import com.github.mjeanroy.rest_assert.internal.json.impl.Jackson1JsonParser;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
+
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
 
 public class Jackson1JsonComparatorTest extends AbstractJsonComparatorTest {
 
 	@Override
 	protected JsonParser jsonParser() {
-		return new Jackson1JsonParser();
+		return jackson1Parser();
 	}
 }

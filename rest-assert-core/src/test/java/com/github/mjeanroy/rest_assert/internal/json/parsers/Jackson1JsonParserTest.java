@@ -22,35 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.impl;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
-import com.google.gson.Gson;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
 
-import java.util.List;
-import java.util.Map;
-
-/**
- * Implementation of {@link JsonParser}
- * using Google Gson as internal implementation.
- */
-public class GsonJsonParser implements JsonParser {
-
-	private final Gson gson;
-
-	public GsonJsonParser() {
-		this.gson = new Gson();
-	}
+public class Jackson1JsonParserTest extends AbstractJsonParserTest {
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> parseObject(String json) {
-		return gson.fromJson(json, Map.class);
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Object> parseArray(String json) {
-		return gson.fromJson(json, List.class);
+	protected JsonParser parser() {
+		return jackson1Parser();
 	}
 }

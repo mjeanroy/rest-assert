@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.impl;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
 import com.github.mjeanroy.rest_assert.tests.json.JsonArray;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.junit.Test;
@@ -37,9 +36,41 @@ import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("unchecked")
-public abstract class AbstractJJsonParserTest {
+public abstract class AbstractJsonParserTest {
+
+	@Test
+	public void it_should_parse_with_object() {
+		JsonObject jsonObject = jsonObject(
+				jsonEntry("str", "bar"),
+				jsonEntry("nb", 1.0),
+				jsonEntry("bool", true)
+		);
+
+		JsonParser parser = spy(parser());
+		Object result = parser.parse(jsonObject.toJson());
+
+		verify(parser).parseObject(jsonObject.toJson());
+		assertThat(result)
+				.isNotNull()
+				.isInstanceOf(Map.class);
+	}
+
+	@Test
+	public void it_should_parse_with_array() {
+		JsonArray jsonArray = jsonArray(1, 2, 3);
+
+		JsonParser parser = spy(parser());
+		Object result = parser.parse(jsonArray.toJson());
+
+		verify(parser).parseArray(jsonArray.toJson());
+		assertThat(result)
+				.isNotNull()
+				.isInstanceOf(Iterable.class);
+	}
 
 	@Test
 	public void it_should_parse_json_object() {

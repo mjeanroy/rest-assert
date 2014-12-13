@@ -22,16 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.comparators;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
+import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
-
-public class Jackson2JsonComparatorTest extends AbstractJsonComparatorTest {
+/**
+ * Abstract json parser.
+ */
+public abstract class AbstractJsonParser implements JsonParser {
 
 	@Override
-	protected JsonParser jsonParser() {
-		return jackson2Parser();
+	public Object parse(String json) {
+		if (JsonType.OBJECT.is(json)) {
+			return parseObject(json);
+		} else if (JsonType.ARRAY.is(json)) {
+			return parseArray(json);
+		}
+
+		throw new UnsupportedOperationException("Parser support object or array conversion only");
 	}
 }

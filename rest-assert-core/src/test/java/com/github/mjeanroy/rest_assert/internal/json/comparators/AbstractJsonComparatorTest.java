@@ -31,7 +31,7 @@ import com.github.mjeanroy.rest_assert.error.json.ShouldBeEntryOf;
 import com.github.mjeanroy.rest_assert.error.json.ShouldBeEqualTo;
 import com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry;
 import com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry;
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 import com.github.mjeanroy.rest_assert.tests.json.JsonArray;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;

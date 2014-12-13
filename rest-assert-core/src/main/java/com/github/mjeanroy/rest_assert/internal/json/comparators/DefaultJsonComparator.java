@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 
 import java.util.HashSet;

@@ -22,31 +22,65 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
+
+import com.github.mjeanroy.rest_assert.internal.json.JsonException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Json parser interface.
- * A Json parser turn a json string into a map
- * object.
+ * Implementation of {@link JsonParser}
+ * using Jackson1 as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
  */
-public interface JsonParser {
+public class Jackson1JsonParser extends AbstractJsonParser {
 
 	/**
-	 * Parse JSON object and deserialize result into a map object.
-	 *
-	 * @param json Json string.
-	 * @return Map object.
+	 * Singleton instance.
 	 */
-	Map<String, Object> parseObject(String json);
+	private static final Jackson1JsonParser INSTANCE = new Jackson1JsonParser();
 
 	/**
-	 * Parse JSON array and deserialize result into a list of objects.
+	 * Get parser.
 	 *
-	 * @param json Json string.
-	 * @return List of objects.
+	 * @return Parser.
 	 */
-	List<Object> parseArray(String json);
+	public static Jackson1JsonParser jackson1Parser() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Jackson mapper.
+	 */
+	private final ObjectMapper mapper;
+
+	private Jackson1JsonParser() {
+		super();
+		this.mapper = new ObjectMapper();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Map<String, Object> parseObject(String json) {
+		return parse(json, Map.class);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object> parseArray(String json) {
+		return parse(json, List.class);
+	}
+
+	private <T> T parse(String json, Class<T> klass) {
+		try {
+			return mapper.readValue(json, klass);
+		}
+		catch (Exception ex) {
+			throw new JsonException(ex);
+		}
+	}
 }

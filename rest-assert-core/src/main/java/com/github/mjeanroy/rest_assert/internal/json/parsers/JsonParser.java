@@ -22,22 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.impl;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
-import org.junit.Before;
+import java.util.List;
+import java.util.Map;
 
-public class GsonJsonParserTest extends AbstractJJsonParserTest {
+/**
+ * Json parser interface.
+ * A Json parser turn a json string into a map
+ * object.
+ */
+public interface JsonParser {
 
-	private JsonParser parser;
+	/**
+	 * Parse JSON representation and return object result.
+	 * @param json Json string.
+	 * @return Object result.
+	 */
+	Object parse(String json);
 
-	@Before
-	public void setUp() {
-		parser = new GsonJsonParser();
-	}
+	/**
+	 * Parse JSON object and deserialize result into a map object.
+	 *
+	 * @param json Json string.
+	 * @return Map object.
+	 */
+	Map<String, Object> parseObject(String json);
 
-	@Override
-	protected JsonParser parser() {
-		return parser;
-	}
+	/**
+	 * Parse JSON array and deserialize result into a list of objects.
+	 *
+	 * @param json Json string.
+	 * @return List of objects.
+	 */
+	List<Object> parseArray(String json);
 }

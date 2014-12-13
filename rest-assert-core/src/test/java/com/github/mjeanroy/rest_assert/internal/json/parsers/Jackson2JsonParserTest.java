@@ -22,22 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.impl;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import com.github.mjeanroy.rest_assert.internal.json.JsonParser;
-import org.junit.Before;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
 
-public class Jackson2JsonParserTest extends AbstractJJsonParserTest {
-
-	private JsonParser parser;
-
-	@Before
-	public void setUp() {
-		parser = new Jackson2JsonParser();
-	}
+public class Jackson2JsonParserTest extends AbstractJsonParserTest {
 
 	@Override
 	protected JsonParser parser() {
-		return parser;
+		return jackson2Parser();
 	}
 }
