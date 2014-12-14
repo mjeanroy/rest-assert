@@ -4,6 +4,7 @@
 *.class
 jsp/
 rest-assert-assertj/src/main/generated/
+rest-assert-unit/src/main/generated/
 
 ########################
 # Maven files          #
