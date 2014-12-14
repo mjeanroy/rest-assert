@@ -22,27 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to_ignoring;
 
 import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
+import java.io.File;
 
-public class Jsons_assertIsEqualToString_Test extends AbstractJsonsIsEqualToTest<String> {
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
+
+public class Jsons_assertIsEqualToIgnoringFile_Test extends AbstractJsonsIsEqualToIgnoringTest<File> {
 
 	@Override
-	protected String success() {
-		return jsonSuccess();
+	protected File success() {
+		return jsonFileSuccess();
 	}
 
 	@Override
-	protected String failure() {
-		return jsonFailure();
+	protected File failure() {
+		return jsonFileFailure();
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, String json) {
-		jsons.assertIsEqualTo(info, actual(), json);
+	protected void invoke(AssertionInfo info, File json) {
+		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

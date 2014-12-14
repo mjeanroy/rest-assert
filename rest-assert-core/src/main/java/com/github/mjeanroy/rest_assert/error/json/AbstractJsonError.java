@@ -22,31 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.json.equals;
+package com.github.mjeanroy.rest_assert.error.json;
 
-import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualTo;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
+import com.github.mjeanroy.rest_assert.error.RestAssertError;
+import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
 
-public class JsonAssert_assertIsEqualToString_Test extends AbstractJsonIsEqualToTest<String> {
+/**
+ * Abstraction of json error message.
+ */
+public abstract class AbstractJsonError extends AbstractError implements RestAssertJsonError, RestAssertError {
 
-	@Override
-	protected void invoke(String actual) {
-		assertIsEqualTo(actual(), actual);
+	/**
+	 * Entry name of json object that throws the error.
+	 */
+	private String entryName;
+
+	/**
+	 * Build new error.
+	 *
+	 * @param entryName Entry name that throws error.
+	 * @param message Original message, with placeholders.
+	 * @param args Arguments that will replace placeholders in original message.
+	 */
+	protected AbstractJsonError(String entryName, String message, Object[] args) {
+		super(message, args);
+		this.entryName = entryName;
 	}
 
 	@Override
-	protected void invoke(String message, String actual) {
-		assertIsEqualTo(message, actual(), actual);
-	}
-
-	@Override
-	protected String success() {
-		return jsonSuccess();
-	}
-
-	@Override
-	protected String failure() {
-		return jsonFailure();
+	public String entryName() {
+		return entryName;
 	}
 }

@@ -22,33 +22,37 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.json.equals;
+package com.github.mjeanroy.rest_assert.api.json.is_equal_to_ignoring;
 
-import java.nio.file.Path;
+import java.net.URL;
 
-import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualTo;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualToIgnoring;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
 
-public class JsonAssert_assertIsEqualToPath_Test extends AbstractJsonIsEqualToTest<Path> {
+public class JsonAssert_assertIsEqualToIgnoringURL_Test extends AbstractJsonIsEqualToIgnoringTest<URL> {
 
 	@Override
-	protected void invoke(Path actual) {
-		assertIsEqualTo(actual(), actual);
+	protected void invoke(URL actual) {
+		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected void invoke(String message, Path actual) {
-		assertIsEqualTo(message, actual(), actual);
+	protected void invoke(String message, URL actual) {
+		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected Path success() {
-		return jsonPathSuccess();
+	protected URL success() {
+		return jsonUrlSuccess();
 	}
 
 	@Override
-	protected Path failure() {
-		return jsonPathFailure();
+	protected URL failure() {
+		return jsonUrlFailure();
+	}
+
+	private URL fromClasspath(String path) {
+		return getClass().getResource(path);
 	}
 }

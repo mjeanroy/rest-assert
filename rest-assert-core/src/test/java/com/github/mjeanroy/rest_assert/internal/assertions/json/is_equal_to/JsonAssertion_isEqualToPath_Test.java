@@ -22,28 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json.is_equal_to;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+import java.nio.file.Path;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+
+public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+
+	@Override
+	protected AssertionResult invoke(String actual, Path expected) {
+		return assertions.isEqualTo(actual, expected);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected Path successObject() throws Exception {
+		return jsonPathSuccess();
+	}
+
+	@Override
+	protected Path failureObject() throws Exception {
+		return jsonPathFailure();
 	}
 }

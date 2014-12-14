@@ -22,27 +22,33 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.api.json.is_equal_to_ignoring;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import java.io.File;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualToIgnoring;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
 
-public class JsonAssertion_isEqualToString_Test extends AbstractJsonAssertion_isEqualTo_Test<String> {
+public class JsonAssert_assertIsEqualToIgnoringFile_Test extends AbstractJsonIsEqualToIgnoringTest<File> {
 
 	@Override
-	protected AssertionResult invoke(String actual, String expected) {
-		return assertions.isEqualTo(actual, expected);
+	protected void invoke(File actual) {
+		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected String successObject() throws Exception {
-		return jsonSuccess();
+	protected void invoke(String message, File actual) {
+		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected String failureObject() throws Exception {
-		return jsonFailure();
+	protected File success() {
+		return jsonFileSuccess();
+	}
+
+	@Override
+	protected File failure() {
+		return jsonFileFailure();
 	}
 }

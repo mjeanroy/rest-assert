@@ -22,17 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.json.equals;
+package com.github.mjeanroy.rest_assert.api.json.is_equal_to_ignoring;
 
 import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import org.junit.Test;
 
+import java.util.List;
+
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
+import static java.util.Arrays.asList;
 
-public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T> {
+public abstract class AbstractJsonIsEqualToIgnoringTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_pass() {
@@ -44,9 +47,6 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 	public void it_should_fail() {
 		final T failure = failure();
 		final String message = "" +
-				"Expecting json entry str to be equal to foo but was bar," + LINE_SEPARATOR +
-				"Expecting json entry nb to be equal to 1.0 but was 2.0," + LINE_SEPARATOR +
-				"Expecting json entry bool to be equal to true but was false," + LINE_SEPARATOR +
 				"Expecting json entry array[0] to be equal to 1.0 but was 1.1," + LINE_SEPARATOR +
 				"Expecting json entry array[1] to be equal to 2.0 but was 2.1," + LINE_SEPARATOR +
 				"Expecting json entry array[2] to be equal to 3.0 but was 3.1";
@@ -74,6 +74,10 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 
 	protected String actual() {
 		return jsonSuccess();
+	}
+
+	protected List<String> ignoringKeys() {
+		return asList("str", "nb", "bool");
 	}
 
 	protected abstract T success();

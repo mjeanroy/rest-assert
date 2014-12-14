@@ -22,29 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to;
 
 import org.assertj.core.api.AssertionInfo;
 
-import java.net.URL;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
-
-public class Jsons_assertIsEqualToURL_Test extends AbstractJsonsIsEqualToTest<URL> {
+public class Jsons_assertIsEqualToString_Test extends AbstractJsonsIsEqualToTest<String> {
 
 	@Override
-	protected URL success() {
-		return jsonUrlSuccess();
+	protected String success() {
+		return jsonSuccess();
 	}
 
 	@Override
-	protected URL failure() {
-		return jsonUrlFailure();
+	protected String failure() {
+		return jsonFailure();
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, URL json) {
+	protected void invoke(AssertionInfo info, String json) {
 		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

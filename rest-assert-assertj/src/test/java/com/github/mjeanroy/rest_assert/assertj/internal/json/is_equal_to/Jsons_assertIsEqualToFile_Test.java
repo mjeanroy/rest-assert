@@ -22,28 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
+import org.assertj.core.api.AssertionInfo;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+import java.io.File;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
+
+public class Jsons_assertIsEqualToFile_Test extends AbstractJsonsIsEqualToTest<File> {
+
+	@Override
+	protected File success() {
+		return jsonFileSuccess();
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected File failure() {
+		return jsonFileFailure();
+	}
+
+	@Override
+	protected void invoke(AssertionInfo info, File json) {
+		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

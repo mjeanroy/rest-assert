@@ -22,28 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json.is_equal_to_ignoring;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+import java.io.File;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
+
+public class JsonAssertion_isEqualIgnoringToFile_Test extends AbstractJsonAssertion_isEqualToIgnoring_Test<File> {
+
+	@Override
+	protected AssertionResult invoke(String actual, File expected) {
+		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys());
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected File successObject() throws Exception {
+		return jsonFileSuccess();
+	}
+
+	@Override
+	protected File failureObject() throws Exception {
+		return jsonFileFailure();
 	}
 }

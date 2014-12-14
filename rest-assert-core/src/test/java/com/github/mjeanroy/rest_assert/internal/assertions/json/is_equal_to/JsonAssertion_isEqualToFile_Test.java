@@ -22,33 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.json.equals;
+package com.github.mjeanroy.rest_assert.internal.assertions.json.is_equal_to;
+
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
 import java.io.File;
 
-import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualTo;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
 
-public class JsonAssert_assertIsEqualToFile_Test extends AbstractJsonIsEqualToTest<File> {
+public class JsonAssertion_isEqualToFile_Test extends AbstractJsonAssertion_isEqualTo_Test<File> {
 
 	@Override
-	protected void invoke(File actual) {
-		assertIsEqualTo(actual(), actual);
+	protected AssertionResult invoke(String actual, File expected) {
+		return assertions.isEqualTo(actual, expected);
 	}
 
 	@Override
-	protected void invoke(String message, File actual) {
-		assertIsEqualTo(message, actual(), actual);
-	}
-
-	@Override
-	protected File success() {
+	protected File successObject() throws Exception {
 		return jsonFileSuccess();
 	}
 
 	@Override
-	protected File failure() {
+	protected File failureObject() throws Exception {
 		return jsonFileFailure();
 	}
 }

@@ -22,28 +22,19 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.error;
 
 /**
- * Error thrown when a json array is not of expected
- * size.
+ * Simple contract to rest-assert json error object.
+ * Each json error object must provide:
+ * - The entry name that throws the error.
  */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
-
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
-	}
+public interface RestAssertJsonError extends RestAssertError {
 
 	/**
-	 * Build error.
+	 * Entry name.
 	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
+	 * @return Entry name.
 	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
-	}
+	String entryName();
 }

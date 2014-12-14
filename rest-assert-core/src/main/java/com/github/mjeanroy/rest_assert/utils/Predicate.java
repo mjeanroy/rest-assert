@@ -22,29 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.json;
+package com.github.mjeanroy.rest_assert.utils;
 
-import org.assertj.core.api.AssertionInfo;
+/**
+ * Predicate function.
+ */
+public interface Predicate<T> {
 
-import java.nio.file.Path;
-
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
-
-public class Jsons_assertIsEqualToPath_Test extends AbstractJsonsIsEqualToTest<Path> {
-
-	@Override
-	protected Path success() {
-		return jsonPathSuccess();
-	}
-
-	@Override
-	protected Path failure() {
-		return jsonPathFailure();
-	}
-
-	@Override
-	protected void invoke(AssertionInfo info, Path json) {
-		jsons.assertIsEqualTo(info, actual(), json);
-	}
+	/**
+	 * Apply predicate.
+	 *
+	 * @param input Input.
+	 * @return Predicate output.
+	 */
+	boolean apply(T input);
 }

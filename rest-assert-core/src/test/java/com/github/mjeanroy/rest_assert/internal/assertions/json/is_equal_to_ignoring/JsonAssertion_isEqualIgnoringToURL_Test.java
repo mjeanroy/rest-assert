@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json.is_equal_to_ignoring;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
@@ -31,11 +31,11 @@ import java.net.URL;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlFailure;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
 
-public class JsonAssertion_isEqualToUrl_Test extends AbstractJsonAssertion_isEqualTo_Test<URL> {
+public class JsonAssertion_isEqualIgnoringToURL_Test extends AbstractJsonAssertion_isEqualToIgnoring_Test<URL> {
 
 	@Override
 	protected AssertionResult invoke(String actual, URL expected) {
-		return assertions.isEqualTo(actual, expected);
+		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys());
 	}
 
 	@Override

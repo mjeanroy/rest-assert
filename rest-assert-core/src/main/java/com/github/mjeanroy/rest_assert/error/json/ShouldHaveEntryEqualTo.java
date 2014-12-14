@@ -24,17 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.error.json;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
-
 /**
  * Error thrown when a json string contain an entry
  * that is not of expected type.
  */
-public class ShouldHaveEntryEqualTo extends AbstractError {
+public class ShouldHaveEntryEqualTo extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveEntryEqualTo(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveEntryEqualTo(String entryName, String message, Object... args) {
+		super(entryName, message, args);
 	}
 
 	/**
@@ -46,6 +44,6 @@ public class ShouldHaveEntryEqualTo extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveEntryEqualTo shouldHaveEntryEqualTo(String entry, Object actualValue, Object expectedValue) {
-		return new ShouldHaveEntryEqualTo("Expecting json entry %s to be equal to %s but was %s", entry, actualValue, expectedValue);
+		return new ShouldHaveEntryEqualTo(entry, "Expecting json entry %s to be equal to %s but was %s", entry, actualValue, expectedValue);
 	}
 }

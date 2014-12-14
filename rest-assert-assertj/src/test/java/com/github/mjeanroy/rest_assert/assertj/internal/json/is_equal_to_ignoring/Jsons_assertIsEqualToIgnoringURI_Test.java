@@ -22,28 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to_ignoring;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
+import org.assertj.core.api.AssertionInfo;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+import java.net.URI;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriSuccess;
+
+public class Jsons_assertIsEqualToIgnoringURI_Test extends AbstractJsonsIsEqualToIgnoringTest<URI> {
+
+	@Override
+	protected URI success() {
+		return jsonUriSuccess();
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected URI failure() {
+		return jsonUriFailure();
+	}
+
+	@Override
+	protected void invoke(AssertionInfo info, URI json) {
+		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

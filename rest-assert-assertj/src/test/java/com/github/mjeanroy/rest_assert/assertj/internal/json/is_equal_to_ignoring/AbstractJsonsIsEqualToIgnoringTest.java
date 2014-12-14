@@ -22,19 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to_ignoring;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.Jsons;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
+import java.util.Collection;
+
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractJsonsIsEqualToTest<T> {
+public abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
 
 	protected Jsons jsons = Jsons.instance();
 
@@ -53,9 +56,6 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			String expectedMessage = "" +
-					"Expecting json entry \"str\" to be equal to \"foo\" but was \"bar\"," + LINE_SEPARATOR +
-					"Expecting json entry \"nb\" to be equal to 1.0 but was 2.0," + LINE_SEPARATOR +
-					"Expecting json entry \"bool\" to be equal to true but was false," + LINE_SEPARATOR +
 					"Expecting json entry \"array[0]\" to be equal to 1.0 but was 1.1," + LINE_SEPARATOR +
 					"Expecting json entry \"array[1]\" to be equal to 2.0 but was 2.1," + LINE_SEPARATOR +
 					"Expecting json entry \"array[2]\" to be equal to 3.0 but was 3.1";
@@ -69,6 +69,10 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 
 	protected String actual() {
 		return jsonSuccess();
+	}
+
+	protected Collection<String> ignoringKeys() {
+		return asList("str", "nb", "bool");
 	}
 
 	protected abstract T success();

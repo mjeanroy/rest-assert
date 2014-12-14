@@ -22,33 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.json.equals;
+package com.github.mjeanroy.rest_assert.internal.json.comparators.predicates;
 
-import java.net.URI;
+import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
+import com.github.mjeanroy.rest_assert.utils.Predicate;
 
-import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualTo;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriSuccess;
+import java.util.Set;
 
-public class JsonAssert_assertIsEqualToURI_Test extends AbstractJsonIsEqualToTest<URI> {
+/**
+ * Predicate that check if error entry name is in a set
+ * of ignoring keys.
+ */
+public class IsIgnoredKey implements Predicate<RestAssertJsonError> {
 
-	@Override
-	protected void invoke(URI actual) {
-		assertIsEqualTo(actual(), actual);
+	/**
+	 * Create new predicate.
+	 *
+	 * @param ignoringKeys Keys to check.
+	 * @return Predicate.
+	 */
+	public static IsIgnoredKey isIgnored(Set<String> ignoringKeys) {
+		return new IsIgnoredKey(ignoringKeys);
+	}
+
+	/**
+	 * Keys to check.
+	 */
+	private final Set<String> ignoringKeys;
+
+	// Use static factory
+	private IsIgnoredKey(Set<String> ignoringKeys) {
+		this.ignoringKeys = ignoringKeys;
 	}
 
 	@Override
-	protected void invoke(String message, URI actual) {
-		assertIsEqualTo(message, actual(), actual);
-	}
-
-	@Override
-	protected URI success() {
-		return jsonUriSuccess();
-	}
-
-	@Override
-	protected URI failure() {
-		return jsonUriFailure();
+	public boolean apply(RestAssertJsonError input) {
+		return !ignoringKeys.contains(input.entryName());
 	}
 }

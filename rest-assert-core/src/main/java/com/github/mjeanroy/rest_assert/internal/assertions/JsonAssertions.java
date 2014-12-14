@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparator;
+import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParserStrategy;
 
@@ -35,11 +36,13 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.Collection;
 import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
 import static com.github.mjeanroy.rest_assert.utils.Utils.readFileToString;
 
 /**
@@ -80,11 +83,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, String expected) {
-		JsonComparator comparator = new DefaultJsonComparator(parser);
-		List<RestAssertError> errors = comparator.compare(actual, expected);
-		return errors.isEmpty() ?
-				success() :
-				failure(composeErrors(errors));
+		return doComparison(actual, expected, builder().build());
 	}
 
 	/**
@@ -134,5 +133,82 @@ public final class JsonAssertions {
 		catch (URISyntaxException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+
+	/**
+	 * Check that two json representation are equals.
+	 *
+	 * @param actual Actual representation.
+	 * @param expected Expected representation.
+	 * @param entries Name of entries to ignore.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isEqualToIgnoring(String actual, String expected, Collection<String> entries) {
+		JsonComparatorOptions options = builder()
+				.ignoreKeys(entries)
+				.build();
+
+		return doComparison(actual, expected, options);
+	}
+
+	/**
+	 * Check that two json representation are equals.
+	 *
+	 * @param actual Actual representation.
+	 * @param file Expected representation.
+	 * @param entries Name of entries to ignore.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isEqualToIgnoring(String actual, File file, Collection<String> entries) {
+		return isEqualToIgnoring(actual, readFileToString(file), entries);
+	}
+
+	/**
+	 * Check that two json representation are equals.
+	 *
+	 * @param actual Actual representation.
+	 * @param path Expected representation.
+	 * @param entries Name of entries to ignore.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isEqualToIgnoring(String actual, Path path, Collection<String> entries) {
+		return isEqualToIgnoring(actual, readFileToString(path.toFile()), entries);
+	}
+
+	/**
+	 * Check that two json representation are equals.
+	 *
+	 * @param actual Actual representation.
+	 * @param uri Expected representation.
+	 * @param entries Name of entries to ignore.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isEqualToIgnoring(String actual, URI uri, Collection<String> entries) {
+		return isEqualToIgnoring(actual, new File(uri), entries);
+	}
+
+	/**
+	 * Check that two json representation are equals.
+	 *
+	 * @param actual Actual representation.
+	 * @param url Expected representation.
+	 * @param entries Name of entries to ignore.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isEqualToIgnoring(String actual, URL url, Collection<String> entries) {
+		try {
+			return isEqualToIgnoring(actual, new File(url.toURI()), entries);
+		}
+		catch (URISyntaxException ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	private AssertionResult doComparison(String actual, String expected, JsonComparatorOptions options) {
+		JsonComparator comparator = new DefaultJsonComparator(parser, options);
+		List<RestAssertError> errors = comparator.compare(actual, expected);
+		return errors.isEmpty() ?
+				success() :
+				failure(composeErrors(errors));
 	}
 }

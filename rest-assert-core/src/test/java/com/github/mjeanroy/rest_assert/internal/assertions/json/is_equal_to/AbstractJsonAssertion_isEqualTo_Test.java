@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.json.is_equal_to;
 
 import com.github.mjeanroy.rest_assert.error.CompositeError;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;

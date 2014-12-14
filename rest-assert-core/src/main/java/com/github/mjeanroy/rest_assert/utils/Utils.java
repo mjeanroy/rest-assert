@@ -93,6 +93,23 @@ public final class Utils {
 	}
 
 	/**
+	 * Filter a list using a given predicate.
+	 * @param inputs List input.
+	 * @param predicate Predicate function.
+	 * @param <T> Type of inputs.
+	 * @return Output (i.e filtered inputs).
+	 */
+	public static <T> List<T> filter(List<T> inputs, Predicate<T> predicate) {
+		List<T> outputs = new ArrayList<>(inputs.size());
+		for (T t : inputs) {
+			if (predicate.apply(t)) {
+				outputs.add(t);
+			}
+		}
+		return outputs;
+	}
+
+	/**
 	 * Read file and return text content.
 	 *
 	 * @param file File.

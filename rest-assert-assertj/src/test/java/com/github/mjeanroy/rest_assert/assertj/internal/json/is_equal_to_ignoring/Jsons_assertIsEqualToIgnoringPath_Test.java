@@ -22,28 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to_ignoring;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
+import org.assertj.core.api.AssertionInfo;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+import java.nio.file.Path;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+
+public class Jsons_assertIsEqualToIgnoringPath_Test extends AbstractJsonsIsEqualToIgnoringTest<Path> {
+
+	@Override
+	protected Path success() {
+		return jsonPathSuccess();
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected Path failure() {
+		return jsonPathFailure();
+	}
+
+	@Override
+	protected void invoke(AssertionInfo info, Path json) {
+		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

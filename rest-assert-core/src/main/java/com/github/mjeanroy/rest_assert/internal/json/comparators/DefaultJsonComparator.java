@@ -25,8 +25,9 @@
 package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
-import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
+import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -37,16 +38,17 @@ import java.util.Set;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnObject.shouldBeAnObject;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeEntryOf.shouldBeEntryOf;
-import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry.shouldHaveEntry;
+import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
 import static com.github.mjeanroy.rest_assert.internal.json.JsonType.parseType;
+import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonContext.rootContext;
+import static com.github.mjeanroy.rest_assert.internal.json.comparators.predicates.IsIgnoredKey.isIgnored;
+import static com.github.mjeanroy.rest_assert.utils.Utils.filter;
 import static java.lang.String.format;
-import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static java.util.Collections.unmodifiableList;
 
 /**
  * Default implementation for {@link JsonComparator}
@@ -55,23 +57,44 @@ import static java.util.Collections.unmodifiableList;
 public class DefaultJsonComparator implements JsonComparator {
 
 	private final JsonParser parser;
+	private final JsonComparatorOptions options;
 
 	// Use thread local to remains thread safe
 	private final ThreadLocal<JsonContext> contexts = new ThreadLocal<>();
 
+	/**
+	 * Create new comparator.
+	 *
+	 * @param parser Parser used to extract json data.
+	 */
 	public DefaultJsonComparator(JsonParser parser) {
 		this.parser = parser;
+		this.options = builder().build();
 	}
 
+	/**
+	 * Create new comparator with custom option.
+	 *
+	 * @param parser Parser used to extract json data.
+	 * @param options Custom options.
+	 */
+	public DefaultJsonComparator(JsonParser parser, JsonComparatorOptions options) {
+		this.parser = parser;
+		this.options = options;
+	}
+
+	@Override
 	public List<RestAssertError> compare(String actual, String expected) {
 		contexts.set(rootContext());
-		List<RestAssertError> errors = doCompare(actual.trim(), expected.trim());
+		List<RestAssertJsonError> errors = doCompare(actual.trim(), expected.trim());
 		contexts.remove();
-		return errors;
+
+		// Return filtered list
+		return (List) filter(errors, isIgnored(options.getIgnoringKeys()));
 	}
 
-	private List<RestAssertError> doCompare(String actual, String expected) {
-		RestAssertError error = checkType(actual, expected);
+	private List<RestAssertJsonError> doCompare(String actual, String expected) {
+		RestAssertJsonError error = checkType(actual, expected);
 		if (error != null) {
 			return singletonList(error);
 		}
@@ -82,19 +105,17 @@ public class DefaultJsonComparator implements JsonComparator {
 			Map<String, Object> actualMap = parser.parseObject(actual);
 			Map<String, Object> expectedMap = parser.parseObject(expected);
 			return compareObjects(actualMap, expectedMap);
-		}
-		else {
+		} else {
 			List<Object> actualArray = parser.parseArray(actual);
 			List<Object> expectedArray = parser.parseArray(expected);
 			return compareArrays(actualArray, expectedArray);
 		}
 	}
 
-	private RestAssertError checkType(String actual, String expected) {
+	private RestAssertJsonError checkType(String actual, String expected) {
 		if (isObject(actual) && isArray(expected)) {
 			return shouldBeAnArray();
-		}
-		else if (isArray(actual) && isObject(expected)) {
+		} else if (isArray(actual) && isObject(expected)) {
 			// It should be an object
 			return shouldBeAnObject();
 		}
@@ -102,23 +123,15 @@ public class DefaultJsonComparator implements JsonComparator {
 		return null;
 	}
 
-	private List<RestAssertError> compareObjects(Map<String, Object> actualMap, Map<String, Object> expectedMap) {
-		List<RestAssertError> entriesErrors = checkMissingOrUnexpectedEntries(actualMap.keySet(), expectedMap.keySet());
-		if (!entriesErrors.isEmpty()) {
-			return unmodifiableList(entriesErrors);
-		}
-
-		// Same entries, check types
-		List<RestAssertError> comparisonErrors = checkEntries(actualMap, expectedMap);
-		if (!comparisonErrors.isEmpty()) {
-			return unmodifiableList(comparisonErrors);
-		}
-
-		return emptyList();
+	private List<RestAssertJsonError> compareObjects(Map<String, Object> actualMap, Map<String, Object> expectedMap) {
+		LinkedList<RestAssertJsonError> errors = new LinkedList<>();
+		errors.addAll(checkMissingOrUnexpectedEntries(actualMap.keySet(), expectedMap.keySet()));
+		errors.addAll(checkEntries(actualMap, expectedMap));
+		return errors;
 	}
 
-	private List<RestAssertError> checkMissingOrUnexpectedEntries(Set<String> actualEntries, Set<String> expectedEntries) {
-		List<RestAssertError> errors = new LinkedList<>();
+	private List<RestAssertJsonError> checkMissingOrUnexpectedEntries(Set<String> actualEntries, Set<String> expectedEntries) {
+		List<RestAssertJsonError> errors = new LinkedList<>();
 
 		Set<String> missingEntries = new HashSet<>(expectedEntries);
 		missingEntries.removeAll(actualEntries);
@@ -135,24 +148,25 @@ public class DefaultJsonComparator implements JsonComparator {
 		return errors;
 	}
 
-	private List<RestAssertError> checkEntries(Map<String, Object> actual, Map<String, Object> expected) {
-		List<RestAssertError> errors = new LinkedList<>();
+	private List<RestAssertJsonError> checkEntries(Map<String, Object> actual, Map<String, Object> expected) {
+		List<RestAssertJsonError> errors = new LinkedList<>();
 		for (Map.Entry<String, Object> entry : actual.entrySet()) {
 			String key = entry.getKey();
-			errors.addAll(compareValues(key, entry.getValue(), expected.get(key)));
+			if (expected.containsKey(key)) {
+				errors.addAll(compareValues(key, entry.getValue(), expected.get(key)));
+			}
 		}
 		return errors;
 	}
 
-	private List<RestAssertError> compareValues(String key, Object actualObject, Object expectedObject) {
-		List<RestAssertError> errors = new LinkedList<>();
+	private List<RestAssertJsonError> compareValues(String key, Object actualObject, Object expectedObject) {
+		List<RestAssertJsonError> errors = new LinkedList<>();
 
 		JsonType actualType = parseType(actualObject);
 		JsonType expectedType = parseType(expectedObject);
 		if (actualType != expectedType) {
 			errors.add(shouldBeEntryOf(contexts.get().toPath(key), actualType, expectedType));
-		}
-		else {
+		} else {
 			// Same types, check values
 			if (actualType == JsonType.OBJECT) {
 				Map<String, Object> newActual = (Map<String, Object>) actualObject;
@@ -162,8 +176,7 @@ public class DefaultJsonComparator implements JsonComparator {
 				contexts.get().append(key);
 				errors.addAll(compareObjects(newActual, newExpected));
 				contexts.get().remove();
-			}
-			else if (actualType == JsonType.ARRAY) {
+			} else if (actualType == JsonType.ARRAY) {
 				List<Object> newActualArray = (List<Object>) actualObject;
 				List<Object> newExpectedArray = (List<Object>) expectedObject;
 
@@ -171,8 +184,7 @@ public class DefaultJsonComparator implements JsonComparator {
 				contexts.get().append(key);
 				errors.addAll(compareArrays(newActualArray, newExpectedArray));
 				contexts.get().remove();
-			}
-			else if (actualType != JsonType.NULL && !actualObject.equals(expectedObject)) {
+			} else if (actualType != JsonType.NULL && !actualObject.equals(expectedObject)) {
 				// Not null and not equals
 				errors.add(shouldHaveEntryEqualTo(contexts.get().toPath(key), actualObject, expectedObject));
 			}
@@ -181,8 +193,8 @@ public class DefaultJsonComparator implements JsonComparator {
 		return errors;
 	}
 
-	private List<RestAssertError> compareArrays(List<Object> actualArray, List<Object> expectedArray) {
-		List<RestAssertError> errors = new LinkedList<>();
+	private List<RestAssertJsonError> compareArrays(List<Object> actualArray, List<Object> expectedArray) {
+		List<RestAssertJsonError> errors = new LinkedList<>();
 
 		int actualSize = actualArray.size();
 		int expectedSize = expectedArray.size();

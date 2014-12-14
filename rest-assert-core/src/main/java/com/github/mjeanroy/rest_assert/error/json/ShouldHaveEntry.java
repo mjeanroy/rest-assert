@@ -24,16 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.error.json;
 
-import com.github.mjeanroy.rest_assert.error.AbstractError;
-
 /**
  * Error thrown when a json string does not contain an expected entry.
  */
-public class ShouldHaveEntry extends AbstractError {
+public class ShouldHaveEntry extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveEntry(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveEntry(String entryName, String message, Object... args) {
+		super(entryName, message, args);
 	}
 
 	/**
@@ -43,6 +41,6 @@ public class ShouldHaveEntry extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveEntry shouldHaveEntry(String entryName) {
-		return new ShouldHaveEntry("Expecting json to contain entry %s", entryName);
+		return new ShouldHaveEntry(entryName, "Expecting json to contain entry %s", entryName);
 	}
 }

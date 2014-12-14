@@ -22,28 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.api.json.is_equal_to_ignoring;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
-public class ShouldHaveEntryWithSize extends AbstractJsonError {
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualToIgnoring;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+public class JsonAssert_assertIsEqualToIgnoringString_Test extends AbstractJsonIsEqualToIgnoringTest<String> {
+
+	@Override
+	protected void invoke(String actual) {
+		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry, "Expecting json array %s to have size %s but was %s", entry, actualSize, expectedSize);
+	@Override
+	protected void invoke(String message, String actual) {
+		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
+	}
+
+	@Override
+	protected String success() {
+		return jsonSuccess();
+	}
+
+	@Override
+	protected String failure() {
+		return jsonFailure();
 	}
 }

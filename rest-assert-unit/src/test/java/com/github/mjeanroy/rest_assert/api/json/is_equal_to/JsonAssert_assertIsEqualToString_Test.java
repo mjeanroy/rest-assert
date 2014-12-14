@@ -22,29 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.json;
+package com.github.mjeanroy.rest_assert.api.json.is_equal_to;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualTo;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 
-import java.io.File;
-
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
-
-public class Jsons_assertIsEqualToFile_Test extends AbstractJsonsIsEqualToTest<File> {
+public class JsonAssert_assertIsEqualToString_Test extends AbstractJsonIsEqualToTest<String> {
 
 	@Override
-	protected File success() {
-		return jsonFileSuccess();
+	protected void invoke(String actual) {
+		assertIsEqualTo(actual(), actual);
 	}
 
 	@Override
-	protected File failure() {
-		return jsonFileFailure();
+	protected void invoke(String message, String actual) {
+		assertIsEqualTo(message, actual(), actual);
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, File json) {
-		jsons.assertIsEqualTo(info, actual(), json);
+	protected String success() {
+		return jsonSuccess();
+	}
+
+	@Override
+	protected String failure() {
+		return jsonFailure();
 	}
 }
