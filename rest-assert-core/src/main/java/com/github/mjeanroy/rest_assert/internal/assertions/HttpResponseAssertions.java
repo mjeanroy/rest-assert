@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
@@ -471,6 +472,15 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response has UTF-8 charset.
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isUtf8(HttpResponse httpResponse) {
+		return hasCharset(httpResponse, "UTF-8");
+	}
+
+	/**
 	 * Check that http response is "application/javascript" or "text/javascript".
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
@@ -508,6 +518,30 @@ public final class HttpResponseAssertions {
 		return actualMimeType.equals(expectedMimeType) ?
 				success() :
 				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+	}
+
+	/**
+	 * Check that http response has expected charset.
+	 * @param httpResponse Http response.
+	 * @param expectedCharset Expected charset.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasCharset(HttpResponse httpResponse, String expectedCharset) {
+		AssertionResult result = hasHeader(httpResponse, CONTENT_TYPE);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		String contentType = httpResponse.getHeader(CONTENT_TYPE);
+		String[] contentTypeParts = contentType.split(";");
+		if (contentTypeParts.length == 1) {
+			return failure(shouldHaveCharset());
+		}
+
+		String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
+		return actualCharset.equalsIgnoreCase(expectedCharset) ?
+				success() :
+				failure(shouldHaveCharset(expectedCharset, actualCharset));
 	}
 
 	/**
