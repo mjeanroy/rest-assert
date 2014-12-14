@@ -36,6 +36,7 @@ import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertSuccess
 import static com.github.mjeanroy.rest_assert.tests.json.JsonArray.jsonArray;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
 
 public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
@@ -56,13 +57,12 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	public void it_should_fail() throws Exception {
 		AssertionResult result = invoke(actual(), failureObject());
 
-		String separator = System.getProperty("line.separator");
 		String expectedPattern = "" +
-				"Expecting json entry %s to be equal to %s but was %s," + separator +
-				"Expecting json entry %s to be equal to %s but was %s," + separator +
-				"Expecting json entry %s to be equal to %s but was %s," + separator +
-				"Expecting json entry %s to be equal to %s but was %s," + separator +
-				"Expecting json entry %s to be equal to %s but was %s," + separator +
+				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
+				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
+				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
+				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
+				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
 				"Expecting json entry %s to be equal to %s but was %s";
 
 		Object[] args = new Object[] {

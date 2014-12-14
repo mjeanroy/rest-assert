@@ -36,6 +36,11 @@ import java.util.List;
  */
 public final class Utils {
 
+	/**
+	 * Line separator (system dependent).
+	 */
+	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
 	// Private constructor to ensure non instantiation.
 	private Utils() {
 	}
@@ -95,14 +100,13 @@ public final class Utils {
 	 */
 	public static String readFileToString(File file) {
 		StringBuilder sb = new StringBuilder();
-		String separator = System.getProperty("line.separator");
 
 		try (FileReader fReader = new FileReader(file);
 				 BufferedReader br = new BufferedReader(fReader)) {
 
 			String line;
 			while ((line = br.readLine()) != null) {
-				sb.append(line).append(separator);
+				sb.append(line).append(LINE_SEPARATOR);
 			}
 
 		} catch (IOException e) {

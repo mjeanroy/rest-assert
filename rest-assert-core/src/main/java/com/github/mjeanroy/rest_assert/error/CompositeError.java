@@ -28,6 +28,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
 import static java.util.Collections.addAll;
 
 /**
@@ -40,7 +41,7 @@ public class CompositeError extends AbstractError {
 	}
 
 	private static String message(Collection<RestAssertError> errors) {
-		String separator = "," + System.getProperty("line.separator");
+		String separator = "," + LINE_SEPARATOR;
 		StringBuilder sb = new StringBuilder();
 		for (RestAssertError error : errors) {
 			sb.append(error.message()).append(separator);

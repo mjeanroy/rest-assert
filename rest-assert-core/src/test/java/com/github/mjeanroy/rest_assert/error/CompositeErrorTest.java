@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.error;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -44,14 +45,12 @@ public class CompositeErrorTest {
 
 		assertThat(error).isNotNull();
 
-		String separator = System.getProperty("line.separator");
-
 		assertThat(error.message())
 				.isNotNull()
 				.isNotEmpty()
 				.isEqualTo("" +
-								"foo," + separator +
-								"bar %s %s," + separator +
+								"foo," + LINE_SEPARATOR +
+								"bar %s %s," + LINE_SEPARATOR +
 								"foobar %s"
 				);
 
@@ -65,8 +64,8 @@ public class CompositeErrorTest {
 				.isNotNull()
 				.isNotEmpty()
 				.isEqualTo("" +
-								"foo," + separator +
-								"bar 1 2," + separator +
+								"foo," + LINE_SEPARATOR +
+								"bar 1 2," + LINE_SEPARATOR +
 								"foobar hello"
 				);
 	}
