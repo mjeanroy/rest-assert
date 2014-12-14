@@ -22,29 +22,33 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.api.json.equals;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import java.net.URI;
 
-import java.nio.file.Path;
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertIsEqualTo;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriSuccess;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
-
-public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+public class JsonAssert_assertIsEqualToURI_Test extends AbstractJsonIsEqualToTest<URI> {
 
 	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
-		return assertions.isEqualTo(actual, expected);
+	protected void invoke(URI actual) {
+		assertIsEqualTo(actual(), actual);
 	}
 
 	@Override
-	protected Path successObject() throws Exception {
-		return jsonPathSuccess();
+	protected void invoke(String message, URI actual) {
+		assertIsEqualTo(message, actual(), actual);
 	}
 
 	@Override
-	protected Path failureObject() throws Exception {
-		return jsonPathFailure();
+	protected URI success() {
+		return jsonUriSuccess();
+	}
+
+	@Override
+	protected URI failure() {
+		return jsonUriFailure();
 	}
 }

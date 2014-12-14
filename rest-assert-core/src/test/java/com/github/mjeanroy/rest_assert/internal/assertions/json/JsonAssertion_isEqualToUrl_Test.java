@@ -28,6 +28,9 @@ import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
 import java.net.URL;
 
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
+
 public class JsonAssertion_isEqualToUrl_Test extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 
 	@Override
@@ -37,11 +40,11 @@ public class JsonAssertion_isEqualToUrl_Test extends AbstractJsonAssertion_isEqu
 
 	@Override
 	protected URL successObject() throws Exception {
-		return getClass().getResource("/success.json");
+		return jsonUrlSuccess();
 	}
 
 	@Override
 	protected URL failureObject() throws Exception {
-		return getClass().getResource("/failure.json");
+		return jsonUrlFailure();
 	}
 }

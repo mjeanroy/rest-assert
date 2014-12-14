@@ -27,7 +27,9 @@ package com.github.mjeanroy.rest_assert.internal.assertions.json;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
 import java.io.File;
-import java.net.URL;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFileSuccess;
 
 public class JsonAssertion_isEqualToFile_Test extends AbstractJsonAssertion_isEqualTo_Test<File> {
 
@@ -38,13 +40,11 @@ public class JsonAssertion_isEqualToFile_Test extends AbstractJsonAssertion_isEq
 
 	@Override
 	protected File successObject() throws Exception {
-		URL url = getClass().getResource("/success.json");
-		return new File(url.toURI());
+		return jsonFileSuccess();
 	}
 
 	@Override
 	protected File failureObject() throws Exception {
-		URL url = getClass().getResource("/failure.json");
-		return new File(url.toURI());
+		return jsonFileFailure();
 	}
 }

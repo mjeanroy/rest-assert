@@ -22,29 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.assertj.api;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 
-import java.nio.file.Path;
-
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
-
-public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
-
-	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
-		return assertions.isEqualTo(actual, expected);
+	public JsonAssert(String actual) {
+		super(actual, JsonAssert.class);
 	}
 
-	@Override
-	protected Path successObject() throws Exception {
-		return jsonPathSuccess();
-	}
-
-	@Override
-	protected Path failureObject() throws Exception {
-		return jsonPathFailure();
-	}
 }

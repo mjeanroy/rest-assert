@@ -22,29 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.assertj.internal.json;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import org.assertj.core.api.AssertionInfo;
 
-import java.nio.file.Path;
+import java.net.URL;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
 
-public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+public class Jsons_assertIsEqualToURL_Test extends AbstractJsonsIsEqualToTest<URL> {
 
 	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
-		return assertions.isEqualTo(actual, expected);
+	protected URL success() {
+		return jsonUrlSuccess();
 	}
 
 	@Override
-	protected Path successObject() throws Exception {
-		return jsonPathSuccess();
+	protected URL failure() {
+		return jsonUrlFailure();
 	}
 
 	@Override
-	protected Path failureObject() throws Exception {
-		return jsonPathFailure();
+	protected void invoke(AssertionInfo info, URL json) {
+		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

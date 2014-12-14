@@ -27,15 +27,12 @@ package com.github.mjeanroy.rest_assert.internal.assertions.json;
 import com.github.mjeanroy.rest_assert.error.CompositeError;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.junit.Before;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertSuccessResult;
-import static com.github.mjeanroy.rest_assert.tests.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
 
 public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
@@ -66,12 +63,12 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 				"Expecting json entry %s to be equal to %s but was %s";
 
 		Object[] args = new Object[] {
-				"str", "bar", "barfoo",
+				"str", "foo", "bar",
 				"nb", 1.0, 2.0,
 				"bool", true, false,
-				"array[0]", 2.0, 3.0,
-				"array[1]", false, true,
-				"array[2]", "foobar", "foobarfoo"
+				"array[0]", 1.0, 1.1,
+				"array[1]", 2.0, 2.1,
+				"array[2]", 3.0, 3.1
 		};
 
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
@@ -80,14 +77,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	protected abstract AssertionResult invoke(String actual, T expected);
 
 	protected String actual() {
-		JsonObject object = jsonObject(
-				jsonEntry("str", "bar"),
-				jsonEntry("nb", 1.0),
-				jsonEntry("bool", true),
-				jsonEntry("array", jsonArray(2.0, false, "foobar"))
-		);
-
-		return object.toJson();
+		return jsonSuccess();
 	}
 
 	protected abstract T successObject() throws Exception;

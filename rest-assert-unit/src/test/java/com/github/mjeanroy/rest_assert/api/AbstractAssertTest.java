@@ -24,9 +24,28 @@
 
 package com.github.mjeanroy.rest_assert.api;
 
+/**
+ * Abstract assert test.
+ * Two methods need to be defined:
+ * - First method must execute assert method, without custom message.
+ * - Second method must execute assert method, with custom message as first argument.
+ *
+ * @param <T> Type of actual objects (a.k.a tested object).
+ */
 public abstract class AbstractAssertTest<T> {
 
+	/**
+	 * Invoke assert method.
+	 *
+	 * @param actual Tested object.
+	 */
 	protected abstract void invoke(T actual);
 
+	/**
+	 * Invoke assert method with custom message.
+	 *
+	 * @param message Custom message.
+	 * @param actual  Tested object.
+	 */
 	protected abstract void invoke(String message, T actual);
 }

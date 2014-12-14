@@ -1,6 +1,0 @@
-{
-	"str": "bar",
-	"nb": 1.0,
-	"bool": true,
-	"array": [2.0, false, "foobar"]
-}

@@ -25,11 +25,9 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.json;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 
-import static com.github.mjeanroy.rest_assert.tests.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 
 public class JsonAssertion_isEqualToString_Test extends AbstractJsonAssertion_isEqualTo_Test<String> {
 
@@ -40,18 +38,11 @@ public class JsonAssertion_isEqualToString_Test extends AbstractJsonAssertion_is
 
 	@Override
 	protected String successObject() throws Exception {
-		return actual();
+		return jsonSuccess();
 	}
 
 	@Override
 	protected String failureObject() throws Exception {
-		JsonObject failureObject = jsonObject(
-				jsonEntry("str", "barfoo"),
-				jsonEntry("nb", 2.0),
-				jsonEntry("bool", false),
-				jsonEntry("array", jsonArray(3.0, true, "foobarfoo"))
-		);
-
-		return failureObject.toJson();
+		return jsonFailure();
 	}
 }

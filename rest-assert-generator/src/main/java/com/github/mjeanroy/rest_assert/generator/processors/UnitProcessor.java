@@ -24,25 +24,47 @@
 
 package com.github.mjeanroy.rest_assert.generator.processors;
 
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.CookieAssert.cookieAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
-
 import com.github.mjeanroy.rest_assert.generator.ClassFile;
 import com.github.mjeanroy.rest_assert.generator.Template;
 import com.github.mjeanroy.rest_assert.generator.TemplateEngine;
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.CookieAssert.cookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.JsonAssert.jsonAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
+
+/**
+ * Set of processors that will be used to generate assertions
+ * classes for rest-assert-unit module.
+ */
 public enum UnitProcessor {
 
+	/**
+	 * Processor that will generate assert class for http response
+	 * objects.
+	 */
 	HTTP_RESPONSE(
 			assertTemplate(),
 			httpAssert()
 	),
 
+	/**
+	 * Processor that will generate assert class cookies
+	 * objects.
+	 */
 	COOKIES(
 			assertTemplate(),
 			cookieAssert()
+	),
+
+	/**
+	 * Processor that will generate assert class json
+	 * objects.
+	 */
+	JSON(
+			assertTemplate(),
+			jsonAssert()
 	);
 
 	/**
@@ -61,6 +83,12 @@ public enum UnitProcessor {
 		this.model = model;
 	}
 
+	/**
+	 * Generate class file from template and model.
+	 *
+	 * @param engine Template engine to use.
+	 * @return Class file.
+	 */
 	public ClassFile process(TemplateEngine engine) {
 		String content = engine.execute(template, model.data());
 		return new ClassFile(model.getPackageName(), model.getClassName(), content);

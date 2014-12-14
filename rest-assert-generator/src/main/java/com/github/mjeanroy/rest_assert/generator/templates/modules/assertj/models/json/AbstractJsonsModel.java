@@ -22,29 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.json;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.generator.TemplateModel;
+import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
 
-import java.nio.file.Path;
-
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
-
-public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+/**
+ * Abstract model for {@link JsonAssertions} assertions.
+ * Actual object (a.k.a tested object) is an instance of {@link java.lang.String} class
+ * representing json object or array.
+ * Convention: class name is defined by current model class.
+ */
+public abstract class AbstractJsonsModel extends AbstractTemplateModel implements TemplateModel {
 
 	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
-		return assertions.isEqualTo(actual, expected);
+	public String getClassName() {
+		return getClass().getSimpleName();
 	}
 
 	@Override
-	protected Path successObject() throws Exception {
-		return jsonPathSuccess();
-	}
-
-	@Override
-	protected Path failureObject() throws Exception {
-		return jsonPathFailure();
+	public String getActualClass() {
+		return String.class.getName();
 	}
 }

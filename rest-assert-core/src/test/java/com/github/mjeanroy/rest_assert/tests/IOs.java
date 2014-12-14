@@ -22,29 +22,37 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.tests;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+public final class IOs {
 
-public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
-
-	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
-		return assertions.isEqualTo(actual, expected);
+	private IOs() {
 	}
 
-	@Override
-	protected Path successObject() throws Exception {
-		return jsonPathSuccess();
+	public static URL urlFromClasspath(String path) {
+		return IOs.class.getResource(path);
 	}
 
-	@Override
-	protected Path failureObject() throws Exception {
-		return jsonPathFailure();
+	public static URI uriFromClasspath(String path) {
+		try {
+			return urlFromClasspath(path).toURI();
+		}
+		catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	public static File fileFromClasspath(String path) {
+		return new File(uriFromClasspath(path));
+	}
+
+	public static Path pathFromClasspath(String path) {
+		return Paths.get(uriFromClasspath(path));
 	}
 }

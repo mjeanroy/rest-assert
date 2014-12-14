@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,29 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.json;
+package com.github.mjeanroy.rest_assert.assertj.api.json.equals;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.assertj.api.JsonAssert;
+import org.assertj.core.api.AssertionInfo;
 
-import java.nio.file.Path;
+import java.net.URL;
 
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
 
-public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+public class JsonAssert_isEqualToURL_Test extends AbstractJsonIsEqualToTest {
 
 	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
-		return assertions.isEqualTo(actual, expected);
+	protected JsonAssert invoke() {
+		return api.isEqualTo(jsonUrlSuccess());
 	}
 
 	@Override
-	protected Path successObject() throws Exception {
-		return jsonPathSuccess();
-	}
-
-	@Override
-	protected Path failureObject() throws Exception {
-		return jsonPathFailure();
+	protected void verifyApiCall() {
+		verify(assertions).assertIsEqualTo(any(AssertionInfo.class), any(String.class), any(URL.class));
 	}
 }

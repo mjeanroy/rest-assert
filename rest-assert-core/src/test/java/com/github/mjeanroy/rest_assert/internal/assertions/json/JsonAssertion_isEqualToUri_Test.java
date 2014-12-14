@@ -27,7 +27,9 @@ package com.github.mjeanroy.rest_assert.internal.assertions.json;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
 import java.net.URI;
-import java.net.URL;
+
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriFailure;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUriSuccess;
 
 public class JsonAssertion_isEqualToUri_Test extends AbstractJsonAssertion_isEqualTo_Test<URI> {
 
@@ -38,13 +40,11 @@ public class JsonAssertion_isEqualToUri_Test extends AbstractJsonAssertion_isEqu
 
 	@Override
 	protected URI successObject() throws Exception {
-		URL url = getClass().getResource("/success.json");
-		return url.toURI();
+		return jsonUriSuccess();
 	}
 
 	@Override
 	protected URI failureObject() throws Exception {
-		URL url = getClass().getResource("/failure.json");
-		return url.toURI();
+		return jsonUriFailure();
 	}
 }
