@@ -22,46 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.api;
 
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-/**
- * Http response contract.
- */
-public interface HttpResponse {
+public class JsonAssertions {
 
-	/**
-	 * Get http status of http response.
-	 *
-	 * @return Http status.
-	 */
-	int getStatus();
+	private JsonAssertions() {
+	}
 
 	/**
-	 * Check that http response contains header.
-	 * Header name should be case insensitive.
+	 * Creates a new instance of {@link JsonAssert}.
 	 *
-	 * @param name Header name.
-	 * @return True if http response contains header, false otherwise.
+	 * @param actual the actual value.
+	 * @return the created assertion object.
 	 */
-	boolean hasHeader(String name);
+	public static JsonAssert assertJsonThat(String actual) {
+		return new JsonAssert(actual);
+	}
 
 	/**
-	 * Get (first) header value.
-	 * If http response does not contain header, it returns
-	 * null.
+	 * Creates a new instance of {@link JsonAssert}.
 	 *
-	 * @param name Header name.
-	 * @return Header value, null if response does not contain header.
+	 * @param actual the response http that will be used to extract content body.
+	 * @return the created assertion object.
 	 */
-	String getHeader(String name);
-
-	/**
-	 * Get response body.
-	 *
-	 * @return Response body.
-	 * @throws UnparseableResponseBodyException If response body cannot be read.
-	 */
-	String getContent();
+	public static JsonAssert assertJsonThat(HttpResponse actual) {
+		return new JsonAssert(actual.getContent());
+	}
 }

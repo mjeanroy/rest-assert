@@ -28,12 +28,16 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
+import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import com.ning.http.client.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
+import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class AsyncHttpAssertionsTest {
 
@@ -59,5 +63,25 @@ public class AsyncHttpAssertionsTest {
 		assertThat(cookie)
 				.isNotNull()
 				.isExactlyInstanceOf(AsyncHttpCookie.class);
+	}
+
+	@Test
+	public void it_should_create_new_json_assertion_object() throws Exception {
+		JsonObject object = jsonObject(
+				jsonEntry("foo", "bar")
+		);
+
+		String body = object.toJson();
+
+		Response response = mock(Response.class);
+		when(response.getResponseBody()).thenReturn(body);
+
+		JsonAssert assertions = AsyncHttpAssertions.assertJsonThat(response);
+
+		assertThat(assertions).isNotNull();
+		String actual = (String) FieldUtils.readField(assertions, "actual", true);
+		assertThat(actual)
+				.isNotNull()
+				.isEqualTo(body);
 	}
 }

@@ -48,12 +48,11 @@ public final class AsyncHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(Response actual) {
-		HttpResponse httpResponse = httpResponse(actual);
-		return new HttpResponseAssert(httpResponse);
+		return new HttpResponseAssert(toHttpResponse(actual));
 	}
 
 	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.CookieAssert}.
+	 * Creates a new instance of {@link CookieAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
@@ -61,5 +60,19 @@ public final class AsyncHttpAssertions {
 	public static CookieAssert assertThat(com.ning.http.client.cookie.Cookie actual) {
 		Cookie cookie = asyncHttpCookie(actual);
 		return new CookieAssert(cookie);
+	}
+
+	/**
+	 * Creates a new instance of {@link JsonAssert}.
+	 *
+	 * @param actual the actual value.
+	 * @return the created assertion object.
+	 */
+	public static JsonAssert assertJsonThat(Response actual) {
+		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	}
+
+	private static HttpResponse toHttpResponse(Response actual) {
+		return httpResponse(actual);
 	}
 }

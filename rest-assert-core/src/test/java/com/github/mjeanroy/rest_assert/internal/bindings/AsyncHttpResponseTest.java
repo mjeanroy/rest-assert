@@ -26,16 +26,25 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
 import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import com.ning.http.client.Response;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AsyncHttpResponseTest {
+
+	@Rule
+	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_return_status_code() {
@@ -83,5 +92,30 @@ public class AsyncHttpResponseTest {
 
 		assertThat(result).isEqualTo(headerValue);
 		verify(response).getHeader(headerName);
+	}
+
+	@Test
+	public void it_should_return_response_body() throws Exception {
+		String body = "foo";
+		Response response = mock(Response.class);
+		when(response.getResponseBody()).thenReturn(body);
+
+		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		String result = httpResponse.getContent();
+
+		assertThat(result).isEqualTo(body);
+		verify(response).getResponseBody();
+	}
+
+	@Test
+	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
+		IOException ex = mock(IOException.class);
+		Response response = mock(Response.class);
+		when(response.getResponseBody()).thenThrow(ex);
+
+		thrown.expect(UnparseableResponseBodyException.class);
+
+		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		httpResponse.getContent();
 	}
 }

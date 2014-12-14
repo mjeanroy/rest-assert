@@ -41,18 +41,17 @@ public final class ApacheHttpAssertions {
 	}
 
 	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert}.
+	 * Creates a new instance of {@link HttpResponseAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(org.apache.http.HttpResponse actual) {
-		HttpResponse httpResponse = httpResponse(actual);
-		return new HttpResponseAssert(httpResponse);
+		return new HttpResponseAssert(toHttpResponse(actual));
 	}
 
 	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.CookieAssert}.
+	 * Creates a new instance of {@link CookieAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
@@ -60,5 +59,19 @@ public final class ApacheHttpAssertions {
 	public static CookieAssert assertThat(org.apache.http.cookie.Cookie actual) {
 		Cookie cookie = apacheHttpCookie(actual);
 		return new CookieAssert(cookie);
+	}
+
+	/**
+	 * Creates a new instance of {@link JsonAssert}.
+	 *
+	 * @param actual the actual value.
+	 * @return the created assertion object.
+	 */
+	public static JsonAssert assertJsonThat(org.apache.http.HttpResponse actual) {
+		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	}
+
+	private static HttpResponse toHttpResponse(org.apache.http.HttpResponse actual) {
+		return httpResponse(actual);
 	}
 }

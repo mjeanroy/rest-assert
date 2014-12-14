@@ -25,7 +25,10 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
 import com.ning.http.client.Response;
+
+import java.io.IOException;
 
 /**
  * Implementation of {@link HttpResponse}
@@ -67,5 +70,15 @@ public class AsyncHttpResponse implements HttpResponse {
 	@Override
 	public String getHeader(String name) {
 		return hasHeader(name) ? response.getHeader(name) : null;
+	}
+
+	@Override
+	public String getContent() {
+		try {
+			return response.getResponseBody();
+		}
+		catch (IOException ex) {
+			throw new UnparseableResponseBodyException(ex);
+		}
 	}
 }

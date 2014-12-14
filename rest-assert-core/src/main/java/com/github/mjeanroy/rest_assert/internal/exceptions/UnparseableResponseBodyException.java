@@ -22,46 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
-
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+package com.github.mjeanroy.rest_assert.internal.exceptions;
 
 /**
- * Http response contract.
+ * Exception thrown when a response body cannot
+ * be read.
  */
-public interface HttpResponse {
+public class UnparseableResponseBodyException extends RuntimeException {
 
 	/**
-	 * Get http status of http response.
+	 * Create exception.
 	 *
-	 * @return Http status.
+	 * @param ex Original exception.
 	 */
-	int getStatus();
-
-	/**
-	 * Check that http response contains header.
-	 * Header name should be case insensitive.
-	 *
-	 * @param name Header name.
-	 * @return True if http response contains header, false otherwise.
-	 */
-	boolean hasHeader(String name);
-
-	/**
-	 * Get (first) header value.
-	 * If http response does not contain header, it returns
-	 * null.
-	 *
-	 * @param name Header name.
-	 * @return Header value, null if response does not contain header.
-	 */
-	String getHeader(String name);
-
-	/**
-	 * Get response body.
-	 *
-	 * @return Response body.
-	 * @throws UnparseableResponseBodyException If response body cannot be read.
-	 */
-	String getContent();
+	public UnparseableResponseBodyException(Exception ex) {
+		super(ex);
+	}
 }

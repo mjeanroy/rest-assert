@@ -25,14 +25,23 @@
 package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
 import com.google.api.client.http.HttpHeaders;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.httpResponse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.powermock.api.mockito.PowerMockito.mock;
@@ -41,13 +50,16 @@ import static org.powermock.api.mockito.PowerMockito.mock;
 @PrepareForTest(com.google.api.client.http.HttpResponse.class)
 public class GoogleHttpResponseTest {
 
+	@Rule
+	public ExpectedException thrown = none();
+
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
 		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
 		when(response.getStatusCode()).thenReturn(expectedStatus);
 
-		HttpResponse httpResponse = GoogleHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = httpResponse(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -64,7 +76,7 @@ public class GoogleHttpResponseTest {
 		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
 		when(response.getHeaders()).thenReturn(httpHeaders);
 
-		HttpResponse httpResponse = GoogleHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = httpResponse(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isTrue();
@@ -82,11 +94,39 @@ public class GoogleHttpResponseTest {
 		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
 		when(response.getHeaders()).thenReturn(httpHeaders);
 
-		HttpResponse httpResponse = GoogleHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = httpResponse(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
 		verify(response).getHeaders();
 		verify(httpHeaders).getFirstHeaderStringValue(headerName);
+	}
+
+	@Test
+	public void it_should_return_response_body() throws Exception {
+		String body = "foo";
+		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
+
+		when(response.getContentCharset()).thenReturn(Charset.defaultCharset());
+		when(response.getContent()).thenReturn(new ByteArrayInputStream(body.getBytes()));
+
+		HttpResponse httpResponse = httpResponse(response);
+		String result = httpResponse.getContent();
+
+		assertThat(result).isEqualTo(body);
+		verify(response).getContent();
+		verify(response).getContentCharset();
+	}
+
+	@Test
+	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
+		IOException ex = Mockito.mock(IOException.class);
+		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
+		when(response.getContent()).thenThrow(ex);
+
+		thrown.expect(UnparseableResponseBodyException.class);
+
+		HttpResponse httpResponse = httpResponse(response);
+		httpResponse.getContent();
 	}
 }

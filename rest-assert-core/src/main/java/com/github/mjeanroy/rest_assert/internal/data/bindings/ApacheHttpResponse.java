@@ -25,7 +25,12 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
@@ -68,6 +73,17 @@ public class ApacheHttpResponse implements HttpResponse {
 	public String getHeader(String name) {
 		Header header = findFirstHeader(name);
 		return header == null ? null : header.getValue();
+	}
+
+	@Override
+	public String getContent() {
+		HttpEntity entity = response.getEntity();
+		try {
+			return EntityUtils.toString(entity);
+		}
+		catch (IOException ex) {
+			throw new UnparseableResponseBodyException(ex);
+		}
 	}
 
 	private Header findFirstHeader(String name) {

@@ -25,18 +25,29 @@
 package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
 import org.apache.http.Header;
+import org.apache.http.HttpEntity;
 import org.apache.http.StatusLine;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse.httpResponse;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ApacheHttpResponseTest {
+
+	@Rule
+	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_return_status_code() {
@@ -46,7 +57,7 @@ public class ApacheHttpResponseTest {
 		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
 		when(response.getStatusLine()).thenReturn(statusLine);
 
-		HttpResponse httpResponse = ApacheHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = httpResponse(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -68,7 +79,7 @@ public class ApacheHttpResponseTest {
 		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
 		when(response.getAllHeaders()).thenReturn(headers);
 
-		HttpResponse httpResponse = ApacheHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = httpResponse(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isTrue();
@@ -93,7 +104,7 @@ public class ApacheHttpResponseTest {
 		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
 		when(response.getAllHeaders()).thenReturn(headers);
 
-		HttpResponse httpResponse = ApacheHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = httpResponse(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
@@ -107,6 +118,38 @@ public class ApacheHttpResponseTest {
 
 		verify(header3, never()).getName();
 		verify(header3, never()).getValue();
+	}
+
+	@Test
+	public void it_should_return_response_body() throws Exception {
+		String body = "foo";
+		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
+
+		HttpEntity httpEntity = mock(HttpEntity.class);
+		when(httpEntity.getContent()).thenReturn(new ByteArrayInputStream(body.getBytes()));
+		when(response.getEntity()).thenReturn(httpEntity);
+
+		HttpResponse httpResponse = httpResponse(response);
+		String result = httpResponse.getContent();
+
+		assertThat(result).isEqualTo(body);
+		verify(response).getEntity();
+		verify(httpEntity).getContent();
+	}
+
+	@Test
+	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
+		IOException ex = mock(IOException.class);
+		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
+
+		HttpEntity entity = mock(HttpEntity.class);
+		when(entity.getContent()).thenThrow(ex);
+		when(response.getEntity()).thenReturn(entity);
+
+		thrown.expect(UnparseableResponseBodyException.class);
+
+		HttpResponse httpResponse = httpResponse(response);
+		httpResponse.getContent();
 	}
 
 	private Header newHeader(String name, String value) {
