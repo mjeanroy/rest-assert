@@ -124,6 +124,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#PARTIAL_CONTENT}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isPartialContent(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.PARTIAL_CONTENT.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
 	 *
 	 * @param httpResponse Http response.
