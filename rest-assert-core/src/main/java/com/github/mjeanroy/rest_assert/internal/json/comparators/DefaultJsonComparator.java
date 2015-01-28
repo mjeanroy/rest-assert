@@ -169,16 +169,16 @@ public class DefaultJsonComparator implements JsonComparator {
 		} else {
 			// Same types, check values
 			if (actualType == JsonType.OBJECT) {
-				Map<String, Object> newActual = (Map<String, Object>) actualObject;
-				Map<String, Object> newExpected = (Map<String, Object>) expectedObject;
+				@SuppressWarnings("unchecked") Map<String, Object> newActual = (Map<String, Object>) actualObject;
+				@SuppressWarnings("unchecked") Map<String, Object> newExpected = (Map<String, Object>) expectedObject;
 
 				// Compare nested object
 				contexts.get().append(key);
 				errors.addAll(compareObjects(newActual, newExpected));
 				contexts.get().remove();
 			} else if (actualType == JsonType.ARRAY) {
-				List<Object> newActualArray = (List<Object>) actualObject;
-				List<Object> newExpectedArray = (List<Object>) expectedObject;
+				@SuppressWarnings("unchecked") List<Object> newActualArray = (List<Object>) actualObject;
+				@SuppressWarnings("unchecked") List<Object> newExpectedArray = (List<Object>) expectedObject;
 
 				// Compare arrays
 				contexts.get().append(key);
