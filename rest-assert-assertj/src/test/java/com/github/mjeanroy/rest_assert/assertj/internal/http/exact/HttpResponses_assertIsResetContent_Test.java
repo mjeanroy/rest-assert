@@ -22,49 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.exact;
 
-/**
- * List of http status.
- */
-public enum  HttpStatus {
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-	// 2XX
-	OK(200),
-	CREATED(201),
-	ACCEPTED(202),
-	NO_CONTENT(204),
-	RESET_CONTENT(205),
-	PARTIAL_CONTENT(206),
+public class HttpResponses_assertIsResetContent_Test extends AbstractHttpResponsesStatusTest {
 
-	// 3XX
-	NOT_MODIFIED(304),
-
-	// 4XX
-	BAD_REQUEST(400),
-	UNAUTHORIZED(401),
-	FORBIDDEN(403),
-	NOT_FOUND(404),
-	METHOD_NOT_ALLOWED(405),
-	CONFLICT(409),
-	PRE_CONDITION_FAILED(412),
-	UNSUPPORTED_MEDIA_TYPE(415),
-
-	// 5XX
-	INTERNAL_SERVER_ERROR(500),
-	NOT_IMPLEMENTED(501);
-
-	/**
-	 * Http status value.
-	 * This code is a valid http status.
-	 */
-	private final int status;
-
-	private HttpStatus(int status) {
-		this.status = status;
+	@Override
+	protected int status() {
+		return 205;
 	}
 
-	public int getStatus() {
-		return status;
+	@Override
+	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsResetContent(info, httpResponse);
 	}
 }

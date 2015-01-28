@@ -134,6 +134,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#RESET_CONTENT}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isResetContent(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.RESET_CONTENT.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
 	 *
 	 * @param httpResponse Http response.
