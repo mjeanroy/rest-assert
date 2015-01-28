@@ -154,6 +154,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#MOVED_TEMPORARILY}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isMovedTemporarily(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.MOVED_TEMPORARILY.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
 	 *
 	 * @param httpResponse Http response.

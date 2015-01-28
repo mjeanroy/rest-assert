@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,51 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.api.http.exact;
 
-/**
- * List of http status.
- */
-public enum  HttpStatus {
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-	// 2XX
-	OK(200),
-	CREATED(201),
-	ACCEPTED(202),
-	NO_CONTENT(204),
-	RESET_CONTENT(205),
-	PARTIAL_CONTENT(206),
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
-	// 3XX
-	MOVED_PERMANENTLY(301),
-	MOVED_TEMPORARILY(302),
-	NOT_MODIFIED(304),
+public class HttpResponseAssert_isMovedTemporarily_Test extends AbstractHttpResponseStatusTest {
 
-	// 4XX
-	BAD_REQUEST(400),
-	UNAUTHORIZED(401),
-	FORBIDDEN(403),
-	NOT_FOUND(404),
-	METHOD_NOT_ALLOWED(405),
-	CONFLICT(409),
-	PRE_CONDITION_FAILED(412),
-	UNSUPPORTED_MEDIA_TYPE(415),
-
-	// 5XX
-	INTERNAL_SERVER_ERROR(500),
-	NOT_IMPLEMENTED(501);
-
-	/**
-	 * Http status value.
-	 * This code is a valid http status.
-	 */
-	private final int status;
-
-	private HttpStatus(int status) {
-		this.status = status;
+	@Override
+	protected int status() {
+		return 302;
 	}
 
-	public int getStatus() {
-		return status;
+	@Override
+	protected HttpResponseAssert invoke() {
+		return api.isMovedTemporarily();
+	}
+
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsMovedTemporarily(any(AssertionInfo.class), any(HttpResponse.class));
 	}
 }
