@@ -144,6 +144,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#MOVED_PERMANENTLY}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isMovedPermanently(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.MOVED_PERMANENTLY.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
 	 *
 	 * @param httpResponse Http response.
