@@ -204,6 +204,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@link HttpStatus#NOT_ACCEPTABLE}.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotAcceptable(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatus.NOT_ACCEPTABLE.getStatus());
+	}
+
+	/**
 	 * Check that status code of http response is {@link HttpStatus#NOT_FOUND}.
 	 *
 	 * @param httpResponse Http response.
