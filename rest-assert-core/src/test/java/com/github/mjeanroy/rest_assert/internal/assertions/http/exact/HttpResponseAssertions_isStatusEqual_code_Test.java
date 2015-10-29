@@ -22,17 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.exact;
 
-/**
- * Http Status Representation.
- */
-public interface HttpStatus {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-	/**
-	 * Get status code.
-	 *
-	 * @return Status code.
-	 */
-	int getStatus();
+public class HttpResponseAssertions_isStatusEqual_code_Test extends AbstractHttpStatusTest {
+
+	@Override
+	protected int status() {
+		return 202;
+	}
+
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isStatusEqual(response, status());
+	}
 }

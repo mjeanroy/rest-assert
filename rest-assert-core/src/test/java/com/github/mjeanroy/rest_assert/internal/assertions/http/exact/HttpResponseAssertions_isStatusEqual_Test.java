@@ -22,17 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.exact;
 
-/**
- * Http Status Representation.
- */
-public interface HttpStatus {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 
-	/**
-	 * Get status code.
-	 *
-	 * @return Status code.
-	 */
-	int getStatus();
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+public class HttpResponseAssertions_isStatusEqual_Test extends AbstractHttpStatusTest {
+
+	@Override
+	protected int status() {
+		return 202;
+	}
+
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		HttpStatus httpStatus = mock(HttpStatus.class);
+		when(httpStatus.getStatus()).thenReturn(status());
+		return assertions.isStatusEqual(response, httpStatus);
+	}
 }

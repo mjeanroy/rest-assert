@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
+import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,203 +85,203 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#OK}.
+	 * Check that status code of http response is {@link com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus#OK}.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isOk(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.OK.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.OK.getStatus());
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#CREATED}.
+	 * Check that status code of http response is {@link com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus#CREATED}.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCreated(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.CREATED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.CREATED.getStatus());
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#ACCEPTED}.
+	 * Check that status code of http response is 'ACCEPTED' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isAccepted(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.ACCEPTED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.ACCEPTED);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#NO_CONTENT}.
+	 * Check that status code of http response is 'NO_CONTENT' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNoContent(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.NO_CONTENT.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.NO_CONTENT);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#PARTIAL_CONTENT}.
+	 * Check that status code of http response is 'PARTIAL_CONTENT' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPartialContent(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.PARTIAL_CONTENT.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.PARTIAL_CONTENT);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#RESET_CONTENT}.
+	 * Check that status code of http response is 'RESET_CONTENT' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isResetContent(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.RESET_CONTENT.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.RESET_CONTENT);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#MOVED_PERMANENTLY}.
+	 * Check that status code of http response is 'MOVED_PERMANENTLY' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMovedPermanently(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.MOVED_PERMANENTLY.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.MOVED_PERMANENTLY);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#MOVED_TEMPORARILY}.
+	 * Check that status code of http response is 'MOVED_TEMPORARILY' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMovedTemporarily(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.MOVED_TEMPORARILY.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.MOVED_TEMPORARILY);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#NOT_MODIFIED}.
+	 * Check that status code of http response is 'NOT_MODIFIED' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotModified(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.NOT_MODIFIED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_MODIFIED);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#UNAUTHORIZED}.
+	 * Check that status code of http response is 'UNAUTHORIZED' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUnauthorized(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.UNAUTHORIZED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.UNAUTHORIZED);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#FORBIDDEN}.
+	 * Check that status code of http response is 'FORBIDDEN' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isForbidden(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.FORBIDDEN.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.FORBIDDEN);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#BAD_REQUEST}.
+	 * Check that status code of http response is 'BAD_REQUEST' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isBadRequest(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.BAD_REQUEST.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.BAD_REQUEST);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#NOT_ACCEPTABLE}.
+	 * Check that status code of http response is 'NOT_ACCEPTABLE' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotAcceptable(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.NOT_ACCEPTABLE.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_ACCEPTABLE);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#NOT_FOUND}.
+	 * Check that status code of http response is 'NOT_FOUND' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotFound(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.NOT_FOUND.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_FOUND);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#INTERNAL_SERVER_ERROR}.
+	 * Check that status code of http response is 'INTERNAL_SERVER_ERROR' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isInternalServerError(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.INTERNAL_SERVER_ERROR.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#PRE_CONDITION_FAILED}.
+	 * Check that status code of http response is 'PRE_CONDITION_FAILED' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPreConditionFailed(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.PRE_CONDITION_FAILED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.PRE_CONDITION_FAILED);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#METHOD_NOT_ALLOWED}.
+	 * Check that status code of http response is 'METHOD_NOT_ALLOWED' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMethodNotAllowed(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.METHOD_NOT_ALLOWED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.METHOD_NOT_ALLOWED);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#CONFLICT}.
+	 * Check that status code of http response is 'CONFLICT' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isConflict(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.CONFLICT.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.CONFLICT);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#UNSUPPORTED_MEDIA_TYPE}.
+	 * Check that status code of http response is 'UNSUPPORTED_MEDIA_TYPE' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUnsupportedMediaType(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.UNSUPPORTED_MEDIA_TYPE.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.UNSUPPORTED_MEDIA_TYPE);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatus#NOT_IMPLEMENTED}.
+	 * Check that status code of http response is 'NOT_IMPLEMENTED' status.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotImplemented(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, HttpStatus.NOT_IMPLEMENTED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_IMPLEMENTED);
 	}
 
 	/**
@@ -635,6 +636,17 @@ public final class HttpResponseAssertions {
 		return actualValue.equals(headerValue) ?
 				success() :
 				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValue));
+	}
+
+	/**
+	 * Check that status code of http response has an expected status.
+	 *
+	 * @param httpResponse Http response.
+	 * @param status Expected status.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isStatusEqual(HttpResponse httpResponse, HttpStatus status) {
+		return isStatusEqual(httpResponse, status.getStatus());
 	}
 
 	/**

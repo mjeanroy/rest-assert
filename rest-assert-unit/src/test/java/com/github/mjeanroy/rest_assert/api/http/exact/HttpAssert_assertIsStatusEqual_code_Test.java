@@ -22,17 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.api.http.exact;
 
-/**
- * Http Status Representation.
- */
-public interface HttpStatus {
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-	/**
-	 * Get status code.
-	 *
-	 * @return Status code.
-	 */
-	int getStatus();
+import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsStatusEqual;
+import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsUnsupportedMediaType;
+
+public class HttpAssert_assertIsStatusEqual_code_Test extends AbstractHttpStatusTest {
+
+	@Override
+	protected int status() {
+		return 415;
+	}
+
+	@Override
+	protected void invoke(HttpResponse actual) {
+		assertIsUnsupportedMediaType(actual);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse actual) {
+		assertIsStatusEqual(message, actual, status());
+	}
 }

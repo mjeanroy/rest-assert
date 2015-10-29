@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,17 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.api.http.exact;
 
-/**
- * Http Status Representation.
- */
-public interface HttpStatus {
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
+import org.assertj.core.api.AssertionInfo;
 
-	/**
-	 * Get status code.
-	 *
-	 * @return Status code.
-	 */
-	int getStatus();
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+public class HttpResponseAssert_isStatusEqual_Test extends AbstractHttpResponseStatusTest {
+
+	@Override
+	protected int status() {
+		return 415;
+	}
+
+	@Override
+	protected HttpResponseAssert invoke() {
+		HttpStatus httpStatus = mock(HttpStatus.class);
+		when(httpStatus.getStatus()).thenReturn(status());
+		return api.isStatusEqual(httpStatus);
+	}
+
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsStatusEqual(any(AssertionInfo.class), any(HttpResponse.class), any(HttpStatus.class));
+	}
 }

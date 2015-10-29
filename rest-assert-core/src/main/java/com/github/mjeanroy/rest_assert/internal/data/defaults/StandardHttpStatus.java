@@ -22,17 +22,56 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.internal.data.defaults;
+
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 
 /**
- * Http Status Representation.
+ * List of standard http status.
  */
-public interface HttpStatus {
+public enum StandardHttpStatus implements HttpStatus {
+
+	// 2XX
+	OK(200),
+	CREATED(201),
+	ACCEPTED(202),
+	NO_CONTENT(204),
+	RESET_CONTENT(205),
+	PARTIAL_CONTENT(206),
+
+	// 3XX
+	MOVED_PERMANENTLY(301),
+	MOVED_TEMPORARILY(302),
+	NOT_MODIFIED(304),
+
+	// 4XX
+	BAD_REQUEST(400),
+	UNAUTHORIZED(401),
+	FORBIDDEN(403),
+	NOT_FOUND(404),
+	METHOD_NOT_ALLOWED(405),
+	NOT_ACCEPTABLE(406),
+	CONFLICT(409),
+	PRE_CONDITION_FAILED(412),
+	UNSUPPORTED_MEDIA_TYPE(415),
+
+	// 5XX
+	INTERNAL_SERVER_ERROR(500),
+	NOT_IMPLEMENTED(501);
 
 	/**
-	 * Get status code.
-	 *
-	 * @return Status code.
+	 * Http status value.
+	 * This code is a valid http status.
 	 */
-	int getStatus();
+	private final int status;
+
+	// Private constructor.
+	private StandardHttpStatus(int status) {
+		this.status = status;
+	}
+
+	@Override
+	public int getStatus() {
+		return status;
+	}
 }
