@@ -25,26 +25,22 @@
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-public class HttpResponseAssert_hasHeader_Test extends AbstractHttpResponseHeaderTest {
+public class HttpResponseAssert_hasHeader_name_Test extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		HttpHeader httpHeader = mock(HttpHeader.class);
-		when(httpHeader.getName()).thenReturn("foo");
-		return api.hasHeader(httpHeader);
+		return api.hasHeader("foo");
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertHasHeader(any(AssertionInfo.class), any(HttpResponse.class), any(HttpHeader.class));
+		verify(assertions).assertHasHeader(any(AssertionInfo.class), any(HttpResponse.class), eq("foo"));
 	}
 }

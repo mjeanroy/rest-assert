@@ -25,16 +25,14 @@
 package com.github.mjeanroy.rest_assert.internal.data;
 
 /**
- * List of http headers names.
+ * Http Header Representation.
  */
-public final class HttpHeader {
+public interface HttpHeader {
 
-	private HttpHeader() {
-	}
-
-	public static final String CONTENT_TYPE = "Content-Type";
-	public static final String ETAG = "ETag";
-	public static final String LOCATION = "Location";
-	public static final String CACHE_CONTROL = "Cache-Control";
-
+	/**
+	 * Http Header Name.
+	 *
+	 * @return Name.
+	 */
+	String getName();
 }

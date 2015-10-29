@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
@@ -41,9 +42,6 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_XML;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
@@ -55,6 +53,9 @@ import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASC
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_PLAIN;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeType.XHTML;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
 import static java.util.Arrays.asList;
@@ -543,6 +544,16 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains expected header.
 	 * @param httpResponse Http response.
+	 * @param header Header.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasHeader(HttpResponse httpResponse, HttpHeader header) {
+		return hasHeader(httpResponse, header.getName());
+	}
+
+	/**
+	 * Check that http response contains expected header.
+	 * @param httpResponse Http response.
 	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
@@ -559,12 +570,13 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasMimeType(HttpResponse httpResponse, String expectedMimeType) {
-		AssertionResult result = hasHeader(httpResponse, CONTENT_TYPE);
+		String headerName = CONTENT_TYPE.getName();
+		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
 			return result;
 		}
 
-		String contentType = httpResponse.getHeader(CONTENT_TYPE);
+		String contentType = httpResponse.getHeader(headerName);
 		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 		return actualMimeType.equals(expectedMimeType) ?
 				success() :
@@ -578,12 +590,13 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCharset(HttpResponse httpResponse, String expectedCharset) {
-		AssertionResult result = hasHeader(httpResponse, CONTENT_TYPE);
+		String headerName = CONTENT_TYPE.getName();
+		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
 			return result;
 		}
 
-		String contentType = httpResponse.getHeader(CONTENT_TYPE);
+		String contentType = httpResponse.getHeader(headerName);
 		String[] contentTypeParts = contentType.split(";");
 		if (contentTypeParts.length == 1) {
 			return failure(shouldHaveCharset());
@@ -602,12 +615,13 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, Collection<String> expectedMimeType) {
-		AssertionResult result = hasHeader(httpResponse, CONTENT_TYPE);
+		String headerName = CONTENT_TYPE.getName();
+		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
 			return result;
 		}
 
-		String contentType = httpResponse.getHeader(CONTENT_TYPE);
+		String contentType = httpResponse.getHeader(headerName);
 		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 
 		List<String> expected = new ArrayList<>(expectedMimeType);
@@ -616,6 +630,18 @@ public final class HttpResponseAssertions {
 		return list.contains(actualMimeType) ?
 				success() :
 				failure(shouldHaveMimeType(expected, actualMimeType));
+	}
+
+	/**
+	 * Check that http response contains expected header with
+	 * expected value.
+	 * @param httpResponse Http response.
+	 * @param header Header.
+	 * @param headerValue Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, HttpHeader header, String headerValue) {
+		return isHeaderEqualTo(httpResponse, header.getName(), headerValue);
 	}
 
 	/**

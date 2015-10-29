@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,29 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import static org.mockito.Mockito.any;
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class HttpResponseAssert_hasHeader_Test extends AbstractHttpResponseHeaderTest {
+public class HttpResponses_assertIsHeaderEqualTo_Test extends AbstractHttpResponsesHeaderTest {
+
+	private static final String NAME = "foo";
+
+	private static final String VALUE = "bar";
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected void invoke(HttpResponse httpResponse) {
 		HttpHeader httpHeader = mock(HttpHeader.class);
-		when(httpHeader.getName()).thenReturn("foo");
-		return api.hasHeader(httpHeader);
+		when(httpHeader.getName()).thenReturn(NAME);
+		httpResponses.assertIsHeaderEqualTo(someInfo(), httpResponse, httpHeader, VALUE);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasHeader(any(AssertionInfo.class), any(HttpResponse.class), any(HttpHeader.class));
+	protected Header getHeader() {
+		return header(NAME, VALUE);
 	}
 }
