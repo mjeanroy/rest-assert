@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -598,6 +599,17 @@ public final class HttpResponseAssertions {
 		return actualMimeType.equals(expectedMimeType) ?
 			success() :
 			failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+	}
+
+	/**
+	 * Check that http response has expected charset.
+	 *
+	 * @param httpResponse Http response.
+	 * @param expectedCharset Expected charset.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasCharset(HttpResponse httpResponse, Charset expectedCharset) {
+		return hasCharset(httpResponse, expectedCharset.name());
 	}
 
 	/**

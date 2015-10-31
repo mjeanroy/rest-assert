@@ -24,53 +24,18 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.charsets;
 
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.assertThat;
 
-public class HttpResponses_isUtf8_Test {
+public class HttpResponses_isUtf8_Test extends AbstractHttpResponsesCharsetTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
-
-	@Test
-	public void should_pass() {
-		HttpResponse httpResponse = newHttpResponse(getCharset());
-		invoke(httpResponse);
-	}
-
-	@Test
-	public void should_fail_if_header_is_not_available() {
-		final String expectedCharset = getCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final HttpResponse httpResponse = newHttpResponse(actualCharset);
-
-		try {
-			invoke(httpResponse);
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting response to have charset \"%s\" but was \"%s\"", expectedCharset, actualCharset));
-		}
-	}
-
+	@Override
 	protected String getCharset() {
 		return "UTF-8";
 	}
 
-	protected HttpResponse newHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return newHttpResponseWithHeader(header("Content-Type", contentType));
-	}
-
+	@Override
 	protected void invoke(HttpResponse httpResponse) {
 		httpResponses.assertIsUtf8(someInfo(), httpResponse);
 	}

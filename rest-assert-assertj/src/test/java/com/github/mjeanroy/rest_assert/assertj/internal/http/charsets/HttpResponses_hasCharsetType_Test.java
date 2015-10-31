@@ -22,20 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.charsets;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.charsets;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpResponseAssertions_isUtf8_Test extends AbstractHttpResponseAssertionsCharsetTest {
+import java.nio.charset.Charset;
+
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+
+public class HttpResponses_hasCharsetType_Test extends AbstractHttpResponsesCharsetTest {
+
+	private static final Charset CHARSET = Charset.forName("UTF-8");
 
 	@Override
-	protected AssertionResult invoke(HttpResponse httpResponse) {
-		return assertions.isUtf8(httpResponse);
+	protected String getCharset() {
+		return CHARSET.toString();
 	}
 
 	@Override
-	protected String expectedCharset() {
-		return "UTF-8";
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertHasCharset(someInfo(), httpResponse, CHARSET);
 	}
 }

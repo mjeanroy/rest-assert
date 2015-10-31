@@ -27,15 +27,19 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.charsets;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-public class HttpResponseAssertions_isUtf8_Test extends AbstractHttpResponseAssertionsCharsetTest {
+import java.nio.charset.Charset;
+
+public class HttpResponseAssertions_hasCharsetConstant_Test extends AbstractHttpResponseAssertionsCharsetTest {
+
+	private static final Charset CHARSET = Charset.forName("UTF-8");
 
 	@Override
-	protected AssertionResult invoke(HttpResponse httpResponse) {
-		return assertions.isUtf8(httpResponse);
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.hasCharset(response, CHARSET);
 	}
 
 	@Override
 	protected String expectedCharset() {
-		return "UTF-8";
+		return CHARSET.toString();
 	}
 }

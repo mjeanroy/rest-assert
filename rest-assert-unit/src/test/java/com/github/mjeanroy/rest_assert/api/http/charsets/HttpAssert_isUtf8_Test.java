@@ -24,58 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.api.http.charsets;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.Function;
-import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsUtf8;
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static java.lang.String.format;
 
-public class HttpAssert_isUtf8_Test extends AbstractAssertTest<HttpResponse> {
+public class HttpAssert_isUtf8_Test extends AbstractHttpAssertCharsetTest {
 
-	@Test
-	public void it_should_pass_with_expected_mime_type() {
-		invoke(newResponse(getCharset()));
-		invoke("foo", newResponse(getCharset()));
-	}
-
-	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		final String expectedCharset = getCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final String message = format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset);
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(newResponse(actualCharset));
-			}
-		});
-	}
-
-	@Test
-	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		final String expectedCharset = getCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final String message = format("Expecting response to have mime type %s but was %s", expectedCharset, actualCharset);
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, newResponse(actualCharset));
-			}
-		});
-	}
-
-	protected HttpResponse newResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return newHttpResponseWithHeader(header("Content-Type", contentType));
-	}
-
+	@Override
 	protected String getCharset() {
 		return "UTF-8";
 	}
