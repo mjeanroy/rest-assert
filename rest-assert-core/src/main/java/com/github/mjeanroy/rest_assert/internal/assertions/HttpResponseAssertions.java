@@ -25,7 +25,6 @@
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.MimeType;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
 
 import java.util.ArrayList;
@@ -486,8 +485,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-			APPLICATION_XML.getValue(),
-			TEXT_XML.getValue()
+			APPLICATION_XML,
+			TEXT_XML
 		));
 	}
 
@@ -539,8 +538,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isHtml(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-			TEXT_HTML.getValue(),
-			XHTML.getValue()
+			TEXT_HTML,
+			XHTML
 		));
 	}
 
@@ -562,8 +561,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isJavascript(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-			APPLICATION_JAVASCRIPT.getValue(),
-			TEXT_JAVASCRIPT.getValue()
+			APPLICATION_JAVASCRIPT,
+			TEXT_JAVASCRIPT
 		));
 	}
 
@@ -578,28 +577,6 @@ public final class HttpResponseAssertions {
 		return httpResponse.hasHeader(headerName) ?
 			success() :
 			failure(shouldHaveHeader(headerName));
-	}
-
-	/**
-	 * Check that http response is expected mime type.
-	 *
-	 * @param httpResponse Http response.
-	 * @param expectedMimeType Expected mime type.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasMimeType(HttpResponse httpResponse, MimeType expectedMimeType) {
-		String headerName = CONTENT_TYPE;
-		AssertionResult result = hasHeader(httpResponse, headerName);
-		if (result.isFailure()) {
-			return result;
-		}
-
-		String contentType = httpResponse.getHeader(headerName);
-		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
-		String expectedMimeTypeValue = expectedMimeType.getValue();
-		return actualMimeType.equals(expectedMimeTypeValue) ?
-			success() :
-			failure(shouldHaveMimeType(expectedMimeTypeValue, actualMimeType));
 	}
 
 	/**
