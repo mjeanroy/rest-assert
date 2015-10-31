@@ -24,28 +24,21 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class HttpResponses_assertHasHeader_Test extends AbstractHttpResponsesHeaderTest {
 
-	private static final String NAME = "foo";
-
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		HttpHeader httpHeader = mock(HttpHeader.class);
-		when(httpHeader.getName()).thenReturn(NAME);
-		httpResponses.assertHasHeader(someInfo(), httpResponse, httpHeader);
+		httpResponses.assertHasHeader(someInfo(), httpResponse, getHeader().getName());
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header(NAME, "bar");
+		return header("foo", "bar");
 	}
 }

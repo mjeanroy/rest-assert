@@ -24,14 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsHeaderEqualTo;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class HttpAssert_assertIsHeaderEqualTo_Test extends AbstractHttpHeaderTest {
 
@@ -46,15 +43,11 @@ public class HttpAssert_assertIsHeaderEqualTo_Test extends AbstractHttpHeaderTes
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		HttpHeader httpHeader = mock(HttpHeader.class);
-		when(httpHeader.getName()).thenReturn(NAME);
-		assertIsHeaderEqualTo(actual, httpHeader, VALUE);
+		assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpHeader httpHeader = mock(HttpHeader.class);
-		when(httpHeader.getName()).thenReturn(NAME);
-		assertIsHeaderEqualTo(message, actual, httpHeader, VALUE);
+		assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

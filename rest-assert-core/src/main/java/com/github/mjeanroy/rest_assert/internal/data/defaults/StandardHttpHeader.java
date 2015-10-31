@@ -24,30 +24,36 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.defaults;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
-
 /**
  * List of standards http headers names.
  */
-public enum StandardHttpHeader implements HttpHeader {
+public final class StandardHttpHeader {
 
-	CONTENT_TYPE("Content-Type"),
-	ETAG("ETag"),
-	LOCATION("Location"),
-	CACHE_CONTROL("Cache-Control");
+	// Ensure non instantiation
+	private StandardHttpHeader() {
+	}
 
 	/**
-	 * Header Name.
+	 * Content type header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
 	 */
-	private final String name;
+	public static final String CONTENT_TYPE = "Content-Type";
 
-	// Private constructor.
-	private StandardHttpHeader(String name) {
-		this.name = name;
-	}
+	/**
+	 * ETag header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
+	 */
+	public static final String ETAG = "ETag";
 
-	@Override
-	public String getName() {
-		return name;
-	}
+	/**
+	 * Location header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
+	 */
+	public static final String LOCATION = "Location";
+
+	/**
+	 * Cache Control header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	 */
+	public static final String CACHE_CONTROL = "Cache-Control";
 }
