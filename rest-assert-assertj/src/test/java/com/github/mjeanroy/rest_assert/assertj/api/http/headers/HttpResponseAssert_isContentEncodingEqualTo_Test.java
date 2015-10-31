@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,44 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.defaults;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
-/**
- * List of standards http headers names.
- */
-public final class StandardHttpHeader {
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-	// Ensure non instantiation
-	private StandardHttpHeader() {
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
+public class HttpResponseAssert_isContentEncodingEqualTo_Test extends AbstractHttpResponseHeaderTest {
+
+	@Override
+	protected HttpResponseAssert invoke() {
+		return api.isContentEncodingEqualTo(getHeader().getValue());
 	}
 
-	/**
-	 * Content type header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
-	 */
-	public static final String CONTENT_TYPE = "Content-Type";
-
-	/**
-	 * Content Encoding header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
-	 */
-	public static final String CONTENT_ENCODING = "Content-Encoding";
-
-	/**
-	 * ETag header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
-	 */
-	public static final String ETAG = "ETag";
-
-	/**
-	 * Location header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
-	 */
-	public static final String LOCATION = "Location";
-
-	/**
-	 * Cache Control header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	 */
-	public static final String CACHE_CONTROL = "Cache-Control";
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsContentEncodingEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+	}
 }

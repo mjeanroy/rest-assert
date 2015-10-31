@@ -22,44 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.defaults;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-/**
- * List of standards http headers names.
- */
-public final class StandardHttpHeader {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-	// Ensure non instantiation
-	private StandardHttpHeader() {
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+
+public class HttpResponseAssertions_hasContentEncoding_Test extends AbstractHttpHeaderTest {
+
+	@Override
+	protected Header getHeader() {
+		return header("Content-Encoding", "gzip");
 	}
 
-	/**
-	 * Content type header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
-	 */
-	public static final String CONTENT_TYPE = "Content-Type";
-
-	/**
-	 * Content Encoding header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
-	 */
-	public static final String CONTENT_ENCODING = "Content-Encoding";
-
-	/**
-	 * ETag header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
-	 */
-	public static final String ETAG = "ETag";
-
-	/**
-	 * Location header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
-	 */
-	public static final String LOCATION = "Location";
-
-	/**
-	 * Cache Control header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	 */
-	public static final String CACHE_CONTROL = "Cache-Control";
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.hasContentEncoding(response);
+	}
 }

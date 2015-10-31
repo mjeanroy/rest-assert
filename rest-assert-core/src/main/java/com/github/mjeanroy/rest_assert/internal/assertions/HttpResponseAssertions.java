@@ -41,6 +41,7 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_ENCODING;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LOCATION;
@@ -414,6 +415,41 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, String contentTypeValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_TYPE, contentTypeValue);
+	}
+
+	/**
+	 * Check that http response contains Content-Encoding header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasContentEncoding(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, CONTENT_ENCODING);
+	}
+
+	/**
+	 * Check that http response contains Content-Encoding header with
+	 * expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param contentEncodingValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, String contentEncodingValue) {
+		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING, contentEncodingValue);
+	}
+
+	/**
+	 * Check that http response contains Content-Encoding header with
+	 * gzip value (meaning that response body has been gzipped).
+	 * This is a shortcut for checking that Content-Encoding is strictly equal
+	 * to "gzip".
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isGzipped(HttpResponse httpResponse) {
+		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING, "gzip");
 	}
 
 	/**
