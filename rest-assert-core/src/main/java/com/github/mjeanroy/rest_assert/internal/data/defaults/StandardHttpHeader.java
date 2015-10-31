@@ -52,6 +52,12 @@ public final class StandardHttpHeader {
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";
 
 	/**
+	 * Last Modified header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29
+	 */
+	public static final String LAST_MODIFIED = "Last-Modified";
+
+	/**
 	 * ETag header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
 	 */

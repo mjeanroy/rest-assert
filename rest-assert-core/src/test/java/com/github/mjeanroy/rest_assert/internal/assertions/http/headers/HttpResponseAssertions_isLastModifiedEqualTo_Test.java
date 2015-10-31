@@ -24,58 +24,28 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
-import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
-import org.junit.Before;
-import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
+public class HttpResponseAssertions_isLastModifiedEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
-	protected HttpResponseAssertions assertions;
+	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
 
-	@Before
-	public void setUp() {
-		assertions = HttpResponseAssertions.instance();
+	@Override
+	protected Header getHeader() {
+		return header("Last-Modified", VALUE);
 	}
 
-	@Test
-	public void it_should_pass_with_expected_header() {
-		Header header = getHeader();
-		AssertionResult result = invoke(newResponse(header));
-		checkSuccess(result);
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isLastModifiedEqualTo(response, VALUE);
 	}
 
-	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		final Header expectedHeader = getHeader();
-
-		final String expectedName = expectedHeader.getName();
-		final String actualValue = failValue();
-		final Header header = header(expectedName, actualValue);
-
-		AssertionResult result = invoke(newResponse(header));
-
-		checkError(result,
-				ShouldHaveHeader.class,
-				"Expecting response to have header %s equal to %s but was %s",
-				expectedHeader.getName(), expectedHeader.getValue(), header.getValue()
-		);
-	}
-
-	protected HttpResponse newResponse(Header header) {
-		return newHttpResponseWithHeader(header);
-	}
-
-	protected abstract Header getHeader();
-
+	@Override
 	protected String failValue() {
-		return getHeader().getValue() + "foo";
+		return "Wed, 15 Nov 1995 12:45:26 GMT";
 	}
 }

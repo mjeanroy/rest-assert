@@ -30,6 +30,7 @@ import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
@@ -45,6 +46,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHtt
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_ENCODING;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LAST_MODIFIED;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_XML;
@@ -57,6 +59,8 @@ import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMim
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_PLAIN;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_XML;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.XHTML;
+import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
+import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
 import static java.util.Arrays.asList;
@@ -514,7 +518,40 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasLastModified(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, "Last-Modified");
+		return hasHeader(httpResponse, LAST_MODIFIED);
+	}
+
+	/**
+	 * Check that http response contains Last-Modified header with
+	 * expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param lastModifiedValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, String lastModifiedValue) {
+		return isLastModifiedEqualTo(httpResponse, parseHttpDate(lastModifiedValue));
+	}
+
+	/**
+	 * Check that http response contains Last-Modified header with
+	 * expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param lastModifiedDate Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
+		AssertionResult result = hasHeader(httpResponse, LAST_MODIFIED);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		String actualValue = httpResponse.getHeader(LAST_MODIFIED);
+		Date actualDate = parseHttpDate(actualValue);
+		return actualDate.equals(lastModifiedDate) ?
+			success() :
+			failure(shouldHaveHeaderWithValue(LAST_MODIFIED, formatHttpDate(lastModifiedDate), formatHttpDate(actualDate)));
 	}
 
 	/**

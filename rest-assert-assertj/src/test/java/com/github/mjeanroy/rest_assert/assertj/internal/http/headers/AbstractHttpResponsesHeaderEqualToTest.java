@@ -24,17 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
+import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.junit.Test;
+
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
-
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesHeaderEqualToTest {
 
@@ -51,7 +50,7 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 		final Header expectedHeader = getHeader();
 		final String expectedName = expectedHeader.getName();
 		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue + "foo";
+		final String actualValue = failValue();
 		final Header header = header(expectedName, actualValue);
 		final HttpResponse httpResponse = newHttpResponse(header);
 
@@ -67,6 +66,10 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	}
 
 	protected abstract Header getHeader();
+
+	protected String failValue() {
+		return getHeader().getValue() + "foo";
+	}
 
 	protected HttpResponse newHttpResponse(Header header) {
 		return newHttpResponseWithHeader(header);
