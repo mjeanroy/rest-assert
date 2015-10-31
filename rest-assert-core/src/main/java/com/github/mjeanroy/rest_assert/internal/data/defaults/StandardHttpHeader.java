@@ -46,6 +46,12 @@ public final class StandardHttpHeader {
 	public static final String CONTENT_ENCODING = "Content-Encoding";
 
 	/**
+	 * Content Disposition header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
+	 */
+	public static final String CONTENT_DISPOSITION = "Content-Disposition";
+
+	/**
 	 * ETag header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
 	 */

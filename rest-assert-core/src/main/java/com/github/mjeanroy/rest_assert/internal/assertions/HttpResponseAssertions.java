@@ -41,6 +41,7 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_DISPOSITION;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_ENCODING;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
@@ -425,6 +426,28 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasContentEncoding(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CONTENT_ENCODING);
+	}
+
+	/**
+	 * Check that http response contains Content-Disposition header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, CONTENT_DISPOSITION);
+	}
+
+	/**
+	 * Check that http response contains Content-Disposition header with
+	 * expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param contentDispositionValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
+		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION, contentDispositionValue);
 	}
 
 	/**
