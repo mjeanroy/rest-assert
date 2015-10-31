@@ -22,17 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.internal.data.defaults;
+
+import com.github.mjeanroy.rest_assert.internal.data.MimeType;
 
 /**
- * Mime Type Representation.
+ * List of standards mime types.
  */
-public interface MimeType {
+public enum StandardMimeType implements MimeType {
+
+	TEXT_PLAIN("text/plain"),
+	CSV("text/csv"),
+	PDF("application/pdf"),
+	TEXT_HTML("text/html"),
+	XHTML("application/xhtml+xml"),
+	CSS("text/css"),
+	JSON("application/json"),
+	APPLICATION_XML("application/xml"),
+	TEXT_XML("text/xml"),
+	APPLICATION_JAVASCRIPT("application/javascript"),
+	TEXT_JAVASCRIPT("text/javascript");
 
 	/**
 	 * Mime Type Value.
-	 *
-	 * @return Mime Type.
 	 */
-	String getValue();
+	private final String value;
+
+	// Private constructor.
+	private StandardMimeType(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}
 }

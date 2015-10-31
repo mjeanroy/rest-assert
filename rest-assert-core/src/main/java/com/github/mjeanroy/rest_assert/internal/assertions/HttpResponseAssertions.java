@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
+import com.github.mjeanroy.rest_assert.internal.data.MimeType;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
 
 import java.util.ArrayList;
@@ -42,20 +43,20 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.APPLICATION_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSS;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.CSV;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.JSON;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.PDF;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_HTML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_PLAIN;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.TEXT_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeType.XHTML;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LOCATION;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.CSS;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.CSV;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.JSON;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.PDF;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_HTML;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_PLAIN;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.XHTML;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
 import static java.util.Arrays.asList;
@@ -475,7 +476,10 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
-		return hasMimeTypeIn(httpResponse, asList(APPLICATION_XML, TEXT_XML));
+		return hasMimeTypeIn(httpResponse, asList(
+			APPLICATION_XML.getValue(),
+			TEXT_XML.getValue()
+		));
 	}
 
 	/**
@@ -520,7 +524,10 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isHtml(HttpResponse httpResponse) {
-		return hasMimeTypeIn(httpResponse, asList(TEXT_HTML, XHTML));
+		return hasMimeTypeIn(httpResponse, asList(
+			TEXT_HTML.getValue(),
+			XHTML.getValue()
+		));
 	}
 
 	/**
@@ -538,7 +545,10 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isJavascript(HttpResponse httpResponse) {
-		return hasMimeTypeIn(httpResponse, asList(APPLICATION_JAVASCRIPT, TEXT_JAVASCRIPT));
+		return hasMimeTypeIn(httpResponse, asList(
+			APPLICATION_JAVASCRIPT.getValue(),
+			TEXT_JAVASCRIPT.getValue()
+		));
 	}
 
 	/**
@@ -561,6 +571,27 @@ public final class HttpResponseAssertions {
 		return httpResponse.hasHeader(headerName) ?
 				success() :
 				failure(shouldHaveHeader(headerName));
+	}
+
+	/**
+	 * Check that http response is expected mime type.
+	 * @param httpResponse Http response.
+	 * @param expectedMimeType Expected mime type.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasMimeType(HttpResponse httpResponse, MimeType expectedMimeType) {
+		String headerName = CONTENT_TYPE.getName();
+		AssertionResult result = hasHeader(httpResponse, headerName);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		String contentType = httpResponse.getHeader(headerName);
+		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
+		String expectedMimeTypeValue = expectedMimeType.getValue();
+		return actualMimeType.equals(expectedMimeTypeValue) ?
+			success() :
+			failure(shouldHaveMimeType(expectedMimeTypeValue, actualMimeType));
 	}
 
 	/**
