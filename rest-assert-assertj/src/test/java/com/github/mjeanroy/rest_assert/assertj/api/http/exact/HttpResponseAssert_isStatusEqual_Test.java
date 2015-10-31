@@ -26,13 +26,11 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.exact;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class HttpResponseAssert_isStatusEqual_Test extends AbstractHttpResponseStatusTest {
 
@@ -43,13 +41,11 @@ public class HttpResponseAssert_isStatusEqual_Test extends AbstractHttpResponseS
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		HttpStatus httpStatus = mock(HttpStatus.class);
-		when(httpStatus.getStatus()).thenReturn(status());
-		return api.isStatusEqual(httpStatus);
+		return api.isStatusEqual(status());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsStatusEqual(any(AssertionInfo.class), any(HttpResponse.class), any(HttpStatus.class));
+		verify(assertions).assertIsStatusEqual(any(AssertionInfo.class), any(HttpResponse.class), eq(status()));
 	}
 }

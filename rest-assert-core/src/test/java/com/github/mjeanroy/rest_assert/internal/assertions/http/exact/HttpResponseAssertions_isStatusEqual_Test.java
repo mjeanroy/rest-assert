@@ -26,10 +26,6 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.exact;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class HttpResponseAssertions_isStatusEqual_Test extends AbstractHttpStatusTest {
 
@@ -40,8 +36,6 @@ public class HttpResponseAssertions_isStatusEqual_Test extends AbstractHttpStatu
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		HttpStatus httpStatus = mock(HttpStatus.class);
-		when(httpStatus.getStatus()).thenReturn(status());
-		return assertions.isStatusEqual(response, httpStatus);
+		return assertions.isStatusEqual(response, status());
 	}
 }

@@ -25,12 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.exact;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsStatusEqual;
 import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsUnsupportedMediaType;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class HttpAssert_assertIsStatusEqual_Test extends AbstractHttpStatusTest {
 
@@ -46,8 +43,6 @@ public class HttpAssert_assertIsStatusEqual_Test extends AbstractHttpStatusTest 
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpStatus httpStatus = mock(HttpStatus.class);
-		when(httpStatus.getStatus()).thenReturn(status());
-		assertIsStatusEqual(message, actual, httpStatus);
+		assertIsStatusEqual(message, actual, status());
 	}
 }

@@ -26,7 +26,6 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
 import com.github.mjeanroy.rest_assert.internal.data.MimeType;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
 
@@ -93,7 +92,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isOk(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.OK.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.OK);
 	}
 
 	/**
@@ -103,7 +102,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCreated(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.CREATED.getStatus());
+		return isStatusEqual(httpResponse, StandardHttpStatus.CREATED);
 	}
 
 	/**
@@ -693,17 +692,6 @@ public final class HttpResponseAssertions {
 		return actualValue.equals(headerValue) ?
 				success() :
 				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValue));
-	}
-
-	/**
-	 * Check that status code of http response has an expected status.
-	 *
-	 * @param httpResponse Http response.
-	 * @param status Expected status.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isStatusEqual(HttpResponse httpResponse, HttpStatus status) {
-		return isStatusEqual(httpResponse, status.getStatus());
 	}
 
 	/**

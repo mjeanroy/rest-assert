@@ -24,54 +24,140 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.defaults;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatus;
-
 /**
  * List of standard http status.
  */
-public enum StandardHttpStatus implements HttpStatus {
+public final class StandardHttpStatus {
+
+	// Ensure non instantiation
+	private StandardHttpStatus() {
+	}
 
 	// 2XX
-	OK(200),
-	CREATED(201),
-	ACCEPTED(202),
-	NO_CONTENT(204),
-	RESET_CONTENT(205),
-	PARTIAL_CONTENT(206),
-
-	// 3XX
-	MOVED_PERMANENTLY(301),
-	MOVED_TEMPORARILY(302),
-	NOT_MODIFIED(304),
-
-	// 4XX
-	BAD_REQUEST(400),
-	UNAUTHORIZED(401),
-	FORBIDDEN(403),
-	NOT_FOUND(404),
-	METHOD_NOT_ALLOWED(405),
-	NOT_ACCEPTABLE(406),
-	CONFLICT(409),
-	PRE_CONDITION_FAILED(412),
-	UNSUPPORTED_MEDIA_TYPE(415),
-
-	// 5XX
-	INTERNAL_SERVER_ERROR(500),
-	NOT_IMPLEMENTED(501);
 
 	/**
-	 * Http status value.
-	 * This code is a valid http status.
+	 * HTTP 200: OK.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1
 	 */
-	private final int status;
+	public static final int OK = 200;
 
-	// Private constructor.
-	private StandardHttpStatus(int status) {
-		this.status = status;
-	}
+	/**
+	 * HTTP 201: CREATED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2
+	 */
+	public static final int CREATED = 201;
 
-	@Override
-	public int getStatus() {
-		return status;
-	}
+	/**
+	 * HTTP 202: ACCEPTED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3
+	 */
+	public static final int ACCEPTED = 202;
+
+	/**
+	 * HTTP 204: NO CONTENT.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5
+	 */
+	public static final int NO_CONTENT = 204;
+
+	/**
+	 * HTTP 205: RESET CONTENT.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6
+	 */
+	public static final int RESET_CONTENT = 205;
+
+	/**
+	 * HTTP 206: PARTIAL CONTENT.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.7
+	 */
+	public static final int PARTIAL_CONTENT = 206;
+
+	// 3XX
+
+	/**
+	 * HTTP 301: MOVED PERMANENTLY.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2
+	 */
+	public static final int MOVED_PERMANENTLY = 301;
+
+	/**
+	 * HTTP 302: MOVED TEMPORARILY.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3
+	 */
+	public static final int MOVED_TEMPORARILY = 302;
+
+	/**
+	 * HTTP 304: NOT MODIFIED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5
+	 */
+	public static final int NOT_MODIFIED = 304;
+
+	// 4XX
+
+	/**
+	 * HTTP 400: BAD REQUEST.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+	 */
+	public static final int BAD_REQUEST = 400;
+
+	/**
+	 * HTTP 401: UNAUTHORIZED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
+	 */
+	public static final int UNAUTHORIZED = 401;
+
+	/**
+	 * HTTP 401: FORBIDDEN.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
+	 */
+	public static final int FORBIDDEN = 403;
+
+	/**
+	 * HTTP 404: NOT FOUND.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5
+	 */
+	public static final int NOT_FOUND = 404;
+
+	/**
+	 * HTTP 405: METHOD NOT ALLOWED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6
+	 */
+	public static final int METHOD_NOT_ALLOWED = 405;
+
+	/**
+	 * HTTP 406: NOT ACCEPTABLE.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7
+	 */
+	public static final int NOT_ACCEPTABLE = 406;
+
+	/**
+	 * HTTP 409: CONFLICT.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10
+	 */
+	public static final int CONFLICT = 409;
+
+	/**
+	 * HTTP 412: PRE CONDITION FAILED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13
+	 */
+	public static final int PRE_CONDITION_FAILED = 412;
+
+	/**
+	 * HTTP 415: UNSUPPORTED MEDIA TYPE.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
+	 */
+	public static final int UNSUPPORTED_MEDIA_TYPE = 415;
+
+	// 5XX
+
+	/**
+	 * HTTP 500: INTERNAL SERVER ERROR.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
+	 */
+	public static final int INTERNAL_SERVER_ERROR = 500;
+
+	/**
+	 * HTTP 501: NOT IMPLEMENTED.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
+	 */
+	public static final int NOT_IMPLEMENTED = 501;
 }
