@@ -46,6 +46,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHtt
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_ENCODING;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.EXPIRES;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LAST_MODIFIED;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LOCATION;
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_JAVASCRIPT;
@@ -522,6 +523,40 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Last-Modified header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasExpires(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, EXPIRES);
+	}
+
+	/**
+	 * Check that http response contains Expires header with
+	 * expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param expiresValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, String expiresValue) {
+		return isExpiresEqualTo(httpResponse, parseHttpDate(expiresValue));
+	}
+
+	/**
+	 * Check that http response contains Expires header with
+	 * expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param expiresValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, Date expiresValue) {
+		return isHeaderDateEqualTo(httpResponse, EXPIRES, expiresValue);
+	}
+
+	/**
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
@@ -542,16 +577,20 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
-		AssertionResult result = hasHeader(httpResponse, LAST_MODIFIED);
+		return isHeaderDateEqualTo(httpResponse, LAST_MODIFIED, lastModifiedDate);
+	}
+
+	private AssertionResult isHeaderDateEqualTo(HttpResponse httpResponse, String name, Date expectedValue) {
+		AssertionResult result = hasHeader(httpResponse, name);
 		if (result.isFailure()) {
 			return result;
 		}
 
-		String actualValue = httpResponse.getHeader(LAST_MODIFIED);
+		String actualValue = httpResponse.getHeader(name);
 		Date actualDate = parseHttpDate(actualValue);
-		return actualDate.equals(lastModifiedDate) ?
+		return actualDate.equals(expectedValue) ?
 			success() :
-			failure(shouldHaveHeaderWithValue(LAST_MODIFIED, formatHttpDate(lastModifiedDate), formatHttpDate(actualDate)));
+			failure(shouldHaveHeaderWithValue(name, formatHttpDate(expectedValue), formatHttpDate(actualDate)));
 	}
 
 	/**

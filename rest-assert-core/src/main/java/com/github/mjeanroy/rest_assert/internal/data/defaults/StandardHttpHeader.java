@@ -58,6 +58,12 @@ public final class StandardHttpHeader {
 	public static final String LAST_MODIFIED = "Last-Modified";
 
 	/**
+	 * Expires header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+	 */
+	public static final String EXPIRES = "Expires";
+
+	/**
 	 * ETag header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
 	 */
