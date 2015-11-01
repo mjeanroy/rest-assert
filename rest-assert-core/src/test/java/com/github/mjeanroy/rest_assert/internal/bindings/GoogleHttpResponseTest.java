@@ -39,7 +39,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.httpResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.verify;

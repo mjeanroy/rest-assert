@@ -22,65 +22,56 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.parsers;
+package com.github.mjeanroy.rest_assert.internal.json.parsers.gson;
 
-import com.github.mjeanroy.rest_assert.internal.json.JsonException;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.AbstractJsonParser;
+import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Implementation of {@link JsonParser}
- * using Jackson1 as internal implementation.
+ * Implementation of {@link com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser}
+ * using Google Gson as internal implementation.
  *
  * This class is implemented as a singleton.
  * This class is thread safe.
  */
-public class Jackson1JsonParser extends AbstractJsonParser {
+public class GsonJsonParser extends AbstractJsonParser {
 
 	/**
 	 * Singleton instance.
 	 */
-	private static final Jackson1JsonParser INSTANCE = new Jackson1JsonParser();
+	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
 
 	/**
 	 * Get parser.
 	 *
 	 * @return Parser.
 	 */
-	public static Jackson1JsonParser jackson1Parser() {
+	public static GsonJsonParser gsonParser() {
 		return INSTANCE;
 	}
 
 	/**
-	 * Jackson mapper.
+	 * Internal parser.
 	 */
-	private final ObjectMapper mapper;
+	private final Gson gson;
 
-	private Jackson1JsonParser() {
+	private GsonJsonParser() {
 		super();
-		this.mapper = new ObjectMapper();
+		this.gson = new Gson();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public Map<String, Object> parseObject(String json) {
-		return parse(json, Map.class);
+		return gson.fromJson(json, Map.class);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Object> parseArray(String json) {
-		return parse(json, List.class);
-	}
-
-	private <T> T parse(String json, Class<T> klass) {
-		try {
-			return mapper.readValue(json, klass);
-		}
-		catch (Exception ex) {
-			throw new JsonException(ex);
-		}
+		return gson.fromJson(json, List.class);
 	}
 }

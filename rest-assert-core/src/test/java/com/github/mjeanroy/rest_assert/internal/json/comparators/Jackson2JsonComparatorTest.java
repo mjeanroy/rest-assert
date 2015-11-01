@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.jackson2.Jackson2JsonParser.jackson2Parser;
 
 public class Jackson2JsonComparatorTest extends AbstractJsonComparatorTest {
 

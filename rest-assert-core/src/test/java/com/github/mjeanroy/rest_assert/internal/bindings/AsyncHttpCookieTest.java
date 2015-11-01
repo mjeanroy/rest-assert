@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

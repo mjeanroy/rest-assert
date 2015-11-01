@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.JavaxCookie.javaxCookie;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie.javaxCookie;
 
 /**
  * Entry point for assertion methods for Javax api

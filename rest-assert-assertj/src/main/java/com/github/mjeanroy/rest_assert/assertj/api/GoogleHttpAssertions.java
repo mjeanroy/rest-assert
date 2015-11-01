@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.httpResponse;
 
 /**
  * Entry point for assertion methods for Google HttpClient

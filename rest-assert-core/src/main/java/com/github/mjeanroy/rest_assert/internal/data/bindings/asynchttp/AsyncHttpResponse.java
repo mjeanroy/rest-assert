@@ -22,77 +22,63 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings;
+package com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.util.EntityUtils;
+import com.ning.http.client.Response;
 
 import java.io.IOException;
 
 /**
- * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
- * using Apache HttpClient framework as real implementation.
+ * Implementation of {@link HttpResponse}
+ * using Async-Http framework as real implementation.
  */
-public class ApacheHttpResponse implements HttpResponse {
+public class AsyncHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse} using instance
-	 * of {@link org.apache.http.HttpResponse}.
+	 * Create new {@link HttpResponse} using instance
+	 * of {@link Response}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static ApacheHttpResponse httpResponse(org.apache.http.HttpResponse response) {
-		return new ApacheHttpResponse(response);
+	public static AsyncHttpResponse httpResponse(Response response) {
+		return new AsyncHttpResponse(response);
 	}
 
 	/**
-	 * Original http response.
+	 * Original Async-Http response.
 	 */
-	private final org.apache.http.HttpResponse response;
+	private final Response response;
 
 	// Use static factory
-	private ApacheHttpResponse(org.apache.http.HttpResponse response) {
+	private AsyncHttpResponse(Response response) {
 		this.response = response;
 	}
 
 	@Override
 	public int getStatus() {
-		return response.getStatusLine().getStatusCode();
+		return response.getStatusCode();
 	}
 
 	@Override
 	public boolean hasHeader(String name) {
-		return findFirstHeader(name) != null;
+		return response.getHeaders().containsKey(name);
 	}
 
 	@Override
 	public String getHeader(String name) {
-		Header header = findFirstHeader(name);
-		return header == null ? null : header.getValue();
+		return hasHeader(name) ? response.getHeader(name) : null;
 	}
 
 	@Override
 	public String getContent() {
-		HttpEntity entity = response.getEntity();
 		try {
-			return EntityUtils.toString(entity);
+			return response.getResponseBody();
 		}
 		catch (IOException ex) {
 			throw new UnparseableResponseBodyException(ex);
 		}
-	}
-
-	private Header findFirstHeader(String name) {
-		Header[] headers = response.getAllHeaders();
-		for (Header header : headers) {
-			if (header.getName().toLowerCase().equals(name.toLowerCase())) {
-				return header;
-			}
-		}
-		return null;
 	}
 }

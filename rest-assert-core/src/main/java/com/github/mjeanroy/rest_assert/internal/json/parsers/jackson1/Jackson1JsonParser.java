@@ -22,55 +22,66 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.parsers;
+package com.github.mjeanroy.rest_assert.internal.json.parsers.jackson1;
 
-import com.google.gson.Gson;
+import com.github.mjeanroy.rest_assert.internal.json.JsonException;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.AbstractJsonParser;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Implementation of {@link JsonParser}
- * using Google Gson as internal implementation.
+ * Implementation of {@link com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser}
+ * using Jackson1 as internal implementation.
  *
  * This class is implemented as a singleton.
  * This class is thread safe.
  */
-public class GsonJsonParser extends AbstractJsonParser {
+public class Jackson1JsonParser extends AbstractJsonParser {
 
 	/**
 	 * Singleton instance.
 	 */
-	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
+	private static final Jackson1JsonParser INSTANCE = new Jackson1JsonParser();
 
 	/**
 	 * Get parser.
 	 *
 	 * @return Parser.
 	 */
-	public static GsonJsonParser gsonParser() {
+	public static Jackson1JsonParser jackson1Parser() {
 		return INSTANCE;
 	}
 
 	/**
-	 * Internal parser.
+	 * Jackson mapper.
 	 */
-	private final Gson gson;
+	private final ObjectMapper mapper;
 
-	private GsonJsonParser() {
+	private Jackson1JsonParser() {
 		super();
-		this.gson = new Gson();
+		this.mapper = new ObjectMapper();
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
+	@Override
 	public Map<String, Object> parseObject(String json) {
-		return gson.fromJson(json, Map.class);
+		return parse(json, Map.class);
 	}
 
-	@Override
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<Object> parseArray(String json) {
-		return gson.fromJson(json, List.class);
+		return parse(json, List.class);
+	}
+
+	private <T> T parse(String json, Class<T> klass) {
+		try {
+			return mapper.readValue(json, klass);
+		}
+		catch (Exception ex) {
+			throw new JsonException(ex);
+		}
 	}
 }

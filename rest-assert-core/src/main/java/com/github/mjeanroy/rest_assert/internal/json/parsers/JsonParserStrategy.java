@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.GsonJsonParser.gsonParser;
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.gson.GsonJsonParser.gsonParser;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.jackson1.Jackson1JsonParser.jackson1Parser;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.jackson2.Jackson2JsonParser.jackson2Parser;
 import static com.github.mjeanroy.rest_assert.utils.ClassUtils.isPresent;
 
 /**

@@ -22,16 +22,17 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.parsers;
+package com.github.mjeanroy.rest_assert.internal.json.parsers.jackson2;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mjeanroy.rest_assert.internal.json.JsonException;
+import com.github.mjeanroy.rest_assert.internal.json.parsers.AbstractJsonParser;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * Implementation of {@link JsonParser}
+ * Implementation of {@link com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser}
  * using Jackson2 as internal implementation.
  *
  * This class is implemented as a singleton.

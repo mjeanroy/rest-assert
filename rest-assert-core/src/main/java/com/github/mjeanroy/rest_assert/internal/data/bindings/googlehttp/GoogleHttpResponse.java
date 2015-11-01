@@ -22,38 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings;
+package com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
-import com.ning.http.client.Response;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
+import static com.google.api.client.util.IOUtils.copy;
 
 /**
- * Implementation of {@link HttpResponse}
- * using Async-Http framework as real implementation.
+ * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
+ * using Google Http Client framework as real implementation.
  */
-public class AsyncHttpResponse implements HttpResponse {
+public class GoogleHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link HttpResponse} using instance
-	 * of {@link Response}.
+	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse} using instance
+	 * of {@link com.ning.http.client.Response}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static AsyncHttpResponse httpResponse(Response response) {
-		return new AsyncHttpResponse(response);
+	public static GoogleHttpResponse httpResponse(com.google.api.client.http.HttpResponse response) {
+		return new GoogleHttpResponse(response);
 	}
 
 	/**
-	 * Original Async-Http response.
+	 * Original Google Http Response.
 	 */
-	private final Response response;
+	private final com.google.api.client.http.HttpResponse response;
 
 	// Use static factory
-	private AsyncHttpResponse(Response response) {
+	private GoogleHttpResponse(com.google.api.client.http.HttpResponse response) {
 		this.response = response;
 	}
 
@@ -64,18 +67,21 @@ public class AsyncHttpResponse implements HttpResponse {
 
 	@Override
 	public boolean hasHeader(String name) {
-		return response.getHeaders().containsKey(name);
+		return response.getHeaders().getFirstHeaderStringValue(name) != null;
 	}
 
 	@Override
 	public String getHeader(String name) {
-		return hasHeader(name) ? response.getHeader(name) : null;
+		return response.getHeaders().getFirstHeaderStringValue(name);
 	}
 
 	@Override
 	public String getContent() {
-		try {
-			return response.getResponseBody();
+		try (InputStream is = response.getContent();
+				 ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+
+			copy(is, bos);
+			return new String(bos.toByteArray(), response.getContentCharset());
 		}
 		catch (IOException ex) {
 			throw new UnparseableResponseBodyException(ex);

@@ -22,34 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings;
+package com.github.mjeanroy.rest_assert.internal.data.bindings.javax;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 /**
- * Implementation of {@link Cookie}
- * using Apache HttpClient framework as real implementation.
+ * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.Cookie}
+ * using javax servlet api as real implementation.
  */
-public class ApacheHttpCookie implements Cookie {
+public class JavaxCookie implements Cookie {
 
 	/**
-	 * Create new {@link Cookie} using instance
-	 * of {@link org.apache.http.cookie.Cookie}.
+	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.Cookie} using instance
+	 * of {@link javax.servlet.http.Cookie}.
 	 *
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
 	 */
-	public static ApacheHttpCookie apacheHttpCookie(org.apache.http.cookie.Cookie cookie) {
-		return new ApacheHttpCookie(cookie);
+	public static JavaxCookie javaxCookie(javax.servlet.http.Cookie cookie) {
+		return new JavaxCookie(cookie);
 	}
 
 	/**
-	 * Original apache http cookie.
+	 * Original cookie.
 	 */
-	private final org.apache.http.cookie.Cookie cookie;
+	private final javax.servlet.http.Cookie cookie;
 
 	// Use static factory
-	private ApacheHttpCookie(org.apache.http.cookie.Cookie cookie) {
+	private JavaxCookie(javax.servlet.http.Cookie cookie) {
 		this.cookie = cookie;
 	}
 
@@ -75,18 +75,16 @@ public class ApacheHttpCookie implements Cookie {
 
 	@Override
 	public boolean isSecured() {
-		return cookie.isSecure();
+		return cookie.getSecure();
 	}
 
 	@Override
 	public boolean isHttpOnly() {
-		// Not supported
-		return false;
+		return cookie.isHttpOnly();
 	}
 
 	@Override
 	public int getMaxAge() {
-		// Not supported
-		return 0;
+		return cookie.getMaxAge();
 	}
 }
