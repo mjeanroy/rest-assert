@@ -30,7 +30,7 @@
 		<google-http-client.version>1.19.0</google-http-client.version>
 		<jackson-2.version>2.7.3</jackson-2.version>
 		<jackson-1.version>1.9.13</jackson-1.version>
-		<gson.version>2.3.1</gson.version>
+		<gson.version>2.6.2</gson.version>
 		<junit.version>4.11</junit.version>
 		<assertj.version>1.6.1</assertj.version>
 		<mockito.version>1.9.5</mockito.version>
