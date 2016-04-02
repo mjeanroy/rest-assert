@@ -63,7 +63,7 @@ public class CookieAssert_assertHasMaxAge_Test extends AbstractCookieTest {
 		};
 	}
 
-	protected Cookie cookie(int maxAge) {
+	protected Cookie cookie(long maxAge) {
 		return newCookie("name", "value", "domain", "path", maxAge, true, true);
 	}
 }

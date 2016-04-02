@@ -76,5 +76,5 @@ public interface Cookie {
 	 *
 	 * @return Max age (in seconds).
 	 */
-	int getMaxAge();
+	long getMaxAge();
 }

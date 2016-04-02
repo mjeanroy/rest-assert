@@ -120,7 +120,7 @@ public class JavaxCookieTest {
 		when(javaxCookie.getMaxAge()).thenReturn(expectedMaxAge);
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
-		int maxAge = cookie.getMaxAge();
+		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
 		verify(javaxCookie).getMaxAge();

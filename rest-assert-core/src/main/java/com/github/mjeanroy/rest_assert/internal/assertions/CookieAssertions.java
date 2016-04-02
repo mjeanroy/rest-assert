@@ -124,8 +124,8 @@ public final class CookieAssertions {
 	 * @param maxAge Expected max age.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMaxAge(Cookie cookie, int maxAge) {
-		int actualMaxAge = cookie.getMaxAge();
+	public AssertionResult hasMaxAge(Cookie cookie, long maxAge) {
+		long actualMaxAge = cookie.getMaxAge();
 		return actualMaxAge == maxAge ?
 				success() :
 				failure(shouldHaveMaxAge(maxAge, actualMaxAge));

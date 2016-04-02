@@ -40,11 +40,11 @@ public class ShouldHaveMaxAge extends AbstractError {
 	/**
 	 * Build error.
 	 *
-	 * @param expectedPath Expected cookie domain.
-	 * @param actualPath Actual cookie domain.
+	 * @param expectedMaxAge Expected cookie domain.
+	 * @param actualMaxAge Actual cookie domain.
 	 * @return Error.
 	 */
-	public static ShouldHaveMaxAge shouldHaveMaxAge(int expectedMaxAge, int actualMaxAge) {
+	public static ShouldHaveMaxAge shouldHaveMaxAge(long expectedMaxAge, long actualMaxAge) {
 		return new ShouldHaveMaxAge("Expecting cookie to have max-age %s but was %s", expectedMaxAge, actualMaxAge);
 	}
 }

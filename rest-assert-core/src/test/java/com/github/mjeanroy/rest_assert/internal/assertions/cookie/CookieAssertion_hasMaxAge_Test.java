@@ -44,8 +44,8 @@ public class CookieAssertion_hasMaxAge_Test extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final int expectedMaxAge = success().getMaxAge();
-		final int actualMaxAge = expectedMaxAge + 1;
+		final long expectedMaxAge = success().getMaxAge();
+		final long actualMaxAge = expectedMaxAge + 1;
 		return cookie(actualMaxAge);
 	}
 
@@ -61,14 +61,14 @@ public class CookieAssertion_hasMaxAge_Test extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final int expectedMaxAge = success().getMaxAge();
-		final int actualMaxAge = failure().getMaxAge();
-		return new Integer[] {
+		final long expectedMaxAge = success().getMaxAge();
+		final long actualMaxAge = failure().getMaxAge();
+		return new Long[] {
 			expectedMaxAge, actualMaxAge
 		};
 	}
 
-	protected Cookie cookie(int maxAge) {
+	protected Cookie cookie(long maxAge) {
 		return newCookie("name", "value", "domain", "path", maxAge, true, true);
 	}
 }
