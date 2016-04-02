@@ -28,7 +28,7 @@
 		<async-http-client.version>1.8.15</async-http-client.version>
 		<httpclient.version>4.3.6</httpclient.version>
 		<google-http-client.version>1.19.0</google-http-client.version>
-		<jackson-2.version>2.4.0</jackson-2.version>
+		<jackson-2.version>2.7.3</jackson-2.version>
 		<jackson-1.version>1.9.13</jackson-1.version>
 		<gson.version>2.3.1</gson.version>
 		<junit.version>4.11</junit.version>
