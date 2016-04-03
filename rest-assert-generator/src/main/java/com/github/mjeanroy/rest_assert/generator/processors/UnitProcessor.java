@@ -29,10 +29,18 @@ import com.github.mjeanroy.rest_assert.generator.Template;
 import com.github.mjeanroy.rest_assert.generator.TemplateEngine;
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.CookieAssert.cookieAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.HttpAssert.httpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.JsonAssert.jsonAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.ApacheHttpAssert.apacheHttpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.GoogleHttpAssert.googleHttpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.HttpAssert.httpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 /**
  * Set of processors that will be used to generate assertions
@@ -46,7 +54,12 @@ public enum UnitProcessor {
 	 */
 	HTTP_RESPONSE(
 			assertTemplate(),
-			httpAssert()
+			asList(
+				httpAssert(),
+				asyncHttpAssert(),
+				apacheHttpAssert(),
+				googleHttpAssert()
+			)
 	),
 
 	/**
@@ -55,7 +68,7 @@ public enum UnitProcessor {
 	 */
 	COOKIES(
 			assertTemplate(),
-			cookieAssert()
+			singletonList(cookieAssert())
 	),
 
 	/**
@@ -64,7 +77,7 @@ public enum UnitProcessor {
 	 */
 	JSON(
 			assertTemplate(),
-			jsonAssert()
+			singletonList(jsonAssert())
 	);
 
 	/**
@@ -75,12 +88,12 @@ public enum UnitProcessor {
 	/**
 	 * Data that will be merged into template.
 	 */
-	private final TemplateModel model;
+	private final List<TemplateModel> models;
 
 	// Create new processor
-	private UnitProcessor(Template template, TemplateModel model) {
+	private UnitProcessor(Template template, List<TemplateModel> models) {
 		this.template = template;
-		this.model = model;
+		this.models = models;
 	}
 
 	/**
@@ -89,8 +102,13 @@ public enum UnitProcessor {
 	 * @param engine Template engine to use.
 	 * @return Class file.
 	 */
-	public ClassFile process(TemplateEngine engine) {
-		String content = engine.execute(template, model.data());
-		return new ClassFile(model.getPackageName(), model.getClassName(), content);
+	public List<ClassFile> process(TemplateEngine engine) {
+		List<ClassFile> results = new ArrayList<>(models.size());
+		for (TemplateModel model : models) {
+			String content = engine.execute(template, model.data());
+			results.add(new ClassFile(model.getPackageName(), model.getClassName(), content));
+		}
+
+		return results;
 	}
 }

@@ -38,7 +38,7 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 
 	@Before
 	public void setUp() {
-		jsonAssert = JsonAssert.jsonAssert();
+		jsonAssert = (JsonAssert) JsonAssert.jsonAssert();
 	}
 
 	@Override
@@ -69,6 +69,11 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getExpectedActualClass() {
 		return String.class.getName();
+	}
+
+	@Override
+	protected String getFactory() {
+		return null;
 	}
 
 	@Override

@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
 
-import java.util.Map;
-
-import org.assertj.core.api.Condition;
-import org.junit.Before;
-
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.assertj.core.api.Condition;
+import org.junit.Before;
+
+import java.util.Map;
 
 public class CookieAssertTest extends AbstractTemplateModelTest {
 
@@ -40,7 +39,7 @@ public class CookieAssertTest extends AbstractTemplateModelTest {
 
 	@Before
 	public void setUp() {
-		cookieAssert = CookieAssert.cookieAssert();
+		cookieAssert = (CookieAssert) CookieAssert.cookieAssert();
 	}
 
 	@Override
@@ -71,6 +70,11 @@ public class CookieAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getExpectedActualClass() {
 		return Cookie.class.getName();
+	}
+
+	@Override
+	protected String getFactory() {
+		return null;
 	}
 
 	@Override

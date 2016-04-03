@@ -48,7 +48,7 @@ public class JsonAssert extends AbstractJsonsModel implements TemplateModel {
 	 *
 	 * @return Singleton instance.
 	 */
-	public static JsonAssert jsonAssert() {
+	public static TemplateModel jsonAssert() {
 		return INSTANCE;
 	}
 

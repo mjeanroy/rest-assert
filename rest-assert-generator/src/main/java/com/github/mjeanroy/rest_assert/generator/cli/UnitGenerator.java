@@ -50,8 +50,10 @@ public class UnitGenerator {
 		TemplateEngine templateEngine = MustacheTemplateEngine.instance();
 		List<UnitProcessor> templates = getProcessors();
 		for (UnitProcessor template : templates) {
-			ClassFile classFile = template.process(templateEngine);
-			classFile.writeTo(buildDirectory);
+			List<ClassFile> classFiles = template.process(templateEngine);
+			for (ClassFile classFile : classFiles) {
+				classFile.writeTo(buildDirectory);
+			}
 		}
 	}
 

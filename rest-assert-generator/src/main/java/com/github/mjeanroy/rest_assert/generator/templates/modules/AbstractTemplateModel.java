@@ -62,7 +62,14 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		map.put("core_class_name", getCoreClassName());
 		map.put("actual_class", getActualClass());
 		map.put("methods", getMethods());
+		map.put("factory", getFactory());
 		return unmodifiableMap(map);
+	}
+
+	@Override
+	public String getFactory() {
+		// Default implementation.
+		return null;
 	}
 
 	/**

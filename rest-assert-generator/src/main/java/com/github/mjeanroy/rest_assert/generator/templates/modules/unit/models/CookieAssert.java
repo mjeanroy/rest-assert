@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
 
-import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
-
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
+import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
  * Template model for rest-assert-unit CookieAssert class.
@@ -46,7 +46,7 @@ public class CookieAssert extends AbstractTemplateModel implements TemplateModel
 	 *
 	 * @return Singleton instance.
 	 */
-	public static CookieAssert cookieAssert() {
+	public static TemplateModel cookieAssert() {
 		return INSTANCE;
 	}
 

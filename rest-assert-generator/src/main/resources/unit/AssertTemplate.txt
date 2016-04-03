@@ -57,7 +57,7 @@ public final class {{class_name}} {
 	 * @param actual Actual object.
 	 */
 	public static void {{method_name}}(String message, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		check(message, assertions.{{core_method_name}}(actual{{#arguments}}, {{name}}{{/arguments}}));
+		check(message, assertions.{{core_method_name}}({{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}));
 	}
 
 	{{/methods}}

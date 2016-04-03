@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.http;
 
-import java.util.Map;
-
-import org.assertj.core.api.Condition;
-import org.junit.Before;
-
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.Condition;
+import org.junit.Before;
+
+import java.util.Map;
 
 public class HttpResponseAssertTest extends AbstractTemplateModelTest {
 
@@ -40,7 +39,7 @@ public class HttpResponseAssertTest extends AbstractTemplateModelTest {
 
 	@Before
 	public void setUp() {
-		httpResponseAssert = HttpResponseAssert.httpResponseAssert();
+		httpResponseAssert = (HttpResponseAssert) HttpResponseAssert.httpResponseAssert();
 	}
 
 	@Override
@@ -71,6 +70,11 @@ public class HttpResponseAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getExpectedActualClass() {
 		return HttpResponse.class.getName();
+	}
+
+	@Override
+	protected String getFactory() {
+		return null;
 	}
 
 	@Override

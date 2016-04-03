@@ -24,17 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.api.http.exact;
 
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.tests.Function;
+import org.junit.Test;
+
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static java.lang.String.format;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.Function;
-
-public abstract class AbstractHttpStatusTest extends AbstractAssertTest<HttpResponse> {
+public abstract class AbstractHttpStatusTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_pass_with_correct_status() {
@@ -69,11 +66,7 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertTest<HttpResp
 		});
 	}
 
-	protected HttpResponse newResponse(int status) {
-		return new HttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
-	}
+	protected abstract T newResponse(int status);
 
 	protected abstract int status();
 }

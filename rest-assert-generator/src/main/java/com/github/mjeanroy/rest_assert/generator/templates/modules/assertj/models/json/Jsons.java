@@ -48,7 +48,7 @@ public class Jsons extends AbstractJsonsModel implements TemplateModel {
 	 *
 	 * @return Singleton instance.
 	 */
-	public static Jsons jsonsModel() {
+	public static TemplateModel jsonsModel() {
 		return INSTANCE;
 	}
 

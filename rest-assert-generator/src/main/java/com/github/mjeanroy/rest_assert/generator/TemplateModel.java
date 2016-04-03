@@ -48,4 +48,11 @@ public interface TemplateModel {
 	 * @return Class name.
 	 */
 	String getClassName();
+
+	/**
+	 * Get factory name (used to translate object model to rest-assert model).
+	 *
+	 * @return Factory name.
+	 */
+	String getFactory();
 }

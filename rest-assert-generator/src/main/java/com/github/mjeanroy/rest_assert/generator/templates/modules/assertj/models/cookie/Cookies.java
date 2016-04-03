@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.cookie;
 
-import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
-
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
+
+import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
  * Data model to use to produce valid internal assertions for {@link CookieAssertions} class for
@@ -48,7 +48,7 @@ public class Cookies extends AbstractCookieModel implements TemplateModel {
 	 *
 	 * @return Singleton instance.
 	 */
-	public static Cookies cookiesModel() {
+	public static TemplateModel cookiesModel() {
 		return INSTANCE;
 	}
 

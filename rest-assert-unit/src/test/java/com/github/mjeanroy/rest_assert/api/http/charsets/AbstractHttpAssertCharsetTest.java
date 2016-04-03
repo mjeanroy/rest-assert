@@ -25,15 +25,13 @@
 package com.github.mjeanroy.rest_assert.api.http.charsets;
 
 import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static java.lang.String.format;
 
-public abstract class AbstractHttpAssertCharsetTest extends AbstractAssertTest<HttpResponse> {
+public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_pass_with_expected_mime_type() {
@@ -69,12 +67,7 @@ public abstract class AbstractHttpAssertCharsetTest extends AbstractAssertTest<H
 		});
 	}
 
-	protected HttpResponse newResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new HttpResponseMockBuilder()
-			.addHeader("Content-Type", contentType)
-			.build();
-	}
+	protected abstract T newResponse(String charset);
 
 	protected abstract String getCharset();
 }

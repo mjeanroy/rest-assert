@@ -24,14 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules;
 
-import static org.assertj.core.api.Assertions.*;
+import org.assertj.core.api.Condition;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.assertj.core.api.Condition;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 public abstract class AbstractTemplateModelTest {
 
@@ -48,6 +49,8 @@ public abstract class AbstractTemplateModelTest {
 	protected abstract String getExpectedActualClass();
 
 	protected abstract Condition<Map<String, Object>> getMethodCondition();
+
+	protected abstract String getFactory();
 
 	@Test
 	public void it_should_have_package_name() {
@@ -117,13 +120,14 @@ public abstract class AbstractTemplateModelTest {
 		assertThat(data)
 				.isNotNull()
 				.isNotEmpty()
-				.hasSize(5)
+				.hasSize(6)
 				.containsKey("methods")
 				.contains(
 						entry("core_class_name", getExpectedCoreClassName()),
 						entry("actual_class", getExpectedActualClass()),
 						entry("class_name", getExpectedClassName()),
-						entry("package", getExpectedPackageName())
+						entry("package", getExpectedPackageName()),
+						entry("factory", getFactory())
 				);
 	}
 }

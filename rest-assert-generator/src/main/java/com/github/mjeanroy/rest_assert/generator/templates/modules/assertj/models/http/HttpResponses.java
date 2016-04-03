@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.models.http;
 
-import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
-
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
+
+import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
  * Data model to use to produce valid internal assertions for {@link HttpResponseAssertions} class for
@@ -48,7 +48,7 @@ public class HttpResponses extends AbstractHttpResponseModel implements Template
 	 *
 	 * @return Singleton instance.
 	 */
-	public static HttpResponses httpResponsesModel() {
+	public static TemplateModel httpResponsesModel() {
 		return INSTANCE;
 	}
 

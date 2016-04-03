@@ -24,19 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.junit.Test;
+
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
-
-public abstract class AbstractMimeTypeTest extends AbstractAssertTest<HttpResponse> {
+public abstract class AbstractMimeTypeTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_pass_with_expected_mime_type() {
@@ -86,11 +83,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertTest<HttpRespon
 		});
 	}
 
-	protected HttpResponse newResponse(Header header) {
-		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
-	}
+	protected abstract T newResponse(Header header);
 
 	protected abstract String getMimeType();
 

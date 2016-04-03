@@ -61,6 +61,20 @@ public class ApacheHttpResponseMockBuilder {
 	}
 
 	/**
+	 * Add new header.
+	 *
+	 * @param name Header name.
+	 * @param value Header value.
+	 * @return Current builder.
+	 */
+	public ApacheHttpResponseMockBuilder addHeader(String name, String value) {
+		return addHeaders(new ApacheHttpHeaderMockBuilder()
+			.setName(name)
+			.setValue(value)
+			.build());
+	}
+
+	/**
 	 * Add new headers.
 	 *
 	 * @param header Header.

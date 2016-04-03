@@ -27,7 +27,6 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules.assertj.mode
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.Condition;
 import org.junit.Before;
 
@@ -39,7 +38,7 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 
 	@Before
 	public void setUp() {
-		jsonAssert = JsonAssert.jsonAssert();
+		jsonAssert = (JsonAssert) JsonAssert.jsonAssert();
 	}
 
 	@Override
@@ -80,5 +79,10 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 				return !value.get("method_name").toString().startsWith("assert");
 			}
 		};
+	}
+
+	@Override
+	protected String getFactory() {
+		return null;
 	}
 }

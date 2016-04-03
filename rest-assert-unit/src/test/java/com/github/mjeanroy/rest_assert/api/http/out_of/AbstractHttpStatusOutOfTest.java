@@ -25,15 +25,13 @@
 package com.github.mjeanroy.rest_assert.api.http.out_of;
 
 import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static java.lang.String.format;
 
-public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertTest<HttpResponse> {
+public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_pass() {
@@ -80,11 +78,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertTest<Htt
 		}
 	}
 
-	protected HttpResponse newResponse(int status) {
-		return new HttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
-	}
+	protected abstract T newResponse(int status);
 
 	protected abstract int start();
 
