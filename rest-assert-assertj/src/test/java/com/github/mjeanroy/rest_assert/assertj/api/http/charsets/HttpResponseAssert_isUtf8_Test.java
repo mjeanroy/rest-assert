@@ -27,11 +27,9 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.charsets;
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -41,8 +39,9 @@ public class HttpResponseAssert_isUtf8_Test extends AbstractHttpResponseTest {
 	@Override
 	protected HttpResponseAssert createApi() {
 		String contentType = format("application/json;charset=%s", getCharset());
-		Header header = header("Content-Type", contentType);
-		return new HttpResponseAssert(newHttpResponseWithHeader(header));
+		return new HttpResponseAssert(new HttpResponseMockBuilder()
+			.addHeader("Content-Type", contentType)
+			.build());
 	}
 
 	protected String getCharset() {

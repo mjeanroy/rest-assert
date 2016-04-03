@@ -27,20 +27,18 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.ByteArrayInputStream;
 import java.nio.charset.Charset;
 
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(com.google.api.client.http.HttpResponse.class)
@@ -48,7 +46,7 @@ public class GoogleHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
 		HttpResponseAssert assertions = GoogleHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -66,9 +64,9 @@ public class GoogleHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
-		when(response.getContent()).thenReturn(new ByteArrayInputStream(body.getBytes()));
-		when(response.getContentCharset()).thenReturn(Charset.defaultCharset());
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setContent(Charset.defaultCharset(), body)
+			.build();
 
 		JsonAssert assertions = GoogleHttpAssertions.assertJsonThat(response);
 

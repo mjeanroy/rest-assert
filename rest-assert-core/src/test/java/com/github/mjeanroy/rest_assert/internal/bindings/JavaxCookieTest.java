@@ -26,20 +26,20 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.javax.JavaxCookieMockBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class JavaxCookieTest {
 
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.getName()).thenReturn(expectedName);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setName(expectedName)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		String name = cookie.getName();
@@ -51,8 +51,9 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.getValue()).thenReturn(expectedValue);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setValue(expectedValue)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		String value = cookie.getValue();
@@ -64,8 +65,9 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.getDomain()).thenReturn(expectedDomain);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setDomain(expectedDomain)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		String domain = cookie.getDomain();
@@ -77,8 +79,9 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.getPath()).thenReturn(expectedPath);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setPath(expectedPath)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		String path = cookie.getPath();
@@ -89,35 +92,36 @@ public class JavaxCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		boolean expectedSecured = true;
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.getSecure()).thenReturn(expectedSecured);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setSecured(true)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		boolean secured = cookie.isSecured();
 
-		assertThat(secured).isEqualTo(expectedSecured);
+		assertThat(secured).isTrue();
 		verify(javaxCookie).getSecure();
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		boolean expectedHttpOnly = true;
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.isHttpOnly()).thenReturn(expectedHttpOnly);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setHttpOnly(true)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		boolean httpOnly = cookie.isHttpOnly();
 
-		assertThat(httpOnly).isEqualTo(expectedHttpOnly);
+		assertThat(httpOnly).isTrue();
 		verify(javaxCookie).isHttpOnly();
 	}
 
 	@Test
 	public void it_should_get_max_age() {
 		int expectedMaxAge = 10;
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
-		when(javaxCookie.getMaxAge()).thenReturn(expectedMaxAge);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setMaxAge(expectedMaxAge)
+			.build();
 
 		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
 		long maxAge = cookie.getMaxAge();

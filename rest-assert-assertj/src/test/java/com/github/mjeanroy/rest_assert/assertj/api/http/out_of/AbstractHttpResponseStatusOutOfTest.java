@@ -26,14 +26,15 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.out_of;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 
 public abstract class AbstractHttpResponseStatusOutOfTest extends AbstractHttpResponseTest {
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(newHttpResponseWithStatus(status()));
+		return new HttpResponseAssert(new HttpResponseMockBuilder()
+			.setStatus(status())
+			.build());
 	}
 
 	protected abstract int status();

@@ -25,9 +25,8 @@
 package com.github.mjeanroy.rest_assert.assertj.internal.cookie;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import org.assertj.core.api.AssertionInfo;
-
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 public class Cookies_assertHasPath_Test extends AbstractCookiesTest {
 
@@ -63,6 +62,8 @@ public class Cookies_assertHasPath_Test extends AbstractCookiesTest {
 	}
 
 	protected Cookie cookie(String path) {
-		return newCookie("name", "value", "domain", path, 10, true, true);
+		return new CookieMockBuilder()
+			.setPath(path)
+			.build();
 	}
 }

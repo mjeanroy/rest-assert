@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.between;
 
 import static org.mockito.Mockito.*;
 
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -73,9 +74,9 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 	}
 
 	protected HttpResponse newResponse(int status) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.getStatus()).thenReturn(status);
-		return httpResponse;
+		return new HttpResponseMockBuilder()
+			.setStatus(status)
+			.build();
 	}
 
 	protected abstract int start();

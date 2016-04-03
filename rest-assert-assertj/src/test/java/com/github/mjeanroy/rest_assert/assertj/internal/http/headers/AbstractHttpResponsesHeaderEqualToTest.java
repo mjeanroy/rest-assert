@@ -26,11 +26,11 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -72,7 +72,9 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	}
 
 	protected HttpResponse newHttpResponse(Header header) {
-		return newHttpResponseWithHeader(header);
+		return new HttpResponseMockBuilder()
+			.addHeader(header)
+			.build();
 	}
 
 	protected abstract void invoke(HttpResponse httpResponse);

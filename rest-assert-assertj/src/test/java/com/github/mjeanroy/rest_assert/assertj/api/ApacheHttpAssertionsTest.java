@@ -29,26 +29,27 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpEntityMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.apache.http.HttpEntity;
 import org.junit.Test;
-
-import java.io.ByteArrayInputStream;
 
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ApacheHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_http_assertion_object() throws Exception {
-		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
+		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+			.build();
+
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
+
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
 		assertThat(httpResponse)
 				.isNotNull()
@@ -57,10 +58,13 @@ public class ApacheHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+			.build();
+
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
 
 		assertThat(assertions).isNotNull();
+
 		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
 		assertThat(cookie)
 				.isNotNull()
@@ -75,11 +79,11 @@ public class ApacheHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		org.apache.http.HttpResponse response = mock(org.apache.http.HttpResponse.class);
-
-		HttpEntity httpEntity = mock(HttpEntity.class);
-		when(httpEntity.getContent()).thenReturn(new ByteArrayInputStream(body.getBytes()));
-		when(response.getEntity()).thenReturn(httpEntity);
+		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+			.setEntity(new ApacheHttpEntityMockBuilder()
+				.setContent(body)
+				.build())
+			.build();
 
 		JsonAssert assertions = ApacheHttpAssertions.assertJsonThat(response);
 

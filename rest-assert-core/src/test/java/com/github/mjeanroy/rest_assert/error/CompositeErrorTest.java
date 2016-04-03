@@ -24,14 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.error;
 
+import com.github.mjeanroy.rest_assert.tests.mocks.RestAssertErrorMockBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class CompositeErrorTest {
 
@@ -71,9 +70,9 @@ public class CompositeErrorTest {
 	}
 
 	private RestAssertError createError(String message, Object... args) {
-		RestAssertError error = mock(RestAssertError.class);
-		when(error.message()).thenReturn(message);
-		when(error.args()).thenReturn(args);
-		return error;
+		return new RestAssertErrorMockBuilder()
+			.setMessage(message)
+			.setArgs(args)
+			.build();
 	}
 }

@@ -27,8 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
 public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 
@@ -69,6 +68,8 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(String name) {
-		return newCookie(name, "value", "domain", "path", 10, true, true);
+		return new CookieMockBuilder()
+			.setName(name)
+			.build();
 	}
 }

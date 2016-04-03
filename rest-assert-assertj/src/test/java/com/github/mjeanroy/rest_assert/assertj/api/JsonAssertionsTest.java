@@ -26,14 +26,13 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class JsonAssertionsTest {
 
@@ -60,8 +59,10 @@ public class JsonAssertionsTest {
 		);
 
 		String json = jsonObject.toJson();
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.getContent()).thenReturn(json);
+		HttpResponse httpResponse = new HttpResponseMockBuilder()
+			.setContent(json)
+			.build();
+
 		JsonAssert assertions = JsonAssertions.assertJsonThat(httpResponse);
 
 		assertThat(assertions).isNotNull();

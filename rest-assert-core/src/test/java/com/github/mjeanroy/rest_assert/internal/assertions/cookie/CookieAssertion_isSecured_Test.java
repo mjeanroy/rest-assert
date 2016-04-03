@@ -27,8 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.cookie;
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldBeSecured;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
 public class CookieAssertion_isSecured_Test extends AbstractCookieTest {
 
@@ -63,6 +62,8 @@ public class CookieAssertion_isSecured_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(boolean secured) {
-		return newCookie("name", "value", "domain", "path", 10, secured, true);
+		return new CookieMockBuilder()
+			.setSecured(secured)
+			.build();
 	}
 }

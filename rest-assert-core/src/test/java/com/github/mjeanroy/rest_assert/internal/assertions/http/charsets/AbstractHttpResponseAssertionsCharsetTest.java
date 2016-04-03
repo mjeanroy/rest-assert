@@ -29,11 +29,10 @@ import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTes
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
 
 public abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAssertionsTest<HttpResponse> {
@@ -68,7 +67,9 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 
 	protected HttpResponse newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
-		return newHttpResponseWithHeader(header("Content-Type", contentType));
+		return new HttpResponseMockBuilder()
+			.addHeader("Content-Type", contentType)
+			.build();
 	}
 
 	protected abstract String expectedCharset();

@@ -27,20 +27,20 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class HttpResponseAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		HttpResponse response = mock(HttpResponse.class);
+		HttpResponse response = new HttpResponseMockBuilder().build();
 		HttpResponseAssert assertions = HttpResponseAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -52,7 +52,7 @@ public class HttpResponseAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		Cookie cookie = mock(Cookie.class);
+		Cookie cookie = new CookieMockBuilder().build();
 		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
 
 		assertThat(assertions).isNotNull();
@@ -70,8 +70,9 @@ public class HttpResponseAssertionsTest {
 
 		String body = object.toJson();
 
-		HttpResponse response = mock(HttpResponse.class);
-		when(response.getContent()).thenReturn(body);
+		HttpResponse response = new HttpResponseMockBuilder()
+			.setContent(body)
+			.build();
 
 		JsonAssert assertions = HttpResponseAssertions.assertJsonThat(response);
 

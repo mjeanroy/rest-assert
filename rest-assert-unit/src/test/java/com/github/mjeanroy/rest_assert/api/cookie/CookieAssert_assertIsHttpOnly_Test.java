@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.cookie;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
 import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsHttpOnly;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newCookie;
 
 public class CookieAssert_assertIsHttpOnly_Test extends AbstractCookieTest {
 
@@ -62,6 +62,8 @@ public class CookieAssert_assertIsHttpOnly_Test extends AbstractCookieTest {
 	}
 
 	protected Cookie cookie(boolean httpOnly) {
-		return newCookie("name", "value", "domain", "path", 10, true, httpOnly);
+		return new CookieMockBuilder()
+			.setHttpOnly(httpOnly)
+			.build();
 	}
 }

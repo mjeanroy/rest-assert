@@ -26,17 +26,17 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.javax.JavaxCookieMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class JavaxAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		javax.servlet.http.Cookie javaxCookie = mock(javax.servlet.http.Cookie.class);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder().build();
 		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
 
 		assertThat(assertions).isNotNull();

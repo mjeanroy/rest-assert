@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
+import com.github.mjeanroy.rest_assert.tests.mocks.RestAssertErrorMockBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,7 +34,6 @@ import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResul
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.mock;
 
 public class AssertionResultTest {
 
@@ -50,7 +50,7 @@ public class AssertionResultTest {
 
 	@Test
 	public void it_should_be_a_failure() {
-		RestAssertError error = mock(RestAssertError.class);
+		RestAssertError error = new RestAssertErrorMockBuilder().build();
 		AssertionResult result = failure(error);
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();

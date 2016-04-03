@@ -29,11 +29,9 @@ import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTes
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest<HttpResponse> {
 
@@ -71,9 +69,9 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 	}
 
 	protected HttpResponse newResponse(int status) {
-		HttpResponse httpResponse = mock(HttpResponse.class);
-		when(httpResponse.getStatus()).thenReturn(status);
-		return httpResponse;
+		return new HttpResponseMockBuilder()
+			.setStatus(status)
+			.build();
 	}
 
 	protected abstract int start();

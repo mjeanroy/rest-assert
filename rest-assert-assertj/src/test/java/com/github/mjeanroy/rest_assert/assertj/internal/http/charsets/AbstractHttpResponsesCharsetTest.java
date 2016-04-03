@@ -26,11 +26,10 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.charsets;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -67,6 +66,8 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 
 	protected HttpResponse newHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
-		return newHttpResponseWithHeader(header("Content-Type", contentType));
+		return new HttpResponseMockBuilder()
+			.addHeader("Content-Type", contentType)
+			.build();
 	}
 }

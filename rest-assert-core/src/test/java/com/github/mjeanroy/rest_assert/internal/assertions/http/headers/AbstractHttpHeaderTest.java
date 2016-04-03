@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -68,7 +68,9 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 	}
 
 	protected HttpResponse newResponse(Header header) {
-		return newHttpResponseWithHeader(header);
+		return new HttpResponseMockBuilder()
+			.addHeader(header)
+			.build();
 	}
 
 	protected abstract Header getHeader();

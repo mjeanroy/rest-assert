@@ -26,12 +26,12 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.out_of;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithStatus;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +43,10 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 	public void should_pass() {
 		for (int i = 0; i <= 999; i++) {
 			if (i < start() && i > end()) {
-				HttpResponse httpResponse = newHttpResponseWithStatus(i);
+				HttpResponse httpResponse = new HttpResponseMockBuilder()
+					.setStatus(i)
+					.build();
+
 				invoke(someInfo(), httpResponse);
 			}
 		}
@@ -55,7 +58,9 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 		final int start = start();
 		final int end = end();
 		for (int status = start; status <= end; status++) {
-			final HttpResponse httpResponse = newHttpResponseWithStatus(status);
+			final HttpResponse httpResponse = new HttpResponseMockBuilder()
+				.setStatus(status)
+				.build();
 
 			try {
 				invoke(info, httpResponse);

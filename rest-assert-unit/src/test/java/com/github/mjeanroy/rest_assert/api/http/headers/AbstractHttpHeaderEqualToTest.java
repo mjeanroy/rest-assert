@@ -27,11 +27,11 @@ package com.github.mjeanroy.rest_assert.api.http.headers;
 import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
 
@@ -82,7 +82,9 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertTest<H
 	}
 
 	protected HttpResponse newResponse(Header header) {
-		return newHttpResponseWithHeader(header);
+		return new HttpResponseMockBuilder()
+			.addHeader(header)
+			.build();
 	}
 
 	protected abstract Header getHeader();

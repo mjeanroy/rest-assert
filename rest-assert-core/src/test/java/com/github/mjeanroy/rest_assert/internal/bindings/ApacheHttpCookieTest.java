@@ -26,20 +26,20 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
-		when(apacheHttpCookie.getName()).thenReturn(expectedName);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+			.setName(expectedName)
+			.build();
 
 		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
 		String name = cookie.getName();
@@ -51,8 +51,9 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
-		when(apacheHttpCookie.getValue()).thenReturn(expectedValue);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+			.setValue(expectedValue)
+			.build();
 
 		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
 		String value = cookie.getValue();
@@ -64,8 +65,9 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
-		when(apacheHttpCookie.getDomain()).thenReturn(expectedDomain);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+			.setDomain(expectedDomain)
+			.build();
 
 		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
 		String domain = cookie.getDomain();
@@ -77,8 +79,9 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
-		when(apacheHttpCookie.getPath()).thenReturn(expectedPath);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+			.setPath(expectedPath)
+			.build();
 
 		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
 		String path = cookie.getPath();
@@ -89,14 +92,15 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		boolean expectedSecured = true;
-		org.apache.http.cookie.Cookie apacheHttpCookie = mock(org.apache.http.cookie.Cookie.class);
-		when(apacheHttpCookie.isSecure()).thenReturn(expectedSecured);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+			.setSecure(true)
+			.build();
 
 		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
+
 		boolean secured = cookie.isSecured();
 
-		assertThat(secured).isEqualTo(expectedSecured);
+		assertThat(secured).isTrue();
 		verify(apacheHttpCookie).isSecure();
 	}
 }

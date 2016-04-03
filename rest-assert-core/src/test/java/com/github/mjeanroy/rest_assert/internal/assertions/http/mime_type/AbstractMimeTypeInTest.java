@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.mime_type;
 
-import static com.github.mjeanroy.rest_assert.tests.TestData.newHttpResponseWithHeader;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 import java.util.List;
 
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -87,7 +87,9 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 	}
 
 	protected HttpResponse newResponse(Header header) {
-		return newHttpResponseWithHeader(header);
+		return new HttpResponseMockBuilder()
+			.addHeader(header)
+			.build();
 	}
 
 	protected abstract List<String> getMimeTypes();

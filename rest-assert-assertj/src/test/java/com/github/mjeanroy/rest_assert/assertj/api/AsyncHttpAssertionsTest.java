@@ -29,6 +29,8 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
@@ -36,14 +38,12 @@ import org.junit.Test;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class AsyncHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		Response response = mock(Response.class);
+		Response response = new AsyncHttpResponseMockBuilder().build();
 		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -55,7 +55,7 @@ public class AsyncHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = mock(com.ning.http.client.cookie.Cookie.class);
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder().build();
 		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();
@@ -73,8 +73,9 @@ public class AsyncHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		Response response = mock(Response.class);
-		when(response.getResponseBody()).thenReturn(body);
+		Response response = new AsyncHttpResponseMockBuilder()
+			.setResponseBody(body)
+			.build();
 
 		JsonAssert assertions = AsyncHttpAssertions.assertJsonThat(response);
 

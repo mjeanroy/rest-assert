@@ -26,25 +26,25 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpHeadersMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpResponseMockBuilder;
 import com.google.api.client.http.HttpHeaders;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.httpResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mock;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(com.google.api.client.http.HttpResponse.class)
@@ -56,8 +56,9 @@ public class GoogleHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
-		when(response.getStatusCode()).thenReturn(expectedStatus);
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setStatusCode(expectedStatus)
+			.build();
 
 		HttpResponse httpResponse = httpResponse(response);
 		int status = httpResponse.getStatus();
@@ -71,10 +72,13 @@ public class GoogleHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		HttpHeaders httpHeaders = mock(HttpHeaders.class);
-		when(httpHeaders.getFirstHeaderStringValue(headerName)).thenReturn(headerValue);
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
-		when(response.getHeaders()).thenReturn(httpHeaders);
+		HttpHeaders httpHeaders = new GoogleHttpHeadersMockBuilder()
+			.addHeader(headerName, headerValue)
+			.build();
+
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setHeaders(httpHeaders)
+			.build();
 
 		HttpResponse httpResponse = httpResponse(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
@@ -89,10 +93,13 @@ public class GoogleHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		HttpHeaders httpHeaders = mock(HttpHeaders.class);
-		when(httpHeaders.getFirstHeaderStringValue(headerName)).thenReturn(headerValue);
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
-		when(response.getHeaders()).thenReturn(httpHeaders);
+		HttpHeaders httpHeaders = new GoogleHttpHeadersMockBuilder()
+			.addHeader(headerName, headerValue)
+			.build();
+
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setHeaders(httpHeaders)
+			.build();
 
 		HttpResponse httpResponse = httpResponse(response);
 		String result = httpResponse.getHeader(headerName);
@@ -105,10 +112,9 @@ public class GoogleHttpResponseTest {
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
-
-		when(response.getContentCharset()).thenReturn(Charset.defaultCharset());
-		when(response.getContent()).thenReturn(new ByteArrayInputStream(body.getBytes()));
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setContent(Charset.defaultCharset(), body)
+			.build();
 
 		HttpResponse httpResponse = httpResponse(response);
 		String result = httpResponse.getContent();
@@ -120,8 +126,8 @@ public class GoogleHttpResponseTest {
 
 	@Test
 	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
-		IOException ex = Mockito.mock(IOException.class);
-		com.google.api.client.http.HttpResponse response = mock(com.google.api.client.http.HttpResponse.class);
+		IOException ex = mock(IOException.class);
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
 		when(response.getContent()).thenThrow(ex);
 
 		thrown.expect(UnparseableResponseBodyException.class);

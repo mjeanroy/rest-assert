@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.bindings;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
-import com.ning.http.client.FluentCaseInsensitiveStringsMap;
+import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 import org.junit.Rule;
 import org.junit.Test;
@@ -49,8 +49,9 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
-		Response response = mock(Response.class);
-		when(response.getStatusCode()).thenReturn(expectedStatus);
+		Response response = new AsyncHttpResponseMockBuilder()
+			.setStatusCode(expectedStatus)
+			.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
 		int status = httpResponse.getStatus();
@@ -62,30 +63,25 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
-		FluentCaseInsensitiveStringsMap map = mock(FluentCaseInsensitiveStringsMap.class);
-		when(map.containsKey(headerName)).thenReturn(true);
 
-		Response response = mock(Response.class);
-		when(response.getHeaders()).thenReturn(map);
+		Response response = new AsyncHttpResponseMockBuilder()
+			.addHeader(headerName, "foo")
+			.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
-		boolean containsHeader = httpResponse.hasHeader(headerName);
-
-		assertThat(containsHeader).isTrue();
-		verify(response).getHeaders();
-		verify(map).containsKey(headerName);
+		assertThat(httpResponse.hasHeader(headerName)).isTrue();
+		assertThat(httpResponse.hasHeader(headerName.toUpperCase())).isTrue();
+		assertThat(httpResponse.hasHeader(headerName.toLowerCase())).isTrue();
 	}
 
 	@Test
 	public void it_should_return_header_value() {
 		String headerName = "header-name";
 		String headerValue = "header-value";
-		FluentCaseInsensitiveStringsMap map = mock(FluentCaseInsensitiveStringsMap.class);
-		when(map.containsKey(headerName)).thenReturn(true);
 
-		Response response = mock(Response.class);
-		when(response.getHeaders()).thenReturn(map);
-		when(response.getHeader(headerName)).thenReturn(headerValue);
+		Response response = new AsyncHttpResponseMockBuilder()
+			.addHeader(headerName, headerValue)
+			.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
 		String result = httpResponse.getHeader(headerName);
@@ -97,8 +93,9 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		Response response = mock(Response.class);
-		when(response.getResponseBody()).thenReturn(body);
+		Response response = new AsyncHttpResponseMockBuilder()
+			.setResponseBody(body)
+			.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
 		String result = httpResponse.getContent();
@@ -110,7 +107,7 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
 		IOException ex = mock(IOException.class);
-		Response response = mock(Response.class);
+		Response response = new AsyncHttpResponseMockBuilder().build();
 		when(response.getResponseBody()).thenThrow(ex);
 
 		thrown.expect(UnparseableResponseBodyException.class);
