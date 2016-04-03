@@ -43,7 +43,7 @@ public class AsyncHttpResponse implements HttpResponse {
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static AsyncHttpResponse httpResponse(Response response) {
+	public static AsyncHttpResponse create(Response response) {
 		return new AsyncHttpResponse(response);
 	}
 

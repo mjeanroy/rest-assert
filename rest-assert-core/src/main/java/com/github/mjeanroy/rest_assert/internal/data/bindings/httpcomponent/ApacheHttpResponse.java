@@ -45,7 +45,7 @@ public class ApacheHttpResponse implements HttpResponse {
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static ApacheHttpResponse httpResponse(org.apache.http.HttpResponse response) {
+	public static ApacheHttpResponse create(org.apache.http.HttpResponse response) {
 		return new ApacheHttpResponse(response);
 	}
 

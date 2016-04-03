@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie.javaxCookie;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie.create;
 
 /**
  * Entry point for assertion methods for Javax api
@@ -45,7 +45,7 @@ public final class JavaxAssertions {
 	 * @return the created assertion object.
 	 */
 	public static CookieAssert assertThat(javax.servlet.http.Cookie actual) {
-		Cookie cookie = javaxCookie(actual);
+		Cookie cookie = create(actual);
 		return new CookieAssert(cookie);
 	}
 }

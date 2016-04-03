@@ -39,7 +39,7 @@ public class AsyncHttpCookie implements Cookie {
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
 	 */
-	public static AsyncHttpCookie asyncHttpCookie(com.ning.http.client.cookie.Cookie cookie) {
+	public static AsyncHttpCookie create(com.ning.http.client.cookie.Cookie cookie) {
 		return new AsyncHttpCookie(cookie);
 	}
 

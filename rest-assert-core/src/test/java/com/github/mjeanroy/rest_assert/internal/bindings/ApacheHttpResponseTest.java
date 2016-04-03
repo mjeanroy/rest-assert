@@ -38,7 +38,7 @@ import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
@@ -61,7 +61,7 @@ public class ApacheHttpResponseTest {
 				.build())
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -79,7 +79,7 @@ public class ApacheHttpResponseTest {
 			.addHeaders(header1, header2, header3)
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isTrue();
@@ -102,7 +102,7 @@ public class ApacheHttpResponseTest {
 			.addHeaders(header1, header2, header3)
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
@@ -128,7 +128,7 @@ public class ApacheHttpResponseTest {
 				.build())
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
@@ -147,7 +147,7 @@ public class ApacheHttpResponseTest {
 
 		thrown.expect(UnparseableResponseBodyException.class);
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		httpResponse.getContent();
 	}
 

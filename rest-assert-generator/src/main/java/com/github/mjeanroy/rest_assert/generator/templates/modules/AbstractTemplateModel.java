@@ -24,11 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules;
 
-import static com.github.mjeanroy.rest_assert.generator.utils.ClassUtils.findPublicMethods;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.sort;
-import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableMap;
+import com.github.mjeanroy.rest_assert.generator.TemplateModel;
+import com.github.mjeanroy.rest_assert.generator.templates.internal.Arg;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -40,8 +37,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.mjeanroy.rest_assert.generator.TemplateModel;
-import com.github.mjeanroy.rest_assert.generator.templates.internal.Arg;
+import static com.github.mjeanroy.rest_assert.generator.utils.ClassUtils.findPublicMethods;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Abstract representation of template model.
@@ -71,7 +71,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Actual class.
 	 */
-	public abstract String getActualClass();
+	protected abstract String getActualClass();
 
 	/**
 	 * Get Rest-Assert core class that is proxified
@@ -80,7 +80,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Core class.
 	 */
-	public abstract String getCoreClassName();
+	protected abstract String getCoreClassName();
 
 	/**
 	 * Get Rest-Assert core class that will be used
@@ -88,7 +88,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Core class.
 	 */
-	public abstract Class coreClass();
+	protected abstract Class coreClass();
 
 	/**
 	 * Get list of methods data to proxify.
@@ -97,7 +97,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return List of methods.
 	 */
-	public List<Map<String, Object>> getMethods() {
+	protected List<Map<String, Object>> getMethods() {
 		List<Method> methods = findPublicMethods(coreClass());
 
 		// Sort methods by name
@@ -162,7 +162,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 * @param methodName Current method name that is parsed.
 	 * @return Core method to use.
 	 */
-	public abstract String buildCoreMethodName(String methodName);
+	protected abstract String buildCoreMethodName(String methodName);
 
 	/**
 	 * Build method name that is generated.
@@ -170,5 +170,5 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 * @param methodName Current method name that is parsed.
 	 * @return Method name that is generated.
 	 */
-	public abstract String buildMethodName(String methodName);
+	protected abstract String buildMethodName(String methodName);
 }

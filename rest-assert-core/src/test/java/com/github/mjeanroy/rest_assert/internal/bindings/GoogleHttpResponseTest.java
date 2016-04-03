@@ -39,7 +39,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
@@ -60,7 +60,7 @@ public class GoogleHttpResponseTest {
 			.setStatusCode(expectedStatus)
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -80,7 +80,7 @@ public class GoogleHttpResponseTest {
 			.setHeaders(httpHeaders)
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isTrue();
@@ -101,7 +101,7 @@ public class GoogleHttpResponseTest {
 			.setHeaders(httpHeaders)
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
@@ -116,7 +116,7 @@ public class GoogleHttpResponseTest {
 			.setContent(Charset.defaultCharset(), body)
 			.build();
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
@@ -132,7 +132,7 @@ public class GoogleHttpResponseTest {
 
 		thrown.expect(UnparseableResponseBodyException.class);
 
-		HttpResponse httpResponse = httpResponse(response);
+		HttpResponse httpResponse = create(response);
 		httpResponse.getContent();
 	}
 }

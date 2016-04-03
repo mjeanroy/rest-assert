@@ -41,7 +41,7 @@ public class JavaxCookieTest {
 			.setName(expectedName)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
@@ -55,7 +55,7 @@ public class JavaxCookieTest {
 			.setValue(expectedValue)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
@@ -69,7 +69,7 @@ public class JavaxCookieTest {
 			.setDomain(expectedDomain)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
@@ -83,7 +83,7 @@ public class JavaxCookieTest {
 			.setPath(expectedPath)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
@@ -96,7 +96,7 @@ public class JavaxCookieTest {
 			.setSecured(true)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
@@ -109,7 +109,7 @@ public class JavaxCookieTest {
 			.setHttpOnly(true)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
@@ -123,7 +123,7 @@ public class JavaxCookieTest {
 			.setMaxAge(expectedMaxAge)
 			.build();
 
-		Cookie cookie = JavaxCookie.javaxCookie(javaxCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);

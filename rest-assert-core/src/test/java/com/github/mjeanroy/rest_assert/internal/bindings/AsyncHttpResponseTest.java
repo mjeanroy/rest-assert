@@ -53,7 +53,7 @@ public class AsyncHttpResponseTest {
 			.setStatusCode(expectedStatus)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -68,7 +68,7 @@ public class AsyncHttpResponseTest {
 			.addHeader(headerName, "foo")
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		assertThat(httpResponse.hasHeader(headerName)).isTrue();
 		assertThat(httpResponse.hasHeader(headerName.toUpperCase())).isTrue();
 		assertThat(httpResponse.hasHeader(headerName.toLowerCase())).isTrue();
@@ -83,7 +83,7 @@ public class AsyncHttpResponseTest {
 			.addHeader(headerName, headerValue)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
@@ -97,7 +97,7 @@ public class AsyncHttpResponseTest {
 			.setResponseBody(body)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
@@ -112,7 +112,7 @@ public class AsyncHttpResponseTest {
 
 		thrown.expect(UnparseableResponseBodyException.class);
 
-		HttpResponse httpResponse = AsyncHttpResponse.httpResponse(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		httpResponse.getContent();
 	}
 }

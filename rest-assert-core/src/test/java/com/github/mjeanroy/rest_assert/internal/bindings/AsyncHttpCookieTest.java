@@ -41,7 +41,7 @@ public class AsyncHttpCookieTest {
 			.setName(expectedName)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
@@ -55,7 +55,7 @@ public class AsyncHttpCookieTest {
 			.setValue(expectedValue)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
@@ -69,7 +69,7 @@ public class AsyncHttpCookieTest {
 			.setDomain(expectedDomain)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
@@ -83,7 +83,7 @@ public class AsyncHttpCookieTest {
 			.setPath(expectedPath)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
@@ -96,7 +96,7 @@ public class AsyncHttpCookieTest {
 			.setSecure(true)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
@@ -109,7 +109,7 @@ public class AsyncHttpCookieTest {
 			.setHttpOnly(true)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
@@ -123,7 +123,7 @@ public class AsyncHttpCookieTest {
 			.setMaxAge(expectedMaxAge)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.asyncHttpCookie(asyncHttpCookie);
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);

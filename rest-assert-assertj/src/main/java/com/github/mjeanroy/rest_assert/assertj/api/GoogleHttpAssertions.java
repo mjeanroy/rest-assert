@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Google HttpClient
@@ -59,6 +59,6 @@ public final class GoogleHttpAssertions {
 	}
 
 	private static HttpResponse toHttpResponse(com.google.api.client.http.HttpResponse actual) {
-		return httpResponse(actual);
+		return create(actual);
 	}
 }

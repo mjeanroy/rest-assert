@@ -46,7 +46,7 @@ public class GoogleHttpResponse implements HttpResponse {
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static GoogleHttpResponse httpResponse(com.google.api.client.http.HttpResponse response) {
+	public static GoogleHttpResponse create(com.google.api.client.http.HttpResponse response) {
 		return new GoogleHttpResponse(response);
 	}
 

@@ -28,8 +28,8 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie.asyncHttpCookie;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Async-Http
@@ -58,7 +58,7 @@ public final class AsyncHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static CookieAssert assertThat(com.ning.http.client.cookie.Cookie actual) {
-		Cookie cookie = asyncHttpCookie(actual);
+		Cookie cookie = create(actual);
 		return new CookieAssert(cookie);
 	}
 
@@ -73,6 +73,6 @@ public final class AsyncHttpAssertions {
 	}
 
 	private static HttpResponse toHttpResponse(Response actual) {
-		return httpResponse(actual);
+		return create(actual);
 	}
 }

@@ -39,7 +39,7 @@ public class ApacheHttpCookie implements Cookie {
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
 	 */
-	public static ApacheHttpCookie apacheHttpCookie(org.apache.http.cookie.Cookie cookie) {
+	public static ApacheHttpCookie create(org.apache.http.cookie.Cookie cookie) {
 		return new ApacheHttpCookie(cookie);
 	}
 

@@ -41,7 +41,7 @@ public class ApacheHttpCookieTest {
 			.setName(expectedName)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
@@ -55,7 +55,7 @@ public class ApacheHttpCookieTest {
 			.setValue(expectedValue)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
@@ -69,7 +69,7 @@ public class ApacheHttpCookieTest {
 			.setDomain(expectedDomain)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
@@ -83,7 +83,7 @@ public class ApacheHttpCookieTest {
 			.setPath(expectedPath)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
@@ -96,7 +96,7 @@ public class ApacheHttpCookieTest {
 			.setSecure(true)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.apacheHttpCookie(apacheHttpCookie);
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		boolean secured = cookie.isSecured();
 

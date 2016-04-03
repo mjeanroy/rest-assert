@@ -39,7 +39,7 @@ public class JavaxCookie implements Cookie {
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
 	 */
-	public static JavaxCookie javaxCookie(javax.servlet.http.Cookie cookie) {
+	public static JavaxCookie create(javax.servlet.http.Cookie cookie) {
 		return new JavaxCookie(cookie);
 	}
 

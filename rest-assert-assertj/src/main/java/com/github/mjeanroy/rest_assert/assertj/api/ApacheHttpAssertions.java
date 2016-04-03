@@ -27,8 +27,8 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie.apacheHttpCookie;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse.httpResponse;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Apache HttpClient
@@ -57,7 +57,7 @@ public final class ApacheHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static CookieAssert assertThat(org.apache.http.cookie.Cookie actual) {
-		Cookie cookie = apacheHttpCookie(actual);
+		Cookie cookie = create(actual);
 		return new CookieAssert(cookie);
 	}
 
@@ -72,6 +72,6 @@ public final class ApacheHttpAssertions {
 	}
 
 	private static HttpResponse toHttpResponse(org.apache.http.HttpResponse actual) {
-		return httpResponse(actual);
+		return create(actual);
 	}
 }
