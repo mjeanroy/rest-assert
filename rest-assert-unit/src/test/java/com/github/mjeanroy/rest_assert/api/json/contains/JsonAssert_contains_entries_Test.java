@@ -22,61 +22,65 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.json.is_equal_to;
+package com.github.mjeanroy.rest_assert.api.json.contains;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.junit.Test;
 
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertContains;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 
-public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T> {
+public class JsonAssert_contains_entries_Test {
 
 	@Test
-	public void it_should_pass() {
-		invoke(success());
-		invoke("foo", success());
+	public void it_should_pass_if_json_contains_entries() {
+		String json = createJson();
+
+		assertContains(json, JsonAssertions.jsonEntry("id", 1));
+		assertContains(json, JsonAssertions.jsonEntry("name", "John Doe"));
+
+		assertContains(json,
+			JsonAssertions.jsonEntry("id", 1),
+			JsonAssertions.jsonEntry("name", "John Doe")
+		);
 	}
 
 	@Test
 	public void it_should_fail() {
-		final T failure = failure();
-		final String message = "" +
-				"Expecting json entry str to be equal to bar but was foo," + LINE_SEPARATOR +
-				"Expecting json entry nb to be equal to 2.0 but was 1.0," + LINE_SEPARATOR +
-				"Expecting json entry bool to be equal to false but was true," + LINE_SEPARATOR +
-				"Expecting json entry array[0] to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
-				"Expecting json entry array[1] to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
-				"Expecting json entry array[2] to be equal to 3.1 but was 3.0";
+		final String json = createJson();
+		final String message = "Expecting json entry id to be equal to 2 but was 1";
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(failure);
+				assertContains(json, JsonAssertions.jsonEntry("id", 2));
 			}
 		});
 	}
 
 	@Test
 	public void it_should_fail_with_custom_message() {
-		final T failure = failure();
-		final String message = "foo";
+		final String json = createJson();
+		final String message = "error";
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(message, failure);
+				assertContains(message, json, JsonAssertions.jsonEntry("id", 2));
 			}
 		});
 	}
 
-	protected String actual() {
-		return jsonSuccess();
+	private String createJson() {
+		JsonObject jsonObject = jsonObject(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe")
+		);
+
+		return jsonObject.toJson();
 	}
-
-	protected abstract T success();
-
-	protected abstract T failure();
 }

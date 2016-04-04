@@ -25,6 +25,8 @@
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
+import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
+import com.github.mjeanroy.rest_assert.internal.data.defaults.DefaultJsonEntry;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions;
@@ -46,6 +48,7 @@ import java.util.Set;
 
 import static com.github.mjeanroy.rest_assert.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry.shouldHaveEntry;
+import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
@@ -70,6 +73,18 @@ public final class JsonAssertions {
 	 */
 	public static JsonAssertions instance() {
 		return INSTANCE;
+	}
+
+	/**
+	 * Create JSON entry object.
+	 *
+	 * @param key Entry key.
+	 * @param value Entry value.
+	 * @param <T> Type of value.
+	 * @return The JSON entry.
+	 */
+	public static <T>JsonEntry<T> jsonEntry(String key, T value) {
+		return new DefaultJsonEntry<>(key, value);
 	}
 
 	/**
@@ -100,6 +115,39 @@ public final class JsonAssertions {
 		for (String e : entries) {
 			if (!hasEntry(actual, e)) {
 				errors.add(shouldHaveEntry(e));
+			}
+		}
+
+		return errors.isEmpty() ?
+			success() :
+			failure(composeErrors(errors));
+	}
+
+	/**
+	 * Check that given json contains given entries.
+	 *
+	 * @param actual JSON object.
+	 * @param entry Entry to check.
+	 * @param other Other entries to check.
+	 * @return Assertion result.
+	 */
+	public AssertionResult contains(String actual, @Param("entry") JsonEntry<?> entry, @Param("other") JsonEntry<?>... other) {
+		Set<RestAssertError> errors = new LinkedHashSet<>();
+
+		Set<JsonEntry> entries = new LinkedHashSet<>();
+		entries.add(entry);
+		addAll(entries, other);
+
+		for (JsonEntry e : entries) {
+			String key = e.getKey();
+			if (!hasEntry(actual, key)) {
+				errors.add(shouldHaveEntry(key));
+			} else {
+				Object expectedValue = e.getValue();
+				Object actualValue = getEntry(actual, key);
+				if (!expectedValue.equals(actualValue)) {
+					errors.add(shouldHaveEntryEqualTo(key, actualValue, expectedValue));
+				}
 			}
 		}
 

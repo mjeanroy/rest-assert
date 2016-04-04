@@ -22,43 +22,58 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.json.is_equal_to_ignoring;
+package com.github.mjeanroy.rest_assert.assertj.internal.json.contains;
 
+import com.github.mjeanroy.rest_assert.assertj.api.JsonAssertions;
 import com.github.mjeanroy.rest_assert.assertj.internal.Jsons;
+import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
-
-import java.util.Collection;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
-import static java.util.Arrays.asList;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
+public class Jsons_assertContains_entries_Test {
 
 	protected Jsons jsons = Jsons.instance();
 
 	@Test
-	public void should_pass() {
-		invoke(someInfo(), success());
+	public void it_should_pass_if_json_contains_entries() {
+		JsonObject jsonObject = jsonObject(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe")
+		);
+
+		String json = jsonObject.toJson();
+
+		jsons.assertContains(someInfo(), json, JsonAssertions.jsonEntry("id", 1));
+		jsons.assertContains(someInfo(), json, JsonAssertions.jsonEntry("name", "John Doe"));
+		jsons.assertContains(someInfo(), json, JsonAssertions.jsonEntry("$.id", 1));
+		jsons.assertContains(someInfo(), json, JsonAssertions.jsonEntry("$.name", "John Doe"));
+		jsons.assertContains(someInfo(), json,
+			JsonAssertions.jsonEntry("id", 1),
+			JsonAssertions.jsonEntry("name", "John Doe")
+		);
 	}
 
 	@Test
-	public void should_fail() {
+	public void it_should_fail_if_json_does_not_contains_entry() {
 		final AssertionInfo info = someInfo();
-		final T json = failure();
+		final JsonObject jsonObject = jsonObject(
+			jsonEntry("id", 1)
+		);
+
+		final String json = jsonObject.toJson();
 
 		try {
-			invoke(info, json);
+			jsons.assertContains(info, json, JsonAssertions.jsonEntry("id", 2));
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
-			String expectedMessage = "" +
-					"Expecting json entry \"array[0]\" to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
-					"Expecting json entry \"array[1]\" to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
-					"Expecting json entry \"array[2]\" to be equal to 3.1 but was 3.0";
+			String expectedMessage = "Expecting json entry \"id\" to be equal to 2 but was 1";
 
 			assertThat(e.getMessage())
 					.isNotNull()
@@ -70,14 +85,4 @@ public abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
 	protected String actual() {
 		return jsonSuccess();
 	}
-
-	protected Collection<String> ignoringKeys() {
-		return asList("str", "nb", "bool");
-	}
-
-	protected abstract T success();
-
-	protected abstract T failure();
-
-	protected abstract void invoke(AssertionInfo info, T json);
 }

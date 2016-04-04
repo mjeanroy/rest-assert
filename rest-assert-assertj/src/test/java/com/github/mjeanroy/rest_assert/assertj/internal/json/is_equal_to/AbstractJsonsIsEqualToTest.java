@@ -53,12 +53,12 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			String expectedMessage = "" +
-					"Expecting json entry \"str\" to be equal to \"foo\" but was \"bar\"," + LINE_SEPARATOR +
-					"Expecting json entry \"nb\" to be equal to 1.0 but was 2.0," + LINE_SEPARATOR +
-					"Expecting json entry \"bool\" to be equal to true but was false," + LINE_SEPARATOR +
-					"Expecting json entry \"array[0]\" to be equal to 1.0 but was 1.1," + LINE_SEPARATOR +
-					"Expecting json entry \"array[1]\" to be equal to 2.0 but was 2.1," + LINE_SEPARATOR +
-					"Expecting json entry \"array[2]\" to be equal to 3.0 but was 3.1";
+					"Expecting json entry \"str\" to be equal to \"bar\" but was \"foo\"," + LINE_SEPARATOR +
+					"Expecting json entry \"nb\" to be equal to 2.0 but was 1.0," + LINE_SEPARATOR +
+					"Expecting json entry \"bool\" to be equal to false but was true," + LINE_SEPARATOR +
+					"Expecting json entry \"array[0]\" to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
+					"Expecting json entry \"array[1]\" to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
+					"Expecting json entry \"array[2]\" to be equal to 3.1 but was 3.0";
 
 			assertThat(e.getMessage())
 					.isNotNull()

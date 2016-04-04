@@ -25,10 +25,26 @@
 package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
 
 public class JsonAssertions {
 
 	private JsonAssertions() {
+	}
+
+	/**
+	 * Create JSON entry.
+	 *
+	 * Basically, a shortcut to {@link com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
+	 * this method may be used to avoid to import the same class name.
+	 *
+	 * @param key JSON key.
+	 * @param value JSON value.
+	 * @param <T> Type of value.
+	 * @return JSON entry.
+	 */
+	public static <T>JsonEntry jsonEntry(String key, T value) {
+		return com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions.jsonEntry(key, value);
 	}
 
 	/**

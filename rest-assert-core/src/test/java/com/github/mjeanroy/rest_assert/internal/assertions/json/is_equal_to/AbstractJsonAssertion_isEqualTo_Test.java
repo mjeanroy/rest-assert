@@ -63,12 +63,12 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 				"Expecting json entry %s to be equal to %s but was %s";
 
 		Object[] args = new Object[] {
-				"str", "foo", "bar",
-				"nb", 1.0, 2.0,
-				"bool", true, false,
-				"array[0]", 1.0, 1.1,
-				"array[1]", 2.0, 2.1,
-				"array[2]", 3.0, 3.1
+				"str", "bar", "foo",
+				"nb", 2.0, 1.0,
+				"bool", false, true,
+				"array[0]", 1.1, 1.0,
+				"array[1]", 2.1, 2.0,
+				"array[2]", 3.1, 3.0
 		};
 
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,28 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.data;
 
 /**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
+ * Standard JSON entry defined by:
+ * - A key.
+ * - A value.
+ *
+ * @param <T> Type of value.
  */
-public class ShouldHaveEntryEqualTo extends AbstractJsonError {
-
-	// Private constructor, use static factory instead
-	private ShouldHaveEntryEqualTo(String entryName, String message, Object... args) {
-		super(entryName, message, args);
-	}
+public interface JsonEntry<T> {
 
 	/**
-	 * Build error.
+	 * Get entry key.
 	 *
-	 * @param entry Entry name.
-	 * @param actualValue Actual value.
-	 * @param expectedValue Expected value.
-	 * @return Error.
+	 * @return JSON entry key.
 	 */
-	public static ShouldHaveEntryEqualTo shouldHaveEntryEqualTo(String entry, Object actualValue, Object expectedValue) {
-		return new ShouldHaveEntryEqualTo(entry, "Expecting json entry %s to be equal to %s but was %s", entry, expectedValue, actualValue);
-	}
+	String getKey();
+
+	/**
+	 * Get entry value.
+	 *
+	 * @return JSON entry value.
+	 */
+	T getValue();
 }
