@@ -22,55 +22,48 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.apache_http;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.tests.Function;
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
+import org.apache.http.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+import static com.github.mjeanroy.rest_assert.api.cookie.ApacheHttpCookieAssert.assertIsSecured;
 
-public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
+public class CookieAssert_assertIsSecured_Test extends AbstractApacheHttpCookieTest {
 
-	@Test
-	public void it_should_pass() {
-		T cookie = success();
-		invoke(cookie);
-		invoke("message", cookie);
+	@Override
+	protected void invoke(Cookie actual) {
+		assertIsSecured(actual);
 	}
 
-	@Test
-	public void it_should_fail() {
-		final T cookie = failure();
-		final String message = format(pattern(), placeholders());
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(cookie);
-			}
-		});
+	@Override
+	protected void invoke(String message, Cookie actual) {
+		assertIsSecured(message, actual);
 	}
 
-	@Test
-	public void it_should_fail_with_custom_message() {
-		final T cookie = failure();
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, cookie);
-			}
-		});
+	@Override
+	protected Cookie success() {
+		return cookie(true);
 	}
 
-	protected abstract T success();
+	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
 
-	protected abstract T failure();
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to be secured";
+	}
 
-	protected abstract String pattern();
+	@Override
+	protected Object[] placeholders() {
+		return new Object[0];
+	}
 
-	protected abstract Object[] placeholders();
+	protected Cookie cookie(boolean secured) {
+		return new ApacheHttpCookieMockBuilder()
+				.setSecure(secured)
+				.build();
+	}
 }

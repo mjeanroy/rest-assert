@@ -22,48 +22,11 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.apache_http;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.api.cookie.AbstractCookieTest;
+import org.apache.http.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsHttpOnly;
+public abstract class AbstractApacheHttpCookieTest extends AbstractCookieTest<Cookie> {
 
-public class CookieAssert_assertIsHttpOnly_Test extends AbstractCookieTest {
-
-	@Override
-	protected void invoke(Cookie actual) {
-		assertIsHttpOnly(actual);
-	}
-
-	@Override
-	protected void invoke(String message, Cookie actual) {
-		assertIsHttpOnly(message, actual);
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie(true);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(false);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie to be 'http only'";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean httpOnly) {
-		return new CookieMockBuilder()
-			.setHttpOnly(httpOnly)
-			.build();
-	}
 }

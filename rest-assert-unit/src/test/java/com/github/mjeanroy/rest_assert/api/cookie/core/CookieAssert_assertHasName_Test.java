@@ -22,48 +22,54 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.core;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasName;
 
-public class CookieAssert_assertIsNotHttpOnly_Test extends AbstractCookieTest {
+public class CookieAssert_assertHasName_Test extends AbstractCoreCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+		assertHasName(actual, success().getName());
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+		assertHasName(message, actual, success().getName());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie("foo");
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
+		final String expectedName = success().getName();
+		final String actualName = expectedName + "foo";
+		return cookie(actualName);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to have name %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		final String expectedName = success().getName();
+		final String actualName = failure().getName();
+		return new Object[] {
+				expectedName, actualName
+		};
 	}
 
-	protected Cookie cookie(boolean httpOnly) {
+	protected Cookie cookie(String name) {
 		return new CookieMockBuilder()
-			.setHttpOnly(httpOnly)
+			.setName(name)
 			.build();
 	}
 }

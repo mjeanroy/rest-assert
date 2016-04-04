@@ -22,48 +22,54 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.apache_http;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
+import org.apache.http.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsSecured;
+import static com.github.mjeanroy.rest_assert.api.cookie.ApacheHttpCookieAssert.assertHasValue;
 
-public class CookieAssert_assertIsSecured_Test extends AbstractCookieTest {
+public class CookieAssert_assertHasValue_Test extends AbstractApacheHttpCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertIsSecured(actual);
+		assertHasValue(actual, success().getValue());
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertIsSecured(message, actual);
+		assertHasValue(message, actual, success().getValue());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(true);
+		return cookie("foo");
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(false);
+		final String expectedValue = success().getValue();
+		final String actualValue = expectedValue + "foo";
+		return cookie(actualValue);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to be secured";
+		return "Expecting cookie to have value %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		final String expectedValue = success().getValue();
+		final String actualValue = failure().getValue();
+		return new Object[]{
+				expectedValue, actualValue
+		};
 	}
 
-	protected Cookie cookie(boolean secured) {
-		return new CookieMockBuilder()
-			.setSecured(secured)
-			.build();
+	protected Cookie cookie(String value) {
+		return new ApacheHttpCookieMockBuilder()
+				.setValue(value)
+				.build();
 	}
 }

@@ -32,8 +32,11 @@ import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.CookieAssert.cookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.AsyncHttpCookieAssert.asyncHttpCookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.CookieAssert.cookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.JsonAssert.jsonAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.JavaxCookieAssert.javaxCookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.ApacheHttpAssert.apacheHttpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.GoogleHttpAssert.googleHttpAssert;
@@ -68,7 +71,12 @@ public enum UnitProcessor {
 	 */
 	COOKIES(
 			assertTemplate(),
-			singletonList(cookieAssert())
+			asList(
+					cookieAssert(),
+					asyncHttpCookieAssert(),
+					apacheHttpCookieAssert(),
+					javaxCookieAssert()
+			)
 	),
 
 	/**

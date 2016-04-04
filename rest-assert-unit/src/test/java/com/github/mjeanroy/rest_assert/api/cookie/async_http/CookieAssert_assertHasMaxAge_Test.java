@@ -22,55 +22,50 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.async_http;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.tests.Function;
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpCookieMockBuilder;
+import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+import static com.github.mjeanroy.rest_assert.api.cookie.AsyncHttpCookieAssert.assertHasMaxAge;
 
-public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
+public class CookieAssert_assertHasMaxAge_Test extends AbstractAsyncHttpCookieTest {
 
-	@Test
-	public void it_should_pass() {
-		T cookie = success();
-		invoke(cookie);
-		invoke("message", cookie);
+	@Override
+	protected void invoke(Cookie actual) {
+		assertHasMaxAge(actual, success().getMaxAge());
 	}
 
-	@Test
-	public void it_should_fail() {
-		final T cookie = failure();
-		final String message = format(pattern(), placeholders());
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(cookie);
-			}
-		});
+	@Override
+	protected void invoke(String message, Cookie actual) {
+		assertHasMaxAge(message, actual, success().getMaxAge());
 	}
 
-	@Test
-	public void it_should_fail_with_custom_message() {
-		final T cookie = failure();
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, cookie);
-			}
-		});
+	@Override
+	protected Cookie success() {
+		return cookie(10);
 	}
 
-	protected abstract T success();
+	@Override
+	protected Cookie failure() {
+		return cookie(success().getMaxAge() + 1);
+	}
 
-	protected abstract T failure();
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to have max-age %s but was %s";
+	}
 
-	protected abstract String pattern();
+	@Override
+	protected Object[] placeholders() {
+		return new Object[]{
+				success().getMaxAge(), failure().getMaxAge()
+		};
+	}
 
-	protected abstract Object[] placeholders();
+	protected Cookie cookie(long maxAge) {
+		return new AsyncHttpCookieMockBuilder()
+				.setMaxAge(maxAge)
+				.build();
+	}
 }

@@ -22,38 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.core;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsNotSecured;
+import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertIsHttpOnly;
 
-public class CookieAssert_assertIsNotSecured_Test extends AbstractCookieTest {
+public class CookieAssert_assertIsHttpOnly_Test extends AbstractCoreCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertIsNotSecured(actual);
+		assertIsHttpOnly(actual);
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertIsNotSecured(message, actual);
+		assertIsHttpOnly(message, actual);
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
 		return cookie(true);
 	}
 
 	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
+
+	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be secured";
+		return "Expecting cookie to be 'http only'";
 	}
 
 	@Override
@@ -61,9 +61,9 @@ public class CookieAssert_assertIsNotSecured_Test extends AbstractCookieTest {
 		return new Object[0];
 	}
 
-	protected Cookie cookie(boolean secured) {
+	protected Cookie cookie(boolean httpOnly) {
 		return new CookieMockBuilder()
-			.setSecured(secured)
+			.setHttpOnly(httpOnly)
 			.build();
 	}
 }

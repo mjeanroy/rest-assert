@@ -22,55 +22,11 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.core;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
-import com.github.mjeanroy.rest_assert.tests.Function;
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.api.cookie.AbstractCookieTest;
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+public abstract class AbstractCoreCookieTest extends AbstractCookieTest<Cookie> {
 
-public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
-
-	@Test
-	public void it_should_pass() {
-		T cookie = success();
-		invoke(cookie);
-		invoke("message", cookie);
-	}
-
-	@Test
-	public void it_should_fail() {
-		final T cookie = failure();
-		final String message = format(pattern(), placeholders());
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(cookie);
-			}
-		});
-	}
-
-	@Test
-	public void it_should_fail_with_custom_message() {
-		final T cookie = failure();
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, cookie);
-			}
-		});
-	}
-
-	protected abstract T success();
-
-	protected abstract T failure();
-
-	protected abstract String pattern();
-
-	protected abstract Object[] placeholders();
 }

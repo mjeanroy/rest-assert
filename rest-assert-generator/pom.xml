@@ -41,6 +41,11 @@
 			<artifactId>google-http-client</artifactId>
 			<version>${google-http-client.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax.servlet-api.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>

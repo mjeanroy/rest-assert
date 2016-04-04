@@ -22,24 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
+package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie;
 
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie;
 import org.assertj.core.api.Condition;
 import org.junit.Before;
 
+import javax.servlet.http.Cookie;
 import java.util.Map;
 
-public class CookieAssertTest extends AbstractTemplateModelTest {
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.JavaxCookieAssert.javaxCookieAssert;
 
-	private CookieAssert cookieAssert;
+public class JavaxCookieAssertTest extends AbstractTemplateModelTest {
+
+	private JavaxCookieAssert cookieAssert;
 
 	@Before
 	public void setUp() {
-		cookieAssert = (CookieAssert) CookieAssert.cookieAssert();
+		cookieAssert = (JavaxCookieAssert) javaxCookieAssert();
 	}
 
 	@Override
@@ -54,7 +57,7 @@ public class CookieAssertTest extends AbstractTemplateModelTest {
 
 	@Override
 	protected String getExpectedClassName() {
-		return "CookieAssert";
+		return "JavaxCookieAssert";
 	}
 
 	@Override
@@ -74,7 +77,7 @@ public class CookieAssertTest extends AbstractTemplateModelTest {
 
 	@Override
 	protected String getFactory() {
-		return null;
+		return JavaxCookie.class.getName();
 	}
 
 	@Override

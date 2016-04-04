@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.async_http;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpCookieMockBuilder;
+import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasPath;
+import static com.github.mjeanroy.rest_assert.api.cookie.AsyncHttpCookieAssert.assertHasDomain;
 
-public class CookieAssert_assertHasPath_Test extends AbstractCookieTest {
+public class CookieAssert_assertHasDomain_Test extends AbstractAsyncHttpCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertHasPath(actual, success().getPath());
+		assertHasDomain(actual, success().getDomain());
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertHasPath(message, actual, success().getPath());
+		assertHasDomain(message, actual, success().getDomain());
 	}
 
 	@Override
@@ -48,28 +48,28 @@ public class CookieAssert_assertHasPath_Test extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedPath = success().getPath();
-		final String actualPath = expectedPath + "foo";
-		return cookie(actualPath);
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = expectedDomain + "foo";
+		return cookie(actualDomain);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have path %s but was %s";
+		return "Expecting cookie to have domain %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedPath = success().getPath();
-		final String actualPath = failure().getPath();
-		return new Object[] {
-				expectedPath, actualPath
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = failure().getDomain();
+		return new Object[]{
+				expectedDomain, actualDomain
 		};
 	}
 
-	protected Cookie cookie(String path) {
-		return new CookieMockBuilder()
-			.setPath(path)
-			.build();
+	protected Cookie cookie(String domain) {
+		return new AsyncHttpCookieMockBuilder()
+				.setDomain(domain)
+				.build();
 	}
 }

@@ -22,71 +22,70 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
+package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie;
 
-import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
+import com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.CookieAssert;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import org.assertj.core.api.Condition;
+import org.junit.Before;
 
-import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
+import java.util.Map;
 
-/**
- * Template model for rest-assert-unit CookieAssert class.
- */
-public class CookieAssert extends AbstractTemplateModel implements TemplateModel {
+public class CookieAssertTest extends AbstractTemplateModelTest {
 
-	/**
-	 * Singleton instance.
-	 */
-	private static final CookieAssert INSTANCE = new CookieAssert();
+	private CookieAssert cookieAssert;
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
-	public static TemplateModel cookieAssert() {
-		return INSTANCE;
-	}
-
-	// Ensure non instantiation
-	private CookieAssert() {
-		super();
+	@Before
+	public void setUp() {
+		cookieAssert = (CookieAssert) CookieAssert.cookieAssert();
 	}
 
 	@Override
-	public String getActualClass() {
-		return Cookie.class.getName();
+	protected AbstractTemplateModel getTemplateModel() {
+		return cookieAssert;
 	}
 
 	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
-	public Class coreClass() {
-		return CookieAssertions.class;
-	}
-
-	@Override
-	public String getPackageName() {
+	protected String getExpectedPackageName() {
 		return "com.github.mjeanroy.rest_assert.api.cookie";
 	}
 
 	@Override
-	public String getClassName() {
-		return getClass().getSimpleName();
+	protected String getExpectedClassName() {
+		return "CookieAssert";
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
-		return methodName;
+	protected String getExpectedCoreClassName() {
+		return CookieAssertions.class.getName();
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
-		return generateAssertMethodName(methodName);
+	protected Class getExpectedCoreClass() {
+		return CookieAssertions.class;
+	}
+
+	@Override
+	protected String getExpectedActualClass() {
+		return Cookie.class.getName();
+	}
+
+	@Override
+	protected String getFactory() {
+		return null;
+	}
+
+	@Override
+	protected Condition<Map<String, Object>> getMethodCondition() {
+		return new Condition<Map<String, Object>>() {
+			@Override
+			public boolean matches(Map<String, Object> value) {
+				String methodName = (String) value.get("method_name");
+				return methodName.startsWith("assert");
+			}
+		};
 	}
 }

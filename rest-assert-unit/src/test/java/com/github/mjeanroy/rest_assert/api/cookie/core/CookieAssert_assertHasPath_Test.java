@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.core;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasName;
+import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasPath;
 
-public class CookieAssert_assertHasName_Test extends AbstractCookieTest {
+public class CookieAssert_assertHasPath_Test extends AbstractCoreCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertHasName(actual, success().getName());
+		assertHasPath(actual, success().getPath());
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertHasName(message, actual, success().getName());
+		assertHasPath(message, actual, success().getPath());
 	}
 
 	@Override
@@ -48,28 +48,28 @@ public class CookieAssert_assertHasName_Test extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
-		return cookie(actualName);
+		final String expectedPath = success().getPath();
+		final String actualPath = expectedPath + "foo";
+		return cookie(actualPath);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have name %s but was %s";
+		return "Expecting cookie to have path %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
+		final String expectedPath = success().getPath();
+		final String actualPath = failure().getPath();
 		return new Object[] {
-				expectedName, actualName
+				expectedPath, actualPath
 		};
 	}
 
-	protected Cookie cookie(String name) {
+	protected Cookie cookie(String path) {
 		return new CookieMockBuilder()
-			.setName(name)
+			.setPath(path)
 			.build();
 	}
 }

@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.core;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
 import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasDomain;
 
-public class CookieAssert_assertHasDomain_Test extends AbstractCookieTest {
+public class CookieAssert_assertHasDomain_Test extends AbstractCoreCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {

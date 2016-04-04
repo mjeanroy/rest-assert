@@ -22,50 +22,48 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie;
+package com.github.mjeanroy.rest_assert.api.cookie.async_http;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpCookieMockBuilder;
+import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.CookieAssert.assertHasMaxAge;
+import static com.github.mjeanroy.rest_assert.api.cookie.AsyncHttpCookieAssert.assertIsSecured;
 
-public class CookieAssert_assertHasMaxAge_Test extends AbstractCookieTest {
+public class CookieAssert_assertIsSecured_Test extends AbstractAsyncHttpCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
-		assertHasMaxAge(actual, success().getMaxAge());
+		assertIsSecured(actual);
 	}
 
 	@Override
 	protected void invoke(String message, Cookie actual) {
-		assertHasMaxAge(message, actual, success().getMaxAge());
+		assertIsSecured(message, actual);
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(10);
+		return cookie(true);
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(success().getMaxAge() + 1);
+		return cookie(false);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have max-age %s but was %s";
+		return "Expecting cookie to be secured";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[] {
-				success().getMaxAge(), failure().getMaxAge()
-		};
+		return new Object[0];
 	}
 
-	protected Cookie cookie(long maxAge) {
-		return new CookieMockBuilder()
-			.setMaxAge(maxAge)
-			.build();
+	protected Cookie cookie(boolean secured) {
+		return new AsyncHttpCookieMockBuilder()
+				.setSecure(secured)
+				.build();
 	}
 }
