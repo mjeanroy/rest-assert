@@ -30,6 +30,7 @@ import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParserStrategy;
+import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import java.io.File;
 import java.net.URI;
@@ -78,11 +79,11 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual Actual representation.
+	 * @param actual   Actual representation.
 	 * @param expected Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, String expected) {
+	public AssertionResult isEqualTo(String actual, @Param("expected") String expected) {
 		return doComparison(actual, expected, builder().build());
 	}
 
@@ -90,10 +91,10 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param file Expected representation.
+	 * @param file   Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, File file) {
+	public AssertionResult isEqualTo(String actual, @Param("file") File file) {
 		return isEqualTo(actual, readFileToString(file));
 	}
 
@@ -101,10 +102,10 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param path Expected representation.
+	 * @param path   Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, Path path) {
+	public AssertionResult isEqualTo(String actual, @Param("path") Path path) {
 		return isEqualTo(actual, readFileToString(path.toFile()));
 	}
 
@@ -112,10 +113,10 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param uri Expected representation.
+	 * @param uri    Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, URI uri) {
+	public AssertionResult isEqualTo(String actual, @Param("uri") URI uri) {
 		return isEqualTo(actual, new File(uri));
 	}
 
@@ -123,14 +124,13 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param url Expected representation.
+	 * @param url    Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, URL url) {
+	public AssertionResult isEqualTo(String actual, @Param("url") URL url) {
 		try {
 			return isEqualTo(actual, new File(url.toURI()));
-		}
-		catch (URISyntaxException ex) {
+		} catch (URISyntaxException ex) {
 			throw new RuntimeException(ex);
 		}
 	}
@@ -138,12 +138,12 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual Actual representation.
+	 * @param actual   Actual representation.
 	 * @param expected Expected representation.
-	 * @param entries Name of entries to ignore.
+	 * @param entries  Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, String expected, Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("expected") String expected, @Param("entries") Collection<String> entries) {
 		JsonComparatorOptions options = builder()
 				.ignoreKeys(entries)
 				.build();
@@ -154,52 +154,51 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual Actual representation.
-	 * @param file Expected representation.
+	 * @param actual  Actual representation.
+	 * @param file    Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, File file, Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("file") File file, @Param("entries") Collection<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(file), entries);
 	}
 
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual Actual representation.
-	 * @param path Expected representation.
+	 * @param actual  Actual representation.
+	 * @param path    Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, Path path, Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("path") Path path, @Param("entries") Collection<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(path.toFile()), entries);
 	}
 
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual Actual representation.
-	 * @param uri Expected representation.
+	 * @param actual  Actual representation.
+	 * @param uri     Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, URI uri, Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("uri") URI uri, @Param("entries") Collection<String> entries) {
 		return isEqualToIgnoring(actual, new File(uri), entries);
 	}
 
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual Actual representation.
-	 * @param url Expected representation.
+	 * @param actual  Actual representation.
+	 * @param url     Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, URL url, Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("url") URL url, @Param("entries") Collection<String> entries) {
 		try {
 			return isEqualToIgnoring(actual, new File(url.toURI()), entries);
-		}
-		catch (URISyntaxException ex) {
+		} catch (URISyntaxException ex) {
 			throw new RuntimeException(ex);
 		}
 	}

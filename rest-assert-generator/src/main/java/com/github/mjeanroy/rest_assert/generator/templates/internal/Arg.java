@@ -37,6 +37,11 @@ import java.util.Objects;
 public class Arg {
 
 	/**
+	 * Argument index.
+	 */
+	private final int index;
+
+	/**
 	 * Argument type.
 	 */
 	private final String type;
@@ -51,10 +56,11 @@ public class Arg {
 	 */
 	private final String name;
 
-	public Arg(String type, String genericType, String name) {
+	public Arg(String type, String genericType, String name, int index) {
 		this.type = type;
 		this.genericType = genericType;
 		this.name = name;
+		this.index = index;
 	}
 
 	/**
@@ -92,7 +98,7 @@ public class Arg {
 	 * @return True if argument is the first, false otherwise.
 	 */
 	public boolean isFirst() {
-		return name.equals("arg1");
+		return index == 1;
 	}
 
 	@Override

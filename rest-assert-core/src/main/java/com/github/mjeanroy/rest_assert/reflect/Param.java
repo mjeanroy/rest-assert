@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,27 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.generator.templates.internal;
+package com.github.mjeanroy.rest_assert.reflect;
 
-import org.junit.Test;
+import java.lang.annotation.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * Annotation to use to get the parameter name.
+ */
+@Target(ElementType.PARAMETER)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Param {
 
-public class ArgTest {
-
-	@Test
-	public void it_should_build_argument_object() {
-		Arg arg = new Arg("int", "foo", "arg1", 1);
-		assertThat(arg.getName()).isEqualTo("arg1");
-		assertThat(arg.getType()).isEqualTo("int");
-		assertThat(arg.getGenericType()).isEqualTo("foo");
-	}
-
-	@Test
-	public void it_should_check_if_argument_is_the_first() {
-		assertThat(new Arg("int", null, "arg1", 1).isFirst()).isTrue();
-		assertThat(new Arg("int", null, "arg0", 0).isFirst()).isFalse();
-		assertThat(new Arg("int", null, "arg2", 2).isFirst()).isFalse();
-		assertThat(new Arg("int", null, "arg11", 11).isFirst()).isFalse();
-	}
+	/**
+	 * Get parameter name.
+	 *
+	 * @return Parameter name.
+	 */
+	String value();
 }

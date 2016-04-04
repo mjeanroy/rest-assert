@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
 import static com.github.mjeanroy.rest_assert.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
@@ -68,7 +69,7 @@ public final class CookieAssertions {
 	 * @param name Expected name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasName(Cookie cookie, String name) {
+	public AssertionResult hasName(Cookie cookie, @Param("name") String name) {
 		String actualName = cookie.getName();
 		return actualName.equals(name) ?
 				success() :
@@ -82,7 +83,7 @@ public final class CookieAssertions {
 	 * @param value Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasValue(Cookie cookie, String value) {
+	public AssertionResult hasValue(Cookie cookie, @Param("value") String value) {
 		String actualValue = cookie.getValue();
 		return actualValue.equals(value) ?
 				success() :
@@ -96,7 +97,7 @@ public final class CookieAssertions {
 	 * @param domain Expected domain.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasDomain(Cookie cookie, String domain) {
+	public AssertionResult hasDomain(Cookie cookie, @Param("domain") String domain) {
 		String actualDomain = cookie.getDomain();
 		return actualDomain.equals(domain) ?
 				success() :
@@ -110,7 +111,7 @@ public final class CookieAssertions {
 	 * @param path Expected path.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasPath(Cookie cookie, String path) {
+	public AssertionResult hasPath(Cookie cookie, @Param("path") String path) {
 		String actualPath = cookie.getPath();
 		return actualPath.equals(path) ?
 				success() :
@@ -124,7 +125,7 @@ public final class CookieAssertions {
 	 * @param maxAge Expected max age.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMaxAge(Cookie cookie, long maxAge) {
+	public AssertionResult hasMaxAge(Cookie cookie, @Param("maxAge") long maxAge) {
 		long actualMaxAge = cookie.getMaxAge();
 		return actualMaxAge == maxAge ?
 				success() :

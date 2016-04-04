@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
+import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -42,24 +43,8 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_DISPOSITION;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_ENCODING;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.CONTENT_TYPE;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.ETAG;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.EXPIRES;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LAST_MODIFIED;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.LOCATION;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.APPLICATION_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.CSS;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.CSV;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.JSON;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.PDF;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_HTML;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_PLAIN;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.TEXT_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.XHTML;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.*;
+import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.*;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
@@ -394,10 +379,10 @@ public final class HttpResponseAssertions {
 	 * expected value.
 	 *
 	 * @param httpResponse Http response.
-	 * @param etagValue ETag value.
+	 * @param etagValue    ETag value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isETagEqualTo(HttpResponse httpResponse, String etagValue) {
+	public AssertionResult isETagEqualTo(HttpResponse httpResponse, @Param("etagValue") String etagValue) {
 		return isHeaderEqualTo(httpResponse, ETAG, etagValue);
 	}
 
@@ -415,11 +400,11 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Type header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse     Http response.
 	 * @param contentTypeValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, String contentTypeValue) {
+	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, @Param("contentTypeValue") String contentTypeValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_TYPE, contentTypeValue);
 	}
 
@@ -447,11 +432,11 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Disposition header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse            Http response.
 	 * @param contentDispositionValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
+	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, @Param("contentDispositionValue") String contentDispositionValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION, contentDispositionValue);
 	}
 
@@ -459,11 +444,11 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Encoding header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse         Http response.
 	 * @param contentEncodingValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, String contentEncodingValue) {
+	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, @Param("contentEncodingValue") String contentEncodingValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING, contentEncodingValue);
 	}
 
@@ -504,11 +489,11 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Location header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse  Http response.
 	 * @param locationValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, String locationValue) {
+	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, @Param("locationValue") String locationValue) {
 		return isHeaderEqualTo(httpResponse, LOCATION, locationValue);
 	}
 
@@ -540,7 +525,7 @@ public final class HttpResponseAssertions {
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, String expiresValue) {
+	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, @Param("expiresValue") String expiresValue) {
 		return isExpiresEqualTo(httpResponse, parseHttpDate(expiresValue));
 	}
 
@@ -552,7 +537,7 @@ public final class HttpResponseAssertions {
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, Date expiresValue) {
+	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, @Param("expiresValue") Date expiresValue) {
 		return isHeaderDateEqualTo(httpResponse, EXPIRES, expiresValue);
 	}
 
@@ -560,11 +545,11 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse      Http response.
 	 * @param lastModifiedValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, String lastModifiedValue) {
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, @Param("lastModifiedValue") String lastModifiedValue) {
 		return isLastModifiedEqualTo(httpResponse, parseHttpDate(lastModifiedValue));
 	}
 
@@ -572,11 +557,11 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse     Http response.
 	 * @param lastModifiedDate Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, @Param("lastModifiedValue") Date lastModifiedDate) {
 		return isHeaderDateEqualTo(httpResponse, LAST_MODIFIED, lastModifiedDate);
 	}
 
@@ -589,8 +574,8 @@ public final class HttpResponseAssertions {
 		String actualValue = httpResponse.getHeader(name);
 		Date actualDate = parseHttpDate(actualValue);
 		return actualDate.equals(expectedValue) ?
-			success() :
-			failure(shouldHaveHeaderWithValue(name, formatHttpDate(expectedValue), formatHttpDate(actualDate)));
+				success() :
+				failure(shouldHaveHeaderWithValue(name, formatHttpDate(expectedValue), formatHttpDate(actualDate)));
 	}
 
 	/**
@@ -621,8 +606,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-			APPLICATION_XML,
-			TEXT_XML
+				APPLICATION_XML,
+				TEXT_XML
 		));
 	}
 
@@ -674,8 +659,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isHtml(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-			TEXT_HTML,
-			XHTML
+				TEXT_HTML,
+				XHTML
 		));
 	}
 
@@ -697,8 +682,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isJavascript(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-			APPLICATION_JAVASCRIPT,
-			TEXT_JAVASCRIPT
+				APPLICATION_JAVASCRIPT,
+				TEXT_JAVASCRIPT
 		));
 	}
 
@@ -706,23 +691,23 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains expected header.
 	 *
 	 * @param httpResponse Http response.
-	 * @param headerName Header name.
+	 * @param headerName   Header name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasHeader(HttpResponse httpResponse, String headerName) {
+	public AssertionResult hasHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
 		return httpResponse.hasHeader(headerName) ?
-			success() :
-			failure(shouldHaveHeader(headerName));
+				success() :
+				failure(shouldHaveHeader(headerName));
 	}
 
 	/**
 	 * Check that http response is expected mime type.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse     Http response.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeType(HttpResponse httpResponse, String expectedMimeType) {
+	public AssertionResult hasMimeType(HttpResponse httpResponse, @Param("expectedMimeType") String expectedMimeType) {
 		String headerName = CONTENT_TYPE;
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
@@ -732,29 +717,29 @@ public final class HttpResponseAssertions {
 		String contentType = httpResponse.getHeader(headerName);
 		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 		return actualMimeType.equals(expectedMimeType) ?
-			success() :
-			failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+				success() :
+				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 	}
 
 	/**
 	 * Check that http response has expected charset.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse    Http response.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCharset(HttpResponse httpResponse, Charset expectedCharset) {
+	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") Charset expectedCharset) {
 		return hasCharset(httpResponse, expectedCharset.name());
 	}
 
 	/**
 	 * Check that http response has expected charset.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse    Http response.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCharset(HttpResponse httpResponse, String expectedCharset) {
+	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") String expectedCharset) {
 		String headerName = CONTENT_TYPE;
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
@@ -769,18 +754,18 @@ public final class HttpResponseAssertions {
 
 		String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
 		return actualCharset.equalsIgnoreCase(expectedCharset) ?
-			success() :
-			failure(shouldHaveCharset(expectedCharset, actualCharset));
+				success() :
+				failure(shouldHaveCharset(expectedCharset, actualCharset));
 	}
 
 	/**
 	 * Check that http response is expected mime type.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse     Http response.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, Collection<String> expectedMimeType) {
+	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") Collection<String> expectedMimeType) {
 		String headerName = CONTENT_TYPE;
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
@@ -794,8 +779,8 @@ public final class HttpResponseAssertions {
 		List<String> list = map(expected, lowercaseMapper());
 
 		return list.contains(actualMimeType) ?
-			success() :
-			failure(shouldHaveMimeType(expected, actualMimeType));
+				success() :
+				failure(shouldHaveMimeType(expected, actualMimeType));
 	}
 
 	/**
@@ -803,11 +788,11 @@ public final class HttpResponseAssertions {
 	 * expected value.
 	 *
 	 * @param httpResponse Http response.
-	 * @param headerName Header name.
-	 * @param headerValue Header value.
+	 * @param headerName   Header name.
+	 * @param headerValue  Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue) {
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") String headerName, @Param("headerValue") String headerValue) {
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
 			return result;
@@ -815,21 +800,21 @@ public final class HttpResponseAssertions {
 
 		String actualValue = httpResponse.getHeader(headerName);
 		return actualValue.equals(headerValue) ?
-			success() :
-			failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValue));
+				success() :
+				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValue));
 	}
 
 	/**
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.
-	 * @param status Expected status.
+	 * @param status       Expected status.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStatusEqual(HttpResponse httpResponse, int status) {
+	public AssertionResult isStatusEqual(HttpResponse httpResponse, @Param("status") int status) {
 		return httpResponse.getStatus() == status ?
-			success() :
-			failure(shouldHaveStatus(httpResponse.getStatus(), status));
+				success() :
+				failure(shouldHaveStatus(httpResponse.getStatus(), status));
 	}
 
 	/**
@@ -837,15 +822,15 @@ public final class HttpResponseAssertions {
 	 * a lower bound and an upper bound (inclusive).
 	 *
 	 * @param httpResponse Http response.
-	 * @param start Lower bound.
-	 * @param end Upper bound.
+	 * @param start        Lower bound.
+	 * @param end          Upper bound.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStatusBetween(HttpResponse httpResponse, int start, int end) {
+	public AssertionResult isStatusBetween(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
 		int actualStatus = httpResponse.getStatus();
 		return actualStatus >= start && actualStatus <= end ?
-			success() :
-			failure(shouldHaveStatusBetween(actualStatus, start, end));
+				success() :
+				failure(shouldHaveStatusBetween(actualStatus, start, end));
 	}
 
 	/**
@@ -853,14 +838,14 @@ public final class HttpResponseAssertions {
 	 * a lower bound and an upper bound (inclusive).
 	 *
 	 * @param httpResponse Http response.
-	 * @param start Lower bound.
-	 * @param end Upper bound.
+	 * @param start        Lower bound.
+	 * @param end          Upper bound.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStatusOutOf(HttpResponse httpResponse, int start, int end) {
+	public AssertionResult isStatusOutOf(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
 		int actualStatus = httpResponse.getStatus();
 		return actualStatus < start && actualStatus > end ?
-			success() :
-			failure(shouldHaveStatusOutOf(actualStatus, start, end));
+				success() :
+				failure(shouldHaveStatusOutOf(actualStatus, start, end));
 	}
 }

@@ -26,7 +26,9 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules;
 
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.internal.Arg;
+import com.github.mjeanroy.rest_assert.reflect.Param;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -127,12 +129,14 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	}
 
 	protected Map<String, Object> getMethod(Method method) {
-		String coreMethodName = method.getName();
+		final String coreMethodName = method.getName();
 
-		List<Arg> args;
-		Class[] classTypes = method.getParameterTypes();
-		Type[] paramTypes = method.getGenericParameterTypes();
-		int size = paramTypes == null ? 0 : paramTypes.length;
+		final List<Arg> args;
+		final Class[] classTypes = method.getParameterTypes();
+		final Type[] paramTypes = method.getGenericParameterTypes();
+		final Annotation[][] annotations = method.getParameterAnnotations();
+		final int size = paramTypes == null ? 0 : paramTypes.length;
+
 		if (size > 1) {
 			args = new ArrayList<>(size);
 			for (int i = 1; i < paramTypes.length; i++) {
@@ -144,10 +148,17 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 					genericType = (Class) parameterizedType.getActualTypeArguments()[0];
 				}
 
+				Annotation[] parameterAnnotations = annotations[i];
+				Param param = find(parameterAnnotations, Param.class);
+				if (param == null || param.value() == null || param.value().trim().isEmpty()) {
+					throw new IllegalArgumentException("Add @Param annotation to additional parameters of method " + coreMethodName);
+				}
+
 				args.add(new Arg(
 						paramType.getName(),
 						genericType == null ? null : genericType.getName(),
-						"arg" + i
+						param.value(),
+						i
 				));
 			}
 		} else {
@@ -178,4 +189,15 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 * @return Method name that is generated.
 	 */
 	protected abstract String buildMethodName(String methodName);
+
+	@SuppressWarnings("unchecked")
+	private static <T extends Annotation> T find(Annotation[] annotations, Class<T> annotationClass) {
+		for (Annotation annotation : annotations) {
+			if (annotation.annotationType() == annotationClass) {
+				return (T) annotation;
+			}
+		}
+
+		return null;
+	}
 }
