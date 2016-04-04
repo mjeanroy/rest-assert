@@ -29,11 +29,7 @@ import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnObject.shouldBeAnObject;
@@ -75,7 +71,7 @@ public class DefaultJsonComparator implements JsonComparator {
 	/**
 	 * Create new comparator with custom option.
 	 *
-	 * @param parser Parser used to extract json data.
+	 * @param parser  Parser used to extract json data.
 	 * @param options Custom options.
 	 */
 	public DefaultJsonComparator(JsonParser parser, JsonComparatorOptions options) {
@@ -204,9 +200,11 @@ public class DefaultJsonComparator implements JsonComparator {
 
 		// Same size
 		int size = Math.min(actualSize, expectedSize);
-		for (int i = 0; i < size; i++) {
-			Object actualObject = actualArray.get(i);
-			Object expectedObject = expectedArray.get(i);
+		Iterator<Object> it1 = actualArray.iterator();
+		Iterator<Object> it2 = expectedArray.iterator();
+		for (int i = 0; i < size; ++i) {
+			Object actualObject = it1.next();
+			Object expectedObject = it2.next();
 			String key = format("[%s]", i);
 			errors.addAll(compareValues(key, actualObject, expectedObject));
 		}
