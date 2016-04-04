@@ -14,8 +14,6 @@ assertMyAssertion(response, parameters);
 
 ## Status Code
 
-### 2XX
-
 ### `isStatusEqual`
 
 The most basic assertion: check that status code is strictly equal to given number.
@@ -42,6 +40,8 @@ public class Test {
   }
 }
 ```
+
+---
 
 ### 2XX
 
@@ -195,6 +195,8 @@ public class Test {
 }
 ```
 
+---
+
 ### 3XX
 
 #### `isMovedPermanently`
@@ -271,6 +273,8 @@ public class Test {
   }
 }
 ```
+
+---
 
 ### 4XX
 
@@ -498,6 +502,8 @@ public class Test {
   }
 }
 ```
+
+---
 
 ### 5XX
 
