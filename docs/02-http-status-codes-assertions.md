@@ -14,6 +14,8 @@ assertMyAssertion(response, parameters);
 
 ## Status Code
 
+### 2XX
+
 ### `isStatusEqual`
 
 The most basic assertion: check that status code is strictly equal to given number.
@@ -41,7 +43,9 @@ public class Test {
 }
 ```
 
-### `isOk`
+### 2XX
+
+#### `isOk`
 
 Check that status code is strictly equal to **200**.
 
@@ -66,7 +70,7 @@ public class Test {
 }
 ```
 
-### `isCreated`
+#### `isCreated`
 
 Check that status code is strictly equal to **201**.
 
@@ -91,7 +95,7 @@ public class Test {
 }
 ```
 
-### `isAccepted`
+#### `isAccepted`
 
 Check that status code is strictly equal to **202**.
 
@@ -116,7 +120,7 @@ public class Test {
 }
 ```
 
-### `isNoContent`
+#### `isNoContent`
 
 Check that status code is strictly equal to **204**.
 
@@ -141,7 +145,7 @@ public class Test {
 }
 ```
 
-### `isResetContent`
+#### `isResetContent`
 
 Check that status code is strictly equal to **205**.
 
@@ -166,7 +170,7 @@ public class Test {
 }
 ```
 
-### `isPartialContent`
+#### `isPartialContent`
 
 Check that status code is strictly equal to **206**.
 
@@ -191,7 +195,9 @@ public class Test {
 }
 ```
 
-### `isMovedPermanently`
+### 3XX
+
+#### `isMovedPermanently`
 
 Check that status code is strictly equal to **301**.
 
@@ -216,7 +222,7 @@ public class Test {
 }
 ```
 
-### `isMovedTemporarily`
+#### `isMovedTemporarily`
 
 Check that status code is strictly equal to **302**.
 
@@ -241,7 +247,7 @@ public class Test {
 }
 ```
 
-### `isNotModified`
+#### `isNotModified`
 
 Check that status code is strictly equal to **304**.
 
@@ -266,7 +272,9 @@ public class Test {
 }
 ```
 
-### `isBadRequest`
+### 4XX
+
+#### `isBadRequest`
 
 Check that status code is strictly equal to **400**.
 
@@ -291,7 +299,7 @@ public class Test {
 }
 ```
 
-### `isUnauthorized`
+#### `isUnauthorized`
 
 Check that status code is strictly equal to **401**.
 
@@ -316,7 +324,7 @@ public class Test {
 }
 ```
 
-### `isForbidden`
+#### `isForbidden`
 
 Check that status code is strictly equal to **403**.
 
@@ -341,7 +349,7 @@ public class Test {
 }
 ```
 
-### `isNotFound`
+#### `isNotFound`
 
 Check that status code is strictly equal to **404**.
 
@@ -366,7 +374,7 @@ public class Test {
 }
 ```
 
-### `isMethodNotAllowed`
+#### `isMethodNotAllowed`
 
 Check that status code is strictly equal to **405**.
 
@@ -391,7 +399,7 @@ public class Test {
 }
 ```
 
-### `isNotAcceptable`
+#### `isNotAcceptable`
 
 Check that status code is strictly equal to **406**.
 
@@ -416,7 +424,7 @@ public class Test {
 }
 ```
 
-### `isConflict`
+#### `isConflict`
 
 Check that status code is strictly equal to **409**.
 
@@ -441,7 +449,7 @@ public class Test {
 }
 ```
 
-### `isPreConditionFailed`
+#### `isPreConditionFailed`
 
 Check that status code is strictly equal to **412**.
 
@@ -466,7 +474,7 @@ public class Test {
 }
 ```
 
-### `isUnsupportedMediaType`
+#### `isUnsupportedMediaType`
 
 Check that status code is strictly equal to **415**.
 
@@ -491,7 +499,9 @@ public class Test {
 }
 ```
 
-### `isInternalServerError`
+### 5XX
+
+#### `isInternalServerError`
 
 Check that status code is strictly equal to **500**.
 
@@ -516,7 +526,7 @@ public class Test {
 }
 ```
 
-### `isNotImplemented`
+#### `isNotImplemented`
 
 Check that status code is strictly equal to **501**.
 
