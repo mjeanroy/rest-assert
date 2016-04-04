@@ -95,7 +95,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, @Param("file") File file) {
-		return isEqualTo(actual, readFileToString(file));
+		return isEqualTo(actual, readFileToString(file.toPath()));
 	}
 
 	/**
@@ -106,7 +106,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, @Param("path") Path path) {
-		return isEqualTo(actual, readFileToString(path.toFile()));
+		return isEqualTo(actual, readFileToString(path));
 	}
 
 	/**
@@ -160,7 +160,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualToIgnoring(String actual, @Param("file") File file, @Param("entries") Collection<String> entries) {
-		return isEqualToIgnoring(actual, readFileToString(file), entries);
+		return isEqualToIgnoring(actual, readFileToString(file.toPath()), entries);
 	}
 
 	/**
@@ -172,7 +172,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualToIgnoring(String actual, @Param("path") Path path, @Param("entries") Collection<String> entries) {
-		return isEqualToIgnoring(actual, readFileToString(path.toFile()), entries);
+		return isEqualToIgnoring(actual, readFileToString(path), entries);
 	}
 
 	/**

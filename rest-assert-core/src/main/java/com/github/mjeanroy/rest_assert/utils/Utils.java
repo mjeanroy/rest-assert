@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.rest_assert.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,9 +94,10 @@ public final class Utils {
 
 	/**
 	 * Filter a list using a given predicate.
-	 * @param inputs List input.
+	 *
+	 * @param inputs    List input.
 	 * @param predicate Predicate function.
-	 * @param <T> Type of inputs.
+	 * @param <T>       Type of inputs.
 	 * @return Output (i.e filtered inputs).
 	 */
 	public static <T> List<T> filter(List<T> inputs, Predicate<T> predicate) {
@@ -115,21 +116,22 @@ public final class Utils {
 	 * @param file File.
 	 * @return File content.
 	 */
-	public static String readFileToString(File file) {
-		StringBuilder sb = new StringBuilder();
+	public static String readFileToString(Path file) {
+		try {
+			List<String> lines = Files.readAllLines(file, Charset.defaultCharset());
 
-		try (FileReader fReader = new FileReader(file);
-				 BufferedReader br = new BufferedReader(fReader)) {
-
-			String line;
-			while ((line = br.readLine()) != null) {
-				sb.append(line).append(LINE_SEPARATOR);
+			int i = 0;
+			StringBuilder sb = new StringBuilder();
+			for (String line : lines) {
+				i++;
+				sb.append(line);
+				if (i < lines.size()) {
+					sb.append(LINE_SEPARATOR);
+				}
 			}
-
-		} catch (IOException e) {
-			throw new RuntimeException(e);
+			return sb.toString();
+		} catch (IOException ex) {
+			throw new RuntimeException(ex);
 		}
-
-		return sb.toString().trim();
 	}
 }
