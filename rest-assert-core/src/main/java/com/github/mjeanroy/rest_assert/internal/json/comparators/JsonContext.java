@@ -58,18 +58,37 @@ public class JsonContext {
 
 		String separator = ".";
 		StringBuilder sb = new StringBuilder();
+
+		int i = 0;
 		for (String context : contexts) {
-			sb.append(context).append(separator);
+			if (shouldAddSeparator(i, context)) {
+				sb.append(separator);
+			}
+
+			sb.append(context);
+			i++;
 		}
 
+		if (shouldAddSeparator(i, last)) {
+			sb.append(separator);
+		}
+
+		// Do not forget to append last value
 		sb.append(last);
-		return sb
-				.toString()
-				.replace(".[", "["); // Replace dot symbol before array bracket
+
+		return sb.toString();
 	}
 
 	@Override
 	public String toString() {
 		return toPath("");
+	}
+
+	private static boolean shouldAddSeparator(int index, String context) {
+		return index != 0 && !isArrayNotation(context);
+	}
+
+	private static boolean isArrayNotation(String context) {
+		return context.charAt(0) == '[' && context.charAt(context.length() - 1) == ']';
 	}
 }
