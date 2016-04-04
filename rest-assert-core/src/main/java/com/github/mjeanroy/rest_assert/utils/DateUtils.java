@@ -64,11 +64,11 @@ public final class DateUtils {
 	/**
 	 * List of patterns to use to convert http date as string to date object.
 	 */
-	private static final List<String> PATTERNS = Collections.unmodifiableList(asList(
+	private static final List<String> PATTERNS = asList(
 		PATTERN_RFC1123,
 		PATTERN_RFC1036,
 		PATTERN_ASCTIME
-	));
+	);
 
 	/**
 	 * Single Quote Character.

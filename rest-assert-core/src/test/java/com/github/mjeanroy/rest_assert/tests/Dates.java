@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,34 +22,42 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.tests;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
-
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
-import static com.github.mjeanroy.rest_assert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+/**
+ * Static utilities.
+ */
+public final class Dates {
 
-public class HttpResponseAssertions_isLastModifiedEqualTo_withDate_Test extends AbstractHttpHeaderEqualToTest {
+	/**
+	 * Pattern used to format / read a date in the internet format
+	 * message defined by RFC 5322 (http://tools.ietf.org/html/rfc5322).
+	 */
+	private static final String IMF_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
-	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
-
-	@Override
-	protected Header getHeader() {
-		return header("Last-Modified", VALUE);
+	// Ensure non instantiation.
+	private Dates() {
 	}
 
-	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		Date date = fromInternetMessageFormat(VALUE);
-		return assertions.isLastModifiedEqualTo(response, date);
-	}
-
-	@Override
-	protected String failValue() {
-		return "Wed, 15 Nov 1995 12:45:26 GMT";
+	/**
+	 * Translate date formatted as the Internet Message Format (specified by
+	 * RFC 5322, http://tools.ietf.org/html/rfc5322) to a {@link Date} instance.
+	 *
+	 * @param date Date value.
+	 * @return The date instance.
+	 */
+	public static Date fromInternetMessageFormat(String date) {
+		DateFormat df = new SimpleDateFormat(IMF_FORMAT, Locale.US);
+		try {
+			return df.parse(date);
+		} catch (ParseException ex) {
+			throw new AssertionError(ex);
+		}
 	}
 }

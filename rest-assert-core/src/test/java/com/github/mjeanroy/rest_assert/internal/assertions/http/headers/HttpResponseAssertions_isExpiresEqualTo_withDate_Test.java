@@ -28,11 +28,9 @@ import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static com.github.mjeanroy.rest_assert.tests.Dates.fromInternetMessageFormat;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponseAssertions_isExpiresEqualTo_withDate_Test extends AbstractHttpHeaderEqualToTest {
@@ -46,14 +44,8 @@ public class HttpResponseAssertions_isExpiresEqualTo_withDate_Test extends Abstr
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
-		try {
-			Date date = df.parse(VALUE);
-			return assertions.isExpiresEqualTo(response, date);
-		}
-		catch (ParseException ex) {
-			throw new AssertionError(ex);
-		}
+		Date date = fromInternetMessageFormat(VALUE);
+		return assertions.isExpiresEqualTo(response, date);
 	}
 
 	@Override

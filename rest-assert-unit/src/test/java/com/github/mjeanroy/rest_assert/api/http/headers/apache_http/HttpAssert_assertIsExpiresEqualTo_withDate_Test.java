@@ -27,12 +27,10 @@ package com.github.mjeanroy.rest_assert.api.http.headers.apache_http;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.apache.http.HttpResponse;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert.assertIsExpiresEqualTo;
+import static com.github.mjeanroy.rest_assert.tests.Dates.fromInternetMessageFormat;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpAssert_assertIsExpiresEqualTo_withDate_Test extends AbstractApacheHttpHeaderEqualToTest {
@@ -45,27 +43,15 @@ public class HttpAssert_assertIsExpiresEqualTo_withDate_Test extends AbstractApa
 	@Override
 	protected void invoke(HttpResponse actual) {
 		String value = getHeader().getValue();
-		DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
-		try {
-			Date date = df.parse(value);
-			assertIsExpiresEqualTo(actual, date);
-		}
-		catch (ParseException ex) {
-			throw new AssertionError(ex);
-		}
+		Date date = fromInternetMessageFormat(value);
+		assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		String value = getHeader().getValue();
-		DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz");
-		try {
-			Date date = df.parse(value);
-			assertIsExpiresEqualTo(message, actual, date);
-		}
-		catch (ParseException ex) {
-			throw new AssertionError(ex);
-		}
+		Date date = fromInternetMessageFormat(value);
+		assertIsExpiresEqualTo(message, actual, date);
 	}
 
 	@Override
