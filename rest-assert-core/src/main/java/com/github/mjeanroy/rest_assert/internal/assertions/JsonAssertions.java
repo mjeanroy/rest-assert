@@ -31,6 +31,8 @@ import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorO
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParserStrategy;
 import com.github.mjeanroy.rest_assert.reflect.Param;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
 
 import java.io.File;
 import java.net.URI;
@@ -38,13 +40,17 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.github.mjeanroy.rest_assert.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
 import static com.github.mjeanroy.rest_assert.utils.Utils.readFileToString;
+import static java.util.Collections.addAll;
 
 /**
  * Set of reusable assertions on json
@@ -74,6 +80,46 @@ public final class JsonAssertions {
 	// Private constructor to ensure singleton
 	private JsonAssertions() {
 		this.parser = JsonParserStrategy.AUTO.build();
+	}
+
+	/**
+	 * Check that given json contains given entries.
+	 *
+	 * @param actual JSON object.
+	 * @param key Entry to check.
+	 * @param other Other entries to check.
+	 * @return Assertion result.
+	 */
+	public AssertionResult contains(String actual, @Param("key") String key, @Param("other") String... other) {
+		Set<RestAssertError> errors = new LinkedHashSet<>();
+
+		Set<String> entries = new LinkedHashSet<>();
+		entries.add(key);
+		addAll(entries, other);
+
+		for (String e : entries) {
+			if (!hasEntry(actual, e)) {
+				errors.add(shouldHaveEntry(e));
+			}
+		}
+
+		return errors.isEmpty() ?
+			success() :
+			failure(composeErrors(errors));
+	}
+
+	private boolean hasEntry(String actual, String entry) {
+		try {
+			getEntry(actual, entry);
+			return true;
+		} catch (PathNotFoundException ex) {
+			return false;
+		}
+	}
+
+	private <T> T getEntry(String actual, String entry) {
+		String path = toJsonPath(entry);
+		return JsonPath.read(actual, path);
 	}
 
 	/**
@@ -209,5 +255,13 @@ public final class JsonAssertions {
 		return errors.isEmpty() ?
 				success() :
 				failure(composeErrors(errors));
+	}
+
+	private static String toJsonPath(String path) {
+		if (!path.startsWith("$.")) {
+			return "$." + path;
+		}
+
+		return path;
 	}
 }

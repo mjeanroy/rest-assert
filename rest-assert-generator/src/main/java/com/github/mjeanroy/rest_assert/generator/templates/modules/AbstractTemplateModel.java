@@ -154,11 +154,18 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 					throw new IllegalArgumentException("Add @Param annotation to additional parameters of method " + coreMethodName);
 				}
 
+				final String name;
+				if (paramType.isArray()) {
+					name = paramType.getComponentType().getName() + (i == size - 1 ? "..." : "[]");
+				} else {
+					name = paramType.getName();
+				}
+
 				args.add(new Arg(
-						paramType.getName(),
-						genericType == null ? null : genericType.getName(),
-						param.value(),
-						i
+					name,
+					genericType == null ? null : genericType.getName(),
+					param.value(),
+					i
 				));
 			}
 		} else {
