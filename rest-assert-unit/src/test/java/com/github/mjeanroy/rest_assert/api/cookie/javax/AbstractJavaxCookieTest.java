@@ -28,6 +28,6 @@ import com.github.mjeanroy.rest_assert.api.cookie.AbstractCookieTest;
 
 import javax.servlet.http.Cookie;
 
-public abstract class AbstractJavaxCookieTest extends AbstractCookieTest<Cookie> {
+abstract class AbstractJavaxCookieTest extends AbstractCookieTest<Cookie> {
 
 }

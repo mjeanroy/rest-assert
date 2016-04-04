@@ -30,13 +30,13 @@ import org.apache.http.HttpResponse;
 
 import static java.lang.String.format;
 
-public abstract class AbstractApacheHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
+abstract class AbstractApacheHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new ApacheHttpResponseMockBuilder()
-			.addHeader("Content-Type", contentType)
-			.build();
+				.addHeader("Content-Type", contentType)
+				.build();
 	}
 }

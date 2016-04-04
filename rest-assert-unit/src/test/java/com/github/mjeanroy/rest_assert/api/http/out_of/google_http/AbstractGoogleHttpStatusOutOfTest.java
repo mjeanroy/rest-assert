@@ -33,12 +33,12 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(HttpResponse.class)
-public abstract class AbstractGoogleHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
+abstract class AbstractGoogleHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(int status) {
 		return new GoogleHttpResponseMockBuilder()
-			.setStatusCode(status)
-			.build();
+				.setStatusCode(status)
+				.build();
 	}
 }

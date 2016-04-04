@@ -28,12 +28,12 @@ import com.github.mjeanroy.rest_assert.api.http.out_of.AbstractHttpStatusOutOfTe
 import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 
-public abstract class AbstractAsyncHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {
+abstract class AbstractAsyncHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {
 
 	@Override
 	protected Response newResponse(int status) {
 		return new AsyncHttpResponseMockBuilder()
-			.setStatusCode(status)
-			.build();
+				.setStatusCode(status)
+				.build();
 	}
 }

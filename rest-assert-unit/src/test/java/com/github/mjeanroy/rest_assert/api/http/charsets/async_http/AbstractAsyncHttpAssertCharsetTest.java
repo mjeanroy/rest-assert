@@ -30,13 +30,13 @@ import com.ning.http.client.Response;
 
 import static java.lang.String.format;
 
-public abstract class AbstractAsyncHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
+abstract class AbstractAsyncHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
 
 	@Override
 	protected Response newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new AsyncHttpResponseMockBuilder()
-			.addHeader("Content-Type", contentType)
-			.build();
+				.addHeader("Content-Type", contentType)
+				.build();
 	}
 }

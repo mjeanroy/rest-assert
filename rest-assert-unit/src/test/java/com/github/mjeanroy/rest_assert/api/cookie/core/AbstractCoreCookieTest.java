@@ -27,6 +27,6 @@ package com.github.mjeanroy.rest_assert.api.cookie.core;
 import com.github.mjeanroy.rest_assert.api.cookie.AbstractCookieTest;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
-public abstract class AbstractCoreCookieTest extends AbstractCookieTest<Cookie> {
+abstract class AbstractCoreCookieTest extends AbstractCookieTest<Cookie> {
 
 }

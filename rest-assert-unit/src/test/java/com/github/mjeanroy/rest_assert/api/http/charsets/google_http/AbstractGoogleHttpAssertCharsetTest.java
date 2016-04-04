@@ -36,15 +36,15 @@ import static java.lang.String.format;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(HttpResponse.class)
-public abstract class AbstractGoogleHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
+abstract class AbstractGoogleHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new GoogleHttpResponseMockBuilder()
-			.setHeaders(new GoogleHttpHeadersMockBuilder()
-				.addHeader("Content-Type", contentType)
-				.build())
-			.build();
+				.setHeaders(new GoogleHttpHeadersMockBuilder()
+						.addHeader("Content-Type", contentType)
+						.build())
+				.build();
 	}
 }

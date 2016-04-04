@@ -29,12 +29,12 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractCoreMimeTypeInTest extends AbstractMimeTypeInTest<HttpResponse> {
+abstract class AbstractCoreMimeTypeInTest extends AbstractMimeTypeInTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+				.addHeader(header)
+				.build();
 	}
 }

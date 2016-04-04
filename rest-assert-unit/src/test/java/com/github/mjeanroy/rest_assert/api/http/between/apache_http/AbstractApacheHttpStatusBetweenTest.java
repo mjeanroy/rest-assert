@@ -29,14 +29,14 @@ import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttp
 import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpStatusLineMockBuilder;
 import org.apache.http.HttpResponse;
 
-public abstract class AbstractApacheHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
+abstract class AbstractApacheHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(int status) {
 		return new ApacheHttpResponseMockBuilder()
-			.setStatusLine(new ApacheHttpStatusLineMockBuilder()
-				.setStatusCode(status)
-				.build())
-			.build();
+				.setStatusLine(new ApacheHttpStatusLineMockBuilder()
+						.setStatusCode(status)
+						.build())
+				.build();
 	}
 }

@@ -35,14 +35,14 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(HttpResponse.class)
-public abstract class AbstractGoogleMimeTypeTest extends AbstractMimeTypeTest<HttpResponse> {
+abstract class AbstractGoogleMimeTypeTest extends AbstractMimeTypeTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(Header header) {
 		return new GoogleHttpResponseMockBuilder()
-			.setHeaders(new GoogleHttpHeadersMockBuilder()
-				.addHeader(header.getName(), header.getValue())
-				.build())
-			.build();
+				.setHeaders(new GoogleHttpHeadersMockBuilder()
+						.addHeader(header.getName(), header.getValue())
+						.build())
+				.build();
 	}
 }

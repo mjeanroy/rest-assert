@@ -30,13 +30,13 @@ import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 
 import static java.lang.String.format;
 
-public abstract class AbstractCoreHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
+abstract class AbstractCoreHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new HttpResponseMockBuilder()
-			.addHeader("Content-Type", contentType)
-			.build();
+				.addHeader("Content-Type", contentType)
+				.build();
 	}
 }

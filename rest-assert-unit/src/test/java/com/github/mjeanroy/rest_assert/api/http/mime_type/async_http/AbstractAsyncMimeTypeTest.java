@@ -29,12 +29,12 @@ import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseM
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import com.ning.http.client.Response;
 
-public abstract class AbstractAsyncMimeTypeTest extends AbstractMimeTypeTest<Response> {
+abstract class AbstractAsyncMimeTypeTest extends AbstractMimeTypeTest<Response> {
 
 	@Override
 	protected Response newResponse(Header header) {
 		return new AsyncHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 }

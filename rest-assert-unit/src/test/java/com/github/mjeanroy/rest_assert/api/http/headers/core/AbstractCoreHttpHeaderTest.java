@@ -29,12 +29,12 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-public abstract class AbstractCoreHttpHeaderTest extends AbstractHttpHeaderTest<HttpResponse> {
+abstract class AbstractCoreHttpHeaderTest extends AbstractHttpHeaderTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+				.addHeader(header)
+				.build();
 	}
 }

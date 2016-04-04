@@ -28,12 +28,12 @@ import com.github.mjeanroy.rest_assert.api.http.between.AbstractHttpStatusBetwee
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 
-public abstract class AbstractCoreHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
+abstract class AbstractCoreHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(int status) {
 		return new HttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
+				.setStatus(status)
+				.build();
 	}
 }

@@ -28,12 +28,12 @@ import com.github.mjeanroy.rest_assert.api.http.out_of.AbstractHttpStatusOutOfTe
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 
-public abstract class AbstractCoreHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
+abstract class AbstractCoreHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(int status) {
 		return new HttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
+				.setStatus(status)
+				.build();
 	}
 }

@@ -29,12 +29,12 @@ import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttp
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.apache.http.HttpResponse;
 
-public abstract class AbstractApacheHttpHeaderEqualToTest extends AbstractHttpHeaderEqualToTest<HttpResponse> {
+abstract class AbstractApacheHttpHeaderEqualToTest extends AbstractHttpHeaderEqualToTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newResponse(Header header) {
 		return new ApacheHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 }

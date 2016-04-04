@@ -27,6 +27,6 @@ package com.github.mjeanroy.rest_assert.api.cookie.async_http;
 import com.github.mjeanroy.rest_assert.api.cookie.AbstractCookieTest;
 import com.ning.http.client.cookie.Cookie;
 
-public abstract class AbstractAsyncHttpCookieTest extends AbstractCookieTest<Cookie> {
+abstract class AbstractAsyncHttpCookieTest extends AbstractCookieTest<Cookie> {
 
 }
