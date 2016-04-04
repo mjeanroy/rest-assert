@@ -34,8 +34,10 @@ import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singleton;
 
-public class JsonAssertion_contains_entries_Test {
+public class JsonAssertion_contains_iterable_Test {
 
 	protected JsonAssertions assertions;
 
@@ -53,36 +55,31 @@ public class JsonAssertion_contains_entries_Test {
 
 		String actual = jsonObject.toJson();
 
-		assertSuccessResult(assertions.containsEntries(actual, JsonAssertions.jsonEntry("id", 1)));
-		assertSuccessResult(assertions.containsEntries(actual, JsonAssertions.jsonEntry("name", "John Doe")));
-		assertSuccessResult(assertions.containsEntries(actual, JsonAssertions.jsonEntry("$.id", 1)));
-		assertSuccessResult(assertions.containsEntries(actual, JsonAssertions.jsonEntry("$.name", "John Doe")));
-
-		assertSuccessResult(assertions.containsEntries(actual,
-			JsonAssertions.jsonEntry("id", 1),
-			JsonAssertions.jsonEntry("name", "John Doe")
-		));
+		assertSuccessResult(assertions.contains(actual, singleton("id")));
+		assertSuccessResult(assertions.contains(actual, singleton("$.id")));
+		assertSuccessResult(assertions.contains(actual, singleton("name")));
+		assertSuccessResult(assertions.contains(actual, singleton("$.name")));
+		assertSuccessResult(assertions.contains(actual, asList("id", "name")));
 	}
 
 	@Test
 	public void it_should_fail_if_json_does_contains_entries() throws Exception {
 		JsonObject jsonObject = jsonObject(
-			jsonEntry("id", 1),
-			jsonEntry("name", "John Doe")
+			jsonEntry("id", 1)
 		);
 
 		String actual = jsonObject.toJson();
 
 		assertFailureResult(
-			assertions.containsEntries(actual, JsonAssertions.jsonEntry("name", "Jane Doe")),
+			assertions.contains(actual, singleton("name")),
 			CompositeError.class,
-			"Expecting json entry %s to be equal to %s but was %s", new Object[]{"name", "Jane Doe", "John Doe"}
+			"Expecting json to contain entry %s", new Object[]{"name"}
 		);
 
 		assertFailureResult(
-			assertions.containsEntries(actual, JsonAssertions.jsonEntry("$.name", "Jane Doe")),
+			assertions.contains(actual, singleton("$.name")),
 			CompositeError.class,
-			"Expecting json entry %s to be equal to %s but was %s", new Object[]{"$.name", "Jane Doe", "John Doe"}
+			"Expecting json to contain entry %s", new Object[]{"$.name"}
 		);
 	}
 }

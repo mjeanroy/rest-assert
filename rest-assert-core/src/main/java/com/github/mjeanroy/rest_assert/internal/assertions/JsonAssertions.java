@@ -106,13 +106,23 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult contains(String actual, @Param("key") String key, @Param("other") String... other) {
-		Set<RestAssertError> errors = new LinkedHashSet<>();
-
 		Set<String> entries = new LinkedHashSet<>();
 		entries.add(key);
 		addAll(entries, other);
+		return contains(actual, entries);
+	}
 
-		for (String e : entries) {
+	/**
+	 * Check that given json contains given entries.
+	 *
+	 * @param actual JSON object.
+	 * @param keys Entries to check.
+	 * @return Assertion result.
+	 */
+	public AssertionResult contains(String actual, @Param("keys") Iterable<String> keys) {
+		Set<RestAssertError> errors = new LinkedHashSet<>();
+
+		for (String e : keys) {
 			if (!hasEntry(actual, e)) {
 				errors.add(shouldHaveEntry(e));
 			}
@@ -131,12 +141,15 @@ public final class JsonAssertions {
 	 * @param other Other entries to check.
 	 * @return Assertion result.
 	 */
-	public AssertionResult contains(String actual, @Param("entry") JsonEntry<?> entry, @Param("other") JsonEntry<?>... other) {
-		Set<RestAssertError> errors = new LinkedHashSet<>();
-
-		Set<JsonEntry> entries = new LinkedHashSet<>();
+	public AssertionResult containsEntries(String actual, @Param("entry") JsonEntry<?> entry, @Param("other") JsonEntry<?>... other) {
+		Set<JsonEntry<?>> entries = new LinkedHashSet<>();
 		entries.add(entry);
 		addAll(entries, other);
+		return containsEntries(actual, entries);
+	}
+
+	private AssertionResult containsEntries(String actual, @Param("entry") Iterable<JsonEntry<?>> entries) {
+		Set<RestAssertError> errors = new LinkedHashSet<>();
 
 		for (JsonEntry e : entries) {
 			String key = e.getKey();

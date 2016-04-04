@@ -24,40 +24,34 @@
 
 package com.github.mjeanroy.rest_assert.api.json.contains;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertContainsEntries;
+import static com.github.mjeanroy.rest_assert.api.json.JsonAssert.assertContains;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static java.util.Collections.singleton;
 
-public class JsonAssert_contains_entries_Test {
+public class JsonAssert_contains_iterable_Test {
 
 	@Test
 	public void it_should_pass_if_json_contains_entries() {
 		String json = createJson();
-
-		assertContainsEntries(json, JsonAssertions.jsonEntry("id", 1));
-		assertContainsEntries(json, JsonAssertions.jsonEntry("name", "John Doe"));
-
-		assertContainsEntries(json,
-			JsonAssertions.jsonEntry("id", 1),
-			JsonAssertions.jsonEntry("name", "John Doe")
-		);
+		assertContains(json, singleton("id"));
+		assertContains(json, singleton("name"));
 	}
 
 	@Test
 	public void it_should_fail() {
 		final String json = createJson();
-		final String message = "Expecting json entry id to be equal to 2 but was 1";
+		final String message = "Expecting json to contain entry foo";
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				assertContainsEntries(json, JsonAssertions.jsonEntry("id", 2));
+				assertContains(json, singleton("foo"));
 			}
 		});
 	}
@@ -70,7 +64,7 @@ public class JsonAssert_contains_entries_Test {
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				assertContainsEntries(message, json, JsonAssertions.jsonEntry("id", 2));
+				assertContains(message, json, singleton("foo"));
 			}
 		});
 	}

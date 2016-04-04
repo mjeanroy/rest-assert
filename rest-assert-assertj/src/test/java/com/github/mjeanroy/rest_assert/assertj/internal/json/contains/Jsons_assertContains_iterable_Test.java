@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.json.contains;
 
-import com.github.mjeanroy.rest_assert.assertj.api.JsonAssertions;
 import com.github.mjeanroy.rest_assert.assertj.internal.Jsons;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.assertj.core.api.AssertionInfo;
@@ -35,9 +34,11 @@ import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseEx
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class Jsons_assertContains_entries_Test {
+public class Jsons_assertContains_iterable_Test {
 
 	protected Jsons jsons = Jsons.instance();
 
@@ -50,14 +51,11 @@ public class Jsons_assertContains_entries_Test {
 
 		String json = jsonObject.toJson();
 
-		jsons.assertContainsEntries(someInfo(), json, JsonAssertions.jsonEntry("id", 1));
-		jsons.assertContainsEntries(someInfo(), json, JsonAssertions.jsonEntry("name", "John Doe"));
-		jsons.assertContainsEntries(someInfo(), json, JsonAssertions.jsonEntry("$.id", 1));
-		jsons.assertContainsEntries(someInfo(), json, JsonAssertions.jsonEntry("$.name", "John Doe"));
-		jsons.assertContainsEntries(someInfo(), json,
-			JsonAssertions.jsonEntry("id", 1),
-			JsonAssertions.jsonEntry("name", "John Doe")
-		);
+		jsons.assertContains(someInfo(), json, singleton("id"));
+		jsons.assertContains(someInfo(), json, singleton("name"));
+		jsons.assertContains(someInfo(), json, singleton("$.id"));
+		jsons.assertContains(someInfo(), json, singleton("$.name"));
+		jsons.assertContains(someInfo(), json, asList("id", "name"));
 	}
 
 	@Test
@@ -70,10 +68,10 @@ public class Jsons_assertContains_entries_Test {
 		final String json = jsonObject.toJson();
 
 		try {
-			jsons.assertContainsEntries(info, json, JsonAssertions.jsonEntry("id", 2));
+			jsons.assertContains(info, json, singleton("name"));
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
-			String expectedMessage = "Expecting json entry \"id\" to be equal to 2 but was 1";
+			String expectedMessage = "Expecting json to contain entry \"name\"";
 
 			assertThat(e.getMessage())
 					.isNotNull()

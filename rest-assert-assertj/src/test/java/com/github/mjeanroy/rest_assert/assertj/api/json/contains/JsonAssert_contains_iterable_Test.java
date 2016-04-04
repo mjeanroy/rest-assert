@@ -26,17 +26,17 @@ package com.github.mjeanroy.rest_assert.assertj.api.json.contains;
 
 import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.rest_assert.assertj.api.JsonAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.JsonAssertions;
 import com.github.mjeanroy.rest_assert.assertj.internal.Jsons;
 import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static java.util.Collections.singleton;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class JsonAssert_contains_entries_Test extends AbstractApiTest<Jsons, JsonAssert> {
+public class JsonAssert_contains_iterable_Test extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
 	protected Jsons createAssertions() {
@@ -50,12 +50,12 @@ public class JsonAssert_contains_entries_Test extends AbstractApiTest<Jsons, Jso
 
 	@Override
 	protected JsonAssert invoke() {
-		return api.containsEntries(JsonAssertions.jsonEntry("id", 1));
+		return api.contains(singleton("foo"));
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertContainsEntries(any(AssertionInfo.class), eq(actual()), eq(JsonAssertions.jsonEntry("id", 1)));
+		verify(assertions).assertContains(any(AssertionInfo.class), eq(actual()), eq(singleton("foo")));
 	}
 
 	protected String actual() {
