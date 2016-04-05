@@ -29,10 +29,7 @@ import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus
 import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
@@ -47,8 +44,6 @@ import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHtt
 import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.*;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
-import static com.github.mjeanroy.rest_assert.utils.LowercaseMapper.lowercaseMapper;
-import static com.github.mjeanroy.rest_assert.utils.Utils.map;
 import static java.util.Arrays.asList;
 
 /**
@@ -765,7 +760,7 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") Collection<String> expectedMimeType) {
+	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") Iterable<String> expectedMimeType) {
 		String headerName = CONTENT_TYPE;
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
@@ -775,12 +770,17 @@ public final class HttpResponseAssertions {
 		String contentType = httpResponse.getHeader(headerName);
 		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 
-		List<String> expected = new ArrayList<>(expectedMimeType);
-		List<String> list = map(expected, lowercaseMapper());
+		boolean found = false;
+		for (String current : expectedMimeType) {
+			if (actualMimeType.equals(current.toLowerCase())) {
+				found = true;
+				break;
+			}
+		}
 
-		return list.contains(actualMimeType) ?
+		return found ?
 				success() :
-				failure(shouldHaveMimeType(expected, actualMimeType));
+				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 	}
 
 	/**

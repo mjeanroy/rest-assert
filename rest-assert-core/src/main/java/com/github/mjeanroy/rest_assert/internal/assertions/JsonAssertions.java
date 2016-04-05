@@ -41,7 +41,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -250,7 +249,7 @@ public final class JsonAssertions {
 	 * @param entries  Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("expected") String expected, @Param("entries") Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("expected") String expected, @Param("entries") Iterable<String> entries) {
 		JsonComparatorOptions options = builder()
 				.ignoreKeys(entries)
 				.build();
@@ -266,7 +265,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("file") File file, @Param("entries") Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("file") File file, @Param("entries") Iterable<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(file.toPath()), entries);
 	}
 
@@ -278,7 +277,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("path") Path path, @Param("entries") Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("path") Path path, @Param("entries") Iterable<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(path), entries);
 	}
 
@@ -290,7 +289,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("uri") URI uri, @Param("entries") Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("uri") URI uri, @Param("entries") Iterable<String> entries) {
 		return isEqualToIgnoring(actual, new File(uri), entries);
 	}
 
@@ -302,7 +301,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("url") URL url, @Param("entries") Collection<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, @Param("url") URL url, @Param("entries") Iterable<String> entries) {
 		try {
 			return isEqualToIgnoring(actual, new File(url.toURI()), entries);
 		} catch (URISyntaxException ex) {

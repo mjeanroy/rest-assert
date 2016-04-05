@@ -26,8 +26,6 @@ package com.github.mjeanroy.rest_assert.error.http;
 
 import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import java.util.Collection;
-
 /**
  * Error thrown when an http response should contain
  * specific mime type.
@@ -43,7 +41,7 @@ public class ShouldHaveMimeType extends AbstractError {
 	 * Build error.
 	 *
 	 * @param expectedMimeType Expected mime type.
-	 * @param actualMimeType Actual mime type.
+	 * @param actualMimeType   Actual mime type.
 	 * @return Error.
 	 */
 	public static ShouldHaveMimeType shouldHaveMimeType(String expectedMimeType, String actualMimeType) {
@@ -54,10 +52,10 @@ public class ShouldHaveMimeType extends AbstractError {
 	 * Build error.
 	 *
 	 * @param expectedMimeType Expected mime types.
-	 * @param actualMimeType Actual mime type.
+	 * @param actualMimeType   Actual mime type.
 	 * @return Error.
 	 */
-	public static ShouldHaveMimeType shouldHaveMimeType(Collection<String> expectedMimeType, String actualMimeType) {
+	public static ShouldHaveMimeType shouldHaveMimeType(Iterable<String> expectedMimeType, String actualMimeType) {
 		return new ShouldHaveMimeType("Expecting response to have mime type in %s but was %s", expectedMimeType, actualMimeType);
 	}
 }
