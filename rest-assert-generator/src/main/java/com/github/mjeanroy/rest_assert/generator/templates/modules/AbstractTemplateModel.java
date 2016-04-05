@@ -35,6 +35,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 import static com.github.mjeanroy.rest_assert.generator.utils.ClassUtils.findPublicMethods;
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
@@ -50,6 +51,8 @@ import static java.util.Collections.unmodifiableMap;
  * - Methods: assertion methods.
  */
 public abstract class AbstractTemplateModel implements TemplateModel {
+
+	private static final List<String> CLASS_NAME_PREFIXES = asList("class ", "interface ");
 
 	@Override
 	public Map<String, Object> data() {
@@ -157,12 +160,16 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 					name = paramType.getName();
 				}
 
-				args.add(new Arg(
-						name,
-						genericType == null ? null : (genericType.startsWith("class ") ? genericType.substring("class ".length()) : genericType),
-						param.value(),
-						i
-				));
+				if (genericType != null) {
+					for (String prefix : CLASS_NAME_PREFIXES) {
+						if (genericType.startsWith(prefix)) {
+							genericType = genericType.substring(prefix.length());
+							break;
+						}
+					}
+				}
+
+				args.add(new Arg(name, genericType, param.value(), i));
 			}
 		} else {
 			args = emptyList();

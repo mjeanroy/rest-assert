@@ -28,10 +28,8 @@ package com.github.mjeanroy.rest_assert.internal.data;
  * Standard JSON entry defined by:
  * - A key.
  * - A value.
- *
- * @param <T> Type of value.
  */
-public interface JsonEntry<T> {
+public interface JsonEntry {
 
 	/**
 	 * Get entry key.
@@ -45,5 +43,5 @@ public interface JsonEntry<T> {
 	 *
 	 * @return JSON entry value.
 	 */
-	T getValue();
+	Object getValue();
 }

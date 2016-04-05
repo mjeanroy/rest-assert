@@ -35,7 +35,7 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
  *
  * @param <T> Type of value.
  */
-public class DefaultJsonEntry<T> implements JsonEntry<T> {
+public class DefaultJsonEntry implements JsonEntry {
 
 	/**
 	 * Entry key.
@@ -45,15 +45,15 @@ public class DefaultJsonEntry<T> implements JsonEntry<T> {
 	/**
 	 * Entry value.
 	 */
-	private final T value;
+	private final Object value;
 
 	/**
 	 * Create JSON entry.
 	 *
-	 * @param key JSON entry (must not be null).
+	 * @param key   JSON entry (must not be null).
 	 * @param value JSON value.
 	 */
-	public DefaultJsonEntry(String key, T value) {
+	public DefaultJsonEntry(String key, Object value) {
 		this.key = notNull(key, "JSON key cannot be null");
 		this.value = value;
 	}
@@ -64,7 +64,7 @@ public class DefaultJsonEntry<T> implements JsonEntry<T> {
 	}
 
 	@Override
-	public T getValue() {
+	public Object getValue() {
 		return value;
 	}
 
@@ -82,7 +82,7 @@ public class DefaultJsonEntry<T> implements JsonEntry<T> {
 		if (o instanceof DefaultJsonEntry) {
 			DefaultJsonEntry e = (DefaultJsonEntry) o;
 			return Objects.equals(getKey(), e.getKey())
-				&& Objects.equals(getValue(), e.getValue());
+					&& Objects.equals(getValue(), e.getValue());
 		}
 
 		return false;

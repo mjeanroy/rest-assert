@@ -77,13 +77,12 @@ public final class JsonAssertions {
 	/**
 	 * Create JSON entry object.
 	 *
-	 * @param key Entry key.
+	 * @param key   Entry key.
 	 * @param value Entry value.
-	 * @param <T> Type of value.
 	 * @return The JSON entry.
 	 */
-	public static <T>JsonEntry<T> jsonEntry(String key, T value) {
-		return new DefaultJsonEntry<>(key, value);
+	public static JsonEntry jsonEntry(String key, Object value) {
+		return new DefaultJsonEntry(key, value);
 	}
 
 	/**
@@ -100,8 +99,8 @@ public final class JsonAssertions {
 	 * Check that given json contains given entries.
 	 *
 	 * @param actual JSON object.
-	 * @param key Entry to check.
-	 * @param other Other entries to check.
+	 * @param key    Entry to check.
+	 * @param other  Other entries to check.
 	 * @return Assertion result.
 	 */
 	public AssertionResult contains(String actual, @Param("key") String key, @Param("other") String... other) {
@@ -115,7 +114,7 @@ public final class JsonAssertions {
 	 * Check that given json contains given entries.
 	 *
 	 * @param actual JSON object.
-	 * @param keys Entries to check.
+	 * @param keys   Entries to check.
 	 * @return Assertion result.
 	 */
 	public AssertionResult contains(String actual, @Param("keys") Iterable<String> keys) {
@@ -128,28 +127,36 @@ public final class JsonAssertions {
 		}
 
 		return errors.isEmpty() ?
-			success() :
-			failure(composeErrors(errors));
+				success() :
+				failure(composeErrors(errors));
 	}
 
 	/**
 	 * Check that given json contains given entries.
 	 *
 	 * @param actual JSON object.
-	 * @param entry Entry to check.
-	 * @param other Other entries to check.
+	 * @param entry  Entry to check.
+	 * @param other  Other entries to check.
 	 * @return Assertion result.
 	 */
-	public AssertionResult containsEntries(String actual, @Param("entry") JsonEntry<?> entry, @Param("other") JsonEntry<?>... other) {
-		Set<JsonEntry<?>> entries = new LinkedHashSet<>();
+	public AssertionResult containsEntries(String actual, @Param("entry") JsonEntry entry, @Param("other") JsonEntry... other) {
+		Set<JsonEntry> entries = new LinkedHashSet<>();
 		entries.add(entry);
 		addAll(entries, other);
 		return containsEntries(actual, entries);
 	}
 
-	private AssertionResult containsEntries(String actual, @Param("entry") Iterable<JsonEntry<?>> entries) {
+	/**
+	 * Check that given json contains given entries.
+	 *
+	 * @param actual  JSON object.
+	 * @param entries Entries to check.
+	 * @return Assertion result.
+	 */
+	public AssertionResult containsEntries(String actual, @Param("entries") Iterable<JsonEntry> entries) {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
+		// Collect errors
 		for (JsonEntry e : entries) {
 			String key = e.getKey();
 			if (!hasEntry(actual, key)) {
@@ -164,8 +171,8 @@ public final class JsonAssertions {
 		}
 
 		return errors.isEmpty() ?
-			success() :
-			failure(composeErrors(errors));
+				success() :
+				failure(composeErrors(errors));
 	}
 
 	private boolean hasEntry(String actual, String entry) {

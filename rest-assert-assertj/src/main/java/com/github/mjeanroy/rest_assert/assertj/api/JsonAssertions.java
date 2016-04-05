@@ -34,16 +34,15 @@ public class JsonAssertions {
 
 	/**
 	 * Create JSON entry.
-	 *
+	 * <p/>
 	 * Basically, a shortcut to {@link com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
 	 * this method may be used to avoid to import the same class name.
 	 *
-	 * @param key JSON key.
+	 * @param key   JSON key.
 	 * @param value JSON value.
-	 * @param <T> Type of value.
 	 * @return JSON entry.
 	 */
-	public static <T>JsonEntry jsonEntry(String key, T value) {
+	public static JsonEntry jsonEntry(String key, Object value) {
 		return com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions.jsonEntry(key, value);
 	}
 
