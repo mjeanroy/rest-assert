@@ -27,7 +27,7 @@ package {{package}};
 import org.assertj.core.api.AbstractAssert;
 
 /**
- * Base class for all implementations of assertions for {@link {{actualClass}}}.
+ * Base class for all implementations of assertions for {@link {{actual_class}}}.
  *
  * @param <S> the "self" type of this assertion class. Please read &quot;<a href="http://bit.ly/anMa4g"
  *          target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
