@@ -40,7 +40,7 @@ public final class {{class_name}} {
 
 	{{#methods}}
 	/**
-	 * @see {@link {{core_class_name}}#{{core_method_name}}}
+	 * @see {{core_class_name}}#{{core_method_name}}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *
 	 * @param actual Actual object.
@@ -50,7 +50,7 @@ public final class {{class_name}} {
 	}
 
 	/**
-	 * @see {@link {{core_class_name}}#{{core_method_name}}}
+	 * @see {{core_class_name}}#{{core_method_name}}
 	 * Throws an {@link AssertionError} with given message if test failed.
 	 *
 	 * @param message  The identifying message for the {@link AssertionError}.
