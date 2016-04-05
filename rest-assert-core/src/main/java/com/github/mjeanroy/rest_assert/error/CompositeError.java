@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.error;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -36,11 +35,11 @@ import static java.util.Collections.addAll;
  */
 public class CompositeError extends AbstractError {
 
-	private CompositeError(Collection<RestAssertError> errors) {
+	private CompositeError(Iterable<RestAssertError> errors) {
 		super(message(errors), args(errors));
 	}
 
-	private static String message(Collection<RestAssertError> errors) {
+	private static String message(Iterable<RestAssertError> errors) {
 		String separator = "," + LINE_SEPARATOR;
 		StringBuilder sb = new StringBuilder();
 		for (RestAssertError error : errors) {
@@ -49,7 +48,7 @@ public class CompositeError extends AbstractError {
 		return sb.substring(0, sb.length() - separator.length()).trim();
 	}
 
-	private static Object[] args(Collection<RestAssertError> errors) {
+	private static Object[] args(Iterable<RestAssertError> errors) {
 		List<Object> args = new LinkedList<>();
 		for (RestAssertError error : errors) {
 			addAll(args, error.args());
@@ -57,7 +56,7 @@ public class CompositeError extends AbstractError {
 		return args.toArray();
 	}
 
-	public static CompositeError composeErrors(Collection<RestAssertError> errors) {
+	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
 		return new CompositeError(errors);
 	}
 }

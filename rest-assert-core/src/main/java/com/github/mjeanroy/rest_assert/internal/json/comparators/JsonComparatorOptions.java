@@ -1,7 +1,7 @@
 package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static java.util.Collections.addAll;
@@ -38,7 +38,7 @@ public class JsonComparatorOptions {
 	 * @param ignoringKeys Set of keys to ignore.
 	 */
 	private JsonComparatorOptions(Collection<String> ignoringKeys) {
-		this.ignoringKeys = new HashSet<>(ignoringKeys);
+		this.ignoringKeys = new LinkedHashSet<>(ignoringKeys);
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class JsonComparatorOptions {
 		private final Set<String> ignoringKeys;
 
 		private Builder() {
-			this.ignoringKeys = new HashSet<>();
+			this.ignoringKeys = new LinkedHashSet<>();
 		}
 
 		public Builder ignoreKey(String key) {

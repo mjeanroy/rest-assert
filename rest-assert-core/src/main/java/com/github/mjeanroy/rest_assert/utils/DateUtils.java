@@ -27,7 +27,6 @@ package com.github.mjeanroy.rest_assert.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -65,9 +64,9 @@ public final class DateUtils {
 	 * List of patterns to use to convert http date as string to date object.
 	 */
 	private static final List<String> PATTERNS = asList(
-		PATTERN_RFC1123,
-		PATTERN_RFC1036,
-		PATTERN_ASCTIME
+			PATTERN_RFC1123,
+			PATTERN_RFC1036,
+			PATTERN_ASCTIME
 	);
 
 	/**
@@ -96,8 +95,7 @@ public final class DateUtils {
 			DateFormat df = createDateFormat(pattern);
 			try {
 				return df.parse(date);
-			}
-			catch (ParseException ex) {
+			} catch (ParseException ex) {
 				// try next...
 			}
 		}
