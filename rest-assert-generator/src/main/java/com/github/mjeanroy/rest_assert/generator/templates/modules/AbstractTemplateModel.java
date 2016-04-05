@@ -32,12 +32,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.github.mjeanroy.rest_assert.generator.utils.ClassUtils.findPublicMethods;
 import static java.util.Collections.emptyList;
@@ -140,12 +135,13 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		if (size > 1) {
 			args = new ArrayList<>(size);
 			for (int i = 1; i < paramTypes.length; i++) {
-				Class genericType = null;
 				Class paramType = classTypes[i];
+				Type type = paramTypes[i];
 
-				if (Collection.class.isAssignableFrom(paramType)) {
-					ParameterizedType parameterizedType = (ParameterizedType) paramTypes[i];
-					genericType = (Class) parameterizedType.getActualTypeArguments()[0];
+				String genericType = null;
+				if (type instanceof ParameterizedType) {
+					ParameterizedType parameterizedType = (ParameterizedType) type;
+					genericType = parameterizedType.getActualTypeArguments()[0].toString();
 				}
 
 				Annotation[] parameterAnnotations = annotations[i];
@@ -162,10 +158,10 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 				}
 
 				args.add(new Arg(
-					name,
-					genericType == null ? null : genericType.getName(),
-					param.value(),
-					i
+						name,
+						genericType == null ? null : (genericType.startsWith("class ") ? genericType.substring("class ".length()) : genericType),
+						param.value(),
+						i
 				));
 			}
 		} else {

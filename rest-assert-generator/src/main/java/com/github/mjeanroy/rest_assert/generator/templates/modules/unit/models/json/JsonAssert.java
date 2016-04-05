@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models;
+package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.json;
 
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;

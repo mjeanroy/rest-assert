@@ -91,8 +91,9 @@ public abstract class AbstractTemplateModelTest {
 
 	@Test
 	public void it_should_build_methods_list() {
-		List<Map<String,Object>> methods = getTemplateModel().getMethods();
+		List<Map<String, Object>> methods = getTemplateModel().getMethods();
 
+		final String pattern = "([a-z][a-zA-Z0-9_]+(\\.))([a-z][a-zA-Z0-9_])";
 		assertThat(methods)
 				.isNotNull()
 				.isNotEmpty()
