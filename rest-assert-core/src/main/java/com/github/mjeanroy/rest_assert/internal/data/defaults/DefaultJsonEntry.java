@@ -32,8 +32,6 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
 
 /**
  * Default implement for {@link JsonEntry} interface.
- *
- * @param <T> Type of value.
  */
 public class DefaultJsonEntry implements JsonEntry {
 
