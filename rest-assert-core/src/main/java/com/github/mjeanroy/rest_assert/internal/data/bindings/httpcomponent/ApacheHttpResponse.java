@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AbstractHttpResponse;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
@@ -36,7 +36,7 @@ import java.io.IOException;
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
  * using Apache HttpClient framework as real implementation.
  */
-public class ApacheHttpResponse implements HttpResponse {
+public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
 	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse} using instance
@@ -76,14 +76,9 @@ public class ApacheHttpResponse implements HttpResponse {
 	}
 
 	@Override
-	public String getContent() {
+	protected String doGetContent() throws IOException {
 		HttpEntity entity = response.getEntity();
-		try {
-			return EntityUtils.toString(entity);
-		}
-		catch (IOException ex) {
-			throw new UnparseableResponseBodyException(ex);
-		}
+		return EntityUtils.toString(entity);
 	}
 
 	private Header findFirstHeader(String name) {

@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AbstractHttpResponse;
 import com.ning.http.client.Response;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ import java.io.IOException;
  * Implementation of {@link HttpResponse}
  * using Async-Http framework as real implementation.
  */
-public class AsyncHttpResponse implements HttpResponse {
+public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
 	 * Create new {@link HttpResponse} using instance
@@ -73,12 +73,7 @@ public class AsyncHttpResponse implements HttpResponse {
 	}
 
 	@Override
-	public String getContent() {
-		try {
-			return response.getResponseBody();
-		}
-		catch (IOException ex) {
-			throw new UnparseableResponseBodyException(ex);
-		}
+	protected String doGetContent() throws IOException {
+		return response.getResponseBody();
 	}
 }

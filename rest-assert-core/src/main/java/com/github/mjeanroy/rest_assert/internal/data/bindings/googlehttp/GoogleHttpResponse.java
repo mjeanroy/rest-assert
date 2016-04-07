@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AbstractHttpResponse;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -37,7 +37,7 @@ import static com.google.api.client.util.IOUtils.copy;
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
  * using Google Http Client framework as real implementation.
  */
-public class GoogleHttpResponse implements HttpResponse {
+public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
 	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse} using instance
@@ -76,15 +76,10 @@ public class GoogleHttpResponse implements HttpResponse {
 	}
 
 	@Override
-	public String getContent() {
-		try (InputStream is = response.getContent();
-				 ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-
+	protected String doGetContent() throws IOException {
+		try (InputStream is = response.getContent(); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
 			copy(is, bos);
 			return new String(bos.toByteArray(), response.getContentCharset());
-		}
-		catch (IOException ex) {
-			throw new UnparseableResponseBodyException(ex);
 		}
 	}
 }
