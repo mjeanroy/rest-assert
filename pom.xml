@@ -29,6 +29,7 @@
 		<async-http-client.version>1.9.37</async-http-client.version>
 		<httpclient.version>4.5.2</httpclient.version>
 		<google-http-client.version>1.21.0</google-http-client.version>
+        <okhttp.version>3.2.0</okhttp.version>
 		<jackson-2.version>2.7.3</jackson-2.version>
 		<jackson-1.version>1.9.13</jackson-1.version>
 		<gson.version>2.6.2</gson.version>
@@ -66,6 +67,11 @@
 				<groupId>com.google.http-client</groupId>
 				<artifactId>google-http-client</artifactId>
 				<version>${google-http-client.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.squareup.okhttp3</groupId>
+				<artifactId>okhttp</artifactId>
+				<version>${okhttp.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>

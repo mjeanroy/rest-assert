@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.charsets.apache_http;
 
 import com.github.mjeanroy.rest_assert.api.http.charsets.AbstractHttpAssertCharsetTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import org.apache.http.HttpResponse;
 
 import static java.lang.String.format;

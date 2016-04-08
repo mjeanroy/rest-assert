@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings;
+package com.github.mjeanroy.rest_assert.internal.bindings.googlehttp;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
-import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpHeadersMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.google.api.client.http.HttpHeaders;
 import org.junit.Rule;
 import org.junit.Test;

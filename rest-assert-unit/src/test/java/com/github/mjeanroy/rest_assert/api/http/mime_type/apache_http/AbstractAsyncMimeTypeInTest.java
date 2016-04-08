@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.mime_type.apache_http;
 
 import com.github.mjeanroy.rest_assert.api.http.mime_type.AbstractMimeTypeInTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.apache.http.HttpResponse;
 

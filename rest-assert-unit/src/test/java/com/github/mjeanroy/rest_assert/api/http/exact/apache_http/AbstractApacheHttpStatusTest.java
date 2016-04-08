@@ -25,8 +25,8 @@
 package com.github.mjeanroy.rest_assert.api.http.exact.apache_http;
 
 import com.github.mjeanroy.rest_assert.api.http.exact.AbstractHttpStatusTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpStatusLineMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
 import org.apache.http.HttpResponse;
 
 abstract class AbstractApacheHttpStatusTest extends AbstractHttpStatusTest<HttpResponse> {

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie.apache_http;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
 import org.apache.http.cookie.Cookie;
 
 import static com.github.mjeanroy.rest_assert.api.cookie.ApacheHttpCookieAssert.assertHasDomain;

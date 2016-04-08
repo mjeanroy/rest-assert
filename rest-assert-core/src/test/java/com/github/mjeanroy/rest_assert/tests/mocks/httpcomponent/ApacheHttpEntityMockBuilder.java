@@ -22,42 +22,52 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client;
+package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
-import org.apache.http.StatusLine;
+import org.apache.http.HttpEntity;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Build mock instance of {@link StatusLine} class.
+ * Builder to create mock instances of {@link HttpEntity} class.
  */
-public class ApacheHttpStatusLineMockBuilder {
+public class ApacheHttpEntityMockBuilder {
 
 	/**
-	 * Cookie name.
+	 * Body content.
 	 */
-	private int statusCode;
+	private InputStream content;
 
 	/**
-	 * Set {@link #statusCode}.
+	 * Set {@link #content}.
 	 *
-	 * @param statusCode New {@link #statusCode}.
+	 * @param content New {@link #content}.
 	 * @return Current builder.
 	 */
-	public ApacheHttpStatusLineMockBuilder setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
+	public ApacheHttpEntityMockBuilder setContent(String content) {
+		this.content = new ByteArrayInputStream(content.getBytes());
 		return this;
 	}
 
 	/**
-	 * Create mock instance.
+	 * Create mock instance of {@link HttpEntity} class.
 	 *
 	 * @return Mock instance.
 	 */
-	public StatusLine build() {
-		StatusLine statusLine = mock(StatusLine.class);
-		when(statusLine.getStatusCode()).thenReturn(statusCode);
-		return statusLine;
+	public HttpEntity build() {
+		HttpEntity entity = mock(HttpEntity.class);
+
+		try {
+			when(entity.getContent()).thenReturn(content);
+		} catch (IOException ex) {
+			throw new AssertionError(ex);
+		}
+
+		return entity;
 	}
 }

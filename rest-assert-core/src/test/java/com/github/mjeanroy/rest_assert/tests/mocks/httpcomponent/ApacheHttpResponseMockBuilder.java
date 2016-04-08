@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client;
+package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

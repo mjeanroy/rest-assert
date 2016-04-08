@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.async_http;
 
 import com.github.mjeanroy.rest_assert.api.http.headers.AbstractHttpHeaderEqualToTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import com.ning.http.client.Response;
 

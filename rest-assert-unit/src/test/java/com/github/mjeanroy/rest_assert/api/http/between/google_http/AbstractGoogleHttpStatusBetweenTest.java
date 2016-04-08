@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.between.google_http;
 
 import com.github.mjeanroy.rest_assert.api.http.between.AbstractHttpStatusBetweenTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.google.api.client.http.HttpResponse;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;

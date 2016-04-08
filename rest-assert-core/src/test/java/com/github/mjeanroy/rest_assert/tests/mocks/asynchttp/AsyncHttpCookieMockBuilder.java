@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.async_http;
+package com.github.mjeanroy.rest_assert.tests.mocks.asynchttp;
 
 import com.ning.http.client.cookie.Cookie;
 

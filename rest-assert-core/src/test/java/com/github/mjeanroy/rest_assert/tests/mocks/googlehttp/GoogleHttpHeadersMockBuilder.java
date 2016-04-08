@@ -22,14 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.async_http;
+package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
-import com.ning.http.client.FluentCaseInsensitiveStringsMap;
-import com.ning.http.client.Response;
+import com.google.api.client.http.HttpHeaders;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -40,62 +38,30 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder to create mock instance of {@link Response} class.
+ * Builder to create mock instance of {@link HttpHeaders} class.
  */
-public class AsyncHttpResponseMockBuilder {
+public class GoogleHttpHeadersMockBuilder {
 
 	/**
-	 * Response status code.
-	 */
-	private int statusCode;
-
-	/**
-	 * Response body.
-	 */
-	private String responseBody;
-
-	/**
-	 * Response headers.
+	 * Map of headers.
 	 */
 	private final Map<String, Collection<String>> headers;
 
 	/**
 	 * Create new builder.
 	 */
-	public AsyncHttpResponseMockBuilder() {
+	public GoogleHttpHeadersMockBuilder() {
 		this.headers = new LinkedHashMap<>();
 	}
 
 	/**
-	 * Set {@link #statusCode}.
-	 *
-	 * @param statusCode New {@link #statusCode}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpResponseMockBuilder setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-		return this;
-	}
-
-	/**
-	 * Set {@link #responseBody}.
-	 *
-	 * @param responseBody New {@link #responseBody}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpResponseMockBuilder setResponseBody(String responseBody) {
-		this.responseBody = responseBody;
-		return this;
-	}
-
-	/**
-	 * Add new header.
+	 * Add new header value.
 	 *
 	 * @param name Header name.
 	 * @param value Header value.
 	 * @return Current builder.
 	 */
-	public AsyncHttpResponseMockBuilder addHeader(String name, String value) {
+	public GoogleHttpHeadersMockBuilder addHeader(String name, String value) {
 		Collection<String> values = headers.get(name);
 		if (values == null) {
 			values = new LinkedHashSet<>();
@@ -111,32 +77,18 @@ public class AsyncHttpResponseMockBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public Response build() {
-		Response rsp = mock(Response.class);
-		when(rsp.getStatusCode()).thenReturn(statusCode);
+	public HttpHeaders build() {
+		final HttpHeaders httpHeaders = mock(HttpHeaders.class);
 
-		try {
-			when(rsp.getResponseBody()).thenReturn(responseBody);
-		} catch (IOException ex) {
-			throw new AssertionError(ex);
-		}
-
-		when(rsp.getHeaders()).thenAnswer(new Answer<FluentCaseInsensitiveStringsMap>() {
+		when(httpHeaders.getFirstHeaderStringValue(anyString())).thenAnswer(new Answer<String>() {
 			@Override
-			public FluentCaseInsensitiveStringsMap answer(InvocationOnMock invocation) {
-				return new FluentCaseInsensitiveStringsMap(headers);
-			}
-		});
-
-		when(rsp.getHeader(anyString())).thenAnswer(new Answer<String>() {
-			@Override
-			public String answer(InvocationOnMock invocation) {
+			public String answer(InvocationOnMock invocation) throws Throwable {
 				String headerName = (String) invocation.getArguments()[0];
-				FluentCaseInsensitiveStringsMap map = new FluentCaseInsensitiveStringsMap(headers);
-				return map.containsKey(headerName) ? map.getFirstValue(headerName) : null;
+				Collection<String> values = headers.get(headerName);
+				return values == null ? null : values.iterator().next();
 			}
 		});
 
-		return rsp;
+		return httpHeaders;
 	}
 }

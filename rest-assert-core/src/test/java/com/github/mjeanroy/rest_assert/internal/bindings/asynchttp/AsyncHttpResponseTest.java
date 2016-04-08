@@ -22,31 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings;
+package com.github.mjeanroy.rest_assert.internal.bindings.asynchttp;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpEntityMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpHeaderMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpStatusLineMockBuilder;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.ning.http.client.Response;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class ApacheHttpResponseTest {
+public class AsyncHttpResponseTest {
 
 	@Rule
 	public ExpectedException thrown = none();
@@ -54,39 +49,29 @@ public class ApacheHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
-
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.setStatusLine(new ApacheHttpStatusLineMockBuilder()
-				.setStatusCode(expectedStatus)
-				.build())
+		Response response = new AsyncHttpResponseMockBuilder()
+			.setStatusCode(expectedStatus)
 			.build();
 
-		HttpResponse httpResponse = create(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
+		verify(response).getStatusCode();
 	}
 
 	@Test
 	public void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
 
-		Header header1 = newHeader("foo", "foo");
-		Header header2 = newHeader(headerName, headerName);
-		Header header3 = newHeader("bar", "bar");
-
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.addHeaders(header1, header2, header3)
+		Response response = new AsyncHttpResponseMockBuilder()
+			.addHeader(headerName, "foo")
 			.build();
 
-		HttpResponse httpResponse = create(response);
-		boolean containsHeader = httpResponse.hasHeader(headerName);
-
-		assertThat(containsHeader).isTrue();
-		verify(response).getAllHeaders();
-		verify(header1).getName();
-		verify(header2).getName();
-		verify(header3, never()).getName();
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		assertThat(httpResponse.hasHeader(headerName)).isTrue();
+		assertThat(httpResponse.hasHeader(headerName.toUpperCase())).isTrue();
+		assertThat(httpResponse.hasHeader(headerName.toLowerCase())).isTrue();
 	}
 
 	@Test
@@ -94,67 +79,40 @@ public class ApacheHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		Header header1 = newHeader("foo", "bar");
-		Header header2 = newHeader(headerName, headerValue);
-		Header header3 = newHeader("bar", "foo");
-
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.addHeaders(header1, header2, header3)
+		Response response = new AsyncHttpResponseMockBuilder()
+			.addHeader(headerName, headerValue)
 			.build();
 
-		HttpResponse httpResponse = create(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
-		verify(response).getAllHeaders();
-
-		verify(header1).getName();
-		verify(header1, never()).getValue();
-
-		verify(header2).getName();
-		verify(header2).getValue();
-
-		verify(header3, never()).getName();
-		verify(header3, never()).getValue();
+		verify(response).getHeader(headerName);
 	}
 
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.setEntity(new ApacheHttpEntityMockBuilder()
-				.setContent(body)
-				.build())
+		Response response = new AsyncHttpResponseMockBuilder()
+			.setResponseBody(body)
 			.build();
 
-		HttpResponse httpResponse = create(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
+		verify(response).getResponseBody();
 	}
 
 	@Test
 	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
 		IOException ex = mock(IOException.class);
-
-		HttpEntity httpEntity = new ApacheHttpEntityMockBuilder().build();
-		when(httpEntity.getContent()).thenThrow(ex);
-
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.setEntity(httpEntity)
-			.build();
+		Response response = new AsyncHttpResponseMockBuilder().build();
+		when(response.getResponseBody()).thenThrow(ex);
 
 		thrown.expect(UnparseableResponseBodyException.class);
 
-		HttpResponse httpResponse = create(response);
+		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		httpResponse.getContent();
-	}
-
-	private Header newHeader(String name, String value) {
-		return new ApacheHttpHeaderMockBuilder()
-			.setName(name)
-			.setValue(value)
-			.build();
 	}
 }

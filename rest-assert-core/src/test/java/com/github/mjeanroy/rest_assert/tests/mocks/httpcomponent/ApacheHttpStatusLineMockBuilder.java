@@ -22,59 +22,42 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client;
+package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
-import org.apache.http.Header;
+import org.apache.http.StatusLine;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder to create mock for {@link Header} class.
+ * Build mock instance of {@link StatusLine} class.
  */
-public class ApacheHttpHeaderMockBuilder {
+public class ApacheHttpStatusLineMockBuilder {
 
 	/**
-	 * Header name.
+	 * Cookie name.
 	 */
-	private String name;
+	private int statusCode;
 
 	/**
-	 * Header value.
-	 */
-	private String value;
-
-	/**
-	 * Set {@link #name}.
+	 * Set {@link #statusCode}.
 	 *
-	 * @param name New {@link #name}.
+	 * @param statusCode New {@link #statusCode}.
 	 * @return Current builder.
 	 */
-	public ApacheHttpHeaderMockBuilder setName(String name) {
-		this.name = name;
+	public ApacheHttpStatusLineMockBuilder setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 		return this;
 	}
 
 	/**
-	 * Set {@link #value}.
-	 *
-	 * @param value New {@link #value}.
-	 * @return Current builder.
-	 */
-	public ApacheHttpHeaderMockBuilder setValue(String value) {
-		this.value = value;
-		return this;
-	}
-
-	/**
-	 * Create mock instance of {@link Header} class.
+	 * Create mock instance.
 	 *
 	 * @return Mock instance.
 	 */
-	public Header build() {
-		Header header = mock(Header.class);
-		when(header.getName()).thenReturn(name);
-		when(header.getValue()).thenReturn(value);
-		return header;
+	public StatusLine build() {
+		StatusLine statusLine = mock(StatusLine.class);
+		when(statusLine.getStatusCode()).thenReturn(statusCode);
+		return statusLine;
 	}
 }

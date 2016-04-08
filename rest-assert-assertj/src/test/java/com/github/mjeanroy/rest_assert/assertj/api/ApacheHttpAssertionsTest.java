@@ -29,9 +29,9 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpEntityMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpEntityMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 

@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.charsets.async_http;
 
 import com.github.mjeanroy.rest_assert.api.http.charsets.AbstractHttpAssertCharsetTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 
 import static java.lang.String.format;

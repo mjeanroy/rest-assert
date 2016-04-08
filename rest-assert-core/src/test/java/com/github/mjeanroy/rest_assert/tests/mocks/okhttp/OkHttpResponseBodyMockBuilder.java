@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,48 +22,40 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie.apache_http;
+package com.github.mjeanroy.rest_assert.tests.mocks.okhttp;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
-import org.apache.http.cookie.Cookie;
+import okhttp3.MediaType;
+import okhttp3.ResponseBody;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.ApacheHttpCookieAssert.assertIsNotSecured;
+/**
+ * Builder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
+ */
+public class OkHttpResponseBodyMockBuilder {
 
-public class CookieAssert_assertIsNotSecured_Test extends AbstractApacheHttpCookieTest {
+	/**
+	 * HTTP Response body.
+	 */
+	private String body;
 
-	@Override
-	protected void invoke(Cookie actual) {
-		assertIsNotSecured(actual);
+	/**
+	 * Set {@link #body}.
+	 *
+	 * @param body New {@link #body}.
+	 * @return Current builder.
+	 */
+	public OkHttpResponseBodyMockBuilder setBody(String body) {
+		this.body = body;
+		return this;
 	}
 
-	@Override
-	protected void invoke(String message, Cookie actual) {
-		assertIsNotSecured(message, actual);
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be secured";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean secured) {
-		return new ApacheHttpCookieMockBuilder()
-			.setSecure(secured)
-			.build();
+	/**
+	 * Create mock instance.
+	 *
+	 * @return Mock instance.
+	 */
+	public ResponseBody build() {
+		MediaType mediaType = MediaType.parse("plain/text");
+		String content = body == null ? "" : body;
+		return ResponseBody.create(mediaType, content);
 	}
 }

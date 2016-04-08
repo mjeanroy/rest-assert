@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,48 +22,59 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.cookie.apache_http;
+package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
-import org.apache.http.cookie.Cookie;
+import org.apache.http.Header;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.ApacheHttpCookieAssert.assertIsNotSecured;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-public class CookieAssert_assertIsNotSecured_Test extends AbstractApacheHttpCookieTest {
+/**
+ * Builder to create mock for {@link Header} class.
+ */
+public class ApacheHttpHeaderMockBuilder {
 
-	@Override
-	protected void invoke(Cookie actual) {
-		assertIsNotSecured(actual);
+	/**
+	 * Header name.
+	 */
+	private String name;
+
+	/**
+	 * Header value.
+	 */
+	private String value;
+
+	/**
+	 * Set {@link #name}.
+	 *
+	 * @param name New {@link #name}.
+	 * @return Current builder.
+	 */
+	public ApacheHttpHeaderMockBuilder setName(String name) {
+		this.name = name;
+		return this;
 	}
 
-	@Override
-	protected void invoke(String message, Cookie actual) {
-		assertIsNotSecured(message, actual);
+	/**
+	 * Set {@link #value}.
+	 *
+	 * @param value New {@link #value}.
+	 * @return Current builder.
+	 */
+	public ApacheHttpHeaderMockBuilder setValue(String value) {
+		this.value = value;
+		return this;
 	}
 
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be secured";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	protected Cookie cookie(boolean secured) {
-		return new ApacheHttpCookieMockBuilder()
-			.setSecure(secured)
-			.build();
+	/**
+	 * Create mock instance of {@link Header} class.
+	 *
+	 * @return Mock instance.
+	 */
+	public Header build() {
+		Header header = mock(Header.class);
+		when(header.getName()).thenReturn(name);
+		when(header.getValue()).thenReturn(value);
+		return header;
 	}
 }

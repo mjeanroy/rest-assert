@@ -22,85 +22,111 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings;
+package com.github.mjeanroy.rest_assert.internal.bindings.javax;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.javax.JavaxCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.javax.JavaxCookieMockBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
-public class ApacheHttpCookieTest {
+public class JavaxCookieTest {
 
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setName(expectedName)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
-		verify(apacheHttpCookie).getName();
+		verify(javaxCookie).getName();
 	}
 
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setValue(expectedValue)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
-		verify(apacheHttpCookie).getValue();
+		verify(javaxCookie).getValue();
 	}
 
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setDomain(expectedDomain)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
-		verify(apacheHttpCookie).getDomain();
+		verify(javaxCookie).getDomain();
 	}
 
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setPath(expectedPath)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
-		verify(apacheHttpCookie).getPath();
+		verify(javaxCookie).getPath();
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
-			.setSecure(true)
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setSecured(true)
 			.build();
 
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
-
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
-		verify(apacheHttpCookie).isSecure();
+		verify(javaxCookie).getSecure();
+	}
+
+	@Test
+	public void it_should_check_if_cookie_is_http_only() {
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setHttpOnly(true)
+			.build();
+
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		boolean httpOnly = cookie.isHttpOnly();
+
+		assertThat(httpOnly).isTrue();
+		verify(javaxCookie).isHttpOnly();
+	}
+
+	@Test
+	public void it_should_get_max_age() {
+		int expectedMaxAge = 10;
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setMaxAge(expectedMaxAge)
+			.build();
+
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		long maxAge = cookie.getMaxAge();
+
+		assertThat(maxAge).isEqualTo(expectedMaxAge);
+		verify(javaxCookie).getMaxAge();
 	}
 }

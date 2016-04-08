@@ -25,8 +25,8 @@
 package com.github.mjeanroy.rest_assert.api.http.mime_type.google_http;
 
 import com.github.mjeanroy.rest_assert.api.http.mime_type.AbstractMimeTypeInTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpHeadersMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.google_http.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import com.google.api.client.http.HttpResponse;
 import org.junit.runner.RunWith;

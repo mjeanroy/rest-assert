@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.between.async_http;
 
 import com.github.mjeanroy.rest_assert.api.http.between.AbstractHttpStatusBetweenTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.async_http.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 
 abstract class AbstractAsyncHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<Response> {

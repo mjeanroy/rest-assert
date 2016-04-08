@@ -22,52 +22,96 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.apache_http_client;
+package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
-import org.apache.http.HttpEntity;
+import com.google.api.client.http.HttpHeaders;
+import com.google.api.client.http.HttpResponse;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder to create mock instances of {@link HttpEntity} class.
+ * Builder to create mock instance of {@link HttpResponse} class.
  */
-public class ApacheHttpEntityMockBuilder {
+public class GoogleHttpResponseMockBuilder {
 
 	/**
-	 * Body content.
+	 * Response status code.
+	 */
+	private int statusCode;
+
+	/**
+	 * Response content.
 	 */
 	private InputStream content;
 
 	/**
-	 * Set {@link #content}.
+	 * Response content charset.
+	 */
+	private Charset charset;
+
+	/**
+	 * Response headers.
+	 */
+	private HttpHeaders headers;
+
+	/**
+	 * Set {@link #statusCode}.
 	 *
-	 * @param content New {@link #content}.
+	 * @param statusCode New {@link #statusCode}.
 	 * @return Current builder.
 	 */
-	public ApacheHttpEntityMockBuilder setContent(String content) {
-		this.content = new ByteArrayInputStream(content.getBytes());
+	public GoogleHttpResponseMockBuilder setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 		return this;
 	}
 
 	/**
-	 * Create mock instance of {@link HttpEntity} class.
+	 * Set {@link #headers}.
+	 *
+	 * @param headers New {@link #headers}.
+	 * @return Current builder.
+	 */
+	public GoogleHttpResponseMockBuilder setHeaders(HttpHeaders headers) {
+		this.headers = headers;
+		return this;
+	}
+
+	/**
+	 * Set {@link #content}.
+	 *
+	 * @param charset New {@link #charset}.
+	 * @param content New {@link #content}.
+	 * @return Current builder.
+	 */
+	public GoogleHttpResponseMockBuilder setContent(Charset charset, String content) {
+		this.content = new ByteArrayInputStream(content.getBytes());
+		this.charset = charset;
+		return this;
+	}
+
+	/**
+	 * Create mock instance.
 	 *
 	 * @return Mock instance.
 	 */
-	public HttpEntity build() {
-		HttpEntity entity = mock(HttpEntity.class);
+	public HttpResponse build() {
+		HttpResponse rsp = mock(HttpResponse.class);
+		when(rsp.getStatusCode()).thenReturn(statusCode);
+		when(rsp.getHeaders()).thenReturn(headers);
 
 		try {
-			when(entity.getContent()).thenReturn(content);
+			when(rsp.getContent()).thenReturn(content);
+			when(rsp.getContentCharset()).thenReturn(charset);
 		} catch (IOException ex) {
 			throw new AssertionError(ex);
 		}
 
-		return entity;
+		return rsp;
 	}
 }
