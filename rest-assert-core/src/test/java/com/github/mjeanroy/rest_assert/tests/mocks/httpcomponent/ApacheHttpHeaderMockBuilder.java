@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
 import org.apache.http.Header;
+import org.apache.http.message.BasicHeader;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Builder to create mock for {@link Header} class.
@@ -72,9 +72,6 @@ public class ApacheHttpHeaderMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Header build() {
-		Header header = mock(Header.class);
-		when(header.getName()).thenReturn(name);
-		when(header.getValue()).thenReturn(value);
-		return header;
+		return spy(new BasicHeader(name, value));
 	}
 }

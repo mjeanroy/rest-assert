@@ -24,10 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
+import org.apache.http.ProtocolVersion;
 import org.apache.http.StatusLine;
+import org.apache.http.message.BasicStatusLine;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Build mock instance of {@link StatusLine} class.
@@ -38,6 +39,20 @@ public class ApacheHttpStatusLineMockBuilder {
 	 * Cookie name.
 	 */
 	private int statusCode;
+
+	/**
+	 * Protocol version.
+	 * This field is required to build valid status line instances.
+	 */
+	private final ProtocolVersion protocolVersion;
+
+	/**
+	 * Create builder.
+	 */
+	public ApacheHttpStatusLineMockBuilder() {
+		this.statusCode = 200;
+		this.protocolVersion = new ProtocolVersion("http", 1, 0);
+	}
 
 	/**
 	 * Set {@link #statusCode}.
@@ -56,8 +71,7 @@ public class ApacheHttpStatusLineMockBuilder {
 	 * @return Mock instance.
 	 */
 	public StatusLine build() {
-		StatusLine statusLine = mock(StatusLine.class);
-		when(statusLine.getStatusCode()).thenReturn(statusCode);
-		return statusLine;
+		StatusLine statusLine = new BasicStatusLine(protocolVersion, statusCode, null);
+		return spy(statusLine);
 	}
 }

@@ -25,13 +25,10 @@
 package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Builder to create mock instances of {@link HttpEntity} class.
@@ -41,7 +38,14 @@ public class ApacheHttpEntityMockBuilder {
 	/**
 	 * Body content.
 	 */
-	private InputStream content;
+	private String content;
+
+	/**
+	 * Create builder.
+	 */
+	public ApacheHttpEntityMockBuilder() {
+		this.content = "";
+	}
 
 	/**
 	 * Set {@link #content}.
@@ -50,7 +54,7 @@ public class ApacheHttpEntityMockBuilder {
 	 * @return Current builder.
 	 */
 	public ApacheHttpEntityMockBuilder setContent(String content) {
-		this.content = new ByteArrayInputStream(content.getBytes());
+		this.content = content;
 		return this;
 	}
 
@@ -60,14 +64,6 @@ public class ApacheHttpEntityMockBuilder {
 	 * @return Mock instance.
 	 */
 	public HttpEntity build() {
-		HttpEntity entity = mock(HttpEntity.class);
-
-		try {
-			when(entity.getContent()).thenReturn(content);
-		} catch (IOException ex) {
-			throw new AssertionError(ex);
-		}
-
-		return entity;
+		return spy(new StringEntity(content, ContentType.DEFAULT_TEXT));
 	}
 }

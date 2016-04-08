@@ -24,17 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
-import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
+import org.apache.http.message.BasicHttpResponse;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
-import static java.util.Collections.addAll;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Create mock instance of {@link HttpResponse} class.
@@ -49,15 +48,19 @@ public class ApacheHttpResponseMockBuilder {
 	/**
 	 * Set of http response headers.
 	 */
-	private final Set<Header> headers;
+	private final Map<String, LinkedList<String>> headers;
 
 	/**
 	 * Http response body.
 	 */
 	private HttpEntity entity;
 
+	/**
+	 * Create new builder.
+	 */
 	public ApacheHttpResponseMockBuilder() {
-		this.headers = new LinkedHashSet<>();
+		this.statusLine = new ApacheHttpStatusLineMockBuilder().build();
+		this.headers = new LinkedHashMap<>();
 	}
 
 	/**
@@ -68,22 +71,13 @@ public class ApacheHttpResponseMockBuilder {
 	 * @return Current builder.
 	 */
 	public ApacheHttpResponseMockBuilder addHeader(String name, String value) {
-		return addHeaders(new ApacheHttpHeaderMockBuilder()
-			.setName(name)
-			.setValue(value)
-			.build());
-	}
+		LinkedList<String> values = headers.get(name);
+		if (values == null) {
+			values = new LinkedList<>();
+			headers.put(name, values);
+		}
 
-	/**
-	 * Add new headers.
-	 *
-	 * @param header Header.
-	 * @param other Optional other headers.
-	 * @return Current builder.
-	 */
-	public ApacheHttpResponseMockBuilder addHeaders(Header header, Header... other) {
-		headers.add(header);
-		addAll(headers, other);
+		values.add(value);
 		return this;
 	}
 
@@ -115,10 +109,16 @@ public class ApacheHttpResponseMockBuilder {
 	 * @return Mock instance.
 	 */
 	public HttpResponse build() {
-		HttpResponse rsp = mock(HttpResponse.class);
-		when(rsp.getStatusLine()).thenReturn(statusLine);
-		when(rsp.getAllHeaders()).thenReturn(headers.toArray(new Header[headers.size()]));
-		when(rsp.getEntity()).thenReturn(entity);
-		return rsp;
+		HttpResponse rsp = new BasicHttpResponse(statusLine);
+		rsp.setEntity(entity);
+
+		for (Map.Entry<String, LinkedList<String>> entry : headers.entrySet()) {
+			String headerName = entry.getKey();
+			for (String headerValue : entry.getValue()) {
+				rsp.addHeader(headerName, headerValue);
+			}
+		}
+
+		return spy(rsp);
 	}
 }

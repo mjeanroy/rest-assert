@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
 import org.apache.http.cookie.Cookie;
+import org.apache.http.impl.cookie.BasicClientCookie;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Build mock instance of {@link Cookie} class.
@@ -58,6 +58,14 @@ public class ApacheHttpCookieMockBuilder {
 	 * Cookie "secure" flag.
 	 */
 	private boolean secure;
+
+	/**
+	 * Create builder.
+	 */
+	public ApacheHttpCookieMockBuilder() {
+		this.name = "cookie";
+		this.value = "";
+	}
 
 	/**
 	 * Set {@link #secure}.
@@ -120,12 +128,10 @@ public class ApacheHttpCookieMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		Cookie cookie = mock(Cookie.class);
-		when(cookie.getName()).thenReturn(name);
-		when(cookie.getValue()).thenReturn(value);
-		when(cookie.getDomain()).thenReturn(domain);
-		when(cookie.getPath()).thenReturn(path);
-		when(cookie.isSecure()).thenReturn(secure);
-		return cookie;
+		BasicClientCookie cookie = new BasicClientCookie(name, value);
+		cookie.setDomain(domain);
+		cookie.setSecure(secure);
+		cookie.setPath(path);
+		return spy(cookie);
 	}
 }
