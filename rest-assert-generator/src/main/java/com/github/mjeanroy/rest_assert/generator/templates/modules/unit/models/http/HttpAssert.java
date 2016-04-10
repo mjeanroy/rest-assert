@@ -55,14 +55,14 @@ public class HttpAssert extends AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Singleton instance.
 	 */
-	public static TemplateModel httpAssert(Class factory) {
+	public static TemplateModel httpAssert(Class<?> factory) {
 		return new HttpAssert(factory);
 	}
 
-	private final Class factory;
+	private final Class<?> factory;
 
 	// Ensure non instantiation
-	private HttpAssert(Class factory) {
+	private HttpAssert(Class<?> factory) {
 		super();
 		this.factory = factory;
 	}
@@ -78,7 +78,7 @@ public class HttpAssert extends AbstractTemplateModel implements TemplateModel {
 	}
 
 	@Override
-	public Class coreClass() {
+	public Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

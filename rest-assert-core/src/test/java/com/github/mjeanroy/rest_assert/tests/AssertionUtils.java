@@ -40,7 +40,7 @@ public abstract class AssertionUtils {
 		assertThat(result.getError()).isNull();
 	}
 
-	public static void assertFailureResult(AssertionResult result, Class klassError, String pattern, Object[] args) {
+	public static void assertFailureResult(AssertionResult result, Class<?> klassError, String pattern, Object[] args) {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();

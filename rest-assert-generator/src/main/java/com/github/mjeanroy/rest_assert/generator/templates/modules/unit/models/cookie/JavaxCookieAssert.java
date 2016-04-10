@@ -68,7 +68,7 @@ public class JavaxCookieAssert extends AbstractTemplateModel implements Template
 	}
 
 	@Override
-	public Class coreClass() {
+	public Class<?> coreClass() {
 		return CookieAssertions.class;
 	}
 

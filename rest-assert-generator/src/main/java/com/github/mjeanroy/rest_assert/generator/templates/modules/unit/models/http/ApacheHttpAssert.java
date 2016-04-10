@@ -67,7 +67,7 @@ public class ApacheHttpAssert extends AbstractTemplateModel implements TemplateM
 	}
 
 	@Override
-	public Class coreClass() {
+	public Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

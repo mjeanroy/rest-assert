@@ -72,7 +72,7 @@ public class HttpResponseAssert extends AbstractHttpResponseModel implements Tem
 	}
 
 	@Override
-	public Class coreClass() {
+	public Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

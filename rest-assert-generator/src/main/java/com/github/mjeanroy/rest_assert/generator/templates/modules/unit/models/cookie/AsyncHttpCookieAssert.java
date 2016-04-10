@@ -67,7 +67,7 @@ public class AsyncHttpCookieAssert extends AbstractTemplateModel implements Temp
 	}
 
 	@Override
-	public Class coreClass() {
+	public Class<?> coreClass() {
 		return CookieAssertions.class;
 	}
 

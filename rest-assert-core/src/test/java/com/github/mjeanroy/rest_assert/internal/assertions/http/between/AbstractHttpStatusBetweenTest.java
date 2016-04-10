@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.between;
 
-import static org.mockito.Mockito.*;
-
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Before;
 import org.junit.Test;

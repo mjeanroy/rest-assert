@@ -44,7 +44,7 @@ public abstract class AbstractTemplateModelTest {
 
 	protected abstract String getExpectedCoreClassName();
 
-	protected abstract Class getExpectedCoreClass();
+	protected abstract Class<?> getExpectedCoreClass();
 
 	protected abstract String getExpectedActualClass();
 
@@ -92,8 +92,6 @@ public abstract class AbstractTemplateModelTest {
 	@Test
 	public void it_should_build_methods_list() {
 		List<Map<String, Object>> methods = getTemplateModel().getMethods();
-
-		final String pattern = "([a-z][a-zA-Z0-9_]+(\\.))([a-z][a-zA-Z0-9_])";
 		assertThat(methods)
 				.isNotNull()
 				.isNotEmpty()
@@ -109,7 +107,7 @@ public abstract class AbstractTemplateModelTest {
 				.areAtLeast(1, new Condition<Map<String, Object>>() {
 					@Override
 					public boolean matches(Map<String, Object> value) {
-						return ((Collection) value.get("arguments")).size() > 0;
+						return ((Collection<?>) value.get("arguments")).size() > 0;
 					}
 				});
 	}

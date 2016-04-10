@@ -47,7 +47,7 @@ public class CookieAssertion_isNotSecured_Test extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Class error() {
+	protected Class<?> error() {
 		return ShouldBeSecured.class;
 	}
 

@@ -63,7 +63,7 @@ public class HttpResponsesTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected Class getExpectedCoreClass() {
+	protected Class<?> getExpectedCoreClass() {
 		return HttpResponseAssertions.class;
 	}
 

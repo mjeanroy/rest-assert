@@ -75,6 +75,7 @@ public class ClassUtilsTest {
 		public void publicMethod() {
 		}
 
+		@SuppressWarnings("unused")
 		private void methodPrivate() {
 
 		}

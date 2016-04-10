@@ -66,7 +66,7 @@ public class AsyncHttpCookieAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected Class getExpectedCoreClass() {
+	protected Class<?> getExpectedCoreClass() {
 		return CookieAssertions.class;
 	}
 

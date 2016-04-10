@@ -59,7 +59,7 @@ public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> 
 
 	protected abstract Cookie failure();
 
-	protected abstract Class error();
+	protected abstract Class<?> error();
 
 	protected abstract String pattern();
 

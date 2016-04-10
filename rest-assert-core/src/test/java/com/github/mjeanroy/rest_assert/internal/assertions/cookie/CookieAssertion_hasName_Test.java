@@ -49,7 +49,7 @@ public class CookieAssertion_hasName_Test extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Class error() {
+	protected Class<?> error() {
 		return ShouldHaveName.class;
 	}
 

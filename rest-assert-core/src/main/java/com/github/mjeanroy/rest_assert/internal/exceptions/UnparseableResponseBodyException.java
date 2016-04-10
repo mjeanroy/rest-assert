@@ -28,6 +28,7 @@ package com.github.mjeanroy.rest_assert.internal.exceptions;
  * Exception thrown when a response body cannot
  * be read.
  */
+@SuppressWarnings("serial")
 public class UnparseableResponseBodyException extends RuntimeException {
 
 	/**

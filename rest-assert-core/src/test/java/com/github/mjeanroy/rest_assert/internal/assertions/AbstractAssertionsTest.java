@@ -35,7 +35,7 @@ public abstract class AbstractAssertionsTest<T> {
 		assertSuccessResult(result);
 	}
 
-	protected void checkError(AssertionResult result, Class klassError, String pattern, Object... args) {
+	protected void checkError(AssertionResult result, Class<?> klassError, String pattern, Object... args) {
 		assertFailureResult(result, klassError, pattern, args);
 	}
 }

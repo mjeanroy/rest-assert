@@ -45,7 +45,7 @@ public final class ClassUtils {
 	 * @param klass Class.
 	 * @return List of public methods.
 	 */
-	public static List<Method> findPublicMethods(Class klass) {
+	public static List<Method> findPublicMethods(Class<?> klass) {
 		Method[] methods = klass.getDeclaredMethods();
 		List<Method> results = new ArrayList<>(methods.length);
 		for (Method method : methods) {

@@ -321,7 +321,7 @@ public abstract class AbstractJsonComparatorTest {
 		checkComparison(actual.toJson(), expected.toJson(), ShouldBeEntryOf.class, "foo", actualType.getFormattedName(), expectedType.getFormattedName());
 	}
 
-	private void checkComparison(String actual, String expected, Class errorKlass, Object... args) {
+	private void checkComparison(String actual, String expected, Class<?> errorKlass, Object... args) {
 		List<RestAssertError> errors = comparator.compare(actual, expected);
 
 		assertThat(errors)

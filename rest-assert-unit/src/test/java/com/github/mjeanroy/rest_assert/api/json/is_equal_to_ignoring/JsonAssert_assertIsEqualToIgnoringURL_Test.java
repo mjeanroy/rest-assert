@@ -51,8 +51,4 @@ public class JsonAssert_assertIsEqualToIgnoringURL_Test extends AbstractJsonIsEq
 	protected URL failure() {
 		return jsonUrlFailure();
 	}
-
-	private URL fromClasspath(String path) {
-		return getClass().getResource(path);
-	}
 }

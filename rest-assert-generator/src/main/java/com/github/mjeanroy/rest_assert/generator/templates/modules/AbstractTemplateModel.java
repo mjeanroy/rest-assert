@@ -95,7 +95,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Core class.
 	 */
-	protected abstract Class coreClass();
+	protected abstract Class<?> coreClass();
 
 	/**
 	 * Get list of methods data to proxify.
@@ -130,7 +130,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		final String coreMethodName = method.getName();
 
 		final List<Arg> args;
-		final Class[] classTypes = method.getParameterTypes();
+		final Class<?>[] classTypes = method.getParameterTypes();
 		final Type[] paramTypes = method.getGenericParameterTypes();
 		final Annotation[][] annotations = method.getParameterAnnotations();
 		final int size = paramTypes == null ? 0 : paramTypes.length;
@@ -138,7 +138,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		if (size > 1) {
 			args = new ArrayList<>(size);
 			for (int i = 1; i < paramTypes.length; i++) {
-				Class paramType = classTypes[i];
+				Class<?> paramType = classTypes[i];
 				Type type = paramTypes[i];
 
 				String genericType = null;

@@ -80,7 +80,7 @@ public class DefaultJsonComparator implements JsonComparator {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<RestAssertError> compare(String actual, String expected) {
 		contexts.set(rootContext());
 		List<RestAssertJsonError> errors = doCompare(actual.trim(), expected.trim());

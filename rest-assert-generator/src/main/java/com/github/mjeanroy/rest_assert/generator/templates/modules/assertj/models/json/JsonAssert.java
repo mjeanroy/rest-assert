@@ -72,7 +72,7 @@ public class JsonAssert extends AbstractJsonsModel implements TemplateModel {
 	}
 
 	@Override
-	public Class coreClass() {
+	public Class<?> coreClass() {
 		return JsonAssertions.class;
 	}
 

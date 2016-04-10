@@ -62,7 +62,7 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected Class getExpectedCoreClass() {
+	protected Class<?> getExpectedCoreClass() {
 		return JsonAssertions.class;
 	}
 

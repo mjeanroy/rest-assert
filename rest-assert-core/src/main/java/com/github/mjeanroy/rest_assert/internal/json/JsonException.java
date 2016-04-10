@@ -28,6 +28,7 @@ package com.github.mjeanroy.rest_assert.internal.json;
  * Exception thrown when a json error occurs
  * during parsing.
  */
+@SuppressWarnings("serial")
 public class JsonException extends RuntimeException {
 
 	public JsonException(Throwable th) {
