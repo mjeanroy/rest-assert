@@ -35,6 +35,7 @@ import java.util.List;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.AsyncHttpCookieAssert.asyncHttpCookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.CookieAssert.cookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.OkHttpAssert.okHttpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.json.JsonAssert.jsonAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.JavaxCookieAssert.javaxCookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.ApacheHttpAssert.apacheHttpAssert;
@@ -61,7 +62,8 @@ public enum UnitProcessor {
 				httpAssert(),
 				asyncHttpAssert(),
 				apacheHttpAssert(),
-				googleHttpAssert()
+				googleHttpAssert(),
+				okHttpAssert()
 			)
 	),
 
@@ -72,10 +74,10 @@ public enum UnitProcessor {
 	COOKIES(
 			assertTemplate(),
 			asList(
-					cookieAssert(),
-					asyncHttpCookieAssert(),
-					apacheHttpCookieAssert(),
-					javaxCookieAssert()
+				cookieAssert(),
+				asyncHttpCookieAssert(),
+				apacheHttpCookieAssert(),
+				javaxCookieAssert()
 			)
 	),
 
