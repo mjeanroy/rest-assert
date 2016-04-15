@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse;
 import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;

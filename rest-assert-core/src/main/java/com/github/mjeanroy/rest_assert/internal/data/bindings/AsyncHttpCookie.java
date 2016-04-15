@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 

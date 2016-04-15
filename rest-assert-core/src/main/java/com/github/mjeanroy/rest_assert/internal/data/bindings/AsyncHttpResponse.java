@@ -22,71 +22,57 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.ning.http.client.Response;
+
+import java.io.IOException;
 
 /**
- * Implementation of {@link Cookie}
- * using Apache HttpClient framework as real implementation.
+ * Implementation of {@link HttpResponse}
+ * using Async-Http framework as real implementation.
  */
-public class ApacheHttpCookie implements Cookie {
+public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link Cookie} using instance
-	 * of {@link org.apache.http.cookie.Cookie}.
+	 * Create new {@link HttpResponse} using instance
+	 * of {@link Response}.
 	 *
-	 * @param cookie Original cookie object.
-	 * @return Cookie that can be used with rest-assert.
+	 * @param response Original response object.
+	 * @return Http response that can be used with rest-assert.
 	 */
-	public static ApacheHttpCookie create(org.apache.http.cookie.Cookie cookie) {
-		return new ApacheHttpCookie(cookie);
+	public static AsyncHttpResponse create(Response response) {
+		return new AsyncHttpResponse(response);
 	}
 
 	/**
-	 * Original apache http cookie.
+	 * Original Async-Http response.
 	 */
-	private final org.apache.http.cookie.Cookie cookie;
+	private final Response response;
 
 	// Use static factory
-	private ApacheHttpCookie(org.apache.http.cookie.Cookie cookie) {
-		this.cookie = cookie;
+	private AsyncHttpResponse(Response response) {
+		this.response = response;
 	}
 
 	@Override
-	public String getName() {
-		return cookie.getName();
+	public int getStatus() {
+		return response.getStatusCode();
 	}
 
 	@Override
-	public String getValue() {
-		return cookie.getValue();
+	public boolean hasHeader(String name) {
+		return response.getHeaders().containsKey(name);
 	}
 
 	@Override
-	public String getDomain() {
-		return cookie.getDomain();
+	public String getHeader(String name) {
+		return hasHeader(name) ? response.getHeader(name) : null;
 	}
 
 	@Override
-	public String getPath() {
-		return cookie.getPath();
-	}
-
-	@Override
-	public boolean isSecured() {
-		return cookie.isSecure();
-	}
-
-	@Override
-	public boolean isHttpOnly() {
-		// Not supported
-		return false;
-	}
-
-	@Override
-	public long getMaxAge() {
-		// Not supported
-		return 0;
+	protected String doGetContent() throws IOException {
+		return response.getResponseBody();
 	}
 }

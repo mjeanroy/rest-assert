@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;

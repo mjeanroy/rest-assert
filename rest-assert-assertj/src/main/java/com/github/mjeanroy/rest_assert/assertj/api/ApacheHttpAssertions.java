@@ -27,8 +27,8 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie.create;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpResponse.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpCookie.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Apache HttpClient

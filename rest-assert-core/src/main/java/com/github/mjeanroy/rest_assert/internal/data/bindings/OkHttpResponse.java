@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,58 +22,56 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AbstractHttpResponse;
-import com.ning.http.client.Response;
+import okhttp3.Response;
 
 import java.io.IOException;
 
 /**
- * Implementation of {@link HttpResponse}
- * using Async-Http framework as real implementation.
+ * Implementation of {@link HttpResponse} using OkHttp framework as real implementation.
  */
-public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
+public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link HttpResponse} using instance
-	 * of {@link Response}.
+	 * Create new {@link HttpResponse} using instance of {@link okhttp3.Response}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static AsyncHttpResponse create(Response response) {
-		return new AsyncHttpResponse(response);
+	public static OkHttpResponse create(Response response) {
+		return new OkHttpResponse(response);
 	}
 
 	/**
-	 * Original Async-Http response.
+	 * Original response.
 	 */
 	private final Response response;
 
 	// Use static factory
-	private AsyncHttpResponse(Response response) {
+	private OkHttpResponse(Response response) {
 		this.response = response;
 	}
 
 	@Override
+	protected String doGetContent() throws IOException {
+		return response.body().string();
+	}
+
+	@Override
 	public int getStatus() {
-		return response.getStatusCode();
+		return response.code();
 	}
 
 	@Override
 	public boolean hasHeader(String name) {
-		return response.getHeaders().containsKey(name);
+		return getHeader(name) != null;
 	}
 
 	@Override
 	public String getHeader(String name) {
-		return hasHeader(name) ? response.getHeader(name) : null;
-	}
-
-	@Override
-	protected String doGetContent() throws IOException {
-		return response.getResponseBody();
+		return response.header(name);
 	}
 }

@@ -22,72 +22,63 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AbstractHttpResponse;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.util.EntityUtils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+
+import static com.google.api.client.util.IOUtils.copy;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
- * using Apache HttpClient framework as real implementation.
+ * using Google Http Client framework as real implementation.
  */
-public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResponse {
+public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
 	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse} using instance
-	 * of {@link org.apache.http.HttpResponse}.
+	 * of {@link com.ning.http.client.Response}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static ApacheHttpResponse create(org.apache.http.HttpResponse response) {
-		return new ApacheHttpResponse(response);
+	public static GoogleHttpResponse create(com.google.api.client.http.HttpResponse response) {
+		return new GoogleHttpResponse(response);
 	}
 
 	/**
-	 * Original http response.
+	 * Original Google Http Response.
 	 */
-	private final org.apache.http.HttpResponse response;
+	private final com.google.api.client.http.HttpResponse response;
 
 	// Use static factory
-	private ApacheHttpResponse(org.apache.http.HttpResponse response) {
+	private GoogleHttpResponse(com.google.api.client.http.HttpResponse response) {
 		this.response = response;
 	}
 
 	@Override
 	public int getStatus() {
-		return response.getStatusLine().getStatusCode();
+		return response.getStatusCode();
 	}
 
 	@Override
 	public boolean hasHeader(String name) {
-		return findFirstHeader(name) != null;
+		return response.getHeaders().getFirstHeaderStringValue(name) != null;
 	}
 
 	@Override
 	public String getHeader(String name) {
-		Header header = findFirstHeader(name);
-		return header == null ? null : header.getValue();
+		return response.getHeaders().getFirstHeaderStringValue(name);
 	}
 
 	@Override
 	protected String doGetContent() throws IOException {
-		HttpEntity entity = response.getEntity();
-		return EntityUtils.toString(entity);
-	}
-
-	private Header findFirstHeader(String name) {
-		Header[] headers = response.getAllHeaders();
-		for (Header header : headers) {
-			if (header.getName().toLowerCase().equals(name.toLowerCase())) {
-				return header;
-			}
+		try (InputStream is = response.getContent(); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+			copy(is, bos);
+			return new String(bos.toByteArray(), response.getContentCharset());
 		}
-		return null;
 	}
 }

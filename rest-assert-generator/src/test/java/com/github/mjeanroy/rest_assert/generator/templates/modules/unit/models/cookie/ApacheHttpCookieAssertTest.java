@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.httpcomponent.ApacheHttpCookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpCookie;
 import org.apache.http.cookie.Cookie;
 import org.assertj.core.api.Condition;
 import org.junit.Before;

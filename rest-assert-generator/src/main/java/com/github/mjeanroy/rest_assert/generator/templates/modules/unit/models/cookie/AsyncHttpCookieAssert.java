@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.
 import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
 import com.ning.http.client.cookie.Cookie;
 
 import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;

@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.googlehttp.GoogleHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse;
 import com.google.api.client.http.HttpResponse;
 import org.assertj.core.api.Condition;
 import org.junit.Before;

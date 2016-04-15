@@ -28,8 +28,8 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie.create;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Async-Http

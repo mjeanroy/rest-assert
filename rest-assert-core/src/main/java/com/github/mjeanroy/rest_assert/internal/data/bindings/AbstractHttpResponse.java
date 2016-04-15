@@ -32,7 +32,13 @@ import java.io.IOException;
 /**
  * Template for {@link HttpResponse} interface.
  */
-public abstract class AbstractHttpResponse implements HttpResponse {
+abstract class AbstractHttpResponse implements HttpResponse {
+
+	/**
+	 * Default constructor.
+	 */
+	AbstractHttpResponse() {
+	}
 
 	@Override
 	public String getContent() {

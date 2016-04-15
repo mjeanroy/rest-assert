@@ -22,10 +22,10 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings.asynchttp;
+package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
 import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
 import com.ning.http.client.Response;

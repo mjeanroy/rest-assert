@@ -26,8 +26,8 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpCookieMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;

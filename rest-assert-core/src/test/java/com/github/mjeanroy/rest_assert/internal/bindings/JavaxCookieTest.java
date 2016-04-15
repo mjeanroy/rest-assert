@@ -22,111 +22,111 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings.asynchttp;
+package com.github.mjeanroy.rest_assert.internal.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.asynchttp.AsyncHttpCookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.JavaxCookie;
+import com.github.mjeanroy.rest_assert.tests.mocks.javax.JavaxCookieMockBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
-public class AsyncHttpCookieTest {
+public class JavaxCookieTest {
 
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setName(expectedName)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
-		verify(asyncHttpCookie).getName();
+		verify(javaxCookie).getName();
 	}
 
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setValue(expectedValue)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
-		verify(asyncHttpCookie).getValue();
+		verify(javaxCookie).getValue();
 	}
 
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setDomain(expectedDomain)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
-		verify(asyncHttpCookie).getDomain();
+		verify(javaxCookie).getDomain();
 	}
 
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setPath(expectedPath)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
-		verify(asyncHttpCookie).getPath();
+		verify(javaxCookie).getPath();
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
-			.setSecure(true)
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+			.setSecured(true)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
-		verify(asyncHttpCookie).isSecure();
+		verify(javaxCookie).getSecure();
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setHttpOnly(true)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
-		verify(asyncHttpCookie).isHttpOnly();
+		verify(javaxCookie).isHttpOnly();
 	}
 
 	@Test
 	public void it_should_get_max_age() {
-		long expectedMaxAge = 10;
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		int expectedMaxAge = 10;
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
 			.setMaxAge(expectedMaxAge)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
-		verify(asyncHttpCookie).getMaxAge();
+		verify(javaxCookie).getMaxAge();
 	}
 }
