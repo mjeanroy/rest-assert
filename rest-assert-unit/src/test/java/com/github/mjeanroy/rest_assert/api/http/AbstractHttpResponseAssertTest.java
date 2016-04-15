@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,31 +22,40 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.http.between.core;
+package com.github.mjeanroy.rest_assert.api.http;
 
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.api.http.HttpAssert.assertIsServerError;
+public abstract class AbstractHttpResponseAssertTest extends AbstractAssertTest<HttpResponse> {
 
-public class HttpAssert_assertIsServerError_Test extends AbstractCoreHttpStatusBetweenTest {
+	// Core HTTP Response
 
-	@Override
-	protected int start() {
-		return 500;
-	}
+	protected abstract void invoke(HttpResponse actual);
 
-	@Override
-	protected int end() {
-		return 599;
-	}
+	protected abstract void invoke(String message, HttpResponse actual);
 
-	@Override
-	protected void invoke(HttpResponse actual) {
-		assertIsServerError(actual);
-	}
+	// Async HTTP Response
 
-	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		assertIsServerError(message, actual);
-	}
+	protected abstract void invoke(com.ning.http.client.Response actual);
+
+	protected abstract void invoke(String message, com.ning.http.client.Response actual);
+
+	// Ok HTTP Response
+
+	protected abstract void invoke(okhttp3.Response actual);
+
+	protected abstract void invoke(String message, okhttp3.Response actual);
+
+	// Apache HTTP Response
+
+	protected abstract void invoke(org.apache.http.HttpResponse actual);
+
+	protected abstract void invoke(String message, org.apache.http.HttpResponse actual);
+
+	// Google HTTP Response
+
+	protected abstract void invoke(com.google.api.client.http.HttpResponse actual);
+
+	protected abstract void invoke(String message, com.google.api.client.http.HttpResponse actual);
 }

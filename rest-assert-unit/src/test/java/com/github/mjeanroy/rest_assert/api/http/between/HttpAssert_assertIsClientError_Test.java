@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.api.http.between.ok_http;
+package com.github.mjeanroy.rest_assert.api.http.between;
 
-import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.*;
 import okhttp3.Response;
 
-public class HttpAssert_assertIsClientError_Test extends AbstractOkHttpStatusBetweenTest {
+public class HttpAssert_assertIsClientError_Test extends AbstractHttpStatusBetweenTest {
 
 	@Override
 	protected int start() {
@@ -39,6 +39,44 @@ public class HttpAssert_assertIsClientError_Test extends AbstractOkHttpStatusBet
 		return 499;
 	}
 
+	// == Core HTTP Response
+
+	@Override
+	protected void invoke(com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		HttpAssert.assertIsClientError(actual);
+	}
+
+	@Override
+	protected void invoke(String message, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual) {
+		HttpAssert.assertIsClientError(message, actual);
+	}
+
+	// == Async HTTP Response
+
+	@Override
+	protected void invoke(com.ning.http.client.Response actual) {
+		AsyncHttpAssert.assertIsClientError(actual);
+	}
+
+	@Override
+	protected void invoke(String message, com.ning.http.client.Response actual) {
+		AsyncHttpAssert.assertIsClientError(message, actual);
+	}
+
+	// == Apache HTTP Response
+
+	@Override
+	protected void invoke(org.apache.http.HttpResponse actual) {
+		ApacheHttpAssert.assertIsClientError(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.apache.http.HttpResponse actual) {
+		ApacheHttpAssert.assertIsClientError(message, actual);
+	}
+
+	// == Ok HTTP Response
+
 	@Override
 	protected void invoke(Response actual) {
 		OkHttpAssert.assertIsClientError(actual);
@@ -47,5 +85,17 @@ public class HttpAssert_assertIsClientError_Test extends AbstractOkHttpStatusBet
 	@Override
 	protected void invoke(String message, Response actual) {
 		OkHttpAssert.assertIsClientError(message, actual);
+	}
+
+	// == Google HTTP Response
+
+	@Override
+	protected void invoke(com.google.api.client.http.HttpResponse actual) {
+		GoogleHttpAssert.assertIsClientError(actual);
+	}
+
+	@Override
+	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
+		GoogleHttpAssert.assertIsClientError(message, actual);
 	}
 }
