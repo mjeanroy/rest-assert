@@ -33,19 +33,10 @@ import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpRespo
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
-import static java.lang.String.format;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-		com.google.api.client.http.HttpResponse.class,
-		okhttp3.Response.class
-})
 abstract class AbstractHttpStatusBetweenTest extends AbstractHttpResponseAssertTest {
 
 	private static final String CUSTOM_MESSAGE = "foo";
@@ -212,8 +203,7 @@ abstract class AbstractHttpStatusBetweenTest extends AbstractHttpResponseAssertT
 			}
 
 			final int status = i;
-			final String message = firstNonNull(msg, format("Expecting status code to be between %s and %s but was %s", start, end, status));
-
+			final String message = firstNonNull(msg, buildErrorMessage(start, end, status));
 			assertFailure(message, new Function() {
 				@Override
 				public void apply() {
@@ -257,13 +247,17 @@ abstract class AbstractHttpStatusBetweenTest extends AbstractHttpResponseAssertT
 				.build();
 	}
 
+	private String buildErrorMessage(int start, int end, int status) {
+		return String.format("Expecting status code to be between %s and %s but was %s", start, end, status);
+	}
+
 	// == To implement
 
 	protected abstract int start();
 
 	protected abstract int end();
 
-	static interface Invocation {
+	interface Invocation {
 		void invokeTest(int status);
 	}
 }
