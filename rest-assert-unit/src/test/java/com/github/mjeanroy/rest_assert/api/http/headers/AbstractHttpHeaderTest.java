@@ -24,53 +24,225 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 import static java.lang.String.format;
 
-public abstract class AbstractHttpHeaderTest<T> extends AbstractAssertTest<T> {
+public abstract class AbstractHttpHeaderTest extends AbstractHttpResponseAssertTest {
+
+	private static final String CUSTOM_MESSAGE = "foo";
+
+	// == Core HTTP Response
 
 	@Test
-	public void it_should_pass_with_expected_header() {
+	public void core_it_should_pass_with_expected_header() {
 		Header header = getHeader();
-		invoke(newResponse(header));
-		invoke("foo", newResponse(header));
+		invoke(newCoreHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(header));
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
-		final String message = format("Expecting response to have header %s", expectedHeader.getName());
-
-		assertFailure(message, new Function() {
+	public void core_it_should_fail_with_if_response_does_not_contain_header() {
+		doTest(null, new Invocation() {
 			@Override
-			public void apply() {
-				invoke(newResponse(header));
+			public void invokeTest(Header header) {
+				invoke(newCoreHttpResponse(header));
 			}
 		});
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
-		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
+	public void core_it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
-			public void apply() {
-				invoke(message, newResponse(header));
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(header));
 			}
 		});
 	}
 
-	protected abstract T newResponse(Header header);
+	// == Async HTTP Response
+
+	@Test
+	public void async_http_it_should_pass_with_expected_header() {
+		Header header = getHeader();
+		invoke(newAsyncHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(header));
+	}
+
+	@Test
+	public void async_http_it_should_fail_with_if_response_does_not_contain_header() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newAsyncHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void async_http_it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(header));
+			}
+		});
+	}
+
+	// == Ok HTTP Response
+
+	@Test
+	public void ok_http_it_should_pass_with_expected_header() {
+		Header header = getHeader();
+		invoke(newOkHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newOkHttpResponse(header));
+	}
+
+	@Test
+	public void ok_http_it_should_fail_with_if_response_does_not_contain_header() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newOkHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void ok_http_it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newOkHttpResponse(header));
+			}
+		});
+	}
+
+	// == Apache HTTP Response
+
+	@Test
+	public void apache_http_it_should_pass_with_expected_header() {
+		Header header = getHeader();
+		invoke(newApacheHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(header));
+	}
+
+	@Test
+	public void apache_http_it_should_fail_with_if_response_does_not_contain_header() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newApacheHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void apache_http_it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(header));
+			}
+		});
+	}
+
+	// == Google HTTP Response
+
+	@Test
+	public void google_http_it_should_pass_with_expected_header() {
+		Header header = getHeader();
+		invoke(newGoogleHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(header));
+	}
+
+	@Test
+	public void google_http_it_should_fail_with_if_response_does_not_contain_header() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newGoogleHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void google_http_it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(header));
+			}
+		});
+	}
+
+	private void doTest(String msg, final Invocation invocation) {
+		final Header expectedHeader = getHeader();
+		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
+		final String message = firstNonNull(msg, buildErrorMessage(expectedHeader));
+
+		assertFailure(message, new Function() {
+			@Override
+			public void apply() {
+				invocation.invokeTest(header);
+			}
+		});
+	}
 
 	protected abstract Header getHeader();
+
+	private String buildErrorMessage(Header expectedHeader) {
+		return format("Expecting response to have header %s", expectedHeader.getName());
+	}
+
+	// == Create target HTTP Response
+
+	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Header header) {
+		return new HttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private com.ning.http.client.Response newAsyncHttpResponse(Header header) {
+		return new AsyncHttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private okhttp3.Response newOkHttpResponse(Header header) {
+		return new OkHttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private org.apache.http.HttpResponse newApacheHttpResponse(Header header) {
+		return new ApacheHttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(Header header) {
+		return new GoogleHttpResponseMockBuilder()
+			.setHeaders(new GoogleHttpHeadersMockBuilder()
+				.addHeader(header.getName(), header.getValue())
+				.build())
+			.build();
+	}
+
+	private interface Invocation {
+		void invokeTest(Header header);
+	}
 }
