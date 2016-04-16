@@ -24,49 +24,217 @@
 
 package com.github.mjeanroy.rest_assert.api.http.exact;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
-public abstract class AbstractHttpStatusTest<T> extends AbstractAssertTest<T> {
+abstract class AbstractHttpStatusTest extends AbstractHttpResponseAssertTest {
+
+	private static final String CUSTOM_MESSAGE = "foo";
+
+	// == Core HTTP response
 
 	@Test
-	public void it_should_pass_with_correct_status() {
-		invoke(newResponse(status()));
-		invoke("foo", newResponse(status()));
+	public void core_it_should_pass_with_correct_status() {
+		invoke(newCoreHttpResponse(status()));
+		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(status()));
 	}
 
 	@Test
-	public void it_should_fail_with_response_different_than_expected_status() {
+	public void core_it_should_fail_with_response_different_than_expected_status() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newCoreHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void core_it_should_pass_with_custom_message_with_response_different_than_200() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(status));
+			}
+		});
+	}
+
+	// == Async HTTP response
+
+	@Test
+	public void async_http_it_should_pass_with_correct_status() {
+		invoke(newAsyncHttpResponse(status()));
+		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(status()));
+	}
+
+	@Test
+	public void async_http_it_should_fail_with_response_different_than_expected_status() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newAsyncHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void async_http_it_should_pass_with_custom_message_with_response_different_than_200() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(status));
+			}
+		});
+	}
+
+	// == Ok HTTP response
+
+	@Test
+	public void ok_http_it_should_pass_with_correct_status() {
+		invoke(newOkHttpResponse(status()));
+		invoke(CUSTOM_MESSAGE, newOkHttpResponse(status()));
+	}
+
+	@Test
+	public void ok_http_it_should_fail_with_response_different_than_expected_status() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newOkHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void ok_http_it_should_pass_with_custom_message_with_response_different_than_200() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newOkHttpResponse(status));
+			}
+		});
+	}
+
+	// == Apache HTTP response
+
+	@Test
+	public void apache_http_it_should_pass_with_correct_status() {
+		invoke(newApacheHttpResponse(status()));
+		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(status()));
+	}
+
+	@Test
+	public void apache_http_it_should_fail_with_response_different_than_expected_status() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newApacheHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void apache_http_it_should_pass_with_custom_message_with_response_different_than_200() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(status));
+			}
+		});
+	}
+
+	// == Google HTTP response
+
+	@Test
+	public void google_http_it_should_pass_with_correct_status() {
+		invoke(newGoogleHttpResponse(status()));
+		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(status()));
+	}
+
+	@Test
+	public void google_http_it_should_fail_with_response_different_than_expected_status() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newGoogleHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void google_http_it_should_pass_with_custom_message_with_response_different_than_200() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(status));
+			}
+		});
+	}
+
+	// == Test
+
+	private void doTest(String msg, final Invocation invocation) {
 		final int expectedStatus = status();
 		final int status = expectedStatus + 1;
-		final String message = format("Expecting status code to be %s but was %s", expectedStatus, status);
+		final String message = firstNonNull(msg, buildErrorMessage(expectedStatus, status));
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(newResponse(status));
+				invocation.invokeTest(status);
 			}
 		});
 	}
-
-	@Test
-	public void it_should_pass_with_custom_message_with_response_different_than_200() {
-		final String message = "foo";
-		final int status = status() + 1;
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, newResponse(status));
-			}
-		});
-	}
-
-	protected abstract T newResponse(int status);
 
 	protected abstract int status();
+
+	private String buildErrorMessage(int expectedStatus, int status) {
+		return String.format("Expecting status code to be %s but was %s", expectedStatus, status);
+	}
+
+	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(int status) {
+		return new HttpResponseMockBuilder()
+			.setStatus(status)
+			.build();
+	}
+
+	private com.ning.http.client.Response newAsyncHttpResponse(int status) {
+		return new AsyncHttpResponseMockBuilder()
+			.setStatusCode(status)
+			.build();
+	}
+
+	private okhttp3.Response newOkHttpResponse(int status) {
+		return new OkHttpResponseMockBuilder()
+			.setCode(status)
+			.build();
+	}
+
+	private org.apache.http.HttpResponse newApacheHttpResponse(int status) {
+		return new ApacheHttpResponseMockBuilder()
+			.setStatusLine(new ApacheHttpStatusLineMockBuilder()
+				.setStatusCode(status)
+				.build())
+			.build();
+	}
+
+	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(int status) {
+		return new GoogleHttpResponseMockBuilder()
+			.setStatusCode(status)
+			.build();
+	}
+
+	interface Invocation {
+		void invokeTest(int status);
+	}
 }
