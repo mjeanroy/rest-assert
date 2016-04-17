@@ -64,7 +64,7 @@ public final class JsonAssertions {
 	/**
 	 * Singleton object.
 	 */
-	private static JsonAssertions INSTANCE = new JsonAssertions();
+	private static final JsonAssertions INSTANCE = new JsonAssertions();
 
 	/**
 	 * Get singleton object.
@@ -122,7 +122,7 @@ public final class JsonAssertions {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
 		for (String e : keys) {
-			if (!hasEntry(actual, e)) {
+			if (doesNotHaveEntry(actual, e)) {
 				errors.add(shouldHaveEntry(e));
 			}
 		}
@@ -160,7 +160,7 @@ public final class JsonAssertions {
 		// Collect errors
 		for (JsonEntry e : entries) {
 			String key = e.getKey();
-			if (!hasEntry(actual, key)) {
+			if (doesNotHaveEntry(actual, key)) {
 				errors.add(shouldHaveEntry(key));
 			} else {
 				Object expectedValue = e.getValue();
@@ -176,12 +176,12 @@ public final class JsonAssertions {
 				failure(composeErrors(errors));
 	}
 
-	private boolean hasEntry(String actual, String entry) {
+	private boolean doesNotHaveEntry(String actual, String entry) {
 		try {
 			getEntry(actual, entry);
-			return true;
-		} catch (PathNotFoundException ex) {
 			return false;
+		} catch (PathNotFoundException ex) {
+			return true;
 		}
 	}
 

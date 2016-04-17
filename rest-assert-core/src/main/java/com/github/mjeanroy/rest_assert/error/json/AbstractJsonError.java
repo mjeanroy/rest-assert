@@ -36,7 +36,7 @@ abstract class AbstractJsonError extends AbstractError implements RestAssertJson
 	/**
 	 * Entry name of json object that throws the error.
 	 */
-	private String entryName;
+	private final String entryName;
 
 	/**
 	 * Build new error.

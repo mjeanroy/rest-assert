@@ -65,7 +65,7 @@ public enum JsonParserStrategy {
 	},
 
 	/**
-	 * Strategy that try to detect avilable implementation on classpath
+	 * Strategy that try to detect available implementation on classpath
 	 * and return associated parser.
 	 */
 	AUTO {

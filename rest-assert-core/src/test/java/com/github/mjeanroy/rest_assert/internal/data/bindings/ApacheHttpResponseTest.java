@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpEntityMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
@@ -156,7 +156,7 @@ public class ApacheHttpResponseTest {
 				.setEntity(httpEntity)
 				.build();
 
-		thrown.expect(UnparseableResponseBodyException.class);
+		thrown.expect(NonParsableResponseBodyException.class);
 
 		HttpResponse httpResponse = create(response);
 		httpResponse.getContent();

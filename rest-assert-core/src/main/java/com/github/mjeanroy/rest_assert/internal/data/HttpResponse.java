@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.data;
 
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 
 /**
  * Http response contract.
@@ -61,7 +61,7 @@ public interface HttpResponse {
 	 * Get response body.
 	 *
 	 * @return Response body.
-	 * @throws UnparseableResponseBodyException If response body cannot be read.
+	 * @throws NonParsableResponseBodyException If response body cannot be read.
 	 */
 	String getContent();
 }

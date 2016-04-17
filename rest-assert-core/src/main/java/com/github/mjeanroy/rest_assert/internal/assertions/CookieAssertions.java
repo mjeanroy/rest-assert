@@ -47,7 +47,7 @@ public final class CookieAssertions {
 	/**
 	 * Singleton object.
 	 */
-	private static CookieAssertions INSTANCE = new CookieAssertions();
+	private static final CookieAssertions INSTANCE = new CookieAssertions();
 
 	/**
 	 * Get singleton object.

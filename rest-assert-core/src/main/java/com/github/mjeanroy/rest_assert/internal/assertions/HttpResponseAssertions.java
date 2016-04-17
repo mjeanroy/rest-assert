@@ -56,7 +56,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Singleton object.
 	 */
-	private static HttpResponseAssertions INSTANCE = new HttpResponseAssertions();
+	private static final HttpResponseAssertions INSTANCE = new HttpResponseAssertions();
 
 	/**
 	 * Get singleton object.

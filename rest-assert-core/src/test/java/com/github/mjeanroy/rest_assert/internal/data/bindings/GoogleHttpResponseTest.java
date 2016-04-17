@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.google.api.client.http.HttpHeaders;
@@ -130,7 +130,7 @@ public class GoogleHttpResponseTest {
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
 		when(response.getContent()).thenThrow(ex);
 
-		thrown.expect(UnparseableResponseBodyException.class);
+		thrown.expect(NonParsableResponseBodyException.class);
 
 		HttpResponse httpResponse = create(response);
 		httpResponse.getContent();

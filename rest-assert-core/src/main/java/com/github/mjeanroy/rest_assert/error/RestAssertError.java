@@ -52,7 +52,7 @@ public interface RestAssertError {
 
 	/**
 	 * Build formatted error message.
-	 * Arguments array will be used in ordre to replace placeholders pattern
+	 * Arguments array will be used in order to replace placeholders pattern
 	 * in original message.
 	 *
 	 * @return Formatted message.

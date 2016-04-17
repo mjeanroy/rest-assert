@@ -29,14 +29,14 @@ package com.github.mjeanroy.rest_assert.internal.exceptions;
  * be read.
  */
 @SuppressWarnings("serial")
-public class UnparseableResponseBodyException extends RuntimeException {
+public class NonParsableResponseBodyException extends RuntimeException {
 
 	/**
 	 * Create exception.
 	 *
 	 * @param ex Original exception.
 	 */
-	public UnparseableResponseBodyException(Exception ex) {
+	public NonParsableResponseBodyException(Exception ex) {
 		super(ex);
 	}
 }

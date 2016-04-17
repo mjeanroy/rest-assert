@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
+import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 
 import java.io.IOException;
 
@@ -45,14 +45,14 @@ abstract class AbstractHttpResponse implements HttpResponse {
 		try {
 			return doGetContent();
 		} catch (IOException ex) {
-			throw new UnparseableResponseBodyException(ex);
+			throw new NonParsableResponseBodyException(ex);
 		}
 	}
 
 	/**
 	 * Get the content body as a string.
 	 * If an {@link java.io.IOException} is thrown, it will be catched
-	 * by {@link #getContent()} method and rethrows as a {@link UnparseableResponseBodyException}.
+	 * by {@link #getContent()} method and rethrows as a {@link NonParsableResponseBodyException}.
 	 *
 	 * @return Response body.
 	 * @throws IOException If an error occurred during parsing.
