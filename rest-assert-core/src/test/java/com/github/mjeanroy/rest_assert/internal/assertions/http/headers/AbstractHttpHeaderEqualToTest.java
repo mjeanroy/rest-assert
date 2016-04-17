@@ -38,7 +38,7 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -83,7 +83,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 
 	protected abstract Header getHeader();
 
-	protected String failValue() {
+	String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 }

@@ -38,7 +38,7 @@ import static org.junit.rules.ExpectedException.none;
 public class JsonAssertion_isEqualToUrl_Test extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 
 	@Rule
-	public ExpectedException thrown = none();
+	public final ExpectedException thrown = none();
 
 	@Override
 	protected AssertionResult invoke(String actual, URL expected) {
@@ -46,12 +46,12 @@ public class JsonAssertion_isEqualToUrl_Test extends AbstractJsonAssertion_isEqu
 	}
 
 	@Override
-	protected URL successObject() throws Exception {
+	protected URL successObject() {
 		return jsonUrlSuccess();
 	}
 
 	@Override
-	protected URL failureObject() throws Exception {
+	protected URL failureObject() {
 		return jsonUrlFailure();
 	}
 

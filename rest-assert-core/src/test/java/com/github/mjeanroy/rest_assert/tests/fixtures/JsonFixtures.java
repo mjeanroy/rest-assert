@@ -44,9 +44,9 @@ public final class JsonFixtures {
 	private JsonFixtures() {
 	}
 
-	public static final String JSON_SUCCESS = "/json/success.json";
+	private static final String JSON_SUCCESS = "/json/success.json";
 
-	public static final String JSON_FAILURE = "/json/failure.json";
+	private static final String JSON_FAILURE = "/json/failure.json";
 
 	public static String jsonSuccess() {
 		JsonObject object = jsonObject(

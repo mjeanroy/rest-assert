@@ -145,7 +145,7 @@ public class ApacheHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
+	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
 		IOException ex = new IOException();
 		HttpEntity httpEntity = new ApacheHttpEntityMockBuilder()
 				.build();

@@ -33,7 +33,7 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
 
-	protected CookieAssertions cookieAssertions = CookieAssertions.instance();
+	final CookieAssertions cookieAssertions = CookieAssertions.instance();
 
 	@Test
 	public void it_should_pass() {

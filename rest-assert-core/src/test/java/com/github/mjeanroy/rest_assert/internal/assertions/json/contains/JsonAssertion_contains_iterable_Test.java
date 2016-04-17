@@ -39,7 +39,7 @@ import static java.util.Collections.singleton;
 
 public class JsonAssertion_contains_iterable_Test {
 
-	protected JsonAssertions assertions;
+	private JsonAssertions assertions;
 
 	@Before
 	public void setUp() {

@@ -35,7 +35,7 @@ import org.junit.Test;
 
 public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {

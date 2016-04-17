@@ -37,7 +37,7 @@ import static java.lang.String.format;
 
 public abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {

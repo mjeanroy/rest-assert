@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.tests.json;
 
-public final class JsonUtil {
+final class JsonUtil {
 
 	private JsonUtil() {
 	}

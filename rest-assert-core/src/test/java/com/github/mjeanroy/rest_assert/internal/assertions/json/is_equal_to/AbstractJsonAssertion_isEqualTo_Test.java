@@ -37,7 +37,7 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.LINE_SEPARATOR;
 
 public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
-	protected JsonAssertions assertions;
+	JsonAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -45,13 +45,13 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	}
 
 	@Test
-	public void it_should_pass_with_object() throws Exception {
+	public void it_should_pass_with_object() {
 		AssertionResult result = invoke(actual(), successObject());
 		assertSuccessResult(result);
 	}
 
 	@Test
-	public void it_should_fail() throws Exception {
+	public void it_should_fail() {
 		AssertionResult result = invoke(actual(), failureObject());
 
 		String expectedPattern = "" +
@@ -76,11 +76,11 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
 	protected abstract AssertionResult invoke(String actual, T expected);
 
-	protected String actual() {
+	private String actual() {
 		return jsonSuccess();
 	}
 
-	protected abstract T successObject() throws Exception;
+	protected abstract T successObject();
 
-	protected abstract T failureObject() throws Exception;
+	protected abstract T failureObject();
 }

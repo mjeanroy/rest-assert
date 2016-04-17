@@ -36,7 +36,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -63,7 +63,7 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 		);
 	}
 
-	protected HttpResponse newResponse(int status) {
+	private HttpResponse newResponse(int status) {
 		return new HttpResponseMockBuilder()
 			.setStatus(status)
 			.build();

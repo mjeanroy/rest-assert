@@ -37,12 +37,12 @@ public class JsonAssertion_isEqualIgnoringToString_Test extends AbstractJsonAsse
 	}
 
 	@Override
-	protected String successObject() throws Exception {
+	protected String successObject() {
 		return jsonSuccess();
 	}
 
 	@Override
-	protected String failureObject() throws Exception {
+	protected String failureObject() {
 		return jsonFailure();
 	}
 }

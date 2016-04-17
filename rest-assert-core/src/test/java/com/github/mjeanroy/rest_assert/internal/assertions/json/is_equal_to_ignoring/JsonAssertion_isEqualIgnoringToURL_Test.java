@@ -46,12 +46,12 @@ public class JsonAssertion_isEqualIgnoringToURL_Test extends AbstractJsonAsserti
 	}
 
 	@Override
-	protected URL successObject() throws Exception {
+	protected URL successObject() {
 		return jsonUrlSuccess();
 	}
 
 	@Override
-	protected URL failureObject() throws Exception {
+	protected URL failureObject() {
 		return jsonUrlFailure();
 	}
 

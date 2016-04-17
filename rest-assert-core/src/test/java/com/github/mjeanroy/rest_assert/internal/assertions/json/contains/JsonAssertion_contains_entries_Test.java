@@ -38,7 +38,7 @@ import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 
 public class JsonAssertion_contains_entries_Test {
 
-	protected JsonAssertions assertions;
+	private JsonAssertions assertions;
 
 	@Before
 	public void setUp() {

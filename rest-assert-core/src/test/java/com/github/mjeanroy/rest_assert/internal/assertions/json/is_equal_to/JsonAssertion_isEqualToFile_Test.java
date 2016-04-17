@@ -39,12 +39,12 @@ public class JsonAssertion_isEqualToFile_Test extends AbstractJsonAssertion_isEq
 	}
 
 	@Override
-	protected File successObject() throws Exception {
+	protected File successObject() {
 		return jsonFileSuccess();
 	}
 
 	@Override
-	protected File failureObject() throws Exception {
+	protected File failureObject() {
 		return jsonFileFailure();
 	}
 }

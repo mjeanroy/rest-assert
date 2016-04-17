@@ -125,7 +125,7 @@ public class GoogleHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
+	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
 		IOException ex = mock(IOException.class);
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
 		when(response.getContent()).thenThrow(ex);

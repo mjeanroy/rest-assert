@@ -38,7 +38,7 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -73,7 +73,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 		);
 	}
 
-	protected HttpResponse newResponse(Header header) {
+	private HttpResponse newResponse(Header header) {
 		return new HttpResponseMockBuilder()
 			.addHeader(header)
 			.build();
@@ -81,7 +81,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 
 	protected abstract String getMimeType();
 
-	protected Header getHeader() {
+	private Header getHeader() {
 		return header("Content-Type", getMimeType() + ";charset=UTF-8");
 	}
 }

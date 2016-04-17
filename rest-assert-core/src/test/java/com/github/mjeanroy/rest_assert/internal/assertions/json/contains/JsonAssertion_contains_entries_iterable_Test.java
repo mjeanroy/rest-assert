@@ -37,10 +37,11 @@ import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
+import static java.util.Collections.singletonList;
 
 public class JsonAssertion_contains_entries_iterable_Test {
 
-	protected JsonAssertions assertions;
+	private JsonAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -59,7 +60,7 @@ public class JsonAssertion_contains_entries_iterable_Test {
 		assertSuccessResult(assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("id", 1))));
 		assertSuccessResult(assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("name", "John Doe"))));
 		assertSuccessResult(assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("$.id", 1))));
-		assertSuccessResult(assertions.containsEntries(actual, asList(JsonAssertions.jsonEntry("$.name", "John Doe"))));
+		assertSuccessResult(assertions.containsEntries(actual, singletonList(JsonAssertions.jsonEntry("$.name", "John Doe"))));
 
 		assertSuccessResult(assertions.containsEntries(actual, asList(
 			JsonAssertions.jsonEntry("id", 1),

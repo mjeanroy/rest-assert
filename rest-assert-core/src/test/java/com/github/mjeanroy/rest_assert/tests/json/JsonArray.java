@@ -47,11 +47,11 @@ public class JsonArray implements JsonValue {
 	}
 
 	private List<String> formatValues() {
-		List<String> vals = new ArrayList<>();
-		for (Object value : values) {
+		List<String> values = new ArrayList<>();
+		for (Object value : this.values) {
 			String val = JsonUtil.formatValue(value);
-			vals.add(val);
+			values.add(val);
 		}
-		return vals;
+		return values;
 	}
 }

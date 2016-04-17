@@ -36,7 +36,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
 public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {

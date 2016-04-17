@@ -39,12 +39,12 @@ public class JsonAssertion_isEqualToPath_Test extends AbstractJsonAssertion_isEq
 	}
 
 	@Override
-	protected Path successObject() throws Exception {
+	protected Path successObject() {
 		return jsonPathSuccess();
 	}
 
 	@Override
-	protected Path failureObject() throws Exception {
+	protected Path failureObject() {
 		return jsonPathFailure();
 	}
 }

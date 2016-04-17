@@ -40,7 +40,7 @@ import static java.util.Arrays.asList;
 
 public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 
-	protected JsonAssertions assertions;
+	JsonAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -73,15 +73,15 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 
 	protected abstract AssertionResult invoke(String actual, T expected);
 
-	protected String actual() {
+	private String actual() {
 		return jsonSuccess();
 	}
 
-	protected List<String> ignoringKeys() {
+	List<String> ignoringKeys() {
 		return asList("str", "nb", "bool");
 	}
 
-	protected abstract T successObject() throws Exception;
+	protected abstract T successObject();
 
-	protected abstract T failureObject() throws Exception;
+	protected abstract T failureObject();
 }

@@ -67,7 +67,7 @@ public class CookieAssertion_hasPath_Test extends AbstractCookieTest {
 		};
 	}
 
-	protected Cookie cookie(String path) {
+	private Cookie cookie(String path) {
 		return new CookieMockBuilder()
 			.setPath(path)
 			.build();

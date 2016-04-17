@@ -47,9 +47,8 @@ public class JsonObject implements JsonValue {
 		this.entries = new ArrayList<>();
 	}
 
-	public JsonObject addEntry(JsonEntry entry) {
+	private void addEntry(JsonEntry entry) {
 		entries.add(entry);
-		return this;
 	}
 
 	@Override
@@ -59,10 +58,6 @@ public class JsonObject implements JsonValue {
 			sub.append(entry.toJson()).append(", ");
 		}
 
-		StringBuilder sb = new StringBuilder();
-		sb.append("{")
-				.append(sub.substring(0, sub.length() - 2))
-				.append("}");
-		return sb.toString();
+		return String.format("{%s}", sub.substring(0, sub.length() - 2));
 	}
 }

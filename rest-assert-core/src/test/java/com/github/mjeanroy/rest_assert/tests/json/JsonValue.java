@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.tests.json;
 
-public interface JsonValue {
+interface JsonValue {
 
 	String toJson();
 }

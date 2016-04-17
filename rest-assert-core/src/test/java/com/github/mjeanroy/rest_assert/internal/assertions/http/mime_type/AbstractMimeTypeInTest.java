@@ -42,7 +42,7 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
 
-	protected HttpResponseAssertions assertions;
+	HttpResponseAssertions assertions;
 
 	@Before
 	public void setUp() {
@@ -93,7 +93,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 
 	protected abstract List<String> getMimeTypes();
 
-	protected List<Header> getHeaders() {
+	private List<Header> getHeaders() {
 		return Utils.map(getMimeTypes(), new Mapper<String, Header>() {
 			@Override
 			public Header apply(String input) {
