@@ -24,12 +24,50 @@
 
 package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.jackson2.Jackson2JsonParser.jackson2Parser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.mjeanroy.rest_assert.internal.json.JsonException;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
+import static org.apache.commons.lang3.reflect.FieldUtils.readField;
+import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class Jackson2JsonParserTest extends AbstractJsonParserTest {
 
+	private JsonParser parser;
+	private ObjectMapper mapper;
+
+	@Before
+	public void setUp() throws Exception {
+		parser = jackson2Parser();
+		mapper = (ObjectMapper) readField(parser, "mapper", true);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		writeField(parser, "mapper", mapper, true);
+	}
+
 	@Override
 	protected JsonParser parser() {
-		return jackson2Parser();
+		return parser;
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void it_should_wrap_checked_exception() throws Exception {
+		ObjectMapper mapper = mock(ObjectMapper.class);
+		when(mapper.readValue(anyString(), any(Class.class))).thenThrow(RuntimeException.class);
+		writeField(parser, "mapper", mapper, true);
+
+		thrown.expect(JsonException.class);
+
+		parser.parse("{}");
 	}
 }

@@ -100,7 +100,9 @@ public final class DateUtils {
 			}
 		}
 
-		return null;
+		// Throw an exception to let user know that the date format is not valid.
+		String message = String.format("HTTP Date must respect standard formats: %s, %s or %s", PATTERN_RFC1123, PATTERN_RFC1036, PATTERN_ASCTIME);
+		throw new IllegalArgumentException(message);
 	}
 
 	/**

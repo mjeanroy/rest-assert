@@ -41,6 +41,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -230,7 +231,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, @Param("uri") URI uri) {
-		return isEqualTo(actual, new File(uri));
+		return isEqualTo(actual, Paths.get(uri));
 	}
 
 	/**
@@ -242,9 +243,9 @@ public final class JsonAssertions {
 	 */
 	public AssertionResult isEqualTo(String actual, @Param("url") URL url) {
 		try {
-			return isEqualTo(actual, new File(url.toURI()));
+			return isEqualTo(actual, url.toURI());
 		} catch (URISyntaxException ex) {
-			throw new RuntimeException(ex);
+			throw new AssertionError(ex);
 		}
 	}
 
@@ -312,7 +313,7 @@ public final class JsonAssertions {
 		try {
 			return isEqualToIgnoring(actual, new File(url.toURI()), entries);
 		} catch (URISyntaxException ex) {
-			throw new RuntimeException(ex);
+			throw new AssertionError(ex);
 		}
 	}
 

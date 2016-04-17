@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import static com.github.mjeanroy.rest_assert.internal.json.parsers.gson.GsonJsonParser.gsonParser;
+import static com.github.mjeanroy.rest_assert.internal.json.parsers.GsonJsonParser.gsonParser;
 
 public class GsonJsonParserTest extends AbstractJsonParserTest {
 

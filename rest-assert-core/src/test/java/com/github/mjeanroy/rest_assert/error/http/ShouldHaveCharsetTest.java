@@ -22,56 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.parsers.gson;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import com.github.mjeanroy.rest_assert.internal.json.parsers.AbstractJsonParser;
-import com.google.gson.Gson;
+import org.junit.Test;
 
-import java.util.List;
-import java.util.Map;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Implementation of {@link com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser}
- * using Google Gson as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
-public class GsonJsonParser extends AbstractJsonParser {
+public class ShouldHaveCharsetTest {
 
-	/**
-	 * Singleton instance.
-	 */
-	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
-
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
-	public static GsonJsonParser gsonParser() {
-		return INSTANCE;
+	@Test
+	public void it_should_have_error_message() {
+		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset();
+		assertThat(shouldHaveCharset).isNotNull();
+		assertThat(shouldHaveCharset.toString()).isEqualTo("Expecting response to have defined charset");
 	}
 
-	/**
-	 * Internal parser.
-	 */
-	private final Gson gson;
-
-	private GsonJsonParser() {
-		super();
-		this.gson = new Gson();
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> parseObject(String json) {
-		return gson.fromJson(json, Map.class);
-	}
-
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Object> parseArray(String json) {
-		return gson.fromJson(json, List.class);
+	@Test
+	public void it_should_have_error_message_with_expected_values() {
+		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset("UTF-8", "UTF-16");
+		assertThat(shouldHaveCharset).isNotNull();
+		assertThat(shouldHaveCharset.toString()).isEqualTo("Expecting response to have charset UTF-8 but was UTF-16");
 	}
 }

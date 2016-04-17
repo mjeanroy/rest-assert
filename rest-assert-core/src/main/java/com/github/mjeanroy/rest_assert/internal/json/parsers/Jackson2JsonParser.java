@@ -22,11 +22,10 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.parsers.jackson2;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mjeanroy.rest_assert.internal.json.JsonException;
-import com.github.mjeanroy.rest_assert.internal.json.parsers.AbstractJsonParser;
 
 import java.util.List;
 import java.util.Map;

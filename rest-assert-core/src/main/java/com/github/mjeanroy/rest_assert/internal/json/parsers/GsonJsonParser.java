@@ -22,20 +22,55 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
-import org.junit.Test;
+import com.google.gson.Gson;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+import java.util.Map;
 
-public class ShouldBeAnArrayTest {
+/**
+ * Implementation of {@link com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser}
+ * using Google Gson as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
+ */
+public class GsonJsonParser extends AbstractJsonParser {
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
-		assertThat(shouldBeAnArray).isNotNull();
-		assertThat(shouldBeAnArray.toString()).isEqualTo("Expecting json to be an array but was an object");
-		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
+	/**
+	 * Singleton instance.
+	 */
+	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
+
+	/**
+	 * Get parser.
+	 *
+	 * @return Parser.
+	 */
+	public static GsonJsonParser gsonParser() {
+		return INSTANCE;
+	}
+
+	/**
+	 * Internal parser.
+	 */
+	private final Gson gson;
+
+	private GsonJsonParser() {
+		super();
+		this.gson = new Gson();
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public Map<String, Object> parseObject(String json) {
+		return gson.fromJson(json, Map.class);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public List<Object> parseArray(String json) {
+		return gson.fromJson(json, List.class);
 	}
 }

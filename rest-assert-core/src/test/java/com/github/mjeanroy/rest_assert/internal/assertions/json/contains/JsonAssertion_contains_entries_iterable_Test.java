@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.json.contains;
 
 import com.github.mjeanroy.rest_assert.error.CompositeError;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import org.junit.Before;
@@ -75,16 +76,13 @@ public class JsonAssertion_contains_entries_iterable_Test {
 
 		String actual = jsonObject.toJson();
 
-		assertFailureResult(
-			assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("name", "Jane Doe"))),
-			CompositeError.class,
-			"Expecting json entry %s to be equal to %s but was %s", new Object[]{"name", "Jane Doe", "John Doe"}
-		);
+		AssertionResult r1 = assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("name", "Jane Doe")));
+		assertFailureResult(r1, CompositeError.class, "Expecting json entry %s to be equal to %s but was %s", new Object[]{"name", "Jane Doe", "John Doe"});
 
-		assertFailureResult(
-			assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("$.name", "Jane Doe"))),
-			CompositeError.class,
-			"Expecting json entry %s to be equal to %s but was %s", new Object[]{"$.name", "Jane Doe", "John Doe"}
-		);
+		AssertionResult r2 = assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("$.name", "Jane Doe")));
+		assertFailureResult(r2, CompositeError.class, "Expecting json entry %s to be equal to %s but was %s", new Object[]{"$.name", "Jane Doe", "John Doe"});
+
+		AssertionResult r3 = assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("foo", "Jane Doe")));
+		assertFailureResult(r3, CompositeError.class, "Expecting json to contain entry %s", new Object[]{"foo"});
 	}
 }

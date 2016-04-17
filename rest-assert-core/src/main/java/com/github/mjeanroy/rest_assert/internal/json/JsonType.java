@@ -51,7 +51,7 @@ public enum JsonType {
 
 		@Override
 		protected boolean doCheck(String json) {
-			return json.matches("-?\\d+(\\.\\d+)?");
+			return json.matches("^-?\\d+(\\.\\d+)?$");
 		}
 	},
 
@@ -63,8 +63,13 @@ public enum JsonType {
 
 		@Override
 		protected boolean doCheck(String json) {
-			return json.charAt(0) == '"' &&
-					json.charAt(json.length() - 1) == '"';
+			if (json.length() < 2) {
+				return false;
+			}
+
+			char firstChar = json.charAt(0);
+			char lastChar = json.charAt(json.length() - 1);
+			return firstChar == '"' && lastChar == '"';
 		}
 	},
 
@@ -76,8 +81,13 @@ public enum JsonType {
 
 		@Override
 		protected boolean doCheck(String json) {
-			return json.charAt(0) == '{' &&
-					json.charAt(json.length() - 1) == '}';
+			if (json.length() < 2) {
+				return false;
+			}
+
+			char firstChar = json.charAt(0);
+			char lastChar = json.charAt(json.length() - 1);
+			return firstChar == '{' && lastChar == '}';
 		}
 	},
 
@@ -90,8 +100,13 @@ public enum JsonType {
 
 		@Override
 		protected boolean doCheck(String json) {
-			return json.charAt(0) == '[' &&
-					json.charAt(json.length() - 1) == ']';
+			if (json.length() < 2) {
+				return false;
+			}
+
+			char firstChar = json.charAt(0);
+			char lastChar = json.charAt(json.length() - 1);
+			return firstChar == '[' && lastChar == ']';
 		}
 	},
 
@@ -113,7 +128,7 @@ public enum JsonType {
 	 * @param object Object.
 	 * @return True if object is valid for type, false otherwise.
 	 */
-	protected abstract boolean isValid(Object object);
+	abstract boolean isValid(Object object);
 
 	/**
 	 * Check if json value is of expected json type.
@@ -121,7 +136,7 @@ public enum JsonType {
 	 * @param json Json value.
 	 * @return True if json is that type, false otherwise.
 	 */
-	protected abstract boolean doCheck(String json);
+	abstract boolean doCheck(String json);
 
 	/**
 	 * Check if json value is of expected json type.
@@ -130,7 +145,7 @@ public enum JsonType {
 	 * @return True if json is that type, false otherwise.
 	 */
 	public boolean is(String json) {
-		return json != null && doCheck(json.trim());
+		return json != null && doCheck(json);
 	}
 
 	/**

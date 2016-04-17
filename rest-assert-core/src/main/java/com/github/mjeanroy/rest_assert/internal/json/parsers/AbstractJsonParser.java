@@ -29,7 +29,7 @@ import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 /**
  * Abstract json parser.
  */
-public abstract class AbstractJsonParser implements JsonParser {
+abstract class AbstractJsonParser implements JsonParser {
 
 	@Override
 	public Object parse(String json) {

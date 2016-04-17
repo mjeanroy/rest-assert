@@ -37,5 +37,6 @@ public class ShouldBeEntryOfTest {
 		ShouldBeEntryOf shouldBeEntryOf = shouldBeEntryOf("foo", JsonType.NULL, JsonType.NUMBER);
 		assertThat(shouldBeEntryOf).isNotNull();
 		assertThat(shouldBeEntryOf.toString()).isEqualTo("Expecting json entry foo to be number value but was null value");
+		assertThat(shouldBeEntryOf.entryName()).isEqualTo("foo");
 	}
 }

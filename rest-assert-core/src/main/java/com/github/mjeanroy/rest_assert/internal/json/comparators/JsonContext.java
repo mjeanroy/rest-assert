@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
+import com.github.mjeanroy.rest_assert.internal.json.JsonType;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,9 +33,9 @@ import java.util.List;
  * Json context (a.k.a current fully qualified entry
  * name).
  */
-public class JsonContext {
+class JsonContext {
 
-	public static JsonContext rootContext() {
+	static JsonContext rootContext() {
 		return new JsonContext();
 	}
 
@@ -43,15 +45,15 @@ public class JsonContext {
 		contexts = new LinkedList<>();
 	}
 
-	public void append(String entryName) {
+	void append(String entryName) {
 		contexts.add(entryName);
 	}
 
-	public void remove() {
+	void remove() {
 		contexts.remove(contexts.size() - 1);
 	}
 
-	public String toPath(String last) {
+	String toPath(String last) {
 		if (contexts.isEmpty()) {
 			return last;
 		}
@@ -69,7 +71,7 @@ public class JsonContext {
 			i++;
 		}
 
-		if (shouldAddSeparator(i, last)) {
+		if (!last.isEmpty() && shouldAddSeparator(i, last)) {
 			sb.append(separator);
 		}
 
@@ -89,6 +91,6 @@ public class JsonContext {
 	}
 
 	private static boolean isArrayNotation(String context) {
-		return context.charAt(0) == '[' && context.charAt(context.length() - 1) == ']';
+		return JsonType.ARRAY.is(context);
 	}
 }

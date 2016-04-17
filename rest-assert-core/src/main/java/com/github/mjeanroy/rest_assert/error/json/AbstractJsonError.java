@@ -31,7 +31,7 @@ import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
 /**
  * Abstraction of json error message.
  */
-public abstract class AbstractJsonError extends AbstractError implements RestAssertJsonError, RestAssertError {
+abstract class AbstractJsonError extends AbstractError implements RestAssertJsonError, RestAssertError {
 
 	/**
 	 * Entry name of json object that throws the error.
@@ -45,7 +45,7 @@ public abstract class AbstractJsonError extends AbstractError implements RestAss
 	 * @param message Original message, with placeholders.
 	 * @param args Arguments that will replace placeholders in original message.
 	 */
-	protected AbstractJsonError(String entryName, String message, Object[] args) {
+	AbstractJsonError(String entryName, String message, Object[] args) {
 		super(message, args);
 		this.entryName = entryName;
 	}

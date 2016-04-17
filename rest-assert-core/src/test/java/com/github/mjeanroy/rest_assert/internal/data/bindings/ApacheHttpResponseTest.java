@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
@@ -80,6 +80,22 @@ public class ApacheHttpResponseTest {
 	}
 
 	@Test
+	public void it_should_return_false_if_http_response_does_not_contain_header() {
+		final String headerName = "header-name";
+
+		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+			.addHeader("foo", "foo")
+			.addHeader("bar", "bar")
+			.build();
+
+		HttpResponse httpResponse = create(response);
+		boolean containsHeader = httpResponse.hasHeader(headerName);
+
+		assertThat(containsHeader).isFalse();
+		verify(response).getAllHeaders();
+	}
+
+	@Test
 	public void it_should_return_header_value() {
 		final String headerName = "header-name";
 		final String headerValue = "header-value";
@@ -94,6 +110,21 @@ public class ApacheHttpResponseTest {
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
+		verify(response).getAllHeaders();
+	}
+
+	@Test
+	public void it_should_return_header_value_with_null_if_header_does_not_exist() {
+		final String headerName = "header-name";
+		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+			.addHeader("foo", "bar")
+			.addHeader("bar", "foo")
+			.build();
+
+		HttpResponse httpResponse = create(response);
+		String result = httpResponse.getHeader(headerName);
+
+		assertThat(result).isNull();
 		verify(response).getAllHeaders();
 	}
 

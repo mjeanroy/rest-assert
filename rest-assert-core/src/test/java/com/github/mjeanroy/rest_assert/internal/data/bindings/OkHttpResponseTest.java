@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import com.github.mjeanroy.rest_assert.internal.data.bindings.OkHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseBodyMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import okhttp3.Response;

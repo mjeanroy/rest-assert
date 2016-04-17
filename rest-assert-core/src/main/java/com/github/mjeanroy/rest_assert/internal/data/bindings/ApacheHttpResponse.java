@@ -83,7 +83,7 @@ public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResp
 	private Header findFirstHeader(String name) {
 		Header[] headers = response.getAllHeaders();
 		for (Header header : headers) {
-			if (header.getName().toLowerCase().equals(name.toLowerCase())) {
+			if (header.getName().equalsIgnoreCase(name)) {
 				return header;
 			}
 		}

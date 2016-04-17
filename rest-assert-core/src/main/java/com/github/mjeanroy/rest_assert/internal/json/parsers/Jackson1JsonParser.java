@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.parsers.jackson1;
+package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
 import com.github.mjeanroy.rest_assert.internal.json.JsonException;
-import com.github.mjeanroy.rest_assert.internal.json.parsers.AbstractJsonParser;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import java.util.List;

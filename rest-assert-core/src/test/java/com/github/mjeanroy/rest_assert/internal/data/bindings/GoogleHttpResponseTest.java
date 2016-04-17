@@ -22,26 +22,33 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.bindings;
+package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.UnparseableResponseBodyException;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
-import com.ning.http.client.Response;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.google.api.client.http.HttpHeaders;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-public class AsyncHttpResponseTest {
+@RunWith(PowerMockRunner.class)
+@PrepareForTest(com.google.api.client.http.HttpResponse.class)
+public class GoogleHttpResponseTest {
 
 	@Rule
 	public ExpectedException thrown = none();
@@ -49,11 +56,11 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
-		Response response = new AsyncHttpResponseMockBuilder()
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
 			.setStatusCode(expectedStatus)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = create(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -61,17 +68,24 @@ public class AsyncHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_check_if_http_response_contains_header() {
+	public void it_should_check_if_response_contains_header() {
 		String headerName = "header-name";
+		String headerValue = "header-value";
 
-		Response response = new AsyncHttpResponseMockBuilder()
-			.addHeader(headerName, "foo")
+		HttpHeaders httpHeaders = new GoogleHttpHeadersMockBuilder()
+			.addHeader(headerName, headerValue)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
-		assertThat(httpResponse.hasHeader(headerName)).isTrue();
-		assertThat(httpResponse.hasHeader(headerName.toUpperCase())).isTrue();
-		assertThat(httpResponse.hasHeader(headerName.toLowerCase())).isTrue();
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setHeaders(httpHeaders)
+			.build();
+
+		HttpResponse httpResponse = create(response);
+		boolean containsHeader = httpResponse.hasHeader(headerName);
+
+		assertThat(containsHeader).isTrue();
+		verify(response).getHeaders();
+		verify(httpHeaders).getFirstHeaderStringValue(headerName);
 	}
 
 	@Test
@@ -79,40 +93,46 @@ public class AsyncHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		HttpHeaders httpHeaders = new GoogleHttpHeadersMockBuilder()
 			.addHeader(headerName, headerValue)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setHeaders(httpHeaders)
+			.build();
+
+		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getHeader(headerName);
 
 		assertThat(result).isEqualTo(headerValue);
-		verify(response).getHeader(headerName);
+		verify(response).getHeaders();
+		verify(httpHeaders).getFirstHeaderStringValue(headerName);
 	}
 
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		Response response = new AsyncHttpResponseMockBuilder()
-			.setResponseBody(body)
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+			.setContent(Charset.defaultCharset(), body)
 			.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
-		verify(response).getResponseBody();
+		verify(response).getContent();
+		verify(response).getContentCharset();
 	}
 
 	@Test
 	public void it_should_return_custom_exception_if_body_is_not_parseable() throws Exception {
 		IOException ex = mock(IOException.class);
-		Response response = new AsyncHttpResponseMockBuilder().build();
-		when(response.getResponseBody()).thenThrow(ex);
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
+		when(response.getContent()).thenThrow(ex);
 
 		thrown.expect(UnparseableResponseBodyException.class);
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = create(response);
 		httpResponse.getContent();
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,34 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.utils;
 
-/**
- * Mapper implementation that turn a string to
- * a lowercase string.
- * This class is thread safe.
- * This class is implemented as a singleton.
- */
-public final class LowercaseMapper implements Mapper<String, String> {
+import org.junit.Test;
 
-	/**
-	 * Singleton instance.
-	 */
-	private static final LowercaseMapper INSTANCE = new LowercaseMapper();
+import static org.assertj.core.api.Assertions.assertThat;
 
-	/**
-	 * Return mapper.
-	 *
-	 * @return Mapper.
-	 */
-	public static LowercaseMapper lowercaseMapper() {
-		return INSTANCE;
-	}
+public class ClassUtilsTest {
 
-	// Ensure non instantiation
-	private LowercaseMapper() {
-	}
-
-	@Override
-	public String apply(String input) {
-		return input.toLowerCase();
+	@Test
+	public void it_should_check_if_class_is_present() {
+		assertThat(ClassUtils.isPresent("com.github.mjeanroy.rest_assert.utils.ClassUtils")).isTrue();
+		assertThat(ClassUtils.isPresent("com.github.mjeanroy.rest_assert.utils.Foo")).isFalse();
 	}
 }

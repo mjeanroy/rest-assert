@@ -36,5 +36,6 @@ public class ShouldNotHaveEntryTest {
 		ShouldNotHaveEntry shouldHaveEntry = shouldNotHaveEntry("foo");
 		assertThat(shouldHaveEntry).isNotNull();
 		assertThat(shouldHaveEntry.toString()).isEqualTo("Expecting json not to contain entry foo");
+		assertThat(shouldHaveEntry.entryName()).isEqualTo("foo");
 	}
 }

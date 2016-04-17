@@ -36,5 +36,6 @@ public class ShouldBeAnObjectTest {
 		ShouldBeAnObject shouldBeAnObject = shouldBeAnObject();
 		assertThat(shouldBeAnObject).isNotNull();
 		assertThat(shouldBeAnObject.toString()).isEqualTo("Expecting json to be an object but was an array");
+		assertThat(shouldBeAnObject.entryName()).isEqualTo("");
 	}
 }

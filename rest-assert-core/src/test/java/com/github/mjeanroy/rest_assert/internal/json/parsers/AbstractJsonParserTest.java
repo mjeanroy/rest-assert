@@ -26,7 +26,9 @@ package com.github.mjeanroy.rest_assert.internal.json.parsers;
 
 import com.github.mjeanroy.rest_assert.tests.json.JsonArray;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.List;
 import java.util.Map;
@@ -36,11 +38,23 @@ import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
+import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("unchecked")
 public abstract class AbstractJsonParserTest {
+
+	@Rule
+	public ExpectedException thrown = none();
+
+	@Test
+	public void it_should_fail_to_parse_non_object_non_array() {
+		thrown.expect(UnsupportedOperationException.class);
+		thrown.expectMessage("Parser support object or array conversion only");
+
+		parser().parse("null");
+	}
 
 	@Test
 	public void it_should_parse_with_object() {

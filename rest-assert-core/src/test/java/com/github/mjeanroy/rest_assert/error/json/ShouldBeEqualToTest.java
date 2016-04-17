@@ -36,5 +36,6 @@ public class ShouldBeEqualToTest {
 		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
 		assertThat(shouldBeEqualTo).isNotNull();
 		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 2 but was 1");
+		assertThat(shouldBeEqualTo.entryName()).isEqualTo("foo");
 	}
 }

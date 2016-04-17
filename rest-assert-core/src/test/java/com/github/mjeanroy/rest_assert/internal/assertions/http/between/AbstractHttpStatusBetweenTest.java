@@ -71,7 +71,7 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 		}
 	}
 
-	protected HttpResponse newResponse(int status) {
+	private HttpResponse newResponse(int status) {
 		return new HttpResponseMockBuilder()
 			.setStatus(status)
 			.build();

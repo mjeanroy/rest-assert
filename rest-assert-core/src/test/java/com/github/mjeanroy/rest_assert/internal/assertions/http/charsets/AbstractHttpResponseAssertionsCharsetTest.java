@@ -65,7 +65,7 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 		);
 	}
 
-	protected HttpResponse newResponse(String charset) {
+	private HttpResponse newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new HttpResponseMockBuilder()
 			.addHeader("Content-Type", contentType)

@@ -844,7 +844,7 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isStatusOutOf(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
 		int actualStatus = httpResponse.getStatus();
-		return actualStatus < start && actualStatus > end ?
+		return actualStatus < start || actualStatus > end ?
 				success() :
 				failure(shouldHaveStatusOutOf(actualStatus, start, end));
 	}

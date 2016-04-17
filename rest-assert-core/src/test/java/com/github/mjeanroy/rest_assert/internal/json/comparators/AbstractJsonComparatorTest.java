@@ -30,6 +30,7 @@ import com.github.mjeanroy.rest_assert.error.json.ShouldBeAnObject;
 import com.github.mjeanroy.rest_assert.error.json.ShouldBeEntryOf;
 import com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo;
 import com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry;
+import com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryWithSize;
 import com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
@@ -43,7 +44,9 @@ import java.util.List;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonArray.jsonArray;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
+import static org.apache.commons.lang3.reflect.FieldUtils.readField;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
 
 public abstract class AbstractJsonComparatorTest {
 
@@ -55,6 +58,17 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	protected abstract JsonParser jsonParser();
+
+	@Test
+	public void it_should_create_comparator_with_arguments() throws Exception {
+		JsonParser parser = mock(JsonParser.class);
+		JsonComparatorOptions options = mock(JsonComparatorOptions.class);
+
+		JsonComparator comparator = new DefaultJsonComparator(parser, options);
+
+		assertThat(readField(comparator, "parser", true)).isSameAs(parser);
+		assertThat(readField(comparator, "options", true)).isSameAs(options);
+	}
 
 	@Test
 	public void it_should_fail_if_actual_should_be_an_array() {
@@ -183,6 +197,19 @@ public abstract class AbstractJsonComparatorTest {
 		);
 
 		checkShouldBeEntryOf(actual, expected, JsonType.ARRAY, JsonType.NUMBER);
+	}
+
+	@Test
+	public void it_should_fail_if_actual_entry_is_array_and_expected_is_array_with_different_size() {
+		JsonObject actual = jsonObject(
+			jsonEntry("foo", jsonArray(1, 2, 3))
+		);
+
+		JsonObject expected = jsonObject(
+			jsonEntry("foo", jsonArray(1, 2))
+		);
+
+		checkComparison(actual.toJson(), expected.toJson(), ShouldHaveEntryWithSize.class, "foo", 3, 2);
 	}
 
 	@Test

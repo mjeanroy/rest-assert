@@ -45,7 +45,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 	@Test
 	public void it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				AssertionResult result = invoke(newResponse(i));
 				checkSuccess(result);
 			}
@@ -59,16 +59,11 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 
 		for (int status = start; status <= end; status++) {
 			AssertionResult result = invoke(newResponse(status));
-
-			checkError(result,
-					ShouldHaveStatusOutOf.class,
-					"Expecting status code to be out of %s and %s but was %s",
-					start, end, status
-			);
+			checkError(result, ShouldHaveStatusOutOf.class, "Expecting status code to be out of %s and %s but was %s", start, end, status);
 		}
 	}
 
-	protected HttpResponse newResponse(int status) {
+	private HttpResponse newResponse(int status) {
 		return new HttpResponseMockBuilder()
 			.setStatus(status)
 			.build();

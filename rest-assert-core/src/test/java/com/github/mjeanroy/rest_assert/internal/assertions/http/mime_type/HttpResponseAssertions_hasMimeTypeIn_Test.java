@@ -22,20 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.mime_type;
 
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
 
-public class ShouldBeAnArrayTest {
+import static java.util.Arrays.asList;
+
+public class HttpResponseAssertions_hasMimeTypeIn_Test extends AbstractMimeTypeInTest {
+
+	@Override
+	protected List<String> getMimeTypes() {
+		return asList("text/css", "text/html");
+	}
+
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.hasMimeTypeIn(response, getMimeTypes());
+	}
 
 	@Test
-	public void it_should_format_error_message() {
-		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
-		assertThat(shouldBeAnArray).isNotNull();
-		assertThat(shouldBeAnArray.toString()).isEqualTo("Expecting json to be an array but was an object");
-		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
+	public void it_should_fail_if_response_does_not_have_content_type() {
+		HttpResponse rsp = new HttpResponseMockBuilder().build();
+		AssertionResult result = assertions.hasMimeTypeIn(rsp, getMimeTypes());
+		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
 	}
 }

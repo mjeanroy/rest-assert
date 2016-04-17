@@ -25,13 +25,20 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.json.is_equal_to_ignoring;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.net.URL;
 
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlFailure;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
+import static org.junit.rules.ExpectedException.none;
 
 public class JsonAssertion_isEqualIgnoringToURL_Test extends AbstractJsonAssertion_isEqualToIgnoring_Test<URL> {
+
+	@Rule
+	public ExpectedException thrown = none();
 
 	@Override
 	protected AssertionResult invoke(String actual, URL expected) {
@@ -46,5 +53,12 @@ public class JsonAssertion_isEqualIgnoringToURL_Test extends AbstractJsonAsserti
 	@Override
 	protected URL failureObject() throws Exception {
 		return jsonUrlFailure();
+	}
+
+	@Test
+	public void it_should_fail_if_uri_syntax_exception() throws Exception {
+		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
+		thrown.expect(AssertionError.class);
+		assertions.isEqualToIgnoring("{}", url, ignoringKeys());
 	}
 }

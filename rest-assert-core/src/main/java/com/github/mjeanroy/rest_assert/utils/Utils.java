@@ -129,9 +129,10 @@ public final class Utils {
 					sb.append(LINE_SEPARATOR);
 				}
 			}
+
 			return sb.toString();
 		} catch (IOException ex) {
-			throw new RuntimeException(ex);
+			throw new UnreadableFileException(ex);
 		}
 	}
 }

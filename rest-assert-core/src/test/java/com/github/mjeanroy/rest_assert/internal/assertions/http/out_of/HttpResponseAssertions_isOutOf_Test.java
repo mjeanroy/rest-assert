@@ -22,41 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.json.comparators.predicates;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.out_of;
 
-import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
-import com.github.mjeanroy.rest_assert.utils.Predicate;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import java.util.Set;
+public class HttpResponseAssertions_isOutOf_Test extends AbstractHttpStatusOutOfTest {
 
-/**
- * Predicate that check if error entry name is in a set
- * of ignoring keys.
- */
-public class IsIgnoredKey implements Predicate<RestAssertJsonError> {
-
-	/**
-	 * Create new predicate.
-	 *
-	 * @param ignoringKeys Keys to check.
-	 * @return Predicate.
-	 */
-	public static IsIgnoredKey isIgnored(Set<String> ignoringKeys) {
-		return new IsIgnoredKey(ignoringKeys);
-	}
-
-	/**
-	 * Keys to check.
-	 */
-	private final Set<String> ignoringKeys;
-
-	// Use static factory
-	private IsIgnoredKey(Set<String> ignoringKeys) {
-		this.ignoringKeys = ignoringKeys;
+	@Override
+	protected int start() {
+		return 0;
 	}
 
 	@Override
-	public boolean apply(RestAssertJsonError input) {
-		return !ignoringKeys.contains(input.entryName());
+	protected int end() {
+		return 399;
+	}
+
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isStatusOutOf(response, start(), end());
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,20 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.utils;
 
-import org.junit.Test;
+import java.io.IOException;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * Exception to throw when a file cannot be read and
+ * fail with {@link IOException}.
+ */
+public class UnreadableFileException extends RuntimeException {
 
-public class ShouldBeAnArrayTest {
-
-	@Test
-	public void it_should_format_error_message() {
-		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
-		assertThat(shouldBeAnArray).isNotNull();
-		assertThat(shouldBeAnArray.toString()).isEqualTo("Expecting json to be an array but was an object");
-		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
+	/**
+	 * Create exception.
+	 * @param ex Original exception.
+	 */
+	public UnreadableFileException(IOException ex) {
+		super(ex);
 	}
 }

@@ -41,7 +41,7 @@ import static com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry.shou
 import static com.github.mjeanroy.rest_assert.internal.json.JsonType.parseType;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonContext.rootContext;
-import static com.github.mjeanroy.rest_assert.internal.json.comparators.predicates.IsIgnoredKey.isIgnored;
+import static com.github.mjeanroy.rest_assert.internal.json.comparators.IsIgnoredKey.isIgnored;
 import static com.github.mjeanroy.rest_assert.utils.Utils.filter;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
@@ -63,7 +63,7 @@ public class DefaultJsonComparator implements JsonComparator {
 	 *
 	 * @param parser Parser used to extract json data.
 	 */
-	public DefaultJsonComparator(JsonParser parser) {
+	DefaultJsonComparator(JsonParser parser) {
 		this.parser = parser;
 		this.options = builder().build();
 	}

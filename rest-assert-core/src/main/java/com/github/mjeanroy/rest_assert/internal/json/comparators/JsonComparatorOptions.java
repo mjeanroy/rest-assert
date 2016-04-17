@@ -10,9 +10,8 @@ import static java.util.Collections.unmodifiableSet;
 /**
  * Options that can be given to any
  * json comparator implementations.
- * <p/>
- * Use {@link Builder} to
- * create new options instance.
+ *
+ * Use {@link Builder} to create new options instance.
  */
 public class JsonComparatorOptions {
 
@@ -58,13 +57,9 @@ public class JsonComparatorOptions {
 			this.ignoringKeys = new LinkedHashSet<>();
 		}
 
-		public Builder ignoreKey(String key) {
+		public Builder ignoreKeys(String key, String... other) {
 			ignoringKeys.add(key);
-			return this;
-		}
-
-		public Builder ignoreKeys(String[] keys) {
-			addAll(ignoringKeys, keys);
+			addAll(ignoringKeys, other);
 			return this;
 		}
 

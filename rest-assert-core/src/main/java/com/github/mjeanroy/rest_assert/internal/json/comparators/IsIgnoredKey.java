@@ -22,20 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.error.json;
+package com.github.mjeanroy.rest_assert.internal.json.comparators;
 
-import org.junit.Test;
+import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
+import com.github.mjeanroy.rest_assert.utils.Predicate;
 
-import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Set;
 
-public class ShouldBeAnArrayTest {
+/**
+ * Predicate that check if error entry name is in a set
+ * of ignoring keys.
+ */
+class IsIgnoredKey implements Predicate<RestAssertJsonError> {
 
-	@Test
-	public void it_should_format_error_message() {
-		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
-		assertThat(shouldBeAnArray).isNotNull();
-		assertThat(shouldBeAnArray.toString()).isEqualTo("Expecting json to be an array but was an object");
-		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
+	/**
+	 * Create new predicate.
+	 *
+	 * @param ignoringKeys Keys to check.
+	 * @return Predicate.
+	 */
+	static IsIgnoredKey isIgnored(Set<String> ignoringKeys) {
+		return new IsIgnoredKey(ignoringKeys);
+	}
+
+	/**
+	 * Keys to check.
+	 */
+	private final Set<String> ignoringKeys;
+
+	// Use static factory
+	private IsIgnoredKey(Set<String> ignoringKeys) {
+		this.ignoringKeys = ignoringKeys;
+	}
+
+	@Override
+	public boolean apply(RestAssertJsonError input) {
+		return !ignoringKeys.contains(input.entryName());
 	}
 }
