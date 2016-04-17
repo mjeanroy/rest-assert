@@ -61,7 +61,7 @@ public class CookieAssert_assertIsNotSecured_Test extends AbstractApacheHttpCook
 		return new Object[0];
 	}
 
-	protected Cookie cookie(boolean secured) {
+	private Cookie cookie(boolean secured) {
 		return new ApacheHttpCookieMockBuilder()
 			.setSecure(secured)
 			.build();

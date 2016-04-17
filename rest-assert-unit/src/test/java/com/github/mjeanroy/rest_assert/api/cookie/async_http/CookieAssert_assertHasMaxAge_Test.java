@@ -63,7 +63,7 @@ public class CookieAssert_assertHasMaxAge_Test extends AbstractAsyncHttpCookieTe
 		};
 	}
 
-	protected Cookie cookie(long maxAge) {
+	private Cookie cookie(long maxAge) {
 		return new AsyncHttpCookieMockBuilder()
 				.setMaxAge(maxAge)
 				.build();

@@ -61,7 +61,7 @@ public class CookieAssert_assertIsNotHttpOnly_Test extends AbstractCoreCookieTes
 		return new Object[0];
 	}
 
-	protected Cookie cookie(boolean httpOnly) {
+	private Cookie cookie(boolean httpOnly) {
 		return new CookieMockBuilder()
 			.setHttpOnly(httpOnly)
 			.build();

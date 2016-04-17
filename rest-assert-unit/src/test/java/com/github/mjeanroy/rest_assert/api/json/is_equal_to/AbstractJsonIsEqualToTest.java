@@ -72,7 +72,7 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 		});
 	}
 
-	protected String actual() {
+	String actual() {
 		return jsonSuccess();
 	}
 

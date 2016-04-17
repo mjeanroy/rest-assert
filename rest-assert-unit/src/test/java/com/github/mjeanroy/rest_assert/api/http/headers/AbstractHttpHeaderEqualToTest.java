@@ -206,7 +206,7 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpRespo
 
 	protected abstract Header getHeader();
 
-	protected String failValue() {
+	String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 

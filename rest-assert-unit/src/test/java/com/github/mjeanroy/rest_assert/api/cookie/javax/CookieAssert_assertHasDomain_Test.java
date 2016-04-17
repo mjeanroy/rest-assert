@@ -68,7 +68,7 @@ public class CookieAssert_assertHasDomain_Test extends AbstractJavaxCookieTest {
 		};
 	}
 
-	protected Cookie cookie(String domain) {
+	private Cookie cookie(String domain) {
 		return new JavaxCookieMockBuilder()
 				.setDomain(domain)
 				.build();

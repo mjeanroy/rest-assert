@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.api;
 
-import com.github.mjeanroy.rest_assert.error.RestAssertError;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
 import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
@@ -39,11 +38,7 @@ public final class AssertUtil {
 
 	public static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
-			fail(message, result.getError());
+			throw new AssertionError(firstNonNull(message, result.getError().buildMessage()));
 		}
-	}
-
-	public static void fail(String message1, RestAssertError message2) {
-		throw new AssertionError(firstNonNull(message1, message2.buildMessage()));
 	}
 }

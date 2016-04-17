@@ -67,7 +67,7 @@ public class CookieAssert_assertHasDomain_Test extends AbstractAsyncHttpCookieTe
 		};
 	}
 
-	protected Cookie cookie(String domain) {
+	private Cookie cookie(String domain) {
 		return new AsyncHttpCookieMockBuilder()
 				.setDomain(domain)
 				.build();

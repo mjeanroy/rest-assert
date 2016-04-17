@@ -62,7 +62,7 @@ public class CookieAssert_assertIsNotSecured_Test extends AbstractJavaxCookieTes
 		return new Object[0];
 	}
 
-	protected Cookie cookie(boolean secured) {
+	private Cookie cookie(boolean secured) {
 		return new JavaxCookieMockBuilder()
 			.setSecured(secured)
 			.build();

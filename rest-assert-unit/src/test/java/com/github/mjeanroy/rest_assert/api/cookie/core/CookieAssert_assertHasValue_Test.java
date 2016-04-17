@@ -67,7 +67,7 @@ public class CookieAssert_assertHasValue_Test extends AbstractCoreCookieTest {
 		};
 	}
 
-	protected Cookie cookie(String value) {
+	private Cookie cookie(String value) {
 		return new CookieMockBuilder()
 			.setValue(value)
 			.build();

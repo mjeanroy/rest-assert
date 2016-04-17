@@ -72,11 +72,11 @@ public abstract class AbstractJsonIsEqualToIgnoringTest<T> extends AbstractAsser
 		});
 	}
 
-	protected String actual() {
+	String actual() {
 		return jsonSuccess();
 	}
 
-	protected List<String> ignoringKeys() {
+	List<String> ignoringKeys() {
 		return asList("str", "nb", "bool");
 	}
 

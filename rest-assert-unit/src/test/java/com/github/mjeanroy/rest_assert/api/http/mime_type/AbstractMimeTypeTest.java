@@ -211,7 +211,7 @@ public abstract class AbstractMimeTypeTest extends AbstractHttpResponseAssertTes
 
 	protected abstract String getMimeType();
 
-	protected Header getHeader() {
+	private Header getHeader() {
 		return header("Content-Type", getMimeType() + ";charset=UTF-8");
 	}
 

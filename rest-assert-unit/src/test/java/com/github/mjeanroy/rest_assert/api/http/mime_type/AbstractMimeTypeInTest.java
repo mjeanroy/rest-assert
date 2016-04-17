@@ -231,7 +231,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractHttpResponseAssertT
 
 	protected abstract List<String> getMimeTypes();
 
-	protected List<Header> getHeaders() {
+	private List<Header> getHeaders() {
 		return map(getMimeTypes(), new Mapper<String, Header>() {
 			@Override
 			public Header apply(String input) {
