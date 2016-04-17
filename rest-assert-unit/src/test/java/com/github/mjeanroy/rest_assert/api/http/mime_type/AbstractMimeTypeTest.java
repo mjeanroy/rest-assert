@@ -24,26 +24,171 @@
 
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
-import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
+import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-import static java.lang.String.format;
+import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
-public abstract class AbstractMimeTypeTest<T> extends AbstractAssertTest<T> {
+public abstract class AbstractMimeTypeTest extends AbstractHttpResponseAssertTest {
+
+	private static final String CUSTOM_MESSAGE = "foo";
+
+	// == Core HTTP Response
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	public void core_it_should_pass_with_expected_mime_type() {
 		Header header = getHeader();
-		invoke(newResponse(header));
-		invoke("foo", newResponse(header));
+		invoke(newCoreHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(header));
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	public void core_it_should_fail_with_if_response_is_not_expected_mime_type() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newCoreHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void core_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(header));
+			}
+		});
+	}
+
+	// == Async HTTP Response
+
+	@Test
+	public void async_http_it_should_pass_with_expected_mime_type() {
+		Header header = getHeader();
+		invoke(newAsyncHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(header));
+	}
+
+	@Test
+	public void async_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newAsyncHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void async_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(header));
+			}
+		});
+	}
+
+	// == Ok HTTP Response
+
+	@Test
+	public void ok_http_it_should_pass_with_expected_mime_type() {
+		Header header = getHeader();
+		invoke(newOkHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newOkHttpResponse(header));
+	}
+
+	@Test
+	public void ok_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newOkHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void ok_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newOkHttpResponse(header));
+			}
+		});
+	}
+
+	// == Apache HTTP Response
+
+	@Test
+	public void apache_http_it_should_pass_with_expected_mime_type() {
+		Header header = getHeader();
+		invoke(newApacheHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(header));
+	}
+
+	@Test
+	public void apache_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newApacheHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void apache_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(header));
+			}
+		});
+	}
+
+	// == Google HTTP Response
+
+	@Test
+	public void google_http_it_should_pass_with_expected_mime_type() {
+		Header header = getHeader();
+		invoke(newGoogleHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(header));
+	}
+
+	@Test
+	public void google_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newGoogleHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void google_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(header));
+			}
+		});
+	}
+
+	private void doTest(String msg, final Invocation invocation) {
 		final Header expectedHeader = getHeader();
 
 		final String expectedMimeType = getMimeType();
@@ -54,40 +199,61 @@ public abstract class AbstractMimeTypeTest<T> extends AbstractAssertTest<T> {
 		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
 		final Header header = header(expectedName, actualValue);
 
-		final String message = format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
+		final String message = firstNonNull(msg, buildErrorMessage(expectedMimeType, actualMimeType));
 
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(newResponse(header));
+				invocation.invokeTest(header);
 			}
 		});
 	}
-
-	@Test
-	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		final Header expectedHeader = getHeader();
-
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue.replace(getMimeType(), getMimeType() + "foo");
-		final Header header = header(expectedName, actualValue);
-
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invoke(message, newResponse(header));
-			}
-		});
-	}
-
-	protected abstract T newResponse(Header header);
 
 	protected abstract String getMimeType();
 
 	protected Header getHeader() {
 		return header("Content-Type", getMimeType() + ";charset=UTF-8");
+	}
+
+	private String buildErrorMessage(String expectedMimeType, String actualMimeType) {
+		return String.format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
+	}
+
+	// == Create target HTTP Response
+
+	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Header header) {
+		return new HttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private com.ning.http.client.Response newAsyncHttpResponse(Header header) {
+		return new AsyncHttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private okhttp3.Response newOkHttpResponse(Header header) {
+		return new OkHttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private org.apache.http.HttpResponse newApacheHttpResponse(Header header) {
+		return new ApacheHttpResponseMockBuilder()
+			.addHeader(header.getName(), header.getValue())
+			.build();
+	}
+
+	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(Header header) {
+		return new GoogleHttpResponseMockBuilder()
+			.setHeaders(new GoogleHttpHeadersMockBuilder()
+				.addHeader(header.getName(), header.getValue())
+				.build())
+			.build();
+	}
+
+	private interface Invocation {
+		void invokeTest(Header header);
 	}
 }
