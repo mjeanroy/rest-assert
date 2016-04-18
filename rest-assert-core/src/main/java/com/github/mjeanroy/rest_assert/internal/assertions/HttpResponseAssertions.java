@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
 import com.github.mjeanroy.rest_assert.reflect.Param;
 
@@ -602,6 +603,28 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasXssProtection(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, X_XSS_PROTECTION);
+	}
+
+	/**
+	 * Check that http response contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @param xssProtection Expected X-XSS-Protection header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") String xssProtection) {
+		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION, xssProtection);
+	}
+
+	/**
+	 * Check that http response contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @param xssProtection Expected X-XSS-Protection header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
+		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION, xssProtection.toValue());
 	}
 
 	/**
