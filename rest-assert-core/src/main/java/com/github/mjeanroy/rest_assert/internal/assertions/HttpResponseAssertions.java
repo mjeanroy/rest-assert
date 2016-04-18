@@ -580,7 +580,18 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, "Cache-Control");
+		return hasHeader(httpResponse, CACHE_CONTROL);
+	}
+
+	/**
+	 * Check that http response contains Cache-Control header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param cacheControl Cache-Control value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") String cacheControl) {
+		return isHeaderEqualTo(httpResponse, CACHE_CONTROL, cacheControl);
 	}
 
 	/**
