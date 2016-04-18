@@ -595,6 +595,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasXssProtection(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, X_XSS_PROTECTION);
+	}
+
+	/**
 	 * Check that http response is "application/json".
 	 *
 	 * @param httpResponse Http response.

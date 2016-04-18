@@ -80,4 +80,10 @@ public final class StandardHttpHeader {
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 	 */
 	public static final String CACHE_CONTROL = "Cache-Control";
+
+	/**
+	 * X-XSS-Protection header name.
+	 * https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection
+	 */
+	public static final String X_XSS_PROTECTION = "X-XSS-Protection";
 }
