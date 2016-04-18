@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
+import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
@@ -625,6 +626,38 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
 		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION, xssProtection.toValue());
+	}
+
+	/**
+	 * Check that http response contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasContentTypeOptions(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, X_CONTENT_TYPE_OPTIONS);
+	}
+
+	/**
+	 * Check that http response contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @param contentTypeOptions Expected X-XSS-Protection header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") String contentTypeOptions) {
+		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions);
+	}
+
+	/**
+	 * Check that http response contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @param contentTypeOptions Expected X-XSS-Protection header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") ContentTypeOptions contentTypeOptions) {
+		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions.toValue());
 	}
 
 	/**

@@ -86,4 +86,10 @@ public final class StandardHttpHeader {
 	 * https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection
 	 */
 	public static final String X_XSS_PROTECTION = "X-XSS-Protection";
+
+	/**
+	 * X-Content-Type-Options header name.
+	 * https://fetch.spec.whatwg.org/#x-content-type-options-header
+	 */
+	public static final String X_CONTENT_TYPE_OPTIONS = "X-Content-Type-Options";
 }
