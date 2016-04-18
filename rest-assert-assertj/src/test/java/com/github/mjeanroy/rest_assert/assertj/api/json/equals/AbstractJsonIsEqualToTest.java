@@ -43,7 +43,7 @@ public abstract class AbstractJsonIsEqualToTest extends AbstractApiTest<Jsons, J
 		return new JsonAssert(actual());
 	}
 
-	protected String actual() {
+	String actual() {
 		return jsonSuccess();
 	}
 }

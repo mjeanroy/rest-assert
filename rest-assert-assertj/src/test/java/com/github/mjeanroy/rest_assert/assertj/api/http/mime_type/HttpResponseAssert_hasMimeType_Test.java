@@ -22,42 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.http.mime_type;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HttpResponseAssert_hasMimeType_Test extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
-	}
-
-	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
-	}
-
-	@Override
-	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
+	protected HttpResponseAssert invoke() {
+		return api.hasMimeType(getMimeType());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertHasMimeType(any(AssertionInfo.class), any(HttpResponse.class), eq(getMimeType()));
 	}
 
-	private Cookie actual() {
-		return new CookieMockBuilder().build();
+	@Override
+	protected String getMimeType() {
+		return "application/json";
 	}
 }

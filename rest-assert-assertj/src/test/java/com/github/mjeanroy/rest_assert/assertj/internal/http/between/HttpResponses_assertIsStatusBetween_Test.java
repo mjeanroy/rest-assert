@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,42 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.between;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HttpResponses_assertIsStatusBetween_Test extends AbstractHttpResponsesStatusBetweenTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	protected int start() {
+		return 400;
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	protected int end() {
+		return 599;
 	}
 
 	@Override
-	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
-	}
-
-	private Cookie actual() {
-		return new CookieMockBuilder().build();
+	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsStatusBetween(info, httpResponse, start(), end());
 	}
 }

@@ -58,7 +58,7 @@ public class JsonAssert_contains_iterable_Test extends AbstractApiTest<Jsons, Js
 		verify(assertions).assertContains(any(AssertionInfo.class), eq(actual()), eq(singleton("foo")));
 	}
 
-	protected String actual() {
+	private String actual() {
 		return jsonSuccess();
 	}
 }

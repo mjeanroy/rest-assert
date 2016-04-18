@@ -22,42 +22,42 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.http.charsets;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
+import java.nio.charset.Charset;
+
+import static java.lang.String.format;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HttpResponseAssert_hasCharset_Test extends AbstractHttpResponseTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	protected HttpResponseAssert createApi() {
+		String contentType = format("application/json;charset=%s", getCharset().displayName());
+		return new HttpResponseAssert(new HttpResponseMockBuilder()
+			.addHeader("Content-Type", contentType)
+			.build());
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
-	}
-
-	@Override
-	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
+	protected HttpResponseAssert invoke() {
+		return api.hasCharset(getCharset());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertHasCharset(any(AssertionInfo.class), any(HttpResponse.class), eq(getCharset()));
 	}
 
-	private Cookie actual() {
-		return new CookieMockBuilder().build();
+	private Charset getCharset() {
+		return Charset.defaultCharset();
 	}
 }

@@ -57,7 +57,7 @@ public class JsonAssert_contains_Test extends AbstractApiTest<Jsons, JsonAssert>
 		verify(assertions).assertContains(any(AssertionInfo.class), eq(actual()), eq("foo"));
 	}
 
-	protected String actual() {
+	private String actual() {
 		return jsonSuccess();
 	}
 }

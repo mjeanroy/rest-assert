@@ -24,15 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api.http.mime_type;
 
-import static org.mockito.Mockito.*;
-
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
-public class HttpResponseAssert_jsText_Test extends AbstractHttpResponseHeaderTest {
+public class HttpResponseAssert_jsText_Test extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
 	protected HttpResponseAssert invoke() {
@@ -42,5 +41,10 @@ public class HttpResponseAssert_jsText_Test extends AbstractHttpResponseHeaderTe
 	@Override
 	protected void verifyApiCall() {
 		verify(assertions).assertIsText(any(AssertionInfo.class), any(HttpResponse.class));
+	}
+
+	@Override
+	protected String getMimeType() {
+		return "text/plain";
 	}
 }

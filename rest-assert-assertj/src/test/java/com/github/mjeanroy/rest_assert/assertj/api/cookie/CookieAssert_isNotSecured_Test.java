@@ -57,7 +57,7 @@ public class CookieAssert_isNotSecured_Test extends AbstractApiTest<Cookies, Coo
 		verify(assertions).assertIsNotSecured(any(AssertionInfo.class), any(Cookie.class));
 	}
 
-	protected Cookie actual() {
+	private Cookie actual() {
 		return new CookieMockBuilder().build();
 	}
 }

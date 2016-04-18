@@ -22,42 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.http.out_of;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HttpResponseAssert_isStatusOutOf_Test extends AbstractHttpResponseStatusOutOfTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	protected int status() {
+		return 400;
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
-	}
-
-	@Override
-	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
+	protected HttpResponseAssert invoke() {
+		return api.isStatusOutOf(start(), end());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertIsStatusOutOf(any(AssertionInfo.class), any(HttpResponse.class), eq(start()), eq(end()));
 	}
 
-	private Cookie actual() {
-		return new CookieMockBuilder().build();
+	private int start() {
+		return 200;
+	}
+
+	private int end() {
+		return 299;
 	}
 }

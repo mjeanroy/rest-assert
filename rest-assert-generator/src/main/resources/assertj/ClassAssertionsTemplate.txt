@@ -49,7 +49,7 @@ public class {{class_name}} extends AbstractRestAssertions {
 	/**
 	 * Original assertions object, retrieved from core module.
 	 */
-	private {{core_class_name}} assertions = {{core_class_name}}.instance();
+	private final {{core_class_name}} assertions = {{core_class_name}}.instance();
 
 	// Private constructor to ensure class is a singleton
 	private {{class_name}}() {

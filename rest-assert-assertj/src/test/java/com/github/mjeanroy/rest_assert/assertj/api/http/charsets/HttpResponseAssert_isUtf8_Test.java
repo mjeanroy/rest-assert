@@ -44,15 +44,17 @@ public class HttpResponseAssert_isUtf8_Test extends AbstractHttpResponseTest {
 			.build());
 	}
 
-	protected String getCharset() {
-		return "UTF-8";
-	}
-
+	@Override
 	protected HttpResponseAssert invoke() {
 		return api.isUtf8();
 	}
 
+	@Override
 	protected void verifyApiCall() {
 		verify(assertions).assertIsUtf8(any(AssertionInfo.class), any(HttpResponse.class));
+	}
+
+	private String getCharset() {
+		return "UTF-8";
 	}
 }

@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
-import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public abstract class AbstractApiTest<T, U> {
 
@@ -63,7 +63,7 @@ public abstract class AbstractApiTest<T, U> {
 				.isSameAs(api);
 	}
 
-	protected void inject() throws Exception {
+	private void inject() throws Exception {
 		writeField(api, "assertions", assertions, true);
 	}
 

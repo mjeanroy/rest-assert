@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
 
@@ -40,7 +40,7 @@ public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpRespons
 			.build());
 	}
 
-	protected Header getHeader() {
+	Header getHeader() {
 		return header("foo", "bar");
 	}
 

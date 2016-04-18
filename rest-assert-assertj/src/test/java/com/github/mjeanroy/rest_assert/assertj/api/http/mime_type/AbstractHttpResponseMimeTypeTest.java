@@ -22,42 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.http.mime_type;
 
-import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpResponseTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	protected HttpResponseAssert createApi() {
+		return new HttpResponseAssert(new HttpResponseMockBuilder()
+			.addHeader(getHeader())
+			.build());
 	}
 
-	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	private Header getHeader() {
+		return header("Content-Type", getMimeType());
 	}
 
-	@Override
-	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
-	}
+	protected abstract HttpResponseAssert invoke();
 
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
-	}
+	protected abstract void verifyApiCall();
 
-	private Cookie actual() {
-		return new CookieMockBuilder().build();
-	}
+	protected abstract String getMimeType();
 }

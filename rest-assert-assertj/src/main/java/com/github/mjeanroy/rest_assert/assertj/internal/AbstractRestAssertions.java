@@ -40,9 +40,9 @@ public abstract class AbstractRestAssertions {
 	/**
 	 * Failures object.
 	 */
-	protected final Failures failures = Failures.instance();
+	private final Failures failures = Failures.instance();
 
-	protected void assertNotNull(AssertionInfo info, Object actual) {
+	void assertNotNull(AssertionInfo info, Object actual) {
 		Objects.instance().assertNotNull(info, actual);
 	}
 
@@ -54,7 +54,7 @@ public abstract class AbstractRestAssertions {
 	 * @param info Assertion info.
 	 * @param result Assertion result.
 	 */
-	protected void check(AssertionInfo info, AssertionResult result) {
+	void check(AssertionInfo info, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(info, result);
 		}
@@ -68,7 +68,7 @@ public abstract class AbstractRestAssertions {
 	 * @param info Assertion info.
 	 * @param result Assertion result.
 	 */
-	protected void fail(AssertionInfo info, AssertionResult result) {
+	private void fail(AssertionInfo info, AssertionResult result) {
 		RestAssertError error = result.getError();
 		throw failures.failure(info, message(error));
 	}
@@ -80,7 +80,7 @@ public abstract class AbstractRestAssertions {
 	 * @param error Error.
 	 * @return Assertj error message
 	 */
-	protected BasicErrorMessageFactory message(RestAssertError error) {
+	private BasicErrorMessageFactory message(RestAssertError error) {
 		return new BasicErrorMessageFactory(error.message(), error.args());
 	}
 }

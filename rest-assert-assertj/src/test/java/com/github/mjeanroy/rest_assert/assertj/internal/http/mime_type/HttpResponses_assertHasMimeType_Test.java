@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,25 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.mime_type;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 
-public class HttpResponseAssert_isContentTypeEqualTo_Test extends AbstractHttpResponseHeaderTest {
+public class HttpResponses_assertHasMimeType_Test extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
-		return api.isContentTypeEqualTo(getHeader().getValue());
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertHasMimeType(someInfo(), httpResponse, getMimeType());
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsContentTypeEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+	protected String getMimeType() {
+		return "text/css";
 	}
 }

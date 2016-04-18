@@ -42,7 +42,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 	@Test
 	public void should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				HttpResponse httpResponse = new HttpResponseMockBuilder()
 					.setStatus(i)
 					.build();

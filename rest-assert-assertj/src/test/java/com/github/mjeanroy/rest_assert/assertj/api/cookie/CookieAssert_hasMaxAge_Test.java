@@ -57,7 +57,7 @@ public class CookieAssert_hasMaxAge_Test extends AbstractApiTest<Cookies, Cookie
 		verify(assertions).assertHasMaxAge(any(AssertionInfo.class), any(Cookie.class), any(Integer.class));
 	}
 
-	protected Cookie actual() {
+	private Cookie actual() {
 		return new CookieMockBuilder().build();
 	}
 }

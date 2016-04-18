@@ -57,7 +57,7 @@ public class CookieAssert_hasDomain_Test extends AbstractApiTest<Cookies, Cookie
 		verify(assertions).assertHasDomain(any(AssertionInfo.class), any(Cookie.class), any(String.class));
 	}
 
-	protected Cookie actual() {
+	private Cookie actual() {
 		return new CookieMockBuilder().build();
 	}
 }

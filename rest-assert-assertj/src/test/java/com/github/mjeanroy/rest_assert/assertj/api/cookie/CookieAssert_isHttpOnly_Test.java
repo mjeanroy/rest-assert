@@ -57,7 +57,7 @@ public class CookieAssert_isHttpOnly_Test extends AbstractApiTest<Cookies, Cooki
 		verify(assertions).assertIsHttpOnly(any(AssertionInfo.class), any(Cookie.class));
 	}
 
-	protected Cookie actual() {
+	private Cookie actual() {
 		return new CookieMockBuilder().build();
 	}
 }

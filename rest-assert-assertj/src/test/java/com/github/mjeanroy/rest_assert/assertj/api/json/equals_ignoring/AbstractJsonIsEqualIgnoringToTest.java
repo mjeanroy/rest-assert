@@ -22,42 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.json.equals_ignoring;
 
 import com.github.mjeanroy.rest_assert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.rest_assert.assertj.api.CookieAssert;
-import com.github.mjeanroy.rest_assert.assertj.internal.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.rest_assert.assertj.api.JsonAssert;
+import com.github.mjeanroy.rest_assert.assertj.internal.Jsons;
 
-import static org.mockito.Mockito.any;
+import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public abstract class AbstractJsonIsEqualIgnoringToTest extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	protected Jsons createAssertions() {
+		return mock(Jsons.class);
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	protected JsonAssert createApi() {
+		return new JsonAssert(actual());
 	}
 
-	@Override
-	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
-	}
-
-	private Cookie actual() {
-		return new CookieMockBuilder().build();
+	String actual() {
+		return jsonSuccess();
 	}
 }

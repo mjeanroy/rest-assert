@@ -58,7 +58,7 @@ public class JsonAssert_contains_entries_Test extends AbstractApiTest<Jsons, Jso
 		verify(assertions).assertContainsEntries(any(AssertionInfo.class), eq(actual()), eq(JsonAssertions.jsonEntry("id", 1)));
 	}
 
-	protected String actual() {
+	private String actual() {
 		return jsonSuccess();
 	}
 }

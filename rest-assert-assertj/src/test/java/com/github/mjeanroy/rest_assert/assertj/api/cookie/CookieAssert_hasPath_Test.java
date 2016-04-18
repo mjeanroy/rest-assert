@@ -57,7 +57,7 @@ public class CookieAssert_hasPath_Test extends AbstractApiTest<Cookies, CookieAs
 		verify(assertions).assertHasPath(any(AssertionInfo.class), any(Cookie.class), any(String.class));
 	}
 
-	protected Cookie actual() {
+	private Cookie actual() {
 		return new CookieMockBuilder().build();
 	}
 }
