@@ -32,7 +32,7 @@ import static com.github.mjeanroy.rest_assert.api.AssertUtil.check;
  */
 public final class {{class_name}} {
 
-	private static {{core_class_name}} assertions = {{core_class_name}}.instance();
+	private static final {{core_class_name}} assertions = {{core_class_name}}.instance();
 
 	// Private constructor to ensure no instantiation
 	private {{class_name}}() {
