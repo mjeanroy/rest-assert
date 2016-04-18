@@ -46,7 +46,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	@Test
 	public void it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				invoke(newCoreHttpResponse(i));
 				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(i));
 			}
@@ -78,7 +78,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	@Test
 	public void async_http_it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				invoke(newAsyncHttpResponse(i));
 				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(i));
 			}
@@ -110,7 +110,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	@Test
 	public void ok_http_it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				invoke(newOkHttpResponse(i));
 				invoke(CUSTOM_MESSAGE, newOkHttpResponse(i));
 			}
@@ -142,7 +142,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	@Test
 	public void apache_http_it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				invoke(newApacheHttpResponse(i));
 				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(i));
 			}
@@ -174,7 +174,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	@Test
 	public void google_http_it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() && i > end()) {
+			if (i < start() || i > end()) {
 				invoke(newGoogleHttpResponse(i));
 				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(i));
 			}
