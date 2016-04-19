@@ -22,26 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
-
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+public class HttpResponses_assertIsCacheControlEqualTo_string_Test extends AbstractHttpResponsesHeaderEqualToTest {
 
 	@Override
-	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, getHeader().getValue());
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, VALUE);
+	protected Header getHeader() {
+		return header("Cache-Control", "no-cache");
 	}
 }

@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
@@ -36,11 +37,17 @@ public class HttpResponseAssert_isCacheControlEqualTo_Test extends AbstractHttpR
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isCacheControlEqualTo(getHeader().getValue());
+		return api.isCacheControlEqualTo(getValue());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsCacheControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+		verify(assertions).assertIsCacheControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
+	}
+
+	private CacheControl getValue() {
+		return new CacheControl.Builder()
+			.noCache(true)
+			.build();
 	}
 }

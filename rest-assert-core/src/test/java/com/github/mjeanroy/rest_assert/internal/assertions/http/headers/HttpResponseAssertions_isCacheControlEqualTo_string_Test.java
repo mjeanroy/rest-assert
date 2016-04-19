@@ -26,22 +26,19 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
-
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+public class HttpResponseAssertions_isCacheControlEqualTo_string_Test extends AbstractHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+		return header("Cache-Control", "max-age: 600");
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, VALUE);
+		return assertions.isCacheControlEqualTo(response, getHeader().getValue());
 	}
 }

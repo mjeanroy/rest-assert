@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
+import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
@@ -43,7 +43,7 @@ public class HttpResponseAssertions_isContentTypeOptionsEqualTo_Test extends Abs
 		return assertions.isContentTypeOptionsEqualTo(response, getValue());
 	}
 
-	private HttpHeaders.ContentTypeOptions getValue() {
-		return HttpHeaders.ContentTypeOptions.NO_SNIFF;
+	private ContentTypeOptions getValue() {
+		return ContentTypeOptions.NO_SNIFF;
 	}
 }

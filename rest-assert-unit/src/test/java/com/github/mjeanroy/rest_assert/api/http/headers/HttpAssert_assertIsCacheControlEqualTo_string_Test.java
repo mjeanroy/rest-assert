@@ -29,69 +29,68 @@ import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
-import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpAssert_assertIsFrameOptionsEqualTo_Test extends AbstractHttpHeaderEqualToTest {
+public class HttpAssert_assertIsCacheControlEqualTo_string_Test extends AbstractHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+	private static final String VALUE = "no-cache";
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", VALUE.value());
+		return header("Cache-Control", VALUE);
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		HttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
+		HttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		HttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
+		AsyncHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		AsyncHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		OkHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
+		OkHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		OkHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		OkHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(org.apache.http.HttpResponse actual) {
-		ApacheHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
+		ApacheHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, org.apache.http.HttpResponse actual) {
-		ApacheHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		ApacheHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(com.google.api.client.http.HttpResponse actual) {
-		GoogleHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
+		GoogleHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
-		GoogleHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		GoogleHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 }

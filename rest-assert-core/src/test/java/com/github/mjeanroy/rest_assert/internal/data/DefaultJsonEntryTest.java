@@ -22,10 +22,8 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.defaults;
+package com.github.mjeanroy.rest_assert.internal.data;
 
-import com.github.mjeanroy.rest_assert.internal.data.DefaultJsonEntry;
-import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

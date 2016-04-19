@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.internal.data;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+/**
+ * Header value that can be checked against string values.
+ */
+public interface HeaderValue {
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+	/**
+	 * Get header value (as it should appears in HTTP header).
+	 *
+	 * @return Header value.
+	 */
+	String value();
 
-public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
-
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
-
-	@Override
-	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
-	}
-
-	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, VALUE);
-	}
+	/**
+	 * Check that actual header value match this header value (in most cases,
+	 * a simple call to equals should be enough).
+	 *
+	 * @param actualValue Actual header value.
+	 * @return {@code true} if actual header value match, {@code false} otherwise.
+	 */
+	boolean match(String actualValue);
 }

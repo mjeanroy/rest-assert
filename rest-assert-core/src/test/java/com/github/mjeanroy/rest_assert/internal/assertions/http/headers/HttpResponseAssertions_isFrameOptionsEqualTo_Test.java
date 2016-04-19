@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.FrameOptions;
+import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;

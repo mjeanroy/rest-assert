@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,26 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.internal.data;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+/**
+ * Values of valid X-Content-Type-Options header.
+ */
+public enum ContentTypeOptions implements HeaderValue {
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+	/**
+	 * The only defined value, "nosniff", prevents Internet Explorer and Google Chrome
+	 * from MIME-sniffing a response away from the declared content-type.
+	 */
+	NO_SNIFF("nosniff");
 
-public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
+	private final String header;
 
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
-
-	@Override
-	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+	ContentTypeOptions(String header) {
+		this.header = header;
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, VALUE);
+	public String value() {
+		return header;
+	}
+
+	@Override
+	public boolean match(String actualValue) {
+		return header.equals(actualValue);
 	}
 }

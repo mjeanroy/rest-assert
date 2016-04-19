@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,26 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
 
-public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
-
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+public class HttpResponseAssert_isCacheControlEqualTo_string_Test extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+	protected HttpResponseAssert invoke() {
+		return api.isCacheControlEqualTo(getHeader().getValue());
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, VALUE);
+	protected void verifyApiCall() {
+		verify(assertions).assertIsCacheControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
 	}
 }

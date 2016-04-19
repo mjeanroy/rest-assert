@@ -24,9 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
+import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
+import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
+import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
+import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import java.nio.charset.Charset;
@@ -596,6 +600,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Cache-Control header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param cacheControl Cache-Control value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") CacheControl cacheControl) {
+		return isHeaderMatching(httpResponse, CACHE_CONTROL, cacheControl);
+	}
+
+	/**
 	 * Check that http response contains X-XSS-Protection header.
 	 *
 	 * @param httpResponse Http response.
@@ -623,7 +638,7 @@ public final class HttpResponseAssertions {
 	 * @param xssProtection Expected X-XSS-Protection header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") HttpHeaders.XssProtection xssProtection) {
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
 		return isHeaderMatching(httpResponse, X_XSS_PROTECTION, xssProtection);
 	}
 
@@ -655,7 +670,7 @@ public final class HttpResponseAssertions {
 	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") HttpHeaders.ContentTypeOptions contentTypeOptions) {
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") ContentTypeOptions contentTypeOptions) {
 		return isHeaderMatching(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions);
 	}
 

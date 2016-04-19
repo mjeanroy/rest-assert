@@ -29,7 +29,7 @@ import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
+import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
@@ -38,7 +38,7 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpAssert_assertIsContentTypeOptionsEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
-	private static final HttpHeaders.ContentTypeOptions VALUE = HttpHeaders.ContentTypeOptions.NO_SNIFF;
+	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
 	protected Header getHeader() {

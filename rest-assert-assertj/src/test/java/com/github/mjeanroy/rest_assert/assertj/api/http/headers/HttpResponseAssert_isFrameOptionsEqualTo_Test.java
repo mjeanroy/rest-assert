@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.FrameOptions;
+import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 

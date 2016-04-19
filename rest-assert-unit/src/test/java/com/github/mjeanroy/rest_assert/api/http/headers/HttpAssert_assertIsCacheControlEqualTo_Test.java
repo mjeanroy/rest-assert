@@ -29,6 +29,7 @@ import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
+import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
@@ -37,11 +38,13 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpAssert_assertIsCacheControlEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = "no-cache";
+	private static final CacheControl VALUE = new CacheControl.Builder()
+		.noCache(true)
+		.build();
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", VALUE);
+		return header("Cache-Control", VALUE.value());
 	}
 
 	@Override

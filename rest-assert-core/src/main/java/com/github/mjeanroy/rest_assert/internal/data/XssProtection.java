@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,26 +22,42 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.internal.data;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+/**
+ * Values of valid XSS protection header.
+ */
+public enum XssProtection implements HeaderValue {
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+	/**
+	 * Disables the XSS Protections offered by the user-agent.
+	 */
+	DISABLE("0"),
 
-public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
+	/**
+	 * Enables the XSS Protections.
+	 */
+	ENABLE("1"),
 
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+	/**
+	 * Enables XSS protections and instructs the user-agent to block the response in the
+	 * event that script has been inserted from user input, instead of sanitizing.
+	 */
+	ENABLE_BLOCK("1; mode=block");
 
-	@Override
-	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+	private final String header;
+
+	XssProtection(String header) {
+		this.header = header;
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, VALUE);
+	public String value() {
+		return header;
+	}
+
+	@Override
+	public boolean match(String actualValue) {
+		return header.equals(actualValue);
 	}
 }
