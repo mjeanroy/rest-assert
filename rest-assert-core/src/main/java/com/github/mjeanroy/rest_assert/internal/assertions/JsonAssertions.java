@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
 import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
-import com.github.mjeanroy.rest_assert.internal.data.defaults.DefaultJsonEntry;
+import com.github.mjeanroy.rest_assert.internal.data.DefaultJsonEntry;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions;

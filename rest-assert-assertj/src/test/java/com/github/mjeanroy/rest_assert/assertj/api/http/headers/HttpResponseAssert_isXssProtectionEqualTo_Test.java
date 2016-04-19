@@ -25,8 +25,8 @@
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.XssProtection;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.Mockito.any;

@@ -22,15 +22,15 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.defaults;
+package com.github.mjeanroy.rest_assert.internal.data;
 
 /**
  * List of standard http status.
  */
-public final class StandardHttpStatus {
+public final class HttpStatusCodes {
 
 	// Ensure non instantiation
-	private StandardHttpStatus() {
+	private HttpStatusCodes() {
 	}
 
 	// 2XX

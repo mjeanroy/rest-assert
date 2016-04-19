@@ -24,26 +24,25 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.XssProtection;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpResponses_assertIsXssProtectionEqualTo_Test extends AbstractHttpResponsesHeaderEqualToTest {
+public class HttpResponses_assertIsFrameOptionsEqualTo_string_Test extends AbstractHttpResponsesHeaderEqualToTest {
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, getValue());
+		httpResponses.assertIsFrameOptionsEqualTo(someInfo(), httpResponse, getValue());
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", getValue().value());
+		return header("X-Frame-Options", getValue());
 	}
 
-	private XssProtection getValue() {
-		return XssProtection.ENABLE_BLOCK;
+	private String getValue() {
+		return "deny";
 	}
 }

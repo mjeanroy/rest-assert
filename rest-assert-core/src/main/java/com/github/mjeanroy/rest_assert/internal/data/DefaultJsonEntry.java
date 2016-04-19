@@ -22,9 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.defaults;
-
-import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
+package com.github.mjeanroy.rest_assert.internal.data;
 
 import java.util.Objects;
 

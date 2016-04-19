@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,25 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
-/**
- * Values of valid X-Content-Type-Options header.
- */
-public enum ContentTypeOptions {
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-	/**
-	 * Disables the XSS Protections offered by the user-agent.
-	 */
-	NO_SNIFF("nosniff");
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-	private final String header;
+public class HttpResponses_assertHasFrameOptions_Test extends AbstractHttpResponsesHeaderTest {
 
-	private ContentTypeOptions(String header) {
-		this.header = header;
+	@Override
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertHasFrameOptions(someInfo(), httpResponse);
 	}
 
-	public String toValue() {
-		return header;
+	@Override
+	protected Header getHeader() {
+		return header("X-Frame-Options", "deny");
 	}
 }

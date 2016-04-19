@@ -25,25 +25,58 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class HttpResponseAssertions_isContentTypeOptionsEqualTo_Test extends AbstractHttpHeaderEqualToTest {
+public class HttpResponseAssertions_isFrameOptionsEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", getValue().value());
+		return header(getName(), getValue().value());
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isContentTypeOptionsEqualTo(response, getValue());
+		return assertions.isFrameOptionsEqualTo(response, getValue());
 	}
 
-	private HttpHeaders.ContentTypeOptions getValue() {
-		return HttpHeaders.ContentTypeOptions.NO_SNIFF;
+	@Test
+	public void it_should_check_that_allow_from_value_match() {
+		HttpResponse httpResponse = new HttpResponseMockBuilder()
+			.addHeader(getName(), "allow-from https://www.google.com")
+			.build();
+
+		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, FrameOptions.ALLOW_FROM);
+
+		assertThat(r).isNotNull();
+		assertThat(r.isSuccess()).isTrue();
+		assertThat(r.isFailure()).isFalse();
+	}
+
+	@Test
+	public void it_should_check_that_allow_from_value_does_not_match() {
+		HttpResponse httpResponse = new HttpResponseMockBuilder()
+			.addHeader(getName(), "deny")
+			.build();
+
+		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, FrameOptions.ALLOW_FROM);
+
+		assertThat(r).isNotNull();
+		assertThat(r.isSuccess()).isFalse();
+		assertThat(r.isFailure()).isTrue();
+	}
+
+	private String getName() {
+		return "X-Frame-Options";
+	}
+
+	private FrameOptions getValue() {
+		return FrameOptions.SAME_ORIGIN;
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,36 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-/**
- * Values of valid XSS protection header.
- */
-public enum  XssProtection {
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-	/**
-	 * Disables the XSS Protections offered by the user-agent.
-	 */
-	DISABLE("0"),
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-	/**
-	 * Enables the XSS Protections.
-	 */
-	ENABLE("1"),
+public class HttpResponseAssertions_hasFrameOptions_Test extends AbstractHttpHeaderTest {
 
-	/**
-	 * Enables XSS protections and instructs the user-agent to block the response in the
-	 * event that script has been inserted from user input, instead of sanitizing.
-	 */
-	ENABLE_BLOCK("1; mode=block");
-
-	private final String header;
-
-	private XssProtection(String header) {
-		this.header = header;
+	@Override
+	protected Header getHeader() {
+		return header("X-Frame-Options", "deny");
 	}
 
-	public String toValue() {
-		return header;
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.hasFrameOptions(response);
 	}
 }

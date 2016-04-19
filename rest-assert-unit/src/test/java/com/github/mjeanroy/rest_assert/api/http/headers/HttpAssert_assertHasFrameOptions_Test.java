@@ -29,69 +29,66 @@ import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpAssert_assertIsXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
-
-	private static final HttpHeaders.XssProtection VALUE = HttpHeaders.XssProtection.ENABLE_BLOCK;
+public class HttpAssert_assertHasFrameOptions_Test extends AbstractHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+		return header("X-Frame-Options", "deny");
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		HttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
+		HttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+		HttpAssert.assertHasFrameOptions(message, actual);
 	}
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
+		AsyncHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+		AsyncHttpAssert.assertHasFrameOptions(message, actual);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		OkHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
+		OkHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		OkHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+		OkHttpAssert.assertHasFrameOptions(message, actual);
 	}
 
 	@Override
 	protected void invoke(org.apache.http.HttpResponse actual) {
-		ApacheHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
+		ApacheHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
 	protected void invoke(String message, org.apache.http.HttpResponse actual) {
-		ApacheHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+		ApacheHttpAssert.assertHasFrameOptions(message, actual);
 	}
 
 	@Override
 	protected void invoke(com.google.api.client.http.HttpResponse actual) {
-		GoogleHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
+		GoogleHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
-		GoogleHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+		GoogleHttpAssert.assertHasFrameOptions(message, actual);
 	}
 }

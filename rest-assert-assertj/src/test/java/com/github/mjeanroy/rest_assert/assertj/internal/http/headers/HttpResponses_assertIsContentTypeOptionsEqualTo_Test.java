@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
@@ -40,7 +40,7 @@ public class HttpResponses_assertIsContentTypeOptionsEqualTo_Test extends Abstra
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", getValue().toValue());
+		return header("X-Content-Type-Options", getValue().value());
 	}
 
 	private ContentTypeOptions getValue() {

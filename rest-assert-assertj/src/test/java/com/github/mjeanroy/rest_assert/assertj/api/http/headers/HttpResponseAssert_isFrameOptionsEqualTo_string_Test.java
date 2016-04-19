@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,28 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.XssProtection;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
 
-public class HttpResponses_assertIsXssProtectionEqualTo_Test extends AbstractHttpResponsesHeaderEqualToTest {
+public class HttpResponseAssert_isFrameOptionsEqualTo_string_Test extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, getValue());
+	protected HttpResponseAssert invoke() {
+		return api.isFrameOptionsEqualTo(getValue());
 	}
 
 	@Override
-	protected Header getHeader() {
-		return header("X-XSS-Protection", getValue().value());
+	protected void verifyApiCall() {
+		verify(assertions).assertIsFrameOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
 	}
 
-	private XssProtection getValue() {
-		return XssProtection.ENABLE_BLOCK;
+	private String getValue() {
+		return getHeader().getValue();
 	}
 }

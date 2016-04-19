@@ -25,19 +25,19 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+	private static final HttpHeaders.XssProtection VALUE = HttpHeaders.XssProtection.ENABLE_BLOCK;
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.toValue());
+		return header("X-XSS-Protection", VALUE.value());
 	}
 
 	@Override

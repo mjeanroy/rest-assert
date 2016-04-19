@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data.defaults;
+package com.github.mjeanroy.rest_assert.internal.data;
 
 /**
  * List of standards mime types.
@@ -33,10 +33,10 @@ package com.github.mjeanroy.rest_assert.internal.data.defaults;
  * List of standard mime types:
  * http://www.iana.org/assignments/media-types/media-types.xhtml
  */
-public final class StandardMimeType {
+public final class MimeTypes {
 
 	// Ensure non instantiation
-	private StandardMimeType() {
+	private MimeTypes() {
 	}
 
 	/**

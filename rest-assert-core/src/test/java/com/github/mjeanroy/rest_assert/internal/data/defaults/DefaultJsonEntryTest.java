@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.defaults;
 
+import com.github.mjeanroy.rest_assert.internal.data.DefaultJsonEntry;
 import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
 import org.junit.Test;
 

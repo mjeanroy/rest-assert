@@ -22,28 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.internal.http.headers;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.XssProtection;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpResponses_assertIsXssProtectionEqualTo_Test extends AbstractHttpResponsesHeaderEqualToTest {
-
-	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, getValue());
-	}
+public class HttpResponseAssertions_isFrameOptionsEqualTo_string_Test extends AbstractHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", getValue().value());
+		return header("X-Frame-Options", getValue());
 	}
 
-	private XssProtection getValue() {
-		return XssProtection.ENABLE_BLOCK;
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isFrameOptionsEqualTo(response, getValue());
+	}
+
+	private String getValue() {
+		return "deny";
 	}
 }

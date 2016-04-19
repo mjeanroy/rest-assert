@@ -149,7 +149,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 
 				Annotation[] parameterAnnotations = annotations[i];
 				Param param = find(parameterAnnotations, Param.class);
-				if (param == null || param.value() == null || param.value().trim().isEmpty()) {
+				if (param == null || param.value().trim().isEmpty()) {
 					throw new IllegalArgumentException("Add @Param annotation to additional parameters of method " + coreMethodName);
 				}
 
@@ -169,7 +169,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 					}
 				}
 
-				args.add(new Arg(name, genericType, param.value(), i));
+				args.add(new Arg(name.replace("$", "."), genericType, param.value(), i));
 			}
 		} else {
 			args = emptyList();

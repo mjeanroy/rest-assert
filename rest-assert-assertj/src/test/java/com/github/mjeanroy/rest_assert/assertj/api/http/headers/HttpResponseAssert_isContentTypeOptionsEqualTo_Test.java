@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
@@ -45,7 +45,7 @@ public class HttpResponseAssert_isContentTypeOptionsEqualTo_Test extends Abstrac
 		verify(assertions).assertIsContentTypeOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
 	}
 
-	private ContentTypeOptions getValue() {
-		return ContentTypeOptions.NO_SNIFF;
+	private HttpHeaders.ContentTypeOptions getValue() {
+		return HttpHeaders.ContentTypeOptions.NO_SNIFF;
 	}
 }

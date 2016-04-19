@@ -24,10 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeaders;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
-import com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus;
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
 import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import java.nio.charset.Charset;
@@ -42,8 +41,8 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpHeader.*;
-import static com.github.mjeanroy.rest_assert.internal.data.defaults.StandardMimeType.*;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.*;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.*;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
 import static java.util.Arrays.asList;
@@ -74,23 +73,23 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that status code of http response is {@link com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus#OK}.
+	 * Check that status code of http response is {@link HttpStatusCodes#OK}.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isOk(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.OK);
+		return isStatusEqual(httpResponse, HttpStatusCodes.OK);
 	}
 
 	/**
-	 * Check that status code of http response is {@link com.github.mjeanroy.rest_assert.internal.data.defaults.StandardHttpStatus#CREATED}.
+	 * Check that status code of http response is {@link HttpStatusCodes#CREATED}.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCreated(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.CREATED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.CREATED);
 	}
 
 	/**
@@ -100,7 +99,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isAccepted(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.ACCEPTED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.ACCEPTED);
 	}
 
 	/**
@@ -110,7 +109,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNoContent(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.NO_CONTENT);
+		return isStatusEqual(httpResponse, HttpStatusCodes.NO_CONTENT);
 	}
 
 	/**
@@ -120,7 +119,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPartialContent(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.PARTIAL_CONTENT);
+		return isStatusEqual(httpResponse, HttpStatusCodes.PARTIAL_CONTENT);
 	}
 
 	/**
@@ -130,7 +129,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isResetContent(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.RESET_CONTENT);
+		return isStatusEqual(httpResponse, HttpStatusCodes.RESET_CONTENT);
 	}
 
 	/**
@@ -140,7 +139,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMovedPermanently(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.MOVED_PERMANENTLY);
+		return isStatusEqual(httpResponse, HttpStatusCodes.MOVED_PERMANENTLY);
 	}
 
 	/**
@@ -150,7 +149,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMovedTemporarily(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.MOVED_TEMPORARILY);
+		return isStatusEqual(httpResponse, HttpStatusCodes.MOVED_TEMPORARILY);
 	}
 
 	/**
@@ -160,7 +159,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotModified(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_MODIFIED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_MODIFIED);
 	}
 
 	/**
@@ -170,7 +169,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUnauthorized(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.UNAUTHORIZED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.UNAUTHORIZED);
 	}
 
 	/**
@@ -180,7 +179,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isForbidden(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.FORBIDDEN);
+		return isStatusEqual(httpResponse, HttpStatusCodes.FORBIDDEN);
 	}
 
 	/**
@@ -190,7 +189,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isBadRequest(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.BAD_REQUEST);
+		return isStatusEqual(httpResponse, HttpStatusCodes.BAD_REQUEST);
 	}
 
 	/**
@@ -200,7 +199,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotAcceptable(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_ACCEPTABLE);
+		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_ACCEPTABLE);
 	}
 
 	/**
@@ -210,7 +209,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotFound(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_FOUND);
+		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_FOUND);
 	}
 
 	/**
@@ -220,7 +219,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isInternalServerError(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.INTERNAL_SERVER_ERROR);
+		return isStatusEqual(httpResponse, HttpStatusCodes.INTERNAL_SERVER_ERROR);
 	}
 
 	/**
@@ -230,7 +229,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPreConditionFailed(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.PRE_CONDITION_FAILED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.PRE_CONDITION_FAILED);
 	}
 
 	/**
@@ -240,7 +239,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMethodNotAllowed(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.METHOD_NOT_ALLOWED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.METHOD_NOT_ALLOWED);
 	}
 
 	/**
@@ -250,7 +249,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isConflict(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.CONFLICT);
+		return isStatusEqual(httpResponse, HttpStatusCodes.CONFLICT);
 	}
 
 	/**
@@ -260,7 +259,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUnsupportedMediaType(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.UNSUPPORTED_MEDIA_TYPE);
+		return isStatusEqual(httpResponse, HttpStatusCodes.UNSUPPORTED_MEDIA_TYPE);
 	}
 
 	/**
@@ -270,7 +269,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotImplemented(HttpResponse httpResponse) {
-		return isStatusEqual(httpResponse, StandardHttpStatus.NOT_IMPLEMENTED);
+		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_IMPLEMENTED);
 	}
 
 	/**
@@ -624,12 +623,12 @@ public final class HttpResponseAssertions {
 	 * @param xssProtection Expected X-XSS-Protection header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
-		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION, xssProtection.toValue());
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") HttpHeaders.XssProtection xssProtection) {
+		return isHeaderMatching(httpResponse, X_XSS_PROTECTION, xssProtection);
 	}
 
 	/**
-	 * Check that http response contains X-XSS-Protection header.
+	 * Check that http response contains X-Content-Type-Options header.
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
@@ -639,10 +638,10 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains X-XSS-Protection header.
+	 * Check that http response contains X-Content-Type-Options header with expected value.
 	 *
 	 * @param httpResponse Http response.
-	 * @param contentTypeOptions Expected X-XSS-Protection header value.
+	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") String contentTypeOptions) {
@@ -650,14 +649,59 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains X-XSS-Protection header.
+	 * Check that http response contains X-Content-Type-Options header with expected value.
 	 *
 	 * @param httpResponse Http response.
-	 * @param contentTypeOptions Expected X-XSS-Protection header value.
+	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") ContentTypeOptions contentTypeOptions) {
-		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions.toValue());
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") HttpHeaders.ContentTypeOptions contentTypeOptions) {
+		return isHeaderMatching(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions);
+	}
+
+	/**
+	 * Check that http response contains X-Frame-Options header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasFrameOptions(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, X_FRAME_OPTIONS);
+	}
+
+	/**
+	 * Check that http response contains X-Frame-Options header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param frameOptions Expected X-Frame-Options header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") String frameOptions) {
+		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS, frameOptions);
+	}
+
+	/**
+	 * Check that http response contains X-Frame-Options header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param frameOptions Expected X-Frame-Options header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") FrameOptions frameOptions) {
+		return isHeaderMatching(httpResponse, X_FRAME_OPTIONS, frameOptions);
+	}
+
+	private AssertionResult isHeaderMatching(HttpResponse httpResponse, String headerName, HeaderValue value) {
+		AssertionResult result = hasHeader(httpResponse, headerName);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		String actualValue = httpResponse.getHeader(headerName);
+		return value.match(actualValue) ?
+			success() :
+			failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValue));
+
 	}
 
 	/**
