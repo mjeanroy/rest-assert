@@ -82,6 +82,12 @@ public final class HttpHeaders {
 	public static final String CACHE_CONTROL = "Cache-Control";
 
 	/**
+	 * Pragma header name.
+	 * https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
+	 */
+	public static final String PRAGMA = "Pragma";
+
+	/**
 	 * X-XSS-Protection header name.
 	 * https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection
 	 */

@@ -579,6 +579,27 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Pragma header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasPragma(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, PRAGMA);
+	}
+
+	/**
+	 * Check that http response contains Pragma header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param pragma Pragma value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, @Param("pragma") String pragma) {
+		return isHeaderEqualTo(httpResponse, PRAGMA, pragma);
+	}
+
+	/**
 	 * Check that http response contains Cache-Control header.
 	 *
 	 * @param httpResponse Http response.
