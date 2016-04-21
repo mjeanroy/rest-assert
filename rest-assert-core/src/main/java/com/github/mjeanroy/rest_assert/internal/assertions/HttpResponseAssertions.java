@@ -48,6 +48,7 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveSingleHeader.
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CONTROL;
@@ -404,6 +405,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does contains ETag header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveETag(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ETAG.getName());
+	}
+
+	/**
 	 * Check that http response contains ETag header with
 	 * expected value.
 	 *
@@ -448,6 +459,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does not contains Content-Encoding header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveContentEncoding(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, CONTENT_ENCODING.getName());
+	}
+
+	/**
 	 * Check that http response contains Content-Disposition header.
 	 *
 	 * @param httpResponse Http response.
@@ -455,6 +476,16 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CONTENT_DISPOSITION.getName());
+	}
+
+	/**
+	 * Check that http response does contains Content-Disposition header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveContentDispostion(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, CONTENT_DISPOSITION.getName());
 	}
 
 	/**
@@ -515,6 +546,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does contains Location header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveLocation(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, LOCATION.getName());
+	}
+
+	/**
 	 * Check that http response contains Location header with
 	 * expected value.
 	 *
@@ -537,6 +578,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does contains Last-Modifier header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveLastModified(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, LAST_MODIFIED.getName());
+	}
+
+	/**
 	 * Check that http response contains Last-Modified header.
 	 *
 	 * @param httpResponse Http response.
@@ -544,6 +595,16 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasExpires(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, EXPIRES.getName());
+	}
+
+	/**
+	 * Check that http response does contains Expires header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveExpires(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, EXPIRES.getName());
 	}
 
 	/**
@@ -622,6 +683,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does contains Pragma header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHavePragma(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, PRAGMA.getName());
+	}
+
+	/**
 	 * Check that http response contains Pragma header with expected value.
 	 *
 	 * @param httpResponse Http response.
@@ -640,6 +711,16 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CACHE_CONTROL.getName());
+	}
+
+	/**
+	 * Check that http response does contains Cache-Control header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveCacheControl(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, CACHE_CONTROL.getName());
 	}
 
 	/**
@@ -675,6 +756,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does contains X-XSS-Protection header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveXssProtection(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, X_XSS_PROTECTION.getName());
+	}
+
+	/**
 	 * Check that http response contains X-XSS-Protection header.
 	 *
 	 * @param httpResponse Http response.
@@ -707,6 +798,16 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does contains X-Content-Type-Options header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveContentTypeOptions(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, X_CONTENT_TYPE_OPTIONS.getName());
+	}
+
+	/**
 	 * Check that http response contains X-Content-Type-Options header with expected value.
 	 *
 	 * @param httpResponse Http response.
@@ -736,6 +837,16 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasFrameOptions(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, X_FRAME_OPTIONS.getName());
+	}
+
+	/**
+	 * Check that http response does contains X-Frame-Options header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveFrameOptions(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, X_FRAME_OPTIONS.getName());
 	}
 
 	/**
@@ -888,6 +999,19 @@ public final class HttpResponseAssertions {
 		return httpResponse.hasHeader(headerName) ?
 				success() :
 				failure(shouldHaveHeader(headerName));
+	}
+
+	/**
+	 * Check that http response does not contains expected header.
+	 *
+	 * @param httpResponse Http response.
+	 * @param headerName   Header name.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNothaveHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
+		return httpResponse.hasHeader(headerName) ?
+			failure(shouldNotHaveHeader(headerName)) :
+			success();
 	}
 
 	/**

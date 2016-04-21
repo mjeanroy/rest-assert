@@ -22,29 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers.has_header;
+
+import static org.mockito.Mockito.*;
+
+import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
+import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-
-public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
+public class HttpResponseAssert_hasETag_Test extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
-			.addHeader(getHeader())
-			.build());
+	protected HttpResponseAssert invoke() {
+		return api.hasETag();
 	}
 
-	protected Header getHeader() {
-		return header("foo", "bar");
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertHasETag(any(AssertionInfo.class), any(HttpResponse.class));
 	}
-
-	protected abstract HttpResponseAssert invoke();
-
-	protected abstract void verifyApiCall();
 }

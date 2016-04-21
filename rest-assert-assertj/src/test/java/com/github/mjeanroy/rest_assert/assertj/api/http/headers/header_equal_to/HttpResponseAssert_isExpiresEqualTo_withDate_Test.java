@@ -22,29 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers.header_equal_to;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import java.util.Date;
 
-public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
+public class HttpResponseAssert_isExpiresEqualTo_withDate_Test extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
-			.addHeader(getHeader())
-			.build());
+	protected HttpResponseAssert invoke() {
+		Date date = mock(Date.class);
+		return api.isExpiresEqualTo(date);
 	}
 
-	protected Header getHeader() {
-		return header("foo", "bar");
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsExpiresEqualTo(any(AssertionInfo.class), any(HttpResponse.class), any(Date.class));
 	}
-
-	protected abstract HttpResponseAssert invoke();
-
-	protected abstract void verifyApiCall();
 }

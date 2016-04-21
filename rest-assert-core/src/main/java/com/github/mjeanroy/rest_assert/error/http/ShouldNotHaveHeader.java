@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,29 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+/**
+ * Error thrown when an http response should not contain
+ * specific header.
+ */
+public class ShouldNotHaveHeader extends AbstractError {
 
-public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
-
-	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
-			.addHeader(getHeader())
-			.build());
+	// Private constructor, use static factory instead
+	private ShouldNotHaveHeader(String message, Object... args) {
+		super(message, args);
 	}
 
-	protected Header getHeader() {
-		return header("foo", "bar");
+	/**
+	 * Build error.
+	 *
+	 * @param headerName Expected header name.
+	 * @return Error.
+	 */
+	public static ShouldNotHaveHeader shouldNotHaveHeader(String headerName) {
+		return new ShouldNotHaveHeader("Expecting response not to have header %s", headerName);
 	}
-
-	protected abstract HttpResponseAssert invoke();
-
-	protected abstract void verifyApiCall();
 }

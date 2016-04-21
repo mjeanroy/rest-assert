@@ -8,7 +8,7 @@
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following httpResponses:
+ * furnished to do so, subject to the following conditions:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,29 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.headers.header_equal_to;
 
-import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
+public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends AbstractHttpHeaderEqualToTest {
+
+	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
-			.addHeader(getHeader())
-			.build());
-	}
-
 	protected Header getHeader() {
-		return header("foo", "bar");
+		return header("X-XSS-Protection", VALUE.value());
 	}
 
-	protected abstract HttpResponseAssert invoke();
+	@Override
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isXssProtectionEqualTo(response, VALUE);
+	}
 
-	protected abstract void verifyApiCall();
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

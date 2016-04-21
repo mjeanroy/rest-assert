@@ -22,29 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.assertj.api.http.headers;
+package com.github.mjeanroy.rest_assert.assertj.api.http.headers.does_not_have_header;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
-public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpResponseTest {
+public class HttpResponseAssert_doesNotHaveHeader_Test extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
-			.addHeader(getHeader())
-			.build());
+	protected HttpResponseAssert invoke() {
+		return api.doesNothaveHeader("foo");
 	}
 
-	protected Header getHeader() {
-		return header("foo", "bar");
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertDoesNothaveHeader(any(AssertionInfo.class), any(HttpResponse.class), eq("foo"));
 	}
-
-	protected abstract HttpResponseAssert invoke();
-
-	protected abstract void verifyApiCall();
 }
