@@ -26,6 +26,9 @@ package com.github.mjeanroy.rest_assert.internal.data;
 
 /**
  * Values of valid X-Frame-Options header.
+ * Specification: https://tools.ietf.org/html/rfc7034
+ *
+ * Important: values are case-insensitive!
  */
 public enum FrameOptions implements HeaderValue {
 
@@ -33,7 +36,7 @@ public enum FrameOptions implements HeaderValue {
 	 * A browser receiving content with this header MUST NOT display
 	 * this content in any frame.
 	 */
-	DENY("deny"),
+	DENY("DENY"),
 
 	/**
 	 * A browser receiving content with this header MUST NOT display
@@ -44,7 +47,7 @@ public enum FrameOptions implements HeaderValue {
 	 * origin of the content and the frame have the same origin, this
 	 * MUST be treated as "DENY".
 	 */
-	SAME_ORIGIN("sameorigin"),
+	SAME_ORIGIN("SAMEORIGIN"),
 
 	/**
 	 * A browser receiving content with this header MUST NOT display
@@ -53,10 +56,10 @@ public enum FrameOptions implements HeaderValue {
 	 * the trusted origin, in some cases it may be necessary to use
 	 * content from other domains.
 	 */
-	ALLOW_FROM("allow-from") {
+	ALLOW_FROM("ALLOW-FROM") {
 		@Override
 		public boolean match(String actualValue) {
-			return actualValue.startsWith(value());
+			return actualValue.toLowerCase().startsWith(value().toLowerCase());
 		}
 	};
 
@@ -73,6 +76,6 @@ public enum FrameOptions implements HeaderValue {
 
 	@Override
 	public boolean match(String actualValue) {
-		return header.equals(actualValue);
+		return header.equalsIgnoreCase(actualValue);
 	}
 }
