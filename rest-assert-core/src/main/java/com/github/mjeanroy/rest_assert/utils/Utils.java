@@ -111,6 +111,25 @@ public final class Utils {
 	}
 
 	/**
+	 * Returns {@code true} if at least one element in the collection verify
+	 * a predicate.
+	 *
+	 * @param inputs Collection of inputs.
+	 * @param predicate Predicate to check.
+	 * @param <T> Type of elements in the collection.
+	 * @return {@code true} if at least one element in the collection verify the predicate, {@code false} otherwise.
+	 */
+	public static <T> boolean some(Iterable<T> inputs, Predicate<T> predicate) {
+		for (T input : inputs) {
+			if (predicate.apply(input)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	/**
 	 * Read file and return text content.
 	 *
 	 * @param file File.

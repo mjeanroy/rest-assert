@@ -32,9 +32,12 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
 import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
 import com.github.mjeanroy.rest_assert.reflect.Param;
+import com.github.mjeanroy.rest_assert.utils.Mapper;
+import com.github.mjeanroy.rest_assert.utils.Predicate;
 
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
@@ -45,10 +48,33 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.*;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.*;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CACHE_CONTROL;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CONTENT_DISPOSITION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CONTENT_ENCODING;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CONTENT_TYPE;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.EXPIRES;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.LAST_MODIFIED;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.LOCATION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.PRAGMA;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.X_XSS_PROTECTION;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSS;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSV;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.JSON;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.PDF;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_HTML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_PLAIN;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.XHTML;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
+import static com.github.mjeanroy.rest_assert.utils.Utils.map;
+import static com.github.mjeanroy.rest_assert.utils.Utils.some;
 import static java.util.Arrays.asList;
 
 /**
@@ -571,11 +597,17 @@ public final class HttpResponseAssertions {
 			return result;
 		}
 
-		String actualValue = httpResponse.getHeader(name);
-		Date actualDate = parseHttpDate(actualValue);
-		return actualDate.equals(expectedValue) ?
+		List<String> actualValues = httpResponse.getHeader(name);
+		List<Date> actualDates = map(actualValues, new Mapper<String, Date>() {
+			@Override
+			public Date apply(String input) {
+				return parseHttpDate(input);
+			}
+		});
+
+		return actualDates.contains(expectedValue) ?
 				success() :
-				failure(shouldHaveHeaderWithValue(name, formatHttpDate(expectedValue), formatHttpDate(actualDate)));
+				failure(shouldHaveHeaderWithValue(name, formatHttpDate(expectedValue), actualValues));
 	}
 
 	/**
@@ -727,14 +759,21 @@ public final class HttpResponseAssertions {
 		return isHeaderMatching(httpResponse, X_FRAME_OPTIONS, frameOptions);
 	}
 
-	private AssertionResult isHeaderMatching(HttpResponse httpResponse, String headerName, HeaderValue value) {
+	private AssertionResult isHeaderMatching(HttpResponse httpResponse, String headerName, final HeaderValue value) {
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
 			return result;
 		}
 
-		String actualValue = httpResponse.getHeader(headerName);
-		return value.match(actualValue) ?
+		List<String> actualValue = httpResponse.getHeader(headerName);
+		boolean found = some(actualValue, new Predicate<String>() {
+			@Override
+			public boolean apply(String input) {
+				return value.match(input);
+			}
+		});
+
+		return found ?
 			success() :
 			failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValue));
 
@@ -866,9 +905,15 @@ public final class HttpResponseAssertions {
 			return result;
 		}
 
-		String contentType = httpResponse.getHeader(headerName);
+		List<String> contentTypes = httpResponse.getHeader(headerName);
+		if (contentTypes.size() > 1) {
+			// If this happen, it is probably a bug in the response.
+
+		}
+
+		String contentType = contentTypes.get(0);
 		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
-		return actualMimeType.equals(expectedMimeType) ?
+		return expectedMimeType.equals(actualMimeType) ?
 				success() :
 				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 	}
@@ -898,7 +943,13 @@ public final class HttpResponseAssertions {
 			return result;
 		}
 
-		String contentType = httpResponse.getHeader(headerName);
+		List<String> contentTypes = httpResponse.getHeader(headerName);
+		if (contentTypes.size() > 1) {
+			// If this happen, then this is probably a bug.
+
+		}
+
+		String contentType = contentTypes.get(0);
 		String[] contentTypeParts = contentType.split(";");
 		if (contentTypeParts.length == 1) {
 			return failure(shouldHaveCharset());
@@ -924,7 +975,13 @@ public final class HttpResponseAssertions {
 			return result;
 		}
 
-		String contentType = httpResponse.getHeader(headerName);
+		List<String> contentTypes = httpResponse.getHeader(headerName);
+		if (contentTypes.size() > 1) {
+			// Probably a bug in the response, fail fast.
+
+		}
+
+		String contentType = contentTypes.get(0);
 		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 
 		boolean found = false;
@@ -955,10 +1012,10 @@ public final class HttpResponseAssertions {
 			return result;
 		}
 
-		String actualValue = httpResponse.getHeader(headerName);
-		return actualValue.equals(headerValue) ?
+		List<String> actualValues = httpResponse.getHeader(headerName);
+		return actualValues.contains(headerValue) ?
 				success() :
-				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValue));
+				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValues));
 	}
 
 	/**

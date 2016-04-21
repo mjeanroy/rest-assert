@@ -36,12 +36,15 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
+import static com.github.mjeanroy.rest_assert.utils.Utils.some;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -163,5 +166,46 @@ public class UtilsTest {
 	public void it_should_join_strings() {
 		assertThat(Utils.join(asList("foo", "bar"), " ")).isEqualTo("foo bar");
 		assertThat(Utils.join(singletonList("foo"), " ")).isEqualTo("foo");
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void it_should_return_true_if_some_find_a_match() {
+		Predicate<String> predicate = mock(Predicate.class);
+		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
+			@Override
+			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+				return invocation.getArguments()[0].equals("foo");
+			}
+		});
+
+		List<String> inputs = asList("quix", "foo", "bar");
+
+		boolean found = some(inputs, predicate);
+
+		assertThat(found).isTrue();
+		verify(predicate).apply("quix");
+		verify(predicate).apply("foo");
+		verify(predicate, never()).apply("bar");
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void it_should_return_false_if_some_does_not_find_a_match() {
+		Predicate<String> predicate = mock(Predicate.class);
+		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
+			@Override
+			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+				return invocation.getArguments()[0].equals("foo");
+			}
+		});
+
+		List<String> inputs = asList("quix", "bar");
+
+		boolean found = some(inputs, predicate);
+
+		assertThat(found).isFalse();
+		verify(predicate).apply("quix");
+		verify(predicate).apply("bar");
 	}
 }

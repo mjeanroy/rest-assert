@@ -28,6 +28,8 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.ning.http.client.Response;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Implementation of {@link HttpResponse}
@@ -62,13 +64,13 @@ public class AsyncHttpResponse extends AbstractHttpResponse implements HttpRespo
 	}
 
 	@Override
-	public boolean hasHeader(String name) {
-		return response.getHeaders().containsKey(name);
-	}
+	public List<String> getHeader(String name) {
+		List<String> headers = response.getHeaders(name);
+		if (headers.isEmpty()) {
+			return Collections.emptyList();
+		}
 
-	@Override
-	public String getHeader(String name) {
-		return hasHeader(name) ? response.getHeader(name) : null;
+		return Collections.unmodifiableList(headers);
 	}
 
 	@Override

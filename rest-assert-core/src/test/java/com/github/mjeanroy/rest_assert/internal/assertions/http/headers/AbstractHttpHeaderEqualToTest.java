@@ -53,6 +53,14 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	}
 
 	@Test
+	public void it_should_pass_with_expected_header_and_list_of_values() {
+		Header h1 = getHeader();
+		Header h2 = header(h1.getName(), h1.getValue() + "foobar");
+		AssertionResult result = invoke(newResponse(h1, h2));
+		checkSuccess(result);
+	}
+
+	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
 		final Header expectedHeader = getHeader();
 
@@ -75,10 +83,15 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", getHeader().getName());
 	}
 
-	private HttpResponse newResponse(Header header) {
-		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+	private HttpResponse newResponse(Header header, Header... other) {
+		HttpResponseMockBuilder builder = new HttpResponseMockBuilder()
+			.addHeader(header);
+
+		for (Header o : other) {
+			builder.addHeader(o.getName(), o.getValue());
+		}
+
+		return builder.build();
 	}
 
 	protected abstract Header getHeader();

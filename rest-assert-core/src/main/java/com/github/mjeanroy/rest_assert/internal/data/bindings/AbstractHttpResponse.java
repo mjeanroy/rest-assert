@@ -49,6 +49,11 @@ abstract class AbstractHttpResponse implements HttpResponse {
 		}
 	}
 
+	@Override
+	public boolean hasHeader(String name) {
+		return !getHeader(name).isEmpty();
+	}
+
 	/**
 	 * Get the content body as a string.
 	 * If an {@link java.io.IOException} is thrown, it will be catched

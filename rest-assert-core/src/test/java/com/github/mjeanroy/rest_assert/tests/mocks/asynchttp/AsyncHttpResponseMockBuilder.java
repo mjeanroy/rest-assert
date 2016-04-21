@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Matchers.anyString;
@@ -121,19 +122,22 @@ public class AsyncHttpResponseMockBuilder {
 			throw new AssertionError(ex);
 		}
 
-		when(rsp.getHeaders()).thenAnswer(new Answer<FluentCaseInsensitiveStringsMap>() {
-			@Override
-			public FluentCaseInsensitiveStringsMap answer(InvocationOnMock invocation) {
-				return new FluentCaseInsensitiveStringsMap(headers);
-			}
-		});
+		final FluentCaseInsensitiveStringsMap map = new FluentCaseInsensitiveStringsMap(headers);
+		when(rsp.getHeaders()).thenReturn(map);
 
 		when(rsp.getHeader(anyString())).thenAnswer(new Answer<String>() {
 			@Override
 			public String answer(InvocationOnMock invocation) {
 				String headerName = (String) invocation.getArguments()[0];
-				FluentCaseInsensitiveStringsMap map = new FluentCaseInsensitiveStringsMap(headers);
 				return map.containsKey(headerName) ? map.getFirstValue(headerName) : null;
+			}
+		});
+
+		when(rsp.getHeaders(anyString())).thenAnswer(new Answer<List<String>>() {
+			@Override
+			public List<String> answer(InvocationOnMock invocation) {
+				String headerName = (String) invocation.getArguments()[0];
+				return map.get(headerName);
 			}
 		});
 

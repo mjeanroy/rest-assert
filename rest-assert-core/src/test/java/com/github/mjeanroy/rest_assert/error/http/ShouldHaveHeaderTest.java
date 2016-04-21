@@ -28,6 +28,8 @@ import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShouldHaveHeaderTest {
@@ -48,5 +50,26 @@ public class ShouldHaveHeaderTest {
 		ShouldHaveHeader shouldHaveHeader = shouldHaveHeaderWithValue(headerName, headerValue, actualValue);
 		assertThat(shouldHaveHeader).isNotNull();
 		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
+	}
+
+	@Test
+	public void it_should_format_error_message_with_collection_of_one_value() {
+		String headerName = "foo";
+		String headerValue = "bar";
+		String actualValue = "quix";
+		ShouldHaveHeader shouldHaveHeader = shouldHaveHeaderWithValue(headerName, headerValue, singletonList(actualValue));
+		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
+	}
+
+	@Test
+	public void it_should_format_error_message_with_collection_of_values() {
+		String headerName = "foo";
+		String headerValue = "bar";
+		String v1 = "foo";
+		String v2 = "bar";
+		ShouldHaveHeader shouldHaveHeader = shouldHaveHeaderWithValue(headerName, headerValue, asList(v1, v2));
+		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but contains only [foo, bar]");
 	}
 }

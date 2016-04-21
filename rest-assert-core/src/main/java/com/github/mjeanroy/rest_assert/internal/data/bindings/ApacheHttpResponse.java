@@ -30,6 +30,9 @@ import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
@@ -64,29 +67,25 @@ public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResp
 	}
 
 	@Override
-	public boolean hasHeader(String name) {
-		return findFirstHeader(name) != null;
-	}
+	public List<String> getHeader(String name) {
+		Header[] headers = response.getHeaders(name);
 
-	@Override
-	public String getHeader(String name) {
-		Header header = findFirstHeader(name);
-		return header == null ? null : header.getValue();
+		int size = headers == null ? 0 : headers.length;
+		if (size == 0) {
+			return Collections.emptyList();
+		}
+
+		List<String> results = new ArrayList<>(size);
+		for (Header header : headers) {
+			results.add(header.getValue());
+		}
+
+		return Collections.unmodifiableList(results);
 	}
 
 	@Override
 	protected String doGetContent() throws IOException {
 		HttpEntity entity = response.getEntity();
 		return EntityUtils.toString(entity);
-	}
-
-	private Header findFirstHeader(String name) {
-		Header[] headers = response.getAllHeaders();
-		for (Header header : headers) {
-			if (header.getName().equalsIgnoreCase(name)) {
-				return header;
-			}
-		}
-		return null;
 	}
 }

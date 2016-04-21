@@ -32,6 +32,8 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
@@ -62,8 +64,6 @@ public class OkHttpResponseTest {
 
 		assertThat(okHttpResponse.hasHeader("foo")).isTrue();
 		assertThat(okHttpResponse.hasHeader("bar")).isFalse();
-		verify(response).header("foo");
-		verify(response).header("bar");
 	}
 
 	@Test
@@ -74,10 +74,17 @@ public class OkHttpResponseTest {
 
 		OkHttpResponse okHttpResponse = OkHttpResponse.create(response);
 
-		assertThat(okHttpResponse.getHeader("foo")).isEqualTo("bar");
-		assertThat(okHttpResponse.getHeader("bar")).isNull();
-		verify(response).header("foo");
-		verify(response).header("bar");
+		List<String> h1 = okHttpResponse.getHeader("foo");
+		assertThat(h1)
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(1)
+			.contains("bar");
+
+		List<String> h2 = okHttpResponse.getHeader("bar");
+		assertThat(h2)
+			.isNotNull()
+			.isEmpty();
 	}
 
 	@Test

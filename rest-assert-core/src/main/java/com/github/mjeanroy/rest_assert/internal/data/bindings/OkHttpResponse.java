@@ -25,10 +25,11 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AbstractHttpResponse;
 import okhttp3.Response;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Implementation of {@link HttpResponse} using OkHttp framework as real implementation.
@@ -66,12 +67,8 @@ public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse
 	}
 
 	@Override
-	public boolean hasHeader(String name) {
-		return getHeader(name) != null;
-	}
-
-	@Override
-	public String getHeader(String name) {
-		return response.header(name);
+	public List<String> getHeader(String name) {
+		List<String> values = response.headers(name);
+		return Collections.unmodifiableList(values);
 	}
 }

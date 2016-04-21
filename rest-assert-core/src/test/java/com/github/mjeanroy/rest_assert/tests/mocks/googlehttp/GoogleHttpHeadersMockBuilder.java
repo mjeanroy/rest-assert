@@ -25,17 +25,13 @@
 package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
 import com.google.api.client.http.HttpHeaders;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Builder to create mock instance of {@link HttpHeaders} class.
@@ -45,7 +41,7 @@ public class GoogleHttpHeadersMockBuilder {
 	/**
 	 * Map of headers.
 	 */
-	private final Map<String, Collection<String>> headers;
+	private final Map<String, List<String>> headers;
 
 	/**
 	 * Create new builder.
@@ -62,9 +58,9 @@ public class GoogleHttpHeadersMockBuilder {
 	 * @return Current builder.
 	 */
 	public GoogleHttpHeadersMockBuilder addHeader(String name, String value) {
-		Collection<String> values = headers.get(name);
+		List<String> values = headers.get(name);
 		if (values == null) {
-			values = new LinkedHashSet<>();
+			values = new LinkedList<>();
 			headers.put(name, values);
 		}
 
@@ -78,17 +74,14 @@ public class GoogleHttpHeadersMockBuilder {
 	 * @return Mock instance.
 	 */
 	public HttpHeaders build() {
-		final HttpHeaders httpHeaders = mock(HttpHeaders.class);
+		HttpHeaders httpHeaders = new HttpHeaders();
 
-		when(httpHeaders.getFirstHeaderStringValue(anyString())).thenAnswer(new Answer<String>() {
-			@Override
-			public String answer(InvocationOnMock invocation) throws Throwable {
-				String headerName = (String) invocation.getArguments()[0];
-				Collection<String> values = headers.get(headerName);
-				return values == null ? null : values.iterator().next();
-			}
-		});
+		for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
+			String headerName = entry.getKey();
+			List<String> headerValues = entry.getValue();
+			httpHeaders.set(headerName, headerValues);
+		}
 
-		return httpHeaders;
+		return spy(httpHeaders);
 	}
 }

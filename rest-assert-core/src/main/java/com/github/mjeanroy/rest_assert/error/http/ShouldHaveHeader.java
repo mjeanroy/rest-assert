@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.error.http;
 
 import com.github.mjeanroy.rest_assert.error.AbstractError;
 
+import java.util.List;
+
 /**
  * Error thrown when an http response should contain
  * specific header.
@@ -45,6 +47,22 @@ public class ShouldHaveHeader extends AbstractError {
 	 */
 	public static ShouldHaveHeader shouldHaveHeader(String headerName) {
 		return new ShouldHaveHeader("Expecting response to have header %s", headerName);
+	}
+
+	/**
+	 * Build error.
+	 *
+	 * @param headerName Expected header name.
+	 * @param headerValue Expected header value.
+	 * @param actualValues Actual header values.
+	 * @return Error.
+	 */
+	public static ShouldHaveHeader shouldHaveHeaderWithValue(String headerName, String headerValue, List<String> actualValues) {
+		if (actualValues.size() == 1) {
+			return shouldHaveHeaderWithValue(headerName, headerValue, actualValues.get(0));
+		}
+
+		return new ShouldHaveHeader("Expecting response to have header %s equal to %s but contains only %s", headerName, headerValue, actualValues);
 	}
 
 	/**

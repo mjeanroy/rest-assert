@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.data;
 
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 
+import java.util.List;
+
 /**
  * Http response contract.
  */
@@ -55,7 +57,7 @@ public interface HttpResponse {
 	 * @param name Header name.
 	 * @return Header value, null if response does not contain header.
 	 */
-	String getHeader(String name);
+	List<String> getHeader(String name);
 
 	/**
 	 * Get response body.

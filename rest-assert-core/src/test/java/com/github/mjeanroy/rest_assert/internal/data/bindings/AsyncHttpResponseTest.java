@@ -33,6 +33,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
@@ -74,7 +75,7 @@ public class AsyncHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_header_value() {
+	public void it_should_return_header_values() {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
@@ -83,10 +84,13 @@ public class AsyncHttpResponseTest {
 			.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
-		String result = httpResponse.getHeader(headerName);
+		List<String> result = httpResponse.getHeader(headerName);
 
-		assertThat(result).isEqualTo(headerValue);
-		verify(response).getHeader(headerName);
+		assertThat(result)
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(1)
+			.contains(headerValue);
 	}
 
 	@Test

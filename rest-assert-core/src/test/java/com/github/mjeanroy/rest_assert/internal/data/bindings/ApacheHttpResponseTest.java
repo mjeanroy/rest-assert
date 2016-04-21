@@ -35,6 +35,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.IOException;
+import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -76,7 +77,6 @@ public class ApacheHttpResponseTest {
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isTrue();
-		verify(response).getAllHeaders();
 	}
 
 	@Test
@@ -92,7 +92,6 @@ public class ApacheHttpResponseTest {
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isFalse();
-		verify(response).getAllHeaders();
 	}
 
 	@Test
@@ -107,10 +106,13 @@ public class ApacheHttpResponseTest {
 				.build();
 
 		HttpResponse httpResponse = create(response);
-		String result = httpResponse.getHeader(headerName);
+		List<String> result = httpResponse.getHeader(headerName);
 
-		assertThat(result).isEqualTo(headerValue);
-		verify(response).getAllHeaders();
+		assertThat(result)
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(1)
+			.contains(headerValue);
 	}
 
 	@Test
@@ -122,10 +124,11 @@ public class ApacheHttpResponseTest {
 			.build();
 
 		HttpResponse httpResponse = create(response);
-		String result = httpResponse.getHeader(headerName);
+		List<String> result = httpResponse.getHeader(headerName);
 
-		assertThat(result).isNull();
-		verify(response).getAllHeaders();
+		assertThat(result)
+			.isNotNull()
+			.isEmpty();
 	}
 
 	@Test

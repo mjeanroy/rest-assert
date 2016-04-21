@@ -26,10 +26,16 @@ package com.github.mjeanroy.rest_assert.tests.mocks;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -51,7 +57,7 @@ public class HttpResponseMockBuilder {
 	/**
 	 * Map of http response headers.
 	 */
-	private final Map<String, String> headers;
+	private final Map<String, List<String>> headers;
 
 	/**
 	 * Create builder.
@@ -91,7 +97,13 @@ public class HttpResponseMockBuilder {
 	 * @return Current builder.
 	 */
 	public HttpResponseMockBuilder addHeader(String name, String value) {
-		this.headers.put(name, value);
+		List<String> values = headers.get(name);
+		if (values == null) {
+			values = new LinkedList<>();
+			headers.put(name, values);
+		}
+
+		values.add(value);
 		return this;
 	}
 
@@ -116,13 +128,26 @@ public class HttpResponseMockBuilder {
 		when(rsp.getStatus()).thenReturn(status);
 		when(rsp.getContent()).thenReturn(content);
 
-		for (Map.Entry<String, String> entry : headers.entrySet()) {
-			String headerName = entry.getKey();
-			String headerValue = entry.getValue();
+		when(rsp.getHeader(anyString())).thenAnswer(new Answer<List<String>>() {
+			@Override
+			public List<String> answer(InvocationOnMock invocation) throws Throwable {
+				String name = (String) invocation.getArguments()[0];
+				List<String> values = headers.get(name);
+				if (values == null) {
+					return Collections.emptyList();
+				}
 
-			when(rsp.hasHeader(headerName)).thenReturn(true);
-			when(rsp.getHeader(headerName)).thenReturn(headerValue);
-		}
+				return Collections.unmodifiableList(values);
+			}
+		});
+
+		when(rsp.hasHeader(anyString())).thenAnswer(new Answer<Boolean>() {
+			@Override
+			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+				String name = (String) invocation.getArguments()[0];
+				return headers.containsKey(name);
+			}
+		});
 
 		return rsp;
 	}

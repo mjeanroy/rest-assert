@@ -25,10 +25,13 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.google.api.client.http.HttpHeaders;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
 
 import static com.google.api.client.util.IOUtils.copy;
 
@@ -65,13 +68,13 @@ public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResp
 	}
 
 	@Override
-	public boolean hasHeader(String name) {
-		return response.getHeaders().getFirstHeaderStringValue(name) != null;
-	}
+	public List<String> getHeader(String name) {
+		HttpHeaders headers = response.getHeaders();
+		if (headers.isEmpty()) {
+			return Collections.emptyList();
+		}
 
-	@Override
-	public String getHeader(String name) {
-		return response.getHeaders().getFirstHeaderStringValue(name);
+		return headers.getHeaderStringValues(name);
 	}
 
 	@Override

@@ -38,6 +38,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -84,8 +85,6 @@ public class GoogleHttpResponseTest {
 		boolean containsHeader = httpResponse.hasHeader(headerName);
 
 		assertThat(containsHeader).isTrue();
-		verify(response).getHeaders();
-		verify(httpHeaders).getFirstHeaderStringValue(headerName);
 	}
 
 	@Test
@@ -102,11 +101,13 @@ public class GoogleHttpResponseTest {
 			.build();
 
 		HttpResponse httpResponse = create(response);
-		String result = httpResponse.getHeader(headerName);
+		List<String> result = httpResponse.getHeader(headerName);
 
-		assertThat(result).isEqualTo(headerValue);
-		verify(response).getHeaders();
-		verify(httpHeaders).getFirstHeaderStringValue(headerName);
+		assertThat(result)
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(1)
+			.contains(headerValue);
 	}
 
 	@Test
