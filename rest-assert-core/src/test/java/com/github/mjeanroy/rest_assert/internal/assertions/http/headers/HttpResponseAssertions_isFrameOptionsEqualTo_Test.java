@@ -46,6 +46,11 @@ public class HttpResponseAssertions_isFrameOptionsEqualTo_Test extends AbstractH
 		return assertions.isFrameOptionsEqualTo(response, getValue());
 	}
 
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
+
 	@Test
 	public void it_should_check_that_allow_from_value_match() {
 		HttpResponse httpResponse = new HttpResponseMockBuilder()

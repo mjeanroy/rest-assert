@@ -41,4 +41,9 @@ public class HttpResponseAssertions_isPragmaEqualTo_Test extends AbstractHttpHea
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isPragmaEqualTo(response, getHeader().getValue());
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

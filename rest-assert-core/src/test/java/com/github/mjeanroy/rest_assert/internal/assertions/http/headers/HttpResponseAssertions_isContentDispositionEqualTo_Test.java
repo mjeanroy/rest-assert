@@ -43,4 +43,9 @@ public class HttpResponseAssertions_isContentDispositionEqualTo_Test extends Abs
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isContentDispositionEqualTo(response, VALUE);
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return false;
+	}
 }

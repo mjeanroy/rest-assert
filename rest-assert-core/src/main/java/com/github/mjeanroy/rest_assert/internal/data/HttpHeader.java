@@ -24,85 +24,155 @@
 
 package com.github.mjeanroy.rest_assert.internal.data;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * List of standards http headers names.
  */
-public final class HttpHeaders {
-
-	// Ensure non instantiation
-	private HttpHeaders() {
-	}
+public enum HttpHeader {
 
 	/**
 	 * Content type header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
 	 */
-	public static final String CONTENT_TYPE = "Content-Type";
+	CONTENT_TYPE("Content-Type", true),
 
 	/**
 	 * Content Encoding header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
 	 */
-	public static final String CONTENT_ENCODING = "Content-Encoding";
+	CONTENT_ENCODING("Content-Encoding", false),
+
+	/**
+	 * Content Length header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+	 */
+	CONTENT_LENGTH("Content-Length", false),
 
 	/**
 	 * Content Disposition header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
 	 */
-	public static final String CONTENT_DISPOSITION = "Content-Disposition";
+	CONTENT_DISPOSITION("Content-Disposition", true),
 
 	/**
 	 * Last Modified header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29
 	 */
-	public static final String LAST_MODIFIED = "Last-Modified";
+	LAST_MODIFIED("Last-Modified", true),
 
 	/**
 	 * Expires header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
 	 */
-	public static final String EXPIRES = "Expires";
+	EXPIRES("Expires", true),
 
 	/**
 	 * ETag header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
 	 */
-	public static final String ETAG = "ETag";
+	ETAG("ETag", true),
 
 	/**
 	 * Location header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
 	 */
-	public static final String LOCATION = "Location";
+	LOCATION("Location", true),
 
 	/**
 	 * Cache Control header name.
 	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 	 */
-	public static final String CACHE_CONTROL = "Cache-Control";
+	CACHE_CONTROL("Cache-Control", false),
 
 	/**
 	 * Pragma header name.
 	 * https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
 	 */
-	public static final String PRAGMA = "Pragma";
+	PRAGMA("Pragma", false),
 
 	/**
 	 * X-XSS-Protection header name.
 	 * https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection
 	 */
-	public static final String X_XSS_PROTECTION = "X-XSS-Protection";
+	X_XSS_PROTECTION("X-XSS-Protection", false),
 
 	/**
 	 * X-Content-Type-Options header name.
 	 * https://fetch.spec.whatwg.org/#x-content-type-options-header
 	 */
-	public static final String X_CONTENT_TYPE_OPTIONS = "X-Content-Type-Options";
+	X_CONTENT_TYPE_OPTIONS("X-Content-Type-Options", false),
 
 	/**
 	 * X-Content-Type-Options header name.
 	 * https://tools.ietf.org/html/rfc7034
 	 */
-	public static final String X_FRAME_OPTIONS = "X-Frame-Options";
+	X_FRAME_OPTIONS("X-Frame-Options", false);
+
+	/**
+	 * Name of header.
+	 */
+	private final String name;
+
+	/**
+	 * Flag to check if this header allow multiple values.
+	 * Multiple values is specified by W3C, see: https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2.
+	 *
+	 * Short answer:
+	 *
+	 * Multiple message-header fields with the same field-name MAY be present in a message if and only if
+	 * the entire field-value for that header field is defined as a comma-separated list [i.e., #(values)].
+	 * It MUST be possible to combine the multiple header fields into one "field-name: field-value" pair,
+	 * without changing the semantics of the message, by appending each subsequent field-value to the first,
+	 * each separated by a comma.
+	 */
+	private final boolean single;
+
+	private HttpHeader(String name, boolean single) {
+		this.name = name;
+		this.single = single;
+	}
+
+	/**
+	 * Get {@link #name}.
+	 *
+	 * @return {@link #name}
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Get {@link #single}.
+	 *
+	 * @return {@link #single}
+	 */
+	public boolean isSingle() {
+		return single;
+	}
+
+	// Keep headers in an immutable map for fast lookup.
+	private static final Map<String, HttpHeader> MAP;
+
+	static {
+		Map<String, HttpHeader> tmp = new HashMap<>();
+		for (HttpHeader httpHeader : HttpHeader.values()) {
+			tmp.put(httpHeader.getName().toLowerCase(), httpHeader);
+		}
+
+		MAP = Collections.unmodifiableMap(tmp);
+	}
+
+	/**
+	 * Find header by its name.
+	 *
+	 * @param name Name of header.
+	 * @return Header, null if it is not defined in the enum set.
+	 */
+	public static HttpHeader find(String name) {
+		return MAP.get(name.toLowerCase());
+	}
 
 }

@@ -48,4 +48,9 @@ public class HttpResponseAssertions_isExpiresEqualTo_Test extends AbstractHttpHe
 	protected String failValue() {
 		return "Wed, 15 Nov 1995 12:45:26 GMT";
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return false;
+	}
 }

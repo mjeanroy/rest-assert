@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveSingleHeader;
 import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
@@ -35,6 +36,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static java.util.Arrays.asList;
 
 public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
 
@@ -57,7 +59,12 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		Header h1 = getHeader();
 		Header h2 = header(h1.getName(), h1.getValue() + "foobar");
 		AssertionResult result = invoke(newResponse(h1, h2));
-		checkSuccess(result);
+
+		if (allowMultipleValues()) {
+			checkSuccess(result);
+		} else {
+			checkError(result, ShouldHaveSingleHeader.class, "Expecting response to contains header %s with a single value but found: %s", h1.getName(), asList(h1.getValue(), h2.getValue()));
+		}
 	}
 
 	@Test
@@ -95,6 +102,8 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	}
 
 	protected abstract Header getHeader();
+
+	protected abstract boolean allowMultipleValues();
 
 	String failValue() {
 		return getHeader().getValue() + "foo";

@@ -22,28 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.github.mjeanroy.rest_assert.error.AbstractError;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import java.util.List;
 
-public class HttpResponseAssertions_isGzipped_Test extends AbstractHttpHeaderEqualToTest {
+/**
+ * Error thrown when an http response should contain
+ * specific header multiple times.
+ */
+public class ShouldHaveSingleHeader extends AbstractError {
 
-	@Override
-	protected Header getHeader() {
-		return header("Content-Encoding", "gzip");
+	// Private constructor, use static factory instead
+	private ShouldHaveSingleHeader(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isGzipped(response);
-	}
-
-	@Override
-	protected boolean allowMultipleValues() {
-		return true;
+	/**
+	 * Build error.
+	 *
+	 * @param headerName Expected header name.
+	 * @return Error.
+	 */
+	public static ShouldHaveSingleHeader shouldHaveSingleHeader(String headerName, List<String> values) {
+		return new ShouldHaveSingleHeader("Expecting response to contains header %s with a single value but found: %s", headerName, values);
 	}
 }

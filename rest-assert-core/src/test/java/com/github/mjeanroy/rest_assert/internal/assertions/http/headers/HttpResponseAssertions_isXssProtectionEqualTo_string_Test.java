@@ -41,4 +41,9 @@ public class HttpResponseAssertions_isXssProtectionEqualTo_string_Test extends A
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isXssProtectionEqualTo(response, getHeader().getValue());
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

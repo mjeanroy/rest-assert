@@ -45,4 +45,9 @@ public class HttpResponseAssertions_isFrameOptionsEqualTo_string_Test extends Ab
 	private String getValue() {
 		return "deny";
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

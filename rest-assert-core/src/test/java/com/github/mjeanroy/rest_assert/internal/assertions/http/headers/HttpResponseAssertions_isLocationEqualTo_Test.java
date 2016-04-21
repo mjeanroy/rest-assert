@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
-
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+
+import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponseAssertions_isLocationEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
@@ -40,5 +40,10 @@ public class HttpResponseAssertions_isLocationEqualTo_Test extends AbstractHttpH
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isLocationEqualTo(response, getHeader().getValue());
+	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return false;
 	}
 }

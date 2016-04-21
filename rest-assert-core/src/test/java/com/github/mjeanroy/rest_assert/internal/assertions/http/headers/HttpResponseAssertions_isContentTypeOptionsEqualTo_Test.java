@@ -46,4 +46,9 @@ public class HttpResponseAssertions_isContentTypeOptionsEqualTo_Test extends Abs
 	private ContentTypeOptions getValue() {
 		return ContentTypeOptions.NO_SNIFF;
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

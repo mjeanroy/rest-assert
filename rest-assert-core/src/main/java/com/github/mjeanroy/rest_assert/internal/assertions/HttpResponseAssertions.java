@@ -28,6 +28,7 @@ import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
 import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
+import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
 import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
@@ -43,23 +44,25 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shoul
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CACHE_CONTROL;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CONTENT_DISPOSITION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CONTENT_ENCODING;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.CONTENT_TYPE;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.ETAG;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.EXPIRES;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.LAST_MODIFIED;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.LOCATION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.PRAGMA;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.X_CONTENT_TYPE_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.X_FRAME_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeaders.X_XSS_PROTECTION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CONTROL;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_DISPOSITION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_ENCODING;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_LENGTH;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.EXPIRES;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LAST_MODIFIED;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.PRAGMA;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_XSS_PROTECTION;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_XML;
 import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSS;
@@ -397,7 +400,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasETag(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ETAG);
+		return hasHeader(httpResponse, ETAG.getName());
 	}
 
 	/**
@@ -409,7 +412,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isETagEqualTo(HttpResponse httpResponse, @Param("etagValue") String etagValue) {
-		return isHeaderEqualTo(httpResponse, ETAG, etagValue);
+		return isHeaderEqualTo(httpResponse, ETAG.getName(), etagValue);
 	}
 
 	/**
@@ -419,7 +422,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentType(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CONTENT_TYPE);
+		return hasHeader(httpResponse, CONTENT_TYPE.getName());
 	}
 
 	/**
@@ -431,7 +434,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, @Param("contentTypeValue") String contentTypeValue) {
-		return isHeaderEqualTo(httpResponse, CONTENT_TYPE, contentTypeValue);
+		return isHeaderEqualTo(httpResponse, CONTENT_TYPE.getName(), contentTypeValue);
 	}
 
 	/**
@@ -441,7 +444,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentEncoding(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CONTENT_ENCODING);
+		return hasHeader(httpResponse, CONTENT_ENCODING.getName());
 	}
 
 	/**
@@ -451,7 +454,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CONTENT_DISPOSITION);
+		return hasHeader(httpResponse, CONTENT_DISPOSITION.getName());
 	}
 
 	/**
@@ -463,7 +466,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, @Param("contentDispositionValue") String contentDispositionValue) {
-		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION, contentDispositionValue);
+		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION.getName(), contentDispositionValue);
 	}
 
 	/**
@@ -475,7 +478,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, @Param("contentEncodingValue") String contentEncodingValue) {
-		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING, contentEncodingValue);
+		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING.getName(), contentEncodingValue);
 	}
 
 	/**
@@ -488,7 +491,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isGzipped(HttpResponse httpResponse) {
-		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING, "gzip");
+		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING.getName(), "gzip");
 	}
 
 	/**
@@ -498,7 +501,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentLength(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, "Content-Length");
+		return hasHeader(httpResponse, CONTENT_LENGTH.getName());
 	}
 
 	/**
@@ -508,7 +511,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasLocation(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, LOCATION);
+		return hasHeader(httpResponse, LOCATION.getName());
 	}
 
 	/**
@@ -520,7 +523,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, @Param("locationValue") String locationValue) {
-		return isHeaderEqualTo(httpResponse, LOCATION, locationValue);
+		return isHeaderEqualTo(httpResponse, LOCATION.getName(), locationValue);
 	}
 
 	/**
@@ -530,7 +533,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasLastModified(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, LAST_MODIFIED);
+		return hasHeader(httpResponse, LAST_MODIFIED.getName());
 	}
 
 	/**
@@ -540,7 +543,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasExpires(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, EXPIRES);
+		return hasHeader(httpResponse, EXPIRES.getName());
 	}
 
 	/**
@@ -564,7 +567,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, @Param("expiresValue") Date expiresValue) {
-		return isHeaderDateEqualTo(httpResponse, EXPIRES, expiresValue);
+		return isHeaderDateEqualTo(httpResponse, EXPIRES.getName(), expiresValue);
 	}
 
 	/**
@@ -588,26 +591,24 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, @Param("lastModifiedValue") Date lastModifiedDate) {
-		return isHeaderDateEqualTo(httpResponse, LAST_MODIFIED, lastModifiedDate);
+		return isHeaderDateEqualTo(httpResponse, LAST_MODIFIED.getName(), lastModifiedDate);
 	}
 
-	private AssertionResult isHeaderDateEqualTo(HttpResponse httpResponse, String name, Date expectedValue) {
-		AssertionResult result = hasHeader(httpResponse, name);
-		if (result.isFailure()) {
-			return result;
-		}
-
-		List<String> actualValues = httpResponse.getHeader(name);
-		List<Date> actualDates = map(actualValues, new Mapper<String, Date>() {
+	private AssertionResult isHeaderDateEqualTo(HttpResponse httpResponse, final String headerName, final Date expectedValue) {
+		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
 			@Override
-			public Date apply(String input) {
-				return parseHttpDate(input);
+			public AssertionResult handle(List<String> actualValues) {
+				List<Date> actualDates = map(actualValues, new Mapper<String, Date>() {
+					@Override
+					public Date apply(String input) {
+						return parseHttpDate(input);
+					}
+				});
+				return actualDates.contains(expectedValue) ?
+					success() :
+					failure(shouldHaveHeaderWithValue(headerName, formatHttpDate(expectedValue), actualValues));
 			}
 		});
-
-		return actualDates.contains(expectedValue) ?
-				success() :
-				failure(shouldHaveHeaderWithValue(name, formatHttpDate(expectedValue), actualValues));
 	}
 
 	/**
@@ -617,7 +618,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasPragma(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, PRAGMA);
+		return hasHeader(httpResponse, PRAGMA.getName());
 	}
 
 	/**
@@ -628,7 +629,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, @Param("pragma") String pragma) {
-		return isHeaderEqualTo(httpResponse, PRAGMA, pragma);
+		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma);
 	}
 
 	/**
@@ -638,7 +639,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CACHE_CONTROL);
+		return hasHeader(httpResponse, CACHE_CONTROL.getName());
 	}
 
 	/**
@@ -649,7 +650,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") String cacheControl) {
-		return isHeaderEqualTo(httpResponse, CACHE_CONTROL, cacheControl);
+		return isHeaderEqualTo(httpResponse, CACHE_CONTROL.getName(), cacheControl);
 	}
 
 	/**
@@ -660,7 +661,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") CacheControl cacheControl) {
-		return isHeaderMatching(httpResponse, CACHE_CONTROL, cacheControl);
+		return isHeaderMatching(httpResponse, CACHE_CONTROL.getName(), cacheControl);
 	}
 
 	/**
@@ -670,7 +671,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasXssProtection(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, X_XSS_PROTECTION);
+		return hasHeader(httpResponse, X_XSS_PROTECTION.getName());
 	}
 
 	/**
@@ -681,7 +682,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") String xssProtection) {
-		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION, xssProtection);
+		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION.getName(), xssProtection);
 	}
 
 	/**
@@ -692,7 +693,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
-		return isHeaderMatching(httpResponse, X_XSS_PROTECTION, xssProtection);
+		return isHeaderMatching(httpResponse, X_XSS_PROTECTION.getName(), xssProtection);
 	}
 
 	/**
@@ -702,7 +703,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentTypeOptions(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, X_CONTENT_TYPE_OPTIONS);
+		return hasHeader(httpResponse, X_CONTENT_TYPE_OPTIONS.getName());
 	}
 
 	/**
@@ -713,7 +714,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") String contentTypeOptions) {
-		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions);
+		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions);
 	}
 
 	/**
@@ -724,7 +725,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") ContentTypeOptions contentTypeOptions) {
-		return isHeaderMatching(httpResponse, X_CONTENT_TYPE_OPTIONS, contentTypeOptions);
+		return isHeaderMatching(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions);
 	}
 
 	/**
@@ -734,7 +735,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasFrameOptions(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, X_FRAME_OPTIONS);
+		return hasHeader(httpResponse, X_FRAME_OPTIONS.getName());
 	}
 
 	/**
@@ -745,7 +746,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") String frameOptions) {
-		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS, frameOptions);
+		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions);
 	}
 
 	/**
@@ -756,27 +757,25 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") FrameOptions frameOptions) {
-		return isHeaderMatching(httpResponse, X_FRAME_OPTIONS, frameOptions);
+		return isHeaderMatching(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions);
 	}
 
-	private AssertionResult isHeaderMatching(HttpResponse httpResponse, String headerName, final HeaderValue value) {
-		AssertionResult result = hasHeader(httpResponse, headerName);
-		if (result.isFailure()) {
-			return result;
-		}
-
-		List<String> actualValue = httpResponse.getHeader(headerName);
-		boolean found = some(actualValue, new Predicate<String>() {
+	private AssertionResult isHeaderMatching(HttpResponse httpResponse, final String headerName, final HeaderValue value) {
+		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
 			@Override
-			public boolean apply(String input) {
-				return value.match(input);
+			public AssertionResult handle(List<String> actualValues) {
+				boolean found = some(actualValues, new Predicate<String>() {
+					@Override
+					public boolean apply(String input) {
+						return value.match(input);
+					}
+				});
+
+				return found ?
+					success() :
+					failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValues));
 			}
 		});
-
-		return found ?
-			success() :
-			failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValue));
-
 	}
 
 	/**
@@ -898,24 +897,18 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeType(HttpResponse httpResponse, @Param("expectedMimeType") String expectedMimeType) {
-		String headerName = CONTENT_TYPE;
-		AssertionResult result = hasHeader(httpResponse, headerName);
-		if (result.isFailure()) {
-			return result;
-		}
-
-		List<String> contentTypes = httpResponse.getHeader(headerName);
-		if (contentTypes.size() > 1) {
-			// If this happen, it is probably a bug in the response.
-
-		}
-
-		String contentType = contentTypes.get(0);
-		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
-		return expectedMimeType.equals(actualMimeType) ?
-				success() :
-				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+	public AssertionResult hasMimeType(HttpResponse httpResponse, @Param("expectedMimeType") final String expectedMimeType) {
+		String headerName = CONTENT_TYPE.getName();
+		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
+			@Override
+			public AssertionResult handle(List<String> contentTypes) {
+				String contentType = contentTypes.get(0);
+				String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
+				return expectedMimeType.equals(actualMimeType) ?
+					success() :
+					failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+			}
+		});
 	}
 
 	/**
@@ -936,29 +929,23 @@ public final class HttpResponseAssertions {
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") String expectedCharset) {
-		String headerName = CONTENT_TYPE;
-		AssertionResult result = hasHeader(httpResponse, headerName);
-		if (result.isFailure()) {
-			return result;
-		}
+	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") final String expectedCharset) {
+		String headerName = CONTENT_TYPE.getName();
+		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
+			@Override
+			public AssertionResult handle(List<String> contentTypes) {
+				String contentType = contentTypes.get(0);
+				String[] contentTypeParts = contentType.split(";");
+				if (contentTypeParts.length == 1) {
+					return failure(shouldHaveCharset());
+				}
 
-		List<String> contentTypes = httpResponse.getHeader(headerName);
-		if (contentTypes.size() > 1) {
-			// If this happen, then this is probably a bug.
-
-		}
-
-		String contentType = contentTypes.get(0);
-		String[] contentTypeParts = contentType.split(";");
-		if (contentTypeParts.length == 1) {
-			return failure(shouldHaveCharset());
-		}
-
-		String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
-		return actualCharset.equalsIgnoreCase(expectedCharset) ?
-				success() :
-				failure(shouldHaveCharset(expectedCharset, actualCharset));
+				String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
+				return actualCharset.equalsIgnoreCase(expectedCharset) ?
+					success() :
+					failure(shouldHaveCharset(expectedCharset, actualCharset));
+			}
+		});
 	}
 
 	/**
@@ -968,33 +955,27 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") Iterable<String> expectedMimeType) {
-		String headerName = CONTENT_TYPE;
-		AssertionResult result = hasHeader(httpResponse, headerName);
-		if (result.isFailure()) {
-			return result;
-		}
+	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") final Iterable<String> expectedMimeType) {
+		String headerName = CONTENT_TYPE.getName();
+		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
+			@Override
+			public AssertionResult handle(List<String> contentTypes) {
+				String contentType = contentTypes.get(0);
+				String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 
-		List<String> contentTypes = httpResponse.getHeader(headerName);
-		if (contentTypes.size() > 1) {
-			// Probably a bug in the response, fail fast.
+				boolean found = false;
+				for (String current : expectedMimeType) {
+					if (actualMimeType.equals(current.toLowerCase())) {
+						found = true;
+						break;
+					}
+				}
 
-		}
-
-		String contentType = contentTypes.get(0);
-		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
-
-		boolean found = false;
-		for (String current : expectedMimeType) {
-			if (actualMimeType.equals(current.toLowerCase())) {
-				found = true;
-				break;
+				return found ?
+					success() :
+					failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 			}
-		}
-
-		return found ?
-				success() :
-				failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+		});
 	}
 
 	/**
@@ -1006,16 +987,32 @@ public final class HttpResponseAssertions {
 	 * @param headerValue  Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") String headerName, @Param("headerValue") String headerValue) {
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") final String headerName, @Param("headerValue") final String headerValue) {
+		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
+			@Override
+			public AssertionResult handle(List<String> actualValues) {
+				return actualValues.contains(headerValue) ?
+					success() :
+					failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValues));
+			}
+		});
+	}
+
+	private AssertionResult assertHeader(HttpResponse httpResponse, String headerName, HeaderAssertion assertion) {
 		AssertionResult result = hasHeader(httpResponse, headerName);
 		if (result.isFailure()) {
 			return result;
 		}
 
 		List<String> actualValues = httpResponse.getHeader(headerName);
-		return actualValues.contains(headerValue) ?
-				success() :
-				failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValues));
+
+		HttpHeader header = HttpHeader.find(headerName);
+		if (header != null && header.isSingle() && actualValues.size() > 1) {
+			// Probably a bug in the response, fail fast.
+			return failure(shouldHaveSingleHeader(headerName, actualValues));
+		}
+
+		return assertion.handle(actualValues);
 	}
 
 	/**
@@ -1061,5 +1058,9 @@ public final class HttpResponseAssertions {
 		return actualStatus < start || actualStatus > end ?
 				success() :
 				failure(shouldHaveStatusOutOf(actualStatus, start, end));
+	}
+
+	private interface HeaderAssertion {
+		AssertionResult handle(List<String> actualValues);
 	}
 }

@@ -44,4 +44,9 @@ public class HttpResponseAssertions_isXssProtectionEqualTo_Test extends Abstract
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isXssProtectionEqualTo(response, VALUE);
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

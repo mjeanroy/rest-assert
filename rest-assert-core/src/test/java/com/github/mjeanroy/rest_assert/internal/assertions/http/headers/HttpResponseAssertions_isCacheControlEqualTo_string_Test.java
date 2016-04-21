@@ -41,4 +41,9 @@ public class HttpResponseAssertions_isCacheControlEqualTo_string_Test extends Ab
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isCacheControlEqualTo(response, getHeader().getValue());
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

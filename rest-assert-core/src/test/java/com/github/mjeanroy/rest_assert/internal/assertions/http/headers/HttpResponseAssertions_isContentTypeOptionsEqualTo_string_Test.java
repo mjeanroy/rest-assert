@@ -45,4 +45,9 @@ public class HttpResponseAssertions_isContentTypeOptionsEqualTo_string_Test exte
 	private String getValue() {
 		return "nosniff";
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

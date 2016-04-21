@@ -55,4 +55,9 @@ public class HttpResponseAssertions_isHeaderEqualTo_Test extends AbstractHttpHea
 		AssertionResult result = assertions.isHeaderEqualTo(rsp, NAME, VALUE);
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", NAME);
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return false;
+	}
 }

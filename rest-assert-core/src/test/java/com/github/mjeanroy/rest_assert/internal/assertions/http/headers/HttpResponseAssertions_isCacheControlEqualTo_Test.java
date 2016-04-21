@@ -48,4 +48,9 @@ public class HttpResponseAssertions_isCacheControlEqualTo_Test extends AbstractH
 			.visibility(CacheControl.Visibility.PUBLIC)
 			.build();
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

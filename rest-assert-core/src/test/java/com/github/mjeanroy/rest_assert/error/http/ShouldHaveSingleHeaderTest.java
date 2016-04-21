@@ -22,28 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers;
+package com.github.mjeanroy.rest_assert.error.http;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.junit.Test;
 
-import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class HttpResponseAssertions_isGzipped_Test extends AbstractHttpHeaderEqualToTest {
+public class ShouldHaveSingleHeaderTest {
 
-	@Override
-	protected Header getHeader() {
-		return header("Content-Encoding", "gzip");
-	}
-
-	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isGzipped(response);
-	}
-
-	@Override
-	protected boolean allowMultipleValues() {
-		return true;
+	@Test
+	public void it_should_format_error_message() {
+		String headerName = "foo";
+		ShouldHaveSingleHeader shouldHaveHeader = shouldHaveSingleHeader(headerName, asList("foo", "bar"));
+		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to contains header foo with a single value but found: [foo, bar]");
 	}
 }

@@ -41,4 +41,9 @@ public class HttpResponseAssertions_isContentEncodingEqualTo_Test extends Abstra
 	protected AssertionResult invoke(HttpResponse response) {
 		return assertions.isContentEncodingEqualTo(response, getHeader().getValue());
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return true;
+	}
 }

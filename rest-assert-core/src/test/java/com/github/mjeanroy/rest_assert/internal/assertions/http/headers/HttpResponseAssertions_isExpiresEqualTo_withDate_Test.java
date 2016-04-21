@@ -52,4 +52,9 @@ public class HttpResponseAssertions_isExpiresEqualTo_withDate_Test extends Abstr
 	protected String failValue() {
 		return "Wed, 15 Nov 1995 12:45:26 GMT";
 	}
+
+	@Override
+	protected boolean allowMultipleValues() {
+		return false;
+	}
 }
