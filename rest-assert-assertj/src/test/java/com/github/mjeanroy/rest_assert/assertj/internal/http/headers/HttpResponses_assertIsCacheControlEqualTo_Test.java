@@ -45,7 +45,7 @@ public class HttpResponses_assertIsCacheControlEqualTo_Test extends AbstractHttp
 
 	private CacheControl getValue() {
 		return new CacheControl.Builder()
-			.noCache(true)
+			.noCache()
 			.build();
 	}
 }

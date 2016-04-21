@@ -327,57 +327,52 @@ public class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Update {@code no-cache} directive.
+		 * Enable {@code no-cache} directive.
 		 *
-		 * @param noCache Enable or disable {@code no-cache} directive.
 		 * @return Current builder.
 		 */
-		public Builder noCache(boolean noCache) {
-			this.noCache = noCache;
+		public Builder noCache() {
+			this.noCache = true;
 			return this;
 		}
 
 		/**
-		 * Update {@code no-transform} directive.
+		 * Enable {@code no-transform} directive.
 		 *
-		 * @param noTransform Enable or disable {@code no-transform} directive.
 		 * @return Current builder.
 		 */
-		public Builder noTransform(boolean noTransform) {
-			this.noTransform = noTransform;
+		public Builder noTransform() {
+			this.noTransform = true;
 			return this;
 		}
 
 		/**
-		 * Update {@code must-revalidate} directive.
+		 * Enable {@code must-revalidate} directive.
 		 *
-		 * @param mustRevalidate Enable or disable {@code must-revalidate} directive.
 		 * @return Current builder.
 		 */
-		public Builder mustRevalidate(boolean mustRevalidate) {
-			this.mustRevalidate = mustRevalidate;
+		public Builder mustRevalidate() {
+			this.mustRevalidate = true;
 			return this;
 		}
 
 		/**
-		 * Update {@code proxy-revalidate} directive.
+		 * Enable {@code proxy-revalidate} directive.
 		 *
-		 * @param proxyRevalidate Enable or disable {@code proxy-revalidate} directive.
 		 * @return Current builder.
 		 */
-		public Builder proxyRevalidate(boolean proxyRevalidate) {
-			this.proxyRevalidate = proxyRevalidate;
+		public Builder proxyRevalidate() {
+			this.proxyRevalidate = true;
 			return this;
 		}
 
 		/**
-		 * Update {@code no-store} directive.
+		 * Enable {@code no-store} directive.
 		 *
-		 * @param noStore Enable or disable {@code no-store} directive.
 		 * @return Current builder.
 		 */
-		public Builder noStore(boolean noStore) {
-			this.noStore = noStore;
+		public Builder noStore() {
+			this.noStore = true;
 			return this;
 		}
 
@@ -439,7 +434,7 @@ public class CacheControl implements HeaderValue {
 
 			@Override
 			void setValue(String value, Builder builder) {
-				builder.noCache(true);
+				builder.noCache();
 			}
 		},
 
@@ -451,7 +446,7 @@ public class CacheControl implements HeaderValue {
 
 			@Override
 			void setValue(String value, Builder builder) {
-				builder.noStore(true);
+				builder.noStore();
 			}
 		},
 
@@ -463,7 +458,7 @@ public class CacheControl implements HeaderValue {
 
 			@Override
 			void setValue(String value, Builder builder) {
-				builder.noTransform(true);
+				builder.noTransform();
 			}
 		},
 
@@ -475,7 +470,7 @@ public class CacheControl implements HeaderValue {
 
 			@Override
 			void setValue(String value, Builder builder) {
-				builder.mustRevalidate(true);
+				builder.mustRevalidate();
 			}
 		},
 
@@ -487,7 +482,7 @@ public class CacheControl implements HeaderValue {
 
 			@Override
 			void setValue(String value, Builder builder) {
-				builder.proxyRevalidate(true);
+				builder.proxyRevalidate();
 			}
 		},
 

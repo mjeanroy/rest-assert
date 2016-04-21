@@ -33,7 +33,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_create_no_cache_header() {
 		CacheControl cacheControl = new CacheControl.Builder()
-			.noCache(true)
+			.noCache()
 			.build();
 
 		assertThat(cacheControl.toString()).isEqualTo("no-cache");
@@ -44,7 +44,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_create_no_store_header() {
 		CacheControl cacheControl = new CacheControl.Builder()
-			.noStore(true)
+			.noStore()
 			.build();
 
 		assertThat(cacheControl.toString()).isEqualTo("no-store");
@@ -79,8 +79,8 @@ public class CacheControlTest {
 	@Test
 	public void it_should_match_header_value_even_in_the_wrong_order() {
 		CacheControl cacheControl = new CacheControl.Builder()
-			.noCache(true)
-			.noStore(true)
+			.noCache()
+			.noStore()
 			.build();
 
 		assertThat(cacheControl.value()).isEqualTo("no-cache, no-store");
@@ -124,7 +124,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_parse_no_cache_directive() {
 		CacheControl c = new CacheControl.Builder()
-			.noCache(true)
+			.noCache()
 			.build();
 
 		assertThat(c.value()).isEqualTo("no-cache");
@@ -134,7 +134,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_parse_no_store_directive() {
 		CacheControl c1 = new CacheControl.Builder()
-			.noStore(true)
+			.noStore()
 			.build();
 
 		assertThat(c1.value()).isEqualTo("no-store");
@@ -144,7 +144,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_parse_proxy_revalidate_directive() {
 		CacheControl c1 = new CacheControl.Builder()
-			.proxyRevalidate(true)
+			.proxyRevalidate()
 			.build();
 
 		assertThat(c1.value()).isEqualTo("proxy-revalidate");
@@ -154,7 +154,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_parse_must_revalidate_directive() {
 		CacheControl c1 = new CacheControl.Builder()
-			.mustRevalidate(true)
+			.mustRevalidate()
 			.build();
 
 		assertThat(c1.value()).isEqualTo("must-revalidate");
@@ -164,7 +164,7 @@ public class CacheControlTest {
 	@Test
 	public void it_should_parse_no_transform_directive() {
 		CacheControl c1 = new CacheControl.Builder()
-			.noTransform(true)
+			.noTransform()
 			.build();
 
 		assertThat(c1.value()).isEqualTo("no-transform");

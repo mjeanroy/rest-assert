@@ -39,7 +39,7 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 public class HttpAssert_assertIsCacheControlEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
 	private static final CacheControl VALUE = new CacheControl.Builder()
-		.noCache(true)
+		.noCache()
 		.build();
 
 	@Override
