@@ -62,12 +62,8 @@ public abstract class AbstractJsonComparatorTest {
 	@Test
 	public void it_should_create_comparator_with_arguments() throws Exception {
 		JsonParser parser = mock(JsonParser.class);
-		JsonComparatorOptions options = mock(JsonComparatorOptions.class);
-
-		JsonComparator comparator = new DefaultJsonComparator(parser, options);
-
+		JsonComparator comparator = new DefaultJsonComparator(parser);
 		assertThat(readField(comparator, "parser", true)).isSameAs(parser);
-		assertThat(readField(comparator, "options", true)).isSameAs(options);
 	}
 
 	@Test

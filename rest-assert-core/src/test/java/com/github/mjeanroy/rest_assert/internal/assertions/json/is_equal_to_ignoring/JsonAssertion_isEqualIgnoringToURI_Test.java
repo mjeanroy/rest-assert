@@ -34,8 +34,8 @@ import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonUr
 public class JsonAssertion_isEqualIgnoringToURI_Test extends AbstractJsonAssertion_isEqualToIgnoring_Test<URI> {
 
 	@Override
-	protected AssertionResult invoke(String actual, URI expected) {
-		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys());
+	protected AssertionResult invoke(String actual, URI expected, Iterable<String> ignoringKeys) {
+		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys);
 	}
 
 	@Override

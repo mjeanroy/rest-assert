@@ -30,8 +30,6 @@ import com.github.mjeanroy.rest_assert.internal.assertions.JsonAssertions;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
-
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSuccess;
@@ -49,13 +47,19 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 
 	@Test
 	public void it_should_pass() throws Exception {
-		AssertionResult result = invoke(actual(), successObject());
+		AssertionResult result = invoke(actual(), successObject(), asList("str", "nb", "bool"));
+		assertSuccessResult(result);
+	}
+
+	@Test
+	public void it_should_support_json_path() throws Exception {
+		AssertionResult result = invoke(actual(), failureObject(), asList("$.str", "$.nb", "$.bool", "$.array[0:3]"));
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_fail() throws Exception {
-		AssertionResult result = invoke(actual(), failureObject());
+		AssertionResult result = invoke(actual(), failureObject(), asList("str", "nb", "bool"));
 
 		String expectedPattern = "" +
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
@@ -71,14 +75,10 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
 	}
 
-	protected abstract AssertionResult invoke(String actual, T expected);
+	protected abstract AssertionResult invoke(String actual, T expected, Iterable<String> ignoringKeys);
 
 	private String actual() {
 		return jsonSuccess();
-	}
-
-	List<String> ignoringKeys() {
-		return asList("str", "nb", "bool");
 	}
 
 	protected abstract T successObject();

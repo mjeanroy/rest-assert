@@ -25,14 +25,14 @@
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
-import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
 import com.github.mjeanroy.rest_assert.internal.data.DefaultJsonEntry;
+import com.github.mjeanroy.rest_assert.internal.data.JsonEntry;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparator;
-import com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParserStrategy;
 import com.github.mjeanroy.rest_assert.reflect.Param;
+import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
 
@@ -51,7 +51,6 @@ import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntry.shouldH
 import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
 import static com.github.mjeanroy.rest_assert.utils.Utils.readFileToString;
 import static java.util.Collections.addAll;
 
@@ -198,7 +197,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, @Param("expected") String expected) {
-		return doComparison(actual, expected, builder().build());
+		return doComparison(actual, expected);
 	}
 
 	/**
@@ -258,11 +257,29 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualToIgnoring(String actual, @Param("expected") String expected, @Param("entries") Iterable<String> entries) {
-		JsonComparatorOptions options = builder()
-				.ignoreKeys(entries)
-				.build();
+		final String actualJson;
+		final String expectedJson;
 
-		return doComparison(actual, expected, options);
+		// Check if some keys needs to be ignored
+		if (entries.iterator().hasNext()) {
+			DocumentContext actualCtx = JsonPath.parse(actual);
+			DocumentContext expectedCtx = JsonPath.parse(expected);
+
+			// Remove keys to ignore
+			for (String entry : entries) {
+				String path = toJsonPath(entry);
+				actualCtx.delete(path);
+				expectedCtx.delete(path);
+			}
+
+			actualJson = actualCtx.jsonString();
+			expectedJson = expectedCtx.jsonString();
+		} else {
+			actualJson = actual;
+			expectedJson = expected;
+		}
+
+		return doComparison(actualJson, expectedJson);
 	}
 
 	/**
@@ -317,8 +334,8 @@ public final class JsonAssertions {
 		}
 	}
 
-	private AssertionResult doComparison(String actual, String expected, JsonComparatorOptions options) {
-		JsonComparator comparator = new DefaultJsonComparator(parser, options);
+	private AssertionResult doComparison(String actual, String expected) {
+		JsonComparator comparator = new DefaultJsonComparator(parser);
 		List<RestAssertError> errors = comparator.compare(actual, expected);
 		return errors.isEmpty() ?
 				success() :

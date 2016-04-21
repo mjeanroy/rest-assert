@@ -32,8 +32,8 @@ import static com.github.mjeanroy.rest_assert.tests.fixtures.JsonFixtures.jsonSu
 public class JsonAssertion_isEqualIgnoringToString_Test extends AbstractJsonAssertion_isEqualToIgnoring_Test<String> {
 
 	@Override
-	protected AssertionResult invoke(String actual, String expected) {
-		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys());
+	protected AssertionResult invoke(String actual, String expected, Iterable<String> ignoringKeys) {
+		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys);
 	}
 
 	@Override

@@ -29,7 +29,12 @@ import com.github.mjeanroy.rest_assert.error.RestAssertJsonError;
 import com.github.mjeanroy.rest_assert.internal.json.JsonType;
 import com.github.mjeanroy.rest_assert.internal.json.parsers.JsonParser;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnArray.shouldBeAnArray;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldBeAnObject.shouldBeAnObject;
@@ -39,10 +44,7 @@ import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryEqualTo.
 import static com.github.mjeanroy.rest_assert.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
 import static com.github.mjeanroy.rest_assert.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
 import static com.github.mjeanroy.rest_assert.internal.json.JsonType.parseType;
-import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonComparatorOptions.builder;
 import static com.github.mjeanroy.rest_assert.internal.json.comparators.JsonContext.rootContext;
-import static com.github.mjeanroy.rest_assert.internal.json.comparators.IsIgnoredKey.isIgnored;
-import static com.github.mjeanroy.rest_assert.utils.Utils.filter;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 
@@ -52,31 +54,21 @@ import static java.util.Collections.singletonList;
  */
 public class DefaultJsonComparator implements JsonComparator {
 
+	/**
+	 * JSON parser.
+	 */
 	private final JsonParser parser;
-	private final JsonComparatorOptions options;
 
 	// Use thread local to remains thread safe
 	private final ThreadLocal<JsonContext> contexts = new ThreadLocal<>();
 
 	/**
-	 * Create new comparator.
-	 *
-	 * @param parser Parser used to extract json data.
-	 */
-	DefaultJsonComparator(JsonParser parser) {
-		this.parser = parser;
-		this.options = builder().build();
-	}
-
-	/**
 	 * Create new comparator with custom option.
 	 *
 	 * @param parser  Parser used to extract json data.
-	 * @param options Custom options.
 	 */
-	public DefaultJsonComparator(JsonParser parser, JsonComparatorOptions options) {
+	public DefaultJsonComparator(JsonParser parser) {
 		this.parser = parser;
-		this.options = options;
 	}
 
 	@Override
@@ -86,8 +78,7 @@ public class DefaultJsonComparator implements JsonComparator {
 		List<RestAssertJsonError> errors = doCompare(actual.trim(), expected.trim());
 		contexts.remove();
 
-		// Return filtered list
-		return (List) filter(errors, isIgnored(options.getIgnoringKeys()));
+		return (List) errors;
 	}
 
 	private List<RestAssertJsonError> doCompare(String actual, String expected) {
