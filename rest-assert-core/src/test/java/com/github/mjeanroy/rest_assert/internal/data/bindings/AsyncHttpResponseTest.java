@@ -38,7 +38,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class AsyncHttpResponseTest {
@@ -47,7 +46,7 @@ public class AsyncHttpResponseTest {
 	public ExpectedException thrown = none();
 
 	@Test
-	public void it_should_return_status_code() {
+	public void it_should_return_status_code() throws Exception {
 		int expectedStatus = 200;
 		Response response = new AsyncHttpResponseMockBuilder()
 			.setStatusCode(expectedStatus)
@@ -57,11 +56,10 @@ public class AsyncHttpResponseTest {
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
-		verify(response).getStatusCode();
 	}
 
 	@Test
-	public void it_should_check_if_http_response_contains_header() {
+	public void it_should_check_if_http_response_contains_header() throws Exception {
 		String headerName = "header-name";
 
 		Response response = new AsyncHttpResponseMockBuilder()
@@ -75,7 +73,7 @@ public class AsyncHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_header_values() {
+	public void it_should_return_header_values() throws Exception {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
@@ -104,7 +102,6 @@ public class AsyncHttpResponseTest {
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
-		verify(response).getResponseBody();
 	}
 
 	@Test

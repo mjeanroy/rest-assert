@@ -24,20 +24,32 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.asynchttp;
 
-import com.ning.http.client.FluentCaseInsensitiveStringsMap;
+import com.ning.http.client.AsyncHttpClientConfig;
+import com.ning.http.client.AsyncHttpProvider;
+import com.ning.http.client.HttpResponseBodyPart;
+import com.ning.http.client.HttpResponseHeaders;
+import com.ning.http.client.HttpResponseStatus;
 import com.ning.http.client.Response;
+import com.ning.http.client.providers.jdk.JDKResponse;
+import com.ning.http.client.providers.jdk.ResponseBodyPart;
+import com.ning.http.client.providers.jdk.ResponseHeaders;
+import com.ning.http.client.providers.jdk.ResponseStatus;
+import com.ning.http.client.uri.Uri;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.net.HttpURLConnection;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static org.mockito.Matchers.anyString;
+import static java.nio.charset.Charset.defaultCharset;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 
 /**
@@ -58,12 +70,13 @@ public class AsyncHttpResponseMockBuilder {
 	/**
 	 * Response headers.
 	 */
-	private final Map<String, Collection<String>> headers;
+	private final Map<String, List<String>> headers;
 
 	/**
 	 * Create new builder.
 	 */
 	public AsyncHttpResponseMockBuilder() {
+		this.statusCode = 200;
 		this.headers = new LinkedHashMap<>();
 	}
 
@@ -97,9 +110,9 @@ public class AsyncHttpResponseMockBuilder {
 	 * @return Current builder.
 	 */
 	public AsyncHttpResponseMockBuilder addHeader(String name, String value) {
-		Collection<String> values = headers.get(name);
+		List<String> values = headers.get(name);
 		if (values == null) {
-			values = new LinkedHashSet<>();
+			values = new LinkedList<>();
 			headers.put(name, values);
 		}
 
@@ -113,34 +126,37 @@ public class AsyncHttpResponseMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Response build() {
-		Response rsp = mock(Response.class);
-		when(rsp.getStatusCode()).thenReturn(statusCode);
+		Uri uri = mock(Uri.class);
+		AsyncHttpProvider provider = mock(AsyncHttpProvider.class);
+		AsyncHttpClientConfig config = mock(AsyncHttpClientConfig.class);
+		HttpURLConnection conn = mock(HttpURLConnection.class);
+
+		when(conn.getHeaderFields()).thenReturn(headers);
 
 		try {
-			when(rsp.getResponseBody()).thenReturn(responseBody);
+			when(conn.getResponseCode()).thenAnswer(new Answer<Integer>() {
+				@Override
+				public Integer answer(InvocationOnMock invocation) throws Throwable {
+					return statusCode;
+				}
+			});
 		} catch (IOException ex) {
 			throw new AssertionError(ex);
 		}
 
-		final FluentCaseInsensitiveStringsMap map = new FluentCaseInsensitiveStringsMap(headers);
-		when(rsp.getHeaders()).thenReturn(map);
+		HttpResponseStatus status = new ResponseStatus(uri, config, conn);
+		HttpResponseHeaders headers = new ResponseHeaders(uri, conn, provider);
 
-		when(rsp.getHeader(anyString())).thenAnswer(new Answer<String>() {
-			@Override
-			public String answer(InvocationOnMock invocation) {
-				String headerName = (String) invocation.getArguments()[0];
-				return map.containsKey(headerName) ? map.getFirstValue(headerName) : null;
-			}
-		});
+		final List<HttpResponseBodyPart> bodyParts;
+		if (responseBody != null) {
+			byte[] body = responseBody.getBytes(defaultCharset());
+			HttpResponseBodyPart part = new ResponseBodyPart(body, true);
+			bodyParts = singletonList(part);
+		} else {
+			bodyParts = emptyList();
+		}
 
-		when(rsp.getHeaders(anyString())).thenAnswer(new Answer<List<String>>() {
-			@Override
-			public List<String> answer(InvocationOnMock invocation) {
-				String headerName = (String) invocation.getArguments()[0];
-				return map.get(headerName);
-			}
-		});
-
-		return rsp;
+		Response rsp = new JDKResponse(status, headers, bodyParts);
+		return spy(rsp);
 	}
 }

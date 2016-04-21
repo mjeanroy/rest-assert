@@ -26,8 +26,7 @@ package com.github.mjeanroy.rest_assert.tests.mocks.asynchttp;
 
 import com.ning.http.client.cookie.Cookie;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.spy;
 
 /**
  * Build mock instance of {@link Cookie} class.
@@ -68,6 +67,14 @@ public class AsyncHttpCookieMockBuilder {
 	 * Cookie max-age value.
 	 */
 	private long maxAge;
+
+	/**
+	 * Create builder with default values.
+	 */
+	public AsyncHttpCookieMockBuilder() {
+		this.name = "foo";
+		this.value = "bar";
+	}
 
 	/**
 	 * Set {@link #secure}.
@@ -152,14 +159,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		Cookie cookie = mock(Cookie.class);
-		when(cookie.getName()).thenReturn(name);
-		when(cookie.getValue()).thenReturn(value);
-		when(cookie.getDomain()).thenReturn(domain);
-		when(cookie.getPath()).thenReturn(path);
-		when(cookie.isSecure()).thenReturn(secure);
-		when(cookie.isHttpOnly()).thenReturn(httpOnly);
-		when(cookie.getMaxAge()).thenReturn(maxAge);
-		return cookie;
+		Cookie cookie = Cookie.newValidCookie(name, value, false, domain, path, maxAge, secure, httpOnly);
+		return spy(cookie);
 	}
 }
