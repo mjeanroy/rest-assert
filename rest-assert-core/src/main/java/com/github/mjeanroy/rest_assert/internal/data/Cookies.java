@@ -24,8 +24,21 @@
 
 package com.github.mjeanroy.rest_assert.internal.data;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
+import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static com.github.mjeanroy.rest_assert.utils.Utils.isGreaterThan;
+import static com.github.mjeanroy.rest_assert.utils.Utils.isInRange;
 import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
 import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
 import static com.github.mjeanroy.rest_assert.utils.Utils.toLong;
@@ -34,6 +47,11 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.toLong;
  * Cookies utilities.
  */
 public final class Cookies {
+
+	/**
+	 * UTC Time Zone.
+	 */
+	private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
 
 	// Ensure non instantiation.
 	private Cookies() {
@@ -49,15 +67,16 @@ public final class Cookies {
 	 * @param secure Secure flag.
 	 * @param httpOnly Http-Only flag.
 	 * @param maxAge Cookie max-age.
+	 * @param expires Cookies expires value.
 	 * @return The cookie.
 	 * @throws NullPointerException If {@code name} or {@code value} are null.
 	 * @throws IllegalArgumentException If {@code name} is empty or blank.
 	 */
-	public static Cookie newCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge) {
+	public static Cookie newCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge, Date expires) {
 		return new DefaultCookie(
 			notBlank(name, "Cookie name must be defined"),
 			notNull(value, "Cookie value must not be null"),
-			domain, path, secure, httpOnly, maxAge
+			domain, path, secure, httpOnly, maxAge, expires
 		);
 	}
 
@@ -84,6 +103,7 @@ public final class Cookies {
 		boolean secure = false;
 		boolean httpOnly = false;
 		Long maxAge = null;
+		Date expires = null;
 
 		char[] unparsedAttributes = parts[1].trim().toCharArray();
 		int length = unparsedAttributes.length;
@@ -107,10 +127,12 @@ public final class Cookies {
 				httpOnly = parseHttpOnly();
 			} else if (attrName.equalsIgnoreCase("max-age")) {
 				maxAge = parseMaxAge(attrValue);
+			} else if (attrName.equalsIgnoreCase("expires")) {
+				expires = parseExpires(attrValue);
 			}
 		}
 
-		return newCookie(name, value, domain, path, secure, httpOnly, maxAge);
+		return newCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
 	}
 
 	/**
@@ -140,17 +162,22 @@ public final class Cookies {
 		/**
 		 * Secure flag.
 		 */
-		private boolean secure;
+		private final boolean secure;
 
 		/**
 		 * HTTP-Only flag.
 		 */
-		private boolean httpOnly;
+		private final boolean httpOnly;
 
 		/**
 		 * Cookie max-age value.
 		 */
-		private Long maxAge;
+		private final Long maxAge;
+
+		/**
+		 * Cookie expires date.
+		 */
+		private final Date expires;
 
 		/**
 		 * Create cookie.
@@ -163,7 +190,7 @@ public final class Cookies {
 		 * @param httpOnly HTTP-Only flag.
 		 * @param maxAge Cookie max-age value.
 		 */
-		private DefaultCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge) {
+		private DefaultCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge, Date expires) {
 			this.name = name;
 			this.value = value;
 			this.domain = domain;
@@ -171,6 +198,13 @@ public final class Cookies {
 			this.secure = secure;
 			this.httpOnly = httpOnly;
 			this.maxAge = maxAge;
+
+			// Date class is not immutable, get a clone copy.
+			if (expires == null) {
+				this.expires = null;
+			} else {
+				this.expires = new Date(expires.getTime());
+			}
 		}
 
 		@Override
@@ -209,6 +243,12 @@ public final class Cookies {
 		}
 
 		@Override
+		public Date getExpires() {
+			// Since a date is mutable, return a clone copy to be sure of no side-effect.
+			return expires == null ? null : new Date(expires.getTime());
+		}
+
+		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
 			sb.append(name).append("=").append(value);
@@ -233,6 +273,12 @@ public final class Cookies {
 				sb.append("; max-age=").append(maxAge);
 			}
 
+			if (expires != null) {
+				DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZZ", Locale.US);
+				df.setTimeZone(UTC);
+				sb.append("; expires=").append(df.format(expires));
+			}
+
 			return sb.toString();
 		}
 
@@ -250,7 +296,8 @@ public final class Cookies {
 					&& Objects.equals(getPath(), c.getPath())
 					&& Objects.equals(isSecured(), c.isSecured())
 					&& Objects.equals(isHttpOnly(), c.isHttpOnly())
-					&& Objects.equals(getMaxAge(), c.getMaxAge());
+					&& Objects.equals(getMaxAge(), c.getMaxAge())
+					&& Objects.equals(getExpires(), c.getExpires());
 			}
 
 			return false;
@@ -258,7 +305,7 @@ public final class Cookies {
 
 		@Override
 		public int hashCode() {
-			return Objects.hash(getName(), getValue(), getDomain(), getPath(), isSecured(), isHttpOnly(), getMaxAge());
+			return Objects.hash(getName(), getValue(), getDomain(), getPath(), isSecured(), isHttpOnly(), getMaxAge(), getExpires());
 		}
 	}
 
@@ -438,6 +485,112 @@ public final class Cookies {
 	 */
 	private static Long parseMaxAge(String maxAge) {
 		return toLong(maxAge, "Max-Age is not a valid number");
+	}
+
+	private static final Pattern TIME_PATTERN = Pattern.compile("(\\d{1,2}):(\\d{1,2}):(\\d{1,2})[^\\d]*");
+	private static final Pattern YEAR_PATTERN = Pattern.compile("(\\d{2,4})[^\\d]*");
+	private static final Pattern MONTH_PATTERN = Pattern.compile("(?i)(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec).*");
+	private static final Pattern DAY_OF_MONTH_PATTERN = Pattern.compile("(\\d{1,2})[^\\d]*");
+
+	/**
+	 * Parse Expires directive of Set-Cookie header.
+	 *
+	 * @param expires Expires value.
+	 * @return The expires date.
+	 */
+	private static Date parseExpires(String expires) {
+		int hour = -1;
+		int minute = -1;
+		int second = -1;
+		int dayOfMonth = -1;
+		int month = -1;
+		int year = -1;
+
+		List<String> tokens = splitTokens(expires);
+
+		// Initialize matcher.
+		// This matcher will be re-used with different patters while iterating against tokens
+		Matcher matcher = TIME_PATTERN.matcher(expires);
+
+		for (String token : tokens) {
+			matcher.reset(token);
+
+			if (hour == -1 && matcher.usePattern(TIME_PATTERN).matches()) {
+				hour = Integer.parseInt(matcher.group(1));
+				minute = Integer.parseInt(matcher.group(2));
+				second = Integer.parseInt(matcher.group(3));
+			} else if (dayOfMonth == -1 && matcher.usePattern(DAY_OF_MONTH_PATTERN).matches()) {
+				dayOfMonth = Integer.parseInt(matcher.group(1));
+			} else if (month == -1 && matcher.usePattern(MONTH_PATTERN).matches()) {
+				String monthString = matcher.group(1).toLowerCase(Locale.US);
+				month = MONTH_PATTERN.pattern().indexOf(monthString) / 4;
+			} else if (year == -1 && matcher.usePattern(YEAR_PATTERN).matches()) {
+				year = Integer.parseInt(matcher.group(1));
+			}
+		}
+
+		if (year >= 70 && year <= 99) {
+			year += 1900;
+		}
+
+		if (year >= 0 && year <= 69) {
+			year += 2000;
+		}
+
+		isGreaterThan(year, 1601, "Expires year must be greater than 1601");
+		isGreaterThan(month, 0, "Expires month is missing");
+		isInRange(dayOfMonth, 1, 31, "Expires day cannot be less than 1 or greater than 31");
+		isInRange(hour, 0, 23, "Expires hour cannot be less than 0 or greater than 23");
+		isInRange(minute, 0, 59, "Expires minutes cannot be less than 0 or greater than 59");
+		isInRange(second, 0, 59, "Expires second cannot be less than 0 or greater than 59");
+
+		Calendar calendar = new GregorianCalendar(UTC);
+		calendar.setLenient(false);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month - 1);
+		calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+		calendar.set(Calendar.HOUR_OF_DAY, hour);
+		calendar.set(Calendar.MINUTE, minute);
+		calendar.set(Calendar.SECOND, second);
+		calendar.set(Calendar.MILLISECOND, 0);
+
+		return calendar.getTime();
+	}
+
+	/**
+	 * Split cookie date into date-tokens (as specified by RFC 6265).
+	 *
+	 * @param expires Date.
+	 * @return All date tokens.
+	 */
+	private static List<String> splitTokens(String expires) {
+		List<String> tokens = new LinkedList<>();
+
+		StringBuilder currentToken = new StringBuilder();
+		for (char c : expires.toCharArray()) {
+			if (isDelimiter(c)) {
+				if (currentToken.length() > 0) {
+					tokens.add(currentToken.toString());
+					currentToken = new StringBuilder();
+				}
+			} else {
+				currentToken.append(c);
+			}
+		}
+
+		return tokens;
+	}
+
+	private static boolean isNonDelimiter(char c) {
+		return (c < ' ' && c != '\t') || (c >= '\u007f')
+			|| (c >= '0' && c <= '9')
+			|| (c >= 'a' && c <= 'z')
+			|| (c >= 'A' && c <= 'Z')
+			|| (c == ':');
+	}
+
+	private static boolean isDelimiter(char c) {
+		return !isNonDelimiter(c);
 	}
 
 	/**

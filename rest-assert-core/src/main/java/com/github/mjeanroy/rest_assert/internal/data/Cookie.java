@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.internal.data;
 
+import java.util.Date;
+
 /**
  * Cookie object: this interface defines what fields may
  * appear in the Set-Cookie header.
@@ -80,4 +82,14 @@ public interface Cookie {
 	 * @return Max age (in seconds).
 	 */
 	Long getMaxAge();
+
+	/**
+	 * Get cookie expires date (i.e date defined by expires directive).
+	 *
+	 * If {@code null} is returned, it means that the expires field was not defined
+	 * in the Set-Cookie header.
+	 *
+	 * @return Expires date.
+	 */
+	Date getExpires();
 }

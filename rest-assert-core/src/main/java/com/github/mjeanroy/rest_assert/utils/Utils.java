@@ -101,6 +101,41 @@ public final class Utils {
 	}
 
 	/**
+	 * Check that a given value is greater or equal than given minimum value.
+	 *
+	 * @param val Value to check.
+	 * @param minValue Minimum value.
+	 * @param message Error message.
+	 * @return The original value.
+	 * @throws IllegalArgumentException If {@code val} is less than {@code minValue}.
+	 */
+	public static int isGreaterThan(int val, int minValue, String message) {
+		if (val < minValue) {
+			throw new IllegalArgumentException(message);
+		}
+
+		return val;
+	}
+
+	/**
+	 * Check that a given value is in given range (inclusive).
+	 *
+	 * @param val Value to check.
+	 * @param min Minimum value.
+	 * @param max Maximum value.
+	 * @param message Error message.
+	 * @return The original value.
+	 * @throws IllegalArgumentException If {@code val} is less than {@code min} or greater than {@code max}.
+	 */
+	public static int isInRange(int val, int min, int max, String message) {
+		if (val < min || val > max) {
+			throw new IllegalArgumentException(message);
+		}
+
+		return val;
+	}
+
+	/**
 	 * Parse a given string value to a long number.
 	 *
 	 * @param value Value to parse.

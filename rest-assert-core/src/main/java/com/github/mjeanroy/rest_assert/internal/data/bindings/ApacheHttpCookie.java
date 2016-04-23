@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
+import java.util.Date;
+
 /**
  * Implementation of {@link Cookie}
  * using Apache HttpClient framework as real implementation.
@@ -88,5 +90,10 @@ public class ApacheHttpCookie implements Cookie {
 	public Long getMaxAge() {
 		// Not supported
 		return 0L;
+	}
+
+	@Override
+	public Date getExpires() {
+		return cookie.getExpiryDate();
 	}
 }

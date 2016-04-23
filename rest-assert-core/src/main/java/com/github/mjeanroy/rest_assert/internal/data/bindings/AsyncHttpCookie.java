@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
+import java.util.Date;
+
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.Cookie}
  * using Async-Http framework as real implementation.
@@ -86,5 +88,10 @@ public class AsyncHttpCookie implements Cookie {
 	@Override
 	public Long getMaxAge() {
 		return cookie.getMaxAge();
+	}
+
+	@Override
+	public Date getExpires() {
+		return new Date(cookie.getExpires());
 	}
 }
