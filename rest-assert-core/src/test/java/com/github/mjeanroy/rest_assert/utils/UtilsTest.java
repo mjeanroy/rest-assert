@@ -36,6 +36,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
+import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
 import static com.github.mjeanroy.rest_assert.utils.Utils.some;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
@@ -207,5 +208,41 @@ public class UtilsTest {
 		assertThat(found).isFalse();
 		verify(predicate).apply("quix");
 		verify(predicate).apply("bar");
+	}
+
+	@Test
+	public void notBlank_should_throw_npe_if_string_is_null() {
+		String message = "Should not be null";
+
+		thrown.expect(NullPointerException.class);
+		thrown.expectMessage(message);
+
+		notBlank(null, message);
+	}
+
+	@Test
+	public void notBlank_should_throw_illegal_argument_exception_if_string_is_empty() {
+		String message = "Should not be null";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage(message);
+
+		notBlank("", message);
+	}
+
+	@Test
+	public void notBlank_should_throw_illegal_argument_exception_if_string_is_blank() {
+		String message = "Should not be null";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage(message);
+
+		notBlank("    ", message);
+	}
+
+	@Test
+	public void notBlank_should_return_argument_if_string_is_ok() {
+		String obj = "Foo";
+		assertThat(notBlank(obj, "Should not be null")).isEqualTo(obj);
 	}
 }

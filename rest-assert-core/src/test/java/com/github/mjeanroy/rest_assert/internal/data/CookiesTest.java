@@ -1,0 +1,228 @@
+/**
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
+package com.github.mjeanroy.rest_assert.internal.data;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import static com.github.mjeanroy.rest_assert.internal.data.Cookies.newCookie;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
+
+public class CookiesTest {
+
+	@Rule
+	public ExpectedException thrown = none();
+
+	@Test
+	public void it_should_create_cookie() {
+		String name = "foo";
+		String value = "bar";
+		String path = "/";
+		String domain = "domain.com";
+		boolean secure = true;
+		boolean httpOnly = true;
+		long maxAge = 10;
+
+		Cookie cookie = newCookie(name, value, domain, path, secure, httpOnly, maxAge);
+
+		assertThat(cookie.getName()).isEqualTo(name);
+		assertThat(cookie.getValue()).isEqualTo(value);
+		assertThat(cookie.getPath()).isEqualTo(path);
+		assertThat(cookie.getDomain()).isEqualTo(domain);
+		assertThat(cookie.isSecured()).isEqualTo(secure);
+		assertThat(cookie.isHttpOnly()).isEqualTo(httpOnly);
+		assertThat(cookie.getMaxAge()).isEqualTo(maxAge);
+	}
+
+	@Test
+	public void it_should_implement_equals() {
+		Cookie c1 = newCookie("name", "value", "domain.com", "/", true, true, 3600L);
+		Cookie c2 = newCookie("name", "value", "domain.com", "/", true, true, 3600L);
+		Cookie c3 = newCookie("name", "value", "domain.com", "/", true, true, 3600L);
+		Cookie c4 = newCookie("name", "", "domain.com", "/", true, true, 3600L);
+
+		assertThat(c1.equals(c2)).isTrue();
+		assertThat(c1.equals(c4)).isFalse();
+		assertThat(c1.equals(null)).isFalse();
+
+		// Symmetric
+		assertThat(c1.equals(c2)).isTrue();
+		assertThat(c2.equals(c1)).isTrue();
+
+		// Reflective
+		assertThat(c1.equals(c1)).isTrue();
+
+		// Transitive
+		assertThat(c1.equals(c2)).isTrue();
+		assertThat(c2.equals(c3)).isTrue();
+		assertThat(c1.equals(c3)).isTrue();
+	}
+
+	@Test
+	public void it_should_implement_hash_code() {
+		Cookie c1 = newCookie("name", "value", "domain.com", "/", true, true, 3600L);
+		Cookie c2 = newCookie("name", "value", "domain.com", "/", true, true, 3600L);
+		assertThat(c1.hashCode()).isEqualTo(c2.hashCode());
+	}
+
+	@Test
+	public void it_should_implement_to_string() {
+		assertThat(newCookie("name", "value", "domain.com", "/", true, true, 3600L).toString())
+			.isEqualTo("name=value; Domain=domain.com; Path=/; secure; HttpOnly; max-age=3600");
+
+		assertThat(newCookie("name", "value", null, "/", true, true, 3600L).toString())
+			.isEqualTo("name=value; Path=/; secure; HttpOnly; max-age=3600");
+
+		assertThat(newCookie("name", "value", null, null, true, true, 3600L).toString())
+			.isEqualTo("name=value; secure; HttpOnly; max-age=3600");
+
+		assertThat(newCookie("name", "value", null, null, false, true, 3600L).toString())
+			.isEqualTo("name=value; HttpOnly; max-age=3600");
+
+		assertThat(newCookie("name", "value", null, null, false, false, 3600L).toString())
+			.isEqualTo("name=value; max-age=3600");
+
+		assertThat(newCookie("name", "value", null, null, false, false, null).toString())
+			.isEqualTo("name=value");
+	}
+
+	@Test
+	public void it_should_not_parse_empty_set_cookie_header() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Header Set-Cookie must be defined");
+		Cookies.parse("  ");
+	}
+
+	@Test
+	public void it_should_parse_set_cookie() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; expires=Fri, 06 May 2016 16:19:20 -0000; secure; HttpOnly";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getName()).isEqualTo("user_session");
+		assertThat(cookie.getValue()).isEqualTo("foobar==");
+		assertThat(cookie.getDomain()).isEqualTo("github.com");
+		assertThat(cookie.getPath()).isEqualTo("/");
+		assertThat(cookie.isSecured()).isTrue();
+		assertThat(cookie.isHttpOnly()).isTrue();
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_without_secure_flag() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; expires=Fri, 06 May 2016 16:19:20 -0000; HttpOnly";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.isSecured()).isFalse();
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_without_http_only_flag() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; expires=Fri, 06 May 2016 16:19:20 -0000";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.isHttpOnly()).isFalse();
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_with_max_age() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=3600; secure; HttpOnly";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getMaxAge()).isEqualTo(3600L);
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_with_max_age_equal_to_zero() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=0; secure; HttpOnly";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getMaxAge()).isZero();
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_with_max_age_less_than_zero() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=-3600; secure; HttpOnly";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getMaxAge()).isEqualTo(-3600L);
+	}
+
+	@Test
+	public void it_should_fail_if_max_age_is_a_float() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=-3600.5; secure; HttpOnly";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Max-Age is not a valid number");
+
+		Cookies.parse(setCookie);
+	}
+
+	@Test
+	public void it_should_fail_if_max_age_is_not_a_number() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=-3600ab; secure; HttpOnly";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Max-Age is not a valid number");
+
+		Cookies.parse(setCookie);
+	}
+
+	@Test
+	public void it_should_fail_if_cookie_does_not_have_a_name() {
+		final String setCookie = "=foobar; domain=github.com; path=/; max-age=-3600; secure; HttpOnly";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Set-Cookie header must have a name");
+
+		Cookies.parse(setCookie);
+	}
+
+	@Test
+	public void it_should_not_parse_set_cookie_if_it_does_not_have_a_value() {
+		final String setCookie = "user_session";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Set-Cookie header must have a value");
+
+		Cookies.parse(setCookie);
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_with_only_name_and_value() {
+		final String setCookie = "user_session=foobar==";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getName()).isEqualTo("user_session");
+		assertThat(cookie.getValue()).isEqualTo("foobar==");
+	}
+}

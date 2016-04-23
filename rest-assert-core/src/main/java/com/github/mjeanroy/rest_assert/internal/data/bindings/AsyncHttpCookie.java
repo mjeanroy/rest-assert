@@ -84,7 +84,7 @@ public class AsyncHttpCookie implements Cookie {
 	}
 
 	@Override
-	public long getMaxAge() {
+	public Long getMaxAge() {
 		return cookie.getMaxAge();
 	}
 }

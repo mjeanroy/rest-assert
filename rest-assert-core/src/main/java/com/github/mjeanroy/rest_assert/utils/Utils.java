@@ -30,6 +30,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Static utilities.
@@ -40,6 +41,8 @@ public final class Utils {
 	 * Line separator (system dependent).
 	 */
 	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
+
+	private static final Pattern INTEGER_PATTERN = Pattern.compile("^-?\\d+");
 
 	// Private constructor to ensure non instantiation.
 	private Utils() {
@@ -73,6 +76,44 @@ public final class Utils {
 			throw new NullPointerException(message);
 		}
 		return obj;
+	}
+
+	/**
+	 * Check that a given string is not blank (i.e not null, not empty
+	 * and contains other characters that whitespaces).
+	 *
+	 * @param obj String value to check.
+	 * @param message Error message if {@code obj} is blank.
+	 * @return Original {@code obj}.
+	 * @throws NullPointerException If {@code obj} is null.
+	 * @throws IllegalArgumentException If {@code obj} is empty or blank.
+	 */
+	public static String notBlank(String obj, String message) {
+		notNull(obj, message);
+
+		for (char c : obj.toCharArray()) {
+			if (!Character.isWhitespace(c)) {
+				return obj;
+			}
+		}
+
+		throw new IllegalArgumentException(message);
+	}
+
+	/**
+	 * Parse a given string value to a long number.
+	 *
+	 * @param value Value to parse.
+	 * @param message Error message if conversion fails.
+	 * @return The long value.
+	 * @throws IllegalArgumentException If {@code value} is not a valid number.
+	 */
+	public static Long toLong(String value, String message) {
+		try {
+			return Long.valueOf(value);
+		} catch (NumberFormatException ex) {
+			throw new IllegalArgumentException(message, ex);
+		}
 	}
 
 	/**

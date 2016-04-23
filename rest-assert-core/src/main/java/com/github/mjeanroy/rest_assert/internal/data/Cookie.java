@@ -25,7 +25,8 @@
 package com.github.mjeanroy.rest_assert.internal.data;
 
 /**
- * Cookie contract.
+ * Cookie object: this interface defines what fields may
+ * appear in the Set-Cookie header.
  */
 public interface Cookie {
 
@@ -73,8 +74,10 @@ public interface Cookie {
 
 	/**
 	 * Get cookie max age.
+	 * If {@code null} is returned, it means that the max-age field was not defined
+	 * in the Set-Cookie header.
 	 *
 	 * @return Max age (in seconds).
 	 */
-	long getMaxAge();
+	Long getMaxAge();
 }

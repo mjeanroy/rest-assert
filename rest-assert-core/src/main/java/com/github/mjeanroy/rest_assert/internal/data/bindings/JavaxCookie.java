@@ -84,7 +84,7 @@ public class JavaxCookie implements Cookie {
 	}
 
 	@Override
-	public long getMaxAge() {
-		return cookie.getMaxAge();
+	public Long getMaxAge() {
+		return (long) cookie.getMaxAge();
 	}
 }
