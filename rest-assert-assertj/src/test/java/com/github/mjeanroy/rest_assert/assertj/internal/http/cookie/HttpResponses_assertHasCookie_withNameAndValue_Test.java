@@ -26,12 +26,10 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.cookie;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-public class HttpResponses_assertHasCookie_withNameAndValue_Test extends AbstractCookieTest {
+public class HttpResponses_assertHasCookie_withNameAndValue_Test extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 
@@ -39,10 +37,10 @@ public class HttpResponses_assertHasCookie_withNameAndValue_Test extends Abstrac
 
 	@Override
 	protected Cookie cookie() {
-		Cookie cookie = mock(Cookie.class);
-		when(cookie.getName()).thenReturn(NAME);
-		when(cookie.getValue()).thenReturn(VALUE);
-		return cookie;
+		return new CookieMockBuilder()
+				.setName(NAME)
+				.setValue(VALUE)
+				.build();
 	}
 
 	@Override

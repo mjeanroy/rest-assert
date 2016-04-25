@@ -24,32 +24,64 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.cookie;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
+import com.github.mjeanroy.rest_assert.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import org.junit.Before;
+import org.junit.Test;
 
-public class HttpResponseAssertions_hasCookieWithNameAndValue_Test extends AbstractHasCookieTest {
+public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpResponse> {
 
-	private static final String NAME = "JSESSIONID";
-	private static final String VALUE = "12345";
+	HttpResponseAssertions assertions;
 
-	@Override
-	protected Cookie newCookie() {
-		return new CookieMockBuilder()
-				.setName(NAME)
-				.setValue(VALUE)
+	@Before
+	public void setUp() {
+		assertions = HttpResponseAssertions.instance();
+	}
+
+	@Test
+	public void it_should_pass_with_expected_cookie() {
+		Cookie cookie = newCookie();
+		AssertionResult result = invoke(newResponse(cookie));
+		checkSuccess(result);
+	}
+
+	@Test
+	public void it_should_fail_without_any_cookies() {
+		HttpResponse rsp = new HttpResponseMockBuilder().build();
+		AssertionResult result = invoke(rsp);
+		verifyError(result);
+	}
+
+	@Test
+	public void it_should_fail_without_expected_cookies() {
+		HttpResponse rsp = new HttpResponseMockBuilder()
+				.addCookie(new CookieMockBuilder()
+						.setName("foo1")
+						.setValue("bar1")
+						.build())
+				.addCookie(new CookieMockBuilder()
+						.setName("foo2")
+						.setValue("bar2")
+						.build())
 				.build();
+
+		AssertionResult result = invoke(rsp);
+
+		verifyError(result);
 	}
 
-	@Override
-	protected void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s and value %s", NAME, VALUE);
-	}
+	protected abstract Cookie newCookie();
 
-	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.hasCookie(response, NAME, VALUE);
+	protected abstract void verifyError(AssertionResult result);
+
+	private HttpResponse newResponse(Cookie cookie, Cookie... cookies) {
+		return new HttpResponseMockBuilder()
+				.addCookie(cookie, cookies)
+				.build();
 	}
 }

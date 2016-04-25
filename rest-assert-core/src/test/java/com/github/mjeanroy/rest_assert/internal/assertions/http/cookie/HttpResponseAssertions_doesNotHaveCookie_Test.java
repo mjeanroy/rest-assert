@@ -30,26 +30,25 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
-public class HttpResponseAssertions_hasCookieWithNameAndValue_Test extends AbstractHasCookieTest {
+public class HttpResponseAssertions_doesNotHaveCookie_Test extends AbstractDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
-	private static final String VALUE = "12345";
 
 	@Override
 	protected Cookie newCookie() {
 		return new CookieMockBuilder()
 				.setName(NAME)
-				.setValue(VALUE)
+				.setValue("12345")
 				.build();
 	}
 
 	@Override
 	protected void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s and value %s", NAME, VALUE);
+		checkError(result, ShouldHaveCookie.class, "Expecting http response not to contains cookie with name %s", NAME);
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.hasCookie(response, NAME, VALUE);
+		return assertions.doesNotHaveCookie(response, NAME);
 	}
 }

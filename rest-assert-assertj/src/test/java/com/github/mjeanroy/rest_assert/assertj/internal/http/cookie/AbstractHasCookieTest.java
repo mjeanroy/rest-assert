@@ -24,30 +24,57 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.cookie;
 
+import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
-public class HttpResponses_assertHasCookie_withName_Test extends AbstractHasCookieTest {
+import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.assertj.core.api.Assertions.assertThat;
 
-	private static final String NAME = "JSESSIONID";
+public abstract class AbstractHasCookieTest {
 
-	@Override
-	protected Cookie cookie() {
-		return new CookieMockBuilder()
-				.setName(NAME)
-				.setValue("12345")
+	protected HttpResponses httpResponses = HttpResponses.instance();
+
+	@Test
+	public void should_pass_if_status_code_is_ok() {
+		HttpResponse httpResponse = new HttpResponseMockBuilder()
+				.addCookie(cookie())
 				.build();
+
+		invoke(someInfo(), httpResponse);
 	}
 
-	@Override
-	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertHasCookie(info, httpResponse, NAME);
+	@Test
+	public void should_fail_if_status_code_are_not_equal() {
+		final AssertionInfo info = someInfo();
+		final Cookie cookie = new CookieMockBuilder()
+				.setName("foo")
+				.setValue("bar")
+				.build();
+
+		final HttpResponse httpResponse = new HttpResponseMockBuilder()
+				.addCookie(cookie)
+				.build();
+
+		try {
+			invoke(info, httpResponse);
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		} catch (AssertionError e) {
+			assertThat(e.getMessage())
+					.isNotNull()
+					.isNotEmpty()
+					.isEqualTo(buildErrorMessage());
+		}
 	}
 
-	@Override
-	protected String buildErrorMessage() {
-		return String.format("Expecting http response to contains cookie with name \"%s\"", NAME);
-	}
+	protected abstract String buildErrorMessage();
+
+	protected abstract Cookie cookie();
+
+	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 }

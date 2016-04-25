@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.cookie;
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
@@ -34,31 +35,25 @@ import org.junit.Test;
 import static com.github.mjeanroy.rest_assert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-public abstract class AbstractCookieTest {
+public abstract class AbstractDoesNotHaveCookieTest {
 
 	protected HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_status_code_is_ok() {
+	public void should_pass_if_cookie_is_missing() {
 		HttpResponse httpResponse = new HttpResponseMockBuilder()
-				.addCookie(cookie())
+				.addCookie(fakeCookie())
 				.build();
 
 		invoke(someInfo(), httpResponse);
 	}
 
 	@Test
-	public void should_fail_if_status_code_are_not_equal() {
+	public void should_fail_if_cookie_is_here() {
 		final AssertionInfo info = someInfo();
-		final Cookie cookie = mock(Cookie.class);
-		when(cookie.getName()).thenReturn("foo");
-		when(cookie.getValue()).thenReturn("bar");
-
 		final HttpResponse httpResponse = new HttpResponseMockBuilder()
-				.addCookie(cookie)
+				.addCookie(cookie())
 				.build();
 
 		try {
@@ -77,4 +72,11 @@ public abstract class AbstractCookieTest {
 	protected abstract Cookie cookie();
 
 	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
+
+	private Cookie fakeCookie() {
+		return new CookieMockBuilder()
+			.setName("foo")
+			.setValue("bar")
+			.build();
+	}
 }

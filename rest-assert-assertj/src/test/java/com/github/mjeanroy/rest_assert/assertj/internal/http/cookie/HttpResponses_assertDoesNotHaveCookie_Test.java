@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,34 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.cookie;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import org.assertj.core.api.AssertionInfo;
 
-public class HttpResponseAssertions_hasCookieWithNameAndValue_Test extends AbstractHasCookieTest {
+public class HttpResponses_assertDoesNotHaveCookie_Test extends AbstractDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
-	private static final String VALUE = "12345";
 
 	@Override
-	protected Cookie newCookie() {
+	protected Cookie cookie() {
 		return new CookieMockBuilder()
 				.setName(NAME)
-				.setValue(VALUE)
+				.setValue("12345")
 				.build();
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s and value %s", NAME, VALUE);
+	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertDoesNotHaveCookie(info, httpResponse, NAME);
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.hasCookie(response, NAME, VALUE);
+	protected String buildErrorMessage() {
+		return String.format("Expecting http response not to contains cookie with name \"%s\"", NAME);
 	}
 }

@@ -36,6 +36,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldHaveCookie;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldNotHaveCookie;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
@@ -1157,21 +1158,33 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response does not contains cookie with given name (note that cookie name
+	 * is case-sensitive).
+	 *
+	 * @param name Cookie name.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse, @Param("name") String name) {
+		List<Cookie> cookies = httpResponse.getCookies();
+		if (cookies.isEmpty()) {
+			return success();
+		}
+
+		boolean result = !some(cookies, new CookieNamePredicate(name));
+		return result ?
+				success() :
+				failure(shouldNotHaveCookie(name));
+	}
+
+	/**
 	 * Check that http response contains cookie with given name (note that cookie name is
 	 * case-sensitive).
 	 *
 	 * @param name Cookie name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") final String name) {
-		notNull(name, "Cookie name must not be null");
-		return hasCookieMatching(httpResponse, shouldHaveCookie(name), new Predicate<Cookie>() {
-			@Override
-			public boolean apply(Cookie input) {
-				// Note that cookie name is case-sensitive.
-				return name.equals(input.getName());
-			}
-		});
+	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") String name) {
+		return hasCookieMatching(httpResponse, shouldHaveCookie(name), new CookieNamePredicate(name));
 	}
 
 	/**
@@ -1182,24 +1195,47 @@ public final class HttpResponseAssertions {
 	 * @param value Cookie value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") final String name, @Param("value") final String value) {
-		notNull(name, "Cookie name must not be null");
-		notNull(value, "Cookie value must not be null");
-		return hasCookieMatching(httpResponse, shouldHaveCookie(name, value), new Predicate<Cookie>() {
-			@Override
-			public boolean apply(Cookie input) {
-				// Note that cookie name is case-sensitive.
-				return name.equals(input.getName()) && value.equals(input.getValue());
-			}
-		});
+	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") String name, @Param("value") String value) {
+		return hasCookieMatching(httpResponse, shouldHaveCookie(name, value), new CookieNameValuePredicate(name, value));
 	}
 
 	private static AssertionResult hasCookieMatching(HttpResponse httpResponse, ShouldHaveCookie error, Predicate<Cookie> predicate) {
 		List<Cookie> cookies = httpResponse.getCookies();
+		if (cookies.isEmpty()) {
+			return failure(error);
+		}
+
 		boolean found = some(cookies, predicate);
 		return found ?
 				success() :
 				failure(error);
+	}
+
+	private static class CookieNamePredicate implements Predicate<Cookie> {
+		private final String name;
+
+		private CookieNamePredicate(String name) {
+			this.name = notNull(name, "Cookie name must not be null");
+		}
+
+		@Override
+		public boolean apply(Cookie cookie) {
+			return name.equals(cookie.getName());
+		}
+	}
+
+	private static class CookieNameValuePredicate extends CookieNamePredicate implements Predicate<Cookie> {
+		private final String value;
+
+		private CookieNameValuePredicate(String name, String value) {
+			super(name);
+			this.value = notNull(value, "Cookie value must not be null");
+		}
+
+		@Override
+		public boolean apply(Cookie cookie) {
+			return super.apply(cookie) && value.equals(cookie.getValue());
+		}
 	}
 
 	private interface HeaderAssertion {

@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.error.http;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldHaveCookie;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldNotHaveCookie;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShouldHaveCookieTest {
@@ -43,5 +44,12 @@ public class ShouldHaveCookieTest {
 		ShouldHaveCookie error = shouldHaveCookie("foo", "bar");
 		assertThat(error).isNotNull();
 		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name foo and value bar");
+	}
+
+	@Test
+	public void it_should_create_error_with_unexpected_cookie_name() {
+		ShouldHaveCookie error = shouldNotHaveCookie("foo");
+		assertThat(error).isNotNull();
+		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookie with name foo");
 	}
 }

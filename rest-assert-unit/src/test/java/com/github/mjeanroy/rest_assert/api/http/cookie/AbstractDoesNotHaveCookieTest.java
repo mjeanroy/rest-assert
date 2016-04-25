@@ -39,7 +39,7 @@ import org.junit.Test;
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
-public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest {
+public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponseAssertTest {
 
 	private static final String CUSTOM_MESSAGE = "foo";
 
@@ -47,8 +47,8 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 
 	@Test
 	public void core_it_should_pass_with_expected_cookie() {
-		invoke(newCoreHttpResponse(cookie()));
-		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(cookie()));
+		invoke(newCoreHttpResponse(fakeCookie()));
+		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(fakeCookie()));
 	}
 
 	@Test
@@ -75,8 +75,8 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 
 	@Test
 	public void async_http_it_should_pass_with_expected_cookie() {
-		invoke(newAsyncHttpResponse(cookie()));
-		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(cookie()));
+		invoke(newAsyncHttpResponse(fakeCookie()));
+		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(fakeCookie()));
 	}
 
 	@Test
@@ -103,8 +103,8 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 
 	@Test
 	public void ok_http_it_should_pass_with_expected_cookie() {
-		invoke(newOkHttpResponse(cookie()));
-		invoke(CUSTOM_MESSAGE, newOkHttpResponse(cookie()));
+		invoke(newOkHttpResponse(fakeCookie()));
+		invoke(CUSTOM_MESSAGE, newOkHttpResponse(fakeCookie()));
 	}
 
 	@Test
@@ -131,8 +131,8 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 
 	@Test
 	public void apache_http_it_should_pass_with_expected_cookie() {
-		invoke(newApacheHttpResponse(cookie()));
-		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(cookie()));
+		invoke(newApacheHttpResponse(fakeCookie()));
+		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(fakeCookie()));
 	}
 
 	@Test
@@ -159,8 +159,8 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 
 	@Test
 	public void google_http_it_should_pass_with_expected_cookie() {
-		invoke(newGoogleHttpResponse(cookie()));
-		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(cookie()));
+		invoke(newGoogleHttpResponse(fakeCookie()));
+		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(fakeCookie()));
 	}
 
 	@Test
@@ -186,13 +186,8 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 	// == Test
 
 	private void doTest(String msg, final Invocation invocation) {
-		final Cookie cookie = new CookieMockBuilder()
-				.setName("foo")
-				.setValue("bar")
-				.build();
-
+		final Cookie cookie = cookie();
 		final String message = firstNonNull(msg, buildErrorMessage());
-
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
@@ -204,6 +199,13 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseAssertTest 
 	protected abstract Cookie cookie();
 
 	protected abstract String buildErrorMessage();
+
+	private Cookie fakeCookie() {
+		return new CookieMockBuilder()
+				.setName("foo")
+				.setValue("bar")
+				.build();
+	}
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Cookie cookie) {
 		return new HttpResponseMockBuilder()

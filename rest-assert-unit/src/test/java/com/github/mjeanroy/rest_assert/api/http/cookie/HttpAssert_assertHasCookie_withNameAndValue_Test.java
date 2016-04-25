@@ -30,7 +30,7 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import com.ning.http.client.Response;
 
-public class HttpAssert_assertHasCookie_withNameAndValue_Test extends AbstractCookieTest {
+public class HttpAssert_assertHasCookie_withNameAndValue_Test extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 

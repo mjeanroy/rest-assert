@@ -1,14 +1,14 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
+ * furnished to do so, subject to the following httpResponses:
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
@@ -22,34 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.cookie;
+package com.github.mjeanroy.rest_assert.assertj.api.http.cookie;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import org.assertj.core.api.AssertionInfo;
 
-public class HttpResponseAssertions_hasCookieWithNameAndValue_Test extends AbstractHasCookieTest {
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
+public class HttpResponseAssert_doesNotHaveCookie_withName_Test extends AbstractCookieTest {
 
 	private static final String NAME = "JSESSIONID";
-	private static final String VALUE = "12345";
 
 	@Override
-	protected Cookie newCookie() {
-		return new CookieMockBuilder()
-				.setName(NAME)
-				.setValue(VALUE)
-				.build();
+	protected HttpResponseAssert invoke() {
+		return api.doesNotHaveCookie(NAME);
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s and value %s", NAME, VALUE);
-	}
-
-	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.hasCookie(response, NAME, VALUE);
+	protected void verifyApiCall() {
+		verify(assertions).assertDoesNotHaveCookie(any(AssertionInfo.class), any(HttpResponse.class), eq(NAME));
 	}
 }

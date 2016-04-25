@@ -30,7 +30,7 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 
-public class HttpResponseAssertions_hasCookieWithName_Test extends AbstractCookieTest {
+public class HttpResponseAssertions_hasCookieWithName_Test extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 
