@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseBodyMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import okhttp3.Response;
@@ -76,15 +78,15 @@ public class OkHttpResponseTest {
 
 		List<String> h1 = okHttpResponse.getHeader("foo");
 		assertThat(h1)
-			.isNotNull()
-			.isNotEmpty()
-			.hasSize(1)
-			.contains("bar");
+				.isNotNull()
+				.isNotEmpty()
+				.hasSize(1)
+				.contains("bar");
 
 		List<String> h2 = okHttpResponse.getHeader("bar");
 		assertThat(h2)
-			.isNotNull()
-			.isEmpty();
+				.isNotNull()
+				.isEmpty();
 	}
 
 	@Test
@@ -100,5 +102,34 @@ public class OkHttpResponseTest {
 
 		assertThat(okHttpResponse.getContent()).isEqualTo(content);
 		verify(response).body();
+	}
+
+	@Test
+	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
+		final Response response = new OkHttpResponseMockBuilder().build();
+		final HttpResponse httpResponse = OkHttpResponse.create(response);
+		final List<Cookie> cookies = httpResponse.getCookies();
+
+		assertThat(cookies)
+				.isNotNull()
+				.isEmpty();
+	}
+
+	@Test
+	public void it_should_return_all_cookies() {
+		final Response response = new OkHttpResponseMockBuilder()
+				.addHeader("Set-Cookie", "foo=bar")
+				.addHeader("Set-Cookie", "quix=123")
+				.build();
+
+		final HttpResponse httpResponse = OkHttpResponse.create(response);
+		final List<Cookie> cookies = httpResponse.getCookies();
+
+		assertThat(cookies)
+				.isNotNull()
+				.isNotEmpty()
+				.hasSize(2)
+				.extracting("name")
+				.contains("foo", "quix");
 	}
 }

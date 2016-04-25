@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
@@ -49,8 +50,8 @@ public class AsyncHttpResponseTest {
 	public void it_should_return_status_code() throws Exception {
 		int expectedStatus = 200;
 		Response response = new AsyncHttpResponseMockBuilder()
-			.setStatusCode(expectedStatus)
-			.build();
+				.setStatusCode(expectedStatus)
+				.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		int status = httpResponse.getStatus();
@@ -63,8 +64,8 @@ public class AsyncHttpResponseTest {
 		String headerName = "header-name";
 
 		Response response = new AsyncHttpResponseMockBuilder()
-			.addHeader(headerName, "foo")
-			.build();
+				.addHeader(headerName, "foo")
+				.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		assertThat(httpResponse.hasHeader(headerName)).isTrue();
@@ -78,25 +79,25 @@ public class AsyncHttpResponseTest {
 		String headerValue = "header-value";
 
 		Response response = new AsyncHttpResponseMockBuilder()
-			.addHeader(headerName, headerValue)
-			.build();
+				.addHeader(headerName, headerValue)
+				.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		List<String> result = httpResponse.getHeader(headerName);
 
 		assertThat(result)
-			.isNotNull()
-			.isNotEmpty()
-			.hasSize(1)
-			.contains(headerValue);
+				.isNotNull()
+				.isNotEmpty()
+				.hasSize(1)
+				.contains(headerValue);
 	}
 
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
 		Response response = new AsyncHttpResponseMockBuilder()
-			.setResponseBody(body)
-			.build();
+				.setResponseBody(body)
+				.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		String result = httpResponse.getContent();
@@ -114,5 +115,34 @@ public class AsyncHttpResponseTest {
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		httpResponse.getContent();
+	}
+
+	@Test
+	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
+		final Response response = new AsyncHttpResponseMockBuilder().build();
+		final HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		final List<Cookie> cookies = httpResponse.getCookies();
+
+		assertThat(cookies)
+				.isNotNull()
+				.isEmpty();
+	}
+
+	@Test
+	public void it_should_return_all_cookies() {
+		final Response response = new AsyncHttpResponseMockBuilder()
+				.addHeader("Set-Cookie", "foo=bar")
+				.addHeader("Set-Cookie", "quix=123")
+				.build();
+
+		final HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		final List<Cookie> cookies = httpResponse.getCookies();
+
+		assertThat(cookies)
+				.isNotNull()
+				.isNotEmpty()
+				.hasSize(2)
+				.extracting("name")
+				.contains("foo", "quix");
 	}
 }

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpEntityMockBuilder;
@@ -40,7 +41,7 @@ import java.util.List;
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 public class ApacheHttpResponseTest {
 
@@ -84,9 +85,9 @@ public class ApacheHttpResponseTest {
 		final String headerName = "header-name";
 
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.addHeader("foo", "foo")
-			.addHeader("bar", "bar")
-			.build();
+				.addHeader("foo", "foo")
+				.addHeader("bar", "bar")
+				.build();
 
 		HttpResponse httpResponse = create(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
@@ -109,26 +110,26 @@ public class ApacheHttpResponseTest {
 		List<String> result = httpResponse.getHeader(headerName);
 
 		assertThat(result)
-			.isNotNull()
-			.isNotEmpty()
-			.hasSize(1)
-			.contains(headerValue);
+				.isNotNull()
+				.isNotEmpty()
+				.hasSize(1)
+				.contains(headerValue);
 	}
 
 	@Test
 	public void it_should_return_header_value_with_null_if_header_does_not_exist() {
 		final String headerName = "header-name";
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.addHeader("foo", "bar")
-			.addHeader("bar", "foo")
-			.build();
+				.addHeader("foo", "bar")
+				.addHeader("bar", "foo")
+				.build();
 
 		HttpResponse httpResponse = create(response);
 		List<String> result = httpResponse.getHeader(headerName);
 
 		assertThat(result)
-			.isNotNull()
-			.isEmpty();
+				.isNotNull()
+				.isEmpty();
 	}
 
 	@Test
@@ -163,5 +164,34 @@ public class ApacheHttpResponseTest {
 
 		HttpResponse httpResponse = create(response);
 		httpResponse.getContent();
+	}
+
+	@Test
+	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
+		final org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder().build();
+		final HttpResponse httpResponse = ApacheHttpResponse.create(response);
+		final List<Cookie> cookies = httpResponse.getCookies();
+
+		assertThat(cookies)
+				.isNotNull()
+				.isEmpty();
+	}
+
+	@Test
+	public void it_should_return_all_cookies() {
+		final org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+				.addHeader("Set-Cookie", "foo=bar")
+				.addHeader("Set-Cookie", "quix=123")
+				.build();
+
+		final HttpResponse httpResponse = ApacheHttpResponse.create(response);
+		final List<Cookie> cookies = httpResponse.getCookies();
+
+		assertThat(cookies)
+				.isNotNull()
+				.isNotEmpty()
+				.hasSize(2)
+				.extracting("name")
+				.contains("foo", "quix");
 	}
 }

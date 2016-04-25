@@ -109,7 +109,13 @@ public enum HttpHeader {
 	 * X-Content-Type-Options header name.
 	 * https://tools.ietf.org/html/rfc7034
 	 */
-	X_FRAME_OPTIONS("X-Frame-Options", false);
+	X_FRAME_OPTIONS("X-Frame-Options", false),
+
+	/**
+	 * Set-Cookie header name.
+	 * https://tools.ietf.org/html/rfc6265
+	 */
+	SET_COOKIE("Set-Cookie", false);
 
 	/**
 	 * Name of header.

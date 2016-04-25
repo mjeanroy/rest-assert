@@ -66,4 +66,11 @@ public interface HttpResponse {
 	 * @throws NonParsableResponseBodyException If response body cannot be read.
 	 */
 	String getContent();
+
+	/**
+	 * Get the list of cookies (i.e cookie objects defined by {@code Set-Cookie} header.
+	 *
+	 * @return List of cookies, may be empty if {@code Set-Cookie} is missing.
+	 */
+	List<Cookie> getCookies();
 }

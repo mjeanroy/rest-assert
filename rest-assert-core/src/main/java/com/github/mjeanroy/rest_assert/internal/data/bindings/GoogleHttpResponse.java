@@ -30,10 +30,10 @@ import com.google.api.client.http.HttpHeaders;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collections;
 import java.util.List;
 
 import static com.google.api.client.util.IOUtils.copy;
+import static java.util.Collections.emptyList;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.HttpResponse}
@@ -70,8 +70,8 @@ public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResp
 	@Override
 	public List<String> getHeader(String name) {
 		HttpHeaders headers = response.getHeaders();
-		if (headers.isEmpty()) {
-			return Collections.emptyList();
+		if (headers == null || headers.isEmpty()) {
+			return emptyList();
 		}
 
 		return headers.getHeaderStringValues(name);

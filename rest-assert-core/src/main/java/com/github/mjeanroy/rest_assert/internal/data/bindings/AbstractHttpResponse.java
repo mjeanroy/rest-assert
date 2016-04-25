@@ -24,10 +24,19 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
+import com.github.mjeanroy.rest_assert.utils.Mapper;
 
 import java.io.IOException;
+import java.util.List;
+
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.SET_COOKIE;
+import static com.github.mjeanroy.rest_assert.utils.Utils.map;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * Template for {@link HttpResponse} interface.
@@ -52,6 +61,24 @@ abstract class AbstractHttpResponse implements HttpResponse {
 	@Override
 	public boolean hasHeader(String name) {
 		return !getHeader(name).isEmpty();
+	}
+
+	@Override
+	public List<Cookie> getCookies() {
+		List<String> setCookieHeaders = getHeader(SET_COOKIE.getName());
+		if (setCookieHeaders.isEmpty()) {
+			return emptyList();
+		}
+
+		// Parse header to create valid cookie object.
+		List<Cookie> cookies = map(setCookieHeaders, new Mapper<String, Cookie>() {
+			@Override
+			public Cookie apply(String input) {
+				return Cookies.parse(input);
+			}
+		});
+
+		return unmodifiableList(cookies);
 	}
 
 	/**
