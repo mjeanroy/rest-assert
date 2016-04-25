@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
 import com.google.api.client.http.HttpHeaders;
 
 import java.util.LinkedHashMap;
@@ -66,6 +68,16 @@ public class GoogleHttpHeadersMockBuilder {
 
 		values.add(value);
 		return this;
+	}
+
+	/**
+	 * Add new cookie.
+	 *
+	 * @param cookie Cookie.
+	 * @return Current builder.
+	 */
+	public GoogleHttpHeadersMockBuilder addCookie(Cookie cookie) {
+		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
 	}
 
 	/**

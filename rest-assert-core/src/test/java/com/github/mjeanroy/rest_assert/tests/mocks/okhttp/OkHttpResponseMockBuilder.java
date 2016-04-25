@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.okhttp;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -117,6 +119,16 @@ public class OkHttpResponseMockBuilder {
 
 		values.add(value);
 		return this;
+	}
+
+	/**
+	 * Add new cookie.
+	 *
+	 * @param cookie Cookie.
+	 * @return Current builder.
+	 */
+	public OkHttpResponseMockBuilder addCookie(Cookie cookie) {
+		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
 	}
 
 	/**

@@ -24,14 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
-import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
-import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
-import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
+import com.github.mjeanroy.rest_assert.internal.data.*;
 import com.github.mjeanroy.rest_assert.reflect.Param;
 import com.github.mjeanroy.rest_assert.utils.Mapper;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
@@ -41,6 +35,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
@@ -51,34 +46,11 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.s
 import static com.github.mjeanroy.rest_assert.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CONTROL;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_DISPOSITION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_ENCODING;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_LENGTH;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.EXPIRES;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LAST_MODIFIED;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.PRAGMA;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_FRAME_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_XSS_PROTECTION;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSS;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSV;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.JSON;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.PDF;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_HTML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_PLAIN;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.XHTML;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.*;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.*;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
-import static com.github.mjeanroy.rest_assert.utils.Utils.map;
-import static com.github.mjeanroy.rest_assert.utils.Utils.some;
+import static com.github.mjeanroy.rest_assert.utils.Utils.*;
 import static java.util.Arrays.asList;
 
 /**
@@ -419,7 +391,7 @@ public final class HttpResponseAssertions {
 	 * expected value.
 	 *
 	 * @param httpResponse Http response.
-	 * @param etagValue    ETag value.
+	 * @param etagValue ETag value.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isETagEqualTo(HttpResponse httpResponse, @Param("etagValue") String etagValue) {
@@ -440,7 +412,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Type header with
 	 * expected value.
 	 *
-	 * @param httpResponse     Http response.
+	 * @param httpResponse Http response.
 	 * @param contentTypeValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -492,7 +464,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Disposition header with
 	 * expected value.
 	 *
-	 * @param httpResponse            Http response.
+	 * @param httpResponse Http response.
 	 * @param contentDispositionValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -504,7 +476,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Encoding header with
 	 * expected value.
 	 *
-	 * @param httpResponse         Http response.
+	 * @param httpResponse Http response.
 	 * @param contentEncodingValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -559,7 +531,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Location header with
 	 * expected value.
 	 *
-	 * @param httpResponse  Http response.
+	 * @param httpResponse Http response.
 	 * @param locationValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -635,7 +607,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
-	 * @param httpResponse      Http response.
+	 * @param httpResponse Http response.
 	 * @param lastModifiedValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -647,7 +619,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
-	 * @param httpResponse     Http response.
+	 * @param httpResponse Http response.
 	 * @param lastModifiedDate Expected value.
 	 * @return Assertion result.
 	 */
@@ -666,8 +638,8 @@ public final class HttpResponseAssertions {
 					}
 				});
 				return actualDates.contains(expectedValue) ?
-					success() :
-					failure(shouldHaveHeaderWithValue(headerName, formatHttpDate(expectedValue), actualValues));
+						success() :
+						failure(shouldHaveHeaderWithValue(headerName, formatHttpDate(expectedValue), actualValues));
 			}
 		});
 	}
@@ -883,8 +855,8 @@ public final class HttpResponseAssertions {
 				});
 
 				return found ?
-					success() :
-					failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValues));
+						success() :
+						failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValues));
 			}
 		});
 	}
@@ -992,7 +964,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains expected header.
 	 *
 	 * @param httpResponse Http response.
-	 * @param headerName   Header name.
+	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
@@ -1005,19 +977,19 @@ public final class HttpResponseAssertions {
 	 * Check that http response does not contains expected header.
 	 *
 	 * @param httpResponse Http response.
-	 * @param headerName   Header name.
+	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNothaveHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
 		return httpResponse.hasHeader(headerName) ?
-			failure(shouldNotHaveHeader(headerName)) :
-			success();
+				failure(shouldNotHaveHeader(headerName)) :
+				success();
 	}
 
 	/**
 	 * Check that http response is expected mime type.
 	 *
-	 * @param httpResponse     Http response.
+	 * @param httpResponse Http response.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
@@ -1029,8 +1001,8 @@ public final class HttpResponseAssertions {
 				String contentType = contentTypes.get(0);
 				String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
 				return expectedMimeType.equals(actualMimeType) ?
-					success() :
-					failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+						success() :
+						failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 			}
 		});
 	}
@@ -1038,7 +1010,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response has expected charset.
 	 *
-	 * @param httpResponse    Http response.
+	 * @param httpResponse Http response.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
@@ -1049,7 +1021,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response has expected charset.
 	 *
-	 * @param httpResponse    Http response.
+	 * @param httpResponse Http response.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
@@ -1066,8 +1038,8 @@ public final class HttpResponseAssertions {
 
 				String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
 				return actualCharset.equalsIgnoreCase(expectedCharset) ?
-					success() :
-					failure(shouldHaveCharset(expectedCharset, actualCharset));
+						success() :
+						failure(shouldHaveCharset(expectedCharset, actualCharset));
 			}
 		});
 	}
@@ -1075,7 +1047,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is expected mime type.
 	 *
-	 * @param httpResponse     Http response.
+	 * @param httpResponse Http response.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
@@ -1096,8 +1068,8 @@ public final class HttpResponseAssertions {
 				}
 
 				return found ?
-					success() :
-					failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
+						success() :
+						failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
 			}
 		});
 	}
@@ -1107,8 +1079,8 @@ public final class HttpResponseAssertions {
 	 * expected value.
 	 *
 	 * @param httpResponse Http response.
-	 * @param headerName   Header name.
-	 * @param headerValue  Header value.
+	 * @param headerName Header name.
+	 * @param headerValue Header value.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") final String headerName, @Param("headerValue") final String headerValue) {
@@ -1116,8 +1088,8 @@ public final class HttpResponseAssertions {
 			@Override
 			public AssertionResult handle(List<String> actualValues) {
 				return actualValues.contains(headerValue) ?
-					success() :
-					failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValues));
+						success() :
+						failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValues));
 			}
 		});
 	}
@@ -1143,7 +1115,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response has an expected status.
 	 *
 	 * @param httpResponse Http response.
-	 * @param status       Expected status.
+	 * @param status Expected status.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusEqual(HttpResponse httpResponse, @Param("status") int status) {
@@ -1157,8 +1129,8 @@ public final class HttpResponseAssertions {
 	 * a lower bound and an upper bound (inclusive).
 	 *
 	 * @param httpResponse Http response.
-	 * @param start        Lower bound.
-	 * @param end          Upper bound.
+	 * @param start Lower bound.
+	 * @param end Upper bound.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusBetween(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
@@ -1173,8 +1145,8 @@ public final class HttpResponseAssertions {
 	 * a lower bound and an upper bound (inclusive).
 	 *
 	 * @param httpResponse Http response.
-	 * @param start        Lower bound.
-	 * @param end          Upper bound.
+	 * @param start Lower bound.
+	 * @param end Upper bound.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusOutOf(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
@@ -1182,6 +1154,52 @@ public final class HttpResponseAssertions {
 		return actualStatus < start || actualStatus > end ?
 				success() :
 				failure(shouldHaveStatusOutOf(actualStatus, start, end));
+	}
+
+	/**
+	 * Check that http response contains cookie with given name (note that cookie name is
+	 * case-sensitive).
+	 *
+	 * @param name Cookie name.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") final String name) {
+		notNull(name, "Cookie name must not be null");
+		return hasCookieMatching(httpResponse, shouldHaveCookie(name), new Predicate<Cookie>() {
+			@Override
+			public boolean apply(Cookie input) {
+				// Note that cookie name is case-sensitive.
+				return name.equals(input.getName());
+			}
+		});
+	}
+
+	/**
+	 * Check that http response contains cookie with given name and value (note that cookie name
+	 * is case-sensitive).
+	 *
+	 * @param name Cookie name.
+	 * @param value Cookie value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") final String name, @Param("value") final String value) {
+		notNull(name, "Cookie name must not be null");
+		notNull(value, "Cookie value must not be null");
+		return hasCookieMatching(httpResponse, shouldHaveCookie(name, value), new Predicate<Cookie>() {
+			@Override
+			public boolean apply(Cookie input) {
+				// Note that cookie name is case-sensitive.
+				return name.equals(input.getName()) && value.equals(input.getValue());
+			}
+		});
+	}
+
+	private static AssertionResult hasCookieMatching(HttpResponse httpResponse, ShouldHaveCookie error, Predicate<Cookie> predicate) {
+		List<Cookie> cookies = httpResponse.getCookies();
+		boolean found = some(cookies, predicate);
+		return found ?
+				success() :
+				failure(error);
 	}
 
 	private interface HeaderAssertion {

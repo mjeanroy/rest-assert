@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -79,6 +81,16 @@ public class ApacheHttpResponseMockBuilder {
 
 		values.add(value);
 		return this;
+	}
+
+	/**
+	 * Add new cookie.
+	 *
+	 * @param cookie Cookie.
+	 * @return Current builder.
+	 */
+	public ApacheHttpResponseMockBuilder addCookie(Cookie cookie) {
+		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
 	}
 
 	/**

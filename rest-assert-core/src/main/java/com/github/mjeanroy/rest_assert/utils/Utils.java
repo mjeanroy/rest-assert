@@ -54,7 +54,7 @@ public final class Utils {
 	 *
 	 * @param obj1 First parameter.
 	 * @param obj2 Second parameter.
-	 * @param <T>  Type of parameters.
+	 * @param <T> Type of parameters.
 	 * @return First non null parameters.
 	 */
 	public static <T> T firstNonNull(T obj1, T obj2) {
@@ -66,9 +66,9 @@ public final class Utils {
 	 * If value is null, a {@link NullPointerException} will be thrown
 	 * with given message.
 	 *
-	 * @param obj     Value to check.
+	 * @param obj Value to check.
 	 * @param message Message given in {@link NullPointerException}.
-	 * @param <T>     Type of object.
+	 * @param <T> Type of object.
 	 * @return Original object if it is not null.
 	 */
 	public static <T> T notNull(T obj, String message) {
@@ -156,8 +156,8 @@ public final class Utils {
 	 *
 	 * @param inputs Input list.
 	 * @param mapper Mapper function.
-	 * @param <T>    Input type.
-	 * @param <U>    Output type.
+	 * @param <T> Input type.
+	 * @param <U> Output type.
 	 * @return Outputs.
 	 */
 	public static <T, U> List<U> map(List<T> inputs, Mapper<T, U> mapper) {
@@ -171,9 +171,9 @@ public final class Utils {
 	/**
 	 * Filter a list using a given predicate.
 	 *
-	 * @param inputs    List input.
+	 * @param inputs List input.
 	 * @param predicate Predicate function.
-	 * @param <T>       Type of inputs.
+	 * @param <T> Type of inputs.
 	 * @return Output (i.e filtered inputs).
 	 */
 	public static <T> List<T> filter(List<T> inputs, Predicate<T> predicate) {

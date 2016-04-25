@@ -24,17 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks;
 
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import static java.util.Collections.addAll;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -60,10 +58,16 @@ public class HttpResponseMockBuilder {
 	private final Map<String, List<String>> headers;
 
 	/**
+	 * List of cookies.
+	 */
+	private final List<Cookie> cookies;
+
+	/**
 	 * Create builder.
 	 */
 	public HttpResponseMockBuilder() {
 		this.headers = new LinkedHashMap<>();
+		this.cookies = new LinkedList<>();
 	}
 
 	/**
@@ -119,6 +123,18 @@ public class HttpResponseMockBuilder {
 	}
 
 	/**
+	 * Add new cookie.
+	 *
+	 * @param cookie Cookie to add.
+	 * @return Current builder.
+	 */
+	public HttpResponseMockBuilder addCookie(Cookie cookie, Cookie... other) {
+		this.cookies.add(cookie);
+		addAll(cookies, other);
+		return this;
+	}
+
+	/**
 	 * Build mock of {@link HttpResponse} class.
 	 *
 	 * @return Mock instance.
@@ -148,6 +164,8 @@ public class HttpResponseMockBuilder {
 				return headers.containsKey(name);
 			}
 		});
+
+		when(rsp.getCookies()).thenReturn(new ArrayList<>(cookies));
 
 		return rsp;
 	}
