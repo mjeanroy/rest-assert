@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2014 <mickael.jeanroy@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,21 +22,19 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.cookie;
+package com.github.mjeanroy.rest_assert.assertj.internal.http.cookie;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import org.junit.Test;
+import org.assertj.core.api.AssertionInfo;
 
-public class HttpResponseAssertions_doesNotHaveCookie_Test extends AbstractDoesNotHaveCookieTest {
+public class HttpResponses_assertDoesNotHaveCookie_withName_Test extends AbstractDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 
 	@Override
-	protected Cookie newCookie() {
+	protected Cookie cookie() {
 		return new CookieMockBuilder()
 				.setName(NAME)
 				.setValue("12345")
@@ -44,18 +42,12 @@ public class HttpResponseAssertions_doesNotHaveCookie_Test extends AbstractDoesN
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response not to contains cookies");
+	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertDoesNotHaveCookie(info, httpResponse, NAME);
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.doesNotHaveCookie(response);
-	}
-
-	@Test
-	@Override
-	public void it_should_pass_without_cookie() {
-		// Nothing to test.
+	protected String buildErrorMessage() {
+		return String.format("Expecting http response not to contains cookie with name \"%s\"", NAME);
 	}
 }

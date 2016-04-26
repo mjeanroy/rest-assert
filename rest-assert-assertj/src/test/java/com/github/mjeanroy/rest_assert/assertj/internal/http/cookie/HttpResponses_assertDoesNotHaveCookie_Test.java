@@ -42,12 +42,17 @@ public class HttpResponses_assertDoesNotHaveCookie_Test extends AbstractDoesNotH
 	}
 
 	@Override
+	protected Cookie fakeCookie() {
+		return null;
+	}
+
+	@Override
 	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertDoesNotHaveCookie(info, httpResponse, NAME);
+		httpResponses.assertDoesNotHaveCookie(info, httpResponse);
 	}
 
 	@Override
 	protected String buildErrorMessage() {
-		return String.format("Expecting http response not to contains cookie with name \"%s\"", NAME);
+		return "Expecting http response not to contains cookies";
 	}
 }

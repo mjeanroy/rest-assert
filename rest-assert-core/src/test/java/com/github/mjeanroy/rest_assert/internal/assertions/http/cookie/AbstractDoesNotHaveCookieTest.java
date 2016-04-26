@@ -45,7 +45,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_pass_without_any_cookies() {
-		AssertionResult result = invoke(new HttpResponseMockBuilder().build());
+		AssertionResult result = invoke(newResponse(null));
 		checkSuccess(result);
 	}
 
@@ -71,9 +71,12 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 
 	protected abstract void verifyError(AssertionResult result);
 
-	private HttpResponse newResponse(Cookie cookie, Cookie... cookies) {
-		return new HttpResponseMockBuilder()
-				.addCookie(cookie, cookies)
-				.build();
+	private HttpResponse newResponse(Cookie cookie) {
+		HttpResponseMockBuilder builder = new HttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
 	}
 }

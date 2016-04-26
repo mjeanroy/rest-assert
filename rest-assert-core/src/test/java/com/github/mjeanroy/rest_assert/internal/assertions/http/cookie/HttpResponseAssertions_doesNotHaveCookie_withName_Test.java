@@ -29,9 +29,8 @@ import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import org.junit.Test;
 
-public class HttpResponseAssertions_doesNotHaveCookie_Test extends AbstractDoesNotHaveCookieTest {
+public class HttpResponseAssertions_doesNotHaveCookie_withName_Test extends AbstractDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 
@@ -45,17 +44,11 @@ public class HttpResponseAssertions_doesNotHaveCookie_Test extends AbstractDoesN
 
 	@Override
 	protected void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response not to contains cookies");
+		checkError(result, ShouldHaveCookie.class, "Expecting http response not to contains cookie with name %s", NAME);
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.doesNotHaveCookie(response);
-	}
-
-	@Test
-	@Override
-	public void it_should_pass_without_cookie() {
-		// Nothing to test.
+		return assertions.doesNotHaveCookie(response, NAME);
 	}
 }

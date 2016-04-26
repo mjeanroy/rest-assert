@@ -46,13 +46,13 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	// == Core HTTP response
 
 	@Test
-	public void core_it_should_pass_with_expected_cookie() {
+	public void core_it_should_pass_without_cookies() {
 		invoke(newCoreHttpResponse(fakeCookie()));
 		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(fakeCookie()));
 	}
 
 	@Test
-	public void core_it_should_fail_with_response_without_expected_cookie() {
+	public void core_it_should_fail_with_response_with_cookie() {
 		doTest(null, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -62,7 +62,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	@Test
-	public void core_it_should_pass_with_custom_message_with_response_without_expected_cookie() {
+	public void core_it_should_pass_with_custom_message_with_response_with_cookie() {
 		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -74,13 +74,13 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	// == Async HTTP response
 
 	@Test
-	public void async_http_it_should_pass_with_expected_cookie() {
+	public void async_http_it_should_pass_without_cookies() {
 		invoke(newAsyncHttpResponse(fakeCookie()));
 		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(fakeCookie()));
 	}
 
 	@Test
-	public void async_http_it_should_fail_with_response_without_expected_cookie() {
+	public void async_http_it_should_fail_with_response_with_cookie() {
 		doTest(null, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -90,7 +90,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	@Test
-	public void async_http_it_should_pass_with_custom_message_with_response_without_expected_cookie() {
+	public void async_http_it_should_pass_with_custom_message_with_response_with_cookie() {
 		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -102,13 +102,13 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	// == Ok HTTP response
 
 	@Test
-	public void ok_http_it_should_pass_with_expected_cookie() {
+	public void ok_http_it_should_pass_without_cookies() {
 		invoke(newOkHttpResponse(fakeCookie()));
 		invoke(CUSTOM_MESSAGE, newOkHttpResponse(fakeCookie()));
 	}
 
 	@Test
-	public void ok_http_it_should_fail_with_response_without_expected_cookie() {
+	public void ok_http_it_should_fail_with_response_with_cookie() {
 		doTest(null, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -118,7 +118,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	@Test
-	public void ok_http_it_should_pass_with_custom_message_with_response_without_expected_cookie() {
+	public void ok_http_it_should_pass_with_custom_message_with_response_with_cookie() {
 		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -130,13 +130,13 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	// == Apache HTTP response
 
 	@Test
-	public void apache_http_it_should_pass_with_expected_cookie() {
+	public void apache_http_it_should_pass_without_cookies() {
 		invoke(newApacheHttpResponse(fakeCookie()));
 		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(fakeCookie()));
 	}
 
 	@Test
-	public void apache_http_it_should_fail_with_response_without_expected_cookie() {
+	public void apache_http_it_should_fail_with_response_with_cookie() {
 		doTest(null, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -146,7 +146,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	@Test
-	public void apache_http_it_should_pass_with_custom_message_with_response_without_expected_cookie() {
+	public void apache_http_it_should_pass_with_custom_message_with_response_with_cookie() {
 		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -158,13 +158,13 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	// == Google HTTP response
 
 	@Test
-	public void google_http_it_should_pass_with_expected_cookie() {
+	public void google_http_it_should_pass_without_cookies() {
 		invoke(newGoogleHttpResponse(fakeCookie()));
 		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(fakeCookie()));
 	}
 
 	@Test
-	public void google_http_it_should_fail_with_response_without_expected_cookie() {
+	public void google_http_it_should_fail_with_response_with_cookie() {
 		doTest(null, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -174,7 +174,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	@Test
-	public void google_http_it_should_pass_with_custom_message_with_response_without_expected_cookie() {
+	public void google_http_it_should_pass_with_custom_message_with_response_with_cookie() {
 		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(Cookie cookie) {
@@ -200,7 +200,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 
 	protected abstract String buildErrorMessage();
 
-	private Cookie fakeCookie() {
+	protected Cookie fakeCookie() {
 		return new CookieMockBuilder()
 				.setName("foo")
 				.setValue("bar")
@@ -208,34 +208,49 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Cookie cookie) {
-		return new HttpResponseMockBuilder()
-				.addCookie(cookie)
-				.build();
+		HttpResponseMockBuilder builder = new HttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
 	}
 
 	private com.ning.http.client.Response newAsyncHttpResponse(Cookie cookie) {
-		return new AsyncHttpResponseMockBuilder()
-				.addCookie(cookie)
-				.build();
+		AsyncHttpResponseMockBuilder builder = new AsyncHttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
 	}
 
 	private okhttp3.Response newOkHttpResponse(Cookie cookie) {
-		return new OkHttpResponseMockBuilder()
-				.addCookie(cookie)
-				.build();
+		OkHttpResponseMockBuilder builder = new OkHttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
 	}
 
 	private org.apache.http.HttpResponse newApacheHttpResponse(Cookie cookie) {
-		return new ApacheHttpResponseMockBuilder()
-				.addCookie(cookie)
-				.build();
+		ApacheHttpResponseMockBuilder builder = new ApacheHttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
 	}
 
 	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(Cookie cookie) {
+		GoogleHttpHeadersMockBuilder builder = new GoogleHttpHeadersMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
 		return new GoogleHttpResponseMockBuilder()
-				.setHeaders(new GoogleHttpHeadersMockBuilder()
-						.addCookie(cookie)
-						.build())
+				.setHeaders(builder.build())
 				.build();
 	}
 

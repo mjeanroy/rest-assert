@@ -52,4 +52,11 @@ public class ShouldHaveCookieTest {
 		assertThat(error).isNotNull();
 		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookie with name foo");
 	}
+
+	@Test
+	public void it_should_create_error_with_unexpected_cookies() {
+		ShouldHaveCookie error = shouldNotHaveCookie();
+		assertThat(error).isNotNull();
+		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookies");
+	}
 }

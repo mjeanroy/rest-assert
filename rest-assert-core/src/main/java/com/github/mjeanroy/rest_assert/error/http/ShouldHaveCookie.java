@@ -67,4 +67,13 @@ public class ShouldHaveCookie extends AbstractError {
 	public static ShouldHaveCookie shouldNotHaveCookie(String name) {
 		return new ShouldHaveCookie("Expecting http response not to contains cookie with name %s", name);
 	}
+
+	/**
+	 * Build error.
+	 *
+	 * @return Error.
+	 */
+	public static ShouldHaveCookie shouldNotHaveCookie() {
+		return new ShouldHaveCookie("Expecting http response not to contains cookies");
+	}
 }

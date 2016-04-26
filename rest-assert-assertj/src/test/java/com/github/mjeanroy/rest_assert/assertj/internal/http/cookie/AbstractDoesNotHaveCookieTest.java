@@ -42,19 +42,14 @@ public abstract class AbstractDoesNotHaveCookieTest {
 
 	@Test
 	public void should_pass_if_cookie_is_missing() {
-		HttpResponse httpResponse = new HttpResponseMockBuilder()
-				.addCookie(fakeCookie())
-				.build();
-
+		HttpResponse httpResponse = newResponse(fakeCookie());
 		invoke(someInfo(), httpResponse);
 	}
 
 	@Test
 	public void should_fail_if_cookie_is_here() {
 		final AssertionInfo info = someInfo();
-		final HttpResponse httpResponse = new HttpResponseMockBuilder()
-				.addCookie(cookie())
-				.build();
+		final HttpResponse httpResponse = newResponse(cookie());
 
 		try {
 			invoke(info, httpResponse);
@@ -73,10 +68,19 @@ public abstract class AbstractDoesNotHaveCookieTest {
 
 	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 
-	private Cookie fakeCookie() {
+	protected Cookie fakeCookie() {
 		return new CookieMockBuilder()
-			.setName("foo")
-			.setValue("bar")
-			.build();
+				.setName("foo")
+				.setValue("bar")
+				.build();
+	}
+
+	private HttpResponse newResponse(Cookie cookie) {
+		HttpResponseMockBuilder builder = new HttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
 	}
 }

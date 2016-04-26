@@ -34,73 +34,70 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import com.ning.http.client.Response;
 
-public class HttpAssert_assertDoesNotHaveCookie_Test extends AbstractDoesNotHaveCookieTest {
+public class HttpAssert_assertDoesNotHaveCookie_withName_Test extends AbstractDoesNotHaveCookieTest {
+
+	private static final String NAME = "JSESSIONID";
 
 	@Override
 	protected Cookie cookie() {
 		return new CookieMockBuilder()
-				.setName("JSESSIONID")
+				.setName(NAME)
 				.setValue("12345")
 				.build();
 	}
 
 	@Override
-	protected Cookie fakeCookie() {
-		return null;
-	}
-
-	@Override
 	protected String buildErrorMessage() {
-		return String.format("Expecting http response not to contains cookies");
+		return String.format("Expecting http response not to contains cookie with name %s", NAME);
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		HttpAssert.assertDoesNotHaveCookie(actual);
+		HttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpAssert.assertDoesNotHaveCookie(message, actual);
+		HttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertDoesNotHaveCookie(actual);
+		AsyncHttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertDoesNotHaveCookie(message, actual);
+		AsyncHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 
 	@Override
 	protected void invoke(okhttp3.Response actual) {
-		OkHttpAssert.assertDoesNotHaveCookie(actual);
+		OkHttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
 	protected void invoke(String message, okhttp3.Response actual) {
-		OkHttpAssert.assertDoesNotHaveCookie(message, actual);
+		OkHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 
 	@Override
 	protected void invoke(org.apache.http.HttpResponse actual) {
-		ApacheHttpAssert.assertDoesNotHaveCookie(actual);
+		ApacheHttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
 	protected void invoke(String message, org.apache.http.HttpResponse actual) {
-		ApacheHttpAssert.assertDoesNotHaveCookie(message, actual);
+		ApacheHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 
 	@Override
 	protected void invoke(com.google.api.client.http.HttpResponse actual) {
-		GoogleHttpAssert.assertDoesNotHaveCookie(actual);
+		GoogleHttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
 	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
-		GoogleHttpAssert.assertDoesNotHaveCookie(message, actual);
+		GoogleHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 }
