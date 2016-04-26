@@ -24,27 +24,28 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api.http.headers.header_equal_to;
 
+import java.util.Date;
+
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import java.util.Date;
-
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class HttpResponseAssert_isExpiresEqualTo_withDate_Test extends AbstractHttpResponseHeaderTest {
 
+	private static final Date EXPIRES_VALUE = new Date();
+
 	@Override
 	protected HttpResponseAssert invoke() {
-		Date date = mock(Date.class);
-		return api.isExpiresEqualTo(date);
+		return api.isExpiresEqualTo(EXPIRES_VALUE);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsExpiresEqualTo(any(AssertionInfo.class), any(HttpResponse.class), any(Date.class));
+		verify(assertions).assertIsExpiresEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(EXPIRES_VALUE));
 	}
 }
