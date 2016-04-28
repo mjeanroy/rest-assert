@@ -74,10 +74,197 @@ public final class Cookies {
 	 */
 	public static Cookie newCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge, Date expires) {
 		return new DefaultCookie(
-			notBlank(name, "Cookie name must be defined"),
-			notNull(value, "Cookie value must not be null"),
-			domain, path, secure, httpOnly, maxAge, expires
+				notBlank(name, "Cookie name must be defined"),
+				notNull(value, "Cookie value must not be null"),
+				domain, path, secure, httpOnly, maxAge, expires
 		);
+	}
+
+	/**
+	 * Create new builder.
+	 *
+	 * @param name Cookie name, must not be blank.
+	 * @param value Cookie value, must not be null.
+	 * @return The builder.
+	 */
+	public static Builder builder(String name, String value) {
+		return new Builder(name, value);
+	}
+
+	/**
+	 * Check that two {@link Cookie} are equals:
+	 *
+	 * <ul>
+	 *   <li>If both are {@code null}, {@code true} is returned.</li>
+	 *   <li>If one is {@code null}, {@code false} is returned.</li>
+	 *   <li>Otherwise, each cookie fields are compared</li>
+	 * </ul>
+	 *
+	 * <strong>Note: Cookie name comparison is case-insensitive.</strong>
+	 *
+	 * @param c1 First cookie.
+	 * @param c2 Second cookie.
+	 * @return {@code true} if {@code c1} and {@code c2} are equals, {@code false} otherwise.
+	 */
+	public static boolean equals(Cookie c1, Cookie c2) {
+		if (c1 == c2) {
+			return true;
+		}
+
+		if (c1 == null || c2 == null) {
+			return false;
+		}
+
+		return c1.getName().equalsIgnoreCase(c2.getName())
+				&& c1.getValue().equals(c2.getValue())
+				&& Objects.equals(c1.getDomain(), c2.getDomain())
+				&& Objects.equals(c1.getPath(), c2.getPath())
+				&& c1.isSecured() == c2.isSecured()
+				&& c1.isHttpOnly() == c2.isHttpOnly()
+				&& Objects.equals(c1.getMaxAge(), c2.getMaxAge())
+				&& Objects.equals(c1.getExpires(), c2.getExpires());
+	}
+
+	/**
+	 * Builder class that can be used to build {@link Cookie} instance.
+	 */
+	public static class Builder {
+		/**
+		 * Cookie name, mandatory.
+		 */
+		private final String name;
+
+		/**
+		 * Cookie value, mandatory.
+		 */
+		private final String value;
+
+		/**
+		 * Cookie domain, optional (default is {@code null}).
+		 */
+		private String domain;
+
+		/**
+		 * Cookie path, optional (default is {@code null}).
+		 */
+		private String path;
+
+		/**
+		 * Cookie secure flag, optional (default is {@code false}).
+		 */
+		private boolean secure;
+
+		/**
+		 * Cookie httpOnly flag, optional (default is {@code false}).
+		 */
+		private boolean httpOnly;
+
+		/**
+		 * Cookie max-age, optional (default is {@code null}, meaning no max-age).
+		 */
+		private Long maxAge;
+
+		/**
+		 * Cookie expires date, optional (default is {@code null}, meaning no expires value).
+		 */
+		private Date expires;
+
+		/**
+		 * Create builder.
+		 * This constructor is private since {@link com.github.mjeanroy.rest_assert.internal.data.Cookies#builder(String, String)} method
+		 * should be used.
+		 *
+		 * @param name Cookie name.
+		 * @param value Cookie value.
+		 */
+		private Builder(String name, String value) {
+			this.name = notBlank(name, "Cookie name must not be blank");
+			this.value = notNull(value, "Cookie value must not be null");
+		}
+
+		/**
+		 * Update cookie domain.
+		 *
+		 * @param domain New domain value.
+		 * @return Current builder.
+		 */
+		public Builder setDomain(String domain) {
+			this.domain = domain;
+			return this;
+		}
+
+		/**
+		 * Update cookie path.
+		 *
+		 * @param path New path value.
+		 * @return Current builder.
+		 */
+		public Builder setPath(String path) {
+			this.path = path;
+			return this;
+		}
+
+		/**
+		 * Set secure flag to {@code true}.
+		 *
+		 * @return Current builder.
+		 */
+		public Builder setSecure() {
+			this.secure = true;
+			return this;
+		}
+
+		/**
+		 * Set httpOnly flag to {@code true}.
+		 *
+		 * @return Current builder.
+		 */
+		public Builder setHttpOnly() {
+			this.httpOnly = true;
+			return this;
+		}
+
+		/**
+		 * Update max-age value.
+		 *
+		 * @param maxAge Max-Age value.
+		 * @return Current builder.
+		 */
+		public Builder setMaxAge(long maxAge) {
+			this.maxAge = maxAge;
+			return this;
+		}
+
+		/**
+		 * Update expires value.
+		 *
+		 * @param expires Expires value.
+		 * @return Current builder.
+		 */
+		public Builder setExpires(Date expires) {
+			this.expires = expires;
+			return this;
+		}
+
+		/**
+		 * Update expires value.
+		 *
+		 * @param expires Expires value (timestamp).
+		 * @return Current builder.
+		 */
+		public Builder setExpires(long expires) {
+			this.expires = new Date(expires);
+			return this;
+		}
+
+		/**
+		 * Create cookie.
+		 *
+		 * @return Cookie.
+		 */
+		public Cookie build() {
+			return newCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
+		}
 	}
 
 	/**
@@ -289,15 +476,7 @@ public final class Cookies {
 			}
 
 			if (o instanceof DefaultCookie) {
-				DefaultCookie c = (DefaultCookie) o;
-				return Objects.equals(getName(), c.getName())
-					&& Objects.equals(getValue(), c.getValue())
-					&& Objects.equals(getDomain(), c.getDomain())
-					&& Objects.equals(getPath(), c.getPath())
-					&& Objects.equals(isSecured(), c.isSecured())
-					&& Objects.equals(isHttpOnly(), c.isHttpOnly())
-					&& Objects.equals(getMaxAge(), c.getMaxAge())
-					&& Objects.equals(getExpires(), c.getExpires());
+				return Cookies.equals(this, (DefaultCookie) o);
 			}
 
 			return false;
@@ -344,9 +523,9 @@ public final class Cookies {
 			current.append(c);
 		}
 
-		return new String[] {
-			nameValuePair.toString(),
-			unparsedAttributes.toString()
+		return new String[]{
+				nameValuePair.toString(),
+				unparsedAttributes.toString()
 		};
 	}
 
@@ -403,7 +582,7 @@ public final class Cookies {
 			throw new IllegalArgumentException("Set-Cookie header must have a name");
 		}
 
-		return new String[] { name, value };
+		return new String[]{name, value};
 	}
 
 	private static MetaDataAttribute parseNextPart(char[] attributes, int pos) {
@@ -429,9 +608,9 @@ public final class Cookies {
 		}
 
 		return new MetaDataAttribute(
-			field.toString(),
-			name.toString().trim(),
-			value.toString().trim()
+				field.toString(),
+				name.toString().trim(),
+				value.toString().trim()
 		);
 	}
 
@@ -583,10 +762,10 @@ public final class Cookies {
 
 	private static boolean isNonDelimiter(char c) {
 		return (c < ' ' && c != '\t') || (c >= '\u007f')
-			|| (c >= '0' && c <= '9')
-			|| (c >= 'a' && c <= 'z')
-			|| (c >= 'A' && c <= 'Z')
-			|| (c == ':');
+				|| (c >= '0' && c <= '9')
+				|| (c >= 'a' && c <= 'z')
+				|| (c >= 'A' && c <= 'Z')
+				|| (c == ':');
 	}
 
 	private static boolean isDelimiter(char c) {

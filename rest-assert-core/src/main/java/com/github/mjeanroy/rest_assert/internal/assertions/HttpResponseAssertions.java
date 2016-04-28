@@ -32,6 +32,7 @@ import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
 import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
@@ -1243,6 +1244,16 @@ public final class HttpResponseAssertions {
 		return hasCookieMatching(httpResponse, shouldHaveCookie(name, value), new CookieNameValuePredicate(name, value));
 	}
 
+	/**
+	 * Check that http response contains cookie.
+	 *
+	 * @param cookie Cookie.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("cookie") Cookie cookie) {
+		return hasCookieMatching(httpResponse, shouldHaveCookie(cookie), new CookiePredicate(cookie));
+	}
+
 	private static AssertionResult hasCookieMatching(HttpResponse httpResponse, ShouldHaveCookie error, Predicate<Cookie> predicate) {
 		List<Cookie> cookies = httpResponse.getCookies();
 		if (cookies.isEmpty()) {
@@ -1279,6 +1290,19 @@ public final class HttpResponseAssertions {
 		@Override
 		public boolean apply(Cookie cookie) {
 			return super.apply(cookie) && value.equals(cookie.getValue());
+		}
+	}
+
+	private static class CookiePredicate implements Predicate<Cookie> {
+		private final Cookie cookie;
+
+		private CookiePredicate(Cookie cookie) {
+			this.cookie = notNull(cookie, "Cookie must not be null");
+		}
+
+		@Override
+		public boolean apply(Cookie cookie) {
+			return Cookies.equals(this.cookie, cookie);
 		}
 	}
 

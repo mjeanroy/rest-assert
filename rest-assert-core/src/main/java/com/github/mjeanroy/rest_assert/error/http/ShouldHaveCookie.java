@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.error.http;
 
 import com.github.mjeanroy.rest_assert.error.AbstractError;
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 /**
  * Error thrown when an http response should contains
@@ -56,6 +57,16 @@ public class ShouldHaveCookie extends AbstractError {
 	 */
 	public static ShouldHaveCookie shouldHaveCookie(String name, String value) {
 		return new ShouldHaveCookie("Expecting http response to contains cookie with name %s and value %s", name, value);
+	}
+
+	/**
+	 * Build error.
+	 *
+	 * @param cookie Cookie.
+	 * @return Error.
+	 */
+	public static ShouldHaveCookie shouldHaveCookie(Cookie cookie) {
+		return new ShouldHaveCookie("Expecting http response to contains cookie %s", cookie);
 	}
 
 	/**
