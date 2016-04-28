@@ -30,6 +30,7 @@ import java.util.List;
 
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
+import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
 import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.Cookies;
@@ -60,6 +61,7 @@ import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CON
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_DISPOSITION;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_ENCODING;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_LENGTH;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.EXPIRES;
@@ -875,6 +877,48 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") FrameOptions frameOptions) {
 		return isHeaderMatching(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions);
+	}
+
+	/**
+	 * Check that http response contains Content-Security-Policy header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasContentSecurityPolicy(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, CONTENT_SECURITY_POLICY.getName());
+	}
+
+	/**
+	 * Check that http response does contains Content-Security-Policy header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveContentSecurityPolicy(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, CONTENT_SECURITY_POLICY.getName());
+	}
+
+	/**
+	 * Check that http response contains Content-Security-Policy header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param contentSecurityPolicy Cache-Control value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, @Param("contentSecurityPolicy") String contentSecurityPolicy) {
+		return isHeaderEqualTo(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy);
+	}
+
+	/**
+	 * Check that http response contains Content-Security-Policy header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param contentSecurityPolicy Cache-Control value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, @Param("contentSecurityPolicy") ContentSecurityPolicy contentSecurityPolicy) {
+		return isHeaderMatching(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy);
 	}
 
 	private AssertionResult isHeaderMatching(HttpResponse httpResponse, final String headerName, final HeaderValue value) {

@@ -88,6 +88,12 @@ public enum HttpHeader {
 	CACHE_CONTROL("Cache-Control", false),
 
 	/**
+	 * Cache Control header name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	 */
+	CONTENT_SECURITY_POLICY("Content-Security-Policy", false),
+
+	/**
 	 * Pragma header name.
 	 * https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
 	 */

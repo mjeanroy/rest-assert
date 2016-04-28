@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions.http.headers.does_not_have_header;
+package com.github.mjeanroy.rest_assert.internal.assertions.http.headers.has_header;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
@@ -30,15 +30,15 @@ import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpResponseAssertions_doesNothaveCacheControl_Test extends AbstractDoesNotHaveHttpHeaderTest {
+public class HttpResponseAssertions_hasContentSecurityPolicy_Test extends AbstractHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "public, no-transform, max-age=300");
+		return header("Content-Security-Policy", "default-src 'none';");
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.doesNotHaveCacheControl(response);
+		return assertions.hasContentSecurityPolicy(response);
 	}
 }

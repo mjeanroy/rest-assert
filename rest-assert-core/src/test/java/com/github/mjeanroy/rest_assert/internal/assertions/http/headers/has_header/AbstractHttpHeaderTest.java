@@ -47,30 +47,49 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 
 	@Test
 	public void it_should_pass_with_expected_header() {
-		Header header = getHeader();
-		AssertionResult result = invoke(newResponse(header));
+		// GIVEN
+		final Header header = getHeader();
+		final HttpResponse rsp = newResponse(header);
+
+		// WHEN
+		AssertionResult result = invoke(rsp);
+
+		// THEN
 		checkSuccess(result);
 	}
 
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header() {
+		// GIVEN
 		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
+		final String expectedName = expectedHeader.getName();
+		final Header header = header(expectedHeader.getValue(), expectedName);
+		final HttpResponse rsp = newResponse(header);
 
-		AssertionResult result = invoke(newResponse(header));
+		// WHEN
+		AssertionResult result = invoke(rsp);
 
-		checkError(result,
-				ShouldHaveHeader.class,
-				"Expecting response to have header %s",
-				expectedHeader.getName()
-		);
+		// THEN
+		final String message = "Expecting response to have header %s";
+		checkError(result, ShouldHaveHeader.class, message, expectedName);
 	}
 
+	/**
+	 * Create fake http response with given {@code header}.
+	 *
+	 * @param header Header.
+	 * @return Fake http response.
+	 */
 	private HttpResponse newResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+				.addHeader(header)
+				.build();
 	}
 
+	/**
+	 * Get expected header.
+	 *
+	 * @return Expected header.
+	 */
 	protected abstract Header getHeader();
 }

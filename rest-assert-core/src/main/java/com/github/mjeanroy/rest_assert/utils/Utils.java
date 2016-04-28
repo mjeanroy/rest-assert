@@ -135,6 +135,14 @@ public final class Utils {
 		return val;
 	}
 
+	public static String match(String value, Pattern pattern, String message) {
+		if (!pattern.matcher(value).matches()) {
+			throw new IllegalArgumentException(message);
+		}
+
+		return value;
+	}
+
 	/**
 	 * Parse a given string value to a long number.
 	 *
@@ -162,6 +170,23 @@ public final class Utils {
 	 */
 	public static <T, U> List<U> map(List<T> inputs, Mapper<T, U> mapper) {
 		List<U> outputs = new ArrayList<>(inputs.size());
+		for (T input : inputs) {
+			outputs.add(mapper.apply(input));
+		}
+		return outputs;
+	}
+
+	/**
+	 * Map each element of input array to an output list.
+	 *
+	 * @param inputs Input list.
+	 * @param mapper Mapper function.
+	 * @param <T> Input type.
+	 * @param <U> Output type.
+	 * @return Outputs.
+	 */
+	public static <T, U> List<U> map(T[] inputs, Mapper<T, U> mapper) {
+		List<U> outputs = new ArrayList<>(inputs.length);
 		for (T input : inputs) {
 			outputs.add(mapper.apply(input));
 		}

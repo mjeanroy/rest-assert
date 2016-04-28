@@ -41,12 +41,19 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 
 	@Test
 	public void should_pass_if_header_is_ok() {
-		HttpResponse httpResponse = newHttpResponse(getHeader());
+		// GIVEN
+		final Header header = getHeader();
+		final HttpResponse httpResponse = newHttpResponse(header);
+
+		// WHEN
 		invoke(httpResponse);
+
+		// THEN
 	}
 
 	@Test
 	public void should_fail_if_header_is_not_available() {
+		// GIVEN
 		final Header expectedHeader = getHeader();
 		final String expectedName = expectedHeader.getName();
 		final String expectedValue = expectedHeader.getValue();
@@ -55,9 +62,11 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
+			// WHEN
 			invoke(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
+			// THEN
 			assertThat(e.getMessage())
 					.isNotNull()
 					.isNotEmpty()
@@ -65,17 +74,38 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 		}
 	}
 
+	/**
+	 * Get expected header.
+	 *
+	 * @return Expected header.
+	 */
 	protected abstract Header getHeader();
 
+	/**
+	 * Create fail value (i.e should not match expected header value).
+	 *
+	 * @return Fail value.
+	 */
 	protected String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 
+	/**
+	 * Create fake http response with expected header.
+	 *
+	 * @param header Expected header.
+	 * @return Fake http response.
+	 */
 	protected HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+				.addHeader(header)
+				.build();
 	}
 
+	/**
+	 * Invoke test with {@code httpResponse}.
+	 *
+	 * @param httpResponse Http response.
+	 */
 	protected abstract void invoke(HttpResponse httpResponse);
 }

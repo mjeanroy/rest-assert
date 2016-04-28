@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.does_not_have_header;
 
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
@@ -48,9 +49,15 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractHttpResp
 
 	@Test
 	public void core_it_should_pass_with_missing_header() {
-		Header header = header("Foo", "Bar");
-		invoke(newCoreHttpResponse(header));
-		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(header));
+		// GIVEN
+		final Header header = header("Foo", "Bar");
+		final HttpResponse rsp = newCoreHttpResponse(header);
+
+		// WHEN
+		invoke(rsp);
+		invoke(CUSTOM_MESSAGE, rsp);
+
+		// THEN
 	}
 
 	@Test
@@ -211,34 +218,34 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractHttpResp
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private com.ning.http.client.Response newAsyncHttpResponse(Header header) {
 		return new AsyncHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private okhttp3.Response newOkHttpResponse(Header header) {
 		return new OkHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private org.apache.http.HttpResponse newApacheHttpResponse(Header header) {
 		return new ApacheHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(Header header) {
 		return new GoogleHttpResponseMockBuilder()
-			.setHeaders(new GoogleHttpHeadersMockBuilder()
-				.addHeader(header.getName(), header.getValue())
-				.build())
-			.build();
+				.setHeaders(new GoogleHttpHeadersMockBuilder()
+						.addHeader(header.getName(), header.getValue())
+						.build())
+				.build();
 	}
 
 	private interface Invocation {

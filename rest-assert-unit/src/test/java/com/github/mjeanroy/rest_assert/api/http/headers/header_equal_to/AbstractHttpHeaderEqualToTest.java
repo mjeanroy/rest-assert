@@ -204,12 +204,30 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpRespo
 		});
 	}
 
+	/**
+	 * Get expected header to test.
+	 *
+	 * @return Header.
+	 */
 	protected abstract Header getHeader();
 
+	/**
+	 * Get failed header value.
+	 *
+	 * @return Failed value.
+	 */
 	String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 
+	/**
+	 * Get expected error message when header does not match expected value.
+	 *
+	 * @param expectedName Header name.
+	 * @param expectedValue Expected value.
+	 * @param actualValue Actual value.
+	 * @return Error message.
+	 */
 	private String buildErrorMessage(String expectedName, String expectedValue, String actualValue) {
 		return String.format("Expecting response to have header %s equal to %s but was %s", expectedName, expectedValue, actualValue);
 	}
@@ -218,34 +236,34 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpRespo
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private com.ning.http.client.Response newAsyncHttpResponse(Header header) {
 		return new AsyncHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private okhttp3.Response newOkHttpResponse(Header header) {
 		return new OkHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private org.apache.http.HttpResponse newApacheHttpResponse(Header header) {
 		return new ApacheHttpResponseMockBuilder()
-			.addHeader(header.getName(), header.getValue())
-			.build();
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(Header header) {
 		return new GoogleHttpResponseMockBuilder()
-			.setHeaders(new GoogleHttpHeadersMockBuilder()
-				.addHeader(header.getName(), header.getValue())
-				.build())
-			.build();
+				.setHeaders(new GoogleHttpHeadersMockBuilder()
+						.addHeader(header.getName(), header.getValue())
+						.build())
+				.build();
 	}
 
 	interface Invocation {

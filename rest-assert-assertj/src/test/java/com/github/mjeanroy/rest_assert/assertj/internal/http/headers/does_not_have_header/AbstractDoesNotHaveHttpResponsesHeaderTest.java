@@ -41,19 +41,26 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Test
 	public void should_pass_if_header_is_missing() {
-		HttpResponse httpResponse = newHttpResponse(header("Foo", "Bar"));
+		// GIVEN
+		final Header header = header("Foo", "Bar");
+		final HttpResponse httpResponse = newHttpResponse(header);
+
+		// WHEN
 		invoke(httpResponse);
 	}
 
 	@Test
 	public void should_fail_if_header_is_available() {
+		// GIVEN
 		final Header header = getHeader();
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
+			// WHEN
 			invoke(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
+			// THEN
 			assertThat(e.getMessage())
 					.isNotNull()
 					.isNotEmpty()
@@ -61,13 +68,29 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 		}
 	}
 
+	/**
+	 * Get expected header.
+	 *
+	 * @return Expected header.
+	 */
 	protected abstract Header getHeader();
 
+	/**
+	 * Create fake http response with expected {@code header}.
+	 *
+	 * @param header Expected header.
+	 * @return Fake http response.
+	 */
 	private HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+				.addHeader(header)
+				.build();
 	}
 
+	/**
+	 * Invoke test with given {@code httpResponse}.
+	 *
+	 * @param httpResponse Http response.
+	 */
 	protected abstract void invoke(HttpResponse httpResponse);
 }

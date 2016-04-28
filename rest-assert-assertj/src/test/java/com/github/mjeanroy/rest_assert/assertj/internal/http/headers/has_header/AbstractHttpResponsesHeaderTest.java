@@ -24,17 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.headers.has_header;
 
+import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.junit.Test;
+
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
-
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import org.junit.Test;
-
-import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.models.Header;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesHeaderTest {
 
@@ -42,20 +41,29 @@ public abstract class AbstractHttpResponsesHeaderTest {
 
 	@Test
 	public void should_pass_if_header_is_ok() {
-		HttpResponse httpResponse = newHttpResponse(getHeader());
+		// GIVEN
+		Header header = getHeader();
+		HttpResponse httpResponse = newHttpResponse(header);
+
+		// WHEN
 		invoke(httpResponse);
+
+		// THEN
 	}
 
 	@Test
 	public void should_fail_if_header_is_not_available() {
+		// GIVEN
 		final Header expectedHeader = getHeader();
 		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
+			// WHEN
 			invoke(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
+			// THEN
 			assertThat(e.getMessage())
 					.isNotNull()
 					.isNotEmpty()
@@ -63,13 +71,29 @@ public abstract class AbstractHttpResponsesHeaderTest {
 		}
 	}
 
+	/**
+	 * Get expected header.
+	 *
+	 * @return Expected header.
+	 */
 	protected abstract Header getHeader();
 
+	/**
+	 * Create fake http response with expected header.
+	 *
+	 * @param header Expected header.
+	 * @return Fake http response.
+	 */
 	protected HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseMockBuilder()
-			.addHeader(header)
-			.build();
+				.addHeader(header)
+				.build();
 	}
 
+	/**
+	 * Invoke test with given {@code httpResponse}.
+	 *
+	 * @param httpResponse Http response.
+	 */
 	protected abstract void invoke(HttpResponse httpResponse);
 }

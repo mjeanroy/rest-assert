@@ -35,21 +35,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.firstNonNull;
-import static com.github.mjeanroy.rest_assert.utils.Utils.isGreaterThan;
-import static com.github.mjeanroy.rest_assert.utils.Utils.isInRange;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
-import static com.github.mjeanroy.rest_assert.utils.Utils.some;
+import static com.github.mjeanroy.rest_assert.utils.Utils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class UtilsTest {
 
@@ -104,6 +97,33 @@ public class UtilsTest {
 			.isNotNull()
 			.hasSameSizeAs(inputs)
 			.contains(1, 4, 9);
+
+		verify(mapper).apply(1);
+		verify(mapper).apply(2);
+		verify(mapper).apply(3);
+	}
+
+	@Test
+	public void it_should_map_inputs_array_to_outputs() {
+		Integer[] inputs = new Integer[] {1, 2, 3};
+
+		@SuppressWarnings("unchecked")
+		Mapper<Integer, Integer> mapper = mock(Mapper.class);
+
+		when(mapper.apply(anyInt())).thenAnswer(new Answer<Integer>() {
+			@Override
+			public Integer answer(InvocationOnMock invocation) throws Throwable {
+				int input = (Integer) invocation.getArguments()[0];
+				return input * input;
+			}
+		});
+
+		List<Integer> outputs = Utils.map(inputs, mapper);
+
+		assertThat(outputs)
+				.isNotNull()
+				.hasSameSizeAs(inputs)
+				.contains(1, 4, 9);
 
 		verify(mapper).apply(1);
 		verify(mapper).apply(2);

@@ -38,6 +38,10 @@ import org.junit.Test;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 import static java.util.Arrays.asList;
 
+/**
+ * Test that http response contains expected header with expected value.
+ * Each sub-class must specify which header has to be tested.
+ */
 public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
@@ -49,62 +53,106 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_pass_with_expected_header() {
-		Header header = getHeader();
-		AssertionResult result = invoke(newResponse(header));
+		// GIVEN
+		final Header header = getHeader();
+		final HttpResponse rsp = newResponse(header);
+
+		// WHEN
+		AssertionResult result = invoke(rsp);
+
+		// THEN
 		checkSuccess(result);
 	}
 
 	@Test
 	public void it_should_pass_with_expected_header_and_list_of_values() {
-		Header h1 = getHeader();
-		Header h2 = header(h1.getName(), h1.getValue() + "foobar");
-		AssertionResult result = invoke(newResponse(h1, h2));
+		// GIVEN
+		final Header h1 = getHeader();
+		final Header h2 = header(h1.getName(), h1.getValue() + "foobar");
+		final HttpResponse rsp = newResponse(h1, h2);
+		final boolean allowMultiple = allowMultipleValues();
 
-		if (allowMultipleValues()) {
+		// WHEN
+		AssertionResult result = invoke(rsp);
+
+		// THEN
+		if (allowMultiple) {
 			checkSuccess(result);
 		} else {
-			checkError(result, ShouldHaveSingleHeader.class, "Expecting response to contains header %s with a single value but found: %s", h1.getName(), asList(h1.getValue(), h2.getValue()));
+			final String message = "Expecting response to contains header %s with a single value but found: %s";
+			final Object[] args = {h1.getName(), asList(h1.getValue(), h2.getValue())};
+			checkError(result, ShouldHaveSingleHeader.class, message, args);
 		}
 	}
 
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
+		// GIVEN
 		final Header expectedHeader = getHeader();
-
 		final String expectedName = expectedHeader.getName();
 		final String actualValue = failValue();
 		final Header header = header(expectedName, actualValue);
+		final HttpResponse rsp = newResponse(header);
 
-		AssertionResult result = invoke(newResponse(header));
+		// WHEN
+		AssertionResult result = invoke(rsp);
 
-		checkError(result,
-				ShouldHaveHeader.class,
-				"Expecting response to have header %s equal to %s but was %s",
-				expectedHeader.getName(), expectedHeader.getValue(), header.getValue()
-		);
+		// THEN
+		final String message = "Expecting response to have header %s equal to %s but was %s";
+		final Object[] args = {expectedHeader.getName(), expectedHeader.getValue(), header.getValue()};
+		checkError(result, ShouldHaveHeader.class, message, args);
 	}
 
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header() {
-		AssertionResult result = invoke(newResponse(header("foo", "bar")));
-		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", getHeader().getName());
+		// GIVEN
+		final Header header = header("foo", "bar");
+		final HttpResponse rsp = newResponse(header);
+
+		// WHEN
+		AssertionResult result = invoke(rsp);
+
+		// THEN
+		final String message = "Expecting response to have header %s";
+		final String args = getHeader().getName();
+		checkError(result, ShouldHaveHeader.class, message, args);
 	}
 
+	/**
+	 * Create fake response with list of headers.
+	 *
+	 * @param header Header, required.
+	 * @param other Other, optional, headers.
+	 * @return Fake http response.
+	 */
 	private HttpResponse newResponse(Header header, Header... other) {
-		HttpResponseMockBuilder builder = new HttpResponseMockBuilder()
-			.addHeader(header);
-
-		for (Header o : other) {
-			builder.addHeader(o.getName(), o.getValue());
+		HttpResponseMockBuilder builder = new HttpResponseMockBuilder().addHeader(header);
+		for (Header h : other) {
+			builder.addHeader(h.getName(), h.getValue());
 		}
 
 		return builder.build();
 	}
 
+	/**
+	 * Get expected header (<strong>must be implemented by each tests.</strong>).
+	 *
+	 * @return The header.
+	 */
 	protected abstract Header getHeader();
 
+	/**
+	 * If multiple headers with same name is allowed.
+	 *
+	 * @return {@code true} if multiple values is allowed, {@code false} otherwise.
+	 */
 	protected abstract boolean allowMultipleValues();
 
+	/**
+	 * Get fail value (used in test where header should not match actual value).
+	 *
+	 * @return Failed value.
+	 */
 	String failValue() {
 		return getHeader().getValue() + "foo";
 	}
