@@ -26,11 +26,11 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpCookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpCookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
@@ -39,30 +39,30 @@ import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AsyncHttpAssertionsTest {
+public class NingHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		Response response = new AsyncHttpResponseMockBuilder().build();
-		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
+		Response response = new NingHttpResponseMockBuilder().build();
+		HttpResponseAssert assertions = NingHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
 		assertThat(httpResponse)
 				.isNotNull()
-				.isExactlyInstanceOf(AsyncHttpResponse.class);
+				.isExactlyInstanceOf(NingHttpResponse.class);
 	}
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder().build();
-		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder().build();
+		CookieAssert assertions = NingHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();
 		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
 		assertThat(cookie)
 				.isNotNull()
-				.isExactlyInstanceOf(AsyncHttpCookie.class);
+				.isExactlyInstanceOf(NingHttpCookie.class);
 	}
 
 	@Test
@@ -73,11 +73,11 @@ public class AsyncHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new NingHttpResponseMockBuilder()
 			.setResponseBody(body)
 			.build();
 
-		JsonAssert assertions = AsyncHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = NingHttpAssertions.assertJsonThat(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

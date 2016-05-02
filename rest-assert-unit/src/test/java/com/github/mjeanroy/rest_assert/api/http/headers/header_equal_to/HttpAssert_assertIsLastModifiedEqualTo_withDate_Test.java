@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 
+import java.util.Date;
+
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
-
-import java.util.Date;
 
 import static com.github.mjeanroy.rest_assert.tests.Dates.fromInternetMessageFormat;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
@@ -67,13 +67,13 @@ public class HttpAssert_assertIsLastModifiedEqualTo_withDate_Test extends Abstra
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
-		AsyncHttpAssert.assertIsLastModifiedEqualTo(actual, date);
+		NingHttpAssert.assertIsLastModifiedEqualTo(actual, date);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
-		AsyncHttpAssert.assertIsLastModifiedEqualTo(message, actual, date);
+		NingHttpAssert.assertIsLastModifiedEqualTo(message, actual, date);
 	}
 
 	@Override

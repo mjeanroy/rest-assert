@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.asynchttp;
+package com.github.mjeanroy.rest_assert.tests.mocks.ning;
 
 import com.ning.http.client.cookie.Cookie;
 
@@ -31,7 +31,7 @@ import static org.mockito.Mockito.spy;
 /**
  * Build mock instance of {@link Cookie} class.
  */
-public class AsyncHttpCookieMockBuilder {
+public class NingHttpCookieMockBuilder {
 
 	/**
 	 * Cookie name.
@@ -71,7 +71,7 @@ public class AsyncHttpCookieMockBuilder {
 	/**
 	 * Create builder with default values.
 	 */
-	public AsyncHttpCookieMockBuilder() {
+	public NingHttpCookieMockBuilder() {
 		this.name = "foo";
 		this.value = "bar";
 	}
@@ -82,7 +82,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param secure New {@link #secure}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setSecure(boolean secure) {
+	public NingHttpCookieMockBuilder setSecure(boolean secure) {
 		this.secure = secure;
 		return this;
 	}
@@ -93,7 +93,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param domain New {@link #domain}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setDomain(String domain) {
+	public NingHttpCookieMockBuilder setDomain(String domain) {
 		this.domain = domain;
 		return this;
 	}
@@ -104,7 +104,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param name New {@link #name}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setName(String name) {
+	public NingHttpCookieMockBuilder setName(String name) {
 		this.name = name;
 		return this;
 	}
@@ -115,7 +115,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param value New {@link #value}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setValue(String value) {
+	public NingHttpCookieMockBuilder setValue(String value) {
 		this.value = value;
 		return this;
 	}
@@ -126,7 +126,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param path New {@link #path}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setPath(String path) {
+	public NingHttpCookieMockBuilder setPath(String path) {
 		this.path = path;
 		return this;
 	}
@@ -137,7 +137,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param httpOnly New {@link #httpOnly}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setHttpOnly(boolean httpOnly) {
+	public NingHttpCookieMockBuilder setHttpOnly(boolean httpOnly) {
 		this.httpOnly = httpOnly;
 		return this;
 	}
@@ -148,7 +148,7 @@ public class AsyncHttpCookieMockBuilder {
 	 * @param maxAge New {@link #maxAge}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpCookieMockBuilder setMaxAge(long maxAge) {
+	public NingHttpCookieMockBuilder setMaxAge(long maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}

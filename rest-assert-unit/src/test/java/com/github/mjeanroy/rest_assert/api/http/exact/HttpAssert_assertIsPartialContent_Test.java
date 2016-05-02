@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.exact;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import okhttp3.Response;
@@ -51,12 +51,12 @@ public class HttpAssert_assertIsPartialContent_Test extends AbstractHttpStatusTe
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsPartialContent(actual);
+		NingHttpAssert.assertIsPartialContent(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsPartialContent(message, actual);
+		NingHttpAssert.assertIsPartialContent(message, actual);
 	}
 
 	@Override

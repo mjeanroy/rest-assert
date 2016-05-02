@@ -33,13 +33,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.AsyncHttpCookieAssert.asyncHttpCookieAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.NingHttpCookieAssert.asyncHttpCookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.CookieAssert.cookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.OkHttpAssert.okHttpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.json.JsonAssert.jsonAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.JavaxCookieAssert.javaxCookieAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.ApacheHttpAssert.apacheHttpAssert;
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.NingHttpAssert.asyncHttpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.GoogleHttpAssert.googleHttpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.HttpAssert.httpAssert;
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;

@@ -28,17 +28,17 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie.create;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpCookie.create;
+import static com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Async-Http
  * library.
  */
-public final class AsyncHttpAssertions {
+public final class NingHttpAssertions {
 
 	// Ensure non instantiation
-	private AsyncHttpAssertions() {
+	private NingHttpAssertions() {
 	}
 
 	/**

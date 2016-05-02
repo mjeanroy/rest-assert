@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.out_of;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import okhttp3.Response;
@@ -56,12 +56,12 @@ public class HttpAssert_assertIsStatusOutOf_Test extends AbstractHttpStatusOutOf
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsStatusOutOf(actual, start(), end());
+		NingHttpAssert.assertIsStatusOutOf(actual, start(), end());
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsStatusOutOf(message, actual, start(), end());
+		NingHttpAssert.assertIsStatusOutOf(message, actual, start(), end());
 	}
 
 	@Override

@@ -45,12 +45,12 @@ public class HttpAssert_isUtf8_Test extends AbstractHttpAssertCharsetTest {
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsUtf8(actual);
+		NingHttpAssert.assertIsUtf8(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsUtf8(message, actual);
+		NingHttpAssert.assertIsUtf8(message, actual);
 	}
 
 	@Override

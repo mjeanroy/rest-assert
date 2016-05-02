@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-
 import java.util.Date;
+
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.Cookie}
  * using Async-Http framework as real implementation.
  */
-public class AsyncHttpCookie implements Cookie {
+public class NingHttpCookie implements Cookie {
 
 	/**
 	 * Create new {@link com.github.mjeanroy.rest_assert.internal.data.Cookie} using instance
@@ -41,8 +41,8 @@ public class AsyncHttpCookie implements Cookie {
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
 	 */
-	public static AsyncHttpCookie create(com.ning.http.client.cookie.Cookie cookie) {
-		return new AsyncHttpCookie(cookie);
+	public static NingHttpCookie create(com.ning.http.client.cookie.Cookie cookie) {
+		return new NingHttpCookie(cookie);
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class AsyncHttpCookie implements Cookie {
 	private final com.ning.http.client.cookie.Cookie cookie;
 
 	// Use static factory
-	private AsyncHttpCookie(com.ning.http.client.cookie.Cookie cookie) {
+	private NingHttpCookie(com.ning.http.client.cookie.Cookie cookie) {
 		this.cookie = cookie;
 	}
 

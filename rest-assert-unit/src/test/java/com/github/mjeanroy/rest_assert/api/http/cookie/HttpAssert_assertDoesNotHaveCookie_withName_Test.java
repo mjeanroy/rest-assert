@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.cookie;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
@@ -63,12 +63,12 @@ public class HttpAssert_assertDoesNotHaveCookie_withName_Test extends AbstractDo
 
 	@Override
 	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertDoesNotHaveCookie(actual, NAME);
+		NingHttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
+		NingHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 
 	@Override

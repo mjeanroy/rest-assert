@@ -22,7 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.tests.mocks.asynchttp;
+package com.github.mjeanroy.rest_assert.tests.mocks.ning;
+
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
@@ -40,13 +47,6 @@ import com.ning.http.client.uri.Uri;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
@@ -57,7 +57,7 @@ import static org.mockito.Mockito.when;
 /**
  * Builder to create mock instance of {@link Response} class.
  */
-public class AsyncHttpResponseMockBuilder {
+public class NingHttpResponseMockBuilder {
 
 	/**
 	 * Response status code.
@@ -77,7 +77,7 @@ public class AsyncHttpResponseMockBuilder {
 	/**
 	 * Create new builder.
 	 */
-	public AsyncHttpResponseMockBuilder() {
+	public NingHttpResponseMockBuilder() {
 		this.statusCode = 200;
 		this.headers = new LinkedHashMap<>();
 	}
@@ -88,7 +88,7 @@ public class AsyncHttpResponseMockBuilder {
 	 * @param statusCode New {@link #statusCode}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpResponseMockBuilder setStatusCode(int statusCode) {
+	public NingHttpResponseMockBuilder setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
 		return this;
 	}
@@ -99,7 +99,7 @@ public class AsyncHttpResponseMockBuilder {
 	 * @param responseBody New {@link #responseBody}.
 	 * @return Current builder.
 	 */
-	public AsyncHttpResponseMockBuilder setResponseBody(String responseBody) {
+	public NingHttpResponseMockBuilder setResponseBody(String responseBody) {
 		this.responseBody = responseBody;
 		return this;
 	}
@@ -111,7 +111,7 @@ public class AsyncHttpResponseMockBuilder {
 	 * @param value Header value.
 	 * @return Current builder.
 	 */
-	public AsyncHttpResponseMockBuilder addHeader(String name, String value) {
+	public NingHttpResponseMockBuilder addHeader(String name, String value) {
 		List<String> values = headers.get(name);
 		if (values == null) {
 			values = new LinkedList<>();
@@ -128,7 +128,7 @@ public class AsyncHttpResponseMockBuilder {
 	 * @param cookie Cookie.
 	 * @return Current builder.
 	 */
-	public AsyncHttpResponseMockBuilder addCookie(Cookie cookie) {
+	public NingHttpResponseMockBuilder addCookie(Cookie cookie) {
 		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
 	}
 

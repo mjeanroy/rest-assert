@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 
+import java.util.Date;
+
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
-
-import java.util.Date;
 
 import static com.github.mjeanroy.rest_assert.tests.Dates.fromInternetMessageFormat;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
@@ -62,13 +62,13 @@ public class HttpAssert_assertIsExpiresEqualTo_withDate_Test extends AbstractHtt
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
-		AsyncHttpAssert.assertIsExpiresEqualTo(actual, date);
+		NingHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
-		AsyncHttpAssert.assertIsExpiresEqualTo(message, actual, date);
+		NingHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}
 
 	@Override

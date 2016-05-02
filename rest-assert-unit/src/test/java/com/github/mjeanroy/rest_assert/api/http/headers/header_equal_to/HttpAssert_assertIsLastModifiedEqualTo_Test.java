@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
@@ -61,12 +61,12 @@ public class HttpAssert_assertIsLastModifiedEqualTo_Test extends AbstractHttpHea
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
+		NingHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
+		NingHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
 	}
 
 	@Override

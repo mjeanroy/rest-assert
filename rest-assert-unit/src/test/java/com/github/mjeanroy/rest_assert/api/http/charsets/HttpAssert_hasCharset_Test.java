@@ -47,12 +47,12 @@ public class HttpAssert_hasCharset_Test extends AbstractHttpAssertCharsetTest {
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertHasCharset(actual, CHARSET);
+		NingHttpAssert.assertHasCharset(actual, CHARSET);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertHasCharset(message, actual, CHARSET);
+		NingHttpAssert.assertHasCharset(message, actual, CHARSET);
 	}
 
 	@Override

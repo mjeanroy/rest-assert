@@ -55,12 +55,12 @@ public class HttpAssert_assertIsClientError_Test extends AbstractHttpStatusBetwe
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsClientError(actual);
+		NingHttpAssert.assertIsClientError(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsClientError(message, actual);
+		NingHttpAssert.assertIsClientError(message, actual);
 	}
 
 	// == Apache HTTP Response

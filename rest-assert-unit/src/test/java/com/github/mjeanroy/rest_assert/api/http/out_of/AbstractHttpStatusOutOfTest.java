@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.out_of;
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
@@ -233,7 +233,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	}
 
 	private com.ning.http.client.Response newAsyncHttpResponse(int status) {
-		return new AsyncHttpResponseMockBuilder()
+		return new NingHttpResponseMockBuilder()
 			.setStatusCode(status)
 			.build();
 	}

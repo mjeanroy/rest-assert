@@ -61,12 +61,12 @@ public class HttpAssert_assertHasCookie_withNameAndValue_Test extends AbstractHa
 
 	@Override
 	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertHasCookie(actual, NAME, VALUE);
+		NingHttpAssert.assertHasCookie(actual, NAME, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
+		NingHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
 	}
 
 	@Override

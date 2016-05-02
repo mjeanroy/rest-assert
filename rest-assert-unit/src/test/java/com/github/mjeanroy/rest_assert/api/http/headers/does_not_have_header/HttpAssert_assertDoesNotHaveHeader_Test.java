@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.does_not_have_header;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
@@ -56,12 +56,12 @@ public class HttpAssert_assertDoesNotHaveHeader_Test extends AbstractDoesNotHave
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertDoesNothaveHeader(actual, getHeader().getName());
+		NingHttpAssert.assertDoesNothaveHeader(actual, getHeader().getName());
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertDoesNothaveHeader(message, actual, getHeader().getName());
+		NingHttpAssert.assertDoesNothaveHeader(message, actual, getHeader().getName());
 	}
 
 	@Override

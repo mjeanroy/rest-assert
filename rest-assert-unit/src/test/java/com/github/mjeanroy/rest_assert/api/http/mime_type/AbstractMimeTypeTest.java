@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.mime_type;
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
@@ -228,7 +228,7 @@ public abstract class AbstractMimeTypeTest extends AbstractHttpResponseAssertTes
 	}
 
 	private com.ning.http.client.Response newAsyncHttpResponse(Header header) {
-		return new AsyncHttpResponseMockBuilder()
+		return new NingHttpResponseMockBuilder()
 			.addHeader(header.getName(), header.getValue())
 			.build();
 	}

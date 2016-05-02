@@ -24,24 +24,24 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.ning.http.client.Response;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.IOException;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class AsyncHttpResponseTest {
+public class NingHttpResponseTest {
 
 	@Rule
 	public ExpectedException thrown = none();
@@ -49,11 +49,11 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() throws Exception {
 		int expectedStatus = 200;
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new NingHttpResponseMockBuilder()
 				.setStatusCode(expectedStatus)
 				.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = NingHttpResponse.create(response);
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
@@ -63,11 +63,11 @@ public class AsyncHttpResponseTest {
 	public void it_should_check_if_http_response_contains_header() throws Exception {
 		String headerName = "header-name";
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new NingHttpResponseMockBuilder()
 				.addHeader(headerName, "foo")
 				.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = NingHttpResponse.create(response);
 		assertThat(httpResponse.hasHeader(headerName)).isTrue();
 		assertThat(httpResponse.hasHeader(headerName.toUpperCase())).isTrue();
 		assertThat(httpResponse.hasHeader(headerName.toLowerCase())).isTrue();
@@ -78,11 +78,11 @@ public class AsyncHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new NingHttpResponseMockBuilder()
 				.addHeader(headerName, headerValue)
 				.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = NingHttpResponse.create(response);
 		List<String> result = httpResponse.getHeader(headerName);
 
 		assertThat(result)
@@ -95,11 +95,11 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new NingHttpResponseMockBuilder()
 				.setResponseBody(body)
 				.build();
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = NingHttpResponse.create(response);
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
@@ -108,19 +108,19 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
 		IOException ex = mock(IOException.class);
-		Response response = new AsyncHttpResponseMockBuilder().build();
+		Response response = new NingHttpResponseMockBuilder().build();
 		when(response.getResponseBody()).thenThrow(ex);
 
 		thrown.expect(NonParsableResponseBodyException.class);
 
-		HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		HttpResponse httpResponse = NingHttpResponse.create(response);
 		httpResponse.getContent();
 	}
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final Response response = new AsyncHttpResponseMockBuilder().build();
-		final HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		final Response response = new NingHttpResponseMockBuilder().build();
+		final HttpResponse httpResponse = NingHttpResponse.create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
 		assertThat(cookies)
@@ -130,12 +130,12 @@ public class AsyncHttpResponseTest {
 
 	@Test
 	public void it_should_return_all_cookies() {
-		final Response response = new AsyncHttpResponseMockBuilder()
+		final Response response = new NingHttpResponseMockBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")
 				.build();
 
-		final HttpResponse httpResponse = AsyncHttpResponse.create(response);
+		final HttpResponse httpResponse = NingHttpResponse.create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
 		assertThat(cookies)

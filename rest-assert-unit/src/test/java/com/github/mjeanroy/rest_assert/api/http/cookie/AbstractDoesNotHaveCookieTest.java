@@ -29,7 +29,7 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
@@ -217,7 +217,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 	}
 
 	private com.ning.http.client.Response newAsyncHttpResponse(Cookie cookie) {
-		AsyncHttpResponseMockBuilder builder = new AsyncHttpResponseMockBuilder();
+		NingHttpResponseMockBuilder builder = new NingHttpResponseMockBuilder();
 		if (cookie != null) {
 			builder.addCookie(cookie);
 		}

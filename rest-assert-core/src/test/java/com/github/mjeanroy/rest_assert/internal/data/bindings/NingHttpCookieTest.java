@@ -25,22 +25,22 @@
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpCookieMockBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 
-public class AsyncHttpCookieTest {
+public class NingHttpCookieTest {
 
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setName(expectedName)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
@@ -50,11 +50,11 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setValue(expectedValue)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
@@ -64,11 +64,11 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setDomain(expectedDomain)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
@@ -78,11 +78,11 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setPath(expectedPath)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
@@ -91,11 +91,11 @@ public class AsyncHttpCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setSecure(true)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
@@ -104,11 +104,11 @@ public class AsyncHttpCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setHttpOnly(true)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
@@ -118,11 +118,11 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_get_max_age() {
 		long expectedMaxAge = 10;
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder()
 			.setMaxAge(expectedMaxAge)
 			.build();
 
-		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		Cookie cookie = NingHttpCookie.create(asyncHttpCookie);
 		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);

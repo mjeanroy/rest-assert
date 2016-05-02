@@ -25,9 +25,9 @@
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import okhttp3.Response;
@@ -53,12 +53,12 @@ public class HttpAssert_assertHasMimeType_Test extends AbstractMimeTypeTest {
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+		NingHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
+		NingHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 
 	@Override

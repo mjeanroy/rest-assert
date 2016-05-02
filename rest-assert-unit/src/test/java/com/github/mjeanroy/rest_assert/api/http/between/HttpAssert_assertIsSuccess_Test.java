@@ -55,12 +55,12 @@ public class HttpAssert_assertIsSuccess_Test extends AbstractHttpStatusBetweenTe
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsSuccess(actual);
+		NingHttpAssert.assertIsSuccess(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsSuccess(message, actual);
+		NingHttpAssert.assertIsSuccess(message, actual);
 	}
 
 	// == Apache HTTP Response

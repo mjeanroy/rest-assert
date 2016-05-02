@@ -22,62 +22,62 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http;
-
-import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
-import com.ning.http.client.Response;
-import org.assertj.core.api.Condition;
-import org.junit.Before;
+package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie;
 
 import java.util.Map;
 
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
+import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
+import com.github.mjeanroy.rest_assert.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpCookie;
+import com.ning.http.client.cookie.Cookie;
+import org.assertj.core.api.Condition;
+import org.junit.Before;
 
-public class AsyncHttpAssertTest extends AbstractTemplateModelTest {
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.cookie.NingHttpCookieAssert.asyncHttpCookieAssert;
 
-	private AsyncHttpAssert httpAssert;
+public class NingHttpCookieAssertTest extends AbstractTemplateModelTest {
+
+	private NingHttpCookieAssert cookieAssert;
 
 	@Before
 	public void setUp() {
-		httpAssert = (AsyncHttpAssert) asyncHttpAssert();
+		cookieAssert = (NingHttpCookieAssert) asyncHttpCookieAssert();
 	}
 
 	@Override
 	protected AbstractTemplateModel getTemplateModel() {
-		return httpAssert;
+		return cookieAssert;
 	}
 
 	@Override
 	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.rest_assert.api.http";
+		return "com.github.mjeanroy.rest_assert.api.cookie";
 	}
 
 	@Override
 	protected String getExpectedClassName() {
-		return "AsyncHttpAssert";
+		return "NingHttpCookieAssert";
 	}
 
 	@Override
 	protected String getExpectedCoreClassName() {
-		return HttpResponseAssertions.class.getName();
+		return CookieAssertions.class.getName();
 	}
 
 	@Override
 	protected Class<?> getExpectedCoreClass() {
-		return HttpResponseAssertions.class;
+		return CookieAssertions.class;
 	}
 
 	@Override
 	protected String getExpectedActualClass() {
-		return Response.class.getName();
+		return Cookie.class.getName();
 	}
 
 	@Override
 	protected String getFactory() {
-		return AsyncHttpResponse.class.getName();
+		return NingHttpCookie.class.getName();
 	}
 
 	@Override

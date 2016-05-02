@@ -25,18 +25,17 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.headers.AbstractHttpHeaderTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-public class HttpAssert_assertIsHeaderEqualTo_Test extends AbstractHttpHeaderTest {
+public class HttpAssert_assertIsHeaderEqualTo_Test extends AbstractHttpHeaderEqualToTest {
 
 	private static final String NAME = "foo";
 
@@ -59,12 +58,12 @@ public class HttpAssert_assertIsHeaderEqualTo_Test extends AbstractHttpHeaderTes
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
+		NingHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
+		NingHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 
 	@Override

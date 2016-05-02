@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.ning.http.client.Response;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.ning.http.client.Response;
+
 /**
  * Implementation of {@link HttpResponse}
- * using Async-Http framework as real implementation.
+ * using Async-Http (version < 2.0.0) framework as real implementation.
  */
-public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
+public class NingHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
 	 * Create new {@link HttpResponse} using instance
@@ -44,8 +44,8 @@ public class AsyncHttpResponse extends AbstractHttpResponse implements HttpRespo
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
-	public static AsyncHttpResponse create(Response response) {
-		return new AsyncHttpResponse(response);
+	public static NingHttpResponse create(Response response) {
+		return new NingHttpResponse(response);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class AsyncHttpResponse extends AbstractHttpResponse implements HttpRespo
 	private final Response response;
 
 	// Use static factory
-	private AsyncHttpResponse(Response response) {
+	private NingHttpResponse(Response response) {
 		this.response = response;
 	}
 

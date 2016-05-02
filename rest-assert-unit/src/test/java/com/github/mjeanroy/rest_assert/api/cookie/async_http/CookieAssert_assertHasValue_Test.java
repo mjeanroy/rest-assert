@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.api.cookie.async_http;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.asynchttp.AsyncHttpCookieMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpCookieMockBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.rest_assert.api.cookie.AsyncHttpCookieAssert.assertHasValue;
+import static com.github.mjeanroy.rest_assert.api.cookie.NingHttpCookieAssert.assertHasValue;
 
-public class CookieAssert_assertHasValue_Test extends AbstractAsyncHttpCookieTest {
+public class CookieAssert_assertHasValue_Test extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void invoke(Cookie actual) {
@@ -68,7 +68,7 @@ public class CookieAssert_assertHasValue_Test extends AbstractAsyncHttpCookieTes
 	}
 
 	private Cookie cookie(String value) {
-		return new AsyncHttpCookieMockBuilder()
+		return new NingHttpCookieMockBuilder()
 				.setValue(value)
 				.build();
 	}

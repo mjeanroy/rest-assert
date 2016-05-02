@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
+import java.util.List;
+
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import okhttp3.Response;
-
-import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -58,12 +58,12 @@ public class HttpAssert_assertIsHtml_Test extends AbstractMimeTypeInTest {
 
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsHtml(actual);
+		NingHttpAssert.assertIsHtml(actual);
 	}
 
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
-		AsyncHttpAssert.assertIsHtml(message, actual);
+		NingHttpAssert.assertIsHtml(message, actual);
 	}
 
 	@Override
