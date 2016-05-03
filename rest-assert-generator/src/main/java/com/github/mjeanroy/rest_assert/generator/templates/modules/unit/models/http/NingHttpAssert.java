@@ -47,7 +47,7 @@ public class NingHttpAssert extends AbstractTemplateModel implements TemplateMod
 	 *
 	 * @return Singleton instance.
 	 */
-	public static TemplateModel asyncHttpAssert() {
+	public static TemplateModel ningHttpAssert() {
 		return INSTANCE;
 	}
 

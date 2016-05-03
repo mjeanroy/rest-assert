@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -61,6 +62,16 @@ public class HttpAssert_assertIsContentEncodingEqualTo_Test extends AbstractHttp
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 
 	@Override

@@ -29,20 +29,20 @@ import java.util.Map;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpResponse;
-import com.ning.http.client.Response;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
 import org.assertj.core.api.Condition;
+import org.asynchttpclient.Response;
 import org.junit.Before;
 
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.NingHttpAssert.ningHttpAssert;
+import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
 
-public class NingHttpAssertTest extends AbstractTemplateModelTest {
+public class AsyncHttpAssertTest extends AbstractTemplateModelTest {
 
-	private NingHttpAssert httpAssert;
+	private AsyncHttpAssert httpAssert;
 
 	@Before
 	public void setUp() {
-		httpAssert = (NingHttpAssert) ningHttpAssert();
+		httpAssert = (AsyncHttpAssert) asyncHttpAssert();
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class NingHttpAssertTest extends AbstractTemplateModelTest {
 
 	@Override
 	protected String getExpectedClassName() {
-		return "NingHttpAssert";
+		return "AsyncHttpAssert";
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class NingHttpAssertTest extends AbstractTemplateModelTest {
 
 	@Override
 	protected String getFactory() {
-		return NingHttpResponse.class.getName();
+		return AsyncHttpResponse.class.getName();
 	}
 
 	@Override

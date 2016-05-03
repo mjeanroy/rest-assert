@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.has_header;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -60,6 +61,16 @@ public class HttpAssert_assertHasContentTypeOptions_Test extends AbstractHttpHea
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertHasContentTypeOptions(message, actual);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertHasContentTypeOptions(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertHasContentTypeOptions(message, actual);
 	}
 
 	@Override

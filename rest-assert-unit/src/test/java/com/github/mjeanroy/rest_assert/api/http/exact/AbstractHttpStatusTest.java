@@ -27,11 +27,13 @@ package com.github.mjeanroy.rest_assert.api.http.exact;
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
@@ -65,6 +67,34 @@ abstract class AbstractHttpStatusTest extends AbstractHttpResponseAssertTest {
 			@Override
 			public void invokeTest(int status) {
 				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(status));
+			}
+		});
+	}
+
+	// == Ning HTTP response
+
+	@Test
+	public void ning_http_it_should_pass_with_correct_status() {
+		invoke(newNingHttpResponse(status()));
+		invoke(CUSTOM_MESSAGE, newNingHttpResponse(status()));
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_response_different_than_expected_status() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newNingHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void ning_http_it_should_pass_with_custom_message_with_response_different_than_200() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newNingHttpResponse(status));
 			}
 		});
 	}
@@ -208,10 +238,16 @@ abstract class AbstractHttpStatusTest extends AbstractHttpResponseAssertTest {
 			.build();
 	}
 
-	private com.ning.http.client.Response newAsyncHttpResponse(int status) {
+	private com.ning.http.client.Response newNingHttpResponse(int status) {
 		return new NingHttpResponseMockBuilder()
 			.setStatusCode(status)
 			.build();
+	}
+
+	private Response newAsyncHttpResponse(int status) {
+		return new AsyncHttpResponseMockBuilder()
+				.setStatusCode(status)
+				.build();
 	}
 
 	private okhttp3.Response newOkHttpResponse(int status) {

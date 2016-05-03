@@ -70,6 +70,16 @@ public class HttpAssert_assertHasCookie_withNameAndValue_Test extends AbstractHa
 	}
 
 	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertHasCookie(actual, NAME, VALUE);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
+	}
+
+	@Override
 	protected void invoke(okhttp3.Response actual) {
 		OkHttpAssert.assertHasCookie(actual, NAME, VALUE);
 	}

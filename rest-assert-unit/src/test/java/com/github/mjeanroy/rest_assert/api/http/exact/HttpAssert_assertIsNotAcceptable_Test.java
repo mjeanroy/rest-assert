@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.exact;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -57,6 +58,16 @@ public class HttpAssert_assertIsNotAcceptable_Test extends AbstractHttpStatusTes
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsNotAcceptable(message, actual);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsNotAcceptable(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsNotAcceptable(message, actual);
 	}
 
 	@Override

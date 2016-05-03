@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -63,6 +64,16 @@ public class HttpAssert_assertIsFrameOptionsEqualTo_Test extends AbstractHttpHea
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 
 	@Override

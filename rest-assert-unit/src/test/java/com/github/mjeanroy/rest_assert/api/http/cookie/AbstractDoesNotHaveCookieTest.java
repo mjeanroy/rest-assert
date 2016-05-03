@@ -29,11 +29,13 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
@@ -67,6 +69,34 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 			@Override
 			public void invokeTest(Cookie cookie) {
 				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(cookie));
+			}
+		});
+	}
+
+	// == Ning HTTP response
+
+	@Test
+	public void ning_http_it_should_pass_without_cookies() {
+		invoke(newNingHttpResponse(fakeCookie()));
+		invoke(CUSTOM_MESSAGE, newNingHttpResponse(fakeCookie()));
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_response_with_cookie() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Cookie cookie) {
+				invoke(newNingHttpResponse(cookie));
+			}
+		});
+	}
+
+	@Test
+	public void ning_http_it_should_pass_with_custom_message_with_response_with_cookie() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Cookie cookie) {
+				invoke(CUSTOM_MESSAGE, newNingHttpResponse(cookie));
 			}
 		});
 	}
@@ -216,8 +246,17 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpResponse
 		return builder.build();
 	}
 
-	private com.ning.http.client.Response newAsyncHttpResponse(Cookie cookie) {
+	private com.ning.http.client.Response newNingHttpResponse(Cookie cookie) {
 		NingHttpResponseMockBuilder builder = new NingHttpResponseMockBuilder();
+		if (cookie != null) {
+			builder.addCookie(cookie);
+		}
+
+		return builder.build();
+	}
+
+	private Response newAsyncHttpResponse(Cookie cookie) {
+		AsyncHttpResponseMockBuilder builder = new AsyncHttpResponseMockBuilder();
 		if (cookie != null) {
 			builder.addCookie(cookie);
 		}

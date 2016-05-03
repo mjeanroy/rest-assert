@@ -27,11 +27,13 @@ package com.github.mjeanroy.rest_assert.api.http.charsets;
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
@@ -66,6 +68,34 @@ abstract class AbstractHttpAssertCharsetTest extends AbstractHttpResponseAssertT
 			@Override
 			public void invokeTest(String charset) {
 				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(charset));
+			}
+		});
+	}
+
+	// == Ning HTTP Response
+
+	@Test
+	public void ning_http_it_should_pass_with_expected_mime_type() {
+		invoke(newNingHttpResponse(getCharset()));
+		invoke(CUSTOM_MESSAGE, newNingHttpResponse(getCharset()));
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
+		invokeFailure(null, new Invocation() {
+			@Override
+			public void invokeTest(String charset) {
+				invoke(newNingHttpResponse(charset));
+			}
+		});
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(String charset) {
+				invoke(CUSTOM_MESSAGE, newNingHttpResponse(charset));
 			}
 		});
 	}
@@ -206,9 +236,16 @@ abstract class AbstractHttpAssertCharsetTest extends AbstractHttpResponseAssertT
 				.build();
 	}
 
-	private com.ning.http.client.Response newAsyncHttpResponse(String charset) {
+	private com.ning.http.client.Response newNingHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new NingHttpResponseMockBuilder()
+				.addHeader("Content-Type", contentType)
+				.build();
+	}
+
+	private Response newAsyncHttpResponse(String charset) {
+		String contentType = format("application/json;charset=%s", charset);
+		return new AsyncHttpResponseMockBuilder()
 				.addHeader("Content-Type", contentType)
 				.build();
 	}

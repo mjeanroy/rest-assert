@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.mime_type;
 import java.util.List;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -64,6 +65,16 @@ public class HttpAssert_assertIsJavascript_Test extends AbstractMimeTypeInTest {
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsJavascript(message, actual);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsJavascript(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsJavascript(message, actual);
 	}
 
 	@Override

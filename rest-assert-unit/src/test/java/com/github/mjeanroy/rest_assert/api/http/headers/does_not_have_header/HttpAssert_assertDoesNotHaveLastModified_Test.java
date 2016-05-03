@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.does_not_have_header;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -61,6 +62,16 @@ public class HttpAssert_assertDoesNotHaveLastModified_Test extends AbstractDoesN
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertDoesNotHaveLastModified(message, actual);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertDoesNotHaveLastModified(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertDoesNotHaveLastModified(message, actual);
 	}
 
 	@Override

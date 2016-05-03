@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.headers.has_header;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -37,7 +38,7 @@ import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpAssert_assertHasHeader_Test extends AbstractHttpHeaderTest {
 
-	private static final String NAME = "foo";
+	private static final String NAME = "X-MyHeader";
 
 	@Override
 	protected Header getHeader() {
@@ -62,6 +63,16 @@ public class HttpAssert_assertHasHeader_Test extends AbstractHttpHeaderTest {
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertHasHeader(message, actual, getHeader().getName());
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertHasHeader(actual, getHeader().getName());
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertHasHeader(message, actual, getHeader().getName());
 	}
 
 	@Override

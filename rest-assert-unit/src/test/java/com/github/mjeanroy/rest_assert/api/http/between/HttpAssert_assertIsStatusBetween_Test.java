@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.between;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -65,6 +66,16 @@ public class HttpAssert_assertIsStatusBetween_Test extends AbstractHttpStatusBet
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsStatusBetween(message, actual, start(), end());
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsStatusBetween(actual, start(), end());
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsStatusBetween(message, actual, start(), end());
 	}
 
 	// == Apache HTTP Response

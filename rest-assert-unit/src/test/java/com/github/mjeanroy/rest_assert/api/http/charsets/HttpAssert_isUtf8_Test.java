@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.charsets;
 
 import com.github.mjeanroy.rest_assert.api.http.*;
+import org.asynchttpclient.Response;
 
 public class HttpAssert_isUtf8_Test extends AbstractHttpAssertCharsetTest {
 
@@ -51,6 +52,16 @@ public class HttpAssert_isUtf8_Test extends AbstractHttpAssertCharsetTest {
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsUtf8(message, actual);
+	}
+
+	@Override
+	protected void invoke(Response actual) {
+		AsyncHttpAssert.assertIsUtf8(actual);
+	}
+
+	@Override
+	protected void invoke(String message, Response actual) {
+		AsyncHttpAssert.assertIsUtf8(message, actual);
 	}
 
 	@Override

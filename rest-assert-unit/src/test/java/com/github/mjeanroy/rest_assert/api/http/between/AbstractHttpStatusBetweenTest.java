@@ -27,11 +27,13 @@ package com.github.mjeanroy.rest_assert.api.http.between;
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
@@ -67,6 +69,36 @@ abstract class AbstractHttpStatusBetweenTest extends AbstractHttpResponseAssertT
 			@Override
 			public void invokeTest(int status) {
 				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(status));
+			}
+		});
+	}
+
+	// == Ning HTTP Response
+
+	@Test
+	public void ning_http_it_should_pass_with_status_in_bounds() {
+		for (int i = start(); i <= end(); i++) {
+			invoke(newNingHttpResponse(i));
+			invoke(CUSTOM_MESSAGE, newNingHttpResponse(i));
+		}
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_response_not_in_bounds() {
+		doTestWithDefaultMessage(null, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(newNingHttpResponse(status));
+			}
+		});
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_response_not_in_bounds_with_custom_message() {
+		doTestWithDefaultMessage(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(int status) {
+				invoke(CUSTOM_MESSAGE, newNingHttpResponse(status));
 			}
 		});
 	}
@@ -221,8 +253,14 @@ abstract class AbstractHttpStatusBetweenTest extends AbstractHttpResponseAssertT
 				.build();
 	}
 
-	private com.ning.http.client.Response newAsyncHttpResponse(int status) {
+	private com.ning.http.client.Response newNingHttpResponse(int status) {
 		return new NingHttpResponseMockBuilder()
+				.setStatusCode(status)
+				.build();
+	}
+
+	private Response newAsyncHttpResponse(int status) {
+		return new AsyncHttpResponseMockBuilder()
 				.setStatusCode(status)
 				.build();
 	}

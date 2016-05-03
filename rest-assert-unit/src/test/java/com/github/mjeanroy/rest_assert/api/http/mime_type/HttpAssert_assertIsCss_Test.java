@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.mime_type;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -52,6 +53,16 @@ public class HttpAssert_assertIsCss_Test extends AbstractMimeTypeTest {
 	@Override
 	protected void invoke(com.ning.http.client.Response actual) {
 		NingHttpAssert.assertIsCss(actual);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsCss(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsCss(message, actual);
 	}
 
 	@Override

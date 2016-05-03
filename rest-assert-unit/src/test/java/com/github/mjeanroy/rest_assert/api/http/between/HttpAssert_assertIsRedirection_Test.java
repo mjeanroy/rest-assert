@@ -63,6 +63,16 @@ public class HttpAssert_assertIsRedirection_Test extends AbstractHttpStatusBetwe
 		NingHttpAssert.assertIsRedirection(message, actual);
 	}
 
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsRedirection(actual);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		AsyncHttpAssert.assertIsRedirection(message, actual);
+	}
+
 	// == Apache HTTP Response
 
 	@Override

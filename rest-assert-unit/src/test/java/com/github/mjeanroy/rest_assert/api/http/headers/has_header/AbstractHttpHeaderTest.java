@@ -27,12 +27,14 @@ package com.github.mjeanroy.rest_assert.api.http.headers.has_header;
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
@@ -69,6 +71,35 @@ public abstract class AbstractHttpHeaderTest extends AbstractHttpResponseAssertT
 			@Override
 			public void invokeTest(Header header) {
 				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(header));
+			}
+		});
+	}
+
+	// == Ning HTTP Response
+
+	@Test
+	public void ning_http_it_should_pass_with_expected_header() {
+		Header header = getHeader();
+		invoke(newNingHttpResponse(header));
+		invoke(CUSTOM_MESSAGE, newNingHttpResponse(header));
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_if_response_does_not_contain_header() {
+		doTest(null, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(newNingHttpResponse(header));
+			}
+		});
+	}
+
+	@Test
+	public void ning_http_it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		doTest(CUSTOM_MESSAGE, new Invocation() {
+			@Override
+			public void invokeTest(Header header) {
+				invoke(CUSTOM_MESSAGE, newNingHttpResponse(header));
 			}
 		});
 	}
@@ -191,7 +222,7 @@ public abstract class AbstractHttpHeaderTest extends AbstractHttpResponseAssertT
 
 	private void doTest(String msg, final Invocation invocation) {
 		final Header expectedHeader = getHeader();
-		final Header header = header(expectedHeader.getValue(), expectedHeader.getName());
+		final Header header = header("foo", "bar");
 		final String message = firstNonNull(msg, buildErrorMessage(expectedHeader));
 
 		assertFailure(message, new Function() {
@@ -216,10 +247,16 @@ public abstract class AbstractHttpHeaderTest extends AbstractHttpResponseAssertT
 			.build();
 	}
 
-	private com.ning.http.client.Response newAsyncHttpResponse(Header header) {
+	private com.ning.http.client.Response newNingHttpResponse(Header header) {
 		return new NingHttpResponseMockBuilder()
 			.addHeader(header.getName(), header.getValue())
 			.build();
+	}
+
+	private Response newAsyncHttpResponse(Header header) {
+		return new AsyncHttpResponseMockBuilder()
+				.addHeader(header.getName(), header.getValue())
+				.build();
 	}
 
 	private okhttp3.Response newOkHttpResponse(Header header) {

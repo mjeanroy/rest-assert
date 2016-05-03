@@ -43,11 +43,17 @@ public abstract class AbstractHttpResponseAssertTest extends AbstractAssertTest<
 
 	protected abstract void invoke(String message, HttpResponse actual);
 
-	// Async HTTP Response
+	// Ning HTTP Response
 
 	protected abstract void invoke(com.ning.http.client.Response actual);
 
 	protected abstract void invoke(String message, com.ning.http.client.Response actual);
+
+	// Async HTTP Response
+
+	protected abstract void invoke(org.asynchttpclient.Response actual);
+
+	protected abstract void invoke(String message, org.asynchttpclient.Response actual);
 
 	// Ok HTTP Response
 

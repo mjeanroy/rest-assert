@@ -24,70 +24,75 @@
 
 package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http;
 
-import java.util.Map;
-
+import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpResponse;
-import com.ning.http.client.Response;
-import org.assertj.core.api.Condition;
-import org.junit.Before;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
+import org.asynchttpclient.Response;
 
-import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.NingHttpAssert.ningHttpAssert;
+import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-public class NingHttpAssertTest extends AbstractTemplateModelTest {
+/**
+ * Template model for rest-assert-unit HttpAssert class.
+ */
+public class AsyncHttpAssert extends AbstractTemplateModel implements TemplateModel {
 
-	private NingHttpAssert httpAssert;
+	/**
+	 * Singleton Instance.
+	 */
+	private static final AsyncHttpAssert INSTANCE = new AsyncHttpAssert();
 
-	@Before
-	public void setUp() {
-		httpAssert = (NingHttpAssert) ningHttpAssert();
+	/**
+	 * Get singleton instance.
+	 *
+	 * @return Singleton instance.
+	 */
+	public static TemplateModel asyncHttpAssert() {
+		return INSTANCE;
+	}
+
+	// Ensure non instantiation
+	private AsyncHttpAssert() {
+		super();
 	}
 
 	@Override
-	protected AbstractTemplateModel getTemplateModel() {
-		return httpAssert;
-	}
-
-	@Override
-	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.rest_assert.api.http";
-	}
-
-	@Override
-	protected String getExpectedClassName() {
-		return "NingHttpAssert";
-	}
-
-	@Override
-	protected String getExpectedCoreClassName() {
-		return HttpResponseAssertions.class.getName();
-	}
-
-	@Override
-	protected Class<?> getExpectedCoreClass() {
-		return HttpResponseAssertions.class;
-	}
-
-	@Override
-	protected String getExpectedActualClass() {
+	public String getActualClass() {
 		return Response.class.getName();
 	}
 
 	@Override
-	protected String getFactory() {
-		return NingHttpResponse.class.getName();
+	public String getCoreClassName() {
+		return coreClass().getName();
 	}
 
 	@Override
-	protected Condition<Map<String, Object>> getMethodCondition() {
-		return new Condition<Map<String, Object>>() {
-			@Override
-			public boolean matches(Map<String, Object> value) {
-				String methodName = (String) value.get("method_name");
-				return methodName.startsWith("assert");
-			}
-		};
+	public Class<?> coreClass() {
+		return HttpResponseAssertions.class;
+	}
+
+	@Override
+	public String getPackageName() {
+		return "com.github.mjeanroy.rest_assert.api.http";
+	}
+
+	@Override
+	public String getClassName() {
+		return getClass().getSimpleName();
+	}
+
+	@Override
+	public String buildCoreMethodName(String methodName) {
+		return methodName;
+	}
+
+	@Override
+	public String buildMethodName(String methodName) {
+		return generateAssertMethodName(methodName);
+	}
+
+	@Override
+	public String getFactory() {
+		return AsyncHttpResponse.class.getName();
 	}
 }

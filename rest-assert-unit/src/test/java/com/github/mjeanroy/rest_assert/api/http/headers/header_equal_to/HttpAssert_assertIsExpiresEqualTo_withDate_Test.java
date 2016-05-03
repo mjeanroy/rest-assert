@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to;
 import java.util.Date;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
@@ -69,6 +70,18 @@ public class HttpAssert_assertIsExpiresEqualTo_withDate_Test extends AbstractHtt
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		NingHttpAssert.assertIsExpiresEqualTo(message, actual, date);
+	}
+
+	@Override
+	protected void invoke(org.asynchttpclient.Response actual) {
+		Date date = fromInternetMessageFormat(VALUE);
+		AsyncHttpAssert.assertIsExpiresEqualTo(actual, date);
+	}
+
+	@Override
+	protected void invoke(String message, org.asynchttpclient.Response actual) {
+		Date date = fromInternetMessageFormat(VALUE);
+		AsyncHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}
 
 	@Override

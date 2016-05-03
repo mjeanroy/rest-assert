@@ -27,10 +27,12 @@ package com.github.mjeanroy.rest_assert.api.http.charsets;
 import java.nio.charset.Charset;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
+import org.asynchttpclient.Response;
 
 public class HttpAssert_hasCharsetType_Test extends AbstractHttpAssertCharsetTest {
 
@@ -59,6 +61,16 @@ public class HttpAssert_hasCharsetType_Test extends AbstractHttpAssertCharsetTes
 	@Override
 	protected void invoke(String message, com.ning.http.client.Response actual) {
 		NingHttpAssert.assertHasCharset(message, actual, CHARSET);
+	}
+
+	@Override
+	protected void invoke(Response actual) {
+		AsyncHttpAssert.assertHasCharset(actual, CHARSET);
+	}
+
+	@Override
+	protected void invoke(String message, Response actual) {
+		AsyncHttpAssert.assertHasCharset(message, actual, CHARSET);
 	}
 
 	@Override
