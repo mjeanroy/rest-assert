@@ -26,23 +26,22 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.ning.http.client.Response;
-
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpCookie.create;
-import static com.github.mjeanroy.rest_assert.internal.data.bindings.NingHttpResponse.create;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
+import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
+import org.asynchttpclient.Response;
 
 /**
  * Entry point for assertion methods for Async-Http
- * library (version < 2.0.0).
+ * library (version >= 2.0.0).
  */
-public final class NingHttpAssertions {
+public final class AsyncHttpAssertions {
 
 	// Ensure non instantiation
-	private NingHttpAssertions() {
+	private AsyncHttpAssertions() {
 	}
 
 	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
+	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
@@ -52,18 +51,18 @@ public final class NingHttpAssertions {
 	}
 
 	/**
-	 * Creates a new instance of {@link CookieAssert}.
+	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.CookieAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static CookieAssert assertThat(com.ning.http.client.cookie.Cookie actual) {
-		Cookie cookie = create(actual);
+	public static CookieAssert assertThat(org.asynchttpclient.cookie.Cookie actual) {
+		Cookie cookie = AsyncHttpCookie.create(actual);
 		return new CookieAssert(cookie);
 	}
 
 	/**
-	 * Creates a new instance of {@link JsonAssert}.
+	 * Creates a new instance of {@link com.github.mjeanroy.rest_assert.assertj.api.JsonAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
@@ -73,6 +72,6 @@ public final class NingHttpAssertions {
 	}
 
 	private static HttpResponse toHttpResponse(Response actual) {
-		return create(actual);
+		return AsyncHttpResponse.create(actual);
 	}
 }
