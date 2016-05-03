@@ -121,7 +121,13 @@ public enum HttpHeader {
 	 * Set-Cookie header name.
 	 * https://tools.ietf.org/html/rfc6265
 	 */
-	SET_COOKIE("Set-Cookie", false);
+	SET_COOKIE("Set-Cookie", false),
+
+	/**
+	 * Access-Control-Allow-Origin name.
+	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	 */
+	ACCESS_CONTROL_ALLOW_ORIGIN("Access-Control-Allow-Origin", true);
 
 	/**
 	 * Name of header.

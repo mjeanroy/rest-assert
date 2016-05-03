@@ -24,25 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.List;
-
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
-import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
-import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.Cookies;
-import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
-import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
-import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.internal.data.*;
 import com.github.mjeanroy.rest_assert.reflect.Param;
 import com.github.mjeanroy.rest_assert.utils.Mapper;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
+
+import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldHaveCookie;
@@ -57,36 +47,11 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.s
 import static com.github.mjeanroy.rest_assert.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CONTROL;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_DISPOSITION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_ENCODING;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_LENGTH;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.EXPIRES;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LAST_MODIFIED;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.PRAGMA;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_FRAME_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_XSS_PROTECTION;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSS;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSV;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.JSON;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.PDF;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_HTML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_PLAIN;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.XHTML;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.*;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.*;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
-import static com.github.mjeanroy.rest_assert.utils.Utils.map;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
-import static com.github.mjeanroy.rest_assert.utils.Utils.some;
+import static com.github.mjeanroy.rest_assert.utils.Utils.*;
 import static java.util.Arrays.asList;
 
 /**
@@ -919,6 +884,37 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, @Param("contentSecurityPolicy") ContentSecurityPolicy contentSecurityPolicy) {
 		return isHeaderMatching(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy);
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Origin header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasAccessControlAllowOrigin(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName());
+	}
+
+	/**
+	 * Check that http response does contains Access-Control-Allow-Origin header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowOrigin(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName());
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Origin header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param accessControlAllowOrigin Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, @Param("accessControlAllowOrigin") String accessControlAllowOrigin) {
+		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin);
 	}
 
 	private AssertionResult isHeaderMatching(HttpResponse httpResponse, final String headerName, final HeaderValue value) {
