@@ -125,9 +125,15 @@ public enum HttpHeader {
 
 	/**
 	 * Access-Control-Allow-Origin name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	 * https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin
 	 */
-	ACCESS_CONTROL_ALLOW_ORIGIN("Access-Control-Allow-Origin", true);
+	ACCESS_CONTROL_ALLOW_ORIGIN("Access-Control-Allow-Origin", true),
+
+	/**
+	 * Access-Control-Allow-Headers name.
+	 * https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers
+	 */
+	ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers", true);
 
 	/**
 	 * Name of header.

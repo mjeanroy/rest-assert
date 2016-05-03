@@ -31,8 +31,7 @@ import com.github.mjeanroy.rest_assert.utils.Mapper;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
 
 import java.nio.charset.Charset;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldHaveCookie;
@@ -53,6 +52,7 @@ import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.Utils.*;
 import static java.util.Arrays.asList;
+import static java.util.Collections.addAll;
 
 /**
  * Reusable Assertions of http response.
@@ -915,6 +915,80 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, @Param("accessControlAllowOrigin") String accessControlAllowOrigin) {
 		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin);
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Headers header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasAccessControlAllowHeaders(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_HEADERS.getName());
+	}
+
+	/**
+	 * Check that http response does contains Access-Control-Allow-Headers header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowHeaders(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_HEADERS.getName());
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param value Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("value") String value, @Param("other") String... other) {
+		List<String> list = new LinkedList<>();
+		list.add(value);
+		addAll(list, other);
+		return isAccessControlAllowHeadersEqualTo(httpResponse, list);
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param accessControlAllowHeaders Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlAllowHeaders") final Iterable<String> accessControlAllowHeaders) {
+		final String name = ACCESS_CONTROL_ALLOW_HEADERS.getName();
+		return assertHeader(httpResponse, name, new HeaderAssertion() {
+			@Override
+			public AssertionResult handle(List<String> actualValues) {
+				String value = actualValues.get(0);
+
+				// Extract set of actual values.
+				String[] array = value.split(",");
+				Set<String> setOfActualValues = new HashSet<>();
+				for (String current : array) {
+					String trimmedValue = current.toLowerCase().trim();
+					if (!trimmedValue.isEmpty()) {
+						setOfActualValues.add(trimmedValue);
+					}
+				}
+
+				// Extract set of expected values.
+				Set<String> setOfExpectedValues = new HashSet<>();
+				for (String current : accessControlAllowHeaders) {
+					String trimmedValue = current.toLowerCase().trim();
+					if (!trimmedValue.isEmpty()) {
+						setOfExpectedValues.add(trimmedValue);
+					}
+				}
+
+				return setOfActualValues.equals(setOfExpectedValues) ?
+						success() :
+						failure(shouldHaveHeaderWithValue(name, join(accessControlAllowHeaders, ", "), value));
+			}
+		});
 	}
 
 	private AssertionResult isHeaderMatching(HttpResponse httpResponse, final String headerName, final HeaderValue value) {
