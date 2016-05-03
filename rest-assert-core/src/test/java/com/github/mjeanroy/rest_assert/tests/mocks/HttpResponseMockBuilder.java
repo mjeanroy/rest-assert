@@ -25,148 +25,57 @@
 package com.github.mjeanroy.rest_assert.tests.mocks;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import java.util.*;
-
-import static java.util.Collections.addAll;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-/**
- * Builder used to create mock instance of {@link HttpResponse} class.
- */
-public class HttpResponseMockBuilder {
+public interface HttpResponseMockBuilder<T> {
 
 	/**
-	 * Http Response status.
-	 */
-	private int status;
-
-	/**
-	 * Body content.
-	 */
-	private String content;
-
-	/**
-	 * Map of http response headers.
-	 */
-	private final Map<String, List<String>> headers;
-
-	/**
-	 * List of cookies.
-	 */
-	private final List<Cookie> cookies;
-
-	/**
-	 * Create builder.
-	 */
-	public HttpResponseMockBuilder() {
-		this.headers = new LinkedHashMap<>();
-		this.cookies = new LinkedList<>();
-	}
-
-	/**
-	 * Set {@link #status}.
+	 * Set http response status.
 	 *
-	 * @param status New {@link #status}.
+	 * @param status New status.
 	 * @return Current builder.
 	 */
-	public HttpResponseMockBuilder setStatus(int status) {
-		this.status = status;
-		return this;
-	}
+	HttpResponseMockBuilder setStatus(int status);
 
 	/**
-	 * Set {@link #content}.
+	 * Set http response body.
 	 *
-	 * @param content New {@link #content}.
+	 * @param content New content.
 	 * @return Current builder.
 	 */
-	public HttpResponseMockBuilder setContent(String content) {
-		this.content = content;
-		return this;
-	}
+	HttpResponseMockBuilder setContent(String content);
 
 	/**
 	 * Add new header.
-	 * Note that if an header already exist with this name, it will be override.
 	 *
 	 * @param name Header name.
 	 * @param value Header value.
 	 * @return Current builder.
 	 */
-	public HttpResponseMockBuilder addHeader(String name, String value) {
-		List<String> values = headers.get(name);
-		if (values == null) {
-			values = new LinkedList<>();
-			headers.put(name, values);
-		}
-
-		values.add(value);
-		return this;
-	}
+	HttpResponseMockBuilder addHeader(String name, String value);
 
 	/**
 	 * Add new header.
-	 * Note that if an header already exist with this name, it will be override.
 	 *
 	 * @param header Header.
+	 * @param other Other, optional, headers.
 	 * @return Current builder.
 	 */
-	public HttpResponseMockBuilder addHeader(Header header) {
-		return addHeader(header.getName(), header.getValue());
-	}
+	HttpResponseMockBuilder addHeader(Header header, Header... other);
 
 	/**
 	 * Add new cookie.
 	 *
-	 * @param cookie Cookie to add.
+	 * @param cookie Cookie.
+	 * @param other Other, optional, cookies.
 	 * @return Current builder.
 	 */
-	public HttpResponseMockBuilder addCookie(Cookie cookie, Cookie... other) {
-		this.cookies.add(cookie);
-		addAll(cookies, other);
-		return this;
-	}
+	HttpResponseMockBuilder addCookie(Cookie cookie, Cookie... other);
 
 	/**
-	 * Build mock of {@link HttpResponse} class.
+	 * Build http response.
 	 *
-	 * @return Mock instance.
+	 * @return Http response.
 	 */
-	public HttpResponse build() {
-		HttpResponse rsp = mock(HttpResponse.class);
-		when(rsp.getStatus()).thenReturn(status);
-		when(rsp.getContent()).thenReturn(content);
-
-		when(rsp.getHeader(anyString())).thenAnswer(new Answer<List<String>>() {
-			@Override
-			public List<String> answer(InvocationOnMock invocation) throws Throwable {
-				String name = (String) invocation.getArguments()[0];
-				List<String> values = headers.get(name);
-				if (values == null) {
-					return Collections.emptyList();
-				}
-
-				return Collections.unmodifiableList(values);
-			}
-		});
-
-		when(rsp.hasHeader(anyString())).thenAnswer(new Answer<Boolean>() {
-			@Override
-			public Boolean answer(InvocationOnMock invocation) throws Throwable {
-				String name = (String) invocation.getArguments()[0];
-				return headers.containsKey(name);
-			}
-		});
-
-		when(rsp.getCookies()).thenReturn(new ArrayList<>(cookies));
-
-		return rsp;
-	}
+	T build();
 }

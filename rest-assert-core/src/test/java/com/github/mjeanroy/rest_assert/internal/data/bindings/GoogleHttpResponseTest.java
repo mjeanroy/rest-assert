@@ -24,12 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
-import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
-import com.google.api.client.http.HttpHeaders;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -37,14 +38,12 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.List;
-
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(com.google.api.client.http.HttpResponse.class)
@@ -57,7 +56,7 @@ public class GoogleHttpResponseTest {
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-				.setStatusCode(expectedStatus)
+				.setStatus(expectedStatus)
 				.build();
 
 		HttpResponse httpResponse = create(response);
@@ -72,12 +71,8 @@ public class GoogleHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		HttpHeaders httpHeaders = new GoogleHttpHeadersMockBuilder()
-				.addHeader(headerName, headerValue)
-				.build();
-
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-				.setHeaders(httpHeaders)
+				.addHeader(headerName, headerValue)
 				.build();
 
 		HttpResponse httpResponse = create(response);
@@ -91,12 +86,8 @@ public class GoogleHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		HttpHeaders httpHeaders = new GoogleHttpHeadersMockBuilder()
-				.addHeader(headerName, headerValue)
-				.build();
-
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-				.setHeaders(httpHeaders)
+				.addHeader(headerName, headerValue)
 				.build();
 
 		HttpResponse httpResponse = create(response);
@@ -113,7 +104,7 @@ public class GoogleHttpResponseTest {
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-				.setContent(Charset.defaultCharset(), body)
+				.setContent(body)
 				.build();
 
 		HttpResponse httpResponse = create(response);
@@ -138,10 +129,7 @@ public class GoogleHttpResponseTest {
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-				.setHeaders(new GoogleHttpHeadersMockBuilder().build())
-				.build();
-
+		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
 		final HttpResponse httpResponse = create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
@@ -153,10 +141,8 @@ public class GoogleHttpResponseTest {
 	@Test
 	public void it_should_return_all_cookies() {
 		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-				.setHeaders(new GoogleHttpHeadersMockBuilder()
-						.addHeader("Set-Cookie", "foo=bar")
-						.addHeader("Set-Cookie", "quix=123")
-						.build())
+				.addHeader("Set-Cookie", "foo=bar")
+				.addHeader("Set-Cookie", "quix=123")
 				.build();
 
 		final HttpResponse httpResponse = create(response);

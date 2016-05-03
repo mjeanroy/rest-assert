@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.mime_type;
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
@@ -35,7 +35,7 @@ public abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpRespo
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
+		return new HttpResponseAssert(new HttpResponseMockBuilderImpl()
 			.addHeader(getHeader())
 			.build());
 	}

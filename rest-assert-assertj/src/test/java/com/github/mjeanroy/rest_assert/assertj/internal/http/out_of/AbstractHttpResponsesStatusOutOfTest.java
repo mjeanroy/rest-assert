@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.internal.http.out_of;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 	public void should_pass() {
 		for (int i = 0; i <= 999; i++) {
 			if (i < start() || i > end()) {
-				HttpResponse httpResponse = new HttpResponseMockBuilder()
+				HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
 					.setStatus(i)
 					.build();
 
@@ -58,7 +58,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 		final int start = start();
 		final int end = end();
 		for (int status = start; status <= end; status++) {
-			final HttpResponse httpResponse = new HttpResponseMockBuilder()
+			final HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
 				.setStatus(status)
 				.build();
 

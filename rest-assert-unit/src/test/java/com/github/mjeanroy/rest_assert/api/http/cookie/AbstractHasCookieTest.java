@@ -28,12 +28,11 @@ import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.Function;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import org.asynchttpclient.Response;
 import org.junit.Test;
@@ -236,7 +235,7 @@ public abstract class AbstractHasCookieTest extends AbstractHttpResponseAssertTe
 	protected abstract String buildErrorMessage();
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(Cookie cookie) {
-		return new HttpResponseMockBuilder()
+		return new HttpResponseMockBuilderImpl()
 				.addCookie(cookie)
 				.build();
 	}
@@ -267,9 +266,7 @@ public abstract class AbstractHasCookieTest extends AbstractHttpResponseAssertTe
 
 	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(Cookie cookie) {
 		return new GoogleHttpResponseMockBuilder()
-				.setHeaders(new GoogleHttpHeadersMockBuilder()
-						.addCookie(cookie)
-						.build())
+				.addCookie(cookie)
 				.build();
 	}
 

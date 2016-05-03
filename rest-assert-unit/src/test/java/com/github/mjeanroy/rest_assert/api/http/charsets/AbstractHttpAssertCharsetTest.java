@@ -26,12 +26,11 @@ package com.github.mjeanroy.rest_assert.api.http.charsets;
 
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpHeadersMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import org.asynchttpclient.Response;
 import org.junit.Test;
@@ -231,7 +230,7 @@ abstract class AbstractHttpAssertCharsetTest extends AbstractHttpResponseAssertT
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
-		return new HttpResponseMockBuilder()
+		return new HttpResponseMockBuilderImpl()
 				.addHeader("Content-Type", contentType)
 				.build();
 	}
@@ -267,9 +266,7 @@ abstract class AbstractHttpAssertCharsetTest extends AbstractHttpResponseAssertT
 	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new GoogleHttpResponseMockBuilder()
-				.setHeaders(new GoogleHttpHeadersMockBuilder()
-						.addHeader("Content-Type", contentType)
-						.build())
+				.addHeader("Content-Type", contentType)
 				.build();
 	}
 

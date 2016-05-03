@@ -29,7 +29,7 @@ import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.failBecauseEx
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.*;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 	@Test
 	public void should_pass_if_status_code_is_in_bounds() {
 		for (int i = start(); i <= end(); i++) {
-			HttpResponse httpResponse = new HttpResponseMockBuilder()
+			HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
 				.setStatus(i)
 				.build();
 
@@ -61,7 +61,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 				continue;
 			}
 
-			final HttpResponse httpResponse = new HttpResponseMockBuilder()
+			final HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
 				.setStatus(status)
 				.build();
 

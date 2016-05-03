@@ -74,7 +74,7 @@ public class NingHttpAssertionsTest {
 		String body = object.toJson();
 
 		Response response = new NingHttpResponseMockBuilder()
-			.setResponseBody(body)
+			.setContent(body)
 			.build();
 
 		JsonAssert assertions = NingHttpAssertions.assertJsonThat(response);

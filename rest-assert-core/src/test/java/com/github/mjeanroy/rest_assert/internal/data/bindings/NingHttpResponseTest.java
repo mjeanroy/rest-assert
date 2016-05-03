@@ -50,7 +50,7 @@ public class NingHttpResponseTest {
 	public void it_should_return_status_code() throws Exception {
 		int expectedStatus = 200;
 		Response response = new NingHttpResponseMockBuilder()
-				.setStatusCode(expectedStatus)
+				.setStatus(expectedStatus)
 				.build();
 
 		HttpResponse httpResponse = NingHttpResponse.create(response);
@@ -96,7 +96,7 @@ public class NingHttpResponseTest {
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
 		Response response = new NingHttpResponseMockBuilder()
-				.setResponseBody(body)
+				.setContent(body)
 				.build();
 
 		HttpResponse httpResponse = NingHttpResponse.create(response);

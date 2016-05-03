@@ -24,21 +24,19 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
-import com.google.api.client.http.HttpHeaders;
-
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.google.api.client.http.HttpHeaders;
 
 import static org.mockito.Mockito.spy;
 
 /**
  * Builder to create mock instance of {@link HttpHeaders} class.
  */
-public class GoogleHttpHeadersMockBuilder {
+class GoogleHttpHeadersMockBuilder {
 
 	/**
 	 * Map of headers.
@@ -48,7 +46,7 @@ public class GoogleHttpHeadersMockBuilder {
 	/**
 	 * Create new builder.
 	 */
-	public GoogleHttpHeadersMockBuilder() {
+	GoogleHttpHeadersMockBuilder() {
 		this.headers = new LinkedHashMap<>();
 	}
 
@@ -59,7 +57,7 @@ public class GoogleHttpHeadersMockBuilder {
 	 * @param value Header value.
 	 * @return Current builder.
 	 */
-	public GoogleHttpHeadersMockBuilder addHeader(String name, String value) {
+	GoogleHttpHeadersMockBuilder addHeader(String name, String value) {
 		List<String> values = headers.get(name);
 		if (values == null) {
 			values = new LinkedList<>();
@@ -71,21 +69,11 @@ public class GoogleHttpHeadersMockBuilder {
 	}
 
 	/**
-	 * Add new cookie.
-	 *
-	 * @param cookie Cookie.
-	 * @return Current builder.
-	 */
-	public GoogleHttpHeadersMockBuilder addCookie(Cookie cookie) {
-		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
-	}
-
-	/**
 	 * Create mock instance.
 	 *
 	 * @return Mock instance.
 	 */
-	public HttpHeaders build() {
+	HttpHeaders build() {
 		HttpHeaders httpHeaders = new HttpHeaders();
 
 		for (Map.Entry<String, List<String>> entry : headers.entrySet()) {

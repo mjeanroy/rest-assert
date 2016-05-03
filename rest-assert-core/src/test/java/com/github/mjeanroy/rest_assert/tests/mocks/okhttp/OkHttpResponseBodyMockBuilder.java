@@ -30,7 +30,7 @@ import okhttp3.ResponseBody;
 /**
  * Builder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
  */
-public class OkHttpResponseBodyMockBuilder {
+class OkHttpResponseBodyMockBuilder {
 
 	/**
 	 * HTTP Response body.
@@ -43,7 +43,7 @@ public class OkHttpResponseBodyMockBuilder {
 	 * @param body New {@link #body}.
 	 * @return Current builder.
 	 */
-	public OkHttpResponseBodyMockBuilder setBody(String body) {
+	OkHttpResponseBodyMockBuilder setBody(String body) {
 		this.body = body;
 		return this;
 	}
@@ -53,7 +53,7 @@ public class OkHttpResponseBodyMockBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public ResponseBody build() {
+	ResponseBody build() {
 		MediaType mediaType = MediaType.parse("plain/text");
 		String content = body == null ? "" : body;
 		return ResponseBody.create(mediaType, content);

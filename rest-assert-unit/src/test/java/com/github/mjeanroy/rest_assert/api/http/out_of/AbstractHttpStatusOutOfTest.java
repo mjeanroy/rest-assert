@@ -26,12 +26,11 @@ package com.github.mjeanroy.rest_assert.api.http.out_of;
 
 import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import org.asynchttpclient.Response;
 import org.junit.Test;
@@ -261,40 +260,38 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	}
 
 	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(int status) {
-		return new HttpResponseMockBuilder()
+		return new HttpResponseMockBuilderImpl()
 			.setStatus(status)
 			.build();
 	}
 
 	private com.ning.http.client.Response newNingHttpResponse(int status) {
 		return new NingHttpResponseMockBuilder()
-			.setStatusCode(status)
+			.setStatus(status)
 			.build();
 	}
 
 	private Response newAsyncHttpResponse(int status) {
 		return new AsyncHttpResponseMockBuilder()
-				.setStatusCode(status)
+				.setStatus(status)
 				.build();
 	}
 
 	private okhttp3.Response newOkHttpResponse(int status) {
 		return new OkHttpResponseMockBuilder()
-			.setCode(status)
+			.setStatus(status)
 			.build();
 	}
 
 	private org.apache.http.HttpResponse newApacheHttpResponse(int status) {
 		return new ApacheHttpResponseMockBuilder()
-			.setStatusLine(new ApacheHttpStatusLineMockBuilder()
-				.setStatusCode(status)
-				.build())
+			.setStatus(status)
 			.build();
 	}
 
 	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(int status) {
 		return new GoogleHttpResponseMockBuilder()
-			.setStatusCode(status)
+			.setStatus(status)
 			.build();
 	}
 

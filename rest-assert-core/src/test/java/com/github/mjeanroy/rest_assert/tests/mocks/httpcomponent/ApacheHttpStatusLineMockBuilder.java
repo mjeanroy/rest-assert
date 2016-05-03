@@ -33,7 +33,7 @@ import static org.mockito.Mockito.spy;
 /**
  * Build mock instance of {@link StatusLine} class.
  */
-public class ApacheHttpStatusLineMockBuilder {
+class ApacheHttpStatusLineMockBuilder {
 
 	/**
 	 * Cookie name.
@@ -49,7 +49,7 @@ public class ApacheHttpStatusLineMockBuilder {
 	/**
 	 * Create builder.
 	 */
-	public ApacheHttpStatusLineMockBuilder() {
+	ApacheHttpStatusLineMockBuilder() {
 		this.statusCode = 200;
 		this.protocolVersion = new ProtocolVersion("http", 1, 0);
 	}
@@ -60,7 +60,7 @@ public class ApacheHttpStatusLineMockBuilder {
 	 * @param statusCode New {@link #statusCode}.
 	 * @return Current builder.
 	 */
-	public ApacheHttpStatusLineMockBuilder setStatusCode(int statusCode) {
+	ApacheHttpStatusLineMockBuilder setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
 		return this;
 	}
@@ -70,7 +70,7 @@ public class ApacheHttpStatusLineMockBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public StatusLine build() {
+	StatusLine build() {
 		StatusLine statusLine = new BasicStatusLine(protocolVersion, statusCode, null);
 		return spy(statusLine);
 	}

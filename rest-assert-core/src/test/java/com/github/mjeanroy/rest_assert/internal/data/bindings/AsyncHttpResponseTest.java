@@ -46,7 +46,7 @@ public class AsyncHttpResponseTest {
 	public void it_should_return_status_code() throws Exception {
 		int expectedStatus = 200;
 		Response response = new AsyncHttpResponseMockBuilder()
-				.setStatusCode(expectedStatus)
+				.setStatus(expectedStatus)
 				.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);
@@ -92,7 +92,7 @@ public class AsyncHttpResponseTest {
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
 		Response response = new AsyncHttpResponseMockBuilder()
-				.setResponseBody(body)
+				.setContent(body)
 				.build();
 
 		HttpResponse httpResponse = AsyncHttpResponse.create(response);

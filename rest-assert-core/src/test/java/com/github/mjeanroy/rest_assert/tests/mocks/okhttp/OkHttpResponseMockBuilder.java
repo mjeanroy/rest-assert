@@ -24,38 +24,21 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.okhttp;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
+import java.util.List;
+import java.util.Map;
+
+import com.github.mjeanroy.rest_assert.tests.mocks.AbstractHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
-
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.Map;
 
 import static org.mockito.Mockito.spy;
 
 /**
  * Builder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
  */
-public class OkHttpResponseMockBuilder {
-
-	/**
-	 * Response status code.
-	 */
-	private int code;
-
-	/**
-	 * HTTP Response body.
-	 */
-	private ResponseBody body;
-
-	/**
-	 * List of headers.
-	 */
-	private final Map<String, LinkedList<String>> headers;
+public class OkHttpResponseMockBuilder extends AbstractHttpResponseMockBuilder<Response, OkHttpResponseMockBuilder> implements HttpResponseMockBuilder<Response> {
 
 	/**
 	 * Original HTTP request.
@@ -73,77 +56,26 @@ public class OkHttpResponseMockBuilder {
 	 * Create builder.
 	 */
 	public OkHttpResponseMockBuilder() {
+		this.protocol = Protocol.HTTP_1_0;
 		this.request = new Request.Builder()
 				.url("http://www.google.fr")
 				.build();
-
-		this.headers = new LinkedHashMap<>();
-		this.protocol = Protocol.HTTP_1_0;
 	}
 
-	/**
-	 * Set {@link #code}.
-	 *
-	 * @param code New {@link #code}.
-	 * @return Current builder.
-	 */
-	public OkHttpResponseMockBuilder setCode(int code) {
-		this.code = code;
-		return this;
-	}
-
-	/**
-	 * Set {@link #body}.
-	 *
-	 * @param body New {@link #body}.
-	 * @return Current builder.
-	 */
-	public OkHttpResponseMockBuilder setBody(ResponseBody body) {
-		this.body = body;
-		return this;
-	}
-
-	/**
-	 * Add new header.
-	 *
-	 * @param name Header name.
-	 * @param value Header value.
-	 * @return Current builder.
-	 */
-	public OkHttpResponseMockBuilder addHeader(String name, String value) {
-		LinkedList<String> values = headers.get(name);
-		if (values == null) {
-			values = new LinkedList<>();
-			headers.put(name, values);
-		}
-
-		values.add(value);
-		return this;
-	}
-
-	/**
-	 * Add new cookie.
-	 *
-	 * @param cookie Cookie.
-	 * @return Current builder.
-	 */
-	public OkHttpResponseMockBuilder addCookie(Cookie cookie) {
-		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
-	}
-
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public Response build() {
 		Response.Builder builder = new Response.Builder()
 				.request(request)
 				.protocol(protocol)
-				.code(code)
-				.body(body);
+				.code(status);
 
-		for (Map.Entry<String, LinkedList<String>> entry : headers.entrySet()) {
+		if (content != null) {
+			builder.body(new OkHttpResponseBodyMockBuilder()
+					.setBody(content)
+					.build());
+		}
+
+		for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
 			String headerName = entry.getKey();
 			for (String headerValue : entry.getValue()) {
 				builder.addHeader(headerName, headerValue);

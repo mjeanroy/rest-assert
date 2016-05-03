@@ -30,7 +30,7 @@ import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertion
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -52,14 +52,14 @@ public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpR
 
 	@Test
 	public void it_should_fail_without_any_cookies() {
-		HttpResponse rsp = new HttpResponseMockBuilder().build();
+		HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
 		AssertionResult result = invoke(rsp);
 		verifyError(result);
 	}
 
 	@Test
 	public void it_should_fail_without_expected_cookies() {
-		HttpResponse rsp = new HttpResponseMockBuilder()
+		HttpResponse rsp = new HttpResponseMockBuilderImpl()
 				.addCookie(new CookieMockBuilder()
 						.setName("foo1")
 						.setValue("bar1")
@@ -80,7 +80,7 @@ public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpR
 	protected abstract void verifyError(AssertionResult result);
 
 	private HttpResponse newResponse(Cookie cookie, Cookie... cookies) {
-		return new HttpResponseMockBuilder()
+		return new HttpResponseMockBuilderImpl()
 				.addCookie(cookie, cookies)
 				.build();
 	}

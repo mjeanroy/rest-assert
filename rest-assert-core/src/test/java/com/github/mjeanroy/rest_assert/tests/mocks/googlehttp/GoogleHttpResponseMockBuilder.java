@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
-import com.google.api.client.http.HttpHeaders;
-import com.google.api.client.http.HttpResponse;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
+
+import com.github.mjeanroy.rest_assert.tests.mocks.AbstractHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.google.api.client.http.HttpResponse;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -38,78 +40,29 @@ import static org.mockito.Mockito.when;
 /**
  * Builder to create mock instance of {@link HttpResponse} class.
  */
-public class GoogleHttpResponseMockBuilder {
+public class GoogleHttpResponseMockBuilder extends AbstractHttpResponseMockBuilder<HttpResponse, GoogleHttpResponseMockBuilder> implements HttpResponseMockBuilder<HttpResponse> {
 
-	/**
-	 * Response status code.
-	 */
-	private int statusCode;
-
-	/**
-	 * Response content.
-	 */
-	private InputStream content;
-
-	/**
-	 * Response content charset.
-	 */
-	private Charset charset;
-
-	/**
-	 * Response headers.
-	 */
-	private HttpHeaders headers;
-
-	/**
-	 * Set {@link #statusCode}.
-	 *
-	 * @param statusCode New {@link #statusCode}.
-	 * @return Current builder.
-	 */
-	public GoogleHttpResponseMockBuilder setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-		return this;
-	}
-
-	/**
-	 * Set {@link #headers}.
-	 *
-	 * @param headers New {@link #headers}.
-	 * @return Current builder.
-	 */
-	public GoogleHttpResponseMockBuilder setHeaders(HttpHeaders headers) {
-		this.headers = headers;
-		return this;
-	}
-
-	/**
-	 * Set {@link #content}.
-	 *
-	 * @param charset New {@link #charset}.
-	 * @param content New {@link #content}.
-	 * @return Current builder.
-	 */
-	public GoogleHttpResponseMockBuilder setContent(Charset charset, String content) {
-		this.content = new ByteArrayInputStream(content.getBytes());
-		this.charset = charset;
-		return this;
-	}
-
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public HttpResponse build() {
 		HttpResponse rsp = mock(HttpResponse.class);
-		when(rsp.getStatusCode()).thenReturn(statusCode);
-		when(rsp.getHeaders()).thenReturn(headers);
+		when(rsp.getStatusCode()).thenReturn(status);
 
-		try {
-			when(rsp.getContent()).thenReturn(content);
-			when(rsp.getContentCharset()).thenReturn(charset);
-		} catch (IOException ex) {
-			throw new AssertionError(ex);
+		GoogleHttpHeadersMockBuilder builder = new GoogleHttpHeadersMockBuilder();
+		for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
+			for (String value : entry.getValue()) {
+				builder.addHeader(entry.getKey(), value);
+			}
+		}
+
+		when(rsp.getHeaders()).thenReturn(builder.build());
+
+		if (content != null) {
+			try {
+				when(rsp.getContent()).thenReturn(new ByteArrayInputStream(content.getBytes()));
+				when(rsp.getContentCharset()).thenReturn(Charset.defaultCharset());
+			} catch (IOException ex) {
+				throw new AssertionError(ex);
+			}
 		}
 
 		return rsp;

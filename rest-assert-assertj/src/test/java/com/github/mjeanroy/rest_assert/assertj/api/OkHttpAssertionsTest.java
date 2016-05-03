@@ -27,7 +27,6 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.OkHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
-import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseBodyMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import okhttp3.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -65,9 +64,7 @@ public class OkHttpAssertionsTest {
 		String body = object.toJson();
 
 		Response response = new OkHttpResponseMockBuilder()
-				.setBody(new OkHttpResponseBodyMockBuilder()
-					.setBody(body)
-					.build())
+				.setContent(body)
 				.build();
 
 		JsonAssert assertions = OkHttpAssertions.assertJsonThat(response);

@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.mime_type;
 import com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.junit.Test;
 
 import java.util.List;
@@ -48,7 +48,7 @@ public class HttpResponseAssertions_hasMimeTypeIn_Test extends AbstractMimeTypeI
 
 	@Test
 	public void it_should_fail_if_response_does_not_have_content_type() {
-		HttpResponse rsp = new HttpResponseMockBuilder().build();
+		HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
 		AssertionResult result = assertions.hasMimeTypeIn(rsp, getMimeTypes());
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
 	}

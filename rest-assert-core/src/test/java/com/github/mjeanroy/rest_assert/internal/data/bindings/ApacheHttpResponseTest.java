@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import java.io.IOException;
+import java.util.List;
+
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpEntityMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpStatusLineMockBuilder;
 import org.apache.http.HttpEntity;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.io.IOException;
-import java.util.List;
 
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,9 +51,7 @@ public class ApacheHttpResponseTest {
 		int expectedStatus = 200;
 
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-				.setStatusLine(new ApacheHttpStatusLineMockBuilder()
-						.setStatusCode(expectedStatus)
-						.build())
+				.setStatus(expectedStatus)
 				.build();
 
 		HttpResponse httpResponse = create(response);
@@ -137,9 +133,7 @@ public class ApacheHttpResponseTest {
 		String body = "foo";
 
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-				.setEntity(new ApacheHttpEntityMockBuilder()
-						.setContent(body)
-						.build())
+				.setContent(body)
 				.build();
 
 		HttpResponse httpResponse = create(response);
@@ -150,15 +144,12 @@ public class ApacheHttpResponseTest {
 
 	@Test
 	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
-		IOException ex = new IOException();
-		HttpEntity httpEntity = new ApacheHttpEntityMockBuilder()
-				.build();
-
-		when(httpEntity.getContent()).thenThrow(ex);
-
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-				.setEntity(httpEntity)
+				.setContent("test")
 				.build();
+
+		HttpEntity entity = response.getEntity();
+		when(entity.getContent()).thenThrow(new IOException());
 
 		thrown.expect(NonParsableResponseBodyException.class);
 

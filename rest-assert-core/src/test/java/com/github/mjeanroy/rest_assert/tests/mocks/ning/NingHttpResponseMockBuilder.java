@@ -26,13 +26,10 @@ package com.github.mjeanroy.rest_assert.tests.mocks.ning;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.CookieSerializer;
+import com.github.mjeanroy.rest_assert.tests.mocks.AbstractHttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
 import com.ning.http.client.AsyncHttpClientConfig;
 import com.ning.http.client.AsyncHttpProvider;
 import com.ning.http.client.HttpResponseBodyPart;
@@ -57,86 +54,9 @@ import static org.mockito.Mockito.when;
 /**
  * Builder to create mock instance of {@link Response} class.
  */
-public class NingHttpResponseMockBuilder {
+public class NingHttpResponseMockBuilder extends AbstractHttpResponseMockBuilder<Response, NingHttpResponseMockBuilder> implements HttpResponseMockBuilder<Response> {
 
-	/**
-	 * Response status code.
-	 */
-	private int statusCode;
-
-	/**
-	 * Response body.
-	 */
-	private String responseBody;
-
-	/**
-	 * Response headers.
-	 */
-	private final Map<String, List<String>> headers;
-
-	/**
-	 * Create new builder.
-	 */
-	public NingHttpResponseMockBuilder() {
-		this.statusCode = 200;
-		this.headers = new LinkedHashMap<>();
-	}
-
-	/**
-	 * Set {@link #statusCode}.
-	 *
-	 * @param statusCode New {@link #statusCode}.
-	 * @return Current builder.
-	 */
-	public NingHttpResponseMockBuilder setStatusCode(int statusCode) {
-		this.statusCode = statusCode;
-		return this;
-	}
-
-	/**
-	 * Set {@link #responseBody}.
-	 *
-	 * @param responseBody New {@link #responseBody}.
-	 * @return Current builder.
-	 */
-	public NingHttpResponseMockBuilder setResponseBody(String responseBody) {
-		this.responseBody = responseBody;
-		return this;
-	}
-
-	/**
-	 * Add new header.
-	 *
-	 * @param name Header name.
-	 * @param value Header value.
-	 * @return Current builder.
-	 */
-	public NingHttpResponseMockBuilder addHeader(String name, String value) {
-		List<String> values = headers.get(name);
-		if (values == null) {
-			values = new LinkedList<>();
-			headers.put(name, values);
-		}
-
-		values.add(value);
-		return this;
-	}
-
-	/**
-	 * Add new cookie.
-	 *
-	 * @param cookie Cookie.
-	 * @return Current builder.
-	 */
-	public NingHttpResponseMockBuilder addCookie(Cookie cookie) {
-		return addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
-	}
-
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public Response build() {
 		Uri uri = mock(Uri.class);
 		AsyncHttpProvider provider = mock(AsyncHttpProvider.class);
@@ -146,10 +66,11 @@ public class NingHttpResponseMockBuilder {
 		when(conn.getHeaderFields()).thenReturn(headers);
 
 		try {
+			final int status = this.status;
 			when(conn.getResponseCode()).thenAnswer(new Answer<Integer>() {
 				@Override
 				public Integer answer(InvocationOnMock invocation) throws Throwable {
-					return statusCode;
+					return status;
 				}
 			});
 		} catch (IOException ex) {
@@ -160,8 +81,8 @@ public class NingHttpResponseMockBuilder {
 		HttpResponseHeaders headers = new ResponseHeaders(uri, conn, provider);
 
 		final List<HttpResponseBodyPart> bodyParts;
-		if (responseBody != null) {
-			byte[] body = responseBody.getBytes(defaultCharset());
+		if (content != null) {
+			byte[] body = content.getBytes(defaultCharset());
 			HttpResponseBodyPart part = new ResponseBodyPart(body, true);
 			bodyParts = singletonList(part);
 		} else {

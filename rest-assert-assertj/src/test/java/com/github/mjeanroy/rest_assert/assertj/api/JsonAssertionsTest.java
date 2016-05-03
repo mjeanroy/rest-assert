@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api;
 
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
@@ -59,7 +59,7 @@ public class JsonAssertionsTest {
 		);
 
 		String json = jsonObject.toJson();
-		HttpResponse httpResponse = new HttpResponseMockBuilder()
+		HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
 			.setContent(json)
 			.build();
 

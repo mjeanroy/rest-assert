@@ -33,7 +33,7 @@ import static org.mockito.Mockito.spy;
 /**
  * Builder to create mock instances of {@link HttpEntity} class.
  */
-public class ApacheHttpEntityMockBuilder {
+class ApacheHttpEntityMockBuilder {
 
 	/**
 	 * Body content.
@@ -43,7 +43,7 @@ public class ApacheHttpEntityMockBuilder {
 	/**
 	 * Create builder.
 	 */
-	public ApacheHttpEntityMockBuilder() {
+	ApacheHttpEntityMockBuilder() {
 		this.content = "";
 	}
 
@@ -53,7 +53,7 @@ public class ApacheHttpEntityMockBuilder {
 	 * @param content New {@link #content}.
 	 * @return Current builder.
 	 */
-	public ApacheHttpEntityMockBuilder setContent(String content) {
+	ApacheHttpEntityMockBuilder setContent(String content) {
 		this.content = content;
 		return this;
 	}
@@ -63,7 +63,7 @@ public class ApacheHttpEntityMockBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public HttpEntity build() {
+	HttpEntity build() {
 		return spy(new StringEntity(content, ContentType.DEFAULT_TEXT));
 	}
 }

@@ -30,7 +30,7 @@ import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertion
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -72,7 +72,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 	protected abstract void verifyError(AssertionResult result);
 
 	private HttpResponse newResponse(Cookie cookie) {
-		HttpResponseMockBuilder builder = new HttpResponseMockBuilder();
+		HttpResponseMockBuilderImpl builder = new HttpResponseMockBuilderImpl();
 		if (cookie != null) {
 			builder.addCookie(cookie);
 		}

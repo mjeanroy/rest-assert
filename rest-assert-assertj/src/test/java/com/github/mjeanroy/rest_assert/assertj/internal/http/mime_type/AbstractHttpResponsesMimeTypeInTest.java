@@ -33,7 +33,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.junit.Test;
 
 import com.github.mjeanroy.rest_assert.assertj.internal.HttpResponses;
@@ -98,7 +98,7 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 	}
 
 	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseMockBuilder()
+		return new HttpResponseMockBuilderImpl()
 			.addHeader(header)
 			.build();
 	}

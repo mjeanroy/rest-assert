@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.http.exact;
 
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -64,7 +64,7 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 	}
 
 	private HttpResponse newResponse(int status) {
-		return new HttpResponseMockBuilder()
+		return new HttpResponseMockBuilderImpl()
 			.setStatus(status)
 			.build();
 	}

@@ -28,7 +28,7 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class HttpResponseAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		HttpResponse response = new HttpResponseMockBuilder().build();
+		HttpResponse response = new HttpResponseMockBuilderImpl().build();
 		HttpResponseAssert assertions = HttpResponseAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -70,7 +70,7 @@ public class HttpResponseAssertionsTest {
 
 		String body = object.toJson();
 
-		HttpResponse response = new HttpResponseMockBuilder()
+		HttpResponse response = new HttpResponseMockBuilderImpl()
 			.setContent(body)
 			.build();
 

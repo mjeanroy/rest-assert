@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.charsets;
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.AbstractHttpResponseTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 
 import java.nio.charset.Charset;
@@ -42,7 +42,7 @@ public class HttpResponseAssert_hasCharset_Test extends AbstractHttpResponseTest
 	@Override
 	protected HttpResponseAssert createApi() {
 		String contentType = format("application/json;charset=%s", getCharset().displayName());
-		return new HttpResponseAssert(new HttpResponseMockBuilder()
+		return new HttpResponseAssert(new HttpResponseMockBuilderImpl()
 			.addHeader("Content-Type", contentType)
 			.build());
 	}

@@ -30,7 +30,6 @@ import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpCookie;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.ApacheHttpResponse;
 import com.github.mjeanroy.rest_assert.tests.json.JsonObject;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpEntityMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
@@ -44,7 +43,7 @@ public class ApacheHttpAssertionsTest {
 	@Test
 	public void it_should_create_new_http_assertion_object() throws Exception {
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.build();
+				.build();
 
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
 
@@ -59,7 +58,7 @@ public class ApacheHttpAssertionsTest {
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
-			.build();
+				.build();
 
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
 
@@ -80,10 +79,8 @@ public class ApacheHttpAssertionsTest {
 		String body = object.toJson();
 
 		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-			.setEntity(new ApacheHttpEntityMockBuilder()
 				.setContent(body)
-				.build())
-			.build();
+				.build();
 
 		JsonAssert assertions = ApacheHttpAssertions.assertJsonThat(response);
 

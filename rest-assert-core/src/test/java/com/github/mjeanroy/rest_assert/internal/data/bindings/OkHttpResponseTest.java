@@ -24,17 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
+import java.util.List;
+
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseBodyMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import okhttp3.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -47,7 +46,7 @@ public class OkHttpResponseTest {
 	public void it_should_get_status_code() {
 		final int code = 200;
 		final Response response = new OkHttpResponseMockBuilder()
-				.setCode(code)
+				.setStatus(code)
 				.build();
 
 		OkHttpResponse okHttpResponse = OkHttpResponse.create(response);
@@ -93,9 +92,7 @@ public class OkHttpResponseTest {
 	public void it_should_get_content() {
 		final String content = "Hello World";
 		final Response response = new OkHttpResponseMockBuilder()
-				.setBody(new OkHttpResponseBodyMockBuilder()
-						.setBody(content)
-						.build())
+				.setContent(content)
 				.build();
 
 		OkHttpResponse okHttpResponse = OkHttpResponse.create(response);

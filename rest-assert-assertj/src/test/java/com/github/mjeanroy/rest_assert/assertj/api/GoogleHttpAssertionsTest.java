@@ -34,8 +34,6 @@ import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.nio.charset.Charset;
-
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -65,7 +63,7 @@ public class GoogleHttpAssertionsTest {
 		String body = object.toJson();
 
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
-			.setContent(Charset.defaultCharset(), body)
+			.setContent(body)
 			.build();
 
 		JsonAssert assertions = GoogleHttpAssertions.assertJsonThat(response);
