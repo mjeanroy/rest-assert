@@ -198,5 +198,4 @@ public enum HttpHeader {
 	public static HttpHeader find(String name) {
 		return MAP.get(name.toLowerCase());
 	}
-
 }

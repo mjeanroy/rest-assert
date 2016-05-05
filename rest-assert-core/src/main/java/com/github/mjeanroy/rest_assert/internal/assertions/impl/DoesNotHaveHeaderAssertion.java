@@ -22,34 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions;
+package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.utils.Predicate;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 
 /**
- * Predicate used to check if a cookie match expected name.
+ * Check that http response does not have any header with
+ * expected name.
  */
-class CookieNamePredicate implements Predicate<Cookie> {
-	/**
-	 * Expected name.
-	 */
-	private final String name;
+public class DoesNotHaveHeaderAssertion extends AbstractHeaderAssertion implements HttpResponseAssertion {
 
 	/**
-	 * Create predicate.
+	 * Create assertion.
 	 *
-	 * @param name Expected name.
-	 * @throws NullPointerException If {@code name} is {@code null}.
+	 * @param name Header name.
 	 */
-	CookieNamePredicate(String name) {
-		this.name = notNull(name, "Cookie name must not be null");
+	public DoesNotHaveHeaderAssertion(String name) {
+		super(name);
 	}
 
 	@Override
-	public boolean apply(Cookie cookie) {
-		return name.equals(cookie.getName());
+	public AssertionResult handle(HttpResponse httpResponse) {
+		return httpResponse.hasHeader(name) ?
+				failure(shouldNotHaveHeader(name)) :
+				success();
 	}
 }

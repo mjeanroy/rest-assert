@@ -24,33 +24,62 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.rest_assert.internal.data.*;
-import com.github.mjeanroy.rest_assert.reflect.Param;
-import com.github.mjeanroy.rest_assert.utils.Mapper;
-import com.github.mjeanroy.rest_assert.utils.Predicate;
-
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldHaveCookie;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCookie.shouldNotHaveCookie;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeader;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
-import static com.github.mjeanroy.rest_assert.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
-import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.*;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.*;
-import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.DoesNotHaveCookieAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.DoesNotHaveHeaderAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasCharsetAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasCookieAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasHeaderAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasMimeTypeAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsDateHeaderEqualToAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderEqualToAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderListEqualToAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderMatchingAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusBetweenAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusEqualAssertion;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusOutOfAssertion;
+import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
+import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
+import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.reflect.Param;
+
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CONTROL;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_DISPOSITION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_ENCODING;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_LENGTH;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.EXPIRES;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LAST_MODIFIED;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.PRAGMA;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_XSS_PROTECTION;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSS;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSV;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.JSON;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.PDF;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_HTML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_JAVASCRIPT;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_PLAIN;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_XML;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.XHTML;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
-import static com.github.mjeanroy.rest_assert.utils.Utils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.addAll;
 
@@ -601,7 +630,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, @Param("expiresValue") Date expiresValue) {
-		return isHeaderDateEqualTo(httpResponse, EXPIRES.getName(), expiresValue);
+		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(EXPIRES.getName(), expiresValue));
 	}
 
 	/**
@@ -625,24 +654,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, @Param("lastModifiedValue") Date lastModifiedDate) {
-		return isHeaderDateEqualTo(httpResponse, LAST_MODIFIED.getName(), lastModifiedDate);
-	}
-
-	private AssertionResult isHeaderDateEqualTo(HttpResponse httpResponse, final String headerName, final Date expectedValue) {
-		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> actualValues) {
-				List<Date> actualDates = map(actualValues, new Mapper<String, Date>() {
-					@Override
-					public Date apply(String input) {
-						return parseHttpDate(input);
-					}
-				});
-				return actualDates.contains(expectedValue) ?
-						success() :
-						failure(shouldHaveHeaderWithValue(headerName, formatHttpDate(expectedValue), actualValues));
-			}
-		});
+		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(LAST_MODIFIED.getName(), lastModifiedDate));
 	}
 
 	/**
@@ -715,7 +727,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") CacheControl cacheControl) {
-		return isHeaderMatching(httpResponse, CACHE_CONTROL.getName(), cacheControl);
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CACHE_CONTROL.getName(), cacheControl));
 	}
 
 	/**
@@ -757,7 +769,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
-		return isHeaderMatching(httpResponse, X_XSS_PROTECTION.getName(), xssProtection);
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_XSS_PROTECTION.getName(), xssProtection));
 	}
 
 	/**
@@ -799,7 +811,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") ContentTypeOptions contentTypeOptions) {
-		return isHeaderMatching(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions);
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions));
 	}
 
 	/**
@@ -841,7 +853,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") FrameOptions frameOptions) {
-		return isHeaderMatching(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions);
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_FRAME_OPTIONS.getName(), frameOptions));
 	}
 
 	/**
@@ -883,7 +895,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, @Param("contentSecurityPolicy") ContentSecurityPolicy contentSecurityPolicy) {
-		return isHeaderMatching(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy);
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy));
 	}
 
 	/**
@@ -958,55 +970,8 @@ public final class HttpResponseAssertions {
 	 * @param accessControlAllowHeaders Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlAllowHeaders") final Iterable<String> accessControlAllowHeaders) {
-		final String name = ACCESS_CONTROL_ALLOW_HEADERS.getName();
-		return assertHeader(httpResponse, name, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> actualValues) {
-				String value = actualValues.get(0);
-
-				// Extract set of actual values.
-				String[] array = value.split(",");
-				Set<String> setOfActualValues = new HashSet<>();
-				for (String current : array) {
-					String trimmedValue = current.toLowerCase().trim();
-					if (!trimmedValue.isEmpty()) {
-						setOfActualValues.add(trimmedValue);
-					}
-				}
-
-				// Extract set of expected values.
-				Set<String> setOfExpectedValues = new HashSet<>();
-				for (String current : accessControlAllowHeaders) {
-					String trimmedValue = current.toLowerCase().trim();
-					if (!trimmedValue.isEmpty()) {
-						setOfExpectedValues.add(trimmedValue);
-					}
-				}
-
-				return setOfActualValues.equals(setOfExpectedValues) ?
-						success() :
-						failure(shouldHaveHeaderWithValue(name, join(accessControlAllowHeaders, ", "), value));
-			}
-		});
-	}
-
-	private AssertionResult isHeaderMatching(HttpResponse httpResponse, final String headerName, final HeaderValue value) {
-		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> actualValues) {
-				boolean found = some(actualValues, new Predicate<String>() {
-					@Override
-					public boolean apply(String input) {
-						return value.match(input);
-					}
-				});
-
-				return found ?
-						success() :
-						failure(shouldHaveHeaderWithValue(headerName, value.value(), actualValues));
-			}
-		});
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlAllowHeaders") Iterable<String> accessControlAllowHeaders) {
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), accessControlAllowHeaders));
 	}
 
 	/**
@@ -1116,9 +1081,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
-		return httpResponse.hasHeader(headerName) ?
-				success() :
-				failure(shouldHaveHeader(headerName));
+		return assertWith(httpResponse, new HasHeaderAssertion(headerName));
 	}
 
 	/**
@@ -1129,9 +1092,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNothaveHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
-		return httpResponse.hasHeader(headerName) ?
-				failure(shouldNotHaveHeader(headerName)) :
-				success();
+		return assertWith(httpResponse, new DoesNotHaveHeaderAssertion(headerName));
 	}
 
 	/**
@@ -1141,18 +1102,8 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeType(HttpResponse httpResponse, @Param("expectedMimeType") final String expectedMimeType) {
-		String headerName = CONTENT_TYPE.getName();
-		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> contentTypes) {
-				String contentType = contentTypes.get(0);
-				String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
-				return expectedMimeType.equals(actualMimeType) ?
-						success() :
-						failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
-			}
-		});
+	public AssertionResult hasMimeType(HttpResponse httpResponse, @Param("expectedMimeType") String expectedMimeType) {
+		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeType));
 	}
 
 	/**
@@ -1173,23 +1124,8 @@ public final class HttpResponseAssertions {
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") final String expectedCharset) {
-		String headerName = CONTENT_TYPE.getName();
-		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> contentTypes) {
-				String contentType = contentTypes.get(0);
-				String[] contentTypeParts = contentType.split(";");
-				if (contentTypeParts.length == 1) {
-					return failure(shouldHaveCharset());
-				}
-
-				String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
-				return actualCharset.equalsIgnoreCase(expectedCharset) ?
-						success() :
-						failure(shouldHaveCharset(expectedCharset, actualCharset));
-			}
-		});
+	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") String expectedCharset) {
+		return assertWith(httpResponse, new HasCharsetAssertion(expectedCharset));
 	}
 
 	/**
@@ -1199,27 +1135,8 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") final Iterable<String> expectedMimeType) {
-		String headerName = CONTENT_TYPE.getName();
-		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> contentTypes) {
-				String contentType = contentTypes.get(0);
-				String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
-
-				boolean found = false;
-				for (String current : expectedMimeType) {
-					if (actualMimeType.equals(current.toLowerCase())) {
-						found = true;
-						break;
-					}
-				}
-
-				return found ?
-						success() :
-						failure(shouldHaveMimeType(expectedMimeType, actualMimeType));
-			}
-		});
+	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") Iterable<String> expectedMimeType) {
+		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeType));
 	}
 
 	/**
@@ -1231,32 +1148,8 @@ public final class HttpResponseAssertions {
 	 * @param headerValue Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") final String headerName, @Param("headerValue") final String headerValue) {
-		return assertHeader(httpResponse, headerName, new HeaderAssertion() {
-			@Override
-			public AssertionResult handle(List<String> actualValues) {
-				return actualValues.contains(headerValue) ?
-						success() :
-						failure(shouldHaveHeaderWithValue(headerName, headerValue, actualValues));
-			}
-		});
-	}
-
-	private AssertionResult assertHeader(HttpResponse httpResponse, String headerName, HeaderAssertion assertion) {
-		AssertionResult result = hasHeader(httpResponse, headerName);
-		if (result.isFailure()) {
-			return result;
-		}
-
-		List<String> actualValues = httpResponse.getHeader(headerName);
-
-		HttpHeader header = HttpHeader.find(headerName);
-		if (header != null && header.isSingle() && actualValues.size() > 1) {
-			// Probably a bug in the response, fail fast.
-			return failure(shouldHaveSingleHeader(headerName, actualValues));
-		}
-
-		return assertion.handle(actualValues);
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") String headerName, @Param("headerValue") String headerValue) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(headerName, headerValue));
 	}
 
 	/**
@@ -1267,9 +1160,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusEqual(HttpResponse httpResponse, @Param("status") int status) {
-		return httpResponse.getStatus() == status ?
-				success() :
-				failure(shouldHaveStatus(httpResponse.getStatus(), status));
+		return assertWith(httpResponse, new StatusEqualAssertion(status));
 	}
 
 	/**
@@ -1282,10 +1173,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusBetween(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
-		int actualStatus = httpResponse.getStatus();
-		return actualStatus >= start && actualStatus <= end ?
-				success() :
-				failure(shouldHaveStatusBetween(actualStatus, start, end));
+		return assertWith(httpResponse, new StatusBetweenAssertion(start, end));
 	}
 
 	/**
@@ -1298,10 +1186,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStatusOutOf(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
-		int actualStatus = httpResponse.getStatus();
-		return actualStatus < start || actualStatus > end ?
-				success() :
-				failure(shouldHaveStatusOutOf(actualStatus, start, end));
+		return assertWith(httpResponse, new StatusOutOfAssertion(start, end));
 	}
 
 	/**
@@ -1310,10 +1195,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse) {
-		List<Cookie> cookies = httpResponse.getCookies();
-		return cookies.isEmpty() ?
-				success() :
-				failure(shouldNotHaveCookie());
+		return assertWith(httpResponse, new DoesNotHaveCookieAssertion());
 	}
 
 	/**
@@ -1324,15 +1206,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse, @Param("name") String name) {
-		List<Cookie> cookies = httpResponse.getCookies();
-		if (cookies.isEmpty()) {
-			return success();
-		}
-
-		boolean result = !some(cookies, new CookieNamePredicate(name));
-		return result ?
-				success() :
-				failure(shouldNotHaveCookie(name));
+		return assertWith(httpResponse, new DoesNotHaveCookieAssertion(name));
 	}
 
 	/**
@@ -1343,7 +1217,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") String name) {
-		return hasCookieMatching(httpResponse, shouldHaveCookie(name), new CookieNamePredicate(name));
+		return assertWith(httpResponse, new HasCookieAssertion(name));
 	}
 
 	/**
@@ -1355,7 +1229,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") String name, @Param("value") String value) {
-		return hasCookieMatching(httpResponse, shouldHaveCookie(name, value), new CookieNameValuePredicate(name, value));
+		return assertWith(httpResponse, new HasCookieAssertion(name, value));
 	}
 
 	/**
@@ -1365,22 +1239,10 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("cookie") Cookie cookie) {
-		return hasCookieMatching(httpResponse, shouldHaveCookie(cookie), new CookiePredicate(cookie));
+		return assertWith(httpResponse, new HasCookieAssertion(cookie));
 	}
 
-	private static AssertionResult hasCookieMatching(HttpResponse httpResponse, ShouldHaveCookie error, Predicate<Cookie> predicate) {
-		List<Cookie> cookies = httpResponse.getCookies();
-		if (cookies.isEmpty()) {
-			return failure(error);
-		}
-
-		boolean found = some(cookies, predicate);
-		return found ?
-				success() :
-				failure(error);
-	}
-
-	private interface HeaderAssertion {
-		AssertionResult handle(List<String> actualValues);
+	private AssertionResult assertWith(HttpResponse httpResponse, Assertion<HttpResponse> assertion) {
+		return assertion.handle(httpResponse);
 	}
 }

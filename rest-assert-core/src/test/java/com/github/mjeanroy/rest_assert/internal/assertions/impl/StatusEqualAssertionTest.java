@@ -22,10 +22,11 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions;
+package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,50 +34,44 @@ import org.junit.rules.ExpectedException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
-public class CookieNameValuePredicateTest {
+public class StatusEqualAssertionTest {
 
 	@Rule
 	public ExpectedException thrown = none();
 
 	@Test
-	public void it_should_match_cookie_by_name() {
-		final String name = "foo";
-		final String value = "bar";
-		final CookieNameValuePredicate predicate = new CookieNameValuePredicate(name, value);
-
-		Cookie c1 = new CookieMockBuilder()
-				.setName(name)
-				.setValue(value)
+	public void it_should_not_fail_if_status_match() {
+		final StatusEqualAssertion assertion = new StatusEqualAssertion(200);
+		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+				.setStatus(200)
 				.build();
 
-		Cookie c2 = new CookieMockBuilder()
-				.setName(value)
-				.setValue(value)
-				.build();
+		AssertionResult result = assertion.handle(rsp);
 
-		Cookie c3 = new CookieMockBuilder()
-				.setName(name)
-				.setValue(name)
-				.build();
-
-		assertThat(predicate.apply(c1)).isTrue();
-		assertThat(predicate.apply(c2)).isFalse();
-		assertThat(predicate.apply(c3)).isFalse();
+		assertThat(result).isNotNull();
+		assertThat(result.isSuccess()).isTrue();
+		assertThat(result.isFailure()).isFalse();
 	}
 
 	@Test
-	public void it_should_fail_if_name_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie name must not be null");
+	public void it_should_fail_if_status_does_not_match() {
+		final StatusEqualAssertion assertion = new StatusEqualAssertion(200);
+		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+				.setStatus(400)
+				.build();
 
-		new CookieNameValuePredicate(null, "value");
+		AssertionResult result = assertion.handle(rsp);
+
+		assertThat(result).isNotNull();
+		assertThat(result.isSuccess()).isFalse();
+		assertThat(result.isFailure()).isTrue();
+		assertThat(result.getError().toString()).isEqualTo("Expecting status code to be 200 but was 400");
 	}
 
 	@Test
-	public void it_should_fail_if_value_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie value must not be null");
-
-		new CookieNameValuePredicate("name", null);
+	public void it_should_fail_if_status_is_negative() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Http status code must be positive");
+		new StatusEqualAssertion(-1);
 	}
 }

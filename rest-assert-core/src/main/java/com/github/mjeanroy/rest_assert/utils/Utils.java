@@ -101,6 +101,24 @@ public final class Utils {
 	}
 
 	/**
+	 * Check that a given collection is not empty (i.e not null, not empty).
+	 *
+	 * @param list Collection to check.
+	 * @param message Error message if {@code obj} is blank.
+	 * @return Original {@code obj}.
+	 * @throws NullPointerException If {@code obj} is null.
+	 * @throws IllegalArgumentException If {@code obj} is empty.
+	 */
+	public static <T> Iterable<T> notEmpty(Iterable<T> list, String message) {
+		notNull(list, message);
+		if (!list.iterator().hasNext()) {
+			throw new IllegalArgumentException(message);
+		}
+
+		return list;
+	}
+
+	/**
 	 * Check that a given value is greater or equal than given minimum value.
 	 *
 	 * @param val Value to check.
@@ -115,6 +133,18 @@ public final class Utils {
 		}
 
 		return val;
+	}
+
+	/**
+	 * Check that a given value is greater or equal than zero.
+	 *
+	 * @param val Value to check.
+	 * @param message Error message.
+	 * @return The original value.
+	 * @throws IllegalArgumentException If {@code val} is less than zero.
+	 */
+	public static int isPositive(int val, String message) {
+		return isGreaterThan(val, 0, message);
 	}
 
 	/**

@@ -24,15 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+
+import java.util.*;
 
 import static java.util.Collections.addAll;
 import static org.mockito.Matchers.anyString;
@@ -74,6 +71,11 @@ public class HttpResponseMockBuilderImpl extends AbstractHttpResponseMockBuilder
 		HttpResponse rsp = mock(HttpResponse.class);
 		when(rsp.getStatus()).thenReturn(status);
 		when(rsp.getContent()).thenReturn(content);
+
+		final Map<String, List<String>> headers = new LinkedHashMap<>();
+		for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
+			headers.put(entry.getKey(), new LinkedList<>(entry.getValue()));
+		}
 
 		when(rsp.getHeader(anyString())).thenAnswer(new Answer<List<String>>() {
 			@Override

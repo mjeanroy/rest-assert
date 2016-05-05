@@ -22,50 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions;
+package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import com.github.mjeanroy.rest_assert.utils.Predicate;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
 
-public class CookiePredicateTest {
+/**
+ * Predicate used to check if a cookie has a given name.
+ */
+class CookieNamePredicate implements Predicate<Cookie> {
 
-	@Rule
-	public ExpectedException thrown = none();
+	/**
+	 * Expected cookie name.
+	 */
+	private final String name;
 
-	@Test
-	public void it_should_match_cookie_by_name() {
-		final Cookie cookie = new CookieMockBuilder()
-				.setName("name")
-				.setValue("value")
-				.build();
-
-		final CookiePredicate predicate = new CookiePredicate(cookie);
-
-		Cookie c1 = new CookieMockBuilder()
-				.setName("name")
-				.setValue("value")
-				.build();
-
-		Cookie c2 = new CookieMockBuilder()
-				.setName("name")
-				.setValue("")
-				.build();
-
-		assertThat(predicate.apply(c1)).isTrue();
-		assertThat(predicate.apply(c2)).isFalse();
+	/**
+	 * Create predicate.
+	 *
+	 * @param name Expected name.
+	 */
+	CookieNamePredicate(String name) {
+		this.name = notNull(name, "Cookie name must not be null");
 	}
 
-	@Test
-	public void it_should_fail_if_cookie_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie must not be null");
-
-		new CookiePredicate(null);
+	@Override
+	public boolean apply(Cookie cookie) {
+		return name.equals(cookie.getName());
 	}
 }

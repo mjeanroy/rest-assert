@@ -152,7 +152,7 @@ public class CookieMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		Cookie cookie = mock(Cookie.class);
+		Cookie cookie = mock(Cookie.class, String.format("Cookie{name: %s}", name));
 		when(cookie.getName()).thenReturn(name);
 		when(cookie.getValue()).thenReturn(value);
 		when(cookie.getDomain()).thenReturn(domain);

@@ -22,38 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions;
+package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.utils.Predicate;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
+import static com.github.mjeanroy.rest_assert.utils.Utils.isPositive;
 
 /**
- /**
- * Predicate used to check if a cookie match expected name
- * and value.
+ * Check that given http response has expected status code.
  */
-class CookieNameValuePredicate extends CookieNamePredicate implements Predicate<Cookie> {
-	/**
-	 * Expected value.
-	 */
-	private final String value;
+public class StatusEqualAssertion implements HttpResponseAssertion {
 
 	/**
-	 * Create predicate.
-	 *
-	 * @param name Expected name.
-	 * @param value Expected value.
-	 * @throws NullPointerException If {@code name} or {@code value} is {@code null}.
+	 * Expected status code.
 	 */
-	CookieNameValuePredicate(String name, String value) {
-		super(name);
-		this.value = notNull(value, "Cookie value must not be null");
+	private final int status;
+
+	/**
+	 * Create assertion.
+	 *
+	 * @param status Expected status.
+	 * @throws IllegalArgumentException If {@code status} is not positive.
+	 */
+	public StatusEqualAssertion(int status) {
+		this.status = isPositive(status, "Http status code must be positive");
 	}
 
 	@Override
-	public boolean apply(Cookie cookie) {
-		return super.apply(cookie) && value.equals(cookie.getValue());
+	public AssertionResult handle(HttpResponse httpResponse) {
+		int actualStatus = httpResponse.getStatus();
+		return actualStatus == status ?
+				AssertionResult.success() :
+				AssertionResult.failure(shouldHaveStatus(actualStatus, status));
 	}
 }

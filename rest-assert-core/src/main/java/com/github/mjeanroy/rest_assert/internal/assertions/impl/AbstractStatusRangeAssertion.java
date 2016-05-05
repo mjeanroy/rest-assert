@@ -22,44 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions;
+package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import static com.github.mjeanroy.rest_assert.utils.Utils.isGreaterThan;
+import static com.github.mjeanroy.rest_assert.utils.Utils.isPositive;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+/**
+ * Abstract assertion with range of status code.
+ */
+abstract class AbstractStatusRangeAssertion implements HttpResponseAssertion {
 
-public class CookieNamePredicateTest {
+	/**
+	 * Lower bound.
+	 */
+	final int start;
 
-	@Rule
-	public ExpectedException thrown = none();
+	/**
+	 * Upper bound.
+	 */
+	final int end;
 
-	@Test
-	public void it_should_match_cookie_by_name() {
-		final String name = "foo";
-		final CookieNamePredicate predicate = new CookieNamePredicate(name);
+	/**
+	 * Create assertion.
+	 *
+	 * @param start Lower bound.
+	 * @param end Upper bound.
+	 * @throws IllegalArgumentException If {@code start} or {@code end} are negative or if {@code start} is less than or equals to {@code end}.
+	 */
+	AbstractStatusRangeAssertion(int start, int end) {
+		isPositive(start, "Http status code must be positive");
+		isPositive(end, "Http status code must be positive");
+		isGreaterThan(end, start, "Lower bound must be strictly less than upper bound");
 
-		Cookie c1 = new CookieMockBuilder()
-				.setName(name)
-				.build();
-
-		Cookie c2 = new CookieMockBuilder()
-				.setName("bar")
-				.build();
-
-		assertThat(predicate.apply(c1)).isTrue();
-		assertThat(predicate.apply(c2)).isFalse();
-	}
-
-	@Test
-	public void it_should_fail_if_name_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie name must not be null");
-
-		new CookieNamePredicate(null);
+		this.start = start;
+		this.end = end;
 	}
 }

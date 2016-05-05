@@ -22,35 +22,43 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.assertions;
+package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.Cookies;
-import com.github.mjeanroy.rest_assert.utils.Predicate;
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 
+import java.util.List;
+
+import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
 
 /**
- * Predicate used to check if a cookie match another cookie.
+ * Check that http response has at least one header with
+ * expected name.
  */
-class CookiePredicate implements Predicate<Cookie> {
-	/**
-	 * Expected cookie.
-	 */
-	private final Cookie cookie;
+public class IsHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
 
 	/**
-	 * Create predicate.
-	 *
-	 * @param cookie Expected cookie.
-	 * @throws NullPointerException If {@code cookie} is {@code null}.
+	 * Expected header value.
 	 */
-	CookiePredicate(Cookie cookie) {
-		this.cookie = notNull(cookie, "Cookie must not be null");
+	private final String value;
+
+	/**
+	 * Create assertion.
+	 *
+	 * @param name Header name.
+	 */
+	public IsHeaderEqualToAssertion(String name, String value) {
+		super(name);
+		this.value = notNull(value, "Header value must not be null");
 	}
 
 	@Override
-	public boolean apply(Cookie cookie) {
-		return Cookies.equals(this.cookie, cookie);
+	AssertionResult doAssertion(List<String> actualValues) {
+		// should be case-sensitive).
+		return actualValues.contains(value) ?
+				success() :
+				failure(shouldHaveHeaderWithValue(name, value, actualValues));
 	}
 }
