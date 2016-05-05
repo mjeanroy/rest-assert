@@ -1380,46 +1380,6 @@ public final class HttpResponseAssertions {
 				failure(error);
 	}
 
-	private static class CookieNamePredicate implements Predicate<Cookie> {
-		private final String name;
-
-		private CookieNamePredicate(String name) {
-			this.name = notNull(name, "Cookie name must not be null");
-		}
-
-		@Override
-		public boolean apply(Cookie cookie) {
-			return name.equals(cookie.getName());
-		}
-	}
-
-	private static class CookieNameValuePredicate extends CookieNamePredicate implements Predicate<Cookie> {
-		private final String value;
-
-		private CookieNameValuePredicate(String name, String value) {
-			super(name);
-			this.value = notNull(value, "Cookie value must not be null");
-		}
-
-		@Override
-		public boolean apply(Cookie cookie) {
-			return super.apply(cookie) && value.equals(cookie.getValue());
-		}
-	}
-
-	private static class CookiePredicate implements Predicate<Cookie> {
-		private final Cookie cookie;
-
-		private CookiePredicate(Cookie cookie) {
-			this.cookie = notNull(cookie, "Cookie must not be null");
-		}
-
-		@Override
-		public boolean apply(Cookie cookie) {
-			return Cookies.equals(this.cookie, cookie);
-		}
-	}
-
 	private interface HeaderAssertion {
 		AssertionResult handle(List<String> actualValues);
 	}
