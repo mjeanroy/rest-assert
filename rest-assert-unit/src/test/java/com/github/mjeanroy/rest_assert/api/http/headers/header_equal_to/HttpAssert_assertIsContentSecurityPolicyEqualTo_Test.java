@@ -30,15 +30,15 @@ import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
-import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
+import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
 
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.none;
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.self;
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.unsafeEval;
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.unsafeInline;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.none;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.self;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.unsafeEval;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.unsafeInline;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpAssert_assertIsContentSecurityPolicyEqualTo_Test extends AbstractHttpHeaderEqualToTest {

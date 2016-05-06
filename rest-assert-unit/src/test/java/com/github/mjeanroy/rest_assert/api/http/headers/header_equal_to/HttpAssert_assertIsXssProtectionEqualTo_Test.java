@@ -31,7 +31,7 @@ import com.github.mjeanroy.rest_assert.api.http.HttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.data.XssProtection;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import okhttp3.Response;
 

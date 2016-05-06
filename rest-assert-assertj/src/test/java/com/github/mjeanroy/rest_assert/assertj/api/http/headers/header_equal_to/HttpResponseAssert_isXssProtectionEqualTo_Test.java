@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.headers.header_equal_to
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.data.XssProtection;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 

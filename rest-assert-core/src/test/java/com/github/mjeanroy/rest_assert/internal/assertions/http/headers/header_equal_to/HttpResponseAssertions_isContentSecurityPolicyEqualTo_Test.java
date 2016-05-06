@@ -25,13 +25,13 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.http.headers.header_equal_to;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
+import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.none;
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.unsafeEval;
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.unsafeInline;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.none;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.unsafeEval;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.unsafeInline;
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
 public class HttpResponseAssertions_isContentSecurityPolicyEqualTo_Test extends AbstractHttpHeaderEqualToTest {

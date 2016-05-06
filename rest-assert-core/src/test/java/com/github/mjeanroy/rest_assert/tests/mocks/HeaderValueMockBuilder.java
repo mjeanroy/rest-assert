@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.tests.mocks;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
+import com.github.mjeanroy.rest_assert.data.HeaderValue;
 
 import static java.util.Collections.addAll;
 import static org.mockito.Mockito.mock;

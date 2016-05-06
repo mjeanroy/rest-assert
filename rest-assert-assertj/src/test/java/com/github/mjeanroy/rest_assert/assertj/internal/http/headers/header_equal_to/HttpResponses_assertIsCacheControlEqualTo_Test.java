@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.assertj.internal.http.headers.header_equal_to;
 
-import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
+import com.github.mjeanroy.rest_assert.data.CacheControl;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 

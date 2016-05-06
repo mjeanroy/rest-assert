@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.http.headers.header_
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.data.XssProtection;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;

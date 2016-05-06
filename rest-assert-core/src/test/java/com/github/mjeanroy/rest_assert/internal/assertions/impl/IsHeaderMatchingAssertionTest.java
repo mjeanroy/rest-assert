@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
+import com.github.mjeanroy.rest_assert.data.HeaderValue;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.HeaderValueMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;

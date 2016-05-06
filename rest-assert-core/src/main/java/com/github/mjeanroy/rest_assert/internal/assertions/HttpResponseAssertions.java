@@ -42,14 +42,14 @@ import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderMatching
 import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusBetweenAssertion;
 import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusEqualAssertion;
 import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.rest_assert.internal.data.CacheControl;
-import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
-import com.github.mjeanroy.rest_assert.internal.data.ContentTypeOptions;
+import com.github.mjeanroy.rest_assert.data.CacheControl;
+import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
+import com.github.mjeanroy.rest_assert.data.ContentTypeOptions;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.internal.data.FrameOptions;
+import com.github.mjeanroy.rest_assert.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.rest_assert.internal.data.XssProtection;
+import com.github.mjeanroy.rest_assert.data.XssProtection;
 import com.github.mjeanroy.rest_assert.reflect.Param;
 
 import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;

@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 import java.util.List;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.internal.data.HeaderValue;
+import com.github.mjeanroy.rest_assert.data.HeaderValue;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;

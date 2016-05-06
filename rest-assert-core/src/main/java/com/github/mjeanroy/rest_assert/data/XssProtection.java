@@ -22,26 +22,44 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.data;
+
+import com.github.mjeanroy.rest_assert.data.HeaderValue;
 
 /**
- * Header value that can be checked against string values.
+ * Values of valid XSS protection header.
  */
-public interface HeaderValue {
+public enum XssProtection implements HeaderValue {
 
 	/**
-	 * Get header value (as it should appears in HTTP header).
-	 *
-	 * @return Header value.
+	 * Disables the XSS Protections offered by the user-agent.
 	 */
-	String value();
+	DISABLE("0"),
 
 	/**
-	 * Check that actual header value match this header value (in most cases,
-	 * a simple call to equals should be enough).
-	 *
-	 * @param actualValue Actual header value.
-	 * @return {@code true} if actual header value match, {@code false} otherwise.
+	 * Enables the XSS Protections.
 	 */
-	boolean match(String actualValue);
+	ENABLE("1"),
+
+	/**
+	 * Enables XSS protections and instructs the user-agent to block the response in the
+	 * event that script has been inserted from user input, instead of sanitizing.
+	 */
+	ENABLE_BLOCK("1; mode=block");
+
+	private final String header;
+
+	XssProtection(String header) {
+		this.header = header;
+	}
+
+	@Override
+	public String value() {
+		return header;
+	}
+
+	@Override
+	public boolean match(String actualValue) {
+		return header.equals(actualValue);
+	}
 }

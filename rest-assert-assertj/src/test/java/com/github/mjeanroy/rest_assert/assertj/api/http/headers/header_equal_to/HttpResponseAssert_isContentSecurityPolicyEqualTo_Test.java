@@ -26,11 +26,11 @@ package com.github.mjeanroy.rest_assert.assertj.api.http.headers.header_equal_to
 
 import com.github.mjeanroy.rest_assert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.rest_assert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy;
+import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.self;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.self;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;

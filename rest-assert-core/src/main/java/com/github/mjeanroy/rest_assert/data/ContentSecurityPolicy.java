@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.data;
 
 import com.github.mjeanroy.rest_assert.utils.Mapper;
 import com.github.mjeanroy.rest_assert.utils.Utils;

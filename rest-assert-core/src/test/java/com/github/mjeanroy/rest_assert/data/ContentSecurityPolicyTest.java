@@ -22,8 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.rest_assert.internal.data;
+package com.github.mjeanroy.rest_assert.data;
 
+import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -31,7 +32,7 @@ import org.junit.rules.ExpectedException;
 import java.net.URI;
 import java.net.URL;
 
-import static com.github.mjeanroy.rest_assert.internal.data.ContentSecurityPolicy.*;
+import static com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContentSecurityPolicyTest {
