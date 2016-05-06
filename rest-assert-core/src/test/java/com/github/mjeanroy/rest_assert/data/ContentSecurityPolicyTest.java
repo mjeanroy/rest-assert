@@ -320,6 +320,17 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
+	public void it_should_handle_block_all_mixed_content() {
+		ContentSecurityPolicy csp = new ContentSecurityPolicy.Builder()
+				.addDefaultSrc(none())
+				.blockAllMixedContent()
+				.build();
+
+		assertThat(csp.toString()).isEqualTo("default-src 'none'; block-all-mixed-content;");
+		assertThat(csp.value()).isEqualTo("default-src 'none'; block-all-mixed-content;");
+	}
+
+	@Test
 	public void it_should_handle_frame_ancestors_and_fail_if_source_is_not_host() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Source must be a valid host value");
@@ -502,6 +513,17 @@ public class ContentSecurityPolicyTest {
 
 		assertThat(csp.match("default-src 'none'; base-uri http://domain.com")).isTrue();
 		assertThat(csp.match("default-src 'none'; base-uri https://domain.com")).isFalse();
+	}
+
+	@Test
+	public void it_should_check_if_csp_match_block_all_mixed_content() {
+		ContentSecurityPolicy csp = new ContentSecurityPolicy.Builder()
+				.addDefaultSrc(none())
+				.blockAllMixedContent()
+				.build();
+
+		assertThat(csp.match("default-src 'none'; block-all-mixed-content;")).isTrue();
+		assertThat(csp.match("default-src 'none';")).isFalse();
 	}
 
 	@Test

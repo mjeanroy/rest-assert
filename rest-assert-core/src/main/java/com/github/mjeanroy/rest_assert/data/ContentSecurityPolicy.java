@@ -91,18 +91,22 @@ public class ContentSecurityPolicy implements HeaderValue {
 					sb.append(" ");
 				}
 
-				sb.append(directive.getName()).append(" ");
-
-				StringBuilder directiveValues = new StringBuilder();
+				StringBuilder allValues = new StringBuilder();
 				for (Source src : directives.get(directive)) {
-					if (directiveValues.length() != 0) {
-						directiveValues.append(" ");
+					if (allValues.length() != 0) {
+						allValues.append(" ");
 					}
 
-					directiveValues.append(src.getValue());
+					allValues.append(src.getValue());
 				}
 
-				sb.append(directiveValues).append(";");
+				sb.append(new StringBuilder()
+						.append(directive.getName())
+						.append(" ")
+						.append(allValues)
+						.toString()
+						.trim()
+					).append(";");
 			}
 		}
 
@@ -337,6 +341,18 @@ public class ContentSecurityPolicy implements HeaderValue {
 				Sandbox sandbox = Sandbox.byValue(value);
 				builder.addSandbox(sandbox);
 			}
+		},
+
+		BLOCK_ALL_MIXED_CONTENT("block-all-mixed-content") {
+			@Override
+			void parse(String headerValue, Builder builder) {
+				builder.blockAllMixedContent();
+			}
+
+			@Override
+			void doParse(String value, Builder builder) {
+
+			}
 		};
 
 		/**
@@ -485,6 +501,14 @@ public class ContentSecurityPolicy implements HeaderValue {
 			return uri.toString();
 		}
 	}
+
+	// Empty source, always return empty string.
+	private static final Source EMPTY_SOURCE = new AbstractSourceValue() {
+		@Override
+		public String getValue() {
+			return "";
+		}
+	};
 
 	/**
 	 * Host source, defined by:
@@ -1208,6 +1232,16 @@ public class ContentSecurityPolicy implements HeaderValue {
 			@SuppressWarnings("unchecked")
 			List<Source> otherSources = (List) asList(other);
 			return add(SourceDirective.SANDBOX, sandbox, otherSources);
+		}
+
+		/**
+		 * Enable {@code block-all-mixed-content} directive.
+		 *
+		 * @return Current builder.
+		 * @see <a href="https://www.w3.org/TR/mixed-content/#strict-checking">https://www.w3.org/TR/mixed-content/#strict-checking</a>
+		 */
+		public Builder blockAllMixedContent() {
+			return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, EMPTY_SOURCE, Collections.<Source>emptyList());
 		}
 
 		private Builder add(SourceDirective directive, Source src, List<Source> other) {
