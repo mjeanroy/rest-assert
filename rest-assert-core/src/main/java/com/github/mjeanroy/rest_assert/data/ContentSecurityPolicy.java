@@ -54,7 +54,12 @@ public class ContentSecurityPolicy implements HeaderValue {
 	 * @param sources Header directives.
 	 */
 	private ContentSecurityPolicy(Map<SourceDirective, Set<Source>> sources) {
-		this.directives = new LinkedHashMap<>(sources);
+		this.directives = new LinkedHashMap<>();
+
+		// Make a deep copy.
+		for (Map.Entry<SourceDirective, Set<Source>> entry : sources.entrySet()) {
+			this.directives.put(entry.getKey(), new LinkedHashSet<>(entry.getValue()));
+		}
 	}
 
 	@Override
