@@ -133,7 +133,13 @@ public enum HttpHeader {
 	 * Access-Control-Allow-Headers name.
 	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers</a>
 	 */
-	ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers", true);
+	ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers", true),
+
+	/**
+	 * Access-Control-Allow-Methods name.
+	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods</a>
+	 */
+	ACCESS_CONTROL_ALLOW_METHODS("Access-Control-Allow-Methods", true);
 
 	/**
 	 * Name of header.

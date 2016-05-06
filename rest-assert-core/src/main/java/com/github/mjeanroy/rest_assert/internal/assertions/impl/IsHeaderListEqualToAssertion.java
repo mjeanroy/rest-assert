@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
+import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.rest_assert.utils.Predicate;
+
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
-import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.rest_assert.utils.Predicate;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
@@ -37,8 +37,6 @@ import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResul
 import static com.github.mjeanroy.rest_assert.utils.Utils.join;
 import static com.github.mjeanroy.rest_assert.utils.Utils.notEmpty;
 import static com.github.mjeanroy.rest_assert.utils.Utils.some;
-import static java.util.Arrays.asList;
-import static java.util.Collections.unmodifiableSet;
 
 /**
  * Check that http response has at least one header with
@@ -52,31 +50,38 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 	private final Set<String> values;
 
 	/**
+	 * Expected header values in lowercase (used for case insensitive comparison).
+	 */
+	private final Set<String> lowercaseValues;
+
+	/**
 	 * Create assertion.
 	 *
 	 * @param name Header name.
 	 */
 	public IsHeaderListEqualToAssertion(String name, Iterable<String> values) {
 		super(name);
-		this.values = unmodifiableSet(toSet(notEmpty(values, "Values must not be empty")));
+
+		notEmpty(values, "Values must not be empty");
+		this.values = new LinkedHashSet<>();
+		this.lowercaseValues = new LinkedHashSet<>();
+		initSet(values);
+	}
+
+	private void initSet(Iterable<String> values) {
+		for (String value : values) {
+			String trimmedValue = value.trim();
+			if (!trimmedValue.isEmpty()) {
+				this.values.add(trimmedValue);
+				this.lowercaseValues.add(trimmedValue.toLowerCase());
+			}
+		}
 	}
 
 	@Override
 	AssertionResult doAssertion(List<String> values) {
-		boolean found = some(values, new SetPredicate(this.values));
+		boolean found = some(values, new SetPredicate(this.lowercaseValues));
 		return found ? success() : failure(shouldHaveHeaderWithValue(name, join(this.values, ", "), values));
-	}
-
-	private static Set<String> toSet(Iterable<String> values) {
-		Set<String> set = new LinkedHashSet<>();
-		for (String value : values) {
-			String trimmedValue = value.trim();
-			if (!trimmedValue.isEmpty()) {
-				set.add(trimmedValue);
-			}
-		}
-
-		return set;
 	}
 
 	private static class SetPredicate implements Predicate<String> {
@@ -88,7 +93,15 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 
 		@Override
 		public boolean apply(String input) {
-			Set<String> actualValues = toSet(asList(input.split(",")));
+			String[] inputs = input.split(",");
+			Set<String> actualValues = new LinkedHashSet<>();
+			for (String value : inputs) {
+				String trimmedValue = value.trim();
+				if (!trimmedValue.isEmpty()) {
+					actualValues.add(trimmedValue.toLowerCase());
+				}
+			}
+
 			return actualValues.equals(expected);
 		}
 	}

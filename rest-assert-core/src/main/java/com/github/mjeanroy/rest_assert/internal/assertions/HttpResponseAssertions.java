@@ -24,61 +24,20 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
+import com.github.mjeanroy.rest_assert.data.*;
+import com.github.mjeanroy.rest_assert.internal.assertions.impl.*;
+import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.rest_assert.reflect.Param;
+
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.DoesNotHaveCookieAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.DoesNotHaveHeaderAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasCharsetAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasCookieAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasHeaderAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.HasMimeTypeAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsDateHeaderEqualToAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderEqualToAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderListEqualToAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.IsHeaderMatchingAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusBetweenAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusEqualAssertion;
-import com.github.mjeanroy.rest_assert.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.rest_assert.data.CacheControl;
-import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
-import com.github.mjeanroy.rest_assert.data.ContentTypeOptions;
-import com.github.mjeanroy.rest_assert.internal.data.Cookie;
-import com.github.mjeanroy.rest_assert.data.FrameOptions;
-import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.rest_assert.data.XssProtection;
-import com.github.mjeanroy.rest_assert.reflect.Param;
-
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CACHE_CONTROL;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_DISPOSITION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_ENCODING;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_LENGTH;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.CONTENT_TYPE;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.ETAG;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.EXPIRES;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LAST_MODIFIED;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.LOCATION;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.PRAGMA;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_FRAME_OPTIONS;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.X_XSS_PROTECTION;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.APPLICATION_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSS;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.CSV;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.JSON;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.PDF;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_HTML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_JAVASCRIPT;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_PLAIN;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.TEXT_XML;
-import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.XHTML;
+import static com.github.mjeanroy.rest_assert.internal.data.HttpHeader.*;
+import static com.github.mjeanroy.rest_assert.internal.data.MimeTypes.*;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
 import static java.util.Arrays.asList;
 import static java.util.Collections.addAll;
@@ -972,6 +931,57 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlAllowHeaders") Iterable<String> accessControlAllowHeaders) {
 		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), accessControlAllowHeaders));
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Methods header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasAccessControlAllowMethods(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_METHODS.getName());
+	}
+
+	/**
+	 * Check that http response does contains Access-Control-Allow-Headers header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowMethods(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_METHODS.getName());
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param method HTTP method.
+	 * @param other Other, optional, HTTP method.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, @Param("method") RequestMethod method, @Param("other") RequestMethod... other) {
+		List<RequestMethod> list = new LinkedList<>();
+		list.add(method);
+		addAll(list, other);
+		return isAccessControlAllowMethodsEqualTo(httpResponse, list);
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Methods header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param methods HTTP Methods.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, @Param("methods") Iterable<RequestMethod> methods) {
+		List<String> list = new LinkedList<>();
+		for (RequestMethod method : methods) {
+			list.add(method.verb());
+		}
+
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_METHODS.getName(), list));
 	}
 
 	/**
