@@ -35,103 +35,103 @@ public enum HttpHeader {
 
 	/**
 	 * Content type header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
 	 */
 	CONTENT_TYPE("Content-Type", true),
 
 	/**
 	 * Content Encoding header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
 	 */
 	CONTENT_ENCODING("Content-Encoding", false),
 
 	/**
 	 * Content Length header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13</a>
 	 */
 	CONTENT_LENGTH("Content-Length", false),
 
 	/**
 	 * Content Disposition header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1">http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1</a>
 	 */
 	CONTENT_DISPOSITION("Content-Disposition", true),
 
 	/**
 	 * Last Modified header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29</a>
 	 */
 	LAST_MODIFIED("Last-Modified", true),
 
 	/**
 	 * Expires header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21</a>
 	 */
 	EXPIRES("Expires", true),
 
 	/**
 	 * ETag header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</a>
 	 */
 	ETAG("ETag", true),
 
 	/**
 	 * Location header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30</a>
 	 */
 	LOCATION("Location", true),
 
 	/**
 	 * Cache Control header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>
 	 */
 	CACHE_CONTROL("Cache-Control", false),
 
 	/**
 	 * Cache Control header name.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>
 	 */
 	CONTENT_SECURITY_POLICY("Content-Security-Policy", false),
 
 	/**
 	 * Pragma header name.
-	 * https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32</a>
 	 */
 	PRAGMA("Pragma", false),
 
 	/**
 	 * X-XSS-Protection header name.
-	 * https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection
+	 * @see <a href="https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection">https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection</a>
 	 */
 	X_XSS_PROTECTION("X-XSS-Protection", false),
 
 	/**
 	 * X-Content-Type-Options header name.
-	 * https://fetch.spec.whatwg.org/#x-content-type-options-header
+	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
 	 */
 	X_CONTENT_TYPE_OPTIONS("X-Content-Type-Options", false),
 
 	/**
 	 * X-Content-Type-Options header name.
-	 * https://tools.ietf.org/html/rfc7034
+	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
 	 */
 	X_FRAME_OPTIONS("X-Frame-Options", false),
 
 	/**
 	 * Set-Cookie header name.
-	 * https://tools.ietf.org/html/rfc6265
+	 * @see <a href="https://tools.ietf.org/html/rfc6265">https://tools.ietf.org/html/rfc6265</a>
 	 */
 	SET_COOKIE("Set-Cookie", false),
 
 	/**
 	 * Access-Control-Allow-Origin name.
-	 * https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin
+	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin</a>
 	 */
 	ACCESS_CONTROL_ALLOW_ORIGIN("Access-Control-Allow-Origin", true),
 
 	/**
 	 * Access-Control-Allow-Headers name.
-	 * https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers
+	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers</a>
 	 */
 	ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers", true);
 
