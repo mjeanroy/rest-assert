@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.data;
 
-import com.github.mjeanroy.rest_assert.data.ContentSecurityPolicy;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -129,6 +128,7 @@ public class ContentSecurityPolicyTest {
 		assertThat(host(null, "domain.com", "80", "/").getValue()).isEqualTo("domain.com:80/");
 		assertThat(host(null, "domain.com", null, "/").getValue()).isEqualTo("domain.com/");
 		assertThat(host(null, "domain.com", "*", null).getValue()).isEqualTo("domain.com:*");
+		assertThat(host(null, "*.gravatar.com", null, null).getValue()).isEqualTo("*.gravatar.com");
 	}
 
 	@Test
