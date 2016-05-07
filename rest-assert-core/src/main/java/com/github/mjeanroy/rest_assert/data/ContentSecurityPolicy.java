@@ -132,6 +132,8 @@ public class ContentSecurityPolicy implements HeaderValue {
 		String[] directives = actualValue.split(";");
 		Builder builder = new Builder();
 
+		Set<SourceDirective> foundDirectives = new HashSet<>();
+
 		for (String directive : directives) {
 			StringBuilder nameBuilder = new StringBuilder();
 			StringBuilder valueBuilder = new StringBuilder();
@@ -157,6 +159,12 @@ public class ContentSecurityPolicy implements HeaderValue {
 			}
 
 			SourceDirective dir = SourceDirective.byName(name);
+			if (foundDirectives.contains(dir)) {
+				log.warn("Directive {} has already been parsed, ignore duplicated");
+				continue;
+			}
+
+			foundDirectives.add(dir);
 
 			// Check if name is valid.
 			if (dir == null) {

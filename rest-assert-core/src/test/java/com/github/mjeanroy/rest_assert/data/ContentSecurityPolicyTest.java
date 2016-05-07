@@ -527,6 +527,16 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
+	public void it_should_ignore_duplicated_directives() {
+		ContentSecurityPolicy csp = new ContentSecurityPolicy.Builder()
+				.addDefaultSrc(none(), unsafeInline())
+				.build();
+
+		assertThat(csp.match("default-src 'none'; default-src 'unsafe-inline';")).isFalse();
+		assertThat(csp.match("default-src 'none' 'unsafe-inline';")).isTrue();
+	}
+
+	@Test
 	public void it_should_fail_if_directive_name_is_not_found() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy.Builder()
 				.addDefaultSrc(none())
