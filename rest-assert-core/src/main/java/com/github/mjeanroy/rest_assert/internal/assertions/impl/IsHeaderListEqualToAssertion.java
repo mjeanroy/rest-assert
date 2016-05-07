@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -43,6 +45,11 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.some;
  * a list of expected values (separated by ',').
  */
 public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(IsHeaderListEqualToAssertion.class);
 
 	/**
 	 * Expected header values.
@@ -69,11 +76,16 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 	}
 
 	private void initSet(Iterable<String> values) {
+		log.debug("Extract set of values from: {}", values);
+
 		for (String value : values) {
 			String trimmedValue = value.trim();
 			if (!trimmedValue.isEmpty()) {
+				log.debug("-> Adding: '{}'", trimmedValue);
 				this.values.add(trimmedValue);
 				this.lowercaseValues.add(trimmedValue.toLowerCase());
+			} else {
+				log.warn("-> Found an empty string, ignore it");
 			}
 		}
 	}
@@ -93,12 +105,17 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 
 		@Override
 		public boolean apply(String input) {
+			log.debug("Extracting list of values from '{}'", input);
+
 			String[] inputs = input.split(",");
 			Set<String> actualValues = new LinkedHashSet<>();
 			for (String value : inputs) {
 				String trimmedValue = value.trim();
 				if (!trimmedValue.isEmpty()) {
+					log.debug("-> Found: '{}'", trimmedValue);
 					actualValues.add(trimmedValue.toLowerCase());
+				} else {
+					log.warn("-> Found empty value during parsing of header: '{}', ignore it", input);
 				}
 			}
 

@@ -25,6 +25,8 @@
 package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -38,6 +40,11 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
  * expected name.
  */
 public class IsHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(IsHeaderEqualToAssertion.class);
 
 	/**
 	 * Expected header value.
@@ -56,7 +63,7 @@ public class IsHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion imp
 
 	@Override
 	AssertionResult doAssertion(List<String> actualValues) {
-		// should be case-sensitive).
+		log.debug("Comparing '{}' with '{}'", value, actualValues);
 		return actualValues.contains(value) ?
 				success() :
 				failure(shouldHaveHeaderWithValue(name, value, actualValues));

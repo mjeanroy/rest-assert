@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.utils.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -40,9 +42,14 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
 
 /**
  * Check that http response has at least one header with
- * expected name.
+ * expected date value.
  */
 public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(IsDateHeaderEqualToAssertion.class);
 
 	/**
 	 * Expected header value.
@@ -63,7 +70,11 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 
 	@Override
 	AssertionResult doAssertion(List<String> values) {
+		log.debug("Extracting and parsing date values from: {}", values);
 		List<String> actualDates = map(values, httpDateMapper);
+
+		log.debug("-> Following dates extracted: {}", actualDates);
+		log.debug("-> Try to find: {}", value);
 		return actualDates.contains(value) ?
 				success() :
 				failure(shouldHaveHeaderWithValue(name, value, values));
@@ -72,7 +83,10 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 	private static final Mapper<String, String> httpDateMapper = new Mapper<String, String>() {
 		@Override
 		public String apply(String input) {
+			log.debug("  --> Parsing date: {}", input);
 			Date date = parseHttpDate(input);
+
+			log.debug("  --> Reformat date: {}", date);
 			return formatHttpDate(date);
 		}
 	};

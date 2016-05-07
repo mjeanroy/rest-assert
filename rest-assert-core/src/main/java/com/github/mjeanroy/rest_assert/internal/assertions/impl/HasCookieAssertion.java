@@ -30,6 +30,8 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.Cookies;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -44,6 +46,11 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.some;
  * Check that http response contains expected cookie.
  */
 public class HasCookieAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(HasCookieAssertion.class);
 
 	/**
 	 * Expected cookie.
@@ -111,9 +118,20 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 
 	@Override
 	public AssertionResult handle(HttpResponse httpResponse) {
+		log.debug("Extracting list of cookies");
 		List<Cookie> cookies = httpResponse.getCookies();
 		if (cookies.isEmpty()) {
+			log.debug("Cannot find any cookies, fail");
 			return failure(getError());
+		}
+
+		log.debug("Try to find cookie: ");
+		if (cookie != null) {
+			log.debug("-> Matching: {}", cookies);
+		} else if (value != null) {
+			log.debug("-> With name / value: '{}' / '{}'", name, value);
+		} else {
+			log.debug("-> With name: '{}'", name);
 		}
 
 		boolean found = some(cookies, predicate);

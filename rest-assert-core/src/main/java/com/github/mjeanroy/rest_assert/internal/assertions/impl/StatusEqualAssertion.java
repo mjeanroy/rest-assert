@@ -26,14 +26,23 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.utils.Utils.isPositive;
 
 /**
  * Check that given http response has expected status code.
  */
 public class StatusEqualAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(StatusEqualAssertion.class);
 
 	/**
 	 * Expected status code.
@@ -53,8 +62,10 @@ public class StatusEqualAssertion implements HttpResponseAssertion {
 	@Override
 	public AssertionResult handle(HttpResponse httpResponse) {
 		int actualStatus = httpResponse.getStatus();
+		log.debug("Checking that status {} is strictly equals to {}", actualStatus, status);
+
 		return actualStatus == status ?
-				AssertionResult.success() :
-				AssertionResult.failure(shouldHaveStatus(actualStatus, status));
+				success() :
+				failure(shouldHaveStatus(actualStatus, status));
 	}
 }

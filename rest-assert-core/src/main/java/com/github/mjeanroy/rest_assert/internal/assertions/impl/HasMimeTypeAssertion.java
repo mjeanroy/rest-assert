@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -40,6 +42,11 @@ import static java.util.Collections.singleton;
  * Check that http response has expected mime type.
  */
 public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(HasMimeTypeAssertion.class);
 
 	/**
 	 * Expected mime-type.
@@ -78,11 +85,15 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	@Override
 	AssertionResult doAssertion(List<String> values) {
 		String contentType = values.get(0);
-		String actualMimeType = contentType.split(";")[0].trim().toLowerCase();
+		log.debug("Parsing Content-Type: '{}'", contentType);
+
+		String actualMimeType = contentType.split(";")[0].trim();
+		log.debug("-> Extracted mime-type: '{}'", actualMimeType);
 
 		boolean found = false;
 		for (String current : mimeTypes) {
-			if (actualMimeType.equals(current.toLowerCase())) {
+			if (actualMimeType.equalsIgnoreCase(current)) {
+				log.debug("-> Found a match with: '{}'", current);
 				found = true;
 				break;
 			}

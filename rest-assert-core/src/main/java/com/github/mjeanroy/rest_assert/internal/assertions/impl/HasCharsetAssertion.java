@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -39,6 +41,11 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
  * expected charset.
  */
 public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(HasCharsetAssertion.class);
 
 	/**
 	 * Expected charset.
@@ -58,12 +65,17 @@ public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implemen
 	@Override
 	AssertionResult doAssertion(List<String> values) {
 		String contentType = values.get(0);
+		log.debug("Extracting charset from: {}", contentType);
+
 		String[] contentTypeParts = contentType.split(";");
 		if (contentTypeParts.length == 1) {
+			log.debug("Charset value is not specified, fail");
 			return failure(shouldHaveCharset());
 		}
 
-		String actualCharset = contentTypeParts[1].trim().split("=")[1].trim();
+		String actualCharset = contentTypeParts[1].split("=")[1].trim();
+		log.debug("Comparing charset '{}' with '{}'", charset, actualCharset);
+
 		return actualCharset.equalsIgnoreCase(charset) ?
 				success() :
 				failure(shouldHaveCharset(charset, actualCharset));

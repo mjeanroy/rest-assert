@@ -28,6 +28,9 @@
 		<maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
 		<exec-maven-plugin.version>1.2.1</exec-maven-plugin.version>
 		<build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
+
+		<slf4j.version>1.7.21</slf4j.version>
+		<logback.version>1.1.7</logback.version>
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<json-path.version>2.2.0</json-path.version>
 		<ning-http-client.version>1.9.37</ning-http-client.version>
@@ -38,6 +41,7 @@
 		<jackson-2.version>2.7.3</jackson-2.version>
 		<jackson-1.version>1.9.13</jackson-1.version>
 		<gson.version>2.6.2</gson.version>
+
 		<junit.version>4.12</junit.version>
 		<assertj.version>2.4.0</assertj.version>
 		<mockito.version>1.10.19</mockito.version>
@@ -48,6 +52,17 @@
 
 	<dependencyManagement>
 		<dependencies>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>com.jayway.jsonpath</groupId>
 				<artifactId>json-path</artifactId>

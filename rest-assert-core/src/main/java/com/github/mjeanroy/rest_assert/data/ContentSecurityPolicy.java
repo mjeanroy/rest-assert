@@ -26,6 +26,8 @@ package com.github.mjeanroy.rest_assert.data;
 
 import com.github.mjeanroy.rest_assert.utils.Mapper;
 import com.github.mjeanroy.rest_assert.utils.Utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URL;
@@ -42,6 +44,11 @@ import static java.util.Collections.unmodifiableMap;
  * @see <a href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a>
  */
 public class ContentSecurityPolicy implements HeaderValue {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(ContentSecurityPolicy.class);
 
 	/**
 	 * List of header directives.
@@ -120,6 +127,8 @@ public class ContentSecurityPolicy implements HeaderValue {
 
 	@Override
 	public boolean match(String actualValue) {
+		log.debug("Parsing Content-Security-Policy header: '{}'", actualValue);
+
 		String[] directives = actualValue.split(";");
 		Builder builder = new Builder();
 
@@ -139,8 +148,11 @@ public class ContentSecurityPolicy implements HeaderValue {
 			String name = nameBuilder.toString().trim();
 			String value = valueBuilder.toString().trim();
 
+			log.debug("-> Found directive: '{} {}'", name, value);
+
 			// Check if directive has name.
 			if (name.isEmpty()) {
+				log.error("Directive name is empty, fail");
 				throw new IllegalArgumentException(String.format("Header %s is not a valid Content-Security-Policy header", actualValue));
 			}
 
@@ -148,9 +160,12 @@ public class ContentSecurityPolicy implements HeaderValue {
 
 			// Check if name is valid.
 			if (dir == null) {
+				log.error("Cannot find a matching for directive '{}', fail", name);
 				throw new IllegalArgumentException(String.format("Cannot parse Content-Security-Policy header since directive %s seems not valid", name));
 			}
 
+			log.debug("  - Found directive: {}", dir);
+			log.debug("  - Parse directive value: '{}'", value);
 			dir.parse(value, builder);
 		}
 

@@ -26,14 +26,23 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 
 /**
  * Check that http response status code is between a lower and an upper
  * bound (inclusive).
  */
 public class StatusBetweenAssertion extends AbstractStatusRangeAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(StatusBetweenAssertion.class);
 
 	/**
 	 * Create assertion.
@@ -47,9 +56,11 @@ public class StatusBetweenAssertion extends AbstractStatusRangeAssertion impleme
 
 	@Override
 	public AssertionResult handle(HttpResponse httpResponse) {
-		int actualStatus = httpResponse.getStatus();
-		return actualStatus >= start && actualStatus <= end ?
-				AssertionResult.success() :
-				AssertionResult.failure(shouldHaveStatusBetween(actualStatus, start, end));
+		int status = httpResponse.getStatus();
+		log.debug("Checking that status {} is between {} and {}", status, start, end);
+
+		return status >= start && status <= end ?
+				success() :
+				failure(shouldHaveStatusBetween(status, start, end));
 	}
 }

@@ -27,6 +27,8 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 import com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.rest_assert.internal.data.HttpHeader;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -34,6 +36,11 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveSingleHeader.
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 
 abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion implements HttpResponseAssertion {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(AbstractHeaderEqualToAssertion.class);
 
 	/**
 	 * Create assertion.
@@ -50,17 +57,20 @@ abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion impleme
 
 		// Header is not set, fail fast.
 		if (r1.isFailure()) {
+			log.debug("Cannot find header: '{}', fail", name);
 			return r1;
 		}
 
 		// Extract values.
 		List<String> actualValues = httpResponse.getHeader(name);
+		log.debug("-> Found header values: {}", actualValues);
 
 		// Check if header should not appear more than once.
 		// If a single value header appear with more than one value, then this is
 		// probably a bug in the generated response, fail fast.
 		HttpHeader header = HttpHeader.find(name);
 		if (header != null && header.isSingle() && actualValues.size() > 1) {
+			log.debug("Header {} should appear once, but found {} values, fail", name, actualValues.size());
 			return failure(shouldHaveSingleHeader(name, actualValues));
 		}
 

@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.data;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -34,6 +37,11 @@ import static com.github.mjeanroy.rest_assert.utils.Utils.join;
  * Cache-Control header value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
  */
 public class CacheControl implements HeaderValue {
+
+	/**
+	 * Class logger.
+	 */
+	private static final Logger log = LoggerFactory.getLogger(CacheControl.class);
 
 	private static final String SEPARATOR = ", ";
 	private static final String DIR_NO_CACHE = "no-cache";
@@ -182,20 +190,23 @@ public class CacheControl implements HeaderValue {
 
 	@Override
 	public boolean match(String actualValue) {
-		String[] parts = actualValue.split(",");
+		log.debug("Parsing Cache-Control header: '{}'", actualValue);
 
+		String[] parts = actualValue.split(",");
 		Builder builder = new Builder();
 		for (String part : parts) {
 			String value = part.trim();
 			for (Directive directive : Directive.values()) {
 				if (directive.match(value)) {
+					log.debug("-> Found directive: '{}'", directive);
+					log.debug("-> Parsing value: '{}'", value);
 					directive.setValue(value, builder);
 					break;
 				}
 			}
 		}
 
-		return this.equals(builder.build());
+		return equals(builder.build());
 	}
 
 	@Override
