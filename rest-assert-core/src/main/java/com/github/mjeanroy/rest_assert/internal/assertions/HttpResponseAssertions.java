@@ -985,6 +985,37 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Access-Control-Allow-Credentials header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasAccessControlAllowCredentials(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_CREDENTIALS.getName());
+	}
+
+	/**
+	 * Check that http response does contains Access-Control-Allow-Credentials header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowCredentials(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_CREDENTIALS.getName());
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Credentials header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param flag Flag value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowCredentialsEqualTo(HttpResponse httpResponse, @Param("flag") boolean flag) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_CREDENTIALS.getName(), Boolean.toString(flag)));
+	}
+
+	/**
 	 * Check that http response contains Strict-Transport-Security header.
 	 *
 	 * @param httpResponse Http response.

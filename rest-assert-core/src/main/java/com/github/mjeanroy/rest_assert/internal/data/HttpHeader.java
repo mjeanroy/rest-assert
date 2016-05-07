@@ -142,6 +142,12 @@ public enum HttpHeader {
 	ACCESS_CONTROL_ALLOW_METHODS("Access-Control-Allow-Methods", true),
 
 	/**
+	 * Access-Control-Allow-Credentials name.
+	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-credentials">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-credentials</a>
+	 */
+	ACCESS_CONTROL_ALLOW_CREDENTIALS("Access-Control-Allow-Credentials", true),
+
+	/**
 	 * Strict-Transport-Security name.
 	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
 	 */
