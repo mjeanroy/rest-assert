@@ -136,6 +136,12 @@ public enum HttpHeader {
 	ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers", true),
 
 	/**
+	 * Access-Control-Allow-Headers name.
+	 * @see <a href="https://www.w3.org/TR/cors/#access-control-expose-headers-response-header">https://www.w3.org/TR/cors/#access-control-expose-headers-response-header</a>
+	 */
+	ACCESS_CONTROL_EXPOSE_HEADERS("Access-Control-Expose-Headers", true),
+
+	/**
 	 * Access-Control-Allow-Methods name.
 	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods</a>
 	 */

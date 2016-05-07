@@ -934,6 +934,51 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Access-Control-Expose-Headers header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasAccessControlExposeHeaders(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_EXPOSE_HEADERS.getName());
+	}
+
+	/**
+	 * Check that http response does contains Access-Control-Expose-Headers header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveAccessControlExposeHeaders(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ACCESS_CONTROL_EXPOSE_HEADERS.getName());
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Expose-Headers header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param value Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, @Param("value") String value, @Param("other") String... other) {
+		List<String> list = new LinkedList<>();
+		list.add(value);
+		addAll(list, other);
+		return isAccessControlExposeHeadersEqualTo(httpResponse, list);
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param accessControlExposeHeaders Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlExposeHeaders") Iterable<String> accessControlExposeHeaders) {
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_EXPOSE_HEADERS.getName(), accessControlExposeHeaders));
+	}
+
+	/**
 	 * Check that http response contains Access-Control-Allow-Methods header.
 	 *
 	 * @param httpResponse Http response.
