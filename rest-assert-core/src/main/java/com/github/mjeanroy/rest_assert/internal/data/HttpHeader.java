@@ -139,7 +139,13 @@ public enum HttpHeader {
 	 * Access-Control-Allow-Methods name.
 	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods</a>
 	 */
-	ACCESS_CONTROL_ALLOW_METHODS("Access-Control-Allow-Methods", true);
+	ACCESS_CONTROL_ALLOW_METHODS("Access-Control-Allow-Methods", true),
+
+	/**
+	 * Strict-Transport-Security name.
+	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
+	 */
+	STRICT_TRANSPORT_SECURITY("Strict-Transport-Security", true);
 
 	/**
 	 * Name of header.

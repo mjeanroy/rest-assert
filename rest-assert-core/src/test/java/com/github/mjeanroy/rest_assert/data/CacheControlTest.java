@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.rest_assert.data;
 
-import com.github.mjeanroy.rest_assert.data.CacheControl;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

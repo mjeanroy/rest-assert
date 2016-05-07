@@ -985,6 +985,48 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Strict-Transport-Security header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasStrictTransportSecurity(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, STRICT_TRANSPORT_SECURITY.getName());
+	}
+
+	/**
+	 * Check that http response does contains Strict-Transport-Security header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveStrictTransportSecurity(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, STRICT_TRANSPORT_SECURITY.getName());
+	}
+
+	/**
+	 * Check that http response contains Strict-Transport-Security header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param strictTransportSecurity Strict-Transport-Security value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, @Param("strictTransportSecurity") String strictTransportSecurity) {
+		return isHeaderEqualTo(httpResponse, STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity);
+	}
+
+	/**
+	 * Check that http response contains Strict-Transport-Security header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param strictTransportSecurity Strict-Transport-Security value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, @Param("strictTransportSecurity") StrictTransportSecurity strictTransportSecurity) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity));
+	}
+
+	/**
 	 * Check that http response is "application/json".
 	 *
 	 * @param httpResponse Http response.
