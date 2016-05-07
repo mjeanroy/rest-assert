@@ -37,7 +37,7 @@ import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.should
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.rest_assert.utils.Utils.join;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notEmpty;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notEmpty;
 import static com.github.mjeanroy.rest_assert.utils.Utils.some;
 
 /**

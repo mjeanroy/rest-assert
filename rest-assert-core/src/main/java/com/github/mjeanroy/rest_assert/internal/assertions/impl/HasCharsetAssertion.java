@@ -34,7 +34,7 @@ import java.util.List;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notBlank;
 
 /**
  * Check that http response has a content-type header with

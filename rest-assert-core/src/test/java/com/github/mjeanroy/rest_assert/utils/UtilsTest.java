@@ -60,23 +60,6 @@ public class UtilsTest {
 	}
 
 	@Test
-	public void it_should_not_throw_npe_if_value_is_not_null() {
-		String value = "foo";
-		String result = Utils.notNull(value, "message");
-		assertThat(result).isEqualTo(value);
-	}
-
-	@Test
-	public void it_should_throw_npe_if_value_is_null() {
-		String message = "message";
-
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage(message);
-
-		Utils.notNull(null, "message");
-	}
-
-	@Test
 	public void it_should_map_inputs_to_outputs() {
 		List<Integer> inputs = asList(1, 2, 3);
 
@@ -230,101 +213,5 @@ public class UtilsTest {
 		assertThat(found).isFalse();
 		verify(predicate).apply("quix");
 		verify(predicate).apply("bar");
-	}
-
-	@Test
-	public void notBlank_should_throw_npe_if_string_is_null() {
-		String message = "Should not be null";
-
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage(message);
-
-		notBlank(null, message);
-	}
-
-	@Test
-	public void notBlank_should_throw_illegal_argument_exception_if_string_is_empty() {
-		String message = "Should not be null";
-
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(message);
-
-		notBlank("", message);
-	}
-
-	@Test
-	public void notBlank_should_throw_illegal_argument_exception_if_string_is_blank() {
-		String message = "Should not be null";
-
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(message);
-
-		notBlank("    ", message);
-	}
-
-	@Test
-	public void notBlank_should_return_argument_if_string_is_ok() {
-		String obj = "Foo";
-		assertThat(notBlank(obj, "Should not be null")).isEqualTo(obj);
-	}
-
-	@Test
-	public void isGreaterThan_should_fail_if_value_is_less_than_min() {
-		String message = "Should be less than";
-
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(message);
-
-		isGreaterThan(0, 1, message);
-	}
-
-	@Test
-	public void isGreaterThan_should_not_fail_if_value_is_equal_to_min() {
-		int val = 0;
-		assertThat(isGreaterThan(val, val, "foo")).isEqualTo(val);
-	}
-
-	@Test
-	public void isGreaterThan_should_not_fail_if_value_is_greater_than_min() {
-		int val = 0;
-		assertThat(isGreaterThan(val, val - 1, "foo")).isEqualTo(val);
-	}
-
-	@Test
-	public void isInRang_should_fail_if_value_is_less_than_min() {
-		String message = "Should be less than";
-
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(message);
-
-		isInRange(0, 1, 5, message);
-	}
-
-	@Test
-	public void isInRange_should_fail_if_value_is_greater_than_max() {
-		String message = "Should be less than";
-
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(message);
-
-		isInRange(10, 1, 5, message);
-	}
-
-	@Test
-	public void isInRange_should_not_fail_if_value_is_equal_to_min() {
-		int val = 0;
-		assertThat(isInRange(val, val, val + 1, "foo")).isEqualTo(val);
-	}
-
-	@Test
-	public void isInRange_should_not_fail_if_value_is_greater_than_min() {
-		int val = 0;
-		assertThat(isInRange(val, val - 1, val + 1, "foo")).isEqualTo(val);
-	}
-
-	@Test
-	public void isInRange_should_not_fail_if_value_is_equal_to_max() {
-		int val = 0;
-		assertThat(isInRange(val, val - 1, val, "foo")).isEqualTo(val);
 	}
 }

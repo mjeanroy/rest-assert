@@ -30,7 +30,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Static utilities.
@@ -41,8 +40,6 @@ public final class Utils {
 	 * Line separator (system dependent).
 	 */
 	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
-	private static final Pattern INTEGER_PATTERN = Pattern.compile("^-?\\d+");
 
 	// Private constructor to ensure non instantiation.
 	private Utils() {
@@ -59,118 +56,6 @@ public final class Utils {
 	 */
 	public static <T> T firstNonNull(T obj1, T obj2) {
 		return obj1 != null ? obj1 : obj2;
-	}
-
-	/**
-	 * Check that a given value is not null.
-	 * If value is null, a {@link NullPointerException} will be thrown
-	 * with given message.
-	 *
-	 * @param obj Value to check.
-	 * @param message Message given in {@link NullPointerException}.
-	 * @param <T> Type of object.
-	 * @return Original object if it is not null.
-	 */
-	public static <T> T notNull(T obj, String message) {
-		if (obj == null) {
-			throw new NullPointerException(message);
-		}
-		return obj;
-	}
-
-	/**
-	 * Check that a given string is not blank (i.e not null, not empty
-	 * and contains other characters that whitespaces).
-	 *
-	 * @param obj String value to check.
-	 * @param message Error message if {@code obj} is blank.
-	 * @return Original {@code obj}.
-	 * @throws NullPointerException If {@code obj} is null.
-	 * @throws IllegalArgumentException If {@code obj} is empty or blank.
-	 */
-	public static String notBlank(String obj, String message) {
-		notNull(obj, message);
-
-		for (char c : obj.toCharArray()) {
-			if (!Character.isWhitespace(c)) {
-				return obj;
-			}
-		}
-
-		throw new IllegalArgumentException(message);
-	}
-
-	/**
-	 * Check that a given collection is not empty (i.e not null, not empty).
-	 *
-	 * @param list Collection to check.
-	 * @param message Error message if {@code obj} is blank.
-	 * @return Original {@code obj}.
-	 * @throws NullPointerException If {@code obj} is null.
-	 * @throws IllegalArgumentException If {@code obj} is empty.
-	 */
-	public static <T> Iterable<T> notEmpty(Iterable<T> list, String message) {
-		notNull(list, message);
-		if (!list.iterator().hasNext()) {
-			throw new IllegalArgumentException(message);
-		}
-
-		return list;
-	}
-
-	/**
-	 * Check that a given value is greater or equal than given minimum value.
-	 *
-	 * @param val Value to check.
-	 * @param minValue Minimum value.
-	 * @param message Error message.
-	 * @return The original value.
-	 * @throws IllegalArgumentException If {@code val} is less than {@code minValue}.
-	 */
-	public static int isGreaterThan(int val, int minValue, String message) {
-		if (val < minValue) {
-			throw new IllegalArgumentException(message);
-		}
-
-		return val;
-	}
-
-	/**
-	 * Check that a given value is greater or equal than zero.
-	 *
-	 * @param val Value to check.
-	 * @param message Error message.
-	 * @return The original value.
-	 * @throws IllegalArgumentException If {@code val} is less than zero.
-	 */
-	public static int isPositive(int val, String message) {
-		return isGreaterThan(val, 0, message);
-	}
-
-	/**
-	 * Check that a given value is in given range (inclusive).
-	 *
-	 * @param val Value to check.
-	 * @param min Minimum value.
-	 * @param max Maximum value.
-	 * @param message Error message.
-	 * @return The original value.
-	 * @throws IllegalArgumentException If {@code val} is less than {@code min} or greater than {@code max}.
-	 */
-	public static int isInRange(int val, int min, int max, String message) {
-		if (val < min || val > max) {
-			throw new IllegalArgumentException(message);
-		}
-
-		return val;
-	}
-
-	public static String match(String value, Pattern pattern, String message) {
-		if (!pattern.matcher(value).matches()) {
-			throw new IllegalArgumentException(message);
-		}
-
-		return value;
 	}
 
 	/**

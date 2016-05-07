@@ -25,7 +25,7 @@
 package com.github.mjeanroy.rest_assert.data;
 
 import com.github.mjeanroy.rest_assert.utils.Mapper;
-import com.github.mjeanroy.rest_assert.utils.Utils;
+import com.github.mjeanroy.rest_assert.utils.PreConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -491,7 +491,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 * @throws IllegalArgumentException If {@code value} is empty or blank.
 		 */
 		private SourceValue(String value) {
-			this.value = notBlank(value, "Source value must be defined");
+			this.value = PreConditions.notBlank(value, "Source value must be defined");
 		}
 
 		@Override
@@ -504,11 +504,11 @@ public class ContentSecurityPolicy implements HeaderValue {
 		private final URI uri;
 
 		private UriSource(URI uri) {
-			this.uri = notNull(uri, "Uri value must not be null");
+			this.uri = PreConditions.notNull(uri, "Uri value must not be null");
 		}
 
 		private UriSource(String uri) {
-			this(URI.create(notBlank(uri, "Uri value must be defined")));
+			this(URI.create(PreConditions.notBlank(uri, "Uri value must be defined")));
 		}
 
 		@Override
@@ -568,7 +568,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 */
 		private Host(String scheme, String host, String port, String path) {
 			this.scheme = scheme;
-			this.host = notBlank(host, "Host must be defined");
+			this.host = PreConditions.notBlank(host, "Host must be defined");
 			this.port = port;
 			this.path = path;
 		}
@@ -771,8 +771,8 @@ public class ContentSecurityPolicy implements HeaderValue {
 	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_source">https://www.w3.org/TR/CSP/#scheme_source</a>
 	 */
 	public static Source scheme(String scheme) {
-		notNull(scheme, "Scheme must not be null");
-		Utils.match(scheme, PATTERN_SCHEME, String.format("Scheme %s is not a valid scheme", scheme));
+		PreConditions.notNull(scheme, "Scheme must not be null");
+		PreConditions.match(scheme, PATTERN_SCHEME, String.format("Scheme %s is not a valid scheme", scheme));
 		return new SourceValue(scheme + ":");
 	}
 
@@ -786,8 +786,8 @@ public class ContentSecurityPolicy implements HeaderValue {
 	 * @see <a href="https://www.w3.org/TR/CSP/#nonce_source">https://www.w3.org/TR/CSP/#nonce_source</a>
 	 */
 	public static Source nonce(String base64) {
-		notNull(base64, "Base64 value must not be null");
-		Utils.match(base64, PATTERN_BASE64, String.format("%s is not a valid base64 value", base64));
+		PreConditions.notNull(base64, "Base64 value must not be null");
+		PreConditions.match(base64, PATTERN_BASE64, String.format("%s is not a valid base64 value", base64));
 		return new SourceValue("'nonce-" + base64 + "'");
 	}
 
@@ -825,8 +825,8 @@ public class ContentSecurityPolicy implements HeaderValue {
 	}
 
 	private static Source algo(String algo, String base64) {
-		notNull(base64, "Base64 value must not be null");
-		Utils.match(base64, PATTERN_BASE64, String.format("%s is not a valid base64 value", base64));
+		PreConditions.notNull(base64, "Base64 value must not be null");
+		PreConditions.match(base64, PATTERN_BASE64, String.format("%s is not a valid base64 value", base64));
 		return new SourceValue("'" + algo + "-" + base64 + "'");
 	}
 
@@ -887,19 +887,19 @@ public class ContentSecurityPolicy implements HeaderValue {
 	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
 	 */
 	public static Source host(String scheme, String host, String port, String path) {
-		notBlank(host, "Host name must be defined");
-		Utils.match(host, PATTERN_HOST_NAME, "Host %s is not valid");
+		PreConditions.notBlank(host, "Host name must be defined");
+		PreConditions.match(host, PATTERN_HOST_NAME, "Host %s is not valid");
 
 		if (scheme != null) {
-			scheme = Utils.match(scheme, PATTERN_SCHEME, String.format("Scheme %s is not a valid scheme", scheme));
+			scheme = PreConditions.match(scheme, PATTERN_SCHEME, String.format("Scheme %s is not a valid scheme", scheme));
 		}
 
 		if (port != null && !port.equals("*")) {
-			port = Utils.match(port, PATTERN_PORT, String.format("Port %s should only contains integers", port));
+			port = PreConditions.match(port, PATTERN_PORT, String.format("Port %s should only contains integers", port));
 		}
 
 		if (path != null && !path.isEmpty()) {
-			path = Utils.match(path, PATTERN_PATH, String.format("Path %s seems not valid", path));
+			path = PreConditions.match(path, PATTERN_PATH, String.format("Path %s seems not valid", path));
 		}
 
 		return new Host(scheme, host, port, path);
@@ -914,7 +914,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
 	 */
 	public static Source host(URL url) {
-		notNull(url, "Host url must not be null");
+		PreConditions.notNull(url, "Host url must not be null");
 
 		// If port is less than zero, then it means it is not set.
 		int port = url.getPort();
@@ -1165,7 +1165,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 			return add(SourceDirective.FRAME_ANCESTORS, src, asList(other), new SourceValidator() {
 				@Override
 				public void validate(Source src) {
-					Utils.match(src.getValue(), PATTERN_HOST_VALUE, "Source must be a valid host value");
+					PreConditions.match(src.getValue(), PATTERN_HOST_VALUE, "Source must be a valid host value");
 				}
 			});
 		}
@@ -1271,11 +1271,11 @@ public class ContentSecurityPolicy implements HeaderValue {
 			}
 
 			// First check validity
-			notNull(src, "Source value must not be null");
+			PreConditions.notNull(src, "Source value must not be null");
 			validator.validate(src);
 
 			for (Source o : other) {
-				notNull(o, "Source value must not be null");
+				PreConditions.notNull(o, "Source value must not be null");
 				validator.validate(o);
 			}
 

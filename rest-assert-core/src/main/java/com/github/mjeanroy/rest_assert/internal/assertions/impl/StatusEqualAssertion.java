@@ -32,7 +32,7 @@ import org.slf4j.LoggerFactory;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.utils.Utils.isPositive;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.isPositive;
 
 /**
  * Check that given http response has expected status code.

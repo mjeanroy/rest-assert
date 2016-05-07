@@ -34,8 +34,8 @@ import java.util.List;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notEmpty;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notBlank;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notEmpty;
 import static java.util.Collections.singleton;
 
 /**

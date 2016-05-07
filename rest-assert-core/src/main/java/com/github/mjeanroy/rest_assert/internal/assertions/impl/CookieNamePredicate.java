@@ -27,7 +27,7 @@ package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.utils.Predicate;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notNull;
 
 /**
  * Predicate used to check if a cookie has a given name.

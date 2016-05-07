@@ -38,7 +38,7 @@ import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResul
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.DateUtils.parseHttpDate;
 import static com.github.mjeanroy.rest_assert.utils.Utils.map;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notNull;
 
 /**
  * Check that http response has at least one header with

@@ -33,7 +33,7 @@ import com.github.mjeanroy.rest_assert.utils.Predicate;
 import static com.github.mjeanroy.rest_assert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.rest_assert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notNull;
 import static com.github.mjeanroy.rest_assert.utils.Utils.some;
 
 /**

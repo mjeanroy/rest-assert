@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notBlank;
 
 /**
  * Abstract assertion for header.

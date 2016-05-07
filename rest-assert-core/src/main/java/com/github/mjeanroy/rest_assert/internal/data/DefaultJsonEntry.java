@@ -26,7 +26,7 @@ package com.github.mjeanroy.rest_assert.internal.data;
 
 import java.util.Objects;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notNull;
 
 /**
  * Default implement for {@link JsonEntry} interface.

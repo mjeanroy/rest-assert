@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notNull;
 
 import com.github.mjeanroy.rest_assert.error.RestAssertError;
 

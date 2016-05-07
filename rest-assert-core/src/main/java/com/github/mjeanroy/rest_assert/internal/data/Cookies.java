@@ -37,10 +37,10 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.isGreaterThan;
-import static com.github.mjeanroy.rest_assert.utils.Utils.isInRange;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notBlank;
-import static com.github.mjeanroy.rest_assert.utils.Utils.notNull;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.isGreaterThan;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.isInRange;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notBlank;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.notNull;
 import static com.github.mjeanroy.rest_assert.utils.Utils.toLong;
 
 /**

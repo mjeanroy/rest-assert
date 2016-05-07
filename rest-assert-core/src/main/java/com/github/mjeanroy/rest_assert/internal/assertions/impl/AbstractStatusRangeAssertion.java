@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.rest_assert.internal.assertions.impl;
 
-import static com.github.mjeanroy.rest_assert.utils.Utils.isGreaterThan;
-import static com.github.mjeanroy.rest_assert.utils.Utils.isPositive;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.isGreaterThan;
+import static com.github.mjeanroy.rest_assert.utils.PreConditions.isPositive;
 
 /**
  * Abstract assertion with range of status code.
