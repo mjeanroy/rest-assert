@@ -148,6 +148,12 @@ public enum HttpHeader {
 	ACCESS_CONTROL_ALLOW_CREDENTIALS("Access-Control-Allow-Credentials", true),
 
 	/**
+	 * Access-Control-Allow-Credentials name.
+	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-max-age">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-max-age</a>
+	 */
+	ACCESS_CONTROL_ALLOW_MAX_AGE("Access-Control-Allow-Max-Age", true),
+
+	/**
 	 * Strict-Transport-Security name.
 	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
 	 */

@@ -1016,6 +1016,37 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains Access-Control-Allow-Max-Age header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasAccessControlAllowMaxAge(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_MAX_AGE.getName());
+	}
+
+	/**
+	 * Check that http response does contains Access-Control-Allow-Max-Age header.
+	 *
+	 * @param httpResponse Http response.
+	 * @return Assertion result.
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowMaxAge(HttpResponse httpResponse) {
+		return doesNothaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_MAX_AGE.getName());
+	}
+
+	/**
+	 * Check that http response contains Access-Control-Allow-Max-Age header with expected value.
+	 *
+	 * @param httpResponse Http response.
+	 * @param maxAge Max age (in seconds).
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowMaxAgeEqualTo(HttpResponse httpResponse, @Param("maxAge") long maxAge) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_MAX_AGE.getName(), Long.toString(maxAge)));
+	}
+
+	/**
 	 * Check that http response contains Strict-Transport-Security header.
 	 *
 	 * @param httpResponse Http response.
