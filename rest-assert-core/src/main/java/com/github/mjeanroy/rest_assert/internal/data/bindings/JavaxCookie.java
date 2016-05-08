@@ -92,6 +92,6 @@ public class JavaxCookie implements Cookie {
 
 	@Override
 	public Date getExpires() {
-		return null;
+		throw new UnsupportedOperationException("javax.servlet.http.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
 	}
 }

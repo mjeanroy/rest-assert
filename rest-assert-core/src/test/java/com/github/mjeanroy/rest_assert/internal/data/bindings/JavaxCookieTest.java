@@ -26,12 +26,18 @@ package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.javax.JavaxCookieMockBuilder;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.verify;
 
 public class JavaxCookieTest {
+
+	@Rule
+	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_return_name() {
@@ -127,5 +133,16 @@ public class JavaxCookieTest {
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
 		verify(javaxCookie).getMaxAge();
+	}
+
+	@Test
+	public void it_should_fail_on_getExpires() {
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder().build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+
+		thrown.expect(UnsupportedOperationException.class);
+		thrown.expectMessage("javax.servlet.http.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
+
+		cookie.getExpires();
 	}
 }

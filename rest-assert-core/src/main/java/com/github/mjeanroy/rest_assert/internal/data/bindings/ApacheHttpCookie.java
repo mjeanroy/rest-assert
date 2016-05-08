@@ -82,14 +82,12 @@ public class ApacheHttpCookie implements Cookie {
 
 	@Override
 	public boolean isHttpOnly() {
-		// Not supported
-		return false;
+		throw new UnsupportedOperationException("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
 	}
 
 	@Override
 	public Long getMaxAge() {
-		// Not supported
-		return 0L;
+		throw new UnsupportedOperationException("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
 
 	@Override

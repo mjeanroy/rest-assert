@@ -26,13 +26,18 @@ package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class ApacheHttpCookieTest {
+
+	@Rule
+	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_return_name() {
@@ -107,18 +112,22 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_zero_for_max_age() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder().build();
-
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
-		assertThat(cookie.getMaxAge()).isZero();
-		verifyZeroInteractions(apacheHttpCookie);
+
+		thrown.expect(UnsupportedOperationException.class);
+		thrown.expectMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
+
+		cookie.getMaxAge();
 	}
 
 	@Test
 	public void it_should_return_false_for_http_only() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder().build();
-
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
-		assertThat(cookie.isHttpOnly()).isFalse();
-		verifyZeroInteractions(apacheHttpCookie);
+
+		thrown.expect(UnsupportedOperationException.class);
+		thrown.expectMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+
+		cookie.isHttpOnly();
 	}
 }

@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import java.util.Date;
-
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
+
+import java.util.Date;
 
 /**
  * Implementation of {@link com.github.mjeanroy.rest_assert.internal.data.Cookie}

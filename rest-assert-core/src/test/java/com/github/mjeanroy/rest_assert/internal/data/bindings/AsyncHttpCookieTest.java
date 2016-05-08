@@ -139,7 +139,7 @@ public class AsyncHttpCookieTest {
 		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder().build();
 
 		thrown.expect(UnsupportedOperationException.class);
-		thrown.expectMessage("org.asynchttpclient.cookie.Cookie does not support expires value, use #getMaxAge() instead");
+		thrown.expectMessage("org.asynchttpclient.cookie.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
 
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		cookie.getExpires();
