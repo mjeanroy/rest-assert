@@ -132,6 +132,6 @@ public class ApacheHttpCookieMockBuilder {
 		cookie.setDomain(domain);
 		cookie.setSecure(secure);
 		cookie.setPath(path);
-		return spy(cookie);
+		return cookie;
 	}
 }

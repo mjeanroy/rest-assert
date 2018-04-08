@@ -106,18 +106,6 @@ public class NingHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
-		IOException ex = mock(IOException.class);
-		Response response = new NingHttpResponseMockBuilder().build();
-		when(response.getResponseBody()).thenThrow(ex);
-
-		thrown.expect(NonParsableResponseBodyException.class);
-
-		HttpResponse httpResponse = NingHttpResponse.create(response);
-		httpResponse.getContent();
-	}
-
-	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
 		final Response response = new NingHttpResponseMockBuilder().build();
 		final HttpResponse httpResponse = NingHttpResponse.create(response);

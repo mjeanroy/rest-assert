@@ -70,6 +70,14 @@ public class JavaxCookieMockBuilder {
 	private int maxAge;
 
 	/**
+	 * Create cookie builder with default values.
+	 */
+	public JavaxCookieMockBuilder() {
+		this.name = "FOO";
+		this.value = "BAR";
+	}
+
+	/**
 	 * Set {@link #name}.
 	 *
 	 * @param name New {@link #name}.
@@ -152,14 +160,19 @@ public class JavaxCookieMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		Cookie cookie = mock(Cookie.class);
-		when(cookie.getName()).thenReturn(name);
-		when(cookie.getValue()).thenReturn(value);
-		when(cookie.getDomain()).thenReturn(domain);
-		when(cookie.getPath()).thenReturn(path);
-		when(cookie.isHttpOnly()).thenReturn(httpOnly);
-		when(cookie.getSecure()).thenReturn(secured);
-		when(cookie.getMaxAge()).thenReturn(maxAge);
+		Cookie cookie = new Cookie(name, value);
+
+		if (domain != null) {
+			cookie.setDomain(domain);
+		}
+
+		if (path != null) {
+			cookie.setPath(path);
+		}
+
+		cookie.setHttpOnly(httpOnly);
+		cookie.setSecure(secured);
+		cookie.setMaxAge(maxAge);
 		return cookie;
 	}
 }

@@ -26,6 +26,9 @@ package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
 import java.util.List;
 
+import com.github.mjeanroy.junit4.runif.RunIf;
+import com.github.mjeanroy.junit4.runif.RunIfRunner;
+import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
@@ -33,17 +36,20 @@ import org.asynchttpclient.Response;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
+@RunWith(RunIfRunner.class)
+@RunIf(AtLeastJava8Condition.class)
 public class AsyncHttpResponseTest {
 
 	@Rule
 	public ExpectedException thrown = none();
 
 	@Test
-	public void it_should_return_status_code() throws Exception {
+	public void it_should_return_status_code() {
 		int expectedStatus = 200;
 		Response response = new AsyncHttpResponseMockBuilder()
 				.setStatus(expectedStatus)

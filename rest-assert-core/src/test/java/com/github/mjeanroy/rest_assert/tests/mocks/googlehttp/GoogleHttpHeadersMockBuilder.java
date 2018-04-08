@@ -82,6 +82,6 @@ class GoogleHttpHeadersMockBuilder {
 			httpHeaders.set(headerName, headerValues);
 		}
 
-		return spy(httpHeaders);
+		return httpHeaders;
 	}
 }

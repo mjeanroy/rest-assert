@@ -143,21 +143,6 @@ public class ApacheHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
-				.setContent("test")
-				.build();
-
-		HttpEntity entity = response.getEntity();
-		when(entity.getContent()).thenThrow(new IOException());
-
-		thrown.expect(NonParsableResponseBodyException.class);
-
-		HttpResponse httpResponse = create(response);
-		httpResponse.getContent();
-	}
-
-	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
 		final org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder().build();
 		final HttpResponse httpResponse = ApacheHttpResponse.create(response);

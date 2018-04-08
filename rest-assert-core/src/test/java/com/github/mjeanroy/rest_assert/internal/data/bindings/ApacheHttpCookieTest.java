@@ -50,7 +50,6 @@ public class ApacheHttpCookieTest {
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
-		verify(apacheHttpCookie).getName();
 	}
 
 	@Test
@@ -64,7 +63,6 @@ public class ApacheHttpCookieTest {
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
-		verify(apacheHttpCookie).getValue();
 	}
 
 	@Test
@@ -78,7 +76,6 @@ public class ApacheHttpCookieTest {
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
-		verify(apacheHttpCookie).getDomain();
 	}
 
 	@Test
@@ -92,7 +89,6 @@ public class ApacheHttpCookieTest {
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
-		verify(apacheHttpCookie).getPath();
 	}
 
 	@Test
@@ -106,7 +102,6 @@ public class ApacheHttpCookieTest {
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
-		verify(apacheHttpCookie).isSecure();
 	}
 
 	@Test

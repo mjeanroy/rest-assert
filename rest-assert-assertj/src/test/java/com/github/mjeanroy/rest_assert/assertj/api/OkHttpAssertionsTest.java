@@ -31,16 +31,11 @@ import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuil
 import okhttp3.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(Response.class)
 public class OkHttpAssertionsTest {
 
 	@Test

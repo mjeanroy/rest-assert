@@ -82,7 +82,6 @@ public class AsyncHttpResponseMockBuilder extends AbstractHttpResponseMockBuilde
 			bodyParts = emptyList();
 		}
 
-		Response rsp = new NettyResponse(status, rspHeaders, bodyParts);
-		return spy(rsp);
+		return new NettyResponse(status, rspHeaders, bodyParts);
 	}
 }

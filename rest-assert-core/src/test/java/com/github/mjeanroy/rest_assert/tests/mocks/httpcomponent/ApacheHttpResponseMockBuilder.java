@@ -61,6 +61,6 @@ public class ApacheHttpResponseMockBuilder extends AbstractHttpResponseMockBuild
 			}
 		}
 
-		return spy(rsp);
+		return rsp;
 	}
 }

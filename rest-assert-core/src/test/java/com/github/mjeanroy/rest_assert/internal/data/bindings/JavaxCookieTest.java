@@ -50,7 +50,6 @@ public class JavaxCookieTest {
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
-		verify(javaxCookie).getName();
 	}
 
 	@Test
@@ -64,7 +63,6 @@ public class JavaxCookieTest {
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
-		verify(javaxCookie).getValue();
 	}
 
 	@Test
@@ -78,7 +76,6 @@ public class JavaxCookieTest {
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
-		verify(javaxCookie).getDomain();
 	}
 
 	@Test
@@ -92,7 +89,6 @@ public class JavaxCookieTest {
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
-		verify(javaxCookie).getPath();
 	}
 
 	@Test
@@ -105,7 +101,6 @@ public class JavaxCookieTest {
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
-		verify(javaxCookie).getSecure();
 	}
 
 	@Test
@@ -118,7 +113,6 @@ public class JavaxCookieTest {
 		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
-		verify(javaxCookie).isHttpOnly();
 	}
 
 	@Test
@@ -132,7 +126,6 @@ public class JavaxCookieTest {
 		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
-		verify(javaxCookie).getMaxAge();
 	}
 
 	@Test

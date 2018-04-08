@@ -28,17 +28,10 @@ import com.github.mjeanroy.rest_assert.utils.ClassUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
-import static org.powermock.api.mockito.PowerMockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(ClassUtils.class)
 public class JsonParserStrategyTest {
 
 	@Rule
@@ -66,42 +59,5 @@ public class JsonParserStrategyTest {
 		assertThat(parser)
 			.isNotNull()
 			.isExactlyInstanceOf(Jackson1JsonParser.class);
-	}
-
-	@Test
-	public void it_should_get_parser_with_classpath_detection() {
-		mockStatic(ClassUtils.class);
-
-		when(ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper")).thenReturn(true);
-		when(ClassUtils.isPresent("org.codehaus.jackson.map.ObjectMapper")).thenReturn(true);
-		when(ClassUtils.isPresent("com.google.gson.Gson")).thenReturn(true);
-		JsonParser p1 = JsonParserStrategy.AUTO.build();
-		assertThat(p1).isExactlyInstanceOf(Jackson2JsonParser.class);
-
-		when(ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper")).thenReturn(false);
-		when(ClassUtils.isPresent("org.codehaus.jackson.map.ObjectMapper")).thenReturn(true);
-		when(ClassUtils.isPresent("com.google.gson.Gson")).thenReturn(true);
-		JsonParser p2 = JsonParserStrategy.AUTO.build();
-		assertThat(p2).isExactlyInstanceOf(Jackson1JsonParser.class);
-
-		when(ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper")).thenReturn(false);
-		when(ClassUtils.isPresent("org.codehaus.jackson.map.ObjectMapper")).thenReturn(false);
-		when(ClassUtils.isPresent("com.google.gson.Gson")).thenReturn(true);
-		JsonParser p3 = JsonParserStrategy.AUTO.build();
-		assertThat(p3).isExactlyInstanceOf(GsonJsonParser.class);
-	}
-
-	@Test
-	public void it_should_fail_if_no_parser_can_be_found() {
-		mockStatic(ClassUtils.class);
-
-		when(ClassUtils.isPresent("com.fasterxml.jackson.databind.ObjectMapper")).thenReturn(false);
-		when(ClassUtils.isPresent("org.codehaus.jackson.map.ObjectMapper")).thenReturn(false);
-		when(ClassUtils.isPresent("com.google.gson.Gson")).thenReturn(false);
-
-		thrown.expect(UnsupportedOperationException.class);
-		thrown.expectMessage("Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)");
-
-		JsonParserStrategy.AUTO.build();
 	}
 }

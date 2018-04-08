@@ -64,6 +64,6 @@ class ApacheHttpEntityMockBuilder {
 	 * @return Mock instance.
 	 */
 	HttpEntity build() {
-		return spy(new StringEntity(content, ContentType.DEFAULT_TEXT));
+		return new StringEntity(content, ContentType.DEFAULT_TEXT);
 	}
 }

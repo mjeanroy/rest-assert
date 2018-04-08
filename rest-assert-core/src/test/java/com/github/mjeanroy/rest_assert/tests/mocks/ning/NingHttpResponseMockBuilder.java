@@ -89,7 +89,6 @@ public class NingHttpResponseMockBuilder extends AbstractHttpResponseMockBuilder
 			bodyParts = emptyList();
 		}
 
-		Response rsp = new JDKResponse(status, headers, bodyParts);
-		return spy(rsp);
+		return new JDKResponse(status, headers, bodyParts);
 	}
 }

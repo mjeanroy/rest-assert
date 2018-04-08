@@ -26,15 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http;
 
 import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({
-		com.google.api.client.http.HttpResponse.class,
-		okhttp3.Response.class
-})
 public abstract class AbstractHttpResponseAssertTest extends AbstractAssertTest<HttpResponse> {
 
 	// Core HTTP Response

@@ -24,47 +24,130 @@
 
 package com.github.mjeanroy.rest_assert.tests.mocks.googlehttp;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
 import com.github.mjeanroy.rest_assert.tests.mocks.AbstractHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilder;
+import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.LowLevelHttpRequest;
+import com.google.api.client.http.LowLevelHttpResponse;
+import com.google.api.client.testing.http.HttpTesting;
+import com.google.api.client.testing.http.MockHttpTransport;
+import com.google.api.client.testing.http.MockLowLevelHttpRequest;
+import com.google.api.client.testing.http.MockLowLevelHttpResponse;
 
 /**
  * Builder to create mock instance of {@link HttpResponse} class.
  */
 public class GoogleHttpResponseMockBuilder extends AbstractHttpResponseMockBuilder<HttpResponse, GoogleHttpResponseMockBuilder> implements HttpResponseMockBuilder<HttpResponse> {
 
+	/**
+	 * Create builder for {@link HttpResponse} with default values.
+	 */
+	public GoogleHttpResponseMockBuilder() {
+		this.status = 200;
+	}
+
 	@Override
 	public HttpResponse build() {
-		HttpResponse rsp = mock(HttpResponse.class);
-		when(rsp.getStatusCode()).thenReturn(status);
+		return createHttpResponse();
+	}
 
-		GoogleHttpHeadersMockBuilder builder = new GoogleHttpHeadersMockBuilder();
-		for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
-			for (String value : entry.getValue()) {
-				builder.addHeader(entry.getKey(), value);
-			}
+	private HttpResponse createHttpResponse() {
+		try {
+			HttpRequest request = createHttpRequest();
+			return request.execute();
+		} catch (Exception ex) {
+			throw new AssertionError(ex);
+		}
+	}
+
+	private HttpRequest createHttpRequest() {
+		try {
+			HttpTransport transport = new MockHttpTransportImpl(status, content, headers);
+			return transport.createRequestFactory()
+					.buildGetRequest(HttpTesting.SIMPLE_GENERIC_URL)
+					.setThrowExceptionOnExecuteError(false);
+
+		} catch (Exception ex) {
+			throw new AssertionError(ex);
+		}
+	}
+
+	/**
+	 * A specialized implementation for {@link MockHttpTransport}.
+	 */
+	private static class MockHttpTransportImpl extends MockHttpTransport {
+		/**
+		 * Response status code.
+		 */
+		private final int status;
+
+		/**
+		 * Response content.
+		 */
+		private final String content;
+
+		/**
+		 * Response headers.
+		 */
+		private final Map<String, List<String>> headers;
+
+		private MockHttpTransportImpl(int status, String content, Map<String, List<String>> headers) {
+			this.status = status;
+			this.content = content;
+			this.headers = headers;
 		}
 
-		when(rsp.getHeaders()).thenReturn(builder.build());
+		@Override
+		public LowLevelHttpRequest buildRequest(String method, String url) {
+			return new MockLowLevelHttpRequestImpl(status, content, headers);
+		}
+	}
 
-		if (content != null) {
-			try {
-				when(rsp.getContent()).thenReturn(new ByteArrayInputStream(content.getBytes()));
-				when(rsp.getContentCharset()).thenReturn(Charset.defaultCharset());
-			} catch (IOException ex) {
-				throw new AssertionError(ex);
-			}
+	/**
+	 * A specialized implementation for {@link MockLowLevelHttpRequest}.
+	 */
+	private static class MockLowLevelHttpRequestImpl extends MockLowLevelHttpRequest {
+		/**
+		 * Response status code.
+		 */
+		private final int status;
+
+		/**
+		 * Response content.
+		 */
+		private final String content;
+
+		/**
+		 * Response headers.
+		 */
+		private final Map<String, List<String>> headers;
+
+		private MockLowLevelHttpRequestImpl(int status, String content, Map<String, List<String>> headers) {
+			this.status = status;
+			this.content = content;
+			this.headers = headers;
 		}
 
-		return rsp;
+		@Override
+		public LowLevelHttpResponse execute() {
+			MockLowLevelHttpResponse response = new MockLowLevelHttpResponse();
+			response.setStatusCode(status);
+			response.setContent(content);
+
+			// Add headers
+			for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
+				String key = entry.getKey();
+				for (String value : entry.getValue()) {
+					response.addHeader(key, value);
+				}
+			}
+
+			return response;
+		}
 	}
 }

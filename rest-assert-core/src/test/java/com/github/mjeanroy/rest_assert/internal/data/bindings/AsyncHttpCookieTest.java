@@ -49,7 +49,6 @@ public class AsyncHttpCookieTest {
 		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
-		verify(asyncHttpCookie).getName();
 	}
 
 	@Test
@@ -63,7 +62,6 @@ public class AsyncHttpCookieTest {
 		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
-		verify(asyncHttpCookie).getValue();
 	}
 
 	@Test
@@ -77,7 +75,6 @@ public class AsyncHttpCookieTest {
 		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
-		verify(asyncHttpCookie).getDomain();
 	}
 
 	@Test
@@ -91,7 +88,6 @@ public class AsyncHttpCookieTest {
 		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
-		verify(asyncHttpCookie).getPath();
 	}
 
 	@Test
@@ -104,7 +100,6 @@ public class AsyncHttpCookieTest {
 		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
-		verify(asyncHttpCookie).isSecure();
 	}
 
 	@Test
@@ -117,7 +112,6 @@ public class AsyncHttpCookieTest {
 		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
-		verify(asyncHttpCookie).isHttpOnly();
 	}
 
 	@Test
@@ -131,7 +125,6 @@ public class AsyncHttpCookieTest {
 		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
-		verify(asyncHttpCookie).getMaxAge();
 	}
 
 	@Test

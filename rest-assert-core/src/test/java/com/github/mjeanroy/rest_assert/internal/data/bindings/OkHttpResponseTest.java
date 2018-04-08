@@ -31,15 +31,9 @@ import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import okhttp3.Response;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(Response.class)
 public class OkHttpResponseTest {
 
 	@Test
@@ -52,7 +46,6 @@ public class OkHttpResponseTest {
 		OkHttpResponse okHttpResponse = OkHttpResponse.create(response);
 
 		assertThat(okHttpResponse.getStatus()).isEqualTo(code);
-		verify(response).code();
 	}
 
 	@Test
@@ -98,7 +91,6 @@ public class OkHttpResponseTest {
 		OkHttpResponse okHttpResponse = OkHttpResponse.create(response);
 
 		assertThat(okHttpResponse.getContent()).isEqualTo(content);
-		verify(response).body();
 	}
 
 	@Test

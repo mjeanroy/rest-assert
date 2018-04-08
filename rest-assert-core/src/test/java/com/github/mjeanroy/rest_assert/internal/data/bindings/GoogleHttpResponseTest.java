@@ -24,29 +24,19 @@
 
 package com.github.mjeanroy.rest_assert.internal.data.bindings;
 
-import java.io.IOException;
 import java.util.List;
 
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
-import com.github.mjeanroy.rest_assert.internal.exceptions.NonParsableResponseBodyException;
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
 
 import static com.github.mjeanroy.rest_assert.internal.data.bindings.GoogleHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(com.google.api.client.http.HttpResponse.class)
 public class GoogleHttpResponseTest {
 
 	@Rule
@@ -63,7 +53,6 @@ public class GoogleHttpResponseTest {
 		int status = httpResponse.getStatus();
 
 		assertThat(status).isEqualTo(expectedStatus);
-		verify(response).getStatusCode();
 	}
 
 	@Test
@@ -111,20 +100,6 @@ public class GoogleHttpResponseTest {
 		String result = httpResponse.getContent();
 
 		assertThat(result).isEqualTo(body);
-		verify(response).getContent();
-		verify(response).getContentCharset();
-	}
-
-	@Test
-	public void it_should_return_custom_exception_if_body_is_not_parsable() throws Exception {
-		IOException ex = mock(IOException.class);
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
-		when(response.getContent()).thenThrow(ex);
-
-		thrown.expect(NonParsableResponseBodyException.class);
-
-		HttpResponse httpResponse = create(response);
-		httpResponse.getContent();
 	}
 
 	@Test

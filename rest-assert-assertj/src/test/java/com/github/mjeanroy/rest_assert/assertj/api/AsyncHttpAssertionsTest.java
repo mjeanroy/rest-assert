@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.rest_assert.assertj.api;
 
+import com.github.mjeanroy.junit4.runif.RunIf;
+import com.github.mjeanroy.junit4.runif.RunIfRunner;
+import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.internal.data.HttpResponse;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpCookie;
@@ -34,11 +37,14 @@ import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBu
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.asynchttpclient.Response;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import static com.github.mjeanroy.rest_assert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.rest_assert.tests.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@RunWith(RunIfRunner.class)
+@RunIf(AtLeastJava8Condition.class)
 public class AsyncHttpAssertionsTest {
 
 	@Test

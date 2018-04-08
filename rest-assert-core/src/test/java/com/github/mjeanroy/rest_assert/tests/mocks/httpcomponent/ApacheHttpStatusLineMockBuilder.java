@@ -71,7 +71,6 @@ class ApacheHttpStatusLineMockBuilder {
 	 * @return Mock instance.
 	 */
 	StatusLine build() {
-		StatusLine statusLine = new BasicStatusLine(protocolVersion, statusCode, null);
-		return spy(statusLine);
+		return new BasicStatusLine(protocolVersion, statusCode, null);
 	}
 }

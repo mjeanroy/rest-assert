@@ -82,7 +82,6 @@ public class OkHttpResponseMockBuilder extends AbstractHttpResponseMockBuilder<R
 			}
 		}
 
-		Response response = builder.build();
-		return spy(response);
+		return builder.build();
 	}
 }

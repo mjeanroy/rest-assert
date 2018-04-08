@@ -159,7 +159,6 @@ public class AsyncHttpCookieMockBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		Cookie cookie = Cookie.newValidCookie(name, value, false, domain, path, maxAge, secure, httpOnly);
-		return spy(cookie);
+		return Cookie.newValidCookie(name, value, false, domain, path, maxAge, secure, httpOnly);
 	}
 }
