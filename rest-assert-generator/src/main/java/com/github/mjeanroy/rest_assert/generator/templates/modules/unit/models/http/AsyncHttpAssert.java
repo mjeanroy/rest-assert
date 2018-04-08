@@ -28,7 +28,6 @@ import com.github.mjeanroy.rest_assert.generator.TemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
-import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.rest_assert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
@@ -58,7 +57,9 @@ public class AsyncHttpAssert extends AbstractTemplateModel implements TemplateMo
 
 	@Override
 	public String getActualClass() {
-		return Response.class.getName();
+		// Be careful, do not import org.asynchttpclient, as it will not compile on JDK 7
+		// and the unit test suite run on JDK 7.
+		return "org.asynchttpclient.Response";
 	}
 
 	@Override
