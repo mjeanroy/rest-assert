@@ -90,6 +90,7 @@ public class NingHttpCookie implements Cookie {
 		return cookie.getMaxAge();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Date getExpires() {
 		return new Date(cookie.getExpires());
