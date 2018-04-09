@@ -26,6 +26,9 @@ package com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.
 
 import java.util.Map;
 
+import com.github.mjeanroy.junit4.runif.RunIf;
+import com.github.mjeanroy.junit4.runif.RunIfRunner;
+import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.rest_assert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions;
@@ -33,9 +36,12 @@ import com.github.mjeanroy.rest_assert.internal.data.bindings.AsyncHttpResponse;
 import org.assertj.core.api.Condition;
 import org.asynchttpclient.Response;
 import org.junit.Before;
+import org.junit.runner.RunWith;
 
 import static com.github.mjeanroy.rest_assert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
 
+@RunWith(RunIfRunner.class)
+@RunIf(AtLeastJava8Condition.class)
 public class AsyncHttpAssertTest extends AbstractTemplateModelTest {
 
 	private AsyncHttpAssert httpAssert;
