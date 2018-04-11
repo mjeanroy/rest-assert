@@ -24,194 +24,42 @@
 
 package com.github.mjeanroy.rest_assert.api.http.charsets;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
-import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
-import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
-import static java.lang.String.format;
 
-abstract class AbstractHttpAssertCharsetTest extends AbstractHttpResponseAssertTest {
+public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTest<T> {
 
 	private static final String CUSTOM_MESSAGE = "foo";
 
-	// == Core HTTP Response
-
 	@Test
-	public void core_it_should_pass_with_expected_mime_type() {
-		invoke(newCoreHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newCoreHttpResponse(getCharset()));
+	public void it_should_pass_with_expected_mime_type() {
+		invoke(newHttpResponse(getCharset()));
+		invoke(CUSTOM_MESSAGE, newHttpResponse(getCharset()));
 	}
 
 	@Test
-	public void core_it_should_fail_with_if_response_is_not_expected_mime_type() {
+	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		invokeFailure(null, new Invocation() {
 			@Override
 			public void invokeTest(String charset) {
-				invoke(newCoreHttpResponse(charset));
+				invoke(newHttpResponse(charset));
 			}
 		});
 	}
 
 	@Test
-	public void core_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
 		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(charset));
+				invoke(CUSTOM_MESSAGE, newHttpResponse(charset));
 			}
 		});
 	}
-
-	// == Ning HTTP Response
-
-	@Test
-	public void ning_http_it_should_pass_with_expected_mime_type() {
-		invoke(newNingHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newNingHttpResponse(getCharset()));
-	}
-
-	@Test
-	public void ning_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(newNingHttpResponse(charset));
-			}
-		});
-	}
-
-	@Test
-	public void ning_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newNingHttpResponse(charset));
-			}
-		});
-	}
-
-	// == Async HTTP Response
-
-	@Test
-	public void async_http_it_should_pass_with_expected_mime_type() {
-		invoke(newAsyncHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(getCharset()));
-	}
-
-	@Test
-	public void async_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(newAsyncHttpResponse(charset));
-			}
-		});
-	}
-
-	@Test
-	public void async_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(charset));
-			}
-		});
-	}
-
-	// == Ok HTTP Response
-
-	@Test
-	public void ok_http_it_should_pass_with_expected_mime_type() {
-		invoke(newOkHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newOkHttpResponse(getCharset()));
-	}
-
-	@Test
-	public void ok_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(newOkHttpResponse(charset));
-			}
-		});
-	}
-
-	@Test
-	public void ok_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newOkHttpResponse(charset));
-			}
-		});
-	}
-
-	// == Apache HTTP Response
-
-	@Test
-	public void apache_http_it_should_pass_with_expected_mime_type() {
-		invoke(newApacheHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newApacheHttpResponse(getCharset()));
-	}
-
-	@Test
-	public void apache_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(newApacheHttpResponse(charset));
-			}
-		});
-	}
-
-	@Test
-	public void apache_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(charset));
-			}
-		});
-	}
-
-	// == Google HTTP Response
-
-	@Test
-	public void google_http_it_should_pass_with_expected_mime_type() {
-		invoke(newGoogleHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(getCharset()));
-	}
-
-	@Test
-	public void google_http_it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(newGoogleHttpResponse(charset));
-			}
-		});
-	}
-
-	@Test
-	public void google_http_it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(charset));
-			}
-		});
-	}
-
-	// == Test
 
 	private void invokeFailure(String msg, final Invocation invocation) {
 		final String expectedCharset = getCharset();
@@ -226,55 +74,11 @@ abstract class AbstractHttpAssertCharsetTest extends AbstractHttpResponseAssertT
 		});
 	}
 
-	// == Create target HTTP Response
-
-	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new HttpResponseMockBuilderImpl()
-				.addHeader("Content-Type", contentType)
-				.build();
-	}
-
-	private com.ning.http.client.Response newNingHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new NingHttpResponseMockBuilder()
-				.addHeader("Content-Type", contentType)
-				.build();
-	}
-
-	private Response newAsyncHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new AsyncHttpResponseMockBuilder()
-				.addHeader("Content-Type", contentType)
-				.build();
-	}
-
-	private okhttp3.Response newOkHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new OkHttpResponseMockBuilder()
-				.addHeader("Content-Type", contentType)
-				.build();
-	}
-
-	private org.apache.http.HttpResponse newApacheHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new ApacheHttpResponseMockBuilder()
-				.addHeader("Content-Type", contentType)
-				.build();
-	}
-
-	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new GoogleHttpResponseMockBuilder()
-				.addHeader("Content-Type", contentType)
-				.build();
-	}
-
 	private String buildErrorMessage(String expectedCharset, String actualCharset) {
 		return String.format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset);
 	}
 
-	// == To Implement
+	protected abstract T newHttpResponse(String charset);
 
 	protected abstract String getCharset();
 

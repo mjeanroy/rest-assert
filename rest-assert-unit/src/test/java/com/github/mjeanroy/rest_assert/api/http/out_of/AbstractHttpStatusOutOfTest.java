@@ -24,21 +24,14 @@
 
 package com.github.mjeanroy.rest_assert.api.http.out_of;
 
-import com.github.mjeanroy.rest_assert.api.http.AbstractHttpResponseAssertTest;
+import com.github.mjeanroy.rest_assert.api.AbstractAssertTest;
 import com.github.mjeanroy.rest_assert.tests.Function;
-import com.github.mjeanroy.rest_assert.tests.mocks.HttpResponseMockBuilderImpl;
-import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.ning.NingHttpResponseMockBuilder;
-import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
-import org.asynchttpclient.Response;
 import org.junit.Test;
 
 import static com.github.mjeanroy.rest_assert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
-public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAssertTest {
+public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractAssertTest<T> {
 
 	private static final String CUSTOM_MESSAGE = "foo";
 
@@ -48,8 +41,8 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 	public void it_should_pass() {
 		for (int i = 0; i <= 999; i++) {
 			if (i < start() || i > end()) {
-				invoke(newCoreHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(i));
+				invoke(newHttpResponse(i));
+				invoke(CUSTOM_MESSAGE, newHttpResponse(i));
 			}
 		}
 	}
@@ -59,7 +52,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 		doTest(null, new Invocation() {
 			@Override
 			public void invokeTest(int status) {
-				invoke(newCoreHttpResponse(status));
+				invoke(newHttpResponse(status));
 			}
 		});
 	}
@@ -69,167 +62,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 		doTest(CUSTOM_MESSAGE, new Invocation() {
 			@Override
 			public void invokeTest(int status) {
-				invoke(CUSTOM_MESSAGE, newCoreHttpResponse(status));
-			}
-		});
-	}
-
-	// == Ning HTTP Response
-
-	@Test
-	public void ning_http_it_should_pass() {
-		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
-				invoke(newNingHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newNingHttpResponse(i));
-			}
-		}
-	}
-
-	@Test
-	public void ning_http_it_should_fail() {
-		doTest(null, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(newNingHttpResponse(status));
-			}
-		});
-	}
-
-	@Test
-	public void ning_http_it_should_fail_with_custom_message() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(CUSTOM_MESSAGE, newNingHttpResponse(status));
-			}
-		});
-	}
-
-	// == Async HTTP Response
-
-	@Test
-	public void async_http_it_should_pass() {
-		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
-				invoke(newAsyncHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(i));
-			}
-		}
-	}
-
-	@Test
-	public void async_http_it_should_fail() {
-		doTest(null, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(newAsyncHttpResponse(status));
-			}
-		});
-	}
-
-	@Test
-	public void async_http_it_should_fail_with_custom_message() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(CUSTOM_MESSAGE, newAsyncHttpResponse(status));
-			}
-		});
-	}
-
-	// == Ok HTTP Response
-
-	@Test
-	public void ok_http_it_should_pass() {
-		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
-				invoke(newOkHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newOkHttpResponse(i));
-			}
-		}
-	}
-
-	@Test
-	public void ok_http_it_should_fail() {
-		doTest(null, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(newOkHttpResponse(status));
-			}
-		});
-	}
-
-	@Test
-	public void ok_http_it_should_fail_with_custom_message() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(CUSTOM_MESSAGE, newOkHttpResponse(status));
-			}
-		});
-	}
-
-	// == Apache HTTP Response
-
-	@Test
-	public void apache_http_it_should_pass() {
-		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
-				invoke(newApacheHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(i));
-			}
-		}
-	}
-
-	@Test
-	public void apache_http_it_should_fail() {
-		doTest(null, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(newApacheHttpResponse(status));
-			}
-		});
-	}
-
-	@Test
-	public void apache_http_it_should_fail_with_custom_message() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(CUSTOM_MESSAGE, newApacheHttpResponse(status));
-			}
-		});
-	}
-
-	// == Google HTTP Response
-
-	@Test
-	public void google_http_it_should_pass() {
-		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
-				invoke(newGoogleHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(i));
-			}
-		}
-	}
-
-	@Test
-	public void google_http_it_should_fail() {
-		doTest(null, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(newGoogleHttpResponse(status));
-			}
-		});
-	}
-
-	@Test
-	public void google_http_it_should_fail_with_custom_message() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
-			@Override
-			public void invokeTest(int status) {
-				invoke(CUSTOM_MESSAGE, newGoogleHttpResponse(status));
+				invoke(CUSTOM_MESSAGE, newHttpResponse(status));
 			}
 		});
 	}
@@ -251,49 +84,15 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractHttpResponseAs
 		}
 	}
 
-	protected abstract int start();
-
-	protected abstract int end();
-
 	private String buildErrorMessage(int start, int end, int status) {
 		return String.format("Expecting status code to be out of %s and %s but was %s", start, end, status);
 	}
 
-	private com.github.mjeanroy.rest_assert.internal.data.HttpResponse newCoreHttpResponse(int status) {
-		return new HttpResponseMockBuilderImpl()
-			.setStatus(status)
-			.build();
-	}
+	protected abstract T newHttpResponse(int status);
 
-	private com.ning.http.client.Response newNingHttpResponse(int status) {
-		return new NingHttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
-	}
+	protected abstract int start();
 
-	private Response newAsyncHttpResponse(int status) {
-		return new AsyncHttpResponseMockBuilder()
-				.setStatus(status)
-				.build();
-	}
-
-	private okhttp3.Response newOkHttpResponse(int status) {
-		return new OkHttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
-	}
-
-	private org.apache.http.HttpResponse newApacheHttpResponse(int status) {
-		return new ApacheHttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
-	}
-
-	private com.google.api.client.http.HttpResponse newGoogleHttpResponse(int status) {
-		return new GoogleHttpResponseMockBuilder()
-			.setStatus(status)
-			.build();
-	}
+	protected abstract int end();
 
 	private interface Invocation {
 		void invokeTest(int status);
