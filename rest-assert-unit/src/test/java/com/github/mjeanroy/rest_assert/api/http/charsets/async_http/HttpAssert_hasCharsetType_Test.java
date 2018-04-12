@@ -24,17 +24,11 @@
 
 package com.github.mjeanroy.rest_assert.api.http.charsets.async_http;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
-import org.junit.runner.RunWith;
 
 import java.nio.charset.Charset;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
 public class HttpAssert_hasCharsetType_Test extends AbstractAsyncHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = Charset.forName("UTF-8");

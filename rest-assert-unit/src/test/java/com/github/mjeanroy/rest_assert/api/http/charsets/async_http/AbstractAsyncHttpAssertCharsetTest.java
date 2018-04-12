@@ -24,12 +24,16 @@
 
 package com.github.mjeanroy.rest_assert.api.http.charsets.async_http;
 
+import com.github.mjeanroy.junit4.runif.RunIf;
+import com.github.mjeanroy.junit4.runif.RunIfRunner;
+import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.api.http.charsets.AbstractHttpAssertCharsetTest;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import org.asynchttpclient.Response;
+import org.junit.runner.RunWith;
 
-import static java.lang.String.format;
-
+@RunWith(RunIfRunner.class)
+@RunIf(AtLeastJava8Condition.class)
 abstract class AbstractAsyncHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
 
 	@Override

@@ -24,18 +24,12 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.async_http;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
-import org.junit.runner.RunWith;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
 public class HttpAssert_assertIsFrameOptionsEqualTo_Test extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;

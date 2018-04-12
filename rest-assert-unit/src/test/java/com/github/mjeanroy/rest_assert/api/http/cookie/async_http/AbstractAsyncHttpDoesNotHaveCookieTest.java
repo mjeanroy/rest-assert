@@ -24,11 +24,17 @@
 
 package com.github.mjeanroy.rest_assert.api.http.cookie.async_http;
 
+import com.github.mjeanroy.junit4.runif.RunIf;
+import com.github.mjeanroy.junit4.runif.RunIfRunner;
+import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.api.http.cookie.AbstractDoesNotHaveCookieTest;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import org.asynchttpclient.Response;
+import org.junit.runner.RunWith;
 
+@RunWith(RunIfRunner.class)
+@RunIf(AtLeastJava8Condition.class)
 abstract class AbstractAsyncHttpDoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest<Response> {
 
 	@Override

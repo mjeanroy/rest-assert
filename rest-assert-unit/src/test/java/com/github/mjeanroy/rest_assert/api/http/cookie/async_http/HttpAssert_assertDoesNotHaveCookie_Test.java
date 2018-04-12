@@ -32,8 +32,6 @@ import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
 import org.junit.runner.RunWith;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
 public class HttpAssert_assertDoesNotHaveCookie_Test extends AbstractAsyncHttpDoesNotHaveCookieTest {
 
 	@Override

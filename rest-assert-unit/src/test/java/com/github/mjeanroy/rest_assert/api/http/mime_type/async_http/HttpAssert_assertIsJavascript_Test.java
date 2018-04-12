@@ -24,19 +24,13 @@
 
 package com.github.mjeanroy.rest_assert.api.http.mime_type.async_http;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
-import org.junit.runner.RunWith;
 
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
 public class HttpAssert_assertIsJavascript_Test extends AbstractAsyncHttpClientMimeTypeInTest {
 
 	@Override

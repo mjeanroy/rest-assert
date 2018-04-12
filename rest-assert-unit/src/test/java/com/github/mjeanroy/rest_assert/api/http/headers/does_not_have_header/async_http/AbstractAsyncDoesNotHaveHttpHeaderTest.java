@@ -24,11 +24,17 @@
 
 package com.github.mjeanroy.rest_assert.api.http.headers.does_not_have_header.async_http;
 
+import com.github.mjeanroy.junit4.runif.RunIf;
+import com.github.mjeanroy.junit4.runif.RunIfRunner;
+import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.rest_assert.api.http.headers.does_not_have_header.AbstractDoesNotHaveHttpHeaderTest;
 import com.github.mjeanroy.rest_assert.tests.mocks.async.AsyncHttpResponseMockBuilder;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
 import org.asynchttpclient.Response;
+import org.junit.runner.RunWith;
 
+@RunWith(RunIfRunner.class)
+@RunIf(AtLeastJava8Condition.class)
 abstract class AbstractAsyncDoesNotHaveHttpHeaderTest extends AbstractDoesNotHaveHttpHeaderTest<Response> {
 
 	@Override
