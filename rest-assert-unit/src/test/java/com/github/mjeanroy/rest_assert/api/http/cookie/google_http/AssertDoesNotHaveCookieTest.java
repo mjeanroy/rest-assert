@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.cookie.google_http;
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertDoesNotHaveCookieTest extends AbstractGoogleHttpDoesNotHaveCookieTest {
 
@@ -46,12 +47,12 @@ public class AssertDoesNotHaveCookieTest extends AbstractGoogleHttpDoesNotHaveCo
 	}
 
 	@Override
-	protected void invoke(com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveCookie(actual);
 	}
 
 	@Override
-	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveCookie(message, actual);
 	}
 }

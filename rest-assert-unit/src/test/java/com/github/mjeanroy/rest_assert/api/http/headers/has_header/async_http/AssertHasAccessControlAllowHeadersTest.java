@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.has_header.async_http;
 
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -37,12 +38,12 @@ public class AssertHasAccessControlAllowHeadersTest extends AbstractAsyncHttpHea
 	}
 
 	@Override
-	protected void invoke(org.asynchttpclient.Response actual) {
+	protected void invoke(Response actual) {
 		AsyncHttpAssert.assertHasAccessControlAllowHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, org.asynchttpclient.Response actual) {
+	protected void invoke(String message, Response actual) {
 		AsyncHttpAssert.assertHasAccessControlAllowHeaders(message, actual);
 	}
 }

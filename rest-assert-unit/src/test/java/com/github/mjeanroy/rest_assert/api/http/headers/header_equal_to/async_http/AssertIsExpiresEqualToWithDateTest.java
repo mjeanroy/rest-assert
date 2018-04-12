@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.async_h
 
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.asynchttpclient.Response;
 
 import java.util.Date;
 
@@ -42,13 +43,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractAsyncHttpHeaderE
 	}
 
 	@Override
-	protected void invoke(org.asynchttpclient.Response actual) {
+	protected void invoke(Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		AsyncHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, org.asynchttpclient.Response actual) {
+	protected void invoke(String message, Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		AsyncHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

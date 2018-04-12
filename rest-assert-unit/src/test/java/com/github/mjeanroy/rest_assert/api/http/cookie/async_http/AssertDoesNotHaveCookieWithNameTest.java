@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.cookie.async_http;
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import org.asynchttpclient.Response;
 
 public class AssertDoesNotHaveCookieWithNameTest extends AbstractAsyncHttpDoesNotHaveCookieTest {
 
@@ -43,12 +44,12 @@ public class AssertDoesNotHaveCookieWithNameTest extends AbstractAsyncHttpDoesNo
 	}
 
 	@Override
-	protected void invoke(org.asynchttpclient.Response actual) {
+	protected void invoke(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
-	protected void invoke(String message, org.asynchttpclient.Response actual) {
+	protected void invoke(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 }

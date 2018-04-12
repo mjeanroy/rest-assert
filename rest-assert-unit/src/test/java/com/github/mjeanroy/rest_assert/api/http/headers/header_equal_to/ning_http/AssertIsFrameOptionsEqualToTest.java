@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.ning_ht
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.data.FrameOptions;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -40,12 +41,12 @@ public class AssertIsFrameOptionsEqualToTest extends AbstractGoogleHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(com.ning.http.client.Response actual) {
+	protected void invoke(Response actual) {
 		NingHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, com.ning.http.client.Response actual) {
+	protected void invoke(String message, Response actual) {
 		NingHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 }

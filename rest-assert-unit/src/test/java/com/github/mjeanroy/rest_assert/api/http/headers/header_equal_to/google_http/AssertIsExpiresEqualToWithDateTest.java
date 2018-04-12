@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.google_
 
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.google.api.client.http.HttpResponse;
 
 import java.util.Date;
 
@@ -42,13 +43,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractGoogleHttpHeader
 	}
 
 	@Override
-	protected void invoke(com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		GoogleHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		GoogleHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

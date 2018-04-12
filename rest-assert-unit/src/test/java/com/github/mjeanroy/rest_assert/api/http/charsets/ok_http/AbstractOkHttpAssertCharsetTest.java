@@ -28,8 +28,6 @@ import com.github.mjeanroy.rest_assert.api.http.charsets.AbstractHttpAssertChars
 import com.github.mjeanroy.rest_assert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
 import okhttp3.Response;
 
-import static java.lang.String.format;
-
 abstract class AbstractOkHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
 
 	@Override

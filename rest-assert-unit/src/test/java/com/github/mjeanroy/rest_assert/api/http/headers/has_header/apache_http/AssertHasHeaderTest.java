@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.has_header.apache_http;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -39,12 +40,12 @@ public class AssertHasHeaderTest extends AbstractApacheHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(org.apache.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		ApacheHttpAssert.assertHasHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, org.apache.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasHeader(message, actual, getHeader().getName());
 	}
 }

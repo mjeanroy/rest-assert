@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.apache_
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.apache.http.HttpResponse;
 
 import java.util.Date;
 
@@ -42,13 +43,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractApacheHttpHeader
 	}
 
 	@Override
-	protected void invoke(org.apache.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		ApacheHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, org.apache.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		ApacheHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

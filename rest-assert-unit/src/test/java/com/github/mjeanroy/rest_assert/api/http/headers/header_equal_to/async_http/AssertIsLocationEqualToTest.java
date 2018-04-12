@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.async_h
 
 import com.github.mjeanroy.rest_assert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -39,12 +40,12 @@ public class AssertIsLocationEqualToTest extends AbstractAsyncHttpHeaderEqualToT
 	}
 
 	@Override
-	protected void invoke(org.asynchttpclient.Response actual) {
+	protected void invoke(Response actual) {
 		AsyncHttpAssert.assertIsLocationEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, org.asynchttpclient.Response actual) {
+	protected void invoke(String message, Response actual) {
 		AsyncHttpAssert.assertIsLocationEqualTo(message, actual, VALUE);
 	}
 }

@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.has_header.ning_http;
 
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -37,12 +38,12 @@ public class AssertHasXssProtectionTest extends AbstractNingHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(com.ning.http.client.Response actual) {
+	protected void invoke(Response actual) {
 		NingHttpAssert.assertHasXssProtection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, com.ning.http.client.Response actual) {
+	protected void invoke(String message, Response actual) {
 		NingHttpAssert.assertHasXssProtection(message, actual);
 	}
 }

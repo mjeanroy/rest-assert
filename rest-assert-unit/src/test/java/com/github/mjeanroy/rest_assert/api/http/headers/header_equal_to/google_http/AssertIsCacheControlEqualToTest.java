@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.google_
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.data.CacheControl;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -42,12 +43,12 @@ public class AssertIsCacheControlEqualToTest extends AbstractGoogleHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		GoogleHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 }

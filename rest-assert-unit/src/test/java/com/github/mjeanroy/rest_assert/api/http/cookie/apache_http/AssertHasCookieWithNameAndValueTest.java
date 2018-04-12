@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.cookie.apache_http;
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import org.apache.http.HttpResponse;
 
 public class AssertHasCookieWithNameAndValueTest extends AbstractApacheHttpHasCookieTest {
 
@@ -45,12 +46,12 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractApacheHttpHasCo
 	}
 
 	@Override
-	protected void invoke(org.apache.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		ApacheHttpAssert.assertHasCookie(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, org.apache.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
 	}
 }

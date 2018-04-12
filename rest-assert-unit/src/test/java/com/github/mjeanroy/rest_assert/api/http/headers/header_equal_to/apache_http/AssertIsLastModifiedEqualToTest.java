@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.apache_
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -44,12 +45,12 @@ public class AssertIsLastModifiedEqualToTest extends AbstractApacheHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(org.apache.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		ApacheHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, org.apache.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
 	}
 }

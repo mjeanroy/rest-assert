@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.cookie.ok_http;
 import com.github.mjeanroy.rest_assert.api.http.OkHttpAssert;
 import com.github.mjeanroy.rest_assert.internal.data.Cookie;
 import com.github.mjeanroy.rest_assert.tests.mocks.CookieMockBuilder;
+import okhttp3.Response;
 
 public class AssertHasCookieWithNameCookieTest extends AbstractOkHttpHasCookieTest {
 
@@ -45,12 +46,12 @@ public class AssertHasCookieWithNameCookieTest extends AbstractOkHttpHasCookieTe
 	}
 
 	@Override
-	protected void invoke(okhttp3.Response actual) {
+	protected void invoke(Response actual) {
 		OkHttpAssert.assertHasCookie(actual, COOKIE);
 	}
 
 	@Override
-	protected void invoke(String message, okhttp3.Response actual) {
+	protected void invoke(String message, Response actual) {
 		OkHttpAssert.assertHasCookie(message, actual, COOKIE);
 	}
 }

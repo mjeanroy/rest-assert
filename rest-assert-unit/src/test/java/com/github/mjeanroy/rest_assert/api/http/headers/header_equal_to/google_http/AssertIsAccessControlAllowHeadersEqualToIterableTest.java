@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.google_
 
 import com.github.mjeanroy.rest_assert.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.google.api.client.http.HttpResponse;
 
 import java.util.List;
 
@@ -43,12 +44,12 @@ public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends Abstra
 	}
 
 	@Override
-	protected void invoke(com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, com.google.api.client.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowHeadersEqualTo(message, actual, VALUE);
 	}
 }

@@ -26,6 +26,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.ning_ht
 
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -41,12 +42,12 @@ public class AssertIsHeaderEqualToTest extends AbstractGoogleHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected void invoke(com.ning.http.client.Response actual) {
+	protected void invoke(Response actual) {
 		NingHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, com.ning.http.client.Response actual) {
+	protected void invoke(String message, Response actual) {
 		NingHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

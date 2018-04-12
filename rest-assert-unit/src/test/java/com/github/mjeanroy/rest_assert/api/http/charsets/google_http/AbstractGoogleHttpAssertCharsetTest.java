@@ -28,8 +28,6 @@ import com.github.mjeanroy.rest_assert.api.http.charsets.AbstractHttpAssertChars
 import com.github.mjeanroy.rest_assert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
 import com.google.api.client.http.HttpResponse;
 
-import static java.lang.String.format;
-
 abstract class AbstractGoogleHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
 
 	@Override

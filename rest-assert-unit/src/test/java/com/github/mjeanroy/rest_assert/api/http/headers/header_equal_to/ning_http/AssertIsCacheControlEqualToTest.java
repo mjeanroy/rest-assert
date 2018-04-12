@@ -27,6 +27,7 @@ package com.github.mjeanroy.rest_assert.api.http.headers.header_equal_to.ning_ht
 import com.github.mjeanroy.rest_assert.api.http.NingHttpAssert;
 import com.github.mjeanroy.rest_assert.data.CacheControl;
 import com.github.mjeanroy.rest_assert.tests.models.Header;
+import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.rest_assert.tests.models.Header.header;
 
@@ -42,12 +43,12 @@ public class AssertIsCacheControlEqualToTest extends AbstractGoogleHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(com.ning.http.client.Response actual) {
+	protected void invoke(Response actual) {
 		NingHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, com.ning.http.client.Response actual) {
+	protected void invoke(String message, Response actual) {
 		NingHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 }

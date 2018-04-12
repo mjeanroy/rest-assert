@@ -25,6 +25,7 @@
 package com.github.mjeanroy.rest_assert.api.http.mime_type.apache_http;
 
 import com.github.mjeanroy.rest_assert.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertIsTextTest extends AbstractApacheHttpClientMimeTypeTest {
 
@@ -34,12 +35,12 @@ public class AssertIsTextTest extends AbstractApacheHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(org.apache.http.HttpResponse actual) {
+	protected void invoke(HttpResponse actual) {
 		ApacheHttpAssert.assertIsText(actual);
 	}
 
 	@Override
-	protected void invoke(String message, org.apache.http.HttpResponse actual) {
+	protected void invoke(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsText(message, actual);
 	}
 }
