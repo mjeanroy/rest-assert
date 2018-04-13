@@ -107,13 +107,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 					allValues.append(src.getValue());
 				}
 
-				sb.append(new StringBuilder()
-						.append(directive.getName())
-						.append(" ")
-						.append(allValues)
-						.toString()
-						.trim()
-					).append(";");
+				sb.append((directive.getName() + " " + allValues).trim()).append(";");
 			}
 		}
 
@@ -184,7 +178,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 	/**
 	 * List of CSP directive.
 	 */
-	private static enum SourceDirective {
+	private enum SourceDirective {
 		/**
 		 * Handle {@code base-uri} directive.
 		 *
@@ -384,7 +378,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 */
 		private final String name;
 
-		private SourceDirective(String name) {
+		SourceDirective(String name) {
 			this.name = name;
 		}
 
@@ -952,7 +946,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 	 *
 	 * @see <a href="https://www.w3.org/TR/CSP/#sandbox-usage">https://www.w3.org/TR/CSP/#sandbox-usage</a>
 	 */
-	public static enum Sandbox implements Source {
+	public enum Sandbox implements Source {
 		ALLOW_SCRIPTS("allow-scripts"),
 		ALLOW_SAME_ORIGIN("allow-same-origin"),
 		ALLOW_FORMS("allow-forms"),
@@ -965,7 +959,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 */
 		private final String value;
 
-		private Sandbox(String value) {
+		Sandbox(String value) {
 			this.value = value;
 		}
 

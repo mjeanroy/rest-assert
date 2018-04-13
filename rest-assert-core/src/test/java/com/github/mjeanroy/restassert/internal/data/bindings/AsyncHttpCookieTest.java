@@ -35,7 +35,6 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
 
 @RunWith(RunIfRunner.class)
 @RunIf(AtLeastJava8Condition.class)

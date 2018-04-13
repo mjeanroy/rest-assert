@@ -61,9 +61,7 @@ public class AssertHasMaxAgeTest extends AbstractCookiesTest {
 		};
 	}
 
-	protected Cookie cookie(long maxAge) {
-		return new CookieBuilder()
-			.setMaxAge(maxAge)
-			.build();
+	private Cookie cookie(long maxAge) {
+		return new CookieBuilder().setMaxAge(maxAge).build();
 	}
 }

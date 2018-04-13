@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.generator.processors;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.mjeanroy.restassert.generator.ClassFile;
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.TemplateEngine;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.CookieAssert.cookieAssert;
@@ -103,7 +103,7 @@ public enum UnitProcessor {
 	private final List<TemplateModel> models;
 
 	// Create new processor
-	private UnitProcessor(Template template, List<TemplateModel> models) {
+	UnitProcessor(Template template, List<TemplateModel> models) {
 		this.template = template;
 		this.models = models;
 	}

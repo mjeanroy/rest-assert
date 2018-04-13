@@ -35,7 +35,7 @@ import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 /**
  * Commons methods to class assertions.
  */
-public abstract class AbstractRestAssertions {
+abstract class AbstractRestAssertions {
 
 	/**
 	 * Failures object.

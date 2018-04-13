@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractDoesNotHaveCookieTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_cookie_is_missing() {
@@ -68,11 +68,8 @@ public abstract class AbstractDoesNotHaveCookieTest {
 
 	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 
-	protected Cookie fakeCookie() {
-		return new CookieBuilder()
-				.setName("foo")
-				.setValue("bar")
-				.build();
+	Cookie fakeCookie() {
+		return new CookieBuilder().setName("foo").setValue("bar").build();
 	}
 
 	private HttpResponse newResponse(Cookie cookie) {

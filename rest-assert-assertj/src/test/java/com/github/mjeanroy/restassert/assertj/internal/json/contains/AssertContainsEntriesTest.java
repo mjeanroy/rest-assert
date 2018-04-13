@@ -39,7 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AssertContainsEntriesTest {
 
-	protected Jsons jsons = Jsons.instance();
+	private Jsons jsons = Jsons.instance();
 
 	@Test
 	public void it_should_pass_if_json_contains_entries() {

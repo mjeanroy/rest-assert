@@ -42,7 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesMimeTypeInTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_mime_type_is_ok() {
@@ -87,7 +87,7 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 
 	protected abstract List<String> getMimeTypes();
 
-	protected List<Header> getHeader() {
+	private List<Header> getHeader() {
 		return map(getMimeTypes(), new Mapper<String, Header>() {
 			@Override
 			public Header apply(String input) {
@@ -96,10 +96,8 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 		});
 	}
 
-	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseBuilderImpl()
-			.addHeader(header)
-			.build();
+	private HttpResponse newHttpResponse(Header header) {
+		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
 	protected abstract void invoke(HttpResponse httpResponse);

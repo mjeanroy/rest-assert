@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.tests;
 
-import java.util.List;
-
 import org.assertj.core.api.AssertionInfo;
 import org.assertj.core.api.WritableAssertionInfo;
+
+import java.util.List;
 
 public final class AssertJUtils {
 
@@ -45,10 +45,6 @@ public final class AssertJUtils {
 			sb.append("\"").append(item).append("\"").append(separator);
 		}
 
-		return new StringBuilder()
-				.append("[")
-				.append(sb.substring(0, sb.length() - separator.length()))
-				.append("]")
-				.toString();
+		return "[" + sb.substring(0, sb.length() - separator.length()) + "]";
 	}
 }

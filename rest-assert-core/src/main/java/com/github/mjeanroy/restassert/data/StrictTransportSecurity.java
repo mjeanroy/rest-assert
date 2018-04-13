@@ -233,7 +233,7 @@ public class StrictTransportSecurity implements HeaderValue {
 	/**
 	 * Set of directive that may appear in {@code Strict-Transport-Security} header.
 	 */
-	private static enum Directive {
+	private enum Directive {
 		/**
 		 * Max-Age directive.
 		 */
@@ -280,7 +280,7 @@ public class StrictTransportSecurity implements HeaderValue {
 		 */
 		private final String name;
 
-		private Directive(String name) {
+		Directive(String name) {
 			this.name = name;
 		}
 

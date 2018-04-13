@@ -184,7 +184,7 @@ public enum HttpHeader {
 	 */
 	private final boolean single;
 
-	private HttpHeader(String name, boolean single) {
+	HttpHeader(String name, boolean single) {
 		this.name = name;
 		this.single = single;
 	}

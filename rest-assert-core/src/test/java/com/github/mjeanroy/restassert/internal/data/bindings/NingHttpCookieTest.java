@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
 
 public class NingHttpCookieTest {
 

@@ -35,7 +35,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesCharsetTest  {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass() {
@@ -64,10 +64,8 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 
 	protected abstract void invoke(HttpResponse httpResponse);
 
-	protected HttpResponse newHttpResponse(String charset) {
+	private HttpResponse newHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
-		return new HttpResponseBuilderImpl()
-			.addHeader("Content-Type", contentType)
-			.build();
+		return new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build();
 	}
 }

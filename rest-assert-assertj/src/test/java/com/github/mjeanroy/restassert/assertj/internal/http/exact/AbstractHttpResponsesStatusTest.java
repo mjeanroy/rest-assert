@@ -24,21 +24,20 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
-
+import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
-import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesStatusTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_status_code_is_ok() {

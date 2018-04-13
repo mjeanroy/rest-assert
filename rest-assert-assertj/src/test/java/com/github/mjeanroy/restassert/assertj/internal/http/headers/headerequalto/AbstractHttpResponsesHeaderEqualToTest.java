@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesHeaderEqualToTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_header_is_ok() {
@@ -86,7 +86,7 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	 *
 	 * @return Fail value.
 	 */
-	protected String failValue() {
+	String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 
@@ -96,10 +96,8 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	 * @param header Expected header.
 	 * @return Fake http response.
 	 */
-	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseBuilderImpl()
-				.addHeader(header)
-				.build();
+	private HttpResponse newHttpResponse(Header header) {
+		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
 	/**

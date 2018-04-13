@@ -61,9 +61,7 @@ public class AssertHasNameTest extends AbstractCookiesTest {
 		};
 	}
 
-	protected Cookie cookie(String name) {
-		return new CookieBuilder()
-			.setName(name)
-			.build();
+	private Cookie cookie(String name) {
+		return new CookieBuilder().setName(name).build();
 	}
 }

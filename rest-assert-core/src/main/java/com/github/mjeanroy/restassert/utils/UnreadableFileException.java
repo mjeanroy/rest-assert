@@ -36,7 +36,7 @@ public class UnreadableFileException extends RuntimeException {
 	 * Create exception.
 	 * @param ex Original exception.
 	 */
-	public UnreadableFileException(IOException ex) {
+	UnreadableFileException(IOException ex) {
 		super(ex);
 	}
 }

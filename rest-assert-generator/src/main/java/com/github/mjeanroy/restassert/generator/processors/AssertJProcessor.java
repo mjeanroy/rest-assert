@@ -81,7 +81,7 @@ public enum AssertJProcessor {
 	private final TemplateModel model;
 
 	// Create new processor
-	private AssertJProcessor(Template template, TemplateModel model) {
+	AssertJProcessor(Template template, TemplateModel model) {
 		this.template = template;
 		this.model = model;
 	}

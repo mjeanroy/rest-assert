@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_header_is_missing() {

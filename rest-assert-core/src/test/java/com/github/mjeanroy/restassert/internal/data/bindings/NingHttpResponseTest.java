@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
-import java.util.List;
-
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
@@ -34,9 +32,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.mock;
 
 public class NingHttpResponseTest {
 

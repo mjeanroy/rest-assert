@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractJsonsIsEqualToTest<T> {
 
-	protected Jsons jsons = Jsons.instance();
+	Jsons jsons = Jsons.instance();
 
 	@Test
 	public void should_pass() {
@@ -67,7 +67,7 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 		}
 	}
 
-	protected String actual() {
+	String actual() {
 		return jsonSuccess();
 	}
 

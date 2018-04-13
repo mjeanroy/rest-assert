@@ -32,7 +32,6 @@ import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
-import static org.mockito.Mockito.verify;
 
 public class ApacheHttpCookieTest {
 

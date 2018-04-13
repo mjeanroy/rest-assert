@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHasCookieTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_status_code_is_ok() {

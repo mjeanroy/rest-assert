@@ -61,9 +61,7 @@ public class AssertHasValueTest extends AbstractCookiesTest {
 		};
 	}
 
-	protected Cookie cookie(String value) {
-		return new CookieBuilder()
-			.setValue(value)
-			.build();
+	private Cookie cookie(String value) {
+		return new CookieBuilder().setValue(value).build();
 	}
 }

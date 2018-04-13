@@ -84,10 +84,8 @@ public abstract class AbstractHttpResponsesHeaderTest {
 	 * @param header Expected header.
 	 * @return Fake http response.
 	 */
-	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseBuilderImpl()
-				.addHeader(header)
-				.build();
+	private HttpResponse newHttpResponse(Header header) {
+		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
 	/**

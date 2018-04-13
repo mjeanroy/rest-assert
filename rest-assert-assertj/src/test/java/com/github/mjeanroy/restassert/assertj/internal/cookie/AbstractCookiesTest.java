@@ -24,20 +24,19 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.cookie;
 
+import com.github.mjeanroy.restassert.assertj.internal.Cookies;
+import com.github.mjeanroy.restassert.internal.data.Cookie;
+import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
+
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
-
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-
 public abstract class AbstractCookiesTest {
 
-	protected Cookies cookies = Cookies.instance();
+	Cookies cookies = Cookies.instance();
 
 	@Test
 	public void should_pass() {

@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.error;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AbstractErrorTest {
 
@@ -75,7 +75,7 @@ public class AbstractErrorTest {
 	}
 
 	private static final class FooError extends AbstractError {
-		public FooError(String message, Object... args) {
+		FooError(String message, Object... args) {
 			super(message, args);
 		}
 	}
