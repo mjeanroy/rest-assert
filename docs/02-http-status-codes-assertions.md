@@ -25,7 +25,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -54,7 +54,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -79,7 +79,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -104,7 +104,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -129,7 +129,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -154,7 +154,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -179,7 +179,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -208,7 +208,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -233,7 +233,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -258,7 +258,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -287,7 +287,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -312,7 +312,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -337,7 +337,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -362,7 +362,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -387,7 +387,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -412,7 +412,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -437,7 +437,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -462,7 +462,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -487,7 +487,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -516,7 +516,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 
@@ -541,7 +541,7 @@ import org.junit.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.assertj.api.assertThat;
+import static com.github.mjeanroy.restassert.assertj.api.assertThat;
 
 public class Test {
 

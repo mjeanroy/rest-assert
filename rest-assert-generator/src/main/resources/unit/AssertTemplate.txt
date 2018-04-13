@@ -24,7 +24,7 @@
 
 package {{package}};
 
-import static com.github.mjeanroy.rest_assert.api.AssertUtil.check;
+import static com.github.mjeanroy.restassert.api.AssertUtil.check;
 
 /**
  * Static assertions.

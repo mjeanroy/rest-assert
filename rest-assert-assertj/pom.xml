@@ -127,7 +127,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<mainClass>com.github.mjeanroy.rest_assert.generator.cli.AssertJGenerator</mainClass>
+					<mainClass>com.github.mjeanroy.restassert.generator.cli.AssertJGenerator</mainClass>
 					<executable>java</executable>
 					<arguments>
 						<argument>-classpath</argument>

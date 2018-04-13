@@ -21,7 +21,7 @@ import org.junit.Test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.rest_assert.internal.data.HttpResponse.JsonAssertions.assertJsonThat;
+import static com.github.mjeanroy.restassert.internal.data.HttpResponse.JsonAssertions.assertJsonThat;
 
 public class MyTest {
   @Test
@@ -56,7 +56,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
 import static java.util.Collections.singletonList;
-import static com.github.mjeanroy.rest_assert.internal.data.HttpResponse.JsonAssertions.assertJsonThat;
+import static com.github.mjeanroy.restassert.internal.data.HttpResponse.JsonAssertions.assertJsonThat;
 
 public class MyTest {
   @Test

@@ -1,11 +1,11 @@
 	/**
-	 * @see com.github.mjeanroy.rest_assert.internal.assertions.HttpResponseAssertions#isBar
+	 * @see com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions#isBar
 	 *
 	 * @param info contains information about the assertion.
 	 * @param actual actual object.
 	 * @throws AssertionError
 	 */
-	public void assertIsBar(AssertionInfo info, com.github.mjeanroy.rest_assert.internal.data.HttpResponse actual, java.lang.String arg1) {
+	public void assertIsBar(AssertionInfo info, com.github.mjeanroy.restassert.internal.data.HttpResponse actual, java.lang.String arg1) {
 		assertNotNull(info, actual);
 		check(info, assertions.isBar(actual, arg1));
 	}
