@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
-import java.util.List;
-
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.List;
 
 import static com.github.mjeanroy.restassert.internal.data.bindings.ApacheHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -125,7 +125,7 @@ public class ApacheHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_response_body() throws Exception {
+	public void it_should_return_response_body() {
 		String body = "foo";
 
 		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()

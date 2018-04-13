@@ -43,7 +43,7 @@ import static java.util.Collections.unmodifiableMap;
  *
  * @see <a href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a>
  */
-public class ContentSecurityPolicy implements HeaderValue {
+public final class ContentSecurityPolicy implements HeaderValue {
 
 	/**
 	 * Class logger.
@@ -77,7 +77,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 
 		if (o instanceof ContentSecurityPolicy) {
 			ContentSecurityPolicy csp = (ContentSecurityPolicy) o;
-			return directives.equals(csp.directives);
+			return Objects.equals(directives, csp.directives);
 		}
 
 		return false;
@@ -85,7 +85,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 
 	@Override
 	public int hashCode() {
-		return directives.hashCode();
+		return Objects.hashCode(directives);
 	}
 
 	@Override
@@ -387,7 +387,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 *
 		 * @return {@link #name}.
 		 */
-		public String getName() {
+		String getName() {
 			return name;
 		}
 
@@ -432,7 +432,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 * @param name Name.
 		 * @return Directive, may be {@code null} if name does not exist.
 		 */
-		public static SourceDirective byName(String name) {
+		static SourceDirective byName(String name) {
 			return map.get(name.toLowerCase());
 		}
 	}
@@ -935,7 +935,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 	/**
 	 * Validator used as a fallback.
 	 */
-	private static SourceValidator noOpValidator = new SourceValidator() {
+	private static final SourceValidator NO_OP_VALIDATOR = new SourceValidator() {
 		@Override
 		public void validate(Source src) {
 		}
@@ -990,7 +990,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		 * @param value Value.
 		 * @return Sandbox item, may be {@code null} if {@code value} does not exist.
 		 */
-		public static Sandbox byValue(String value) {
+		static Sandbox byValue(String value) {
 			return map.get(value.toLowerCase());
 		}
 	}
@@ -1262,7 +1262,7 @@ public class ContentSecurityPolicy implements HeaderValue {
 		}
 
 		private Builder add(SourceDirective directive, Source src, List<Source> other) {
-			return add(directive, src, other, noOpValidator);
+			return add(directive, src, other, NO_OP_VALIDATOR);
 		}
 
 		private Builder add(SourceDirective directive, Source src, List<Source> other, SourceValidator validator) {

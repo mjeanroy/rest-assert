@@ -68,7 +68,7 @@ public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Respons
 			final int status = this.status;
 			when(conn.getResponseCode()).thenAnswer(new Answer<Integer>() {
 				@Override
-				public Integer answer(InvocationOnMock invocation) throws Throwable {
+				public Integer answer(InvocationOnMock invocation) {
 					return status;
 				}
 			});

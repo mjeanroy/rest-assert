@@ -37,11 +37,11 @@ public class DoesNotHaveHeaderTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.doesNothaveHeader("foo");
+		return api.doesNotHaveHeader("foo");
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertDoesNothaveHeader(any(AssertionInfo.class), any(HttpResponse.class), eq("foo"));
+		verify(assertions).assertDoesNotHaveHeader(any(AssertionInfo.class), any(HttpResponse.class), eq("foo"));
 	}
 }

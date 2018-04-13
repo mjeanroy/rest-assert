@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
-import java.io.IOException;
-import java.util.List;
-
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import org.asynchttpclient.Response;
+
+import java.util.List;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
@@ -76,7 +75,7 @@ public class AsyncHttpResponse extends AbstractHttpResponse implements HttpRespo
 	}
 
 	@Override
-	protected String doGetContent() throws IOException {
+	protected String doGetContent() {
 		return response.getResponseBody();
 	}
 }

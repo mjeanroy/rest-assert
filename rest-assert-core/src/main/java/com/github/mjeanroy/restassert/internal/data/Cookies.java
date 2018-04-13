@@ -115,8 +115,8 @@ public final class Cookies {
 			return false;
 		}
 
-		return c1.getName().equalsIgnoreCase(c2.getName())
-				&& c1.getValue().equals(c2.getValue())
+		return Objects.equals(c1.getName(), c2.getName())
+				&& Objects.equals(c1.getValue(), c2.getValue())
 				&& Objects.equals(c1.getDomain(), c2.getDomain())
 				&& Objects.equals(c1.getPath(), c2.getPath())
 				&& c1.isSecured() == c2.isSecured()
@@ -325,7 +325,7 @@ public final class Cookies {
 	/**
 	 * Default cookie representation.
 	 */
-	private static class DefaultCookie implements Cookie {
+	static final class DefaultCookie implements Cookie {
 		/**
 		 * Cookie name.
 		 */
@@ -461,7 +461,7 @@ public final class Cookies {
 			}
 
 			if (expires != null) {
-				DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZZ", Locale.US);
+				DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ", Locale.US);
 				df.setTimeZone(UTC);
 				sb.append("; expires=").append(df.format(expires));
 			}

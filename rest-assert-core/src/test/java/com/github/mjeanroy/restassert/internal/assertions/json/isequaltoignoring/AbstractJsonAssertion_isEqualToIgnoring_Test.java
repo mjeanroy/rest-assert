@@ -46,19 +46,19 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 	}
 
 	@Test
-	public void it_should_pass() throws Exception {
+	public void it_should_pass() {
 		AssertionResult result = invoke(actual(), successObject(), asList("str", "nb", "bool"));
 		assertSuccessResult(result);
 	}
 
 	@Test
-	public void it_should_support_json_path() throws Exception {
+	public void it_should_support_json_path() {
 		AssertionResult result = invoke(actual(), failureObject(), asList("$.str", "$.nb", "$.bool", "$.array[0:3]"));
 		assertSuccessResult(result);
 	}
 
 	@Test
-	public void it_should_fail() throws Exception {
+	public void it_should_fail() {
 		AssertionResult result = invoke(actual(), failureObject(), asList("str", "nb", "bool"));
 
 		String expectedPattern = "" +

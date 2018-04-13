@@ -26,16 +26,28 @@ package com.github.mjeanroy.restassert.tests;
 
 import java.util.Collection;
 
+/**
+ * Static Test String Utilities.
+ */
 public final class Strings {
 
+	// Ensure non instantiation.
 	private Strings() {
 	}
 
+	/**
+	 * Join string with given character.
+	 *
+	 * @param strings Collection of strings.
+	 * @param separator The string separator.
+	 * @return The final string.
+	 */
 	public static String join(Collection<String> strings, String separator) {
 		StringBuilder sb = new StringBuilder();
 		for (String str : strings) {
 			sb.append(str).append(separator);
 		}
+
 		return sb.substring(0, sb.length() - separator.length());
 	}
 }

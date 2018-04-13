@@ -41,6 +41,6 @@ public class DoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.doesNothaveHeader(response, NAME);
+		return assertions.doesNotHaveHeader(response, NAME);
 	}
 }

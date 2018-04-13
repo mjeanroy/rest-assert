@@ -43,30 +43,19 @@ public class CompositeErrorTest {
 		CompositeError error = composeErrors(asList(error1, error2, error3));
 
 		assertThat(error).isNotNull();
+		assertThat(error.message()).isEqualTo(
+			"foo," + LINE_SEPARATOR +
+			"bar %s %s," + LINE_SEPARATOR +
+			"foobar %s"
+		);
 
-		assertThat(error.message())
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo("" +
-								"foo," + LINE_SEPARATOR +
-								"bar %s %s," + LINE_SEPARATOR +
-								"foobar %s"
-				);
+		assertThat(error.args()).hasSize(3).contains(1, 2, "hello");
 
-		assertThat(error.args())
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(3)
-				.contains(1, 2, "hello");
-
-		assertThat(error.buildMessage())
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo("" +
-								"foo," + LINE_SEPARATOR +
-								"bar 1 2," + LINE_SEPARATOR +
-								"foobar hello"
-				);
+		assertThat(error.buildMessage()).isEqualTo("" +
+			"foo," + LINE_SEPARATOR +
+			"bar 1 2," + LINE_SEPARATOR +
+			"foobar hello"
+		);
 	}
 
 	private RestAssertError createError(String message, Object... args) {

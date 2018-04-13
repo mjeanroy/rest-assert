@@ -31,7 +31,7 @@ import static com.github.mjeanroy.restassert.utils.PreConditions.notNull;
 /**
  * Default implement for {@link JsonEntry} interface.
  */
-public class DefaultJsonEntry implements JsonEntry {
+public final class DefaultJsonEntry implements JsonEntry {
 
 	/**
 	 * Entry key.

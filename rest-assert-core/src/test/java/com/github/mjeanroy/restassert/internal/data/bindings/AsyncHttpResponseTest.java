@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
-import java.util.List;
-
 import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
@@ -37,6 +35,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
@@ -62,7 +62,7 @@ public class AsyncHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_check_if_http_response_contains_header() throws Exception {
+	public void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
 
 		Response response = new AsyncHttpResponseBuilder()
@@ -76,7 +76,7 @@ public class AsyncHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_header_values() throws Exception {
+	public void it_should_return_header_values() {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
@@ -95,7 +95,7 @@ public class AsyncHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_response_body() throws Exception {
+	public void it_should_return_response_body() {
 		String body = "foo";
 		Response response = new AsyncHttpResponseBuilder()
 				.setContent(body)

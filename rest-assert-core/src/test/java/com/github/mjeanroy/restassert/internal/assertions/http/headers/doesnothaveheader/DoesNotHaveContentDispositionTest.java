@@ -39,6 +39,6 @@ public class DoesNotHaveContentDispositionTest extends AbstractDoesNotHaveHttpHe
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.doesNotHaveContentDispostion(response);
+		return assertions.doesNotHaveContentDisposition(response);
 	}
 }

@@ -69,9 +69,7 @@ public class AbstractErrorTest {
 
 		Object[] args1 = error.args();
 		Object[] args2 = error.args();
-		assertThat(args1)
-				.isNotSameAs(args2)
-				.isEqualTo(args2);
+		assertThat(args1).isNotSameAs(args2).isEqualTo(args2);
 	}
 
 	private static final class FooError extends AbstractError {

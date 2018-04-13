@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.data;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -31,7 +32,22 @@ import org.junit.rules.ExpectedException;
 import java.net.URI;
 import java.net.URL;
 
-import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.*;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.Sandbox;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.Source;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.allHosts;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.data;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.host;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.http;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.https;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.nonce;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.none;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.scheme;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.self;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.sha256;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.sha384;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.sha512;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.unsafeEval;
+import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.unsafeInline;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContentSecurityPolicyTest {
@@ -564,49 +580,6 @@ public class ContentSecurityPolicyTest {
 
 	@Test
 	public void it_should_implement_equals() {
-		ContentSecurityPolicy csp1 = new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(none())
-				.build();
-
-		ContentSecurityPolicy csp2 = new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(none())
-				.build();
-
-		ContentSecurityPolicy csp3 = new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(none())
-				.build();
-
-		ContentSecurityPolicy csp4 = new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(self())
-				.build();
-
-		assertThat(csp1.equals(csp2)).isTrue();
-		assertThat(csp1.equals(csp4)).isFalse();
-		assertThat(csp1.equals(null)).isFalse();
-
-		// Reflective
-		assertThat(csp1.equals(csp1)).isTrue();
-
-		// Symmetric
-		assertThat(csp1.equals(csp2)).isTrue();
-		assertThat(csp2.equals(csp1)).isTrue();
-
-		// Transitive
-		assertThat(csp1.equals(csp2)).isTrue();
-		assertThat(csp2.equals(csp3)).isTrue();
-		assertThat(csp1.equals(csp3)).isTrue();
-	}
-
-	@Test
-	public void it_should_implement_hash_code() {
-		ContentSecurityPolicy csp1 = new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(none())
-				.build();
-
-		ContentSecurityPolicy csp2 = new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(none())
-				.build();
-
-		assertThat(csp1.hashCode()).isEqualTo(csp2.hashCode());
+		EqualsVerifier.forClass(ContentSecurityPolicy.class).verify();
 	}
 }

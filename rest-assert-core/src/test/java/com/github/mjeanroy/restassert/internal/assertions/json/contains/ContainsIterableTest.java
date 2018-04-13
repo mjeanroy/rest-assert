@@ -47,7 +47,7 @@ public class ContainsIterableTest {
 	}
 
 	@Test
-	public void it_should_check_if_json_contains_entries() throws Exception {
+	public void it_should_check_if_json_contains_entries() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
@@ -63,7 +63,7 @@ public class ContainsIterableTest {
 	}
 
 	@Test
-	public void it_should_fail_if_json_does_contains_entries() throws Exception {
+	public void it_should_fail_if_json_does_contains_entries() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1)
 		);

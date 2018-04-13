@@ -72,7 +72,7 @@ public class UtilsTest {
 
 		when(mapper.apply(anyInt())).thenAnswer(new Answer<Integer>() {
 			@Override
-			public Integer answer(InvocationOnMock invocation) throws Throwable {
+			public Integer answer(InvocationOnMock invocation) {
 				int input = (Integer) invocation.getArguments()[0];
 				return input * input;
 			}
@@ -99,7 +99,7 @@ public class UtilsTest {
 
 		when(mapper.apply(anyInt())).thenAnswer(new Answer<Integer>() {
 			@Override
-			public Integer answer(InvocationOnMock invocation) throws Throwable {
+			public Integer answer(InvocationOnMock invocation) {
 				int input = (Integer) invocation.getArguments()[0];
 				return input * input;
 			}
@@ -126,7 +126,7 @@ public class UtilsTest {
 
 		when(predicate.apply(anyInt())).thenAnswer(new Answer<Boolean>() {
 			@Override
-			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+			public Boolean answer(InvocationOnMock invocation) {
 				int input = (Integer) invocation.getArguments()[0];
 				return input % 2 == 0;
 			}
@@ -184,7 +184,7 @@ public class UtilsTest {
 		Predicate<String> predicate = mock(Predicate.class);
 		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
 			@Override
-			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+			public Boolean answer(InvocationOnMock invocation) {
 				return invocation.getArguments()[0].equals("foo");
 			}
 		});
@@ -205,7 +205,7 @@ public class UtilsTest {
 		Predicate<String> predicate = mock(Predicate.class);
 		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
 			@Override
-			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+			public Boolean answer(InvocationOnMock invocation) {
 				return invocation.getArguments()[0].equals("foo");
 			}
 		});

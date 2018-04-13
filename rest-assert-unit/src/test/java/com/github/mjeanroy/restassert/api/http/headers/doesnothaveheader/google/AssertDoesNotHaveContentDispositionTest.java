@@ -39,11 +39,11 @@ public class AssertDoesNotHaveContentDispositionTest extends AbstractGoogleDoesN
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		GoogleHttpAssert.assertDoesNotHaveContentDispostion(actual);
+		GoogleHttpAssert.assertDoesNotHaveContentDisposition(actual);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		GoogleHttpAssert.assertDoesNotHaveContentDispostion(message, actual);
+		GoogleHttpAssert.assertDoesNotHaveContentDisposition(message, actual);
 	}
 }

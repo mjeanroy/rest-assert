@@ -34,7 +34,7 @@ public class AssertDoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponse
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertDoesNothaveHeader(someInfo(), httpResponse, getHeader().getName());
+		httpResponses.assertDoesNotHaveHeader(someInfo(), httpResponse, getHeader().getName());
 	}
 
 	@Override

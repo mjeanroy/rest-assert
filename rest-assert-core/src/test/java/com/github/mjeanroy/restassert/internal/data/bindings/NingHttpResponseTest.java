@@ -43,7 +43,7 @@ public class NingHttpResponseTest {
 	public ExpectedException thrown = none();
 
 	@Test
-	public void it_should_return_status_code() throws Exception {
+	public void it_should_return_status_code() {
 		int expectedStatus = 200;
 		Response response = new NingHttpResponseBuilder()
 				.setStatus(expectedStatus)
@@ -56,7 +56,7 @@ public class NingHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_check_if_http_response_contains_header() throws Exception {
+	public void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
 
 		Response response = new NingHttpResponseBuilder()
@@ -70,7 +70,7 @@ public class NingHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_header_values() throws Exception {
+	public void it_should_return_header_values() {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
@@ -89,7 +89,7 @@ public class NingHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_response_body() throws Exception {
+	public void it_should_return_response_body() {
 		String body = "foo";
 		Response response = new NingHttpResponseBuilder()
 				.setContent(body)

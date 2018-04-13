@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.internal.data;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,32 +48,6 @@ public class DefaultJsonEntryTest {
 
 	@Test
 	public void it_should_implement_equals() {
-		JsonEntry e1 = new DefaultJsonEntry("foo", "bar");
-		JsonEntry e2 = new DefaultJsonEntry("foo", "bar");
-		JsonEntry e3 = new DefaultJsonEntry("foo", "bar");
-		JsonEntry e4 = new DefaultJsonEntry("foo", "quix");
-
-		assertThat(e1.equals(null)).isFalse();
-		assertThat(e1.equals(e4)).isFalse();
-		assertThat(e4.equals(e1)).isFalse();
-
-		// Reflective
-		assertThat(e1.equals(e1)).isTrue();
-
-		// Symmetric
-		assertThat(e1.equals(e2)).isTrue();
-		assertThat(e2.equals(e1)).isTrue();
-
-		// Transitive
-		assertThat(e1.equals(e2)).isTrue();
-		assertThat(e2.equals(e3)).isTrue();
-		assertThat(e1.equals(e3)).isTrue();
-	}
-
-	@Test
-	public void it_should_implement_hash_code() {
-		JsonEntry e1 = new DefaultJsonEntry("foo", "bar");
-		JsonEntry e2 = new DefaultJsonEntry("foo", "bar");
-		assertThat(e1.hashCode()).isEqualTo(e2.hashCode());
+		EqualsVerifier.forClass(DefaultJsonEntry.class).verify();
 	}
 }

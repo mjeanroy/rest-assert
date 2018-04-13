@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.internal.data;
 
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
-
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static com.github.mjeanroy.restassert.internal.data.Cookies.newCookie;
 import static com.github.mjeanroy.restassert.internal.data.Cookies.parse;
@@ -67,33 +68,7 @@ public class CookiesTest {
 
 	@Test
 	public void it_should_implement_equals() {
-		Cookie c1 = newCookie("name", "value", "domain.com", "/", true, true, 3600L, null);
-		Cookie c2 = newCookie("name", "value", "domain.com", "/", true, true, 3600L, null);
-		Cookie c3 = newCookie("name", "value", "domain.com", "/", true, true, 3600L, null);
-		Cookie c4 = newCookie("name", "", "domain.com", "/", true, true, 3600L, null);
-
-		assertThat(c1.equals(c2)).isTrue();
-		assertThat(c1.equals(c4)).isFalse();
-		assertThat(c1.equals(null)).isFalse();
-
-		// Symmetric
-		assertThat(c1.equals(c2)).isTrue();
-		assertThat(c2.equals(c1)).isTrue();
-
-		// Reflective
-		assertThat(c1.equals(c1)).isTrue();
-
-		// Transitive
-		assertThat(c1.equals(c2)).isTrue();
-		assertThat(c2.equals(c3)).isTrue();
-		assertThat(c1.equals(c3)).isTrue();
-	}
-
-	@Test
-	public void it_should_implement_hash_code() {
-		Cookie c1 = newCookie("name", "value", "domain.com", "/", true, true, 3600L, null);
-		Cookie c2 = newCookie("name", "value", "domain.com", "/", true, true, 3600L, null);
-		assertThat(c1.hashCode()).isEqualTo(c2.hashCode());
+		EqualsVerifier.forClass(Cookies.DefaultCookie.class).verify();
 	}
 
 	@Test

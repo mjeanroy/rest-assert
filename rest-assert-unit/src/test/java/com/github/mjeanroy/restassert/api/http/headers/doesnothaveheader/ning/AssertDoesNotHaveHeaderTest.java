@@ -41,11 +41,11 @@ public class AssertDoesNotHaveHeaderTest extends AbstractNingDoesNotHaveHttpHead
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertDoesNothaveHeader(actual, getHeader().getName());
+		NingHttpAssert.assertDoesNotHaveHeader(actual, getHeader().getName());
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertDoesNothaveHeader(message, actual, getHeader().getName());
+		NingHttpAssert.assertDoesNotHaveHeader(message, actual, getHeader().getName());
 	}
 }

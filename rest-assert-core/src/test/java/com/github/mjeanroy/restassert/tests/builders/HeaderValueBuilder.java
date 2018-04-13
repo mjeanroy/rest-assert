@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.data.HeaderValue;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import static java.util.Collections.addAll;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -64,19 +63,6 @@ public class HeaderValueBuilder {
 	public HeaderValueBuilder setValue(String value) {
 		this.value = value;
 		this.matches.add(value);
-		return this;
-	}
-
-	/**
-	 * Add new matches.
-	 *
-	 * @param match First match, required.
-	 * @param other Other, optional, matches.
-	 * @return Current builder.
-	 */
-	public HeaderValueBuilder addMatch(String match, String... other) {
-		matches.add(match);
-		addAll(matches, match);
 		return this;
 	}
 

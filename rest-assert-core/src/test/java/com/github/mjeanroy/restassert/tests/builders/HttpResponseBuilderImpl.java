@@ -79,7 +79,7 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 
 		when(rsp.getHeader(anyString())).thenAnswer(new Answer<List<String>>() {
 			@Override
-			public List<String> answer(InvocationOnMock invocation) throws Throwable {
+			public List<String> answer(InvocationOnMock invocation) {
 				String name = (String) invocation.getArguments()[0];
 				List<String> values = headers.get(name);
 				if (values == null) {
@@ -92,7 +92,7 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 
 		when(rsp.hasHeader(anyString())).thenAnswer(new Answer<Boolean>() {
 			@Override
-			public Boolean answer(InvocationOnMock invocation) throws Throwable {
+			public Boolean answer(InvocationOnMock invocation) {
 				String name = (String) invocation.getArguments()[0];
 				return headers.containsKey(name);
 			}

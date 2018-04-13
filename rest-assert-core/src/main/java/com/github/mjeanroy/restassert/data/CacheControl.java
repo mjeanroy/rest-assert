@@ -36,7 +36,7 @@ import static com.github.mjeanroy.restassert.utils.Utils.join;
 /**
  * Cache-Control header value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
  */
-public class CacheControl implements HeaderValue {
+public final class CacheControl implements HeaderValue {
 
 	/**
 	 * Class logger.

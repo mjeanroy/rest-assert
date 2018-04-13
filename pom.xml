@@ -48,6 +48,7 @@
 		<commons-lang3.version>3.4</commons-lang3.version>
 		<commons-io.version>2.4</commons-io.version>
 		<junit-runif.version>0.2.0</junit-runif.version>
+		<equalsverifier.version>1.5.1</equalsverifier.version>
 	</properties>
 
 	<dependencyManagement>
@@ -142,6 +143,11 @@
 				<groupId>com.github.mjeanroy</groupId>
 				<artifactId>junit-runif</artifactId>
 				<version>${junit-runif.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>nl.jqno.equalsverifier</groupId>
+				<artifactId>equalsverifier</artifactId>
+				<version>${equalsverifier.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

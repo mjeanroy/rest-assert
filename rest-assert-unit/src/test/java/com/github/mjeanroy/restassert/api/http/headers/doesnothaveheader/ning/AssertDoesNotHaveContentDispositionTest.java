@@ -39,11 +39,11 @@ public class AssertDoesNotHaveContentDispositionTest extends AbstractNingDoesNot
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertDoesNotHaveContentDispostion(actual);
+		NingHttpAssert.assertDoesNotHaveContentDisposition(actual);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertDoesNotHaveContentDispostion(message, actual);
+		NingHttpAssert.assertDoesNotHaveContentDisposition(message, actual);
 	}
 }

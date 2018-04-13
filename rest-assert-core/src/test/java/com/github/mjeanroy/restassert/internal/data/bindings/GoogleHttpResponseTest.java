@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
-import java.util.List;
-
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.List;
 
 import static com.github.mjeanroy.restassert.internal.data.bindings.GoogleHttpResponse.create;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,7 +90,7 @@ public class GoogleHttpResponseTest {
 	}
 
 	@Test
-	public void it_should_return_response_body() throws Exception {
+	public void it_should_return_response_body() {
 		String body = "foo";
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 				.setContent(body)

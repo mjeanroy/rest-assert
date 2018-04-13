@@ -34,7 +34,7 @@ public class AssertDoesNotHaveContentDispositionTest extends AbstractDoesNotHave
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertDoesNotHaveContentDispostion(someInfo(), httpResponse);
+		httpResponses.assertDoesNotHaveContentDisposition(someInfo(), httpResponse);
 	}
 
 	@Override

@@ -35,12 +35,12 @@ import static java.util.Collections.unmodifiableMap;
 /**
  * Strict-Transport-Security header.
  * Note that this object handle {@code preload} directive, even if
- * it is not officaly defined in the spec.
+ * it is not officially defined in the spec.
  *
  * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
  * @see <a href="https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security">https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security</a>
  */
-public class StrictTransportSecurity implements HeaderValue {
+public final class StrictTransportSecurity implements HeaderValue {
 
 	/**
 	 * Class logger.

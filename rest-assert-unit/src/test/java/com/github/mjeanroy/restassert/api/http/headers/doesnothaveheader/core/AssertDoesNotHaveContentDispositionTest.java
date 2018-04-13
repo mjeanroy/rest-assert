@@ -39,11 +39,11 @@ public class AssertDoesNotHaveContentDispositionTest extends AbstractCoreDoesNot
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		HttpAssert.assertDoesNotHaveContentDispostion(actual);
+		HttpAssert.assertDoesNotHaveContentDisposition(actual);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpAssert.assertDoesNotHaveContentDispostion(message, actual);
+		HttpAssert.assertDoesNotHaveContentDisposition(message, actual);
 	}
 }

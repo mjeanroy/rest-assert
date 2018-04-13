@@ -36,11 +36,11 @@ public class DoesNotHaveContentDispositionTest extends AbstractHttpResponseHeade
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.doesNotHaveContentDispostion();
+		return api.doesNotHaveContentDisposition();
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertDoesNotHaveContentDispostion(any(AssertionInfo.class), any(HttpResponse.class));
+		verify(assertions).assertDoesNotHaveContentDisposition(any(AssertionInfo.class), any(HttpResponse.class));
 	}
 }

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.data;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,7 +107,7 @@ public class StrictTransportSecurityTest {
 	}
 
 	@Test
-	public void it_should_parse_with_case_insenstivie_header() {
+	public void it_should_parse_with_case_insensitive_header() {
 		StrictTransportSecurity sts = new StrictTransportSecurity.Builder(3600)
 				.includeSubDomains()
 				.preload()
@@ -114,5 +115,10 @@ public class StrictTransportSecurityTest {
 
 		assertThat(sts.match("max-age=3600; includeSubDomains; preload")).isTrue();
 		assertThat(sts.match("MAX-AGE=3600; INCLUDESUBDOMAINS; PRELOAD")).isTrue();
+	}
+
+	@Test
+	public void it_should_implement_equals() {
+		EqualsVerifier.forClass(StrictTransportSecurity.class).verify();
 	}
 }

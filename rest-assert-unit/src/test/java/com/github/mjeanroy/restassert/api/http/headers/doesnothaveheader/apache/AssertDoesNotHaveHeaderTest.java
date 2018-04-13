@@ -41,11 +41,11 @@ public class AssertDoesNotHaveHeaderTest extends AbstractApacheDoesNotHaveHttpHe
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertDoesNothaveHeader(actual, getHeader().getName());
+		ApacheHttpAssert.assertDoesNotHaveHeader(actual, getHeader().getName());
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertDoesNothaveHeader(message, actual, getHeader().getName());
+		ApacheHttpAssert.assertDoesNotHaveHeader(message, actual, getHeader().getName());
 	}
 }
