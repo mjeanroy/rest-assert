@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesStatusOutOfTest {
 
-	HttpResponses httpResponses = HttpResponses.instance();
+	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass() {

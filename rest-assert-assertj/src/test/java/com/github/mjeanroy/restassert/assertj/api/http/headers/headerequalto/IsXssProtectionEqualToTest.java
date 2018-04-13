@@ -36,17 +36,15 @@ import static org.mockito.Mockito.verify;
 
 public class IsXssProtectionEqualToTest extends AbstractHttpResponseHeaderTest {
 
+	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isXssProtectionEqualTo(getValue());
+		return api.isXssProtectionEqualTo(VALUE);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsXssProtectionEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
-	}
-
-	private XssProtection getValue() {
-		return XssProtection.ENABLE_BLOCK;
+		verify(assertions).assertIsXssProtectionEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
 	}
 }

@@ -67,7 +67,7 @@ public class OkHttpAssert extends AbstractTemplateModel implements TemplateModel
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

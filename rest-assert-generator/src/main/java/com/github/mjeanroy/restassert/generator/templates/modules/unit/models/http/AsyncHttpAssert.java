@@ -68,7 +68,7 @@ public class AsyncHttpAssert extends AbstractTemplateModel implements TemplateMo
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

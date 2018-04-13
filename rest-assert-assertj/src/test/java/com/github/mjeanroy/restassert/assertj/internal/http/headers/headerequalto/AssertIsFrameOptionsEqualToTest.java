@@ -33,17 +33,15 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsFrameOptionsEqualTo(someInfo(), httpResponse, getValue());
+		httpResponses.assertIsFrameOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", getValue().value());
-	}
-
-	private FrameOptions getValue() {
-		return FrameOptions.SAME_ORIGIN;
+		return header("X-Frame-Options", VALUE.value());
 	}
 }

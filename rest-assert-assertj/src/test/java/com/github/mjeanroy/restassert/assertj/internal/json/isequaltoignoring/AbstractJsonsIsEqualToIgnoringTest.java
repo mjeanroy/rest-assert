@@ -39,7 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
 
-	Jsons jsons = Jsons.instance();
+	final Jsons jsons = Jsons.instance();
 
 	@Test
 	public void should_pass() {

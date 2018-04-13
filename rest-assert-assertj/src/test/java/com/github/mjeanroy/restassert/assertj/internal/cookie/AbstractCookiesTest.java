@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractCookiesTest {
 
-	Cookies cookies = Cookies.instance();
+	final Cookies cookies = Cookies.instance();
 
 	@Test
 	public void should_pass() {

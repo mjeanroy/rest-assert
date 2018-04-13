@@ -32,17 +32,15 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsXssProtectionEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final String VALUE = "1";
+
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, getValue());
+		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", getValue());
-	}
-
-	private String getValue() {
-		return "1";
+		return header("X-XSS-Protection", VALUE);
 	}
 }

@@ -49,7 +49,7 @@ public abstract class AbstractApiTest<T, U> {
 	protected abstract U createApi();
 
 	@Test
-	public void it_should_invoke_internal_api() throws Exception {
+	public void it_should_invoke_internal_api() {
 		invoke();
 		verifyApiCall();
 		verifyNoMoreInteractions(assertions);

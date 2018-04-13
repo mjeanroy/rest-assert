@@ -46,7 +46,7 @@ public class UnitGenerator {
 	 *
 	 * @param buildDirectory Target directory.
 	 */
-	protected void generate(String buildDirectory) {
+	private void generate(String buildDirectory) {
 		TemplateEngine templateEngine = MustacheTemplateEngine.instance();
 		List<UnitProcessor> templates = getProcessors();
 		for (UnitProcessor template : templates) {
@@ -64,7 +64,7 @@ public class UnitGenerator {
 	 *
 	 * @return Processors.
 	 */
-	protected List<UnitProcessor> getProcessors() {
+	private List<UnitProcessor> getProcessors() {
 		return asList(UnitProcessor.values());
 	}
 }

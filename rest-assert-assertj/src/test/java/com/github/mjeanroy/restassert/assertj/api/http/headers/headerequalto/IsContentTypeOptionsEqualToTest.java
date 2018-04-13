@@ -36,17 +36,15 @@ import static org.mockito.Mockito.verify;
 
 public class IsContentTypeOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
 
+	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
+
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isContentTypeOptionsEqualTo(getValue());
+		return api.isContentTypeOptionsEqualTo(VALUE);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsContentTypeOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
-	}
-
-	private ContentTypeOptions getValue() {
-		return ContentTypeOptions.NO_SNIFF;
+		verify(assertions).assertIsContentTypeOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
 	}
 }

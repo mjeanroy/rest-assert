@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.generator;
 
+import org.junit.Test;
+
+import java.io.File;
+
 import static org.apache.commons.io.FileUtils.deleteQuietly;
 import static org.apache.commons.io.FileUtils.getTempDirectoryPath;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.commons.io.FilenameUtils.normalize;
-import static org.assertj.core.api.Assertions.*;
-
-import java.io.File;
-
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ClassFileTest {
 
@@ -65,12 +65,8 @@ public class ClassFileTest {
 		classFile.writeTo(directory);
 
 		File klass = new File(directory + "/com/github/mjeanroy/Foo.java");
-		assertThat(klass)
-				.exists()
-				.isFile();
-
-		assertThat(readFileToString(klass).trim())
-				.isEqualTo(content.trim());
+		assertThat(klass).exists().isFile();
+		assertThat(readFileToString(klass).trim()).isEqualTo(content.trim());
 
 		deleteQuietly(temp);
 		assertThat(temp).doesNotExist();

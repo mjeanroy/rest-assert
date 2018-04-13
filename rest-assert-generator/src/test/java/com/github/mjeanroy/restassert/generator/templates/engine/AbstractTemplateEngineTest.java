@@ -24,17 +24,16 @@
 
 package com.github.mjeanroy.restassert.generator.templates.engine;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import com.github.mjeanroy.restassert.generator.Template;
+import com.github.mjeanroy.restassert.generator.TemplateEngine;
+import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
-
-import com.github.mjeanroy.restassert.generator.Template;
-import com.github.mjeanroy.restassert.generator.TemplateEngine;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public abstract class AbstractTemplateEngineTest {
 
@@ -56,13 +55,13 @@ public abstract class AbstractTemplateEngineTest {
 
 	protected abstract TemplateEngine templateEngine();
 
-	protected Template createTemplate(String text) {
+	private Template createTemplate(String text) {
 		Template template = mock(Template.class);
 		when(template.read()).thenReturn(text);
 		return template;
 	}
 
-	protected Map<String, Object> placeholders(String key, String value) {
+	private Map<String, Object> placeholders(String key, String value) {
 		Map<String, Object> placeholders = new HashMap<>();
 		placeholders.put(key, value);
 		return placeholders;

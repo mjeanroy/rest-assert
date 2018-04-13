@@ -36,12 +36,12 @@ import static org.mockito.Mockito.verify;
 
 public class IsUtf8Test extends AbstractHttpResponseTest {
 
+	private static final String CHARSET = "UTF-8";
+
 	@Override
 	protected HttpResponseAssert createApi() {
-		String contentType = format("application/json;charset=%s", getCharset());
-		return new HttpResponseAssert(new HttpResponseBuilderImpl()
-			.addHeader("Content-Type", contentType)
-			.build());
+		String contentType = format("application/json;charset=%s", CHARSET);
+		return new HttpResponseAssert(new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build());
 	}
 
 	@Override
@@ -52,9 +52,5 @@ public class IsUtf8Test extends AbstractHttpResponseTest {
 	@Override
 	protected void verifyApiCall() {
 		verify(assertions).assertIsUtf8(any(AssertionInfo.class), any(HttpResponse.class));
-	}
-
-	private String getCharset() {
-		return "UTF-8";
 	}
 }

@@ -67,7 +67,7 @@ public class NingHttpCookieAssert extends AbstractTemplateModel implements Templ
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return CookieAssertions.class;
 	}
 

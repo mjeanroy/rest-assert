@@ -36,17 +36,15 @@ import static org.mockito.Mockito.verify;
 
 public class IsFrameOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
 
+	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isFrameOptionsEqualTo(getValue());
+		return api.isFrameOptionsEqualTo(VALUE);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsFrameOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
-	}
-
-	private FrameOptions getValue() {
-		return FrameOptions.SAME_ORIGIN;
+		verify(assertions).assertIsFrameOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
 	}
 }

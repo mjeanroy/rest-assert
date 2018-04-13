@@ -67,7 +67,7 @@ public class GoogleHttpAssert extends AbstractTemplateModel implements TemplateM
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

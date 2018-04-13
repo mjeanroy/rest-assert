@@ -31,7 +31,6 @@ import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
 import static java.util.Arrays.asList;
@@ -40,7 +39,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AssertContainsIterableTest {
 
-	private Jsons jsons = Jsons.instance();
+	private final Jsons jsons = Jsons.instance();
 
 	@Test
 	public void it_should_pass_if_json_contains_entries() {
@@ -78,9 +77,5 @@ public class AssertContainsIterableTest {
 					.isNotEmpty()
 					.isEqualTo(expectedMessage);
 		}
-	}
-
-	protected String actual() {
-		return jsonSuccess();
 	}
 }

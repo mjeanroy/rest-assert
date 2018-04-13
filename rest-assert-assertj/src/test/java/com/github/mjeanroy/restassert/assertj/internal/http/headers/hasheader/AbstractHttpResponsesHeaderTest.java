@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesHeaderTest {
 
-	protected HttpResponses httpResponses = HttpResponses.instance();
+	protected final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
 	public void should_pass_if_header_is_ok() {

@@ -30,13 +30,13 @@ import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTempla
 /**
  * Abstract template.
  */
-public abstract class AbstractAssertJTemplate extends AbstractTemplate implements Template {
+abstract class AbstractAssertJTemplate extends AbstractTemplate implements Template {
 
 	/**
 	 * Create new abstract template.
 	 * Path of template is retrieved from Java class name.
 	 */
-	protected AbstractAssertJTemplate() {
+	AbstractAssertJTemplate() {
 		super("/assertj/");
 	}
 }

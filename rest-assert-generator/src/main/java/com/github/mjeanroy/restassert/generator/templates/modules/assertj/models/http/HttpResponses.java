@@ -67,7 +67,7 @@ public class HttpResponses extends AbstractHttpResponseModel implements Template
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

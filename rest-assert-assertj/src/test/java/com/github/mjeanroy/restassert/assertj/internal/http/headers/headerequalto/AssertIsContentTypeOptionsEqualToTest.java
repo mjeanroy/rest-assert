@@ -33,17 +33,15 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
+
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsContentTypeOptionsEqualTo(someInfo(), httpResponse, getValue());
+		httpResponses.assertIsContentTypeOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", getValue().value());
-	}
-
-	private ContentTypeOptions getValue() {
-		return ContentTypeOptions.NO_SNIFF;
+		return header("X-Content-Type-Options", VALUE.value());
 	}
 }

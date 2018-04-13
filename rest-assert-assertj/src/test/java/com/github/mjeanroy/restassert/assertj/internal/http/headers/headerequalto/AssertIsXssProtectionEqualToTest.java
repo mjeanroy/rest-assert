@@ -33,17 +33,15 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, getValue());
+		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", getValue().value());
-	}
-
-	private XssProtection getValue() {
-		return XssProtection.ENABLE_BLOCK;
+		return header("X-XSS-Protection", VALUE.value());
 	}
 }

@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.generator.utils;
 
-import static org.assertj.core.api.Assertions.*;
-
-import java.io.File;
-import java.io.InputStream;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
+
+import java.io.File;
+import java.io.InputStream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class IOUtilsTest {
 
@@ -110,12 +110,9 @@ public class IOUtilsTest {
 		IOUtils.write(file, content);
 
 		assertThat(file).exists();
-		assertThat(FileUtils.readFileToString(file).trim())
-				.isNotEmpty()
-				.isEqualTo(content.trim());
+		assertThat(FileUtils.readFileToString(file).trim()).isEqualTo(content.trim());
 
 		file.delete();
-		assertThat(file)
-				.doesNotExist();
+		assertThat(file).doesNotExist();
 	}
 }

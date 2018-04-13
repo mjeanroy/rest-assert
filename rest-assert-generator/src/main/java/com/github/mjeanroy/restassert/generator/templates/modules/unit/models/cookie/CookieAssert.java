@@ -66,7 +66,7 @@ public class CookieAssert extends AbstractTemplateModel implements TemplateModel
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return CookieAssertions.class;
 	}
 

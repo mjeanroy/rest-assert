@@ -67,7 +67,7 @@ public class ApacheHttpCookieAssert extends AbstractTemplateModel implements Tem
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return CookieAssertions.class;
 	}
 

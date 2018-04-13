@@ -37,25 +37,21 @@ import static org.mockito.Mockito.verify;
 
 public class HasCharsetStringTest extends AbstractHttpResponseTest {
 
+	private static final String CHARSET = "UTF-8";
+
 	@Override
 	protected HttpResponseAssert createApi() {
-		String contentType = format("application/json;charset=%s", getCharset());
-		return new HttpResponseAssert(new HttpResponseBuilderImpl()
-			.addHeader("Content-Type", contentType)
-			.build());
+		String contentType = format("application/json;charset=%s", CHARSET);
+		return new HttpResponseAssert(new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build());
 	}
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.hasCharset(getCharset());
+		return api.hasCharset(CHARSET);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertHasCharset(any(AssertionInfo.class), any(HttpResponse.class), eq(getCharset()));
-	}
-
-	private String getCharset() {
-		return "UTF-8";
+		verify(assertions).assertHasCharset(any(AssertionInfo.class), any(HttpResponse.class), eq(CHARSET));
 	}
 }

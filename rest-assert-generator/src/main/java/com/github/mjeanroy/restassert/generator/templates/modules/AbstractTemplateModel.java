@@ -126,7 +126,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		return unmodifiableList(models);
 	}
 
-	protected Map<String, Object> getMethod(Method method) {
+	private Map<String, Object> getMethod(Method method) {
 		final String coreMethodName = method.getName();
 
 		final List<Arg> args;

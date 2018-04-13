@@ -67,7 +67,7 @@ public class NingHttpAssert extends AbstractTemplateModel implements TemplateMod
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 

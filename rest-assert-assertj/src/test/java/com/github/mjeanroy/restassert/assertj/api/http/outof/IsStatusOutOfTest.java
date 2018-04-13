@@ -34,6 +34,9 @@ import static org.mockito.Mockito.verify;
 
 public class IsStatusOutOfTest extends AbstractHttpResponseStatusOutOfTest {
 
+	private static final int START = 200;
+	private static final int END = 299;
+
 	@Override
 	protected int status() {
 		return 400;
@@ -41,19 +44,11 @@ public class IsStatusOutOfTest extends AbstractHttpResponseStatusOutOfTest {
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isStatusOutOf(start(), end());
+		return api.isStatusOutOf(START, END);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsStatusOutOf(any(AssertionInfo.class), any(HttpResponse.class), eq(start()), eq(end()));
-	}
-
-	private int start() {
-		return 200;
-	}
-
-	private int end() {
-		return 299;
+		verify(assertions).assertIsStatusOutOf(any(AssertionInfo.class), any(HttpResponse.class), eq(START), eq(END));
 	}
 }

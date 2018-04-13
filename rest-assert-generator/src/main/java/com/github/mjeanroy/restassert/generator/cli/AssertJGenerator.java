@@ -46,7 +46,7 @@ public class AssertJGenerator {
 	 *
 	 * @param buildDirectory Target directory.
 	 */
-	protected void generate(String buildDirectory) {
+	private void generate(String buildDirectory) {
 		TemplateEngine templateEngine = MustacheTemplateEngine.instance();
 		List<AssertJProcessor> templates = getProcessors();
 		for (AssertJProcessor template : templates) {
@@ -62,7 +62,7 @@ public class AssertJGenerator {
 	 *
 	 * @return Processors.
 	 */
-	protected List<AssertJProcessor> getProcessors() {
+	private List<AssertJProcessor> getProcessors() {
 		return asList(AssertJProcessor.values());
 	}
 }
