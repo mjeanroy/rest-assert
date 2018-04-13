@@ -31,6 +31,7 @@ import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -54,7 +55,7 @@ public class CookieAssert_hasValue_Test extends AbstractApiTest<Cookies, CookieA
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertHasValue(any(AssertionInfo.class), any(Cookie.class), any(String.class));
+		verify(assertions).assertHasValue(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
 	}
 
 	private Cookie actual() {

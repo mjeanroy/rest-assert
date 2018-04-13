@@ -30,7 +30,7 @@ import org.assertj.core.api.AssertionInfo;
 import java.net.URI;
 
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUriSuccess;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 public class IsEqualToURITest extends AbstractJsonIsEqualToTest {

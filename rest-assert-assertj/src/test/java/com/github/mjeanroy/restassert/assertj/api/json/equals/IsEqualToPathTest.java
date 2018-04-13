@@ -30,7 +30,7 @@ import org.assertj.core.api.AssertionInfo;
 import java.nio.file.Path;
 
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathSuccess;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 public class IsEqualToPathTest extends AbstractJsonIsEqualToTest {

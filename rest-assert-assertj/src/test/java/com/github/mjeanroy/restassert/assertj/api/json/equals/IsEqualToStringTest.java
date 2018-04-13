@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.api.json.equals;
 import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
 import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 public class IsEqualToStringTest extends AbstractJsonIsEqualToTest {

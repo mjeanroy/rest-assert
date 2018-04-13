@@ -30,7 +30,7 @@ import org.assertj.core.api.AssertionInfo;
 import java.io.File;
 
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileSuccess;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
 public class IsEqualToFileTest extends AbstractJsonIsEqualToTest {
