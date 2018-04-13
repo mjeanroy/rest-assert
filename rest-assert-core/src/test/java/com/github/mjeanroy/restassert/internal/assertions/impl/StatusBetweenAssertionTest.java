@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
+
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
 
 public class StatusBetweenAssertionTest {
 
@@ -46,11 +46,8 @@ public class StatusBetweenAssertionTest {
 		final StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
 
 		for (int i = start; i <= end; i++) {
-			final HttpResponse rsp = new HttpResponseBuilderImpl()
-					.setStatus(i)
-					.build();
-
-			AssertionResult result = assertion.handle(rsp);
+			final HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(i).build();
+			final AssertionResult result = assertion.handle(rsp);
 			assertThat(result).isNotNull();
 			assertThat(result.isSuccess()).isTrue();
 			assertThat(result.isFailure()).isFalse();

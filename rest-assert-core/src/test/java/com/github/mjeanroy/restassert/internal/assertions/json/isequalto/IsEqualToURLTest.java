@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.json.isequalto;
 
+import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlFailure;
+import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
+import static org.junit.rules.ExpectedException.none;
+
+import java.net.URL;
+
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import java.net.URL;
-
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlFailure;
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
-import static org.junit.rules.ExpectedException.none;
 
 public class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 

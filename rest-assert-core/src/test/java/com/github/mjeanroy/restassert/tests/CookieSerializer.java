@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.tests;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import com.github.mjeanroy.restassert.internal.data.Cookie;
 
 public final class CookieSerializer {
 
@@ -66,7 +66,7 @@ public final class CookieSerializer {
 		}
 
 		if (expires != null) {
-			DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZZ", Locale.US);
+			DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ", Locale.US);
 			df.setTimeZone(TimeZone.getTimeZone("UTC"));
 			sb.append("; expires=").append(df.format(expires));
 		}

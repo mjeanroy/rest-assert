@@ -24,26 +24,24 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.models.Header.header;
+
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = "nosniff";
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", getValue());
+		return header("X-Content-Type-Options", VALUE);
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isContentTypeOptionsEqualTo(response, getValue());
-	}
-
-	private String getValue() {
-		return "nosniff";
+		return assertions.isContentTypeOptionsEqualTo(response, VALUE);
 	}
 
 	@Override

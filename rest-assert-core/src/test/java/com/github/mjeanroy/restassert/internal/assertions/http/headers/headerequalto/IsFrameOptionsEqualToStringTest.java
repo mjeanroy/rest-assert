@@ -24,26 +24,24 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.models.Header.header;
+
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = "deny";
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", getValue());
+		return header("X-Frame-Options", VALUE);
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isFrameOptionsEqualTo(response, getValue());
-	}
-
-	private String getValue() {
-		return "deny";
+		return assertions.isFrameOptionsEqualTo(response, VALUE);
 	}
 
 	@Override
