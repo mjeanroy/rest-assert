@@ -55,9 +55,7 @@ public class OkHttpResponseBuilder extends AbstractHttpResponseBuilder<Response,
 	 */
 	public OkHttpResponseBuilder() {
 		this.protocol = Protocol.HTTP_1_0;
-		this.request = new Request.Builder()
-				.url("http://www.google.fr")
-				.build();
+		this.request = new Request.Builder().url("http://www.google.fr").build();
 	}
 
 	@Override
@@ -68,9 +66,7 @@ public class OkHttpResponseBuilder extends AbstractHttpResponseBuilder<Response,
 				.code(status);
 
 		if (content != null) {
-			builder.body(new OkHttpResponseBodyBuilder()
-					.setBody(content)
-					.build());
+			builder.body(new OkHttpResponseBodyBuilder().setBody(content).build());
 		}
 
 		for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
@@ -80,6 +76,7 @@ public class OkHttpResponseBuilder extends AbstractHttpResponseBuilder<Response,
 			}
 		}
 
+		builder.message("OK");
 		return builder.build();
 	}
 }
