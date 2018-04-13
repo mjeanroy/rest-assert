@@ -61,7 +61,7 @@ public class AsyncHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();

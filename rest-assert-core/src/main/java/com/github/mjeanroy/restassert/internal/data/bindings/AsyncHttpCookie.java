@@ -36,43 +36,43 @@ public class AsyncHttpCookie implements Cookie {
 
 	/**
 	 * Create new {@link com.github.mjeanroy.restassert.internal.data.Cookie} using instance
-	 * of {@link org.asynchttpclient.cookie.Cookie}.
+	 * of {@link io.netty.handler.codec.http.cookie.Cookie}.
 	 *
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
 	 */
-	public static AsyncHttpCookie create(org.asynchttpclient.cookie.Cookie cookie) {
+	public static AsyncHttpCookie create(io.netty.handler.codec.http.cookie.Cookie cookie) {
 		return new AsyncHttpCookie(cookie);
 	}
 
 	/**
 	 * Original async http cookie.
 	 */
-	private final org.asynchttpclient.cookie.Cookie cookie;
+	private final io.netty.handler.codec.http.cookie.Cookie cookie;
 
 	// Use static factory
-	private AsyncHttpCookie(org.asynchttpclient.cookie.Cookie cookie) {
+	private AsyncHttpCookie(io.netty.handler.codec.http.cookie.Cookie cookie) {
 		this.cookie = cookie;
 	}
 
 	@Override
 	public String getName() {
-		return cookie.getName();
+		return cookie.name();
 	}
 
 	@Override
 	public String getValue() {
-		return cookie.getValue();
+		return cookie.value();
 	}
 
 	@Override
 	public String getDomain() {
-		return cookie.getDomain();
+		return cookie.domain();
 	}
 
 	@Override
 	public String getPath() {
-		return cookie.getPath();
+		return cookie.path();
 	}
 
 	@Override
@@ -87,7 +87,7 @@ public class AsyncHttpCookie implements Cookie {
 
 	@Override
 	public Long getMaxAge() {
-		return cookie.getMaxAge();
+		return cookie.maxAge();
 	}
 
 	@Override

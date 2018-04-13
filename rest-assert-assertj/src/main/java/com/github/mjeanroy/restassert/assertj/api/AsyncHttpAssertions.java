@@ -56,7 +56,7 @@ public final class AsyncHttpAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static CookieAssert assertThat(org.asynchttpclient.cookie.Cookie actual) {
+	public static CookieAssert assertThat(io.netty.handler.codec.http.cookie.Cookie actual) {
 		Cookie cookie = AsyncHttpCookie.create(actual);
 		return new CookieAssert(cookie);
 	}

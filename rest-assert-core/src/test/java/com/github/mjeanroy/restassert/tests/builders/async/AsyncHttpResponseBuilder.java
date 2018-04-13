@@ -31,9 +31,7 @@ import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.HttpHeaders;
 import io.netty.handler.codec.http.HttpResponse;
 import io.netty.handler.codec.http.HttpVersion;
-import org.asynchttpclient.AsyncHttpClientConfig;
 import org.asynchttpclient.HttpResponseBodyPart;
-import org.asynchttpclient.HttpResponseHeaders;
 import org.asynchttpclient.HttpResponseStatus;
 import org.asynchttpclient.Response;
 import org.asynchttpclient.netty.NettyResponse;
@@ -57,18 +55,15 @@ public class AsyncHttpResponseBuilder extends AbstractHttpResponseBuilder<Respon
 	@Override
 	public Response build() {
 		Uri uri = mock(Uri.class);
-		AsyncHttpClientConfig config = mock(AsyncHttpClientConfig.class);
 
 		io.netty.handler.codec.http.HttpResponseStatus rspStatus = io.netty.handler.codec.http.HttpResponseStatus.valueOf(status);
 		HttpResponse httpResponse = new DefaultHttpResponse(HttpVersion.HTTP_1_1, rspStatus);
-		HttpResponseStatus status = new NettyResponseStatus(uri, config, httpResponse, null);
+		HttpResponseStatus status = new NettyResponseStatus(uri, httpResponse, null);
 
 		HttpHeaders headers = new DefaultHttpHeaders();
 		for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
 			headers.add(entry.getKey(), entry.getValue());
 		}
-
-		HttpResponseHeaders rspHeaders = new HttpResponseHeaders(headers);
 
 		final List<HttpResponseBodyPart> bodyParts;
 		if (content != null) {
@@ -81,6 +76,6 @@ public class AsyncHttpResponseBuilder extends AbstractHttpResponseBuilder<Respon
 			bodyParts = emptyList();
 		}
 
-		return new NettyResponse(status, rspHeaders, bodyParts);
+		return new NettyResponse(status, headers, bodyParts);
 	}
 }

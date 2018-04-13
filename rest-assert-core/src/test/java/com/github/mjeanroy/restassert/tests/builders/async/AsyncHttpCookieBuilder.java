@@ -24,10 +24,11 @@
 
 package com.github.mjeanroy.restassert.tests.builders.async;
 
-import org.asynchttpclient.cookie.Cookie;
+import io.netty.handler.codec.http.cookie.Cookie;
+import io.netty.handler.codec.http.cookie.DefaultCookie;
 
 /**
- * Build mock instance of {@link org.asynchttpclient.cookie.Cookie} class.
+ * Build mock instance of {@link Cookie} class.
  */
 public class AsyncHttpCookieBuilder {
 
@@ -157,6 +158,12 @@ public class AsyncHttpCookieBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		return Cookie.newValidCookie(name, value, false, domain, path, maxAge, secure, httpOnly);
+		DefaultCookie cookie = new DefaultCookie(name, value);
+		cookie.setDomain(domain);
+		cookie.setPath(path);
+		cookie.setMaxAge(maxAge);
+		cookie.setSecure(secure);
+		cookie.setHttpOnly(httpOnly);
+		return cookie;
 	}
 }
