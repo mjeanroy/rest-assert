@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -46,7 +46,7 @@ public class HasMimeTypeAssertionTest {
 	public void it_should_not_fail_if_header_is_set_with_expected_mime_type() {
 		final String mimeType = "application/json";
 		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.build();
 
@@ -62,7 +62,7 @@ public class HasMimeTypeAssertionTest {
 		final String m1 = "application/json";
 		final String m2 = "application/xml";
 		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.build();
 
@@ -77,7 +77,7 @@ public class HasMimeTypeAssertionTest {
 	public void it_should_fail_if_header_is_not_set_with_expected_mime_type() {
 		final String mimeType = "application/xml";
 		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.build();
 
@@ -94,7 +94,7 @@ public class HasMimeTypeAssertionTest {
 		final String m1 = "application/xml";
 		final String m2 = "application/json";
 		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "text/html; charset=utf-8")
 				.build();
 
@@ -109,7 +109,7 @@ public class HasMimeTypeAssertionTest {
 	@Test
 	public void it_should_fail_if_content_type_header_has_multiple_values() {
 		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion("application/json");
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.addHeader("Content-Type", "application/xml; charset=utf-8")
 				.build();
@@ -125,7 +125,7 @@ public class HasMimeTypeAssertionTest {
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
 		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion("application/json");
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 

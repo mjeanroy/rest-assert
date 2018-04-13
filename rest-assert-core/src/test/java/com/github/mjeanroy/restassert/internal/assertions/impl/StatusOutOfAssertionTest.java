@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -47,7 +47,7 @@ public class StatusOutOfAssertionTest {
 
 		for (int i = 0; i <= 999; i++) {
 			if (i < start || i > end) {
-				final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+				final HttpResponse rsp = new HttpResponseBuilderImpl()
 						.setStatus(i)
 						.build();
 
@@ -66,7 +66,7 @@ public class StatusOutOfAssertionTest {
 		final StatusOutOfAssertion assertion = new StatusOutOfAssertion(start, end);
 
 		for (int i = start; i <= end; i++) {
-			final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+			final HttpResponse rsp = new HttpResponseBuilderImpl()
 					.setStatus(i)
 					.build();
 

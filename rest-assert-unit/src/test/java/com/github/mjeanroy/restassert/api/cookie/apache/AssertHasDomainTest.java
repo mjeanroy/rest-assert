@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.apache;
 
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.api.cookie.ApacheHttpCookieAssert.assertHasDomain;
@@ -68,7 +68,7 @@ public class AssertHasDomainTest extends AbstractApacheHttpCookieTest {
 	}
 
 	private Cookie cookie(String domain) {
-		return new ApacheHttpCookieMockBuilder()
+		return new ApacheHttpCookieBuilder()
 				.setDomain(domain)
 				.build();
 	}

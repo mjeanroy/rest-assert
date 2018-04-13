@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.api.http.cookie.google;
 
 import com.github.mjeanroy.restassert.api.http.cookie.AbstractHasCookieTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpHasCookieTest extends AbstractHasCookieTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newHttpResponse(Cookie cookie) {
-		return new GoogleHttpResponseMockBuilder().addCookie(cookie).build();
+		return new GoogleHttpResponseBuilder().addCookie(cookie).build();
 	}
 }

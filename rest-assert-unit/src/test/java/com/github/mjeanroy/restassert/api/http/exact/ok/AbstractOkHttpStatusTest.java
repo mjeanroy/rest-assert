@@ -25,12 +25,12 @@
 package com.github.mjeanroy.restassert.api.http.exact.ok;
 
 import com.github.mjeanroy.restassert.api.http.exact.AbstractHttpStatusTest;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpStatusTest extends AbstractHttpStatusTest<Response> {
 
 	protected Response newHttpResponse(int status) {
-		return new OkHttpResponseMockBuilder().setStatus(status).build();
+		return new OkHttpResponseBuilder().setStatus(status).build();
 	}
 }

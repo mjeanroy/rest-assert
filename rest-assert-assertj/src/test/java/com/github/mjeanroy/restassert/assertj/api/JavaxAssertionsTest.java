@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.bindings.JavaxCookie;
-import com.github.mjeanroy.restassert.tests.mocks.javax.JavaxCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class JavaxAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder().build();
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
 		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
 
 		assertThat(assertions).isNotNull();

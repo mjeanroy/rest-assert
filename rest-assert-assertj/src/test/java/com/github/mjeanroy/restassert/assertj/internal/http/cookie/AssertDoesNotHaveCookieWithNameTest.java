@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.cookie;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 public class AssertDoesNotHaveCookieWithNameTest extends AbstractDoesNotHaveCookieTest {
@@ -35,7 +35,7 @@ public class AssertDoesNotHaveCookieWithNameTest extends AbstractDoesNotHaveCook
 
 	@Override
 	protected Cookie cookie() {
-		return new CookieMockBuilder()
+		return new CookieBuilder()
 				.setName(NAME)
 				.setValue("12345")
 				.build();

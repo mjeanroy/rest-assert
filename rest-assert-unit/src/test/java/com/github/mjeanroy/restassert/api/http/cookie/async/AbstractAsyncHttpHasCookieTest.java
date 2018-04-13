@@ -29,7 +29,7 @@ import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.api.http.cookie.AbstractHasCookieTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
 import org.junit.runner.RunWith;
 
@@ -39,6 +39,6 @@ abstract class AbstractAsyncHttpHasCookieTest extends AbstractHasCookieTest<Resp
 
 	@Override
 	protected Response newHttpResponse(Cookie cookie) {
-		return new AsyncHttpResponseMockBuilder().addCookie(cookie).build();
+		return new AsyncHttpResponseBuilder().addCookie(cookie).build();
 	}
 }

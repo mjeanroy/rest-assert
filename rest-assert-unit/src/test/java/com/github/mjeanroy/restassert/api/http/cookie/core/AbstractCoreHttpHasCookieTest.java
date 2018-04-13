@@ -27,12 +27,12 @@ package com.github.mjeanroy.restassert.api.http.cookie.core;
 import com.github.mjeanroy.restassert.api.http.cookie.AbstractHasCookieTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
 abstract class AbstractCoreHttpHasCookieTest extends AbstractHasCookieTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newHttpResponse(Cookie cookie) {
-		return new HttpResponseMockBuilderImpl().addCookie(cookie).build();
+		return new HttpResponseBuilderImpl().addCookie(cookie).build();
 	}
 }

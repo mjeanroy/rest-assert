@@ -25,13 +25,13 @@
 package com.github.mjeanroy.restassert.api.http.between.google;
 
 import com.github.mjeanroy.restassert.api.http.between.AbstractHttpStatusBetweenTest;
-import com.github.mjeanroy.restassert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newHttpResponse(int status) {
-		return new GoogleHttpResponseMockBuilder().setStatus(status).build();
+		return new GoogleHttpResponseBuilder().setStatus(status).build();
 	}
 }

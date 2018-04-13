@@ -28,7 +28,7 @@ import java.util.List;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -46,7 +46,7 @@ public class ApacheHttpResponseTest {
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
 
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.setStatus(expectedStatus)
 				.build();
 
@@ -60,7 +60,7 @@ public class ApacheHttpResponseTest {
 	public void it_should_check_if_http_response_contains_header() {
 		final String headerName = "header-name";
 
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.addHeader("foo", "foo")
 				.addHeader(headerName, headerName)
 				.addHeader("bar", "bar")
@@ -76,7 +76,7 @@ public class ApacheHttpResponseTest {
 	public void it_should_return_false_if_http_response_does_not_contain_header() {
 		final String headerName = "header-name";
 
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.addHeader("foo", "foo")
 				.addHeader("bar", "bar")
 				.build();
@@ -92,7 +92,7 @@ public class ApacheHttpResponseTest {
 		final String headerName = "header-name";
 		final String headerValue = "header-value";
 
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.addHeader("foo", "bar")
 				.addHeader(headerName, headerValue)
 				.addHeader("bar", "foo")
@@ -111,7 +111,7 @@ public class ApacheHttpResponseTest {
 	@Test
 	public void it_should_return_header_value_with_null_if_header_does_not_exist() {
 		final String headerName = "header-name";
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.addHeader("foo", "bar")
 				.addHeader("bar", "foo")
 				.build();
@@ -128,7 +128,7 @@ public class ApacheHttpResponseTest {
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
 
-		org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.setContent(body)
 				.build();
 
@@ -140,7 +140,7 @@ public class ApacheHttpResponseTest {
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder().build();
+		final org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().build();
 		final HttpResponse httpResponse = ApacheHttpResponse.create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
@@ -151,7 +151,7 @@ public class ApacheHttpResponseTest {
 
 	@Test
 	public void it_should_return_all_cookies() {
-		final org.apache.http.HttpResponse response = new ApacheHttpResponseMockBuilder()
+		final org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")
 				.build();

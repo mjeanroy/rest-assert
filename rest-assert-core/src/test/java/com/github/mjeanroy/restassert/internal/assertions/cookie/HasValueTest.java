@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.internal.assertions.cookie;
 import com.github.mjeanroy.restassert.error.cookie.ShouldHaveValue;
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
 public class HasValueTest extends AbstractCookieTest {
 
@@ -68,7 +68,7 @@ public class HasValueTest extends AbstractCookieTest {
 	}
 
 	private Cookie cookie(String value) {
-		return new CookieMockBuilder()
+		return new CookieBuilder()
 			.setValue(value)
 			.build();
 	}

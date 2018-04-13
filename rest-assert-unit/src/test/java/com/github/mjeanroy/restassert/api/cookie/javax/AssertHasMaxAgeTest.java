@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.javax;
 
-import com.github.mjeanroy.restassert.tests.mocks.javax.JavaxCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
@@ -65,7 +65,7 @@ public class AssertHasMaxAgeTest extends AbstractJavaxCookieTest {
 	}
 
 	private Cookie cookie(int maxAge) {
-		return new JavaxCookieMockBuilder()
+		return new JavaxCookieBuilder()
 				.setMaxAge(maxAge)
 				.build();
 	}

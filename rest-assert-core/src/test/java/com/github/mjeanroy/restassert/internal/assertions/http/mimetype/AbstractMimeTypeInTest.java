@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.internal.assertions.AbstractAssertionsTest
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.utils.Mapper;
 import com.github.mjeanroy.restassert.utils.Utils;
@@ -86,7 +86,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 	}
 
 	private HttpResponse newResponse(Header header) {
-		return new HttpResponseMockBuilderImpl()
+		return new HttpResponseBuilderImpl()
 			.addHeader(header)
 			.build();
 	}

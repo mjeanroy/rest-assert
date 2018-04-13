@@ -26,11 +26,11 @@ package com.github.mjeanroy.restassert.api.http.exact.core;
 
 import com.github.mjeanroy.restassert.api.http.exact.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
 abstract class AbstractCoreHttpStatusTest extends AbstractHttpStatusTest<HttpResponse> {
 
 	protected HttpResponse newHttpResponse(int status) {
-		return new HttpResponseMockBuilderImpl().setStatus(status).build();
+		return new HttpResponseBuilderImpl().setStatus(status).build();
 	}
 }

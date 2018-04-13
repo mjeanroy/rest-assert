@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -44,7 +44,7 @@ public class DoesNotHaveCookieAssertionTest {
 	@Test
 	public void it_should_not_fail_if_header_does_not_have_cookies() {
 		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -55,11 +55,11 @@ public class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_response_has_cookies() {
-		final Cookie cookie = new CookieMockBuilder()
+		final Cookie cookie = new CookieBuilder()
 				.setName("foo")
 				.build();
 
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addCookie(cookie)
 				.build();
 
@@ -78,11 +78,11 @@ public class DoesNotHaveCookieAssertionTest {
 		final String name = "foo";
 		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
 
-		Cookie cookie = new CookieMockBuilder()
+		Cookie cookie = new CookieBuilder()
 				.setName(name + name)
 				.build();
 
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addCookie(cookie)
 				.build();
 
@@ -98,11 +98,11 @@ public class DoesNotHaveCookieAssertionTest {
 		final String name = "foo";
 		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
 
-		Cookie cookie = new CookieMockBuilder()
+		Cookie cookie = new CookieBuilder()
 				.setName(name)
 				.build();
 
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addCookie(cookie)
 				.build();
 

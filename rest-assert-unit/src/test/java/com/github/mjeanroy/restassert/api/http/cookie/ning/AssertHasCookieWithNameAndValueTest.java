@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.api.http.cookie.ning;
 
 import com.github.mjeanroy.restassert.api.http.NingHttpAssert;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.ning.http.client.Response;
 
 public class AssertHasCookieWithNameAndValueTest extends AbstractNingHttpHasCookieTest {
@@ -36,7 +36,7 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractNingHttpHasCook
 
 	@Override
 	protected Cookie cookie() {
-		return new CookieMockBuilder().setName(NAME).setValue(VALUE).build();
+		return new CookieBuilder().setName(NAME).setValue(VALUE).build();
 	}
 
 	@Override

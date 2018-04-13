@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -42,7 +42,7 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setName(expectedName)
 			.build();
 
@@ -55,7 +55,7 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setValue(expectedValue)
 			.build();
 
@@ -68,7 +68,7 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setDomain(expectedDomain)
 			.build();
 
@@ -81,7 +81,7 @@ public class ApacheHttpCookieTest {
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setPath(expectedPath)
 			.build();
 
@@ -93,7 +93,7 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder()
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setSecure(true)
 			.build();
 
@@ -106,7 +106,7 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_return_zero_for_max_age() {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder().build();
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		thrown.expect(UnsupportedOperationException.class);
@@ -117,7 +117,7 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_return_false_for_http_only() {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieMockBuilder().build();
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		thrown.expect(UnsupportedOperationException.class);

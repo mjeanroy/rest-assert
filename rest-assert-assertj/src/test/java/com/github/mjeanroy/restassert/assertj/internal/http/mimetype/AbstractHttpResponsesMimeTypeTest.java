@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.*;
 
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
@@ -77,7 +77,7 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 	}
 
 	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseMockBuilderImpl()
+		return new HttpResponseBuilderImpl()
 			.addHeader(header)
 			.build();
 	}

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -46,7 +46,7 @@ public class StatusBetweenAssertionTest {
 		final StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
 
 		for (int i = start; i <= end; i++) {
-			final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+			final HttpResponse rsp = new HttpResponseBuilderImpl()
 					.setStatus(i)
 					.build();
 
@@ -62,7 +62,7 @@ public class StatusBetweenAssertionTest {
 		final int start = 200;
 		final int end = 299;
 		final StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.setStatus(400)
 				.build();
 

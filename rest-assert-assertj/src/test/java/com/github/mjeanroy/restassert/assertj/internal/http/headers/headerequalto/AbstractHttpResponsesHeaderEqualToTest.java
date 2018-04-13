@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequal
 
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.junit.Test;
 
@@ -97,7 +97,7 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	 * @return Fake http response.
 	 */
 	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseMockBuilderImpl()
+		return new HttpResponseBuilderImpl()
 				.addHeader(header)
 				.build();
 	}

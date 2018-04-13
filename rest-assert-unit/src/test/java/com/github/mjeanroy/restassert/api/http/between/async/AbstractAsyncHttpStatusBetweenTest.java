@@ -28,7 +28,7 @@ import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.api.http.between.AbstractHttpStatusBetweenTest;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
 import org.junit.runner.RunWith;
 
@@ -38,6 +38,6 @@ abstract class AbstractAsyncHttpStatusBetweenTest extends AbstractHttpStatusBetw
 
 	@Override
 	protected Response newHttpResponse(int status) {
-		return new AsyncHttpResponseMockBuilder().setStatus(status).build();
+		return new AsyncHttpResponseBuilder().setStatus(status).build();
 	}
 }

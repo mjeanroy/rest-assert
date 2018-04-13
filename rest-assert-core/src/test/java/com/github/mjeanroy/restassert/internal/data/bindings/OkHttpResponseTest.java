@@ -28,7 +28,7 @@ import java.util.List;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class OkHttpResponseTest {
 	@Test
 	public void it_should_get_status_code() {
 		final int code = 200;
-		final Response response = new OkHttpResponseMockBuilder()
+		final Response response = new OkHttpResponseBuilder()
 				.setStatus(code)
 				.build();
 
@@ -50,7 +50,7 @@ public class OkHttpResponseTest {
 
 	@Test
 	public void it_should_check_if_response_has_header() {
-		final Response response = new OkHttpResponseMockBuilder()
+		final Response response = new OkHttpResponseBuilder()
 				.addHeader("foo", "bar")
 				.build();
 
@@ -62,7 +62,7 @@ public class OkHttpResponseTest {
 
 	@Test
 	public void it_should_get_header_value() {
-		final Response response = new OkHttpResponseMockBuilder()
+		final Response response = new OkHttpResponseBuilder()
 				.addHeader("foo", "bar")
 				.build();
 
@@ -84,7 +84,7 @@ public class OkHttpResponseTest {
 	@Test
 	public void it_should_get_content() {
 		final String content = "Hello World";
-		final Response response = new OkHttpResponseMockBuilder()
+		final Response response = new OkHttpResponseBuilder()
 				.setContent(content)
 				.build();
 
@@ -95,7 +95,7 @@ public class OkHttpResponseTest {
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final Response response = new OkHttpResponseMockBuilder().build();
+		final Response response = new OkHttpResponseBuilder().build();
 		final HttpResponse httpResponse = OkHttpResponse.create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
@@ -106,7 +106,7 @@ public class OkHttpResponseTest {
 
 	@Test
 	public void it_should_return_all_cookies() {
-		final Response response = new OkHttpResponseMockBuilder()
+		final Response response = new OkHttpResponseBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")
 				.build();

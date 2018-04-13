@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.internal.data.bindings.OkHttpResponse;
 import com.github.mjeanroy.restassert.tests.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
@@ -40,7 +40,7 @@ public class OkHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		Response response = new OkHttpResponseMockBuilder().build();
+		Response response = new OkHttpResponseBuilder().build();
 		HttpResponseAssert assertions = OkHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -58,7 +58,7 @@ public class OkHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		Response response = new OkHttpResponseMockBuilder()
+		Response response = new OkHttpResponseBuilder()
 				.setContent(body)
 				.build();
 

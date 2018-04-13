@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -43,7 +43,7 @@ public class HasCharsetAssertionTest {
 	public void it_should_not_fail_if_header_is_set_with_expected_charset() {
 		final String charset = "utf-8";
 		final HasCharsetAssertion assertion = new HasCharsetAssertion(charset);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.build();
 
@@ -58,7 +58,7 @@ public class HasCharsetAssertionTest {
 	public void it_should_fail_if_header_is_not_set_with_expected_charset() {
 		final String charset = "utf-8";
 		final HasCharsetAssertion assertion = new HasCharsetAssertion(charset);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-16")
 				.build();
 
@@ -73,7 +73,7 @@ public class HasCharsetAssertionTest {
 	@Test
 	public void it_should_fail_if_content_type_header_has_multiple_values() {
 		final HasCharsetAssertion assertion = new HasCharsetAssertion("utf-8");
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.addHeader("Content-Type", "application/xml; charset=utf-8")
 				.build();
@@ -89,7 +89,7 @@ public class HasCharsetAssertionTest {
 	@Test
 	public void it_should_fail_if_charset_is_not_set() {
 		final HasCharsetAssertion assertion = new HasCharsetAssertion("utf-8");
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json")
 				.build();
 
@@ -104,7 +104,7 @@ public class HasCharsetAssertionTest {
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
 		final HasCharsetAssertion assertion = new HasCharsetAssertion("utf-8");
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 

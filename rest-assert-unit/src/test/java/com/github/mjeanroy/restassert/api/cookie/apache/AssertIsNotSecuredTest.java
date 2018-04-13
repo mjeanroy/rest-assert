@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.apache;
 
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.api.cookie.ApacheHttpCookieAssert.assertIsNotSecured;
@@ -62,7 +62,7 @@ public class AssertIsNotSecuredTest extends AbstractApacheHttpCookieTest {
 	}
 
 	private Cookie cookie(boolean secured) {
-		return new ApacheHttpCookieMockBuilder()
+		return new ApacheHttpCookieBuilder()
 			.setSecure(secured)
 			.build();
 	}

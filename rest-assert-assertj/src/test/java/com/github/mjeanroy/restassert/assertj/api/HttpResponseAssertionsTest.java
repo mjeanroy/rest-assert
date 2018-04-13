@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class HttpResponseAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		HttpResponse response = new HttpResponseMockBuilderImpl().build();
+		HttpResponse response = new HttpResponseBuilderImpl().build();
 		HttpResponseAssert assertions = HttpResponseAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -52,7 +52,7 @@ public class HttpResponseAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		Cookie cookie = new CookieMockBuilder().build();
+		Cookie cookie = new CookieBuilder().build();
 		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
 
 		assertThat(assertions).isNotNull();
@@ -70,7 +70,7 @@ public class HttpResponseAssertionsTest {
 
 		String body = object.toJson();
 
-		HttpResponse response = new HttpResponseMockBuilderImpl()
+		HttpResponse response = new HttpResponseBuilderImpl()
 			.setContent(body)
 			.build();
 

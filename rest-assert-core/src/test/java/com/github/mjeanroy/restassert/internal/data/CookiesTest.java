@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -421,19 +421,19 @@ public class CookiesTest {
 	@Test
 	public void it_should_compare_cookies() {
 		assertThat(Cookies.equals(null, null)).isTrue();
-		assertThat(Cookies.equals(null, new CookieMockBuilder().build())).isFalse();
-		assertThat(Cookies.equals(new CookieMockBuilder().build(), null)).isFalse();
+		assertThat(Cookies.equals(null, new CookieBuilder().build())).isFalse();
+		assertThat(Cookies.equals(new CookieBuilder().build(), null)).isFalse();
 
 		final String domain = "domain.com";
 		final String path = "path";
-		Cookie c1 = new CookieMockBuilder()
+		Cookie c1 = new CookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.setDomain(domain)
 				.setPath(path)
 				.build();
 
-		Cookie c2 = new CookieMockBuilder()
+		Cookie c2 = new CookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.setDomain(domain)

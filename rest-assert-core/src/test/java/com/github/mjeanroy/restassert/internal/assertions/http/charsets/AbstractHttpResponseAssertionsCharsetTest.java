@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.internal.assertions.AbstractAssertionsTest
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -67,7 +67,7 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 
 	private HttpResponse newResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
-		return new HttpResponseMockBuilderImpl()
+		return new HttpResponseBuilderImpl()
 			.addHeader("Content-Type", contentType)
 			.build();
 	}

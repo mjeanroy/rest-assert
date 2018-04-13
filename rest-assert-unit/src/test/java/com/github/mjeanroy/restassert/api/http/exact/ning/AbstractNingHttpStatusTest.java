@@ -25,12 +25,12 @@
 package com.github.mjeanroy.restassert.api.http.exact.ning;
 
 import com.github.mjeanroy.restassert.api.http.exact.AbstractHttpStatusTest;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpStatusTest extends AbstractHttpStatusTest<Response> {
 
 	protected Response newHttpResponse(int status) {
-		return new NingHttpResponseMockBuilder().setStatus(status).build();
+		return new NingHttpResponseBuilder().setStatus(status).build();
 	}
 }

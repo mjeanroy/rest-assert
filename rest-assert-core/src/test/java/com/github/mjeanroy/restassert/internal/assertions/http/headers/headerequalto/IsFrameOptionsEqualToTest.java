@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.internal.assertions.http.headers.headereq
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.data.FrameOptions;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.junit.Test;
 
@@ -53,7 +53,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	@Test
 	public void it_should_check_that_allow_from_value_match() {
-		HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
+		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 			.addHeader(getName(), "allow-from https://www.google.com")
 			.build();
 
@@ -66,7 +66,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	@Test
 	public void it_should_check_that_allow_from_value_does_not_match() {
-		HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
+		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 			.addHeader(getName(), "deny")
 			.build();
 

@@ -26,14 +26,14 @@ package com.github.mjeanroy.restassert.api.http.cookie.async;
 
 import com.github.mjeanroy.restassert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.asynchttpclient.Response;
 
 public class AssertDoesNotHaveCookieTest extends AbstractAsyncHttpDoesNotHaveCookieTest {
 
 	@Override
 	protected Cookie cookie() {
-		return new CookieMockBuilder().setName("JSESSIONID").setValue("12345").build();
+		return new CookieBuilder().setName("JSESSIONID").setValue("12345").build();
 	}
 
 	@Override

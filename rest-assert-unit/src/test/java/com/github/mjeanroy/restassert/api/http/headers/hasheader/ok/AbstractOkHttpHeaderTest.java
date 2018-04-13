@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.api.http.headers.hasheader.ok;
 
 import com.github.mjeanroy.restassert.api.http.headers.hasheader.AbstractHttpHeaderTest;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import okhttp3.Response;
 
@@ -33,6 +33,6 @@ abstract class AbstractOkHttpHeaderTest extends AbstractHttpHeaderTest<Response>
 
 	@Override
 	protected Response newHttpResponse(Header header) {
-		return new OkHttpResponseMockBuilder().addHeader(header).build();
+		return new OkHttpResponseBuilder().addHeader(header).build();
 	}
 }

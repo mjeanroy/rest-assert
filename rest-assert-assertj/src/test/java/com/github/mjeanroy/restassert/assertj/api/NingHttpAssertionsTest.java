@@ -29,8 +29,8 @@ import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpCookie;
 import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpResponse;
 import com.github.mjeanroy.restassert.tests.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpCookieMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
@@ -43,7 +43,7 @@ public class NingHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		Response response = new NingHttpResponseMockBuilder().build();
+		Response response = new NingHttpResponseBuilder().build();
 		HttpResponseAssert assertions = NingHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -55,7 +55,7 @@ public class NingHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieMockBuilder().build();
+		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder().build();
 		CookieAssert assertions = NingHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();
@@ -73,7 +73,7 @@ public class NingHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		Response response = new NingHttpResponseMockBuilder()
+		Response response = new NingHttpResponseBuilder()
 			.setContent(body)
 			.build();
 

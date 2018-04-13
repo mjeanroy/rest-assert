@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.api.http.mimetype.apache;
 
 import com.github.mjeanroy.restassert.api.http.mimetype.AbstractMimeTypeInTest;
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.apache.http.HttpResponse;
 
@@ -33,6 +33,6 @@ abstract class AbstractApacheHttpClientMimeTypeInTest extends AbstractMimeTypeIn
 
 	@Override
 	protected HttpResponse newHttpResponse(Header header) {
-		return new ApacheHttpResponseMockBuilder().addHeader(header).build();
+		return new ApacheHttpResponseBuilder().addHeader(header).build();
 	}
 }

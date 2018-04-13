@@ -25,13 +25,13 @@
 package com.github.mjeanroy.restassert.api.http.outof.ning;
 
 import com.github.mjeanroy.restassert.api.http.outof.AbstractHttpStatusOutOfTest;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {
 
 	@Override
 	protected Response newHttpResponse(int status) {
-		return new NingHttpResponseMockBuilder().setStatus(status).build();
+		return new NingHttpResponseBuilder().setStatus(status).build();
 	}
 }

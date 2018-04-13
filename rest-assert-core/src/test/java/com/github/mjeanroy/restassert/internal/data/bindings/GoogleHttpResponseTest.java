@@ -28,7 +28,7 @@ import java.util.List;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -45,7 +45,7 @@ public class GoogleHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 				.setStatus(expectedStatus)
 				.build();
 
@@ -60,7 +60,7 @@ public class GoogleHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 				.addHeader(headerName, headerValue)
 				.build();
 
@@ -75,7 +75,7 @@ public class GoogleHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 				.addHeader(headerName, headerValue)
 				.build();
 
@@ -92,7 +92,7 @@ public class GoogleHttpResponseTest {
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 				.setContent(body)
 				.build();
 
@@ -104,7 +104,7 @@ public class GoogleHttpResponseTest {
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
+		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder().build();
 		final HttpResponse httpResponse = create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
@@ -115,7 +115,7 @@ public class GoogleHttpResponseTest {
 
 	@Test
 	public void it_should_return_all_cookies() {
-		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+		final com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")
 				.build();

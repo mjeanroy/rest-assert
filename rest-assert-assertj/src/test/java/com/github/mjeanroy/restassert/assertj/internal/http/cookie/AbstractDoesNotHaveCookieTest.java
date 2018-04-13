@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.assertj.internal.http.cookie;
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
@@ -69,14 +69,14 @@ public abstract class AbstractDoesNotHaveCookieTest {
 	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 
 	protected Cookie fakeCookie() {
-		return new CookieMockBuilder()
+		return new CookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.build();
 	}
 
 	private HttpResponse newResponse(Cookie cookie) {
-		HttpResponseMockBuilderImpl builder = new HttpResponseMockBuilderImpl();
+		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl();
 		if (cookie != null) {
 			builder.addCookie(cookie);
 		}

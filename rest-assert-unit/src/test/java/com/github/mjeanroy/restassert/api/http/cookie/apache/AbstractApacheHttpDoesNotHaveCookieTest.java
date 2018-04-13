@@ -26,14 +26,14 @@ package com.github.mjeanroy.restassert.api.http.cookie.apache;
 
 import com.github.mjeanroy.restassert.api.http.cookie.AbstractDoesNotHaveCookieTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
 
 abstract class AbstractApacheHttpDoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newHttpResponse(Cookie cookie) {
-		ApacheHttpResponseMockBuilder builder = new ApacheHttpResponseMockBuilder();
+		ApacheHttpResponseBuilder builder = new ApacheHttpResponseBuilder();
 
 		if (cookie != null) {
 			builder.addCookie(cookie);

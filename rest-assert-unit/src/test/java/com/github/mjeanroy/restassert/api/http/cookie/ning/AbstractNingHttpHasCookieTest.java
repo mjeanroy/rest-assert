@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.api.http.cookie.ning;
 
 import com.github.mjeanroy.restassert.api.http.cookie.AbstractHasCookieTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpHasCookieTest extends AbstractHasCookieTest<Response> {
 
 	@Override
 	protected Response newHttpResponse(Cookie cookie) {
-		return new NingHttpResponseMockBuilder().addCookie(cookie).build();
+		return new NingHttpResponseBuilder().addCookie(cookie).build();
 	}
 }

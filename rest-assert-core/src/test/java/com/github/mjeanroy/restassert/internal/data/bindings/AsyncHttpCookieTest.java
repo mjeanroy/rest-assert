@@ -28,7 +28,7 @@ import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -47,7 +47,7 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setName(expectedName)
 			.build();
 
@@ -60,7 +60,7 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setValue(expectedValue)
 			.build();
 
@@ -73,7 +73,7 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setDomain(expectedDomain)
 			.build();
 
@@ -86,7 +86,7 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setPath(expectedPath)
 			.build();
 
@@ -98,7 +98,7 @@ public class AsyncHttpCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setSecure(true)
 			.build();
 
@@ -110,7 +110,7 @@ public class AsyncHttpCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setHttpOnly(true)
 			.build();
 
@@ -123,7 +123,7 @@ public class AsyncHttpCookieTest {
 	@Test
 	public void it_should_get_max_age() {
 		long expectedMaxAge = 10;
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder()
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder()
 			.setMaxAge(expectedMaxAge)
 			.build();
 
@@ -135,7 +135,7 @@ public class AsyncHttpCookieTest {
 
 	@Test
 	public void it_should_not_implement_expires() {
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder().build();
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 
 		thrown.expect(UnsupportedOperationException.class);
 		thrown.expectMessage("org.asynchttpclient.cookie.Cookie does not support #getExpires(), please use #getMaxAge() instead.");

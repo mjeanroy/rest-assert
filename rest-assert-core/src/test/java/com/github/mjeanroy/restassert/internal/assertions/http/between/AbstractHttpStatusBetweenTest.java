@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.http.between;
 
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -72,7 +72,7 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 	}
 
 	private HttpResponse newResponse(int status) {
-		return new HttpResponseMockBuilderImpl()
+		return new HttpResponseBuilderImpl()
 			.setStatus(status)
 			.build();
 	}

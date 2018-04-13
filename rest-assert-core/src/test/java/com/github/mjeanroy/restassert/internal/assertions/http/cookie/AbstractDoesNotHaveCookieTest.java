@@ -29,8 +29,8 @@ import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,7 +51,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_pass_without_cookie() {
-		HttpResponse response = newResponse(new CookieMockBuilder()
+		HttpResponse response = newResponse(new CookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.build());
@@ -72,7 +72,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 	protected abstract void verifyError(AssertionResult result);
 
 	private HttpResponse newResponse(Cookie cookie) {
-		HttpResponseMockBuilderImpl builder = new HttpResponseMockBuilderImpl();
+		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl();
 		if (cookie != null) {
 			builder.addCookie(cookie);
 		}

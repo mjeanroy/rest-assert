@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.api.http.mimetype.ning;
 
 import com.github.mjeanroy.restassert.api.http.mimetype.AbstractMimeTypeInTest;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.ning.http.client.Response;
 
@@ -33,6 +33,6 @@ abstract class AbstractNingHttpClientMimeTypeInTest extends AbstractMimeTypeInTe
 
 	@Override
 	protected Response newHttpResponse(Header header) {
-		return new NingHttpResponseMockBuilder().addHeader(header).build();
+		return new NingHttpResponseBuilder().addHeader(header).build();
 	}
 }

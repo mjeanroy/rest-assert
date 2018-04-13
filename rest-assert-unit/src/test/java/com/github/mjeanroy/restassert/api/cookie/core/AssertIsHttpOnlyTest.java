@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.api.cookie.core;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
 import static com.github.mjeanroy.restassert.api.cookie.CookieAssert.assertIsHttpOnly;
 
@@ -62,7 +62,7 @@ public class AssertIsHttpOnlyTest extends AbstractCoreCookieTest {
 	}
 
 	private Cookie cookie(boolean httpOnly) {
-		return new CookieMockBuilder()
+		return new CookieBuilder()
 			.setHttpOnly(httpOnly)
 			.build();
 	}

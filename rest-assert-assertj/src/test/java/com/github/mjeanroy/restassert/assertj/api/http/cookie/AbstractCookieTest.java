@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.assertj.api.http.cookie;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
 public abstract class AbstractCookieTest extends AbstractHttpResponseTest {
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilderImpl().build());
+		return new HttpResponseAssert(new HttpResponseBuilderImpl().build());
 	}
 
 	protected abstract HttpResponseAssert invoke();

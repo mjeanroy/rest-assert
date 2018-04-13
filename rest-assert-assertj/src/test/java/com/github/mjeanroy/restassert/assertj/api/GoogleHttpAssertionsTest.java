@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.internal.data.bindings.GoogleHttpResponse;
 import com.github.mjeanroy.restassert.tests.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class GoogleHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder().build();
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder().build();
 		HttpResponseAssert assertions = GoogleHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -57,7 +57,7 @@ public class GoogleHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseMockBuilder()
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
 			.setContent(body)
 			.build();
 

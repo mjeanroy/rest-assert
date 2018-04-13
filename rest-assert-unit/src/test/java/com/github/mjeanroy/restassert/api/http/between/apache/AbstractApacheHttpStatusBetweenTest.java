@@ -25,13 +25,13 @@
 package com.github.mjeanroy.restassert.api.http.between.apache;
 
 import com.github.mjeanroy.restassert.api.http.between.AbstractHttpStatusBetweenTest;
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
 
 abstract class AbstractApacheHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newHttpResponse(int status) {
-		return new ApacheHttpResponseMockBuilder().setStatus(status).build();
+		return new ApacheHttpResponseBuilder().setStatus(status).build();
 	}
 }

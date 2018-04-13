@@ -28,7 +28,7 @@ import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.api.http.mimetype.AbstractMimeTypeInTest;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.asynchttpclient.Response;
 import org.junit.runner.RunWith;
@@ -39,6 +39,6 @@ abstract class AbstractAsyncHttpClientMimeTypeInTest extends AbstractMimeTypeInT
 
 	@Override
 	protected Response newHttpResponse(Header header) {
-		return new AsyncHttpResponseMockBuilder().addHeader(header).build();
+		return new AsyncHttpResponseBuilder().addHeader(header).build();
 	}
 }

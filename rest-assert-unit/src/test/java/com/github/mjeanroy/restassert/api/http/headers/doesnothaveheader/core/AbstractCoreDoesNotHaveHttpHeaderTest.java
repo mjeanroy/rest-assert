@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.api.http.headers.doesnothaveheader.core;
 
 import com.github.mjeanroy.restassert.api.http.headers.doesnothaveheader.AbstractDoesNotHaveHttpHeaderTest;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
 abstract class AbstractCoreDoesNotHaveHttpHeaderTest extends AbstractDoesNotHaveHttpHeaderTest<HttpResponse> {
 
 	@Override
 	protected HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseMockBuilderImpl().addHeader(header).build();
+		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 }

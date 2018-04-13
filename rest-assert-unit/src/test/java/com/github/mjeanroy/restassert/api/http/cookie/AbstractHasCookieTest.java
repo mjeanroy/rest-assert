@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.api.http.cookie;
 import com.github.mjeanroy.restassert.api.AbstractAssertTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -66,7 +66,7 @@ public abstract class AbstractHasCookieTest<T> extends AbstractAssertTest<T> {
 	// == Test
 
 	private void doTest(String msg, final Invocation invocation) {
-		final Cookie cookie = new CookieMockBuilder().setName("foo").setValue("bar").build();
+		final Cookie cookie = new CookieBuilder().setName("foo").setValue("bar").build();
 		final String message = firstNonNull(msg, buildErrorMessage());
 
 		assertFailure(message, new Function() {

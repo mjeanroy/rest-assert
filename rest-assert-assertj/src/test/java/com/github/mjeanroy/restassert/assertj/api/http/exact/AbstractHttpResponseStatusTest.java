@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
 public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseMockBuilderImpl()
+		return new HttpResponseAssert(new HttpResponseBuilderImpl()
 			.setStatus(status())
 			.build());
 	}

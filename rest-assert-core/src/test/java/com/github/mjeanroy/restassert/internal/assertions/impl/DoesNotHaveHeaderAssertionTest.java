@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -43,7 +43,7 @@ public class DoesNotHaveHeaderAssertionTest {
 	public void it_should_not_fail_if_header_is_not_set() {
 		final String name = "foo";
 		final DoesNotHaveHeaderAssertion assertion = new DoesNotHaveHeaderAssertion(name);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("bar", "bar")
 				.build();
 
@@ -58,7 +58,7 @@ public class DoesNotHaveHeaderAssertionTest {
 	public void it_should_fail_if_header_is_set() {
 		final String name = "foo";
 		final DoesNotHaveHeaderAssertion assertion = new DoesNotHaveHeaderAssertion(name);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, "bar")
 				.build();
 

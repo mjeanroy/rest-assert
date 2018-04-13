@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.internal.data.bindings;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.javax.JavaxCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -42,7 +42,7 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_name() {
 		String expectedName = "foo";
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setName(expectedName)
 			.build();
 
@@ -55,7 +55,7 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_value() {
 		String expectedValue = "foo";
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setValue(expectedValue)
 			.build();
 
@@ -68,7 +68,7 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_domain() {
 		String expectedDomain = "foo";
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setDomain(expectedDomain)
 			.build();
 
@@ -81,7 +81,7 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_return_path() {
 		String expectedPath = "foo";
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setPath(expectedPath)
 			.build();
 
@@ -93,7 +93,7 @@ public class JavaxCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setSecured(true)
 			.build();
 
@@ -105,7 +105,7 @@ public class JavaxCookieTest {
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setHttpOnly(true)
 			.build();
 
@@ -118,7 +118,7 @@ public class JavaxCookieTest {
 	@Test
 	public void it_should_get_max_age() {
 		int expectedMaxAge = 10;
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder()
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder()
 			.setMaxAge(expectedMaxAge)
 			.build();
 
@@ -130,7 +130,7 @@ public class JavaxCookieTest {
 
 	@Test
 	public void it_should_fail_on_getExpires() {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieMockBuilder().build();
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 
 		thrown.expect(UnsupportedOperationException.class);

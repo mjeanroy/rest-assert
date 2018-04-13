@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -42,7 +42,7 @@ public class StatusEqualAssertionTest {
 	@Test
 	public void it_should_not_fail_if_status_match() {
 		final StatusEqualAssertion assertion = new StatusEqualAssertion(200);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.setStatus(200)
 				.build();
 
@@ -56,7 +56,7 @@ public class StatusEqualAssertionTest {
 	@Test
 	public void it_should_fail_if_status_does_not_match() {
 		final StatusEqualAssertion assertion = new StatusEqualAssertion(200);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.setStatus(400)
 				.build();
 

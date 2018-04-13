@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -60,7 +60,7 @@ public class IsDateHeaderEqualToAssertionTest {
 
 		final Date date = cal.getTime();
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value)
 				.build();
 
@@ -88,7 +88,7 @@ public class IsDateHeaderEqualToAssertionTest {
 
 		final Date date = cal.getTime();
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, v1)
 				.addHeader(name, v2)
 				.build();
@@ -115,7 +115,7 @@ public class IsDateHeaderEqualToAssertionTest {
 
 		final Date date = cal.getTime();
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -141,7 +141,7 @@ public class IsDateHeaderEqualToAssertionTest {
 
 		final Date date = cal.getTime();
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value)
 				.build();
 
@@ -170,7 +170,7 @@ public class IsDateHeaderEqualToAssertionTest {
 
 		final Date date = cal.getTime();
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, v1)
 				.addHeader(name, v2)
 				.build();

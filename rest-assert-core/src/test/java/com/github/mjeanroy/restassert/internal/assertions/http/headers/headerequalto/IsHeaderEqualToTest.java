@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.internal.assertions.http.headers.headereq
 import com.github.mjeanroy.restassert.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.junit.Test;
 
@@ -51,7 +51,7 @@ public class IsHeaderEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	@Test
 	public void it_should_fail_if_response_does_not_have_header() {
-		HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 		AssertionResult result = assertions.isHeaderEqualTo(rsp, NAME, VALUE);
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", NAME);
 	}

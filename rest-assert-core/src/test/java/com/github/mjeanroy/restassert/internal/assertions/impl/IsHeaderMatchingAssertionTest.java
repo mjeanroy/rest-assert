@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.data.HeaderValue;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HeaderValueMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HeaderValueBuilder;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -45,12 +45,12 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue hValue = new HeaderValueMockBuilder()
+		final HeaderValue hValue = new HeaderValueBuilder()
 				.setValue(value)
 				.build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, hValue);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value)
 				.build();
 
@@ -65,12 +65,12 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue hValue = new HeaderValueMockBuilder()
+		final HeaderValue hValue = new HeaderValueBuilder()
 				.setValue(value)
 				.build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, hValue);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value + value)
 				.addHeader(name, value)
 				.build();
@@ -86,12 +86,12 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_header_is_not_set() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue hValue = new HeaderValueMockBuilder()
+		final HeaderValue hValue = new HeaderValueBuilder()
 				.setValue(value)
 				.build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, hValue);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("bar", "bar")
 				.build();
 
@@ -107,12 +107,12 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue hValue = new HeaderValueMockBuilder()
+		final HeaderValue hValue = new HeaderValueBuilder()
 				.setValue(value)
 				.build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, hValue);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value + value)
 				.build();
 
@@ -128,12 +128,12 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
 		final String name = "Content-Type";
 		final String value = "bar";
-		final HeaderValue hValue = new HeaderValueMockBuilder()
+		final HeaderValue hValue = new HeaderValueBuilder()
 				.setValue(value)
 				.build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, hValue);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, "application/json")
 				.addHeader(name, "application/xml")
 				.build();
@@ -150,21 +150,21 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_header_name_is_null() {
 		thrown.expect(NullPointerException.class);
 		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderMatchingAssertion(null, new HeaderValueMockBuilder().build());
+		new IsHeaderMatchingAssertion(null, new HeaderValueBuilder().build());
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderMatchingAssertion("", new HeaderValueMockBuilder().build());
+		new IsHeaderMatchingAssertion("", new HeaderValueBuilder().build());
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderMatchingAssertion("   ", new HeaderValueMockBuilder().build());
+		new IsHeaderMatchingAssertion("   ", new HeaderValueBuilder().build());
 	}
 
 	@Test

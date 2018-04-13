@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.javax;
 
-import com.github.mjeanroy.restassert.tests.mocks.javax.JavaxCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
@@ -63,7 +63,7 @@ public class AssertIsSecuredTest extends AbstractJavaxCookieTest {
 	}
 
 	private Cookie cookie(boolean secured) {
-		return new JavaxCookieMockBuilder()
+		return new JavaxCookieBuilder()
 				.setSecured(secured)
 				.build();
 	}

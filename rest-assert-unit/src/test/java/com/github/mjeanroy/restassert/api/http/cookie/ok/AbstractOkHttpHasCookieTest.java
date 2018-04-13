@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.api.http.cookie.ok;
 
 import com.github.mjeanroy.restassert.api.http.cookie.AbstractHasCookieTest;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpHasCookieTest extends AbstractHasCookieTest<Response> {
 
 	@Override
 	protected Response newHttpResponse(Cookie cookie) {
-		return new OkHttpResponseMockBuilder().addCookie(cookie).build();
+		return new OkHttpResponseBuilder().addCookie(cookie).build();
 	}
 }

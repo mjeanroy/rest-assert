@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.async;
 
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.api.cookie.NingHttpCookieAssert.assertHasMaxAge;
@@ -64,7 +64,7 @@ public class AssertHasMaxAgeTest extends AbstractNingHttpCookieTest {
 	}
 
 	private Cookie cookie(long maxAge) {
-		return new NingHttpCookieMockBuilder()
+		return new NingHttpCookieBuilder()
 				.setMaxAge(maxAge)
 				.build();
 	}

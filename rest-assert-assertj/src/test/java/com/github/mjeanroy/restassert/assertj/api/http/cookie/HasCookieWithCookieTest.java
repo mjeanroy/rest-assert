@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.api.http.cookie;
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.Matchers.same;
@@ -38,7 +38,7 @@ public class HasCookieWithCookieTest extends AbstractCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
-	private static final Cookie COOKIE = new CookieMockBuilder()
+	private static final Cookie COOKIE = new CookieBuilder()
 			.setName(NAME)
 			.setValue(VALUE)
 			.build();

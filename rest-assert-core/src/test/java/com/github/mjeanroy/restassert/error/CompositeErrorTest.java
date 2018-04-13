@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.error;
 
-import com.github.mjeanroy.restassert.tests.mocks.RestAssertErrorMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.error.CompositeError.composeErrors;
@@ -70,7 +70,7 @@ public class CompositeErrorTest {
 	}
 
 	private RestAssertError createError(String message, Object... args) {
-		return new RestAssertErrorMockBuilder()
+		return new RestAssertErrorBuilder()
 			.setMessage(message)
 			.setArgs(args)
 			.build();

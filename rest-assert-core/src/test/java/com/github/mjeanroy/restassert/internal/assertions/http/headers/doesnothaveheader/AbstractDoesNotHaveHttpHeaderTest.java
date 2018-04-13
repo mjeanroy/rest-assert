@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.internal.assertions.AbstractAssertionsTest
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +76,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 	 * @return Http response.
 	 */
 	private HttpResponse newResponse() {
-		return new HttpResponseMockBuilderImpl().build();
+		return new HttpResponseBuilderImpl().build();
 	}
 
 	/**
@@ -86,7 +86,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 	 * @return Fake http response.
 	 */
 	private HttpResponse newResponse(Header header) {
-		return new HttpResponseMockBuilderImpl()
+		return new HttpResponseBuilderImpl()
 				.addHeader(header)
 				.build();
 	}

@@ -32,8 +32,8 @@ import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.internal.data.bindings.AsyncHttpCookie;
 import com.github.mjeanroy.restassert.internal.data.bindings.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.tests.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpCookieMockBuilder;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.asynchttpclient.Response;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class AsyncHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_assertion_object() throws Exception {
-		Response response = new AsyncHttpResponseMockBuilder().build();
+		Response response = new AsyncHttpResponseBuilder().build();
 		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
@@ -61,7 +61,7 @@ public class AsyncHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieMockBuilder().build();
+		org.asynchttpclient.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();
@@ -79,7 +79,7 @@ public class AsyncHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new AsyncHttpResponseBuilder()
 			.setContent(body)
 			.build();
 

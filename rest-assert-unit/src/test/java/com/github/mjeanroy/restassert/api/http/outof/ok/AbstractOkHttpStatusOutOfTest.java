@@ -25,13 +25,13 @@
 package com.github.mjeanroy.restassert.api.http.outof.ok;
 
 import com.github.mjeanroy.restassert.api.http.outof.AbstractHttpStatusOutOfTest;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {
 
 	@Override
 	protected Response newHttpResponse(int status) {
-		return new OkHttpResponseMockBuilder().setStatus(status).build();
+		return new OkHttpResponseBuilder().setStatus(status).build();
 	}
 }

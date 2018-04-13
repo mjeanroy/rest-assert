@@ -26,14 +26,14 @@ package com.github.mjeanroy.restassert.api.http.cookie.ning;
 
 import com.github.mjeanroy.restassert.api.http.NingHttpAssert;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.ning.http.client.Response;
 
 public class AssertHasCookieWithNameCookieTest extends AbstractNingHttpHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
-	private static final Cookie COOKIE = new CookieMockBuilder().setName(NAME).setValue(VALUE).build();
+	private static final Cookie COOKIE = new CookieBuilder().setName(NAME).setValue(VALUE).build();
 
 	@Override
 	protected Cookie cookie() {

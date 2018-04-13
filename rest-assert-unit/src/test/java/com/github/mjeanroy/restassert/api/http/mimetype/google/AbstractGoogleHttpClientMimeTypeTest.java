@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.api.http.mimetype.google;
 
 import com.github.mjeanroy.restassert.api.http.mimetype.AbstractMimeTypeTest;
-import com.github.mjeanroy.restassert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.google.api.client.http.HttpResponse;
 
@@ -33,6 +33,6 @@ abstract class AbstractGoogleHttpClientMimeTypeTest extends AbstractMimeTypeTest
 
 	@Override
 	protected HttpResponse newHttpResponse(Header header) {
-		return new GoogleHttpResponseMockBuilder().addHeader(header).build();
+		return new GoogleHttpResponseBuilder().addHeader(header).build();
 	}
 }

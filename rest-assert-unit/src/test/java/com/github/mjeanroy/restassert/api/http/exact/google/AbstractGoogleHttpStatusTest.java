@@ -25,12 +25,12 @@
 package com.github.mjeanroy.restassert.api.http.exact.google;
 
 import com.github.mjeanroy.restassert.api.http.exact.AbstractHttpStatusTest;
-import com.github.mjeanroy.restassert.tests.mocks.googlehttp.GoogleHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpStatusTest extends AbstractHttpStatusTest<HttpResponse> {
 
 	protected HttpResponse newHttpResponse(int status) {
-		return new GoogleHttpResponseMockBuilder().setStatus(status).build();
+		return new GoogleHttpResponseBuilder().setStatus(status).build();
 	}
 }

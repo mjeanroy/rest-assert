@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.async;
 
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.api.cookie.NingHttpCookieAssert.assertHasPath;
@@ -68,7 +68,7 @@ public class AssertHasPathTest extends AbstractNingHttpCookieTest {
 	}
 
 	private Cookie cookie(String path) {
-		return new NingHttpCookieMockBuilder()
+		return new NingHttpCookieBuilder()
 				.setPath(path)
 				.build();
 	}

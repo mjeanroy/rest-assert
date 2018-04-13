@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
 import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.Mockito.any;
@@ -58,6 +58,6 @@ public class CookieAssert_hasMaxAge_Test extends AbstractApiTest<Cookies, Cookie
 	}
 
 	private Cookie actual() {
-		return new CookieMockBuilder().build();
+		return new CookieBuilder().build();
 	}
 }

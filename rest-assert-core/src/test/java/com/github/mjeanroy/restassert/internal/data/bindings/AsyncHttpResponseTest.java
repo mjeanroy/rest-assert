@@ -31,7 +31,7 @@ import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.async.AsyncHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
 import org.junit.Rule;
 import org.junit.Test;
@@ -51,7 +51,7 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() {
 		int expectedStatus = 200;
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new AsyncHttpResponseBuilder()
 				.setStatus(expectedStatus)
 				.build();
 
@@ -65,7 +65,7 @@ public class AsyncHttpResponseTest {
 	public void it_should_check_if_http_response_contains_header() throws Exception {
 		String headerName = "header-name";
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new AsyncHttpResponseBuilder()
 				.addHeader(headerName, "foo")
 				.build();
 
@@ -80,7 +80,7 @@ public class AsyncHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new AsyncHttpResponseBuilder()
 				.addHeader(headerName, headerValue)
 				.build();
 
@@ -97,7 +97,7 @@ public class AsyncHttpResponseTest {
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		Response response = new AsyncHttpResponseMockBuilder()
+		Response response = new AsyncHttpResponseBuilder()
 				.setContent(body)
 				.build();
 
@@ -109,7 +109,7 @@ public class AsyncHttpResponseTest {
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final Response response = new AsyncHttpResponseMockBuilder().build();
+		final Response response = new AsyncHttpResponseBuilder().build();
 		final HttpResponse httpResponse = AsyncHttpResponse.create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
@@ -120,7 +120,7 @@ public class AsyncHttpResponseTest {
 
 	@Test
 	public void it_should_return_all_cookies() {
-		final Response response = new AsyncHttpResponseMockBuilder()
+		final Response response = new AsyncHttpResponseBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")
 				.build();

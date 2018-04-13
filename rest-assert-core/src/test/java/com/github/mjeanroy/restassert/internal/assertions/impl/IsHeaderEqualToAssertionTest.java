@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -44,7 +44,7 @@ public class IsHeaderEqualToAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value)
 				.build();
 
@@ -60,7 +60,7 @@ public class IsHeaderEqualToAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value + value)
 				.addHeader(name, value)
 				.build();
@@ -77,7 +77,7 @@ public class IsHeaderEqualToAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("bar", "bar")
 				.build();
 
@@ -94,7 +94,7 @@ public class IsHeaderEqualToAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value + value)
 				.build();
 
@@ -110,7 +110,7 @@ public class IsHeaderEqualToAssertionTest {
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
 		final String name = "Content-Type";
 		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, "application/json");
-		final HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, "application/json")
 				.addHeader(name, "application/xml")
 				.build();

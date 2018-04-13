@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExp
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.*;
 
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 
 	@Test
 	public void should_pass_if_status_code_is_ok() {
-		HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
+		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 			.setStatus(status())
 			.build();
 
@@ -54,7 +54,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 		final AssertionInfo info = someInfo();
 		final int status = status();
 		final int expectedStatus = status + 1;
-		final HttpResponse httpResponse = new HttpResponseMockBuilderImpl()
+		final HttpResponse httpResponse = new HttpResponseBuilderImpl()
 			.setStatus(expectedStatus)
 			.build();
 

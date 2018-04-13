@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.api.http.cookie.ok;
 
 import com.github.mjeanroy.restassert.api.http.OkHttpAssert;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import okhttp3.Response;
 
 public class AssertHasCookieWithNameAndValueTest extends AbstractOkHttpHasCookieTest {
@@ -36,7 +36,7 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractOkHttpHasCookie
 
 	@Override
 	protected Cookie cookie() {
-		return new CookieMockBuilder().setName(NAME).setValue(VALUE).build();
+		return new CookieBuilder().setName(NAME).setValue(VALUE).build();
 	}
 
 	@Override

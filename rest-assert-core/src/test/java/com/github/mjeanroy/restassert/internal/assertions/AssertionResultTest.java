@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.internal.assertions;
 
 import com.github.mjeanroy.restassert.error.RestAssertError;
-import com.github.mjeanroy.restassert.tests.mocks.RestAssertErrorMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -50,7 +50,7 @@ public class AssertionResultTest {
 
 	@Test
 	public void it_should_be_a_failure() {
-		RestAssertError error = new RestAssertErrorMockBuilder().build();
+		RestAssertError error = new RestAssertErrorBuilder().build();
 		AssertionResult result = failure(error);
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();

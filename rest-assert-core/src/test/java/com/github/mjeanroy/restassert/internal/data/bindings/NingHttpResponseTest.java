@@ -28,7 +28,7 @@ import java.util.List;
 
 import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.ning.NingHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class NingHttpResponseTest {
 	@Test
 	public void it_should_return_status_code() throws Exception {
 		int expectedStatus = 200;
-		Response response = new NingHttpResponseMockBuilder()
+		Response response = new NingHttpResponseBuilder()
 				.setStatus(expectedStatus)
 				.build();
 
@@ -60,7 +60,7 @@ public class NingHttpResponseTest {
 	public void it_should_check_if_http_response_contains_header() throws Exception {
 		String headerName = "header-name";
 
-		Response response = new NingHttpResponseMockBuilder()
+		Response response = new NingHttpResponseBuilder()
 				.addHeader(headerName, "foo")
 				.build();
 
@@ -75,7 +75,7 @@ public class NingHttpResponseTest {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 
-		Response response = new NingHttpResponseMockBuilder()
+		Response response = new NingHttpResponseBuilder()
 				.addHeader(headerName, headerValue)
 				.build();
 
@@ -92,7 +92,7 @@ public class NingHttpResponseTest {
 	@Test
 	public void it_should_return_response_body() throws Exception {
 		String body = "foo";
-		Response response = new NingHttpResponseMockBuilder()
+		Response response = new NingHttpResponseBuilder()
 				.setContent(body)
 				.build();
 
@@ -104,7 +104,7 @@ public class NingHttpResponseTest {
 
 	@Test
 	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
-		final Response response = new NingHttpResponseMockBuilder().build();
+		final Response response = new NingHttpResponseBuilder().build();
 		final HttpResponse httpResponse = NingHttpResponse.create(response);
 		final List<Cookie> cookies = httpResponse.getCookies();
 
@@ -115,7 +115,7 @@ public class NingHttpResponseTest {
 
 	@Test
 	public void it_should_return_all_cookies() {
-		final Response response = new NingHttpResponseMockBuilder()
+		final Response response = new NingHttpResponseBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")
 				.build();

@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.error.http.ShouldHaveCharset;
 import com.github.mjeanroy.restassert.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
 public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
@@ -47,14 +47,14 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 
 	@Test
 	public void it_should_fail_if_response_does_not_have_content_type() {
-		HttpResponse rsp = new HttpResponseMockBuilderImpl().build();
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
 	}
 
 	@Test
 	public void it_should_fail_if_response_has_content_type_without_charset() {
-		HttpResponse rsp = new HttpResponseMockBuilderImpl()
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 			.addHeader("Content-Type", "application/json")
 			.build();
 

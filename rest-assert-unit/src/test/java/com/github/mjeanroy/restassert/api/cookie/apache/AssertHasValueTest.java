@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.api.cookie.apache;
 
-import com.github.mjeanroy.restassert.tests.mocks.httpcomponent.ApacheHttpCookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.api.cookie.ApacheHttpCookieAssert.assertHasValue;
@@ -68,7 +68,7 @@ public class AssertHasValueTest extends AbstractApacheHttpCookieTest {
 	}
 
 	private Cookie cookie(String value) {
-		return new ApacheHttpCookieMockBuilder()
+		return new ApacheHttpCookieBuilder()
 				.setValue(value)
 				.build();
 	}

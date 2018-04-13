@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.api.http.charsets.ok;
 
 import com.github.mjeanroy.restassert.api.http.charsets.AbstractHttpAssertCharsetTest;
-import com.github.mjeanroy.restassert.tests.mocks.okhttp.OkHttpResponseMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
@@ -33,6 +33,6 @@ abstract class AbstractOkHttpAssertCharsetTest extends AbstractHttpAssertCharset
 	@Override
 	protected Response newHttpResponse(String charset) {
 		String contentType = String.format("application/json;charset=%s", charset);
-		return new OkHttpResponseMockBuilder().addHeader("Content-Type", contentType).build();
+		return new OkHttpResponseBuilder().addHeader("Content-Type", contentType).build();
 	}
 }

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.api.http.cookie.async;
 
 import com.github.mjeanroy.restassert.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.mocks.CookieMockBuilder;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.asynchttpclient.Response;
 
 public class AssertHasCookieWithNameAndValueTest extends AbstractAsyncHttpHasCookieTest {
@@ -36,7 +36,7 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractAsyncHttpHasCoo
 
 	@Override
 	protected Cookie cookie() {
-		return new CookieMockBuilder().setName(NAME).setValue(VALUE).build();
+		return new CookieBuilder().setName(NAME).setValue(VALUE).build();
 	}
 
 	@Override

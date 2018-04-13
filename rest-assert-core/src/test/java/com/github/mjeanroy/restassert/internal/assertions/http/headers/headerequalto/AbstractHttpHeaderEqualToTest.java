@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.internal.assertions.AbstractAssertionsTest
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.mocks.HttpResponseMockBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.junit.Before;
 import org.junit.Test;
@@ -126,7 +126,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	 * @return Fake http response.
 	 */
 	private HttpResponse newResponse(Header header, Header... other) {
-		HttpResponseMockBuilderImpl builder = new HttpResponseMockBuilderImpl().addHeader(header);
+		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl().addHeader(header);
 		for (Header h : other) {
 			builder.addHeader(h.getName(), h.getValue());
 		}
