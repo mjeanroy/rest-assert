@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static java.util.Collections.singletonList;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-import static java.util.Collections.singletonList;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 

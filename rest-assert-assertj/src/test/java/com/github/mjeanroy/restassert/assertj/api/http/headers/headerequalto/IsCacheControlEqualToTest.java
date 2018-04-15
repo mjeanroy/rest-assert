@@ -24,31 +24,27 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-
 public class IsCacheControlEqualToTest extends AbstractHttpResponseHeaderTest {
+
+	private static final CacheControl VALUE = new CacheControl.Builder().noCache().build();
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isCacheControlEqualTo(getValue());
+		return api.isCacheControlEqualTo(VALUE);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsCacheControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
-	}
-
-	private CacheControl getValue() {
-		return new CacheControl.Builder()
-			.noCache()
-			.build();
+		verify(assertions).assertIsCacheControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
 	}
 }

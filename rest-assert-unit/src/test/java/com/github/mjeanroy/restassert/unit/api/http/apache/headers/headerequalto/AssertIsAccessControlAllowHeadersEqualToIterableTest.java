@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.apache.http.HttpResponse;
-
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.tests.Strings.join;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 import static java.util.Collections.singletonList;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractApacheHttpHeaderEqualToTest {
 

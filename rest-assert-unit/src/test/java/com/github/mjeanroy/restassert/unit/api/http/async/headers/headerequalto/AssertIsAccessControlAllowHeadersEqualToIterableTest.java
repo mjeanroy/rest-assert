@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.asynchttpclient.Response;
-
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.tests.Strings.join;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 import static java.util.Collections.singletonList;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import org.asynchttpclient.Response;
 
 public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractAsyncHttpHeaderEqualToTest {
 

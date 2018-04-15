@@ -4,9 +4,9 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-public final class Headers {
+public final class TestHeaders {
 
-	private Headers() {
+	private TestHeaders() {
 	}
 
 	/**
@@ -20,7 +20,7 @@ public final class Headers {
 	public static final Header ACCESS_CONTROL_ALLOW_METHODS = header("Access-Control-Allow-Methods", "GET, POST");
 
 	/**
-	 * The {@code "Access-Control-Expose-Headers"} header, to use in unit test.
+	 * The {@code "Access-Control-Expose-TestHeaders"} header, to use in unit test.
 	 */
 	public static final Header ACCESS_CONTROL_EXPOSE_HEADERS = header("Access-Control-Expose-Headers", "Content-Length");
 

@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import okhttp3.Response;
-
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.tests.Strings.join;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 import static java.util.Collections.singletonList;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
+import okhttp3.Response;
 
 public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractOkHttpHeaderEqualToTest {
 

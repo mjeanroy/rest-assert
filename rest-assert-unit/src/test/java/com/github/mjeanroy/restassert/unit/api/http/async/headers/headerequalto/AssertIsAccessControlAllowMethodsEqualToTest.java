@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.Headers.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.tests.models.Header;
