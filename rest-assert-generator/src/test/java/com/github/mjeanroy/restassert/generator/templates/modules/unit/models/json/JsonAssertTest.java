@@ -24,15 +24,12 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.json;
 
+import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.JsonAssertions;
-import org.assertj.core.api.Condition;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.junit.Before;
 
-import java.util.Map;
-
-public class JsonAssertTest extends AbstractTemplateModelTest {
+public class JsonAssertTest extends AbstractUnitTemplateModelTest {
 
 	private JsonAssert jsonAssert;
 
@@ -47,8 +44,8 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.restassert.api.json";
+	protected String getSubPackage() {
+		return "json";
 	}
 
 	@Override
@@ -74,16 +71,5 @@ public class JsonAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getFactory() {
 		return null;
-	}
-
-	@Override
-	protected Condition<Map<String, Object>> getMethodCondition() {
-		return new Condition<Map<String, Object>>() {
-			@Override
-			public boolean matches(Map<String, Object> value) {
-				String methodName = (String) value.get("method_name");
-				return methodName.startsWith("assert");
-			}
-		};
 	}
 }

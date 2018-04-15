@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpCookie;
-import com.ning.http.client.cookie.Cookie;
-
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpCookie;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
+import com.ning.http.client.cookie.Cookie;
 
 /**
  * Template model for rest-assert-unit CookieAssert class.
  */
-public class NingHttpCookieAssert extends AbstractTemplateModel implements TemplateModel {
+public class NingHttpCookieAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton instance.
@@ -72,8 +72,8 @@ public class NingHttpCookieAssert extends AbstractTemplateModel implements Templ
 	}
 
 	@Override
-	public String getPackageName() {
-		return "com.github.mjeanroy.restassert.api.cookie";
+	protected String getSubPackage() {
+		return "cookie";
 	}
 
 	@Override

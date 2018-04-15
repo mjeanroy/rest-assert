@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpResponse;
-import com.ning.http.client.Response;
-
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpResponse;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
+import com.ning.http.client.Response;
 
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class NingHttpAssert extends AbstractTemplateModel implements TemplateModel {
+public class NingHttpAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -72,8 +72,8 @@ public class NingHttpAssert extends AbstractTemplateModel implements TemplateMod
 	}
 
 	@Override
-	public String getPackageName() {
-		return "com.github.mjeanroy.restassert.api.http";
+	protected String getSubPackage() {
+		return "http";
 	}
 
 	@Override

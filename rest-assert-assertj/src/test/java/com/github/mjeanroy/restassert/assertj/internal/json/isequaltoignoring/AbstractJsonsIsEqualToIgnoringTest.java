@@ -33,7 +33,7 @@ import java.util.Collection;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.restassert.utils.Utils.LINE_SEPARATOR;
+import static com.github.mjeanroy.restassert.core.utils.Utils.LINE_SEPARATOR;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 

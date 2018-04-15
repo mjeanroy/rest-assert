@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import org.junit.Test;

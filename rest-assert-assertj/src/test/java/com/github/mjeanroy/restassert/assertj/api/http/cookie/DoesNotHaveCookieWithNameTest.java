@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api.http.cookie;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.ArgumentMatchers.eq;

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.api.http.headers.hasheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.Mockito.any;

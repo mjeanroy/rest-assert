@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.JavaxCookie;
-import org.assertj.core.api.Condition;
-import org.junit.Before;
-
-import javax.servlet.http.Cookie;
-import java.util.Map;
-
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.JavaxCookieAssert.javaxCookieAssert;
 
-public class JavaxCookieAssertTest extends AbstractTemplateModelTest {
+import javax.servlet.http.Cookie;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.JavaxCookie;
+import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
+import org.junit.Before;
+
+public class JavaxCookieAssertTest extends AbstractUnitTemplateModelTest {
 
 	private JavaxCookieAssert cookieAssert;
 
@@ -51,8 +49,8 @@ public class JavaxCookieAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.restassert.api.cookie";
+	protected String getSubPackage() {
+		return "cookie";
 	}
 
 	@Override
@@ -78,16 +76,5 @@ public class JavaxCookieAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getFactory() {
 		return JavaxCookie.class.getName();
-	}
-
-	@Override
-	protected Condition<Map<String, Object>> getMethodCondition() {
-		return new Condition<Map<String, Object>>() {
-			@Override
-			public boolean matches(Map<String, Object> value) {
-				String methodName = (String) value.get("method_name");
-				return methodName.startsWith("assert");
-			}
-		};
 	}
 }

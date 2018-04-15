@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.outof;
 
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsNotRedirectionTest extends AbstractHttpResponsesStatusOutOfTest {

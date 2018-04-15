@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.json;
 
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.JsonAssertions;
+import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 

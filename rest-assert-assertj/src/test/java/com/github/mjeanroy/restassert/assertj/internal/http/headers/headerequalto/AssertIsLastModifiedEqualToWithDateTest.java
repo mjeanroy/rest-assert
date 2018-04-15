@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
 import java.util.Date;

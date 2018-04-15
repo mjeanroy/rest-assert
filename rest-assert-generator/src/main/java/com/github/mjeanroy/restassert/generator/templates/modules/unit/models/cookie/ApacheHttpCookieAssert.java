@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.ApacheHttpCookie;
-import org.apache.http.cookie.Cookie;
-
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.ApacheHttpCookie;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
+import org.apache.http.cookie.Cookie;
 
 /**
  * Template model for rest-assert-unit CookieAssert class.
  */
-public class ApacheHttpCookieAssert extends AbstractTemplateModel implements TemplateModel {
+public class ApacheHttpCookieAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton instance.
@@ -72,8 +72,8 @@ public class ApacheHttpCookieAssert extends AbstractTemplateModel implements Tem
 	}
 
 	@Override
-	public String getPackageName() {
-		return "com.github.mjeanroy.restassert.api.cookie";
+	protected String getSubPackage() {
+		return "cookie";
 	}
 
 	@Override

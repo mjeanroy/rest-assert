@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.internal.data.bindings.JavaxCookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.JavaxCookie;
 import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;

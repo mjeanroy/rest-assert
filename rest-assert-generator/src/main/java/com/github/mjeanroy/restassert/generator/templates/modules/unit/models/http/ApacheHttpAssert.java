@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.ApacheHttpResponse;
-import org.apache.http.HttpResponse;
-
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.ApacheHttpResponse;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
+import org.apache.http.HttpResponse;
 
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class ApacheHttpAssert extends AbstractTemplateModel implements TemplateModel {
+public class ApacheHttpAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -72,8 +72,8 @@ public class ApacheHttpAssert extends AbstractTemplateModel implements TemplateM
 	}
 
 	@Override
-	public String getPackageName() {
-		return "com.github.mjeanroy.restassert.api.http";
+	protected String getSubPackage() {
+		return "http";
 	}
 
 	@Override

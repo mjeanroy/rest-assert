@@ -24,16 +24,6 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules;
 
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.internal.Arg;
-import com.github.mjeanroy.restassert.reflect.Param;
-
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.*;
-
 import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.findPublicMethods;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
@@ -41,14 +31,31 @@ import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.github.mjeanroy.restassert.core.reflect.Param;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.internal.Arg;
+
 /**
  * Abstract representation of template model.
+ *
  * Each template model must provide at least:
- * - Package name: package name of generated class.
- * - Class name: name of generated class.
- * - Core class name: class (FQN) that will execute assertion test.
- * - Actual class: class (FQN) of tested object.
- * - Methods: assertion methods.
+ * <ul>
+ *   <li>Package name: package name of generated class.</li>
+ *   <li>Class name: name of generated class.</li>
+ *   <li>Core class name: class (FQN) that will execute assertion test.</li>
+ *   <li>Actual class: class (FQN) of tested object.</li>
+ *   <li>Methods: assertion methods.</li>
+ * </ul>
  */
 public abstract class AbstractTemplateModel implements TemplateModel {
 

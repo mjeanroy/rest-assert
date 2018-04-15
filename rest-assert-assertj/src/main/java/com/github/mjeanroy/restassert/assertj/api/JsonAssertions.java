@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.internal.data.JsonEntry;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
 
 public class JsonAssertions {
 
@@ -35,7 +35,7 @@ public class JsonAssertions {
 	/**
 	 * Create JSON entry.
 	 * <p/>
-	 * Basically, a shortcut to {@link com.github.mjeanroy.restassert.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
+	 * Basically, a shortcut to {@link com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
 	 * this method may be used to avoid to import the same class name.
 	 *
 	 * @param key   JSON key.
@@ -43,7 +43,7 @@ public class JsonAssertions {
 	 * @return JSON entry.
 	 */
 	public static JsonEntry jsonEntry(String key, Object value) {
-		return com.github.mjeanroy.restassert.internal.assertions.JsonAssertions.jsonEntry(key, value);
+		return com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions.jsonEntry(key, value);
 	}
 
 	/**

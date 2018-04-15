@@ -26,8 +26,8 @@ package com.github.mjeanroy.restassert.generator.templates.modules.assertj.model
 
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import org.assertj.core.api.Condition;
 import org.junit.Before;
 

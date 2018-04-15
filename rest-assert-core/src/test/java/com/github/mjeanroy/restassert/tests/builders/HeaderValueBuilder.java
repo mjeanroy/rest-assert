@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.data.HeaderValue;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

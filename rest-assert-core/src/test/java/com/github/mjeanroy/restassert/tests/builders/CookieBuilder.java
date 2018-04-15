@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

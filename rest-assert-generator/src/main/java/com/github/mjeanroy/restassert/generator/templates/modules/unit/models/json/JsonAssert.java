@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.json;
 
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.JsonAssertions;
-
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 
 /**
  * Template model for rest-assert-unit JsonAssert class.
@@ -36,7 +36,7 @@ import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.gene
  * This class is implemented as a singleton.
  * This class is thread safe.
  */
-public class JsonAssert extends AbstractTemplateModel implements TemplateModel {
+public class JsonAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton instance.
@@ -73,8 +73,8 @@ public class JsonAssert extends AbstractTemplateModel implements TemplateModel {
 	}
 
 	@Override
-	public String getPackageName() {
-		return "com.github.mjeanroy.restassert.api.json";
+	protected String getSubPackage() {
+		return "json";
 	}
 
 	@Override

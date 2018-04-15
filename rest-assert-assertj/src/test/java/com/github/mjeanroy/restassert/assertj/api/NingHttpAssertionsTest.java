@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpCookie;
-import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpCookie;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpResponse;
 import com.github.mjeanroy.restassert.tests.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;

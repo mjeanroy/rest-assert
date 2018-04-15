@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-import static com.github.mjeanroy.restassert.internal.data.bindings.ApacheHttpCookie.create;
-import static com.github.mjeanroy.restassert.internal.data.bindings.ApacheHttpResponse.create;
+import static com.github.mjeanroy.restassert.core.internal.data.bindings.ApacheHttpCookie.create;
+import static com.github.mjeanroy.restassert.core.internal.data.bindings.ApacheHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Apache HttpClient

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.generator.templates.modules.assertj.model
 
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.JsonAssertions;
+import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 
 /**
  * Abstract model for {@link JsonAssertions} assertions.

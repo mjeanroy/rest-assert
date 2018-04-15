@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
 public class CookieAssert extends AbstractCookieAssert<CookieAssert> {
 

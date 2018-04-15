@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.restassert.internal.data.bindings.NingHttpCookie.create;
-import static com.github.mjeanroy.restassert.internal.data.bindings.NingHttpResponse.create;
+import static com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpCookie.create;
+import static com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Async-Http

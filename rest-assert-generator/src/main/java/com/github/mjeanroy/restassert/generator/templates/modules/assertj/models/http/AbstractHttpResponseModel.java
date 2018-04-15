@@ -26,8 +26,8 @@ package com.github.mjeanroy.restassert.generator.templates.modules.assertj.model
 
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 /**
  * Abstract model for {@link HttpResponseAssertions} assertions.

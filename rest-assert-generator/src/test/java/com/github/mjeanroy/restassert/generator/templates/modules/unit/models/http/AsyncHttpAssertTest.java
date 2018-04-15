@@ -24,25 +24,22 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
+
 import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
+import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.AsyncHttpResponse;
-import org.assertj.core.api.Condition;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.asynchttpclient.Response;
 import org.junit.Before;
 import org.junit.runner.RunWith;
 
-import java.util.Map;
-
-import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
-
 @RunWith(RunIfRunner.class)
 @RunIf(AtLeastJava8Condition.class)
-public class AsyncHttpAssertTest extends AbstractTemplateModelTest {
+public class AsyncHttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private AsyncHttpAssert httpAssert;
 
@@ -57,8 +54,8 @@ public class AsyncHttpAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.restassert.api.http";
+	protected String getSubPackage() {
+		return "http";
 	}
 
 	@Override
@@ -84,16 +81,5 @@ public class AsyncHttpAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getFactory() {
 		return AsyncHttpResponse.class.getName();
-	}
-
-	@Override
-	protected Condition<Map<String, Object>> getMethodCondition() {
-		return new Condition<Map<String, Object>>() {
-			@Override
-			public boolean matches(Map<String, Object> value) {
-				String methodName = (String) value.get("method_name");
-				return methodName.startsWith("assert");
-			}
-		};
 	}
 }

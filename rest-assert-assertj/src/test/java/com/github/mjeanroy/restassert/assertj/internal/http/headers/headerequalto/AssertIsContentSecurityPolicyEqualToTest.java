@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.none;
-import static com.github.mjeanroy.restassert.data.ContentSecurityPolicy.self;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {

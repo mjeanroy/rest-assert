@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.error.RestAssertError;
 
 import java.util.Collection;
 import java.util.LinkedList;

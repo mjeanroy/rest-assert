@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class AssertIsOkTest extends AbstractHttpResponsesStatusTest {
 

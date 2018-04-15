@@ -24,92 +24,106 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules;
 
-import org.assertj.core.api.Condition;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import org.assertj.core.api.Condition;
+import org.junit.Test;
 
 public abstract class AbstractTemplateModelTest {
 
+	/**
+	 * Get the template model to be tested.
+	 *
+	 * @return Template model to be tested.
+	 */
 	protected abstract AbstractTemplateModel getTemplateModel();
 
+	/**
+	 * Get the expected package name of the generated class.
+	 *
+	 * @return Expected package name.
+	 */
 	protected abstract String getExpectedPackageName();
 
+	/**
+	 * Get the expected class name of the generated class.
+	 *
+	 * @return Expected class name.
+	 */
 	protected abstract String getExpectedClassName();
 
+	/**
+	 * Get the expected class name of the core class that will be used as delegated assertions.
+	 *
+	 * @return Expected core class name.
+	 */
 	protected abstract String getExpectedCoreClassName();
 
+	/**
+	 * Get the expected core class that will be used as delegated assertions.
+	 *
+	 * @return Expected core class.
+	 */
 	protected abstract Class<?> getExpectedCoreClass();
 
+	/**
+	 * Get the expected class name that will be tested.
+	 *
+	 * @return Expected tested class name.
+	 */
 	protected abstract String getExpectedActualClass();
 
+	/**
+	 * Get the expected class assertj condition, used to validate the method name generation.
+	 *
+	 * @return AssertJ condition.
+	 */
 	protected abstract Condition<Map<String, Object>> getMethodCondition();
 
+	/**
+	 * Get expected factory name.
+	 *
+	 * @return Expected factory.
+	 */
 	protected abstract String getFactory();
 
 	@Test
 	public void it_should_have_package_name() {
-		assertThat(getTemplateModel().getPackageName())
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo(getExpectedPackageName());
+		assertThat(getTemplateModel().getPackageName()).isEqualTo(getExpectedPackageName());
 	}
 
 	@Test
 	public void it_should_have_class_name() {
-		assertThat(getTemplateModel().getClassName())
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo(getExpectedClassName());
+		assertThat(getTemplateModel().getClassName()).isEqualTo(getExpectedClassName());
 	}
 
 	@Test
 	public void it_should_define_core_class_name() {
-		assertThat(getTemplateModel().getCoreClassName())
-				.isNotNull()
-				.isEqualTo(getExpectedCoreClassName());
+		assertThat(getTemplateModel().getCoreClassName()).isEqualTo(getExpectedCoreClassName());
 	}
 
 	@Test
 	public void it_should_define_core_class() {
-		assertThat(getTemplateModel().coreClass())
-				.isNotNull()
-				.isEqualTo(getExpectedCoreClass());
+		assertThat(getTemplateModel().coreClass()).isEqualTo(getExpectedCoreClass());
 	}
 
 	@Test
 	public void it_should_define_actual_class() {
-		assertThat(getTemplateModel().getActualClass())
-				.isNotNull()
-				.isEqualTo(getExpectedActualClass());
+		assertThat(getTemplateModel().getActualClass()).isEqualTo(getExpectedActualClass());
 	}
 
 	@Test
 	public void it_should_build_methods_list() {
 		List<Map<String, Object>> methods = getTemplateModel().getMethods();
 		assertThat(methods)
-				.isNotNull()
-				.isNotEmpty()
-				.are(new Condition<Map<String, Object>>() {
-					@Override
-					public boolean matches(Map<String, Object> value) {
-						return value.containsKey("arguments") &&
-								value.containsKey("method_name") &&
-								value.containsKey("core_method_name");
-					}
-				})
-				.are(getMethodCondition())
-				.areAtLeast(1, new Condition<Map<String, Object>>() {
-					@Override
-					public boolean matches(Map<String, Object> value) {
-						return ((Collection<?>) value.get("arguments")).size() > 0;
-					}
-				});
+			.are(getMethodCondition())
+			.are(IS_VALID_METHOD_CONDITION)
+			.areAtLeast(1, HAS_ARGUMENTS_CONDITION);
 	}
 
 	@Test
@@ -117,16 +131,28 @@ public abstract class AbstractTemplateModelTest {
 		Map<String, Object> data = getTemplateModel().data();
 
 		assertThat(data)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(6)
-				.containsKey("methods")
-				.contains(
-						entry("core_class_name", getExpectedCoreClassName()),
-						entry("actual_class", getExpectedActualClass()),
-						entry("class_name", getExpectedClassName()),
-						entry("package", getExpectedPackageName()),
-						entry("factory", getFactory())
-				);
+			.hasSize(6)
+			.containsKey("methods")
+			.contains(
+				entry("core_class_name", getExpectedCoreClassName()),
+				entry("actual_class", getExpectedActualClass()),
+				entry("class_name", getExpectedClassName()),
+				entry("package", getExpectedPackageName()),
+				entry("factory", getFactory())
+			);
 	}
+
+	private static final Condition<Map<String, Object>> HAS_ARGUMENTS_CONDITION = new Condition<Map<String, Object>>() {
+		@Override
+		public boolean matches(Map<String, Object> value) {
+			return ((Collection<?>) value.get("arguments")).size() > 0;
+		}
+	};
+
+	private static final Condition<Map<String, Object>> IS_VALID_METHOD_CONDITION = new Condition<Map<String, Object>>() {
+		@Override
+		public boolean matches(Map<String, Object> value) {
+			return value.containsKey("arguments") && value.containsKey("method_name") && value.containsKey("core_method_name");
+		}
+	};
 }

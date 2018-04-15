@@ -24,19 +24,16 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpCookie;
-import com.ning.http.client.cookie.Cookie;
-import org.assertj.core.api.Condition;
-import org.junit.Before;
-
-import java.util.Map;
-
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.NingHttpCookieAssert.asyncHttpCookieAssert;
 
-public class NingHttpCookieAssertTest extends AbstractTemplateModelTest {
+import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpCookie;
+import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
+import com.ning.http.client.cookie.Cookie;
+import org.junit.Before;
+
+public class NingHttpCookieAssertTest extends AbstractUnitTemplateModelTest {
 
 	private NingHttpCookieAssert cookieAssert;
 
@@ -51,8 +48,8 @@ public class NingHttpCookieAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.restassert.api.cookie";
+	protected String getSubPackage() {
+		return "cookie";
 	}
 
 	@Override
@@ -78,16 +75,5 @@ public class NingHttpCookieAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getFactory() {
 		return NingHttpCookie.class.getName();
-	}
-
-	@Override
-	protected Condition<Map<String, Object>> getMethodCondition() {
-		return new Condition<Map<String, Object>>() {
-			@Override
-			public boolean matches(Map<String, Object> value) {
-				String methodName = (String) value.get("method_name");
-				return methodName.startsWith("assert");
-			}
-		};
 	}
 }

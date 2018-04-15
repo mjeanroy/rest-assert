@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.internal.data.bindings.AsyncHttpCookie;
-import com.github.mjeanroy.restassert.internal.data.bindings.AsyncHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.AsyncHttpCookie;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.AsyncHttpResponse;
 import org.asynchttpclient.Response;
 
 /**

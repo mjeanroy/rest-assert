@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.cookie;
 
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.internal.assertions.CookieAssertions;
+import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 

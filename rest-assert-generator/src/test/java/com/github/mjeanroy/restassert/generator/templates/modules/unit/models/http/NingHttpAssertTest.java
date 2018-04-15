@@ -24,19 +24,16 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.internal.data.bindings.NingHttpResponse;
-import com.ning.http.client.Response;
-import org.assertj.core.api.Condition;
-import org.junit.Before;
-
-import java.util.Map;
-
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.NingHttpAssert.ningHttpAssert;
 
-public class NingHttpAssertTest extends AbstractTemplateModelTest {
+import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpResponse;
+import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
+import com.ning.http.client.Response;
+import org.junit.Before;
+
+public class NingHttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private NingHttpAssert httpAssert;
 
@@ -51,8 +48,8 @@ public class NingHttpAssertTest extends AbstractTemplateModelTest {
 	}
 
 	@Override
-	protected String getExpectedPackageName() {
-		return "com.github.mjeanroy.restassert.api.http";
+	protected String getSubPackage() {
+		return "http";
 	}
 
 	@Override
@@ -78,16 +75,5 @@ public class NingHttpAssertTest extends AbstractTemplateModelTest {
 	@Override
 	protected String getFactory() {
 		return NingHttpResponse.class.getName();
-	}
-
-	@Override
-	protected Condition<Map<String, Object>> getMethodCondition() {
-		return new Condition<Map<String, Object>>() {
-			@Override
-			public boolean matches(Map<String, Object> value) {
-				String methodName = (String) value.get("method_name");
-				return methodName.startsWith("assert");
-			}
-		};
 	}
 }

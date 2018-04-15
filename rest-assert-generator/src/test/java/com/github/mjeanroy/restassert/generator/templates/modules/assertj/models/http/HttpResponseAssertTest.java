@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.http;
 
+import java.util.Map;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
-import com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
 import org.assertj.core.api.Condition;
 import org.junit.Before;
-
-import java.util.Map;
 
 public class HttpResponseAssertTest extends AbstractTemplateModelTest {
 

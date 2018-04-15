@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.cookie;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 

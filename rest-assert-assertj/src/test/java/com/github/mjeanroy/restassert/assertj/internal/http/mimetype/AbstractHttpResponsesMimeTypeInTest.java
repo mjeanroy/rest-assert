@@ -25,10 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.models.Header;
-import com.github.mjeanroy.restassert.utils.Mapper;
+import com.github.mjeanroy.restassert.core.utils.Mapper;
 import org.junit.Test;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.formatList;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
-import static com.github.mjeanroy.restassert.utils.Utils.map;
+import static com.github.mjeanroy.restassert.core.utils.Utils.map;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 

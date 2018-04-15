@@ -30,7 +30,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import com.github.mjeanroy.restassert.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
 public final class CookieSerializer {
 

@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.tests;
 
-import com.github.mjeanroy.restassert.error.RestAssertError;
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
