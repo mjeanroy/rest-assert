@@ -74,9 +74,11 @@ public enum JsonParserStrategy {
 			if (isPresent("com.fasterxml.jackson.databind.ObjectMapper")) {
 				return JsonParserStrategy.JACKSON2.build();
 			}
+
 			if (isPresent("org.codehaus.jackson.map.ObjectMapper")) {
 				return JsonParserStrategy.JACKSON1.build();
 			}
+
 			if (isPresent("com.google.gson.Gson")) {
 				return JsonParserStrategy.GSON.build();
 			}

@@ -39,8 +39,19 @@ public final class ClassUtils {
 	 * @return True if class is available on classpath, false otherwise.
 	 */
 	public static boolean isPresent(String klass) {
+		return isPresent(klass, Thread.currentThread().getContextClassLoader());
+	}
+
+	/**
+	 * Check if given class is available.
+	 *
+	 * @param klass Fully qualified class name.
+	 * @param classLoader The classloader to user.
+	 * @return True if class is available on classpath, false otherwise.
+	 */
+	private static boolean isPresent(String klass, ClassLoader classLoader) {
 		try {
-			Class.forName(klass);
+			Class.forName(klass, false, classLoader);
 			return true;
 		}
 		catch (ClassNotFoundException ex) {

@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
+
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 /**
  * Check that http response status code is between a lower and an upper
@@ -42,7 +42,7 @@ public class StatusBetweenAssertion extends AbstractStatusRangeAssertion impleme
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(StatusBetweenAssertion.class);
+	private static final Logger log = Loggers.getLogger(StatusBetweenAssertion.class);
 
 	/**
 	 * Create assertion.
@@ -58,9 +58,6 @@ public class StatusBetweenAssertion extends AbstractStatusRangeAssertion impleme
 	public AssertionResult handle(HttpResponse httpResponse) {
 		int status = httpResponse.getStatus();
 		log.debug("Checking that status {} is between {} and {}", status, start, end);
-
-		return status >= start && status <= end ?
-				success() :
-				failure(shouldHaveStatusBetween(status, start, end));
+		return status >= start && status <= end ? success() : failure(shouldHaveStatusBetween(status, start, end));
 	}
 }

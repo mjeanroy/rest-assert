@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.utils.PreConditions.isPositive;
+
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 /**
  * Check that given http response has expected status code.
@@ -42,7 +42,7 @@ public class StatusEqualAssertion implements HttpResponseAssertion {
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(StatusEqualAssertion.class);
+	private static final Logger log = Loggers.getLogger(StatusEqualAssertion.class);
 
 	/**
 	 * Expected status code.
@@ -63,9 +63,6 @@ public class StatusEqualAssertion implements HttpResponseAssertion {
 	public AssertionResult handle(HttpResponse httpResponse) {
 		int actualStatus = httpResponse.getStatus();
 		log.debug("Checking that status {} is strictly equals to {}", actualStatus, status);
-
-		return actualStatus == status ?
-				success() :
-				failure(shouldHaveStatus(actualStatus, status));
+		return actualStatus == status ? success() : failure(shouldHaveStatus(actualStatus, status));
 	}
 }

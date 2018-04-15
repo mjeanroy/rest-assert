@@ -24,39 +24,82 @@
 
 package com.github.mjeanroy.restassert.internal.json.parsers;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
+import com.github.mjeanroy.junit4.customclassloader.BlackListClassLoader;
+import com.github.mjeanroy.junit4.customclassloader.BlackListClassLoaderHolder;
+import com.github.mjeanroy.junit4.customclassloader.CustomClassLoaderRunner;
+import com.github.mjeanroy.junit4.customclassloader.RunWithClassLoader;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+
+@RunWith(CustomClassLoaderRunner.class)
+@RunWithClassLoader(BlackListClassLoaderHolder.class)
 public class JsonParserStrategyTest {
 
 	@Rule
 	public ExpectedException thrown = none();
 
 	@Test
-	public void it_should_get_gson_parser() {
+	public void GSON_should_get_gson_parser() {
 		JsonParser parser = JsonParserStrategy.GSON.build();
-		assertThat(parser)
-			.isNotNull()
-			.isExactlyInstanceOf(GsonJsonParser.class);
+		assertThat(parser).isExactlyInstanceOf(GsonJsonParser.class);
 	}
 
 	@Test
-	public void it_should_get_jackson2_parser() {
+	public void JACKSON2_should_get_jackson2_parser() {
 		JsonParser parser = JsonParserStrategy.JACKSON2.build();
-		assertThat(parser)
-			.isNotNull()
-			.isExactlyInstanceOf(Jackson2JsonParser.class);
+		assertThat(parser).isExactlyInstanceOf(Jackson2JsonParser.class);
 	}
 
 	@Test
-	public void it_should_get_jackson1_parser() {
+	public void JACKSON1_should_get_jackson1_parser() {
 		JsonParser parser = JsonParserStrategy.JACKSON1.build();
-		assertThat(parser)
-			.isNotNull()
-			.isExactlyInstanceOf(Jackson1JsonParser.class);
+		assertThat(parser).isExactlyInstanceOf(Jackson1JsonParser.class);
+	}
+
+	@Test
+	public void AUTO_should_get_jackson2_parser_by_default() {
+		// com.fasterxml.jackson.databind.ObjectMapper
+		JsonParser parser = JsonParserStrategy.AUTO.build();
+		assertThat(parser).isExactlyInstanceOf(Jackson2JsonParser.class);
+	}
+
+	@Test
+	public void AUTO_should_get_jackson_1_parser_if_jackson_2_is_not_available() {
+		BlackListClassLoader classLoader = getClassLoader();
+		classLoader.add("com.fasterxml.jackson.databind.ObjectMapper");
+
+		JsonParser parser = JsonParserStrategy.AUTO.build();
+		assertThat(parser).isExactlyInstanceOf(Jackson1JsonParser.class);
+	}
+
+	@Test
+	public void AUTO_should_get_gson_parser_if_jackson_2_and_jackson_1_are_not_available() {
+		BlackListClassLoader classLoader = getClassLoader();
+		classLoader.add("com.fasterxml.jackson.databind.ObjectMapper");
+		classLoader.add("org.codehaus.jackson.map.ObjectMapper");
+
+		JsonParser parser = JsonParserStrategy.AUTO.build();
+		assertThat(parser).isExactlyInstanceOf(GsonJsonParser.class);
+	}
+
+	@Test
+	public void AUTO_should_fail_if_no_implementation_is_available() {
+		BlackListClassLoader classLoader = getClassLoader();
+		classLoader.add("com.fasterxml.jackson.databind.ObjectMapper");
+		classLoader.add("org.codehaus.jackson.map.ObjectMapper");
+		classLoader.add("com.google.gson.Gson");
+
+		thrown.expect(UnsupportedOperationException.class);
+		thrown.expectMessage("Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)");
+		JsonParserStrategy.AUTO.build();
+	}
+
+	private BlackListClassLoader getClassLoader() {
+		return (BlackListClassLoader) Thread.currentThread().getContextClassLoader();
 	}
 }

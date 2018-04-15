@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.internal.data.HttpHeader;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.utils.PreConditions.notBlank;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 /**
  * Check that http response has a content-type header with
@@ -45,7 +45,7 @@ public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implemen
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(HasCharsetAssertion.class);
+	private static final Logger log = Loggers.getLogger(HasCharsetAssertion.class);
 
 	/**
 	 * Expected charset.
@@ -76,8 +76,6 @@ public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implemen
 		String actualCharset = contentTypeParts[1].split("=")[1].trim();
 		log.debug("Comparing charset '{}' with '{}'", charset, actualCharset);
 
-		return actualCharset.equalsIgnoreCase(charset) ?
-				success() :
-				failure(shouldHaveCharset(charset, actualCharset));
+		return actualCharset.equalsIgnoreCase(charset) ? success() : failure(shouldHaveCharset(charset, actualCharset));
 	}
 }

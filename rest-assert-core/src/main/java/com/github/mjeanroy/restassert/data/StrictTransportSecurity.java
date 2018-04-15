@@ -24,13 +24,17 @@
 
 package com.github.mjeanroy.restassert.data;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.*;
-
 import static com.github.mjeanroy.restassert.utils.Utils.toLong;
 import static java.util.Collections.unmodifiableMap;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 /**
  * Strict-Transport-Security header.
@@ -45,7 +49,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(StrictTransportSecurity.class);
+	private static final Logger log = Loggers.getLogger(StrictTransportSecurity.class);
 
 	/**
 	 * Max-Age value.

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.data;
 
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 import com.github.mjeanroy.restassert.utils.Mapper;
 import com.github.mjeanroy.restassert.utils.PreConditions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URI;
 import java.net.URL;
@@ -48,7 +48,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(ContentSecurityPolicy.class);
+	private static final Logger log = Loggers.getLogger(ContentSecurityPolicy.class);
 
 	/**
 	 * List of header directives.

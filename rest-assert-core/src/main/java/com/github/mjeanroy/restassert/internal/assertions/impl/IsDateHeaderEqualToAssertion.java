@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.utils.Mapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Date;
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.utils.DateUtils.formatHttpDate;
 import static com.github.mjeanroy.restassert.utils.DateUtils.parseHttpDate;
-import static com.github.mjeanroy.restassert.utils.Utils.map;
 import static com.github.mjeanroy.restassert.utils.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.utils.Utils.map;
+
+import java.util.Date;
+import java.util.List;
+
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
+import com.github.mjeanroy.restassert.utils.Mapper;
 
 /**
  * Check that http response has at least one header with
@@ -49,7 +49,7 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(IsDateHeaderEqualToAssertion.class);
+	private static final Logger log = Loggers.getLogger(IsDateHeaderEqualToAssertion.class);
 
 	/**
 	 * Expected header value.

@@ -24,23 +24,23 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.internal.data.Cookie;
-import com.github.mjeanroy.restassert.internal.data.Cookies;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.utils.Predicate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.utils.PreConditions.notBlank;
 import static com.github.mjeanroy.restassert.utils.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.utils.Utils.some;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.error.http.ShouldHaveCookie;
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.data.Cookie;
+import com.github.mjeanroy.restassert.internal.data.Cookies;
+import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
+import com.github.mjeanroy.restassert.utils.Predicate;
 
 /**
  * Check that http response contains expected cookie.
@@ -50,7 +50,7 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(HasCookieAssertion.class);
+	private static final Logger log = Loggers.getLogger(HasCookieAssertion.class);
 
 	/**
 	 * Expected cookie.

@@ -22,17 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.utils;
+package com.github.mjeanroy.restassert.internal.loggers;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.github.mjeanroy.restassert.utils.ClassUtils;
 
-import org.junit.Test;
+/**
+ * Static Logger Factory.
+ */
+public final class Loggers {
 
-public class ClassUtilsTest {
+	// Ensure non instantiation.
+	private Loggers() {
+	}
 
-	@Test
-	public void it_should_check_if_class_is_present() {
-		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.utils.ClassUtils")).isTrue();
-		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.utils.Foo")).isFalse();
+	/**
+	 * Create logger, returns a no-op logger if slf4j is not available in the
+	 * classpath, or a logger delegating to slf4j otherwise.
+	 *
+	 * @param klass Logger name.
+	 * @return The logger.
+	 */
+	public static Logger getLogger(Class<?> klass) {
+		if (ClassUtils.isPresent("org.slf4j.Logger")) {
+			return new Slf4jLogger(klass);
+		}
+
+		// Fallback.
+		return new NoOpLogger();
 	}
 }

@@ -26,8 +26,8 @@ package com.github.mjeanroy.restassert.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
@@ -38,7 +38,7 @@ public class StatusOutOfAssertion extends AbstractStatusRangeAssertion implement
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(StatusOutOfAssertion.class);
+	private static final Logger log = Loggers.getLogger(StatusOutOfAssertion.class);
 
 	/**
 	 * Create assertion.
@@ -54,9 +54,6 @@ public class StatusOutOfAssertion extends AbstractStatusRangeAssertion implement
 	public AssertionResult handle(HttpResponse httpResponse) {
 		int status = httpResponse.getStatus();
 		log.debug("Checking that status {} is not between {} and {}", status, start, end);
-
-		return status < start || status > end ?
-				success() :
-				failure(shouldHaveStatusOutOf(status, start, end));
+		return status < start || status > end ? success() : failure(shouldHaveStatusOutOf(status, start, end));
 	}
 }

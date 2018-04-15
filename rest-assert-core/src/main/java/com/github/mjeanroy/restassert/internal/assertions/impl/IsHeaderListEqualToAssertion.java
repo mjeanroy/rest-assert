@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.utils.Predicate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.github.mjeanroy.restassert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.utils.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.utils.Utils.join;
+import static com.github.mjeanroy.restassert.utils.Utils.some;
 
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
-import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.utils.Utils.join;
-import static com.github.mjeanroy.restassert.utils.PreConditions.notEmpty;
-import static com.github.mjeanroy.restassert.utils.Utils.some;
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
+import com.github.mjeanroy.restassert.utils.Predicate;
 
 /**
  * Check that http response has at least one header with
@@ -49,7 +49,7 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(IsHeaderListEqualToAssertion.class);
+	private static final Logger log = Loggers.getLogger(IsHeaderListEqualToAssertion.class);
 
 	/**
 	 * Expected header values.

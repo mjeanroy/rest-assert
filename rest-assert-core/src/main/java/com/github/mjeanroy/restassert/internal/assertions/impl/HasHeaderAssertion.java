@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import static com.github.mjeanroy.restassert.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.success;
+
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 /**
  * Check that http response has at least one header with
@@ -42,7 +42,7 @@ public class HasHeaderAssertion extends AbstractHeaderAssertion implements HttpR
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(HasHeaderAssertion.class);
+	private static final Logger log = Loggers.getLogger(HasHeaderAssertion.class);
 
 	/**
 	 * Create assertion.
@@ -56,8 +56,6 @@ public class HasHeaderAssertion extends AbstractHeaderAssertion implements HttpR
 	@Override
 	public AssertionResult handle(HttpResponse httpResponse) {
 		log.debug("Checking if response contains header: '{}'", name);
-		return httpResponse.hasHeader(name) ?
-				success() :
-				failure(shouldHaveHeader(name));
+		return httpResponse.hasHeader(name) ? success() : failure(shouldHaveHeader(name));
 	}
 }

@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.data;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
 import static com.github.mjeanroy.restassert.utils.Utils.join;
+
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 /**
  * Cache-Control header value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
@@ -41,7 +41,7 @@ public final class CacheControl implements HeaderValue {
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(CacheControl.class);
+	private static final Logger log = Loggers.getLogger(CacheControl.class);
 
 	private static final String SEPARATOR = ", ";
 	private static final String DIR_NO_CACHE = "no-cache";

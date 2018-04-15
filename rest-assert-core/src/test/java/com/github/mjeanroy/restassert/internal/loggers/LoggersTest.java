@@ -22,17 +22,35 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.utils;
+package com.github.mjeanroy.restassert.internal.loggers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.github.mjeanroy.junit4.customclassloader.BlackListClassLoader;
+import com.github.mjeanroy.junit4.customclassloader.BlackListClassLoaderHolder;
+import com.github.mjeanroy.junit4.customclassloader.CustomClassLoaderRunner;
+import com.github.mjeanroy.junit4.customclassloader.RunWithClassLoader;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class ClassUtilsTest {
+@RunWith(CustomClassLoaderRunner.class)
+@RunWithClassLoader(BlackListClassLoaderHolder.class)
+public class LoggersTest {
 
 	@Test
-	public void it_should_check_if_class_is_present() {
-		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.utils.ClassUtils")).isTrue();
-		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.utils.Foo")).isFalse();
+	public void it_should_load_no_op_logger_if_slf4_is_not_available() {
+		getClassLoader().add("org.slf4j.Logger");
+		Logger logger = Loggers.getLogger(LoggersTest.class);
+		assertThat(logger).isExactlyInstanceOf(NoOpLogger.class);
+	}
+
+	@Test
+	public void it_should_load_slf4j_logger_if_slf4_is_available() {
+		Logger logger = Loggers.getLogger(LoggersTest.class);
+		assertThat(logger).isExactlyInstanceOf(Slf4jLogger.class);
+	}
+
+	private BlackListClassLoader getClassLoader() {
+		return (BlackListClassLoader) Thread.currentThread().getContextClassLoader();
 	}
 }

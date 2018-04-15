@@ -24,23 +24,23 @@
 
 package com.github.mjeanroy.restassert.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.internal.data.HttpHeader;
-import com.github.mjeanroy.restassert.internal.data.HttpResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static com.github.mjeanroy.restassert.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
+import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
-import static com.github.mjeanroy.restassert.internal.assertions.AssertionResult.failure;
+import com.github.mjeanroy.restassert.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.internal.loggers.Loggers;
 
 abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion implements HttpResponseAssertion {
 
 	/**
 	 * Class logger.
 	 */
-	private static final Logger log = LoggerFactory.getLogger(AbstractHeaderEqualToAssertion.class);
+	private static final Logger log = Loggers.getLogger(AbstractHeaderEqualToAssertion.class);
 
 	/**
 	 * Create assertion.

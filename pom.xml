@@ -48,6 +48,7 @@
 		<commons-lang3.version>3.7</commons-lang3.version>
 		<commons-io.version>2.6</commons-io.version>
 		<junit-runif.version>0.2.0</junit-runif.version>
+		<junit-customclassloader.version>0.1.1</junit-customclassloader.version>
 		<equalsverifier.version>2.4.5</equalsverifier.version>
 	</properties>
 
@@ -143,6 +144,12 @@
 				<groupId>com.github.mjeanroy</groupId>
 				<artifactId>junit-runif</artifactId>
 				<version>${junit-runif.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.mjeanroy</groupId>
+				<artifactId>junit-customclassloader</artifactId>
+				<version>${junit-customclassloader.version}</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>nl.jqno.equalsverifier</groupId>
