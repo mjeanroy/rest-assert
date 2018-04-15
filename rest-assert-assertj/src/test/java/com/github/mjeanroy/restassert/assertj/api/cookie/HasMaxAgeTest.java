@@ -31,11 +31,12 @@ import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HasMaxAgeTest extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
 	protected Cookies createAssertions() {
@@ -49,12 +50,12 @@ public class CookieAssert_isNotHttpOnly_Test extends AbstractApiTest<Cookies, Co
 
 	@Override
 	protected CookieAssert invoke() {
-		return api.isNotHttpOnly();
+		return api.hasMaxAge(actual().getMaxAge());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertHasMaxAge(any(AssertionInfo.class), any(Cookie.class), nullable(Long.class));
 	}
 
 	private Cookie actual() {

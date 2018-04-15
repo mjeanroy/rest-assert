@@ -35,7 +35,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isHttpOnly_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class IsSecuredTest extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
 	protected Cookies createAssertions() {
@@ -49,12 +49,12 @@ public class CookieAssert_isHttpOnly_Test extends AbstractApiTest<Cookies, Cooki
 
 	@Override
 	protected CookieAssert invoke() {
-		return api.isHttpOnly();
+		return api.isSecured();
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsHttpOnly(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertIsSecured(any(AssertionInfo.class), any(Cookie.class));
 	}
 
 	private Cookie actual() {

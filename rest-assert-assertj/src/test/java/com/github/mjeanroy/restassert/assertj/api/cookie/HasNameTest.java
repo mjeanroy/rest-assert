@@ -36,7 +36,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_hasValue_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HasNameTest extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
 	protected Cookies createAssertions() {
@@ -50,12 +50,12 @@ public class CookieAssert_hasValue_Test extends AbstractApiTest<Cookies, CookieA
 
 	@Override
 	protected CookieAssert invoke() {
-		return api.hasValue(actual().getName());
+		return api.hasName(actual().getName());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertHasValue(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
+		verify(assertions).assertHasName(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
 	}
 
 	private Cookie actual() {

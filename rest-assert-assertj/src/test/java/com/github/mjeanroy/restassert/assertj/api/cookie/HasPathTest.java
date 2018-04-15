@@ -31,11 +31,12 @@ import com.github.mjeanroy.restassert.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.ArgumentMatchers.nullable;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class CookieAssert_isNotSecured_Test extends AbstractApiTest<Cookies, CookieAssert> {
+public class HasPathTest extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
 	protected Cookies createAssertions() {
@@ -49,12 +50,12 @@ public class CookieAssert_isNotSecured_Test extends AbstractApiTest<Cookies, Coo
 
 	@Override
 	protected CookieAssert invoke() {
-		return api.isNotSecured();
+		return api.hasPath(actual().getPath());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsNotSecured(any(AssertionInfo.class), any(Cookie.class));
+		verify(assertions).assertHasPath(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
 	}
 
 	private Cookie actual() {
