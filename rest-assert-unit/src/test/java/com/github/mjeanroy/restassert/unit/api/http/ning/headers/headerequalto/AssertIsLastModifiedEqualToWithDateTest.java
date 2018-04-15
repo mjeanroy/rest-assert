@@ -33,7 +33,7 @@ import java.util.Date;
 import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsLastModifiedEqualToWithDateTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsLastModifiedEqualToWithDateTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
 

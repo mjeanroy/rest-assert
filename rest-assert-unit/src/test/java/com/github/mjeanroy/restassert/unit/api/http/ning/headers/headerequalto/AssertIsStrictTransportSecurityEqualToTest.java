@@ -24,28 +24,36 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import static com.github.mjeanroy.restassert.tests.Headers.STRICT_TRANSPORT_SECURITY;
+
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+public class AssertIsStrictTransportSecurityEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
-
-	private static final String VALUE = "nosniff";
+	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
+		.includeSubDomains()
+		.build();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE);
+		return STRICT_TRANSPORT_SECURITY;
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsContentTypeOptionsEqualTo(actual, VALUE);
+		NingHttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
+		NingHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return "max-age=31536000; preload";
 	}
 }

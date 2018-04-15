@@ -31,7 +31,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsXssProtectionEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsXssProtectionEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
 

@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsContentDispositionEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsContentDispositionEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = "attachment; filename=\"fname.ext\"";
 

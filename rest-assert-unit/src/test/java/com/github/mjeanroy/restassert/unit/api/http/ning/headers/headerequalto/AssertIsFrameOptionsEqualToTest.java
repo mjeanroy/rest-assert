@@ -31,7 +31,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsFrameOptionsEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
 

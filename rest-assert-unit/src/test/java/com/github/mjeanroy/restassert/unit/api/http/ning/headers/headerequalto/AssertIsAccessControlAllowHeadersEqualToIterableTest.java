@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.tests.Strings.join;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 import static java.util.Collections.singletonList;
 
-public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final List<String> VALUE = singletonList("X-Requested-With");
 

@@ -31,7 +31,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsCacheControlEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsCacheControlEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final CacheControl VALUE = new CacheControl.Builder()
 		.noCache()

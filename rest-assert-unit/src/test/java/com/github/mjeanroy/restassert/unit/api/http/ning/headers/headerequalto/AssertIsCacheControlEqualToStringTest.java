@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsCacheControlEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsCacheControlEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = "no-cache";
 

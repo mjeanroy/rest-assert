@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsXssProtectionEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsXssProtectionEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = "1";
 

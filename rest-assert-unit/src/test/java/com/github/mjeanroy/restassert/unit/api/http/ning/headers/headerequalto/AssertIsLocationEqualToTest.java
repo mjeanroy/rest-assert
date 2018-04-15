@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsLocationEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsLocationEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = "http://www.google.fr";
 

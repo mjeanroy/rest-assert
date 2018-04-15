@@ -24,28 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpHeaderEqualToTest;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.ning.http.client.Response;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
-public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
-
-	private static final String VALUE = "nosniff";
+abstract class AbstractNingHttpHeaderEqualToTest extends AbstractHttpHeaderEqualToTest<Response> {
 
 	@Override
-	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE);
-	}
-
-	@Override
-	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsContentTypeOptionsEqualTo(actual, VALUE);
-	}
-
-	@Override
-	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
+	protected Response newHttpResponse(Header header) {
+		return new NingHttpResponseBuilder().addHeader(header).build();
 	}
 }

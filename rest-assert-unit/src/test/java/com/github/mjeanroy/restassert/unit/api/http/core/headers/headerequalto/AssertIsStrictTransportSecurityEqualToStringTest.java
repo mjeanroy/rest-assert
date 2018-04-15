@@ -22,17 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
+package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpHeaderEqualToTest;
-import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
+import static com.github.mjeanroy.restassert.tests.Headers.STRICT_TRANSPORT_SECURITY;
+
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-import com.ning.http.client.Response;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-abstract class AbstractGoogleHttpHeaderEqualToTest extends AbstractHttpHeaderEqualToTest<Response> {
+public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractCoreHttpHeaderEqualToTest {
+
+	private static final String VALUE = STRICT_TRANSPORT_SECURITY.getValue();
 
 	@Override
-	protected Response newHttpResponse(Header header) {
-		return new NingHttpResponseBuilder().addHeader(header).build();
+	protected Header getHeader() {
+		return STRICT_TRANSPORT_SECURITY;
+	}
+
+	@Override
+	protected void invoke(HttpResponse actual) {
+		HttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse actual) {
+		HttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
 	}
 }

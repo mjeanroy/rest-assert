@@ -35,7 +35,7 @@ import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.ning.http.client.Response;
 
-public class AssertIsContentSecurityPolicyEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = new ContentSecurityPolicy.Builder()
 			.addDefaultSrc(none())

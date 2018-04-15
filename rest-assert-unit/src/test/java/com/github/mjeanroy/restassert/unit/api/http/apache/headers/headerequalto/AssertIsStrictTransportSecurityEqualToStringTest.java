@@ -22,30 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
+package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import static com.github.mjeanroy.restassert.tests.Headers.STRICT_TRANSPORT_SECURITY;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
-import com.ning.http.client.Response;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
 
-public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
-
-	private static final String VALUE = "nosniff";
+	private static final String VALUE = STRICT_TRANSPORT_SECURITY.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE);
+		return STRICT_TRANSPORT_SECURITY;
 	}
 
 	@Override
-	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsContentTypeOptionsEqualTo(actual, VALUE);
+	protected void invoke(HttpResponse actual) {
+		ApacheHttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
+	protected void invoke(String message, HttpResponse actual) {
+		ApacheHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
 	}
 }

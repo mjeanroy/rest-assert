@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
-public class AssertIsExpiresEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+public class AssertIsExpiresEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
 
