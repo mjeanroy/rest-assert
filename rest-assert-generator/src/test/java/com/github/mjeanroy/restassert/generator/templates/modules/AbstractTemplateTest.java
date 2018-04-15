@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2014-2016 <mickael.jeanroy@gmail.com>
+ * Copyright (c) 2014-2018 Mickael Jeanroy
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.github.mjeanroy.restassert.generator.Template;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractTemplateTest {
 
