@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 
+import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasValue;
+
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
-
-import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasValue;
 
 public class AssertHasValueTest extends AbstractApacheHttpCookieTest {
 
@@ -68,8 +68,6 @@ public class AssertHasValueTest extends AbstractApacheHttpCookieTest {
 	}
 
 	private Cookie cookie(String value) {
-		return new ApacheHttpCookieBuilder()
-				.setValue(value)
-				.build();
+		return new ApacheHttpCookieBuilder().setValue(value).build();
 	}
 }

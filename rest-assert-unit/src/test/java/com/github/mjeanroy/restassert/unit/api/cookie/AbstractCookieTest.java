@@ -24,12 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
-import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
-
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
+
+import com.github.mjeanroy.restassert.tests.Function;
+import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
+import org.junit.Test;
 
 public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 
@@ -43,7 +42,7 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 	@Test
 	public void it_should_fail() {
 		final T cookie = failure();
-		final String message = format(pattern(), placeholders());
+		final String message = String.format(pattern(), placeholders());
 
 		assertFailure(message, new Function() {
 			@Override
@@ -66,11 +65,31 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 		});
 	}
 
+	/**
+	 * Create a cookie that should pass test.
+	 *
+	 * @return Cookie.
+	 */
 	protected abstract T success();
 
+	/**
+	 * Create a cookie that should not pass test.
+	 *
+	 * @return Cookie.
+	 */
 	protected abstract T failure();
 
+	/**
+	 * Get expected message pattern when test fails.
+	 *
+	 * @return The expected error message pattern.
+	 */
 	protected abstract String pattern();
 
+	/**
+	 * Get expected message placeholders when test fails.
+	 *
+	 * @return The expected error message placeholders.
+	 */
 	protected abstract Object[] placeholders();
 }

@@ -24,10 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.reflect.Param;
-
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeSecured.shouldBeSecured;
@@ -38,6 +34,10 @@ import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHavePath.sh
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+
+import com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveName;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.reflect.Param;
 
 /**
  * Re-usable assertion for {@link Cookie} objects.
@@ -71,9 +71,7 @@ public final class CookieAssertions {
 	 */
 	public AssertionResult hasName(Cookie cookie, @Param("name") String name) {
 		String actualName = cookie.getName();
-		return actualName.equals(name) ?
-				success() :
-				failure(ShouldHaveName.shouldHaveName(name, actualName));
+		return actualName.equals(name) ? success() : failure(ShouldHaveName.shouldHaveName(name, actualName));
 	}
 
 	/**
@@ -85,9 +83,7 @@ public final class CookieAssertions {
 	 */
 	public AssertionResult hasValue(Cookie cookie, @Param("value") String value) {
 		String actualValue = cookie.getValue();
-		return actualValue.equals(value) ?
-				success() :
-				failure(shouldHaveValue(value, actualValue));
+		return actualValue.equals(value) ? success() : failure(shouldHaveValue(value, actualValue));
 	}
 
 	/**
@@ -99,9 +95,7 @@ public final class CookieAssertions {
 	 */
 	public AssertionResult hasDomain(Cookie cookie, @Param("domain") String domain) {
 		String actualDomain = cookie.getDomain();
-		return actualDomain.equals(domain) ?
-				success() :
-				failure(shouldHaveDomain(domain, actualDomain));
+		return actualDomain.equals(domain) ? success() : failure(shouldHaveDomain(domain, actualDomain));
 	}
 
 	/**
@@ -113,9 +107,7 @@ public final class CookieAssertions {
 	 */
 	public AssertionResult hasPath(Cookie cookie, @Param("path") String path) {
 		String actualPath = cookie.getPath();
-		return actualPath.equals(path) ?
-				success() :
-				failure(shouldHavePath(path, actualPath));
+		return actualPath.equals(path) ? success() : failure(shouldHavePath(path, actualPath));
 	}
 
 	/**
@@ -127,9 +119,7 @@ public final class CookieAssertions {
 	 */
 	public AssertionResult hasMaxAge(Cookie cookie, @Param("maxAge") long maxAge) {
 		long actualMaxAge = cookie.getMaxAge();
-		return actualMaxAge == maxAge ?
-				success() :
-				failure(shouldHaveMaxAge(maxAge, actualMaxAge));
+		return actualMaxAge == maxAge ? success() : failure(shouldHaveMaxAge(maxAge, actualMaxAge));
 	}
 
 	/**
@@ -139,9 +129,7 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isSecured(Cookie cookie) {
-		return cookie.isSecured() ?
-				success() :
-				failure(shouldBeSecured());
+		return cookie.isSecured() ? success() : failure(shouldBeSecured());
 	}
 
 	/**
@@ -151,9 +139,7 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotSecured(Cookie cookie) {
-		return !cookie.isSecured() ?
-				success() :
-				failure(shouldNotBeSecured());
+		return !cookie.isSecured() ? success() : failure(shouldNotBeSecured());
 	}
 
 	/**
@@ -163,9 +149,7 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isHttpOnly(Cookie cookie) {
-		return cookie.isHttpOnly() ?
-				success() :
-				failure(shouldBeHttpOnly());
+		return cookie.isHttpOnly() ? success() : failure(shouldBeHttpOnly());
 	}
 
 	/**
@@ -175,8 +159,6 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotHttpOnly(Cookie cookie) {
-		return !cookie.isHttpOnly() ?
-				success() :
-				failure(shouldNotBeHttpOnly());
+		return !cookie.isHttpOnly() ? success() : failure(shouldNotBeHttpOnly());
 	}
 }
