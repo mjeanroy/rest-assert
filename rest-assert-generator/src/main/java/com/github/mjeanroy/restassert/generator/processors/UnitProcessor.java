@@ -42,6 +42,7 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.unit.mo
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.HttpAssert.httpAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.NingHttpAssert.ningHttpAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.OkHttpAssert.okHttpAssert;
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.SpringMockMvcHttpAssert.springMockMvcHttpAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.json.JsonAssert.jsonAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
 import static java.util.Arrays.asList;
@@ -65,7 +66,8 @@ public enum UnitProcessor {
 				asyncHttpAssert(),
 				apacheHttpAssert(),
 				googleHttpAssert(),
-				okHttpAssert()
+				okHttpAssert(),
+				springMockMvcHttpAssert()
 			)
 	),
 

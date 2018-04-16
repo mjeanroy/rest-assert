@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.NingHttpAssert.ningHttpAssert;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.NingHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import com.ning.http.client.Response;
 import org.junit.Before;
+
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.NingHttpAssert.ningHttpAssert;
 
 public class NingHttpAssertTest extends AbstractUnitTemplateModelTest {
 

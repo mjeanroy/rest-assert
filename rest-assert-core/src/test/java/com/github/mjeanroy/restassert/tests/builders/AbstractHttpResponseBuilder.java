@@ -38,6 +38,7 @@ import java.util.Map;
  *
  * @param <T> Concrete implementation, used for chaining.
  */
+@SuppressWarnings("unchecked")
 public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuilder> implements HttpResponseBuilder<U> {
 
 	/**
@@ -65,21 +66,18 @@ public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuild
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public T setStatus(int status) {
 		this.status = status;
 		return (T) this;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public T setContent(String content) {
 		this.content = content;
 		return (T) this;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public T addHeader(String name, String value) {
 		List<String> header = headers.get(name);
 		if (header == null) {
@@ -92,7 +90,6 @@ public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuild
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public T addHeader(Header header, Header... other) {
 		addHeader(header.getName(), header.getValue());
 		for (Header h : other) {
@@ -103,7 +100,6 @@ public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuild
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public T addCookie(Cookie cookie, Cookie... other) {
 		addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
 		for (Cookie c : other) {

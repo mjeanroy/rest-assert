@@ -41,13 +41,8 @@ public class ApacheHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpR
 
 	@Override
 	public HttpResponse build() {
-		StatusLine statusLine = new ApacheHttpStatusLineBuilder()
-				.setStatusCode(status)
-				.build();
-
-		HttpEntity entity = new ApacheHttpEntityBuilder()
-				.setContent(content)
-				.build();
+		StatusLine statusLine = new ApacheHttpStatusLineBuilder().setStatusCode(status).build();
+		HttpEntity entity = new ApacheHttpEntityBuilder().setContent(content).build();
 
 		HttpResponse rsp = new BasicHttpResponse(statusLine);
 		rsp.setEntity(entity);

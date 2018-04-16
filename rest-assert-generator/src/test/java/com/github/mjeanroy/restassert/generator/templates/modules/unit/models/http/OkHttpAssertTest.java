@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.h
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.OkHttpAssert.okHttpAssert;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.OkHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import okhttp3.Response;

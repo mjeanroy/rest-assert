@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.unit.mo
 import javax.servlet.http.Cookie;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.JavaxCookie;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.javax.JavaxCookie;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.junit.Before;

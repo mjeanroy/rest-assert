@@ -24,18 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
-
-import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.GoogleHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 import com.google.api.client.http.HttpResponse;
 
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class GoogleHttpAssert extends AbstractUnitTemplateModel implements TemplateModel {
+public class GoogleHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -59,36 +55,6 @@ public class GoogleHttpAssert extends AbstractUnitTemplateModel implements Templ
 	@Override
 	public String getActualClass() {
 		return HttpResponse.class.getName();
-	}
-
-	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
-	protected Class<?> coreClass() {
-		return HttpResponseAssertions.class;
-	}
-
-	@Override
-	protected String getSubPackage() {
-		return "http";
-	}
-
-	@Override
-	public String getClassName() {
-		return getClass().getSimpleName();
-	}
-
-	@Override
-	public String buildCoreMethodName(String methodName) {
-		return methodName;
-	}
-
-	@Override
-	public String buildMethodName(String methodName) {
-		return generateAssertMethodName(methodName);
 	}
 
 	@Override

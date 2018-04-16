@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.OkHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResponse;
 import okhttp3.Response;
 
 /**

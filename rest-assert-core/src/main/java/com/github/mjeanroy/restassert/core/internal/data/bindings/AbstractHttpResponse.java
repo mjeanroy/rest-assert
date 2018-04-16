@@ -41,12 +41,12 @@ import static java.util.Collections.unmodifiableList;
 /**
  * Template for {@link HttpResponse} interface.
  */
-abstract class AbstractHttpResponse implements HttpResponse {
+public abstract class AbstractHttpResponse implements HttpResponse {
 
 	/**
 	 * Default constructor.
 	 */
-	AbstractHttpResponse() {
+	protected AbstractHttpResponse() {
 	}
 
 	@Override

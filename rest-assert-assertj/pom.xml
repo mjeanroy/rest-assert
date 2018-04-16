@@ -47,6 +47,11 @@
 			<artifactId>okhttp</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<optional>true</optional>
+		</dependency>
 
 		<!-- Generator -->
 		<dependency>
@@ -107,6 +112,11 @@
 		<dependency>
 			<groupId>com.github.mjeanroy</groupId>
 			<artifactId>junit-runif</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

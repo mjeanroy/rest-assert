@@ -24,17 +24,13 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
-
-import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.AsyncHttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class AsyncHttpAssert extends AbstractUnitTemplateModel implements TemplateModel {
+public class AsyncHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -60,36 +56,6 @@ public class AsyncHttpAssert extends AbstractUnitTemplateModel implements Templa
 		// Be careful, do not import org.asynchttpclient, as it will not compile on JDK 7
 		// and the unit test suite run on JDK 7.
 		return "org.asynchttpclient.Response";
-	}
-
-	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
-	protected Class<?> coreClass() {
-		return HttpResponseAssertions.class;
-	}
-
-	@Override
-	protected String getSubPackage() {
-		return "http";
-	}
-
-	@Override
-	public String getClassName() {
-		return getClass().getSimpleName();
-	}
-
-	@Override
-	public String buildCoreMethodName(String methodName) {
-		return methodName;
-	}
-
-	@Override
-	public String buildMethodName(String methodName) {
-		return generateAssertMethodName(methodName);
 	}
 
 	@Override

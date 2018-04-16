@@ -35,7 +35,7 @@ public interface HttpResponseBuilder<T> {
 	 * @param status New status.
 	 * @return Current builder.
 	 */
-	HttpResponseBuilder setStatus(int status);
+	HttpResponseBuilder<T> setStatus(int status);
 
 	/**
 	 * Set http response body.
@@ -43,7 +43,7 @@ public interface HttpResponseBuilder<T> {
 	 * @param content New content.
 	 * @return Current builder.
 	 */
-	HttpResponseBuilder setContent(String content);
+	HttpResponseBuilder<T> setContent(String content);
 
 	/**
 	 * Add new header.
@@ -52,7 +52,7 @@ public interface HttpResponseBuilder<T> {
 	 * @param value Header value.
 	 * @return Current builder.
 	 */
-	HttpResponseBuilder addHeader(String name, String value);
+	HttpResponseBuilder<T> addHeader(String name, String value);
 
 	/**
 	 * Add new header.
@@ -61,7 +61,7 @@ public interface HttpResponseBuilder<T> {
 	 * @param other Other, optional, headers.
 	 * @return Current builder.
 	 */
-	HttpResponseBuilder addHeader(Header header, Header... other);
+	HttpResponseBuilder<T> addHeader(Header header, Header... other);
 
 	/**
 	 * Add new cookie.
@@ -70,7 +70,7 @@ public interface HttpResponseBuilder<T> {
 	 * @param other Other, optional, cookies.
 	 * @return Current builder.
 	 */
-	HttpResponseBuilder addCookie(Cookie cookie, Cookie... other);
+	HttpResponseBuilder<T> addCookie(Cookie cookie, Cookie... other);
 
 	/**
 	 * Build http response.
