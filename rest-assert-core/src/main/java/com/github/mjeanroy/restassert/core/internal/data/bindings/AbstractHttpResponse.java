@@ -66,7 +66,7 @@ public abstract class AbstractHttpResponse implements HttpResponse {
 	@Override
 	public List<Cookie> getCookies() {
 		List<String> setCookieHeaders = getHeader(SET_COOKIE.getName());
-		if (setCookieHeaders.isEmpty()) {
+		if (setCookieHeaders == null || setCookieHeaders.isEmpty()) {
 			return emptyList();
 		}
 

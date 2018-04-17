@@ -51,6 +51,10 @@
 			<artifactId>spring-test</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.github.mjeanroy</groupId>
+			<artifactId>junit-servers-core</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
