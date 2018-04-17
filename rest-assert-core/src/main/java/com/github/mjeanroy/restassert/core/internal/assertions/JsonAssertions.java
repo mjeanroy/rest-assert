@@ -31,7 +31,6 @@ import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJson
 import com.github.mjeanroy.restassert.core.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParserStrategy;
-import com.github.mjeanroy.restassert.core.reflect.Param;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
@@ -103,7 +102,7 @@ public final class JsonAssertions {
 	 * @param other  Other entries to check.
 	 * @return Assertion result.
 	 */
-	public AssertionResult contains(String actual, @Param("key") String key, @Param("other") String... other) {
+	public AssertionResult contains(String actual, String key, String... other) {
 		Set<String> entries = new LinkedHashSet<>();
 		entries.add(key);
 		addAll(entries, other);
@@ -117,7 +116,7 @@ public final class JsonAssertions {
 	 * @param keys   Entries to check.
 	 * @return Assertion result.
 	 */
-	public AssertionResult contains(String actual, @Param("keys") Iterable<String> keys) {
+	public AssertionResult contains(String actual, Iterable<String> keys) {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
 		for (String e : keys) {
@@ -139,7 +138,7 @@ public final class JsonAssertions {
 	 * @param other  Other entries to check.
 	 * @return Assertion result.
 	 */
-	public AssertionResult containsEntries(String actual, @Param("entry") JsonEntry entry, @Param("other") JsonEntry... other) {
+	public AssertionResult containsEntries(String actual, JsonEntry entry, JsonEntry... other) {
 		Set<JsonEntry> entries = new LinkedHashSet<>();
 		entries.add(entry);
 		addAll(entries, other);
@@ -153,7 +152,7 @@ public final class JsonAssertions {
 	 * @param entries Entries to check.
 	 * @return Assertion result.
 	 */
-	public AssertionResult containsEntries(String actual, @Param("entries") Iterable<JsonEntry> entries) {
+	public AssertionResult containsEntries(String actual, Iterable<JsonEntry> entries) {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
 		// Collect errors
@@ -196,7 +195,7 @@ public final class JsonAssertions {
 	 * @param expected Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, @Param("expected") String expected) {
+	public AssertionResult isEqualTo(String actual, String expected) {
 		return doComparison(actual, expected);
 	}
 
@@ -207,7 +206,7 @@ public final class JsonAssertions {
 	 * @param file   Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, @Param("file") File file) {
+	public AssertionResult isEqualTo(String actual, File file) {
 		return isEqualTo(actual, readFileToString(file.toPath()));
 	}
 
@@ -218,7 +217,7 @@ public final class JsonAssertions {
 	 * @param path   Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, @Param("path") Path path) {
+	public AssertionResult isEqualTo(String actual, Path path) {
 		return isEqualTo(actual, readFileToString(path));
 	}
 
@@ -229,7 +228,7 @@ public final class JsonAssertions {
 	 * @param uri    Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, @Param("uri") URI uri) {
+	public AssertionResult isEqualTo(String actual, URI uri) {
 		return isEqualTo(actual, Paths.get(uri));
 	}
 
@@ -240,7 +239,7 @@ public final class JsonAssertions {
 	 * @param url    Expected representation.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualTo(String actual, @Param("url") URL url) {
+	public AssertionResult isEqualTo(String actual, URL url) {
 		try {
 			return isEqualTo(actual, url.toURI());
 		} catch (URISyntaxException ex) {
@@ -256,7 +255,7 @@ public final class JsonAssertions {
 	 * @param entries  Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("expected") String expected, @Param("entries") Iterable<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, String expected, Iterable<String> entries) {
 		final String actualJson;
 		final String expectedJson;
 
@@ -290,7 +289,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("file") File file, @Param("entries") Iterable<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, File file, Iterable<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(file.toPath()), entries);
 	}
 
@@ -302,7 +301,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("path") Path path, @Param("entries") Iterable<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, Path path, Iterable<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(path), entries);
 	}
 
@@ -314,7 +313,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("uri") URI uri, @Param("entries") Iterable<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, URI uri, Iterable<String> entries) {
 		return isEqualToIgnoring(actual, new File(uri), entries);
 	}
 
@@ -326,7 +325,7 @@ public final class JsonAssertions {
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isEqualToIgnoring(String actual, @Param("url") URL url, @Param("entries") Iterable<String> entries) {
+	public AssertionResult isEqualToIgnoring(String actual, URL url, Iterable<String> entries) {
 		try {
 			return isEqualToIgnoring(actual, new File(url.toURI()), entries);
 		} catch (URISyntaxException ex) {

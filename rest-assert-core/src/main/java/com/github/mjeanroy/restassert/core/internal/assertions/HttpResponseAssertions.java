@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.impl.*;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.restassert.core.reflect.Param;
 
 import java.nio.charset.Charset;
 import java.util.Date;
@@ -383,7 +382,7 @@ public final class HttpResponseAssertions {
 	 * @param etagValue ETag value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isETagEqualTo(HttpResponse httpResponse, @Param("etagValue") String etagValue) {
+	public AssertionResult isETagEqualTo(HttpResponse httpResponse, String etagValue) {
 		return isHeaderEqualTo(httpResponse, ETAG.getName(), etagValue);
 	}
 
@@ -405,7 +404,7 @@ public final class HttpResponseAssertions {
 	 * @param contentTypeValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, @Param("contentTypeValue") String contentTypeValue) {
+	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, String contentTypeValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_TYPE.getName(), contentTypeValue);
 	}
 
@@ -457,7 +456,7 @@ public final class HttpResponseAssertions {
 	 * @param contentDispositionValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, @Param("contentDispositionValue") String contentDispositionValue) {
+	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION.getName(), contentDispositionValue);
 	}
 
@@ -469,7 +468,7 @@ public final class HttpResponseAssertions {
 	 * @param contentEncodingValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, @Param("contentEncodingValue") String contentEncodingValue) {
+	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, String contentEncodingValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING.getName(), contentEncodingValue);
 	}
 
@@ -524,7 +523,7 @@ public final class HttpResponseAssertions {
 	 * @param locationValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, @Param("locationValue") String locationValue) {
+	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, String locationValue) {
 		return isHeaderEqualTo(httpResponse, LOCATION.getName(), locationValue);
 	}
 
@@ -576,7 +575,7 @@ public final class HttpResponseAssertions {
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, @Param("expiresValue") String expiresValue) {
+	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, String expiresValue) {
 		return isExpiresEqualTo(httpResponse, parseHttpDate(expiresValue));
 	}
 
@@ -588,7 +587,7 @@ public final class HttpResponseAssertions {
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, @Param("expiresValue") Date expiresValue) {
+	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, Date expiresValue) {
 		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(EXPIRES.getName(), expiresValue));
 	}
 
@@ -600,7 +599,7 @@ public final class HttpResponseAssertions {
 	 * @param lastModifiedValue Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, @Param("lastModifiedValue") String lastModifiedValue) {
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, String lastModifiedValue) {
 		return isLastModifiedEqualTo(httpResponse, parseHttpDate(lastModifiedValue));
 	}
 
@@ -612,7 +611,7 @@ public final class HttpResponseAssertions {
 	 * @param lastModifiedDate Expected value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, @Param("lastModifiedValue") Date lastModifiedDate) {
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
 		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(LAST_MODIFIED.getName(), lastModifiedDate));
 	}
 
@@ -643,7 +642,7 @@ public final class HttpResponseAssertions {
 	 * @param pragma Pragma value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, @Param("pragma") String pragma) {
+	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
 		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma);
 	}
 
@@ -674,7 +673,7 @@ public final class HttpResponseAssertions {
 	 * @param cacheControl Cache-Control value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") String cacheControl) {
+	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, String cacheControl) {
 		return isHeaderEqualTo(httpResponse, CACHE_CONTROL.getName(), cacheControl);
 	}
 
@@ -685,7 +684,7 @@ public final class HttpResponseAssertions {
 	 * @param cacheControl Cache-Control value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, @Param("cacheControl") CacheControl cacheControl) {
+	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, CacheControl cacheControl) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CACHE_CONTROL.getName(), cacheControl));
 	}
 
@@ -716,7 +715,7 @@ public final class HttpResponseAssertions {
 	 * @param xssProtection Expected X-XSS-Protection header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") String xssProtection) {
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, String xssProtection) {
 		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION.getName(), xssProtection);
 	}
 
@@ -727,7 +726,7 @@ public final class HttpResponseAssertions {
 	 * @param xssProtection Expected X-XSS-Protection header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, @Param("xssProtection") XssProtection xssProtection) {
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, XssProtection xssProtection) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_XSS_PROTECTION.getName(), xssProtection));
 	}
 
@@ -758,7 +757,7 @@ public final class HttpResponseAssertions {
 	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") String contentTypeOptions) {
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, String contentTypeOptions) {
 		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions);
 	}
 
@@ -769,7 +768,7 @@ public final class HttpResponseAssertions {
 	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, @Param("contentTypeOptions") ContentTypeOptions contentTypeOptions) {
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, ContentTypeOptions contentTypeOptions) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions));
 	}
 
@@ -800,7 +799,7 @@ public final class HttpResponseAssertions {
 	 * @param frameOptions Expected X-Frame-Options header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") String frameOptions) {
+	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, String frameOptions) {
 		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions);
 	}
 
@@ -811,7 +810,7 @@ public final class HttpResponseAssertions {
 	 * @param frameOptions Expected X-Frame-Options header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, @Param("frameOptions") FrameOptions frameOptions) {
+	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, FrameOptions frameOptions) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_FRAME_OPTIONS.getName(), frameOptions));
 	}
 
@@ -842,7 +841,7 @@ public final class HttpResponseAssertions {
 	 * @param contentSecurityPolicy Cache-Control value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, @Param("contentSecurityPolicy") String contentSecurityPolicy) {
+	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, String contentSecurityPolicy) {
 		return isHeaderEqualTo(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy);
 	}
 
@@ -853,7 +852,7 @@ public final class HttpResponseAssertions {
 	 * @param contentSecurityPolicy Cache-Control value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, @Param("contentSecurityPolicy") ContentSecurityPolicy contentSecurityPolicy) {
+	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, ContentSecurityPolicy contentSecurityPolicy) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy));
 	}
 
@@ -884,7 +883,7 @@ public final class HttpResponseAssertions {
 	 * @param accessControlAllowOrigin Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, @Param("accessControlAllowOrigin") String accessControlAllowOrigin) {
+	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, String accessControlAllowOrigin) {
 		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin);
 	}
 
@@ -915,7 +914,7 @@ public final class HttpResponseAssertions {
 	 * @param value Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("value") String value, @Param("other") String... other) {
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
 		List<String> list = new LinkedList<>();
 		list.add(value);
 		addAll(list, other);
@@ -929,7 +928,7 @@ public final class HttpResponseAssertions {
 	 * @param accessControlAllowHeaders Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlAllowHeaders") Iterable<String> accessControlAllowHeaders) {
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlAllowHeaders) {
 		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), accessControlAllowHeaders));
 	}
 
@@ -960,7 +959,7 @@ public final class HttpResponseAssertions {
 	 * @param value Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, @Param("value") String value, @Param("other") String... other) {
+	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
 		List<String> list = new LinkedList<>();
 		list.add(value);
 		addAll(list, other);
@@ -974,7 +973,7 @@ public final class HttpResponseAssertions {
 	 * @param accessControlExposeHeaders Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, @Param("accessControlExposeHeaders") Iterable<String> accessControlExposeHeaders) {
+	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlExposeHeaders) {
 		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_EXPOSE_HEADERS.getName(), accessControlExposeHeaders));
 	}
 
@@ -1006,7 +1005,7 @@ public final class HttpResponseAssertions {
 	 * @param other Other, optional, HTTP method.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, @Param("method") RequestMethod method, @Param("other") RequestMethod... other) {
+	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, RequestMethod method, RequestMethod... other) {
 		List<RequestMethod> list = new LinkedList<>();
 		list.add(method);
 		addAll(list, other);
@@ -1020,7 +1019,7 @@ public final class HttpResponseAssertions {
 	 * @param methods HTTP Methods.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, @Param("methods") Iterable<RequestMethod> methods) {
+	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, Iterable<RequestMethod> methods) {
 		List<String> list = new LinkedList<>();
 		for (RequestMethod method : methods) {
 			list.add(method.verb());
@@ -1056,7 +1055,7 @@ public final class HttpResponseAssertions {
 	 * @param flag Flag value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowCredentialsEqualTo(HttpResponse httpResponse, @Param("flag") boolean flag) {
+	public AssertionResult isAccessControlAllowCredentialsEqualTo(HttpResponse httpResponse, boolean flag) {
 		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_CREDENTIALS.getName(), Boolean.toString(flag)));
 	}
 
@@ -1087,7 +1086,7 @@ public final class HttpResponseAssertions {
 	 * @param maxAge Max age (in seconds).
 	 * @return Assertion result.
 	 */
-	public AssertionResult isAccessControlAllowMaxAgeEqualTo(HttpResponse httpResponse, @Param("maxAge") long maxAge) {
+	public AssertionResult isAccessControlAllowMaxAgeEqualTo(HttpResponse httpResponse, long maxAge) {
 		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_MAX_AGE.getName(), Long.toString(maxAge)));
 	}
 
@@ -1118,7 +1117,7 @@ public final class HttpResponseAssertions {
 	 * @param strictTransportSecurity Strict-Transport-Security value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, @Param("strictTransportSecurity") String strictTransportSecurity) {
+	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, String strictTransportSecurity) {
 		return isHeaderEqualTo(httpResponse, STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity);
 	}
 
@@ -1129,7 +1128,7 @@ public final class HttpResponseAssertions {
 	 * @param strictTransportSecurity Strict-Transport-Security value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, @Param("strictTransportSecurity") StrictTransportSecurity strictTransportSecurity) {
+	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, StrictTransportSecurity strictTransportSecurity) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity));
 	}
 
@@ -1239,7 +1238,7 @@ public final class HttpResponseAssertions {
 	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
+	public AssertionResult hasHeader(HttpResponse httpResponse, String headerName) {
 		return assertWith(httpResponse, new HasHeaderAssertion(headerName));
 	}
 
@@ -1250,7 +1249,7 @@ public final class HttpResponseAssertions {
 	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult doesNotHaveHeader(HttpResponse httpResponse, @Param("headerName") String headerName) {
+	public AssertionResult doesNotHaveHeader(HttpResponse httpResponse, String headerName) {
 		return assertWith(httpResponse, new DoesNotHaveHeaderAssertion(headerName));
 	}
 
@@ -1261,7 +1260,7 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeType(HttpResponse httpResponse, @Param("expectedMimeType") String expectedMimeType) {
+	public AssertionResult hasMimeType(HttpResponse httpResponse, String expectedMimeType) {
 		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeType));
 	}
 
@@ -1272,7 +1271,7 @@ public final class HttpResponseAssertions {
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") Charset expectedCharset) {
+	public AssertionResult hasCharset(HttpResponse httpResponse, Charset expectedCharset) {
 		return hasCharset(httpResponse, expectedCharset.name());
 	}
 
@@ -1283,7 +1282,7 @@ public final class HttpResponseAssertions {
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCharset(HttpResponse httpResponse, @Param("expectedCharset") String expectedCharset) {
+	public AssertionResult hasCharset(HttpResponse httpResponse, String expectedCharset) {
 		return assertWith(httpResponse, new HasCharsetAssertion(expectedCharset));
 	}
 
@@ -1294,7 +1293,7 @@ public final class HttpResponseAssertions {
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, @Param("expectedMimeType") Iterable<String> expectedMimeType) {
+	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, Iterable<String> expectedMimeType) {
 		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeType));
 	}
 
@@ -1307,7 +1306,7 @@ public final class HttpResponseAssertions {
 	 * @param headerValue Header value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, @Param("headerName") String headerName, @Param("headerValue") String headerValue) {
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue) {
 		return assertWith(httpResponse, new IsHeaderEqualToAssertion(headerName, headerValue));
 	}
 
@@ -1318,7 +1317,7 @@ public final class HttpResponseAssertions {
 	 * @param status Expected status.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStatusEqual(HttpResponse httpResponse, @Param("status") int status) {
+	public AssertionResult isStatusEqual(HttpResponse httpResponse, int status) {
 		return assertWith(httpResponse, new StatusEqualAssertion(status));
 	}
 
@@ -1331,7 +1330,7 @@ public final class HttpResponseAssertions {
 	 * @param end Upper bound.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStatusBetween(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
+	public AssertionResult isStatusBetween(HttpResponse httpResponse, int start, int end) {
 		return assertWith(httpResponse, new StatusBetweenAssertion(start, end));
 	}
 
@@ -1344,7 +1343,7 @@ public final class HttpResponseAssertions {
 	 * @param end Upper bound.
 	 * @return Assertion result.
 	 */
-	public AssertionResult isStatusOutOf(HttpResponse httpResponse, @Param("start") int start, @Param("end") int end) {
+	public AssertionResult isStatusOutOf(HttpResponse httpResponse, int start, int end) {
 		return assertWith(httpResponse, new StatusOutOfAssertion(start, end));
 	}
 
@@ -1364,7 +1363,7 @@ public final class HttpResponseAssertions {
 	 * @param name Cookie name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse, @Param("name") String name) {
+	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse, String name) {
 		return assertWith(httpResponse, new DoesNotHaveCookieAssertion(name));
 	}
 
@@ -1375,7 +1374,7 @@ public final class HttpResponseAssertions {
 	 * @param name Cookie name.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") String name) {
+	public AssertionResult hasCookie(HttpResponse httpResponse, String name) {
 		return assertWith(httpResponse, new HasCookieAssertion(name));
 	}
 
@@ -1387,7 +1386,7 @@ public final class HttpResponseAssertions {
 	 * @param value Cookie value.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("name") String name, @Param("value") String value) {
+	public AssertionResult hasCookie(HttpResponse httpResponse, String name, String value) {
 		return assertWith(httpResponse, new HasCookieAssertion(name, value));
 	}
 
@@ -1397,7 +1396,7 @@ public final class HttpResponseAssertions {
 	 * @param cookie Cookie.
 	 * @return Assertion result.
 	 */
-	public AssertionResult hasCookie(HttpResponse httpResponse, @Param("cookie") Cookie cookie) {
+	public AssertionResult hasCookie(HttpResponse httpResponse, Cookie cookie) {
 		return assertWith(httpResponse, new HasCookieAssertion(cookie));
 	}
 

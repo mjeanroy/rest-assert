@@ -24,12 +24,10 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules;
 
-import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.findPublicMethods;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static java.util.Collections.sort;
-import static java.util.Collections.unmodifiableList;
-import static java.util.Collections.unmodifiableMap;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.internal.Arg;
+import com.thoughtworks.paranamer.BytecodeReadingParanamer;
+import com.thoughtworks.paranamer.Paranamer;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -41,9 +39,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.github.mjeanroy.restassert.core.reflect.Param;
-import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.internal.Arg;
+import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.findPublicMethods;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Abstract representation of template model.
@@ -60,6 +61,20 @@ import com.github.mjeanroy.restassert.generator.templates.internal.Arg;
 public abstract class AbstractTemplateModel implements TemplateModel {
 
 	private static final List<String> CLASS_NAME_PREFIXES = asList("class ", "interface ");
+
+	/**
+	 * The paranamer instance that will be used to extract parameter name
+	 * from the method instance.
+	 */
+	private final Paranamer paranamer;
+
+	/**
+	 * Create template model and instantiate paranamer
+	 * value.
+	 */
+	protected AbstractTemplateModel() {
+		this.paranamer = new BytecodeReadingParanamer();
+	}
 
 	@Override
 	public Map<String, Object> data() {
@@ -117,12 +132,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		// Sort methods by name
 		// Not mandatory but useful for tests and to group
 		// methods by name
-		sort(methods, new Comparator<Method>() {
-			@Override
-			public int compare(Method o1, Method o2) {
-				return o1.getName().compareTo(o2.getName());
-			}
-		});
+		sort(methods, METHOD_NAME_COMPARATOR);
 
 		// Just build model for each methods
 		List<Map<String, Object>> models = new ArrayList<>(methods.size());
@@ -139,11 +149,12 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		final List<Arg> args;
 		final Class<?>[] classTypes = method.getParameterTypes();
 		final Type[] paramTypes = method.getGenericParameterTypes();
-		final Annotation[][] annotations = method.getParameterAnnotations();
 		final int size = paramTypes == null ? 0 : paramTypes.length;
+		final String[] parameterNames = paranamer.lookupParameterNames(method);
 
 		if (size > 1) {
 			args = new ArrayList<>(size);
+
 			for (int i = 1; i < paramTypes.length; i++) {
 				Class<?> paramType = classTypes[i];
 				Type type = paramTypes[i];
@@ -154,18 +165,11 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 					genericType = parameterizedType.getActualTypeArguments()[0].toString();
 				}
 
-				Annotation[] parameterAnnotations = annotations[i];
-				Param param = find(parameterAnnotations, Param.class);
-				if (param == null || param.value().trim().isEmpty()) {
-					throw new IllegalArgumentException("Add @Param annotation to additional parameters of method " + coreMethodName);
-				}
+				final String name = paramType.isArray() ?
+						paramType.getComponentType().getName() + (i == size - 1 ? "..." : "[]") :
+						paramType.getName();
 
-				final String name;
-				if (paramType.isArray()) {
-					name = paramType.getComponentType().getName() + (i == size - 1 ? "..." : "[]");
-				} else {
-					name = paramType.getName();
-				}
+				final String typeName = name.replace("$", ".");
 
 				if (genericType != null) {
 					for (String prefix : CLASS_NAME_PREFIXES) {
@@ -176,7 +180,9 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 					}
 				}
 
-				args.add(new Arg(name.replace("$", "."), genericType, param.value(), i));
+				final String parameterName = parameterNames[i];
+
+				args.add(new Arg(typeName, genericType, parameterName, i));
 			}
 		} else {
 			args = emptyList();
@@ -191,8 +197,12 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 
 	/**
 	 * Build core method name.
-	 * The core method is the name of method that will internally
+	 *
+	 * The core method is the name of the method that will internally
 	 * execute assertion test.
+	 *
+	 * For example, in the `rest-assert-unit` context, the returned value
+	 * for method `isOk` will be `assertIsOk`.
 	 *
 	 * @param methodName Current method name that is parsed.
 	 * @return Core method to use.
@@ -217,4 +227,15 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 
 		return null;
 	}
+
+	/**
+	 * A comparator that will execute a string comparison on the returned
+	 * values of {@link Method#getName()}.
+	 */
+	private static final Comparator<Method> METHOD_NAME_COMPARATOR = new Comparator<Method>() {
+		@Override
+		public int compare(Method o1, Method o2) {
+			return o1.getName().compareTo(o2.getName());
+		}
+	};
 }
