@@ -27,8 +27,9 @@ package com.github.mjeanroy.restassert.unit.api.http.async.charsets;
 import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import org.asynchttpclient.Response;
 import org.junit.runner.RunWith;
 
@@ -37,8 +38,7 @@ import org.junit.runner.RunWith;
 abstract class AbstractAsyncHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(String charset) {
-		String contentType = String.format("application/json;charset=%s", charset);
-		return new AsyncHttpResponseBuilder().addHeader("Content-Type", contentType).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new AsyncHttpResponseBuilder();
 	}
 }

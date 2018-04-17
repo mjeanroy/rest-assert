@@ -22,17 +22,19 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
+package com.github.mjeanroy.restassert.unit.api;
 
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHasHttpHeaderTest;
-import okhttp3.Response;
+/**
+ * A test invocation with a single parameter.
+ *
+ * @param <T> Parameter type.
+ */
+public interface TestInvocation<T> {
 
-abstract class AbstractOkHttpHeaderTest extends AbstractHasHttpHeaderTest<Response> {
-
-	@Override
-	protected HttpResponseBuilder<Response> getBuilder() {
-		return new OkHttpResponseBuilder();
-	}
+	/**
+	 * Invoke test with parameter.
+	 *
+	 * @param param The parameter to use in test.
+	 */
+	void invokeTest(T param);
 }

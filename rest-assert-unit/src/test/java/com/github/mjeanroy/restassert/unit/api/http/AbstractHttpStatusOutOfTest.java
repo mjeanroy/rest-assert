@@ -24,15 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import com.github.mjeanroy.restassert.tests.Function;
+import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
-public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractAssertTest<T> {
+public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertTest<T> {
 
+	/**
+	 * The custom message used as first parameter when optional message
+	 * is specified in assertion.
+	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	// == Core HTTP Response
@@ -49,9 +53,9 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractAssertTest<
 
 	@Test
 	public void it_should_fail() {
-		doTest(null, new Invocation() {
+		doTest(null, new TestInvocation<Integer>() {
 			@Override
-			public void invokeTest(int status) {
+			public void invokeTest(Integer status) {
 				invoke(newHttpResponse(status));
 			}
 		});
@@ -59,15 +63,21 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractAssertTest<
 
 	@Test
 	public void it_should_fail_with_custom_message() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
+		doTest(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
 			@Override
-			public void invokeTest(int status) {
+			public void invokeTest(Integer status) {
 				invoke(CUSTOM_MESSAGE, newHttpResponse(status));
 			}
 		});
 	}
 
-	private void doTest(String msg, final Invocation invocation) {
+	/**
+	 * Invoke test with a fail test case.
+	 *
+	 * @param msg The custom error message, optional and may be {@code null}.
+	 * @param invocation The test invocation.
+	 */
+	private void doTest(String msg, final TestInvocation<Integer> invocation) {
 		final int start = start();
 		final int end = end();
 
@@ -84,17 +94,39 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractAssertTest<
 		}
 	}
 
+	/**
+	 * Range start.
+	 *
+	 * @return Start value.
+	 */
+	protected abstract int start();
+
+	/**
+	 * Range end.
+	 *
+	 * @return End value.
+	 */
+	protected abstract int end();
+
+	/**
+	 * Get expected default error message.
+	 *
+	 * @param start Range start.
+	 * @param end Range end.
+	 * @param status The HTTP response actual status.
+	 * @return The expected default message.
+	 */
 	private String buildErrorMessage(int start, int end, int status) {
 		return String.format("Expecting status code to be out of %s and %s but was %s", start, end, status);
 	}
 
-	protected abstract T newHttpResponse(int status);
-
-	protected abstract int start();
-
-	protected abstract int end();
-
-	private interface Invocation {
-		void invokeTest(int status);
+	/**
+	 * Create the HTTP response to be tested.
+	 *
+	 * @param status HTTP Response status.
+	 * @return The HTTP response.
+	 */
+	private T newHttpResponse(int status) {
+		return getBuilder().setStatus(status).build();
 	}
 }

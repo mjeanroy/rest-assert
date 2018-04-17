@@ -24,21 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveCookieTest;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveCookieTest;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpDoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(Cookie cookie) {
-		NingHttpResponseBuilder builder = new NingHttpResponseBuilder();
-
-		if (cookie != null) {
-			builder.addCookie(cookie);
-		}
-
-		return builder.build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new NingHttpResponseBuilder();
 	}
 }

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.charsets;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
@@ -31,8 +32,7 @@ import org.apache.http.HttpResponse;
 abstract class AbstractApacheHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(String charset) {
-		String contentType = String.format("application/json;charset=%s", charset);
-		return new ApacheHttpResponseBuilder().addHeader("Content-Type", contentType).build();
+	public HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new ApacheHttpResponseBuilder();
 	}
 }

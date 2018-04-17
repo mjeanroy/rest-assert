@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.between;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import org.springframework.test.web.servlet.ResultActions;
@@ -31,7 +32,7 @@ import org.springframework.test.web.servlet.ResultActions;
 abstract class AbstractSpringMockMvcHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<ResultActions> {
 
 	@Override
-	protected ResultActions newHttpResponse(int status) {
-		return new SpringMockMvcHttpResponseBuilder().setStatus(status).build();
+	protected HttpResponseBuilder<ResultActions> getBuilder() {
+		return new SpringMockMvcHttpResponseBuilder();
 	}
 }

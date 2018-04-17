@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.charsets;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import org.springframework.test.web.servlet.ResultActions;
@@ -31,8 +32,7 @@ import org.springframework.test.web.servlet.ResultActions;
 abstract class AbstractSpringMockMvcHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<ResultActions> {
 
 	@Override
-	protected ResultActions newHttpResponse(String charset) {
-		String contentType = String.format("application/json;charset=%s", charset);
-		return new SpringMockMvcHttpResponseBuilder().addHeader("Content-Type", contentType).build();
+	public HttpResponseBuilder<ResultActions> getBuilder() {
+		return new SpringMockMvcHttpResponseBuilder();
 	}
 }

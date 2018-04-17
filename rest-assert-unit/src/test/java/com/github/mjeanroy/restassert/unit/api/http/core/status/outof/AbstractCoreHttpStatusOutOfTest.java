@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.outof;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
@@ -31,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 abstract class AbstractCoreHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(int status) {
-		return new HttpResponseBuilderImpl().setStatus(status).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new HttpResponseBuilderImpl();
 	}
 }

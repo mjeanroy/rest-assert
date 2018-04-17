@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.exact;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpStatusTest extends AbstractHttpStatusTest<HttpResponse> {
 
-	protected HttpResponse newHttpResponse(int status) {
-		return new GoogleHttpResponseBuilder().setStatus(status).build();
+	@Override
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new GoogleHttpResponseBuilder();
 	}
 }

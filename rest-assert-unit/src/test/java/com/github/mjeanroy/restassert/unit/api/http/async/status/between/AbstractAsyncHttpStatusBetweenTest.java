@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.async.status.between;
 import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
@@ -37,7 +38,7 @@ import org.junit.runner.RunWith;
 abstract class AbstractAsyncHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(int status) {
-		return new AsyncHttpResponseBuilder().setStatus(status).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new AsyncHttpResponseBuilder();
 	}
 }

@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveHttpHeaderTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveHttpHeaderTest;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleDoesNotHaveHttpHeaderTest extends AbstractDoesNotHaveHttpHeaderTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(Header header) {
-		return new GoogleHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new GoogleHttpResponseBuilder();
 	}
 }

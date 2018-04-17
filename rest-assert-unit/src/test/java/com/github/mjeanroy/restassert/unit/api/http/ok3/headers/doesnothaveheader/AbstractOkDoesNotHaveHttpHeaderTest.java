@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveHttpHeaderTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveHttpHeaderTest;
 import okhttp3.Response;
 
 abstract class AbstractOkDoesNotHaveHttpHeaderTest extends AbstractDoesNotHaveHttpHeaderTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(Header header) {
-		return new OkHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new OkHttpResponseBuilder();
 	}
 }

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.between;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
@@ -31,7 +32,7 @@ import org.apache.http.HttpResponse;
 abstract class AbstractApacheHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(int status) {
-		return new ApacheHttpResponseBuilder().setStatus(status).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new ApacheHttpResponseBuilder();
 	}
 }

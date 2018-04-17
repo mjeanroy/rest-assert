@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.charsets;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(String charset) {
-		String contentType = String.format("application/json;charset=%s", charset);
-		return new NingHttpResponseBuilder().addHeader("Content-Type", contentType).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new NingHttpResponseBuilder();
 	}
 }

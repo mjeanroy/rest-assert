@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpHeaderTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHasHttpHeaderTest;
 import com.google.api.client.http.HttpResponse;
 
-abstract class AbstractGoogleHttpHeaderTest extends AbstractHttpHeaderTest<HttpResponse> {
+abstract class AbstractGoogleHttpHeaderTest extends AbstractHasHttpHeaderTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(Header header) {
-		return new GoogleHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new GoogleHttpResponseBuilder();
 	}
 }

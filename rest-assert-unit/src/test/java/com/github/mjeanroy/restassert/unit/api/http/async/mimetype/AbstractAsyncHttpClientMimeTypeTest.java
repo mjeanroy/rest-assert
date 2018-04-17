@@ -27,9 +27,9 @@ package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeTest;
 import org.asynchttpclient.Response;
 import org.junit.runner.RunWith;
 
@@ -38,7 +38,7 @@ import org.junit.runner.RunWith;
 abstract class AbstractAsyncHttpClientMimeTypeTest extends AbstractMimeTypeTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(Header header) {
-		return new AsyncHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new AsyncHttpResponseBuilder();
 	}
 }

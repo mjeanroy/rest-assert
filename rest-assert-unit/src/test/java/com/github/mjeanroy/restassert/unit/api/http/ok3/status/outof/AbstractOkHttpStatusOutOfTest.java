@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.outof;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
@@ -31,7 +32,7 @@ import okhttp3.Response;
 abstract class AbstractOkHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(int status) {
-		return new OkHttpResponseBuilder().setStatus(status).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new OkHttpResponseBuilder();
 	}
 }

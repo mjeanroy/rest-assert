@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.mimetype;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeTest;
 import org.springframework.test.web.servlet.ResultActions;
 
 abstract class AbstractSpringMockMvcHttpClientMimeTypeTest extends AbstractMimeTypeTest<ResultActions> {
 
 	@Override
-	protected ResultActions newHttpResponse(Header header) {
-		return new SpringMockMvcHttpResponseBuilder().addHeader(header).build();
+	public HttpResponseBuilder<ResultActions> getBuilder() {
+		return new SpringMockMvcHttpResponseBuilder();
 	}
 }

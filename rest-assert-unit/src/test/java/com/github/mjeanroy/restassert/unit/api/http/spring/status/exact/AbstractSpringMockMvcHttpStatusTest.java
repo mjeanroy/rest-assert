@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.exact;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import org.springframework.test.web.servlet.ResultActions;
 
 abstract class AbstractSpringMockMvcHttpStatusTest extends AbstractHttpStatusTest<ResultActions> {
 
-	protected ResultActions newHttpResponse(int status) {
-		return new SpringMockMvcHttpResponseBuilder().setStatus(status).build();
+	@Override
+	public HttpResponseBuilder<ResultActions> getBuilder() {
+		return new SpringMockMvcHttpResponseBuilder();
 	}
 }

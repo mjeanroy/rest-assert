@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.exact;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
@@ -32,5 +33,10 @@ abstract class AbstractApacheHttpStatusTest extends AbstractHttpStatusTest<HttpR
 
 	protected HttpResponse newHttpResponse(int status) {
 		return new ApacheHttpResponseBuilder().setStatus(status).build();
+	}
+
+	@Override
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new ApacheHttpResponseBuilder();
 	}
 }

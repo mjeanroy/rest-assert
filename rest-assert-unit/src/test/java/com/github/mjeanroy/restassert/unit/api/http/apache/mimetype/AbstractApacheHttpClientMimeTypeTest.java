@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeTest;
 import org.apache.http.HttpResponse;
 
 abstract class AbstractApacheHttpClientMimeTypeTest extends AbstractMimeTypeTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(Header header) {
-		return new ApacheHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new ApacheHttpResponseBuilder();
 	}
 }

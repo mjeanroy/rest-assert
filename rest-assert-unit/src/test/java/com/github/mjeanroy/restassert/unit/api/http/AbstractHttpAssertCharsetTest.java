@@ -24,15 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import com.github.mjeanroy.restassert.tests.Function;
+import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
-public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTest<T> {
+public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAssertTest<T> {
 
+	/**
+	 * The custom message used as first parameter when optional message
+	 * is specified in assertion.
+	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -43,7 +47,7 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTes
 
 	@Test
 	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new Invocation() {
+		invokeFailure(null, new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {
 				invoke(newHttpResponse(charset));
@@ -53,7 +57,7 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTes
 
 	@Test
 	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new Invocation() {
+		invokeFailure(CUSTOM_MESSAGE, new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {
 				invoke(CUSTOM_MESSAGE, newHttpResponse(charset));
@@ -61,7 +65,13 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTes
 		});
 	}
 
-	private void invokeFailure(String msg, final Invocation invocation) {
+	/**
+	 * Invoke test with failure case.
+	 *
+	 * @param msg Expected error message, optional and may be {@code null}.
+	 * @param invocation The test invocation.
+	 */
+	private void invokeFailure(String msg, final TestInvocation<String> invocation) {
 		final String expectedCharset = getCharset();
 		final String actualCharset = expectedCharset + "foo";
 		final String message = firstNonNull(msg, buildErrorMessage(expectedCharset, actualCharset));
@@ -74,15 +84,32 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractAssertTes
 		});
 	}
 
+	/**
+	 * Get the charset to be tested.
+	 *
+	 * @return Charset value.
+	 */
+	protected abstract String getCharset();
+
+	/**
+	 * Create expected error message when test fail.
+	 *
+	 * @param expectedCharset Expected charset.
+	 * @param actualCharset Actual charset in HTTP response.
+	 * @return Expected error message.
+	 */
 	private String buildErrorMessage(String expectedCharset, String actualCharset) {
 		return String.format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset);
 	}
 
-	protected abstract T newHttpResponse(String charset);
-
-	protected abstract String getCharset();
-
-	interface Invocation {
-		void invokeTest(String charset);
+	/**
+	 * Create the HTTP response to be tested.
+	 *
+	 * @param charset The HTTP response charset.
+	 * @return The HTTP response.
+	 */
+	private T newHttpResponse(String charset) {
+		String contentType = String.format("application/json;charset=%s", charset);
+		return getBuilder().addHeader("Content-Type", contentType).build();
 	}
 }

@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeInTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractMimeTypeInTest;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpClientMimeTypeInTest extends AbstractMimeTypeInTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(Header header) {
-		return new NingHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new NingHttpResponseBuilder();
 	}
 }

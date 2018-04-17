@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpStatusTest extends AbstractHttpStatusTest<Response> {
 
-	protected Response newHttpResponse(int status) {
-		return new OkHttpResponseBuilder().setStatus(status).build();
+	@Override
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new OkHttpResponseBuilder();
 	}
 }

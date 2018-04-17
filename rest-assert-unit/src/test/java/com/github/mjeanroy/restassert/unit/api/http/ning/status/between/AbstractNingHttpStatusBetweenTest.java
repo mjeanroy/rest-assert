@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.between;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
@@ -31,7 +32,7 @@ import com.ning.http.client.Response;
 abstract class AbstractNingHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(int status) {
-		return new NingHttpResponseBuilder().setStatus(status).build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new NingHttpResponseBuilder();
 	}
 }

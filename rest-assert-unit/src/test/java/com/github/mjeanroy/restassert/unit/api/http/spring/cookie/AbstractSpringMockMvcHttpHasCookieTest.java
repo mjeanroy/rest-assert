@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.cookie;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHasCookieTest;
 import org.springframework.test.web.servlet.ResultActions;
@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.ResultActions;
 abstract class AbstractSpringMockMvcHttpHasCookieTest extends AbstractHasCookieTest<ResultActions> {
 
 	@Override
-	protected ResultActions newHttpResponse(Cookie cookie) {
-		return new SpringMockMvcHttpResponseBuilder().addCookie(cookie).build();
+	public HttpResponseBuilder<ResultActions> getBuilder() {
+		return new SpringMockMvcHttpResponseBuilder();
 	}
 }

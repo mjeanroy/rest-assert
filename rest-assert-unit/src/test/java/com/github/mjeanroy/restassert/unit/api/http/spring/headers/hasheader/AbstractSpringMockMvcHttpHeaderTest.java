@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.hasheader;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpHeaderTest;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHasHttpHeaderTest;
 import org.springframework.test.web.servlet.ResultActions;
 
-abstract class AbstractSpringMockMvcHttpHeaderTest extends AbstractHttpHeaderTest<ResultActions> {
+abstract class AbstractSpringMockMvcHttpHeaderTest extends AbstractHasHttpHeaderTest<ResultActions> {
 
 	@Override
-	protected ResultActions newHttpResponse(Header header) {
-		return new SpringMockMvcHttpResponseBuilder().addHeader(header).build();
+	public HttpResponseBuilder<ResultActions> getBuilder() {
+		return new SpringMockMvcHttpResponseBuilder();
 	}
 }

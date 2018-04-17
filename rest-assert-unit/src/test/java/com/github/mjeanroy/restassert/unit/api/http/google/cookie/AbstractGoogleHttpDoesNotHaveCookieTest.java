@@ -24,21 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveCookieTest;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveCookieTest;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpDoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(Cookie cookie) {
-		GoogleHttpResponseBuilder builder = new GoogleHttpResponseBuilder();
-
-		if (cookie != null) {
-			builder.addCookie(cookie);
-		}
-
-		return builder.build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new GoogleHttpResponseBuilder();
 	}
 }

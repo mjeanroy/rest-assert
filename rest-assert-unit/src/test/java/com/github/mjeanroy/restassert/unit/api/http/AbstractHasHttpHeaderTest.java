@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -34,8 +34,12 @@ import static com.github.mjeanroy.restassert.tests.models.Header.header;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 import static java.lang.String.format;
 
-public abstract class AbstractHttpHeaderTest<T> extends AbstractAssertTest<T> {
+public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTest<T> {
 
+	/**
+	 * The custom message used as first parameter when optional message
+	 * is specified in assertion.
+	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -47,7 +51,7 @@ public abstract class AbstractHttpHeaderTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header() {
-		doTest(null, new Invocation() {
+		doTest(null, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
 				invoke(newHttpResponse(header));
@@ -57,7 +61,7 @@ public abstract class AbstractHttpHeaderTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
-		doTest(CUSTOM_MESSAGE, new Invocation() {
+		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
 				invoke(CUSTOM_MESSAGE, newHttpResponse(header));
@@ -65,7 +69,13 @@ public abstract class AbstractHttpHeaderTest<T> extends AbstractAssertTest<T> {
 		});
 	}
 
-	private void doTest(String msg, final Invocation invocation) {
+	/**
+	 * Execute test with a failed test case.
+	 *
+	 * @param msg The customized error message, optional and may be {@code null}.
+	 * @param invocation The test invocation.
+	 */
+	private void doTest(String msg, final TestInvocation<Header> invocation) {
 		final Header expectedHeader = getHeader();
 		final Header header = header("foo", "bar");
 		final String message = firstNonNull(msg, buildErrorMessage(expectedHeader));
@@ -78,17 +88,31 @@ public abstract class AbstractHttpHeaderTest<T> extends AbstractAssertTest<T> {
 		});
 	}
 
+	/**
+	 * Get header that will be tested.
+	 * Note that header value does not really matter, only name is important here.
+	 *
+	 * @return Header.
+	 */
 	protected abstract Header getHeader();
 
+	/**
+	 * Get expected error message when HTTP response does not have expected header.
+	 *
+	 * @param expectedHeader Header.
+	 * @return Error message.
+	 */
 	private String buildErrorMessage(Header expectedHeader) {
 		return format("Expecting response to have header %s", expectedHeader.getName());
 	}
 
-	// == Create target HTTP Response
-
-	protected abstract T newHttpResponse(Header header);
-
-	private interface Invocation {
-		void invokeTest(Header header);
+	/**
+	 * Get the HTTP response to be tested.
+	 *
+	 * @param header Expected header.
+	 * @return The HTTP response.
+	 */
+	private T newHttpResponse(Header header) {
+		return getBuilder().addHeader(header).build();
 	}
 }

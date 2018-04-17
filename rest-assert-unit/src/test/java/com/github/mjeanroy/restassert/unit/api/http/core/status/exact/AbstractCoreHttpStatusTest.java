@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
 abstract class AbstractCoreHttpStatusTest extends AbstractHttpStatusTest<HttpResponse> {
 
-	protected HttpResponse newHttpResponse(int status) {
-		return new HttpResponseBuilderImpl().setStatus(status).build();
+	@Override
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new HttpResponseBuilderImpl();
 	}
 }

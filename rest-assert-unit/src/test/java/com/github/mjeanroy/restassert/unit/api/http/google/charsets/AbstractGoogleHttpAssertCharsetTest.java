@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.charsets;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(String charset) {
-		String contentType = String.format("application/json;charset=%s", charset);
-		return new GoogleHttpResponseBuilder().addHeader("Content-Type", contentType).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new GoogleHttpResponseBuilder();
 	}
 }

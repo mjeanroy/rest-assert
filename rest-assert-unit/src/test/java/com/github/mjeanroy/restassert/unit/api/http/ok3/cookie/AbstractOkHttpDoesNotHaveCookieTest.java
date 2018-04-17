@@ -24,21 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveCookieTest;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractDoesNotHaveCookieTest;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpDoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest<Response> {
 
 	@Override
-	protected Response newHttpResponse(Cookie cookie) {
-		OkHttpResponseBuilder builder = new OkHttpResponseBuilder();
-
-		if (cookie != null) {
-			builder.addCookie(cookie);
-		}
-
-		return builder.build();
+	protected HttpResponseBuilder<Response> getBuilder() {
+		return new OkHttpResponseBuilder();
 	}
 }

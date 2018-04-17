@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpHeaderTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHasHttpHeaderTest;
 import org.apache.http.HttpResponse;
 
-abstract class AbstractApacheHttpHeaderTest extends AbstractHttpHeaderTest<HttpResponse> {
+abstract class AbstractApacheHttpHeaderTest extends AbstractHasHttpHeaderTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(Header header) {
-		return new ApacheHttpResponseBuilder().addHeader(header).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new ApacheHttpResponseBuilder();
 	}
 }

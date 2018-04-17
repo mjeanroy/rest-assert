@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.outof;
 
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import com.google.api.client.http.HttpResponse;
@@ -31,7 +32,7 @@ import com.google.api.client.http.HttpResponse;
 abstract class AbstractGoogleHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
 
 	@Override
-	protected HttpResponse newHttpResponse(int status) {
-		return new GoogleHttpResponseBuilder().setStatus(status).build();
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new GoogleHttpResponseBuilder();
 	}
 }
