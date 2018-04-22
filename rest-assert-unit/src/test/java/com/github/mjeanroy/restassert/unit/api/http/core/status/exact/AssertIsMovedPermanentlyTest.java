@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.MOVED_PERMANENTLY;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsMovedPermanentlyTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 301;
+		return MOVED_PERMANENTLY;
 	}
 
 	@Override

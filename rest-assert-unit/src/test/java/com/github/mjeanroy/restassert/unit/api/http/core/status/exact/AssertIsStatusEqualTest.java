@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.CREATED;
+
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsStatusEqualTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 415;
+		return CREATED;
 	}
 
 	@Override

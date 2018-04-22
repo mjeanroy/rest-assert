@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.METHOD_NOT_ALLOWED;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsMethodNotAllowedTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 405;
+		return METHOD_NOT_ALLOWED;
 	}
 
 	@Override

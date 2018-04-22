@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NO_CONTENT;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
@@ -31,7 +33,7 @@ public class AssertIsNoContentTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 204;
+		return NO_CONTENT;
 	}
 
 	@Override

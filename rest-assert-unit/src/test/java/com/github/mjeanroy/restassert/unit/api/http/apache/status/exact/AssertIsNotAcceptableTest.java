@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_ACCEPTABLE;
+
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsNotAcceptableTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 406;
+		return NOT_ACCEPTABLE;
 	}
 
 	@Override

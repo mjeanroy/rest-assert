@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NO_CONTENT;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
@@ -31,7 +33,7 @@ public class IsNoContentTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 204;
+		return NO_CONTENT;
 	}
 
 	@Override

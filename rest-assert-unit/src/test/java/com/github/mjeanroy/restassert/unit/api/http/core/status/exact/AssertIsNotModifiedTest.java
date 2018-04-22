@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_MODIFIED;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsNotModifiedTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 304;
+		return NOT_MODIFIED;
 	}
 
 	@Override

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.METHOD_NOT_ALLOWED;
+
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsMethodNotAllowedTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 405;
+		return METHOD_NOT_ALLOWED;
 	}
 
 	@Override

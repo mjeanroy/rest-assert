@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.UNSUPPORTED_MEDIA_TYPE;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsUnsupportedMediaTypeTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 415;
+		return UNSUPPORTED_MEDIA_TYPE;
 	}
 
 	@Override

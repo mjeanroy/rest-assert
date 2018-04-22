@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.OK;
+
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -31,7 +33,7 @@ public class AssertIsOkTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 200;
+		return OK;
 	}
 
 	@Override

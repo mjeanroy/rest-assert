@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.MOVED_PERMANENTLY;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
@@ -31,7 +33,7 @@ public class AssertIsMovedPermanentlyTest extends AbstractJunitServersHttpStatus
 
 	@Override
 	protected int status() {
-		return 301;
+		return MOVED_PERMANENTLY;
 	}
 
 	@Override

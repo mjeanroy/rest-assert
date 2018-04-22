@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_IMPLEMENTED;
+
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsNotImplementedTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 501;
+		return NOT_IMPLEMENTED;
 	}
 
 	@Override

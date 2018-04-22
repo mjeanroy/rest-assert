@@ -24,18 +24,19 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_IMPLEMENTED;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
 public class IsNotImplementedTest extends AbstractHttpResponseStatusTest {
 
 	@Override
 	protected int status() {
-		return 501;
+		return NOT_IMPLEMENTED;
 	}
 
 	@Override

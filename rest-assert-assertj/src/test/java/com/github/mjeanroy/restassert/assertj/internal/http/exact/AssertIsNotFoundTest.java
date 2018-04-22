@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_FOUND;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsNotFoundTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 404;
+		return NOT_FOUND;
 	}
 
 	@Override

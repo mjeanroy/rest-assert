@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.MOVED_TEMPORARILY;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsMovedTemporarilyTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 302;
+		return MOVED_TEMPORARILY;
 	}
 
 	@Override

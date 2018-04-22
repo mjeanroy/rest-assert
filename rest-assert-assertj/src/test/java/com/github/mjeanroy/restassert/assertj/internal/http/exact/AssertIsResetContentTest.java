@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.RESET_CONTENT;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
@@ -31,7 +33,7 @@ public class AssertIsResetContentTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 205;
+		return RESET_CONTENT;
 	}
 
 	@Override

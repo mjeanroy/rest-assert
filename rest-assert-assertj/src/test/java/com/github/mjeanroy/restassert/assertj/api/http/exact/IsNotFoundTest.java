@@ -24,18 +24,19 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_FOUND;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
 public class IsNotFoundTest extends AbstractHttpResponseStatusTest {
 
 	@Override
 	protected int status() {
-		return 404;
+		return NOT_FOUND;
 	}
 
 	@Override

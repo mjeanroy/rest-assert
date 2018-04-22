@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_IMPLEMENTED;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsNotImplementedTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 501;
+		return NOT_IMPLEMENTED;
 	}
 
 	@Override

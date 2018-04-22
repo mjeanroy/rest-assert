@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.CREATED;
+
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsCreatedTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 201;
+		return CREATED;
 	}
 
 	@Override

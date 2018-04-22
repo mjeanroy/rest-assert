@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.METHOD_NOT_ALLOWED;
+
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -31,7 +33,7 @@ public class AssertIsMethodNotAllowedTest extends AbstractSpringMockMvcHttpStatu
 
 	@Override
 	protected int status() {
-		return 405;
+		return METHOD_NOT_ALLOWED;
 	}
 
 	@Override

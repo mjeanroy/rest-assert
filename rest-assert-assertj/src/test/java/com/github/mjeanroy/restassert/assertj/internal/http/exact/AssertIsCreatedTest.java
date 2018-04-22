@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.CREATED;
+
 import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -32,7 +34,7 @@ public class AssertIsCreatedTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 201;
+		return CREATED;
 	}
 
 	@Override

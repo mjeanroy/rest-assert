@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_ACCEPTABLE;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
@@ -31,7 +33,7 @@ public class AssertIsNotAcceptableTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 406;
+		return NOT_ACCEPTABLE;
 	}
 
 	@Override

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.MOVED_TEMPORARILY;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsMovedTemporarilyTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 302;
+		return MOVED_TEMPORARILY;
 	}
 
 	@Override

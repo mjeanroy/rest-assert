@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.BAD_REQUEST;
+
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsBadRequestTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 400;
+		return BAD_REQUEST;
 	}
 
 	@Override

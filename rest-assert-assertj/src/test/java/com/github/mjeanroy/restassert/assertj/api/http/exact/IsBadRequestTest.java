@@ -24,18 +24,19 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.BAD_REQUEST;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
 public class IsBadRequestTest extends AbstractHttpResponseStatusTest {
 
 	@Override
 	protected int status() {
-		return 400;
+		return BAD_REQUEST;
 	}
 
 	@Override

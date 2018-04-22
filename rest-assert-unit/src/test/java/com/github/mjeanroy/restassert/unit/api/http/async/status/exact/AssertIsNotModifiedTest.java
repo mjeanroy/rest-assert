@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_MODIFIED;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsNotModifiedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 304;
+		return NOT_MODIFIED;
 	}
 
 	@Override

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.METHOD_NOT_ALLOWED;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsMethodNotAllowedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 405;
+		return METHOD_NOT_ALLOWED;
 	}
 
 	@Override

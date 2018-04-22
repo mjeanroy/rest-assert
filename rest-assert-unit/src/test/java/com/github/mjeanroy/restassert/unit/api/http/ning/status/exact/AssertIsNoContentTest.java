@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NO_CONTENT;
+
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsNoContentTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 204;
+		return NO_CONTENT;
 	}
 
 	@Override

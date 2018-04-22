@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NO_CONTENT;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsNoContentTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 204;
+		return NO_CONTENT;
 	}
 
 	@Override

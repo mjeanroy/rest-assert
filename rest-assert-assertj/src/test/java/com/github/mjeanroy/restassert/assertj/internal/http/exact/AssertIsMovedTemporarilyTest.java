@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.MOVED_TEMPORARILY;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
@@ -31,7 +33,7 @@ public class AssertIsMovedTemporarilyTest extends AbstractHttpResponsesStatusTes
 
 	@Override
 	protected int status() {
-		return 302;
+		return MOVED_TEMPORARILY;
 	}
 
 	@Override

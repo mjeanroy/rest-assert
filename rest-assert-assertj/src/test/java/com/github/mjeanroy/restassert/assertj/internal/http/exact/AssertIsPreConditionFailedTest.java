@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.PRE_CONDITION_FAILED;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsPreConditionFailedTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 412;
+		return PRE_CONDITION_FAILED;
 	}
 
 	@Override

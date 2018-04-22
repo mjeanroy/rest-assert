@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.UNSUPPORTED_MEDIA_TYPE;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
@@ -31,7 +33,7 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractJunitServersHttpSt
 
 	@Override
 	protected int status() {
-		return 415;
+		return UNSUPPORTED_MEDIA_TYPE;
 	}
 
 	@Override

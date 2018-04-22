@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.UNSUPPORTED_MEDIA_TYPE;
+
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractGoogleHttpStatusTe
 
 	@Override
 	protected int status() {
-		return 415;
+		return UNSUPPORTED_MEDIA_TYPE;
 	}
 
 	@Override

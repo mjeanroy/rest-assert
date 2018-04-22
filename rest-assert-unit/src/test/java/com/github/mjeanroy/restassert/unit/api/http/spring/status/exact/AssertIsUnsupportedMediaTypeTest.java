@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.UNSUPPORTED_MEDIA_TYPE;
+
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -31,7 +33,7 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractSpringMockMvcHttpS
 
 	@Override
 	protected int status() {
-		return 415;
+		return UNSUPPORTED_MEDIA_TYPE;
 	}
 
 	@Override

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.ACCEPTED;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
@@ -31,7 +33,7 @@ public class IsStatusEqualTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 202;
+		return ACCEPTED;
 	}
 
 	@Override

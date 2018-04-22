@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.INTERNAL_SERVER_ERROR;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsInternalServerErrorTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 500;
+		return INTERNAL_SERVER_ERROR;
 	}
 
 	@Override

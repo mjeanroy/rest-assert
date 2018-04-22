@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_ACCEPTABLE;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsNotAcceptableTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 406;
+		return NOT_ACCEPTABLE;
 	}
 
 	@Override

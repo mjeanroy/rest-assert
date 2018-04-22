@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.PRE_CONDITION_FAILED;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
@@ -31,7 +33,7 @@ public class AssertIsPreConditionFailedTest extends AbstractJunitServersHttpStat
 
 	@Override
 	protected int status() {
-		return 412;
+		return PRE_CONDITION_FAILED;
 	}
 
 	@Override

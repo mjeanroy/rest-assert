@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.PRE_CONDITION_FAILED;
+
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsPreConditionFailedTest extends AbstractGoogleHttpStatusTest
 
 	@Override
 	protected int status() {
-		return 412;
+		return PRE_CONDITION_FAILED;
 	}
 
 	@Override

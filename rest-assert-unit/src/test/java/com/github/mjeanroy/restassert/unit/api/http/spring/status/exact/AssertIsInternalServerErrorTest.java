@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.INTERNAL_SERVER_ERROR;
+
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -31,7 +33,7 @@ public class AssertIsInternalServerErrorTest extends AbstractSpringMockMvcHttpSt
 
 	@Override
 	protected int status() {
-		return 500;
+		return INTERNAL_SERVER_ERROR;
 	}
 
 	@Override

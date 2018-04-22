@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.PARTIAL_CONTENT;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsPartialContentContentTest extends AbstractHttpResponsesStatusTest {
+public class AssertIsPartialContentTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 206;
+		return PARTIAL_CONTENT;
 	}
 
 	@Override

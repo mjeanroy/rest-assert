@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_MODIFIED;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsNotModifiedTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	protected int status() {
-		return 304;
+		return NOT_MODIFIED;
 	}
 
 	@Override

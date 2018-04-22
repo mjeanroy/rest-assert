@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.CREATED;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsCreatedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 201;
+		return CREATED;
 	}
 
 	@Override

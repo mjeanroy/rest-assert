@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_FOUND;
+
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsNotFoundTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {
-		return 404;
+		return NOT_FOUND;
 	}
 
 	@Override
