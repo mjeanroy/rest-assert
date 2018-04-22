@@ -24,12 +24,14 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
 public class AssertHasMimeTypeTest extends AbstractAsyncHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = "application/json";
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
 	protected String getMimeType() {

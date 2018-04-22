@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.LOCATION;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LOCATION;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;

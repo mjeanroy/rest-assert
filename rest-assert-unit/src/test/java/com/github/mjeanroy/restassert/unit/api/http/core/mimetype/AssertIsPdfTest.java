@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_PDF;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsPdfTest extends AbstractCoreHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "application/pdf";
+		return APPLICATION_PDF;
 	}
 
 	@Override

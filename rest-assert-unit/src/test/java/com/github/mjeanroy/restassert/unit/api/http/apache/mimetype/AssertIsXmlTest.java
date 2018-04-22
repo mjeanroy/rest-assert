@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.XML;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertIsXmlTest extends AbstractApacheHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"application/xml",
-				"text/xml"
-		);
+		return XML;
 	}
 
 	@Override

@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import org.asynchttpclient.Response;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.JAVASCRIPT;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import org.asynchttpclient.Response;
 
 public class AssertIsJavascriptTest extends AbstractAsyncHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"application/javascript",
-				"text/javascript"
-		);
+		return JAVASCRIPT;
 	}
 
 	@Override

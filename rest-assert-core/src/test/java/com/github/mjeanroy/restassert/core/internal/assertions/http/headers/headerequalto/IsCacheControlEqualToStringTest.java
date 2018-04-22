@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CACHE_CONTROL;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;

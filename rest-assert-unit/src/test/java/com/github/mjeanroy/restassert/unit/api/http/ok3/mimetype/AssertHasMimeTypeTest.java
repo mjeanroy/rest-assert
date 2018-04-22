@@ -24,12 +24,14 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 public class AssertHasMimeTypeTest extends AbstractOkHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = "application/json";
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
 	protected String getMimeType() {

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.EXPIRES;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;

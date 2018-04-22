@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_XSS_PROTECTION;
 
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.tests.models.Header;

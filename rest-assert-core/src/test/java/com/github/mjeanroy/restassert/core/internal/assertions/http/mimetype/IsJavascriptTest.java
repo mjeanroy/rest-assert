@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.JAVASCRIPT;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class IsJavascriptTest extends AbstractMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"application/javascript",
-				"text/javascript"
-		);
+		return JAVASCRIPT;
 	}
 
 	@Override

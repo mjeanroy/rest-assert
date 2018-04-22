@@ -24,12 +24,14 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_PLAIN;
+import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class AssertHasMimeTypeInTest extends AbstractHttpResponsesMimeTypeInTest {
 
@@ -40,9 +42,6 @@ public class AssertHasMimeTypeInTest extends AbstractHttpResponsesMimeTypeInTest
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"application/javascript",
-				"text/javascript"
-		);
+		return asList(TEXT_CSS, TEXT_PLAIN);
 	}
 }

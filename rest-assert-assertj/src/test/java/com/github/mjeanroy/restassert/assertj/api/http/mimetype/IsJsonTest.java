@@ -24,12 +24,13 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
 public class IsJsonTest extends AbstractHttpResponseMimeTypeTest {
 
@@ -45,6 +46,6 @@ public class IsJsonTest extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "application/json";
+		return APPLICATION_JSON;
 	}
 }

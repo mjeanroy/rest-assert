@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_PLAIN;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
@@ -31,7 +33,7 @@ public class AssertIsTextTest extends AbstractJunitServersHttpClientMimeTypeTest
 
 	@Override
 	protected String getMimeType() {
-		return "text/plain";
+		return TEXT_PLAIN;
 	}
 
 	@Override

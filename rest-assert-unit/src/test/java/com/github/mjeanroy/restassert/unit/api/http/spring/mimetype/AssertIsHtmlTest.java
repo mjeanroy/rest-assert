@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
-import org.springframework.test.web.servlet.ResultActions;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.HTML;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
+import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertIsHtmlTest extends AbstractSpringMockMvcHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"text/html",
-				"application/xhtml+xml"
-		);
+		return HTML;
 	}
 
 	@Override

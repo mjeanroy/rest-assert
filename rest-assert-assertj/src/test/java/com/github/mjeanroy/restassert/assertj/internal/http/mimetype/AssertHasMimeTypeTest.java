@@ -24,9 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class AssertHasMimeTypeTest extends AbstractHttpResponsesMimeTypeTest {
 
@@ -37,6 +38,6 @@ public class AssertHasMimeTypeTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/css";
+		return TEXT_CSS;
 	}
 }

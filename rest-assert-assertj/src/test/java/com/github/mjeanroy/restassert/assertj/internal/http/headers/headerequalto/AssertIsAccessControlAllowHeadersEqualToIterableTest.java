@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import java.util.List;
 

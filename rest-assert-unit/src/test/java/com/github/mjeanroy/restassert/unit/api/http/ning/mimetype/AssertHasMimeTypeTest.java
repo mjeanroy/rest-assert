@@ -24,12 +24,14 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
 public class AssertHasMimeTypeTest extends AbstractNingHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = "application/json";
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
 	protected String getMimeType() {

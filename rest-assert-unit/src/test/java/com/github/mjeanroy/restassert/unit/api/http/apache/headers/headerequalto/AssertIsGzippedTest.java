@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.GZIP_CONTENT_ENCODING;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.GZIP_CONTENT_ENCODING;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;

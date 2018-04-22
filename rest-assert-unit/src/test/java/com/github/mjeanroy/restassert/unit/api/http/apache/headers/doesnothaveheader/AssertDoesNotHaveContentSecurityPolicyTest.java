@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_SECURITY_POLICY;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;

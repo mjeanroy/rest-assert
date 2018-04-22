@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequal
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
-import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_SECURITY_POLICY;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;

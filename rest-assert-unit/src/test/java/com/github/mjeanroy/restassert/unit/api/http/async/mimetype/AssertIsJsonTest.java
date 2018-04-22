@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsJsonTest extends AbstractAsyncHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "application/json";
+		return APPLICATION_JSON;
 	}
 
 	@Override

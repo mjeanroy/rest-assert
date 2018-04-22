@@ -24,21 +24,23 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_PLAIN;
+import static java.util.Arrays.asList;
+
+import java.util.List;
+
 import com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
-import java.util.List;
-
-import static java.util.Arrays.asList;
-
 public class HasMimeTypeInTest extends AbstractMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList("text/css", "text/html");
+		return asList(TEXT_CSS, TEXT_PLAIN);
 	}
 
 	@Override

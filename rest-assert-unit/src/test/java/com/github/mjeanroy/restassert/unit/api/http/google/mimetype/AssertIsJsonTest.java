@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsJsonTest extends AbstractGoogleHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "application/json";
+		return APPLICATION_JSON;
 	}
 
 	@Override

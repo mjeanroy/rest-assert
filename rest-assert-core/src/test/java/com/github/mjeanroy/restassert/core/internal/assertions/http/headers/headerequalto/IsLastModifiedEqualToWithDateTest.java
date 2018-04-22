@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LAST_MODIFIED;
 
 import java.util.Date;
 

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSV;
+
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsCsvTest extends AbstractAsyncHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/csv";
+		return TEXT_CSV;
 	}
 
 	@Override

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.STRICT_TRANSPORT_SECURITY;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;

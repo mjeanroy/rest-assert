@@ -24,12 +24,13 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSV;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
-
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
 public class IsCsvTest extends AbstractHttpResponseMimeTypeTest {
 
@@ -45,6 +46,6 @@ public class IsCsvTest extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/csv";
+		return TEXT_CSV;
 	}
 }

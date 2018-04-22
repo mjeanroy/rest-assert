@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LAST_MODIFIED;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;

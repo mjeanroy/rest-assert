@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsCssTest extends AbstractCoreHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/css";
+		return TEXT_CSS;
 	}
 
 	@Override

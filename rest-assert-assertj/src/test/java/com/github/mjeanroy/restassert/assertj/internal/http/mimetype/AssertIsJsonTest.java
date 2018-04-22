@@ -24,9 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class AssertIsJsonTest extends AbstractHttpResponsesMimeTypeTest {
 
@@ -37,6 +38,6 @@ public class AssertIsJsonTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "application/json";
+		return APPLICATION_JSON;
 	}
 }

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LAST_MODIFIED;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;

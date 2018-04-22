@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.HTML;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsHtmlTest extends AbstractCoreHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"text/html",
-				"application/xhtml+xml"
-		);
+		return HTML;
 	}
 
 	@Override

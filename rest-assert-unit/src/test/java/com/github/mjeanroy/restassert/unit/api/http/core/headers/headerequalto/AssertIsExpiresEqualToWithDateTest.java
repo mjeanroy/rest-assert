@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.EXPIRES;
 
 import java.util.Date;
 

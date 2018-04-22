@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;

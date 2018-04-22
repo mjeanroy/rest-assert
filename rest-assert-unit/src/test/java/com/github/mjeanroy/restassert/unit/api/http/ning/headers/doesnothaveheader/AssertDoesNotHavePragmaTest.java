@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.PRAGMA;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;

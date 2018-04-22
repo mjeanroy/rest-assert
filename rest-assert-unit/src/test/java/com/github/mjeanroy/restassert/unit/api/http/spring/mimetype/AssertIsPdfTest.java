@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_PDF;
+
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -31,7 +33,7 @@ public class AssertIsPdfTest extends AbstractSpringMockMvcHttpClientMimeTypeTest
 
 	@Override
 	protected String getMimeType() {
-		return "application/pdf";
+		return APPLICATION_PDF;
 	}
 
 	@Override

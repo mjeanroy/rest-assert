@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ETAG;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ETAG;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;

@@ -24,12 +24,14 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class AssertHasMimeTypeTest extends AbstractCoreHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = "application/json";
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
 	protected String getMimeType() {

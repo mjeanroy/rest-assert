@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
 
 public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {

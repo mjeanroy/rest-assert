@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+
 import com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -34,7 +36,7 @@ public class HasMimeTypeTest extends AbstractMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/css";
+		return TEXT_CSS;
 	}
 
 	@Override

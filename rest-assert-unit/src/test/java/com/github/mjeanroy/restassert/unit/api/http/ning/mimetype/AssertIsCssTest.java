@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
@@ -31,7 +33,7 @@ public class AssertIsCssTest extends AbstractNingHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/css";
+		return TEXT_CSS;
 	}
 
 	@Override

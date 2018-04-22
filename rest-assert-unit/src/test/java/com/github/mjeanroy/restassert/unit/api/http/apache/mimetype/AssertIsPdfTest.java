@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_PDF;
+
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsPdfTest extends AbstractApacheHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "application/pdf";
+		return APPLICATION_PDF;
 	}
 
 	@Override

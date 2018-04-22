@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequal
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.EXPIRES;
 
 import java.util.Date;
 

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_FRAME_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.tests.models.Header;

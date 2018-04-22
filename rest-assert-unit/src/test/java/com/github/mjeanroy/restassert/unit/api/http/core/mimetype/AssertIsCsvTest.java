@@ -24,14 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSV;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsCsvTest extends AbstractCoreHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/csv";
+		return TEXT_CSV;
 	}
 
 	@Override

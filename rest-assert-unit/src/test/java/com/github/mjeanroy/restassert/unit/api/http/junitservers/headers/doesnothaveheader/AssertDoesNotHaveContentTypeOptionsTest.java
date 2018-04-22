@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;

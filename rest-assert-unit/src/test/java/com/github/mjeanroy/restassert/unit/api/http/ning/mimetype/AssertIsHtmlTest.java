@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
-import com.ning.http.client.Response;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.HTML;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.ning.http.client.Response;
 
 public class AssertIsHtmlTest extends AbstractNingHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {
-		return asList(
-				"text/html",
-				"application/xhtml+xml"
-		);
+		return HTML;
 	}
 
 	@Override

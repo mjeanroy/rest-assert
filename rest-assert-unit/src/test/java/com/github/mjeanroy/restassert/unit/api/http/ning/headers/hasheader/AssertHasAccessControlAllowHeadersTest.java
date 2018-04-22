@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;

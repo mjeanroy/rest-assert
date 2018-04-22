@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
 public class AssertHasAccessControlAllowCredentialsTest extends AbstractSpringMockMvcHttpHeaderTest {
 

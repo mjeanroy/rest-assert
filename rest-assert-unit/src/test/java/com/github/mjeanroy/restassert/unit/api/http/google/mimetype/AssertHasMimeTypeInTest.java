@@ -24,19 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_PLAIN;
+import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertHasMimeTypeInTest extends AbstractGoogleHttpClientMimeTypeInTest {
 
-	private static final List<String> MIME_TYPES = asList(
-		"application/json",
-		"application/xml"
-	);
+	private static final List<String> MIME_TYPES = asList(TEXT_CSS, TEXT_PLAIN);
 
 	@Override
 	protected List<String> getMimeTypes() {

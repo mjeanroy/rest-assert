@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
 
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSV;
+
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
@@ -31,7 +33,7 @@ public class AssertIsCsvTest extends AbstractGoogleHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {
-		return "text/csv";
+		return TEXT_CSV;
 	}
 
 	@Override

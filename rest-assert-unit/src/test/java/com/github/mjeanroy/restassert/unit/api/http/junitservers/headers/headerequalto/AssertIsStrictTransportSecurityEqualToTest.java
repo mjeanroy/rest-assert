@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.STRICT_TRANSPORT_SECURITY;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;

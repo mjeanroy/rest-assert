@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.PRAGMA;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;

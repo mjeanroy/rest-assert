@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_FRAME_OPTIONS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.mjeanroy.restassert.core.data.FrameOptions;

@@ -24,19 +24,18 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
+import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_PLAIN;
+import static java.util.Arrays.asList;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertHasMimeTypeInTest extends AbstractCoreHttpClientMimeTypeInTest {
 
-	private static final List<String> MIME_TYPES = asList(
-		"application/json",
-		"application/xml"
-	);
+	private static final List<String> MIME_TYPES = asList(TEXT_CSS, TEXT_PLAIN);
 
 	@Override
 	protected List<String> getMimeTypes() {

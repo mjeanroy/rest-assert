@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
+import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
 import java.util.List;
 
