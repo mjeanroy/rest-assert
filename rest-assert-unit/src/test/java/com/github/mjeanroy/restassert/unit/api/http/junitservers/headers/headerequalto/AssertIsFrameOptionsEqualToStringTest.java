@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsFrameOptionsEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final String VALUE = "deny";
+	private static final String VALUE = X_FRAME_OPTIONS.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", VALUE);
+		return X_FRAME_OPTIONS;
 	}
 
 	@Override

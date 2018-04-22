@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.asynchttpclient.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.GZIP_CONTENT_ENCODING;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import org.asynchttpclient.Response;
 
 public class AssertDoesNotHaveContentEncodingTest extends AbstractAsyncDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Encoding", "gzip");
+		return GZIP_CONTENT_ENCODING;
 	}
 
 	@Override

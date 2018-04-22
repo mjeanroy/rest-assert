@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ETAG;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsETagEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
-	private static final String VALUE = "123";
+	private static final String VALUE = ETAG.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("ETag", VALUE);
+		return ETAG;
 	}
 
 	@Override

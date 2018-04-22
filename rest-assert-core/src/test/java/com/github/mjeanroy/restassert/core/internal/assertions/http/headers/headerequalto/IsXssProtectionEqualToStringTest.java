@@ -24,22 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = X_XSS_PROTECTION.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", "1");
+		return X_XSS_PROTECTION;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isXssProtectionEqualTo(response, getHeader().getValue());
+		return assertions.isXssProtectionEqualTo(response, VALUE);
 	}
 
 	@Override

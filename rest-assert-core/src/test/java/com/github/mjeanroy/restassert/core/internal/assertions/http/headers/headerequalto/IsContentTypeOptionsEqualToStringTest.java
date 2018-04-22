@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -32,11 +32,11 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = "nosniff";
+	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE);
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 
 	@Override

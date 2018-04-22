@@ -24,22 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsCacheControlEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = CACHE_CONTROL.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "max-age: 600");
+		return CACHE_CONTROL;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isCacheControlEqualTo(response, getHeader().getValue());
+		return assertions.isCacheControlEqualTo(response, VALUE);
 	}
 
 	@Override

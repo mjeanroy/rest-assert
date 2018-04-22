@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ETAG;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertHasETagTest extends AbstractGoogleHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("ETag", "123");
+		return ETAG;
 	}
 
 	@Override

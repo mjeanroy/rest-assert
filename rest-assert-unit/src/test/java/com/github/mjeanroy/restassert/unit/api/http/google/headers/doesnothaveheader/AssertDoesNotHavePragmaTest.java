@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertDoesNotHavePragmaTest extends AbstractGoogleDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Pragma", "no-cache");
+		return PRAGMA;
 	}
 
 	@Override

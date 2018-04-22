@@ -37,6 +37,11 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractCoreHttp
 		.includeSubDomains()
 		.build();
 
+	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
+		.preload()
+		.build()
+		.toString();
+
 	@Override
 	protected Header getHeader() {
 		return STRICT_TRANSPORT_SECURITY;
@@ -54,6 +59,6 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractCoreHttp
 
 	@Override
 	protected String failValue() {
-		return "max-age=31536000; preload";
+		return FAILED_VALUE;
 	}
 }

@@ -32,7 +32,7 @@ import com.google.api.client.http.HttpResponse;
 
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final boolean VALUE = true;
+	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {

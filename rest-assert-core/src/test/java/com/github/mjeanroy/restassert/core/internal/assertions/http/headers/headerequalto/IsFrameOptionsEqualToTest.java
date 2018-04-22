@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
@@ -36,12 +36,11 @@ import org.junit.Test;
 
 public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String NAME = "X-Frame-Options";
-	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+	private static final FrameOptions VALUE = FrameOptions.DENY;
 
 	@Override
 	protected Header getHeader() {
-		return header(NAME, VALUE.value());
+		return X_FRAME_OPTIONS;
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_check_that_allow_from_value_match() {
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-			.addHeader(NAME, "allow-from https://www.google.com")
+			.addHeader(X_FRAME_OPTIONS.getName(), "allow-from https://www.google.com")
 			.build();
 
 		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, FrameOptions.ALLOW_FROM);
@@ -70,7 +69,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_check_that_allow_from_value_does_not_match() {
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-			.addHeader(NAME, "deny")
+			.addHeader(X_FRAME_OPTIONS.getName(), "deny")
 			.build();
 
 		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, FrameOptions.ALLOW_FROM);

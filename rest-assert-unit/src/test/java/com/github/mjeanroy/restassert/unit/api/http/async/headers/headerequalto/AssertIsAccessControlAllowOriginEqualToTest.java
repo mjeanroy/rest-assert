@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.asynchttpclient.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import org.asynchttpclient.Response;
 
 public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
-	private static final String VALUE = "*";
+	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Origin", VALUE);
+		return ACCESS_CONTROL_ALLOW_ORIGIN;
 	}
 
 	@Override

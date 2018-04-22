@@ -24,22 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.STRICT_TRANSPORT_SECURITY;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = STRICT_TRANSPORT_SECURITY.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Strict-Transport-Security", "max-age=600");
+		return STRICT_TRANSPORT_SECURITY;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isStrictTransportSecurityEqualTo(response, getHeader().getValue());
+		return assertions.isStrictTransportSecurityEqualTo(response, VALUE);
 	}
 
 	@Override

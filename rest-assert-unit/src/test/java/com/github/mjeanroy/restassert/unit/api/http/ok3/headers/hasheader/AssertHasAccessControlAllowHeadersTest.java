@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
@@ -34,7 +34,7 @@ public class AssertHasAccessControlAllowHeadersTest extends AbstractOkHttpHeader
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", "X-Requested-With");
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 
 	@Override

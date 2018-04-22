@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import okhttp3.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
+import okhttp3.Response;
 
 public class AssertHasPragmaTest extends AbstractOkHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Pragma", "no-cache");
+		return PRAGMA;
 	}
 
 	@Override

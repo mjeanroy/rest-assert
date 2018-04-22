@@ -32,6 +32,8 @@ import com.google.api.client.http.HttpResponse;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractGoogl
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		GoogleHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		GoogleHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		GoogleHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		GoogleHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

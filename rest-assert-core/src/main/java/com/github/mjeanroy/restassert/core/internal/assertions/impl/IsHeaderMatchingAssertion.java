@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import java.util.List;
-
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.data.HeaderValue;
-import com.github.mjeanroy.restassert.core.utils.Predicate;
-
 import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.utils.Utils.some;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.core.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.utils.Predicate;
 
 /**
  * Check that http response has at least one header matching
@@ -66,8 +66,6 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 			}
 		});
 
-		return found ?
-				success() :
-				failure(shouldHaveHeaderWithValue(name, value.value(), values));
+		return found ? success() : failure(shouldHaveHeaderWithValue(name, value.value(), values));
 	}
 }

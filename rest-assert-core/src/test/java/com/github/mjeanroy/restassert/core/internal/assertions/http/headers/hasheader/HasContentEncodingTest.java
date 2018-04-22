@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hasheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class HasContentEncodingTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Encoding", "gzip");
+		return GZIP_CONTENT_ENCODING;
 	}
 
 	@Override

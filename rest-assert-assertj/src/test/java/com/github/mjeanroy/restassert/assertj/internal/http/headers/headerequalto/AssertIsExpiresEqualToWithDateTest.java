@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
 
 import java.util.Date;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class AssertIsExpiresEqualToWithDateTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
+	private static final String VALUE = EXPIRES.getValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -45,7 +45,7 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractHttpResponsesHea
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", VALUE);
+		return EXPIRES;
 	}
 
 	@Override

@@ -32,6 +32,8 @@ import org.asynchttpclient.Response;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractAsync
 
 	@Override
 	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		AsyncHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		AsyncHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

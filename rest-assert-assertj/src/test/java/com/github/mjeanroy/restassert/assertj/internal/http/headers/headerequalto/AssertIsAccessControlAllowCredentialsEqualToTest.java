@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final boolean VALUE = true;
+	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {

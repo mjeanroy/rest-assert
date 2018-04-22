@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+	private static final FrameOptions VALUE = FrameOptions.DENY;
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -42,6 +42,6 @@ public class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeader
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", VALUE.value());
+		return X_FRAME_OPTIONS;
 	}
 }

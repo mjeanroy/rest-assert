@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertDoesNotHaveCacheControlTest extends AbstractGoogleDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "public, no-transform, max-age=300");
+		return CACHE_CONTROL;
 	}
 
 	@Override

@@ -24,7 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.Strings.join;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static java.util.Arrays.asList;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -32,14 +35,19 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class IsAccessControlAllowHeadersEqualToVarargsTest extends AbstractHttpHeaderEqualToTest {
 
+	private static final String V1 = "X-Requested-With";
+	private static final String V2 = "X-H1";
+	private static final String V3 = "X-H2";
+	private static final String VALUE = join(asList(V1, V2, V3), ", ");
+
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", "X-Requested-With, X-H1, X-H2");
+		return header(ACCESS_CONTROL_ALLOW_HEADERS.getName(), VALUE);
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isAccessControlAllowHeadersEqualTo(response, "X-Requested-With", "X-H1", "X-H2");
+		return assertions.isAccessControlAllowHeadersEqualTo(response, V1, V2, V3);
 	}
 
 	@Override

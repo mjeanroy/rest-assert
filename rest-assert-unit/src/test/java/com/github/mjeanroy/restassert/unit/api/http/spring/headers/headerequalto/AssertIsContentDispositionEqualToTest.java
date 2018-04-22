@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_DISPOSITION;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsContentDispositionEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final String VALUE = "attachment; filename=\"fname.ext\"";
+	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Disposition", VALUE);
+		return CONTENT_DISPOSITION;
 	}
 
 	@Override

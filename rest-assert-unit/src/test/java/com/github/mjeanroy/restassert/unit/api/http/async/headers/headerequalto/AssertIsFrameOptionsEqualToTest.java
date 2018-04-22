@@ -24,20 +24,25 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+	private static final FrameOptions VALUE = FrameOptions.DENY;
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", VALUE.value());
+		return X_FRAME_OPTIONS;
+	}
+
+	@Override
+	protected String failValue() {
+		return FrameOptions.SAME_ORIGIN.value();
 	}
 
 	@Override

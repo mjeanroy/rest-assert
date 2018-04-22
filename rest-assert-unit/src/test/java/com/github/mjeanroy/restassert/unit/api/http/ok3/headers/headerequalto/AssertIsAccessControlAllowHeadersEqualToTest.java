@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
@@ -32,11 +32,11 @@ import okhttp3.Response;
 
 public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
-	private static final String VALUE = "X-Requested-With";
+	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", VALUE);
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 
 	@Override

@@ -24,21 +24,23 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsAccessControlAllowOriginEqualTo(someInfo(), httpResponse, getHeader().getValue());
+		httpResponses.assertIsAccessControlAllowOriginEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Origin", "*");
+		return ACCESS_CONTROL_ALLOW_ORIGIN;
 	}
 }

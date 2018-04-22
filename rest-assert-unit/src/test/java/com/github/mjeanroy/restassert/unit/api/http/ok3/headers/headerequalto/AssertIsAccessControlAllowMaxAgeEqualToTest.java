@@ -32,7 +32,7 @@ import okhttp3.Response;
 
 public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
-	private static final long VALUE = 3600;
+	private static final long VALUE = Long.valueOf(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
 	protected Header getHeader() {

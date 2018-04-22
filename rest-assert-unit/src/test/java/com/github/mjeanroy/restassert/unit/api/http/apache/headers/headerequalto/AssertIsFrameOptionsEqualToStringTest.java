@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertIsFrameOptionsEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final String VALUE = "deny";
+	private static final String VALUE = X_FRAME_OPTIONS.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", VALUE);
+		return X_FRAME_OPTIONS;
 	}
 
 	@Override

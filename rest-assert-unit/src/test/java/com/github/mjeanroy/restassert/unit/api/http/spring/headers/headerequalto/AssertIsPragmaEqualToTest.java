@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsPragmaEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final String VALUE = "no-cache";
+	private static final String VALUE = PRAGMA.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Pragma", VALUE);
+		return PRAGMA;
 	}
 
 	@Override

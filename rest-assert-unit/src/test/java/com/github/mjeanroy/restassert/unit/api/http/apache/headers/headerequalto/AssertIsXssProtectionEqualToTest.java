@@ -24,20 +24,20 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+	private static final XssProtection VALUE = XssProtection.DISABLE;
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+		return X_XSS_PROTECTION;
 	}
 
 	@Override

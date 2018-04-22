@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveCacheControlTest extends AbstractJunitServersDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "public, no-transform, max-age=300");
+		return CACHE_CONTROL;
 	}
 
 	@Override

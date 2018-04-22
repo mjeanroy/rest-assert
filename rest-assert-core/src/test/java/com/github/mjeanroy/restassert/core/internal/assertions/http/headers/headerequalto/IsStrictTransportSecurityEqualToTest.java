@@ -24,27 +24,33 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.STRICT_TRANSPORT_SECURITY;
+
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class IsStrictTransportSecurityEqualToTest extends AbstractHttpHeaderEqualToTest {
 
+	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
+		.includeSubDomains()
+		.build();
+
+	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(3600)
+		.includeSubDomains()
+		.preload()
+		.build()
+		.toString();
+
 	@Override
 	protected Header getHeader() {
-		return header("Strict-Transport-Security", "max-age=3600; includeSubDomains; preload");
+		return STRICT_TRANSPORT_SECURITY;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isStrictTransportSecurityEqualTo(response, new StrictTransportSecurity.Builder(3600)
-			.includeSubDomains()
-			.preload()
-			.build()
-		);
+		return assertions.isStrictTransportSecurityEqualTo(response, VALUE);
 	}
 
 	@Override
@@ -54,6 +60,6 @@ public class IsStrictTransportSecurityEqualToTest extends AbstractHttpHeaderEqua
 
 	@Override
 	String failValue() {
-		return "max-age=3600; includeSubDomains";
+		return FAILED_VALUE;
 	}
 }

@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveFrameOptionsTest extends AbstractJunitServersDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", "deny");
+		return X_FRAME_OPTIONS;
 	}
 
 	@Override

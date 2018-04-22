@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.JSON_CONTENT_TYPE;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 public class AssertHasContentTypeTest extends AbstractOkHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Type", "application/json");
+		return JSON_CONTENT_TYPE;
 	}
 
 	@Override

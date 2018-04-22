@@ -24,18 +24,23 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.STRICT_TRANSPORT_SECURITY;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
-import static com.github.mjeanroy.restassert.tests.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
 		.includeSubDomains()
 		.build();
+
+	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
+		.preload()
+		.build()
+		.toString();
 
 	@Override
 	protected Header getHeader() {
@@ -54,6 +59,6 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractJunitSer
 
 	@Override
 	protected String failValue() {
-		return "max-age=31536000; preload";
+		return FAILED_VALUE;
 	}
 }

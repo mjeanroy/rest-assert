@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
-
 public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final long VALUE = 3600;
+	private static final long VALUE = Long.valueOf(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
 	protected Header getHeader() {

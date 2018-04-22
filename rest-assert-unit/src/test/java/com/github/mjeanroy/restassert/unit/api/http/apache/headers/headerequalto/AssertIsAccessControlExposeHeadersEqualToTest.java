@@ -32,6 +32,8 @@ import org.apache.http.HttpResponse;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractApach
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		ApacheHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		ApacheHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

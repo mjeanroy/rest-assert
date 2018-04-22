@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
-	private static final long VALUE = 3600;
+	private static final long VALUE = Long.valueOf(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
 	protected Header getHeader() {

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsCacheControlEqualToStringTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final String VALUE = "no-cache";
+	private static final String VALUE = CACHE_CONTROL.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", VALUE);
+		return CACHE_CONTROL;
 	}
 
 	@Override

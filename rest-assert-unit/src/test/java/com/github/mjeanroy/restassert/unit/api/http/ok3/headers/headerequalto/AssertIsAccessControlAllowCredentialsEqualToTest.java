@@ -32,7 +32,7 @@ import okhttp3.Response;
 
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
-	private static final boolean VALUE = true;
+	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {

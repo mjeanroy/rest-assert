@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_DISPOSITION;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsContentDispositionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = "attachment; filename=\"fname.ext\"";
+	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -41,6 +41,6 @@ public class AssertIsContentDispositionEqualToTest extends AbstractHttpResponses
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Disposition", VALUE);
+		return CONTENT_DISPOSITION;
 	}
 }

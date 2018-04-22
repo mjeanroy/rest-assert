@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.hasheader;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.JSON_CONTENT_TYPE;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertHasContentTypeTest extends AbstractHttpResponsesHeaderTest {
 
@@ -39,6 +39,6 @@ public class AssertHasContentTypeTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Type", "application/json");
+		return JSON_CONTENT_TYPE;
 	}
 }

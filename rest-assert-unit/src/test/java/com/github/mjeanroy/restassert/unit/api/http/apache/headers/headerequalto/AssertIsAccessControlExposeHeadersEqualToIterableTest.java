@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-import static java.util.Collections.singletonList;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ import org.apache.http.HttpResponse;
 
 public class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final List<String> VALUE = singletonList("Content-Length");
+	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 
 	@Override
 	protected Header getHeader() {

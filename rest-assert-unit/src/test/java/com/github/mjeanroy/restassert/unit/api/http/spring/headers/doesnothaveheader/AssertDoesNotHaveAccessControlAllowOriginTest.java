@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveAccessControlAllowOriginTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Origin", "*");
+		return ACCESS_CONTROL_ALLOW_ORIGIN;
 	}
 
 	@Override

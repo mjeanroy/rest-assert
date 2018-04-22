@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
@@ -39,6 +39,6 @@ public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractDoesNotHave
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", "nosniff");
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 }

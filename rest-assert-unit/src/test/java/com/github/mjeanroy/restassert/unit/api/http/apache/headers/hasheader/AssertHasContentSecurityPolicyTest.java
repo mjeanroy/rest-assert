@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertHasContentSecurityPolicyTest extends AbstractApacheHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Security-Policy", "default-src 'none';");
+		return CONTENT_SECURITY_POLICY;
 	}
 
 	@Override

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
@@ -37,7 +37,7 @@ public class IsContentTypeOptionsEqualToTest extends AbstractHttpHeaderEqualToTe
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE.value());
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 
 	@Override

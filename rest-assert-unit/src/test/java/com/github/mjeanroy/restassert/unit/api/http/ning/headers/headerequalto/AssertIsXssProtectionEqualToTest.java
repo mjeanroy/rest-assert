@@ -24,20 +24,20 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+	private static final XssProtection VALUE = XssProtection.DISABLE;
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+		return X_XSS_PROTECTION;
 	}
 
 	@Override

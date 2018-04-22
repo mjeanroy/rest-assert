@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hasheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class HasContentTypeOptionsTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", "nosniff");
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 
 	@Override

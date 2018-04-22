@@ -24,22 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsPragmaEqualToTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = PRAGMA.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Pragma", "no-cache");
+		return PRAGMA;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isPragmaEqualTo(response, getHeader().getValue());
+		return assertions.isPragmaEqualTo(response, VALUE);
 	}
 
 	@Override

@@ -24,28 +24,40 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final String FAILED_VALUE = new CacheControl.Builder()
+		.visibility(CacheControl.Visibility.PUBLIC)
+		.noTransform()
+		.maxAge(3600)
+		.build()
+		.toString();
+
+	private static final CacheControl VALUE = new CacheControl.Builder()
+		.visibility(CacheControl.Visibility.PUBLIC)
+		.noTransform()
+		.maxAge(300)
+		.build();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, getValue());
+		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", getValue().value());
+		return CACHE_CONTROL;
 	}
 
-	private CacheControl getValue() {
-		return new CacheControl.Builder()
-			.noCache()
-			.build();
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 }

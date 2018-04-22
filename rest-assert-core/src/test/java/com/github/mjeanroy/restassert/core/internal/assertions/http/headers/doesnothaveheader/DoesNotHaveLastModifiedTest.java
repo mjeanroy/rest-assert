@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class DoesNotHaveLastModifiedTest extends AbstractDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Last-Modified", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return LAST_MODIFIED;
 	}
 
 	@Override

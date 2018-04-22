@@ -24,20 +24,20 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_FRAME_OPTIONS;
+
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsFrameOptionsEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.SAME_ORIGIN;
+	private static final FrameOptions VALUE = FrameOptions.DENY;
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Frame-Options", VALUE.value());
+		return X_FRAME_OPTIONS;
 	}
 
 	@Override

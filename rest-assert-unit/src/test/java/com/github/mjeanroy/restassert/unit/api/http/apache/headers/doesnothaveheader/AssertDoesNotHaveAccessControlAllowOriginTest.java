@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertDoesNotHaveAccessControlAllowOriginTest extends AbstractApacheDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Origin", "*");
+		return ACCESS_CONTROL_ALLOW_ORIGIN;
 	}
 
 	@Override

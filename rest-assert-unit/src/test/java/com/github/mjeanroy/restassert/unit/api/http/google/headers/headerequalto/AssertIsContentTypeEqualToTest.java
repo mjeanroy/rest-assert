@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.JSON_CONTENT_TYPE;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertIsContentTypeEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final String VALUE = "application/json";
+	private static final String VALUE = JSON_CONTENT_TYPE.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Type", "application/json");
+		return JSON_CONTENT_TYPE;
 	}
 
 	@Override

@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import okhttp3.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.LOCATION;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
+import okhttp3.Response;
 
 public class AssertDoesNotHaveLocationTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Location", "http://www.google.fr");
+		return LOCATION;
 	}
 
 	@Override

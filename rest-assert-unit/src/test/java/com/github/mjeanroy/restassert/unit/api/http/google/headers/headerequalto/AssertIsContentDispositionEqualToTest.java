@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_DISPOSITION;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertIsContentDispositionEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final String VALUE = "attachment; filename=\"fname.ext\"";
+	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Disposition", VALUE);
+		return CONTENT_DISPOSITION;
 	}
 
 	@Override

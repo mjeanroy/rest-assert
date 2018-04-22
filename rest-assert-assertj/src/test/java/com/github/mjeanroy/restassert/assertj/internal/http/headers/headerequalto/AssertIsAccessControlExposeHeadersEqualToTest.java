@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = "Content-Length";
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {

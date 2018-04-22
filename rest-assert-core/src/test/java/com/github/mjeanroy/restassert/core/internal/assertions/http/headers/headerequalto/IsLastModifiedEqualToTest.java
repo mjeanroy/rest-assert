@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
+	private static final String VALUE = LAST_MODIFIED.getValue();
+	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
 
 	@Override
 	protected Header getHeader() {
-		return header("Last-Modified", VALUE);
+		return LAST_MODIFIED;
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	@Override
 	protected String failValue() {
-		return "Wed, 15 Nov 1995 12:45:26 GMT";
+		return FAILED_VALUE;
 	}
 
 	@Override

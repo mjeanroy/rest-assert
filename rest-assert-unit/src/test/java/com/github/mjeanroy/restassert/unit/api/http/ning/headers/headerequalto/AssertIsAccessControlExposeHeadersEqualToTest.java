@@ -32,6 +32,8 @@ import com.ning.http.client.Response;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractNingH
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		NingHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		NingHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveCacheControlTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
@@ -39,6 +39,6 @@ public class AssertDoesNotHaveCacheControlTest extends AbstractDoesNotHaveHttpRe
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "public, no-transform, max-age=300");
+		return CACHE_CONTROL;
 	}
 }

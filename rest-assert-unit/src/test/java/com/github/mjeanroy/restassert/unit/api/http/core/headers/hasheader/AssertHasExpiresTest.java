@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertHasExpiresTest extends AbstractCoreHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return EXPIRES;
 	}
 
 	@Override

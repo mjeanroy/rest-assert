@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = "max-age=31536000; includeSubDomains";
+	private static final String VALUE = STRICT_TRANSPORT_SECURITY.getValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {

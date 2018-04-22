@@ -28,6 +28,7 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.non
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
 import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
@@ -46,14 +47,19 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHe
 			.addFormAction(self())
 			.build();
 
+	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
+		.addDefaultSrc(self())
+		.build()
+		.toString();
+
 	@Override
 	protected Header getHeader() {
-		return header("Content-Security-Policy", VALUE.value());
+		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.value());
 	}
 
 	@Override
 	protected String failValue() {
-		return "default-src 'self';";
+		return FAILED_VALUE;
 	}
 
 	@Override

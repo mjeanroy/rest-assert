@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 
 	@Override
 	protected Header getHeader() {
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractJunit
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		JunitServersHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		JunitServersHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final String VALUE = "nosniff";
+	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE);
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 
 	@Override

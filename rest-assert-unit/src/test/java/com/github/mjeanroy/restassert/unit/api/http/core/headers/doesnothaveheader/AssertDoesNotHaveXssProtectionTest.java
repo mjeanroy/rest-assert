@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertDoesNotHaveXssProtectionTest extends AbstractCoreDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", "0");
+		return X_XSS_PROTECTION;
 	}
 
 	@Override

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.LOCATION;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsLocationEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
@@ -36,7 +36,7 @@ public class AssertIsLocationEqualToTest extends AbstractJunitServersHttpHeaderE
 
 	@Override
 	protected Header getHeader() {
-		return header("Location", VALUE);
+		return LOCATION;
 	}
 
 	@Override

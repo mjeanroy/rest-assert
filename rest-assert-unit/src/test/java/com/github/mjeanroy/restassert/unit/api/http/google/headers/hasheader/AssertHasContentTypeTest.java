@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.JSON_CONTENT_TYPE;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
 public class AssertHasContentTypeTest extends AbstractGoogleHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Type", "application/json");
+		return JSON_CONTENT_TYPE;
 	}
 
 	@Override

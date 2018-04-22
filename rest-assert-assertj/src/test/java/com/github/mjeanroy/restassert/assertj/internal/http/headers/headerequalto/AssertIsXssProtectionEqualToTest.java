@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsXssProtectionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.ENABLE_BLOCK;
+	private static final XssProtection VALUE = XssProtection.DISABLE;
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -42,6 +42,6 @@ public class AssertIsXssProtectionEqualToTest extends AbstractHttpResponsesHeade
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", VALUE.value());
+		return X_XSS_PROTECTION;
 	}
 }

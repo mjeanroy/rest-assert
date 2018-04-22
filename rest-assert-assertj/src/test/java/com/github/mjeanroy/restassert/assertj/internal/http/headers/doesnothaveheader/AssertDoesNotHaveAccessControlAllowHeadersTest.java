@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
@@ -39,6 +39,6 @@ public class AssertDoesNotHaveAccessControlAllowHeadersTest extends AbstractDoes
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", "X-Requested-With");
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 }

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_DISPOSITION;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsContentDispositionEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = "attachment; filename=\"fname.ext\"";
+	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Disposition", VALUE);
+		return CONTENT_DISPOSITION;
 	}
 
 	@Override

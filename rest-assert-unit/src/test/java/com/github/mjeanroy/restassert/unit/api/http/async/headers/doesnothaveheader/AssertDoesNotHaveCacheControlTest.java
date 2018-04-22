@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.asynchttpclient.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import org.asynchttpclient.Response;
 
 public class AssertDoesNotHaveCacheControlTest extends AbstractAsyncDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "public, no-transform, max-age=300");
+		return CACHE_CONTROL;
 	}
 
 	@Override

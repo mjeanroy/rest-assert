@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.ning.http.client.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.ning.http.client.Response;
 
 public class AssertDoesNotHaveXssProtectionTest extends AbstractNingDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", "0");
+		return X_XSS_PROTECTION;
 	}
 
 	@Override

@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 
 	@Override
 	protected Header getHeader() {
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractSprin
 
 	@Override
 	protected void invoke(ResultActions actual) {
-		SpringMockMvcHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		SpringMockMvcHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, ResultActions actual) {
-		SpringMockMvcHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		SpringMockMvcHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

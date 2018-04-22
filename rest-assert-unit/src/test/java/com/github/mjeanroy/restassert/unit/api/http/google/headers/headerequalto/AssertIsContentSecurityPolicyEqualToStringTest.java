@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final String VALUE = "default-src 'none';";
+	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Security-Policy", VALUE);
+		return CONTENT_SECURITY_POLICY;
 	}
 
 	@Override

@@ -24,22 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsAccessControlAllowCredentialsEqualToTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Credentials", "true");
+		return ACCESS_CONTROL_ALLOW_CREDENTIALS;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isAccessControlAllowCredentialsEqualTo(response, true);
+		return assertions.isAccessControlAllowCredentialsEqualTo(response, VALUE);
 	}
 
 	@Override

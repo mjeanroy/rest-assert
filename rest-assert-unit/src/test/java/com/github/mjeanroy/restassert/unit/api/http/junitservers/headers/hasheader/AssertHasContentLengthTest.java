@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.hasheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_LENGTH;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertHasContentLengthTest extends AbstractJunitServersHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Length", "100");
+		return CONTENT_LENGTH;
 	}
 
 	@Override

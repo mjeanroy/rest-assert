@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveXssProtectionTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
@@ -39,6 +39,6 @@ public class AssertDoesNotHaveXssProtectionTest extends AbstractDoesNotHaveHttpR
 
 	@Override
 	protected Header getHeader() {
-		return header("X-XSS-Protection", "0");
+		return X_XSS_PROTECTION;
 	}
 }

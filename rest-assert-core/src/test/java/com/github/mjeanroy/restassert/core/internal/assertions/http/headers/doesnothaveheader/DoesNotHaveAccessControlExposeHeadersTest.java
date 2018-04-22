@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -34,7 +34,7 @@ public class DoesNotHaveAccessControlExposeHeadersTest extends AbstractDoesNotHa
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Expose-Headers", "X-Requested-With");
+		return ACCESS_CONTROL_EXPOSE_HEADERS;
 	}
 
 	@Override

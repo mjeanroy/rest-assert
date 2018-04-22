@@ -24,6 +24,11 @@
 
 package com.github.mjeanroy.restassert.tests.models;
 
+import static java.util.Collections.unmodifiableList;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Representation of header.
  * A header is defined by a name and a value.
@@ -57,11 +62,35 @@ public class Header {
 		this.value = value;
 	}
 
+	/**
+	 * Get {@link #name}
+	 *
+	 * @return {@link #name}
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * Get {@link #value}
+	 *
+	 * @return {@link #value}
+	 */
 	public String getValue() {
 		return value;
+	}
+
+	/**
+	 * Get all header values.
+	 *
+	 * @return Header values.
+	 */
+	public List<String> getValues() {
+		List<String> values = new ArrayList<>();
+		for (String v : value.split(",")) {
+			values.add(v.trim());
+		}
+
+		return unmodifiableList(values);
 	}
 }

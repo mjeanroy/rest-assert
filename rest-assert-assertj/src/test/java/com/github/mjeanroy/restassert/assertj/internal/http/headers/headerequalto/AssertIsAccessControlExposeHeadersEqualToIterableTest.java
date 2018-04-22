@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequal
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-import static java.util.Collections.singletonList;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final List<String> VALUE = singletonList("Content-Length");
+	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {

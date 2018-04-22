@@ -24,8 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-import static java.util.Collections.singletonList;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import java.util.List;
 
@@ -35,16 +34,16 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final List<String> VALUES = singletonList("X-Requested-With");
+	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", "X-Requested-With");
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isAccessControlAllowHeadersEqualTo(response, VALUES);
+		return assertions.isAccessControlAllowHeadersEqualTo(response, VALUE);
 	}
 
 	@Override

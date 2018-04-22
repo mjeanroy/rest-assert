@@ -24,27 +24,28 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
 
 import java.util.Date;
 
-import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertIsLastModifiedEqualToWithDateTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
+	private static final String VALUE = LAST_MODIFIED.getValue();
+	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
 
 	@Override
 	protected Header getHeader() {
-		return header("Last-Modified", VALUE);
+		return LAST_MODIFIED;
 	}
 
 	@Override
 	protected String failValue() {
-		return "Wed, 15 Nov 1995 12:45:26 GMT";
+		return FAILED_VALUE;
 	}
 
 	@Override

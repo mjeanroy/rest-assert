@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.hasheader;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertHasExpiresTest extends AbstractSpringMockMvcHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return EXPIRES;
 	}
 
 	@Override

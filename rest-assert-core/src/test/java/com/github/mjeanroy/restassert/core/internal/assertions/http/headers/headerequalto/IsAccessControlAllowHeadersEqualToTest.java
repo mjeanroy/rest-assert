@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -32,14 +32,16 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class IsAccessControlAllowHeadersEqualToTest extends AbstractHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", "X-Requested-With");
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isAccessControlAllowHeadersEqualTo(response, getHeader().getValue());
+		return assertions.isAccessControlAllowHeadersEqualTo(response, VALUE);
 	}
 
 	@Override

@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.ning.http.client.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_DISPOSITION;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.ning.http.client.Response;
 
 public class AssertDoesNotHaveContentDispositionTest extends AbstractNingDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Disposition", "attachment; filename=\"fname.ext\"");
+		return CONTENT_DISPOSITION;
 	}
 
 	@Override

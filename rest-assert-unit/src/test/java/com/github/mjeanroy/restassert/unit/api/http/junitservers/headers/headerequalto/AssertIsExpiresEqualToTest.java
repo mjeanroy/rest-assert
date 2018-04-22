@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsExpiresEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final String VALUE = "Tue, 15 Nov 1994 12:45:26 GMT";
+	private static final String VALUE = EXPIRES.getValue();
+	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", VALUE);
+		return EXPIRES;
 	}
 
 	@Override
@@ -51,6 +52,6 @@ public class AssertIsExpiresEqualToTest extends AbstractJunitServersHttpHeaderEq
 
 	@Override
 	protected String failValue() {
-		return "Wed, 15 Nov 1995 12:45:26 GMT";
+		return FAILED_VALUE;
 	}
 }

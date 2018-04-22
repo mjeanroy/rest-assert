@@ -24,27 +24,34 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.tests.models.Header.header;
+
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualToTest {
 
+	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
+		.addDefaultSrc(self())
+		.build()
+		.toString();
+
 	private static final ContentSecurityPolicy VALUE = new ContentSecurityPolicy.Builder()
-			.addDefaultSrc(none())
-			.addScriptSrc(unsafeInline(), unsafeEval())
-			.addStyleSrc(unsafeInline())
-			.build();
+		.addDefaultSrc(none())
+		.addScriptSrc(unsafeInline(), unsafeEval())
+		.addStyleSrc(unsafeInline())
+		.build();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Security-Policy", VALUE.value());
+		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.value());
 	}
 
 	@Override
@@ -59,6 +66,6 @@ public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualT
 
 	@Override
 	String failValue() {
-		return "default-src 'self';";
+		return FAILED_VALUE;
 	}
 }

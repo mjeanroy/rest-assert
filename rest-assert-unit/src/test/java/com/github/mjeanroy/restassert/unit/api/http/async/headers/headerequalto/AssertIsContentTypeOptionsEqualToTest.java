@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsContentTypeOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
@@ -37,7 +37,7 @@ public class AssertIsContentTypeOptionsEqualToTest extends AbstractAsyncHttpHead
 
 	@Override
 	protected Header getHeader() {
-		return header("X-Content-Type-Options", VALUE.value());
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 
 	@Override

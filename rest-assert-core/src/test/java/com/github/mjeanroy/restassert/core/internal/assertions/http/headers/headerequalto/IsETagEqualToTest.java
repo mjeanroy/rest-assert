@@ -24,22 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ETAG;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsETagEqualToTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String VALUE = ETAG.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("ETag", "123");
+		return ETAG;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isETagEqualTo(response, getHeader().getValue());
+		return assertions.isETagEqualTo(response, VALUE);
 	}
 
 	@Override

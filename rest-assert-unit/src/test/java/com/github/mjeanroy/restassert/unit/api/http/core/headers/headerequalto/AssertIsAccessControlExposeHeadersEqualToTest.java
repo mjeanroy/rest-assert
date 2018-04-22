@@ -32,6 +32,8 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractCoreH
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		HttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		HttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		HttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		HttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

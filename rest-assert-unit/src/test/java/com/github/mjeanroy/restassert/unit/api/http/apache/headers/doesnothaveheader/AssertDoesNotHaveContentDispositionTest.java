@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_DISPOSITION;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 public class AssertDoesNotHaveContentDispositionTest extends AbstractApacheDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Disposition", "attachment; filename=\"fname.ext\"");
+		return CONTENT_DISPOSITION;
 	}
 
 	@Override

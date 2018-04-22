@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import org.asynchttpclient.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
+import org.asynchttpclient.Response;
 
 public class AssertIsPragmaEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
-	private static final String VALUE = "no-cache";
+	private static final String VALUE = PRAGMA.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Pragma", VALUE);
+		return PRAGMA;
 	}
 
 	@Override

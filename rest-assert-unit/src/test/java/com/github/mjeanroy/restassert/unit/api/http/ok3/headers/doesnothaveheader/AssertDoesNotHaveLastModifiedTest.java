@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import okhttp3.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.LAST_MODIFIED;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
+import okhttp3.Response;
 
 public class AssertDoesNotHaveLastModifiedTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Last-Modified", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return LAST_MODIFIED;
 	}
 
 	@Override

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsContentEncodingEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
-	private static final String VALUE = "gzip";
+	private static final String VALUE = GZIP_CONTENT_ENCODING.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Encoding", VALUE);
+		return GZIP_CONTENT_ENCODING;
 	}
 	@Override
 	protected void invoke(HttpResponse actual) {

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.PRAGMA;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsPragmaEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
@@ -36,7 +36,7 @@ public class AssertIsPragmaEqualToTest extends AbstractJunitServersHttpHeaderEqu
 
 	@Override
 	protected Header getHeader() {
-		return header("Pragma", VALUE);
+		return PRAGMA;
 	}
 
 	@Override

@@ -24,27 +24,35 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.Strings.join;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static java.util.Arrays.asList;
+
+import java.util.List;
+
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import java.util.List;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-import static java.util.Arrays.asList;
-
 public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
+	private static final String V1 = "GET";
+	private static final String V2 = "POST";
+	private static final String V3 = "PUT";
+
+	private static final String VALUE = join(asList(V1, V2, V3), ", ");
+
 	private static final List<RequestMethod> VALUES = asList(
-			RequestMethod.GET,
-			RequestMethod.POST,
-			RequestMethod.PUT
+			RequestMethod.valueOf(V1),
+			RequestMethod.valueOf(V2),
+			RequestMethod.valueOf(V3)
 	);
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Methods", "GET, POST, PUT");
+		return header(ACCESS_CONTROL_ALLOW_METHODS.getName(), VALUE);
 	}
 
 	@Override

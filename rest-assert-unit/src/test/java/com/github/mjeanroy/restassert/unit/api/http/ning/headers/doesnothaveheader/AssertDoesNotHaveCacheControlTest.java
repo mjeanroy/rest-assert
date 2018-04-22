@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.doesnothaveheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.ning.http.client.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.ning.http.client.Response;
 
 public class AssertDoesNotHaveCacheControlTest extends AbstractNingDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", "public, no-transform, max-age=300");
+		return CACHE_CONTROL;
 	}
 
 	@Override

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ETAG;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsETagEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final String VALUE = "123";
+	private static final String VALUE = ETAG.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("ETag", VALUE);
+		return ETAG;
 	}
 
 	@Override

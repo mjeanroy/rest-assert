@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = "default-src 'self';";
+	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -41,6 +41,6 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttp
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Security-Policy", VALUE);
+		return CONTENT_SECURITY_POLICY;
 	}
 }

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_SECURITY_POLICY;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final String VALUE = "default-src 'none';";
+	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Security-Policy", VALUE);
+		return CONTENT_SECURITY_POLICY;
 	}
 
 	@Override

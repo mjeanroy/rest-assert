@@ -24,29 +24,41 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.restassert.core.data.CacheControl;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class IsCacheControlEqualToTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final String FAILED_VALUE = new CacheControl.Builder()
+		.visibility(CacheControl.Visibility.PUBLIC)
+		.noTransform()
+		.maxAge(3600)
+		.build()
+		.toString();
+
+	private static final CacheControl VALUE = new CacheControl.Builder()
+		.visibility(CacheControl.Visibility.PUBLIC)
+		.noTransform()
+		.maxAge(300)
+		.build();
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", getValue().value());
+		return CACHE_CONTROL;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isCacheControlEqualTo(response, getValue());
-	}
-
-	private CacheControl getValue() {
-		return new CacheControl.Builder()
-			.visibility(CacheControl.Visibility.PUBLIC)
-			.build();
+		return assertions.isCacheControlEqualTo(response, VALUE);
 	}
 
 	@Override

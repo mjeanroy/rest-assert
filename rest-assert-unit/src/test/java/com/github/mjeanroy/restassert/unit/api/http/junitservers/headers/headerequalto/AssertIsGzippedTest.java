@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
 public class AssertIsGzippedTest extends AbstractJunitServersHttpHeaderEqualToTest {
-
-	private static final String VALUE = "gzip";
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Encoding", VALUE);
+		return GZIP_CONTENT_ENCODING;
 	}
 
 	@Override

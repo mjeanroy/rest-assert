@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertDoesNotHaveExpiresTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
@@ -39,6 +39,6 @@ public class AssertDoesNotHaveExpiresTest extends AbstractDoesNotHaveHttpRespons
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return EXPIRES;
 	}
 }

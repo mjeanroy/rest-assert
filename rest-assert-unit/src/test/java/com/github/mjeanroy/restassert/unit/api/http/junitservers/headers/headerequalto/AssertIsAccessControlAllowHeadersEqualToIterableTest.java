@@ -24,23 +24,21 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
+
+import java.util.List;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import java.util.List;
-
-import static com.github.mjeanroy.restassert.tests.Strings.join;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-import static java.util.Collections.singletonList;
-
 public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final List<String> VALUE = singletonList("X-Requested-With");
+	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", join(VALUE, " "));
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 
 	@Override

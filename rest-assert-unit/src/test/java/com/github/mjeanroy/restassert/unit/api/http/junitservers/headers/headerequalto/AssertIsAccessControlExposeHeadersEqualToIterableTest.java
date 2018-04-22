@@ -24,18 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
+
+import java.util.List;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import java.util.List;
-
-import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-import static java.util.Collections.singletonList;
-
 public class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final List<String> VALUE = singletonList("Content-Length");
+	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 
 	@Override
 	protected Header getHeader() {

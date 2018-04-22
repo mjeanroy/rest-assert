@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.hasheader;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 public class AssertHasExpiresTest extends AbstractGoogleHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return EXPIRES;
 	}
 
 	@Override

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.hasheader;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CONTENT_LENGTH;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.models.Header;
-
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertHasContentLengthTest extends AbstractHttpResponsesHeaderTest {
 
@@ -39,6 +39,6 @@ public class AssertHasContentLengthTest extends AbstractHttpResponsesHeaderTest 
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Length", "100");
+		return CONTENT_LENGTH;
 	}
 }

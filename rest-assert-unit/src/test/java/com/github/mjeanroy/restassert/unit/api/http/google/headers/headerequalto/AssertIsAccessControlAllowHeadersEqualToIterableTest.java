@@ -24,9 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.Strings.join;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-import static java.util.Collections.singletonList;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import java.util.List;
 
@@ -36,11 +34,11 @@ import com.google.api.client.http.HttpResponse;
 
 public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final List<String> VALUE = singletonList("X-Requested-With");
+	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 
 	@Override
 	protected Header getHeader() {
-		return header("Access-Control-Allow-Headers", join(VALUE, " "));
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 
 	@Override

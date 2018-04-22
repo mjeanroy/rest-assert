@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
-import com.ning.http.client.Response;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.GZIP_CONTENT_ENCODING;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.ning.http.client.Response;
 
 public class AssertIsContentEncodingEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-	private static final String VALUE = "gzip";
+	private static final String VALUE = GZIP_CONTENT_ENCODING.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return header("Content-Encoding", VALUE);
+		return GZIP_CONTENT_ENCODING;
 	}
 
 	@Override

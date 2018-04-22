@@ -32,6 +32,8 @@ import okhttp3.Response;
 
 public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
+	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+
 	@Override
 	protected Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
@@ -39,11 +41,11 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractOkHtt
 
 	@Override
 	protected void invoke(Response actual) {
-		OkHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, "Content-Length");
+		OkHttpAssert.assertIsAccessControlExposeHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		OkHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, "Content-Length");
+		OkHttpAssert.assertIsAccessControlExposeHeadersEqualTo(message, actual, VALUE);
 	}
 }

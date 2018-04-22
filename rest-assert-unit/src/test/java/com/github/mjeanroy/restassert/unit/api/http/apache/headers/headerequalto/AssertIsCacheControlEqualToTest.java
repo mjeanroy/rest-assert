@@ -24,22 +24,36 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.CACHE_CONTROL;
+
 import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
-
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
 
 public class AssertIsCacheControlEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final CacheControl VALUE = new CacheControl.Builder()
-		.noCache()
+		.visibility(CacheControl.Visibility.PUBLIC)
+		.noTransform()
+		.maxAge(300)
 		.build();
+
+	private static final String FAILED_VALUE = new CacheControl.Builder()
+		.visibility(CacheControl.Visibility.PUBLIC)
+		.noTransform()
+		.maxAge(3600)
+		.build()
+		.toString();
 
 	@Override
 	protected Header getHeader() {
-		return header("Cache-Control", VALUE.value());
+		return CACHE_CONTROL;
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 
 	@Override

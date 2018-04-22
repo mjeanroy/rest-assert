@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.TestHeaders.EXPIRES;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 public class AssertDoesNotHaveExpiresTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {
-		return header("Expires", "Mon, 01 Jun 2009 08:56:18 GMT");
+		return EXPIRES;
 	}
 
 	@Override

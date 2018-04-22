@@ -33,7 +33,15 @@ import com.github.mjeanroy.restassert.tests.models.Header;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000).includeSubDomains().build();
+	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
+		.includeSubDomains()
+		.build();
+
+	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
+		.includeSubDomains()
+		.preload()
+		.build()
+		.toString();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -47,10 +55,6 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResp
 
 	@Override
 	String failValue() {
-		return new StrictTransportSecurity.Builder(31536000)
-			.includeSubDomains()
-			.preload()
-			.build()
-			.toString();
+		return FAILED_VALUE;
 	}
 }
