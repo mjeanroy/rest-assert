@@ -25,10 +25,10 @@
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.hasheader;
 
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.google.api.client.http.HttpResponse;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 public class AssertHasHeaderTest extends AbstractGoogleHttpHeaderTest {
 

@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_FRAME_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 

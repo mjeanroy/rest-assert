@@ -27,11 +27,11 @@ package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothave
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 

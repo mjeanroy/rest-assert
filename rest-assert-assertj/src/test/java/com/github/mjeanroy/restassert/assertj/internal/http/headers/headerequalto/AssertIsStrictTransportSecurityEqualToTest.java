@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.tests.data.TestHeaders.STRICT_TRANS
 
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 

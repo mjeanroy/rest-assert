@@ -25,10 +25,10 @@
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.doesnothaveheader;
 
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import org.asynchttpclient.Response;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 public class AssertDoesNotHaveHeaderTest extends AbstractAsyncDoesNotHaveHttpHeaderTest {
 

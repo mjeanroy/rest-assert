@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.tests.data;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
 /**
  * Static pre-configured HTTP status values to use in unit test.
  */
@@ -34,97 +36,97 @@ public final class TestStatus {
 	}
 
 	/**
-	 * The status code for the {@code "OK"} response.
+	 * The status code for the {@code "OK"} response, to use in unit test.
 	 */
 	public static final int OK = 200;
 
 	/**
-	 * The status code for the {@code "CREATED"} response.
+	 * The status code for the {@code "CREATED"} response, to use in unit test.
 	 */
 	public static final int CREATED = 201;
 
 	/**
-	 * The status code for the {@code "ACCEPTED"} response.
+	 * The status code for the {@code "ACCEPTED"} response, to use in unit test.
 	 */
 	public static final int ACCEPTED = 202;
 
 	/**
-	 * The status code for the {@code "NO CONTENT"} response.
+	 * The status code for the {@code "NO CONTENT"} response, to use in unit test.
 	 */
 	public static final int NO_CONTENT = 204;
 
 	/**
-	 * The status code for the {@code "RESET CONTENT"} response.
+	 * The status code for the {@code "RESET CONTENT"} response, to use in unit test.
 	 */
 	public static final int RESET_CONTENT = 205;
 
 	/**
-	 * The status code for the {@code "PARTIAL CONTENT"} response.
+	 * The status code for the {@code "PARTIAL CONTENT"} response, to use in unit test.
 	 */
 	public static final int PARTIAL_CONTENT = 206;
 
 	/**
-	 * The status code for the {@code "MOVED PERMANENTLY"} response.
+	 * The status code for the {@code "MOVED PERMANENTLY"} response, to use in unit test.
 	 */
 	public static final int MOVED_PERMANENTLY = 301;
 
 	/**
-	 * The status code for the {@code "MOVED TEMPORARILY"} response.
+	 * The status code for the {@code "MOVED TEMPORARILY"} response, to use in unit test.
 	 */
 	public static final int MOVED_TEMPORARILY = 302;
 
 	/**
-	 * The status code for the {@code "NOT MODIFIED"} response.
+	 * The status code for the {@code "NOT MODIFIED"} response, to use in unit test.
 	 */
 	public static final int NOT_MODIFIED = 304;
 
 	/**
-	 * The status code for the {@code "BAD REQUEST"} response.
+	 * The status code for the {@code "BAD REQUEST"} response, to use in unit test.
 	 */
 	public static final int BAD_REQUEST = 400;
 
 	/**
-	 * The status code for the {@code "UNAUTHORIZED"} response.
+	 * The status code for the {@code "UNAUTHORIZED"} response, to use in unit test.
 	 */
 	public static final int UNAUTHORIZED = 401;
 
 	/**
-	 * The status code for the {@code "FORBIDDEN"} response.
+	 * The status code for the {@code "FORBIDDEN"} response, to use in unit test.
 	 */
 	public static final int FORBIDDEN = 403;
 
 	/**
-	 * The status code for the {@code "NOT FOUND"} response.
+	 * The status code for the {@code "NOT FOUND"} response, to use in unit test.
 	 */
 	public static final int NOT_FOUND = 404;
 
 	/**
-	 * The status code for the {@code "METHOD NOT ALLOWED"} response.
+	 * The status code for the {@code "METHOD NOT ALLOWED"} response, to use in unit test.
 	 */
 	public static final int METHOD_NOT_ALLOWED = 405;
 
 	/**
-	 * The status code for the {@code "NOT ACCEPTABLE"} response.
+	 * The status code for the {@code "NOT ACCEPTABLE"} response, to use in unit test.
 	 */
 	public static final int NOT_ACCEPTABLE = 406;
 
 	/**
-	 * The status code for the {@code "CONFLICT"} response.
+	 * The status code for the {@code "CONFLICT"} response, to use in unit test.
 	 */
 	public static final int CONFLICT = 409;
 
 	/**
-	 * The status code for the {@code "PRE CONDITION FAILED"} response.
+	 * The status code for the {@code "PRE CONDITION FAILED"} response, to use in unit test.
 	 */
 	public static final int PRE_CONDITION_FAILED = 412;
 
 	/**
-	 * The status code for the {@code "UNSUPPORTED MEDIA TYPE"} response.
+	 * The status code for the {@code "UNSUPPORTED MEDIA TYPE"} response, to use in unit test.
 	 */
 	public static final int UNSUPPORTED_MEDIA_TYPE = 415;
 
 	/**
-	 * The status code for the {@code "INTERNAL SERVER ERROR"} response.
+	 * The status code for the {@code "INTERNAL SERVER ERROR"} response, to use in unit test.
 	 */
 	public static final int INTERNAL_SERVER_ERROR = 500;
 
@@ -132,4 +134,24 @@ public final class TestStatus {
 	 * The status code for the {@code "NOT IMPLEMENTED"} response.
 	 */
 	public static final int NOT_IMPLEMENTED = 501;
+
+	/**
+	 * The range of status for "client errors", to use in unit test.
+	 */
+	public static final Range CLIENT_ERROR = range(400, 499);
+
+	/**
+	 * The range of status for "server errors", to use in unit test.
+	 */
+	public static final Range SERVER_ERROR = range(500, 599);
+
+	/**
+	 * The range of status for success calls, to use in unit test.
+	 */
+	public static final Range SUCCESS = range(200, 299);
+
+	/**
+	 * The range of status for redirection calls, to use in unit test.
+	 */
+	public static final Range REDIRECTION = range(300, 399);
 }

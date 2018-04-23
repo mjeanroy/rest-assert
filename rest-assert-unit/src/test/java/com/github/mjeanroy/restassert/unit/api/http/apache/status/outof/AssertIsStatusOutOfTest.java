@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
 public class AssertIsStatusOutOfTest extends AbstractApacheHttpStatusOutOfTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertIsStatusOutOf(actual, start(), end());
+		ApacheHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertIsStatusOutOf(message, actual, start(), end());
+		ApacheHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

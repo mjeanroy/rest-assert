@@ -24,23 +24,24 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsStatusOutOfTest extends AbstractHttpResponsesStatusOutOfTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertIsStatusOutOf(info, httpResponse, start(), end());
+		httpResponses.assertIsStatusOutOf(info, httpResponse, START, END);
 	}
 }

@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.tests.data.TestHeaders.STRICT_TRANS
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {

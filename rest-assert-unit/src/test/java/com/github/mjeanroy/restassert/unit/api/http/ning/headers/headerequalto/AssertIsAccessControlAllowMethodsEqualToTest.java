@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 

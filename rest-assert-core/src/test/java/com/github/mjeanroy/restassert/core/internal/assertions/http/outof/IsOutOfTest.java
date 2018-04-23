@@ -24,23 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
 
 public class IsOutOfTest extends AbstractHttpStatusOutOfTest {
 
-	@Override
-	protected int start() {
-		return 0;
-	}
+	private static final int START = 0;
+	private static final int END = 399;
 
 	@Override
-	protected int end() {
-		return 399;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isStatusOutOf(response, start(), end());
+		return assertions.isStatusOutOf(response, START, END);
 	}
 }

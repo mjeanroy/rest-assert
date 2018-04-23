@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.CLIENT_ERROR;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
 public class AssertIsNotClientErrorTest extends AbstractAsyncHttpStatusOutOfTest {
 
 	@Override
-	protected int start() {
-		return 400;
-	}
-
-	@Override
-	protected int end() {
-		return 499;
+	protected Range getRange() {
+		return CLIENT_ERROR;
 	}
 
 	@Override

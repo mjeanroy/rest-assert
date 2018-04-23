@@ -24,20 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.between;
 
-import org.assertj.core.api.AssertionInfo;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SERVER_ERROR;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
+import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsServerErrorTest extends AbstractHttpResponsesStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 500;
-	}
-
-	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return SERVER_ERROR;
 	}
 
 	@Override

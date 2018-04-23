@@ -24,23 +24,24 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.between;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsStatusBetweenTest extends AbstractHttpResponsesStatusBetweenTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
-		httpResponses.assertIsStatusBetween(info, httpResponse, start(), end());
+		httpResponses.assertIsStatusBetween(info, httpResponse, START, END);
 	}
 }

@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.http.between;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -45,7 +46,8 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {
-		for (int i = start(); i <= end(); i++) {
+		final Range range = getRange();
+		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			AssertionResult result = invoke(newResponse(i));
 			checkSuccess(result);
 		}
@@ -53,8 +55,9 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_fail_with_response_not_in_bounds() {
-		final int start = start();
-		final int end = end();
+		final Range range = getRange();
+		final int start = range.getStart();
+		final int end = range.getEnd();
 
 		for (int status = 100; status <= 599; status++) {
 			if (status >= start && status <= end) {
@@ -77,7 +80,5 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 			.build();
 	}
 
-	protected abstract int start();
-
-	protected abstract int end();
+	protected abstract Range getRange();
 }

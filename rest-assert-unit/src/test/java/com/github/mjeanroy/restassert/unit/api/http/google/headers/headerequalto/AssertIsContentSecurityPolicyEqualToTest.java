@@ -29,11 +29,11 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.sel
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_SECURITY_POLICY;
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.google.api.client.http.HttpResponse;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {

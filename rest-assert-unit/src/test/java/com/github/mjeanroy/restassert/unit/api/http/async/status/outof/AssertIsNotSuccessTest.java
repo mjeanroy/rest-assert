@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SUCCESS;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
 public class AssertIsNotSuccessTest extends AbstractAsyncHttpStatusOutOfTest {
 
 	@Override
-	protected int start() {
-		return 200;
-	}
-
-	@Override
-	protected int end() {
-		return 299;
+	protected Range getRange() {
+		return SUCCESS;
 	}
 
 	@Override

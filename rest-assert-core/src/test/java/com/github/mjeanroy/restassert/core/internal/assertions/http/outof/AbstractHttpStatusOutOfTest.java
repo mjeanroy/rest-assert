@@ -30,6 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,8 +45,9 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 
 	@Test
 	public void it_should_pass() {
+		final Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
+			if (i < range.getStart() || i > range.getEnd()) {
 				AssertionResult result = invoke(newResponse(i));
 				checkSuccess(result);
 			}
@@ -54,8 +56,9 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 
 	@Test
 	public void it_should_fail() {
-		final int start = start();
-		final int end = end();
+		final Range range = getRange();
+		final int start = range.getStart();
+		final int end = range.getEnd();
 
 		for (int status = start; status <= end; status++) {
 			AssertionResult result = invoke(newResponse(status));
@@ -69,7 +72,5 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 			.build();
 	}
 
-	protected abstract int start();
-
-	protected abstract int end();
+	protected abstract Range getRange();
 }

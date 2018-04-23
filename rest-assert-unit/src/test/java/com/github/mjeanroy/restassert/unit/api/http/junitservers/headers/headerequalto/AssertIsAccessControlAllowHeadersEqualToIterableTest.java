@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTR
 import java.util.List;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractJunitServersHttpHeaderEqualToTest {

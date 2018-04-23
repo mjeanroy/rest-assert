@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_CONTENT_TY
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsContentTypeOptionsEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {

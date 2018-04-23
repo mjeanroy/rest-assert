@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.tests.data.TestHeaders.JSON_CONTENT
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 
 public class HasContentTypeTest extends AbstractHttpHeaderTest {
 

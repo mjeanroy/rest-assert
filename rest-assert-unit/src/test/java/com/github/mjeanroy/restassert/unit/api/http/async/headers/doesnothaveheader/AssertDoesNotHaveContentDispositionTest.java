@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.http.async.headers.doesnothavehe
 
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_DISPOSITION;
 
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 

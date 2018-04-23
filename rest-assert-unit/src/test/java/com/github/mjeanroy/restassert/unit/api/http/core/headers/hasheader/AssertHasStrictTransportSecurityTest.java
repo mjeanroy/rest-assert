@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.core.headers.hasheader;
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertHasStrictTransportSecurityTest extends AbstractCoreHttpHeaderTest {

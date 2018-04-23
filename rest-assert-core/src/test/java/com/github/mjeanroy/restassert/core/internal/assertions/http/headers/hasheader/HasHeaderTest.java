@@ -26,9 +26,9 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.has
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 public class HasHeaderTest extends AbstractHttpHeaderTest {
 

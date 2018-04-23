@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.core.utils.Mapper;
 import com.github.mjeanroy.restassert.core.utils.Utils;
 import org.junit.Before;
@@ -38,7 +38,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
 

@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.REDIRECTION;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsNotRedirectionTest extends AbstractJunitServersHttpStatusOutOfTest {
 
 	@Override
-	protected int start() {
-		return 300;
-	}
-
-	@Override
-	protected int end() {
-		return 399;
+	protected Range getRange() {
+		return REDIRECTION;
 	}
 
 	@Override

@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
 public class AssertIsStatusOutOfTest extends AbstractGoogleHttpStatusOutOfTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		GoogleHttpAssert.assertIsStatusOutOf(actual, start(), end());
+		GoogleHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		GoogleHttpAssert.assertIsStatusOutOf(message, actual, start(), end());
+		GoogleHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

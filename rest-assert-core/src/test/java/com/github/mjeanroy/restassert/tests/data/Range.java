@@ -22,75 +22,86 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.models;
+package com.github.mjeanroy.restassert.tests.data;
 
-import static java.util.Collections.unmodifiableList;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 /**
- * Representation of header.
- * A header is defined by a name and a value.
+ * A status range, with a lower bound and an upper bound.
  */
-public class Header {
+public final class Range {
 
 	/**
-	 * Create new header.
+	 * Create new range.
 	 *
-	 * @param name  Header name.
-	 * @param value Header value.
-	 * @return Header.
+	 * @param start The lower bound.
+	 * @param end The upper bound.
+	 * @return The new range.
 	 */
-	public static Header header(String name, String value) {
-		return new Header(name, value);
+	public static Range range(int start, int end) {
+		return new Range(start, end);
 	}
 
 	/**
-	 * Header name.
+	 * The lower bound.
 	 */
-	private final String name;
+	private final int start;
 
 	/**
-	 * Header value.
+	 * The upper bound.
 	 */
-	private final String value;
+	private final int end;
 
-	// Use static factory instead
-	private Header(String name, String value) {
-		this.name = name;
-		this.value = value;
+	/**
+	 * Create the range.
+	 *
+	 * @param start The lower bound.
+	 * @param end The upper bound.
+	 */
+	private Range(int start, int end) {
+		this.start = start;
+		this.end = end;
 	}
 
 	/**
-	 * Get {@link #name}
+	 * Get {@link #start}
 	 *
-	 * @return {@link #name}
+	 * @return {@link #start}
 	 */
-	public String getName() {
-		return name;
+	public int getStart() {
+		return start;
 	}
 
 	/**
-	 * Get {@link #value}
+	 * Get {@link #end}
 	 *
-	 * @return {@link #value}
+	 * @return {@link #end}
 	 */
-	public String getValue() {
-		return value;
+	public int getEnd() {
+		return end;
 	}
 
-	/**
-	 * Get all header values.
-	 *
-	 * @return Header values.
-	 */
-	public List<String> getValues() {
-		List<String> values = new ArrayList<>();
-		for (String v : value.split(",")) {
-			values.add(v.trim());
+	@Override
+	public String toString() {
+		return String.format("Range{start=%d, end=%d}", start, end);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
 		}
 
-		return unmodifiableList(values);
+		if (o instanceof Range) {
+			Range r = (Range) o;
+			return r.start == start && r.end == end;
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(start, end);
 	}
 }

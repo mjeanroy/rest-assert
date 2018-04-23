@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SUCCESS;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 public class AssertIsSuccessTest extends AbstractOkHttpHttpStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 200;
-	}
-
-	@Override
-	protected int end() {
-		return 299;
+	protected Range getRange() {
+		return SUCCESS;
 	}
 
 	@Override

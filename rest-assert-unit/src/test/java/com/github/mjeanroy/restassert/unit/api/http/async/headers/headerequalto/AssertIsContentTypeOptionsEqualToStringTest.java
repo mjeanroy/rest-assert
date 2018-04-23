@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto
 
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 

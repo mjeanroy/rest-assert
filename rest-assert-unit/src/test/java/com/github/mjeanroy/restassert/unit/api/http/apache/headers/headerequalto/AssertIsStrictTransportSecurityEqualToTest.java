@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalt
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 

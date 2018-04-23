@@ -24,9 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests.data;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
-
-import com.github.mjeanroy.restassert.tests.models.Header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 /**
  * Static pre-configured headers to use in unit test.

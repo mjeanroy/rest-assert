@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.doesno
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LOCATION;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertDoesNotHaveLocationTest extends AbstractJunitServersDoesNotHaveHttpHeaderTest {

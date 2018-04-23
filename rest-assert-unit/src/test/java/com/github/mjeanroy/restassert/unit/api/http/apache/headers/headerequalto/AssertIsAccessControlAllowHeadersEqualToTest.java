@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalt
 
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 

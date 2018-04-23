@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.between;
 
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SUCCESS;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsSuccessTest extends AbstractCoreHttpStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 200;
-	}
-
-	@Override
-	protected int end() {
-		return 299;
+	protected Range getRange() {
+		return SUCCESS;
 	}
 
 	@Override

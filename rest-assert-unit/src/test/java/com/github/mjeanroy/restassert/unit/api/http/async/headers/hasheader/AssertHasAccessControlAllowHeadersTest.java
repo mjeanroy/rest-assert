@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.http.async.headers.hasheader;
 
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 

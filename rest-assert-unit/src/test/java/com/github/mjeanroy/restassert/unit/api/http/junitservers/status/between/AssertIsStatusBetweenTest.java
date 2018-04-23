@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsStatusBetweenTest extends AbstractJunitServersHttpStatusBetweenTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertIsStatusBetween(actual, start(), end());
+		JunitServersHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertIsStatusBetween(message, actual, start(), end());
+		JunitServersHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

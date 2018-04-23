@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertIsStatusBetweenTest extends AbstractSpringMockMvcHttpStatusBetweenTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(ResultActions actual) {
-		SpringMockMvcHttpAssert.assertIsStatusBetween(actual, start(), end());
+		SpringMockMvcHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, ResultActions actual) {
-		SpringMockMvcHttpAssert.assertIsStatusBetween(message, actual, start(), end());
+		SpringMockMvcHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

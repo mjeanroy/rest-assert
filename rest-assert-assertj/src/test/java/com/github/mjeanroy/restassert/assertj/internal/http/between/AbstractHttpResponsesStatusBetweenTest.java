@@ -24,16 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.between;
 
-import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
-
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.data.Range;
+import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
 
 public abstract class AbstractHttpResponsesStatusBetweenTest {
 
@@ -41,7 +42,8 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 
 	@Test
 	public void should_pass_if_status_code_is_in_bounds() {
-		for (int i = start(); i <= end(); i++) {
+		final Range range = getRange();
+		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			HttpResponse httpResponse = new HttpResponseBuilderImpl()
 				.setStatus(i)
 				.build();
@@ -53,8 +55,9 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 	@Test
 	public void should_fail_if_status_code_are_not_in_bounds() {
 		final AssertionInfo info = someInfo();
-		final int start = start();
-		final int end = end();
+		final Range range = getRange();
+		final int start = range.getStart();
+		final int end = range.getEnd();
 		for (int status = 100; status <= 599; status++) {
 			if (status >= start && status <= end) {
 				continue;
@@ -76,9 +79,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 		}
 	}
 
-	protected abstract int start();
-
-	protected abstract int end();
+	protected abstract Range getRange();
 
 	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
 }

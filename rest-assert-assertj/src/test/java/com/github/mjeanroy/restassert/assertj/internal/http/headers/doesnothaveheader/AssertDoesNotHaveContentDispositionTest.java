@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_DISPOSITION;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 
 public class AssertDoesNotHaveContentDispositionTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 

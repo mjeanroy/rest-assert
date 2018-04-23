@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SUCCESS;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
 public class AssertIsSuccessTest extends AbstractGoogleHttpStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 200;
-	}
-
-	@Override
-	protected int end() {
-		return 299;
+	protected Range getRange() {
+		return SUCCESS;
 	}
 
 	@Override

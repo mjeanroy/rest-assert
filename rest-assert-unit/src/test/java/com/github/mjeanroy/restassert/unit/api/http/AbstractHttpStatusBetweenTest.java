@@ -24,12 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.unit.api.TestInvocation;
-import org.junit.Test;
-
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
+
+import com.github.mjeanroy.restassert.tests.Function;
+import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.unit.api.TestInvocation;
+import org.junit.Test;
 
 public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAssertTest<T> {
 
@@ -41,7 +42,8 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {
-		for (int i = start(); i <= end(); i++) {
+		final Range range = getRange();
+		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			invoke(newHttpResponse(i));
 			invoke(CUSTOM_MESSAGE, newHttpResponse(i));
 		}
@@ -74,8 +76,9 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	 * @param invocation The test invocation.
 	 */
 	private void doTestWithDefaultMessage(String msg, final TestInvocation<Integer> invocation) {
-		final int start = start();
-		final int end = end();
+		final Range rang = getRange();
+		final int start = rang.getStart();
+		final int end = rang.getEnd();
 
 		for (int i = 100; i <= 599; i++) {
 			if (i >= start && i <= end) {
@@ -94,18 +97,11 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	}
 
 	/**
-	 * Range start.
+	 * Range.
 	 *
-	 * @return Start value.
+	 * @return The range value.
 	 */
-	protected abstract int start();
-
-	/**
-	 * Range end.
-	 *
-	 * @return End value.
-	 */
-	protected abstract int end();
+	protected abstract Range getRange();
 
 	/**
 	 * Create the HTTP response to be tested.

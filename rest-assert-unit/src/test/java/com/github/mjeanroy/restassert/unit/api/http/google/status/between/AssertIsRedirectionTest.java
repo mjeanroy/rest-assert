@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.REDIRECTION;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
 public class AssertIsRedirectionTest extends AbstractGoogleHttpStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 300;
-	}
-
-	@Override
-	protected int end() {
-		return 399;
+	protected Range getRange() {
+		return REDIRECTION;
 	}
 
 	@Override

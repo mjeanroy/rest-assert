@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.REDIRECTION;
+
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.data.Range;
 import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsNotRedirectionTest extends AbstractHttpResponsesStatusOutOfTest {
 
 	@Override
-	protected int start() {
-		return 300;
-	}
-
-	@Override
-	protected int end() {
-		return 399;
+	protected Range getRange() {
+		return REDIRECTION;
 	}
 
 	@Override

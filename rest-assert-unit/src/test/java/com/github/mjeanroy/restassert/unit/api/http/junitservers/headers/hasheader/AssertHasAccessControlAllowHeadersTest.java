@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.hashea
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertHasAccessControlAllowHeadersTest extends AbstractJunitServersHttpHeaderTest {

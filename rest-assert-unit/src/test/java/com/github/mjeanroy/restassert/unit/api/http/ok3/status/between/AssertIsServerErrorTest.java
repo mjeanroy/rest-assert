@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SERVER_ERROR;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 public class AssertIsServerErrorTest extends AbstractOkHttpHttpStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 500;
-	}
-
-	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return SERVER_ERROR;
 	}
 
 	@Override

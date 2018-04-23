@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.SERVER_ERROR;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertIsNotServerErrorTest extends AbstractSpringMockMvcHttpStatusOutOfTest {
 
 	@Override
-	protected int start() {
-		return 500;
-	}
-
-	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return SERVER_ERROR;
 	}
 
 	@Override

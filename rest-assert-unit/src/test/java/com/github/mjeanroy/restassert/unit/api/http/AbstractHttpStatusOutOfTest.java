@@ -24,12 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.unit.api.TestInvocation;
-import org.junit.Test;
-
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
+
+import com.github.mjeanroy.restassert.tests.Function;
+import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.unit.api.TestInvocation;
+import org.junit.Test;
 
 public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertTest<T> {
 
@@ -43,8 +44,9 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 
 	@Test
 	public void it_should_pass() {
+		final Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
-			if (i < start() || i > end()) {
+			if (i < range.getStart() || i > range.getEnd()) {
 				invoke(newHttpResponse(i));
 				invoke(CUSTOM_MESSAGE, newHttpResponse(i));
 			}
@@ -78,8 +80,9 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 	 * @param invocation The test invocation.
 	 */
 	private void doTest(String msg, final TestInvocation<Integer> invocation) {
-		final int start = start();
-		final int end = end();
+		final Range range = getRange();
+		final int start = range.getStart();
+		final int end = range.getEnd();
 
 		for (int i = start; i <= end; i++) {
 			final int status = i;
@@ -95,18 +98,11 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 	}
 
 	/**
-	 * Range start.
+	 * The range.
 	 *
-	 * @return Start value.
+	 * @return The range.
 	 */
-	protected abstract int start();
-
-	/**
-	 * Range end.
-	 *
-	 * @return End value.
-	 */
-	protected abstract int end();
+	protected abstract Range getRange();
 
 	/**
 	 * Get expected default error message.

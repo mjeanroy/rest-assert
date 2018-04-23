@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 public class AssertIsStatusBetweenTest extends AbstractOkHttpHttpStatusBetweenTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 300;
+	private static final int END = 399;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		OkHttpAssert.assertIsStatusBetween(actual, start(), end());
+		OkHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		OkHttpAssert.assertIsStatusBetween(message, actual, start(), end());
+		OkHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.outof;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
 public class AssertIsStatusOutOfTest extends AbstractNingHttpStatusOutOfTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsStatusOutOf(actual, start(), end());
+		NingHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsStatusOutOf(message, actual, start(), end());
+		NingHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

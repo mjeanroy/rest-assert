@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
 public class AssertIsStatusBetweenTest extends AbstractNingHttpStatusBetweenTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsStatusBetween(actual, start(), end());
+		NingHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsStatusBetween(message, actual, start(), end());
+		NingHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

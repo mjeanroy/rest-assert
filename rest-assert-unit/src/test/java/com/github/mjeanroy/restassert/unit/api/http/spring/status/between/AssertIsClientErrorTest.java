@@ -24,19 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.TestStatus.CLIENT_ERROR;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertIsClientErrorTest extends AbstractSpringMockMvcHttpStatusBetweenTest {
 
 	@Override
-	protected int start() {
-		return 400;
-	}
-
-	@Override
-	protected int end() {
-		return 499;
+	protected Range getRange() {
+		return CLIENT_ERROR;
 	}
 
 	@Override

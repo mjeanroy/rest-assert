@@ -25,10 +25,10 @@
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
 
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import okhttp3.Response;
 
-import static com.github.mjeanroy.restassert.tests.models.Header.header;
+import static com.github.mjeanroy.restassert.tests.data.Header.header;
 
 public class AssertHasHeaderTest extends AbstractOkHttpHeaderTest {
 

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.CookieSerializer;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;

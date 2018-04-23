@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 
 public interface HttpResponseBuilder<T> {
 

@@ -24,28 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.between;
 
+import static com.github.mjeanroy.restassert.tests.data.Range.range;
+
+import com.github.mjeanroy.restassert.tests.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
 public class AssertIsStatusBetweenTest extends AbstractAsyncHttpStatusBetweenTest {
 
-	@Override
-	protected int start() {
-		return 400;
-	}
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	protected int end() {
-		return 599;
+	protected Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertIsStatusBetween(actual, start(), end());
+		AsyncHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertIsStatusBetween(message, actual, start(), end());
+		AsyncHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

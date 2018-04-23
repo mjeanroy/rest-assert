@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CACHE_CONTRO
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.CacheControl;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsCacheControlEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {

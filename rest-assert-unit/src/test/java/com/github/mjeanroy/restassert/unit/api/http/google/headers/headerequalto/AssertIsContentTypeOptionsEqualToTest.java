@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalt
 import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
-import com.github.mjeanroy.restassert.tests.models.Header;
+import com.github.mjeanroy.restassert.tests.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
