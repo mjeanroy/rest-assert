@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.EXPIRES;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class DoesNotHaveExpiresTest extends AbstractDoesNotHaveHttpHeaderTest {
 

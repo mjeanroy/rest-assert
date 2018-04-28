@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.RESET_CONTENT;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
 
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;

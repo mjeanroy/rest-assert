@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.CREATED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
 import org.assertj.core.api.AssertionInfo;
 

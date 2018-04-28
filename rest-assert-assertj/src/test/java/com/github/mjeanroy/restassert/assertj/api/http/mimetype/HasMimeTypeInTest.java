@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.APPLICATION_JSON;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 import static java.util.Collections.singleton;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;

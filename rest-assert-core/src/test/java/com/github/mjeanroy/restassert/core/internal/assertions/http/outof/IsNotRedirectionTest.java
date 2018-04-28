@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.outof;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.REDIRECTION;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 
 public class IsNotRedirectionTest extends AbstractHttpStatusOutOfTest {
 

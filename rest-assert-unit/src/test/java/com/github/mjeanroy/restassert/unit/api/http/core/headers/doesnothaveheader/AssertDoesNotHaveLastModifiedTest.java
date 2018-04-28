@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertDoesNotHaveLastModifiedTest extends AbstractCoreDoesNotHaveHttpHeaderTest {

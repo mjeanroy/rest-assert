@@ -25,11 +25,11 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 

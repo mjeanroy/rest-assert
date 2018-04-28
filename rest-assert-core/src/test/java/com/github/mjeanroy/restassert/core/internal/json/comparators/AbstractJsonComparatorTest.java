@@ -34,16 +34,16 @@ import com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryWithSize;
 import com.github.mjeanroy.restassert.core.error.json.ShouldNotHaveEntry;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
-import com.github.mjeanroy.restassert.tests.json.JsonArray;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonArray;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.tests.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.apache.commons.lang3.reflect.FieldUtils.readField;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

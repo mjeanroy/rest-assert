@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.mimetype;
 
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.XML;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
 
 import java.util.List;
 

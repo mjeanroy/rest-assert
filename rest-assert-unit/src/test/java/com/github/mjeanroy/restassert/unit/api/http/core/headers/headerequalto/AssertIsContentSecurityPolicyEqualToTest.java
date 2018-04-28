@@ -28,13 +28,13 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.non
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_SECURITY_POLICY;
-import static com.github.mjeanroy.restassert.tests.data.Header.header;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 

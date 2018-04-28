@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.HTML;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.HTML;
 
 import java.util.List;
 

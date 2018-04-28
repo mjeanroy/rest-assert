@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
 import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 

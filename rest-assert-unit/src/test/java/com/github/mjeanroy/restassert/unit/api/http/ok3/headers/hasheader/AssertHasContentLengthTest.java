@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_LENGTH;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_LENGTH;
 
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 

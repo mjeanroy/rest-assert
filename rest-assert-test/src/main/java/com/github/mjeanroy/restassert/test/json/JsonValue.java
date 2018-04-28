@@ -22,9 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.json;
+package com.github.mjeanroy.restassert.test.json;
 
+/**
+ * A JSON value: an object that can be serialized to JSON using the {@link #toJson()}
+ * method.
+ */
 interface JsonValue {
 
+	/**
+	 * Serialize value to JSON (can be an object, an array, a primitive value, etc.).
+	 *
+	 * @return JSON Value.
+	 */
 	String toJson();
 }

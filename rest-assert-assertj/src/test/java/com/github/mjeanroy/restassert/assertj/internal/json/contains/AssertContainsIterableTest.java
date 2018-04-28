@@ -25,14 +25,14 @@
 package com.github.mjeanroy.restassert.assertj.internal.json.contains;
 
 import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;

@@ -22,42 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests;
+package com.github.mjeanroy.restassert.test.commons;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Static utilities.
- */
-public final class Dates {
+import java.util.List;
 
-	/**
-	 * Pattern used to format / read a date in the internet format
-	 * message defined by RFC 5322 (http://tools.ietf.org/html/rfc5322).
-	 */
-	private static final String IMF_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
+import org.junit.Test;
 
-	// Ensure non instantiation.
-	private Dates() {
+public class StringTestUtilsTest {
+
+	@Test
+	public void it_should_join_strings() {
+		List<String> values = asList("foo", "bar");
+		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
 	}
 
-	/**
-	 * Translate date formatted as the Internet Message Format (specified by
-	 * RFC 5322, http://tools.ietf.org/html/rfc5322) to a {@link Date} instance.
-	 *
-	 * @param date Date value.
-	 * @return The date instance.
-	 */
-	public static Date fromInternetMessageFormat(String date) {
-		DateFormat df = new SimpleDateFormat(IMF_FORMAT, Locale.US);
-		try {
-			return df.parse(date);
-		} catch (ParseException ex) {
-			throw new AssertionError(ex);
-		}
+	@Test
+	public void it_should_join_strings_with_empty_collection() {
+		List<String> values = emptyList();
+		assertThat(StringTestUtils.join(values, ",")).isEqualTo("");
 	}
 }

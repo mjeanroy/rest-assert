@@ -25,10 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 

@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.outof;
 
-import static com.github.mjeanroy.restassert.tests.data.Range.range;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 

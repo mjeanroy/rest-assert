@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.between;
 
-import static com.github.mjeanroy.restassert.tests.data.Range.range;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsStatusBetweenTest extends AbstractJunitServersHttpStatusBetweenTest {

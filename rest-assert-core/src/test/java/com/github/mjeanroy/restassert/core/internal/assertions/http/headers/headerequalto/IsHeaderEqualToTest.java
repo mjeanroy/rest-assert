@@ -28,10 +28,10 @@ import com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.tests.data.Header.header;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 public class IsHeaderEqualToTest extends AbstractHttpHeaderEqualToTest {
 

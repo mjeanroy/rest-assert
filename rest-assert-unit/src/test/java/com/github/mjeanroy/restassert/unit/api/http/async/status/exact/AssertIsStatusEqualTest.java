@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.CREATED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;

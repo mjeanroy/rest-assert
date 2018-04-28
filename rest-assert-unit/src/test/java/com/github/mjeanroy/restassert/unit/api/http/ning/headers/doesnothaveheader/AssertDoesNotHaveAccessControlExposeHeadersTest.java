@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 

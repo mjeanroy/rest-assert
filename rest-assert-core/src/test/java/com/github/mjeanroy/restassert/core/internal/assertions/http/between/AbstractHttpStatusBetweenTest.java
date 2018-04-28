@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.http.between;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import org.junit.Before;
 import org.junit.Test;
 

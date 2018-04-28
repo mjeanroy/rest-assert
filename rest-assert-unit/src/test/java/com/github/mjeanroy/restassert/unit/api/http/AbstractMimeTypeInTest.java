@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.core.utils.Mapper;
 import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.core.utils.Utils.firstNonNull;
 import static com.github.mjeanroy.restassert.core.utils.Utils.map;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.restassert.tests.data.Header.header;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T> {
 

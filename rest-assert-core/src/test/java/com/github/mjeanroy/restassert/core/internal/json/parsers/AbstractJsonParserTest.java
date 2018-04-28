@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import com.github.mjeanroy.restassert.tests.json.JsonArray;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonArray;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,9 +33,9 @@ import org.junit.rules.ExpectedException;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.mjeanroy.restassert.tests.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 import static org.junit.rules.ExpectedException.none;

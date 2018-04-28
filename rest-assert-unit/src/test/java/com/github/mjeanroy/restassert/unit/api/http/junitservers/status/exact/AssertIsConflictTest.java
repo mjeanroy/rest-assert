@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.CONFLICT;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;

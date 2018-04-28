@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -39,8 +39,8 @@ import org.asynchttpclient.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(RunIfRunner.class)

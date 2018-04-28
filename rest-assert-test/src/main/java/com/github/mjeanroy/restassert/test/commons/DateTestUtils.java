@@ -22,37 +22,42 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests;
+package com.github.mjeanroy.restassert.test.commons;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-public final class IOs {
+/**
+ * Static utilities.
+ */
+public final class DateTestUtils {
 
-	private IOs() {
+	/**
+	 * Pattern used to format / read a date in the internet format
+	 * message defined by RFC 5322 (http://tools.ietf.org/html/rfc5322).
+	 */
+	private static final String IMF_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
+
+	// Ensure non instantiation.
+	private DateTestUtils() {
 	}
 
-	public static URL urlFromClasspath(String path) {
-		return IOs.class.getResource(path);
-	}
-
-	public static URI uriFromClasspath(String path) {
+	/**
+	 * Translate date formatted as the Internet Message Format (specified by
+	 * RFC 5322, http://tools.ietf.org/html/rfc5322) to a {@link Date} instance.
+	 *
+	 * @param date Date value.
+	 * @return The date instance.
+	 */
+	public static Date fromInternetMessageFormat(String date) {
+		DateFormat df = new SimpleDateFormat(IMF_FORMAT, Locale.US);
 		try {
-			return urlFromClasspath(path).toURI();
+			return df.parse(date);
+		} catch (ParseException ex) {
+			throw new AssertionError(ex);
 		}
-		catch (Exception ex) {
-			throw new RuntimeException(ex);
-		}
-	}
-
-	public static File fileFromClasspath(String path) {
-		return new File(uriFromClasspath(path));
-	}
-
-	public static Path pathFromClasspath(String path) {
-		return Paths.get(uriFromClasspath(path));
 	}
 }

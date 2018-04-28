@@ -22,32 +22,65 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests;
+package com.github.mjeanroy.restassert.test.commons;
 
-import java.util.Collection;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
- * Static Test String Utilities.
+ * Static IO Test Utilities.
  */
-public final class Strings {
+public final class IoTestUtils {
 
 	// Ensure non instantiation.
-	private Strings() {
+	private IoTestUtils() {
 	}
 
 	/**
-	 * Join string with given character.
+	 * Get resource URL from classpath.
 	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
+	 * @param path URL path.
+	 * @return URL.
 	 */
-	public static String join(Collection<String> strings, String separator) {
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
+	public static URL urlFromClasspath(String path) {
+		return IoTestUtils.class.getResource(path);
+	}
 
-		return sb.substring(0, sb.length() - separator.length());
+	/**
+	 * Get resource URI from classpath.
+	 *
+	 * @param path The URI path.
+	 * @return URI.
+	 */
+	public static URI uriFromClasspath(String path) {
+		try {
+			return urlFromClasspath(path).toURI();
+		}
+		catch (Exception ex) {
+			throw new RuntimeException(ex);
+		}
+	}
+
+	/**
+	 * Get a file from classpath.
+	 *
+	 * @param path File path.
+	 * @return The file.
+	 */
+	public static File fileFromClasspath(String path) {
+		return new File(uriFromClasspath(path));
+	}
+
+	/**
+	 * Get path from classpath.
+	 *
+	 * @param path The resource path.
+	 * @return The path.
+	 */
+	public static Path pathFromClasspath(String path) {
+		return Paths.get(uriFromClasspath(path));
 	}
 }

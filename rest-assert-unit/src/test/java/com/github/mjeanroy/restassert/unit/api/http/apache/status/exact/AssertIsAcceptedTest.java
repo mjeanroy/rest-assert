@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.ACCEPTED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;

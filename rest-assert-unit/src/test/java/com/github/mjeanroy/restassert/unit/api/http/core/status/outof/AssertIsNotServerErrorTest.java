@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.outof;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.SERVER_ERROR;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsNotServerErrorTest extends AbstractCoreHttpStatusOutOfTest {

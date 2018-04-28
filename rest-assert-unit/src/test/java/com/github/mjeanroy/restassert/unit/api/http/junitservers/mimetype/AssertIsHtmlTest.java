@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
 
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.HTML;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.HTML;
 
 import java.util.List;
 

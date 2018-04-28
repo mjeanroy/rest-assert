@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.outof;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.SUCCESS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsNotSuccessTest extends AbstractJunitServersHttpStatusOutOfTest {

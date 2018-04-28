@@ -22,9 +22,11 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.data;
+package com.github.mjeanroy.restassert.test.fixtures;
 
-import static com.github.mjeanroy.restassert.tests.data.Range.range;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
+
+import com.github.mjeanroy.restassert.test.data.Range;
 
 /**
  * Static pre-configured HTTP status values to use in unit test.

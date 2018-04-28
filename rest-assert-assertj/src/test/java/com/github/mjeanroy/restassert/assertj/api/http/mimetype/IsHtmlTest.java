@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.HTML;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.HTML;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.data;
+package com.github.mjeanroy.restassert.test.fixtures;
 
 import static java.util.Arrays.asList;
 

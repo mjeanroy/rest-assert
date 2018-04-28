@@ -31,11 +31,11 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.tests.data.Header.header;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static java.util.Arrays.asList;
 
 /**

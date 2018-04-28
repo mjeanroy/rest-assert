@@ -25,11 +25,11 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 

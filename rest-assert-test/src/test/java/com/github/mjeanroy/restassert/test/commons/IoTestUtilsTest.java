@@ -22,36 +22,40 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.json;
+package com.github.mjeanroy.restassert.test.commons;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static com.github.mjeanroy.restassert.tests.Strings.join;
-import static java.util.Arrays.asList;
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Path;
 
-public class JsonArray implements JsonValue {
-	public static JsonArray jsonArray(Object... values) {
-		return new JsonArray(values);
+import org.junit.Test;
+
+public class IoTestUtilsTest {
+
+	@Test
+	public void it_should_get_file_from_classpath() {
+		File file = IoTestUtils.fileFromClasspath("/test.txt");
+		assertThat(file).isNotNull().exists().hasName("test.txt");
 	}
 
-	private final List<Object> values;
-
-	private JsonArray(Object... values) {
-		this.values = asList(values);
+	@Test
+	public void it_should_get_path_from_classpath() {
+		Path path = IoTestUtils.pathFromClasspath("/test.txt");
+		assertThat(path).isNotNull().exists().hasFileName("test.txt");
 	}
 
-	@Override
-	public String toJson() {
-		return "[" + join(formatValues(), ", ") + "]";
+	@Test
+	public void it_should_get_URL_from_classpath() {
+		URL url = IoTestUtils.urlFromClasspath("/test.txt");
+		assertThat(url).isNotNull().hasProtocol("file");
 	}
 
-	private List<String> formatValues() {
-		List<String> values = new ArrayList<>();
-		for (Object value : this.values) {
-			String val = JsonUtil.formatValue(value);
-			values.add(val);
-		}
-		return values;
+	@Test
+	public void it_should_get_URI_from_classpath() {
+		URI url = IoTestUtils.uriFromClasspath("/test.txt");
+		assertThat(url).isNotNull().hasScheme("file");
 	}
 }

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_MODIFIED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFIED;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;

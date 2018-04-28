@@ -27,13 +27,13 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SpringMockMvcHttpAssertionsTest {

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.NOT_MODIFIED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFIED;
 
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;

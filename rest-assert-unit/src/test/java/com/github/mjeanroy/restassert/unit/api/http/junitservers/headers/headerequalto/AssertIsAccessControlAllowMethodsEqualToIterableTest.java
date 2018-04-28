@@ -26,12 +26,12 @@ package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.header
 
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
 
 public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractJunitServersHttpHeaderEqualToTest {

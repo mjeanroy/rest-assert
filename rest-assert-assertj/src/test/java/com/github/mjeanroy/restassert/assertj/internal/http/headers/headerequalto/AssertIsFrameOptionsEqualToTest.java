@@ -25,11 +25,11 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 

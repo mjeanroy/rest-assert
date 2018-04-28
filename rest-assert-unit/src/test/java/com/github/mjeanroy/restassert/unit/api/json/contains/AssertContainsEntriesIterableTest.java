@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.unit.api.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContainsEntries;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 

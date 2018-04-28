@@ -22,23 +22,91 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.json;
+package com.github.mjeanroy.restassert.test.json;
 
-public class JsonEntry implements JsonValue {
+import static com.github.mjeanroy.restassert.test.json.JsonUtil.jsonEscape;
+
+import java.util.Objects;
+
+/**
+ * A JSON entry: contains a key name (as a {@link String} and a value (basically anything
+ * that can be translated to JSON).
+ *
+ * This is a very simple implementation and should be used in unit test only.
+ */
+public final class JsonEntry implements JsonValue {
+
+	/**
+	 * Create new JSON entry.
+	 *
+	 * @param name The JSON entry name.
+	 * @param value The JSON entry value.
+	 * @return The JSON pair.
+	 */
 	public static JsonEntry jsonEntry(String name, Object value) {
 		return new JsonEntry(name, value);
 	}
 
+	/**
+	 * The entry key.
+	 */
 	private final String key;
+
+	/**
+	 * The entry value.
+	 */
 	private final Object value;
 
+	// Use static factory.
 	private JsonEntry(String key, Object value) {
 		this.key = key;
 		this.value = value;
 	}
 
+	/**
+	 * Get {@link #key}
+	 *
+	 * @return {@link #key}
+	 */
+	public String getKey() {
+		return key;
+	}
+
+	/**
+	 * Get {@link #value}
+	 *
+	 * @return {@link #value}
+	 */
+	public Object getValue() {
+		return value;
+	}
+
 	@Override
 	public String toJson() {
-		return "\"" + key + "\" : " + JsonUtil.formatValue(value);
+		return "\"" + jsonEscape(key) + "\" : " + JsonUtil.formatValue(value);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("JsonEntry{key=%s, value=%s}", key, value);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (o instanceof JsonEntry) {
+			JsonEntry e = (JsonEntry) o;
+			return Objects.equals(key, e.key) && Objects.equals(value, e.value);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(key, value);
 	}
 }

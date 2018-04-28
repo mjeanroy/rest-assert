@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse;
-import com.github.mjeanroy.restassert.tests.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.tests.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.tests.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class NingHttpAssertionsTest {

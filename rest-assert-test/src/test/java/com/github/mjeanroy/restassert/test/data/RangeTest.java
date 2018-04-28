@@ -22,42 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.json;
+package com.github.mjeanroy.restassert.test.data;
 
-import java.util.ArrayList;
-import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class JsonObject implements JsonValue {
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Test;
 
-	public static JsonObject jsonObject() {
-		return new JsonObject();
+public class RangeTest {
+
+	@Test
+	public void it_should_create_range() {
+		int start = 200;
+		int end = 299;
+		Range range = Range.range(start, end);
+
+		assertThat(range).isNotNull();
+		assertThat(range.getStart()).isEqualTo(start);
+		assertThat(range.getEnd()).isEqualTo(end);
 	}
 
-	public static JsonObject jsonObject(JsonEntry... entries) {
-		JsonObject object = new JsonObject();
-		for (JsonEntry entry : entries) {
-			object.addEntry(entry);
-		}
-		return object;
+	@Test
+	public void it_should_implement_equals_hash_code() {
+		EqualsVerifier.forClass(Range.class).verify();
 	}
 
-	private final List<JsonEntry> entries;
-
-	private JsonObject() {
-		this.entries = new ArrayList<>();
-	}
-
-	private void addEntry(JsonEntry entry) {
-		entries.add(entry);
-	}
-
-	@Override
-	public String toJson() {
-		StringBuilder sub = new StringBuilder();
-		for (JsonEntry entry : entries) {
-			sub.append(entry.toJson()).append(", ");
-		}
-
-		return String.format("{%s}", sub.substring(0, sub.length() - 2));
+	@Test
+	public void it_should_implement_to_string() {
+		Range range = Range.range(200, 299);
+		assertThat(range.toString()).isEqualTo("Range{start=200, end=299}");
 	}
 }

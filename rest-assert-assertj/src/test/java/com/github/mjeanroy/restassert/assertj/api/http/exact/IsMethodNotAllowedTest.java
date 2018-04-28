@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.METHOD_NOT_ALLOWED;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 

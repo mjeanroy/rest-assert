@@ -22,23 +22,57 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.json;
+package com.github.mjeanroy.restassert.test.json;
 
+/**
+ * Static JSON Utilities.
+ */
 final class JsonUtil {
 
+	// Ensure non instantiation.
 	private JsonUtil() {
 	}
 
-	public static String formatValue(Object value) {
+	/**
+	 * Try to format value to a JSON string value:
+	 *
+	 * <ul>
+	 *   <li>If {@code value} is {@code null}, {@code null} is returned.</li>
+	 *   <li>If {@code value} is a {@link String}, then the string prefixed/suffixed with double quote is returned.</li>
+	 *   <li>If {@code value} is a {@link JsonValue} instance, the result of {@link JsonValue#toJson()} is returned.</li>
+	 *   <li>Otherwise, the result of {@link #toString()} is returned.</li>
+	 * </ul>
+	 *
+	 * @param value The value to format.
+	 * @return The JSON string value.
+	 */
+	static String formatValue(Object value) {
 		if (value == null) {
 			return null;
 		}
+
 		if (value instanceof String) {
-			return "\"" + value.toString() + "\"";
+			return "\"" + jsonEscape(value.toString()) + "\"";
 		}
+
 		if (value instanceof JsonValue) {
 			return ((JsonValue) value).toJson();
 		}
-		return value.toString();
+
+		return jsonEscape(value.toString());
+	}
+
+	/**
+	 * Escape value to be json compliant (i.e all double quotes are escaped).
+	 *
+	 * @param value Input value.
+	 * @return Escaped output value.
+	 */
+	static String jsonEscape(String value) {
+		if (value == null || value.isEmpty()) {
+			return value;
+		}
+
+		return value.replace("\"", "\\\"");
 	}
 }

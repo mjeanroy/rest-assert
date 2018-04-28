@@ -25,13 +25,13 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.Dates.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.tests.data.TestHeaders.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
 import java.util.Date;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Header;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsLastModifiedEqualToWithDateTest extends AbstractHttpResponsesHeaderEqualToTest {
 

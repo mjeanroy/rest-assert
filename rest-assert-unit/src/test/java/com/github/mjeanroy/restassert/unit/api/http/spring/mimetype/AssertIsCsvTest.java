@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.mimetype;
 
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSV;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSV;
 
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;

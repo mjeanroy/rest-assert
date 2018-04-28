@@ -10,6 +10,7 @@
   <version>0.1.0-SNAPSHOT</version>
 
   <modules>
+    <module>rest-assert-test</module>
     <module>rest-assert-core</module>
     <module>rest-assert-generator</module>
     <module>rest-assert-unit</module>
@@ -178,7 +179,6 @@
         <groupId>com.github.mjeanroy</groupId>
         <artifactId>junit-customclassloader</artifactId>
         <version>${junit-customclassloader.version}</version>
-        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>nl.jqno.equalsverifier</groupId>

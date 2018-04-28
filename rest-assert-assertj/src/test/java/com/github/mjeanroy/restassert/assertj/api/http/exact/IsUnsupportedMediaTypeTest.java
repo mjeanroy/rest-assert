@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.UNSUPPORTED_MEDIA_TYPE;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTED_MEDIA_TYPE;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 

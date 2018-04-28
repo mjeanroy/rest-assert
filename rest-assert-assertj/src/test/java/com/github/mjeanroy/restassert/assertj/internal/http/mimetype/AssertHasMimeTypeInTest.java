@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_CSS;
-import static com.github.mjeanroy.restassert.tests.data.TestMimeTypes.TEXT_PLAIN;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
 import static java.util.Arrays.asList;
 
 import java.util.List;

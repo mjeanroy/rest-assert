@@ -22,9 +22,11 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.data;
+package com.github.mjeanroy.restassert.test.fixtures;
 
-import static com.github.mjeanroy.restassert.tests.data.Header.header;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
+
+import com.github.mjeanroy.restassert.test.data.Header;
 
 /**
  * Static pre-configured headers to use in unit test.

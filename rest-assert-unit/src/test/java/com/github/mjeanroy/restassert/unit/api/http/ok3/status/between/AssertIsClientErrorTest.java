@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.between;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.CLIENT_ERROR;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
 
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 

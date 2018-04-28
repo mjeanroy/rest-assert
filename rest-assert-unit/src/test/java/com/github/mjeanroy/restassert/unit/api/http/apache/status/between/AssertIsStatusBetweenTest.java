@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.between;
 
-import static com.github.mjeanroy.restassert.tests.data.Range.range;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 

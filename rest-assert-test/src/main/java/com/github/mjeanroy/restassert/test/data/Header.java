@@ -22,68 +22,82 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.data;
+package com.github.mjeanroy.restassert.test.data;
 
+import static java.util.Collections.unmodifiableList;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
- * A status range, with a lower bound and an upper bound.
+ * Representation of header.
+ * A header is defined by a name and a value.
  */
-public final class Range {
+public final class Header {
 
 	/**
-	 * Create new range.
+	 * Create new header.
 	 *
-	 * @param start The lower bound.
-	 * @param end The upper bound.
-	 * @return The new range.
+	 * @param name  Header name.
+	 * @param value Header value.
+	 * @return Header.
 	 */
-	public static Range range(int start, int end) {
-		return new Range(start, end);
+	public static Header header(String name, String value) {
+		return new Header(name, value);
 	}
 
 	/**
-	 * The lower bound.
+	 * Header name.
 	 */
-	private final int start;
+	private final String name;
 
 	/**
-	 * The upper bound.
+	 * Header value.
 	 */
-	private final int end;
+	private final String value;
 
-	/**
-	 * Create the range.
-	 *
-	 * @param start The lower bound.
-	 * @param end The upper bound.
-	 */
-	private Range(int start, int end) {
-		this.start = start;
-		this.end = end;
+	// Use static factory instead
+	private Header(String name, String value) {
+		this.name = name;
+		this.value = value;
 	}
 
 	/**
-	 * Get {@link #start}
+	 * Get {@link #name}
 	 *
-	 * @return {@link #start}
+	 * @return {@link #name}
 	 */
-	public int getStart() {
-		return start;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * Get {@link #end}
+	 * Get {@link #value}
 	 *
-	 * @return {@link #end}
+	 * @return {@link #value}
 	 */
-	public int getEnd() {
-		return end;
+	public String getValue() {
+		return value;
+	}
+
+	/**
+	 * Get all header values.
+	 *
+	 * @return Header values.
+	 */
+	public List<String> getValues() {
+		List<String> values = new ArrayList<>();
+		for (String current : value.split(",")) {
+			values.add(current.trim());
+		}
+
+		return unmodifiableList(values);
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Range{start=%d, end=%d}", start, end);
+		return String.format("Header{name=%s, value=%s}", name, value);
 	}
 
 	@Override
@@ -92,9 +106,9 @@ public final class Range {
 			return true;
 		}
 
-		if (o instanceof Range) {
-			Range r = (Range) o;
-			return r.start == start && r.end == end;
+		if (o instanceof Header) {
+			Header h = (Header) o;
+			return Objects.equals(name, h.name) && Objects.equals(value, h.value);
 		}
 
 		return false;
@@ -102,6 +116,6 @@ public final class Range {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(start, end);
+		return Objects.hash(name, value);
 	}
 }

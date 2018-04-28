@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.MOVED_TEMPORARILY;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMPORARILY;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 

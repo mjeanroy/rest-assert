@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.outof;
 
-import static com.github.mjeanroy.restassert.tests.data.TestStatus.SUCCESS;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.data.Range;
+import com.github.mjeanroy.restassert.test.data.Range;
 import org.assertj.core.api.AssertionInfo;
 
 public class AssertIsNotSuccessTest extends AbstractHttpResponsesStatusOutOfTest {
