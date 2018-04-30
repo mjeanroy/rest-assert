@@ -33,6 +33,11 @@ import java.util.List;
 public final class JavaDocParser {
 
 	/**
+	 * The regex to match content in a JavaDoc tag.
+	 */
+	private static final String INSIDE_TAG_PATTERN = "[a-zA-Z0-9_#\" ]+";
+
+	/**
 	 * The line break character.
 	 */
 	private static final String LINE_SEPARATOR = System.getProperty("line.separator");
@@ -63,6 +68,10 @@ public final class JavaDocParser {
 				String[] parts = block.split(" ", 2);
 				builder.setReturns(toMarkdown(parts[1]));
 			}
+			else if (isSee(block)) {
+				String[] parts = block.split(" ", 2);
+				builder.addSee(toMarkdown(parts[1]));
+			}
 			else {
 				throw new UnsupportedOperationException("Cannot parse line: '" + block + "'");
 			}
@@ -80,6 +89,17 @@ public final class JavaDocParser {
 	 */
 	private static boolean isParam(String line) {
 		return line.startsWith("@param");
+	}
+
+	/**
+	 * Check if line starts with {@code "@see"} text, which means that a new external links
+	 * is described.
+	 *
+	 * @param line The text line.
+	 * @return {@code true} if line starts with {@code "@see"}, {@code false} otherwise.
+	 */
+	private static boolean isSee(String line) {
+		return line.startsWith("@see");
 	}
 
 	/**
@@ -163,6 +183,6 @@ public final class JavaDocParser {
 	 * @return Markdown text.
 	 */
 	private static String toMarkdown(String text) {
-		return text.replaceAll("\\{@link ([a-zA-Z0-9_#]+)\\}", "`$1`").replaceAll("\\{@code ([a-zA-Z0-9_#]+)\\}", "`$1`");
+		return text.replaceAll("\\{@link (" + INSIDE_TAG_PATTERN + ")\\}", "`$1`").replaceAll("\\{@code (" + INSIDE_TAG_PATTERN + ")\\}", "`$1`");
 	}
 }

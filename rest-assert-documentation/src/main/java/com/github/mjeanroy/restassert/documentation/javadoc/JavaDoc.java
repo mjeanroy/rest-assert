@@ -49,16 +49,22 @@ public final class JavaDoc {
 	private final JavaDocReturn returns;
 
 	/**
+	 * JavaDoc see tag, may be empty.
+	 */
+	private final List<JavaDocSee> see;
+
+	/**
 	 * Create Javadoc instance.
 	 *
 	 * @param description Javadoc Description.
 	 * @param params Javadoc Parameters, may be empty.
 	 * @param returns Javadoc returns tag, may be null.
 	 */
-	JavaDoc(String description, List<JavaDocParam> params, JavaDocReturn returns) {
+	JavaDoc(String description, List<JavaDocParam> params, JavaDocReturn returns, List<JavaDocSee> see) {
 		this.description = description;
 		this.params = params;
 		this.returns = returns;
+		this.see = see;
 	}
 
 	/**
@@ -88,9 +94,18 @@ public final class JavaDoc {
 		 return returns;
 	}
 
+	/**
+	 * Get {@link #see}
+	 *
+	 * @return {@link #see}
+	 */
+	public List<JavaDocSee> getSee() {
+		return see;
+	}
+
 	@Override
 	public String toString() {
-		return String.format("JavaDoc{description=%s, params=%s, returns=%s}", description, params, returns);
+		return String.format("JavaDoc{description=%s, params=%s, returns=%s, see=%s}", description, params, returns, see);
 	}
 
 	@Override
@@ -101,7 +116,10 @@ public final class JavaDoc {
 
 		if (o instanceof JavaDoc) {
 			JavaDoc doc = (JavaDoc) o;
-			return Objects.equals(description, doc.description) && Objects.equals(params, doc.params) && Objects.equals(returns, doc.returns);
+			return Objects.equals(description, doc.description)
+					&& Objects.equals(params, doc.params)
+					&& Objects.equals(returns, doc.returns)
+					&& Objects.equals(see, doc.see);
 		}
 
 		return false;
@@ -109,7 +127,7 @@ public final class JavaDoc {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(description, params, returns);
+		return Objects.hash(description, params, returns, see);
 	}
 
 	/**
@@ -130,6 +148,12 @@ public final class JavaDoc {
 		private final List<JavaDocParam> params;
 
 		/**
+		 * The Javadoc See Tag.
+		 * @see JavaDoc#see
+		 */
+		private final List<JavaDocSee> see;
+
+		/**
 		 * The Javadoc Returns.
 		 * @see JavaDoc#returns
 		 */
@@ -140,6 +164,7 @@ public final class JavaDoc {
 		 */
 		public Builder() {
 			this.params = new ArrayList<>();
+			this.see = new ArrayList<>();
 		}
 
 		/**
@@ -166,6 +191,17 @@ public final class JavaDoc {
 		}
 
 		/**
+		 * Add new entry to {@link #see} section.
+		 *
+		 * @param description Parameter description.
+		 * @return The builder.
+		 */
+		public Builder addSee(String description) {
+			this.see.add(new JavaDocSee(description));
+			return this;
+		}
+
+		/**
 		 * Update {@link #returns}
 		 *
 		 * @param description New {@link #returns} description.
@@ -182,7 +218,7 @@ public final class JavaDoc {
 		 * @return The Javadoc Instance.
 		 */
 		public JavaDoc build() {
-			return new JavaDoc(description, new ArrayList<>(params), returns);
+			return new JavaDoc(description, new ArrayList<>(params), returns, new ArrayList<>(see));
 		}
 	}
 }

@@ -26,6 +26,7 @@ package com.github.mjeanroy.restassert.documentation.templates;
 
 import com.github.mjeanroy.restassert.documentation.DocumentedMethod;
 import com.github.mjeanroy.restassert.documentation.javadoc.JavaDocParam;
+import com.github.mjeanroy.restassert.documentation.javadoc.JavaDocSee;
 
 import java.util.List;
 import java.util.Objects;
@@ -67,6 +68,16 @@ final class RestAssertUnitMethod implements TemplateModel {
 	@Override
 	public boolean hasArguments() {
 		return getArguments().size() > 0;
+	}
+
+	@Override
+	public List<JavaDocSee> getSee() {
+		return method.getJavaDoc().getSee();
+	}
+
+	@Override
+	public boolean hasSee() {
+		return getSee().size() > 0;
 	}
 
 	@Override

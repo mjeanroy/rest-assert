@@ -117,200 +117,260 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatusCodes#OK}.
+	 * Check that status code of http response is {@code "OK"} (i.e is strictly equals to {@code 200}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200</a>
+	 * @see <a href="https://httpstatuses.com/200">https://httpstatuses.com/200</a>
 	 */
 	public AssertionResult isOk(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.OK);
 	}
 
 	/**
-	 * Check that status code of http response is {@link HttpStatusCodes#CREATED}.
+	 * Check that status code of http response is {@code "CREATED"} (i.e is strictly equals to {@code 201}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/201</a>
+	 * @see <a href="https://httpstatuses.com/201">https://httpstatuses.com/201</a>
 	 */
 	public AssertionResult isCreated(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.CREATED);
 	}
 
 	/**
-	 * Check that status code of http response is 'ACCEPTED' status.
+	 * Check that status code of http response is {@code "ACCEPTED"} status (i.e is strictly equals to {@code 202}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/202</a>
+	 * @see <a href="https://httpstatuses.com/202">https://httpstatuses.com/202</a>
 	 */
 	public AssertionResult isAccepted(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.ACCEPTED);
 	}
 
 	/**
-	 * Check that status code of http response is 'NO_CONTENT' status.
+	 * Check that status code of http response is {@code "NO CONTENT"} status (i.e is strictly equals to {@code 204}).
 	 *
 	 * @param httpResponse Http response.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/204</a>
+	 * @see <a href="https://httpstatuses.com/204">https://httpstatuses.com/204</a>
 	 */
 	public AssertionResult isNoContent(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.NO_CONTENT);
 	}
 
 	/**
-	 * Check that status code of http response is 'PARTIAL_CONTENT' status.
+	 * Check that status code of http response is {@code "PARTIAL CONTENT"} status (i.e is strictly equals to {@code 206}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.7">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.7</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/206</a>
+	 * @see <a href="https://httpstatuses.com/206">https://httpstatuses.com/206</a>
 	 */
 	public AssertionResult isPartialContent(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.PARTIAL_CONTENT);
 	}
 
 	/**
-	 * Check that status code of http response is 'RESET_CONTENT' status.
+	 * Check that status code of http response is {@code "RESET CONTENT"} status (i.e is strictly equals to {@code 205}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/205">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/205</a>
+	 * @see <a href="https://httpstatuses.com/205">https://httpstatuses.com/205</a>
 	 */
 	public AssertionResult isResetContent(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.RESET_CONTENT);
 	}
 
 	/**
-	 * Check that status code of http response is 'MOVED_PERMANENTLY' status.
+	 * Check that status code of http response is {@code "MOVED PERMANENTLY"} status (i.e is strictly equals to {@code 301}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/301</a>
+	 * @see <a href="https://httpstatuses.com/301">https://httpstatuses.com/301</a>
 	 */
 	public AssertionResult isMovedPermanently(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.MOVED_PERMANENTLY);
 	}
 
 	/**
-	 * Check that status code of http response is 'MOVED_TEMPORARILY' status.
+	 * Check that status code of http response is {@code "MOVED TEMPORARILY"} status (i.e is strictly equals to {@code 302}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/302</a>
+	 * @see <a href="https://httpstatuses.com/302">https://httpstatuses.com/302</a>
 	 */
 	public AssertionResult isMovedTemporarily(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.MOVED_TEMPORARILY);
 	}
 
 	/**
-	 * Check that status code of http response is 'NOT_MODIFIED' status.
+	 * Check that status code of http response is {@code "NOT MODIFIED"} status (i.e is strictly equals to {@code 304}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/304</a>
+	 * @see <a href="https://httpstatuses.com/304">https://httpstatuses.com/304</a>
 	 */
 	public AssertionResult isNotModified(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_MODIFIED);
 	}
 
 	/**
-	 * Check that status code of http response is 'UNAUTHORIZED' status.
+	 * Check that status code of http response is {@code "UNAUTHORIZED"} status (i.e is strictly equals to {@code 401}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401</a>
+	 * @see <a href="https://httpstatuses.com/401">https://httpstatuses.com/401</a>
 	 */
 	public AssertionResult isUnauthorized(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.UNAUTHORIZED);
 	}
 
 	/**
-	 * Check that status code of http response is 'FORBIDDEN' status.
+	 * Check that status code of http response is {@code "FORBIDDEN"} status (i.e is strictly equals to {@code 403}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403</a>
+	 * @see <a href="https://httpstatuses.com/403">https://httpstatuses.com/403</a>
 	 */
 	public AssertionResult isForbidden(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.FORBIDDEN);
 	}
 
 	/**
-	 * Check that status code of http response is 'BAD_REQUEST' status.
+	 * Check that status code of http response is {@code "BAD REQUEST"} status (i.e is strictly equals to {@code 400}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400</a>
+	 * @see <a href="https://httpstatuses.com/400">https://httpstatuses.com/400</a>
 	 */
 	public AssertionResult isBadRequest(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.BAD_REQUEST);
 	}
 
 	/**
-	 * Check that status code of http response is 'NOT_ACCEPTABLE' status.
+	 * Check that status code of http response is {@code "NOT ACCEPTABLE"} status (i.e is strictly equals to {@code 406}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406</a>
+	 * @see <a href="https://httpstatuses.com/406">https://httpstatuses.com/406</a>
 	 */
 	public AssertionResult isNotAcceptable(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_ACCEPTABLE);
 	}
 
 	/**
-	 * Check that status code of http response is 'NOT_FOUND' status.
+	 * Check that status code of http response is {@code "NOT FOUND"} status (i.e is strictly equals to {@code 404}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405</a>
+	 * @see <a href="https://httpstatuses.com/406">https://httpstatuses.com/405</a>
 	 */
 	public AssertionResult isNotFound(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_FOUND);
 	}
 
 	/**
-	 * Check that status code of http response is 'INTERNAL_SERVER_ERROR' status.
+	 * Check that status code of http response is {@code "INTERNAL SERVER ERROR"} status (i.e is strictly equals to {@code 500}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500</a>
+	 * @see <a href="https://httpstatuses.com/500">https://httpstatuses.com/500</a>
 	 */
 	public AssertionResult isInternalServerError(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.INTERNAL_SERVER_ERROR);
 	}
 
 	/**
-	 * Check that status code of http response is 'PRE_CONDITION_FAILED' status.
+	 * Check that status code of http response is {@code "PRE CONDITION FAILED"} status (i.e is strictly equals to {@code 412}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/412">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/412</a>
+	 * @see <a href="https://httpstatuses.com/412">https://httpstatuses.com/412</a>
 	 */
 	public AssertionResult isPreConditionFailed(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.PRE_CONDITION_FAILED);
 	}
 
 	/**
-	 * Check that status code of http response is 'METHOD_NOT_ALLOWED' status.
+	 * Check that status code of http response is {@code "METHOD NOT ALLOWED} status (i.e is strictly equals to {@code 405}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/405</a>
+	 * @see <a href="https://httpstatuses.com/405">https://httpstatuses.com/405</a>
 	 */
 	public AssertionResult isMethodNotAllowed(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.METHOD_NOT_ALLOWED);
 	}
 
 	/**
-	 * Check that status code of http response is 'CONFLICT' status.
+	 * Check that status code of http response is {@code "CONFLICT"} status (i.e is strictly equals to {@code 406}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/406</a>
+	 * @see <a href="https://httpstatuses.com/406">https://httpstatuses.com/406</a>
 	 */
 	public AssertionResult isConflict(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.CONFLICT);
 	}
 
 	/**
-	 * Check that status code of http response is 'UNSUPPORTED_MEDIA_TYPE' status.
+	 * Check that status code of http response is {@code "UNSUPPORTED MEDIA TYPE"} status (i.e is strictly equals to {@code 415}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/415">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/415</a>
+	 * @see <a href="https://httpstatuses.com/415">https://httpstatuses.com/415</a>
 	 */
 	public AssertionResult isUnsupportedMediaType(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.UNSUPPORTED_MEDIA_TYPE);
 	}
 
 	/**
-	 * Check that status code of http response is 'NOT_IMPLEMENTED' status.
+	 * Check that status code of http response is {@code "NOT IMPLEMENTED"} status (i.e is strictly equals to {@code 501}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/501</a>
+	 * @see <a href="https://httpstatuses.com/501">https://httpstatuses.com/501</a>
 	 */
 	public AssertionResult isNotImplemented(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.NOT_IMPLEMENTED);

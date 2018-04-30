@@ -62,6 +62,43 @@ public class JavaDocParserTest {
 	}
 
 	@Test
+	public void it_should_parse_javadoc_see_tag() {
+		String comment = joinWithBr(
+				" Check that status code of http response is 'RESET_CONTENT' status.",
+				" ",
+				" @param httpResponse Http response.",
+				" @return Assertion result.",
+				" @see <a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200>https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200</a>",
+				" @see <a href=\"https://httpstatuses.com/200\">https://httpstatuses.com/200</a>",
+				" "
+		);
+
+		JavaDoc javaDoc = JavaDocParser.parse(comment);
+
+		assertThat(javaDoc).isNotNull();
+
+		assertThat(javaDoc.getDescription()).isEqualTo(joinWithBr(
+				"Check that status code of http response is 'RESET_CONTENT' status."
+		));
+
+		assertThat(javaDoc.getParams())
+				.hasSize(1)
+				.extracting("name", "description")
+				.contains(tuple("httpResponse", "Http response."));
+
+		assertThat(javaDoc.getReturns()).isNotNull();
+		assertThat(javaDoc.getReturns().getDescription()).isEqualTo("Assertion result.");
+
+		assertThat(javaDoc.getSee())
+				.hasSize(2)
+				.extracting("description")
+				.contains(
+						"<a href=\"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200>https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200</a>",
+						"<a href=\"https://httpstatuses.com/200\">https://httpstatuses.com/200</a>"
+				);
+	}
+
+	@Test
 	public void it_should_parse_multiline_javadoc() {
 			String comment = joinWithBr(
 			" Check that http response contains cookie with given name (note that cookie name is",

@@ -39,4 +39,12 @@ public class MyTest {
 }
 ```
 
+{{#hasSee}}
+#### External Links
+
+{{#see}}
+- {{description}}
+{{/see}}
+
+{{/hasSee}}
 {{/methods}}

@@ -30,6 +30,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class JavaDocTest {
@@ -45,11 +46,16 @@ public class JavaDocTest {
 
 		JavaDocReturn returns = new JavaDocReturn("The return value");
 
-		JavaDoc javaDoc = new JavaDoc(description, params, returns);
+		List<JavaDocSee> see = singletonList(
+				new JavaDocSee("<a href=\"https://httpstatuses.com/200\">https://httpstatuses.com/200</a>")
+		);
+
+		JavaDoc javaDoc = new JavaDoc(description, params, returns, see);
 
 		assertThat(javaDoc.getDescription()).isEqualTo(description);
 		assertThat(javaDoc.getParams()).isEqualTo(params);
 		assertThat(javaDoc.getReturns()).isEqualTo(returns);
+		assertThat(javaDoc.getSee()).isEqualTo(see);
 	}
 
 	@Test
@@ -58,17 +64,20 @@ public class JavaDocTest {
 		JavaDocParam p1 = new JavaDocParam("p1", "Description for p1");
 		JavaDocParam p2 = new JavaDocParam("p2", "Description for p2");
 		JavaDocReturn returns = new JavaDocReturn("The return value");
+		JavaDocSee see = new JavaDocSee("<a href=\"https://httpstatuses.com/200\">https://httpstatuses.com/200</a>");
 
 		JavaDoc javaDoc = new JavaDoc.Builder()
 			.setDescription(description)
 			.addParam(p1.getName(), p1.getDescription())
 			.addParam(p2.getName(), p2.getDescription())
 			.setReturns(returns.getDescription())
+			.addSee(see.getDescription())
 			.build();
 
 		assertThat(javaDoc.getDescription()).isEqualTo(description);
 		assertThat(javaDoc.getParams()).isEqualTo(asList(p1, p2));
 		assertThat(javaDoc.getReturns()).isEqualTo(returns);
+		assertThat(javaDoc.getSee()).isEqualTo(singletonList(see));
 	}
 
 	@Test
@@ -87,7 +96,11 @@ public class JavaDocTest {
 
 		JavaDocReturn returns = new JavaDocReturn("The return value");
 
-		JavaDoc javaDoc = new JavaDoc(description, params, returns);
+		List<JavaDocSee> see = singletonList(
+				new JavaDocSee("<a href=\"https://httpstatuses.com/200\">https://httpstatuses.com/200</a>")
+		);
+
+		JavaDoc javaDoc = new JavaDoc(description, params, returns, see);
 
 		assertThat(javaDoc.toString()).isEqualTo(
 			"JavaDoc{" +
@@ -96,7 +109,10 @@ public class JavaDocTest {
 					"JavaDocParam{name=p1, description=Description for p1}, " +
 					"JavaDocParam{name=p2, description=Description for p2}" +
 				"], " +
-				"returns=JavaDocReturn{description=The return value}" +
+				"returns=JavaDocReturn{description=The return value}, " +
+				"see=[" +
+					"JavaDocSee{description=<a href=\"https://httpstatuses.com/200\">https://httpstatuses.com/200</a>}" +
+				"]" +
 			"}"
 		);
 	}

@@ -92,7 +92,8 @@ public class RestAssertUnitMethodTest {
 					"javaDoc=JavaDoc{" +
 						"description=Check that status is equal to expected, " +
 						"params=[JavaDocParam{name=status, description=Expected Status}], " +
-						"returns=JavaDocReturn{description=The assertion result}" +
+						"returns=JavaDocReturn{description=The assertion result}, " +
+						"see=[]" +
 					"}" +
 				"}" +
 			"}"

@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.documentation.templates;
 
 import com.github.mjeanroy.restassert.documentation.javadoc.JavaDocParam;
+import com.github.mjeanroy.restassert.documentation.javadoc.JavaDocSee;
 
 import java.util.List;
 
@@ -55,11 +56,25 @@ public interface TemplateModel {
 	List<JavaDocParam> getArguments();
 
 	/**
+	 * Get "@see" (i.e external links) to display.
+	 *
+	 * @return External links.
+	 */
+	List<JavaDocSee> getSee();
+
+	/**
 	 * Check if method has arguments (i.e {@link #getArguments()} has size greater than zero).
 	 *
 	 * @return {@code true} if method has arguments, {@code false} otherwise.
 	 */
 	boolean hasArguments();
+
+	/**
+	 * Check if method has external links (i.e {@link #getSee()} ()} has size greater than zero).
+	 *
+	 * @return {@code true} if method has external links, {@code false} otherwise.
+	 */
+	boolean hasSee();
 
 	/**
 	 * Return list of argument names, separated by {@code ", "}.
