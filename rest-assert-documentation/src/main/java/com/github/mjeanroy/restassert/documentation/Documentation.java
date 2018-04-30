@@ -22,33 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import java.util.List;
-
-import org.junit.Test;
-
-public class StringTestUtilsTest {
-
-	@Test
-	public void it_should_join_strings() {
-		List<String> values = asList("foo", "bar");
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
-	}
-
-	@Test
-	public void it_should_join_strings_with_empty_collection() {
-		List<String> values = emptyList();
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("");
-	}
-
-	@Test
-	public void it_should_join_array_of_strings() {
-		String[] values = new String[]{"foo", "bar"};
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
-	}
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Documentation {
 }

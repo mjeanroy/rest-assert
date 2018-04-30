@@ -24,9 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeSecured.shouldBeSecured;
@@ -38,9 +35,14 @@ import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveValue.s
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 
+import com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveName;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.documentation.Documentation;
+
 /**
  * Re-usable assertion for {@link Cookie} objects.
  */
+@Documentation
 public final class CookieAssertions {
 
 	/**

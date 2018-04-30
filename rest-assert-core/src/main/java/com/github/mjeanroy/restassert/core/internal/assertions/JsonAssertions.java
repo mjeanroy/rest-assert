@@ -24,16 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.error.RestAssertError;
-import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
-import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
-import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
-import com.github.mjeanroy.restassert.core.internal.json.comparators.JsonComparator;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParserStrategy;
-import com.jayway.jsonpath.DocumentContext;
-import com.jayway.jsonpath.JsonPath;
-import com.jayway.jsonpath.PathNotFoundException;
+import static com.github.mjeanroy.restassert.core.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntry.shouldHaveEntry;
+import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.utils.Utils.readFileToString;
+import static java.util.Collections.addAll;
 
 import java.io.File;
 import java.net.URI;
@@ -45,18 +42,23 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.error.CompositeError.composeErrors;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntry.shouldHaveEntry;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.Utils.readFileToString;
-import static java.util.Collections.addAll;
+import com.github.mjeanroy.restassert.core.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
+import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
+import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
+import com.github.mjeanroy.restassert.core.internal.json.comparators.JsonComparator;
+import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
+import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParserStrategy;
+import com.github.mjeanroy.restassert.documentation.Documentation;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
+import com.jayway.jsonpath.PathNotFoundException;
 
 /**
  * Set of reusable assertions on json
  * values.
  */
+@Documentation
 public final class JsonAssertions {
 
 	/**

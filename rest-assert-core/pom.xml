@@ -19,6 +19,13 @@
     </dependency>
 
     <dependency>
+      <groupId>com.github.mjeanroy</groupId>
+      <artifactId>rest-assert-documentation</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <optional>true</optional>
@@ -147,6 +154,20 @@
             </goals>
           </execution>
         </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${maven-compiler-plugin.version}</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+          <encoding>${project.build.sourceEncoding}</encoding>
+          <annotationProcessors>
+            <annotationProcessor>com.github.mjeanroy.restassert.documentation.DocumentationProcessor</annotationProcessor>
+          </annotationProcessors>
+        </configuration>
       </plugin>
     </plugins>
   </build>

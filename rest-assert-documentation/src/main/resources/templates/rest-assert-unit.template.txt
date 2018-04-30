@@ -1,0 +1,41 @@
+# Rest Assert Unit
+
+## Installation
+
+## Introduction
+
+## Assertions
+
+{{#methods}}
+### {{name}}
+
+{{description}}
+
+#### Signature
+
+{{#hasArguments}}
+| Argument | Description |
+|----------|-------------|
+{{#arguments}}|{{name}}|{{description}}|{{/arguments}}
+{{/hasArguments}}
+
+{{^hasArguments}}
+No Arguments.
+{{/hasArguments}}
+
+#### Example
+
+````java
+public class MyTest {
+  @Test
+  public void testApi() {
+    // When
+    Response response = callApi();
+
+    // Then
+    OkHttpAssert.{{name}}(response{{#hasArguments}}{{#arguments}}, {{name}}{{/arguments}}{{/hasArguments}});
+  }
+}
+```
+
+{{/methods}}

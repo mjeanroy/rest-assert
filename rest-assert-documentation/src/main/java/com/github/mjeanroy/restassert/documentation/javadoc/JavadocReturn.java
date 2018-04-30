@@ -22,33 +22,59 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.javadoc;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.Objects;
 
-import java.util.List;
+/**
+ * The Javadoc {@code @return} tag, defined by a description text.
+ */
+public final class JavadocReturn {
 
-import org.junit.Test;
+	/**
+	 * The Javadoc description.
+	 */
+	private final String description;
 
-public class StringTestUtilsTest {
-
-	@Test
-	public void it_should_join_strings() {
-		List<String> values = asList("foo", "bar");
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+	/**
+	 * Create the Javadoc Returns element.
+	 *
+	 * @param description The description associated to @return tag.
+	 */
+	JavadocReturn(String description) {
+		this.description = description;
 	}
 
-	@Test
-	public void it_should_join_strings_with_empty_collection() {
-		List<String> values = emptyList();
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("");
+	/**
+	 * Get {@link #description}
+	 *
+	 * @return {@link #description}
+	 */
+	public String getDescription() {
+		return description;
 	}
 
-	@Test
-	public void it_should_join_array_of_strings() {
-		String[] values = new String[]{"foo", "bar"};
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+	@Override
+	public String toString() {
+		return String.format("JavadocReturn{description=%s}", description);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (o instanceof JavadocReturn) {
+			JavadocReturn r = (JavadocReturn) o;
+			return Objects.equals(description, r.description);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description);
 	}
 }

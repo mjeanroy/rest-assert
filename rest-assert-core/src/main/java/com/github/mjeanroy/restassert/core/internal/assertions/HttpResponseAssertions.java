@@ -24,28 +24,78 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.data.*;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.*;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_MAX_AGE;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_EXPOSE_HEADERS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CACHE_CONTROL;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_DISPOSITION;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_ENCODING;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_LENGTH;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_TYPE;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ETAG;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.EXPIRES;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.LOCATION;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.PRAGMA;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.STRICT_TRANSPORT_SECURITY;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_XSS_PROTECTION;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.APPLICATION_XML;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.CSS;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.CSV;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.JSON;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.PDF;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_HTML;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_JAVASCRIPT;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_PLAIN;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
+import static com.github.mjeanroy.restassert.core.utils.DateUtils.parseHttpDate;
+import static java.util.Arrays.asList;
+import static java.util.Collections.addAll;
 
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.*;
-import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.*;
-import static com.github.mjeanroy.restassert.core.utils.DateUtils.parseHttpDate;
-import static java.util.Arrays.asList;
-import static java.util.Collections.addAll;
+import com.github.mjeanroy.restassert.core.data.CacheControl;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
+import com.github.mjeanroy.restassert.core.data.FrameOptions;
+import com.github.mjeanroy.restassert.core.data.RequestMethod;
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
+import com.github.mjeanroy.restassert.core.data.XssProtection;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCharsetAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasMimeTypeAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsDateHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderListEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatchingAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.restassert.documentation.Documentation;
 
 /**
  * Reusable Assertions of http response.
  * This class is implemented as a singleton object.
  * This class is thread safe.
  */
+@Documentation
 public final class HttpResponseAssertions {
 
 	/**

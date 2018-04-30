@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.test.commons;
 
+import static java.util.Arrays.asList;
+
 import java.util.Collection;
 
 /**
@@ -53,5 +55,16 @@ public final class StringTestUtils {
 		}
 
 		return sb.substring(0, sb.length() - separator.length());
+	}
+
+	/**
+	 * Join string with given character.
+	 *
+	 * @param strings Collection of strings.
+	 * @param separator The string separator.
+	 * @return The final string.
+	 */
+	public static String join(String[] strings, String separator) {
+		return join(asList(strings), separator);
 	}
 }

@@ -22,33 +22,35 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.javadoc;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-
+import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
-public class StringTestUtilsTest {
+public class JavadocReturnTest {
 
 	@Test
-	public void it_should_join_strings() {
-		List<String> values = asList("foo", "bar");
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+	public void it_should_create_javadoc_return_value() {
+		String description = "The Return Description";
+		JavadocReturn ret = new JavadocReturn(description);
+		assertThat(ret.getDescription()).isEqualTo(description);
 	}
 
 	@Test
-	public void it_should_join_strings_with_empty_collection() {
-		List<String> values = emptyList();
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("");
+	public void it_should_implement_equals_hash_cdoe() {
+		EqualsVerifier.forClass(JavadocReturn.class).verify();
 	}
 
 	@Test
-	public void it_should_join_array_of_strings() {
-		String[] values = new String[]{"foo", "bar"};
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+	public void it_should_implement_to_string() {
+		String description = "The Return Description";
+		JavadocReturn ret = new JavadocReturn(description);
+		assertThat(ret.toString()).isEqualTo(
+			"JavadocReturn{" +
+				"description=The Return Description" +
+			"}"
+		);
 	}
 }
