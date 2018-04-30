@@ -22,49 +22,59 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.javadoc;
 
-import java.util.Collection;
-
-import static java.util.Arrays.asList;
+import java.util.Objects;
 
 /**
- * Static Test String Utilities.
+ * The Javadoc {@code @return} tag, defined by a description text.
  */
-public final class StringTestUtils {
+public final class JavaDocReturn {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	/**
+	 * The Javadoc description.
+	 */
+	private final String description;
+
+	/**
+	 * Create the Javadoc Returns element.
+	 *
+	 * @param description The description associated to @return tag.
+	 */
+	JavaDocReturn(String description) {
+		this.description = description;
 	}
 
 	/**
-	 * Join string with given character.
+	 * Get {@link #description}
 	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
+	 * @return {@link #description}
 	 */
-	public static String join(Collection<String> strings, String separator) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	public String getDescription() {
+		return description;
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(String[] strings, String separator) {
-		return join(asList(strings), separator);
+	@Override
+	public String toString() {
+		return String.format("JavaDocReturn{description=%s}", description);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (o instanceof JavaDocReturn) {
+			JavaDocReturn r = (JavaDocReturn) o;
+			return Objects.equals(description, r.description);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(description);
 	}
 }

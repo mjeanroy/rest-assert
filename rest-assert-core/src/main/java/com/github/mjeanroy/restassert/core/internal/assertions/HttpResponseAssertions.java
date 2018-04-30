@@ -24,19 +24,68 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.data.*;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.*;
+import com.github.mjeanroy.restassert.core.data.CacheControl;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
+import com.github.mjeanroy.restassert.core.data.FrameOptions;
+import com.github.mjeanroy.restassert.core.data.RequestMethod;
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
+import com.github.mjeanroy.restassert.core.data.XssProtection;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCharsetAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasMimeTypeAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsDateHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderListEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatchingAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.restassert.documentation.Documentation;
 
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.*;
-import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.*;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_MAX_AGE;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_METHODS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_EXPOSE_HEADERS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CACHE_CONTROL;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_DISPOSITION;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_ENCODING;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_LENGTH;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_TYPE;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ETAG;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.EXPIRES;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.LAST_MODIFIED;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.LOCATION;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.PRAGMA;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.STRICT_TRANSPORT_SECURITY;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_FRAME_OPTIONS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_XSS_PROTECTION;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.APPLICATION_JAVASCRIPT;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.APPLICATION_XML;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.CSS;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.CSV;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.JSON;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.PDF;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_HTML;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_JAVASCRIPT;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_PLAIN;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
+import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
 import static com.github.mjeanroy.restassert.core.utils.DateUtils.parseHttpDate;
 import static java.util.Arrays.asList;
 import static java.util.Collections.addAll;
@@ -46,6 +95,7 @@ import static java.util.Collections.addAll;
  * This class is implemented as a singleton object.
  * This class is thread safe.
  */
+@Documentation
 public final class HttpResponseAssertions {
 
 	/**
@@ -69,7 +119,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is {@link HttpStatusCodes#OK}.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isOk(HttpResponse httpResponse) {
@@ -79,7 +129,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is {@link HttpStatusCodes#CREATED}.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCreated(HttpResponse httpResponse) {
@@ -89,7 +139,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'ACCEPTED' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isAccepted(HttpResponse httpResponse) {
@@ -109,7 +159,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'PARTIAL_CONTENT' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPartialContent(HttpResponse httpResponse) {
@@ -119,7 +169,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'RESET_CONTENT' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isResetContent(HttpResponse httpResponse) {
@@ -129,7 +179,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'MOVED_PERMANENTLY' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMovedPermanently(HttpResponse httpResponse) {
@@ -139,7 +189,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'MOVED_TEMPORARILY' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMovedTemporarily(HttpResponse httpResponse) {
@@ -149,7 +199,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'NOT_MODIFIED' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotModified(HttpResponse httpResponse) {
@@ -159,7 +209,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'UNAUTHORIZED' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUnauthorized(HttpResponse httpResponse) {
@@ -169,7 +219,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'FORBIDDEN' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isForbidden(HttpResponse httpResponse) {
@@ -179,7 +229,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'BAD_REQUEST' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isBadRequest(HttpResponse httpResponse) {
@@ -189,7 +239,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'NOT_ACCEPTABLE' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotAcceptable(HttpResponse httpResponse) {
@@ -199,7 +249,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'NOT_FOUND' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotFound(HttpResponse httpResponse) {
@@ -209,7 +259,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'INTERNAL_SERVER_ERROR' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isInternalServerError(HttpResponse httpResponse) {
@@ -219,7 +269,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'PRE_CONDITION_FAILED' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPreConditionFailed(HttpResponse httpResponse) {
@@ -229,7 +279,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'METHOD_NOT_ALLOWED' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isMethodNotAllowed(HttpResponse httpResponse) {
@@ -239,7 +289,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'CONFLICT' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isConflict(HttpResponse httpResponse) {
@@ -249,7 +299,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'UNSUPPORTED_MEDIA_TYPE' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUnsupportedMediaType(HttpResponse httpResponse) {
@@ -259,7 +309,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response is 'NOT_IMPLEMENTED' status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotImplemented(HttpResponse httpResponse) {
@@ -270,7 +320,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is a success status (i.e
 	 * between 200 and 299).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isSuccess(HttpResponse httpResponse) {
@@ -281,7 +331,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is not a success status (i.e
 	 * not between 200 and 299).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotSuccess(HttpResponse httpResponse) {
@@ -292,7 +342,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is a redirection status (i.e
 	 * between 300 and 399).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isRedirection(HttpResponse httpResponse) {
@@ -303,7 +353,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is not a redirection status (i.e
 	 * not between 300 and 399).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotRedirection(HttpResponse httpResponse) {
@@ -314,7 +364,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is a server error status (i.e
 	 * between 500 and 599).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isServerError(HttpResponse httpResponse) {
@@ -325,7 +375,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is not a server error status (i.e
 	 * not between 500 and 599).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotServerError(HttpResponse httpResponse) {
@@ -336,7 +386,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is a client error status (i.e
 	 * between 400 and 499).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isClientError(HttpResponse httpResponse) {
@@ -347,7 +397,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is not a client error status (i.e
 	 * not between 400 and 499).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotClientError(HttpResponse httpResponse) {
@@ -357,7 +407,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains ETag header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasETag(HttpResponse httpResponse) {
@@ -367,7 +417,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains ETag header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveETag(HttpResponse httpResponse) {
@@ -378,7 +428,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains ETag header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param etagValue ETag value.
 	 * @return Assertion result.
 	 */
@@ -389,7 +439,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Type header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentType(HttpResponse httpResponse) {
@@ -400,7 +450,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Type header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentTypeValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -411,7 +461,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Encoding header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentEncoding(HttpResponse httpResponse) {
@@ -421,7 +471,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does not contains Content-Encoding header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveContentEncoding(HttpResponse httpResponse) {
@@ -431,7 +481,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Disposition header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
@@ -441,7 +491,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Content-Disposition header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveContentDisposition(HttpResponse httpResponse) {
@@ -452,7 +502,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Disposition header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentDispositionValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -464,7 +514,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Content-Encoding header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentEncodingValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -478,7 +528,7 @@ public final class HttpResponseAssertions {
 	 * This is a shortcut for checking that Content-Encoding is strictly equal
 	 * to "gzip".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isGzipped(HttpResponse httpResponse) {
@@ -488,7 +538,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Length header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentLength(HttpResponse httpResponse) {
@@ -498,7 +548,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Location header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasLocation(HttpResponse httpResponse) {
@@ -508,7 +558,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Location header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveLocation(HttpResponse httpResponse) {
@@ -519,7 +569,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Location header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param locationValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -530,7 +580,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Last-Modified header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasLastModified(HttpResponse httpResponse) {
@@ -540,7 +590,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Last-Modifier header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveLastModified(HttpResponse httpResponse) {
@@ -550,7 +600,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Last-Modified header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasExpires(HttpResponse httpResponse) {
@@ -560,7 +610,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Expires header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveExpires(HttpResponse httpResponse) {
@@ -571,7 +621,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Expires header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -583,7 +633,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Expires header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -595,7 +645,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param lastModifiedValue Expected value.
 	 * @return Assertion result.
 	 */
@@ -607,7 +657,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains Last-Modified header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param lastModifiedDate Expected value.
 	 * @return Assertion result.
 	 */
@@ -618,7 +668,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Pragma header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasPragma(HttpResponse httpResponse) {
@@ -628,7 +678,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Pragma header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHavePragma(HttpResponse httpResponse) {
@@ -638,7 +688,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Pragma header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param pragma Pragma value.
 	 * @return Assertion result.
 	 */
@@ -649,7 +699,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Cache-Control header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
@@ -659,7 +709,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Cache-Control header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveCacheControl(HttpResponse httpResponse) {
@@ -669,7 +719,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Cache-Control header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param cacheControl Cache-Control value.
 	 * @return Assertion result.
 	 */
@@ -680,7 +730,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Cache-Control header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param cacheControl Cache-Control value.
 	 * @return Assertion result.
 	 */
@@ -691,7 +741,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-XSS-Protection header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasXssProtection(HttpResponse httpResponse) {
@@ -701,7 +751,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains X-XSS-Protection header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveXssProtection(HttpResponse httpResponse) {
@@ -711,7 +761,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-XSS-Protection header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param xssProtection Expected X-XSS-Protection header value.
 	 * @return Assertion result.
 	 */
@@ -722,7 +772,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-XSS-Protection header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param xssProtection Expected X-XSS-Protection header value.
 	 * @return Assertion result.
 	 */
@@ -733,7 +783,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-Content-Type-Options header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentTypeOptions(HttpResponse httpResponse) {
@@ -743,7 +793,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains X-Content-Type-Options header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveContentTypeOptions(HttpResponse httpResponse) {
@@ -753,7 +803,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-Content-Type-Options header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
@@ -764,7 +814,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-Content-Type-Options header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
 	 * @return Assertion result.
 	 */
@@ -775,7 +825,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-Frame-Options header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasFrameOptions(HttpResponse httpResponse) {
@@ -785,7 +835,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains X-Frame-Options header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveFrameOptions(HttpResponse httpResponse) {
@@ -795,7 +845,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-Frame-Options header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param frameOptions Expected X-Frame-Options header value.
 	 * @return Assertion result.
 	 */
@@ -806,7 +856,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains X-Frame-Options header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param frameOptions Expected X-Frame-Options header value.
 	 * @return Assertion result.
 	 */
@@ -817,7 +867,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Security-Policy header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasContentSecurityPolicy(HttpResponse httpResponse) {
@@ -827,7 +877,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Content-Security-Policy header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveContentSecurityPolicy(HttpResponse httpResponse) {
@@ -837,7 +887,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Security-Policy header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentSecurityPolicy Cache-Control value.
 	 * @return Assertion result.
 	 */
@@ -848,7 +898,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Content-Security-Policy header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param contentSecurityPolicy Cache-Control value.
 	 * @return Assertion result.
 	 */
@@ -859,7 +909,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Origin header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasAccessControlAllowOrigin(HttpResponse httpResponse) {
@@ -869,7 +919,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Access-Control-Allow-Origin header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveAccessControlAllowOrigin(HttpResponse httpResponse) {
@@ -879,7 +929,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Origin header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param accessControlAllowOrigin Header value.
 	 * @return Assertion result.
 	 */
@@ -890,7 +940,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Headers header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasAccessControlAllowHeaders(HttpResponse httpResponse) {
@@ -900,7 +950,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Access-Control-Allow-Headers header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveAccessControlAllowHeaders(HttpResponse httpResponse) {
@@ -910,7 +960,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param value Header value.
 	 * @return Assertion result.
 	 */
@@ -924,7 +974,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param accessControlAllowHeaders Header value.
 	 * @return Assertion result.
 	 */
@@ -935,7 +985,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Expose-Headers header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasAccessControlExposeHeaders(HttpResponse httpResponse) {
@@ -945,7 +995,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Access-Control-Expose-Headers header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveAccessControlExposeHeaders(HttpResponse httpResponse) {
@@ -955,7 +1005,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Expose-Headers header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param value Header value.
 	 * @return Assertion result.
 	 */
@@ -969,7 +1019,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param accessControlExposeHeaders Header value.
 	 * @return Assertion result.
 	 */
@@ -980,7 +1030,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Methods header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasAccessControlAllowMethods(HttpResponse httpResponse) {
@@ -990,7 +1040,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Access-Control-Allow-Headers header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveAccessControlAllowMethods(HttpResponse httpResponse) {
@@ -1000,7 +1050,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param method HTTP method.
 	 * @param other Other, optional, HTTP method.
 	 * @return Assertion result.
@@ -1015,7 +1065,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Methods header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param methods HTTP Methods.
 	 * @return Assertion result.
 	 */
@@ -1031,7 +1081,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Credentials header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasAccessControlAllowCredentials(HttpResponse httpResponse) {
@@ -1041,7 +1091,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Access-Control-Allow-Credentials header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveAccessControlAllowCredentials(HttpResponse httpResponse) {
@@ -1051,7 +1101,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Credentials header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param flag Flag value.
 	 * @return Assertion result.
 	 */
@@ -1062,7 +1112,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Max-Age header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasAccessControlAllowMaxAge(HttpResponse httpResponse) {
@@ -1072,7 +1122,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Access-Control-Allow-Max-Age header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveAccessControlAllowMaxAge(HttpResponse httpResponse) {
@@ -1082,7 +1132,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Access-Control-Allow-Max-Age header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param maxAge Max age (in seconds).
 	 * @return Assertion result.
 	 */
@@ -1093,7 +1143,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Strict-Transport-Security header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasStrictTransportSecurity(HttpResponse httpResponse) {
@@ -1103,7 +1153,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does contains Strict-Transport-Security header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveStrictTransportSecurity(HttpResponse httpResponse) {
@@ -1113,7 +1163,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Strict-Transport-Security header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param strictTransportSecurity Strict-Transport-Security value.
 	 * @return Assertion result.
 	 */
@@ -1124,7 +1174,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains Strict-Transport-Security header with expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param strictTransportSecurity Strict-Transport-Security value.
 	 * @return Assertion result.
 	 */
@@ -1135,7 +1185,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "application/json".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isJson(HttpResponse httpResponse) {
@@ -1145,7 +1195,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "application/xml" or "text/xml".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
@@ -1158,7 +1208,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "text/css".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCss(HttpResponse httpResponse) {
@@ -1168,7 +1218,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "text/plain".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isText(HttpResponse httpResponse) {
@@ -1178,7 +1228,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "text/csv".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCsv(HttpResponse httpResponse) {
@@ -1188,7 +1238,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "application/pdf".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPdf(HttpResponse httpResponse) {
@@ -1198,7 +1248,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "text/html" or "application/xhtml+xml".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isHtml(HttpResponse httpResponse) {
@@ -1211,7 +1261,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response has UTF-8 charset.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUtf8(HttpResponse httpResponse) {
@@ -1221,7 +1271,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is "application/javascript" or "text/javascript".
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isJavascript(HttpResponse httpResponse) {
@@ -1234,7 +1284,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains expected header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
@@ -1245,7 +1295,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does not contains expected header.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param headerName Header name.
 	 * @return Assertion result.
 	 */
@@ -1256,7 +1306,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is expected mime type.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
@@ -1267,7 +1317,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response has expected charset.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
@@ -1278,7 +1328,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response has expected charset.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
 	 */
@@ -1289,7 +1339,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response is expected mime type.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
 	 */
@@ -1301,7 +1351,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains expected header with
 	 * expected value.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param headerName Header name.
 	 * @param headerValue Header value.
 	 * @return Assertion result.
@@ -1313,7 +1363,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that status code of http response has an expected status.
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param status Expected status.
 	 * @return Assertion result.
 	 */
@@ -1325,7 +1375,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is include between
 	 * a lower bound and an upper bound (inclusive).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param start Lower bound.
 	 * @param end Upper bound.
 	 * @return Assertion result.
@@ -1338,7 +1388,7 @@ public final class HttpResponseAssertions {
 	 * Check that status code of http response is not included between
 	 * a lower bound and an upper bound (inclusive).
 	 *
-	 * @param httpResponse Http response.
+	 * @param httpResponse HTTP response to be tested.
 	 * @param start Lower bound.
 	 * @param end Upper bound.
 	 * @return Assertion result.
@@ -1350,6 +1400,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response does not contains any cookies.
 	 *
+	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 */
 	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse) {
@@ -1360,6 +1411,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response does not contains cookie with given name (note that cookie name
 	 * is case-sensitive).
 	 *
+	 * @param httpResponse HTTP response to be tested.
 	 * @param name Cookie name.
 	 * @return Assertion result.
 	 */
@@ -1371,6 +1423,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains cookie with given name (note that cookie name is
 	 * case-sensitive).
 	 *
+	 * @param httpResponse HTTP response to be tested.
 	 * @param name Cookie name.
 	 * @return Assertion result.
 	 */
@@ -1382,6 +1435,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains cookie with given name and value (note that cookie name
 	 * is case-sensitive).
 	 *
+	 * @param httpResponse HTTP response to be tested.
 	 * @param name Cookie name.
 	 * @param value Cookie value.
 	 * @return Assertion result.
@@ -1393,6 +1447,7 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that http response contains cookie.
 	 *
+	 * @param httpResponse HTTP response to be tested.
 	 * @param cookie Cookie.
 	 * @return Assertion result.
 	 */

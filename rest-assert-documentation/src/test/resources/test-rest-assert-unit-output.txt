@@ -1,0 +1,58 @@
+# Rest Assert Unit
+
+## Installation
+
+## Introduction
+
+## Assertions
+
+### `isStatusEqualTo`
+
+Check that status code of http response has an expected status.
+
+#### Signature
+
+| Argument | Description |
+|----------|-------------|
+| `httpResponse` | Http response. |
+| `status` | Expected status. |
+
+#### Example
+
+```java
+public class MyTest {
+  @Test
+  public void testApi() {
+    // When
+    Response httpResponse = callApi();
+
+    // Then
+    OkHttpAssert.isStatusEqualTo(httpResponse, status);
+  }
+}
+```
+
+### `isOk`
+
+Check that status code of http response is 'OK'
+
+#### Signature
+
+| Argument | Description |
+|----------|-------------|
+| `httpResponse` | Http response. |
+
+#### Example
+
+```java
+public class MyTest {
+  @Test
+  public void testApi() {
+    // When
+    Response httpResponse = callApi();
+
+    // Then
+    OkHttpAssert.isOk(httpResponse);
+  }
+}
+```

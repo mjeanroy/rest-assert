@@ -22,49 +22,52 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.templates;
 
-import java.util.Collection;
+import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+public class MustacheProcessorTest {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	@Test
+	public void it_should_render_mustache_template() {
+		List<Person> persons = asList(
+				new Person("John Doe", 20),
+				new Person("Jane Doe", 30)
+		);
+
+		InputStream template = new ByteArrayInputStream("{{#persons}}{{name}}: {{age}}{{/persons}}".getBytes());
+		Map<String, Object> model = new HashMap<>();
+		model.put("persons", persons);
+
+		String output = MustacheProcessor.getInstance().render(template, model);
+
+		assertThat(output).isEqualTo("John Doe: 20Jane Doe: 30");
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(Collection<String> strings, String separator) {
-		if (strings.isEmpty()) {
-			return "";
+	private static class Person {
+		private final String name;
+		private final int age;
+
+		private Person(String name, int age) {
+			this.name = name;
+			this.age = age;
 		}
 
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
+		private String getName() {
+			return name;
 		}
 
-		return sb.substring(0, sb.length() - separator.length());
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(String[] strings, String separator) {
-		return join(asList(strings), separator);
+		private int getAge() {
+			return age;
+		}
 	}
 }

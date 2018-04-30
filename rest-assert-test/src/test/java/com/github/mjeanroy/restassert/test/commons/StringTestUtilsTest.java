@@ -45,4 +45,10 @@ public class StringTestUtilsTest {
 		List<String> values = emptyList();
 		assertThat(StringTestUtils.join(values, ",")).isEqualTo("");
 	}
+
+	@Test
+	public void it_should_join_array_of_strings() {
+		String[] values = new String[]{"foo", "bar"};
+		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+	}
 }

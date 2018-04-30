@@ -22,50 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.templates;
 
+import com.github.mjeanroy.restassert.documentation.DocumentedMethod;
+import com.github.mjeanroy.restassert.documentation.javadoc.JavaDoc;
 import org.junit.Test;
 
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.Path;
+import java.util.List;
 
+import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.readFile;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IoTestUtilsTest {
+public class TemplateProcessorTest {
 
 	@Test
-	public void it_should_get_file_from_classpath() {
-		File file = IoTestUtils.fileFromClasspath("/test.txt");
-		assertThat(file).isNotNull().exists().hasName("test.txt");
-	}
+	public void it_should_generate_documentation_as_markdown() {
+		DocumentedMethod method1 = new DocumentedMethod("isStatusEqualTo", new JavaDoc.Builder()
+			.setDescription("Check that status code of http response has an expected status.")
+			.addParam("httpResponse", "Http response.")
+			.addParam("status", "Expected status.")
+			.setReturns("Assertion result.")
+			.build());
 
-	@Test
-	public void it_should_get_path_from_classpath() {
-		Path path = IoTestUtils.pathFromClasspath("/test.txt");
-		assertThat(path).isNotNull().exists().hasFileName("test.txt");
-	}
+		DocumentedMethod method2 = new DocumentedMethod("isOk", new JavaDoc.Builder()
+			.setDescription("Check that status code of http response is 'OK'")
+			.addParam("httpResponse", "Http response.")
+			.setReturns("Assertion result.")
+			.build());
 
-	@Test
-	public void it_should_get_URL_from_classpath() {
-		URL url = IoTestUtils.urlFromClasspath("/test.txt");
-		assertThat(url).isNotNull().hasProtocol("file");
-	}
+		List<DocumentedMethod> methods = asList(method1, method2);
 
-	@Test
-	public void it_should_get_URI_from_classpath() {
-		URI url = IoTestUtils.uriFromClasspath("/test.txt");
-		assertThat(url).isNotNull().hasScheme("file");
-	}
+		String output = TemplateProcessor.REST_ASSERT_UNIT.process(methods);
 
-	@Test
-	public void it_should_read_file_content() {
-		String content = IoTestUtils.readFile("test.txt");
-		assertThat(content).isEqualTo(
-				"Hello World\n" +
-				"Foo Bar\n" +
-				"Test"
-		);
+		assertThat(output.trim()).isEqualTo(readFile("test-rest-assert-unit-output.txt").trim());
 	}
 }

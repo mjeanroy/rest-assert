@@ -11,6 +11,7 @@
 
   <modules>
     <module>rest-assert-test</module>
+    <module>rest-assert-documentation</module>
     <module>rest-assert-core</module>
     <module>rest-assert-generator</module>
     <module>rest-assert-unit</module>

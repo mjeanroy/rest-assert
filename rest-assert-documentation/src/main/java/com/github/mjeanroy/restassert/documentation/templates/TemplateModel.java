@@ -22,49 +22,49 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.templates;
 
-import java.util.Collection;
+import com.github.mjeanroy.restassert.documentation.javadoc.JavaDocParam;
 
-import static java.util.Arrays.asList;
+import java.util.List;
 
 /**
- * Static Test String Utilities.
+ * Data Model for mustache templates.
  */
-public final class StringTestUtils {
-
-	// Ensure non instantiation.
-	private StringTestUtils() {
-	}
+public interface TemplateModel {
 
 	/**
-	 * Join string with given character.
+	 * Get the method name to document.
 	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
+	 * @return Method name.
 	 */
-	public static String join(Collection<String> strings, String separator) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
-	}
+	String getName();
 
 	/**
-	 * Join string with given character.
+	 * Get the method description to display.
 	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
+	 * @return Method description.
 	 */
-	public static String join(String[] strings, String separator) {
-		return join(asList(strings), separator);
-	}
+	String getDescription();
+
+	/**
+	 * Get method arguments.
+	 *
+	 * @return Method arguments.
+	 */
+	List<JavaDocParam> getArguments();
+
+	/**
+	 * Check if method has arguments (i.e {@link #getArguments()} has size greater than zero).
+	 *
+	 * @return {@code true} if method has arguments, {@code false} otherwise.
+	 */
+	boolean hasArguments();
+
+	/**
+	 * Return list of argument names, separated by {@code ", "}.
+	 *
+	 * @return Argument names.
+	 */
+	String getArgumentNames();
 }

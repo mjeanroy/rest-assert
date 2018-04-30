@@ -22,49 +22,55 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.templates;
 
-import java.util.Collection;
+import com.samskivert.mustache.Mustache;
 
-import static java.util.Arrays.asList;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.util.Map;
 
 /**
- * Static Test String Utilities.
+ * Render templates using Mustache rendering.
  */
-public final class StringTestUtils {
+final class MustacheProcessor {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	/**
+	 * The Mustache Processor.
+	 */
+	private static final MustacheProcessor INSTANCE = new MustacheProcessor();
+
+	/**
+	 * Get the mustache processor instance.
+	 *
+	 * @return The mustache processor.
+	 */
+	static MustacheProcessor getInstance() {
+		return INSTANCE;
 	}
 
 	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
+	 * The mustache compiler.
 	 */
-	public static String join(Collection<String> strings, String separator) {
-		if (strings.isEmpty()) {
-			return "";
-		}
+	private final Mustache.Compiler mustache;
 
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	/**
+	 * Create the processor with default compiler options.
+	 */
+	private MustacheProcessor() {
+		this.mustache = Mustache.compiler().escapeHTML(false);
 	}
 
 	/**
-	 * Join string with given character.
+	 * Render template with data model.
 	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
+	 * @param template Mustache template.
+	 * @param model Data model.
+	 * @return The rendered template.
 	 */
-	public static String join(String[] strings, String separator) {
-		return join(asList(strings), separator);
+	public String render(InputStream template, Map<String, Object> model) {
+		Reader source = new InputStreamReader(template);
+		return mustache.compile(source).execute(model);
 	}
 }

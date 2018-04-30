@@ -22,49 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation;
 
-import java.util.Collection;
-
-import static java.util.Arrays.asList;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Static Test String Utilities.
+ * An annotation that will be parsed by {@link DocumentationProcessor}: each annotated classes
+ * will be eligible to markdown documentation.
  */
-public final class StringTestUtils {
-
-	// Ensure non instantiation.
-	private StringTestUtils() {
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(Collection<String> strings, String separator) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(String[] strings, String separator) {
-		return join(asList(strings), separator);
-	}
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+public @interface Documentation {
 }

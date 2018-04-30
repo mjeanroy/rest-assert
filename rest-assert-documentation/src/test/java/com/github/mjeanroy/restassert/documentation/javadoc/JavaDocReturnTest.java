@@ -22,49 +22,35 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.documentation.javadoc;
 
-import java.util.Collection;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static java.util.Arrays.asList;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Test;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+public class JavaDocReturnTest {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	@Test
+	public void it_should_create_javadoc_return_value() {
+		String description = "The Return Description";
+		JavaDocReturn ret = new JavaDocReturn(description);
+		assertThat(ret.getDescription()).isEqualTo(description);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(Collection<String> strings, String separator) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	@Test
+	public void it_should_implement_equals_hash_cdoe() {
+		EqualsVerifier.forClass(JavaDocReturn.class).verify();
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param strings Collection of strings.
-	 * @param separator The string separator.
-	 * @return The final string.
-	 */
-	public static String join(String[] strings, String separator) {
-		return join(asList(strings), separator);
+	@Test
+	public void it_should_implement_to_string() {
+		String description = "The Return Description";
+		JavaDocReturn ret = new JavaDocReturn(description);
+		assertThat(ret.toString()).isEqualTo(
+			"JavaDocReturn{" +
+				"description=The Return Description" +
+			"}"
+		);
 	}
 }
