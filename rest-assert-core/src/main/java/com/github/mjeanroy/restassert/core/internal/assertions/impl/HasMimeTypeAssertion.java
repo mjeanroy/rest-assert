@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
+import com.github.mjeanroy.restassert.core.error.http.ShouldHaveMimeType;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+
+import java.util.List;
+
 import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
 import static com.github.mjeanroy.restassert.core.utils.PreConditions.notEmpty;
 import static java.util.Collections.singleton;
-
-import java.util.List;
-
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 /**
  * Check that http response has expected mime type.
@@ -91,6 +92,7 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 		log.debug("-> Extracted mime-type: '{}'", actualMimeType);
 
 		boolean found = false;
+
 		for (String current : mimeTypes) {
 			if (actualMimeType.equalsIgnoreCase(current)) {
 				log.debug("-> Found a match with: '{}'", current);
@@ -99,12 +101,16 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 			}
 		}
 
-		return found ?
-				success() :
-				failure(
-						singular ?
-								shouldHaveMimeType(mimeTypes.iterator().next(), actualMimeType) :
-								shouldHaveMimeType(mimeTypes, actualMimeType)
-					);
+		return found ? success() : failure(getFailure(actualMimeType));
+	}
+
+	/**
+	 * Generate error instance.
+	 *
+	 * @param actualMimeType The actual mime-type.
+	 * @return The error instance.
+	 */
+	private ShouldHaveMimeType getFailure(String actualMimeType) {
+		return singular ? shouldHaveMimeType(mimeTypes.iterator().next(), actualMimeType) : shouldHaveMimeType(mimeTypes, actualMimeType);
 	}
 }
