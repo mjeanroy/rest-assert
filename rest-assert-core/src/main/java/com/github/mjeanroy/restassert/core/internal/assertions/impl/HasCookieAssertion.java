@@ -24,15 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie.shouldHaveCookie;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
-import static com.github.mjeanroy.restassert.core.utils.Utils.some;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
@@ -41,6 +32,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 import com.github.mjeanroy.restassert.core.utils.Predicate;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie.shouldHaveCookie;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.utils.Utils.some;
 
 /**
  * Check that http response contains expected cookie.
@@ -135,9 +135,7 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		}
 
 		boolean found = some(cookies, predicate);
-		return found ?
-				success() :
-				failure(getError());
+		return found ? success() : failure(getError());
 	}
 
 	private ShouldHaveCookie getError() {

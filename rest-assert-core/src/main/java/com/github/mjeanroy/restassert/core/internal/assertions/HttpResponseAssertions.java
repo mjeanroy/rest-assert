@@ -377,182 +377,242 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that status code of http response is a success status (i.e
-	 * between 200 and 299).
+	 * Check that status code of HTTP response is a "SUCCESS" status a.k.a 2XX status.
+	 *
+	 * Note that this assertion will check that the HTTP response status is between {@code 200} and {@code 299} (inclusive),
+	 * it does not check that the status code is in the list of status described
+	 * in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2">official specification</a>.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success</a>
 	 */
 	public AssertionResult isSuccess(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 200, 299);
 	}
 
 	/**
-	 * Check that status code of http response is not a success status (i.e
-	 * not between 200 and 299).
+	 * Check that status code of HTTP response is <strong>not</strong> a "SUCCESS" status, a.k.a 2XX status.
+	 *
+	 * Note that this assertion will check that the HTTP response status is <strong>strictly</strong> not
+	 * between {@code 200} and {@code 299}.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#2xx_Success</a>
 	 */
 	public AssertionResult isNotSuccess(HttpResponse httpResponse) {
 		return isStatusOutOf(httpResponse, 200, 299);
 	}
 
 	/**
-	 * Check that status code of http response is a redirection status (i.e
-	 * between 300 and 399).
+	 * Check that status code of HTTP response is a "REDIRECTION" status, a.k.a 3XX status.
+	 *
+	 * Note that this assertion will check that HTTP response status is between {@code 300} and {@code 399} (inclusive),
+	 * it does not check that the status code is in the list of status described
+	 * in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3">official specification</a>.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection</a>
 	 */
 	public AssertionResult isRedirection(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 300, 399);
 	}
 
 	/**
-	 * Check that status code of http response is not a redirection status (i.e
-	 * not between 300 and 399).
+	 * Check that status code of HTTP response is <strong>not</strong> a "REDIRECTION" status, a.k.a 3XX status.
+	 *
+	 * Note that this assertion will only check that the HTTP response status is <strong>strictly</strong> not
+	 * between {@code 300} and {@code 399}.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#3xx_Redirection</a>
 	 */
 	public AssertionResult isNotRedirection(HttpResponse httpResponse) {
 		return isStatusOutOf(httpResponse, 300, 399);
 	}
 
 	/**
-	 * Check that status code of http response is a server error status (i.e
-	 * between 500 and 599).
+	 * Check that status code of HTTP response is a "SERVER ERROR" status, a.k.a 5XX status.
+	 *
+	 * Note that this assertion will check that HTTP response status is between {@code 500} and {@code 599} (inclusive),
+	 * it does not check that the status code is in the list of status described
+	 * in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5">official specification</a>.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors</a>
 	 */
 	public AssertionResult isServerError(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 500, 599);
 	}
 
 	/**
-	 * Check that status code of http response is not a server error status (i.e
-	 * not between 500 and 599).
+	 * Check that status code of HTTP response is <strong>not</strong> a "SERVER ERROR" status, a.k.a 5XX status.
+	 *
+	 * Note that this assertion will only check that the HTTP response status is <strong>strictly</strong> not
+	 * between {@code 500} and {@code 599}.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#5xx_Server_errors</a>
 	 */
 	public AssertionResult isNotServerError(HttpResponse httpResponse) {
 		return isStatusOutOf(httpResponse, 500, 599);
 	}
 
 	/**
-	 * Check that status code of http response is a client error status (i.e
-	 * between 400 and 499).
+	 * Check that status code of HTTP response is a "CLIENT ERROR" status, a.k.a 4XX status.
+	 *
+	 * Note that this assertion will check that HTTP response status is between {@code 400} and {@code 499} (inclusive),
+	 * it does not check that the status code is in the list of status described
+	 * in <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4">official specification</a>.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors</a>
 	 */
 	public AssertionResult isClientError(HttpResponse httpResponse) {
 		return isStatusBetween(httpResponse, 400, 499);
 	}
 
 	/**
-	 * Check that status code of http response is not a client error status (i.e
-	 * not between 400 and 499).
+	 * Check that status code of HTTP response is <strong>not</strong> a "CLIENT ERROR" status, a.k.a 4XX status.
+	 *
+	 * Note that this assertion will only check that the HTTP response status is <strong>strictly</strong> not
+	 * between {@code 400} and {@code 499}.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors</a>
 	 */
 	public AssertionResult isNotClientError(HttpResponse httpResponse) {
 		return isStatusOutOf(httpResponse, 400, 499);
 	}
 
 	/**
-	 * Check that http response contains ETag header.
+	 * Check that HTTP response contains {@code "ETag"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag</a>
 	 */
 	public AssertionResult hasETag(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, ETAG.getName());
 	}
 
 	/**
-	 * Check that http response does contains ETag header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "ETag"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag</a>
 	 */
 	public AssertionResult doesNotHaveETag(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, ETAG.getName());
 	}
 
 	/**
-	 * Check that http response contains ETag header with
-	 * expected value.
+	 * Check that HTTP response contains {@code "ETag"} header with expected value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param etagValue ETag value.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag</a>
 	 */
 	public AssertionResult isETagEqualTo(HttpResponse httpResponse, String etagValue) {
 		return isHeaderEqualTo(httpResponse, ETAG.getName(), etagValue);
 	}
 
 	/**
-	 * Check that http response contains Content-Type header.
+	 * Check that HTTP response contains {@code "Content-Type"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult hasContentType(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CONTENT_TYPE.getName());
 	}
 
 	/**
-	 * Check that http response contains Content-Type header with
-	 * expected value.
+	 * Check that HTTP response contains {@code "Content-Type"} header with expected value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param contentTypeValue Expected value.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, String contentTypeValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_TYPE.getName(), contentTypeValue);
 	}
 
 	/**
-	 * Check that http response contains Content-Encoding header.
+	 * Check that HTTP response contains {@code "Content-Encoding"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding</a>
 	 */
 	public AssertionResult hasContentEncoding(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CONTENT_ENCODING.getName());
 	}
 
 	/**
-	 * Check that http response does not contains Content-Encoding header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Content-Encoding"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding</a>
 	 */
 	public AssertionResult doesNotHaveContentEncoding(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, CONTENT_ENCODING.getName());
 	}
 
 	/**
-	 * Check that http response contains Content-Disposition header.
+	 * Check that HTTP response contains {@code "Content-Disposition"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
 	 */
 	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CONTENT_DISPOSITION.getName());
 	}
 
 	/**
-	 * Check that http response does contains Content-Disposition header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Content-Disposition"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
 	 */
 	public AssertionResult doesNotHaveContentDisposition(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, CONTENT_DISPOSITION.getName());
@@ -1243,79 +1303,122 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response is "application/json".
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "application/json").
+	 *
+	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
+	 * case-insensitive.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isJson(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, JSON);
 	}
 
 	/**
-	 * Check that http response is "application/xml" or "text/xml".
+	 * Check that HTTP response has a mime-type corresponding to an XML document, meaning one of the following
+	 * values (ignoring case):
+	 *
+	 * <ul>
+	 *   <li>{@code "application/xml"}</li>
+	 *   <li>{@code "text/xml"}</li>
+	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7303#page-19">https://tools.ietf.org/html/rfc7303#page-19</a>
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isXml(HttpResponse httpResponse) {
-		return hasMimeTypeIn(httpResponse, asList(
-				APPLICATION_XML,
-				TEXT_XML
-		));
+		return hasMimeTypeIn(httpResponse, asList(APPLICATION_XML, TEXT_XML));
 	}
 
 	/**
-	 * Check that http response is "text/css".
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/css").
+	 *
+	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
+	 * case-insensitive.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isCss(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, CSS);
 	}
 
 	/**
-	 * Check that http response is "text/plain".
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/plain").
+	 *
+	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
+	 * case-insensitive.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isText(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, TEXT_PLAIN);
 	}
 
 	/**
-	 * Check that http response is "text/csv".
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/csv").
+	 *
+	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
+	 * case-insensitive.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isCsv(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, CSV);
 	}
 
 	/**
-	 * Check that http response is "application/pdf".
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "application/pdf").
+	 *
+	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
+	 * case-insensitive.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isPdf(HttpResponse httpResponse) {
 		return hasMimeType(httpResponse, PDF);
 	}
 
 	/**
-	 * Check that http response is "text/html" or "application/xhtml+xml".
+	 * Check that HTTP response has a mime-type corresponding to an HTML document, meaning one of
+	 * the following values (ignoring case):
+	 *
+	 * <ul>
+	 *   <li>{@code "text/html"}</li>
+	 *   <li>{@code "application/xhtml+xml"}</li>
+	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isHtml(HttpResponse httpResponse) {
-		return hasMimeTypeIn(httpResponse, asList(
-				TEXT_HTML,
-				XHTML
-		));
+		return hasMimeTypeIn(httpResponse, asList(TEXT_HTML, XHTML));
 	}
 
 	/**
@@ -1342,22 +1445,25 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains expected header.
+	 * Check that HTTP response contains expected header (note that header name are case-insensitive).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param headerName Header name.
 	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers</a>
 	 */
 	public AssertionResult hasHeader(HttpResponse httpResponse, String headerName) {
 		return assertWith(httpResponse, new HasHeaderAssertion(headerName));
 	}
 
 	/**
-	 * Check that http response does not contains expected header.
+	 * Check that HTTP response <strong>does not</strong> contains expected header (note that header name are
+	 * case-insensitive).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param headerName Header name.
 	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers</a>
 	 */
 	public AssertionResult doesNotHaveHeader(HttpResponse httpResponse, String headerName) {
 		return assertWith(httpResponse, new DoesNotHaveHeaderAssertion(headerName));
@@ -1505,7 +1611,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains cookie.
+	 * Check that HTTP response contains given cookie.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param cookie Cookie.
