@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 
@@ -66,6 +66,6 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 			}
 		});
 
-		return found ? success() : failure(shouldHaveHeaderWithValue(name, value.value(), values));
+		return found ? success() : failure(shouldHaveHeaderWithValue(name, value.serializeValue(), values));
 	}
 }

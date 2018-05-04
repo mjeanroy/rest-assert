@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.core.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -73,7 +73,7 @@ public class HeaderValueBuilder {
 	 */
 	public HeaderValue build() {
 		HeaderValue hValue = mock(HeaderValue.class);
-		when(hValue.value()).thenReturn(value);
+		when(hValue.serializeValue()).thenReturn(value);
 
 		for (String match : matches) {
 			when(hValue.match(match)).thenReturn(true);

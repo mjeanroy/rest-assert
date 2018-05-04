@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.data;
+package com.github.mjeanroy.restassert.core.internal.data;
 
 /**
  * Header value that can be checked against string values.
@@ -34,7 +34,7 @@ public interface HeaderValue {
 	 *
 	 * @return Header value.
 	 */
-	String value();
+	String serializeValue();
 
 	/**
 	 * Check that actual header value match this header value (in most cases,

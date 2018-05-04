@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
 public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
@@ -42,7 +42,7 @@ public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqua
 
 	@Override
 	protected String failValue() {
-		return FrameOptions.SAME_ORIGIN.value();
+		return FrameOptions.SAME_ORIGIN.serializeValue();
 	}
 
 	@Override

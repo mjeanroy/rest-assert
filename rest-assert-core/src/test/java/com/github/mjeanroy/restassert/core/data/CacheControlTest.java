@@ -35,7 +35,7 @@ public class CacheControlTest {
 	public void it_should_create_no_cache_header() {
 		CacheControl cacheControl = new CacheControl.Builder().noCache().build();
 
-		assertThat(cacheControl.value()).isEqualTo("no-cache");
+		assertThat(cacheControl.serializeValue()).isEqualTo("no-cache");
 		assertThat(cacheControl.match("no-cache")).isTrue();
 		assertThat(cacheControl.toString()).isEqualTo(
 			"CacheControl{" +
@@ -55,7 +55,7 @@ public class CacheControlTest {
 	public void it_should_create_no_store_header() {
 		CacheControl cacheControl = new CacheControl.Builder().noStore().build();
 
-		assertThat(cacheControl.value()).isEqualTo("no-store");
+		assertThat(cacheControl.serializeValue()).isEqualTo("no-store");
 		assertThat(cacheControl.match("no-store")).isTrue();
 		assertThat(cacheControl.toString()).isEqualTo(
 			"CacheControl{" +
@@ -78,7 +78,7 @@ public class CacheControlTest {
 			.maxAge(0)
 			.build();
 
-		assertThat(cacheControl.value()).isEqualTo("public, max-age=0");
+		assertThat(cacheControl.serializeValue()).isEqualTo("public, max-age=0");
 		assertThat(cacheControl.match("public, max-age=0")).isTrue();
 		assertThat(cacheControl.toString()).isEqualTo(
 			"CacheControl{" +
@@ -101,7 +101,7 @@ public class CacheControlTest {
 			.maxAge(3600)
 			.build();
 
-		assertThat(cacheControl.value()).isEqualTo("private, max-age=3600");
+		assertThat(cacheControl.serializeValue()).isEqualTo("private, max-age=3600");
 		assertThat(cacheControl.match("private, max-age=3600")).isTrue();
 		assertThat(cacheControl.toString()).isEqualTo(
 			"CacheControl{" +
@@ -124,42 +124,42 @@ public class CacheControlTest {
 				.noStore()
 				.build();
 
-		assertThat(cacheControl.value()).isEqualTo("no-cache, no-store");
+		assertThat(cacheControl.serializeValue()).isEqualTo("no-cache, no-store");
 		assertThat(cacheControl.match("no-store, no-cache")).isTrue();
 	}
 
 	@Test
 	public void it_should_parse_no_cache_directive() {
 		CacheControl c = new CacheControl.Builder().noCache().build();
-		assertThat(c.value()).isEqualTo("no-cache");
+		assertThat(c.serializeValue()).isEqualTo("no-cache");
 		assertThat(c.match("no-cache")).isTrue();
 	}
 
 	@Test
 	public void it_should_parse_no_store_directive() {
 		CacheControl c1 = new CacheControl.Builder().noStore().build();
-		assertThat(c1.value()).isEqualTo("no-store");
+		assertThat(c1.serializeValue()).isEqualTo("no-store");
 		assertThat(c1.match("no-store")).isTrue();
 	}
 
 	@Test
 	public void it_should_parse_proxy_revalidate_directive() {
 		CacheControl c1 = new CacheControl.Builder().proxyRevalidate().build();
-		assertThat(c1.value()).isEqualTo("proxy-revalidate");
+		assertThat(c1.serializeValue()).isEqualTo("proxy-revalidate");
 		assertThat(c1.match("proxy-revalidate")).isTrue();
 	}
 
 	@Test
 	public void it_should_parse_must_revalidate_directive() {
 		CacheControl c1 = new CacheControl.Builder().mustRevalidate().build();
-		assertThat(c1.value()).isEqualTo("must-revalidate");
+		assertThat(c1.serializeValue()).isEqualTo("must-revalidate");
 		assertThat(c1.match("must-revalidate")).isTrue();
 	}
 
 	@Test
 	public void it_should_parse_no_transform_directive() {
 		CacheControl c1 = new CacheControl.Builder().noTransform().build();
-		assertThat(c1.value()).isEqualTo("no-transform");
+		assertThat(c1.serializeValue()).isEqualTo("no-transform");
 		assertThat(c1.match("no-transform")).isTrue();
 	}
 
@@ -170,7 +170,7 @@ public class CacheControlTest {
 			.visibility(CacheControl.Visibility.PUBLIC)
 			.build();
 
-		assertThat(c1.value()).isEqualTo("public, s-maxage=3600");
+		assertThat(c1.serializeValue()).isEqualTo("public, s-maxage=3600");
 		assertThat(c1.match("public, s-maxage=3600")).isTrue();
 	}
 

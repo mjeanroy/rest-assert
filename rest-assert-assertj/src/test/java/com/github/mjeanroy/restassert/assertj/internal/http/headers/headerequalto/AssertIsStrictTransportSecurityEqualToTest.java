@@ -41,7 +41,7 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResp
 		.includeSubDomains()
 		.preload()
 		.build()
-		.value();
+		.serializeValue();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {

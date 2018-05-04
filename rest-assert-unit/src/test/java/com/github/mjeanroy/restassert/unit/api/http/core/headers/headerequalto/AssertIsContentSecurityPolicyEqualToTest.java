@@ -50,11 +50,11 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractCoreHttpHe
 	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
 		.addDefaultSrc(self())
 		.build()
-		.value();
+		.serializeValue();
 
 	@Override
 	protected Header getHeader() {
-		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.value());
+		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.serializeValue());
 	}
 
 	@Override

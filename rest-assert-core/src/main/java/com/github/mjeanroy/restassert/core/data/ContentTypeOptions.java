@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+
 /**
  * Values of valid X-Content-Type-Options header.
  */
@@ -42,7 +44,7 @@ public enum ContentTypeOptions implements HeaderValue {
 	}
 
 	@Override
-	public String value() {
+	public String serializeValue() {
 		return header;
 	}
 

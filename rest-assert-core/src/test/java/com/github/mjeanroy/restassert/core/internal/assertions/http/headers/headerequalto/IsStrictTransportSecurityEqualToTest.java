@@ -41,7 +41,7 @@ public class IsStrictTransportSecurityEqualToTest extends AbstractHttpHeaderEqua
 		.includeSubDomains()
 		.preload()
 		.build()
-		.value();
+		.serializeValue();
 
 	@Override
 	protected Header getHeader() {

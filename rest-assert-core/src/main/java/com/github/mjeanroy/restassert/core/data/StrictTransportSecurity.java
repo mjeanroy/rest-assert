@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
@@ -88,7 +89,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 	}
 
 	@Override
-	public String value() {
+	public String serializeValue() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("max-age=").append(maxAge);
 

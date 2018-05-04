@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+
 /**
  * Values of valid X-Frame-Options header.
  * Specification: https://tools.ietf.org/html/rfc7034
@@ -59,7 +61,7 @@ public enum FrameOptions implements HeaderValue {
 	ALLOW_FROM("ALLOW-FROM") {
 		@Override
 		public boolean match(String actualValue) {
-			return actualValue.toLowerCase().startsWith(value().toLowerCase());
+			return actualValue.toLowerCase().startsWith(serializeValue().toLowerCase());
 		}
 	};
 
@@ -70,7 +72,7 @@ public enum FrameOptions implements HeaderValue {
 	}
 
 	@Override
-	public String value() {
+	public String serializeValue() {
 		return header;
 	}
 

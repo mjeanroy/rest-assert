@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+
 /**
  * Values of valid XSS protection header.
  */
@@ -52,7 +54,7 @@ public enum XssProtection implements HeaderValue {
 	}
 
 	@Override
-	public String value() {
+	public String serializeValue() {
 		return header;
 	}
 

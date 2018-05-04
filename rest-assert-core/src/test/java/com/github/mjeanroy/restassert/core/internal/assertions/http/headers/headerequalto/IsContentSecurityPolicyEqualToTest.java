@@ -41,7 +41,7 @@ public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualT
 	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
 		.addDefaultSrc(self())
 		.build()
-		.value();
+		.serializeValue();
 
 	private static final ContentSecurityPolicy VALUE = new ContentSecurityPolicy.Builder()
 		.addDefaultSrc(none())
@@ -51,7 +51,7 @@ public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualT
 
 	@Override
 	protected Header getHeader() {
-		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.value());
+		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.serializeValue());
 	}
 
 	@Override

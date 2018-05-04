@@ -26,6 +26,7 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
@@ -97,7 +98,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	}
 
 	@Override
-	public String value() {
+	public String serializeValue() {
 		StringBuilder sb = new StringBuilder();
 
 		for (SourceDirective directive : SourceDirective.values()) {

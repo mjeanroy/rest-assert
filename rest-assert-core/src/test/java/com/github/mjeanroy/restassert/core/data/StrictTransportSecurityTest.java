@@ -33,7 +33,7 @@ public class StrictTransportSecurityTest {
 	@Test
 	public void it_should_create_strict_transport_security_with_max_age() {
 		StrictTransportSecurity sts = new StrictTransportSecurity.Builder(3600).build();
-		assertThat(sts.value()).isEqualTo("max-age=3600");
+		assertThat(sts.serializeValue()).isEqualTo("max-age=3600");
 		assertThat(sts.toString()).isEqualTo(
 			"StrictTransportSecurity{" +
 				"maxAge=3600, " +
@@ -49,7 +49,7 @@ public class StrictTransportSecurityTest {
 				.includeSubDomains()
 				.build();
 
-		assertThat(sts.value()).isEqualTo("max-age=3600; includeSubDomains");
+		assertThat(sts.serializeValue()).isEqualTo("max-age=3600; includeSubDomains");
 		assertThat(sts.toString()).isEqualTo(
 			"StrictTransportSecurity{" +
 				"maxAge=3600, " +
@@ -66,7 +66,7 @@ public class StrictTransportSecurityTest {
 				.preload()
 				.build();
 
-		assertThat(sts.value()).isEqualTo("max-age=3600; includeSubDomains; preload");
+		assertThat(sts.serializeValue()).isEqualTo("max-age=3600; includeSubDomains; preload");
 		assertThat(sts.toString()).isEqualTo(
 			"StrictTransportSecurity{" +
 				"maxAge=3600, " +
