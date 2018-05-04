@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
 import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
@@ -45,9 +45,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.error.CompositeError.composeErrors;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntry.shouldHaveEntry;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
+import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.common.Files.readFileToString;

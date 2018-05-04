@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
-import com.github.mjeanroy.restassert.core.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
 import java.util.List;
 

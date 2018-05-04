@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
-import com.github.mjeanroy.restassert.core.error.RestAssertError;
-import com.github.mjeanroy.restassert.core.error.json.ShouldBeAnArray;
-import com.github.mjeanroy.restassert.core.error.json.ShouldBeAnObject;
-import com.github.mjeanroy.restassert.core.error.json.ShouldBeEntryOf;
-import com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryEqualTo;
-import com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntry;
-import com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryWithSize;
-import com.github.mjeanroy.restassert.core.error.json.ShouldNotHaveEntry;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnArray;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnObject;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeEntryOf;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryWithSize;
+import com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotHaveEntry;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import com.github.mjeanroy.restassert.test.json.JsonArray;

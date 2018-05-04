@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
-import com.github.mjeanroy.restassert.core.error.RestAssertError;
-import com.github.mjeanroy.restassert.core.error.RestAssertJsonError;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertJsonError;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 
@@ -36,13 +36,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.error.json.ShouldBeAnArray.shouldBeAnArray;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldBeAnObject.shouldBeAnObject;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldBeEntryOf.shouldBeEntryOf;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntry.shouldHaveEntry;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
-import static com.github.mjeanroy.restassert.core.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnArray.shouldBeAnArray;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnObject.shouldBeAnObject;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeEntryOf.shouldBeEntryOf;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
 import static com.github.mjeanroy.restassert.core.internal.json.JsonType.parseType;
 import static com.github.mjeanroy.restassert.core.internal.json.comparators.JsonContext.rootContext;
 import static java.lang.String.format;

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-import com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;

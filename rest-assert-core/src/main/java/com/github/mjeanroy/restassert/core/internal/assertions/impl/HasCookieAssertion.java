@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
@@ -35,7 +35,7 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie.shouldHaveCookie;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;

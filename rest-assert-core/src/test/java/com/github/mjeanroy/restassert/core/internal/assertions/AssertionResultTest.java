@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.junit.Rule;
 import org.junit.Test;

@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.charsets;
 
-import com.github.mjeanroy.restassert.core.error.http.ShouldHaveCharset;
-import com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;

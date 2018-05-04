@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveName;
+import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeSecured.shouldBeSecured;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldBeSecured.shouldNotBeSecured;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveDomain.shouldHaveDomain;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveMaxAge.shouldHaveMaxAge;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHavePath.shouldHavePath;
-import static com.github.mjeanroy.restassert.core.error.cookie.ShouldHaveValue.shouldHaveValue;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeSecured.shouldBeSecured;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeSecured.shouldNotBeSecured;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveDomain.shouldHaveDomain;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveMaxAge.shouldHaveMaxAge;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHavePath.shouldHavePath;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 

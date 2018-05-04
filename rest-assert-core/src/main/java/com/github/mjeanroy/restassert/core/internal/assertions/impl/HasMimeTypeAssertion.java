@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.error.http.ShouldHaveMimeType;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveMimeType.shouldHaveMimeType;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;

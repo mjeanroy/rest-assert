@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 
 import java.util.List;
