@@ -25,7 +25,11 @@
 package com.github.mjeanroy.restassert.documentation.javadoc;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import static java.util.Collections.unmodifiableSet;
 
 /**
  * The JavaDoc parser static utility.
@@ -36,6 +40,39 @@ public final class JavaDocParser {
 	 * The regex to match content in a JavaDoc tag.
 	 */
 	private static final String INSIDE_TAG_PATTERN = "[a-zA-Z0-9_#\" ]+";
+
+	/**
+	 * The list of JavaDoc tags that may appear as a new "section" in the
+	 * JavaDoc comment.
+	 */
+	private static final Set<String> JAVADOC_TAGS = unmodifiableSet(new HashSet<String>() {{
+		add("@author");
+		add("@deprecated");
+		add("@exception");
+		add("@param");
+		add("@return");
+		add("@see");
+		add("@serial");
+		add("@serialData");
+		add("@serialField");
+		add("@since");
+		add("@throws");
+		add("@version");
+	}});
+
+	/**
+	 * The list of JavaDoc tags that may appear "inline" (i.e inside {@code "{"} and {@code "}"}) in the
+	 * JavaDoc comment.
+	 */
+	private static final Set<String> INLINE_JAVADOC_TAGS = unmodifiableSet(new HashSet<String>() {{
+		add("@code");
+		add("@docRoot");
+		add("@inheritDoc");
+		add("@link");
+		add("@linkplain");
+		add("@literal");
+		add("@value");
+	}});
 
 	/**
 	 * The line break character.
@@ -71,9 +108,6 @@ public final class JavaDocParser {
 			else if (isSee(block)) {
 				String[] parts = block.split(" ", 2);
 				builder.addSee(toMarkdown(parts[1]));
-			}
-			else {
-				throw new UnsupportedOperationException("Cannot parse line: '" + block + "'");
 			}
 		}
 
@@ -173,7 +207,12 @@ public final class JavaDocParser {
 	 * @return {@code true} if line starts with a javadoc tag, {@code false} otherwise.
 	 */
 	private static boolean isJavadocTag(String line) {
-		return line.length() > 0 && line.charAt(0) == '@';
+		if (line.length() == 0 || line.charAt(0) != '@') {
+			return false;
+		}
+
+		String[] parts = line.split(" ", 2);
+		return parts.length >= 1 && JAVADOC_TAGS.contains(parts[0]);
 	}
 
 	/**
@@ -183,6 +222,11 @@ public final class JavaDocParser {
 	 * @return Markdown text.
 	 */
 	private static String toMarkdown(String text) {
-		return text.replaceAll("\\{@link (" + INSIDE_TAG_PATTERN + ")\\}", "`$1`").replaceAll("\\{@code (" + INSIDE_TAG_PATTERN + ")\\}", "`$1`");
+		String output = text;
+		for (String inlineTag : INLINE_JAVADOC_TAGS) {
+			output = output.replaceAll("\\{" + inlineTag + " (" + INSIDE_TAG_PATTERN + ")\\}", "`$1`");
+		}
+
+		return output;
 	}
 }
