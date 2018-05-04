@@ -35,8 +35,8 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
 import static java.util.Collections.singleton;
 
 /**

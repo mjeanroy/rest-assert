@@ -22,18 +22,34 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
+
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
- * Predicate function.
+ * Static Number Utilities.
  */
-public interface Predicate<T> {
+public final class Numbers {
+
+	// Ensure non instantiation.
+	private Numbers() {
+	}
 
 	/**
-	 * Apply predicate.
+	 * Parse a given string value to a long number.
 	 *
-	 * @param input Input.
-	 * @return Predicate output.
+	 * @param value Value to parse.
+	 * @param message Error message if conversion fails.
+	 * @return The long value.
+	 * @throws IllegalArgumentException If {@code value} is not a valid number.
 	 */
-	boolean apply(T input);
+	public static Long toLong(String value, String message) {
+		notNull(value, message);
+
+		try {
+			return Long.valueOf(value);
+		} catch (NumberFormatException ex) {
+			throw new IllegalArgumentException(message, ex);
+		}
+	}
 }

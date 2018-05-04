@@ -22,21 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-import java.io.IOException;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
-/**
- * Exception to throw when a file cannot be read and
- * fail with {@link IOException}.
- */
-public class UnreadableFileException extends RuntimeException {
+import static org.assertj.core.api.Assertions.assertThat;
 
-	/**
-	 * Create exception.
-	 * @param ex Original exception.
-	 */
-	UnreadableFileException(IOException ex) {
-		super(ex);
+public class NumbersTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void it_should_get_long_value_from_string() {
+		assertThat(Numbers.toLong("1", "Test")).isEqualTo(1L);
+	}
+
+	@Test
+	public void it_should_fail_if_string_value_is_not_a_valid_long_value() {
+		String message = "My Custom Error Message";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage(message);
+		assertThat(Numbers.toLong("test", message)).isEqualTo(1L);
+	}
+
+	@Test
+	public void it_should_fail_with_null() {
+		String message = "My Custom Error Message";
+
+		thrown.expect(NullPointerException.class);
+		thrown.expectMessage(message);
+		assertThat(Numbers.toLong(null, message)).isEqualTo(1L);
 	}
 }

@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.json.parsers;
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser.gsonParser;
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
-import static com.github.mjeanroy.restassert.core.utils.ClassUtils.isPresent;
+import static com.github.mjeanroy.restassert.core.internal.common.ClassUtils.isPresent;
 
 /**
  * Access json parser implementation.

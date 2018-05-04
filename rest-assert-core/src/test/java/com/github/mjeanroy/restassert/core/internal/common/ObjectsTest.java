@@ -22,40 +22,19 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-/**
- * Static class utilities.
- */
-public final class ClassUtils {
+import org.junit.Test;
 
-	private ClassUtils() {
-	}
+import static org.assertj.core.api.Assertions.assertThat;
 
-	/**
-	 * Check if given class is available.
-	 *
-	 * @param klass Fully qualified class name.
-	 * @return True if class is available on classpath, false otherwise.
-	 */
-	public static boolean isPresent(String klass) {
-		return isPresent(klass, Thread.currentThread().getContextClassLoader());
-	}
+public class ObjectsTest {
 
-	/**
-	 * Check if given class is available.
-	 *
-	 * @param klass Fully qualified class name.
-	 * @param classLoader The classloader to user.
-	 * @return True if class is available on classpath, false otherwise.
-	 */
-	private static boolean isPresent(String klass, ClassLoader classLoader) {
-		try {
-			Class.forName(klass, false, classLoader);
-			return true;
-		}
-		catch (ClassNotFoundException ex) {
-			return false;
-		}
+	@Test
+	public void it_should_get_first_non_null_value() {
+		assertThat(Objects.firstNonNull(null, null)).isNull();
+		assertThat(Objects.firstNonNull("foo", null)).isEqualTo("foo");
+		assertThat(Objects.firstNonNull(null, "bar")).isEqualTo("bar");
+		assertThat(Objects.firstNonNull("foo", "bar")).isEqualTo("foo");
 	}
 }

@@ -22,13 +22,13 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.*;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 

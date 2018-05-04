@@ -86,7 +86,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_J
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_PLAIN;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
-import static com.github.mjeanroy.restassert.core.utils.DateUtils.parseHttpDate;
+import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static java.util.Arrays.asList;
 import static java.util.Collections.addAll;
 

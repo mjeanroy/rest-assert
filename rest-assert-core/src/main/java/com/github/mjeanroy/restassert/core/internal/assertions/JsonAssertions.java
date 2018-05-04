@@ -50,7 +50,7 @@ import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntry.sho
 import static com.github.mjeanroy.restassert.core.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.Utils.readFileToString;
+import static com.github.mjeanroy.restassert.core.internal.common.Files.readFileToString;
 import static java.util.Collections.addAll;
 
 /**

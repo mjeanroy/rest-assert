@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.error;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.utils.Utils.LINE_SEPARATOR;
+import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static java.util.Collections.addAll;
 
 /**

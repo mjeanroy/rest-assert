@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.DateUtils.formatHttpDate;
-import static com.github.mjeanroy.restassert.core.utils.DateUtils.parseHttpDate;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
-import static com.github.mjeanroy.restassert.core.utils.Utils.map;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.Date;
 import java.util.List;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
-import com.github.mjeanroy.restassert.core.utils.Mapper;
+import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
+import static com.github.mjeanroy.restassert.core.internal.common.Dates.formatHttpDate;
+import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Check that http response has at least one header with

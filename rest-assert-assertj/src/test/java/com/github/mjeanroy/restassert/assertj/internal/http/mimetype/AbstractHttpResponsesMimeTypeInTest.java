@@ -28,15 +28,14 @@ import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.core.utils.Mapper;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.formatList;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
-import static com.github.mjeanroy.restassert.core.utils.Utils.map;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -88,12 +87,13 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 	protected abstract List<String> getMimeTypes();
 
 	private List<Header> getHeader() {
-		return map(getMimeTypes(), new Mapper<String, Header>() {
-			@Override
-			public Header apply(String input) {
-				return header("Content-Type", input + ";charset=UTF-8");
-			}
-		});
+		List<String> mimeTypes = getMimeTypes();
+		List<Header> headers = new ArrayList<>(mimeTypes.size());
+		for (String mimeType : mimeTypes) {
+			headers.add(header("Content-Type", mimeType + ";charset=UTF-8"));
+		}
+
+		return headers;
 	}
 
 	private HttpResponse newHttpResponse(Header header) {

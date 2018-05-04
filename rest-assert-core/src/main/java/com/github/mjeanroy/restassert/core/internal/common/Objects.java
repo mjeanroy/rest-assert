@@ -22,30 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api;
-
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-
-import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
+package com.github.mjeanroy.restassert.core.internal.common;
 
 /**
- * Static assertion utilities.
+ * Static Object Utilities.
  */
-public final class AssertUtil {
+public final class Objects {
 
 	// Ensure non instantiation.
-	private AssertUtil() {
+	private Objects() {
 	}
 
 	/**
-	 * Check for assertion result and throws {@link AssertionError} in case of error.
+	 * Get first non null parameter.
+	 * If both parameters are null, null will be returned.
 	 *
-	 * @param message The custom message, a default error message will be used if it is null.
-	 * @param result The assertion result.
+	 * @param obj1 First parameter.
+	 * @param obj2 Second parameter.
+	 * @param <T> Type of parameters.
+	 * @return First non null parameters.
 	 */
-	public static void check(String message, AssertionResult result) {
-		if (result.isFailure()) {
-			throw new AssertionError(firstNonNull(message, result.getError().buildMessage()));
-		}
+	public static <T> T firstNonNull(T obj1, T obj2) {
+		return obj1 != null ? obj1 : obj2;
 	}
 }

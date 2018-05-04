@@ -37,11 +37,11 @@ import java.util.TimeZone;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.isGreaterThan;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.isInRange;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
-import static com.github.mjeanroy.restassert.core.utils.Utils.toLong;
+import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isGreaterThan;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isInRange;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Cookies utilities.

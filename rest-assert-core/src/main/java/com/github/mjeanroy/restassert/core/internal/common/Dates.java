@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -37,9 +37,9 @@ import static java.util.Arrays.asList;
 /**
  * Static Date Utilities.
  */
-public final class DateUtils {
+public final class Dates {
 
-	private DateUtils() {
+	private Dates() {
 	}
 
 	/**

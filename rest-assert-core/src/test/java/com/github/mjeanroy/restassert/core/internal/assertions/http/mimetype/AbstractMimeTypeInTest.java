@@ -28,8 +28,8 @@ import com.github.mjeanroy.restassert.core.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.utils.Mapper;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Before;
@@ -37,7 +37,7 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.utils.Utils.map;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {

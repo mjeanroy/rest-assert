@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,7 +33,7 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
-public class DateUtilsTest {
+public class DatesTest {
 
 	@Rule
 	public ExpectedException thrown = none();
@@ -42,7 +42,7 @@ public class DateUtilsTest {
 	public void it_should_parse_rfc_1123() {
 		String date = "Sun, 06 Nov 1994 08:49:37 GMT";
 
-		Date result = DateUtils.parseHttpDate(date);
+		Date result = Dates.parseHttpDate(date);
 
 		assertThat(result)
 			.isNotNull()
@@ -53,7 +53,7 @@ public class DateUtilsTest {
 	public void it_should_parse_rfc_1036() {
 		String date = "Sunday, 06-Nov-94 08:49:37 GMT";
 
-		Date result = DateUtils.parseHttpDate(date);
+		Date result = Dates.parseHttpDate(date);
 
 		assertThat(result)
 			.isNotNull()
@@ -64,7 +64,7 @@ public class DateUtilsTest {
 	public void it_should_parse_ansi_c_format() {
 		String date = "Sun Nov  6 08:49:37 1994";
 
-		Date result = DateUtils.parseHttpDate(date);
+		Date result = Dates.parseHttpDate(date);
 
 		assertThat(result)
 			.isNotNull()
@@ -75,7 +75,7 @@ public class DateUtilsTest {
 	public void it_should_parse_without_single_quotes() {
 		String date = "'Sun, 06 Nov 1994 08:49:37 GMT'";
 
-		Date result = DateUtils.parseHttpDate(date);
+		Date result = Dates.parseHttpDate(date);
 
 		assertThat(result)
 			.isNotNull()
@@ -89,7 +89,7 @@ public class DateUtilsTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("HTTP Date must respect standard formats: EEE, dd MMM yyyy HH:mm:ss zzz, EEE, dd-MMM-yy HH:mm:ss zzz or EEE MMM d HH:mm:ss yyyy");
 
-		DateUtils.parseHttpDate(date);
+		Dates.parseHttpDate(date);
 	}
 
 	@Test
@@ -97,6 +97,6 @@ public class DateUtilsTest {
 		Date date = new Date();
 		date.setTime(784111777000L);
 
-		assertThat(DateUtils.formatHttpDate(date)).isEqualTo("Sun, 06 Nov 1994 08:49:37 GMT");
+		assertThat(Dates.formatHttpDate(date)).isEqualTo("Sun, 06 Nov 1994 08:49:37 GMT");
 	}
 }

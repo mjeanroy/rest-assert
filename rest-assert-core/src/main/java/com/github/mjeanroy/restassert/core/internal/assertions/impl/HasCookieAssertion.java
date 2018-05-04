@@ -26,21 +26,21 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
-import com.github.mjeanroy.restassert.core.utils.Predicate;
 
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
-import static com.github.mjeanroy.restassert.core.utils.Utils.some;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Check that http response contains expected cookie.

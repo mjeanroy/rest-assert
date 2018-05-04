@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.utils.Utils.toLong;
+import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
 import static java.util.Collections.unmodifiableMap;
 
 /**

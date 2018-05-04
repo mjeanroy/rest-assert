@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings;
 
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.exceptions.NonParsableResponseBodyException;
-import com.github.mjeanroy.restassert.core.utils.Mapper;
 
 import java.io.IOException;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.SET_COOKIE;
-import static com.github.mjeanroy.restassert.core.utils.Utils.map;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 

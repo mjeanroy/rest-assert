@@ -33,7 +33,7 @@ import org.junit.Test;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.restassert.core.utils.Utils.LINE_SEPARATOR;
+import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static java.util.Arrays.asList;
 
 public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {

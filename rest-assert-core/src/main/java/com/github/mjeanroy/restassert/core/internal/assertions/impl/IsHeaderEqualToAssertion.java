@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 import java.util.List;
 

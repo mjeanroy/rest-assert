@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.loggers;
 
-import com.github.mjeanroy.restassert.core.utils.ClassUtils;
+import com.github.mjeanroy.restassert.core.internal.common.ClassUtils;
 
 /**
  * Static Logger Factory.

@@ -22,58 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-import com.github.mjeanroy.restassert.core.internal.common.Strings;
-
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Static utilities.
+ * Static Collection Utilities.
  */
-public final class Utils {
+public final class Collections {
 
-	/**
-	 * Line separator (system dependent).
-	 */
-	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
-	// Private constructor to ensure non instantiation.
-	private Utils() {
-	}
-
-	/**
-	 * Get first non null parameter.
-	 * If both parameters are null, null will be returned.
-	 *
-	 * @param obj1 First parameter.
-	 * @param obj2 Second parameter.
-	 * @param <T> Type of parameters.
-	 * @return First non null parameters.
-	 */
-	public static <T> T firstNonNull(T obj1, T obj2) {
-		return obj1 != null ? obj1 : obj2;
-	}
-
-	/**
-	 * Parse a given string value to a long number.
-	 *
-	 * @param value Value to parse.
-	 * @param message Error message if conversion fails.
-	 * @return The long value.
-	 * @throws IllegalArgumentException If {@code value} is not a valid number.
-	 */
-	public static Long toLong(String value, String message) {
-		try {
-			return Long.valueOf(value);
-		} catch (NumberFormatException ex) {
-			throw new IllegalArgumentException(message, ex);
-		}
+	// Ensure non instantiation.
+	private Collections() {
 	}
 
 	/**
@@ -125,6 +85,7 @@ public final class Utils {
 				outputs.add(t);
 			}
 		}
+
 		return outputs;
 	}
 
@@ -148,17 +109,30 @@ public final class Utils {
 	}
 
 	/**
-	 * Read file and return text content.
-	 *
-	 * @param file File.
-	 * @return File content.
+	 * Predicate function.
 	 */
-	public static String readFileToString(Path file) {
-		try {
-			List<String> lines = Files.readAllLines(file, Charset.defaultCharset());
-			return Strings.join(lines, LINE_SEPARATOR);
-		} catch (IOException ex) {
-			throw new UnreadableFileException(ex);
-		}
+	public interface Predicate<T> {
+
+		/**
+		 * Apply predicate.
+		 *
+		 * @param input Input.
+		 * @return Predicate output.
+		 */
+		boolean apply(T input);
+	}
+
+	/**
+	 * Mapper function.
+	 */
+	public interface Mapper<T, U> {
+
+		/**
+		 * Transform input to a new output.
+		 *
+		 * @param input Input.
+		 * @return Output.
+		 */
+		U apply(T input);
 	}
 }

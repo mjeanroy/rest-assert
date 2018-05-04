@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.utils.Predicate;
 
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Predicate used to check if a cookie has a given name.

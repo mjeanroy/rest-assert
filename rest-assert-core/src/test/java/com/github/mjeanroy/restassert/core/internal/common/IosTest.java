@@ -22,17 +22,52 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
+
+import com.github.mjeanroy.restassert.core.internal.common.Files;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
 
-import org.junit.Test;
+public class IosTest {
 
-public class ClassUtilsTest {
+	private static final String BR = System.getProperty("line.separator");
+
+	@Rule
+	public ExpectedException thrown = none();
 
 	@Test
-	public void it_should_check_if_class_is_present() {
-		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.core.utils.ClassUtils")).isTrue();
-		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.core.utils.Foo")).isFalse();
+	public void it_should_read_file_to_string() throws Exception {
+		URL resource = getClass().getResource("/test.txt");
+		Path path = Paths.get(resource.toURI());
+
+		String content = Files.readFileToString(path);
+
+		String expectedContent =
+			"Hello World" + BR +
+			"Foo Bar" + BR +
+			"Test";
+
+		assertThat(content)
+			.isNotNull()
+			.isNotEmpty()
+			.isEqualTo(expectedContent);
+	}
+
+	@Test
+	public void it_should_fail_to_read_file_to_string_with_custom_exception() throws Exception {
+		URL resource = getClass().getResource("/test-not-utf-8.txt");
+		Path path = Paths.get(resource.toURI());
+
+		thrown.expect(Files.UnreadableFileException.class);
+
+		Files.readFileToString(path);
 	}
 }

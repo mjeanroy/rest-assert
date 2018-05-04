@@ -24,17 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.core.utils.Mapper;
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.utils.Utils.firstNonNull;
-import static com.github.mjeanroy.restassert.core.utils.Utils.map;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
@@ -96,7 +94,7 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 			final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
 			final Header header = header(expectedName, actualValue);
 
-			final String message = firstNonNull(msg, buildErrorMessage(mimeTypes, actualMimeType));
+			final String message = msg != null ? msg : buildErrorMessage(mimeTypes, actualMimeType);
 
 			assertFailure(message, new Function() {
 				@Override
@@ -120,12 +118,13 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 	 * @return The header list.
 	 */
 	private List<Header> getHeaders() {
-		return map(getMimeTypes(), new Mapper<String, Header>() {
-			@Override
-			public Header apply(String input) {
-				return header("Content-Type", input + ";charset=UTF-8");
-			}
-		});
+		List<String> mimeTypes = getMimeTypes();
+		List<Header> headers = new ArrayList<>(mimeTypes.size());
+		for (String mimeType : mimeTypes) {
+			headers.add(header("Content-Type", mimeType + ";charset=UTF-8"));
+		}
+
+		return headers;
 	}
 
 	/**

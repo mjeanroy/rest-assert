@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.data;
 
 import java.util.Objects;
 
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Default implement for {@link JsonEntry} interface.

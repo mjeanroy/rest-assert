@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 import com.github.mjeanroy.restassert.core.error.RestAssertError;
 

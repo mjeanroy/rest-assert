@@ -33,8 +33,8 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveCookie.shouldNotHaveCookie;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notBlank;
-import static com.github.mjeanroy.restassert.core.utils.Utils.some;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
 /**
  * Check that http response does not contains any cookies.
@@ -67,14 +67,16 @@ public class DoesNotHaveCookieAssertion implements HttpResponseAssertion {
 	@Override
 	public AssertionResult handle(HttpResponse httpResponse) {
 		List<Cookie> cookies = httpResponse.getCookies();
-		boolean doesNotHave = name == null ?
-				cookies.isEmpty() :
-				!some(cookies, new CookieNamePredicate(name));
+		boolean doesNotHave = name == null ? cookies.isEmpty() : !some(cookies, new CookieNamePredicate(name));
+		return doesNotHave ? success() : getFailure();
+	}
 
-		return doesNotHave ?
-				success() :
-				failure(
-						name == null ? shouldNotHaveCookie() : shouldNotHaveCookie(name)
-				);
+	/**
+	 * Get the {@link AssertionResult} failure instance.
+	 *
+	 * @return The result.
+	 */
+	private AssertionResult getFailure() {
+		return failure(name == null ? shouldNotHaveCookie() : shouldNotHaveCookie(name));
 	}
 }

@@ -22,30 +22,17 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Static assertion utilities.
- */
-public final class AssertUtil {
+public class ClassesTest {
 
-	// Ensure non instantiation.
-	private AssertUtil() {
-	}
-
-	/**
-	 * Check for assertion result and throws {@link AssertionError} in case of error.
-	 *
-	 * @param message The custom message, a default error message will be used if it is null.
-	 * @param result The assertion result.
-	 */
-	public static void check(String message, AssertionResult result) {
-		if (result.isFailure()) {
-			throw new AssertionError(firstNonNull(message, result.getError().buildMessage()));
-		}
+	@Test
+	public void it_should_check_if_class_is_present() {
+		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.core.internal.common.ClassUtils")).isTrue();
+		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.core.utils.Foo")).isFalse();
 	}
 }

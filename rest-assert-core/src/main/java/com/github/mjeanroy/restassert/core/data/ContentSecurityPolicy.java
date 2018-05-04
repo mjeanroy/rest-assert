@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
-import com.github.mjeanroy.restassert.core.utils.Mapper;
-import com.github.mjeanroy.restassert.core.utils.PreConditions;
+import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static com.github.mjeanroy.restassert.core.utils.Utils.*;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableMap;
 

@@ -22,18 +22,40 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.utils;
+package com.github.mjeanroy.restassert.core.internal.common;
 
 /**
- * Mapper function.
+ * Static class utilities.
  */
-public interface Mapper<T, U> {
+public final class ClassUtils {
+
+	private ClassUtils() {
+	}
 
 	/**
-	 * Transform input to a new output.
+	 * Check if given class is available.
 	 *
-	 * @param input Input.
-	 * @return Output.
+	 * @param klass Fully qualified class name.
+	 * @return True if class is available on classpath, false otherwise.
 	 */
-	U apply(T input);
+	public static boolean isPresent(String klass) {
+		return isPresent(klass, Thread.currentThread().getContextClassLoader());
+	}
+
+	/**
+	 * Check if given class is available.
+	 *
+	 * @param klass Fully qualified class name.
+	 * @param classLoader The classloader to user.
+	 * @return True if class is available on classpath, false otherwise.
+	 */
+	private static boolean isPresent(String klass, ClassLoader classLoader) {
+		try {
+			Class.forName(klass, false, classLoader);
+			return true;
+		}
+		catch (ClassNotFoundException ex) {
+			return false;
+		}
+	}
 }
