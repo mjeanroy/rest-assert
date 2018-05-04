@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
+
 public class IsStrictTransportSecurityEqualToTest extends AbstractHttpResponseHeaderTest {
 
-	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000).includeSubDomains().build();
+	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000).includeSubDomains().build();
 
 	@Override
 	protected HttpResponseAssert invoke() {

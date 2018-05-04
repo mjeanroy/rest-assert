@@ -27,8 +27,6 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,11 +36,6 @@ import java.util.Objects;
  * Cache-Control header value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
  */
 public final class CacheControl implements HeaderValue {
-
-	/**
-	 * Class logger.
-	 */
-	private static final Logger log = Loggers.getLogger(CacheControl.class);
 
 	private static final String SEPARATOR = ", ";
 	private static final String DIR_NO_CACHE = "no-cache";
@@ -54,6 +47,29 @@ public final class CacheControl implements HeaderValue {
 	private static final String DIR_S_MAX_AGE = "s-maxage=";
 	private static final String DIR_PRIVATE = "private";
 	private static final String DIR_PUBLIC = "public";
+
+	/**
+	 * The parser instance.
+	 */
+	private static final CacheControlParser PARSER = new CacheControlParser();
+
+	/**
+	 * Get parser for {@link CacheControl} instances.
+	 *
+	 * @return The parser.
+	 */
+	public static CacheControlParser parser() {
+		return PARSER;
+	}
+
+	/**
+	 * Create new builder for {@link CacheControl}.
+	 *
+	 * @return The builder.
+	 */
+	public static CacheControlBuilder builder() {
+		return new CacheControlBuilder();
+	}
 
 	public enum Visibility {
 		/**
@@ -170,7 +186,7 @@ public final class CacheControl implements HeaderValue {
 	 */
 	private final boolean proxyRevalidate;
 
-	private CacheControl(
+	CacheControl(
 			Visibility visibility,
 			boolean noStore,
 			boolean noCache,
@@ -188,6 +204,78 @@ public final class CacheControl implements HeaderValue {
 		this.noTransform = noTransform;
 		this.mustRevalidate = mustRevalidate;
 		this.proxyRevalidate = proxyRevalidate;
+	}
+
+	/**
+	 * Get {@link #visibility}
+	 *
+	 * @return {@link #visibility}
+	 */
+	public Visibility getVisibility() {
+		return visibility;
+	}
+
+	/**
+	 * Get {@link #noCache}
+	 *
+	 * @return {@link #noCache}
+	 */
+	public boolean isNoCache() {
+		return noCache;
+	}
+
+	/**
+	 * Get {@link #noStore}
+	 *
+	 * @return {@link #noStore}
+	 */
+	public boolean isNoStore() {
+		return noStore;
+	}
+
+	/**
+	 * Get {@link #maxAge}
+	 *
+	 * @return {@link #maxAge}
+	 */
+	public Long getMaxAge() {
+		return maxAge;
+	}
+
+	/**
+	 * Get {@link #sMaxAge}
+	 *
+	 * @return {@link #sMaxAge}
+	 */
+	public Long getSMaxAge() {
+		return sMaxAge;
+	}
+
+	/**
+	 * Get {@link #noTransform}
+	 *
+	 * @return {@link #noTransform}
+	 */
+	public boolean isNoTransform() {
+		return noTransform;
+	}
+
+	/**
+	 * Get {@link #mustRevalidate}
+	 *
+	 * @return {@link #mustRevalidate}
+	 */
+	public boolean isMustRevalidate() {
+		return mustRevalidate;
+	}
+
+	/**
+	 * Get {@link #proxyRevalidate}
+	 *
+	 * @return {@link #proxyRevalidate}
+	 */
+	public boolean isProxyRevalidate() {
+		return proxyRevalidate;
 	}
 
 	@Override
@@ -230,27 +318,6 @@ public final class CacheControl implements HeaderValue {
 	}
 
 	@Override
-	public boolean match(String actualValue) {
-		log.debug("Parsing Cache-Control header: '{}'", actualValue);
-
-		String[] parts = actualValue.split(",");
-		Builder builder = new Builder();
-		for (String part : parts) {
-			String value = part.trim();
-			for (Directive directive : Directive.values()) {
-				if (directive.match(value)) {
-					log.debug("-> Found directive: '{}'", directive);
-					log.debug("-> Parsing value: '{}'", value);
-					directive.setValue(value, builder);
-					break;
-				}
-			}
-		}
-
-		return equals(builder.build());
-	}
-
-	@Override
 	public boolean equals(Object o) {
 		if (o == this) {
 			return true;
@@ -290,155 +357,7 @@ public final class CacheControl implements HeaderValue {
 			.build();
 	}
 
-	/**
-	 * Build {@link CacheControl} instance.
-	 */
-	public static class Builder {
-		/**
-		 * Visibility directive (i.e {@code public} or {@code private}.
-		 */
-		private Visibility visibility;
-
-		/**
-		 * Flag for {@code no-store} directive.
-		 */
-		private boolean noStore;
-
-		/**
-		 * Flag for {@code no-cache} directive.
-		 */
-		private boolean noCache;
-
-		/**
-		 * Flag for {@code no-transform} directive.
-		 */
-		private boolean noTransform;
-
-		/**
-		 * Flag for {@code must-revalidate} directive.
-		 */
-		private boolean mustRevalidate;
-
-		/**
-		 * Flag for {@code proxy-revalidate} directive.
-		 */
-		private boolean proxyRevalidate;
-
-		/**
-		 * Flag for {@code max-age} directive.
-		 */
-		private Long maxAge;
-
-		/**
-		 * Flag for {@code s-maxage} directive.
-		 */
-		private Long sMaxAge;
-
-		/**
-		 * Create the builder with default values initialized.
-		 */
-		public Builder() {
-			this.noCache = false;
-			this.noStore = false;
-			this.noTransform = false;
-			this.mustRevalidate = false;
-			this.proxyRevalidate = false;
-		}
-
-		/**
-		 * Update {@code "public"} or {@code "private"} directive.
-		 *
-		 * @param visibility New visibility.
-		 * @return Current builder.
-		 */
-		public Builder visibility(Visibility visibility) {
-			this.visibility = visibility;
-			return this;
-		}
-
-		/**
-		 * Enable {@code "no-cache"} directive.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder noCache() {
-			this.noCache = true;
-			return this;
-		}
-
-		/**
-		 * Enable {@code "no-transform"} directive.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder noTransform() {
-			this.noTransform = true;
-			return this;
-		}
-
-		/**
-		 * Enable {@code "must-revalidate"} directive.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder mustRevalidate() {
-			this.mustRevalidate = true;
-			return this;
-		}
-
-		/**
-		 * Enable {@code "proxy-revalidate"} directive.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder proxyRevalidate() {
-			this.proxyRevalidate = true;
-			return this;
-		}
-
-		/**
-		 * Enable {@code "no-store"} directive.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder noStore() {
-			this.noStore = true;
-			return this;
-		}
-
-		/**
-		 * Update {@code "max-age"} directive.
-		 *
-		 * @param maxAge Enable {@code "max-age"} directive and update its value.
-		 * @return Current builder.
-		 */
-		public Builder maxAge(long maxAge) {
-			this.maxAge = maxAge;
-			return this;
-		}
-
-		/**
-		 * Update {@code s-maxage} directive.
-		 *
-		 * @param sMaxAge Enable {@code s-maxage} directive and update its value.
-		 * @return Current builder.
-		 */
-		public Builder sMaxAge(long sMaxAge) {
-			this.sMaxAge = sMaxAge;
-			return this;
-		}
-
-		/**
-		 * Create new {@link CacheControl} header object.
-		 *
-		 * @return Cache-Control value.
-		 */
-		public CacheControl build() {
-			return new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
-		}
-	}
-
-	private enum Directive {
+	enum Directive {
 		VISIBILITY {
 			@Override
 			boolean match(String value) {
@@ -446,7 +365,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				if (value.equals(DIR_PRIVATE)) {
 					builder.visibility(Visibility.PRIVATE);
 				}
@@ -463,7 +382,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				builder.noCache();
 			}
 		},
@@ -475,7 +394,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				builder.noStore();
 			}
 		},
@@ -487,7 +406,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				builder.noTransform();
 			}
 		},
@@ -499,7 +418,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				builder.mustRevalidate();
 			}
 		},
@@ -511,7 +430,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				builder.proxyRevalidate();
 			}
 		},
@@ -523,7 +442,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				int maxAge = Integer.valueOf(value.split("=")[1].trim());
 				builder.maxAge(maxAge);
 			}
@@ -536,7 +455,7 @@ public final class CacheControl implements HeaderValue {
 			}
 
 			@Override
-			void setValue(String value, Builder builder) {
+			void setValue(String value, CacheControlBuilder builder) {
 				int maxAge = Integer.valueOf(value.split("=")[1].trim());
 				builder.sMaxAge(maxAge);
 			}
@@ -544,6 +463,7 @@ public final class CacheControl implements HeaderValue {
 
 		abstract boolean match(String value);
 
-		abstract void setValue(String value, Builder builder);
+		abstract void setValue(String value, CacheControlBuilder builder);
 	}
+
 }

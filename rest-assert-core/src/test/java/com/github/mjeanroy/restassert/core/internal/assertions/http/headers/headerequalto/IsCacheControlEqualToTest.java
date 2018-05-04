@@ -24,23 +24,23 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
-
 import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
+
 public class IsCacheControlEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String FAILED_VALUE = new CacheControl.Builder()
+	private static final String FAILED_VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)
 		.noTransform()
 		.maxAge(3600)
 		.build()
 		.toString();
 
-	private static final CacheControl VALUE = new CacheControl.Builder()
+	private static final CacheControl VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)
 		.noTransform()
 		.maxAge(300)

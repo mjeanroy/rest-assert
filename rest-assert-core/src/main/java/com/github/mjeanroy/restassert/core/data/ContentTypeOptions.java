@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
@@ -37,6 +39,23 @@ public enum ContentTypeOptions implements HeaderValue {
 	 */
 	NO_SNIFF("nosniff");
 
+	/**
+	 * The parser instance.
+	 */
+	private static final ContentTypeOptionsParser PARSER = new ContentTypeOptionsParser();
+
+	/**
+	 * Get parser for {@link ContentTypeOptions} instances.
+	 *
+	 * @return The parser.
+	 */
+	public static HeaderParser parser() {
+		return PARSER;
+	}
+
+	/**
+	 * The header value as specified by official specification.
+	 */
 	private final String header;
 
 	ContentTypeOptions(String header) {
@@ -48,8 +67,17 @@ public enum ContentTypeOptions implements HeaderValue {
 		return header;
 	}
 
-	@Override
-	public boolean match(String actualValue) {
-		return header.equals(actualValue);
+	private static class ContentTypeOptionsParser extends AbstractHeaderParser {
+		@Override
+		protected HeaderValue doParse(String value) {
+			String rawValue = value.toLowerCase();
+			for (ContentTypeOptions x : ContentTypeOptions.values()) {
+				if (rawValue.equals(x.header)) {
+					return x;
+				}
+			}
+
+			return null;
+		}
 	}
 }

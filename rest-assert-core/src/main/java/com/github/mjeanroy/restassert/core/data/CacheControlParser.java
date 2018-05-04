@@ -24,27 +24,43 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Test;
+import com.github.mjeanroy.restassert.core.data.CacheControl.Directive;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * Parser for {@link CacheControl} header.
+ */
+class CacheControlParser extends AbstractHeaderParser<CacheControl> {
 
-public class FrameOptionsTest {
+	/**
+	 * Class Logger.
+	 */
+	private static final Logger log = Loggers.getLogger(StrictTransportSecurityParser.class);
 
-	@Test
-	public void it_should_match_deny() {
-		assertThat(FrameOptions.parser().parse("deny")).isEqualTo(FrameOptions.DENY);
-		assertThat(FrameOptions.parser().parse("DENY")).isEqualTo(FrameOptions.DENY);
+	// Ensure non public instantiation.
+	CacheControlParser() {
 	}
 
-	@Test
-	public void it_should_match_same_origin() {
-		assertThat(FrameOptions.parser().parse("sameorigin")).isEqualTo(FrameOptions.SAME_ORIGIN);
-		assertThat(FrameOptions.parser().parse("SAMEORIGIN")).isEqualTo(FrameOptions.SAME_ORIGIN);
-	}
+	@Override
+	protected CacheControl doParse(String value) {
+		log.debug("Parsing Cache-Control header: '{}'", value);
 
-	@Test
-	public void it_should_match_allow_from() {
-		assertThat(FrameOptions.parser().parse("allow-from domain.com")).isEqualTo(FrameOptions.ALLOW_FROM);
-		assertThat(FrameOptions.parser().parse("ALLOW-FROM domain.com")).isEqualTo(FrameOptions.ALLOW_FROM);
+		String[] parts = value.split(",");
+		CacheControlBuilder builder = new CacheControlBuilder();
+		for (String part : parts) {
+			String partValue = part.trim();
+			for (Directive directive : Directive.values()) {
+				if (directive.match(partValue)) {
+					log.debug("-> Found directive: '{}'", directive);
+					log.debug("-> Parsing value: '{}'", partValue);
+					directive.setValue(partValue, builder);
+					break;
+				}
+			}
+		}
+
+		return builder.build();
 	}
 }

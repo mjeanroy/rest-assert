@@ -24,22 +24,22 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
-
 import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
+
 public class AssertIsCacheControlEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
-	private static final CacheControl VALUE = new CacheControl.Builder()
+	private static final CacheControl VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)
 		.noTransform()
 		.maxAge(300)
 		.build();
 
-	private static final String FAILED_VALUE = new CacheControl.Builder()
+	private static final String FAILED_VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)
 		.noTransform()
 		.maxAge(3600)

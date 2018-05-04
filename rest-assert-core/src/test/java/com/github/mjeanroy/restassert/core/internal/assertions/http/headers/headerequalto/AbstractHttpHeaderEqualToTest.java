@@ -95,7 +95,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		AssertionResult result = invoke(rsp);
+		final AssertionResult result = invoke(rsp);
 
 		// THEN
 		final String message = "Expecting response to have header %s equal to %s but was %s";

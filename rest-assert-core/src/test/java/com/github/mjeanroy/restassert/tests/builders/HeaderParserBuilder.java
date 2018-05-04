@@ -24,10 +24,11 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
+import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -35,34 +36,29 @@ import static org.mockito.Mockito.when;
 /**
  * Builder used to create mock instance of {@link HeaderValue} class.
  */
-public class HeaderValueBuilder {
+public class HeaderParserBuilder {
 
 	/**
-	 * String value of header.
+	 * Pair of {@link String} to {@link HeaderValue}.
 	 */
-	private String value;
-
-	/**
-	 * String value that are strictly equivalent to current value.
-	 */
-	private final Set<String> matches;
+	private final Map<String, HeaderValue> pairs;
 
 	/**
 	 * Create builder.
 	 */
-	public HeaderValueBuilder() {
-		this.matches = new LinkedHashSet<>();
+	public HeaderParserBuilder() {
+		this.pairs = new LinkedHashMap<>();
 	}
 
 	/**
-	 * Set {@link #value}.
+	 * Add new mapping.
 	 *
-	 * @param value New {@link #value}.
+	 * @param value Raw value.
+	 * @param headerValue Header value.
 	 * @return Current builder.
 	 */
-	public HeaderValueBuilder setValue(String value) {
-		this.value = value;
-		this.matches.add(value);
+	public HeaderParserBuilder add(String value, HeaderValue headerValue) {
+		this.pairs.put(value, headerValue);
 		return this;
 	}
 
@@ -71,9 +67,12 @@ public class HeaderValueBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public HeaderValue build() {
-		HeaderValue hValue = mock(HeaderValue.class);
-		when(hValue.serializeValue()).thenReturn(value);
-		return hValue;
+	public HeaderParser build() {
+		HeaderParser parser = mock(HeaderParser.class);
+		for (Map.Entry<String, HeaderValue> entry : pairs.entrySet()) {
+			when(parser.parse(entry.getKey())).thenReturn(entry.getValue());
+		}
+
+		return parser;
 	}
 }

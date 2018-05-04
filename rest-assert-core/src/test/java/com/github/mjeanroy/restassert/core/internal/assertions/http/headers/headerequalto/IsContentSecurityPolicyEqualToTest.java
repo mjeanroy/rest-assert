@@ -38,12 +38,12 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 
 public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
+	private static final String FAILED_VALUE = ContentSecurityPolicy.builder()
 		.addDefaultSrc(self())
 		.build()
 		.serializeValue();
 
-	private static final ContentSecurityPolicy VALUE = new ContentSecurityPolicy.Builder()
+	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 		.addDefaultSrc(none())
 		.addScriptSrc(unsafeInline(), unsafeEval())
 		.addStyleSrc(unsafeInline())

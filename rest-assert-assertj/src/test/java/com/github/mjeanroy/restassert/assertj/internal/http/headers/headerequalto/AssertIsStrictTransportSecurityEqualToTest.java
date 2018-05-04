@@ -33,11 +33,11 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TR
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
+	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()
 		.build();
 
-	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
+	private static final String FAILED_VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()
 		.preload()
 		.build()

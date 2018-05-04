@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
@@ -34,20 +36,52 @@ public enum XssProtection implements HeaderValue {
 	/**
 	 * Disables the XSS Protections offered by the user-agent.
 	 */
-	DISABLE("0"),
+	DISABLE("0") {
+		@Override
+		boolean match(String value) {
+			return value.equals(header);
+		}
+	},
 
 	/**
 	 * Enables the XSS Protections.
 	 */
-	ENABLE("1"),
+	ENABLE("1") {
+		@Override
+		boolean match(String value) {
+			return value.equals(header);
+		}
+	},
 
 	/**
 	 * Enables XSS protections and instructs the user-agent to block the response in the
 	 * event that script has been inserted from user input, instead of sanitizing.
 	 */
-	ENABLE_BLOCK("1; mode=block");
+	ENABLE_BLOCK("1; mode=block") {
+		@Override
+		boolean match(String value) {
+			return value.equals(header);
+		}
+	};
 
-	private final String header;
+	/**
+	 * The parser instance.
+	 */
+	private static final XssProtectionParser PARSER = new XssProtectionParser();
+
+	/**
+	 * Get parser for {@link XssProtection} instances.
+	 *
+	 * @return The parser.
+	 */
+	public static HeaderParser parser() {
+		return PARSER;
+	}
+
+	/**
+	 * The header value.
+	 */
+	final String header;
 
 	XssProtection(String header) {
 		this.header = header;
@@ -58,8 +92,29 @@ public enum XssProtection implements HeaderValue {
 		return header;
 	}
 
-	@Override
-	public boolean match(String actualValue) {
-		return header.equals(actualValue);
+	/**
+	 * Check if header raw value match specified value.
+	 *
+	 * @param value Raw value.
+	 * @return {@code true} if {@code value} match specified value, {@code false} otherwise.
+	 */
+	abstract boolean match(String value);
+
+	/**
+	 * Parser for {@link XssProtection} header.
+	 */
+	private static class XssProtectionParser extends AbstractHeaderParser {
+
+		@Override
+		protected HeaderValue doParse(String value) {
+			String rawValue = value.toLowerCase();
+			for (XssProtection x : XssProtection.values()) {
+				if (x.match(rawValue)) {
+					return x;
+				}
+			}
+
+			return null;
+		}
 	}
 }

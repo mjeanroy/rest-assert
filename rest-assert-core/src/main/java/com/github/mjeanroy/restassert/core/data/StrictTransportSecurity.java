@@ -26,14 +26,10 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
 import static java.util.Collections.unmodifiableMap;
@@ -49,9 +45,28 @@ import static java.util.Collections.unmodifiableMap;
 public final class StrictTransportSecurity implements HeaderValue {
 
 	/**
-	 * Class logger.
+	 * The parser instance.
 	 */
-	private static final Logger log = Loggers.getLogger(StrictTransportSecurity.class);
+	private static final StrictTransportSecurityParser PARSER = new StrictTransportSecurityParser();
+
+	/**
+	 * Get parser for {@link StrictTransportSecurity} instances.
+	 *
+	 * @return The parser.
+	 */
+	public static StrictTransportSecurityParser parser() {
+		return PARSER;
+	}
+
+	/**
+	 * Create new builder for {@link StrictTransportSecurity}.
+	 *
+	 * @param maxAge The max-age value.
+	 * @return The builder.
+	 */
+	public static StrictTransportSecurityBuilder builder(long maxAge) {
+		return new StrictTransportSecurityBuilder(maxAge);
+	}
 
 	/**
 	 * Max-Age value.
@@ -82,10 +97,37 @@ public final class StrictTransportSecurity implements HeaderValue {
 	 * @param includeSubDomains Sub-Domains flag.
 	 * @param preload Preload flag.
 	 */
-	private StrictTransportSecurity(long maxAge, boolean includeSubDomains, boolean preload) {
+	StrictTransportSecurity(long maxAge, boolean includeSubDomains, boolean preload) {
 		this.maxAge = maxAge;
 		this.includeSubDomains = includeSubDomains;
 		this.preload = preload;
+	}
+
+	/**
+	 * Get {@link #maxAge}
+	 *
+	 * @return {@link #maxAge}
+	 */
+	public long getMaxAge() {
+		return maxAge;
+	}
+
+	/**
+	 * Get {@link #preload}
+	 *
+	 * @return {@link #preload}
+	 */
+	public boolean isPreload() {
+		return preload;
+	}
+
+	/**
+	 * Get {@link #includeSubDomains}
+	 *
+	 * @return {@link #includeSubDomains}
+	 */
+	public boolean isIncludeSubDomains() {
+		return includeSubDomains;
 	}
 
 	@Override
@@ -102,44 +144,6 @@ public final class StrictTransportSecurity implements HeaderValue {
 		}
 
 		return sb.toString();
-	}
-
-	@Override
-	public boolean match(String actualValue) {
-		log.debug("Parsing header: '{}'", actualValue);
-		String[] parts = actualValue.split(";");
-
-		Builder builder = new Builder();
-		Set<Directive> foundDirectives = new HashSet<>();
-
-		for (String part : parts) {
-			String[] nameValue = part.split("=");
-			String name = nameValue[0].trim();
-
-			log.debug("-> Parsing part: '{}'", part);
-			log.debug("  --> Name: '{}'", name);
-
-			Directive directive = Directive.byName(name);
-			if (directive == null) {
-				log.error("Directive name '{}' should not appear in Strict-Transport-Security header", name);
-				throw new IllegalArgumentException(String.format("Cannot parse Strict-Transport-Security, directive %s is unknown", name));
-			}
-
-			if (foundDirectives.contains(directive)) {
-				log.warn("  --> Directive '{}' has already been parsed, ignore it", name);
-				continue;
-			}
-
-			// Mark directive.
-			foundDirectives.add(directive);
-
-			String value = nameValue.length == 2 ? nameValue[1].trim() : null;
-
-			log.debug("  --> Parsing value: '{}'", value);
-			directive.parse(value, builder);
-		}
-
-		return equals(builder.build());
 	}
 
 	@Override
@@ -173,83 +177,15 @@ public final class StrictTransportSecurity implements HeaderValue {
 	}
 
 	/**
-	 * Builder used to create instance of {@link StrictTransportSecurity} object.
-	 */
-	public static class Builder {
-		/**
-		 * {@code max-age} directive.
-		 * The max-age value is required to create header.
-		 */
-		private long maxAge;
-
-		/**
-		 * {@code includeSubDomains} directive.
-		 */
-		private boolean includeSubDomains;
-
-		/**
-		 * {@code preload} directive.
-		 */
-		private boolean preload;
-
-		/**
-		 * Empty constructor, only used internally.
-		 */
-		private Builder() {
-		}
-
-		/**
-		 * Create builder.
-		 *
-		 * @param maxAge Max-Age value.
-		 * @see <a href="https://tools.ietf.org/html/rfc6797#page-16">https://tools.ietf.org/html/rfc6797#page-16</a>
-		 */
-		public Builder(long maxAge) {
-			this.maxAge = maxAge;
-		}
-
-		/**
-		 * Enable {@code includeSubDomains} directive.
-		 *
-		 * @return Current builder.
-		 * @see <a href="https://tools.ietf.org/html/rfc6797#section-6.1.2">https://tools.ietf.org/html/rfc6797#section-6.1.2</a>
-		 */
-		public Builder includeSubDomains() {
-			this.includeSubDomains = true;
-			return this;
-		}
-
-		/**
-		 * Enable {@code preload} directive.
-		 *
-		 * @return Current builder.
-		 * @see <a href="https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security">https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security</a>
-		 */
-		public Builder preload() {
-			this.preload = true;
-			return this;
-		}
-
-		/**
-		 * Create {@code Strict-Transport-Security} header.
-		 *
-		 * @return Header.
-		 */
-		public StrictTransportSecurity build() {
-			return new StrictTransportSecurity(maxAge, includeSubDomains, preload);
-		}
-	}
-
-	/**
 	 * Set of directive that may appear in {@code Strict-Transport-Security} header.
 	 */
-	private enum Directive {
+	enum Directive {
 		/**
 		 * Max-Age directive.
 		 */
 		MAX_AGE("max-age") {
 			@Override
-			void parse(String value, Builder builder) {
+			void parse(String value, StrictTransportSecurityBuilder builder) {
 				String nb = value;
 
 				// Value may be quoted
@@ -261,7 +197,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 					}
 				}
 
-				builder.maxAge = toLong(nb, String.format("Max-Age '%s' is not a valid number", value));
+				builder.maxAge(toLong(nb, String.format("Max-Age '%s' is not a valid number", value)));
 			}
 		},
 
@@ -270,7 +206,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 		 */
 		INCLUDE_SUB_DOMAINS("includeSubDomains") {
 			@Override
-			void parse(String value, Builder builder) {
+			void parse(String value, StrictTransportSecurityBuilder builder) {
 				builder.includeSubDomains();
 			}
 		},
@@ -280,7 +216,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 		 */
 		PRELOAD("preload") {
 			@Override
-			void parse(String value, Builder builder) {
+			void parse(String value, StrictTransportSecurityBuilder builder) {
 				builder.preload();
 			}
 		};
@@ -294,7 +230,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 			this.name = name;
 		}
 
-		abstract void parse(String value, Builder builder);
+		abstract void parse(String value, StrictTransportSecurityBuilder builder);
 
 		private static final Map<String, Directive> map;
 
@@ -314,8 +250,9 @@ public final class StrictTransportSecurity implements HeaderValue {
 		 * @param name Directive name.
 		 * @return Directive object, may be {@code null} if name is not found.
 		 */
-		private static Directive byName(String name) {
+		static Directive byName(String name) {
 			return map.get(name.toLowerCase());
 		}
 	}
+
 }

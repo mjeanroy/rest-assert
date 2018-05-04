@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.data.CacheControl.Visibility;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
@@ -33,11 +34,26 @@ public class CacheControlTest {
 
 	@Test
 	public void it_should_create_no_cache_header() {
-		CacheControl cacheControl = new CacheControl.Builder().noCache().build();
+		Visibility visibility = null;
+		boolean noStore = false;
+		boolean noCache = true;
+		boolean noTransform = false;
+		boolean mustRevalidate = false;
+		boolean proxyRevalidate = false;
+		Long maxAge = null;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
 
-		assertThat(cacheControl.serializeValue()).isEqualTo("no-cache");
-		assertThat(cacheControl.match("no-cache")).isTrue();
-		assertThat(cacheControl.toString()).isEqualTo(
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("no-cache");
+		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
 				"visibility=null, " +
 				"noCache=true, " +
@@ -53,14 +69,29 @@ public class CacheControlTest {
 
 	@Test
 	public void it_should_create_no_store_header() {
-		CacheControl cacheControl = new CacheControl.Builder().noStore().build();
+		Visibility visibility = null;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = false;
+		boolean mustRevalidate = false;
+		boolean proxyRevalidate = false;
+		Long maxAge = null;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
 
-		assertThat(cacheControl.serializeValue()).isEqualTo("no-store");
-		assertThat(cacheControl.match("no-store")).isTrue();
-		assertThat(cacheControl.toString()).isEqualTo(
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("no-cache, no-store");
+		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
 				"visibility=null, " +
-				"noCache=false, " +
+				"noCache=true, " +
 				"noStore=true, " +
 				"noTransform=false, " +
 				"mustRevalidate=false, " +
@@ -73,41 +104,30 @@ public class CacheControlTest {
 
 	@Test
 	public void it_should_create_public_with_max_age_header() {
-		CacheControl cacheControl = new CacheControl.Builder()
-			.visibility(CacheControl.Visibility.PUBLIC)
-			.maxAge(0)
-			.build();
+		Visibility visibility = null;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = false;
+		boolean mustRevalidate = false;
+		boolean proxyRevalidate = false;
+		Long maxAge = 3600L;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
 
-		assertThat(cacheControl.serializeValue()).isEqualTo("public, max-age=0");
-		assertThat(cacheControl.match("public, max-age=0")).isTrue();
-		assertThat(cacheControl.toString()).isEqualTo(
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("no-cache, no-store, max-age=3600");
+		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
-				"visibility=PUBLIC, " +
-				"noCache=false, " +
-				"noStore=false, " +
-				"noTransform=false, " +
-				"mustRevalidate=false, " +
-				"proxyRevalidate=false, " +
-				"maxAge=0, " +
-				"sMaxAge=null" +
-			"}"
-		);
-	}
-
-	@Test
-	public void it_should_create_private_with_max_age_header() {
-		CacheControl cacheControl = new CacheControl.Builder()
-			.visibility(CacheControl.Visibility.PRIVATE)
-			.maxAge(3600)
-			.build();
-
-		assertThat(cacheControl.serializeValue()).isEqualTo("private, max-age=3600");
-		assertThat(cacheControl.match("private, max-age=3600")).isTrue();
-		assertThat(cacheControl.toString()).isEqualTo(
-			"CacheControl{" +
-				"visibility=PRIVATE, " +
-				"noCache=false, " +
-				"noStore=false, " +
+				"visibility=null, " +
+				"noCache=true, " +
+				"noStore=true, " +
 				"noTransform=false, " +
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
@@ -118,60 +138,178 @@ public class CacheControlTest {
 	}
 
 	@Test
-	public void it_should_match_header_value_even_in_the_wrong_order() {
-		CacheControl cacheControl = new CacheControl.Builder()
-				.noCache()
-				.noStore()
-				.build();
+	public void it_should_create_private_with_max_age_header() {
+		Visibility visibility = Visibility.PRIVATE;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = false;
+		boolean mustRevalidate = false;
+		boolean proxyRevalidate = false;
+		Long maxAge = 3600L;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
 
-		assertThat(cacheControl.serializeValue()).isEqualTo("no-cache, no-store");
-		assertThat(cacheControl.match("no-store, no-cache")).isTrue();
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, max-age=3600");
+		assertThat(expected.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=true, " +
+				"noStore=true, " +
+				"noTransform=false, " +
+				"mustRevalidate=false, " +
+				"proxyRevalidate=false, " +
+				"maxAge=3600, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test
-	public void it_should_parse_no_cache_directive() {
-		CacheControl c = new CacheControl.Builder().noCache().build();
-		assertThat(c.serializeValue()).isEqualTo("no-cache");
-		assertThat(c.match("no-cache")).isTrue();
+	public void it_should_create_private_with_must_revalidate_header() {
+		Visibility visibility = Visibility.PRIVATE;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = false;
+		boolean mustRevalidate = true;
+		boolean proxyRevalidate = false;
+		Long maxAge = 3600L;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, must-revalidate, max-age=3600");
+		assertThat(expected.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=true, " +
+				"noStore=true, " +
+				"noTransform=false, " +
+				"mustRevalidate=true, " +
+				"proxyRevalidate=false, " +
+				"maxAge=3600, " +
+				"sMaxAge=null" +
+				"}"
+		);
 	}
 
 	@Test
-	public void it_should_parse_no_store_directive() {
-		CacheControl c1 = new CacheControl.Builder().noStore().build();
-		assertThat(c1.serializeValue()).isEqualTo("no-store");
-		assertThat(c1.match("no-store")).isTrue();
+	public void it_should_create_private_with_proxy_revalidate_header() {
+		Visibility visibility = Visibility.PRIVATE;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = false;
+		boolean mustRevalidate = true;
+		boolean proxyRevalidate = true;
+		Long maxAge = 3600L;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, must-revalidate, proxy-revalidate, max-age=3600");
+		assertThat(expected.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=true, " +
+				"noStore=true, " +
+				"noTransform=false, " +
+				"mustRevalidate=true, " +
+				"proxyRevalidate=true, " +
+				"maxAge=3600, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test
-	public void it_should_parse_proxy_revalidate_directive() {
-		CacheControl c1 = new CacheControl.Builder().proxyRevalidate().build();
-		assertThat(c1.serializeValue()).isEqualTo("proxy-revalidate");
-		assertThat(c1.match("proxy-revalidate")).isTrue();
+	public void it_should_create_private_with_no_transform_header() {
+		Visibility visibility = Visibility.PRIVATE;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = true;
+		boolean mustRevalidate = true;
+		boolean proxyRevalidate = true;
+		Long maxAge = 3600L;
+		Long sMaxAge = null;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600");
+		assertThat(expected.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=true, " +
+				"noStore=true, " +
+				"noTransform=true, " +
+				"mustRevalidate=true, " +
+				"proxyRevalidate=true, " +
+				"maxAge=3600, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test
-	public void it_should_parse_must_revalidate_directive() {
-		CacheControl c1 = new CacheControl.Builder().mustRevalidate().build();
-		assertThat(c1.serializeValue()).isEqualTo("must-revalidate");
-		assertThat(c1.match("must-revalidate")).isTrue();
-	}
+	public void it_should_create_private_with_s_max_age_header() {
+		Visibility visibility = Visibility.PRIVATE;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = true;
+		boolean mustRevalidate = true;
+		boolean proxyRevalidate = true;
+		Long maxAge = 3600L;
+		Long sMaxAge = 1000L;
+		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
 
-	@Test
-	public void it_should_parse_no_transform_directive() {
-		CacheControl c1 = new CacheControl.Builder().noTransform().build();
-		assertThat(c1.serializeValue()).isEqualTo("no-transform");
-		assertThat(c1.match("no-transform")).isTrue();
-	}
-
-	@Test
-	public void it_should_parse_s_maxage_directive() {
-		CacheControl c1 = new CacheControl.Builder()
-			.sMaxAge(3600)
-			.visibility(CacheControl.Visibility.PUBLIC)
-			.build();
-
-		assertThat(c1.serializeValue()).isEqualTo("public, s-maxage=3600");
-		assertThat(c1.match("public, s-maxage=3600")).isTrue();
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600, s-maxage=1000");
+		assertThat(expected.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=true, " +
+				"noStore=true, " +
+				"noTransform=true, " +
+				"mustRevalidate=true, " +
+				"proxyRevalidate=true, " +
+				"maxAge=3600, " +
+				"sMaxAge=1000" +
+			"}"
+		);
 	}
 
 	@Test

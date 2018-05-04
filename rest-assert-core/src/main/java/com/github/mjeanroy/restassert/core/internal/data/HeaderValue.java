@@ -35,13 +35,4 @@ public interface HeaderValue {
 	 * @return Header value.
 	 */
 	String serializeValue();
-
-	/**
-	 * Check that actual header value match this header value (in most cases,
-	 * a simple call to equals should be enough).
-	 *
-	 * @param actualValue Actual header value.
-	 * @return {@code true} if actual header value match, {@code false} otherwise.
-	 */
-	boolean match(String actualValue);
 }

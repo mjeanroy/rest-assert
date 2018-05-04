@@ -22,42 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.internal.data;
 
-import com.github.mjeanroy.restassert.core.data.CacheControl;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.data.Header;
+/**
+ * Header parser that can be used to parse raw string values and
+ * produce instance of {@link HeaderValue}.
+ *
+ * @param <T> Header value implementation.
+ */
+public interface HeaderParser<T extends HeaderValue> {
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
-
-public class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
-
-	private static final String FAILED_VALUE = CacheControl.builder()
-		.visibility(CacheControl.Visibility.PUBLIC)
-		.noTransform()
-		.maxAge(3600)
-		.build()
-		.toString();
-
-	private static final CacheControl VALUE = CacheControl.builder()
-		.visibility(CacheControl.Visibility.PUBLIC)
-		.noTransform()
-		.maxAge(300)
-		.build();
-
-	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
-	}
-
-	@Override
-	protected Header getHeader() {
-		return CACHE_CONTROL;
-	}
-
-	@Override
-	String failValue() {
-		return FAILED_VALUE;
-	}
+	/**
+	 * Parse header value from raw string and build a structured header value.
+	 *
+	 * @param value The raw value.
+	 * @return Header value.
+	 */
+	T parse(String value);
 }

@@ -16,7 +16,7 @@ assertMyAssertion(response, parameters);
 
 ### `isStatusBetween`
 
-The most basic assertion: check that status code is between `start` value and `end` value (inclusive).
+The most basic assertion: check that status code is between `start` expected and `end` expected (inclusive).
 
 *Note: to improve readability, use this method if other provided assertions are not enough.*
 
@@ -43,7 +43,7 @@ public class Test {
 
 ### `isStatusOutOf`
 
-The most basic assertion: check that status code is strictly less than `start` value or strictly greater than `end` value.
+The most basic assertion: check that status code is strictly less than `start` expected or strictly greater than `end` expected.
 
 *Note: to improve readability, use this method if other provided assertions are not enough.*
 

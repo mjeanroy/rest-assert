@@ -9,10 +9,10 @@ Compare two JSON representation.
 This assertion take one parameter, this parameter may be:
 
 - A string (must be a JSON string).
-- A file containing the JSON value.
-- A path containing the JSON value.
-- An URL pointing to the JSON value.
-- An URI pointing to the JSON value.
+- A file containing the JSON expected.
+- A path containing the JSON expected.
+- An URL pointing to the JSON expected.
+- An URI pointing to the JSON expected.
 
 
 ```java
@@ -44,10 +44,10 @@ Compare two JSON representation and ignore some keys during the comparison.
 This assertion take two parameter, first parameter may be:
 
 - A string (must be a JSON string).
-- A file containing the JSON value.
-- A path containing the JSON value.
-- An URL pointing to the JSON value.
-- An URI pointing to the JSON value.
+- A file containing the JSON expected.
+- A path containing the JSON expected.
+- An URL pointing to the JSON expected.
+- An URI pointing to the JSON expected.
 
 ```java
 import java.nio.file.Paths;

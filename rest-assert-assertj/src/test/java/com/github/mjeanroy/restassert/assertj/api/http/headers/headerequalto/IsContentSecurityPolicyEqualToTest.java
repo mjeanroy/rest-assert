@@ -48,8 +48,6 @@ public class IsContentSecurityPolicyEqualToTest extends AbstractHttpResponseHead
 	}
 
 	private ContentSecurityPolicy getValue() {
-		return new ContentSecurityPolicy.Builder()
-				.addDefaultSrc(self())
-				.build();
+		return ContentSecurityPolicy.builder().addDefaultSrc(self()).build();
 	}
 }

@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
-import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 
-import java.net.URI;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Pattern;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
-import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
 
 /**
  * Content-Security-Policy Header.
@@ -48,9 +48,27 @@ import static java.util.Collections.unmodifiableMap;
 public final class ContentSecurityPolicy implements HeaderValue {
 
 	/**
-	 * Class logger.
+	 * The parser instance.
 	 */
-	private static final Logger log = Loggers.getLogger(ContentSecurityPolicy.class);
+	private static final ContentSecurityPolicyParser PARSER = new ContentSecurityPolicyParser();
+
+	/**
+	 * Get parser for {@link ContentSecurityPolicy} instances.
+	 *
+	 * @return The parser.
+	 */
+	public static ContentSecurityPolicyParser parser() {
+		return PARSER;
+	}
+
+	/**
+	 * Create new builder for {@link CacheControl}.
+	 *
+	 * @return The builder.
+	 */
+	public static ContentSecurityPolicyBuilder builder() {
+		return new ContentSecurityPolicyBuilder();
+	}
 
 	/**
 	 * List of header directives.
@@ -60,15 +78,27 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	/**
 	 * Create CSP header object.
 	 *
-	 * @param sources Header directives.
+	 * @param directives Header directives.
 	 */
-	private ContentSecurityPolicy(Map<SourceDirective, Set<Source>> sources) {
-		this.directives = new LinkedHashMap<>();
-
+	ContentSecurityPolicy(Map<SourceDirective, Set<Source>> directives) {
 		// Make a deep copy.
-		for (Map.Entry<SourceDirective, Set<Source>> entry : sources.entrySet()) {
-			this.directives.put(entry.getKey(), new LinkedHashSet<>(entry.getValue()));
+		Map<SourceDirective, Set<Source>> clone = new LinkedHashMap<>();
+		for (Map.Entry<SourceDirective, Set<Source>> entry : directives.entrySet()) {
+			LinkedHashSet<Source> sources = new LinkedHashSet<>(entry.getValue());
+			SourceDirective directive = entry.getKey();
+			clone.put(directive, unmodifiableSet(sources));
 		}
+
+		this.directives = unmodifiableMap(clone);
+	}
+
+	/**
+	 * Get {@link #directives}
+	 *
+	 * @return {@link #directives}
+	 */
+	public Map<SourceDirective, Set<Source>> getDirectives() {
+		return directives;
 	}
 
 	@Override
@@ -123,66 +153,10 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		return sb.toString();
 	}
 
-	@Override
-	public boolean match(String actualValue) {
-		log.debug("Parsing Content-Security-Policy header: '{}'", actualValue);
-
-		String[] directives = actualValue.split(";");
-		Builder builder = new Builder();
-
-		Set<SourceDirective> foundDirectives = new HashSet<>();
-
-		for (String directive : directives) {
-			StringBuilder nameBuilder = new StringBuilder();
-			StringBuilder valueBuilder = new StringBuilder();
-
-			StringBuilder current = nameBuilder;
-			for (char c : directive.trim().toCharArray()) {
-				if (Character.isWhitespace(c)) {
-					current = valueBuilder;
-				}
-
-				current.append(c);
-			}
-
-			String name = nameBuilder.toString().trim();
-			String value = valueBuilder.toString().trim();
-
-			log.debug("-> Found directive: '{} {}'", name, value);
-
-			// Check if directive has name.
-			if (name.isEmpty()) {
-				log.error("Directive name is empty, fail");
-				throw new IllegalArgumentException(String.format("Header %s is not a valid Content-Security-Policy header", actualValue));
-			}
-
-			SourceDirective dir = SourceDirective.byName(name);
-			if (foundDirectives.contains(dir)) {
-				log.warn("Directive {} has already been parsed, ignore duplicated");
-				continue;
-			}
-
-			foundDirectives.add(dir);
-
-			// Check if name is valid.
-			if (dir == null) {
-				log.error("Cannot find a matching for directive '{}', fail", name);
-				throw new IllegalArgumentException(String.format("Cannot parse Content-Security-Policy header since directive %s seems not valid", name));
-			}
-
-			log.debug("  - Found directive: {}", dir);
-			log.debug("  - Parse directive value: '{}'", value);
-			dir.parse(value, builder);
-		}
-
-		ContentSecurityPolicy csp = builder.build();
-		return this.equals(csp);
-	}
-
 	/**
 	 * List of CSP directive.
 	 */
-	private enum SourceDirective {
+	enum SourceDirective {
 		/**
 		 * Handle {@code base-uri} directive.
 		 *
@@ -190,7 +164,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		BASE_URI("base-uri") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addBaseUri(new SourceValue(value));
 			}
 		},
@@ -202,7 +176,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		DEFAULT_SRC("default-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addDefaultSrc(new SourceValue(value));
 			}
 		},
@@ -214,7 +188,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		SCRIPT_SRC("script-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addScriptSrc(new SourceValue(value));
 			}
 		},
@@ -226,7 +200,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		STYLE_SRC("style-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addStyleSrc(new SourceValue(value));
 			}
 		},
@@ -238,7 +212,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		OBJECT_SRC("object-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addObjectSrc(new SourceValue(value));
 			}
 		},
@@ -250,7 +224,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		MEDIA_SRC("media-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addMediaSrc(new SourceValue(value));
 			}
 		},
@@ -262,7 +236,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		IMG_SRC("img-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addImgSrc(new SourceValue(value));
 			}
 		},
@@ -274,7 +248,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		FONT_SRC("font-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addFontSrc(new SourceValue(value));
 			}
 		},
@@ -286,7 +260,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		CONNECT_SRC("connect-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addConnectSrc(new SourceValue(value));
 			}
 		},
@@ -298,7 +272,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		CHILD_SRC("child-src") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addChildSrc(new SourceValue(value));
 			}
 		},
@@ -310,7 +284,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		FORM_ACTION("form-action") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addFormAction(new SourceValue(value));
 			}
 		},
@@ -322,7 +296,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		FRAME_ANCESTORS("frame-ancestors") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addFrameAncestors(new SourceValue(value));
 			}
 		},
@@ -334,7 +308,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		PLUGIN_TYPES("plugin-types") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addPluginTypes(value);
 			}
 		},
@@ -346,7 +320,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		REPORT_URI("report-uri") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addReportUri(value);
 			}
 		},
@@ -358,7 +332,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		SANDBOX("sandbox") {
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				Sandbox sandbox = Sandbox.byValue(value);
 				builder.addSandbox(sandbox);
 			}
@@ -366,12 +340,12 @@ public final class ContentSecurityPolicy implements HeaderValue {
 
 		BLOCK_ALL_MIXED_CONTENT("block-all-mixed-content") {
 			@Override
-			void parse(String headerValue, Builder builder) {
+			void parse(String headerValue, ContentSecurityPolicyBuilder builder) {
 				builder.blockAllMixedContent();
 			}
 
 			@Override
-			void doParse(String value, Builder builder) {
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 
 			}
 		};
@@ -401,7 +375,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 * @param headerValue Directive value.
 		 * @param builder Current builder.
 		 */
-		void parse(String headerValue, Builder builder) {
+		void parse(String headerValue, ContentSecurityPolicyBuilder builder) {
 			String[] values = headerValue.split(" ");
 			for (String value : values) {
 				doParse(value, builder);
@@ -414,7 +388,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 * @param value Value.
 		 * @param builder Builder.
 		 */
-		abstract void doParse(String value, Builder builder);
+		abstract void doParse(String value, ContentSecurityPolicyBuilder builder);
 
 		/**
 		 * Map of directives indexed by name.
@@ -454,7 +428,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	/**
 	 * Template for {@link Source} implementation.
 	 */
-	private abstract static class AbstractSourceValue implements Source {
+	abstract static class AbstractSourceValue implements Source {
 		@Override
 		public String toString() {
 			return getValue();
@@ -483,7 +457,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	/**
 	 * Simple source item.
 	 */
-	private static class SourceValue extends AbstractSourceValue implements Source {
+	static class SourceValue extends AbstractSourceValue implements Source {
 		/**
 		 * Source item value.
 		 */
@@ -496,7 +470,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 * @throws NullPointerException If {@code value} is {@code null}.
 		 * @throws IllegalArgumentException If {@code value} is empty or blank.
 		 */
-		private SourceValue(String value) {
+		SourceValue(String value) {
 			this.value = PreConditions.notBlank(value, "Source value must be defined");
 		}
 
@@ -505,31 +479,6 @@ public final class ContentSecurityPolicy implements HeaderValue {
 			return value;
 		}
 	}
-
-	private static class UriSource extends AbstractSourceValue implements Source {
-		private final URI uri;
-
-		private UriSource(URI uri) {
-			this.uri = PreConditions.notNull(uri, "Uri value must not be null");
-		}
-
-		private UriSource(String uri) {
-			this(URI.create(PreConditions.notBlank(uri, "Uri value must be defined")));
-		}
-
-		@Override
-		public String getValue() {
-			return uri.toString();
-		}
-	}
-
-	// Empty source, always return empty string.
-	private static final Source EMPTY_SOURCE = new AbstractSourceValue() {
-		@Override
-		public String getValue() {
-			return "";
-		}
-	};
 
 	/**
 	 * Host source, defined by:
@@ -604,10 +553,10 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		}
 	}
 
-	private static final String SCHEME_REGEX = "[a-z][a-z0-9\\+\\-\\.]*";
-	private static final String HOST_NAME_REGEX = "(\\*\\.)?([a-z0-9\\-])+(\\.[a-z0-9\\-]+)*";
-	private static final String HOST_PORT_REGEX = "([0-9]+)|\\*";
-	private static final String HOST_PATH_REGEX = "([^?#]*)";
+	static final String SCHEME_REGEX = "[a-z][a-z0-9\\+\\-\\.]*";
+	static final String HOST_NAME_REGEX = "(\\*\\.)?([a-z0-9\\-])+(\\.[a-z0-9\\-]+)*";
+	static final String HOST_PORT_REGEX = "([0-9]+)|\\*";
+	static final String HOST_PATH_REGEX = "([^?#]*)";
 
 	/**
 	 * Pattern used to validate scheme value.
@@ -643,22 +592,6 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	 * @see <a href="https://tools.ietf.org/html/rfc3986#section-3.3">https://tools.ietf.org/html/rfc3986#section-3.3</a>
 	 */
 	private static final Pattern PATTERN_PATH = Pattern.compile(HOST_PATH_REGEX, Pattern.CASE_INSENSITIVE);
-
-	/**
-	 * Pattern used to validate host value.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
-	 */
-	private static final Pattern PATTERN_HOST_VALUE = Pattern.compile(
-			"^" +
-					"(" + SCHEME_REGEX + "://)?" +
-					"(" + HOST_NAME_REGEX + ")" +
-					"(:" + HOST_PORT_REGEX + ")?" +
-					"(" + HOST_PATH_REGEX + ")?" +
-			"$",
-
-			Pattern.CASE_INSENSITIVE
-	);
 
 	/**
 	 * Self keyword.
@@ -930,22 +863,6 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	}
 
 	/**
-	 * Validator interface.
-	 */
-	private interface SourceValidator {
-		void validate(Source src);
-	}
-
-	/**
-	 * Validator used as a fallback.
-	 */
-	private static final SourceValidator NO_OP_VALIDATOR = new SourceValidator() {
-		@Override
-		public void validate(Source src) {
-		}
-	};
-
-	/**
 	 * Set of allowed sandbox value.
 	 *
 	 * @see <a href="https://www.w3.org/TR/CSP/#sandbox-usage">https://www.w3.org/TR/CSP/#sandbox-usage</a>
@@ -996,308 +913,6 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 */
 		static Sandbox byValue(String value) {
 			return map.get(value.toLowerCase());
-		}
-	}
-
-	/**
-	 * Builder used to create {@link ContentSecurityPolicy} instances.
-	 */
-	public static class Builder {
-		/**
-		 * List of header directives.
-		 */
-		private final Map<SourceDirective, Set<Source>> sources;
-
-		/**
-		 * Create builder.
-		 */
-		public Builder() {
-			this.sources = new LinkedHashMap<>();
-		}
-
-		/**
-		 * Add values for {@code base-uri} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-base-uri">https://www.w3.org/TR/CSP/#directive-base-uri</a>
-		 */
-		public Builder addBaseUri(Source src, Source... other) {
-			return add(SourceDirective.BASE_URI, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code default-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-default-src">https://www.w3.org/TR/CSP/#directive-default-src</a>
-		 */
-		public Builder addDefaultSrc(Source src, Source... other) {
-			return add(SourceDirective.DEFAULT_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code script-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-script-src">https://www.w3.org/TR/CSP/#directive-script-src</a>
-		 */
-		public Builder addScriptSrc(Source src, Source... other) {
-			return add(SourceDirective.SCRIPT_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code style-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-style-src">https://www.w3.org/TR/CSP/#directive-style-src</a>
-		 */
-		public Builder addStyleSrc(Source src, Source... other) {
-			return add(SourceDirective.STYLE_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code font-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-font-src">https://www.w3.org/TR/CSP/#directive-font-src</a>
-		 */
-		public Builder addFontSrc(Source src, Source... other) {
-			return add(SourceDirective.FONT_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code object-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-object-src">https://www.w3.org/TR/CSP/#directive-object-src</a>
-		 */
-		public Builder addObjectSrc(Source src, Source... other) {
-			return add(SourceDirective.OBJECT_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code media-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-media-src">https://www.w3.org/TR/CSP/#directive-media-src</a>
-		 */
-		public Builder addMediaSrc(Source src, Source... other) {
-			return add(SourceDirective.MEDIA_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code img-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-img-src">https://www.w3.org/TR/CSP/#directive-img-src</a>
-		 */
-		public Builder addImgSrc(Source src, Source... other) {
-			return add(SourceDirective.IMG_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code connect-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-connect-src">https://www.w3.org/TR/CSP/#directive-connect-src</a>
-		 */
-		public Builder addConnectSrc(Source src, Source... other) {
-			return add(SourceDirective.CONNECT_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code child-src} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-child-src">https://www.w3.org/TR/CSP/#directive-child-src</a>
-		 */
-		public Builder addChildSrc(Source src, Source... other) {
-			return add(SourceDirective.CHILD_SRC, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code form-actions} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-form-action">https://www.w3.org/TR/CSP/#directive-form-action</a>
-		 */
-		public Builder addFormAction(Source src, Source... other) {
-			return add(SourceDirective.FORM_ACTION, src, asList(other));
-		}
-
-		/**
-		 * Add values for {@code frame-ancestors} directive.
-		 *
-		 * @param src Source value.
-		 * @param other Optional other source values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-frame-ancestors">https://www.w3.org/TR/CSP/#directive-frame-ancestors</a>
-		 */
-		public Builder addFrameAncestors(Source src, Source... other) {
-			return add(SourceDirective.FRAME_ANCESTORS, src, asList(other), new SourceValidator() {
-				@Override
-				public void validate(Source src) {
-					PreConditions.match(src.getValue(), PATTERN_HOST_VALUE, "Source must be a valid host value");
-				}
-			});
-		}
-
-		/**
-		 * Add values for {@code frame-ancestors} directive.
-		 *
-		 * @param mediaType Media-type value.
-		 * @param other Optional other media-types values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-plugin-types">https://www.w3.org/TR/CSP/#directive-plugin-types</a>
-		 */
-		public Builder addPluginTypes(String mediaType, String... other) {
-			Source src = new SourceValue(mediaType);
-			List<Source> otherSources = map(other, new Mapper<String, Source>() {
-				@Override
-				public Source apply(String input) {
-					return new SourceValue(input);
-				}
-			});
-
-			return add(SourceDirective.PLUGIN_TYPES, src, otherSources);
-		}
-
-		/**
-		 * Add values for {@code report-uri} directive.
-		 *
-		 * @param uri Uri value.
-		 * @param other Optional other uri values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @throws IllegalArgumentException If at least one uri is not a valid uri value.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-report-uri">https://www.w3.org/TR/CSP/#directive-report-uri</a>
-		 */
-		public Builder addReportUri(String uri, String... other) {
-			Source src = new UriSource(uri);
-			List<Source> otherSources = map(other, new Mapper<String, Source>() {
-				@Override
-				public Source apply(String input) {
-					return new UriSource(input);
-				}
-			});
-
-			return add(SourceDirective.REPORT_URI, src, otherSources);
-		}
-
-		/**
-		 * Add values for {@code report-uri} directive.
-		 *
-		 * @param uri Uri value.
-		 * @param other Optional other uri values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-report-uri">https://www.w3.org/TR/CSP/#directive-report-uri</a>
-		 */
-		public Builder addReportUri(URI uri, URI... other) {
-			Source src = new UriSource(uri);
-			List<Source> otherSources = map(other, new Mapper<URI, Source>() {
-				@Override
-				public Source apply(URI input) {
-					return new UriSource(input);
-				}
-			});
-
-			return add(SourceDirective.REPORT_URI, src, otherSources);
-		}
-
-		/**
-		 * Add values for {@code sandbox} directive.
-		 *
-		 * @param sandbox Sandbox value.
-		 * @param other Optional other sandbox values.
-		 * @return Current builder.
-		 * @throws NullPointerException If at least one parameter is {@code null}.
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-sandbox">https://www.w3.org/TR/CSP/#directive-sandbox</a>
-		 */
-		public Builder addSandbox(Sandbox sandbox, Sandbox... other) {
-			@SuppressWarnings("unchecked")
-			List<Source> otherSources = (List) asList(other);
-			return add(SourceDirective.SANDBOX, sandbox, otherSources);
-		}
-
-		/**
-		 * Enable {@code block-all-mixed-content} directive.
-		 *
-		 * @return Current builder.
-		 * @see <a href="https://www.w3.org/TR/mixed-content/#strict-checking">https://www.w3.org/TR/mixed-content/#strict-checking</a>
-		 */
-		public Builder blockAllMixedContent() {
-			return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, EMPTY_SOURCE, Collections.<Source>emptyList());
-		}
-
-		private Builder add(SourceDirective directive, Source src, List<Source> other) {
-			return add(directive, src, other, NO_OP_VALIDATOR);
-		}
-
-		private Builder add(SourceDirective directive, Source src, List<Source> other, SourceValidator validator) {
-			Set<Source> list = sources.get(directive);
-			if (list == null) {
-				list = new LinkedHashSet<>();
-				sources.put(directive, list);
-			}
-
-			// First check validity
-			PreConditions.notNull(src, "Source value must not be null");
-			validator.validate(src);
-
-			for (Source o : other) {
-				PreConditions.notNull(o, "Source value must not be null");
-				validator.validate(o);
-			}
-
-			list.add(src);
-			list.addAll(other);
-
-			return this;
-		}
-
-		/**
-		 * Create {@link ContentSecurityPolicy} instance.
-		 *
-		 * @return New {@link ContentSecurityPolicy} instance.
-		 */
-		public ContentSecurityPolicy build() {
-			return new ContentSecurityPolicy(sources);
 		}
 	}
 }

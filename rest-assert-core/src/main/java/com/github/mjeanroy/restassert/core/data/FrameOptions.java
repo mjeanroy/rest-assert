@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
@@ -38,7 +40,12 @@ public enum FrameOptions implements HeaderValue {
 	 * A browser receiving content with this header MUST NOT display
 	 * this content in any frame.
 	 */
-	DENY("DENY"),
+	DENY("DENY") {
+		@Override
+		boolean match(String actualValue) {
+			return actualValue.equals(prefix);
+		}
+	},
 
 	/**
 	 * A browser receiving content with this header MUST NOT display
@@ -49,7 +56,12 @@ public enum FrameOptions implements HeaderValue {
 	 * origin of the content and the frame have the same origin, this
 	 * MUST be treated as "DENY".
 	 */
-	SAME_ORIGIN("SAMEORIGIN"),
+	SAME_ORIGIN("SAMEORIGIN") {
+		@Override
+		boolean match(String actualValue) {
+			return actualValue.equals(prefix);
+		}
+	},
 
 	/**
 	 * A browser receiving content with this header MUST NOT display
@@ -60,24 +72,60 @@ public enum FrameOptions implements HeaderValue {
 	 */
 	ALLOW_FROM("ALLOW-FROM") {
 		@Override
-		public boolean match(String actualValue) {
-			return actualValue.toLowerCase().startsWith(serializeValue().toLowerCase());
+		boolean match(String actualValue) {
+			return actualValue.startsWith(prefix + " ");
 		}
 	};
 
-	private final String header;
+	/**
+	 * The parser instance.
+	 */
+	private static final FrameOptionsParser PARSER = new FrameOptionsParser();
 
-	FrameOptions(String header) {
-		this.header = header;
+	/**
+	 * Get parser for {@link FrameOptions} instances.
+	 *
+	 * @return The parser.
+	 */
+	public static HeaderParser parser() {
+		return PARSER;
+	}
+
+	/**
+	 * The header value.
+	 */
+	final String prefix;
+
+	FrameOptions(String prefix) {
+		this.prefix = prefix;
 	}
 
 	@Override
 	public String serializeValue() {
-		return header;
+		return prefix;
 	}
 
-	@Override
-	public boolean match(String actualValue) {
-		return header.equalsIgnoreCase(actualValue);
+	/**
+	 * Check if header match given raw value.
+	 *
+	 * @param value Uppercased raw value.
+	 */
+	abstract boolean match(String value);
+
+	/**
+	 * Parser for {@link FrameOptions} header.
+	 */
+	private static class FrameOptionsParser extends AbstractHeaderParser {
+		@Override
+		protected HeaderValue doParse(String value) {
+			String rawValue = value.toUpperCase();
+			for (FrameOptions x : FrameOptions.values()) {
+				if (x.match(rawValue)) {
+					return x;
+				}
+			}
+
+			return null;
+		}
 	}
 }

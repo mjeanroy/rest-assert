@@ -22,42 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.internal.data;
 
-import com.github.mjeanroy.restassert.core.data.CacheControl;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.data.Header;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
-
-public class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
-
-	private static final String FAILED_VALUE = CacheControl.builder()
-		.visibility(CacheControl.Visibility.PUBLIC)
-		.noTransform()
-		.maxAge(3600)
-		.build()
-		.toString();
-
-	private static final CacheControl VALUE = CacheControl.builder()
-		.visibility(CacheControl.Visibility.PUBLIC)
-		.noTransform()
-		.maxAge(300)
-		.build();
+/**
+ * Abstract template implementation for {@link HeaderParser} interface.
+ */
+public abstract class AbstractHeaderParser<T extends HeaderValue> implements HeaderParser<T> {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
+	public T parse(String value) {
+		notBlank(value, "Header value must be defined to be parsed");
+		return doParse(value.trim());
 	}
 
-	@Override
-	protected Header getHeader() {
-		return CACHE_CONTROL;
-	}
-
-	@Override
-	String failValue() {
-		return FAILED_VALUE;
-	}
+	/**
+	 * Parse header value as a raw string and returns valid {@link HeaderValue} instance.
+	 * Note that, unlike {@link #parse(String)} method, this method guarantee that raw value
+	 * is not {@code null} and not blank.
+	 *
+	 * @param value Raw value.
+	 * @return The {@link HeaderValue} instance.
+	 */
+	protected abstract T doParse(String value);
 }

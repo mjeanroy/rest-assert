@@ -24,11 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
+import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 
 import java.util.List;
+import java.util.Objects;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
@@ -38,34 +40,49 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 
 /**
  * Check that http response has at least one header matching
- * expected header value object.
+ * expected header expected object.
  */
 public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
 
 	/**
-	 * Expected header value.
+	 * Expected header expected.
 	 */
-	private final HeaderValue value;
+	private final HeaderValue expected;
+
+	/**
+	 * The parser that will be used to build comparison.
+	 */
+	private final HeaderParser parser;
 
 	/**
 	 * Create assertion.
 	 *
 	 * @param name Header name.
 	 */
-	public IsHeaderMatchingAssertion(String name, HeaderValue value) {
+	public IsHeaderMatchingAssertion(String name, HeaderValue expected, HeaderParser parser) {
 		super(name);
-		this.value = notNull(value, "Header value must not be null");
+		this.expected = notNull(expected, "Header expected value must not be null");
+		this.parser = notNull(parser, "Header parser must not be null");
 	}
 
 	@Override
 	AssertionResult doAssertion(List<String> values) {
-		boolean found = some(values, new Predicate<String>() {
-			@Override
-			public boolean apply(String input) {
-				return value.match(input);
-			}
-		});
+		boolean found = some(values, new HeaderPredicate(expected, parser));
+		return found ? success() : failure(shouldHaveHeaderWithValue(name, expected.serializeValue(), values));
+	}
 
-		return found ? success() : failure(shouldHaveHeaderWithValue(name, value.serializeValue(), values));
+	private static class HeaderPredicate implements Predicate<String> {
+		private final HeaderValue expected;
+		private final HeaderParser parser;
+
+		private HeaderPredicate(HeaderValue expected, HeaderParser parser) {
+			this.expected = expected;
+			this.parser = parser;
+		}
+
+		@Override
+		public boolean apply(String input) {
+			return Objects.equals(expected, parser.parse(input));
+		}
 	}
 }

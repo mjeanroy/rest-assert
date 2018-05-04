@@ -24,65 +24,41 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StrictTransportSecurityTest {
+public class StrictTransportSecurityBuilderTest {
+
 	@Test
 	public void it_should_create_strict_transport_security_with_max_age() {
-		StrictTransportSecurity sts = new StrictTransportSecurity(3600, false, false);
+		StrictTransportSecurity sts = StrictTransportSecurity.builder(3600).build();
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
 		assertThat(sts.isIncludeSubDomains()).isFalse();
 		assertThat(sts.isPreload()).isFalse();
-		assertThat(sts.serializeValue()).isEqualTo("max-age=3600");
-		assertThat(sts.toString()).isEqualTo(
-			"StrictTransportSecurity{" +
-				"maxAge=3600, " +
-				"includeSubDomains=false, " +
-				"preload=false" +
-			"}"
-		);
 	}
 
 	@Test
 	public void it_should_create_strict_transport_security_with_include_sub_domains() {
-		StrictTransportSecurity sts = new StrictTransportSecurity(3600, true, false);
+		StrictTransportSecurity sts = StrictTransportSecurity.builder(3600)
+			.includeSubDomains()
+			.build();
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
 		assertThat(sts.isIncludeSubDomains()).isTrue();
 		assertThat(sts.isPreload()).isFalse();
-		assertThat(sts.serializeValue()).isEqualTo("max-age=3600; includeSubDomains");
-		assertThat(sts.toString()).isEqualTo(
-			"StrictTransportSecurity{" +
-				"maxAge=3600, " +
-				"includeSubDomains=true, " +
-				"preload=false" +
-			"}"
-		);
 	}
 
 	@Test
 	public void it_should_create_strict_transport_security_with_include_preload() {
-		StrictTransportSecurity sts = new StrictTransportSecurity(3600, true, true);
+		StrictTransportSecurity sts = StrictTransportSecurity.builder(3600)
+			.includeSubDomains()
+			.preload()
+			.build();
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
 		assertThat(sts.isIncludeSubDomains()).isTrue();
 		assertThat(sts.isPreload()).isTrue();
-		assertThat(sts.serializeValue()).isEqualTo("max-age=3600; includeSubDomains; preload");
-		assertThat(sts.toString()).isEqualTo(
-			"StrictTransportSecurity{" +
-				"maxAge=3600, " +
-				"includeSubDomains=true, " +
-				"preload=true" +
-			"}"
-		);
-	}
-
-	@Test
-	public void it_should_implement_equals() {
-		EqualsVerifier.forClass(StrictTransportSecurity.class).verify();
 	}
 }

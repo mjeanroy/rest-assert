@@ -38,7 +38,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-	private static final ContentSecurityPolicy VALUE = new ContentSecurityPolicy.Builder()
+	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())
 			.addScriptSrc(self(), unsafeEval(), unsafeInline())
 			.addStyleSrc(unsafeInline())
@@ -47,7 +47,7 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHe
 			.addFormAction(self())
 			.build();
 
-	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
+	private static final String FAILED_VALUE = ContentSecurityPolicy.builder()
 		.addDefaultSrc(self())
 		.build()
 		.serializeValue();
