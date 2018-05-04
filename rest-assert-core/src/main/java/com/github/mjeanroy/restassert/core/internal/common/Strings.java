@@ -22,39 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.data.Header;
+/**
+ * Static String Utilities.
+ */
+public final class Strings {
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
-
-	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
-		.includeSubDomains()
-		.build();
-
-	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
-		.includeSubDomains()
-		.preload()
-		.build()
-		.value();
-
-	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsStrictTransportSecurityEqualTo(someInfo(), httpResponse, VALUE);
+	// Ensure non instantiation.
+	private Strings() {
 	}
 
-	@Override
-	protected Header getHeader() {
-		return STRICT_TRANSPORT_SECURITY;
-	}
+	/**
+	 * Join sequence of strings into a single string separated by a given
+	 * separator.
+	 *
+	 * @param lines Sequence of strings.
+	 * @param separator Separator between each strings.
+	 * @return Single string.
+	 */
+	public static String join(Iterable<String> lines, String separator) {
+		boolean first = true;
 
-	@Override
-	String failValue() {
-		return FAILED_VALUE;
+		StringBuilder sb = new StringBuilder();
+		for (String line : lines) {
+			if (!first) {
+				sb.append(separator);
+			}
+
+			sb.append(line);
+			first = false;
+		}
+
+		return sb.toString();
 	}
 }

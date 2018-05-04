@@ -22,39 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.data.Header;
+import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+public class ToStringBuilderTest {
 
-	private static final StrictTransportSecurity VALUE = new StrictTransportSecurity.Builder(31536000)
-		.includeSubDomains()
-		.build();
+	@Test
+	public void it_should_generate_string_value() {
+		String output = ToStringBuilder.toStringBuilder(getClass())
+			.append("id", 1L)
+			.append("name", "John Doe")
+			.build();
 
-	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
-		.includeSubDomains()
-		.preload()
-		.build()
-		.value();
-
-	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsStrictTransportSecurityEqualTo(someInfo(), httpResponse, VALUE);
-	}
-
-	@Override
-	protected Header getHeader() {
-		return STRICT_TRANSPORT_SECURITY;
-	}
-
-	@Override
-	String failValue() {
-		return FAILED_VALUE;
+		assertThat(output).isEqualTo(
+			"ToStringBuilderTest{" +
+				"id=1, " +
+				"name=John Doe" +
+			"}"
+		);
 	}
 }

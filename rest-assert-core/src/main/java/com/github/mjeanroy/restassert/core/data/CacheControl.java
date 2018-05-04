@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-
-import static com.github.mjeanroy.restassert.core.utils.Utils.join;
-
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 /**
  * Cache-Control header value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
@@ -170,8 +170,14 @@ public final class CacheControl implements HeaderValue {
 	private final boolean proxyRevalidate;
 
 	private CacheControl(
-		Visibility visibility, boolean noStore, boolean noCache, boolean noTransform,
-		boolean mustRevalidate, boolean proxyRevalidate, Long maxAge, Long sMaxAge) {
+			Visibility visibility,
+			boolean noStore,
+			boolean noCache,
+			boolean noTransform,
+			boolean mustRevalidate,
+			boolean proxyRevalidate,
+			Long maxAge,
+			Long sMaxAge) {
 
 		this.visibility = visibility;
 		this.noCache = noCache;
@@ -185,7 +191,41 @@ public final class CacheControl implements HeaderValue {
 
 	@Override
 	public String value() {
-		return toString();
+		List<String> values = new LinkedList<>();
+
+		if (visibility != null) {
+			values.add(visibility.name().toLowerCase());
+		}
+
+		if (noCache) {
+			values.add(DIR_NO_CACHE);
+		}
+
+		if (noStore) {
+			values.add(DIR_NO_STORE);
+		}
+
+		if (noTransform) {
+			values.add(DIR_NO_TRANSFORM);
+		}
+
+		if (mustRevalidate) {
+			values.add(DIR_MUST_REVALIDATE);
+		}
+
+		if (proxyRevalidate) {
+			values.add(DIR_PROXY_REVALIDATE);
+		}
+
+		if (maxAge != null) {
+			values.add(DIR_MAX_AGE + maxAge);
+		}
+
+		if (sMaxAge != null) {
+			values.add(DIR_S_MAX_AGE + sMaxAge);
+		}
+
+		return Strings.join(values, SEPARATOR);
 	}
 
 	@Override
@@ -237,41 +277,16 @@ public final class CacheControl implements HeaderValue {
 
 	@Override
 	public String toString() {
-		List<String> values = new LinkedList<>();
-
-		if (visibility != null) {
-			values.add(visibility.name().toLowerCase());
-		}
-
-		if (noCache) {
-			values.add(DIR_NO_CACHE);
-		}
-
-		if (noStore) {
-			values.add(DIR_NO_STORE);
-		}
-
-		if (noTransform) {
-			values.add(DIR_NO_TRANSFORM);
-		}
-
-		if (mustRevalidate) {
-			values.add(DIR_MUST_REVALIDATE);
-		}
-
-		if (proxyRevalidate) {
-			values.add(DIR_PROXY_REVALIDATE);
-		}
-
-		if (maxAge != null) {
-			values.add(DIR_MAX_AGE + maxAge);
-		}
-
-		if (sMaxAge != null) {
-			values.add(DIR_S_MAX_AGE + sMaxAge);
-		}
-
-		return join(values, SEPARATOR);
+		return ToStringBuilder.toStringBuilder(getClass())
+			.append("visibility", visibility)
+			.append("noCache", noCache)
+			.append("noStore", noStore)
+			.append("noTransform", noTransform)
+			.append("mustRevalidate", mustRevalidate)
+			.append("proxyRevalidate", proxyRevalidate)
+			.append("maxAge", maxAge)
+			.append("sMaxAge", sMaxAge)
+			.build();
 	}
 
 	/**
@@ -318,6 +333,9 @@ public final class CacheControl implements HeaderValue {
 		 */
 		private Long sMaxAge;
 
+		/**
+		 * Create the builder with default values initialized.
+		 */
 		public Builder() {
 			this.noCache = false;
 			this.noStore = false;
@@ -327,7 +345,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Update {@code public} or {@code private} directive.
+		 * Update {@code "public"} or {@code "private"} directive.
 		 *
 		 * @param visibility New visibility.
 		 * @return Current builder.
@@ -338,7 +356,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Enable {@code no-cache} directive.
+		 * Enable {@code "no-cache"} directive.
 		 *
 		 * @return Current builder.
 		 */
@@ -348,7 +366,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Enable {@code no-transform} directive.
+		 * Enable {@code "no-transform"} directive.
 		 *
 		 * @return Current builder.
 		 */
@@ -358,7 +376,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Enable {@code must-revalidate} directive.
+		 * Enable {@code "must-revalidate"} directive.
 		 *
 		 * @return Current builder.
 		 */
@@ -368,7 +386,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Enable {@code proxy-revalidate} directive.
+		 * Enable {@code "proxy-revalidate"} directive.
 		 *
 		 * @return Current builder.
 		 */
@@ -378,7 +396,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Enable {@code no-store} directive.
+		 * Enable {@code "no-store"} directive.
 		 *
 		 * @return Current builder.
 		 */
@@ -388,9 +406,9 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Update {@code max-age} directive.
+		 * Update {@code "max-age"} directive.
 		 *
-		 * @param maxAge Enable or disable {@code max-age} directive.
+		 * @param maxAge Enable {@code "max-age"} directive and update its value.
 		 * @return Current builder.
 		 */
 		public Builder maxAge(long maxAge) {
@@ -401,7 +419,7 @@ public final class CacheControl implements HeaderValue {
 		/**
 		 * Update {@code s-maxage} directive.
 		 *
-		 * @param sMaxAge Enable or disable {@code s-maxage} directive.
+		 * @param sMaxAge Enable {@code s-maxage} directive and update its value.
 		 * @return Current builder.
 		 */
 		public Builder sMaxAge(long sMaxAge) {
@@ -410,7 +428,7 @@ public final class CacheControl implements HeaderValue {
 		}
 
 		/**
-		 * Create new Cache-Control header object.
+		 * Create new {@link CacheControl} header object.
 		 *
 		 * @return Cache-Control value.
 		 */

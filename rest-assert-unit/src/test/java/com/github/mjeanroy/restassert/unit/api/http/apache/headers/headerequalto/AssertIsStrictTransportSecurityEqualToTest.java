@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
@@ -40,7 +40,7 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractApacheHt
 	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
 		.preload()
 		.build()
-		.toString();
+		.value();
 
 	@Override
 	protected Header getHeader() {

@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
@@ -40,7 +40,7 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractNingHttp
 	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
 		.preload()
 		.build()
-		.toString();
+		.value();
 
 	@Override
 	protected Header getHeader() {

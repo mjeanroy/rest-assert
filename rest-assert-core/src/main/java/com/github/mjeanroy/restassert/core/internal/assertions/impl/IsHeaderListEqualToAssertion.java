@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.utils.PreConditions.notEmpty;
-import static com.github.mjeanroy.restassert.core.utils.Utils.join;
-import static com.github.mjeanroy.restassert.core.utils.Utils.some;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+import com.github.mjeanroy.restassert.core.utils.Predicate;
 
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
-import com.github.mjeanroy.restassert.core.utils.Predicate;
+import static com.github.mjeanroy.restassert.core.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static com.github.mjeanroy.restassert.core.utils.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.utils.Utils.some;
 
 /**
  * Check that http response has at least one header with

@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 public class IsStrictTransportSecurityEqualToTest extends AbstractHttpHeaderEqualToTest {
 
@@ -41,7 +41,7 @@ public class IsStrictTransportSecurityEqualToTest extends AbstractHttpHeaderEqua
 		.includeSubDomains()
 		.preload()
 		.build()
-		.toString();
+		.value();
 
 	@Override
 	protected Header getHeader() {

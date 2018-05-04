@@ -34,7 +34,13 @@ public class StrictTransportSecurityTest {
 	public void it_should_create_strict_transport_security_with_max_age() {
 		StrictTransportSecurity sts = new StrictTransportSecurity.Builder(3600).build();
 		assertThat(sts.value()).isEqualTo("max-age=3600");
-		assertThat(sts.toString()).isEqualTo("max-age=3600");
+		assertThat(sts.toString()).isEqualTo(
+			"StrictTransportSecurity{" +
+				"maxAge=3600, " +
+				"includeSubDomains=false, " +
+				"preload=false" +
+			"}"
+		);
 	}
 
 	@Test
@@ -44,7 +50,13 @@ public class StrictTransportSecurityTest {
 				.build();
 
 		assertThat(sts.value()).isEqualTo("max-age=3600; includeSubDomains");
-		assertThat(sts.toString()).isEqualTo("max-age=3600; includeSubDomains");
+		assertThat(sts.toString()).isEqualTo(
+			"StrictTransportSecurity{" +
+				"maxAge=3600, " +
+				"includeSubDomains=true, " +
+				"preload=false" +
+			"}"
+		);
 	}
 
 	@Test
@@ -55,7 +67,13 @@ public class StrictTransportSecurityTest {
 				.build();
 
 		assertThat(sts.value()).isEqualTo("max-age=3600; includeSubDomains; preload");
-		assertThat(sts.toString()).isEqualTo("max-age=3600; includeSubDomains; preload");
+		assertThat(sts.toString()).isEqualTo(
+			"StrictTransportSecurity{" +
+				"maxAge=3600, " +
+				"includeSubDomains=true, " +
+				"preload=true" +
+			"}"
+		);
 	}
 
 	@Test

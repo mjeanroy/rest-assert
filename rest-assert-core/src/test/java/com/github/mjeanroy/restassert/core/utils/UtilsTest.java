@@ -38,7 +38,6 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.core.utils.Utils.firstNonNull;
 import static com.github.mjeanroy.restassert.core.utils.Utils.some;
 import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -170,12 +169,6 @@ public class UtilsTest {
 		thrown.expect(UnreadableFileException.class);
 
 		Utils.readFileToString(path);
-	}
-
-	@Test
-	public void it_should_join_strings() {
-		assertThat(Utils.join(asList("foo", "bar"), " ")).isEqualTo("foo bar");
-		assertThat(Utils.join(singletonList("foo"), " ")).isEqualTo("foo");
 	}
 
 	@Test

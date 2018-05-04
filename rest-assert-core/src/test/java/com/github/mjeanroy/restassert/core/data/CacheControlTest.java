@@ -34,17 +34,41 @@ public class CacheControlTest {
 	@Test
 	public void it_should_create_no_cache_header() {
 		CacheControl cacheControl = new CacheControl.Builder().noCache().build();
-		assertThat(cacheControl.toString()).isEqualTo("no-cache");
+
 		assertThat(cacheControl.value()).isEqualTo("no-cache");
 		assertThat(cacheControl.match("no-cache")).isTrue();
+		assertThat(cacheControl.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=null, " +
+				"noCache=true, " +
+				"noStore=false, " +
+				"noTransform=false, " +
+				"mustRevalidate=false, " +
+				"proxyRevalidate=false, " +
+				"maxAge=null, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test
 	public void it_should_create_no_store_header() {
 		CacheControl cacheControl = new CacheControl.Builder().noStore().build();
-		assertThat(cacheControl.toString()).isEqualTo("no-store");
+
 		assertThat(cacheControl.value()).isEqualTo("no-store");
 		assertThat(cacheControl.match("no-store")).isTrue();
+		assertThat(cacheControl.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=null, " +
+				"noCache=false, " +
+				"noStore=true, " +
+				"noTransform=false, " +
+				"mustRevalidate=false, " +
+				"proxyRevalidate=false, " +
+				"maxAge=null, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test
@@ -54,9 +78,20 @@ public class CacheControlTest {
 			.maxAge(0)
 			.build();
 
-		assertThat(cacheControl.toString()).isEqualTo("public, max-age=0");
 		assertThat(cacheControl.value()).isEqualTo("public, max-age=0");
 		assertThat(cacheControl.match("public, max-age=0")).isTrue();
+		assertThat(cacheControl.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PUBLIC, " +
+				"noCache=false, " +
+				"noStore=false, " +
+				"noTransform=false, " +
+				"mustRevalidate=false, " +
+				"proxyRevalidate=false, " +
+				"maxAge=0, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test
@@ -66,9 +101,20 @@ public class CacheControlTest {
 			.maxAge(3600)
 			.build();
 
-		assertThat(cacheControl.toString()).isEqualTo("private, max-age=3600");
 		assertThat(cacheControl.value()).isEqualTo("private, max-age=3600");
 		assertThat(cacheControl.match("private, max-age=3600")).isTrue();
+		assertThat(cacheControl.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=false, " +
+				"noStore=false, " +
+				"noTransform=false, " +
+				"mustRevalidate=false, " +
+				"proxyRevalidate=false, " +
+				"maxAge=3600, " +
+				"sMaxAge=null" +
+			"}"
+		);
 	}
 
 	@Test

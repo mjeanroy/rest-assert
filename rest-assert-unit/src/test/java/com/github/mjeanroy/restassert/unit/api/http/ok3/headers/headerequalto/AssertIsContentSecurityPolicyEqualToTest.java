@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
+import okhttp3.Response;
+
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
-
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.test.data.Header;
-import okhttp3.Response;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
@@ -50,7 +50,7 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractOkHttpHead
 	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
 		.addDefaultSrc(self())
 		.build()
-		.toString();
+		.value();
 
 	@Override
 	protected Header getHeader() {

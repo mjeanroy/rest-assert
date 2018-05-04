@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 import com.github.mjeanroy.restassert.core.utils.Mapper;
@@ -90,6 +91,13 @@ public final class ContentSecurityPolicy implements HeaderValue {
 
 	@Override
 	public String toString() {
+		return ToStringBuilder.toStringBuilder(getClass())
+			.append("directives", directives)
+			.build();
+	}
+
+	@Override
+	public String value() {
 		StringBuilder sb = new StringBuilder();
 
 		for (SourceDirective directive : SourceDirective.values()) {
@@ -112,11 +120,6 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		}
 
 		return sb.toString();
-	}
-
-	@Override
-	public String value() {
-		return toString();
 	}
 
 	@Override

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.utils;
 
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -154,33 +156,9 @@ public final class Utils {
 	public static String readFileToString(Path file) {
 		try {
 			List<String> lines = Files.readAllLines(file, Charset.defaultCharset());
-			return join(lines, LINE_SEPARATOR);
+			return Strings.join(lines, LINE_SEPARATOR);
 		} catch (IOException ex) {
 			throw new UnreadableFileException(ex);
 		}
-	}
-
-	/**
-	 * Join sequence of strings into a single string separated by a given
-	 * separator.
-	 *
-	 * @param lines Sequence of strings.
-	 * @param separator Separator between each strings.
-	 * @return Single string.
-	 */
-	public static String join(Iterable<String> lines, String separator) {
-		boolean first = true;
-
-		StringBuilder sb = new StringBuilder();
-		for (String line : lines) {
-			if (!first) {
-				sb.append(separator);
-			}
-
-			sb.append(line);
-			first = false;
-		}
-
-		return sb.toString();
 	}
 }

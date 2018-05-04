@@ -24,8 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.utils.Utils.toLong;
-import static java.util.Collections.unmodifiableMap;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,8 +34,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+import static com.github.mjeanroy.restassert.core.utils.Utils.toLong;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Strict-Transport-Security header.
@@ -142,7 +143,11 @@ public final class StrictTransportSecurity implements HeaderValue {
 
 	@Override
 	public String toString() {
-		return value();
+		return ToStringBuilder.toStringBuilder(getClass())
+			.append("maxAge", maxAge)
+			.append("includeSubDomains", includeSubDomains)
+			.append("preload", preload)
+			.build();
 	}
 
 	@Override

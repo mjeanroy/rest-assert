@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
+
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
-
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.test.data.Header;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
@@ -50,7 +50,7 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractApacheHttp
 	private static final String FAILED_VALUE = new ContentSecurityPolicy.Builder()
 		.addDefaultSrc(self())
 		.build()
-		.toString();
+		.value();
 
 	@Override
 	protected Header getHeader() {

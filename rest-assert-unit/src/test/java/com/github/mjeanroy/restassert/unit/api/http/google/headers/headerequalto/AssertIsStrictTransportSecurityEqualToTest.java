@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 public class AssertIsStrictTransportSecurityEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
@@ -40,7 +40,7 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractGoogleHt
 	private static final String FAILED_VALUE = new StrictTransportSecurity.Builder(31536000)
 		.preload()
 		.build()
-		.toString();
+		.value();
 
 	@Override
 	protected Header getHeader() {
