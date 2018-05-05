@@ -31,7 +31,7 @@ public class StrictTransportSecurityBuilder {
 
 	/**
 	 * {@code max-age} directive.
-	 * The max-age value is required to create header.
+	 * The max-age value is required to create value.
 	 */
 	private long maxAge;
 
@@ -96,7 +96,7 @@ public class StrictTransportSecurityBuilder {
 	}
 
 	/**
-	 * Create {@code Strict-Transport-Security} header.
+	 * Create {@code Strict-Transport-Security} value.
 	 *
 	 * @return Header.
 	 */

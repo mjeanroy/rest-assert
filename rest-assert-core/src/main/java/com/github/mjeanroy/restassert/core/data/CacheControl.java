@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Cache-Control header value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
+ * Cache-Control value value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
  */
 public final class CacheControl implements HeaderValue {
 
@@ -99,7 +99,7 @@ public final class CacheControl implements HeaderValue {
 	private final Visibility visibility;
 
 	/**
-	 * Append {@code no-store} directive to the header value.
+	 * Append {@code no-store} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.3):
 	 *
@@ -114,7 +114,7 @@ public final class CacheControl implements HeaderValue {
 	private final boolean noStore;
 
 	/**
-	 * Append {@code no-cache} directive to the header value.
+	 * Append {@code no-cache} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.2):
 	 *
@@ -127,7 +127,7 @@ public final class CacheControl implements HeaderValue {
 	private final boolean noCache;
 
 	/**
-	 * Append {@code max-age} directive to the header value.
+	 * Append {@code max-age} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.8):
 	 *
@@ -141,20 +141,20 @@ public final class CacheControl implements HeaderValue {
 	private final Long maxAge;
 
 	/**
-	 * Append {@code s-maxage} directive to the header value.
+	 * Append {@code s-maxage} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.9):
 	 *
 	 * The "s-maxage" response directive indicates that, in shared caches,
 	 * the maximum age specified by this directive overrides the maximum age
-	 * specified by either the max-age directive or the Expires header
+	 * specified by either the max-age directive or the Expires value
 	 * field.  The s-maxage directive also implies the semantics of the
 	 * proxy-revalidate response directive.
 	 */
 	private final Long sMaxAge;
 
 	/**
-	 * Append {@code no-transform} directive to the header value.
+	 * Append {@code no-transform} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.4):
 	 *
@@ -165,7 +165,7 @@ public final class CacheControl implements HeaderValue {
 	private final boolean noTransform;
 
 	/**
-	 * Append {@code must-revalidate} directive to the header value.
+	 * Append {@code must-revalidate} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.1):
 	 *
@@ -176,7 +176,7 @@ public final class CacheControl implements HeaderValue {
 	private final boolean mustRevalidate;
 
 	/**
-	 * Append {@code prox-revalidate} directive to the header value.
+	 * Append {@code prox-revalidate} directive to the value value.
 	 *
 	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.1):
 	 *
@@ -461,8 +461,20 @@ public final class CacheControl implements HeaderValue {
 			}
 		};
 
+		/**
+		 * Check if raw value match given directive definition.
+		 *
+		 * @param value Raw value.
+		 * @return {@code true} if {@code value} is a value defining directive, {@code false} otherwise.
+		 */
 		abstract boolean match(String value);
 
+		/**
+		 * Parse and update current value in cache-control builder.
+		 *
+		 * @param value The value to parse and set.
+		 * @param builder The builder.
+		 */
 		abstract void setValue(String value, CacheControlBuilder builder);
 	}
 

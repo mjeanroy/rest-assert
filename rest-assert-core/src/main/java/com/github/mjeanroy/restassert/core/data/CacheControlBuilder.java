@@ -166,7 +166,7 @@ public class CacheControlBuilder {
 	}
 
 	/**
-	 * Create new {@link CacheControl} header object.
+	 * Create new {@link CacheControl} value object.
 	 *
 	 * @return Cache-Control value.
 	 */

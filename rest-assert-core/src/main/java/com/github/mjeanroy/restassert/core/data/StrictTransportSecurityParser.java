@@ -34,7 +34,7 @@ import java.util.Set;
 import static com.github.mjeanroy.restassert.core.data.StrictTransportSecurity.Directive;
 
 /**
- * Parser for {@link StrictTransportSecurity} header.
+ * Parser for {@link StrictTransportSecurity} value.
  */
 public class StrictTransportSecurityParser extends AbstractHeaderParser<StrictTransportSecurity> {
 
@@ -49,7 +49,7 @@ public class StrictTransportSecurityParser extends AbstractHeaderParser<StrictTr
 
 	@Override
 	protected StrictTransportSecurity doParse(String value) {
-		log.debug("Parsing header: '{}'", value);
+		log.debug("Parsing value: '{}'", value);
 		String[] parts = value.split(";");
 
 		StrictTransportSecurityBuilder builder = new StrictTransportSecurityBuilder();
@@ -64,7 +64,7 @@ public class StrictTransportSecurityParser extends AbstractHeaderParser<StrictTr
 
 			Directive directive = Directive.byName(directiveName);
 			if (directive == null) {
-				log.error("Directive name '{}' should not appear in Strict-Transport-Security header", directiveName);
+				log.error("Directive name '{}' should not appear in Strict-Transport-Security value", directiveName);
 				throw new IllegalArgumentException(String.format("Cannot parse Strict-Transport-Security, directive %s is unknown", directiveName));
 			}
 

@@ -35,7 +35,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong
 import static java.util.Collections.unmodifiableMap;
 
 /**
- * Strict-Transport-Security header.
+ * Strict-Transport-Security value.
  * Note that this object handle {@code preload} directive, even if
  * it is not officially defined in the spec.
  *
@@ -91,7 +91,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 	private final boolean preload;
 
 	/**
-	 * Create header value.
+	 * Create value value.
 	 *
 	 * @param maxAge Max-Age value.
 	 * @param includeSubDomains Sub-Domains flag.
@@ -177,7 +177,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 	}
 
 	/**
-	 * Set of directive that may appear in {@code Strict-Transport-Security} header.
+	 * Set of directive that may appear in {@code Strict-Transport-Security} value.
 	 */
 	enum Directive {
 		/**

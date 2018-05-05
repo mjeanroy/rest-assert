@@ -32,7 +32,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Parser for {@link ContentSecurityPolicy} header.
+ * Parser for {@link ContentSecurityPolicy} value.
  */
 public class ContentSecurityPolicyParser extends AbstractHeaderParser<ContentSecurityPolicy> {
 
@@ -47,7 +47,7 @@ public class ContentSecurityPolicyParser extends AbstractHeaderParser<ContentSec
 
 	@Override
 	protected ContentSecurityPolicy doParse(String value) {
-		log.debug("Parsing Content-Security-Policy header: '{}'", value);
+		log.debug("Parsing Content-Security-Policy value: '{}'", value);
 
 		String[] directives = value.split(";");
 		ContentSecurityPolicyBuilder builder = new ContentSecurityPolicyBuilder();
@@ -75,7 +75,7 @@ public class ContentSecurityPolicyParser extends AbstractHeaderParser<ContentSec
 			// Check if directive has name.
 			if (currentName.isEmpty()) {
 				log.error("Directive name is empty, fail");
-				throw new IllegalArgumentException(String.format("Header %s is not a valid Content-Security-Policy header", value));
+				throw new IllegalArgumentException(String.format("Header %s is not a valid Content-Security-Policy value", value));
 			}
 
 			ContentSecurityPolicy.SourceDirective dir = ContentSecurityPolicy.SourceDirective.byName(currentName);
@@ -89,7 +89,7 @@ public class ContentSecurityPolicyParser extends AbstractHeaderParser<ContentSec
 			// Check if name is valid.
 			if (dir == null) {
 				log.error("Cannot find a matching for directive '{}', fail", currentName);
-				throw new IllegalArgumentException(String.format("Cannot parse Content-Security-Policy header since directive %s seems not valid", currentName));
+				throw new IllegalArgumentException(String.format("Cannot parse Content-Security-Policy value since directive %s seems not valid", currentName));
 			}
 
 			log.debug("  - Found directive: {}", dir);

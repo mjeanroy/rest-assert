@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
- * Values of valid X-Content-Type-Options header.
+ * Values of valid X-Content-Type-Options value.
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
  */
 public enum ContentTypeOptions implements HeaderValue {
 
@@ -49,35 +49,35 @@ public enum ContentTypeOptions implements HeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static HeaderParser parser() {
+	public static ContentTypeOptionsParser parser() {
 		return PARSER;
 	}
 
 	/**
-	 * The header value as specified by official specification.
+	 * The value value as specified by official specification.
 	 */
-	private final String header;
+	private final String value;
 
-	ContentTypeOptions(String header) {
-		this.header = header;
+	/**
+	 * Create Content-Type value value.
+	 *
+	 * @param value The value.
+	 */
+	ContentTypeOptions(String value) {
+		this.value = value;
 	}
 
 	@Override
 	public String serializeValue() {
-		return header;
+		return value;
 	}
 
-	private static class ContentTypeOptionsParser extends AbstractHeaderParser {
-		@Override
-		protected HeaderValue doParse(String value) {
-			String rawValue = value.toLowerCase();
-			for (ContentTypeOptions x : ContentTypeOptions.values()) {
-				if (rawValue.equals(x.header)) {
-					return x;
-				}
-			}
-
-			return null;
-		}
+	/**
+	 * Get {@link #value}
+	 *
+	 * @return {@link #value}
+	 */
+	String getValue() {
+		return value;
 	}
 }

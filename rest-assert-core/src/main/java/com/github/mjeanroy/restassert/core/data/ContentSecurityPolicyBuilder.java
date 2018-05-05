@@ -52,7 +52,7 @@ import static java.util.Arrays.asList;
  */
 public class ContentSecurityPolicyBuilder {
 	/**
-	 * List of header directives.
+	 * List of value directives.
 	 */
 	private final Map<SourceDirective, Set<Source>> sources;
 
@@ -366,14 +366,6 @@ public class ContentSecurityPolicyBuilder {
 	public ContentSecurityPolicy build() {
 		return new ContentSecurityPolicy(sources);
 	}
-
-	// Empty source, always return empty string.
-	private static final Source EMPTY_SOURCE = new AbstractSourceValue() {
-		@Override
-		public String getValue() {
-			return "";
-		}
-	};
 
 	/**
 	 * Validator interface.

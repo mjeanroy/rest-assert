@@ -24,58 +24,176 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
+import java.net.URI;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static java.util.Collections.singleton;
+import static java.util.Collections.unmodifiableSet;
+
 /**
- * Values of valid X-Frame-Options header.
+ * Values of valid X-Frame-Options directive.
  * Specification: https://tools.ietf.org/html/rfc7034
  *
  * Important: values are case-insensitive!
+ *
+ * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
  */
-public enum FrameOptions implements HeaderValue {
+public final class FrameOptions implements HeaderValue {
+
+	private static final FrameOptions DENY = new FrameOptions(Directive.DENY);
+	private static final FrameOptions SAME_ORIGIN = new FrameOptions(Directive.SAME_ORIGIN);
 
 	/**
-	 * A browser receiving content with this header MUST NOT display
-	 * this content in any frame.
-	 */
-	DENY("DENY") {
-		@Override
-		boolean match(String actualValue) {
-			return actualValue.equals(prefix);
-		}
-	},
-
-	/**
-	 * A browser receiving content with this header MUST NOT display
-	 * this content in any frame from a page of different origin than
-	 * the content itself.
+	 * Get the {@code "DENY"} {@code "X-Frame-Options"} header.
 	 *
-	 * If a browser or plugin can not reliably determine whether the
-	 * origin of the content and the frame have the same origin, this
-	 * MUST be treated as "DENY".
+	 * @return The {@code "X-Frame-Options"} header.
 	 */
-	SAME_ORIGIN("SAMEORIGIN") {
-		@Override
-		boolean match(String actualValue) {
-			return actualValue.equals(prefix);
-		}
-	},
+	public static FrameOptions deny() {
+		return DENY;
+	}
 
 	/**
-	 * A browser receiving content with this header MUST NOT display
-	 * this content in any frame from a page of different origin than
-	 * the listed origin.  While this can expose the page to risks by
-	 * the trusted origin, in some cases it may be necessary to use
-	 * content from other domains.
+	 * Get the {@code "SAMEORIGIN"} {@code "X-Frame-Options"} header.
+	 *
+	 * @return The {@code "X-Frame-Options"} header.
 	 */
-	ALLOW_FROM("ALLOW-FROM") {
-		@Override
-		boolean match(String actualValue) {
-			return actualValue.startsWith(prefix + " ");
+	public static FrameOptions sameOrigin() {
+		return SAME_ORIGIN;
+	}
+
+	/**
+	 * Get the {@code "ALLOW-FROM"} {@code "X-Frame-Options"} header with given URI.
+	 *
+	 * @param uri The given URI.
+	 * @return The {@code "X-Frame-Options"} header.
+	 */
+	public static FrameOptions allowFrom(String uri) {
+		return allowFrom(URI.create(uri));
+	}
+
+	/**
+	 * Get the {@code "ALLOW-FROM"} {@code "X-Frame-Options"} header with given URI.
+	 *
+	 * @param uri The given URI.
+	 * @return The {@code "X-Frame-Options"} header.
+	 */
+	public static FrameOptions allowFrom(URI uri) {
+		return new FrameOptions(Directive.ALLOW_FROM, singleton(uri.toString()));
+	}
+
+	/**
+	 * The {@code X-Frame-Options} directives.
+	 */
+	enum Directive {
+		/**
+		 * A browser receiving content with this directive MUST NOT display
+		 * this content in any frame.
+		 */
+		DENY("DENY") {
+			@Override
+			FrameOptions parse(String value) {
+				return FrameOptions.DENY;
+			}
+		},
+
+		/**
+		 * A browser receiving content with this directive MUST NOT display
+		 * this content in any frame from a page of different origin than
+		 * the content itself.
+		 *
+		 * If a browser or plugin can not reliably determine whether the
+		 * origin of the content and the frame have the same origin, this
+		 * MUST be treated as "DENY".
+		 */
+		SAME_ORIGIN("SAMEORIGIN") {
+			@Override
+			FrameOptions parse(String value) {
+				return FrameOptions.SAME_ORIGIN;
+			}
+		},
+
+		/**
+		 * A browser receiving content with this directive MUST NOT display
+		 * this content in any frame from a page of different origin than
+		 * the listed origin.  While this can expose the page to risks by
+		 * the trusted origin, in some cases it may be necessary to use
+		 * content from other domains.
+		 */
+		ALLOW_FROM("ALLOW-FROM") {
+			@Override
+			boolean match(String value) {
+				return value.startsWith(getPrefix());
+			}
+
+			@Override
+			FrameOptions parse(String value) {
+				String[] parts = value.split(" ", 2);
+				if (parts.length != 2) {
+					return null;
+				}
+
+				String[] options = parts[1].split(" ");
+				Set<String> uris = new LinkedHashSet<>();
+				for (String opt : options) {
+					String trimmedOpt = opt.trim();
+					if (!trimmedOpt.isEmpty()) {
+						uris.add(trimmedOpt);
+					}
+				}
+
+				return new FrameOptions(Directive.ALLOW_FROM, unmodifiableSet(uris));
+			}
+		};
+
+		/**
+		 * The directive directive.
+		 */
+		private final String prefix;
+
+		/**
+		 * Create the directive using the directive prefix.
+		 *
+		 * @param prefix Directive prefix.
+		 */
+		Directive(String prefix) {
+			this.prefix = prefix;
 		}
-	};
+
+		/**
+		 * Get {@link #prefix}
+		 *
+		 * @return {@link #prefix}
+		 */
+		String getPrefix() {
+			return prefix;
+		}
+
+		/**
+		 * Check if value match given directive name.
+		 *
+		 * @param value The header raw value.
+		 * @return The
+		 */
+		boolean match(String value) {
+			return getPrefix().equals(value);
+		}
+
+		/**
+		 * Parse header and return structured {@link FrameOptions} header.
+		 *
+		 * @param value The header raw value.
+		 * @return The header.
+		 */
+		abstract FrameOptions parse(String value);
+	}
 
 	/**
 	 * The parser instance.
@@ -87,45 +205,88 @@ public enum FrameOptions implements HeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static HeaderParser parser() {
+	public static FrameOptionsParser parser() {
 		return PARSER;
 	}
 
 	/**
-	 * The header value.
+	 * The header directive value.
 	 */
-	final String prefix;
+	private final Directive directive;
 
-	FrameOptions(String prefix) {
-		this.prefix = prefix;
+	/**
+	 * The header directive options.
+	 */
+	private final Set<String> options;
+
+	/**
+	 * Create FrameOptions directive.
+	 *
+	 * @param value The directive mode.
+	 * @param options Directive options.
+	 */
+	private FrameOptions(Directive value, Set<String> options) {
+		this.directive = value;
+		this.options = options;
+	}
+
+	/**
+	 * Create FrameOptions directive without any options.
+	 *
+	 * @param directive The directive mode.
+	 */
+	private FrameOptions(Directive directive) {
+		this(directive, Collections.<String>emptySet());
+	}
+
+	/**
+	 * Get {@link #directive}
+	 *
+	 * @return {@link #directive}
+	 */
+	public Directive getDirective() {
+		return directive;
+	}
+
+	/**
+	 * Get {@link #options}
+	 *
+	 * @return {@link #options}
+	 */
+	public Set<String> getOptions() {
+		return options;
 	}
 
 	@Override
 	public String serializeValue() {
-		return prefix;
+		String opts = options.isEmpty() ? "" : " " + join(options, " ");
+		return directive.getPrefix() + opts;
 	}
 
-	/**
-	 * Check if header match given raw value.
-	 *
-	 * @param value Uppercased raw value.
-	 */
-	abstract boolean match(String value);
-
-	/**
-	 * Parser for {@link FrameOptions} header.
-	 */
-	private static class FrameOptionsParser extends AbstractHeaderParser {
-		@Override
-		protected HeaderValue doParse(String value) {
-			String rawValue = value.toUpperCase();
-			for (FrameOptions x : FrameOptions.values()) {
-				if (x.match(rawValue)) {
-					return x;
-				}
-			}
-
-			return null;
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
 		}
+
+		if (o instanceof FrameOptions) {
+			FrameOptions f = (FrameOptions) o;
+			return Objects.equals(directive, f.directive) && Objects.equals(options, f.options);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(directive, options);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.toStringBuilder(getClass())
+			.append("directive", directive)
+			.append("options", options)
+			.build();
 	}
 }

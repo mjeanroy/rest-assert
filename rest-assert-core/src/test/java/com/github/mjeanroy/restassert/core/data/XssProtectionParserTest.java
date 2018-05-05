@@ -22,36 +22,33 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.FrameOptions;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import org.asynchttpclient.Response;
+import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
+public class XssProtectionParserTest {
 
-	private static final FrameOptions VALUE = FrameOptions.deny();
-
-	@Override
-	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+	@Test
+	public void it_should_parse_0() {
+		XssProtectionParser parser = XssProtection.parser();
+		assertThat(parser.parse("0")).isEqualTo(XssProtection.DISABLE);
+		assertThat(parser.parse(" 0 ")).isEqualTo(XssProtection.DISABLE);
 	}
 
-	@Override
-	protected String failValue() {
-		return FrameOptions.sameOrigin().serializeValue();
+	@Test
+	public void it_should_parse_1() {
+		XssProtectionParser parser = XssProtection.parser();
+		assertThat(parser.parse("1")).isEqualTo(XssProtection.ENABLE);
+		assertThat(parser.parse(" 1 ")).isEqualTo(XssProtection.ENABLE);
 	}
 
-	@Override
-	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
-	}
-
-	@Override
-	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+	@Test
+	public void it_should_parse_1_with_block_mode() {
+		XssProtectionParser parser = XssProtection.parser();
+		assertThat(parser.parse("1; mode=block")).isEqualTo(XssProtection.ENABLE_BLOCK);
+		assertThat(parser.parse("1;mode=block")).isEqualTo(XssProtection.ENABLE_BLOCK);
+		assertThat(parser.parse(" 1 ; mode=block ")).isEqualTo(XssProtection.ENABLE_BLOCK);
 	}
 }

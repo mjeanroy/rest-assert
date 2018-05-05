@@ -22,36 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.FrameOptions;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import org.asynchttpclient.Response;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+/**
+ * Parser for {@link FrameOptions} value.
+ */
+public class FrameOptionsParser extends AbstractHeaderParser<FrameOptions> {
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
-
-	private static final FrameOptions VALUE = FrameOptions.deny();
-
-	@Override
-	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+	// Ensure no public instantiation.
+	FrameOptionsParser() {
 	}
 
 	@Override
-	protected String failValue() {
-		return FrameOptions.sameOrigin().serializeValue();
-	}
+	protected FrameOptions doParse(String value) {
+		String rawValue = value.toUpperCase();
+		for (FrameOptions.Directive x : FrameOptions.Directive.values()) {
+			if (x.match(rawValue)) {
+				return x.parse(value);
+			}
+		}
 
-	@Override
-	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
-	}
-
-	@Override
-	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		return null;
 	}
 }

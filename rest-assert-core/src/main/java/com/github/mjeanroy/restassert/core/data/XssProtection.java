@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
- * Values of valid XSS protection header.
+ * Values of valid XSS protection value.
+ *
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
  */
 public enum XssProtection implements HeaderValue {
 
@@ -39,7 +39,7 @@ public enum XssProtection implements HeaderValue {
 	DISABLE("0") {
 		@Override
 		boolean match(String value) {
-			return value.equals(header);
+			return value.equals(this.value);
 		}
 	},
 
@@ -49,7 +49,7 @@ public enum XssProtection implements HeaderValue {
 	ENABLE("1") {
 		@Override
 		boolean match(String value) {
-			return value.equals(header);
+			return value.equals(this.value);
 		}
 	},
 
@@ -60,7 +60,14 @@ public enum XssProtection implements HeaderValue {
 	ENABLE_BLOCK("1; mode=block") {
 		@Override
 		boolean match(String value) {
-			return value.equals(header);
+			String[] parts = this.value.split(";", 2);
+			if (parts.length != 2) {
+				return false;
+			}
+
+			String mode = parts[0].trim().toLowerCase();
+			String option = parts[1].trim().toLowerCase();
+			return mode.equals("1") && option.equals("mode=block");
 		}
 	};
 
@@ -74,47 +81,29 @@ public enum XssProtection implements HeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static HeaderParser parser() {
+	public static XssProtectionParser parser() {
 		return PARSER;
 	}
 
 	/**
-	 * The header value.
+	 * The value value.
 	 */
-	final String header;
+	final String value;
 
-	XssProtection(String header) {
-		this.header = header;
+	XssProtection(String value) {
+		this.value = value;
 	}
 
 	@Override
 	public String serializeValue() {
-		return header;
+		return value;
 	}
 
 	/**
-	 * Check if header raw value match specified value.
+	 * Check if value raw value match specified value.
 	 *
 	 * @param value Raw value.
 	 * @return {@code true} if {@code value} match specified value, {@code false} otherwise.
 	 */
 	abstract boolean match(String value);
-
-	/**
-	 * Parser for {@link XssProtection} header.
-	 */
-	private static class XssProtectionParser extends AbstractHeaderParser {
-
-		@Override
-		protected HeaderValue doParse(String value) {
-			String rawValue = value.toLowerCase();
-			for (XssProtection x : XssProtection.values()) {
-				if (x.match(rawValue)) {
-					return x;
-				}
-			}
-
-			return null;
-		}
-	}
 }

@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+
 public class AssertIsFrameOptionsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.DENY;
+	private static final FrameOptions VALUE = FrameOptions.deny();
 
 	@Override
 	protected Header getHeader() {

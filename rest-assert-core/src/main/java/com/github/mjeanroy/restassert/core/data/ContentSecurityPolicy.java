@@ -71,12 +71,12 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	}
 
 	/**
-	 * List of header directives.
+	 * List of value directives.
 	 */
 	private final Map<SourceDirective, Set<Source>> directives;
 
 	/**
-	 * Create CSP header object.
+	 * Create CSP value object.
 	 *
 	 * @param directives Header directives.
 	 */
@@ -346,13 +346,12 @@ public final class ContentSecurityPolicy implements HeaderValue {
 
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
-
 			}
 		};
 
 		/**
 		 * Name of directive.
-		 * This name is the directive label in CSP header.
+		 * This name is the directive label in CSP value.
 		 */
 		private final String name;
 
@@ -370,7 +369,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		}
 
 		/**
-		 * Parse header directive value.
+		 * Parse value directive value.
 		 *
 		 * @param headerValue Directive value.
 		 * @param builder Current builder.
@@ -887,7 +886,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Label as specified by RFC.
 		 *
-		 * @return Sandbox value appearing in CSP header.
+		 * @return Sandbox value appearing in CSP value.
 		 */
 		@Override
 		public String getValue() {

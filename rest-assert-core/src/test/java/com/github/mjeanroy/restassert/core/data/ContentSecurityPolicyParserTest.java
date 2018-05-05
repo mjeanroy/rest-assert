@@ -283,7 +283,7 @@ public class ContentSecurityPolicyParserTest {
 		ContentSecurityPolicyParser parser = ContentSecurityPolicy.parser();
 
 		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cannot parse Content-Security-Policy header since directive foo seems not valid");
+		thrown.expectMessage("Cannot parse Content-Security-Policy value since directive foo seems not valid");
 
 		parser.parse("default-src 'none'; foo http://domain.com");
 	}
@@ -293,7 +293,7 @@ public class ContentSecurityPolicyParserTest {
 		ContentSecurityPolicyParser parser = ContentSecurityPolicy.parser();
 
 		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header default-src 'none'; ; is not a valid Content-Security-Policy header");
+		thrown.expectMessage("Header default-src 'none'; ; is not a valid Content-Security-Policy value");
 
 		parser.parse("default-src 'none'; ;");
 	}

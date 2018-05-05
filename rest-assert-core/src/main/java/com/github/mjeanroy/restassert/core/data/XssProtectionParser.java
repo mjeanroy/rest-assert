@@ -22,36 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.FrameOptions;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
-import org.asynchttpclient.Response;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+/**
+ * Parser for {@link XssProtection} value.
+ */
+public class XssProtectionParser extends AbstractHeaderParser<XssProtection> {
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
-
-	private static final FrameOptions VALUE = FrameOptions.deny();
-
-	@Override
-	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+	// Ensure no public instantiation.
+	XssProtectionParser() {
 	}
 
 	@Override
-	protected String failValue() {
-		return FrameOptions.sameOrigin().serializeValue();
-	}
+	protected XssProtection doParse(String value) {
+		String rawValue = value.toLowerCase();
 
-	@Override
-	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
-	}
+		for (XssProtection x : XssProtection.values()) {
+			if (x.match(rawValue)) {
+				return x;
+			}
+		}
 
-	@Override
-	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+		return null;
 	}
 }

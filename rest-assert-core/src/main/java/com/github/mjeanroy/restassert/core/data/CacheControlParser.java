@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 /**
- * Parser for {@link CacheControl} header.
+ * Parser for {@link CacheControl} value.
  */
 class CacheControlParser extends AbstractHeaderParser<CacheControl> {
 
@@ -45,7 +45,7 @@ class CacheControlParser extends AbstractHeaderParser<CacheControl> {
 
 	@Override
 	protected CacheControl doParse(String value) {
-		log.debug("Parsing Cache-Control header: '{}'", value);
+		log.debug("Parsing Cache-Control value: '{}'", value);
 
 		String[] parts = value.split(",");
 		CacheControlBuilder builder = new CacheControlBuilder();

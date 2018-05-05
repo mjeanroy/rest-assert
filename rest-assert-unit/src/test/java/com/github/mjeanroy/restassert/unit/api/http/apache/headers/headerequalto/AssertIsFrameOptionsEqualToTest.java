@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+
 public class AssertIsFrameOptionsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.DENY;
+	private static final FrameOptions VALUE = FrameOptions.deny();
 
 	@Override
 	protected Header getHeader() {

@@ -24,19 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-import static org.assertj.core.api.Assertions.assertThat;
-
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.core.data.FrameOptions.allowFrom;
+import static com.github.mjeanroy.restassert.core.data.FrameOptions.sameOrigin;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.DENY;
+	private static final FrameOptions VALUE = FrameOptions.parser().parse("deny");
 
 	@Override
 	protected Header getHeader() {
@@ -55,11 +57,12 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	@Test
 	public void it_should_check_that_allow_from_value_match() {
+		String uri = "https://www.google.com";
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-			.addHeader(X_FRAME_OPTIONS.getName(), "allow-from https://www.google.com")
+			.addHeader(X_FRAME_OPTIONS.getName(), "allow-from " + uri)
 			.build();
 
-		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, FrameOptions.ALLOW_FROM);
+		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, allowFrom(uri));
 
 		assertThat(r).isNotNull();
 		assertThat(r.isSuccess()).isTrue();
@@ -72,7 +75,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 			.addHeader(X_FRAME_OPTIONS.getName(), "deny")
 			.build();
 
-		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, FrameOptions.ALLOW_FROM);
+		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, sameOrigin());
 
 		assertThat(r).isNotNull();
 		assertThat(r.isSuccess()).isFalse();
