@@ -22,33 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.spring.mimetype;
+package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
+
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-import static java.util.Arrays.asList;
 
-import java.util.List;
-
-import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
-import org.springframework.test.web.servlet.ResultActions;
-
-public class AssertHasMimeTypeInTest extends AbstractSpringMockMvcHttpClientMimeTypeInTest {
-
-	private static final List<String> MIME_TYPES = asList(TEXT_CSS, TEXT_PLAIN);
+public class HasMimeTypeStringTest extends AbstractMimeTypeTest {
 
 	@Override
-	protected List<String> getMimeTypes() {
-		return MIME_TYPES;
+	protected String getMimeType() {
+		return TEXT_CSS;
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
-		SpringMockMvcHttpAssert.assertHasMimeTypeIn(actual, MIME_TYPES);
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.hasMimeType(response, getMimeType());
 	}
 
-	@Override
-	protected void invoke(String message, ResultActions actual) {
-		SpringMockMvcHttpAssert.assertHasMimeTypeIn(message, actual, MIME_TYPES);
+	@Test
+	public void it_should_fail_if_response_does_not_have_content_type() {
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
+		AssertionResult result = assertions.hasMimeType(rsp, getMimeType());
+		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
 	}
 }

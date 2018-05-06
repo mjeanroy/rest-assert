@@ -22,33 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.core.mimetype;
+package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 
-import java.util.List;
+/**
+ * Parser for {@link MediaType} values.
+ */
+public final class MediaTypeParser extends AbstractHeaderParser<MediaType> {
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
-
-public class AssertHasMimeTypeInTest extends AbstractCoreHttpClientMimeTypeInTest {
-
-	private static final List<String> MIME_TYPES = asList(TEXT_CSS, TEXT_PLAIN);
-
-	@Override
-	protected List<String> getMimeTypes() {
-		return MIME_TYPES;
+	// Ensure no public instantiation.
+	MediaTypeParser() {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
-		HttpAssert.assertHasMimeTypeIn(actual, MIME_TYPES);
-	}
+	protected MediaType doParse(String value) {
+		String[] parts = value.split("/", 2);
+		if (parts.length != 2) {
+			return null;
+		}
 
-	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		HttpAssert.assertHasMimeTypeIn(message, actual, MIME_TYPES);
+		String type = parts[0].trim().toLowerCase();
+		String subtype = parts[1].trim().toLowerCase();
+		return new MediaType(type, subtype);
 	}
 }

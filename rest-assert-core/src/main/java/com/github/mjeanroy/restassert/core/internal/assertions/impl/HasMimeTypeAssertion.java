@@ -24,19 +24,23 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
+import java.util.Collection;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static java.util.Collections.singleton;
 
 /**
@@ -52,7 +56,7 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	/**
 	 * Expected mime-type.
 	 */
-	private final Iterable<String> mimeTypes;
+	private final Collection<MediaType> mimeTypes;
 
 	/**
 	 * Flag to know if assertion is made against a single value or an list of values.
@@ -64,11 +68,9 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	 *
 	 * @param mimeType Mime-Type value.
 	 */
-	public HasMimeTypeAssertion(String mimeType) {
+	public HasMimeTypeAssertion(MediaType mimeType) {
 		super(HttpHeader.CONTENT_TYPE.getName());
-
-		notBlank(mimeType, "Mime-Type value must be defined");
-		this.mimeTypes = singleton(mimeType);
+		this.mimeTypes = singleton(notNull(mimeType, "Mime-Type value must be defined"));
 		this.singular = true;
 	}
 
@@ -77,7 +79,7 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	 *
 	 * @param mimeTypes Mime-Type value.
 	 */
-	public HasMimeTypeAssertion(Iterable<String> mimeTypes) {
+	public HasMimeTypeAssertion(Collection<MediaType> mimeTypes) {
 		super(HttpHeader.CONTENT_TYPE.getName());
 		this.mimeTypes = notEmpty(mimeTypes, "Mime-Type values must be defined");
 		this.singular = false;
@@ -86,22 +88,23 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	@Override
 	AssertionResult doAssertion(List<String> values) {
 		String contentType = values.get(0);
-		log.debug("Parsing Content-Type: '{}'", contentType);
+		log.debug("Parsing Content-Type: {}", contentType);
 
-		String actualMimeType = contentType.split(";")[0].trim();
-		log.debug("-> Extracted mime-type: '{}'", actualMimeType);
+		String rawValue = contentType.split(";", 2)[0].trim();
+		MediaType mediaType = MediaType.parser().parse(rawValue);
+		log.debug("-> Extracted mime-type: {} --> {}", rawValue, mediaType);
 
 		boolean found = false;
 
-		for (String current : mimeTypes) {
-			if (actualMimeType.equalsIgnoreCase(current)) {
+		for (MediaType current : mimeTypes) {
+			if (current.equals(mediaType)) {
 				log.debug("-> Found a match with: '{}'", current);
 				found = true;
 				break;
 			}
 		}
 
-		return found ? success() : failure(getFailure(actualMimeType));
+		return found ? success() : failure(getFailure(rawValue));
 	}
 
 	/**
@@ -111,6 +114,35 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	 * @return The error instance.
 	 */
 	private ShouldHaveMimeType getFailure(String actualMimeType) {
-		return singular ? shouldHaveMimeType(mimeTypes.iterator().next(), actualMimeType) : shouldHaveMimeType(mimeTypes, actualMimeType);
+		return singular ? getSingularFailure(actualMimeType) : getPluralFailure(actualMimeType);
+	}
+
+	/**
+	 * Get failure instance when there was only one expected mime-type to test.
+	 *
+	 * @param actualMimeType The actual mime type.
+	 * @return The failure instance.
+	 */
+	private ShouldHaveMimeType getSingularFailure(String actualMimeType) {
+		MediaType mediaType = mimeTypes.iterator().next();
+		String rawValue = mediaType.serializeValue();
+		return shouldHaveMimeType(rawValue, actualMimeType);
+	}
+
+	/**
+	 * Get failure instance when there was a list of expected media-type.
+	 *
+	 * @param actualMimeType The actual mime type.
+	 * @return The failure instance.
+	 */
+	private ShouldHaveMimeType getPluralFailure(String actualMimeType) {
+		List<String> rawValues = map(mimeTypes, new Mapper<MediaType, String>() {
+			@Override
+			public String apply(MediaType input) {
+				return input.serializeValue();
+			}
+		});
+
+		return shouldHaveMimeType(rawValues, actualMimeType);
 	}
 }

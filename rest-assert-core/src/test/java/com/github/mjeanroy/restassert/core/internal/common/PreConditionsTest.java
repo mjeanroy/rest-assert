@@ -28,7 +28,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.*;
+import java.util.Collection;
+
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isGreaterThan;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isInRange;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
@@ -148,5 +156,65 @@ public class PreConditionsTest {
 	public void isInRange_should_not_fail_if_value_is_equal_to_max() {
 		int val = 0;
 		assertThat(isInRange(val, val - 1, val, "foo")).isEqualTo(val);
+	}
+
+	@Test
+	public void notEmpty_should_return_not_empty_iterable() {
+		String message = "message";
+		Iterable<String> inputs = singleton("foo");
+		Iterable<String> result = notEmpty(inputs, message);
+		assertThat(result).isSameAs(inputs);
+	}
+
+	@Test
+	public void notEmpty_should_fail_with_null_iterable() {
+		String message = "message";
+		Iterable<Object> inputs = null;
+
+		thrown.expect(NullPointerException.class);
+		thrown.expectMessage(message);
+
+		notEmpty(inputs, message);
+	}
+
+	@Test
+	public void notEmpty_should_fail_with_empty_iterable() {
+		String message = "message";
+		Iterable<Object> inputs = emptyList();
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage(message);
+
+		notEmpty(inputs, message);
+	}
+
+	@Test
+	public void notEmpty_should_return_not_empty_collection() {
+		String message = "message";
+		Collection<String> inputs = singleton("foo");
+		Collection<String> result = notEmpty(inputs, message);
+		assertThat(result).isSameAs(inputs);
+	}
+
+	@Test
+	public void notEmpty_should_fail_with_null_collection() {
+		String message = "message";
+		Collection<Object> inputs = null;
+
+		thrown.expect(NullPointerException.class);
+		thrown.expectMessage(message);
+
+		notEmpty(inputs, message);
+	}
+
+	@Test
+	public void notEmpty_should_fail_with_empty_collection() {
+		String message = "message";
+		Collection<Object> inputs = emptyList();
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage(message);
+
+		notEmpty(inputs, message);
 	}
 }

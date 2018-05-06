@@ -22,33 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
+package com.github.mjeanroy.restassert.unit.api.http.spring.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.restassert.core.data.MediaType;
+import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
+import org.springframework.test.web.servlet.ResultActions;
 
-import java.util.List;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+public class AssertHasMimeTypeStringTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
-public class AssertHasMimeTypeInTest extends AbstractJunitServersHttpClientMimeTypeInTest {
-
-	private static final List<String> MIME_TYPES = asList(TEXT_CSS, TEXT_PLAIN);
+	private static final String RAW_VALUE = APPLICATION_JSON;
+	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);
 
 	@Override
-	protected List<String> getMimeTypes() {
-		return MIME_TYPES;
+	protected String getMimeType() {
+		return RAW_VALUE;
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertHasMimeTypeIn(actual, MIME_TYPES);
+	protected void invoke(ResultActions actual) {
+		SpringMockMvcHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertHasMimeTypeIn(message, actual, MIME_TYPES);
+	protected void invoke(String message, ResultActions actual) {
+		SpringMockMvcHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

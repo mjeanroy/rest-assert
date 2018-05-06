@@ -24,27 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
+
 public class AssertHasMimeTypeTest extends AbstractGoogleHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = APPLICATION_JSON;
+	private static final String RAW_VALUE = APPLICATION_JSON;
+	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);
 
 	@Override
 	protected String getMimeType() {
-		return MIME_TYPE;
+		return RAW_VALUE;
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		GoogleHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+		GoogleHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		GoogleHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
+		GoogleHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

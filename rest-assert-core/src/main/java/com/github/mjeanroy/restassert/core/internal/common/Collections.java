@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -50,6 +51,25 @@ public final class Collections {
 		for (T input : inputs) {
 			outputs.add(mapper.apply(input));
 		}
+		return outputs;
+	}
+
+	/**
+	 * Map each element of input list to an output list.
+	 *
+	 * @param inputs Input list.
+	 * @param mapper Mapper function.
+	 * @param <T> Input type.
+	 * @param <U> Output type.
+	 * @return Outputs.
+	 */
+	public static <T, U> List<U> map(Iterable<T> inputs, Mapper<T, U> mapper) {
+		int size = inputs instanceof Collection ? ((Collection) inputs).size() : 10;
+		List<U> outputs = new ArrayList<>(size);
+		for (T input : inputs) {
+			outputs.add(mapper.apply(input));
+		}
+
 		return outputs;
 	}
 

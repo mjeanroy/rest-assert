@@ -24,30 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
 
 public class HasMimeTypeTest extends AbstractMimeTypeTest {
 
+	private static final MediaType VALUE = MediaType.application("json");
+	private static final String RAW_VALUE = VALUE.serializeValue();
+
 	@Override
 	protected String getMimeType() {
-		return TEXT_CSS;
+		return RAW_VALUE;
 	}
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.hasMimeType(response, getMimeType());
-	}
-
-	@Test
-	public void it_should_fail_if_response_does_not_have_content_type() {
-		HttpResponse rsp = new HttpResponseBuilderImpl().build();
-		AssertionResult result = assertions.hasMimeType(rsp, getMimeType());
-		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
+		return assertions.hasMimeType(response, VALUE);
 	}
 }

@@ -24,27 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
 public class AssertHasMimeTypeTest extends AbstractJunitServersHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = APPLICATION_JSON;
+	private static final String RAW_VALUE = APPLICATION_JSON;
+	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);
 
 	@Override
 	protected String getMimeType() {
-		return MIME_TYPE;
+		return RAW_VALUE;
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+		JunitServersHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
+		JunitServersHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

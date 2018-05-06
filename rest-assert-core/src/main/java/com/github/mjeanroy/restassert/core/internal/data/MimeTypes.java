@@ -24,14 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import com.github.mjeanroy.restassert.core.data.MediaType;
+
 /**
- * List of standards mime types.
+ * List of standards mime types:
  *
- * Media Types format is standardized:
- * http://www.w3.org/Protocols/rfc1341/4_Content-Type.html
+ * <ul>
+ *   <li>Media Types format is standardized: <a href="http://www.w3.org/Protocols/rfc1341/4_Content-Type.html">http://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a></li>
+ *   <li>List of standard mime types: <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">http://www.iana.org/assignments/media-types/media-types.xhtml</a></li>
+ * </ul>
  *
- * List of standard mime types:
- * http://www.iana.org/assignments/media-types/media-types.xhtml
+ * @see <a href="http://www.w3.org/Protocols/rfc1341/4_Content-Type.html">http://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+ * @see <a href="http://www.iana.org/assignments/media-types/media-types.xhtml">http://www.iana.org/assignments/media-types/media-types.xhtml</a>
  */
 public final class MimeTypes {
 
@@ -41,70 +45,81 @@ public final class MimeTypes {
 
 	/**
 	 * Text media type.
-	 * https://tools.ietf.org/html/rfc2046#section-4.1
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc2046#section-4.1">https://tools.ietf.org/html/rfc2046#section-4.1</a>
 	 */
-	public static final String TEXT_PLAIN = "text/plain";
+	public static final MediaType TEXT_PLAIN = MediaType.text("plain");
 
 	/**
 	 * CSV Media Type.
-	 * https://tools.ietf.org/html/rfc4180
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc4180">https://tools.ietf.org/html/rfc4180</a>
 	 */
-	public static final String CSV = "text/csv";
+	public static final MediaType CSV = MediaType.text("csv");
 
 	/**
 	 * PDF Media Type.
-	 * https://tools.ietf.org/html/rfc3778
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc3778">https://tools.ietf.org/html/rfc3778</a>
 	 */
-	public static final String PDF = "application/pdf";
+	public static final MediaType PDF = MediaType.application("pdf");
 
 	/**
 	 * HTML Media Type.
-	 * https://tools.ietf.org/html/rfc2854
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc2854">https://tools.ietf.org/html/rfc2854</a>
 	 */
-	public static final String TEXT_HTML = "text/html";
+	public static final MediaType TEXT_HTML = MediaType.text("html");
 
 	/**
 	 * XHTML Media Type.
-	 * https://tools.ietf.org/html/rfc3236
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc3236">https://tools.ietf.org/html/rfc3236</a>
 	 */
-	public static final String XHTML = "application/xhtml+xml";
+	public static final MediaType XHTML = MediaType.application("xhtml+xml");
 
 	/**
 	 * CSS Media Type.
-	 * https://tools.ietf.org/html/rfc2318
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc2318">https://tools.ietf.org/html/rfc2318</a>
 	 */
-	public static final String CSS = "text/css";
+	public static final MediaType CSS = MediaType.text("css");
 
 	/**
 	 * JSON Media Type.
-	 * https://tools.ietf.org/html/rfc4627
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc4627">https://tools.ietf.org/html/rfc3023</a>
 	 */
-	public static final String JSON = "application/json";
+	public static final MediaType JSON = MediaType.application("json");
 
 	/**
 	 * XML Media Type.
-	 * https://tools.ietf.org/html/rfc3023
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc3023">https://tools.ietf.org/html/rfc3023</a>
 	 */
-	public static final String APPLICATION_XML = "application/xml";
+	public static final MediaType APPLICATION_XML = MediaType.application("xml");
 
 	/**
 	 * XML Media Type.
 	 * Alternative for "application/xml" media type.
-	 * https://tools.ietf.org/html/rfc3023
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc3023">https://tools.ietf.org/html/rfc3023</a>
 	 */
-	public static final String TEXT_XML = "text/xml";
+	public static final MediaType TEXT_XML = MediaType.text("xml");
 
 	/**
 	 * JavaScript Media Type.
-	 * https://tools.ietf.org/html/rfc4329
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc4329">https://tools.ietf.org/html/rfc4329</a>
 	 */
-	public static final String APPLICATION_JAVASCRIPT = "application/javascript";
+	public static final MediaType APPLICATION_JAVASCRIPT = MediaType.application("javascript");
 
 	/**
 	 * JavaScript Media Type.
-	 * https://tools.ietf.org/html/rfc4329
 	 * Obsolete alternative for "application/javascript" media type.
 	 * This alternative may be used by old web server.
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc4329"></a>https://tools.ietf.org/html/rfc4329</a>
 	 */
-	public static final String TEXT_JAVASCRIPT = "text/javascript";
+	public static final MediaType TEXT_JAVASCRIPT = MediaType.text("javascript");
 }

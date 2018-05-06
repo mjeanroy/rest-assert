@@ -24,27 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
+
 public class AssertHasMimeTypeTest extends AbstractOkHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = APPLICATION_JSON;
+	private static final String RAW_VALUE = APPLICATION_JSON;
+	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);
 
 	@Override
 	protected String getMimeType() {
-		return MIME_TYPE;
+		return RAW_VALUE;
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		OkHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+		OkHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		OkHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
+		OkHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.core.data.XssProtection;
@@ -54,6 +55,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_MAX_AGE;
@@ -86,7 +88,6 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_J
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_PLAIN;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
-import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static java.util.Arrays.asList;
 import static java.util.Collections.addAll;
 
@@ -1470,14 +1471,39 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response is expected mime type.
+	 * Check that http response is of expected mime type (a.k.a media type).
+	 *
+	 * Note that comparison is <strong>case insensitive</strong>, so calling assertion with {@code "application/json"} is
+	 * equivalent to {@code "APPLICATION/JSON"}.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedMimeType Expected mime type.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult hasMimeType(HttpResponse httpResponse, String expectedMimeType) {
+		MediaType expected = MediaType.parser().parse(expectedMimeType);
+		return assertWith(httpResponse, new HasMimeTypeAssertion(expected));
+	}
+
+	/**
+	 * Check that HTTP response is of expected mime type (a.k.a media type).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param expectedMimeType Expected mime type.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
+	 */
+	public AssertionResult hasMimeType(HttpResponse httpResponse, MediaType expectedMimeType) {
 		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeType));
+	}
+
+	private AssertionResult hasMimeTypeIn(HttpResponse httpResponse, List<MediaType> expectedMimeTypes) {
+		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeTypes));
 	}
 
 	/**
@@ -1500,17 +1526,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult hasCharset(HttpResponse httpResponse, String expectedCharset) {
 		return assertWith(httpResponse, new HasCharsetAssertion(expectedCharset));
-	}
-
-	/**
-	 * Check that http response is expected mime type.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param expectedMimeType Expected mime type.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasMimeTypeIn(HttpResponse httpResponse, Iterable<String> expectedMimeType) {
-		return assertWith(httpResponse, new HasMimeTypeAssertion(expectedMimeType));
 	}
 
 	/**

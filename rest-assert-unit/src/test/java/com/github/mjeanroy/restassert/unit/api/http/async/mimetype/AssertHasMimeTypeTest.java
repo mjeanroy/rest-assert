@@ -24,27 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
+
 public class AssertHasMimeTypeTest extends AbstractAsyncHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = APPLICATION_JSON;
+	private static final String RAW_VALUE = APPLICATION_JSON;
+	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);
 
 	@Override
 	protected String getMimeType() {
-		return MIME_TYPE;
+		return RAW_VALUE;
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		AsyncHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+		AsyncHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		AsyncHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
+		AsyncHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
+import java.util.Collection;
 import java.util.regex.Pattern;
 
 /**
@@ -46,6 +47,25 @@ public final class PreConditions {
 	public static <T> Iterable<T> notEmpty(Iterable<T> list, String message) {
 		notNull(list, message);
 		if (!list.iterator().hasNext()) {
+			throw new IllegalArgumentException(message);
+		}
+
+		return list;
+	}
+
+	/**
+	 * Check that a given collection is not empty (i.e not null, not empty).
+	 *
+	 * @param list Collection to check.
+	 * @param message Error message if {@code obj} is blank.
+	 * @return Original {@code obj}.
+	 * @throws NullPointerException If {@code obj} is null.
+	 * @throws IllegalArgumentException If {@code obj} is empty.
+	 */
+	public static <T> Collection<T> notEmpty(Collection<T> list, String message) {
+		notNull(list, message);
+
+		if (list.isEmpty()) {
 			throw new IllegalArgumentException(message);
 		}
 

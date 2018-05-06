@@ -22,32 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
+package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
+
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-import static java.util.Collections.singleton;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+public class AssertHasMimeTypeStringTest extends AbstractGoogleHttpClientMimeTypeTest {
 
-public class HasMimeTypeInTest extends AbstractHttpResponseMimeTypeTest {
-
-	@Override
-	protected HttpResponseAssert invoke() {
-		return api.hasMimeTypeIn(singleton(getMimeType()));
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasMimeTypeIn(any(AssertionInfo.class), any(HttpResponse.class), eq(singleton(getMimeType())));
-	}
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
 	protected String getMimeType() {
-		return APPLICATION_JSON;
+		return MIME_TYPE;
+	}
+
+	@Override
+	protected void invoke(HttpResponse actual) {
+		GoogleHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse actual) {
+		GoogleHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

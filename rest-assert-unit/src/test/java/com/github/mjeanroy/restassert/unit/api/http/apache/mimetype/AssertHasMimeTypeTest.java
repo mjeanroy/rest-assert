@@ -24,27 +24,29 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
+
 public class AssertHasMimeTypeTest extends AbstractApacheHttpClientMimeTypeTest {
 
-	private static final String MIME_TYPE = TEXT_CSS;
+	private static final String RAW_VALUE = TEXT_CSS;
+	private static final MediaType VALUE = MediaType.parser().parse(TEXT_CSS);
 
 	@Override
 	protected String getMimeType() {
-		return MIME_TYPE;
+		return RAW_VALUE;
 	}
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+		ApacheHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
+		ApacheHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

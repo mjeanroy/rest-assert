@@ -22,26 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
+package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-import static java.util.Arrays.asList;
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-import java.util.List;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+public class AssertHasMimeTypeStringTest extends AbstractJunitServersHttpClientMimeTypeTest {
 
-public class AssertHasMimeTypeInTest extends AbstractHttpResponsesMimeTypeInTest {
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertHasMimeTypeIn(someInfo(), httpResponse, getMimeTypes());
+	protected String getMimeType() {
+		return MIME_TYPE;
 	}
 
 	@Override
-	protected List<String> getMimeTypes() {
-		return asList(TEXT_CSS, TEXT_PLAIN);
+	protected void invoke(HttpResponse actual) {
+		JunitServersHttpAssert.assertHasMimeType(actual, MIME_TYPE);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse actual) {
+		JunitServersHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

@@ -24,31 +24,27 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-import static java.util.Arrays.asList;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertHasMimeTypeInTest extends AbstractNingHttpClientMimeTypeInTest {
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-	private static final List<String> MIME_TYPES = asList(TEXT_CSS, TEXT_PLAIN);
+public class AssertHasMimeTypeStringTest extends AbstractNingHttpClientMimeTypeTest {
+
+	private static final String MIME_TYPE = APPLICATION_JSON;
 
 	@Override
-	protected List<String> getMimeTypes() {
-		return MIME_TYPES;
+	protected String getMimeType() {
+		return MIME_TYPE;
 	}
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertHasMimeTypeIn(actual, MIME_TYPES);
+		NingHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertHasMimeTypeIn(message, actual, MIME_TYPES);
+		NingHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }
