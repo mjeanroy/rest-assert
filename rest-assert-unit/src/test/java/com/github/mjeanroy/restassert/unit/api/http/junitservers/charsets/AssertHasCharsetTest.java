@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertHasCharsetTest extends AbstractJunitServersHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

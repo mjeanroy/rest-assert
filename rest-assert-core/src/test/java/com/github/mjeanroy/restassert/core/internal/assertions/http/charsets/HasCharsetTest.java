@@ -33,7 +33,7 @@ import org.junit.Test;
 
 public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {

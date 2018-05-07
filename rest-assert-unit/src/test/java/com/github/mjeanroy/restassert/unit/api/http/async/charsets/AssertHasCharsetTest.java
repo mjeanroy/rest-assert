@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 public class AssertHasCharsetTest extends AbstractAsyncHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

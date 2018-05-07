@@ -24,17 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset.shouldHaveCharset;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
-
-import java.util.List;
-
+import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset.shouldHaveCharset;
 
 /**
  * Check that http response has a content-type header with
@@ -50,32 +51,36 @@ public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implemen
 	/**
 	 * Expected charset.
 	 */
-	private final String charset;
+	private final String expectedCharset;
 
 	/**
 	 * Create assertion.
 	 *
-	 * @param charset Charset name.
+	 * @param expectedCharset Charset name.
 	 */
-	public HasCharsetAssertion(String charset) {
+	public HasCharsetAssertion(String expectedCharset) {
 		super(HttpHeader.CONTENT_TYPE.getName());
-		this.charset = notBlank(charset, "Charset value must be defined");
+		this.expectedCharset = notBlank(expectedCharset, "Charset value must be defined");
 	}
 
 	@Override
 	AssertionResult doAssertion(List<String> values) {
-		String contentType = values.get(0);
-		log.debug("Extracting charset from: {}", contentType);
+		String rawValue = values.get(0);
+		log.debug("Extracting expectedCharset from: {}", rawValue);
 
-		String[] contentTypeParts = contentType.split(";");
-		if (contentTypeParts.length == 1) {
+		ContentType contentType = ContentType.parser().parse(rawValue);
+		String actualCharset = contentType.getCharset();
+
+		if (actualCharset == null) {
 			log.debug("Charset value is not specified, fail");
 			return failure(shouldHaveCharset());
 		}
 
-		String actualCharset = contentTypeParts[1].split("=")[1].trim();
-		log.debug("Comparing charset '{}' with '{}'", charset, actualCharset);
+		log.debug("Comparing expectedCharset '{}' with '{}'", actualCharset, expectedCharset);
+		return actualCharset.equalsIgnoreCase(expectedCharset) ? success() : getFailure(actualCharset);
+	}
 
-		return actualCharset.equalsIgnoreCase(charset) ? success() : failure(shouldHaveCharset(charset, actualCharset));
+	private AssertionResult getFailure(String actualCharset) {
+		return failure(shouldHaveCharset(expectedCharset, actualCharset));
 	}
 }

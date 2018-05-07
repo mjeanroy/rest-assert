@@ -36,7 +36,7 @@ public class AssertHasCharsetTypeTest extends AbstractHttpResponsesCharsetTest {
 
 	@Override
 	protected String getCharset() {
-		return CHARSET.toString();
+		return CHARSET.name().toLowerCase();
 	}
 
 	@Override

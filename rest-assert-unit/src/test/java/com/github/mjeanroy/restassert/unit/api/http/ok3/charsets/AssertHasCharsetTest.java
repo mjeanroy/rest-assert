@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 public class AssertHasCharsetTest extends AbstractOkHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

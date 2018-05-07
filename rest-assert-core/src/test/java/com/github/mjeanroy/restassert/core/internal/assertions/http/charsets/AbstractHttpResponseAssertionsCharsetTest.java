@@ -53,24 +53,36 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 
 	@Test
 	public void it_should_fail() {
+		// GIVEN
 		final String expectedCharset = expectedCharset();
 		final String actualCharset = expectedCharset + "foo";
+		final HttpResponse httpResponse = newResponse(actualCharset);
 
-		AssertionResult result = invoke(newResponse(actualCharset));
+		// WHEN
+		final AssertionResult result = invoke(httpResponse);
 
-		checkError(result,
-				ShouldHaveCharset.class,
-				"Expecting response to have charset %s but was %s",
-				expectedCharset, actualCharset
-		);
+		// THEN
+		final Class<ShouldHaveCharset> klassError = ShouldHaveCharset.class;
+		final String pattern = "Expecting response to have charset %s but was %s";
+		final Object[] parameters = {expectedCharset, actualCharset};
+		checkError(result, klassError, pattern, parameters);
 	}
 
-	private HttpResponse newResponse(String charset) {
-		String contentType = format("application/json;charset=%s", charset);
-		return new HttpResponseBuilderImpl()
-			.addHeader("Content-Type", contentType)
-			.build();
-	}
-
+	/**
+	 * Get the expected charset to be tested.
+	 *
+	 * @return Expected charset.
+	 */
 	protected abstract String expectedCharset();
+
+	/**
+	 * Create the fake HTTP response with given charset.
+	 *
+	 * @param charset THe charset.
+	 * @return The HTTP response to be tested.
+	 */
+	private HttpResponse newResponse(String charset) {
+		String contentType = format("application/json; charset=%s", charset);
+		return new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build();
+	}
 }

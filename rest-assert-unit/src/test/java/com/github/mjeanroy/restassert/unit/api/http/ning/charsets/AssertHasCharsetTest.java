@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 public class AssertHasCharsetTest extends AbstractNingHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

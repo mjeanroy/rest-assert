@@ -48,16 +48,19 @@ public class ContentTypeTest {
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
 		assertThat(contentType.getMediaType().getSubtype()).isEqualTo("json");
 
-		assertThat(contentType.getParameters())
-			.hasSize(1)
-			.extracting("name", "value")
-			.containsOnly(tuple("charset", "utf-8"));
+		assertThat(contentType.getParameters()).extracting("name", "value").containsOnly(tuple("charset", "utf-8"));
+		assertThat(contentType.getParameter("charset")).isNotNull();
+		assertThat(contentType.getParameter("charset").getName()).isEqualTo("charset");
+		assertThat(contentType.getParameter("charset").getValue()).isEqualTo("utf-8");
+
+		assertThat(contentType.getCharset()).isNotNull();
+		assertThat(contentType.getCharset()).isEqualTo("utf-8");
 
 		assertThat(contentType.serializeValue()).isEqualTo("application/json; charset=utf-8");
 		assertThat(contentType.toString()).isEqualTo(
 			"ContentType{" +
 				"mediaType=MediaType{type=application, subtype=json}, " +
-				"parameters=[Parameter{name=charset, value=utf-8}]" +
+				"parameters={charset=Parameter{name=charset, value=utf-8}}" +
 			"}"
 		);
 	}
@@ -67,12 +70,16 @@ public class ContentTypeTest {
 		ContentType contentType = contentType(application("json"));
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
 		assertThat(contentType.getMediaType().getSubtype()).isEqualTo("json");
+
 		assertThat(contentType.getParameters()).isEmpty();
+		assertThat(contentType.getParameter("charset")).isNull();
+		assertThat(contentType.getCharset()).isNull();
+
 		assertThat(contentType.serializeValue()).isEqualTo("application/json");
 		assertThat(contentType.toString()).isEqualTo(
 			"ContentType{" +
 				"mediaType=MediaType{type=application, subtype=json}, " +
-				"parameters=[]" +
+				"parameters={}" +
 			"}"
 		);
 	}
@@ -87,6 +94,6 @@ public class ContentTypeTest {
 		thrown.expect(NullPointerException.class);
 		thrown.expectMessage("Media Type must not be null");
 
-		new ContentType(null, Collections.<Parameter>emptySet());
+		new ContentType(null, Collections.<String, Parameter>emptyMap());
 	}
 }

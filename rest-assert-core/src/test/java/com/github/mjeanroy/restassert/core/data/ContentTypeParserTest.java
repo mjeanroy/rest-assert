@@ -82,10 +82,9 @@ public class ContentTypeParserTest {
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
 		assertThat(contentType.getMediaType().getSubtype()).isEqualTo("json");
 
-		assertThat(contentType.getParameters())
-			.hasSize(1)
-			.extracting("name", "value")
-			.containsOnly(tuple("charset", "utf-8"));
+		assertThat(contentType.getParameters()).extracting("name", "value").containsOnly(tuple("charset", "utf-8"));
+		assertThat(contentType.getParameter("charset").getValue()).isEqualTo("utf-8");
+		assertThat(contentType.getCharset()).isEqualTo("utf-8");
 
 		assertThat(contentType.serializeValue()).isEqualTo("application/json; charset=utf-8");
 	}
@@ -98,13 +97,10 @@ public class ContentTypeParserTest {
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
 		assertThat(contentType.getMediaType().getSubtype()).isEqualTo("json");
 
-		assertThat(contentType.getParameters())
-			.hasSize(2)
-			.extracting("name", "value")
-			.containsOnly(
-				tuple("foo", "bar"),
-				tuple("charset", "utf-8")
-			);
+		assertThat(contentType.getParameters()).extracting("name", "value").containsOnly(tuple("foo", "bar"), tuple("charset", "utf-8"));
+		assertThat(contentType.getParameter("foo").getValue()).isEqualTo("bar");
+		assertThat(contentType.getParameter("charset").getValue()).isEqualTo("utf-8");
+		assertThat(contentType.getCharset()).isEqualTo("utf-8");
 
 		assertThat(contentType.serializeValue()).isEqualTo("application/json; foo=bar; charset=utf-8");
 	}

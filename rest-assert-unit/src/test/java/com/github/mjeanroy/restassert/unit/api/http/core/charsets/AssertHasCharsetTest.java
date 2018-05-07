@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 public class AssertHasCharsetTest extends AbstractCoreHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

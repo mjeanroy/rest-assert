@@ -35,7 +35,7 @@ public class AssertHasCharsetTypeTest extends AbstractOkHttpAssertCharsetTest {
 
 	@Override
 	protected String getCharset() {
-		return CHARSET.toString();
+		return CHARSET.name().toLowerCase();
 	}
 
 	@Override

@@ -44,24 +44,32 @@ public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharse
 
 	@Override
 	protected String expectedCharset() {
-		return CHARSET.toString();
+		return CHARSET.displayName().toLowerCase();
 	}
 
 	@Test
 	public void it_should_fail_if_response_does_not_have_content_type() {
-		HttpResponse rsp = new HttpResponseBuilderImpl().build();
-		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+		// GIVEN
+		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
+
+		// WHEN
+		final AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+
+		// THEN
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
 	}
 
 	@Test
 	public void it_should_fail_if_response_has_content_type_without_charset() {
-		HttpResponse rsp = new HttpResponseBuilderImpl()
+		// GIVEN
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
 			.addHeader("Content-Type", "application/json")
 			.build();
 
+		// WHEN
 		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 
+		// THEN
 		checkError(result, ShouldHaveCharset.class, "Expecting response to have defined charset");
 	}
 }

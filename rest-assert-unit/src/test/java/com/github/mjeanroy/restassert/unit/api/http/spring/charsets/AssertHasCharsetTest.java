@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertHasCharsetTest extends AbstractSpringMockMvcHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

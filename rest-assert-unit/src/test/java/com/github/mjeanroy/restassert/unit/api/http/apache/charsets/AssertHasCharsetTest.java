@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 public class AssertHasCharsetTest extends AbstractApacheHttpAssertCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

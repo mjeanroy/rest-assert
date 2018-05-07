@@ -27,12 +27,12 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 
 import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isQuoted;
-import static java.util.Collections.unmodifiableSet;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Parser that translate {@link String} to {@link ContentType} values.
@@ -52,10 +52,10 @@ public final class ContentTypeParser extends AbstractHeaderParser<ContentType> {
 
 		int nbParts = parts.length;
 		if (nbParts == 1) {
-			return new ContentType(mediaType, Collections.<Parameter>emptySet());
+			return new ContentType(mediaType, Collections.<String, Parameter>emptyMap());
 		}
 
-		Set<Parameter> parameters = new LinkedHashSet<>();
+		Map<String, Parameter> parameters = new LinkedHashMap<>();
 
 		for (int i = 1; i < nbParts; ++i) {
 			String part = parts[i].toLowerCase();
@@ -67,9 +67,11 @@ public final class ContentTypeParser extends AbstractHeaderParser<ContentType> {
 				parameterValue = parameterValue.substring(1, parameterValue.length() - 1);
 			}
 
-			parameters.add(parameter(parameterName, parameterValue));
+			if (!parameters.containsKey(parameterName)) {
+				parameters.put(parameterName, parameter(parameterName, parameterValue));
+			}
 		}
 
-		return new ContentType(mediaType, unmodifiableSet(parameters));
+		return new ContentType(mediaType, unmodifiableMap(parameters));
 	}
 }

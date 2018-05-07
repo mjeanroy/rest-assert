@@ -29,15 +29,16 @@ import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 import java.nio.charset.Charset;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static java.util.Collections.singleton;
+import static java.util.Collections.singletonMap;
 
 /**
  * A model for Content-Type values.
@@ -45,6 +46,8 @@ import static java.util.Collections.singleton;
  * @see <a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>
  */
 public final class ContentType implements HeaderValue {
+
+	private static final String CHARSET_PARAMETER_NAME = "charset";
 
 	/**
 	 * Create content-type with given media type and charset.
@@ -54,7 +57,8 @@ public final class ContentType implements HeaderValue {
 	 * @return The associated {@link ContentType}.
 	 */
 	public static ContentType contentType(MediaType mediaType, Charset charset) {
-		return new ContentType(mediaType, singleton(parameter("charset", charset.displayName().toLowerCase())));
+		Parameter parameter = parameter(CHARSET_PARAMETER_NAME, charset.displayName().toLowerCase());
+		return new ContentType(mediaType, singletonMap(CHARSET_PARAMETER_NAME, parameter));
 	}
 
 	/**
@@ -64,7 +68,7 @@ public final class ContentType implements HeaderValue {
 	 * @return The associated {@link ContentType}.
 	 */
 	public static ContentType contentType(MediaType mediaType) {
-		return new ContentType(mediaType, java.util.Collections.<Parameter>emptySet());
+		return new ContentType(mediaType, java.util.Collections.<String, Parameter>emptyMap());
 	}
 
 	/**
@@ -89,7 +93,7 @@ public final class ContentType implements HeaderValue {
 	/**
 	 * The charset, may be {@code null}.
 	 */
-	private final Set<Parameter> parameters;
+	private final Map<String, Parameter> parameters;
 
 	/**
 	 * Create content-type value.
@@ -98,7 +102,7 @@ public final class ContentType implements HeaderValue {
 	 * @param parameters The header parameters, such as charset.
 	 * @throws NullPointerException If {@code mediaType} is {@code null}.
 	 */
-	ContentType(MediaType mediaType, Set<Parameter> parameters) {
+	ContentType(MediaType mediaType, Map<String, Parameter> parameters) {
 		this.mediaType = notNull(mediaType, "Media Type must not be null");
 		this.parameters = parameters;
 	}
@@ -117,8 +121,29 @@ public final class ContentType implements HeaderValue {
 	 *
 	 * @return {@link #parameters}
 	 */
-	public Set<Parameter> getParameters() {
-		return parameters;
+	public Collection<Parameter> getParameters() {
+		return parameters.values();
+	}
+
+	/**
+	 * Get parameter by its name.
+	 *
+	 * @param name Parameter name.
+	 * @return The parameter, {@code null} if parameter was not defined.
+	 */
+	public Parameter getParameter(String name) {
+		return parameters.get(name.toLowerCase());
+	}
+
+	/**
+	 * Get the {@code charset} parameter, this is a shortcut for {@link #getParameter(String)}
+	 * called with {@code "charset"}.
+	 *
+	 * @return The charset parameter, {@code null} if it was not defined.
+	 */
+	public String getCharset() {
+		Parameter parameter = parameters.get(CHARSET_PARAMETER_NAME);
+		return parameter == null ? null : parameter.getValue();
 	}
 
 	@Override
@@ -126,7 +151,7 @@ public final class ContentType implements HeaderValue {
 		String output = mediaType.serializeValue();
 
 		if (!parameters.isEmpty()) {
-			List<String> options = map(parameters, new Mapper<Parameter, String>() {
+			List<String> options = map(parameters.values(), new Mapper<Parameter, String>() {
 				@Override
 				public String apply(Parameter input) {
 					return input.serializeValue();

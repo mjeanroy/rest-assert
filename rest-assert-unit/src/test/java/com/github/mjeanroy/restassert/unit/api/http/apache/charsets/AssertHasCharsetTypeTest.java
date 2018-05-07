@@ -31,11 +31,11 @@ import java.nio.charset.Charset;
 
 public class AssertHasCharsetTypeTest extends AbstractApacheHttpAssertCharsetTest {
 
-	private static final Charset CHARSET = Charset.forName("UTF-8");
+	private static final Charset CHARSET = Charset.forName("utf-8");
 
 	@Override
 	protected String getCharset() {
-		return CHARSET.toString();
+		return CHARSET.name().toLowerCase();
 	}
 
 	@Override

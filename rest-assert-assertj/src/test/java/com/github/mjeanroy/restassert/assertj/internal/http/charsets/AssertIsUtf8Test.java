@@ -32,7 +32,7 @@ public class AssertIsUtf8Test extends AbstractHttpResponsesCharsetTest {
 
 	@Override
 	protected String getCharset() {
-		return "UTF-8";
+		return "utf-8";
 	}
 
 	@Override

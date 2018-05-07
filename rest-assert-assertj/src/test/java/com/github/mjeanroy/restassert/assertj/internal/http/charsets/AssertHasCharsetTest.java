@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo
 
 public class AssertHasCharsetTest extends AbstractHttpResponsesCharsetTest {
 
-	private static final String CHARSET = "UTF-8";
+	private static final String CHARSET = "utf-8";
 
 	@Override
 	protected String getCharset() {

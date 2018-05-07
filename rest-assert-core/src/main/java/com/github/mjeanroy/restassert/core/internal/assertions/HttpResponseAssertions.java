@@ -52,6 +52,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
 import com.github.mjeanroy.restassert.documentation.Documentation;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -1465,7 +1466,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isUtf8(HttpResponse httpResponse) {
-		return hasCharset(httpResponse, "UTF-8");
+		return hasCharset(httpResponse, StandardCharsets.UTF_8);
 	}
 
 	/**
@@ -1550,7 +1551,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasCharset(HttpResponse httpResponse, Charset expectedCharset) {
-		return hasCharset(httpResponse, expectedCharset.name());
+		return hasCharset(httpResponse, expectedCharset.name().toLowerCase());
 	}
 
 	/**

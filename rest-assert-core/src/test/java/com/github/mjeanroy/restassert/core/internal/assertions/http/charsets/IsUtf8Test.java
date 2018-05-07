@@ -36,6 +36,6 @@ public class IsUtf8Test extends AbstractHttpResponseAssertionsCharsetTest {
 
 	@Override
 	protected String expectedCharset() {
-		return "UTF-8";
+		return "utf-8";
 	}
 }
