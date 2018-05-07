@@ -22,32 +22,55 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.core.data.ContentType;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class AssertIsContentTypeEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+public class IsContentTypeEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final Header HEADER = JSON_CONTENT_TYPE;
-	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
+	private static final String VALUE = JSON_CONTENT_TYPE.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return HEADER;
+		return JSON_CONTENT_TYPE;
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
+	protected AssertionResult invoke(HttpResponse response) {
+		return assertions.isContentTypeEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
+	protected boolean allowMultipleValues() {
+		return false;
+	}
+
+	@Test
+	public void it_should_be_a_case_insensitive_comparison() {
+		invoke("APPLICATION/JSON; charset=utf-8");
+	}
+
+	@Test
+	public void it_should_compare_with_quoted_charset() {
+		invoke("application/json; charset='utf-8'");
+	}
+
+	private void invoke(String rawValue) {
+		// GIVEN
+		final String name = "Content-Type";
+		final Header header = Header.header(name, rawValue);
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(header).build();
+
+		// WHEN
+		AssertionResult result = assertions.isContentTypeEqualTo(response, VALUE);
+
+		// THEN
+		checkSuccess(result);
 	}
 }

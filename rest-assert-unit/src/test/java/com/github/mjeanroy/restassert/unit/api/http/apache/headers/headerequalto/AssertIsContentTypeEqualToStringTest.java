@@ -22,26 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.assertions;
+package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
-public abstract class AbstractAssertionsTest<T> {
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-	/**
-	 * Invoke main test.
-	 *
-	 * @param testedObject Object to be tested.
-	 * @return Assertion result.
-	 */
-	protected abstract AssertionResult invoke(T testedObject);
+public class AssertIsContentTypeEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	protected void checkSuccess(AssertionResult result) {
-		assertSuccessResult(result);
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final String VALUE = HEADER.getValue();
+
+	@Override
+	protected Header getHeader() {
+		return HEADER;
 	}
 
-	protected void checkError(AssertionResult result, Class<?> klassError, String pattern, Object... args) {
-		assertFailureResult(result, klassError, pattern, args);
+	@Override
+	protected void invoke(HttpResponse actual) {
+		ApacheHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
+	}
+
+	@Override
+	protected void invoke(String message, HttpResponse actual) {
+		ApacheHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 }

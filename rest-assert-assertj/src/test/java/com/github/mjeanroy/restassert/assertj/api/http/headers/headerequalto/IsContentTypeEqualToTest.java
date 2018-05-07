@@ -26,8 +26,12 @@ package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
+import com.github.mjeanroy.restassert.core.data.ContentType;
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
+
+import java.nio.charset.StandardCharsets;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
@@ -35,13 +39,18 @@ import static org.mockito.Mockito.verify;
 
 public class IsContentTypeEqualToTest extends AbstractHttpResponseHeaderTest {
 
+	private static final ContentType VALUE = ContentType.contentType(
+		MediaType.application("json"),
+		StandardCharsets.UTF_8
+	);
+
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isContentTypeEqualTo(getHeader().getValue());
+		return api.isContentTypeEqualTo(VALUE);
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsContentTypeEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+		verify(assertions).assertIsContentTypeEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
 	}
 }

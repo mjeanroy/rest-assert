@@ -26,6 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions;
 
 import com.github.mjeanroy.restassert.core.data.CacheControl;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.core.data.MediaType;
@@ -561,6 +562,16 @@ public final class HttpResponseAssertions {
 	/**
 	 * Check that HTTP response contains {@code "Content-Type"} header with expected value.
 	 *
+	 * According to the specification, comparison will be case-insensitive, and charset options may be
+	 * quoted or not. So following values are all equivalent:
+	 *
+	 * <ul>
+	 *   <li>Content-Type: application/json; charset=utf-8</li>
+	 *   <li>Content-Type: APPLICATION/JSON; charset=UTF-8</li>
+	 *   <li>Content-Type: application/json; charset='utf-8'</li>
+	 *   <li>Content-Type: application/json; charset="utf-8"</li>
+	 * </ul>
+	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param contentTypeValue Expected value.
 	 * @return Assertion result.
@@ -568,7 +579,32 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, String contentTypeValue) {
-		return isHeaderEqualTo(httpResponse, CONTENT_TYPE.getName(), contentTypeValue);
+		return isContentTypeEqualTo(httpResponse, ContentType.parser().parse(contentTypeValue));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Content-Type"} header with expected value.
+	 *
+	 * Here is an example to create a {@code "Content-Type"} using the {@link ContentType} factories:
+	 *
+	 * <pre><code>
+	 *   // Produce "application/json; charset=utf-8" header.
+	 *   public ContentType getApplicationJson() {
+	 *     return ContentType.contentType(
+	 *       MediaType.application("json"),
+	 *       StandardCharsets.UTF_8
+	 *     );
+	 *   }
+	 * </code></pre>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentTypeValue Expected value.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type</a>
+	 */
+	public AssertionResult isContentTypeEqualTo(HttpResponse httpResponse, ContentType contentTypeValue) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_TYPE.getName(), contentTypeValue, ContentType.parser()));
 	}
 
 	/**

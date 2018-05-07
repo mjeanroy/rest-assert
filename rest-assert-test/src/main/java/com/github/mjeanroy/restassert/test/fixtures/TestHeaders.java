@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.test.fixtures;
 
-import static com.github.mjeanroy.restassert.test.data.Header.header;
-
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 /**
  * Static pre-configured headers to use in unit test.
@@ -105,7 +105,7 @@ public final class TestHeaders {
 	/**
 	 * The {@code "Content-Type"} header with {@code "application/json"} value, to use in unit test.
 	 */
-	public static final Header JSON_CONTENT_TYPE = header("Content-Type", "application/json");
+	public static final Header JSON_CONTENT_TYPE = header("Content-Type", "application/json; charset=utf-8");
 
 	/**
 	 * The {@code "Last-Modified"} header, to use in unit test.

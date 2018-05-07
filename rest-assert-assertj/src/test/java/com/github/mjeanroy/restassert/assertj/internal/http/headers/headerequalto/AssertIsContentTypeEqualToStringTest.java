@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.assertions;
+package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-public abstract class AbstractAssertionsTest<T> {
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-	/**
-	 * Invoke main test.
-	 *
-	 * @param testedObject Object to be tested.
-	 * @return Assertion result.
-	 */
-	protected abstract AssertionResult invoke(T testedObject);
+public class AssertIsContentTypeEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	protected void checkSuccess(AssertionResult result) {
-		assertSuccessResult(result);
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final String VALUE = HEADER.getValue();
+
+	@Override
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertIsContentTypeEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
-	protected void checkError(AssertionResult result, Class<?> klassError, String pattern, Object... args) {
-		assertFailureResult(result, klassError, pattern, args);
+	@Override
+	protected Header getHeader() {
+		return HEADER;
 	}
 }

@@ -24,19 +24,21 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
-
+import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
+
 public class AssertIsContentTypeEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-	private static final String VALUE = JSON_CONTENT_TYPE.getValue();
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
 
 	@Override
 	protected Header getHeader() {
-		return JSON_CONTENT_TYPE;
+		return HEADER;
 	}
 
 	@Override

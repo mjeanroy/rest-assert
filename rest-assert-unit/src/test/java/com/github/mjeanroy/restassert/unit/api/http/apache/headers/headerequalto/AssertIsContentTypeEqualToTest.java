@@ -24,19 +24,21 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
-
+import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
+
 public class AssertIsContentTypeEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final String VALUE = JSON_CONTENT_TYPE.getValue();
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
 
 	@Override
 	protected Header getHeader() {
-		return JSON_CONTENT_TYPE;
+		return HEADER;
 	}
 
 	@Override

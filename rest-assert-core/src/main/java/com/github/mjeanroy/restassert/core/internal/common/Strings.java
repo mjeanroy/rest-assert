@@ -29,6 +29,9 @@ package com.github.mjeanroy.restassert.core.internal.common;
  */
 public final class Strings {
 
+	private static final char SINGLE_QUOTE = '\'';
+	private static final char DOUBLE_QUOTE = '"';
+
 	// Ensure non instantiation.
 	private Strings() {
 	}
@@ -55,5 +58,17 @@ public final class Strings {
 		}
 
 		return sb.toString();
+	}
+
+	public static boolean isQuoted(String value) {
+		return value != null && value.length() >= 2 && (isSingleQuoted(value) || isDoubleQuoted(value));
+	}
+
+	private static boolean isSingleQuoted(String value) {
+		return value.charAt(0) == SINGLE_QUOTE && value.charAt(value.length() - 1) == SINGLE_QUOTE;
+	}
+
+	private static boolean isDoubleQuoted(String value) {
+		return value.charAt(0) == DOUBLE_QUOTE && value.charAt(value.length() - 1) == DOUBLE_QUOTE;
 	}
 }

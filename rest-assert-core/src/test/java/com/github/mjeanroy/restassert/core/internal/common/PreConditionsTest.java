@@ -217,4 +217,34 @@ public class PreConditionsTest {
 
 		notEmpty(inputs, message);
 	}
+
+	@Test
+	public void notEmpty_should_return_not_empty_string() {
+		String message = "message";
+		String input = "foo";
+		String result = notEmpty(input, message);
+		assertThat(result).isSameAs(input);
+	}
+
+	@Test
+	public void notEmpty_should_fail_with_null_string() {
+		String message = "message";
+		String input = null;
+
+		thrown.expect(NullPointerException.class);
+		thrown.expectMessage(message);
+
+		notEmpty(input, message);
+	}
+
+	@Test
+	public void notEmpty_should_fail_with_empty_string() {
+		String message = "message";
+		String input = "";
+
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage(message);
+
+		notEmpty(input, message);
+	}
 }

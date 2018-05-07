@@ -22,26 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.assertions;
+package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
+import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-public abstract class AbstractAssertionsTest<T> {
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
 
-	/**
-	 * Invoke main test.
-	 *
-	 * @param testedObject Object to be tested.
-	 * @return Assertion result.
-	 */
-	protected abstract AssertionResult invoke(T testedObject);
+public class IsContentTypeEqualToStringTest extends AbstractHttpResponseHeaderTest {
 
-	protected void checkSuccess(AssertionResult result) {
-		assertSuccessResult(result);
+	@Override
+	protected HttpResponseAssert invoke() {
+		return api.isContentTypeEqualTo(getHeader().getValue());
 	}
 
-	protected void checkError(AssertionResult result, Class<?> klassError, String pattern, Object... args) {
-		assertFailureResult(result, klassError, pattern, args);
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsContentTypeEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
 	}
 }

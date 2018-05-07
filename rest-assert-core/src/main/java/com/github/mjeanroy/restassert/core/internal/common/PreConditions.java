@@ -36,6 +36,25 @@ public final class PreConditions {
 	}
 
 	/**
+	 * Check that a given string is not empty (i.e not null, not empty).
+	 *
+	 * @param input String to check.
+	 * @param message Error message if {@code obj} is blank.
+	 * @return Original {@code obj}.
+	 * @throws NullPointerException If {@code obj} is null.
+	 * @throws IllegalArgumentException If {@code obj} is empty.
+	 */
+	public static String notEmpty(String input, String message) {
+		notNull(input, message);
+
+		if (input.isEmpty()) {
+			throw new IllegalArgumentException(message);
+		}
+
+		return input;
+	}
+
+	/**
 	 * Check that a given collection is not empty (i.e not null, not empty).
 	 *
 	 * @param list Collection to check.

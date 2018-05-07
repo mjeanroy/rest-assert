@@ -24,15 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
-
+import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
+
 public class AssertIsContentTypeEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = JSON_CONTENT_TYPE.getValue();
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -41,6 +43,6 @@ public class AssertIsContentTypeEqualToTest extends AbstractHttpResponsesHeaderE
 
 	@Override
 	protected Header getHeader() {
-		return JSON_CONTENT_TYPE;
+		return HEADER;
 	}
 }
