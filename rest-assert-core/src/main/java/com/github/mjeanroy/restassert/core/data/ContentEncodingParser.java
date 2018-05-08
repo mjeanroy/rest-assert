@@ -22,32 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.ContentEncoding;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import org.apache.http.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+import java.util.ArrayList;
+import java.util.List;
 
-public class AssertIsContentEncodingEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+import static java.util.Collections.unmodifiableList;
 
-	private static final Header HEADER = GZIP_CONTENT_ENCODING;
-	private static final ContentEncoding VALUE = ContentEncoding.gzip();
+/**
+ * Parser for {@link ContentEncoding} header.
+ */
+public class ContentEncodingParser extends AbstractHeaderParser<ContentEncoding> {
 
-	@Override
-	protected Header getHeader() {
-		return HEADER;
+	// Ensure no public instantiation.
+	ContentEncodingParser() {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
-	}
+	protected ContentEncoding doParse(String value) {
+		String[] values = value.split(",");
+		List<Directive> directives = new ArrayList<>(value.length());
+		for (String encoding : values) {
+			String v = encoding.trim().toLowerCase();
+			if (v == null) {
+				throw new IllegalArgumentException(String.format("Content-Encoding directive '%s' cannot be parsed", encoding));
+			}
 
-	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
+			directives.add(Directive.byValue(v));
+		}
+
+		return new ContentEncoding(unmodifiableList(directives));
 	}
 }

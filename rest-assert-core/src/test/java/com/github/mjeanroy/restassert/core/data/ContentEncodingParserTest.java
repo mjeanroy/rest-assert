@@ -22,32 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.ContentEncoding;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import org.apache.http.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
+import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class AssertIsContentEncodingEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+public class ContentEncodingParserTest {
 
-	private static final Header HEADER = GZIP_CONTENT_ENCODING;
-	private static final ContentEncoding VALUE = ContentEncoding.gzip();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
+	@Test
+	public void it_should_parse_header() {
+		ContentEncoding contentEncoding = ContentEncoding.parser().parse("compress, identity");
+		assertThat(contentEncoding.getDirectives()).hasSize(2).containsExactly(Directive.COMPRESS, Directive.IDENTITY);
+		assertThat(contentEncoding.serializeValue()).isEqualTo("compress, identity");
+		assertThat(contentEncoding.toString()).isEqualTo(
+			"ContentEncoding{" +
+				"directives=[COMPRESS, IDENTITY]" +
+			"}"
+		);
 	}
 
-	@Override
-	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
-	}
-
-	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
+	@Test
+	public void it_should_parse_header_case_insensitive() {
+		ContentEncoding contentEncoding = ContentEncoding.parser().parse("GZIP");
+		assertThat(contentEncoding.getDirectives()).hasSize(1).containsExactly(Directive.GZIP);
+		assertThat(contentEncoding.serializeValue()).isEqualTo("gzip");
+		assertThat(contentEncoding.toString()).isEqualTo(
+			"ContentEncoding{" +
+				"directives=[GZIP]" +
+			"}"
+		);
 	}
 }

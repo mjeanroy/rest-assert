@@ -24,19 +24,21 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
+import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+
 public class AssertIsContentEncodingEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final String VALUE = GZIP_CONTENT_ENCODING.getValue();
+	private static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final ContentEncoding VALUE = ContentEncoding.gzip();
 
 	@Override
 	protected Header getHeader() {
-		return GZIP_CONTENT_ENCODING;
+		return HEADER;
 	}
 
 	@Override

@@ -43,7 +43,7 @@ public enum HttpHeader {
 	 * Content Encoding header name.
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
 	 */
-	CONTENT_ENCODING("Content-Encoding", false),
+	CONTENT_ENCODING("Content-Encoding", true),
 
 	/**
 	 * Content Length header name.

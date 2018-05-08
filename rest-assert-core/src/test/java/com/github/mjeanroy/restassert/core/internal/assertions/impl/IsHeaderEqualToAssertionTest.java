@@ -43,12 +43,10 @@ public class IsHeaderEqualToAssertionTest {
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value)
-				.build();
+		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value, false);
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
@@ -58,14 +56,12 @@ public class IsHeaderEqualToAssertionTest {
 	@Test
 	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		final String name = "foo";
-		final String value = "bar";
-		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value + value)
-				.addHeader(name, value)
-				.build();
+		final String v1 = "bar";
+		final String v2 = v1 + v1;
+		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, v1, false);
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, v2).addHeader(name, v1).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
@@ -76,12 +72,10 @@ public class IsHeaderEqualToAssertionTest {
 	public void it_should_fail_if_header_is_not_set() {
 		final String name = "foo";
 		final String value = "bar";
-		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader("bar", "bar")
-				.build();
+		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value, false);
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
@@ -92,13 +86,12 @@ public class IsHeaderEqualToAssertionTest {
 	@Test
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
 		final String name = "foo";
-		final String value = "bar";
-		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value + value)
-				.build();
+		final String v1 = "bar";
+		final String v2 = v1 + v1;
+		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, v1, false);
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, v2).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
@@ -109,13 +102,12 @@ public class IsHeaderEqualToAssertionTest {
 	@Test
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
 		final String name = "Content-Type";
-		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, "application/json");
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, "application/json")
-				.addHeader(name, "application/xml")
-				.build();
+		final String v1 = "application/json";
+		final String v2 = "application/xml";
+		final IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, v1, false);
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, v1).addHeader(name, v2).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
@@ -127,27 +119,27 @@ public class IsHeaderEqualToAssertionTest {
 	public void it_should_fail_if_header_name_is_null() {
 		thrown.expect(NullPointerException.class);
 		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderEqualToAssertion(null, "value");
+		new IsHeaderEqualToAssertion(null, "value", false);
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderEqualToAssertion("", "value");
+		new IsHeaderEqualToAssertion("", "value", false);
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderEqualToAssertion("   ", "value");
+		new IsHeaderEqualToAssertion("   ", "value", false);
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
 		thrown.expect(NullPointerException.class);
 		thrown.expectMessage("Header value must not be null");
-		new IsHeaderEqualToAssertion("name", null);
+		new IsHeaderEqualToAssertion("name", null, false);
 	}
 }

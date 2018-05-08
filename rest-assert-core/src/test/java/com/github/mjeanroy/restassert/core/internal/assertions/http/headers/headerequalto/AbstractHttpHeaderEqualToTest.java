@@ -58,7 +58,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		AssertionResult result = invoke(rsp);
+		final AssertionResult result = invoke(rsp);
 
 		// THEN
 		checkSuccess(result);
@@ -73,15 +73,16 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final boolean allowMultiple = allowMultipleValues();
 
 		// WHEN
-		AssertionResult result = invoke(rsp);
+		final AssertionResult result = invoke(rsp);
 
 		// THEN
 		if (allowMultiple) {
 			checkSuccess(result);
 		} else {
+			final Class<ShouldHaveSingleHeader> klassError = ShouldHaveSingleHeader.class;
 			final String message = "Expecting response to contains header %s with a single value but found: %s";
 			final Object[] args = {h1.getName(), asList(h1.getValue(), h2.getValue())};
-			checkError(result, ShouldHaveSingleHeader.class, message, args);
+			checkError(result, klassError, message, args);
 		}
 	}
 
@@ -110,7 +111,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		AssertionResult result = invoke(rsp);
+		final AssertionResult result = invoke(rsp);
 
 		// THEN
 		final String message = "Expecting response to have header %s";

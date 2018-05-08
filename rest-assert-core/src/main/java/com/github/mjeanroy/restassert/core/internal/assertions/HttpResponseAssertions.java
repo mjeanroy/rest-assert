@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
 import com.github.mjeanroy.restassert.core.data.CacheControl;
+import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
@@ -545,7 +546,7 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag</a>
 	 */
 	public AssertionResult isETagEqualTo(HttpResponse httpResponse, String etagValue) {
-		return isHeaderEqualTo(httpResponse, ETAG.getName(), etagValue);
+		return isHeaderEqualTo(httpResponse, ETAG.getName(), etagValue, false);
 	}
 
 	/**
@@ -626,10 +627,65 @@ public final class HttpResponseAssertions {
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding</a>
 	 */
 	public AssertionResult doesNotHaveContentEncoding(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, CONTENT_ENCODING.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Content-Encoding"} header with
+	 * expected value.
+	 *
+	 * Note that according to the specification, comparison is <strong>case-insensitive</strong>.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentEncodingValue Expected value.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding</a>
+	 */
+	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, String contentEncodingValue) {
+		ContentEncoding contentEncoding = ContentEncoding.parser().parse(contentEncodingValue);
+		return isContentEncodingEqualTo(httpResponse, contentEncoding);
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Content-Encoding"} header with
+	 * expected value.
+	 *
+	 * Note that according to the specification, comparison is <strong>case-insensitive</strong>.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentEncoding Expected value.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding</a>
+	 */
+	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, ContentEncoding contentEncoding) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_ENCODING.getName(), contentEncoding, ContentEncoding.parser()));
+	}
+
+	/**
+	 * Check that http response contains {@code "Content-Encoding"} header with {@code "gzip"}
+	 * value (meaning that response body has been gzipped).
+	 *
+	 * This is a shortcut for checking that {@code "Content-Encoding"} is equal to {@code "gzip").
+	 *
+	 * Note that according to specification, comparison is <strong>case-insensitive</strong> (so {@code "gzip"}
+	 * or {@code "GZIP"} is equivalent).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding</a>
+	 */
+	public AssertionResult isGzipped(HttpResponse httpResponse) {
+		return isContentEncodingEqualTo(httpResponse, ContentEncoding.gzip());
 	}
 
 	/**
@@ -666,31 +722,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION.getName(), contentDispositionValue);
-	}
-
-	/**
-	 * Check that http response contains Content-Encoding header with
-	 * expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param contentEncodingValue Expected value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isContentEncodingEqualTo(HttpResponse httpResponse, String contentEncodingValue) {
-		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING.getName(), contentEncodingValue);
-	}
-
-	/**
-	 * Check that http response contains Content-Encoding header with
-	 * gzip value (meaning that response body has been gzipped).
-	 * This is a shortcut for checking that Content-Encoding is strictly equal
-	 * to "gzip".
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isGzipped(HttpResponse httpResponse) {
-		return isHeaderEqualTo(httpResponse, CONTENT_ENCODING.getName(), "gzip");
 	}
 
 	/**
@@ -732,7 +763,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, String locationValue) {
-		return isHeaderEqualTo(httpResponse, LOCATION.getName(), locationValue);
+		return isHeaderEqualTo(httpResponse, LOCATION.getName(), locationValue, false);
 	}
 
 	/**
@@ -851,7 +882,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
-		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma);
+		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
 	}
 
 	/**
@@ -882,7 +913,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, String cacheControl) {
-		return isHeaderEqualTo(httpResponse, CACHE_CONTROL.getName(), cacheControl);
+		return isHeaderEqualTo(httpResponse, CACHE_CONTROL.getName(), cacheControl, false);
 	}
 
 	/**
@@ -924,7 +955,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, String xssProtection) {
-		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION.getName(), xssProtection);
+		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION.getName(), xssProtection, false);
 	}
 
 	/**
@@ -966,7 +997,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, String contentTypeOptions) {
-		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions);
+		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions, false);
 	}
 
 	/**
@@ -1008,7 +1039,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, String frameOptions) {
-		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions);
+		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions, false);
 	}
 
 	/**
@@ -1050,7 +1081,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, String contentSecurityPolicy) {
-		return isHeaderEqualTo(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy);
+		return isHeaderEqualTo(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy, false);
 	}
 
 	/**
@@ -1092,7 +1123,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, String accessControlAllowOrigin) {
-		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin);
+		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin, false);
 	}
 
 	/**
@@ -1264,7 +1295,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isAccessControlAllowCredentialsEqualTo(HttpResponse httpResponse, boolean flag) {
-		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_CREDENTIALS.getName(), Boolean.toString(flag)));
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_CREDENTIALS.getName(), Boolean.toString(flag), false));
 	}
 
 	/**
@@ -1295,7 +1326,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isAccessControlAllowMaxAgeEqualTo(HttpResponse httpResponse, long maxAge) {
-		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_MAX_AGE.getName(), Long.toString(maxAge)));
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_MAX_AGE.getName(), Long.toString(maxAge), false));
 	}
 
 	/**
@@ -1326,7 +1357,7 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, String strictTransportSecurity) {
-		return isHeaderEqualTo(httpResponse, STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity);
+		return isHeaderEqualTo(httpResponse, STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity, false);
 	}
 
 	/**
@@ -1575,7 +1606,11 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue) {
-		return assertWith(httpResponse, new IsHeaderEqualToAssertion(headerName, headerValue));
+		return isHeaderEqualTo(httpResponse, headerName, headerValue, false);
+	}
+
+	private AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue, boolean caseInsensitive) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(headerName, headerValue, caseInsensitive));
 	}
 
 	/**

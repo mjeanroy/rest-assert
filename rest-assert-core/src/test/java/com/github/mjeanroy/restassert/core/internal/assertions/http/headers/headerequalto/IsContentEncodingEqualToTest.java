@@ -24,19 +24,25 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
+import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = GZIP_CONTENT_ENCODING.getValue();
+	private static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final ContentEncoding VALUE = ContentEncoding.gzip();
+	private static final String HEADER_NAME = HEADER.getName();
 
 	@Override
 	protected Header getHeader() {
-		return GZIP_CONTENT_ENCODING;
+		return HEADER;
 	}
 
 	@Override
@@ -46,6 +52,23 @@ public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest 
 
 	@Override
 	protected boolean allowMultipleValues() {
-		return true;
+		return false;
+	}
+
+	@Test
+	public void it_should_not_pass_with_list_in_wrong_order() {
+		// GIVEN
+		final ContentEncoding expected = ContentEncoding.parser().parse("compress, identity");
+		final ContentEncoding actual = ContentEncoding.parser().parse("identity, compress");
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual.serializeValue()).build();
+
+		// WHEN
+		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
+
+		// THEN
+		final Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
+		final String message = "Expecting response to have header %s equal to %s but was %s";
+		final Object[] args = {HEADER_NAME, expected.serializeValue(), actual.serializeValue()};
+		checkError(result, klassError, message, args);
 	}
 }

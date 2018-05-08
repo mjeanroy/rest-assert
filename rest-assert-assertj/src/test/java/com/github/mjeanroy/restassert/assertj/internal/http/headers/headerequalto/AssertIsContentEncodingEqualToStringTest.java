@@ -22,32 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
+package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.data.ContentEncoding;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import org.apache.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class AssertIsContentEncodingEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+public class AssertIsContentEncodingEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
-	private static final ContentEncoding VALUE = ContentEncoding.gzip();
+	private static final String VALUE = HEADER.getValue();
+
+	@Override
+	protected void invoke(HttpResponse httpResponse) {
+		httpResponses.assertIsContentEncodingEqualTo(someInfo(), httpResponse, VALUE);
+	}
 
 	@Override
 	protected Header getHeader() {
 		return HEADER;
-	}
-
-	@Override
-	protected void invoke(HttpResponse actual) {
-		ApacheHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
-	}
-
-	@Override
-	protected void invoke(String message, HttpResponse actual) {
-		ApacheHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 }

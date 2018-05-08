@@ -26,17 +26,18 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hea
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
+public class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final String VALUE = HEADER.getValue();
 	private static final String HEADER_NAME = HEADER.getName();
-	private static final String HEADER_VALUE = HEADER.getValue();
 
 	@Override
 	protected Header getHeader() {
@@ -45,7 +46,7 @@ public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isGzipped(response);
+		return assertions.isContentEncodingEqualTo(response, VALUE);
 	}
 
 	@Override
@@ -56,13 +57,43 @@ public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_pass_with_case_insensitive_comparison() {
 		// GIVEN
-		final String encoding = HEADER_VALUE.toUpperCase();
+		final String encoding = VALUE.toUpperCase();
 		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, encoding).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isContentEncodingEqualTo(response, HEADER_VALUE.toLowerCase());
+		final AssertionResult result = assertions.isContentEncodingEqualTo(response, encoding.toLowerCase());
 
 		// THEN
 		checkSuccess(result);
+	}
+
+	@Test
+	public void it_should_pass_with_list_comparison() {
+		// GIVEN
+		final String encoding = "compress, identity";
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, encoding).build();
+
+		// WHEN
+		final AssertionResult result = assertions.isContentEncodingEqualTo(response, encoding.toUpperCase());
+
+		// THEN
+		checkSuccess(result);
+	}
+
+	@Test
+	public void it_should_not_pass_with_list_in_wrong_order() {
+		// GIVEN
+		final String expected = "compress, identity";
+		final String actual = "identity, compress";
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual).build();
+
+		// WHEN
+		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
+
+		// THEN
+		final Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
+		final String message = "Expecting response to have header %s equal to %s but was %s";
+		final Object[] args = {HEADER_NAME, expected, actual};
+		checkError(result, klassError, message, args);
 	}
 }

@@ -24,16 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.List;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
 /**
  * Check that http response has at least one header with
@@ -52,18 +54,59 @@ public class IsHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion imp
 	private final String value;
 
 	/**
+	 * If header value comparison should be case insensitive.
+	 */
+	private final boolean caseInsensitive;
+
+	/**
 	 * Create assertion.
 	 *
 	 * @param name Header name.
 	 */
-	public IsHeaderEqualToAssertion(String name, String value) {
+	public IsHeaderEqualToAssertion(String name, String value, boolean caseInsensitive) {
 		super(name);
 		this.value = notNull(value, "Header value must not be null");
+		this.caseInsensitive = caseInsensitive;
 	}
 
 	@Override
 	AssertionResult doAssertion(List<String> actualValues) {
 		log.debug("Comparing '{}' with '{}'", value, actualValues);
-		return actualValues.contains(value) ? success() : failure(shouldHaveHeaderWithValue(name, value, actualValues));
+		return contains(actualValues) ? success() : failure(shouldHaveHeaderWithValue(name, value, actualValues));
+	}
+
+	/**
+	 * Check if expected value is in actual list.
+	 *
+	 * @param actualValues Actual values.
+	 * @return {@code true} if {@link #value} is in {@code actualValues}, {@code false} otherwise.
+	 */
+	private boolean contains(List<String> actualValues) {
+		return caseInsensitive ? containsCaseInsensitive(actualValues) : containsNonCaseInsensitive(actualValues);
+	}
+
+	/**
+	 * Check if expected value is in actual list, using a <strong>>case-sensitive</strong comparison.
+	 *
+	 * @param actualValues Actual values.
+	 * @return {@code true} if {@link #value} is in {@code actualValues}, {@code false} otherwise.
+	 */
+	private boolean containsNonCaseInsensitive(List<String> actualValues) {
+		return actualValues.contains(value);
+	}
+
+	/**
+	 * Check if expected value is in actual list, using a <strong>case-insensitive</strong> comparison.
+	 *
+	 * @param actualValues Actual values.
+	 * @return {@code true} if {@link #value} is in {@code actualValues}, {@code false} otherwise.
+	 */
+	private boolean containsCaseInsensitive(List<String> actualValues) {
+		return some(actualValues, new Collections.Predicate<String>() {
+			@Override
+			public boolean apply(String input) {
+				return value.equalsIgnoreCase(input);
+			}
+		});
 	}
 }
