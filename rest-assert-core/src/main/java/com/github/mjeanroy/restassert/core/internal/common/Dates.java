@@ -75,16 +75,23 @@ public final class Dates {
 	private static final String SINGLE_QUOTE = "'";
 
 	/**
-	 * Parse HTTP date to get a real Date object.
+	 * Parse HTTP date to get a real {@link Date} object.
+	 *
 	 * This function will use three patterns:
-	 * - First is pattern defined by RFC 1123 (most standard).
-	 * - Second is pattern defined by RFC 1036.
-	 * - Third is ANSI C's asctime() format.
-	 * These patterns should still be supported, as stated here:
-	 * https://tools.ietf.org/html/rfc7231#section-7.1.1.1
+	 *
+	 * <ul>
+	 *   <li>First is pattern defined by RFC 5322 (most standard).</li>
+	 *   <li>Second is pattern defined by RFC 850 (obsolete).</li>
+	 *   <li>Third is ANSI C's asctime() format (obsolete).</li>
+	 * </ul>
+	 *
+	 * These patterns should still be supported, as stated <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">here</a>.
 	 *
 	 * @param date Date to parse.
-	 * @return Dare object, null if date cannot be parsed.
+	 * @return Date object, {@code null} if date cannot be parsed.
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">https://tools.ietf.org/html/rfc7231#section-7.1.1.1</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc5322#section-3.3">https://tools.ietf.org/html/rfc5322#section-3.3</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc850">https://tools.ietf.org/html/rfc850</a>
 	 */
 	public static Date parseHttpDate(String date) {
 		if (date.length() > 1 && date.startsWith(SINGLE_QUOTE) && date.endsWith(SINGLE_QUOTE)) {

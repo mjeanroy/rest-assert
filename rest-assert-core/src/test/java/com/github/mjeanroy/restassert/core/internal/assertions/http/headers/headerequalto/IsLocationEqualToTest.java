@@ -24,19 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 
 public class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = LOCATION.getValue();
+	private static final Header HEADER = LOCATION;
+	private static final String VALUE = HEADER.getValue();
+	private static final String NAME = HEADER.getName();
 
 	@Override
 	protected Header getHeader() {
-		return LOCATION;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +52,22 @@ public class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
 	@Override
 	protected boolean allowMultipleValues() {
 		return false;
+	}
+
+	@Test
+	public void it_should_fail_with_same_value_but_different_case() {
+		// GIVEN
+		final String expected = VALUE.toUpperCase();
+		final String actual = VALUE.toLowerCase();
+		final HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+
+		// WHEN
+		final AssertionResult result = assertions.isLocationEqualTo(httpResponse, expected);
+
+		// THEN
+		final Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
+		final String message = "Expecting response to have header %s equal to %s but was %s";
+		final Object[] args = {NAME, expected, actual};
+		checkError(result, klassError, message, args);
 	}
 }

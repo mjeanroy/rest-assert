@@ -725,82 +725,145 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains Content-Length header.
+	 * Check that HTTP response contains {@code "Content-Length"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc7230#section-3.3.2">https://tools.ietf.org/html/rfc7230#section-3.3.2</a>
 	 */
 	public AssertionResult hasContentLength(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, CONTENT_LENGTH.getName());
 	}
 
 	/**
-	 * Check that http response contains Location header.
+	 * Check that HTTP response contains {@code "Location"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">https://tools.ietf.org/html/rfc7231#section-7.1.2v</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location</a>
 	 */
 	public AssertionResult hasLocation(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, LOCATION.getName());
 	}
 
 	/**
-	 * Check that http response does contains Location header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Location"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">https://tools.ietf.org/html/rfc7231#section-7.1.2v</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location</a>
 	 */
 	public AssertionResult doesNotHaveLocation(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, LOCATION.getName());
 	}
 
 	/**
-	 * Check that http response contains Location header with
+	 * Check that HTTP response contains {@code "Location"} header with
 	 * expected value.
+	 *
+	 * Note that, even if URI values should be case insensitive, comparison is <strong>case sensitive</strong> (so
+	 * URI {@code "https://google.com"} is not equivalent to {@code "HTTPS://GOOGLE.COM"}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param locationValue Expected value.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">https://tools.ietf.org/html/rfc7231#section-7.1.2v</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location</a>
 	 */
 	public AssertionResult isLocationEqualTo(HttpResponse httpResponse, String locationValue) {
 		return isHeaderEqualTo(httpResponse, LOCATION.getName(), locationValue, false);
 	}
 
 	/**
-	 * Check that http response contains Last-Modified header.
+	 * Check that HTTP response contains {@code "Last-Modified"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Last-Modified</a>
 	 */
 	public AssertionResult hasLastModified(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, LAST_MODIFIED.getName());
 	}
 
 	/**
-	 * Check that http response does contains Last-Modifier header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Last-Modified"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
+	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Last-Modified</a>
 	 */
 	public AssertionResult doesNotHaveLastModified(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, LAST_MODIFIED.getName());
 	}
 
 	/**
-	 * Check that http response contains Last-Modified header.
+	 * Check that HTTP response contains {@code "Last-Modified"} header with
+	 * expected value.
+	 *
+	 * Three date-time format are supported, according to the <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>The (preferred) format defined by RFC 5322, for example: {@code "Sun, 06 Nov 1994 08:49:37 GMT"}.</li>
+	 *   <li>The (obsolete) format defined by RFC 850, for example: {@code "Sunday, 06-Nov-94 08:49:37 GMT"}.</li>
+	 *   <li>The (obsolete) ANSI C's asctime() format, for example: {@code "Sun Nov  6 08:49:37 1994"}.</li>
+	 * </ul>
+	 *
+	 * Note that, unless specific reason, first format defined by RFC 5322 should be used.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param lastModifiedValue Expected value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">https://tools.ietf.org/html/rfc7231#section-7.1.1.1</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc5322#section-3.3">https://tools.ietf.org/html/rfc5322#section-3.3</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc850">https://tools.ietf.org/html/rfc850</a>
+	 */
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, String lastModifiedValue) {
+		return isLastModifiedEqualTo(httpResponse, parseHttpDate(lastModifiedValue));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Last-Modified"} header with
+	 * expected {@link Date} value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param lastModifiedDate Expected value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">https://tools.ietf.org/html/rfc7231#section-7.1.1.1</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc5322#section-3.3">https://tools.ietf.org/html/rfc5322#section-3.3</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc850">https://tools.ietf.org/html/rfc850</a>
+	 */
+	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
+		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(LAST_MODIFIED.getName(), lastModifiedDate));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Expires"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.3">https://tools.ietf.org/html/rfc7234#section-5.3</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires</a>
 	 */
 	public AssertionResult hasExpires(HttpResponse httpResponse) {
 		return hasHeader(httpResponse, EXPIRES.getName());
 	}
 
 	/**
-	 * Check that http response does contains Expires header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Expires"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.3">https://tools.ietf.org/html/rfc7234#section-5.3</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires</a>
 	 */
 	public AssertionResult doesNotHaveExpires(HttpResponse httpResponse) {
 		return doesNotHaveHeader(httpResponse, EXPIRES.getName());
@@ -828,30 +891,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, Date expiresValue) {
 		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(EXPIRES.getName(), expiresValue));
-	}
-
-	/**
-	 * Check that http response contains Last-Modified header with
-	 * expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param lastModifiedValue Expected value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, String lastModifiedValue) {
-		return isLastModifiedEqualTo(httpResponse, parseHttpDate(lastModifiedValue));
-	}
-
-	/**
-	 * Check that http response contains Last-Modified header with
-	 * expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param lastModifiedDate Expected value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
-		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(LAST_MODIFIED.getName(), lastModifiedDate));
 	}
 
 	/**
