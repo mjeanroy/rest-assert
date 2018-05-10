@@ -38,11 +38,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final FrameOptions VALUE = FrameOptions.parser().parse("deny");
+	private static final Header HEADER = X_FRAME_OPTIONS;
+	private static final String NAME = HEADER.getName();
+	private static final FrameOptions VALUE = FrameOptions.deny();
+	private static final FrameOptions FAILED_VALUE = FrameOptions.sameOrigin();
 
 	@Override
 	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+		return HEADER;
 	}
 
 	@Override
@@ -55,15 +58,23 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 		return true;
 	}
 
+	@Override
+	String failValue() {
+		return FAILED_VALUE.serializeValue();
+	}
+
 	@Test
 	public void it_should_check_that_allow_from_value_match() {
-		String uri = "https://www.google.com";
-		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-			.addHeader(X_FRAME_OPTIONS.getName(), "allow-from " + uri)
-			.build();
+		// GIVEN
+		final String uri = "https://www.google.com";
+		final String actual = "allow-from " + uri;
+		final FrameOptions expected = allowFrom(uri);
+		final HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
-		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, allowFrom(uri));
+		// WHEN
+		final AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, expected);
 
+		// THEN
 		assertThat(r).isNotNull();
 		assertThat(r.isSuccess()).isTrue();
 		assertThat(r.isFailure()).isFalse();
@@ -71,12 +82,15 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	@Test
 	public void it_should_check_that_allow_from_value_does_not_match() {
-		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-			.addHeader(X_FRAME_OPTIONS.getName(), "deny")
-			.build();
+		// GIVEN
+		final String actual = "deny";
+		final FrameOptions expected = sameOrigin();
+		final HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
-		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, sameOrigin());
+		// WHEN
+		final AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, expected);
 
+		// THEN
 		assertThat(r).isNotNull();
 		assertThat(r.isSuccess()).isFalse();
 		assertThat(r.isFailure()).isTrue();

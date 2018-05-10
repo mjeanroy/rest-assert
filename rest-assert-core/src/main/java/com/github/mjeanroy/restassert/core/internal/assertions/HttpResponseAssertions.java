@@ -966,14 +966,104 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains Cache-Control header with expected value.
+	 * Check that HTTP response contains {@code "Cache-Control"} header with expected value.
+	 *
+	 * You can build {@link CacheControl} using {@link com.github.mjeanroy.restassert.core.data.CacheControlBuilder} to get
+	 * a fluent API, for example:
+	 *
+	 * <pre><code>
+	 *   private CacheControl createHeader() {
+	 *     return CacheControl.builder()
+	 *       .visibility(Visibility.PUBLIC)
+	 *       .noTransform()
+	 *       .noStore()
+	 *       .build();
+	 *   }
+	 * </code></pre>
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param cacheControl Cache-Control value.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#page-21">https://tools.ietf.org/html/rfc7234#page-21</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</a>
 	 */
 	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, CacheControl cacheControl) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CACHE_CONTROL.getName(), cacheControl, CacheControl.parser()));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-Frame-Options"} header, no matter what values.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
+	 */
+	public AssertionResult hasFrameOptions(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, X_FRAME_OPTIONS.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "X-Frame-Options"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
+	 */
+	public AssertionResult doesNotHaveFrameOptions(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, X_FRAME_OPTIONS.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-Frame-Options"} header with
+	 * expected value.
+	 *
+	 * Note that, according to <a href="https://tools.ietf.org/html/rfc7034">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>Header value is <strong>case-insensitive</strong>, so {@code "deny"} or {@code "DENY"} is equivalent.</li>
+	 *   <li>Using a different value than {@code "DENY"}, {@code "SAMEORIGIN"} or {@code "ALLOW-FROM"} is not permitted, so test will fail as it is probably a mistake.</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param frameOptions Expected X-Frame-Options header value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
+	 */
+	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, String frameOptions) {
+		return isFrameOptionsEqualTo(httpResponse, FrameOptions.parser().parse(frameOptions));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-Frame-Options"} header with
+	 * expected {@link FrameOptions} value.
+	 *
+	 * You can build {@link FrameOptions} using one of the static factory available:
+	 *
+	 * <pre><code>
+	 *   private FrameOptions createDeny() {
+	 *     return FrameOptions.deny();
+	 *   }
+	 *
+	 *   private FrameOptions createSameOrigin() {
+	 *     return FrameOptions.sameOrigin();
+	 *   }
+	 *
+	 *   private FrameOptions createAllowFrom() {
+	 *     return FrameOptions.allowFrom("https://example.com");
+	 *   }
+	 * </code></pre>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param frameOptions Expected X-Frame-Options header value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
+	 */
+	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, FrameOptions frameOptions) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_FRAME_OPTIONS.getName(), frameOptions, FrameOptions.parser()));
 	}
 
 	/**
@@ -1089,48 +1179,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, ContentTypeOptions contentTypeOptions) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions, ContentTypeOptions.parser()));
-	}
-
-	/**
-	 * Check that http response contains X-Frame-Options header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasFrameOptions(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, X_FRAME_OPTIONS.getName());
-	}
-
-	/**
-	 * Check that http response does contains X-Frame-Options header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveFrameOptions(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, X_FRAME_OPTIONS.getName());
-	}
-
-	/**
-	 * Check that http response contains X-Frame-Options header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param frameOptions Expected X-Frame-Options header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, String frameOptions) {
-		return isHeaderEqualTo(httpResponse, X_FRAME_OPTIONS.getName(), frameOptions, false);
-	}
-
-	/**
-	 * Check that http response contains X-Frame-Options header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param frameOptions Expected X-Frame-Options header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isFrameOptionsEqualTo(HttpResponse httpResponse, FrameOptions frameOptions) {
-		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_FRAME_OPTIONS.getName(), frameOptions, FrameOptions.parser()));
 	}
 
 	/**

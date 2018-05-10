@@ -24,19 +24,29 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
 public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = X_FRAME_OPTIONS.getValue();
+	private static final Header HEADER = X_FRAME_OPTIONS;
+	private static final String VALUE = HEADER.getValue();
+	private static final String NAME = HEADER.getName();
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Override
 	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +57,49 @@ public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTe
 	@Override
 	protected boolean allowMultipleValues() {
 		return true;
+	}
+
+	@Override
+	String failValue() {
+		return "sameorigin";
+	}
+
+	@Test
+	public void it_should_parse_deny_case_insensitively() {
+		final String actual = "DENY";
+		final String expected = "deny";
+		doTest(actual, expected);
+	}
+
+	@Test
+	public void it_should_parse_sameorigin_case_insensitively() {
+		final String actual = "SAMEORIGIN";
+		final String expected = "sameorigin";
+		doTest(actual, expected);
+	}
+
+	@Test
+	public void it_should_parse_allowfrom_case_insensitively() {
+		final String actual = "ALLOW-FROM https://example.com";
+		final String expected = "allow-from https://example.com";
+		doTest(actual, expected);
+	}
+
+	@Test
+	public void it_should_fail_with_invalid_value() {
+		final String actual = "sameorigin";
+		final String expected = "same-origin";
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+
+		thrown.expect(InvalidHeaderValue.class);
+		thrown.expectMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+
+		assertions.isFrameOptionsEqualTo(response, expected);
+	}
+
+	private void doTest(String actual, String expected) {
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		final AssertionResult result = assertions.isFrameOptionsEqualTo(response, expected);
+		checkSuccess(result);
 	}
 }

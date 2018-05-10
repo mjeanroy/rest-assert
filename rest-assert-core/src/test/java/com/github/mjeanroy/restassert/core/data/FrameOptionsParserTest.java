@@ -24,11 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FrameOptionsParserTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_match_deny() {
@@ -72,5 +78,16 @@ public class FrameOptionsParserTest {
 		FrameOptions header = FrameOptions.parser().parse("ALLOW-FROM " + uri);
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.ALLOW_FROM);
 		assertThat(header.getOptions()).hasSize(1).containsOnly("https://example.com");
+	}
+
+	@Test
+	public void it_should_fail_with_invalid_value() {
+		String value = "same-origin";
+		FrameOptionsParser parser = FrameOptions.parser();
+
+		thrown.expect(InvalidHeaderValue.class);
+		thrown.expectMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+
+		parser.parse(value);
 	}
 }

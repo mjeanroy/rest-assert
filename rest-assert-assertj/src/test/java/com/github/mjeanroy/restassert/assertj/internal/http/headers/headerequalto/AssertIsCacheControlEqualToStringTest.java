@@ -24,15 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
+
 public class AssertIsCacheControlEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();
+	private static final String FAILED_VALUE = "public, no-transform, max-age=0";
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -41,6 +43,11 @@ public class AssertIsCacheControlEqualToStringTest extends AbstractHttpResponses
 
 	@Override
 	protected Header getHeader() {
-		return CACHE_CONTROL;
+		return HEADER;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 }

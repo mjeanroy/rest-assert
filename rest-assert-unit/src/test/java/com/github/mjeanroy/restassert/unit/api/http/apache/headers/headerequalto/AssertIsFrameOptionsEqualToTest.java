@@ -33,11 +33,13 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_O
 
 public class AssertIsFrameOptionsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
+	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final FrameOptions VALUE = FrameOptions.deny();
+	private static final FrameOptions FAILED_VALUE = FrameOptions.sameOrigin();
 
 	@Override
 	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+		return HEADER;
 	}
 
 	@Override
@@ -48,5 +50,10 @@ public class AssertIsFrameOptionsEqualToTest extends AbstractApacheHttpHeaderEqu
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE.serializeValue();
 	}
 }

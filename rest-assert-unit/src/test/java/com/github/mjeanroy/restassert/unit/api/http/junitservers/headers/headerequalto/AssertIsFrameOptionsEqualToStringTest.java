@@ -24,19 +24,21 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+
 public class AssertIsFrameOptionsEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
+	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final String VALUE = X_FRAME_OPTIONS.getValue();
+	private static final String FAILED_VALUE = "sameorigin";
 
 	@Override
 	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class AssertIsFrameOptionsEqualToStringTest extends AbstractJunitServersH
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }

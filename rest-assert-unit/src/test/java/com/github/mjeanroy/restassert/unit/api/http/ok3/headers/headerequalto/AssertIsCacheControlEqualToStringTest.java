@@ -24,19 +24,21 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
+
 public class AssertIsCacheControlEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
 
+	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();
+	private static final String FAILED_VALUE = "public, no-transform, max-age=0";
 
 	@Override
 	protected Header getHeader() {
-		return CACHE_CONTROL;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class AssertIsCacheControlEqualToStringTest extends AbstractOkHttpHeaderE
 	@Override
 	protected void invoke(String message, Response actual) {
 		OkHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }
