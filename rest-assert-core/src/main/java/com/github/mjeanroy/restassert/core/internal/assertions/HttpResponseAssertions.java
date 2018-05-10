@@ -540,7 +540,7 @@ public final class HttpResponseAssertions {
 	 * Check that HTTP response contains {@code "ETag"} header with expected value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param etagValue ETag value.
+	 * @param etagValue Expected {@code "ETag"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</a>
 	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/ETag</a>
@@ -575,7 +575,7 @@ public final class HttpResponseAssertions {
 	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param contentTypeValue Expected value.
+	 * @param contentTypeValue Expected {@code "Content-Type} value.
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
 	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type</a>
@@ -600,7 +600,7 @@ public final class HttpResponseAssertions {
 	 * </code></pre>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param contentTypeValue Expected value.
+	 * @param contentTypeValue Expected {@code "Content-Type} value.
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
 	 * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Type</a>
@@ -641,7 +641,7 @@ public final class HttpResponseAssertions {
 	 * Note that according to the specification, comparison is <strong>case-insensitive</strong>.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param contentEncodingValue Expected value.
+	 * @param contentEncodingValue Expected {@code "Content-Encoding} value.
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
@@ -659,7 +659,7 @@ public final class HttpResponseAssertions {
 	 * Note that according to the specification, comparison is <strong>case-insensitive</strong>.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param contentEncoding Expected value.
+	 * @param contentEncoding Expected {@code "Content-Encoding} value.
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
@@ -768,7 +768,7 @@ public final class HttpResponseAssertions {
 	 * URI {@code "https://google.com"} is not equivalent to {@code "HTTPS://GOOGLE.COM"}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param locationValue Expected value.
+	 * @param locationValue Expected {@code "Location"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.2">https://tools.ietf.org/html/rfc7231#section-7.1.2v</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Location</a>
@@ -816,7 +816,7 @@ public final class HttpResponseAssertions {
 	 * Note that, unless specific reason, first format defined by RFC 5322 should be used.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param lastModifiedValue Expected value.
+	 * @param lastModifiedValue Expected {@code "Last-Modified"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified</a>
@@ -833,7 +833,7 @@ public final class HttpResponseAssertions {
 	 * expected {@link Date} value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param lastModifiedDate Expected value.
+	 * @param lastModifiedDate Expected {@code "Last-Modified"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified</a>
@@ -887,7 +887,7 @@ public final class HttpResponseAssertions {
 	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param expiresValue Expected value.
+	 * @param expiresValue Expected {@code "Expires"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires</a>
 	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.3">https://tools.ietf.org/html/rfc7234#section-5.3</a>
@@ -904,7 +904,7 @@ public final class HttpResponseAssertions {
 	 * expected {@link Date} value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param expiresValue Expected value.
+	 * @param expiresValue Expected {@code "Expires"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires</a>
 	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.3">https://tools.ietf.org/html/rfc7234#section-5.3</a>
@@ -956,7 +956,7 @@ public final class HttpResponseAssertions {
 	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param cacheControl Cache-Control value.
+	 * @param cacheControl Expected {@code "Cache-Control"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7234#page-21">https://tools.ietf.org/html/rfc7234#page-21</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</a>
@@ -982,7 +982,7 @@ public final class HttpResponseAssertions {
 	 * </code></pre>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param cacheControl Cache-Control value.
+	 * @param cacheControl Expected {@code "Cache-Control"} value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7234#page-21">https://tools.ietf.org/html/rfc7234#page-21</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</a>
@@ -1027,7 +1027,7 @@ public final class HttpResponseAssertions {
 	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param frameOptions Expected X-Frame-Options header value.
+	 * @param frameOptions Expected {@code "X-Frame-Options"} header value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
@@ -1057,7 +1057,7 @@ public final class HttpResponseAssertions {
 	 * </code></pre>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param frameOptions Expected X-Frame-Options header value.
+	 * @param frameOptions Expected {@code "X-Frame-Options"} header value.
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
@@ -1102,7 +1102,7 @@ public final class HttpResponseAssertions {
 	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
+	 * @param contentTypeOptions Expected {@code "X-Content-Type-Options"} header value.
 	 * @return Assertion result.
 	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
@@ -1116,8 +1116,10 @@ public final class HttpResponseAssertions {
 	 * expected {@link ContentTypeOptions} value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
-	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
+	 * @param contentTypeOptions Expected {@code "X-Content-Type-Options"} header value.
 	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
 	 */
 	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, ContentTypeOptions contentTypeOptions) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions, ContentTypeOptions.parser()));
