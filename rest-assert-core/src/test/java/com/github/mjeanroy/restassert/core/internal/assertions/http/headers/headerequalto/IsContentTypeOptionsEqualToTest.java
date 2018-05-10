@@ -24,20 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+
 public class IsContentTypeOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
+	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
 	protected Header getHeader() {
-		return X_CONTENT_TYPE_OPTIONS;
+		return HEADER;
 	}
 
 	@Override
@@ -48,5 +49,10 @@ public class IsContentTypeOptionsEqualToTest extends AbstractHttpHeaderEqualToTe
 	@Override
 	protected boolean allowMultipleValues() {
 		return true;
+	}
+
+	@Override
+	public void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
+		// Can't provide failed value since only "nosniff" is a valid value.
 	}
 }

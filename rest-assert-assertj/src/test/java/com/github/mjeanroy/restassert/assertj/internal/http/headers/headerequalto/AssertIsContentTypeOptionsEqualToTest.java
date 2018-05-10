@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+
 public class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
@@ -42,6 +43,11 @@ public class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponses
 
 	@Override
 	protected Header getHeader() {
-		return X_CONTENT_TYPE_OPTIONS;
+		return HEADER;
+	}
+
+	@Override
+	public void should_fail_if_header_is_not_available() {
+		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

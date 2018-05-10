@@ -24,11 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ContentTypeOptionsParserTest {
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_parse_no_sniff_value() {
@@ -36,6 +42,15 @@ public class ContentTypeOptionsParserTest {
 		assertThat(parser.parse("nosniff")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 		assertThat(parser.parse("NOSNIFF")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 		assertThat(parser.parse(" nosniff ")).isEqualTo(ContentTypeOptions.NO_SNIFF);
-		assertThat(parser.parse("foo")).isNull();
+	}
+
+	@Test
+	public void it_should_failed_to_parse_invalid_value() {
+		ContentTypeOptionsParser parser = ContentTypeOptions.parser();
+
+		thrown.expect(InvalidHeaderValue.class);
+		thrown.expectMessage("X-Content-Type-Options value 'foo' is not a valid one.");
+
+		parser.parse("foo");
 	}
 }

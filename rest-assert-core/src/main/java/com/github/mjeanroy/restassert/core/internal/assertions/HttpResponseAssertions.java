@@ -1067,6 +1067,63 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that HTTP response contains {@code "X-Content-Type-Options"} header, no matter what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
+	 */
+	public AssertionResult hasContentTypeOptions(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, X_CONTENT_TYPE_OPTIONS.getName());
+	}
+
+	/**
+	 * Check that http response <strong>does not</strong> contains {@code "X-Content-Type-Options"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
+	 */
+	public AssertionResult doesNotHaveContentTypeOptions(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, X_CONTENT_TYPE_OPTIONS.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-Content-Type-Options"} header with
+	 * expected value.
+	 *
+	 * Note that, according to the <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>Header value is <strong>case-insensitive</strong>, so {@code "nosniff"} or {@code "NOSNIFF"} are equivalent.</li>
+	 *   <li>Non authorized value (currently, only {@code "nosniff"} is allowed) will fail since it is probably a mistake.</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
+	 */
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, String contentTypeOptions) {
+		return isContentTypeOptionsEqualTo(httpResponse, ContentTypeOptions.parser().parse(contentTypeOptions));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-Content-Type-Options"} header with
+	 * expected {@link ContentTypeOptions} value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, ContentTypeOptions contentTypeOptions) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions, ContentTypeOptions.parser()));
+	}
+
+	/**
 	 * Check that http response contains Pragma header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
@@ -1137,48 +1194,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, XssProtection xssProtection) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_XSS_PROTECTION.getName(), xssProtection, XssProtection.parser()));
-	}
-
-	/**
-	 * Check that http response contains X-Content-Type-Options header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasContentTypeOptions(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, X_CONTENT_TYPE_OPTIONS.getName());
-	}
-
-	/**
-	 * Check that http response does contains X-Content-Type-Options header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveContentTypeOptions(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, X_CONTENT_TYPE_OPTIONS.getName());
-	}
-
-	/**
-	 * Check that http response contains X-Content-Type-Options header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, String contentTypeOptions) {
-		return isHeaderEqualTo(httpResponse, X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions, false);
-	}
-
-	/**
-	 * Check that http response contains X-Content-Type-Options header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param contentTypeOptions Expected X-Content-Type-Options header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isContentTypeOptionsEqualTo(HttpResponse httpResponse, ContentTypeOptions contentTypeOptions) {
-		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_CONTENT_TYPE_OPTIONS.getName(), contentTypeOptions, ContentTypeOptions.parser()));
 	}
 
 	/**

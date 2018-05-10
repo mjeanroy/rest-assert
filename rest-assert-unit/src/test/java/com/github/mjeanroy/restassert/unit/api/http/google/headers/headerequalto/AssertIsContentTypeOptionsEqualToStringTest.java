@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+
 public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
 
+	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return X_CONTENT_TYPE_OPTIONS;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +48,15 @@ public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractGoogleH
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	public void it_should_fail_with_if_response_does_not_contain_header() {
+		// Can't provide a failed value since only "nosniff" is authorized.
+	}
+
+	@Override
+	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }
