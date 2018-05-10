@@ -47,6 +47,7 @@ public final class CacheControl implements HeaderValue {
 	private static final String DIR_S_MAX_AGE = "s-maxage=";
 	private static final String DIR_PRIVATE = "private";
 	private static final String DIR_PUBLIC = "public";
+	private static final String DIR_IMMUTABLE = "immutable";
 
 	/**
 	 * The parser instance.
@@ -73,7 +74,7 @@ public final class CacheControl implements HeaderValue {
 
 	public enum Visibility {
 		/**
-		 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.5):
+		 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.6">RFC 7234</a>:
 		 *
 		 * The "private" response directive indicates that the response message
 		 * is intended for a single user and MUST NOT be stored by a shared
@@ -83,7 +84,7 @@ public final class CacheControl implements HeaderValue {
 		PRIVATE,
 
 		/**
-		 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.6):
+		 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.5">RFC 7234</a>:
 		 *
 		 * The "public" response directive indicates that any cache MAY store
 		 * the response, even if the response would normally be non-cacheable or
@@ -93,17 +94,23 @@ public final class CacheControl implements HeaderValue {
 	}
 
 	/**
-	 * Append visibility directive.
-	 * Currently, two choices: {@code private} or {@code public}.
+	 * Append {@code "visibility"} directive.
+	 *
+	 * Currently, two choices:
+	 *
+	 * <ul>
+	 *   <li>{@code private},</li>
+	 *   <li>{@code public}</li>
+	 * </ul>
 	 */
 	private final Visibility visibility;
 
 	/**
 	 * Append {@code no-store} directive to the value value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.3):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.3">RFC 7234</a>:
 	 *
-	 * The "no-store" response directive indicates that a cache MUST NOT
+	 * The {@code "no-store"} response directive indicates that a cache MUST NOT
 	 * store any part of either the immediate request or response.  This
 	 * directive applies to both private and shared caches.  "MUST NOT
 	 * store" in this context means that the cache MUST NOT intentionally
@@ -116,9 +123,9 @@ public final class CacheControl implements HeaderValue {
 	/**
 	 * Append {@code no-cache} directive to the value value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.2):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.2">RFC 7234</a>:
 	 *
-	 * The "no-cache" response directive indicates that the response MUST
+	 * The {@code "no-cache"} response directive indicates that the response MUST
 	 * NOT be used to satisfy a subsequent request without successful
 	 * validation on the origin server.  This allows an origin server to
 	 * prevent a cache from using it to satisfy a request without contacting
@@ -129,9 +136,9 @@ public final class CacheControl implements HeaderValue {
 	/**
 	 * Append {@code max-age} directive to the value value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.8):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.8">RFC 7234</a>:
 	 *
-	 * The "max-age" response directive indicates that the response is to be
+	 * The {@code "max-age"} response directive indicates that the response is to be
 	 * considered stale after its age is greater than the specified number
 	 * of seconds.
 	 * This directive uses the token form of the argument syntax: e.g.,
@@ -143,9 +150,9 @@ public final class CacheControl implements HeaderValue {
 	/**
 	 * Append {@code s-maxage} directive to the value value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.9):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.9">RFC 7234</a>:
 	 *
-	 * The "s-maxage" response directive indicates that, in shared caches,
+	 * The {@code "s-maxage"} response directive indicates that, in shared caches,
 	 * the maximum age specified by this directive overrides the maximum age
 	 * specified by either the max-age directive or the Expires value
 	 * field.  The s-maxage directive also implies the semantics of the
@@ -156,9 +163,9 @@ public final class CacheControl implements HeaderValue {
 	/**
 	 * Append {@code no-transform} directive to the value value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.4):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.4">RFC 7234</a>:
 	 *
-	 * The "no-transform" response directive indicates that an intermediary
+	 * The {@code "no-transform"} response directive indicates that an intermediary
 	 * (regardless of whether it implements a cache) MUST NOT transform the
 	 * payload.
 	 */
@@ -167,24 +174,36 @@ public final class CacheControl implements HeaderValue {
 	/**
 	 * Append {@code must-revalidate} directive to the value value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.1):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.1">RFC 7234</a>:
 	 *
-	 * The "must-revalidate" response directive indicates that once it has
+	 * The {@code "must-revalidate"} response directive indicates that once it has
 	 * become stale, a cache MUST NOT use the response to satisfy subsequent
 	 * requests without successful validation on the origin server.
 	 */
 	private final boolean mustRevalidate;
 
 	/**
-	 * Append {@code prox-revalidate} directive to the value value.
+	 * Append {@code proxy-revalidate} directive to the header value.
 	 *
-	 * As specified by RFC 7234 (https://tools.ietf.org/html/rfc7234#section-5.2.2.1):
+	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.1">RFC 7234</a>:
 	 *
-	 * The "proxy-revalidate" response directive has the same meaning as the
-	 * must-revalidate response directive, except that it does not apply to
+	 * The {@code "proxy-revalidate"} response directive has the same meaning as the
+	 * {@code "must-revalidate"} response directive, except that it does not apply to
 	 * private caches.
 	 */
 	private final boolean proxyRevalidate;
+
+	/**
+	 * Append {@code immutable} directive to the header value.
+	 *
+	 * As specified by <a href="https://tools.ietf.org/html/rfc8246">RFC 8246</a>:
+	 *
+	 * When present in an HTTP response, the {@code "immutable"} {@code "Cache-Control"}
+	 * extension indicates that the origin server will not update the
+	 * representation of that resource during the freshness lifetime of the
+	 * response.
+	 */
+	private final boolean immutable;
 
 	CacheControl(
 			Visibility visibility,
@@ -194,7 +213,8 @@ public final class CacheControl implements HeaderValue {
 			boolean mustRevalidate,
 			boolean proxyRevalidate,
 			Long maxAge,
-			Long sMaxAge) {
+			Long sMaxAge,
+			boolean immutable) {
 
 		this.visibility = visibility;
 		this.noCache = noCache;
@@ -204,6 +224,7 @@ public final class CacheControl implements HeaderValue {
 		this.noTransform = noTransform;
 		this.mustRevalidate = mustRevalidate;
 		this.proxyRevalidate = proxyRevalidate;
+		this.immutable = immutable;
 	}
 
 	/**
@@ -278,6 +299,15 @@ public final class CacheControl implements HeaderValue {
 		return proxyRevalidate;
 	}
 
+	/**
+	 * Get {@link #immutable}
+	 *
+	 * @return {@link #immutable}
+	 */
+	public boolean isImmutable() {
+		return immutable;
+	}
+
 	@Override
 	public String serializeValue() {
 		List<String> values = new LinkedList<>();
@@ -314,6 +344,10 @@ public final class CacheControl implements HeaderValue {
 			values.add(DIR_S_MAX_AGE + sMaxAge);
 		}
 
+		if (immutable) {
+			values.add(DIR_IMMUTABLE);
+		}
+
 		return Strings.join(values, SEPARATOR);
 	}
 
@@ -332,7 +366,8 @@ public final class CacheControl implements HeaderValue {
 				&& Objects.equals(mustRevalidate, c.mustRevalidate)
 				&& Objects.equals(proxyRevalidate, c.proxyRevalidate)
 				&& Objects.equals(sMaxAge, c.sMaxAge)
-				&& Objects.equals(maxAge, c.maxAge);
+				&& Objects.equals(maxAge, c.maxAge)
+				&& Objects.equals(immutable, c.immutable);
 		}
 
 		return false;
@@ -340,7 +375,7 @@ public final class CacheControl implements HeaderValue {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		return Objects.hash(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge, immutable);
 	}
 
 	@Override
@@ -354,6 +389,7 @@ public final class CacheControl implements HeaderValue {
 			.append("proxyRevalidate", proxyRevalidate)
 			.append("maxAge", maxAge)
 			.append("sMaxAge", sMaxAge)
+			.append("immutable", immutable)
 			.build();
 	}
 
@@ -459,6 +495,18 @@ public final class CacheControl implements HeaderValue {
 				int maxAge = Integer.valueOf(value.split("=")[1].trim());
 				builder.sMaxAge(maxAge);
 			}
+		},
+
+		IMMUTABLE {
+			@Override
+			boolean match(String value) {
+				return value.equals(DIR_IMMUTABLE);
+			}
+
+			@Override
+			void setValue(String value, CacheControlBuilder builder) {
+				builder.immutable();
+			}
 		};
 
 		/**
@@ -477,5 +525,4 @@ public final class CacheControl implements HeaderValue {
 		 */
 		abstract void setValue(String value, CacheControlBuilder builder);
 	}
-
 }

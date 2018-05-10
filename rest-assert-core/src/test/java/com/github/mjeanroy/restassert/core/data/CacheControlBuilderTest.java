@@ -45,6 +45,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isFalse();
 		assertThat(expected.getMaxAge()).isNull();
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("no-cache");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -55,7 +56,8 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=null, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -75,6 +77,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isFalse();
 		assertThat(expected.getMaxAge()).isNull();
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("no-cache, no-store");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -85,8 +88,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=null, " +
-				"sMaxAge=null" +
-				"}"
+				"sMaxAge=null, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 
@@ -106,6 +110,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isFalse();
 		assertThat(expected.getMaxAge()).isEqualTo(3600L);
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("no-cache, no-store, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -116,8 +121,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
-				"}"
+				"sMaxAge=null, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 
@@ -138,6 +144,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isFalse();
 		assertThat(expected.getMaxAge()).isEqualTo(3600L);
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -148,8 +155,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
-				"}"
+				"sMaxAge=null, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 
@@ -171,6 +179,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isFalse();
 		assertThat(expected.getMaxAge()).isEqualTo(3600L);
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, must-revalidate, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -181,8 +190,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=false, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
-				"}"
+				"sMaxAge=null, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 
@@ -205,6 +215,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isTrue();
 		assertThat(expected.getMaxAge()).isEqualTo(3600L);
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, must-revalidate, proxy-revalidate, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -215,8 +226,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=true, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
-				"}"
+				"sMaxAge=null, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 
@@ -240,6 +252,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isTrue();
 		assertThat(expected.getMaxAge()).isEqualTo(3600L);
 		assertThat(expected.getSMaxAge()).isNull();
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -250,8 +263,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=true, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
-				"}"
+				"sMaxAge=null, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 
@@ -276,6 +290,7 @@ public class CacheControlBuilderTest {
 		assertThat(expected.isProxyRevalidate()).isTrue();
 		assertThat(expected.getMaxAge()).isEqualTo(3600L);
 		assertThat(expected.getSMaxAge()).isEqualTo(1000L);
+		assertThat(expected.isImmutable()).isFalse();
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600, s-maxage=1000");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -286,8 +301,9 @@ public class CacheControlBuilderTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=true, " +
 				"maxAge=3600, " +
-				"sMaxAge=1000" +
-				"}"
+				"sMaxAge=1000, " +
+				"immutable=false" +
+			"}"
 		);
 	}
 }

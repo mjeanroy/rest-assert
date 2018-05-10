@@ -837,9 +837,6 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 * @see <a href="https://tools.ietf.org/html/rfc7232#section-2.2">https://tools.ietf.org/html/rfc7232#section-2.2</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified</a>
-	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">https://tools.ietf.org/html/rfc7231#section-7.1.1.1</a>
-	 * @see <a href="https://tools.ietf.org/html/rfc5322#section-3.3">https://tools.ietf.org/html/rfc5322#section-3.3</a>
-	 * @see <a href="https://tools.ietf.org/html/rfc850">https://tools.ietf.org/html/rfc850</a>
 	 */
 	public AssertionResult isLastModifiedEqualTo(HttpResponse httpResponse, Date lastModifiedDate) {
 		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(LAST_MODIFIED.getName(), lastModifiedDate));
@@ -870,27 +867,113 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains Expires header with
+	 * Check that HTTP response contains {@code "Expires"} header with
 	 * expected value.
+	 *
+	 * Three date-time format are supported (for {@code expiresValue} parameter or for header
+	 * value), according to the <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>The (preferred) format defined by RFC 5322, for example: {@code "Sun, 06 Nov 1994 08:49:37 GMT"}.</li>
+	 *   <li>The (obsolete) format defined by RFC 850, for example: {@code "Sunday, 06-Nov-94 08:49:37 GMT"}.</li>
+	 *   <li>The (obsolete) ANSI C's asctime() format, for example: {@code "Sun Nov  6 08:49:37 1994"}.</li>
+	 * </ul>
+	 *
+	 * Note that:
+	 *
+	 * <ul>
+	 *   <li>Unless specific reason, the first (preferred) format should be used.</li>
+	 *   <li>This is not a "strict" comparison: {@code expiresValue} parameter and header value does not need to use the same pattern.</li>
+	 * </ul>
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.3">https://tools.ietf.org/html/rfc7234#section-5.3</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">https://tools.ietf.org/html/rfc7231#section-7.1.1.1</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc5322#section-3.3">https://tools.ietf.org/html/rfc5322#section-3.3</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc850">https://tools.ietf.org/html/rfc850</a>
 	 */
 	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, String expiresValue) {
 		return isExpiresEqualTo(httpResponse, parseHttpDate(expiresValue));
 	}
 
 	/**
-	 * Check that http response contains Expires header with
-	 * expected value.
+	 * Check that HTTP response contains {@code "Expires"} header with
+	 * expected {@link Date} value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param expiresValue Expected value.
 	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expires</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.3">https://tools.ietf.org/html/rfc7234#section-5.3</a>
 	 */
 	public AssertionResult isExpiresEqualTo(HttpResponse httpResponse, Date expiresValue) {
 		return assertWith(httpResponse, new IsDateHeaderEqualToAssertion(EXPIRES.getName(), expiresValue));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Cache-Control"} header, no matter what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#page-21">https://tools.ietf.org/html/rfc7234#page-21</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</a>
+	 */
+	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, CACHE_CONTROL.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Cache-Control"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#page-21">https://tools.ietf.org/html/rfc7234#page-21</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</a>
+	 */
+	public AssertionResult doesNotHaveCacheControl(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, CACHE_CONTROL.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Cache-Control"} header with expected value.
+	 *
+	 * Note that, according to the <a href="https://tools.ietf.org/html/rfc7234#page-21">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>Comparison is <strong>case-insensitive</strong>.</li>
+	 *   <li>Header directives does not need to be in the same order</li>
+	 * </ul>
+	 *
+	 * For example, following values are equivalent:
+	 *
+	 * <ul>
+	 *   <li>{@code "no-cache, no-store, must-revalidate"}</li>
+	 *   <li>{@code "NO-CACHE, NO-STORE, MUST-REVALIDATE"}</li>
+	 *   <li>{@code "no-cache, must-revalidate, no-store"}</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param cacheControl Cache-Control value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#page-21">https://tools.ietf.org/html/rfc7234#page-21</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control</a>
+	 */
+	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, String cacheControl) {
+		return isCacheControlEqualTo(httpResponse, CacheControl.parser().parse(cacheControl));
+	}
+
+	/**
+	 * Check that http response contains Cache-Control header with expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param cacheControl Cache-Control value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, CacheControl cacheControl) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CACHE_CONTROL.getName(), cacheControl, CacheControl.parser()));
 	}
 
 	/**
@@ -922,48 +1005,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
 		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
-	}
-
-	/**
-	 * Check that http response contains Cache-Control header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasCacheControl(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CACHE_CONTROL.getName());
-	}
-
-	/**
-	 * Check that http response does contains Cache-Control header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveCacheControl(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, CACHE_CONTROL.getName());
-	}
-
-	/**
-	 * Check that http response contains Cache-Control header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param cacheControl Cache-Control value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, String cacheControl) {
-		return isHeaderEqualTo(httpResponse, CACHE_CONTROL.getName(), cacheControl, false);
-	}
-
-	/**
-	 * Check that http response contains Cache-Control header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param cacheControl Cache-Control value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isCacheControlEqualTo(HttpResponse httpResponse, CacheControl cacheControl) {
-		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CACHE_CONTROL.getName(), cacheControl, CacheControl.parser()));
 	}
 
 	/**

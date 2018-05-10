@@ -42,7 +42,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = false;
 		Long maxAge = null;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -52,6 +63,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("no-cache");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -62,7 +74,8 @@ public class CacheControlTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=null, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -77,7 +90,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = false;
 		Long maxAge = null;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -87,6 +111,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("no-cache, no-store");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -97,7 +122,8 @@ public class CacheControlTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=null, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -112,7 +138,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = false;
 		Long maxAge = 3600L;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -122,6 +159,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("no-cache, no-store, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -132,7 +170,8 @@ public class CacheControlTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -147,7 +186,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = false;
 		Long maxAge = 3600L;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -157,6 +207,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -167,7 +218,8 @@ public class CacheControlTest {
 				"mustRevalidate=false, " +
 				"proxyRevalidate=false, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -182,7 +234,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = false;
 		Long maxAge = 3600L;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -192,6 +255,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, must-revalidate, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -202,7 +266,8 @@ public class CacheControlTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=false, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 				"}"
 		);
 	}
@@ -217,7 +282,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = true;
 		Long maxAge = 3600L;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -227,6 +303,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, must-revalidate, proxy-revalidate, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -237,7 +314,8 @@ public class CacheControlTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=true, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -252,7 +330,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = true;
 		Long maxAge = 3600L;
 		Long sMaxAge = null;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -262,6 +351,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -272,7 +362,8 @@ public class CacheControlTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=true, " +
 				"maxAge=3600, " +
-				"sMaxAge=null" +
+				"sMaxAge=null, " +
+				"immutable=false" +
 			"}"
 		);
 	}
@@ -287,7 +378,18 @@ public class CacheControlTest {
 		boolean proxyRevalidate = true;
 		Long maxAge = 3600L;
 		Long sMaxAge = 1000L;
-		CacheControl expected = new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		boolean immutable = false;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 
 		assertThat(expected.getVisibility()).isEqualTo(visibility);
 		assertThat(expected.isNoStore()).isEqualTo(noStore);
@@ -297,6 +399,7 @@ public class CacheControlTest {
 		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
 		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
 		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
 		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600, s-maxage=1000");
 		assertThat(expected.toString()).isEqualTo(
 			"CacheControl{" +
@@ -307,7 +410,56 @@ public class CacheControlTest {
 				"mustRevalidate=true, " +
 				"proxyRevalidate=true, " +
 				"maxAge=3600, " +
-				"sMaxAge=1000" +
+				"sMaxAge=1000, " +
+				"immutable=false" +
+			"}"
+		);
+	}
+
+	@Test
+	public void it_should_create_immutable_header() {
+		Visibility visibility = Visibility.PRIVATE;
+		boolean noStore = true;
+		boolean noCache = true;
+		boolean noTransform = true;
+		boolean mustRevalidate = true;
+		boolean proxyRevalidate = true;
+		Long maxAge = 3600L;
+		Long sMaxAge = 1000L;
+		boolean immutable = true;
+		CacheControl expected = new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
+
+		assertThat(expected.getVisibility()).isEqualTo(visibility);
+		assertThat(expected.isNoStore()).isEqualTo(noStore);
+		assertThat(expected.isNoCache()).isEqualTo(noCache);
+		assertThat(expected.isNoTransform()).isEqualTo(noTransform);
+		assertThat(expected.isMustRevalidate()).isEqualTo(mustRevalidate);
+		assertThat(expected.isProxyRevalidate()).isEqualTo(proxyRevalidate);
+		assertThat(expected.getMaxAge()).isEqualTo(maxAge);
+		assertThat(expected.getSMaxAge()).isEqualTo(sMaxAge);
+		assertThat(expected.isImmutable()).isEqualTo(immutable);
+		assertThat(expected.serializeValue()).isEqualTo("private, no-cache, no-store, no-transform, must-revalidate, proxy-revalidate, max-age=3600, s-maxage=1000, immutable");
+		assertThat(expected.toString()).isEqualTo(
+			"CacheControl{" +
+				"visibility=PRIVATE, " +
+				"noCache=true, " +
+				"noStore=true, " +
+				"noTransform=true, " +
+				"mustRevalidate=true, " +
+				"proxyRevalidate=true, " +
+				"maxAge=3600, " +
+				"sMaxAge=1000, " +
+				"immutable=true" +
 			"}"
 		);
 	}

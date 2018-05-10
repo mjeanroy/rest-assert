@@ -72,6 +72,11 @@ public class CacheControlBuilder {
 	private Long sMaxAge;
 
 	/**
+	 * Flag for {@code immutable} directive.
+	 */
+	private boolean immutable;
+
+	/**
 	 * Create the builder with default values initialized.
 	 */
 	CacheControlBuilder() {
@@ -80,6 +85,7 @@ public class CacheControlBuilder {
 		this.noTransform = false;
 		this.mustRevalidate = false;
 		this.proxyRevalidate = false;
+		this.immutable = false;
 	}
 
 	/**
@@ -166,11 +172,31 @@ public class CacheControlBuilder {
 	}
 
 	/**
+	 * Enable {@code "immutable"} directive.
+	 *
+	 * @return Current builder.
+	 */
+	public CacheControlBuilder immutable() {
+		this.immutable = true;
+		return this;
+	}
+
+	/**
 	 * Create new {@link CacheControl} value object.
 	 *
 	 * @return Cache-Control value.
 	 */
 	public CacheControl build() {
-		return new CacheControl(visibility, noStore, noCache, noTransform, mustRevalidate, proxyRevalidate, maxAge, sMaxAge);
+		return new CacheControl(
+			visibility,
+			noStore,
+			noCache,
+			noTransform,
+			mustRevalidate,
+			proxyRevalidate,
+			maxAge,
+			sMaxAge,
+			immutable
+		);
 	}
 }
