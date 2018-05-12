@@ -32,7 +32,9 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();
+	private static final Header HEADER = CONTENT_SECURITY_POLICY;
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -41,6 +43,11 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttp
 
 	@Override
 	protected Header getHeader() {
-		return CONTENT_SECURITY_POLICY;
+		return HEADER;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 }

@@ -24,40 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.data.CacheControl;
-import com.github.mjeanroy.restassert.core.data.ContentEncoding;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.core.data.ContentType;
-import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
-import com.github.mjeanroy.restassert.core.data.FrameOptions;
-import com.github.mjeanroy.restassert.core.data.MediaType;
-import com.github.mjeanroy.restassert.core.data.RequestMethod;
-import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.core.data.XssProtection;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCharsetAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCookieAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasHeaderAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasMimeTypeAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsDateHeaderEqualToAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderEqualToAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderListEqualToAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatchingAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.restassert.documentation.Documentation;
-
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
 import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
@@ -93,6 +59,40 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_X
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
 import static java.util.Arrays.asList;
 import static java.util.Collections.addAll;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import com.github.mjeanroy.restassert.core.data.CacheControl;
+import com.github.mjeanroy.restassert.core.data.ContentEncoding;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.data.ContentType;
+import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
+import com.github.mjeanroy.restassert.core.data.FrameOptions;
+import com.github.mjeanroy.restassert.core.data.MediaType;
+import com.github.mjeanroy.restassert.core.data.RequestMethod;
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
+import com.github.mjeanroy.restassert.core.data.XssProtection;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCharsetAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasMimeTypeAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsDateHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderListEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatchingAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.restassert.documentation.Documentation;
 
 /**
  * Reusable Assertions of http response.
@@ -689,42 +689,6 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response contains {@code "Content-Disposition"} header, no matter what value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
-	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
-	 */
-	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CONTENT_DISPOSITION.getName());
-	}
-
-	/**
-	 * Check that HTTP response <strong>does not</strong> contains {@code "Content-Disposition"} header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
-	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
-	 */
-	public AssertionResult doesNotHaveContentDisposition(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, CONTENT_DISPOSITION.getName());
-	}
-
-	/**
-	 * Check that http response contains Content-Disposition header with
-	 * expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param contentDispositionValue Expected value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
-		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION.getName(), contentDispositionValue);
-	}
-
-	/**
 	 * Check that HTTP response contains {@code "Content-Length"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
@@ -1126,6 +1090,118 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that HTTP response contains {@code "Content-Security-Policy"} header, no matter what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+	 * @see <a href="https://w3c.github.io/webappsec-csp/2/">https://w3c.github.io/webappsec-csp/2/</a>
+	 * @see <a href="https://www.w3.org/TR/CSP1/">https://www.w3.org/TR/CSP1/</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a>
+	 */
+	public AssertionResult hasContentSecurityPolicy(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, CONTENT_SECURITY_POLICY.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Content-Security-Policy"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+	 * @see <a href="https://w3c.github.io/webappsec-csp/2/">https://w3c.github.io/webappsec-csp/2/</a>
+	 * @see <a href="https://www.w3.org/TR/CSP1/">https://www.w3.org/TR/CSP1/</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a>
+	 */
+	public AssertionResult doesNotHaveContentSecurityPolicy(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, CONTENT_SECURITY_POLICY.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains Content-Security-Policy header with
+	 * expected value.
+	 *
+	 * Note that according to latest <a href="https://w3c.github.io/webappsec-csp/">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>Directive name are <strong>case-insensitive</strong>.</li>
+	 *   <li>Directives order does not matter.</li>
+	 * </ul>
+	 *
+	 * So for example, following values are equivalent:
+	 *
+	 * <ul>
+	 *   <li>{@code "default-src 'none'; script-src 'self' 'unsafe-inline'}</li>
+	 *   <li>{@code "default-src 'none'; script-src 'unsafe-inline' 'self'}</li>
+	 *   <li>{@code "script-src 'self' 'unsafe-inline'; default-src 'none';}</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentSecurityPolicy Cache-Control value.
+	 * @return Assertion result.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+	 * @see <a href="https://w3c.github.io/webappsec-csp/2/">https://w3c.github.io/webappsec-csp/2/</a>
+	 * @see <a href="https://www.w3.org/TR/CSP1/">https://www.w3.org/TR/CSP1/</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a>
+	 */
+	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, String contentSecurityPolicy) {
+		ContentSecurityPolicy csp = ContentSecurityPolicy.parser().parse(contentSecurityPolicy);
+		return isContentSecurityPolicyControlEqualTo(httpResponse, csp);
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Content-Security-Policy"} header with
+	 * expected {@link ContentSecurityPolicy} value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentSecurityPolicy Cache-Control value.
+	 * @return Assertion result.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+	 * @see <a href="https://w3c.github.io/webappsec-csp/2/">https://w3c.github.io/webappsec-csp/2/</a>
+	 * @see <a href="https://www.w3.org/TR/CSP1/">https://www.w3.org/TR/CSP1/</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a>
+	 */
+	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, ContentSecurityPolicy contentSecurityPolicy) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy, ContentSecurityPolicy.parser()));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Content-Disposition"} header, no matter what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
+	 */
+	public AssertionResult hasContentDisposition(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, CONTENT_DISPOSITION.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Content-Disposition"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
+	 */
+	public AssertionResult doesNotHaveContentDisposition(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, CONTENT_DISPOSITION.getName());
+	}
+
+	/**
+	 * Check that http response contains Content-Disposition header with
+	 * expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param contentDispositionValue Expected value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
+		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION.getName(), contentDispositionValue);
+	}
+
+	/**
 	 * Check that http response contains Pragma header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
@@ -1196,48 +1272,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, XssProtection xssProtection) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_XSS_PROTECTION.getName(), xssProtection, XssProtection.parser()));
-	}
-
-	/**
-	 * Check that http response contains Content-Security-Policy header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasContentSecurityPolicy(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, CONTENT_SECURITY_POLICY.getName());
-	}
-
-	/**
-	 * Check that http response does contains Content-Security-Policy header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveContentSecurityPolicy(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, CONTENT_SECURITY_POLICY.getName());
-	}
-
-	/**
-	 * Check that http response contains Content-Security-Policy header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param contentSecurityPolicy Cache-Control value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, String contentSecurityPolicy) {
-		return isHeaderEqualTo(httpResponse, CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy, false);
-	}
-
-	/**
-	 * Check that http response contains Content-Security-Policy header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param contentSecurityPolicy Cache-Control value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, ContentSecurityPolicy contentSecurityPolicy) {
-		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy, ContentSecurityPolicy.parser()));
 	}
 
 	/**

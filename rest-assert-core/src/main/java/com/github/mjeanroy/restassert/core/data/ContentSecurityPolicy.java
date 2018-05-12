@@ -24,9 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -37,8 +36,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import static java.util.Collections.unmodifiableMap;
-import static java.util.Collections.unmodifiableSet;
+import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * Content-Security-Policy Header.
@@ -160,7 +160,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code base-uri} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-base-uri">https://www.w3.org/TR/CSP/#directive-base-uri</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-base-uri">https://w3c.github.io/webappsec-csp/#directive-base-uri</a>
 		 */
 		BASE_URI("base-uri") {
 			@Override
@@ -172,7 +172,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code default-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-default-src">https://www.w3.org/TR/CSP/#directive-default-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-default-src">https://w3c.github.io/webappsec-csp/#directive-default-src</a>
 		 */
 		DEFAULT_SRC("default-src") {
 			@Override
@@ -184,7 +184,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code script-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-script-src">https://www.w3.org/TR/CSP/#directive-script-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src">https://w3c.github.io/webappsec-csp/#directive-script-src</a>
 		 */
 		SCRIPT_SRC("script-src") {
 			@Override
@@ -196,7 +196,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code style-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-style-src">https://www.w3.org/TR/CSP/#directive-style-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src">https://w3c.github.io/webappsec-csp/#directive-style-src</a>
 		 */
 		STYLE_SRC("style-src") {
 			@Override
@@ -208,7 +208,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code object-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-object-src">https://www.w3.org/TR/CSP/#directive-object-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-object-src">https://w3c.github.io/webappsec-csp/#directive-object-src</a>
 		 */
 		OBJECT_SRC("object-src") {
 			@Override
@@ -220,7 +220,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code media-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-media-src">https://www.w3.org/TR/CSP/#directive-media-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-media-src">https://w3c.github.io/webappsec-csp/#directive-media-src</a>
 		 */
 		MEDIA_SRC("media-src") {
 			@Override
@@ -232,7 +232,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code img-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-img-src">https://www.w3.org/TR/CSP/#directive-img-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-img-src">https://w3c.github.io/webappsec-csp/#directive-img-src</a>
 		 */
 		IMG_SRC("img-src") {
 			@Override
@@ -244,7 +244,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code font-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-font-src">https://www.w3.org/TR/CSP/#directive-font-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-font-src">https://w3c.github.io/webappsec-csp/#directive-font-src</a>
 		 */
 		FONT_SRC("font-src") {
 			@Override
@@ -256,7 +256,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code connect-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-connect-src">https://www.w3.org/TR/CSP/#directive-connect-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-connect-src">https://w3c.github.io/webappsec-csp/#directive-connect-src</a>
 		 */
 		CONNECT_SRC("connect-src") {
 			@Override
@@ -268,7 +268,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code child-src} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-child-src">https://www.w3.org/TR/CSP/#directive-child-src</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-child-src">https://w3c.github.io/webappsec-csp/#directive-child-src</a>
 		 */
 		CHILD_SRC("child-src") {
 			@Override
@@ -278,9 +278,57 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		},
 
 		/**
+		 * Handle {@code manifest-src} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-manifest-src">https://w3c.github.io/webappsec-csp/#directive-manifest-src</a>
+		 */
+		MANIFEST_SRC("manifest-src") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addManifestSrc(new SourceValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code frame-src} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-src">https://w3c.github.io/webappsec-csp/#directive-frame-src</a>
+		 */
+		FRAME_SRC("frame-src") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addFrameSrc(new SourceValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code prefetch-src} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-prefetch-src">https://w3c.github.io/webappsec-csp/#directive-prefetch-src</a>
+		 */
+		PREFETCH_SRC("prefetch-src") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addPrefetchSrc(new SourceValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code worker-src} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-worker-src">https://w3c.github.io/webappsec-csp/#directive-worker-src</a>
+		 */
+		WORKER_SRC("worker-src") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addWorkerSrc(new SourceValue(value));
+			}
+		},
+
+		/**
 		 * Handle {@code form-action} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-form-action">https://www.w3.org/TR/CSP/#directive-form-action</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-form-action">https://w3c.github.io/webappsec-csp/#directive-form-action</a>
 		 */
 		FORM_ACTION("form-action") {
 			@Override
@@ -290,9 +338,21 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		},
 
 		/**
+		 * Handle {@code navigate-to} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-navigate-to">https://w3c.github.io/webappsec-csp/#directive-navigate-to</a>
+		 */
+		NAVIGATE_TO("navigate-to") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addNavigateTo(new SourceValue(value));
+			}
+		},
+
+		/**
 		 * Handle {@code frame-ancestors} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-frame-ancestors">https://www.w3.org/TR/CSP/#directive-frame-ancestors</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-ancestors">https://w3c.github.io/webappsec-csp/#directive-frame-ancestors</a>
 		 */
 		FRAME_ANCESTORS("frame-ancestors") {
 			@Override
@@ -304,7 +364,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code plugin-types} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-plugin-types">https://www.w3.org/TR/CSP/#directive-plugin-types</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-plugin-types">https://w3c.github.io/webappsec-csp/#directive-plugin-types</a>
 		 */
 		PLUGIN_TYPES("plugin-types") {
 			@Override
@@ -316,7 +376,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code report-uri} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-report-uri">https://www.w3.org/TR/CSP/#directive-report-uri</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-report-uri">https://w3c.github.io/webappsec-csp/#directive-report-uri</a>
 		 */
 		REPORT_URI("report-uri") {
 			@Override
@@ -328,13 +388,25 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Handle {@code sandbox} directive.
 		 *
-		 * @see <a href="https://www.w3.org/TR/CSP/#directive-sandbox">https://www.w3.org/TR/CSP/#directive-sandbox</a>
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-sandbox">https://w3c.github.io/webappsec-csp/#directive-sandbox</a>
 		 */
 		SANDBOX("sandbox") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				Sandbox sandbox = Sandbox.byValue(value);
 				builder.addSandbox(sandbox);
+			}
+		},
+
+		/**
+		 * Handle {@code report-uri} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-disown-opener">https://w3c.github.io/webappsec-csp/#directive-disown-opener</a>
+		 */
+		DISOWN_OPENER("disown-opener") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addDisownOpener();
 			}
 		},
 

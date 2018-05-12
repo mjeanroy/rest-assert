@@ -29,14 +29,19 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
 
 public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();
+	private static final Header HEADER = CONTENT_SECURITY_POLICY;
+	private static final String NAME = HEADER.getName();
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 
 	@Override
 	protected Header getHeader() {
-		return CONTENT_SECURITY_POLICY;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +52,37 @@ public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeader
 	@Override
 	protected boolean allowMultipleValues() {
 		return true;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
+	}
+
+	@Test
+	public void it_should_handle_different_directive_order() {
+		final String actual = "script-src 'self' 'unsafe-inline'; default-src 'none'";
+		final String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
+		doTest(actual, expected);
+	}
+
+	@Test
+	public void it_should_handle_different_source_value_order() {
+		final String actual = "default-src 'none'; script-src 'unsafe-inline' 'self'";
+		final String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
+		doTest(actual, expected);
+	}
+
+	@Test
+	public void it_should_handle_case_insensitive_comparison() {
+		final String actual = "DEFAULT-SRC 'none'; SCRIPT-SRC 'self' 'unsafe-inline'";
+		final String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
+		doTest(actual, expected);
+	}
+
+	private void doTest(String actual, String expected) {
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		final AssertionResult result = assertions.isContentSecurityPolicyControlEqualTo(response, expected);
+		checkSuccess(result);
 	}
 }

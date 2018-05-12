@@ -32,11 +32,13 @@ import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();
+	private static final Header HEADER = CONTENT_SECURITY_POLICY;
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 
 	@Override
 	protected Header getHeader() {
-		return CONTENT_SECURITY_POLICY;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractSpri
 	@Override
 	protected void invoke(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }
