@@ -42,6 +42,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.AbstractSourceValue;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective;
@@ -391,10 +392,31 @@ public class ContentSecurityPolicyBuilder {
 	 * @throws NullPointerException If at least one parameter is {@code null}.
 	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-sandbox">https://w3c.github.io/webappsec-csp/#directive-sandbox</a>
 	 */
+	@SuppressWarnings("unchecked")
 	public ContentSecurityPolicyBuilder addSandbox(Sandbox sandbox, Sandbox... other) {
-		@SuppressWarnings("unchecked")
-		List<Source> otherSources = (List) asList(other);
-		return add(SourceDirective.SANDBOX, sandbox, otherSources);
+		return add(SourceDirective.SANDBOX, sandbox, (List) asList(other));
+	}
+
+	/**
+	 * Enable {@code block-all-mixed-content} directive.
+	 *
+	 * @return Current builder.
+	 * @see <a href="https://w3c.github.io/webappsec-mixed-content">https://w3c.github.io/webappsec-mixed-content</a>
+	 */
+	public ContentSecurityPolicyBuilder blockAllMixedContent() {
+		List<Source> sources = emptyList();
+		return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, sources, NO_OP_VALIDATOR);
+	}
+
+	/**
+	 * Enable {@code upgrade-insecure-request} directive.
+	 *
+	 * @return Current builder.
+	 * @see <a href="https://w3c.github.io/webappsec-upgrade-insecure-requests">https://w3c.github.io/webappsec-upgrade-insecure-requests</a>
+	 */
+	public ContentSecurityPolicyBuilder upgradeInsecureRequest() {
+		List<Source> sources = emptyList();
+		return add(SourceDirective.UPGRADE_INSECURE_REQUEST, sources, NO_OP_VALIDATOR);
 	}
 
 	/**
@@ -403,8 +425,9 @@ public class ContentSecurityPolicyBuilder {
 	 * @return Current builder.
 	 * @see <a href="https://www.w3.org/TR/mixed-content/#strict-checking">https://www.w3.org/TR/mixed-content/#strict-checking</a>
 	 */
-	public ContentSecurityPolicyBuilder blockAllMixedContent() {
-		return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, null, java.util.Collections.<Source>emptyList());
+	@SuppressWarnings("unchecked")
+	public ContentSecurityPolicyBuilder addRequireSriFor(RequireSriFor resource, RequireSriFor... other) {
+		return add(SourceDirective.REQUIRE_SRI_FOR, resource, (List) asList(other));
 	}
 
 	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<Source> other) {

@@ -24,12 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 /**
  * Parser for {@link ContentSecurityPolicy} value.
@@ -75,7 +78,7 @@ public class ContentSecurityPolicyParser extends AbstractHeaderParser<ContentSec
 			// Check if directive has name.
 			if (currentName.isEmpty()) {
 				log.error("Directive name is empty, fail");
-				throw new IllegalArgumentException(String.format("Header %s is not a valid Content-Security-Policy value", value));
+				throw new InvalidHeaderValue(CONTENT_SECURITY_POLICY.getName(), value);
 			}
 
 			ContentSecurityPolicy.SourceDirective dir = ContentSecurityPolicy.SourceDirective.byName(currentName);

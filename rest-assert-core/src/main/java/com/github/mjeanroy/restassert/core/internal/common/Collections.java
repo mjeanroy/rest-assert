@@ -26,7 +26,9 @@ package com.github.mjeanroy.restassert.core.internal.common;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Static Collection Utilities.
@@ -126,6 +128,24 @@ public final class Collections {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Index iterable list of values to a map where each input is indexed by a given key.
+	 *
+	 * @param inputs List of inputs.
+	 * @param indexer The indexer function.
+	 * @param <T> Index key type.
+	 * @param <U> Input type.
+	 * @return The indexes.
+	 */
+	public static <T, U> Map<T, U> indexBy(U[] inputs, Mapper<U, T> indexer) {
+		Map<T, U> indexes = new LinkedHashMap<>();
+		for (U input : inputs) {
+			indexes.put(indexer.apply(input), input);
+		}
+
+		return indexes;
 	}
 
 	/**

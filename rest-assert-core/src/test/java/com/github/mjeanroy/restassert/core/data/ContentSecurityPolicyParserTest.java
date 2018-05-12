@@ -42,20 +42,25 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sou
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.PLUGIN_TYPES;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.PREFETCH_SRC;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REPORT_URI;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REQUIRE_SRI_FOR;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SANDBOX;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.UPGRADE_INSECURE_REQUEST;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.WORKER_SRC;
+import static java.util.Collections.addAll;
+import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
-import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -300,7 +305,7 @@ public class ContentSecurityPolicyParserTest {
 			.hasSize(2)
 			.containsOnly(
 				entry(DEFAULT_SRC, sources("'none'")),
-				entry(BLOCK_ALL_MIXED_CONTENT, Collections.<Source>emptySet())
+				entry(BLOCK_ALL_MIXED_CONTENT, sources())
 			);
 	}
 
@@ -364,7 +369,7 @@ public class ContentSecurityPolicyParserTest {
 			.hasSize(2)
 			.containsOnly(
 				entry(DEFAULT_SRC, sources("'none'")),
-				entry(DISOWN_OPENER, Collections.<Source>emptySet())
+				entry(DISOWN_OPENER, sources())
 			);
 	}
 
@@ -380,6 +385,33 @@ public class ContentSecurityPolicyParserTest {
 			.containsOnly(
 				entry(DEFAULT_SRC, sources("'none'")),
 				entry(NAVIGATE_TO, sources(v1, v2))
+			);
+	}
+
+	@Test
+	public void it_should_parse_upgrade_insecure_request() {
+		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; upgrade-insecure-request");
+
+		assertThat(csp.getDirectives())
+			.hasSize(2)
+			.containsOnly(
+				entry(DEFAULT_SRC, sources("'none'")),
+				entry(UPGRADE_INSECURE_REQUEST, sources())
+			);
+	}
+
+	@Test
+	public void it_should_parse_require_sri_for() {
+		final String v1 = "script";
+		final String v2 = "style";
+		final String value = v1 + " " + v2;
+		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; require-sri-for " + value);
+
+		assertThat(csp.getDirectives())
+			.hasSize(2)
+			.containsOnly(
+				entry(DEFAULT_SRC, sources("'none'")),
+				entry(REQUIRE_SRI_FOR, sources(RequireSriFor.SCRIPT, RequireSriFor.STYLE))
 			);
 	}
 
@@ -403,23 +435,30 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_fail_if_directive_does_not_have_name() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header default-src 'none'; ; is not a valid Content-Security-Policy value");
+		thrown.expect(InvalidHeaderValue.class);
+		thrown.expectMessage("Content-Security-Policy value 'default-src 'none'; ;' is not a valid one.");
 		parser.parse("default-src 'none'; ;");
 	}
 
-	private static Set<Source> sources(String... values) {
+	private static Set<Source> sources() {
+		return emptySet();
+	}
+
+	private static Set<Source> sources(String value, String... values) {
 		Set<Source> sources = new LinkedHashSet<>();
-		for (String value : values) {
-			sources.add(new SourceValue(value));
+		sources.add(new SourceValue(value));
+
+		for (String v : values) {
+			sources.add(new SourceValue(v));
 		}
 
 		return sources;
 	}
 
-	private static Set<Source> sources(Source... values) {
+	private static Set<Source> sources(Source value, Source... values) {
 		Set<Source> sources = new LinkedHashSet<>();
-		Collections.addAll(sources, values);
+		sources.add(value);
+		addAll(sources, values);
 		return sources;
 	}
 }

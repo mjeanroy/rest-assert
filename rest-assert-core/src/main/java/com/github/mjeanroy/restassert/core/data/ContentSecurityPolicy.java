@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -36,6 +36,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
@@ -393,8 +394,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		SANDBOX("sandbox") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
-				Sandbox sandbox = Sandbox.byValue(value);
-				builder.addSandbox(sandbox);
+				builder.addSandbox(Sandbox.byValue(value));
 			}
 		},
 
@@ -410,14 +410,42 @@ public final class ContentSecurityPolicy implements HeaderValue {
 			}
 		},
 
-		BLOCK_ALL_MIXED_CONTENT("block-all-mixed-content") {
-			@Override
-			void parse(String headerValue, ContentSecurityPolicyBuilder builder) {
-				builder.blockAllMixedContent();
-			}
-
+		/**
+		 * Handle {@code require-sri-for}.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-subresource-integrity">https://w3c.github.io/webappsec-subresource-integrity</a>
+		 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for</a>
+		 */
+		REQUIRE_SRI_FOR("require-sri-for") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addRequireSriFor(RequireSriFor.byValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code upgrade-insecure-request}.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-upgrade-insecure-requests/">https://w3c.github.io/webappsec-upgrade-insecure-requests/</a>
+		 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests</a>
+		 */
+		UPGRADE_INSECURE_REQUEST("upgrade-insecure-request") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.upgradeInsecureRequest();
+			}
+		},
+
+		/**
+		 * Handle {@code block-all-mixed-content}.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-mixed-content/">https://w3c.github.io/webappsec-mixed-content/</a>
+		 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content</a>
+		 */
+		BLOCK_ALL_MIXED_CONTENT("block-all-mixed-content") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.blockAllMixedContent();
 			}
 		};
 
@@ -464,16 +492,12 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		/**
 		 * Map of directives indexed by name.
 		 */
-		private static final Map<String, SourceDirective> map;
-
-		static {
-			Map<String, SourceDirective> index = new HashMap<>();
-			for (SourceDirective directive : SourceDirective.values()) {
-				index.put(directive.getName().toLowerCase(), directive);
+		private static final Map<String, SourceDirective> map = indexBy(SourceDirective.values(), new Mapper<SourceDirective, String>() {
+			@Override
+			public String apply(SourceDirective input) {
+				return input.getName().toLowerCase();
 			}
-
-			map = unmodifiableMap(index);
-		}
+		});
 
 		/**
 		 * Get {@link SourceDirective} by name (search is case-insensitive).
@@ -965,16 +989,12 @@ public final class ContentSecurityPolicy implements HeaderValue {
 			return value;
 		}
 
-		private static final Map<String, Sandbox> map;
-
-		static {
-			Map<String, Sandbox> index = new HashMap<>();
-			for (Sandbox sandbox : Sandbox.values()) {
-				index.put(sandbox.getValue().toLowerCase(), sandbox);
+		private static final Map<String, Sandbox> map = indexBy(Sandbox.values(), new Mapper<Sandbox, String>() {
+			@Override
+			public String apply(Sandbox input) {
+				return input.getValue().toLowerCase();
 			}
-
-			map = unmodifiableMap(index);
-		}
+		});
 
 		/**
 		 * Get sandbox item from value.
@@ -983,6 +1003,55 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 * @return Sandbox item, may be {@code null} if {@code value} does not exist.
 		 */
 		static Sandbox byValue(String value) {
+			return map.get(value.toLowerCase());
+		}
+	}
+
+	/**
+	 * Set of allowed sandbox value.
+	 *
+	 * @see <a href="https://w3c.github.io/webappsec-subresource-integrity/">https://w3c.github.io/webappsec-subresource-integrity/</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for</a>
+	 */
+	public enum RequireSriFor implements Source {
+		SCRIPT("script"),
+		STYLE("style");
+
+		/**
+		 * Label as specified by <a href="https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for">RFC</a>.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for">https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for</a>
+		 */
+		private final String value;
+
+		RequireSriFor(String value) {
+			this.value = value;
+		}
+
+		/**
+		 * Get {@link #value}
+		 *
+		 * @return {@link #value}
+		 */
+		@Override
+		public String getValue() {
+			return value;
+		}
+
+		private static final Map<String, RequireSriFor> map = indexBy(RequireSriFor.values(), new Mapper<RequireSriFor, String>() {
+			@Override
+			public String apply(RequireSriFor input) {
+				return input.getValue().toLowerCase();
+			}
+		});
+
+		/**
+		 * Get {@link RequireSriFor} item from value.
+		 *
+		 * @param value Value.
+		 * @return The item, may be {@code null} if {@code value} does not exist.
+		 */
+		static RequireSriFor byValue(String value) {
 			return map.get(value.toLowerCase());
 		}
 	}
