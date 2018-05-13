@@ -24,24 +24,24 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-
 public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isContentSecurityPolicyControlEqualTo(getHeader().getValue());
+		return api.isContentSecurityPolicyEqualTo(getHeader().getValue());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsContentSecurityPolicyControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+		verify(assertions).assertIsContentSecurityPolicyEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
 	}
 }

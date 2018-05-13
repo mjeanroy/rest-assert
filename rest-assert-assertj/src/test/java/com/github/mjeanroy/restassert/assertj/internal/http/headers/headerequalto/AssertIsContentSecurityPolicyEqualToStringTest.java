@@ -38,7 +38,7 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttp
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
-		httpResponses.assertIsContentSecurityPolicyControlEqualTo(someInfo(), httpResponse, VALUE);
+		httpResponses.assertIsContentSecurityPolicyEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override

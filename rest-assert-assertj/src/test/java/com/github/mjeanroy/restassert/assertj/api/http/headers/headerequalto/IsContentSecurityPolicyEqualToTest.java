@@ -24,27 +24,27 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
+
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-
 public class IsContentSecurityPolicyEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert invoke() {
-		return api.isContentSecurityPolicyControlEqualTo(getValue());
+		return api.isContentSecurityPolicyEqualTo(getValue());
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsContentSecurityPolicyControlEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
+		verify(assertions).assertIsContentSecurityPolicyEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
 	}
 
 	private ContentSecurityPolicy getValue() {

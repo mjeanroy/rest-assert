@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
-import com.ning.http.client.Response;
-
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
+
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
+import com.ning.http.client.Response;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
@@ -64,11 +64,11 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHe
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		NingHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		NingHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 }

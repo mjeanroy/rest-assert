@@ -43,12 +43,12 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractJuni
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		JunitServersHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		JunitServersHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 
 	@Override

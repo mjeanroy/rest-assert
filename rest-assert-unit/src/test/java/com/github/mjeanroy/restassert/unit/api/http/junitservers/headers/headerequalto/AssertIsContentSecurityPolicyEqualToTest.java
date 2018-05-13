@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
-
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
+
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsContentSecurityPolicyEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
@@ -64,11 +64,11 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractJunitServe
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		JunitServersHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		JunitServersHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		JunitServersHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		JunitServersHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 }

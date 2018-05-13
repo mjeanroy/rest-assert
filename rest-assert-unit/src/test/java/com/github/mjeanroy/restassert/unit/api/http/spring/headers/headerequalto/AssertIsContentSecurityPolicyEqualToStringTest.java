@@ -43,12 +43,12 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractSpri
 
 	@Override
 	protected void invoke(ResultActions actual) {
-		SpringMockMvcHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		SpringMockMvcHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, ResultActions actual) {
-		SpringMockMvcHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		SpringMockMvcHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 
 	@Override

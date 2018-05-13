@@ -43,12 +43,12 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractGoog
 
 	@Override
 	protected void invoke(HttpResponse actual) {
-		GoogleHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		GoogleHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
-		GoogleHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		GoogleHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 
 	@Override

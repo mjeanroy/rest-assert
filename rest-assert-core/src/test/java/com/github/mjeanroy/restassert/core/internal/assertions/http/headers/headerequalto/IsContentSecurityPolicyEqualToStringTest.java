@@ -46,7 +46,7 @@ public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeader
 
 	@Override
 	protected AssertionResult invoke(HttpResponse response) {
-		return assertions.isContentSecurityPolicyControlEqualTo(response, VALUE);
+		return assertions.isContentSecurityPolicyEqualTo(response, VALUE);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeader
 
 	private void doTest(String actual, String expected) {
 		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isContentSecurityPolicyControlEqualTo(response, expected);
+		final AssertionResult result = assertions.isContentSecurityPolicyEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

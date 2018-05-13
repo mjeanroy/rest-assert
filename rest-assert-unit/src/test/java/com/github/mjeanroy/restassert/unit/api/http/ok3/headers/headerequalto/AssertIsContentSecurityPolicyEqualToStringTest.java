@@ -43,12 +43,12 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractOkHt
 
 	@Override
 	protected void invoke(Response actual) {
-		OkHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		OkHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		OkHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		OkHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 
 	@Override

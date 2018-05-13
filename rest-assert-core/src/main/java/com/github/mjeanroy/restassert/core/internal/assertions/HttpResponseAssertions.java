@@ -1144,9 +1144,9 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://www.w3.org/TR/CSP1/">https://www.w3.org/TR/CSP1/</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a>
 	 */
-	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, String contentSecurityPolicy) {
+	public AssertionResult isContentSecurityPolicyEqualTo(HttpResponse httpResponse, String contentSecurityPolicy) {
 		ContentSecurityPolicy csp = ContentSecurityPolicy.parser().parse(contentSecurityPolicy);
-		return isContentSecurityPolicyControlEqualTo(httpResponse, csp);
+		return isContentSecurityPolicyEqualTo(httpResponse, csp);
 	}
 
 	/**
@@ -1161,7 +1161,7 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://www.w3.org/TR/CSP1/">https://www.w3.org/TR/CSP1/</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy</a>
 	 */
-	public AssertionResult isContentSecurityPolicyControlEqualTo(HttpResponse httpResponse, ContentSecurityPolicy contentSecurityPolicy) {
+	public AssertionResult isContentSecurityPolicyEqualTo(HttpResponse httpResponse, ContentSecurityPolicy contentSecurityPolicy) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy, ContentSecurityPolicy.parser()));
 	}
 

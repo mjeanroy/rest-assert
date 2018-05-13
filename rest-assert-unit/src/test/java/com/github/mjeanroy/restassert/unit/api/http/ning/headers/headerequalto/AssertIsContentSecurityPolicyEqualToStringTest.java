@@ -43,12 +43,12 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractNing
 
 	@Override
 	protected void invoke(Response actual) {
-		NingHttpAssert.assertIsContentSecurityPolicyControlEqualTo(actual, VALUE);
+		NingHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
 	protected void invoke(String message, Response actual) {
-		NingHttpAssert.assertIsContentSecurityPolicyControlEqualTo(message, actual, VALUE);
+		NingHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 
 	@Override
