@@ -26,6 +26,10 @@ package com.github.mjeanroy.restassert.generator.templates.modules;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 import com.github.mjeanroy.restassert.generator.Template;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
@@ -39,7 +43,9 @@ public abstract class AbstractTemplateTest {
 
 	@Test
 	public void it_should_starts_with_license() throws Exception {
-		String license = IOUtils.toString(getClass().getResourceAsStream("/license.txt"));
+		final InputStream input = getClass().getResourceAsStream("/license.txt");
+		final Charset charset = StandardCharsets.UTF_8;
+		final String license = IOUtils.toString(input, charset);
 		assertThat(getTemplate().read()).startsWith(license);
 	}
 

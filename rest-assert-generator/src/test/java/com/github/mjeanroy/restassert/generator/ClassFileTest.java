@@ -24,25 +24,26 @@
 
 package com.github.mjeanroy.restassert.generator;
 
-import org.junit.Test;
-
-import java.io.File;
-
 import static org.apache.commons.io.FileUtils.deleteQuietly;
 import static org.apache.commons.io.FileUtils.getTempDirectoryPath;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.apache.commons.io.FilenameUtils.normalize;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+
+import org.junit.Test;
+
 public class ClassFileTest {
 
 	@Test
 	public void it_should_build_class_file() {
-		String packageName = "com.github.mjeanroy";
-		String className = "Foo";
-		String content = "bar";
+		final String packageName = "com.github.mjeanroy";
+		final String className = "Foo";
+		final String content = "bar";
 
-		ClassFile classFile = new ClassFile(packageName, className, content);
+		final ClassFile classFile = new ClassFile(packageName, className, content);
 
 		assertThat(classFile.getPackageName()).isEqualTo(packageName);
 		assertThat(classFile.getClassName()).isEqualTo(className);
@@ -51,22 +52,21 @@ public class ClassFileTest {
 
 	@Test
 	public void it_should_write_class_on_disk() throws Exception {
-		String packageName = "com.github.mjeanroy";
-		String className = "Foo";
-		String content = "bar";
+		final String packageName = "com.github.mjeanroy";
+		final String className = "Foo";
+		final String content = "bar";
 
-		String directory = getTempDirectoryPath() + "/rest-assert";
-		directory = normalize(directory);
-		File temp = new File(directory);
+		final String directory = normalize(getTempDirectoryPath() + "/rest-assert");
+		final File temp = new File(directory);
 		deleteQuietly(temp);
 		temp.mkdirs();
 
-		ClassFile classFile = new ClassFile(packageName, className, content);
+		final ClassFile classFile = new ClassFile(packageName, className, content);
 		classFile.writeTo(directory);
 
-		File klass = new File(directory + "/com/github/mjeanroy/Foo.java");
+		final File klass = new File(directory + "/com/github/mjeanroy/Foo.java");
 		assertThat(klass).exists().isFile();
-		assertThat(readFileToString(klass).trim()).isEqualTo(content.trim());
+		assertThat(readFileToString(klass, StandardCharsets.UTF_8).trim()).isEqualTo(content.trim());
 
 		deleteQuietly(temp);
 		assertThat(temp).doesNotExist();

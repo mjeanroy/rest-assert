@@ -24,42 +24,39 @@
 
 package com.github.mjeanroy.restassert.generator.utils;
 
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.io.File;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.assertj.core.api.Condition;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.InputStream;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class IOUtilsTest {
 
 	@Test
 	public void it_should_get_input_stream_from_classpath() {
-		InputStream inputStream = IOUtils.fromClasspath("/license.txt");
-		assertThat(inputStream)
-				.isNotNull();
+		final InputStream inputStream = IOUtils.fromClasspath("/license.txt");
+		assertThat(inputStream).isNotNull();
 	}
 
 	@Test
 	public void it_should_read_from_classpath() {
-		String content = IOUtils.read("/license.txt");
-		assertThat(content)
-				.isNotNull()
-				.isNotEmpty();
+		final String content = IOUtils.read("/license.txt");
+		assertThat(content).isNotNull().isNotEmpty();
 	}
 
 	@Test
 	public void it_should_read_from_classpath_and_prepend_string() {
 		final String tab = "\t";
-		String content = IOUtils.read("/license.txt", tab);
-		assertThat(content)
-				.isNotNull()
-				.isNotEmpty();
+		final String content = IOUtils.read("/license.txt", tab);
+		assertThat(content).isNotNull().isNotEmpty();
 
-		String[] lines = content.split(IOUtils.LINE_SEPARATOR);
+		final String[] lines = content.split(IOUtils.LINE_SEPARATOR);
 		assertThat(lines)
 				.isNotNull()
 				.isNotEmpty()
@@ -73,23 +70,19 @@ public class IOUtilsTest {
 
 	@Test
 	public void it_should_read_input_stream() {
-		InputStream inputStream = getClass().getResourceAsStream("/license.txt");
-		String content = IOUtils.read(inputStream);
-		assertThat(content)
-				.isNotNull()
-				.isNotEmpty();
+		final InputStream inputStream = getClass().getResourceAsStream("/license.txt");
+		final String content = IOUtils.read(inputStream);
+		assertThat(content).isNotNull().isNotEmpty();
 	}
 
 	@Test
 	public void it_should_read_input_stream_and_prepend_string() {
 		final String tab = "\t";
-		InputStream inputStream = getClass().getResourceAsStream("/license.txt");
-		String content = IOUtils.read(inputStream, tab);
-		assertThat(content)
-				.isNotNull()
-				.isNotEmpty();
+		final InputStream inputStream = getClass().getResourceAsStream("/license.txt");
+		final String content = IOUtils.read(inputStream, tab);
+		assertThat(content).isNotNull().isNotEmpty();
 
-		String[] lines = content.split(IOUtils.LINE_SEPARATOR);
+		final String[] lines = content.split(IOUtils.LINE_SEPARATOR);
 		assertThat(lines)
 				.isNotNull()
 				.isNotEmpty()
@@ -103,14 +96,14 @@ public class IOUtilsTest {
 
 	@Test
 	public void it_should_write_to_a_file() throws Exception {
-		String path = FilenameUtils.normalize(FileUtils.getTempDirectoryPath() + "/foo.txt");
-		File file = new File(path);
-		String content = "Hello World";
+		final String path = FilenameUtils.normalize(FileUtils.getTempDirectoryPath() + "/foo.txt");
+		final File file = new File(path);
+		final String content = "Hello World";
 
 		IOUtils.write(file, content);
 
 		assertThat(file).exists();
-		assertThat(FileUtils.readFileToString(file).trim()).isEqualTo(content.trim());
+		assertThat(readFileToString(file, StandardCharsets.UTF_8).trim()).isEqualTo(content.trim());
 
 		file.delete();
 		assertThat(file).doesNotExist();
