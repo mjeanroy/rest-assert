@@ -24,13 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_ENCODING;
+import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Collections.unmodifiableList;
+import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 /**
  * Parser for {@link ContentEncoding} header.
@@ -46,12 +48,13 @@ public class ContentEncodingParser extends AbstractHeaderParser<ContentEncoding>
 		String[] values = value.split(",");
 		List<Directive> directives = new ArrayList<>(value.length());
 		for (String encoding : values) {
-			String v = encoding.trim().toLowerCase();
-			if (v == null) {
-				throw new IllegalArgumentException(String.format("Content-Encoding directive '%s' cannot be parsed", encoding));
+			final String directiveValue = encoding.trim().toLowerCase();
+			final Directive directive = Directive.byValue(directiveValue);
+			if (directive == null) {
+				throw new InvalidHeaderValue(CONTENT_ENCODING.getName(), encoding);
 			}
 
-			directives.add(Directive.byValue(v));
+			directives.add(directive);
 		}
 
 		return new ContentEncoding(unmodifiableList(directives));

@@ -24,16 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
-
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 public class AssertIsContentEncodingEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "deflate";
 
 	@Override
 	protected Header getHeader() {
@@ -48,5 +49,10 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractOkHttpHead
 	@Override
 	protected void invoke(String message, Response actual) {
 		OkHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }

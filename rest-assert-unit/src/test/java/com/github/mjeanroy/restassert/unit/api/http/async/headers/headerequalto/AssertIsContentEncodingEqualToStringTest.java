@@ -24,16 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
-
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 public class AssertIsContentEncodingEqualToStringTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "deflate";
 
 	@Override
 	protected Header getHeader() {
@@ -48,5 +49,10 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractAsyncHttpH
 	@Override
 	protected void invoke(String message, Response actual) {
 		AsyncHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }

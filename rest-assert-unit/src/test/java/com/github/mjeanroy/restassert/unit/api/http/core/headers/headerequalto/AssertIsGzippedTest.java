@@ -32,9 +32,12 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 public class AssertIsGzippedTest extends AbstractCoreHttpHeaderEqualToTest {
 
+	private static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final String FAILED_VALUE = "deflate";
+
 	@Override
 	protected Header getHeader() {
-		return GZIP_CONTENT_ENCODING;
+		return HEADER;
 	}
 
 	@Override
@@ -45,5 +48,10 @@ public class AssertIsGzippedTest extends AbstractCoreHttpHeaderEqualToTest {
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		HttpAssert.assertIsGzipped(message, actual);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }

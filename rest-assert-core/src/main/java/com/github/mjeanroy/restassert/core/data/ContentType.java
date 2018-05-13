@@ -24,21 +24,19 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
-
-import java.nio.charset.Charset;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
 import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
 import static java.util.Collections.singletonMap;
+
+import java.nio.charset.Charset;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Objects;
+
+import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * A model for Content-Type values.
@@ -48,6 +46,7 @@ import static java.util.Collections.singletonMap;
 public final class ContentType implements HeaderValue {
 
 	private static final String CHARSET_PARAMETER_NAME = "charset";
+	private static final String SEPARATOR = "; ";
 
 	/**
 	 * Create content-type with given media type and charset.
@@ -151,14 +150,12 @@ public final class ContentType implements HeaderValue {
 		String output = mediaType.serializeValue();
 
 		if (!parameters.isEmpty()) {
-			List<String> options = map(parameters.values(), new Mapper<Parameter, String>() {
+			output += SEPARATOR + join(parameters.values(), SEPARATOR, new StringMapper<Parameter>() {
 				@Override
 				public String apply(Parameter input) {
 					return input.serializeValue();
 				}
 			});
-
-			output += "; " + join(options, "; ");
 		}
 
 		return output;

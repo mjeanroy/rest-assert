@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.test.fixtures;
 
-import com.github.mjeanroy.restassert.test.data.Header;
-
 import static com.github.mjeanroy.restassert.test.data.Header.header;
+
+import com.github.mjeanroy.restassert.test.data.Header;
 
 /**
  * Static pre-configured headers to use in unit test.
@@ -85,7 +85,7 @@ public final class TestHeaders {
 	/**
 	 * The {@code "Content-Security-Policy"} header, to use in unit test.
 	 */
-	public static final Header CONTENT_SECURITY_POLICY = header("Content-Security-Policy", "default-src 'none';");
+	public static final Header CONTENT_SECURITY_POLICY = header("Content-Security-Policy", "default-src 'none'");
 
 	/**
 	 * The {@code "ETag"} header value, to use in unit test.

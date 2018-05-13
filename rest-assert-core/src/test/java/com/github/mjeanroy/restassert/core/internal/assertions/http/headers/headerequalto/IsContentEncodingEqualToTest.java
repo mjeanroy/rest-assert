@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -32,13 +34,12 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
 public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();
 	private static final String HEADER_NAME = HEADER.getName();
+	private static final String FAILED_VALUE = "deflate";
 
 	@Override
 	protected Header getHeader() {
@@ -53,6 +54,11 @@ public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest 
 	@Override
 	protected boolean allowMultipleValues() {
 		return false;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 
 	@Test

@@ -24,17 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import java.net.URL;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BASE_URI;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BLOCK_ALL_MIXED_CONTENT;
@@ -68,6 +57,17 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.uns
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.net.URL;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ContentSecurityPolicyTest {
 
@@ -178,7 +178,7 @@ public class ContentSecurityPolicyTest {
 			DEFAULT_SRC, sources("'none'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -194,7 +194,7 @@ public class ContentSecurityPolicyTest {
 			STYLE_SRC, sources("'none'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("style-src 'none';");
+		assertThat(csp.serializeValue()).isEqualTo("style-src 'none'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -210,7 +210,7 @@ public class ContentSecurityPolicyTest {
 			SCRIPT_SRC, sources("'none'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("script-src 'none';");
+		assertThat(csp.serializeValue()).isEqualTo("script-src 'none'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -226,7 +226,7 @@ public class ContentSecurityPolicyTest {
 			CONNECT_SRC, sources("'none'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("connect-src 'none';");
+		assertThat(csp.serializeValue()).isEqualTo("connect-src 'none'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -242,7 +242,7 @@ public class ContentSecurityPolicyTest {
 			CHILD_SRC, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("child-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("child-src 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -258,7 +258,7 @@ public class ContentSecurityPolicyTest {
 			FONT_SRC, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("font-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("font-src 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -274,7 +274,7 @@ public class ContentSecurityPolicyTest {
 			MEDIA_SRC, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("media-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("media-src 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -290,7 +290,7 @@ public class ContentSecurityPolicyTest {
 			FORM_ACTION, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("form-action 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("form-action 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -306,7 +306,7 @@ public class ContentSecurityPolicyTest {
 			IMG_SRC, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("img-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("img-src 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -322,7 +322,7 @@ public class ContentSecurityPolicyTest {
 			OBJECT_SRC, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("object-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("object-src 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -338,7 +338,7 @@ public class ContentSecurityPolicyTest {
 			BASE_URI, sources("'self'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("base-uri 'self';");
+		assertThat(csp.serializeValue()).isEqualTo("base-uri 'self'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -354,7 +354,7 @@ public class ContentSecurityPolicyTest {
 			FRAME_ANCESTORS, sources("'self'", "'unsafe-inline'")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("frame-ancestors 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("frame-ancestors 'self' 'unsafe-inline'");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -370,7 +370,7 @@ public class ContentSecurityPolicyTest {
 			PLUGIN_TYPES, sources("application/json", "application/xml")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("plugin-types application/json application/xml;");
+		assertThat(csp.serializeValue()).isEqualTo("plugin-types application/json application/xml");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -386,7 +386,7 @@ public class ContentSecurityPolicyTest {
 			REPORT_URI, sources("http://domain.com", "http://fake.com", "http://google.com")
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("report-uri http://domain.com http://fake.com http://google.com;");
+		assertThat(csp.serializeValue()).isEqualTo("report-uri http://domain.com http://fake.com http://google.com");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -402,7 +402,7 @@ public class ContentSecurityPolicyTest {
 			SANDBOX, sources(Sandbox.ALLOW_SCRIPTS, Sandbox.ALLOW_SAME_ORIGIN)
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("sandbox allow-scripts allow-same-origin;");
+		assertThat(csp.serializeValue()).isEqualTo("sandbox allow-scripts allow-same-origin");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
@@ -418,7 +418,7 @@ public class ContentSecurityPolicyTest {
 			BLOCK_ALL_MIXED_CONTENT, Collections.<Source>emptySet()
 		));
 
-		assertThat(csp.serializeValue()).isEqualTo("block-all-mixed-content;");
+		assertThat(csp.serializeValue()).isEqualTo("block-all-mixed-content");
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +

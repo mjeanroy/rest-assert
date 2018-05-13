@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
 import java.util.Objects;
 
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * The media type representation.
@@ -37,6 +37,8 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
  */
 public final class MediaType implements HeaderValue {
+
+	private static final String SEPARATOR = "/";
 
 	/**
 	 * Create {@link MediaType} with {@code "text"} type.
@@ -165,7 +167,7 @@ public final class MediaType implements HeaderValue {
 
 	@Override
 	public String serializeValue() {
-		return type + "/" + subtype;
+		return type + SEPARATOR + subtype;
 	}
 
 	@Override

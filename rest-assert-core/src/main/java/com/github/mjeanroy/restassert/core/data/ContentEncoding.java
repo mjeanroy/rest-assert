@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static java.util.Collections.singletonList;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static java.util.Collections.singletonList;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * The list of available content-encoding values.
@@ -120,16 +120,14 @@ public final class ContentEncoding implements HeaderValue {
 		}
 
 		/**
-		 * Index of directive, each one being identitied by its value.
+		 * Index of directive, each one being indexed by its value.
 		 */
-		private static final Map<String, Directive> map;
-
-		static {
-			map = new HashMap<>();
-			for (Directive directive : Directive.values()) {
-				map.put(directive.getValue(), directive);
+		private static final Map<String, Directive> map = indexBy(Directive.values(), new Mapper<Directive, String>() {
+			@Override
+			public String apply(Directive input) {
+				return input.getValue();
 			}
-		}
+		});
 
 		/**
 		 * Get the directive element by its value.
@@ -168,14 +166,12 @@ public final class ContentEncoding implements HeaderValue {
 
 	@Override
 	public String serializeValue() {
-		List<String> directiveValues = map(directives, new Mapper<Directive, String>() {
+		return join(directives, ", ", new StringMapper<Directive>() {
 			@Override
 			public String apply(Directive input) {
 				return input.getValue();
 			}
 		});
-
-		return join(directiveValues, ", ");
 	}
 
 	@Override

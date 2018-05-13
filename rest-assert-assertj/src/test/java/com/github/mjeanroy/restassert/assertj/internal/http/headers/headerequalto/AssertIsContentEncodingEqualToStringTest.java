@@ -24,16 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.data.Header;
-
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsContentEncodingEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "deflate";
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -43,5 +44,10 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractHttpRespon
 	@Override
 	protected Header getHeader() {
 		return HEADER;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 }

@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 
@@ -32,19 +33,22 @@ import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
+import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * Content-Security-Policy Header.
  *
- * @see <a href="https://www.w3.org/TR/CSP/">https://www.w3.org/TR/CSP/</a>
+ * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
+ * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy</a>
  */
 public final class ContentSecurityPolicy implements HeaderValue {
 
@@ -84,7 +88,8 @@ public final class ContentSecurityPolicy implements HeaderValue {
 	ContentSecurityPolicy(Map<SourceDirective, Set<Source>> directives) {
 		// Make a deep copy.
 		Map<SourceDirective, Set<Source>> clone = new LinkedHashMap<>();
-		for (Map.Entry<SourceDirective, Set<Source>> entry : directives.entrySet()) {
+
+		for (Entry<SourceDirective, Set<Source>> entry : directives.entrySet()) {
 			LinkedHashSet<Source> sources = new LinkedHashSet<>(entry.getValue());
 			SourceDirective directive = entry.getKey();
 			clone.put(directive, unmodifiableSet(sources));
@@ -130,28 +135,30 @@ public final class ContentSecurityPolicy implements HeaderValue {
 
 	@Override
 	public String serializeValue() {
-		StringBuilder sb = new StringBuilder();
-
-		for (SourceDirective directive : SourceDirective.values()) {
-			if (directives.containsKey(directive)) {
-				if (sb.length() != 0) {
-					sb.append(" ");
-				}
-
-				StringBuilder allValues = new StringBuilder();
-				for (Source src : directives.get(directive)) {
-					if (allValues.length() != 0) {
-						allValues.append(" ");
+		return join(directives.entrySet(), "; ", new StringMapper<Entry<SourceDirective, Set<Source>>>() {
+			@Override
+			public String apply(Entry<SourceDirective, Set<Source>> input) {
+				final SourceDirective directive = input.getKey();
+				final Set<Source> sources = input.getValue();
+				final String name = directive.getName();
+				final String value = join(sources, " ", new StringMapper<Source>() {
+					@Override
+					public String apply(Source input) {
+						return input.getValue();
 					}
+				});
 
-					allValues.append(src.getValue());
+				final int capacity = name.length() + value.length() + 1;
+				final StringBuilder sb = new StringBuilder(capacity);
+
+				sb.append(name);
+				if (!value.isEmpty()) {
+					sb.append(" ").append(value);
 				}
 
-				sb.append((directive.getName() + " " + allValues).trim()).append(";");
+				return sb.toString();
 			}
-		}
-
-		return sb.toString();
+		});
 	}
 
 	/**
@@ -383,6 +390,18 @@ public final class ContentSecurityPolicy implements HeaderValue {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addReportUri(value);
+			}
+		},
+
+		/**
+		 * Handle {@code report-to} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-report-to">https://w3c.github.io/webappsec-csp/#directive-report-to</a>
+		 */
+		REPORT_TO("report-to") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.setReportTo(value);
 			}
 		},
 

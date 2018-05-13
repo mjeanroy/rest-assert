@@ -41,6 +41,7 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sou
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.OBJECT_SRC;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.PLUGIN_TYPES;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.PREFETCH_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REPORT_TO;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REPORT_URI;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REQUIRE_SRI_FOR;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SANDBOX;
@@ -412,6 +413,19 @@ public class ContentSecurityPolicyParserTest {
 			.containsOnly(
 				entry(DEFAULT_SRC, sources("'none'")),
 				entry(REQUIRE_SRI_FOR, sources(RequireSriFor.SCRIPT, RequireSriFor.STYLE))
+			);
+	}
+
+	@Test
+	public void it_should_parse_report_to() {
+		final String value = "#test-group";
+		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-to " + value);
+
+		assertThat(csp.getDirectives())
+			.hasSize(2)
+			.containsOnly(
+				entry(DEFAULT_SRC, sources("'none'")),
+				entry(REPORT_TO, sources(value))
 			);
 	}
 

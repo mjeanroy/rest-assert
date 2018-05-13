@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
+import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
-import static java.util.Collections.unmodifiableMap;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * Strict-Transport-Security value.
@@ -48,6 +48,10 @@ public final class StrictTransportSecurity implements HeaderValue {
 	 * The parser instance.
 	 */
 	private static final StrictTransportSecurityParser PARSER = new StrictTransportSecurityParser();
+	private static final String MAX_AGE_DIRECTIVE = "max-age";
+	private static final String INCLUDE_SUB_DOMAINS_DIRECTIVE = "includeSubDomains";
+	private static final String PRELOAD_DIRECTIVE = "preload";
+	private static final String SEPARATOR = "; ";
 
 	/**
 	 * Get parser for {@link StrictTransportSecurity} instances.
@@ -133,14 +137,14 @@ public final class StrictTransportSecurity implements HeaderValue {
 	@Override
 	public String serializeValue() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("max-age=").append(maxAge);
+		sb.append(MAX_AGE_DIRECTIVE + "=").append(maxAge);
 
 		if (includeSubDomains) {
-			sb.append("; includeSubDomains");
+			sb.append(SEPARATOR + INCLUDE_SUB_DOMAINS_DIRECTIVE);
 		}
 
 		if (preload) {
-			sb.append("; preload");
+			sb.append(SEPARATOR + PRELOAD_DIRECTIVE);
 		}
 
 		return sb.toString();
@@ -204,7 +208,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 		/**
 		 * {@code includeSubDomains} directive.
 		 */
-		INCLUDE_SUB_DOMAINS("includeSubDomains") {
+		INCLUDE_SUB_DOMAINS(INCLUDE_SUB_DOMAINS_DIRECTIVE) {
 			@Override
 			void parse(String value, StrictTransportSecurityBuilder builder) {
 				builder.includeSubDomains();
@@ -214,7 +218,7 @@ public final class StrictTransportSecurity implements HeaderValue {
 		/**
 		 * {@code preload} directive.
 		 */
-		PRELOAD("preload") {
+		PRELOAD(PRELOAD_DIRECTIVE) {
 			@Override
 			void parse(String value, StrictTransportSecurityBuilder builder) {
 				builder.preload();
@@ -230,18 +234,23 @@ public final class StrictTransportSecurity implements HeaderValue {
 			this.name = name;
 		}
 
+		/**
+		 * Parse directive value.
+		 *
+		 * @param value The value.
+		 * @param builder The current builder.
+		 */
 		abstract void parse(String value, StrictTransportSecurityBuilder builder);
 
-		private static final Map<String, Directive> map;
-
-		static {
-			Map<String, Directive> index = new HashMap<>();
-			for (Directive directive : Directive.values()) {
-				index.put(directive.name.toLowerCase(), directive);
+		/**
+		 * List of directives, indexed by lowercase directive name.
+		 */
+		private static final Map<String, Directive> map = indexBy(Directive.values(), new Mapper<Directive, String>() {
+			@Override
+			public String apply(Directive input) {
+				return input.name.toLowerCase();
 			}
-
-			map = unmodifiableMap(index);
-		}
+		});
 
 		/**
 		 * Get directive from its name. As specified by RFC 6797, directive name
@@ -254,5 +263,4 @@ public final class StrictTransportSecurity implements HeaderValue {
 			return map.get(name.toLowerCase());
 		}
 	}
-
 }

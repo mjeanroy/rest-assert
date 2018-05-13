@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
+
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
 public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
-	private static final String HEADER_NAME = HEADER.getName();
-	private static final String HEADER_VALUE = HEADER.getValue();
+	private static final String NAME = HEADER.getName();
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "deflate";
 
 	@Override
 	protected Header getHeader() {
@@ -53,14 +54,20 @@ public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 		return false;
 	}
 
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
+	}
+
 	@Test
 	public void it_should_pass_with_case_insensitive_comparison() {
 		// GIVEN
-		final String encoding = HEADER_VALUE.toUpperCase();
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, encoding).build();
+		final String actual = VALUE.toUpperCase();
+		final String expected = VALUE.toLowerCase();
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isContentEncodingEqualTo(response, HEADER_VALUE.toLowerCase());
+		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
 
 		// THEN
 		checkSuccess(result);

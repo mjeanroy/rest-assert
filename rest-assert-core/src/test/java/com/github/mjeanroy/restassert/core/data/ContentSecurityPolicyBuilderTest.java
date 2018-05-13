@@ -42,6 +42,7 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sou
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.OBJECT_SRC;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.PLUGIN_TYPES;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.PREFETCH_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REPORT_TO;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REPORT_URI;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REQUIRE_SRI_FOR;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SANDBOX;
@@ -88,7 +89,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addDefaultSrc(none())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'");
 		assertThat(csp.getDirectives())
 			.hasSize(1)
 			.containsOnly(
@@ -103,7 +104,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addStyleSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -119,7 +120,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addScriptSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -135,7 +136,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addConnectSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; connect-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; connect-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -151,7 +152,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addChildSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; child-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; child-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -167,7 +168,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addFontSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; font-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; font-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -183,7 +184,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addMediaSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; media-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; media-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -199,7 +200,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addFormAction(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; form-action 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; form-action 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -215,7 +216,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addImgSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; img-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; img-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -231,7 +232,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addObjectSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; object-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; object-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -247,7 +248,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addBaseUri(self())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("base-uri 'self'; default-src 'none';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; base-uri 'self'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -271,7 +272,7 @@ public class ContentSecurityPolicyBuilderTest {
 				"frame-ancestors " +
 				"domain.com " +
 				"http://domain.com:80/ " +
-				"http://domain.com:*;"
+				"http://domain.com:*"
 		);
 
 		assertThat(csp.getDirectives())
@@ -289,7 +290,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addPluginTypes("application/json", "application/xml")
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; plugin-types application/json application/xml;");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; plugin-types application/json application/xml");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -310,7 +311,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addReportUri(URI.create(uri3))
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; report-uri " + value + ";");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; report-uri " + value);
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -326,7 +327,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addSandbox(Sandbox.ALLOW_SCRIPTS, Sandbox.ALLOW_SAME_ORIGIN)
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; sandbox allow-scripts allow-same-origin;");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; sandbox allow-scripts allow-same-origin");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -342,7 +343,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.blockAllMixedContent()
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; block-all-mixed-content;");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; block-all-mixed-content");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -358,7 +359,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addFrameSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; frame-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; frame-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -374,7 +375,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addPrefetchSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; prefetch-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; prefetch-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -390,7 +391,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addManifestSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; manifest-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; manifest-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -406,7 +407,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addWorkerSrc(self(), unsafeInline())
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; worker-src 'self' 'unsafe-inline';");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; worker-src 'self' 'unsafe-inline'");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -422,7 +423,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addDisownOpener()
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; disown-opener;");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; disown-opener");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -448,7 +449,7 @@ public class ContentSecurityPolicyBuilderTest {
 				"'self' " +
 				"domain.com " +
 				"http://domain.com:80/ " +
-				"http://domain.com:*;"
+				"http://domain.com:*"
 		);
 
 		assertThat(csp.getDirectives())
@@ -466,7 +467,7 @@ public class ContentSecurityPolicyBuilderTest {
 			.addRequireSriFor(RequireSriFor.SCRIPT)
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; require-sri-for script;");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; require-sri-for script");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
@@ -482,12 +483,29 @@ public class ContentSecurityPolicyBuilderTest {
 			.upgradeInsecureRequest()
 			.build();
 
-		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; upgrade-insecure-request;");
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; upgrade-insecure-request");
 		assertThat(csp.getDirectives())
 			.hasSize(2)
 			.containsOnly(
 				entry(DEFAULT_SRC, sources("'none'")),
 				entry(UPGRADE_INSECURE_REQUEST, sources())
+			);
+	}
+
+	@Test
+	public void it_should_handle_report_to() {
+		final String value = "#group1";
+		final ContentSecurityPolicy csp = builder
+			.addDefaultSrc(none())
+			.setReportTo(value)
+			.build();
+
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; report-to " + value);
+		assertThat(csp.getDirectives())
+			.hasSize(2)
+			.containsOnly(
+				entry(DEFAULT_SRC, sources("'none'")),
+				entry(REPORT_TO, sources(value))
 			);
 	}
 
@@ -505,7 +523,6 @@ public class ContentSecurityPolicyBuilderTest {
 	private static Set<Source> sources(String value, String... values) {
 		Set<Source> sources = new LinkedHashSet<>();
 		sources.add(new SourceValue(value));
-
 		for (String v : values) {
 			sources.add(new SourceValue(v));
 		}
