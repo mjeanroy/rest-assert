@@ -24,15 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
-import org.junit.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-
-import java.util.List;
-
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -40,6 +33,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import java.util.List;
+
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
+import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 
 public class CollectionsTest {
 
@@ -163,5 +164,36 @@ public class CollectionsTest {
 		assertThat(found).isFalse();
 		verify(predicate).apply("quix");
 		verify(predicate).apply("bar");
+	}
+
+	@Test
+	public void it_should_create_list_from_parameters() {
+		final String v1 = "foo";
+		final String v2 = "bar";
+		final String v3 = "baz";
+		final List<String> outputs = Collections.toList(v1, v2, v3);
+		assertThat(outputs).hasSize(3).containsExactly(v1, v2, v3);
+	}
+
+	@Test
+	@SuppressWarnings("unchecked")
+	public void it_should_flat_map_inputs() {
+		final String v1 = "foo";
+		final String v2 = "bar";
+		final String v3 = "baz";
+		final String inputs = v1 + "," + v2 + "," + v3;
+		final Mapper<String, String[]> splitFn = mock(Mapper.class);
+
+		when(splitFn.apply(anyString())).thenAnswer(new Answer<String[]>() {
+			@Override
+			public String[] answer(InvocationOnMock invocation) {
+				return ((String) invocation.getArgument(0)).split(",");
+			}
+		});
+
+		final List<String> outputs = Collections.flatMap(singletonList(inputs), splitFn);
+
+		assertThat(outputs).hasSize(3).containsExactly(v1, v2, v3);
+		verify(splitFn).apply(inputs);
 	}
 }

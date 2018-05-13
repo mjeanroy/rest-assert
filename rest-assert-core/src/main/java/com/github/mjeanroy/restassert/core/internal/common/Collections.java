@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
+import static java.util.Collections.addAll;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -54,6 +56,49 @@ public final class Collections {
 			outputs.add(mapper.apply(input));
 		}
 		return outputs;
+	}
+
+	/**
+	 * Map each element of input list to an output list where each input element
+	 * has been splitted.
+	 *
+	 * @param inputs Input list.
+	 * @param split The split function.
+	 * @param <T> Input type.
+	 * @return Outputs.
+	 */
+	public static <T> List<T> flatMap(Iterable<T> inputs, Mapper<T, T[]> split) {
+		final int initialCapacity = sizeOf(inputs) * 10;
+		final List<T> outputs = new ArrayList<>(initialCapacity);
+		for (T input : inputs) {
+			addAll(outputs, split.apply(input));
+		}
+
+		return outputs;
+	}
+
+	/**
+	 * Create a list from all parameters.
+	 *
+	 * @param v1 First value.
+	 * @param other Other values.
+	 * @param <T> Type of inputs.
+	 * @return Output list.
+	 */
+	public static <T> List<T> toList(T v1, T... other) {
+		final int initialCapacity = other.length + 1;
+		final List<T> outputs = new ArrayList<>(initialCapacity);
+		outputs.add(v1);
+		addAll(outputs, other);
+		return outputs;
+	}
+
+	private static <T> int sizeOf(Iterable<T> iterable) {
+		if (iterable instanceof Collection) {
+			return ((Collection) iterable).size();
+		}
+
+		return 10;
 	}
 
 	/**

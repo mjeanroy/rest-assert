@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.flatMap;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.toList;
 import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS;
@@ -58,12 +61,10 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_P
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
 import static java.util.Arrays.asList;
-import static java.util.Collections.addAll;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.github.mjeanroy.restassert.core.data.CacheControl;
@@ -89,6 +90,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatc
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
@@ -106,6 +108,12 @@ public final class HttpResponseAssertions {
 	 * Singleton object.
 	 */
 	private static final HttpResponseAssertions INSTANCE = new HttpResponseAssertions();
+	private static final Mapper<String, String[]> STRING_SPLIT = new Mapper<String, String[]>() {
+		@Override
+		public String[] apply(String input) {
+			return input.split(",");
+		}
+	};
 
 	/**
 	 * Get singleton object.
@@ -1228,6 +1236,293 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Origin"} header, no matter
+	 * what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-origin">https://fetch.spec.whatwg.org/#http-access-control-allow-origin</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin</a>
+	 */
+	public AssertionResult hasAccessControlAllowOrigin(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Access-Control-Allow-Origin"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-origin">https://fetch.spec.whatwg.org/#http-access-control-allow-origin</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin</a>
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowOrigin(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Origin"} header
+	 * with expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param accessControlAllowOrigin Header value.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-origin">https://fetch.spec.whatwg.org/#http-access-control-allow-origin</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Origin</a>
+	 */
+	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, String accessControlAllowOrigin) {
+		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin, false);
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Headers"} header, no matter what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-headers">https://fetch.spec.whatwg.org/#http-access-control-allow-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
+	 */
+	public AssertionResult hasAccessControlAllowHeaders(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_HEADERS.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Access-Control-Allow-Headers"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-headers">https://fetch.spec.whatwg.org/#http-access-control-allow-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowHeaders(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_HEADERS.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Headers"} header with
+	 * expected values (note that order does not matter).
+	 *
+	 * Note that since header names are case-insensitive, assertion is also <strong>case-insensitive</strong>.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param value Header value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
+		return isAccessControlAllowHeadersEqualTo(httpResponse, flatMap(toList(value, other), STRING_SPLIT));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Headers"} header with expected
+	 * list of values.
+	 *
+	 * Note that since header names are case-insensitive, assertion is also <strong>case-insensitive</strong>.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param accessControlAllowHeaders Header value.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-headers">https://fetch.spec.whatwg.org/#http-access-control-allow-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
+	 */
+	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlAllowHeaders) {
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), flatMap(accessControlAllowHeaders, STRING_SPLIT)));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Expose-Headers"} header, no matter
+	 * what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-expose-headers">https://fetch.spec.whatwg.org/#http-access-control-expose-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>
+	 */
+	public AssertionResult hasAccessControlExposeHeaders(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_EXPOSE_HEADERS.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Access-Control-Expose-Headers"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-expose-headers">https://fetch.spec.whatwg.org/#http-access-control-expose-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>
+	 */
+	public AssertionResult doesNotHaveAccessControlExposeHeaders(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_EXPOSE_HEADERS.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Expose-Headers"} header with expected
+	 * value(s).
+	 *
+	 * Note that since header names are case-insensitive, assertion is also <strong>case-insensitive</strong>.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param value Header value.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-expose-headers">https://fetch.spec.whatwg.org/#http-access-control-expose-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>
+	 */
+	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
+		return isAccessControlExposeHeadersEqualTo(httpResponse, flatMap(toList(value, other), STRING_SPLIT));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Headers"} header with expected
+	 * list of value.
+	 *
+	 * Note that since header names are case-insensitive, assertion is also <strong>case-insensitive</strong>.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param accessControlExposeHeaders Header value.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-expose-headers">https://fetch.spec.whatwg.org/#http-access-control-expose-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>
+	 */
+	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlExposeHeaders) {
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_EXPOSE_HEADERS.getName(), flatMap(accessControlExposeHeaders, STRING_SPLIT)));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Methods"} header, no matter
+	 * what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-methods">https://fetch.spec.whatwg.org/#http-access-control-allow-methods</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods</a>
+	 */
+	public AssertionResult hasAccessControlAllowMethods(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_METHODS.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Access-Control-Allow-Methods"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-methods">https://fetch.spec.whatwg.org/#http-access-control-allow-methods</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods</a>
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowMethods(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_METHODS.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Methods"} header with
+	 * expected values.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param method HTTP method.
+	 * @param other Other, optional, HTTP method.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-methods">https://fetch.spec.whatwg.org/#http-access-control-allow-methods</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods</a>
+	 */
+	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, RequestMethod method, RequestMethod... other) {
+		return isAccessControlAllowMethodsEqualTo(httpResponse, toList(method, other));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Methods"} header with
+	 * expected values (note that order of methods does not matter).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param methods HTTP Methods.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-methods">https://fetch.spec.whatwg.org/#http-access-control-allow-methods</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods</a>
+	 */
+	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, Iterable<RequestMethod> methods) {
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_METHODS.getName(), map(methods, new Mapper<RequestMethod, String>() {
+			@Override
+			public String apply(RequestMethod input) {
+				return input.verb();
+			}
+		})));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Credentials"} header, no matter
+	 * what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-credentials">https://fetch.spec.whatwg.org/#http-access-control-allow-credentials</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials</a>
+	 */
+	public AssertionResult hasAccessControlAllowCredentials(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_CREDENTIALS.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Access-Control-Allow-Credentials"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-credentials">https://fetch.spec.whatwg.org/#http-access-control-allow-credentials</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Credentials</a>
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowCredentials(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_CREDENTIALS.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Credentials"} header with
+	 * expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param flag Flag value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
+	 */
+	public AssertionResult isAccessControlAllowCredentialsEqualTo(HttpResponse httpResponse, boolean flag) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_CREDENTIALS.getName(), Boolean.toString(flag), false));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Max-Age"} header, no matter
+	 * what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-max-age">https://fetch.spec.whatwg.org/#http-access-control-max-age</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age</a>
+	 */
+	public AssertionResult hasAccessControlAllowMaxAge(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_MAX_AGE.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Access-Control-Allow-Max-Age"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-max-age">https://fetch.spec.whatwg.org/#http-access-control-max-age</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age</a>
+	 */
+	public AssertionResult doesNotHaveAccessControlAllowMaxAge(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_MAX_AGE.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Access-Control-Allow-Max-Age"} header with
+	 * expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param maxAge Max age (in seconds).
+	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-max-age">https://fetch.spec.whatwg.org/#http-access-control-max-age</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Max-Age</a>
+	 */
+	public AssertionResult isAccessControlAllowMaxAgeEqualTo(HttpResponse httpResponse, long maxAge) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_MAX_AGE.getName(), Long.toString(maxAge), false));
+	}
+
+	/**
 	 * Check that HTTP response contains {@code "Content-Disposition"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
@@ -1292,240 +1587,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
 		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Origin header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasAccessControlAllowOrigin(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName());
-	}
-
-	/**
-	 * Check that http response does contains Access-Control-Allow-Origin header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveAccessControlAllowOrigin(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName());
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Origin header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param accessControlAllowOrigin Header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowOriginEqualTo(HttpResponse httpResponse, String accessControlAllowOrigin) {
-		return isHeaderEqualTo(httpResponse, ACCESS_CONTROL_ALLOW_ORIGIN.getName(), accessControlAllowOrigin, false);
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Headers header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasAccessControlAllowHeaders(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_HEADERS.getName());
-	}
-
-	/**
-	 * Check that http response does contains Access-Control-Allow-Headers header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveAccessControlAllowHeaders(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_HEADERS.getName());
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param value Header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
-		List<String> list = new LinkedList<>();
-		list.add(value);
-		addAll(list, other);
-		return isAccessControlAllowHeadersEqualTo(httpResponse, list);
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param accessControlAllowHeaders Header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlAllowHeaders) {
-		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), accessControlAllowHeaders));
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Expose-Headers header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasAccessControlExposeHeaders(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ACCESS_CONTROL_EXPOSE_HEADERS.getName());
-	}
-
-	/**
-	 * Check that http response does contains Access-Control-Expose-Headers header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveAccessControlExposeHeaders(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_EXPOSE_HEADERS.getName());
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Expose-Headers header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param value Header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
-		List<String> list = new LinkedList<>();
-		list.add(value);
-		addAll(list, other);
-		return isAccessControlExposeHeadersEqualTo(httpResponse, list);
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param accessControlExposeHeaders Header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlExposeHeaders) {
-		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_EXPOSE_HEADERS.getName(), accessControlExposeHeaders));
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Methods header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasAccessControlAllowMethods(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_METHODS.getName());
-	}
-
-	/**
-	 * Check that http response does contains Access-Control-Allow-Headers header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveAccessControlAllowMethods(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_METHODS.getName());
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Headers header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param method HTTP method.
-	 * @param other Other, optional, HTTP method.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, RequestMethod method, RequestMethod... other) {
-		List<RequestMethod> list = new LinkedList<>();
-		list.add(method);
-		addAll(list, other);
-		return isAccessControlAllowMethodsEqualTo(httpResponse, list);
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Methods header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param methods HTTP Methods.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, Iterable<RequestMethod> methods) {
-		List<String> list = new LinkedList<>();
-		for (RequestMethod method : methods) {
-			list.add(method.verb());
-		}
-
-		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_METHODS.getName(), list));
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Credentials header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasAccessControlAllowCredentials(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_CREDENTIALS.getName());
-	}
-
-	/**
-	 * Check that http response does contains Access-Control-Allow-Credentials header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveAccessControlAllowCredentials(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_CREDENTIALS.getName());
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Credentials header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param flag Flag value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowCredentialsEqualTo(HttpResponse httpResponse, boolean flag) {
-		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_CREDENTIALS.getName(), Boolean.toString(flag), false));
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Max-Age header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasAccessControlAllowMaxAge(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, ACCESS_CONTROL_ALLOW_MAX_AGE.getName());
-	}
-
-	/**
-	 * Check that http response does contains Access-Control-Allow-Max-Age header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveAccessControlAllowMaxAge(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, ACCESS_CONTROL_ALLOW_MAX_AGE.getName());
-	}
-
-	/**
-	 * Check that http response contains Access-Control-Allow-Max-Age header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param maxAge Max age (in seconds).
-	 * @return Assertion result.
-	 */
-	public AssertionResult isAccessControlAllowMaxAgeEqualTo(HttpResponse httpResponse, long maxAge) {
-		return assertWith(httpResponse, new IsHeaderEqualToAssertion(ACCESS_CONTROL_ALLOW_MAX_AGE.getName(), Long.toString(maxAge), false));
 	}
 
 	/**

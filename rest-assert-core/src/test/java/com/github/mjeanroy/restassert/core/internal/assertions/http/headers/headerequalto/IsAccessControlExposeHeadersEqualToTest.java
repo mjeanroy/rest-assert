@@ -29,14 +29,18 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CO
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
 
 public class IsAccessControlExposeHeadersEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
+	private static final Header HEADER = ACCESS_CONTROL_EXPOSE_HEADERS;
+	private static final String NAME = HEADER.getName();
+	private static final String VALUE = HEADER.getValue();
 
 	@Override
 	protected Header getHeader() {
-		return ACCESS_CONTROL_EXPOSE_HEADERS;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +51,25 @@ public class IsAccessControlExposeHeadersEqualToTest extends AbstractHttpHeaderE
 	@Override
 	protected boolean allowMultipleValues() {
 		return false;
+	}
+
+	@Test
+	public void it_should_compare_with_single_string() {
+		final String actual = "X-Foo, X-Bar";
+		final String expected = "X-Bar, X-Foo";
+		doTestSuccess(actual, expected);
+	}
+
+	@Test
+	public void it_should_compare_case_insensitively() {
+		final String actual = "x-foo, x-bar";
+		final String expected = "X-Foo, X-Bar";
+		doTestSuccess(actual, expected);
+	}
+
+	private void doTestSuccess(String actual, String expected) {
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		final AssertionResult result = assertions.isAccessControlExposeHeadersEqualTo(response, expected);
+		checkSuccess(result);
 	}
 }

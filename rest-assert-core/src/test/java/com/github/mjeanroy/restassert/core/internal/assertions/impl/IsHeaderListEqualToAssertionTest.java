@@ -24,6 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
+import static java.util.Arrays.asList;
+import static java.util.Collections.singleton;
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.rules.ExpectedException.none;
+
 import java.util.Collections;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
@@ -33,12 +39,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.singleton;
-import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
-
 public class IsHeaderListEqualToAssertionTest {
 
 	@Rule
@@ -46,16 +46,16 @@ public class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_single_value() {
+		// GIVEN
 		final String name = "foo";
 		final String value = "bar";
-
 		final IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, singleton("bar"));
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value)
-				.build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		// WHEN
+		final AssertionResult result = assertion.handle(rsp);
 
+		// THEN
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
 		assertThat(result.isFailure()).isFalse();
@@ -63,16 +63,16 @@ public class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_multiple_value() {
+		// GIVEN
 		final String name = "foo";
 		final String value = "foo, bar";
-
 		final IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, asList("bar", "foo"));
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value)
-				.build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		// WHEN
+		final AssertionResult result = assertion.handle(rsp);
 
+		// THEN
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
 		assertThat(result.isFailure()).isFalse();
@@ -80,16 +80,16 @@ public class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
+		// GIVEN
 		final String name = "foo";
 		final String value = "foo, bar";
 		final IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, asList("foo", "bar"));
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value + ", " + value)
-				.addHeader(name, value)
-				.build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + ", " + value).addHeader(name, value).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		// WHEN
+		final AssertionResult result = assertion.handle(rsp);
 
+		// THEN
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
 		assertThat(result.isFailure()).isFalse();
@@ -97,15 +97,16 @@ public class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
+		// GIVEN
 		final String name = "foo";
 		final String value = "bar";
 		final IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, singletonList(value));
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader("bar", "bar")
-				.build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
 
-		AssertionResult result = assertion.handle(rsp);
+		// WHEN
+		final AssertionResult result = assertion.handle(rsp);
 
+		// THEN
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
@@ -114,15 +115,16 @@ public class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
+		// GIVEN
 		final String name = "foo";
 		final String value = "bar";
 		final IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, asList("foo", "bar"));
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value)
-				.build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
-		AssertionResult result = assertion.handle(rsp);
+		// WHEN
+		final AssertionResult result = assertion.handle(rsp);
 
+		// THEN
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
@@ -131,15 +133,15 @@ public class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
+		// GIVEN
 		final String name = "Content-Type";
 		final IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, singletonList("application/json"));
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, "application/json")
-				.addHeader(name, "application/xml")
-				.build();
+		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, "application/json").addHeader(name, "application/xml").build();
 
-		AssertionResult result = assertion.handle(rsp);
+		// WHEN
+		final AssertionResult result = assertion.handle(rsp);
 
+		// THEN
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();

@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import static com.github.mjeanroy.restassert.core.data.RequestMethod.GET;
+import static com.github.mjeanroy.restassert.core.data.RequestMethod.POST;
+import static com.github.mjeanroy.restassert.core.data.RequestMethod.PUT;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -35,6 +38,8 @@ import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
 
 public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
@@ -42,8 +47,9 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 	private static final String V2 = "POST";
 	private static final String V3 = "PUT";
 
+	private static final Header HEADER = ACCESS_CONTROL_ALLOW_METHODS;
+	private static final String NAME = HEADER.getName();
 	private static final String VALUE = join(asList(V1, V2, V3), ", ");
-
 	private static final List<RequestMethod> VALUES = asList(
 			RequestMethod.valueOf(V1),
 			RequestMethod.valueOf(V2),
@@ -52,7 +58,7 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 
 	@Override
 	protected Header getHeader() {
-		return header(ACCESS_CONTROL_ALLOW_METHODS.getName(), VALUE);
+		return header(HEADER.getName(), VALUE);
 	}
 
 	@Override
@@ -63,5 +69,19 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 	@Override
 	protected boolean allowMultipleValues() {
 		return false;
+	}
+
+	@Test
+	public void it_should_not_be_order_sensitive() {
+		// GIVEN
+		final String actual = "GET,POST,PUT";
+		final List<RequestMethod> expected = asList(GET, PUT, POST);
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+
+		// WHEN
+		final AssertionResult result = assertions.isAccessControlAllowMethodsEqualTo(response, expected);
+
+		// THEN
+		checkSuccess(result);
 	}
 }

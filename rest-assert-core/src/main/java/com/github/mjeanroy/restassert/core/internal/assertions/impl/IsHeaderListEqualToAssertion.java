@@ -24,21 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 /**
  * Check that http response has at least one header with
@@ -71,7 +72,7 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 
 		notEmpty(values, "Values must not be empty");
 		this.values = new LinkedHashSet<>();
-		this.lowercaseValues = new LinkedHashSet<>();
+		this.lowercaseValues = new HashSet<>();
 		initSet(values);
 	}
 
@@ -93,7 +94,11 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 	@Override
 	AssertionResult doAssertion(List<String> values) {
 		boolean found = some(values, new SetPredicate(this.lowercaseValues));
-		return found ? success() : failure(shouldHaveHeaderWithValue(name, join(this.values, ", "), values));
+		return found ? success() : getFailure(values);
+	}
+
+	private AssertionResult getFailure(List<String> values) {
+		return failure(shouldHaveHeaderWithValue(name, join(this.values, ", "), values));
 	}
 
 	private static class SetPredicate implements Predicate<String> {
@@ -108,7 +113,8 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 			log.debug("Extracting list of values from '{}'", input);
 
 			String[] inputs = input.split(",");
-			Set<String> actualValues = new LinkedHashSet<>();
+			Set<String> actualValues = new HashSet<>();
+
 			for (String value : inputs) {
 				String trimmedValue = value.trim();
 				if (!trimmedValue.isEmpty()) {
@@ -119,7 +125,7 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 				}
 			}
 
-			return actualValues.equals(expected);
+			return actualValues.containsAll(expected);
 		}
 	}
 }
