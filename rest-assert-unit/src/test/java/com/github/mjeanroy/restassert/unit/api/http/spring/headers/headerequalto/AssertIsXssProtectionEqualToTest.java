@@ -33,11 +33,13 @@ import org.springframework.test.web.servlet.ResultActions;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.DISABLE;
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final XssProtection VALUE = XssProtection.disable();
+	private static final XssProtection FAILED_VALUE = XssProtection.enable();
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
 	}
 
 	@Override
@@ -48,5 +50,10 @@ public class AssertIsXssProtectionEqualToTest extends AbstractSpringMockMvcHttpH
 	@Override
 	protected void invoke(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE.serializeValue();
 	}
 }

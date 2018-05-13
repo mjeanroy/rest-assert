@@ -24,13 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 import java.util.Objects;
 
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
  * A parameter that can be displayed in header raw values formatted as {@code "<name>=<value>"}.
@@ -47,6 +48,21 @@ public final class Parameter implements HeaderValue {
 	 * @throws IllegalArgumentException If {@code name} is empty.
 	 */
 	public static Parameter parameter(String name, String value) {
+		return new Parameter(name, value);
+	}
+
+	/**
+	 * Parse raw value and create parameter.
+	 *
+	 * @param rawValue Parameter raw value.
+	 * @return The parameter.
+	 * @throws NullPointerException If {@code rawValue} is {@code null}.
+	 */
+	public static Parameter parse(String rawValue) {
+		PreConditions.notNull(rawValue, "Parameter raw value must be defined");
+		String[] parts = rawValue.split("=", 2);
+		String name = parts[0].trim().toLowerCase();
+		String value = parts.length == 2 ? parts[1].trim() : "";
 		return new Parameter(name, value);
 	}
 

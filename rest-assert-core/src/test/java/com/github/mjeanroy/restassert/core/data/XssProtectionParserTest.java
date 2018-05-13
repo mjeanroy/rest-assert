@@ -24,31 +24,45 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Test;
-
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.Before;
+import org.junit.Test;
 
 public class XssProtectionParserTest {
 
+	private XssProtectionParser parser;
+
+	@Before
+	public void setUp() {
+		parser = XssProtection.parser();
+	}
+
 	@Test
 	public void it_should_parse_0() {
-		XssProtectionParser parser = XssProtection.parser();
-		assertThat(parser.parse("0")).isEqualTo(XssProtection.DISABLE);
-		assertThat(parser.parse(" 0 ")).isEqualTo(XssProtection.DISABLE);
+		assertThat(parser.parse("0")).isEqualTo(XssProtection.disable());
+		assertThat(parser.parse(" 0 ")).isEqualTo(XssProtection.disable());
 	}
 
 	@Test
 	public void it_should_parse_1() {
-		XssProtectionParser parser = XssProtection.parser();
-		assertThat(parser.parse("1")).isEqualTo(XssProtection.ENABLE);
-		assertThat(parser.parse(" 1 ")).isEqualTo(XssProtection.ENABLE);
+		assertThat(parser.parse("1")).isEqualTo(XssProtection.enable());
+		assertThat(parser.parse(" 1 ")).isEqualTo(XssProtection.enable());
 	}
 
 	@Test
 	public void it_should_parse_1_with_block_mode() {
-		XssProtectionParser parser = XssProtection.parser();
-		assertThat(parser.parse("1; mode=block")).isEqualTo(XssProtection.ENABLE_BLOCK);
-		assertThat(parser.parse("1;mode=block")).isEqualTo(XssProtection.ENABLE_BLOCK);
-		assertThat(parser.parse(" 1 ; mode=block ")).isEqualTo(XssProtection.ENABLE_BLOCK);
+		assertThat(parser.parse("1; mode=block")).isEqualTo(XssProtection.enableModeBlock());
+		assertThat(parser.parse("1;mode=block")).isEqualTo(XssProtection.enableModeBlock());
+		assertThat(parser.parse(" 1 ; mode=block ")).isEqualTo(XssProtection.enableModeBlock());
+	}
+
+	@Test
+	public void it_should_parse_1_with_report_uri() {
+		final String uri = "https://google.com";
+		assertThat(parser.parse("1; report=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));
+		assertThat(parser.parse("1;report=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));
+		assertThat(parser.parse(" 1 ; report=" + uri + " ")).isEqualTo(XssProtection.enableModeReport(uri));
+		assertThat(parser.parse("1; REPORT=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));
 	}
 }

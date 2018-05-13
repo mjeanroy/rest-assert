@@ -1118,7 +1118,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response contains Content-Security-Policy header with
+	 * Check that HTTP response contains {@code "Content-Security-Policy"} header with
 	 * expected value.
 	 *
 	 * Note that according to latest <a href="https://w3c.github.io/webappsec-csp/">specification</a>:
@@ -1163,6 +1163,68 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isContentSecurityPolicyEqualTo(HttpResponse httpResponse, ContentSecurityPolicy contentSecurityPolicy) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(CONTENT_SECURITY_POLICY.getName(), contentSecurityPolicy, ContentSecurityPolicy.parser()));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-XSS-Protection"} header, no matter what value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
+	 */
+	public AssertionResult hasXssProtection(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, X_XSS_PROTECTION.getName());
+	}
+
+	/**
+	 * Check that http response <strong>does not</strong> contains {@code "X-XSS-Protection"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
+	 */
+	public AssertionResult doesNotHaveXssProtection(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, X_XSS_PROTECTION.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-XSS-Protection"} header with
+	 * expected value.
+	 *
+	 * Please, note that:
+	 *
+	 * <ul>
+	 *   <li>Header value is <strong>case-insensitive</strong>.</li>
+	 *   <li>A non-authorize value will fail, as it is probably a mistake.</li>
+	 * </ul>
+	 *
+	 * Following values are equivalent:
+	 *
+	 * <ul>
+	 *   <li>{@code "1; mode=block"}</li>
+	 *   <li>{@code "1; MODE=BLOCK"}</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param xssProtection Expected {@code "X-XSS-Protection"} header value.
+	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
+	 */
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, String xssProtection) {
+		return isXssProtectionEqualTo(httpResponse, XssProtection.parser().parse(xssProtection));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "X-XSS-Protection"} header
+	 * with {@link XssProtection} value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param xssProtection Expected {@code "X-XSS-Protection"} header value.
+	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
+	 */
+	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, XssProtection xssProtection) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_XSS_PROTECTION.getName(), xssProtection, XssProtection.parser()));
 	}
 
 	/**
@@ -1230,48 +1292,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
 		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
-	}
-
-	/**
-	 * Check that http response contains X-XSS-Protection header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasXssProtection(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, X_XSS_PROTECTION.getName());
-	}
-
-	/**
-	 * Check that http response does contains X-XSS-Protection header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveXssProtection(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, X_XSS_PROTECTION.getName());
-	}
-
-	/**
-	 * Check that http response contains X-XSS-Protection header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param xssProtection Expected X-XSS-Protection header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, String xssProtection) {
-		return isHeaderEqualTo(httpResponse, X_XSS_PROTECTION.getName(), xssProtection, false);
-	}
-
-	/**
-	 * Check that http response contains X-XSS-Protection header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param xssProtection Expected X-XSS-Protection header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isXssProtectionEqualTo(HttpResponse httpResponse, XssProtection xssProtection) {
-		return assertWith(httpResponse, new IsHeaderMatchingAssertion(X_XSS_PROTECTION.getName(), xssProtection, XssProtection.parser()));
 	}
 
 	/**

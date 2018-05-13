@@ -33,11 +33,13 @@ import org.apache.http.HttpResponse;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.DISABLE;
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final XssProtection VALUE = XssProtection.disable();
+	private static final XssProtection FAILED_VALUE = XssProtection.enable();
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
 	}
 
 	@Override
@@ -48,5 +50,10 @@ public class AssertIsXssProtectionEqualToTest extends AbstractApacheHttpHeaderEq
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE.serializeValue();
 	}
 }

@@ -29,14 +29,19 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PRO
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.junit.Test;
 
 public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
-	private static final String VALUE = X_XSS_PROTECTION.getValue();
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final String NAME = HEADER.getName();
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "1";
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +52,30 @@ public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToT
 	@Override
 	protected boolean allowMultipleValues() {
 		return true;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
+	}
+
+	@Test
+	public void it_should_compare_case_insensitively() {
+		final String actual = "1; mode=block";
+		final String expected = "1; MODE=BLOCK";
+		doTestSuccess(actual, expected);
+	}
+
+	@Test
+	public void it_should_compare_with_different_spaces() {
+		final String actual = "1; mode=block";
+		final String expected = "1 ; mode = block";
+		doTestSuccess(actual, expected);
+	}
+
+	private void doTestSuccess(String actual, String expected) {
+		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		final AssertionResult result = assertions.isXssProtectionEqualTo(response, expected);
+		checkSuccess(result);
 	}
 }

@@ -33,7 +33,9 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.DISABLE;
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final XssProtection VALUE = XssProtection.disable();
+	private static final XssProtection FAILED_VALUE = XssProtection.enable();
 
 	@Override
 	protected void invoke(HttpResponse httpResponse) {
@@ -42,6 +44,11 @@ public class AssertIsXssProtectionEqualToTest extends AbstractHttpResponsesHeade
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
+	}
+
+	@Override
+	String failValue() {
+		return FAILED_VALUE.serializeValue();
 	}
 }

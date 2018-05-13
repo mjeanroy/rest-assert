@@ -33,11 +33,13 @@ import com.ning.http.client.Response;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.DISABLE;
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final XssProtection VALUE = XssProtection.disable();
+	private static final XssProtection FAILED_VALUE = XssProtection.enable();
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
 	}
 
 	@Override
@@ -48,5 +50,10 @@ public class AssertIsXssProtectionEqualToTest extends AbstractNingHttpHeaderEqua
 	@Override
 	protected void invoke(String message, Response actual) {
 		NingHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE.serializeValue();
 	}
 }

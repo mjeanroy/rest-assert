@@ -32,11 +32,13 @@ import com.google.api.client.http.HttpResponse;
 
 public class AssertIsXssProtectionEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final String VALUE = X_XSS_PROTECTION.getValue();
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "1";
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class AssertIsXssProtectionEqualToStringTest extends AbstractGoogleHttpHe
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }

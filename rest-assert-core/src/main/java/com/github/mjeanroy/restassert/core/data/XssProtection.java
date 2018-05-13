@@ -24,6 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+
+import java.net.URI;
+import java.util.Objects;
+
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
 
 /**
@@ -31,45 +38,52 @@ import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
  */
-public enum XssProtection implements HeaderValue {
+public final class XssProtection implements HeaderValue {
 
 	/**
-	 * Disables the XSS Protections offered by the user-agent.
+	 * Create {@code "X-XSS-Protection"} header with {@code "DISABLE"} parameter.
+	 *
+	 * @return The header.
 	 */
-	DISABLE("0") {
-		@Override
-		boolean match(String value) {
-			return value.equals(this.value);
-		}
-	},
+	public static XssProtection disable() {
+		return new XssProtection(Directive.DISABLE, null);
+	}
 
 	/**
-	 * Enables the XSS Protections.
+	 * Create {@code "X-XSS-Protection"} header with {@code "ENABLE"} parameter.
+	 *
+	 * @return The header.
 	 */
-	ENABLE("1") {
-		@Override
-		boolean match(String value) {
-			return value.equals(this.value);
-		}
-	},
+	public static XssProtection enable() {
+		return new XssProtection(Directive.ENABLE, null);
+	}
 
 	/**
-	 * Enables XSS protections and instructs the user-agent to block the response in the
-	 * event that script has been inserted from user input, instead of sanitizing.
+	 * Create {@code "X-XSS-Protection"} header with {@code "ENABLE MODE=block"} parameter.
+	 *
+	 * @return The header.
 	 */
-	ENABLE_BLOCK("1; mode=block") {
-		@Override
-		boolean match(String value) {
-			String[] parts = this.value.split(";", 2);
-			if (parts.length != 2) {
-				return false;
-			}
+	public static XssProtection enableModeBlock() {
+		return new XssProtection(Directive.ENABLE, parameter("mode", "block"));
+	}
 
-			String mode = parts[0].trim().toLowerCase();
-			String option = parts[1].trim().toLowerCase();
-			return mode.equals("1") && option.equals("mode=block");
-		}
-	};
+	/**
+	 * Create {@code "X-XSS-Protection"} header with {@code "ENABLE REPORT=<uri>"} parameter.
+	 *
+	 * @return The header.
+	 */
+	public static XssProtection enableModeReport(String uri) {
+		return new XssProtection(Directive.ENABLE, parameter("report", uri));
+	}
+
+	/**
+	 * Create {@code "X-XSS-Protection"} header with {@code "ENABLE REPORT=<uri>"} parameter.
+	 *
+	 * @return The header.
+	 */
+	public static XssProtection enableModeReport(URI uri) {
+		return new XssProtection(Directive.ENABLE, parameter("report", uri.toString()));
+	}
 
 	/**
 	 * The parser instance.
@@ -86,24 +100,132 @@ public enum XssProtection implements HeaderValue {
 	}
 
 	/**
-	 * The value value.
+	 * The {@code "X-XSS-Protection"} directives.
+	 *
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
 	 */
-	final String value;
+	enum Directive {
+		/**
+		 * Disables the XSS Protections offered by the user-agent.
+		 */
+		DISABLE("0") {
+			@Override
+			boolean match(String value) {
+				return value.equals(getPrefix());
+			}
+		},
 
-	XssProtection(String value) {
-		this.value = value;
+		/**
+		 * Enables the XSS Protections.
+		 */
+		ENABLE("1") {
+			@Override
+			boolean match(String value) {
+				return value.equals(getPrefix());
+			}
+		};
+
+		/**
+		 * The directive value.
+		 */
+		private final String prefix;
+
+		Directive(String prefix) {
+			this.prefix = prefix;
+		}
+
+		/**
+		 * Get {@link #prefix}
+		 *
+		 * @return {@link #prefix}
+		 */
+		String getPrefix() {
+			return prefix;
+		}
+
+		/**
+		 * Check if value raw value match specified value.
+		 *
+		 * @param value Raw value.
+		 * @return {@code true} if {@code value} match specified value, {@code false} otherwise.
+		 */
+		abstract boolean match(String value);
+	}
+
+	/**
+	 * The header directive.
+	 */
+	private final Directive directive;
+
+	/**
+	 * The directive parameter.
+	 */
+	private final Parameter parameter;
+
+	/**
+	 * Create {@code "X-XSS-Protection"} header.
+	 *
+	 * @param directive The header directive.
+	 * @param parameter Directive parameter, may be {@code null}.
+	 */
+	XssProtection(Directive directive, Parameter parameter) {
+		this.directive = notNull(directive, "X-XSS-Protection directive must be defined");
+		this.parameter = parameter;
+	}
+
+	/**
+	 * Get {@link #directive}
+	 *
+	 * @return {@link #directive}
+	 */
+	public Directive getDirective() {
+		return directive;
+	}
+
+	/**
+	 * Get {@link #parameter}
+	 *
+	 * @return {@link #parameter}
+	 */
+	public Parameter getParameter() {
+		return parameter;
 	}
 
 	@Override
 	public String serializeValue() {
-		return value;
+		String output = directive.getPrefix();
+
+		if (parameter != null) {
+			output += "; " + parameter.serializeValue();
+		}
+
+		return output;
 	}
 
-	/**
-	 * Check if value raw value match specified value.
-	 *
-	 * @param value Raw value.
-	 * @return {@code true} if {@code value} match specified value, {@code false} otherwise.
-	 */
-	abstract boolean match(String value);
+	@Override
+	public boolean equals(Object o) {
+		if (o == this) {
+			return true;
+		}
+
+		if (o instanceof XssProtection) {
+			XssProtection x = (XssProtection) o;
+			return Objects.equals(directive, x.directive) && Objects.equals(parameter, x.parameter);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(directive, parameter);
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.toStringBuilder(getClass())
+			.append("directive", directive)
+			.append("parameter", parameter)
+			.build();
+	}
 }

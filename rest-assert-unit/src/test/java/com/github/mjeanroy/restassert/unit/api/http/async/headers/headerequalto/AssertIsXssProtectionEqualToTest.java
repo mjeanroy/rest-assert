@@ -33,11 +33,13 @@ import org.asynchttpclient.Response;
 
 public class AssertIsXssProtectionEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
-	private static final XssProtection VALUE = XssProtection.DISABLE;
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final XssProtection VALUE = XssProtection.disable();
+	private static final XssProtection FAILED_VALUE = XssProtection.enable();
 
 	@Override
 	protected Header getHeader() {
-		return X_XSS_PROTECTION;
+		return HEADER;
 	}
 
 	@Override
@@ -48,5 +50,10 @@ public class AssertIsXssProtectionEqualToTest extends AbstractAsyncHttpHeaderEqu
 	@Override
 	protected void invoke(String message, Response actual) {
 		AsyncHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE.serializeValue();
 	}
 }

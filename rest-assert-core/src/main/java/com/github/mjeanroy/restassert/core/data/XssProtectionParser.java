@@ -24,7 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_XSS_PROTECTION;
+
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 /**
  * Parser for {@link XssProtection} value.
@@ -39,12 +42,15 @@ public class XssProtectionParser extends AbstractHeaderParser<XssProtection> {
 	protected XssProtection doParse(String value) {
 		String rawValue = value.toLowerCase();
 
-		for (XssProtection x : XssProtection.values()) {
-			if (x.match(rawValue)) {
-				return x;
+		for (XssProtection.Directive x : XssProtection.Directive.values()) {
+			String[] parts = rawValue.split(";", 2);
+			String directive = parts[0].trim();
+			if (x.match(directive)) {
+				Parameter parameter = parts.length == 2 ? Parameter.parse(parts[1]) : null;
+				return new XssProtection(x, parameter);
 			}
 		}
 
-		return null;
+		throw new InvalidHeaderValue(X_XSS_PROTECTION.getName(), value);
 	}
 }
