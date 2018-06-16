@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
@@ -32,6 +33,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.github.mjeanroy.restassert.core.data.StrictTransportSecurity.Directive;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.isQuoted;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.removeQuote;
 
 /**
  * Parser for {@link StrictTransportSecurity} value.
@@ -77,6 +80,11 @@ public class StrictTransportSecurityParser extends AbstractHeaderParser<StrictTr
 			foundDirectives.add(directive);
 
 			String directiveValue = directiveNameValue.length == 2 ? directiveNameValue[1].trim() : null;
+
+			// Value may be quoted.
+			if (isQuoted(directiveValue)) {
+				directiveValue = removeQuote(directiveValue);
+			}
 
 			log.debug("  --> Parsing value: '{}'", directiveValue);
 			directive.parse(directiveValue, builder);

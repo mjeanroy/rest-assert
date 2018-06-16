@@ -32,11 +32,13 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TR
 
 public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final String VALUE = STRICT_TRANSPORT_SECURITY.getValue();
+	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "max-age=7200";
 
 	@Override
 	protected Header getHeader() {
-		return STRICT_TRANSPORT_SECURITY;
+		return HEADER;
 	}
 
 	@Override
@@ -47,5 +49,10 @@ public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractJu
 	@Override
 	protected void invoke(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
+	}
+
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
 	}
 }

@@ -109,6 +109,16 @@ public final class Strings {
 		return value != null && value.length() >= 2 && (isSingleQuoted(value) || isDoubleQuoted(value));
 	}
 
+	/**
+	 * Remove quote of given string.
+	 *
+	 * @param value Input string.
+	 * @return Output string.
+	 */
+	public static String removeQuote(String value) {
+		return value.substring(1, value.length() - 1);
+	}
+
 	private static boolean isSingleQuoted(String value) {
 		return value.charAt(0) == SINGLE_QUOTE && value.charAt(value.length() - 1) == SINGLE_QUOTE;
 	}

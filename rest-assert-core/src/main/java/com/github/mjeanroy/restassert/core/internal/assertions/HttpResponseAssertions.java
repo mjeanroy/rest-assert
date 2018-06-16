@@ -76,6 +76,7 @@ import com.github.mjeanroy.restassert.core.data.FrameOptions;
 import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurityParser;
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
@@ -1307,6 +1308,8 @@ public final class HttpResponseAssertions {
 	 * @param httpResponse HTTP response to be tested.
 	 * @param value Header value.
 	 * @return Assertion result.
+	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-headers">https://fetch.spec.whatwg.org/#http-access-control-allow-headers</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
 	 */
 	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
 		return isAccessControlAllowHeadersEqualTo(httpResponse, flatMap(toList(value, other), STRING_SPLIT));
@@ -1523,6 +1526,65 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that http response contains {@code "Strict-Transport-Security"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a>
+	 */
+	public AssertionResult hasStrictTransportSecurity(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, STRICT_TRANSPORT_SECURITY.getName());
+	}
+
+	/**
+	 * Check that http response <strong>does not</strong> contains {@code "Strict-Transport-Security"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a>
+	 */
+	public AssertionResult doesNotHaveStrictTransportSecurity(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, STRICT_TRANSPORT_SECURITY.getName());
+	}
+
+	/**
+	 * Check that http response contains {@code "Strict-Transport-Security"} header with expected value.
+	 *
+	 * Note that, according to the <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">specification</a>:
+	 *
+	 * <ul>
+	 *   <li>Directive order does not matter.</li>
+	 *   <li>Directive value (such as {@code "max-age"}) may be quoted, or not.</li>
+	 *   <li>Directive names are case-insensitive.</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param strictTransportSecurity Strict-Transport-Security value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a>
+	 */
+	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, String strictTransportSecurity) {
+		StrictTransportSecurity sts = StrictTransportSecurity.parser().parse(strictTransportSecurity);
+		return isStrictTransportSecurityEqualTo(httpResponse, sts);
+	}
+
+	/**
+	 * Check that http response contains {@code "Strict-Transport-Security"} header with expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param strictTransportSecurity Strict-Transport-Security value.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security</a>
+	 */
+	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, StrictTransportSecurity strictTransportSecurity) {
+		return assertWith(httpResponse, new IsHeaderMatchingAssertion(STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity, StrictTransportSecurity.parser()));
+	}
+
+	/**
 	 * Check that HTTP response contains {@code "Content-Disposition"} header, no matter what value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
@@ -1587,48 +1649,6 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
 		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
-	}
-
-	/**
-	 * Check that http response contains Strict-Transport-Security header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasStrictTransportSecurity(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, STRICT_TRANSPORT_SECURITY.getName());
-	}
-
-	/**
-	 * Check that http response does contains Strict-Transport-Security header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHaveStrictTransportSecurity(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, STRICT_TRANSPORT_SECURITY.getName());
-	}
-
-	/**
-	 * Check that http response contains Strict-Transport-Security header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param strictTransportSecurity Strict-Transport-Security value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, String strictTransportSecurity) {
-		return isHeaderEqualTo(httpResponse, STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity, false);
-	}
-
-	/**
-	 * Check that http response contains Strict-Transport-Security header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param strictTransportSecurity Strict-Transport-Security value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, StrictTransportSecurity strictTransportSecurity) {
-		return assertWith(httpResponse, new IsHeaderMatchingAssertion(STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity, StrictTransportSecurity.parser()));
 	}
 
 	/**
