@@ -57,7 +57,7 @@
     <commons-io.version>2.6</commons-io.version>
     <junit-runif.version>0.2.0</junit-runif.version>
     <junit-customclassloader.version>0.1.1</junit-customclassloader.version>
-    <equalsverifier.version>2.4.5</equalsverifier.version>
+    <equalsverifier.version>2.4.6</equalsverifier.version>
   </properties>
 
   <dependencyManagement>
