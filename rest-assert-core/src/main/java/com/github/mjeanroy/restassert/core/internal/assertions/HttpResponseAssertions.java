@@ -390,6 +390,20 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of HTTP response is strictly equals to an expected status.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param status Expected status.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://httpstatuses.com">https://httpstatuses.com</a>
+	 */
+	public AssertionResult isStatusEqual(HttpResponse httpResponse, int status) {
+		return assertWith(httpResponse, new StatusEqualAssertion(status));
+	}
+
+	/**
 	 * Check that status code of HTTP response is a "SUCCESS" status a.k.a 2XX status.
 	 *
 	 * Note that this assertion will check that the HTTP response status is between {@code 200} and {@code 299} (inclusive),
@@ -519,6 +533,38 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isNotClientError(HttpResponse httpResponse) {
 		return isStatusOutOf(httpResponse, 400, 499);
+	}
+
+	/**
+	 * Check that status code of HTTP response is included between a lower bound and
+	 * an upper bound (inclusive).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param start Lower bound.
+	 * @param end Upper bound.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors</a>
+	 */
+	public AssertionResult isStatusBetween(HttpResponse httpResponse, int start, int end) {
+		return assertWith(httpResponse, new StatusBetweenAssertion(start, end));
+	}
+
+	/**
+	 * Check that status code of HTTP response is not included between a lower bound and
+	 * an upper bound (inclusive).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param start Lower bound.
+	 * @param end Upper bound.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status</a>
+	 * @see <a href="https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors">https://en.wikipedia.org/wiki/List_of_HTTP_status_codes#4xx_Client_errors</a>
+	 */
+	public AssertionResult isStatusOutOf(HttpResponse httpResponse, int start, int end) {
+		return assertWith(httpResponse, new StatusOutOfAssertion(start, end));
 	}
 
 	/**
@@ -1526,7 +1572,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains {@code "Strict-Transport-Security"} header.
+	 * Check that HTTP response contains {@code "Strict-Transport-Security"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
@@ -1538,7 +1584,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response <strong>does not</strong> contains {@code "Strict-Transport-Security"} header.
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Strict-Transport-Security"} header.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
@@ -1550,7 +1596,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains {@code "Strict-Transport-Security"} header with expected value.
+	 * Check that HTTP response contains {@code "Strict-Transport-Security"} header with expected value.
 	 *
 	 * Note that, according to the <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">specification</a>:
 	 *
@@ -1572,7 +1618,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains {@code "Strict-Transport-Security"} header with expected value.
+	 * Check that HTTP response contains {@code "Strict-Transport-Security"} header with expected value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param strictTransportSecurity Strict-Transport-Security value.
@@ -1582,6 +1628,41 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isStrictTransportSecurityEqualTo(HttpResponse httpResponse, StrictTransportSecurity strictTransportSecurity) {
 		return assertWith(httpResponse, new IsHeaderMatchingAssertion(STRICT_TRANSPORT_SECURITY.getName(), strictTransportSecurity, StrictTransportSecurity.parser()));
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Pragma"} header, no matter what values.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.4">https://tools.ietf.org/html/rfc7234#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma</a>
+	 */
+	public AssertionResult hasPragma(HttpResponse httpResponse) {
+		return hasHeader(httpResponse, PRAGMA.getName());
+	}
+
+	/**
+	 * Check that HTTP response <strong>does not</strong> contains {@code "Pragma"} header.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7234#section-5.4">https://tools.ietf.org/html/rfc7234#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Pragma</a>
+	 */
+	public AssertionResult doesNotHavePragma(HttpResponse httpResponse) {
+		return doesNotHaveHeader(httpResponse, PRAGMA.getName());
+	}
+
+	/**
+	 * Check that HTTP response contains {@code "Pragma"} header with expected value.
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param pragma Pragma value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
+		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
 	}
 
 	/**
@@ -1609,46 +1690,17 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response contains Content-Disposition header with
+	 * Check that HTTP response contains {@code "Content-Disposition"} header with
 	 * expected value.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param contentDispositionValue Expected value.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6266">https://tools.ietf.org/html/rfc6266</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
 	 */
 	public AssertionResult isContentDispositionEqualTo(HttpResponse httpResponse, String contentDispositionValue) {
 		return isHeaderEqualTo(httpResponse, CONTENT_DISPOSITION.getName(), contentDispositionValue);
-	}
-
-	/**
-	 * Check that http response contains Pragma header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult hasPragma(HttpResponse httpResponse) {
-		return hasHeader(httpResponse, PRAGMA.getName());
-	}
-
-	/**
-	 * Check that http response does contains Pragma header.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @return Assertion result.
-	 */
-	public AssertionResult doesNotHavePragma(HttpResponse httpResponse) {
-		return doesNotHaveHeader(httpResponse, PRAGMA.getName());
-	}
-
-	/**
-	 * Check that http response contains Pragma header with expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param pragma Pragma value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isPragmaEqualTo(HttpResponse httpResponse, String pragma) {
-		return isHeaderEqualTo(httpResponse, PRAGMA.getName(), pragma, false);
 	}
 
 	/**
@@ -1771,20 +1823,27 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response has UTF-8 charset.
+	 * Check that HTTP response has {@code UTF-8} charset (the response charset is the one specified in
+	 * the {@code "Content-Type"} header).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult isUtf8(HttpResponse httpResponse) {
 		return hasCharset(httpResponse, StandardCharsets.UTF_8);
 	}
 
 	/**
-	 * Check that http response is "application/javascript" or "text/javascript".
+	 * Check that http response is {@code "application/javascript"} or {@code "text/javascript"}.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
+	 * @see <a href="https://mathiasbynens.be/demo/javascript-mime-type">https://mathiasbynens.be/demo/javascript-mime-type</a>
 	 */
 	public AssertionResult isJavascript(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
@@ -1816,6 +1875,29 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult doesNotHaveHeader(HttpResponse httpResponse, String headerName) {
 		return assertWith(httpResponse, new DoesNotHaveHeaderAssertion(headerName));
+	}
+
+	/**
+	 * Check that HTTP response contains expected header with expected value.
+	 *
+	 * Note that:
+	 * <ul>
+	 *   <li>Header name is case-insensitive.</li>
+	 *   <li>Value <strong>comparison is strict</strong>: the exact string values will be compared.</li>
+	 * </ul>
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @param headerName Header name.
+	 * @param headerValue Header value.
+	 * @return Assertion result.
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers</a>
+	 */
+	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue) {
+		return isHeaderEqualTo(httpResponse, headerName, headerValue, false);
+	}
+
+	private AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue, boolean caseInsensitive) {
+		return assertWith(httpResponse, new IsHeaderEqualToAssertion(headerName, headerValue, caseInsensitive));
 	}
 
 	/**
@@ -1855,123 +1937,90 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that http response has expected charset.
+	 * Check that HTTP response has expected charset (the response charset is the one specified in
+	 * 	 * the {@code "Content-Type"} header).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult hasCharset(HttpResponse httpResponse, Charset expectedCharset) {
 		return hasCharset(httpResponse, expectedCharset.name().toLowerCase());
 	}
 
 	/**
-	 * Check that http response has expected charset.
+	 * Check that HTTP response has expected charset (the response charset is the one specified in
+	 * the {@code "Content-Type"} header).
+	 *
+	 * Note that charset is case-insensitive, so calling the assertion with {@code "utf-8"} or {@code "UTF-8"} produce the same
+	 * result.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedCharset Expected charset.
 	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc1341/4_Content-Type.html">https://www.w3.org/Protocols/rfc1341/4_Content-Type.html</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type</a>
 	 */
 	public AssertionResult hasCharset(HttpResponse httpResponse, String expectedCharset) {
 		return assertWith(httpResponse, new HasCharsetAssertion(expectedCharset));
 	}
 
 	/**
-	 * Check that http response contains expected header with
-	 * expected value.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param headerName Header name.
-	 * @param headerValue Header value.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue) {
-		return isHeaderEqualTo(httpResponse, headerName, headerValue, false);
-	}
-
-	private AssertionResult isHeaderEqualTo(HttpResponse httpResponse, String headerName, String headerValue, boolean caseInsensitive) {
-		return assertWith(httpResponse, new IsHeaderEqualToAssertion(headerName, headerValue, caseInsensitive));
-	}
-
-	/**
-	 * Check that status code of http response has an expected status.
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param status Expected status.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isStatusEqual(HttpResponse httpResponse, int status) {
-		return assertWith(httpResponse, new StatusEqualAssertion(status));
-	}
-
-	/**
-	 * Check that status code of http response is include between
-	 * a lower bound and an upper bound (inclusive).
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param start Lower bound.
-	 * @param end Upper bound.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isStatusBetween(HttpResponse httpResponse, int start, int end) {
-		return assertWith(httpResponse, new StatusBetweenAssertion(start, end));
-	}
-
-	/**
-	 * Check that status code of http response is not included between
-	 * a lower bound and an upper bound (inclusive).
-	 *
-	 * @param httpResponse HTTP response to be tested.
-	 * @param start Lower bound.
-	 * @param end Upper bound.
-	 * @return Assertion result.
-	 */
-	public AssertionResult isStatusOutOf(HttpResponse httpResponse, int start, int end) {
-		return assertWith(httpResponse, new StatusOutOfAssertion(start, end));
-	}
-
-	/**
-	 * Check that http response does not contains any cookies.
+	 * Check that HTTP response does not contains any cookies.
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6265#section-5.4">https://tools.ietf.org/html/rfc6265#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</a>
 	 */
 	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse) {
 		return assertWith(httpResponse, new DoesNotHaveCookieAssertion());
 	}
 
 	/**
-	 * Check that http response does not contains cookie with given name (note that cookie name
+	 * Check that HTTP response does not contains cookie with given name (note that cookie name
 	 * is case-sensitive).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param name Cookie name.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6265#section-5.4">https://tools.ietf.org/html/rfc6265#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</a>
 	 */
 	public AssertionResult doesNotHaveCookie(HttpResponse httpResponse, String name) {
 		return assertWith(httpResponse, new DoesNotHaveCookieAssertion(name));
 	}
 
 	/**
-	 * Check that http response contains cookie with given name (note that cookie name is
+	 * Check that HTTP response contains cookie with given name (note that cookie name is
 	 * case-sensitive).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param name Cookie name.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6265#section-5.4">https://tools.ietf.org/html/rfc6265#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</a>
 	 */
 	public AssertionResult hasCookie(HttpResponse httpResponse, String name) {
 		return assertWith(httpResponse, new HasCookieAssertion(name));
 	}
 
 	/**
-	 * Check that http response contains cookie with given name and value (note that cookie name
+	 * Check that HTTP response contains cookie with given name and value (note that cookie name
 	 * is case-sensitive).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param name Cookie name.
 	 * @param value Cookie value.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6265#section-5.4">https://tools.ietf.org/html/rfc6265#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</a>
 	 */
 	public AssertionResult hasCookie(HttpResponse httpResponse, String name, String value) {
 		return assertWith(httpResponse, new HasCookieAssertion(name, value));
@@ -1983,6 +2032,9 @@ public final class HttpResponseAssertions {
 	 * @param httpResponse HTTP response to be tested.
 	 * @param cookie Cookie.
 	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc6265#section-5.4">https://tools.ietf.org/html/rfc6265#section-5.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cookie</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies">https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies</a>
 	 */
 	public AssertionResult hasCookie(HttpResponse httpResponse, Cookie cookie) {
 		return assertWith(httpResponse, new HasCookieAssertion(cookie));

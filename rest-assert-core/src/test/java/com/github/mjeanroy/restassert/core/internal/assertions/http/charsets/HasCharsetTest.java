@@ -28,11 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.fixtures.TestHeaders;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
+
 public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 
+	private static final String NAME = "Content-Type";
 	private static final String CHARSET = "utf-8";
 
 	@Override
@@ -46,20 +50,44 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	}
 
 	@Test
+	public void it_should_compare_charset_case_insensitively() {
+		// GIVEN
+		final String expected = "UTF-8";
+		final String actual = "utf-8";
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
+				.addHeader(NAME, "application/json; charset=" + actual)
+				.build();
+
+		// WHEN
+		final AssertionResult result = assertions.hasCharset(rsp, expected);
+
+		// THEN
+		checkSuccess(result);
+	}
+
+	@Test
 	public void it_should_fail_if_response_does_not_have_content_type() {
-		HttpResponse rsp = new HttpResponseBuilderImpl().build();
-		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+		// GIVEN
+		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
+
+		// WHEN
+		final AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+
+		// THEN
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
 	}
 
 	@Test
 	public void it_should_fail_if_response_has_content_type_without_charset() {
-		HttpResponse rsp = new HttpResponseBuilderImpl()
-			.addHeader("Content-Type", "application/json")
+		// GIVEN
+		final HttpResponse rsp = new HttpResponseBuilderImpl()
+			.addHeader(NAME, "application/json")
 			.build();
 
-		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+		// WHEN
+		final AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 
+		// THEN
 		checkError(result, ShouldHaveCharset.class, "Expecting response to have defined charset");
 	}
 }
