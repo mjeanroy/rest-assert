@@ -727,7 +727,7 @@ public final class HttpResponseAssertions {
 	 * Check that http response contains {@code "Content-Encoding"} header with {@code "gzip"}
 	 * value (meaning that response body has been gzipped).
 	 *
-	 * This is a shortcut for checking that {@code "Content-Encoding"} is equal to {@code "gzip").
+	 * This is a shortcut for checking that {@code "Content-Encoding"} is equal to {@code "gzip"}.
 	 *
 	 * Note that according to specification, comparison is <strong>case-insensitive</strong> (so {@code "gzip"}
 	 * or {@code "GZIP"} is equivalent).
@@ -1703,7 +1703,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "application/json").
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "application/json"}.
 	 *
 	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
 	 * case-insensitive.
@@ -1739,7 +1739,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/css").
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/css"}.
 	 *
 	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
 	 * case-insensitive.
@@ -1755,7 +1755,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/plain").
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/plain"}.
 	 *
 	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
 	 * case-insensitive.
@@ -1771,7 +1771,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/csv").
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "text/csv"}.
 	 *
 	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
 	 * case-insensitive.
@@ -1787,7 +1787,7 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
-	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "application/pdf").
+	 * Check that HTTP response has a mime-type equals (ignoring case) to {@code "application/pdf"}.
 	 *
 	 * The mime type of an HTTP response is specified in the {@code "Content-Type"} header, and is
 	 * case-insensitive.
