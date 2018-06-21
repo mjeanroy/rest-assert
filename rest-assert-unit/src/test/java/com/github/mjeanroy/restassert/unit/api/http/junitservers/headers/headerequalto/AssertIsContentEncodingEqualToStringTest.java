@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 public class AssertIsContentEncodingEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	public static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();
 	private static final String FAILED_VALUE = "deflate";
 

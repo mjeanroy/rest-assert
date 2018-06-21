@@ -31,10 +31,6 @@ import org.apache.http.HttpResponse;
 
 abstract class AbstractApacheHttpStatusTest extends AbstractHttpStatusTest<HttpResponse> {
 
-	protected HttpResponse newHttpResponse(int status) {
-		return new ApacheHttpResponseBuilder().setStatus(status).build();
-	}
-
 	@Override
 	protected HttpResponseBuilder<HttpResponse> getBuilder() {
 		return new ApacheHttpResponseBuilder();

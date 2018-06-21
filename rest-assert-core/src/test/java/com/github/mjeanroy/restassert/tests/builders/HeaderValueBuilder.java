@@ -43,18 +43,6 @@ public class HeaderValueBuilder {
 	private String value;
 
 	/**
-	 * String value that are strictly equivalent to current value.
-	 */
-	private final Set<String> matches;
-
-	/**
-	 * Create builder.
-	 */
-	public HeaderValueBuilder() {
-		this.matches = new LinkedHashSet<>();
-	}
-
-	/**
 	 * Set {@link #value}.
 	 *
 	 * @param value New {@link #value}.
@@ -62,7 +50,6 @@ public class HeaderValueBuilder {
 	 */
 	public HeaderValueBuilder setValue(String value) {
 		this.value = value;
-		this.matches.add(value);
 		return this;
 	}
 

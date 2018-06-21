@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONT
 
 public class AssertIsContentTypeEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
-	public static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
 
 	@Override

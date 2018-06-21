@@ -677,6 +677,7 @@ public final class Cookies {
 	 * @param expires Expires value.
 	 * @return The expires date.
 	 */
+	@SuppressWarnings("ResultOfMethodCallIgnored")
 	private static Date parseExpires(String expires) {
 		int hour = -1;
 		int minute = -1;

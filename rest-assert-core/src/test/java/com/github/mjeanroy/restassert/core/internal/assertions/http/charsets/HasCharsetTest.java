@@ -28,11 +28,8 @@ import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.fixtures.TestHeaders;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
-
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
 public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 

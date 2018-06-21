@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.ok3;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
@@ -60,7 +61,8 @@ public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse
 
 	@Override
 	protected String doGetContent() throws IOException {
-		return response.body().string();
+		ResponseBody body = response.body();
+		return body == null ? "" : body.string();
 	}
 
 	@Override

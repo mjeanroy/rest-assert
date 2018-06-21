@@ -40,6 +40,7 @@ import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
+@SuppressWarnings({"ConstantConditions", "ResultOfMethodCallIgnored"})
 public class PreConditionsTest {
 
 	@Rule

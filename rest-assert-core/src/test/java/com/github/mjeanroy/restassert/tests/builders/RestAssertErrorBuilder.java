@@ -86,7 +86,8 @@ public class RestAssertErrorBuilder {
 		RestAssertError error = mock(RestAssertError.class);
 		when(error.message()).thenReturn(message);
 
-		Object[] args = this.args.toArray(new Object[this.args.size()]);
+		int size = this.args.size();
+		Object[] args = this.args.toArray(new Object[size]);
 		when(error.args()).thenReturn(args);
 
 		return error;

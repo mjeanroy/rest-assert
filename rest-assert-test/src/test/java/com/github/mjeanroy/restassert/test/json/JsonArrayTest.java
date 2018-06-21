@@ -32,6 +32,7 @@ import static org.mockito.Mockito.when;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
+@SuppressWarnings("ConstantConditions")
 public class JsonArrayTest {
 
 	@Test

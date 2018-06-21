@@ -85,6 +85,7 @@ public final class Collections {
 	 * @param <T> Type of inputs.
 	 * @return Output list.
 	 */
+	@SafeVarargs
 	public static <T> List<T> toList(T v1, T... other) {
 		final int initialCapacity = other.length + 1;
 		final List<T> outputs = new ArrayList<>(initialCapacity);
@@ -145,7 +146,7 @@ public final class Collections {
 	 * @param <T> Type of inputs.
 	 * @return Output (i.e filtered inputs).
 	 */
-	public static <T> List<T> filter(List<T> inputs, Predicate<T> predicate) {
+	static <T> List<T> filter(List<T> inputs, Predicate<T> predicate) {
 		List<T> outputs = new ArrayList<>(inputs.size());
 		for (T t : inputs) {
 			if (predicate.apply(t)) {

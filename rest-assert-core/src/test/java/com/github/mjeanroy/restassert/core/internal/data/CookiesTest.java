@@ -40,6 +40,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.Cookies.parse;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.rules.ExpectedException.none;
 
+@SuppressWarnings("ConstantConditions")
 public class CookiesTest {
 
 	@Rule

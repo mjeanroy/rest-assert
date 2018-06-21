@@ -217,17 +217,6 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 */
 	protected abstract String buildMethodName(String methodName);
 
-	@SuppressWarnings("unchecked")
-	private static <T extends Annotation> T find(Annotation[] annotations, Class<T> annotationClass) {
-		for (Annotation annotation : annotations) {
-			if (annotation.annotationType() == annotationClass) {
-				return (T) annotation;
-			}
-		}
-
-		return null;
-	}
-
 	/**
 	 * A comparator that will execute a string comparison on the returned
 	 * values of {@link Method#getName()}.

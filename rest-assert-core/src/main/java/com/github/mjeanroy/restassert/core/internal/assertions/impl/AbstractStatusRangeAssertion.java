@@ -49,6 +49,7 @@ abstract class AbstractStatusRangeAssertion implements HttpResponseAssertion {
 	 * @param end Upper bound.
 	 * @throws IllegalArgumentException If {@code start} or {@code end} are negative or if {@code start} is less than or equals to {@code end}.
 	 */
+	@SuppressWarnings("ResultOfMethodCallIgnored")
 	AbstractStatusRangeAssertion(int start, int end) {
 		isPositive(start, "Http status code must be positive");
 		isPositive(end, "Http status code must be positive");
