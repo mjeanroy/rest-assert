@@ -53,8 +53,8 @@ public final class JunitServersHttpAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {
-		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	public static JsonAssert assertThatJson(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {
+		return JsonAssertions.assertThatJson(toHttpResponse(actual));
 	}
 
 	private static HttpResponse toHttpResponse(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {

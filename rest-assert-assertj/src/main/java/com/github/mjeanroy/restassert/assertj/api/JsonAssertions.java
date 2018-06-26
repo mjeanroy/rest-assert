@@ -52,7 +52,7 @@ public class JsonAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(String actual) {
+	public static JsonAssert assertThatJson(String actual) {
 		return new JsonAssert(actual);
 	}
 
@@ -62,7 +62,7 @@ public class JsonAssertions {
 	 * @param actual the response http that will be used to extract content body.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(HttpResponse actual) {
+	public static JsonAssert assertThatJson(HttpResponse actual) {
 		return new JsonAssert(actual.getContent());
 	}
 }

@@ -77,7 +77,7 @@ public class NingHttpAssertionsTest {
 			.setContent(body)
 			.build();
 
-		JsonAssert assertions = NingHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = NingHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

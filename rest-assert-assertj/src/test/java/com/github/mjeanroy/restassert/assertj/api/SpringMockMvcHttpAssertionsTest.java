@@ -56,7 +56,7 @@ public class SpringMockMvcHttpAssertionsTest {
 
 		String body = object.toJson();
 		ResultActions response = new SpringMockMvcHttpResponseBuilder().setContent(body).build();
-		JsonAssert assertions = SpringMockMvcHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = SpringMockMvcHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

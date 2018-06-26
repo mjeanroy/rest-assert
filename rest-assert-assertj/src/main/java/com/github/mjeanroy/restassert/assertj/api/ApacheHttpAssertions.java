@@ -67,8 +67,8 @@ public final class ApacheHttpAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(org.apache.http.HttpResponse actual) {
-		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	public static JsonAssert assertThatJson(org.apache.http.HttpResponse actual) {
+		return JsonAssertions.assertThatJson(toHttpResponse(actual));
 	}
 
 	private static HttpResponse toHttpResponse(org.apache.http.HttpResponse actual) {

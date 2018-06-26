@@ -68,8 +68,8 @@ public final class NingHttpAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(Response actual) {
-		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	public static JsonAssert assertThatJson(Response actual) {
+		return JsonAssertions.assertThatJson(toHttpResponse(actual));
 	}
 
 	private static HttpResponse toHttpResponse(Response actual) {

@@ -67,8 +67,8 @@ public final class SpringMockMvcHttpAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(ResultActions actual) {
-		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	public static JsonAssert assertThatJson(ResultActions actual) {
+		return JsonAssertions.assertThatJson(toHttpResponse(actual));
 	}
 
 	private static HttpResponse toHttpResponse(ResultActions actual) {

@@ -62,7 +62,7 @@ public final class HttpResponseAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(HttpResponse actual) {
-		return JsonAssertions.assertJsonThat(actual);
+	public static JsonAssert assertThatJson(HttpResponse actual) {
+		return JsonAssertions.assertThatJson(actual);
 	}
 }

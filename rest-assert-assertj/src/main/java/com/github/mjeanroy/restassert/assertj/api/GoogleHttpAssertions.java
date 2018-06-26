@@ -54,8 +54,8 @@ public final class GoogleHttpAssertions {
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
-	public static JsonAssert assertJsonThat(com.google.api.client.http.HttpResponse actual) {
-		return JsonAssertions.assertJsonThat(toHttpResponse(actual));
+	public static JsonAssert assertThatJson(com.google.api.client.http.HttpResponse actual) {
+		return JsonAssertions.assertThatJson(toHttpResponse(actual));
 	}
 
 	private static HttpResponse toHttpResponse(com.google.api.client.http.HttpResponse actual) {

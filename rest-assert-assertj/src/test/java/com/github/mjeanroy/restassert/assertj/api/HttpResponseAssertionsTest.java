@@ -74,7 +74,7 @@ public class HttpResponseAssertionsTest {
 			.setContent(body)
 			.build();
 
-		JsonAssert assertions = HttpResponseAssertions.assertJsonThat(response);
+		JsonAssert assertions = HttpResponseAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

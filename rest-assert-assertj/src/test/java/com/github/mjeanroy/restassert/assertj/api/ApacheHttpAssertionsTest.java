@@ -82,7 +82,7 @@ public class ApacheHttpAssertionsTest {
 				.setContent(body)
 				.build();
 
-		JsonAssert assertions = ApacheHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = ApacheHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

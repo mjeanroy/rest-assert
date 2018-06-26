@@ -43,7 +43,7 @@ public class JsonAssertionsTest {
 		);
 
 		String json = jsonObject.toJson();
-		JsonAssert assertions = JsonAssertions.assertJsonThat(json);
+		JsonAssert assertions = JsonAssertions.assertThatJson(json);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
@@ -63,7 +63,7 @@ public class JsonAssertionsTest {
 			.setContent(json)
 			.build();
 
-		JsonAssert assertions = JsonAssertions.assertJsonThat(httpResponse);
+		JsonAssert assertions = JsonAssertions.assertThatJson(httpResponse);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

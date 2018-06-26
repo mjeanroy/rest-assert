@@ -55,7 +55,7 @@ public class JunitServersHttpAssertionsTest {
 
 		String body = object.toJson();
 		com.github.mjeanroy.junit.servers.client.HttpResponse response = new JunitServersHttpResponseBuilder().setContent(body).build();
-		JsonAssert assertions = JunitServersHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = JunitServersHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

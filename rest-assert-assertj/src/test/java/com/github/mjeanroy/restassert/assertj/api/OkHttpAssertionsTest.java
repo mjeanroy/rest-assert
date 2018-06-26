@@ -62,7 +62,7 @@ public class OkHttpAssertionsTest {
 				.setContent(body)
 				.build();
 
-		JsonAssert assertions = OkHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = OkHttpAssertions.assertThatJson(response);
 		assertThat(assertions).isNotNull();
 
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

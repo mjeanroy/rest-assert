@@ -61,7 +61,7 @@ public class GoogleHttpAssertionsTest {
 			.setContent(body)
 			.build();
 
-		JsonAssert assertions = GoogleHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = GoogleHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);

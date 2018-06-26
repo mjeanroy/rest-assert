@@ -83,7 +83,7 @@ public class AsyncHttpAssertionsTest {
 			.setContent(body)
 			.build();
 
-		JsonAssert assertions = AsyncHttpAssertions.assertJsonThat(response);
+		JsonAssert assertions = AsyncHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
