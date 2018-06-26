@@ -6,7 +6,7 @@
   <artifactId>rest-assert</artifactId>
   <name>rest-assert</name>
   <packaging>pom</packaging>
-  <version>0.2.0</version>
+  <version>0.2.1-SNAPSHOT</version>
   <url>https://github.com/mjeanroy/rest-assert</url>
   <description>Make testing HTTP a breeze.</description>
 
@@ -32,7 +32,7 @@
     <developerConnection>scm:git:git@github.com:mjeanroy/rest-assert.git
     </developerConnection>
     <url>https://github.com/mjeanroy/rest-assert</url>
-    <tag>rest-assert-0.2.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
