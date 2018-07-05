@@ -30,9 +30,12 @@ import com.github.mjeanroy.junit.servers.client.impl.AbstractHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.AbstractHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Builder to create instance of {@link HttpResponse} class.
@@ -73,6 +76,16 @@ public class JunitServersHttpResponseBuilder extends AbstractHttpResponseBuilder
 		@Override
 		public String body() {
 			return content;
+		}
+
+		@Override
+		public Collection<HttpHeader> getHeaders() {
+			List<HttpHeader> headers = new ArrayList<>(this.headers.size());
+			for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
+				headers.add(HttpHeader.header(entry.getKey(), entry.getValue()));
+			}
+
+			return headers;
 		}
 
 		@Override
