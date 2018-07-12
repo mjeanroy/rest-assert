@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaders;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
@@ -59,7 +59,7 @@ public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implemen
 	 * @param expectedCharset Charset name.
 	 */
 	public HasCharsetAssertion(String expectedCharset) {
-		super(HttpHeader.CONTENT_TYPE.getName());
+		super(HttpHeaders.CONTENT_TYPE.getName());
 		this.expectedCharset = notBlank(expectedCharset, "Charset value must be defined");
 	}
 

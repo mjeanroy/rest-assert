@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaders;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
@@ -69,7 +69,7 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	 * @param mimeType Mime-Type value.
 	 */
 	public HasMimeTypeAssertion(MediaType mimeType) {
-		super(HttpHeader.CONTENT_TYPE.getName());
+		super(HttpHeaders.CONTENT_TYPE.getName());
 		this.mimeTypes = singleton(notNull(mimeType, "Mime-Type value must be defined"));
 		this.singular = true;
 	}
@@ -80,7 +80,7 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	 * @param mimeTypes Mime-Type value.
 	 */
 	public HasMimeTypeAssertion(Collection<MediaType> mimeTypes) {
-		super(HttpHeader.CONTENT_TYPE.getName());
+		super(HttpHeaders.CONTENT_TYPE.getName());
 		this.mimeTypes = notEmpty(mimeTypes, "Mime-Type values must be defined");
 		this.singular = false;
 	}

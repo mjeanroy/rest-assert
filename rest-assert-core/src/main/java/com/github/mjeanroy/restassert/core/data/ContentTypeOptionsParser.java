@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_CONTENT_TYPE_OPTIONS;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_CONTENT_TYPE_OPTIONS;
 
 /**
  * Parser for {@link ContentTypeOptions}.

@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import java.util.List;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeader;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaders;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
@@ -68,7 +68,7 @@ abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion impleme
 		// Check if header should not appear more than once.
 		// If a single value header appear with more than one value, then this is
 		// probably a bug in the generated response, fail fast.
-		HttpHeader header = HttpHeader.find(name);
+		HttpHeaders header = HttpHeaders.find(name);
 		if (header != null && header.isSingle() && actualValues.size() > 1) {
 			log.debug("Header {} should appear once, but found {} values, fail", name, actualValues.size());
 			return failure(shouldHaveSingleHeader(name, actualValues));

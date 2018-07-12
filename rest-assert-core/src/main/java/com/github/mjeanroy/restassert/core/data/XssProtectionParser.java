@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.X_XSS_PROTECTION;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_XSS_PROTECTION;
 
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_ENCODING;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_ENCODING;
 import static java.util.Collections.unmodifiableList;
 
 import java.util.ArrayList;

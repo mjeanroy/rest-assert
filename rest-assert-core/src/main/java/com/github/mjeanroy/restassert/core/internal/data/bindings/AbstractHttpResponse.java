@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.SET_COOKIE;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.SET_COOKIE;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 

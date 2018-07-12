@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeader.CONTENT_SECURITY_POLICY;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_SECURITY_POLICY;
 
 import java.util.HashSet;
 import java.util.Set;

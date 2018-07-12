@@ -31,7 +31,7 @@ import java.util.Map;
 /**
  * List of standards http headers names.
  */
-public enum HttpHeader {
+public enum HttpHeaders {
 
 	/**
 	 * Content type header name.
@@ -184,7 +184,7 @@ public enum HttpHeader {
 	 */
 	private final boolean single;
 
-	HttpHeader(String name, boolean single) {
+	HttpHeaders(String name, boolean single) {
 		this.name = name;
 		this.single = single;
 	}
@@ -208,11 +208,11 @@ public enum HttpHeader {
 	}
 
 	// Keep headers in an immutable map for fast lookup.
-	private static final Map<String, HttpHeader> MAP;
+	private static final Map<String, HttpHeaders> MAP;
 
 	static {
-		Map<String, HttpHeader> tmp = new HashMap<>();
-		for (HttpHeader httpHeader : HttpHeader.values()) {
+		Map<String, HttpHeaders> tmp = new HashMap<>();
+		for (HttpHeaders httpHeader : HttpHeaders.values()) {
 			tmp.put(httpHeader.getName().toLowerCase(), httpHeader);
 		}
 
@@ -225,7 +225,7 @@ public enum HttpHeader {
 	 * @param name Name of header.
 	 * @return Header, null if it is not defined in the enum set.
 	 */
-	public static HttpHeader find(String name) {
+	public static HttpHeaders find(String name) {
 		return MAP.get(name.toLowerCase());
 	}
 }
