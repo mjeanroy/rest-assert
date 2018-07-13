@@ -27,17 +27,13 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StatusEqualAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_status_match() {
@@ -46,7 +42,7 @@ public class StatusEqualAssertionTest {
 				.setStatus(200)
 				.build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
@@ -60,7 +56,7 @@ public class StatusEqualAssertionTest {
 				.setStatus(400)
 				.build();
 
-		AssertionResult result = assertion.handle(rsp);
+		final AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
@@ -70,8 +66,17 @@ public class StatusEqualAssertionTest {
 
 	@Test
 	public void it_should_fail_if_status_is_negative() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Http status code must be positive");
-		new StatusEqualAssertion(-1);
+		assertThatThrownBy(statusEqualAssertion(-1))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Http status code must be positive");
+	}
+
+	private static ThrowingCallable statusEqualAssertion(final int status) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new StatusEqualAssertion(status);
+			}
+		};
 	}
 }

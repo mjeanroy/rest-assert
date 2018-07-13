@@ -24,6 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.net.URI;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BASE_URI;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BLOCK_ALL_MIXED_CONTENT;
@@ -57,24 +68,10 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.uns
 import static java.util.Collections.addAll;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
 
-import java.net.URI;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 public class ContentSecurityPolicyBuilderTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	private ContentSecurityPolicyBuilder builder;
 
@@ -511,9 +508,9 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_frame_ancestors_and_fail_if_source_is_not_host() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Source must be a valid host value");
-		builder.addDefaultSrc(none()).addFrameAncestors(self()).build();
+		assertThatThrownBy(addFrameAncestors(builder, self()))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Source must be a valid host value");
 	}
 
 	private static Set<Source> sources() {
@@ -535,5 +532,14 @@ public class ContentSecurityPolicyBuilderTest {
 		sources.add(value);
 		addAll(sources, values);
 		return sources;
+	}
+
+	private static ThrowingCallable addFrameAncestors(final ContentSecurityPolicyBuilder builder, final ContentSecurityPolicy.Source source) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				builder.addFrameAncestors(source);
+			}
+		};
 	}
 }

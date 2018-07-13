@@ -25,69 +25,80 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FrameOptionsParserTest {
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-
 	@Test
 	public void it_should_match_deny() {
-		FrameOptions header = FrameOptions.parser().parse("deny");
+		final FrameOptions header = FrameOptions.parser().parse("deny");
+
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.DENY);
 		assertThat(header.getOptions()).isEmpty();
 	}
 
 	@Test
 	public void it_should_match_deny_case_insensitive() {
-		FrameOptions header = FrameOptions.parser().parse("DENY");
+		final FrameOptions header = FrameOptions.parser().parse("DENY");
+
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.DENY);
 		assertThat(header.getOptions()).isEmpty();
 	}
 
 	@Test
 	public void it_should_match_same_origin() {
-		FrameOptions header = FrameOptions.parser().parse("sameorigin");
+		final FrameOptions header = FrameOptions.parser().parse("sameorigin");
+
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.SAME_ORIGIN);
 		assertThat(header.getOptions()).isEmpty();
 	}
 
 	@Test
 	public void it_should_match_same_origin_case_insensitive() {
-		FrameOptions header = FrameOptions.parser().parse("SAMEORIGIN");
+		final FrameOptions header = FrameOptions.parser().parse("SAMEORIGIN");
+
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.SAME_ORIGIN);
 		assertThat(header.getOptions()).isEmpty();
 	}
 
 	@Test
 	public void it_should_match_allow_from() {
-		String uri = "https://example.com";
-		FrameOptions header = FrameOptions.parser().parse("allow-from " + uri);
+		final String uri = "https://example.com";
+		final FrameOptions header = FrameOptions.parser().parse("allow-from " + uri);
+
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.ALLOW_FROM);
 		assertThat(header.getOptions()).hasSize(1).containsOnly("https://example.com");
 	}
 
 	@Test
 	public void it_should_match_allow_from_case_insensitive() {
-		String uri = "https://example.com";
-		FrameOptions header = FrameOptions.parser().parse("ALLOW-FROM " + uri);
+		final String uri = "https://example.com";
+		final FrameOptions header = FrameOptions.parser().parse("ALLOW-FROM " + uri);
+
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.ALLOW_FROM);
 		assertThat(header.getOptions()).hasSize(1).containsOnly("https://example.com");
 	}
 
 	@Test
 	public void it_should_fail_with_invalid_value() {
-		String value = "same-origin";
-		FrameOptionsParser parser = FrameOptions.parser();
+		final String value = "same-origin";
+		final FrameOptionsParser parser = FrameOptions.parser();
 
-		thrown.expect(InvalidHeaderValue.class);
-		thrown.expectMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+		assertThatThrownBy(parse(parser, value))
+				.isExactlyInstanceOf(InvalidHeaderValue.class)
+				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+	}
 
-		parser.parse(value);
+	private static ThrowingCallable parse(final FrameOptionsParser parser, final String value) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				parser.parse(value);
+			}
+		};
 	}
 }

@@ -29,17 +29,13 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DoesNotHaveCookieAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_does_not_have_cookies() {
@@ -116,22 +112,31 @@ public class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new DoesNotHaveCookieAssertion(null);
+		assertThatThrownBy(doesNotHaveCookieAssertion(null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new DoesNotHaveCookieAssertion("");
+		assertThatThrownBy(doesNotHaveCookieAssertion(""))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new DoesNotHaveCookieAssertion("   ");
+		assertThatThrownBy(doesNotHaveCookieAssertion("   "))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cookie name must be defined");
+	}
+
+	private static ThrowingCallable doesNotHaveCookieAssertion(final String name) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new DoesNotHaveCookieAssertion(name);
+			}
+		};
 	}
 }

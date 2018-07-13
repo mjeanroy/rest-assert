@@ -31,17 +31,13 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HeaderParserBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HeaderValueBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsHeaderMatchingAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
@@ -136,36 +132,45 @@ public class IsHeaderMatchingAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_name_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderMatchingAssertion(null, new HeaderValueBuilder().build(), new HeaderParserBuilder().build());
+		assertThatThrownBy(isHeaderMatchingAssertion(null, new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderMatchingAssertion("", new HeaderValueBuilder().build(), new HeaderParserBuilder().build());
+		assertThatThrownBy(isHeaderMatchingAssertion("", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new IsHeaderMatchingAssertion("   ", new HeaderValueBuilder().build(), new HeaderParserBuilder().build());
+		assertThatThrownBy(isHeaderMatchingAssertion("   ", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Header expected value must not be null");
-		new IsHeaderMatchingAssertion("name", null, new HeaderParserBuilder().build());
+		assertThatThrownBy(isHeaderMatchingAssertion("name", null, new HeaderParserBuilder().build()))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Header expected value must not be null");
 	}
 
 	@Test
 	public void it_should_fail_if_header_parser_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Header parser must not be null");
-		new IsHeaderMatchingAssertion("name", new HeaderValueBuilder().build(), null);
+		assertThatThrownBy(isHeaderMatchingAssertion("name", new HeaderValueBuilder().build(), null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Header parser must not be null");
+	}
+
+	private static ThrowingCallable isHeaderMatchingAssertion(final String name, final HeaderValue value, final HeaderParser parser) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new IsHeaderMatchingAssertion(name, value, parser);
+			}
+		};
 	}
 }

@@ -26,17 +26,13 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.apache;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ApacheHttpCookieTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_return_name() {
@@ -105,23 +101,39 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_return_zero_for_max_age() {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		final org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
+		final Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
-		thrown.expect(UnsupportedOperationException.class);
-		thrown.expectMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
-
-		cookie.getMaxAge();
+		assertThatThrownBy(getMaxAge(cookie))
+				.isExactlyInstanceOf(UnsupportedOperationException.class)
+				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
 
 	@Test
 	public void it_should_return_false_for_http_only() {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
-		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		final org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
+		final Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
-		thrown.expect(UnsupportedOperationException.class);
-		thrown.expectMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+		assertThatThrownBy(isHttpOnly(cookie))
+				.isExactlyInstanceOf(UnsupportedOperationException.class)
+				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+	}
 
-		cookie.isHttpOnly();
+	private static ThrowingCallable getMaxAge(final Cookie cookie) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				cookie.getMaxAge();
+			}
+		};
+	}
+
+	private static ThrowingCallable isHttpOnly(final Cookie cookie) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				cookie.isHttpOnly();
+			}
+		};
 	}
 }

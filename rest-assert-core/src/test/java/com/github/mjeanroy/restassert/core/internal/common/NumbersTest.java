@@ -24,16 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class NumbersTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_get_long_value_from_string() {
@@ -42,19 +39,26 @@ public class NumbersTest {
 
 	@Test
 	public void it_should_fail_if_string_value_is_not_a_valid_long_value() {
-		String message = "My Custom Error Message";
-
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage(message);
-		assertThat(Numbers.toLong("test", message)).isEqualTo(1L);
+		final String message = "My Custom Error Message";
+		assertThatThrownBy(toLong("test", message))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage(message);
 	}
 
 	@Test
 	public void it_should_fail_with_null() {
-		String message = "My Custom Error Message";
+		final String message = "My Custom Error Message";
+		assertThatThrownBy(toLong(null, message))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage(message);
+	}
 
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage(message);
-		assertThat(Numbers.toLong(null, message)).isEqualTo(1L);
+	private static ThrowingCallable toLong(final String value, final String message) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				Numbers.toLong(value, message);
+			}
+		};
 	}
 }

@@ -24,21 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.json.isequalto;
 
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlFailure;
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
-import static org.junit.rules.ExpectedException.none;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.Test;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlFailure;
+import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> {
-
-	@Rule
-	public final ExpectedException thrown = none();
 
 	@Override
 	protected AssertionResult invoke(String actual, URL expected) {
@@ -57,8 +54,19 @@ public class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> 
 
 	@Test
 	public void it_should_fail_if_uri_syntax_exception() throws Exception {
-		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
-		thrown.expect(AssertionError.class);
-		assertions.isEqualTo("{}", url);
+		final URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
+		final String actual = "{}";
+		assertThatThrownBy(isEqualTo(actual, url))
+				.isExactlyInstanceOf(AssertionError.class)
+				.hasCauseExactlyInstanceOf(URISyntaxException.class);
+	}
+
+	private static ThrowingCallable isEqualTo(final String actual, final URL url) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				assertions.isEqualTo(actual, url);
+			}
+		};
 	}
 }

@@ -25,16 +25,13 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class MediaTypeTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_create_media_type_text() {
@@ -113,43 +110,52 @@ public class MediaTypeTest {
 
 	@Test
 	public void it_should_fail_if_type_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("MediaType type must be defined");
-		new MediaType(null, "subtype");
+		assertThatThrownBy(newMediaType(null, "subtype"))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_type_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("MediaType type must be defined");
-		new MediaType("", "subtype");
+		assertThatThrownBy(newMediaType("", "subtype"))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_type_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("MediaType type must be defined");
-		new MediaType("    ", "subtype");
+		assertThatThrownBy(newMediaType("    ", "subtype"))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_subtype_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("MediaType subtype must be defined");
-		new MediaType("type", null);
+		assertThatThrownBy(newMediaType("type", null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_subtype_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("MediaType subtype must be defined");
-		new MediaType("type", "");
+		assertThatThrownBy(newMediaType("type", ""))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_subtype_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("MediaType subtype must be defined");
-		new MediaType("type", "    ");
+		assertThatThrownBy(newMediaType("type", "    "))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("MediaType subtype must be defined");
+	}
+
+	private static ThrowingCallable newMediaType(final String type, final String subtype) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new MediaType(type, subtype);
+			}
+		};
 	}
 }

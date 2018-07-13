@@ -37,11 +37,11 @@ public abstract class AbstractAssertionsTest<T> {
 	 */
 	protected abstract AssertionResult invoke(T testedObject);
 
-	protected void checkSuccess(AssertionResult result) {
+	protected static void checkSuccess(AssertionResult result) {
 		assertSuccessResult(result);
 	}
 
-	protected void checkError(AssertionResult result, Class<?> klassError, String pattern, Object... args) {
+	protected static void checkError(AssertionResult result, Class<?> klassError, String pattern, Object... args) {
 		assertFailureResult(result, klassError, pattern, args);
 	}
 }

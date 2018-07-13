@@ -156,22 +156,12 @@ public class IsDateHeaderEqualToAssertionTest {
 				.hasMessage("Header value must not be null");
 	}
 
-	private static IsDateHeaderEqualToAssertionThrowing isDateHeaderEqualToAssertion(String name, Date value) {
-		return new IsDateHeaderEqualToAssertionThrowing(name, value);
-	}
-
-	private static class IsDateHeaderEqualToAssertionThrowing implements ThrowingCallable {
-		private final String name;
-		private final Date value;
-
-		private IsDateHeaderEqualToAssertionThrowing(String name, Date value) {
-			this.name = name;
-			this.value = value;
-		}
-
-		@Override
-		public void call() {
-			new IsDateHeaderEqualToAssertion(name, value);
-		}
+	private static ThrowingCallable isDateHeaderEqualToAssertion(final String name, final Date value) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new IsDateHeaderEqualToAssertion(name, value);
+			}
+		};
 	}
 }

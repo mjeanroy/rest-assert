@@ -24,24 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
-
 import com.github.mjeanroy.junit4.customclassloader.BlackListClassLoader;
 import com.github.mjeanroy.junit4.customclassloader.BlackListClassLoaderHolder;
 import com.github.mjeanroy.junit4.customclassloader.CustomClassLoaderRunner;
 import com.github.mjeanroy.junit4.customclassloader.RunWithClassLoader;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @RunWith(CustomClassLoaderRunner.class)
 @RunWithClassLoader(BlackListClassLoaderHolder.class)
 public class JsonParserStrategyTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void GSON_should_get_gson_parser() {
@@ -94,12 +90,21 @@ public class JsonParserStrategyTest {
 		classLoader.add("org.codehaus.jackson.map.ObjectMapper");
 		classLoader.add("com.google.gson.Gson");
 
-		thrown.expect(UnsupportedOperationException.class);
-		thrown.expectMessage("Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)");
-		JsonParserStrategy.AUTO.build();
+		assertThatThrownBy(auto())
+				.isExactlyInstanceOf(UnsupportedOperationException.class)
+				.hasMessage("Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)");
 	}
 
-	private BlackListClassLoader getClassLoader() {
+	private static BlackListClassLoader getClassLoader() {
 		return (BlackListClassLoader) Thread.currentThread().getContextClassLoader();
+	}
+
+	private static ThrowingCallable auto() {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				JsonParserStrategy.AUTO.build();
+			}
+		};
 	}
 }

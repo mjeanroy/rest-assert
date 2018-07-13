@@ -29,20 +29,17 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final String VALUE = HEADER.getValue();
 	private static final String NAME = HEADER.getName();
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Override
 	protected Header getHeader() {
@@ -91,15 +88,24 @@ public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTe
 		final String expected = "same-origin";
 		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
-		thrown.expect(InvalidHeaderValue.class);
-		thrown.expectMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+		assertThatThrownBy(isFrameOptionsEqualTo(response, expected))
+				.isExactlyInstanceOf(InvalidHeaderValue.class)
+				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
 
-		assertions.isFrameOptionsEqualTo(response, expected);
 	}
 
-	private void doTest(String actual, String expected) {
+	private static void doTest(String actual, String expected) {
 		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 		final AssertionResult result = assertions.isFrameOptionsEqualTo(response, expected);
 		checkSuccess(result);
+	}
+
+	private static ThrowingCallable isFrameOptionsEqualTo(final HttpResponse response, final String expected) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				assertions.isFrameOptionsEqualTo(response, expected);
+			}
+		};
 	}
 }

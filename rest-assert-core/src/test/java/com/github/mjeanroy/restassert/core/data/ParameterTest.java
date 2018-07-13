@@ -24,17 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ParameterTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_create_parameter() {
@@ -99,29 +96,47 @@ public class ParameterTest {
 
 	@Test
 	public void it_should_not_create_parameter_with_null_name() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Parameter name must be defined");
-		Parameter.parameter(null, "bar");
+		assertThatThrownBy(parameter(null, "bar"))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
 	public void it_should_not_create_parameter_with_empty_name() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Parameter name must be defined");
-		Parameter.parameter("", "bar");
+		assertThatThrownBy(parameter("", "bar"))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
 	public void it_should_not_create_parameter_with_null_value() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Parameter value must be defined");
-		Parameter.parameter("foo", null);
+		assertThatThrownBy(parameter("foo", null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Parameter value must be defined");
 	}
 
 	@Test
 	public void it_should_not_parse_parameter_with_null_raw_value() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Parameter raw value must be defined");
-		Parameter.parse(null);
+		assertThatThrownBy(parse(null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Parameter raw value must be defined");
+	}
+
+	private static ThrowingCallable parameter(final String name, final String value) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				Parameter.parameter(name, value);
+			}
+		};
+	}
+
+	private static ThrowingCallable parse(final String rawValue) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				Parameter.parse(rawValue);
+			}
+		};
 	}
 }

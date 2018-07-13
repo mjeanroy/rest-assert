@@ -29,20 +29,17 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final String NAME = HEADER.getName();
 	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Override
 	protected Header getHeader() {
@@ -85,10 +82,18 @@ public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqu
 		final String expected = "no-sniff";
 		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
-		thrown.expect(InvalidHeaderValue.class);
-		thrown.expectMessage("X-Content-Type-Options value 'no-sniff' is not a valid one.");
+		// WHEN, THEN
+		assertThatThrownBy(isContentTypeOptionsEqualTo(response, expected))
+				.isExactlyInstanceOf(InvalidHeaderValue.class)
+				.hasMessage("X-Content-Type-Options value 'no-sniff' is not a valid one.");
+	}
 
-		// WHEN
-		assertions.isContentTypeOptionsEqualTo(response, expected);
+	private ThrowingCallable isContentTypeOptionsEqualTo(final HttpResponse response, final String expected) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				assertions.isContentTypeOptionsEqualTo(response, expected);
+			}
+		};
 	}
 }

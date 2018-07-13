@@ -27,17 +27,13 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class HasHeaderAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_is_set() {
@@ -72,22 +68,31 @@ public class HasHeaderAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_name_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new HasHeaderAssertion(null);
+		assertThatThrownBy(hasHeaderAssertion(null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new HasHeaderAssertion("");
+		assertThatThrownBy(hasHeaderAssertion(""))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new HasHeaderAssertion("   ");
+		assertThatThrownBy(hasHeaderAssertion("   "))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Header name cannot be blank");
+	}
+
+	private static ThrowingCallable hasHeaderAssertion(final String name) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() throws Throwable {
+				new HasHeaderAssertion(name);
+			}
+		};
 	}
 }

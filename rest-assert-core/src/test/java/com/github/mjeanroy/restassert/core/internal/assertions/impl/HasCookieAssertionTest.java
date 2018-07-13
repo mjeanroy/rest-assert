@@ -29,17 +29,13 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class HasCookieAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_has_cookie() {
@@ -182,57 +178,84 @@ public class HasCookieAssertionTest {
 
 	@Test
 	public void it_should_fail_if_cookie_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie must be defined");
-		new HasCookieAssertion((Cookie) null);
+		assertThatThrownBy(hasCookieAssertion((Cookie) null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Cookie must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new HasCookieAssertion((String) null);
+		assertThatThrownBy(hasCookieAssertion((String) null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new HasCookieAssertion("");
+		assertThatThrownBy(hasCookieAssertion(""))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new HasCookieAssertion("   ");
+		assertThatThrownBy(hasCookieAssertion("   "))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_null_and_value_is_set() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new HasCookieAssertion(null, "value");
+		assertThatThrownBy(hasCookieAssertion(null, "value"))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_empty_an_value_is_set() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new HasCookieAssertion("", "value");
+		assertThatThrownBy(hasCookieAssertion("", "value"))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_blank_and_value_is_set() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cookie name must be defined");
-		new HasCookieAssertion("   ", "value");
+		assertThatThrownBy(hasCookieAssertion("   ", "value"))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_value_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Cookie value must be defined");
-		new HasCookieAssertion("name", null);
+		assertThatThrownBy(hasCookieAssertion("name", null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Cookie value must be defined");
+	}
+
+	private static ThrowingCallable hasCookieAssertion(final Cookie cookie) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new HasCookieAssertion(cookie);
+			}
+		};
+	}
+
+	private static ThrowingCallable hasCookieAssertion(final String name) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new HasCookieAssertion(name);
+			}
+		};
+	}
+
+	private static ThrowingCallable hasCookieAssertion(final String name, final String value) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new HasCookieAssertion(name, value);
+			}
+		};
 	}
 }

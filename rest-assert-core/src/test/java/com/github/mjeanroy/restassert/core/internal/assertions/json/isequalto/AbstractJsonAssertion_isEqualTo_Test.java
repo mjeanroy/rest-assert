@@ -24,35 +24,40 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.json.isequalto;
 
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import org.junit.Before;
+import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 
 public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
-	JsonAssertions assertions;
+	static JsonAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 		assertions = JsonAssertions.instance();
 	}
 
 	@Test
 	public void it_should_pass_with_object() {
-		AssertionResult result = invoke(actual(), successObject());
+		final String actual = actual();
+		final T expected = successObject();
+		final AssertionResult result = invoke(actual, expected);
+
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_fail() {
-		AssertionResult result = invoke(actual(), failureObject());
+		final String actual = actual();
+		final T expected = failureObject();
+		final AssertionResult result = invoke(actual, expected);
 
 		String expectedPattern = "" +
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
@@ -76,7 +81,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
 	protected abstract AssertionResult invoke(String actual, T expected);
 
-	private String actual() {
+	private static String actual() {
 		return jsonSuccess();
 	}
 

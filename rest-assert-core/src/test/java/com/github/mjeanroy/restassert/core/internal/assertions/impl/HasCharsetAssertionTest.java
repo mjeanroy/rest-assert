@@ -27,17 +27,13 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class HasCharsetAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_charset() {
@@ -116,22 +112,31 @@ public class HasCharsetAssertionTest {
 
 	@Test
 	public void it_should_fail_if_charset_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Charset value must be defined");
-		new HasCharsetAssertion(null);
+		assertThatThrownBy(hasCharsetAssertion(null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Charset value must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_charset_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Charset value must be defined");
-		new HasCharsetAssertion("");
+		assertThatThrownBy(hasCharsetAssertion(""))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Charset value must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Charset value must be defined");
-		new HasCharsetAssertion("    ");
+		assertThatThrownBy(hasCharsetAssertion("    "))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Charset value must be defined");
+	}
+
+	private static ThrowingCallable hasCharsetAssertion(final String expectedCharset) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new HasCharsetAssertion(expectedCharset);
+			}
+		};
 	}
 }

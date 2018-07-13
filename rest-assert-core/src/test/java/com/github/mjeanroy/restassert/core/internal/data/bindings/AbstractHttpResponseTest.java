@@ -27,19 +27,13 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
 
 public abstract class AbstractHttpResponseTest<T> {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_return_status_code() {

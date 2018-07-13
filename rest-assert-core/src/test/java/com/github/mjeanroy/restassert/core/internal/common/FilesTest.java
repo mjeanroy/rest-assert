@@ -24,23 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.net.URL;
+import java.nio.charset.MalformedInputException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FilesTest {
 
 	private static final String BR = System.getProperty("line.separator");
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_read_file_to_string() throws Exception {
@@ -62,11 +59,20 @@ public class FilesTest {
 
 	@Test
 	public void it_should_fail_to_read_file_to_string_with_custom_exception() throws Exception {
-		URL resource = getClass().getResource("/test-not-utf-8.txt");
-		Path path = Paths.get(resource.toURI());
+		final URL resource = getClass().getResource("/test-not-utf-8.txt");
+		final Path path = Paths.get(resource.toURI());
 
-		thrown.expect(Files.UnreadableFileException.class);
+		assertThatThrownBy(readFileToString(path))
+				.isExactlyInstanceOf(Files.UnreadableFileException.class)
+				.hasCauseExactlyInstanceOf(MalformedInputException.class);
+	}
 
-		Files.readFileToString(path);
+	private static ThrowingCallable readFileToString(final Path path) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				Files.readFileToString(path);
+			}
+		};
 	}
 }

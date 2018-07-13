@@ -25,22 +25,19 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.json.isequaltoignoring;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
 import static java.util.Collections.emptyList;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsEqualIgnoringToURLTest extends AbstractJsonAssertion_isEqualToIgnoring_Test<URL> {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Override
 	protected AssertionResult invoke(String actual, URL expected, Iterable<String> ignoringKeys) {
@@ -59,10 +56,21 @@ public class IsEqualIgnoringToURLTest extends AbstractJsonAssertion_isEqualToIgn
 
 	@Test
 	public void it_should_fail_if_uri_syntax_exception() throws Exception {
-		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
-		thrown.expect(AssertionError.class);
+		final String actual = "{}";
+		final URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
+		final List<String> objects = emptyList();
 
-		List<String> objects = emptyList();
-		assertions.isEqualToIgnoring("{}", url, objects);
+		assertThatThrownBy(isEqualToIgnoring(actual, url, objects))
+				.isExactlyInstanceOf(AssertionError.class)
+				.hasCauseExactlyInstanceOf(URISyntaxException.class);
+	}
+
+	private static ThrowingCallable isEqualToIgnoring(final String actual, final URL url, final List<String> objects) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				assertions.isEqualToIgnoring(actual, url, objects);
+			}
+		};
 	}
 }

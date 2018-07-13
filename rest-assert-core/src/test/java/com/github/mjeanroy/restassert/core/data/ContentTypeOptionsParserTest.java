@@ -25,20 +25,18 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class ContentTypeOptionsParserTest {
 
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
-
 	@Test
 	public void it_should_parse_no_sniff_value() {
-		ContentTypeOptionsParser parser = ContentTypeOptions.parser();
+		final ContentTypeOptionsParser parser = ContentTypeOptions.parser();
+
 		assertThat(parser.parse("nosniff")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 		assertThat(parser.parse("NOSNIFF")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 		assertThat(parser.parse(" nosniff ")).isEqualTo(ContentTypeOptions.NO_SNIFF);
@@ -46,11 +44,19 @@ public class ContentTypeOptionsParserTest {
 
 	@Test
 	public void it_should_failed_to_parse_invalid_value() {
-		ContentTypeOptionsParser parser = ContentTypeOptions.parser();
+		final ContentTypeOptionsParser parser = ContentTypeOptions.parser();
 
-		thrown.expect(InvalidHeaderValue.class);
-		thrown.expectMessage("X-Content-Type-Options value 'foo' is not a valid one.");
+		assertThatThrownBy(parse(parser, "foo"))
+				.isExactlyInstanceOf(InvalidHeaderValue.class)
+				.hasMessage("X-Content-Type-Options value 'foo' is not a valid one.");
+	}
 
-		parser.parse("foo");
+	private static ThrowingCallable parse(final ContentTypeOptionsParser parser, final String value) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				parser.parse(value);
+			}
+		};
 	}
 }

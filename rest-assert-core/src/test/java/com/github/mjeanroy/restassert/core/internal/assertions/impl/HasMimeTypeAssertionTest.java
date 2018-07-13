@@ -28,21 +28,17 @@ import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Collection;
 import java.util.Collections;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class HasMimeTypeAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_mime_type() {
@@ -133,23 +129,23 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_fail_if_mime_type_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Mime-Type value must be defined");
-		new HasMimeTypeAssertion((MediaType) null);
+		assertThatThrownBy(hasMimeTypeAssertion((MediaType) null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Mime-Type value must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_list_mime_type_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Mime-Type values must be defined");
-		new HasMimeTypeAssertion((Collection<MediaType>) null);
+		assertThatThrownBy(hasMimeTypeAssertion((Collection<MediaType>) null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Mime-Type values must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_list_mime_type_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Mime-Type values must be defined");
-		new HasMimeTypeAssertion(Collections.<MediaType>emptyList());
+		assertThatThrownBy(hasMimeTypeAssertion(Collections.<MediaType>emptyList()))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Mime-Type values must be defined");
 	}
 
 	/**
@@ -160,5 +156,23 @@ public class HasMimeTypeAssertionTest {
 	 */
 	private HttpResponse createHttpResponse(String mimeType) {
 		return new HttpResponseBuilderImpl().addHeader("Content-Type", mimeType + "; charset=utf-8").build();
+	}
+
+	private static ThrowingCallable hasMimeTypeAssertion(final Collection<MediaType> mediaTypes) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new HasMimeTypeAssertion(mediaTypes);
+			}
+		};
+	}
+
+	private static ThrowingCallable hasMimeTypeAssertion(final MediaType mediaType) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new HasMimeTypeAssertion(mediaType);
+			}
+		};
 	}
 }

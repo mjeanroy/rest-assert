@@ -24,6 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BASE_URI;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BLOCK_ALL_MIXED_CONTENT;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.CHILD_SRC;
@@ -52,25 +64,10 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sou
 import static java.util.Collections.addAll;
 import static java.util.Collections.emptySet;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
-import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 public class ContentSecurityPolicyParserTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	private ContentSecurityPolicyParser parser;
 
@@ -442,16 +439,16 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_fail_if_directive_name_is_not_found() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Cannot parse Content-Security-Policy value since directive foo seems not valid");
-		parser.parse("default-src 'none'; foo http://domain.com");
+		assertThatThrownBy(parse(parser, "default-src 'none'; foo http://domain.com"))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Cannot parse Content-Security-Policy value since directive foo seems not valid");
 	}
 
 	@Test
 	public void it_should_fail_if_directive_does_not_have_name() {
-		thrown.expect(InvalidHeaderValue.class);
-		thrown.expectMessage("Content-Security-Policy value 'default-src 'none'; ;' is not a valid one.");
-		parser.parse("default-src 'none'; ;");
+		assertThatThrownBy(parse(parser, "default-src 'none'; ;"))
+				.isExactlyInstanceOf(InvalidHeaderValue.class)
+				.hasMessage("Content-Security-Policy value 'default-src 'none'; ;' is not a valid one.");
 	}
 
 	private static Set<Source> sources() {
@@ -474,5 +471,14 @@ public class ContentSecurityPolicyParserTest {
 		sources.add(value);
 		addAll(sources, values);
 		return sources;
+	}
+
+	private static ThrowingCallable parse(final ContentSecurityPolicyParser parser, final String value) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				parser.parse(value);
+			}
+		};
 	}
 }

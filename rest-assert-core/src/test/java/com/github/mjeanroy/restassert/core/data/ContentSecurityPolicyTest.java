@@ -24,6 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.Test;
+
+import java.net.URL;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BASE_URI;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.BLOCK_ALL_MIXED_CONTENT;
@@ -58,21 +67,7 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.uns
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.net.URL;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
-
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
-import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 public class ContentSecurityPolicyTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_define_self_source() {

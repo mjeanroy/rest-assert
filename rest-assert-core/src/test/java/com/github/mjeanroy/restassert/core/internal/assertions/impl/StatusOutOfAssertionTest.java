@@ -24,20 +24,16 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StatusOutOfAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_status_match() {
@@ -80,22 +76,31 @@ public class StatusOutOfAssertionTest {
 
 	@Test
 	public void it_should_fail_if_status_start_is_negative() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Http status code must be positive");
-		new StatusOutOfAssertion(-1, 200);
+		assertThatThrownBy(statusOutOfAssertion(-1, 200))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Http status code must be positive");
 	}
 
 	@Test
 	public void it_should_fail_if_status_end_is_negative() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Http status code must be positive");
-		new StatusOutOfAssertion(200, -1);
+		assertThatThrownBy(statusOutOfAssertion(200, -1))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Http status code must be positive");
 	}
 
 	@Test
 	public void it_should_fail_if_status_start_is_greater_than_end() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Lower bound must be strictly less than upper bound");
-		new StatusOutOfAssertion(201, 200);
+		assertThatThrownBy(statusOutOfAssertion(201, 200))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Lower bound must be strictly less than upper bound");
+	}
+
+	private static ThrowingCallable statusOutOfAssertion(final int start, final int end) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new StatusOutOfAssertion(start, end);
+			}
+		};
 	}
 }

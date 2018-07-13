@@ -25,22 +25,20 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
+import java.util.Map;
 
 import static com.github.mjeanroy.restassert.core.data.ContentType.contentType;
 import static com.github.mjeanroy.restassert.core.data.MediaType.application;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.groups.Tuple.tuple;
 
 public class ContentTypeTest {
-
-	@Rule
-	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	public void it_should_create_content_type_with_charsets() {
@@ -91,9 +89,17 @@ public class ContentTypeTest {
 
 	@Test
 	public void it_should_fail_if_media_type_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Media Type must not be null");
+		assertThatThrownBy(newContentType(null, Collections.<String, Parameter>emptyMap()))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Media Type must not be null");
+	}
 
-		new ContentType(null, Collections.<String, Parameter>emptyMap());
+	private static ThrowingCallable newContentType(final MediaType mediaType, final Map<String, Parameter> parameters) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				new ContentType(mediaType, parameters);
+			}
+		};
 	}
 }

@@ -24,44 +24,57 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.json.isequaltoignoring;
 
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import org.junit.Before;
+import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static java.util.Arrays.asList;
 
 public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 
-	JsonAssertions assertions;
+	static JsonAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeClass
+	public static void setUp() {
 		assertions = JsonAssertions.instance();
 	}
 
 	@Test
 	public void it_should_pass() {
-		AssertionResult result = invoke(actual(), successObject(), asList("str", "nb", "bool"));
+		final String actual = actual();
+		final T expected = successObject();
+		final List<String> ignoringKeys = asList("str", "nb", "bool");
+		final AssertionResult result = invoke(actual, expected, ignoringKeys);
+
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_support_json_path() {
-		AssertionResult result = invoke(actual(), failureObject(), asList("$.str", "$.nb", "$.bool", "$.array[0:3]"));
+		final String actual = actual();
+		final T expected = failureObject();
+		final List<String> ignoringKeys = asList("$.str", "$.nb", "$.bool", "$.array[0:3]");
+		final AssertionResult result = invoke(actual, expected, ignoringKeys);
+
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_fail() {
-		AssertionResult result = invoke(actual(), failureObject(), asList("str", "nb", "bool"));
+		final String actual = actual();
+		final T expected = failureObject();
+		final List<String> ignoringKeys = asList("str", "nb", "bool");
+		final AssertionResult result = invoke(actual, expected, ignoringKeys);
 
-		String expectedPattern = "" +
+		String expectedPattern =
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
 				"Expecting json entry %s to be equal to %s but was %s";
@@ -75,13 +88,36 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
 	}
 
+	/**
+	 * Invoke test.
+	 *
+	 * @param actual The actual object.
+	 * @param expected The expected object.
+	 * @param ignoringKeys The keys to ignore.
+	 * @return The assertion result.
+	 */
 	protected abstract AssertionResult invoke(String actual, T expected, Iterable<String> ignoringKeys);
 
-	private String actual() {
+	/**
+	 * The actual JSON representation, i.e the JSON to be tested.
+	 *
+	 * @return The JSON value.
+	 */
+	private static String actual() {
 		return jsonSuccess();
 	}
 
+	/**
+	 * Create the object that should pass the test.
+	 *
+	 * @return The object.
+	 */
 	protected abstract T successObject();
 
+	/**
+	 * Create the object that should not pass the test.
+	 *
+	 * @return The object.
+	 */
 	protected abstract T failureObject();
 }

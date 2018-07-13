@@ -25,33 +25,20 @@
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
 import com.github.mjeanroy.restassert.core.internal.json.JsonException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.junit.After;
-import org.junit.Before;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
-import static org.apache.commons.lang3.reflect.FieldUtils.readField;
-import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class Jackson1JsonParserTest extends AbstractJsonParserTest {
 
-	private JsonParser parser;
-	private ObjectMapper mapper;
+	private static JsonParser parser;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeClass
+	public static void setUp() {
 		parser = jackson1Parser();
-		mapper = (ObjectMapper) readField(parser, "mapper", true);
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		writeField(parser, "mapper", mapper, true);
 	}
 
 	@Override
@@ -60,16 +47,17 @@ public class Jackson1JsonParserTest extends AbstractJsonParserTest {
 	}
 
 	@Test
-	@SuppressWarnings("unchecked")
-	public void it_should_wrap_checked_exception() throws Exception {
-		Jackson1JsonParser parser = jackson1Parser();
+	public void it_should_wrap_checked_exception() {
+		final String json = "[ Invalid JSON ]";
+		assertThatThrownBy(parse(json)).isExactlyInstanceOf(JsonException.class);
+	}
 
-		ObjectMapper mapper = mock(ObjectMapper.class);
-		when(mapper.readValue(anyString(), any(Class.class))).thenThrow(RuntimeException.class);
-		writeField(parser, "mapper", mapper, true);
-
-		thrown.expect(JsonException.class);
-
-		parser.parse("{}");
+	private static ThrowingCallable parse(final String json) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				parser.parse(json);
+			}
+		};
 	}
 }

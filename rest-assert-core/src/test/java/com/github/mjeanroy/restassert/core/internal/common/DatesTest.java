@@ -24,19 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DatesTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_parse_rfc_1123() {
@@ -84,12 +80,11 @@ public class DatesTest {
 
 	@Test
 	public void it_should_throw_exception_if_pattern_is_not_known() {
-		String date = "foo bar";
+		final String date = "foo bar";
 
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("HTTP Date must respect standard formats: EEE, dd MMM yyyy HH:mm:ss zzz, EEE, dd-MMM-yy HH:mm:ss zzz or EEE MMM d HH:mm:ss yyyy");
-
-		Dates.parseHttpDate(date);
+		assertThatThrownBy(parseHttpDate(date))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("HTTP Date must respect standard formats: EEE, dd MMM yyyy HH:mm:ss zzz, EEE, dd-MMM-yy HH:mm:ss zzz or EEE MMM d HH:mm:ss yyyy");
 	}
 
 	@Test
@@ -98,5 +93,14 @@ public class DatesTest {
 		date.setTime(784111777000L);
 
 		assertThat(Dates.formatHttpDate(date)).isEqualTo("Sun, 06 Nov 1994 08:49:37 GMT");
+	}
+
+	private static ThrowingCallable parseHttpDate(final String date) {
+		return new ThrowingCallable() {
+			@Override
+			public void call() {
+				Dates.parseHttpDate(date);
+			}
+		};
 	}
 }
