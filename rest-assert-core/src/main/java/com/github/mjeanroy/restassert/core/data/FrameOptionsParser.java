@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_FRAME_OPTIONS;
@@ -32,7 +32,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_FR
 /**
  * Parser for {@link FrameOptions} value.
  */
-public class FrameOptionsParser extends AbstractHeaderParser<FrameOptions> {
+public class FrameOptionsParser extends AbstractHttpHeaderParser<FrameOptions> {
 
 	// Ensure no public instantiation.
 	FrameOptionsParser() {

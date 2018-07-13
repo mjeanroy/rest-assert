@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_CONTENT_TYPE_OPTIONS;
@@ -32,7 +32,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_CO
 /**
  * Parser for {@link ContentTypeOptions}.
  */
-public class ContentTypeOptionsParser extends AbstractHeaderParser<ContentTypeOptions> {
+public class ContentTypeOptionsParser extends AbstractHttpHeaderParser<ContentTypeOptions> {
 
 	// Ensure no public instantiation.
 	ContentTypeOptionsParser() {

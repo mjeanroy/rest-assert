@@ -24,8 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.exceptions;
 
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+
 /**
- * Exception thrown when an {@link com.github.mjeanroy.restassert.core.internal.data.HeaderParser} cannot parse
+ * Exception thrown when an {@link HttpHeaderParser} cannot parse
  * header value because of an invalid or a non-authorized value.
  */
 public class InvalidHeaderValue extends IllegalArgumentException {

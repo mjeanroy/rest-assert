@@ -42,7 +42,7 @@ import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * Content-Security-Policy Header.
@@ -50,7 +50,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
  * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
  * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy</a>
  */
-public final class ContentSecurityPolicy implements HeaderValue {
+public final class ContentSecurityPolicy implements HttpHeaderValue {
 
 	/**
 	 * The parser instance.

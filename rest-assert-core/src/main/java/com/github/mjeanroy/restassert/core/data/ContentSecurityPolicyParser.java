@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONT
 import java.util.HashSet;
 import java.util.Set;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
@@ -37,7 +37,7 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 /**
  * Parser for {@link ContentSecurityPolicy} value.
  */
-public class ContentSecurityPolicyParser extends AbstractHeaderParser<ContentSecurityPolicy> {
+public class ContentSecurityPolicyParser extends AbstractHttpHeaderParser<ContentSecurityPolicy> {
 
 	/**
 	 * Class logger.

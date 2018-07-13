@@ -32,7 +32,7 @@ import java.util.Objects;
 
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * Strict-Transport-Security value.
@@ -42,7 +42,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
  * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
  * @see <a href="https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security">https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security</a>
  */
-public final class StrictTransportSecurity implements HeaderValue {
+public final class StrictTransportSecurity implements HttpHeaderValue {
 
 	/**
 	 * The parser instance.

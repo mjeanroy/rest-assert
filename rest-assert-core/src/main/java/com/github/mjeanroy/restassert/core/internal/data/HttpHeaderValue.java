@@ -24,26 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
-
 /**
- * Abstract template implementation for {@link HeaderParser} interface.
+ * Header value that can be checked against string values.
  */
-public abstract class AbstractHeaderParser<T extends HeaderValue> implements HeaderParser<T> {
-
-	@Override
-	public T parse(String value) {
-		notBlank(value, "Header value must be defined to be parsed");
-		return doParse(value.trim());
-	}
+public interface HttpHeaderValue {
 
 	/**
-	 * Parse header value as a raw string and returns valid {@link HeaderValue} instance.
-	 * Note that, unlike {@link #parse(String)} method, this method guarantee that raw value
-	 * is not {@code null} and not blank.
+	 * Get header value (as it should appears in HTTP header).
 	 *
-	 * @param value Raw value.
-	 * @return The {@link HeaderValue} instance.
+	 * @return Header value.
 	 */
-	protected abstract T doParse(String value);
+	String serializeValue();
 }

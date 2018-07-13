@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 
@@ -47,19 +47,19 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 	/**
 	 * Expected header expected.
 	 */
-	private final HeaderValue expected;
+	private final HttpHeaderValue expected;
 
 	/**
 	 * The parser that will be used to build comparison.
 	 */
-	private final HeaderParser parser;
+	private final HttpHeaderParser parser;
 
 	/**
 	 * Create assertion.
 	 *
 	 * @param name Header name.
 	 */
-	public IsHeaderMatchingAssertion(String name, HeaderValue expected, HeaderParser parser) {
+	public IsHeaderMatchingAssertion(String name, HttpHeaderValue expected, HttpHeaderParser parser) {
 		super(name);
 		this.expected = notNull(expected, "Header expected value must not be null");
 		this.parser = notNull(parser, "Header parser must not be null");
@@ -72,10 +72,10 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 	}
 
 	private static class HeaderPredicate implements Predicate<String> {
-		private final HeaderValue expected;
-		private final HeaderParser parser;
+		private final HttpHeaderValue expected;
+		private final HttpHeaderParser parser;
 
-		private HeaderPredicate(HeaderValue expected, HeaderParser parser) {
+		private HeaderPredicate(HttpHeaderValue expected, HttpHeaderParser parser) {
 			this.expected = expected;
 			this.parser = parser;
 		}

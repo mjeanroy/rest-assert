@@ -36,14 +36,14 @@ import java.util.Objects;
 
 import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * A model for Content-Type values.
  *
  * @see <a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>
  */
-public final class ContentType implements HeaderValue {
+public final class ContentType implements HttpHeaderValue {
 
 	private static final String CHARSET_PARAMETER_NAME = "charset";
 	private static final String SEPARATOR = "; ";

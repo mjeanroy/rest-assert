@@ -35,12 +35,12 @@ import java.util.Objects;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * The list of available content-encoding values.
  */
-public final class ContentEncoding implements HeaderValue {
+public final class ContentEncoding implements HttpHeaderValue {
 
 	/**
 	 * Create {@code "GZIP"} {@code "Content-Encoding"} header.

@@ -24,16 +24,13 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
-
-import java.util.LinkedHashSet;
-import java.util.Set;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * DefaultCookieBuilder used to create mock instance of {@link HeaderValue} class.
+ * DefaultCookieBuilder used to create mock instance of {@link HttpHeaderValue} class.
  */
 public class HeaderValueBuilder {
 
@@ -58,8 +55,8 @@ public class HeaderValueBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public HeaderValue build() {
-		HeaderValue hValue = mock(HeaderValue.class);
+	public HttpHeaderValue build() {
+		HttpHeaderValue hValue = mock(HttpHeaderValue.class);
 		when(hValue.serializeValue()).thenReturn(value);
 		return hValue;
 	}

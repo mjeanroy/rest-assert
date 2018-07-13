@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
@@ -38,7 +38,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.remove
 /**
  * Parser for {@link StrictTransportSecurity} value.
  */
-public class StrictTransportSecurityParser extends AbstractHeaderParser<StrictTransportSecurity> {
+public class StrictTransportSecurityParser extends AbstractHttpHeaderParser<StrictTransportSecurity> {
 
 	/**
 	 * Class Logger.

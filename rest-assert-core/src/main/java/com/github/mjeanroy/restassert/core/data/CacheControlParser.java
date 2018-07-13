@@ -25,14 +25,14 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.CacheControl.Directive;
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 /**
  * Parser for {@link CacheControl} value.
  */
-public class CacheControlParser extends AbstractHeaderParser<CacheControl> {
+public class CacheControlParser extends AbstractHttpHeaderParser<CacheControl> {
 
 	/**
 	 * Class Logger.

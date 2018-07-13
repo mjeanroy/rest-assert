@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * Values of valid X-Content-Type-Options value.
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
  */
-public enum ContentTypeOptions implements HeaderValue {
+public enum ContentTypeOptions implements HttpHeaderValue {
 
 	/**
 	 * The only defined value, "nosniff", prevents Internet Explorer and Google Chrome

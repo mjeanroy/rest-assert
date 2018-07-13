@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -35,7 +35,7 @@ import java.util.Objects;
 /**
  * Cache-Control value value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
  */
-public final class CacheControl implements HeaderValue {
+public final class CacheControl implements HttpHeaderValue {
 
 	private static final String SEPARATOR = ", ";
 	private static final String DIR_NO_CACHE = "no-cache";

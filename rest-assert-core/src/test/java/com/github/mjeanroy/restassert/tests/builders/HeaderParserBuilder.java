@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -34,14 +34,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * DefaultCookieBuilder used to create mock instance of {@link HeaderValue} class.
+ * DefaultCookieBuilder used to create mock instance of {@link HttpHeaderValue} class.
  */
 public class HeaderParserBuilder {
 
 	/**
-	 * Pair of {@link String} to {@link HeaderValue}.
+	 * Pair of {@link String} to {@link HttpHeaderValue}.
 	 */
-	private final Map<String, HeaderValue> pairs;
+	private final Map<String, HttpHeaderValue> pairs;
 
 	/**
 	 * Create builder.
@@ -57,7 +57,7 @@ public class HeaderParserBuilder {
 	 * @param headerValue Header value.
 	 * @return Current builder.
 	 */
-	public HeaderParserBuilder add(String value, HeaderValue headerValue) {
+	public HeaderParserBuilder add(String value, HttpHeaderValue headerValue) {
 		this.pairs.put(value, headerValue);
 		return this;
 	}
@@ -67,9 +67,9 @@ public class HeaderParserBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public HeaderParser build() {
-		HeaderParser parser = mock(HeaderParser.class);
-		for (Map.Entry<String, HeaderValue> entry : pairs.entrySet()) {
+	public HttpHeaderParser build() {
+		HttpHeaderParser parser = mock(HttpHeaderParser.class);
+		for (Map.Entry<String, HttpHeaderValue> entry : pairs.entrySet()) {
 			when(parser.parse(entry.getKey())).thenReturn(entry.getValue());
 		}
 

@@ -31,12 +31,12 @@ import java.util.Objects;
 
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * A parameter that can be displayed in header raw values formatted as {@code "<name>=<value>"}.
  */
-public final class Parameter implements HeaderValue {
+public final class Parameter implements HttpHeaderValue {
 
 	/**
 	 * Create parameter.

@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.net.URI;
 import java.util.Collections;
@@ -46,7 +46,7 @@ import static java.util.Collections.unmodifiableSet;
  * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
  */
-public final class FrameOptions implements HeaderValue {
+public final class FrameOptions implements HttpHeaderValue {
 
 	private static final FrameOptions DENY = new FrameOptions(Directive.DENY);
 	private static final FrameOptions SAME_ORIGIN = new FrameOptions(Directive.SAME_ORIGIN);

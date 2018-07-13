@@ -31,13 +31,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 /**
  * Parser for {@link ContentEncoding} header.
  */
-public class ContentEncodingParser extends AbstractHeaderParser<ContentEncoding> {
+public class ContentEncodingParser extends AbstractHttpHeaderParser<ContentEncoding> {
 
 	// Ensure no public instantiation.
 	ContentEncodingParser() {

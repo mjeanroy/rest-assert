@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderParser;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HeaderParserBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HeaderValueBuilder;
@@ -43,8 +43,8 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
@@ -60,8 +60,8 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).addHeader(name, value).build();
@@ -77,8 +77,8 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_header_is_not_set() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
@@ -95,8 +95,8 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
 		final String name = "foo";
 		final String value = "bar";
-		final HeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).build();
@@ -113,8 +113,8 @@ public class IsHeaderMatchingAssertionTest {
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
 		final String name = "Content-Type";
 		final String value = "bar";
-		final HeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl()
@@ -165,7 +165,7 @@ public class IsHeaderMatchingAssertionTest {
 				.hasMessage("Header parser must not be null");
 	}
 
-	private static ThrowingCallable isHeaderMatchingAssertion(final String name, final HeaderValue value, final HeaderParser parser) {
+	private static ThrowingCallable isHeaderMatchingAssertion(final String name, final HttpHeaderValue value, final HttpHeaderParser parser) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {

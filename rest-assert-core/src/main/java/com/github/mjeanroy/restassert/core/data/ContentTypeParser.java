@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -39,7 +39,7 @@ import static java.util.Collections.unmodifiableMap;
  *
  * @see <a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>
  */
-public final class ContentTypeParser extends AbstractHeaderParser<ContentType> {
+public final class ContentTypeParser extends AbstractHttpHeaderParser<ContentType> {
 
 	// Ensure no public instantiation.
 	ContentTypeParser() {

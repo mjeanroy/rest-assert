@@ -26,13 +26,13 @@ package com.github.mjeanroy.restassert.core.data;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_XSS_PROTECTION;
 
-import com.github.mjeanroy.restassert.core.internal.data.AbstractHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 /**
  * Parser for {@link XssProtection} value.
  */
-public class XssProtectionParser extends AbstractHeaderParser<XssProtection> {
+public class XssProtectionParser extends AbstractHttpHeaderParser<XssProtection> {
 
 	// Ensure no public instantiation.
 	XssProtectionParser() {

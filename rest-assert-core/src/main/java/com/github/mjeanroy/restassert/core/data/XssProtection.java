@@ -31,14 +31,14 @@ import java.net.URI;
 import java.util.Objects;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * Values of valid XSS protection value.
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
  */
-public final class XssProtection implements HeaderValue {
+public final class XssProtection implements HttpHeaderValue {
 
 	/**
 	 * Create {@code "X-XSS-Protection"} header with {@code "DISABLE"} parameter.

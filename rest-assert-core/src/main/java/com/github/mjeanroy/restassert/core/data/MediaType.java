@@ -29,14 +29,14 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 import java.util.Objects;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HeaderValue;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
  * The media type representation.
  *
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
  */
-public final class MediaType implements HeaderValue {
+public final class MediaType implements HttpHeaderValue {
 
 	private static final String SEPARATOR = "/";
 
