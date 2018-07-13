@@ -44,6 +44,16 @@ public abstract class {{class_name}}<S extends {{class_name}}<S>> extends Abstra
 	}
 
 	{{#methods}}
+	/**
+	 * AssertJ wrapper for {@link {{core_class_name}}#{{core_method_name}}}.
+	 *
+	 {{#arguments}}
+	 * @param {{name}} See {@link {{core_class_name}}#{{core_method_name}}}
+	 {{/arguments}}
+	 * @return The current assert instance, for chaining.
+	 * @throws AssertionError When assertion fails.
+	 * @see {{core_class_name}}#{{core_method_name}}
+	 */
 	public S {{method_name}}({{#arguments}}{{^first}}, {{/first}}{{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		assertions.{{core_method_name}}(info, actual{{#arguments}}, {{name}}{{/arguments}});
 		return myself;

@@ -61,7 +61,7 @@ public class {{class_name}} extends AbstractRestAssertions {
 	 *
 	 * @param info contains information about the assertion.
 	 * @param actual actual object.
-	 * @throws AssertionError
+	 * @throws AssertionError When assertion fails.
 	 */
 	public void {{method_name}}(AssertionInfo info, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		assertNotNull(info, actual);
