@@ -37,7 +37,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder used to create mock instance of {@link HttpResponse} class.
+ * DefaultCookieBuilder used to create mock instance of {@link HttpResponse} class.
  */
 public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpResponse, HttpResponseBuilderImpl> implements HttpResponseBuilder<HttpResponse> {
 

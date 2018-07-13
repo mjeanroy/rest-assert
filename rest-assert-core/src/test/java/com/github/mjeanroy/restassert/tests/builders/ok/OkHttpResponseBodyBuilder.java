@@ -28,7 +28,7 @@ import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 
 /**
- * Builder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
+ * DefaultCookieBuilder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
  */
 class OkHttpResponseBodyBuilder {
 

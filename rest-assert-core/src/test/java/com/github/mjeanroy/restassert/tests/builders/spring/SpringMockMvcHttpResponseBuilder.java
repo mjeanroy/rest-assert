@@ -38,7 +38,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder to create instance of {@link ResultActions} class.
+ * DefaultCookieBuilder to create instance of {@link ResultActions} class.
  */
 public class SpringMockMvcHttpResponseBuilder extends AbstractHttpResponseBuilder<ResultActions, SpringMockMvcHttpResponseBuilder> implements HttpResponseBuilder<ResultActions> {
 

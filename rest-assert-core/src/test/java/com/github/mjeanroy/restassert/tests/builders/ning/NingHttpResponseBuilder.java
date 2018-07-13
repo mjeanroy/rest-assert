@@ -51,7 +51,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder to create mock instance of {@link Response} class.
+ * DefaultCookieBuilder to create mock instance of {@link Response} class.
  */
 public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Response, NingHttpResponseBuilder> implements HttpResponseBuilder<Response> {
 

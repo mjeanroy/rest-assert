@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Builder to create mock instance of {@link HttpResponse} class.
+ * DefaultCookieBuilder to create mock instance of {@link HttpResponse} class.
  */
 public class GoogleHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpResponse, GoogleHttpResponseBuilder> implements HttpResponseBuilder<HttpResponse> {
 

@@ -22,46 +22,45 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.builders.apache;
+package com.github.mjeanroy.restassert.tests.junit;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
+import org.junit.rules.ExternalResource;
+
+import java.util.TimeZone;
 
 /**
- * DefaultCookieBuilder to create mock instances of {@link HttpEntity} class.
+ * A JUnit {@link org.junit.Rule} that can be used to run unit test
+ * on a specific TimeZone.
  */
-class ApacheHttpEntityBuilder {
+public class TimeZoneRule extends ExternalResource {
 
 	/**
-	 * Body content.
+	 * The TimeZone to use.
 	 */
-	private String content;
+	private final TimeZone timeZone;
 
 	/**
-	 * Create builder.
+	 * The default TimeZone that was defined before updating before test.
 	 */
-	ApacheHttpEntityBuilder() {
-		this.content = "";
+	private final TimeZone defaultTimeZone;
+
+	/**
+	 * Create the JUnit Rule.
+	 *
+	 * @param tzId The TimeZone identifier.
+	 */
+	public TimeZoneRule(String tzId) {
+		this.timeZone = TimeZone.getTimeZone(tzId);
+		this.defaultTimeZone = TimeZone.getDefault();
 	}
 
-	/**
-	 * Set {@link #content}.
-	 *
-	 * @param content New {@link #content}.
-	 * @return Current builder.
-	 */
-	ApacheHttpEntityBuilder setContent(String content) {
-		this.content = content;
-		return this;
+	@Override
+	protected void before() throws Throwable {
+		TimeZone.setDefault(timeZone);
 	}
 
-	/**
-	 * Create mock instance of {@link HttpEntity} class.
-	 *
-	 * @return Mock instance.
-	 */
-	HttpEntity build() {
-		return new StringEntity(content, ContentType.DEFAULT_TEXT);
+	@Override
+	protected void after() {
+		TimeZone.setDefault(defaultTimeZone);
 	}
 }

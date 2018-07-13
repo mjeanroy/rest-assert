@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -47,11 +45,6 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
  * Cookies utilities.
  */
 public final class Cookies {
-
-	/**
-	 * UTC Time Zone.
-	 */
-	private static final TimeZone UTC = TimeZone.getTimeZone("UTC");
 
 	// Ensure non instantiation.
 	private Cookies() {
@@ -87,8 +80,8 @@ public final class Cookies {
 	 * @param value Cookie value, must not be null.
 	 * @return The builder.
 	 */
-	public static Builder builder(String name, String value) {
-		return new Builder(name, value);
+	public static DefaultCookieBuilder builder(String name, String value) {
+		return new DefaultCookieBuilder(name, value);
 	}
 
 	/**
@@ -123,148 +116,6 @@ public final class Cookies {
 				&& c1.isHttpOnly() == c2.isHttpOnly()
 				&& Objects.equals(c1.getMaxAge(), c2.getMaxAge())
 				&& Objects.equals(c1.getExpires(), c2.getExpires());
-	}
-
-	/**
-	 * Builder class that can be used to build {@link Cookie} instance.
-	 */
-	public static class Builder {
-		/**
-		 * Cookie name, mandatory.
-		 */
-		private final String name;
-
-		/**
-		 * Cookie value, mandatory.
-		 */
-		private final String value;
-
-		/**
-		 * Cookie domain, optional (default is {@code null}).
-		 */
-		private String domain;
-
-		/**
-		 * Cookie path, optional (default is {@code null}).
-		 */
-		private String path;
-
-		/**
-		 * Cookie secure flag, optional (default is {@code false}).
-		 */
-		private boolean secure;
-
-		/**
-		 * Cookie httpOnly flag, optional (default is {@code false}).
-		 */
-		private boolean httpOnly;
-
-		/**
-		 * Cookie max-age, optional (default is {@code null}, meaning no max-age).
-		 */
-		private Long maxAge;
-
-		/**
-		 * Cookie expires date, optional (default is {@code null}, meaning no expires value).
-		 */
-		private Date expires;
-
-		/**
-		 * Create builder.
-		 * This constructor is private since {@link com.github.mjeanroy.restassert.core.internal.data.Cookies#builder(String, String)} method
-		 * should be used.
-		 *
-		 * @param name Cookie name.
-		 * @param value Cookie value.
-		 */
-		private Builder(String name, String value) {
-			this.name = notBlank(name, "Cookie name must not be blank");
-			this.value = notNull(value, "Cookie value must not be null");
-		}
-
-		/**
-		 * Update cookie domain.
-		 *
-		 * @param domain New domain value.
-		 * @return Current builder.
-		 */
-		public Builder setDomain(String domain) {
-			this.domain = domain;
-			return this;
-		}
-
-		/**
-		 * Update cookie path.
-		 *
-		 * @param path New path value.
-		 * @return Current builder.
-		 */
-		public Builder setPath(String path) {
-			this.path = path;
-			return this;
-		}
-
-		/**
-		 * Set secure flag to {@code true}.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder setSecure() {
-			this.secure = true;
-			return this;
-		}
-
-		/**
-		 * Set httpOnly flag to {@code true}.
-		 *
-		 * @return Current builder.
-		 */
-		public Builder setHttpOnly() {
-			this.httpOnly = true;
-			return this;
-		}
-
-		/**
-		 * Update max-age value.
-		 *
-		 * @param maxAge Max-Age value.
-		 * @return Current builder.
-		 */
-		public Builder setMaxAge(long maxAge) {
-			this.maxAge = maxAge;
-			return this;
-		}
-
-		/**
-		 * Update expires value.
-		 *
-		 * @param expires Expires value.
-		 * @return Current builder.
-		 */
-		public Builder setExpires(Date expires) {
-			this.expires = expires;
-			return this;
-		}
-
-		/**
-		 * Update expires value.
-		 *
-		 * @param expires Expires value (timestamp).
-		 * @return Current builder.
-		 */
-		public Builder setExpires(long expires) {
-			this.expires = new Date(expires);
-			return this;
-		}
-
-		/**
-		 * Create cookie.
-		 *
-		 * @return Cookie.
-		 */
-		public Cookie build() {
-			return newCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
-		}
 	}
 
 	/**
@@ -320,172 +171,6 @@ public final class Cookies {
 		}
 
 		return newCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
-	}
-
-	/**
-	 * Default cookie representation.
-	 */
-	static final class DefaultCookie implements Cookie {
-		/**
-		 * Cookie name.
-		 */
-		private final String name;
-
-		/**
-		 * Cookie value.
-		 */
-		private final String value;
-
-		/**
-		 * Cookie domain.
-		 */
-		private final String domain;
-
-		/**
-		 * Cookie path.
-		 */
-		private final String path;
-
-		/**
-		 * Secure flag.
-		 */
-		private final boolean secure;
-
-		/**
-		 * HTTP-Only flag.
-		 */
-		private final boolean httpOnly;
-
-		/**
-		 * Cookie max-age value.
-		 */
-		private final Long maxAge;
-
-		/**
-		 * Cookie expires date.
-		 */
-		private final Date expires;
-
-		/**
-		 * Create cookie.
-		 *
-		 * @param name Cookie name, must not be null.
-		 * @param value Cookie value, must not be null.
-		 * @param domain Cookie domain.
-		 * @param path Cookie path.
-		 * @param secure Secure flag.
-		 * @param httpOnly HTTP-Only flag.
-		 * @param maxAge Cookie max-age value.
-		 */
-		private DefaultCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge, Date expires) {
-			this.name = name;
-			this.value = value;
-			this.domain = domain;
-			this.path = path;
-			this.secure = secure;
-			this.httpOnly = httpOnly;
-			this.maxAge = maxAge;
-
-			// Date class is not immutable, get a clone copy.
-			if (expires == null) {
-				this.expires = null;
-			} else {
-				this.expires = new Date(expires.getTime());
-			}
-		}
-
-		@Override
-		public String getName() {
-			return name;
-		}
-
-		@Override
-		public String getValue() {
-			return value;
-		}
-
-		@Override
-		public String getDomain() {
-			return domain;
-		}
-
-		@Override
-		public String getPath() {
-			return path;
-		}
-
-		@Override
-		public boolean isSecured() {
-			return secure;
-		}
-
-		@Override
-		public boolean isHttpOnly() {
-			return httpOnly;
-		}
-
-		@Override
-		public Long getMaxAge() {
-			return maxAge;
-		}
-
-		@Override
-		public Date getExpires() {
-			// Since a date is mutable, return a clone copy to be sure of no side-effect.
-			return expires == null ? null : new Date(expires.getTime());
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append(name).append("=").append(value);
-
-			if (domain != null) {
-				sb.append("; Domain=").append(domain);
-			}
-
-			if (path != null) {
-				sb.append("; Path=").append(path);
-			}
-
-			if (secure) {
-				sb.append("; secure");
-			}
-
-			if (httpOnly) {
-				sb.append("; HttpOnly");
-			}
-
-			if (maxAge != null) {
-				sb.append("; max-age=").append(maxAge);
-			}
-
-			if (expires != null) {
-				DateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss ZZZ", Locale.US);
-				df.setTimeZone(UTC);
-				sb.append("; expires=").append(df.format(expires));
-			}
-
-			return sb.toString();
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (o == this) {
-				return true;
-			}
-
-			if (o instanceof DefaultCookie) {
-				return Cookies.equals(this, (DefaultCookie) o);
-			}
-
-			return false;
-		}
-
-		@Override
-		public int hashCode() {
-			return Objects.hash(getName(), getValue(), getDomain(), getPath(), isSecured(), isHttpOnly(), getMaxAge(), getExpires());
-		}
 	}
 
 	/**
@@ -677,7 +362,6 @@ public final class Cookies {
 	 * @param expires Expires value.
 	 * @return The expires date.
 	 */
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	private static Date parseExpires(String expires) {
 		int hour = -1;
 		int minute = -1;
@@ -724,7 +408,7 @@ public final class Cookies {
 		isInRange(minute, 0, 59, "Expires minutes cannot be less than 0 or greater than 59");
 		isInRange(second, 0, 59, "Expires second cannot be less than 0 or greater than 59");
 
-		Calendar calendar = new GregorianCalendar(UTC);
+		Calendar calendar = new GregorianCalendar(TimeZone.getTimeZone("UTC"));
 		calendar.setLenient(false);
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.MONTH, month - 1);

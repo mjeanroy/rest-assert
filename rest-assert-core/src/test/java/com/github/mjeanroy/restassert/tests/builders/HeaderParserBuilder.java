@@ -34,7 +34,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder used to create mock instance of {@link HeaderValue} class.
+ * DefaultCookieBuilder used to create mock instance of {@link HeaderValue} class.
  */
 public class HeaderParserBuilder {
 

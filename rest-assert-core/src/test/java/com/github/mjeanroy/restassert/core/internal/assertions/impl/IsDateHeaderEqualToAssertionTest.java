@@ -27,38 +27,23 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Rule;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.TimeZone;
 
+import static com.github.mjeanroy.restassert.tests.TestUtils.createUtcDate;
+import static java.util.Calendar.MAY;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.rules.ExpectedException.none;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class IsDateHeaderEqualToAssertionTest {
-
-	@Rule
-	public ExpectedException thrown = none();
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
 		final String name = "foo";
 		final String value = "Thu, 05 May 2016 19:29:03 GMT";
-
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeZone(TimeZone.getTimeZone("GMT"));
-		cal.set(Calendar.YEAR, 2016);
-		cal.set(Calendar.MONTH, Calendar.MAY);
-		cal.set(Calendar.DAY_OF_MONTH, 5);
-		cal.set(Calendar.HOUR_OF_DAY, 19);
-		cal.set(Calendar.MINUTE, 29);
-		cal.set(Calendar.SECOND, 3);
-
-		final Date date = cal.getTime();
+		final Date date = createUtcDate(2016, MAY, 5, 19, 29, 3);
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value)
@@ -76,17 +61,7 @@ public class IsDateHeaderEqualToAssertionTest {
 		final String name = "foo";
 		final String v1 = "Thu, 05 May 2016 19:29:03 GMT";
 		final String v2 = "Thu, 05 May 2016 19:30:03 GMT";
-
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeZone(TimeZone.getTimeZone("GMT"));
-		cal.set(Calendar.YEAR, 2016);
-		cal.set(Calendar.MONTH, Calendar.MAY);
-		cal.set(Calendar.DAY_OF_MONTH, 5);
-		cal.set(Calendar.HOUR_OF_DAY, 19);
-		cal.set(Calendar.MINUTE, 30);
-		cal.set(Calendar.SECOND, 3);
-
-		final Date date = cal.getTime();
+		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, v1)
@@ -103,17 +78,7 @@ public class IsDateHeaderEqualToAssertionTest {
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
 		final String name = "foo";
-
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeZone(TimeZone.getTimeZone("GMT"));
-		cal.set(Calendar.YEAR, 2016);
-		cal.set(Calendar.MONTH, Calendar.MAY);
-		cal.set(Calendar.DAY_OF_MONTH, 5);
-		cal.set(Calendar.HOUR_OF_DAY, 19);
-		cal.set(Calendar.MINUTE, 30);
-		cal.set(Calendar.SECOND, 3);
-
-		final Date date = cal.getTime();
+		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
@@ -129,17 +94,7 @@ public class IsDateHeaderEqualToAssertionTest {
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
 		final String name = "foo";
 		final String value = "Thu, 05 May 2016 19:29:03 GMT";
-
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeZone(TimeZone.getTimeZone("GMT"));
-		cal.set(Calendar.YEAR, 2016);
-		cal.set(Calendar.MONTH, Calendar.MAY);
-		cal.set(Calendar.DAY_OF_MONTH, 5);
-		cal.set(Calendar.HOUR_OF_DAY, 19);
-		cal.set(Calendar.MINUTE, 30);
-		cal.set(Calendar.SECOND, 3);
-
-		final Date date = cal.getTime();
+		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, value)
@@ -158,17 +113,7 @@ public class IsDateHeaderEqualToAssertionTest {
 		final String name = "Last-Modified";
 		final String v1 = "Thu, 05 May 2016 19:29:03 GMT";
 		final String v2 = "Thu, 05 May 2016 19:30:03 GMT";
-
-		Calendar cal = new GregorianCalendar();
-		cal.setTimeZone(TimeZone.getTimeZone("GMT"));
-		cal.set(Calendar.YEAR, 2016);
-		cal.set(Calendar.MONTH, Calendar.MAY);
-		cal.set(Calendar.DAY_OF_MONTH, 5);
-		cal.set(Calendar.HOUR_OF_DAY, 19);
-		cal.set(Calendar.MINUTE, 30);
-		cal.set(Calendar.SECOND, 3);
-
-		final Date date = cal.getTime();
+		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		final HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, v1)
@@ -185,29 +130,48 @@ public class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_name_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new IsDateHeaderEqualToAssertion(null, new Date());
+		assertThatThrownBy(isDateHeaderEqualToAssertion(null, new Date()))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new IsDateHeaderEqualToAssertion("", new Date());
+		assertThatThrownBy(isDateHeaderEqualToAssertion("", new Date()))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
-		thrown.expect(IllegalArgumentException.class);
-		thrown.expectMessage("Header name cannot be blank");
-		new IsDateHeaderEqualToAssertion("   ", new Date());
+		assertThatThrownBy(isDateHeaderEqualToAssertion("   ", new Date()))
+				.isExactlyInstanceOf(IllegalArgumentException.class)
+				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
-		thrown.expect(NullPointerException.class);
-		thrown.expectMessage("Header value must not be null");
-		new IsDateHeaderEqualToAssertion("name", null);
+		assertThatThrownBy(isDateHeaderEqualToAssertion("name", null))
+				.isExactlyInstanceOf(NullPointerException.class)
+				.hasMessage("Header value must not be null");
+	}
+
+	private static IsDateHeaderEqualToAssertionThrowing isDateHeaderEqualToAssertion(String name, Date value) {
+		return new IsDateHeaderEqualToAssertionThrowing(name, value);
+	}
+
+	private static class IsDateHeaderEqualToAssertionThrowing implements ThrowingCallable {
+		private final String name;
+		private final Date value;
+
+		private IsDateHeaderEqualToAssertionThrowing(String name, Date value) {
+			this.name = name;
+			this.value = value;
+		}
+
+		@Override
+		public void call() {
+			new IsDateHeaderEqualToAssertion(name, value);
+		}
 	}
 }

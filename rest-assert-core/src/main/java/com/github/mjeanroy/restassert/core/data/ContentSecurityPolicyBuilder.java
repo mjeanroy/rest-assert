@@ -51,7 +51,7 @@ import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 
 /**
- * Builder used to create {@link ContentSecurityPolicy} instances.
+ * DefaultCookieBuilder used to create {@link ContentSecurityPolicy} instances.
  */
 public class ContentSecurityPolicyBuilder {
 	/**

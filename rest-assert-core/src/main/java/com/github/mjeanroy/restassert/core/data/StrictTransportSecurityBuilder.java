@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.data;
 
 /**
- * Builder used to create instance of {@link StrictTransportSecurity} object.
+ * DefaultCookieBuilder used to create instance of {@link StrictTransportSecurity} object.
  */
 public class StrictTransportSecurityBuilder {
 

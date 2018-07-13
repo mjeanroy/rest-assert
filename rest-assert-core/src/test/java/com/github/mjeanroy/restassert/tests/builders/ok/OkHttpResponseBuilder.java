@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Builder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
+ * DefaultCookieBuilder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
  */
 public class OkHttpResponseBuilder extends AbstractHttpResponseBuilder<Response, OkHttpResponseBuilder> implements HttpResponseBuilder<Response> {
 

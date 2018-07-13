@@ -48,7 +48,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Builder to create mock instance of {@link org.asynchttpclient.Response} class.
+ * DefaultCookieBuilder to create mock instance of {@link org.asynchttpclient.Response} class.
  */
 public class AsyncHttpResponseBuilder extends AbstractHttpResponseBuilder<Response, AsyncHttpResponseBuilder> implements HttpResponseBuilder<Response> {
 

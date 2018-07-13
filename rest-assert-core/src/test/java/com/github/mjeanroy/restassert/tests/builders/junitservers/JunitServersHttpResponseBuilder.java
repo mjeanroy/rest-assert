@@ -38,7 +38,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Builder to create instance of {@link HttpResponse} class.
+ * DefaultCookieBuilder to create instance of {@link HttpResponse} class.
  */
 public class JunitServersHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpResponse, JunitServersHttpResponseBuilder> implements HttpResponseBuilder<HttpResponse> {
 

@@ -504,7 +504,7 @@ public final class ContentSecurityPolicy implements HeaderValue {
 		 * Append {@code value} to appropriate section.
 		 *
 		 * @param value Value.
-		 * @param builder Builder.
+		 * @param builder DefaultCookieBuilder.
 		 */
 		abstract void doParse(String value, ContentSecurityPolicyBuilder builder);
 

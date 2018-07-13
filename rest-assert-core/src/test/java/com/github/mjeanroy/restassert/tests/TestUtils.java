@@ -22,46 +22,44 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.tests.builders.apache;
+package com.github.mjeanroy.restassert.tests;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 /**
- * DefaultCookieBuilder to create mock instances of {@link HttpEntity} class.
+ * Static Test Utilities.
  */
-class ApacheHttpEntityBuilder {
+public final class TestUtils {
 
-	/**
-	 * Body content.
-	 */
-	private String content;
-
-	/**
-	 * Create builder.
-	 */
-	ApacheHttpEntityBuilder() {
-		this.content = "";
+	// Ensure non instantiation.
+	private TestUtils() {
 	}
 
 	/**
-	 * Set {@link #content}.
+	 * Create date using UTC TimeZone.
 	 *
-	 * @param content New {@link #content}.
-	 * @return Current builder.
+	 * @param year The year.
+	 * @param month The month, starting at zero.
+	 * @param dayOfMonth The day of month.
+	 * @param hourOfDay The hours of day.
+	 * @param minute The minute.
+	 * @param seconds The seconds.
+	 * @return The UTC Date.
 	 */
-	ApacheHttpEntityBuilder setContent(String content) {
-		this.content = content;
-		return this;
-	}
+	public static Date createUtcDate(int year, int month, int dayOfMonth, int hourOfDay, int minute, int seconds) {
+		final TimeZone utc = TimeZone.getTimeZone("UTC");
+		final Calendar calendar = new GregorianCalendar(utc);
+		calendar.setLenient(false);
+		calendar.set(Calendar.YEAR, year);
+		calendar.set(Calendar.MONTH, month);
+		calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		calendar.set(Calendar.MINUTE, minute);
+		calendar.set(Calendar.SECOND, seconds);
 
-	/**
-	 * Create mock instance of {@link HttpEntity} class.
-	 *
-	 * @return Mock instance.
-	 */
-	HttpEntity build() {
-		return new StringEntity(content, ContentType.DEFAULT_TEXT);
+		return calendar.getTime();
 	}
 }
