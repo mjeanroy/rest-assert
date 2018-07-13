@@ -26,8 +26,11 @@ package com.github.mjeanroy.restassert.core.internal.data;
 
 /**
  * Standard JSON entry defined by:
- * - A key.
- * - A value.
+ *
+ * <ul>
+ *   <li>A key</li>
+ *   <li>A value</li>
+ * </ul>.
  */
 public interface JsonEntry {
 
