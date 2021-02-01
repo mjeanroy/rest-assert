@@ -109,7 +109,7 @@
     <junit-runif.version>0.2.0</junit-runif.version>
     <junit-customclassloader.version>0.1.1</junit-customclassloader.version>
     <equalsverifier.version>2.5.2</equalsverifier.version>
-    <wiremock.version>2.18.0</wiremock.version>
+    <wiremock.version>2.27.2</wiremock.version>
   </properties>
 
   <dependencyManagement>
