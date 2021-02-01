@@ -95,7 +95,7 @@
     <spring.version>4.3.18.RELEASE</spring.version>
     <junit-servers.version>0.7.0</junit-servers.version>
 
-    <jackson-2.version>2.9.6</jackson-2.version>
+    <jackson-2.version>2.9.10.7</jackson-2.version>
     <jackson-1.version>1.9.13</jackson-1.version>
     <gson.version>2.8.5</gson.version>
 
