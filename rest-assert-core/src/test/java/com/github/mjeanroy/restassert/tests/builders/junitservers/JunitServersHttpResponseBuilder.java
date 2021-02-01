@@ -35,7 +35,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * DefaultCookieBuilder to create instance of {@link HttpResponse} class.
@@ -53,6 +52,7 @@ public class JunitServersHttpResponseBuilder extends AbstractHttpResponseBuilder
 		private final Map<String, List<String>> headers;
 
 		private HttpResponseImpl(int status, String content, Map<String, List<String>> headers) {
+			super(0);
 			this.status = status;
 			this.content = content;
 			this.headers = new LinkedHashMap<>(headers);
@@ -75,6 +75,11 @@ public class JunitServersHttpResponseBuilder extends AbstractHttpResponseBuilder
 
 		@Override
 		public String body() {
+			return content;
+		}
+
+		@Override
+		protected String readResponseBody() {
 			return content;
 		}
 
