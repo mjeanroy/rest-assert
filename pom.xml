@@ -411,6 +411,20 @@
         <version>${maven-enforcer-plugin.version}</version>
         <executions>
           <execution>
+            <id>enforce-maven</id>
+            <goals>
+              <goal>enforce</goal>
+            </goals>
+            <configuration>
+              <rules>
+                <requireMavenVersion>
+                  <version>3.0</version>
+                </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+
+          <execution>
             <id>enforce-java</id>
             <goals>
               <goal>enforce</goal>
