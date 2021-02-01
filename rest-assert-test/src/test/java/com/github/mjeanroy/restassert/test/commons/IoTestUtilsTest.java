@@ -35,6 +35,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class IoTestUtilsTest {
 
+	private static final String BR = System.getProperty("line.separator");
+
 	@Test
 	public void it_should_get_file_from_classpath() {
 		File file = IoTestUtils.fileFromClasspath("/test.txt");
@@ -63,8 +65,8 @@ public class IoTestUtilsTest {
 	public void it_should_read_file_content() {
 		String content = IoTestUtils.readFile("test.txt");
 		assertThat(content).isEqualTo(
-				"Hello World\n" +
-				"Foo Bar\n" +
+				"Hello World" + BR +
+				"Foo Bar" + BR +
 				"Test"
 		);
 	}

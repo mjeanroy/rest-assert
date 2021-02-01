@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Static Class Utilities.
@@ -64,6 +65,21 @@ public final class ClassUtils {
 	 * @return Path.
 	 */
 	public static String packageNameToDirectory(String packageName) {
-		return packageName.replaceAll("\\.", File.separator);
+		return packageName.replaceAll("\\.", separator());
+	}
+
+	/**
+	 * Get the file separator value, safe to be used on windows or unix systems.
+	 *
+	 * @return File separator.
+	 */
+	private static String separator() {
+		char separator = File.separatorChar;
+		if (separator == '/') {
+			return String.valueOf(separator);
+		}
+
+		// Escape on windows
+		return "\\" + separator;
 	}
 }

@@ -56,23 +56,4 @@ public class FilesTest {
 			.isNotEmpty()
 			.isEqualTo(expectedContent);
 	}
-
-	@Test
-	public void it_should_fail_to_read_file_to_string_with_custom_exception() throws Exception {
-		final URL resource = getClass().getResource("/test-not-utf-8.txt");
-		final Path path = Paths.get(resource.toURI());
-
-		assertThatThrownBy(readFileToString(path))
-				.isExactlyInstanceOf(Files.UnreadableFileException.class)
-				.hasCauseExactlyInstanceOf(MalformedInputException.class);
-	}
-
-	private static ThrowingCallable readFileToString(final Path path) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				Files.readFileToString(path);
-			}
-		};
-	}
 }

@@ -35,6 +35,10 @@
   <packaging>jar</packaging>
   <url>https://github.com/mjeanroy/rest-assert</url>
 
+  <properties>
+    <source.generated.path>${project.basedir}/src/main/generated</source.generated.path>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -171,7 +175,7 @@
           <executable>java</executable>
           <arguments>
             <argument>-classpath</argument>
-            <argument>${project.basedir}/src/main/generated</argument>
+            <argument>${source.generated.path}</argument>
           </arguments>
           <classpathScope>compile</classpathScope>
         </configuration>
@@ -189,7 +193,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.basedir}/src/main/generated</source>
+                <source>${source.generated.path}</source>
               </sources>
             </configuration>
           </execution>
@@ -203,7 +207,7 @@
         <configuration>
           <filesets>
             <fileset>
-              <directory>${basedir}/src/main/generated</directory>
+              <directory>${source.generated.path}</directory>
             </fileset>
           </filesets>
         </configuration>
@@ -223,4 +227,18 @@
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>windows</id>
+      <activation>
+        <os>
+          <family>Windows</family>
+        </os>
+      </activation>
+      <properties>
+        <source.generated.path>${project.basedir}\src\main\generated</source.generated.path>
+      </properties>
+    </profile>
+  </profiles>
 </project>
