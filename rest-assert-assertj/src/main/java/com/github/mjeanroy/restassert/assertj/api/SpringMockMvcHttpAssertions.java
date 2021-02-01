@@ -24,9 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -48,17 +46,6 @@ public final class SpringMockMvcHttpAssertions {
 	 */
 	public static HttpResponseAssert assertThat(ResultActions actual) {
 		return new HttpResponseAssert(toHttpResponse(actual));
-	}
-
-	/**
-	 * Creates a new instance of {@link CookieAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
-	public static CookieAssert assertThat(io.netty.handler.codec.http.cookie.Cookie actual) {
-		Cookie cookie = AsyncHttpCookie.create(actual);
-		return new CookieAssert(cookie);
 	}
 
 	/**
