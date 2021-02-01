@@ -77,7 +77,7 @@
     <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
-    <build-helper-maven-plugin.version>1.9.1</build-helper-maven-plugin.version>
+    <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
     <versions-maven-plugin.version>2.5</versions-maven-plugin.version>
     <animal-sniffer-maven-plugin.version>1.16</animal-sniffer-maven-plugin.version>
     <java17-signature.version>1.0</java17-signature.version>
@@ -381,6 +381,41 @@
           <artifactId>versions-maven-plugin</artifactId>
           <version>${versions-maven-plugin.version}</version>
         </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>${maven-enforcer-plugin.version}</version>
+          <executions>
+            <execution>
+              <id>enforce-maven</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireMavenVersion>
+                    <version>3.0</version>
+                  </requireMavenVersion>
+                </rules>
+              </configuration>
+            </execution>
+
+            <execution>
+              <id>enforce-java</id>
+              <goals>
+                <goal>enforce</goal>
+              </goals>
+              <configuration>
+                <rules>
+                  <requireJavaVersion>
+                    <version>${jdk.version}</version>
+                  </requireJavaVersion>
+                </rules>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
       </plugins>
     </pluginManagement>
 
@@ -408,36 +443,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
-        <version>${maven-enforcer-plugin.version}</version>
-        <executions>
-          <execution>
-            <id>enforce-maven</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireMavenVersion>
-                  <version>3.0</version>
-                </requireMavenVersion>
-              </rules>
-            </configuration>
-          </execution>
-
-          <execution>
-            <id>enforce-java</id>
-            <goals>
-              <goal>enforce</goal>
-            </goals>
-            <configuration>
-              <rules>
-                <requireJavaVersion>
-                  <version>${jdk.version}</version>
-                </requireJavaVersion>
-              </rules>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>
