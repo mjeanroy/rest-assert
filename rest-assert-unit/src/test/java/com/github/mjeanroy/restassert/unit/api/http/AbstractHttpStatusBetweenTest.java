@@ -24,14 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import static com.github.mjeanroy.junit.servers.commons.ObjectUtils.firstNonNull;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-
-import com.github.mjeanroy.junit.servers.commons.ObjectUtils;
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.data.Range;
+import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAssertTest<T> {
 
