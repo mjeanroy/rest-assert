@@ -24,20 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.engine;
 
-import java.io.StringReader;
-import java.io.StringWriter;
-import java.util.Map;
-
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.TemplateEngine;
-import com.github.mustachejava.DefaultMustacheFactory;
-import com.github.mustachejava.Mustache;
-import com.github.mustachejava.MustacheFactory;
+import com.samskivert.mustache.Mustache;
+
+import java.util.Map;
 
 /**
  * Mustache {@link TemplateEngine} implementation.
- * This implementation mustache.java library as internal
- * engine.
  * <p/>
  * This class is thread safe.
  * This class is implemented as a singleton.
@@ -58,27 +52,15 @@ public class MustacheTemplateEngine implements TemplateEngine {
 		return INSTANCE;
 	}
 
-	private final MustacheFactory mf;
+	private final Mustache.Compiler compiler;
 
 	// Ensure non instantiation
 	private MustacheTemplateEngine() {
-		mf = new DefaultMustacheFactory();
+		compiler = Mustache.compiler();
 	}
 
 	@Override
 	public String execute(Template template, Map<String, Object> context) {
-		Mustache mustache = compile(template);
-		return execute(mustache, context);
-	}
-
-	private Mustache compile(Template template) {
-		return mf.compile(new StringReader(template.read()), template.getPath());
-	}
-
-	private String execute(Mustache mustache, Map<String, Object> context) {
-		StringWriter writer = new StringWriter();
-		mustache.execute(writer, context);
-		writer.flush();
-		return writer.toString();
+		return compiler.compile(template.read()).execute(context);
 	}
 }
