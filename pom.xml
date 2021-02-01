@@ -103,7 +103,7 @@
 
     <junit.version>4.13.1</junit.version>
     <assertj.version>2.9.1</assertj.version>
-    <mockito.version>2.19.0</mockito.version>
+    <mockito.version>2.28.2</mockito.version>
     <commons-lang3.version>3.7</commons-lang3.version>
     <commons-io.version>2.6</commons-io.version>
     <junit-runif.version>0.2.0</junit-runif.version>
