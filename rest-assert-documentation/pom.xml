@@ -33,15 +33,10 @@
   <artifactId>rest-assert-documentation</artifactId>
   <packaging>jar</packaging>
 
-  <properties>
-    <jmustache.version>1.13</jmustache.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>com.samskivert</groupId>
       <artifactId>jmustache</artifactId>
-      <version>${jmustache.version}</version>
     </dependency>
 
     <dependency>

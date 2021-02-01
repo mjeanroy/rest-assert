@@ -45,7 +45,6 @@
     <dependency>
       <groupId>com.samskivert</groupId>
       <artifactId>jmustache</artifactId>
-      <version>${jmustache.version}</version>
     </dependency>
     <dependency>
       <groupId>com.thoughtworks.paranamer</groupId>
