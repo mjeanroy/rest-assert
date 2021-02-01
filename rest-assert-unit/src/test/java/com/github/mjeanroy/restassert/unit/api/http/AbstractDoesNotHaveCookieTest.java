@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
+import com.github.mjeanroy.junit.servers.commons.ObjectUtils;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
@@ -31,8 +32,8 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
+import static com.github.mjeanroy.junit.servers.commons.ObjectUtils.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
 public abstract class AbstractDoesNotHaveCookieTest<T> extends AbstractHttpAssertTest<T> {
 

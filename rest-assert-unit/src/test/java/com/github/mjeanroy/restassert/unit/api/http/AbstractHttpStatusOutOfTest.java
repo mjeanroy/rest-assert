@@ -24,9 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
+import static com.github.mjeanroy.junit.servers.commons.ObjectUtils.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static com.google.api.client.repackaged.com.google.common.base.Objects.firstNonNull;
 
+import com.github.mjeanroy.junit.servers.commons.ObjectUtils;
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.TestInvocation;
