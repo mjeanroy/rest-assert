@@ -33,7 +33,7 @@ import static org.mockito.Mockito.verify;
 public class IsEqualToStringTest extends AbstractJsonIsEqualToTest {
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.isEqualTo(actual());
 	}
 

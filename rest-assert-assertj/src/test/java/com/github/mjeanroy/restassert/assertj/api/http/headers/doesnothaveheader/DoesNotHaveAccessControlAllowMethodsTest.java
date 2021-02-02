@@ -35,7 +35,7 @@ import org.assertj.core.api.AssertionInfo;
 public class DoesNotHaveAccessControlAllowMethodsTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.doesNotHaveAccessControlAllowMethods();
 	}
 

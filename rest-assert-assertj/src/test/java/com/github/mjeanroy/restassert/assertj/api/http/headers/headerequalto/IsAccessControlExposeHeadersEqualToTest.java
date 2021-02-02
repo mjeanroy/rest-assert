@@ -36,7 +36,7 @@ import org.assertj.core.api.AssertionInfo;
 public class IsAccessControlExposeHeadersEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isAccessControlExposeHeadersEqualTo("Content-Length", "Content-Type");
 	}
 

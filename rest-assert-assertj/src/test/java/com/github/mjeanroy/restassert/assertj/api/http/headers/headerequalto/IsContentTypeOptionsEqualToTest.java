@@ -39,7 +39,7 @@ public class IsContentTypeOptionsEqualToTest extends AbstractHttpResponseHeaderT
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isContentTypeOptionsEqualTo(VALUE);
 	}
 

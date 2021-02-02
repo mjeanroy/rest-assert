@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 public class IsLocationEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isLocationEqualTo(getHeader().getValue());
 	}
 

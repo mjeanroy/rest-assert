@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 public class IsLastModifiedEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isLastModifiedEqualTo(getHeader().getValue());
 	}
 

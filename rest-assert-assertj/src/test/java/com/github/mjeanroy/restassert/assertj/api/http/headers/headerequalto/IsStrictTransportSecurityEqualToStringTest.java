@@ -38,7 +38,7 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpResp
 	private static final String VALUE = "max-age=31536000; includeSubDomains";
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isStrictTransportSecurityEqualTo(VALUE);
 	}
 

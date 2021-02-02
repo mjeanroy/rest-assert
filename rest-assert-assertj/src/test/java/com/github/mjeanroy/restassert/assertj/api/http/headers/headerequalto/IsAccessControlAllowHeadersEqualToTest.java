@@ -34,7 +34,7 @@ import static org.mockito.Mockito.*;
 public class IsAccessControlAllowHeadersEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isAccessControlAllowHeadersEqualTo(getHeader().getValue());
 	}
 

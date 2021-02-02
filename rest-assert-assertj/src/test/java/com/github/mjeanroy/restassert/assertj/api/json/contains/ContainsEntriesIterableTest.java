@@ -50,7 +50,7 @@ public class ContainsEntriesIterableTest extends AbstractApiTest<Jsons, JsonAsse
 	}
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.containsEntries(singleton(JsonAssertions.jsonEntry("id", 1)));
 	}
 

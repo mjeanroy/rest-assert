@@ -32,7 +32,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuc
 public class IsEqualToStringTest extends AbstractJsonAssertion_isEqualTo_Test<String> {
 
 	@Override
-	protected AssertionResult invoke(String actual, String expected) {
+	protected AssertionResult run(String actual, String expected) {
 		return assertions.isEqualTo(actual, expected);
 	}
 

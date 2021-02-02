@@ -44,7 +44,7 @@ public abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpRespo
 		return header("Content-Type", getMimeType());
 	}
 
-	protected abstract HttpResponseAssert invoke();
+	protected abstract HttpResponseAssert run();
 
 	protected abstract void verifyApiCall();
 

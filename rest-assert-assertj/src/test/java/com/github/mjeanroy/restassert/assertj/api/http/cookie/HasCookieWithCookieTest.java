@@ -44,7 +44,7 @@ public class HasCookieWithCookieTest extends AbstractCookieTest {
 			.build();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.hasCookie(COOKIE);
 	}
 

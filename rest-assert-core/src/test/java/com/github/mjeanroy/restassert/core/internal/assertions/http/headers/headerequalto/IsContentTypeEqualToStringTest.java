@@ -53,15 +53,15 @@ public class IsContentTypeEqualToStringTest extends AbstractHttpHeaderEqualToTes
 
 	@Test
 	public void it_should_be_a_case_insensitive_comparison() {
-		invoke("APPLICATION/JSON; charset=utf-8");
+		run("APPLICATION/JSON; charset=utf-8");
 	}
 
 	@Test
 	public void it_should_compare_with_quoted_charset() {
-		invoke("application/json; charset='utf-8'");
+		run("application/json; charset='utf-8'");
 	}
 
-	private void invoke(String rawValue) {
+	private void run(String rawValue) {
 		// GIVEN
 		final String name = "Content-Type";
 		final Header header = Header.header(name, rawValue);

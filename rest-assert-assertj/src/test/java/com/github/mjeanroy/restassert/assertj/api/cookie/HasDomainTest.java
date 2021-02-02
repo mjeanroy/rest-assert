@@ -49,7 +49,7 @@ public class HasDomainTest extends AbstractApiTest<Cookies, CookieAssert> {
 	}
 
 	@Override
-	protected CookieAssert invoke() {
+	protected CookieAssert run() {
 		return api.hasDomain(actual().getDomain());
 	}
 

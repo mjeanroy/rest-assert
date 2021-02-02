@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
 public class HttpResponseAssert_doesNotHaveCookie_Test extends AbstractCookieTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.doesNotHaveCookie();
 	}
 

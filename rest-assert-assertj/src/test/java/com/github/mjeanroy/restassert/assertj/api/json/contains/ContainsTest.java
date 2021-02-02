@@ -48,7 +48,7 @@ public class ContainsTest extends AbstractApiTest<Jsons, JsonAssert> {
 	}
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.contains("foo");
 	}
 

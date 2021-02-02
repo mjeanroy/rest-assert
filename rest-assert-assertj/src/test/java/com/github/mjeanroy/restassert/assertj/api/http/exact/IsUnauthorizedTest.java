@@ -40,7 +40,7 @@ public class IsUnauthorizedTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isUnauthorized();
 	}
 

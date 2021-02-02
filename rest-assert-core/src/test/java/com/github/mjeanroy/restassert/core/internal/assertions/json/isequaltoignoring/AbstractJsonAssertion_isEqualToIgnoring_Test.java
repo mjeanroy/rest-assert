@@ -52,7 +52,7 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		final String actual = actual();
 		final T expected = successObject();
 		final List<String> ignoringKeys = asList("str", "nb", "bool");
-		final AssertionResult result = invoke(actual, expected, ignoringKeys);
+		final AssertionResult result = run(actual, expected, ignoringKeys);
 
 		assertSuccessResult(result);
 	}
@@ -62,7 +62,7 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		final String actual = actual();
 		final T expected = failureObject();
 		final List<String> ignoringKeys = asList("$.str", "$.nb", "$.bool", "$.array[0:3]");
-		final AssertionResult result = invoke(actual, expected, ignoringKeys);
+		final AssertionResult result = run(actual, expected, ignoringKeys);
 
 		assertSuccessResult(result);
 	}
@@ -72,7 +72,7 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		final String actual = actual();
 		final T expected = failureObject();
 		final List<String> ignoringKeys = asList("str", "nb", "bool");
-		final AssertionResult result = invoke(actual, expected, ignoringKeys);
+		final AssertionResult result = run(actual, expected, ignoringKeys);
 
 		String expectedPattern =
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
@@ -96,7 +96,7 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 	 * @param ignoringKeys The keys to ignore.
 	 * @return The assertion result.
 	 */
-	protected abstract AssertionResult invoke(String actual, T expected, Iterable<String> ignoringKeys);
+	protected abstract AssertionResult run(String actual, T expected, Iterable<String> ignoringKeys);
 
 	/**
 	 * The actual JSON representation, i.e the JSON to be tested.

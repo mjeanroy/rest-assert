@@ -35,7 +35,7 @@ import org.assertj.core.api.AssertionInfo;
 public class IsPdfTest extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isPdf();
 	}
 

@@ -39,7 +39,7 @@ public class IsXssProtectionEqualToTest extends AbstractHttpResponseHeaderTest {
 	private static final XssProtection VALUE = XssProtection.enableModeBlock();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isXssProtectionEqualTo(VALUE);
 	}
 

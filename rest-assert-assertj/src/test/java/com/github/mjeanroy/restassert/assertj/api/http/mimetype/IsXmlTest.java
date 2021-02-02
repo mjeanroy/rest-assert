@@ -35,7 +35,7 @@ import org.assertj.core.api.AssertionInfo;
 public class IsXmlTest extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isXml();
 	}
 

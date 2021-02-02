@@ -49,7 +49,7 @@ public class ContainsIterableTest extends AbstractApiTest<Jsons, JsonAssert> {
 	}
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.contains(singleton("foo"));
 	}
 

@@ -41,7 +41,7 @@ public class IsAccessControlExposeHeadersEqualToIterableTest extends AbstractHtt
 	private static final List<String> VALUE = asList("Content-Length", "Content-Type");
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isAccessControlExposeHeadersEqualTo(VALUE);
 	}
 

@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
 public class HasXssProtectionTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.hasXssProtection();
 	}
 

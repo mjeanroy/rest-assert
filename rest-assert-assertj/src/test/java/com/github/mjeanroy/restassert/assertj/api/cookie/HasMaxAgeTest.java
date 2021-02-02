@@ -49,7 +49,7 @@ public class HasMaxAgeTest extends AbstractApiTest<Cookies, CookieAssert> {
 	}
 
 	@Override
-	protected CookieAssert invoke() {
+	protected CookieAssert run() {
 		return api.hasMaxAge(actual().getMaxAge());
 	}
 

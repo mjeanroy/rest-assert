@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFil
 public class IsEqualToFileTest extends AbstractJsonAssertion_isEqualTo_Test<File> {
 
 	@Override
-	protected AssertionResult invoke(String actual, File expected) {
+	protected AssertionResult run(String actual, File expected) {
 		return assertions.isEqualTo(actual, expected);
 	}
 

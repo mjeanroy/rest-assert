@@ -40,7 +40,7 @@ public class IsLastModifiedEqualToWithDateTest extends AbstractHttpResponseHeade
 	private static final Date LAST_MODIFIED_VALUE = new Date();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isLastModifiedEqualTo(LAST_MODIFIED_VALUE);
 	}
 

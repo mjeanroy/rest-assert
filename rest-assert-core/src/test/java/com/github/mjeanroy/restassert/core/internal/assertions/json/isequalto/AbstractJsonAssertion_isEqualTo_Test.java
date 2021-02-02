@@ -48,7 +48,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	public void it_should_pass_with_object() {
 		final String actual = actual();
 		final T expected = successObject();
-		final AssertionResult result = invoke(actual, expected);
+		final AssertionResult result = run(actual, expected);
 
 		assertSuccessResult(result);
 	}
@@ -57,7 +57,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	public void it_should_fail() {
 		final String actual = actual();
 		final T expected = failureObject();
-		final AssertionResult result = invoke(actual, expected);
+		final AssertionResult result = run(actual, expected);
 
 		String expectedPattern = "" +
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
@@ -79,7 +79,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
 	}
 
-	protected abstract AssertionResult invoke(String actual, T expected);
+	protected abstract AssertionResult run(String actual, T expected);
 
 	private static String actual() {
 		return jsonSuccess();

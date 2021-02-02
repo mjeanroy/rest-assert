@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
 public class HasContentTypeOptionsTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.hasContentTypeOptions();
 	}
 

@@ -37,7 +37,7 @@ import static org.mockito.Mockito.verify;
 public class IsEqualToIgnoringStringTest extends AbstractJsonIsEqualIgnoringToTest {
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.isEqualToIgnoring(fixture(), keys());
 	}
 

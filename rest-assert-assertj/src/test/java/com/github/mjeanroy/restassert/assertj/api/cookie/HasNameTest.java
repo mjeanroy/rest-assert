@@ -49,7 +49,7 @@ public class HasNameTest extends AbstractApiTest<Cookies, CookieAssert> {
 	}
 
 	@Override
-	protected CookieAssert invoke() {
+	protected CookieAssert run() {
 		return api.hasName(actual().getName());
 	}
 

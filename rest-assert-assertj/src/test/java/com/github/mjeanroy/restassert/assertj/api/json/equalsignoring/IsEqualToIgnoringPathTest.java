@@ -38,7 +38,7 @@ import static org.mockito.Mockito.verify;
 public class IsEqualToIgnoringPathTest extends AbstractJsonIsEqualIgnoringToTest {
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.isEqualToIgnoring(fixture(), keys());
 	}
 

@@ -40,7 +40,7 @@ public class IsStatusBetweenTest extends AbstractHttpResponseStatusBetweenTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isStatusBetween(400, 499);
 	}
 

@@ -39,7 +39,7 @@ public class IsContentEncodingEqualToTest extends AbstractHttpResponseHeaderTest
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isContentEncodingEqualTo(VALUE);
 	}
 

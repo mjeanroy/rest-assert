@@ -35,7 +35,7 @@ public abstract class AbstractCookieTest extends AbstractHttpResponseTest {
 		return new HttpResponseAssert(new HttpResponseBuilderImpl().build());
 	}
 
-	protected abstract HttpResponseAssert invoke();
+	protected abstract HttpResponseAssert run();
 
 	protected abstract void verifyApiCall();
 }

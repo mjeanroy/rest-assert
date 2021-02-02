@@ -48,7 +48,7 @@ public class IsHttpOnlyTest extends AbstractApiTest<Cookies, CookieAssert> {
 	}
 
 	@Override
-	protected CookieAssert invoke() {
+	protected CookieAssert run() {
 		return api.isHttpOnly();
 	}
 

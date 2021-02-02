@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFil
 public class IsEqualIgnoringToFileTest extends AbstractJsonAssertion_isEqualToIgnoring_Test<File> {
 
 	@Override
-	protected AssertionResult invoke(String actual, File expected, Iterable<String> ignoringKeys) {
+	protected AssertionResult run(String actual, File expected, Iterable<String> ignoringKeys) {
 		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys);
 	}
 

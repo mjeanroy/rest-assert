@@ -39,7 +39,7 @@ public class IsClientErrorTest extends AbstractHttpResponseStatusBetweenTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isClientError();
 	}
 

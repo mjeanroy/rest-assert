@@ -39,7 +39,7 @@ public abstract class AbstractHttpResponseStatusTest extends AbstractHttpRespons
 
 	protected abstract int status();
 
-	protected abstract HttpResponseAssert invoke();
+	protected abstract HttpResponseAssert run();
 
 	protected abstract void verifyApiCall();
 }

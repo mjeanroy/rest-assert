@@ -39,7 +39,7 @@ public class IsNotRedirectionTest extends AbstractHttpResponseStatusOutOfTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isNotRedirection();
 	}
 

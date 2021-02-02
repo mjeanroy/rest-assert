@@ -36,7 +36,7 @@ import org.assertj.core.api.AssertionInfo;
 public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isContentSecurityPolicyEqualTo(getHeader().getValue());
 	}
 

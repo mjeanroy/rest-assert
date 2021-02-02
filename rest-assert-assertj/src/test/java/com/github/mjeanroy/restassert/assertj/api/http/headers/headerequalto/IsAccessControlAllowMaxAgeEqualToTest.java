@@ -38,7 +38,7 @@ public class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpResponseH
 	private static final long VALUE = 3600;
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isAccessControlAllowMaxAgeEqualTo(VALUE);
 	}
 

@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 
 	@Override
-	protected AssertionResult invoke(String actual, URL expected) {
+	protected AssertionResult run(String actual, URL expected) {
 		return assertions.isEqualTo(actual, expected);
 	}
 

@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 public class IsEqualToURITest extends AbstractJsonIsEqualToTest {
 
 	@Override
-	protected JsonAssert invoke() {
+	protected JsonAssert run() {
 		return api.isEqualTo(jsonUriSuccess());
 	}
 

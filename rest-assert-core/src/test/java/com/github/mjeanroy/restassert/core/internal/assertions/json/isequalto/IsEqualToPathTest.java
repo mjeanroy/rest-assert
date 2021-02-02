@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPat
 public class IsEqualToPathTest extends AbstractJsonAssertion_isEqualTo_Test<Path> {
 
 	@Override
-	protected AssertionResult invoke(String actual, Path expected) {
+	protected AssertionResult run(String actual, Path expected) {
 		return assertions.isEqualTo(actual, expected);
 	}
 

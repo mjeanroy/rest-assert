@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 public class IsPragmaEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isPragmaEqualTo(getHeader().getValue());
 	}
 

@@ -43,7 +43,7 @@ public class IsStatusOutOfTest extends AbstractHttpResponseStatusOutOfTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isStatusOutOf(START, END);
 	}
 

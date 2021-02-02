@@ -50,14 +50,14 @@ public abstract class AbstractApiTest<T, U> {
 
 	@Test
 	public void it_should_invoke_internal_api() {
-		invoke();
+		run();
 		verifyApiCall();
 		verifyNoMoreInteractions(assertions);
 	}
 
 	@Test
 	public void it_should_return_instance() {
-		U result = invoke();
+		U result = run();
 		assertThat(result)
 				.isNotNull()
 				.isSameAs(api);
@@ -67,7 +67,7 @@ public abstract class AbstractApiTest<T, U> {
 		writeField(api, "assertions", assertions, true);
 	}
 
-	protected abstract U invoke();
+	protected abstract U run();
 
 	protected abstract void verifyApiCall();
 }

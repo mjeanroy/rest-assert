@@ -41,7 +41,7 @@ public class IsStatusEqualTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isStatusEqual(status());
 	}
 

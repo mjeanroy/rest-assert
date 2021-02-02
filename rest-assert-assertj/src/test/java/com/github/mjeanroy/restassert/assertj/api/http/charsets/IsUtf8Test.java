@@ -45,7 +45,7 @@ public class IsUtf8Test extends AbstractHttpResponseTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isUtf8();
 	}
 

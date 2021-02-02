@@ -39,7 +39,7 @@ public class HasCookieWithNameAndValueTest extends AbstractCookieTest {
 	private static final String VALUE = "12345";
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.hasCookie(NAME, VALUE);
 	}
 

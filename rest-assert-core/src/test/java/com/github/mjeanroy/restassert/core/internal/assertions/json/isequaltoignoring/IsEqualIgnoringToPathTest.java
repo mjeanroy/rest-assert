@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPat
 public class IsEqualIgnoringToPathTest extends AbstractJsonAssertion_isEqualToIgnoring_Test<Path> {
 
 	@Override
-	protected AssertionResult invoke(String actual, Path expected, Iterable<String> ignoringKeys) {
+	protected AssertionResult run(String actual, Path expected, Iterable<String> ignoringKeys) {
 		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys);
 	}
 

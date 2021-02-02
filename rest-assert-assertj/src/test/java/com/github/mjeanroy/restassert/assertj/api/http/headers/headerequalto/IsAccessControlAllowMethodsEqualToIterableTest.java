@@ -42,7 +42,7 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isAccessControlAllowMethodsEqualTo(METHODS);
 	}
 

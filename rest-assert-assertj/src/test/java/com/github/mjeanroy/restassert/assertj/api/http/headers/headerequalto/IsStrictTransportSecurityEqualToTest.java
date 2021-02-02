@@ -39,7 +39,7 @@ public class IsStrictTransportSecurityEqualToTest extends AbstractHttpResponseHe
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000).includeSubDomains().build();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isStrictTransportSecurityEqualTo(VALUE);
 	}
 

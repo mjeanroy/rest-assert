@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 public class IsFrameOptionsEqualToStringTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isFrameOptionsEqualTo(getValue());
 	}
 

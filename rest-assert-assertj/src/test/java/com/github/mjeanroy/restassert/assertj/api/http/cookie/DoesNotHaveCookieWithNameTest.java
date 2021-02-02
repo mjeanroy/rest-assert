@@ -37,7 +37,7 @@ public class DoesNotHaveCookieWithNameTest extends AbstractCookieTest {
 	private static final String NAME = "JSESSIONID";
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.doesNotHaveCookie(NAME);
 	}
 

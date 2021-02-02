@@ -37,7 +37,7 @@ public abstract class AbstractHttpResponseTest extends AbstractApiTest<HttpRespo
 		return mock(HttpResponses.class);
 	}
 
-	protected abstract HttpResponseAssert invoke();
+	protected abstract HttpResponseAssert run();
 
 	protected abstract void verifyApiCall();
 }

@@ -42,7 +42,7 @@ public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpRespons
 		return header("foo", "bar");
 	}
 
-	protected abstract HttpResponseAssert invoke();
+	protected abstract HttpResponseAssert run();
 
 	protected abstract void verifyApiCall();
 }

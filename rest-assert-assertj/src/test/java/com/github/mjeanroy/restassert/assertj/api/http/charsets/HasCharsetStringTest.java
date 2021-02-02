@@ -46,7 +46,7 @@ public class HasCharsetStringTest extends AbstractHttpResponseTest {
 	}
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.hasCharset(CHARSET);
 	}
 

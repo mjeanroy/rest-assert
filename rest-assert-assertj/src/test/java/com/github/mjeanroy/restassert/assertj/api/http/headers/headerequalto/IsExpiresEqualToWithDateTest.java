@@ -40,7 +40,7 @@ public class IsExpiresEqualToWithDateTest extends AbstractHttpResponseHeaderTest
 	private static final Date EXPIRES_VALUE = new Date();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isExpiresEqualTo(EXPIRES_VALUE);
 	}
 

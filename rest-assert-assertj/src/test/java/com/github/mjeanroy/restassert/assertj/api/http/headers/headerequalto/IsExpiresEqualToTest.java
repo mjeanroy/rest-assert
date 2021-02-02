@@ -36,7 +36,7 @@ import static org.mockito.Mockito.verify;
 public class IsExpiresEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isExpiresEqualTo(getHeader().getValue());
 	}
 

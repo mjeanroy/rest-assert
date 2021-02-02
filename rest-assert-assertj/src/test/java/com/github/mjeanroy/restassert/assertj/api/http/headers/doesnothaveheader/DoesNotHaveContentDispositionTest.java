@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
 public class DoesNotHaveContentDispositionTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.doesNotHaveContentDisposition();
 	}
 

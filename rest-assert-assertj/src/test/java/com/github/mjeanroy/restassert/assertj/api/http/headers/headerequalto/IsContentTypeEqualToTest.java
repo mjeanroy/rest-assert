@@ -45,7 +45,7 @@ public class IsContentTypeEqualToTest extends AbstractHttpResponseHeaderTest {
 	);
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isContentTypeEqualTo(VALUE);
 	}
 

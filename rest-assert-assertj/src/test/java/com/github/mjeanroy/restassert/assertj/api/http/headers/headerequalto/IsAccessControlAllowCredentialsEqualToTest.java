@@ -38,7 +38,7 @@ public class IsAccessControlAllowCredentialsEqualToTest extends AbstractHttpResp
 	private static final boolean VALUE = true;
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isAccessControlAllowCredentialsEqualTo(VALUE);
 	}
 

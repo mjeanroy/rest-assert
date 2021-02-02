@@ -39,7 +39,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
 	private static final FrameOptions VALUE = FrameOptions.sameOrigin();
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.isFrameOptionsEqualTo(VALUE);
 	}
 

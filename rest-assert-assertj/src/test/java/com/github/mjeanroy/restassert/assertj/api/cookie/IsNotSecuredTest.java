@@ -48,7 +48,7 @@ public class IsNotSecuredTest extends AbstractApiTest<Cookies, CookieAssert> {
 	}
 
 	@Override
-	protected CookieAssert invoke() {
+	protected CookieAssert run() {
 		return api.isNotSecured();
 	}
 

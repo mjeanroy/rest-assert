@@ -35,7 +35,7 @@ import static org.mockito.Mockito.verify;
 public class HasFrameOptionsTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
-	protected HttpResponseAssert invoke() {
+	protected HttpResponseAssert run() {
 		return api.hasFrameOptions();
 	}
 
