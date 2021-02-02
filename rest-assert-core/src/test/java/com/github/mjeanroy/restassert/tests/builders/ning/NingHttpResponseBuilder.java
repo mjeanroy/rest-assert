@@ -32,23 +32,23 @@ import com.ning.http.client.HttpResponseBodyPart;
 import com.ning.http.client.HttpResponseHeaders;
 import com.ning.http.client.HttpResponseStatus;
 import com.ning.http.client.Response;
+import com.ning.http.client.providers.jdk.JDKAsyncHttpProvider;
 import com.ning.http.client.providers.jdk.JDKResponse;
 import com.ning.http.client.providers.jdk.ResponseBodyPart;
 import com.ning.http.client.providers.jdk.ResponseHeaders;
 import com.ning.http.client.providers.jdk.ResponseStatus;
 import com.ning.http.client.uri.Uri;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * DefaultCookieBuilder to create mock instance of {@link Response} class.
@@ -58,24 +58,10 @@ public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Respons
 	@Override
 	public Response build() {
 		Uri uri = mock(Uri.class);
-		AsyncHttpProvider provider = mock(AsyncHttpProvider.class);
-		AsyncHttpClientConfig config = mock(AsyncHttpClientConfig.class);
-		HttpURLConnection conn = mock(HttpURLConnection.class);
+		AsyncHttpClientConfig config = new AsyncHttpClientConfig.Builder().build();
+		AsyncHttpProvider provider = new JDKAsyncHttpProvider(config);
 
-		when(conn.getHeaderFields()).thenReturn(headers);
-
-		try {
-			final int status = this.status;
-			when(conn.getResponseCode()).thenAnswer(new Answer<Integer>() {
-				@Override
-				public Integer answer(InvocationOnMock invocation) {
-					return status;
-				}
-			});
-		} catch (IOException ex) {
-			throw new AssertionError(ex);
-		}
-
+		HttpURLConnection conn = new MockHttpUrlConnection(status, headers);
 		HttpResponseStatus status = new ResponseStatus(uri, config, conn);
 		HttpResponseHeaders headers = new ResponseHeaders(uri, conn, provider);
 
@@ -89,5 +75,42 @@ public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Respons
 		}
 
 		return new JDKResponse(status, headers, bodyParts);
+	}
+
+	private static final class MockHttpUrlConnection extends HttpURLConnection {
+
+		private final int responseCode;
+		private final Map<String, List<String>> headers;
+
+		private MockHttpUrlConnection(int responseCode, Map<String, List<String>> headers) {
+			super(null);
+			this.responseCode = responseCode;
+			this.headers = new HashMap<>(headers);
+		}
+
+		@Override
+		public int getResponseCode() {
+			return responseCode;
+		}
+
+		@Override
+		public Map<String, List<String>> getHeaderFields() {
+			return headers;
+		}
+
+		@Override
+		public void disconnect() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public boolean usingProxy() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public void connect() {
+			throw new UnsupportedOperationException();
+		}
 	}
 }
