@@ -34,7 +34,9 @@ public class JsonAssertions {
 
 	/**
 	 * Create JSON entry.
-	 * <p/>
+	 *
+	 * <br>
+	 *
 	 * Basically, a shortcut to {@link com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
 	 * this method may be used to avoid to import the same class name.
 	 *

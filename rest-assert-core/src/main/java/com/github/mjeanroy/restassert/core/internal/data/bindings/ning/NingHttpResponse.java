@@ -36,7 +36,7 @@ import static java.util.Collections.unmodifiableList;
 
 /**
  * Implementation of {@link HttpResponse}
- * using Async-Http (version < 2.0.0) framework as real implementation.
+ * using Async-Http (version &lt; 2.0.0) framework as real implementation.
  */
 public class NingHttpResponse extends AbstractHttpResponse implements HttpResponse {
 

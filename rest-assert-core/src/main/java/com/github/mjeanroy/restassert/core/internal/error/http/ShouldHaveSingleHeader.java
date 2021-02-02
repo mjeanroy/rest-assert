@@ -43,6 +43,7 @@ public class ShouldHaveSingleHeader extends AbstractError {
 	 * Build error.
 	 *
 	 * @param headerName Expected header name.
+	 * @param values Found values.
 	 * @return Error.
 	 */
 	public static ShouldHaveSingleHeader shouldHaveSingleHeader(String headerName, List<String> values) {

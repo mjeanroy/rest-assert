@@ -24,6 +24,40 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
+import com.github.mjeanroy.restassert.core.data.CacheControl;
+import com.github.mjeanroy.restassert.core.data.ContentEncoding;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.core.data.ContentType;
+import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
+import com.github.mjeanroy.restassert.core.data.FrameOptions;
+import com.github.mjeanroy.restassert.core.data.MediaType;
+import com.github.mjeanroy.restassert.core.data.RequestMethod;
+import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
+import com.github.mjeanroy.restassert.core.data.XssProtection;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCharsetAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCookieAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasHeaderAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasMimeTypeAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsDateHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderListEqualToAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatchingAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
+import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
+import com.github.mjeanroy.restassert.documentation.Documentation;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
+
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.flatMap;
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.toList;
@@ -61,40 +95,6 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_P
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
 import static java.util.Arrays.asList;
-
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.List;
-
-import com.github.mjeanroy.restassert.core.data.CacheControl;
-import com.github.mjeanroy.restassert.core.data.ContentEncoding;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.core.data.ContentType;
-import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
-import com.github.mjeanroy.restassert.core.data.FrameOptions;
-import com.github.mjeanroy.restassert.core.data.MediaType;
-import com.github.mjeanroy.restassert.core.data.RequestMethod;
-import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.core.data.XssProtection;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveCookieAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.DoesNotHaveHeaderAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCharsetAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasCookieAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasHeaderAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.HasMimeTypeAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsDateHeaderEqualToAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderEqualToAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderListEqualToAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatchingAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
-import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.restassert.documentation.Documentation;
 
 /**
  * Reusable Assertions of http response.
@@ -1352,6 +1352,7 @@ public final class HttpResponseAssertions {
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param value Header value.
+	 * @param other Other (optional) values.
 	 * @return Assertion result.
 	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-allow-headers">https://fetch.spec.whatwg.org/#http-access-control-allow-headers</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
@@ -1409,6 +1410,7 @@ public final class HttpResponseAssertions {
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param value Header value.
+	 * @param other Other (optional) values.
 	 * @return Assertion result.
 	 * @see <a href="https://fetch.spec.whatwg.org/#http-access-control-expose-headers">https://fetch.spec.whatwg.org/#http-access-control-expose-headers</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>

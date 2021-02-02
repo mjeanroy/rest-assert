@@ -119,7 +119,7 @@ public final class MimeTypes {
 	 * Obsolete alternative for "application/javascript" media type.
 	 * This alternative may be used by old web server.
 	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc4329"></a>https://tools.ietf.org/html/rfc4329</a>
+	 * @see <a href="https://tools.ietf.org/html/rfc4329">https://tools.ietf.org/html/rfc4329</a>
 	 */
 	public static final MediaType TEXT_JAVASCRIPT = MediaType.text("javascript");
 }

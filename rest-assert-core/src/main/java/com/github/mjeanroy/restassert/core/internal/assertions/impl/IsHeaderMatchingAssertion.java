@@ -58,6 +58,8 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 	 * Create assertion.
 	 *
 	 * @param name Header name.
+	 * @param expected Expected header value.
+	 * @param parser Parser, used to compare both header values.
 	 */
 	public IsHeaderMatchingAssertion(String name, HttpHeaderValue expected, HttpHeaderParser<? extends HttpHeaderValue> parser) {
 		super(name);

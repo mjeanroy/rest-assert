@@ -91,7 +91,8 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 	 * Create assertion.
 	 *
 	 * @param name Cookie name.
-	 * @throws NullPointerException If {@code name} is {@code null}.
+	 * @param value Cookie value.
+	 * @throws NullPointerException If {@code name} or {code value} are {@code null}.
 	 * @throws IllegalArgumentException If {@code name} is empty or blank.
 	 */
 	public HasCookieAssertion(String name, String value) {

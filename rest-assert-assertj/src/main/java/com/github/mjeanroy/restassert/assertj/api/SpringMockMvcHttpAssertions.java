@@ -29,8 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringM
 import org.springframework.test.web.servlet.ResultActions;
 
 /**
- * Entry point for assertion methods for Async-Http
- * library (version >= 2.0.0).
+ * Entry point for assertion methods for Spring MockMVC Test Framework.
  */
 public final class SpringMockMvcHttpAssertions {
 

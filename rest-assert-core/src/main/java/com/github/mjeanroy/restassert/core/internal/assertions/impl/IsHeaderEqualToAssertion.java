@@ -62,6 +62,9 @@ public class IsHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion imp
 	 * Create assertion.
 	 *
 	 * @param name Header name.
+	 * @param value Header value (will be serialized as a string).
+	 * @param caseInsensitive If assertion should be case insensitive.
+	 * @throws NullPointerException If {@code name} or {value} are {@code null}
 	 */
 	public IsHeaderEqualToAssertion(String name, String value, boolean caseInsensitive) {
 		super(name);

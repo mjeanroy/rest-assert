@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.bindings.ning.Ni
 
 /**
  * Entry point for assertion methods for Async-Http
- * library (version < 2.0.0).
+ * library (version &lt; 2.0.0).
  */
 public final class NingHttpAssertions {
 

@@ -435,6 +435,8 @@ public class ContentSecurityPolicyBuilder {
 	/**
 	 * Enable {@code block-all-mixed-content} directive.
 	 *
+	 * @param resource Source directive.
+	 * @param other Other, optional, source directives.
 	 * @return Current builder.
 	 * @see <a href="https://www.w3.org/TR/mixed-content/#strict-checking">https://www.w3.org/TR/mixed-content/#strict-checking</a>
 	 */

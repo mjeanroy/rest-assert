@@ -60,6 +60,7 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 	 * Create assertion.
 	 *
 	 * @param name Header name.
+	 * @param value Header value (will be serialized as a string).
 	 */
 	public IsDateHeaderEqualToAssertion(String name, Date value) {
 		super(name);

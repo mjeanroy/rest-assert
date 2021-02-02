@@ -32,7 +32,7 @@ import org.asynchttpclient.Response;
 
 /**
  * Entry point for assertion methods for Async-Http
- * library (version >= 2.0.0).
+ * library (version &gt;= 2.0.0).
  */
 public final class AsyncHttpAssertions {
 

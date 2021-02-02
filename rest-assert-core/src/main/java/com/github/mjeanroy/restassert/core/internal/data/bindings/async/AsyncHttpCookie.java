@@ -30,7 +30,7 @@ import java.util.Date;
 
 /**
  * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.Cookie}
- * using Async-Http (version >= 2.0.0) framework as real implementation.
+ * using Async-Http (version &gt;= 2.0.0) framework as real implementation.
  */
 public class AsyncHttpCookie implements Cookie {
 

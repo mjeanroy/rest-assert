@@ -24,22 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
-import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
-import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
 /**
  * Check that http response has at least one header with
@@ -66,6 +66,7 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 	 * Create assertion.
 	 *
 	 * @param name Header name.
+	 * @param values Header values.
 	 */
 	public IsHeaderListEqualToAssertion(String name, Iterable<String> values) {
 		super(name);

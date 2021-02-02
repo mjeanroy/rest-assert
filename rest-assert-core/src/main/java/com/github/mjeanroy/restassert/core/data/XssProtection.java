@@ -71,6 +71,7 @@ public final class XssProtection implements HttpHeaderValue {
 	/**
 	 * Create {@code "X-XSS-Protection"} header with {@code "ENABLE REPORT=<uri>"} parameter.
 	 *
+	 * @param uri Report URI.
 	 * @return The header.
 	 */
 	public static XssProtection enableModeReport(String uri) {
@@ -80,6 +81,7 @@ public final class XssProtection implements HttpHeaderValue {
 	/**
 	 * Create {@code "X-XSS-Protection"} header with {@code "ENABLE REPORT=<uri>"} parameter.
 	 *
+	 * @param uri Report URI.
 	 * @return The header.
 	 */
 	public static XssProtection enableModeReport(URI uri) {

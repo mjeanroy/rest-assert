@@ -35,7 +35,7 @@ import static java.util.Collections.unmodifiableList;
 
 /**
  * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse}
- * using Async-Http (version >= 2.0.0) framework as real implementation.
+ * using Async-Http (version &gt;= 2.0.0) framework as real implementation.
  */
 public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
