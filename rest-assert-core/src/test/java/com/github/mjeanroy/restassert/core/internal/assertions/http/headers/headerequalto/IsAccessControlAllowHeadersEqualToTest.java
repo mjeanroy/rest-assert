@@ -44,7 +44,7 @@ public class IsAccessControlAllowHeadersEqualToTest extends AbstractHttpHeaderEq
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isAccessControlAllowHeadersEqualTo(response, VALUE);
 	}
 

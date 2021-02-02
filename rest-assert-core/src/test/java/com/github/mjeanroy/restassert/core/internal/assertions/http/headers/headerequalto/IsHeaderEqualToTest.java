@@ -45,7 +45,7 @@ public class IsHeaderEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isHeaderEqualTo(response, NAME, VALUE);
 	}
 

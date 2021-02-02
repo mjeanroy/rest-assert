@@ -48,7 +48,7 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 	public void it_should_pass_with_status_in_bounds() {
 		final Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
-			AssertionResult result = invoke(newResponse(i));
+			AssertionResult result = run(newResponse(i));
 			checkSuccess(result);
 		}
 	}
@@ -64,7 +64,7 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 				continue;
 			}
 
-			AssertionResult result = invoke(newResponse(status));
+			AssertionResult result = run(newResponse(status));
 
 			checkError(result,
 					ShouldHaveStatusBetween.class,

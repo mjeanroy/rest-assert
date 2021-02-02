@@ -46,14 +46,14 @@ public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpR
 	@Test
 	public void it_should_pass_with_expected_cookie() {
 		Cookie cookie = newCookie();
-		AssertionResult result = invoke(newResponse(cookie));
+		AssertionResult result = run(newResponse(cookie));
 		checkSuccess(result);
 	}
 
 	@Test
 	public void it_should_fail_without_any_cookies() {
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
-		AssertionResult result = invoke(rsp);
+		AssertionResult result = run(rsp);
 		verifyError(result);
 	}
 
@@ -70,7 +70,7 @@ public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpR
 						.build())
 				.build();
 
-		AssertionResult result = invoke(rsp);
+		AssertionResult result = run(rsp);
 
 		verifyError(result);
 	}

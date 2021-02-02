@@ -38,7 +38,7 @@ public class IsNotServerErrorTest extends AbstractHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotServerError(response);
 	}
 }

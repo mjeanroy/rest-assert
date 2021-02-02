@@ -37,7 +37,7 @@ public class IsForbiddenTest extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isForbidden(response);
 	}
 }

@@ -38,7 +38,7 @@ public class IsServerErrorTest extends AbstractHttpStatusBetweenTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isServerError(response);
 	}
 }

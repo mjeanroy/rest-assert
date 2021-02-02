@@ -45,7 +45,7 @@ public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToT
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isXssProtectionEqualTo(response, VALUE);
 	}
 

@@ -38,7 +38,7 @@ public class DoesNotHaveAccessControlAllowOriginTest extends AbstractDoesNotHave
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveAccessControlAllowOrigin(response);
 	}
 }

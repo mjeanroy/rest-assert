@@ -35,7 +35,7 @@ public abstract class AbstractAssertionsTest<T> {
 	 * @param testedObject Object to be tested.
 	 * @return Assertion result.
 	 */
-	protected abstract AssertionResult invoke(T testedObject);
+	protected abstract AssertionResult run(T testedObject);
 
 	protected static void checkSuccess(AssertionResult result) {
 		assertSuccessResult(result);

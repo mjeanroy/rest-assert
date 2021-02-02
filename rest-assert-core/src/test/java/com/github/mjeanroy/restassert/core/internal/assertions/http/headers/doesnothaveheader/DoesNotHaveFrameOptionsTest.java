@@ -38,7 +38,7 @@ public class DoesNotHaveFrameOptionsTest extends AbstractDoesNotHaveHttpHeaderTe
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveFrameOptions(response);
 	}
 }

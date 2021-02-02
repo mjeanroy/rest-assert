@@ -37,7 +37,7 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	private static final String CHARSET = "utf-8";
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasCharset(response, CHARSET);
 	}
 

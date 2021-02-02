@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 public class IsUtf8Test extends AbstractHttpResponseAssertionsCharsetTest {
 
 	@Override
-	protected AssertionResult invoke(HttpResponse httpResponse) {
+	protected AssertionResult run(HttpResponse httpResponse) {
 		return assertions.isUtf8(httpResponse);
 	}
 

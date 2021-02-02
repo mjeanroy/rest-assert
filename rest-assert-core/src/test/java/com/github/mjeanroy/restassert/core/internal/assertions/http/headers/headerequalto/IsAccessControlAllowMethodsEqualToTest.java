@@ -47,7 +47,7 @@ public class IsAccessControlAllowMethodsEqualToTest extends AbstractHttpHeaderEq
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isAccessControlAllowMethodsEqualTo(response,
 				RequestMethod.valueOf(V1),
 				RequestMethod.valueOf(V2),

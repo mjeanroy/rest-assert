@@ -49,7 +49,7 @@ public class HasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasCookie(response, NAME, VALUE);
 	}
 }

@@ -38,7 +38,7 @@ public class HasAccessControlAllowOriginTest extends AbstractHttpHeaderTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasAccessControlAllowOrigin(response);
 	}
 }

@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 public class HasMaxAgeTest extends AbstractCookieTest {
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
+	protected AssertionResult run(Cookie cookie) {
 		return cookieAssertions.hasMaxAge(cookie, success().getMaxAge());
 	}
 

@@ -37,7 +37,7 @@ public class IsConflictTest extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isConflict(response);
 	}
 }

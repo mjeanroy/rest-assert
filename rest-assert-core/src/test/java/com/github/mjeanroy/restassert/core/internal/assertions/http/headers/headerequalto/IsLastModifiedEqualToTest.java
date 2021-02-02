@@ -45,7 +45,7 @@ public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isLastModifiedEqualTo(response, VALUE);
 	}
 

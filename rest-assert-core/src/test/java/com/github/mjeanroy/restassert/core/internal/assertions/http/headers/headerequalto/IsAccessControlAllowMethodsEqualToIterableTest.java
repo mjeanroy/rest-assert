@@ -62,7 +62,7 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isAccessControlAllowMethodsEqualTo(response, VALUES);
 	}
 

@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 public class IsHttpOnlyTest extends AbstractCookieTest {
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
+	protected AssertionResult run(Cookie cookie) {
 		return cookieAssertions.isHttpOnly(cookie);
 	}
 

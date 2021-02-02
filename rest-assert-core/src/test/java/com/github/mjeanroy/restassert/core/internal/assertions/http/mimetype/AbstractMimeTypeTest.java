@@ -56,7 +56,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 		final HttpResponse httpResponse = newResponse(header);
 
 		// When
-		final AssertionResult result = invoke(httpResponse);
+		final AssertionResult result = run(httpResponse);
 
 		// Then
 		checkSuccess(result);
@@ -70,7 +70,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 		final HttpResponse httpResponse = newResponse(header);
 
 		// When
-		final AssertionResult result = invoke(httpResponse);
+		final AssertionResult result = run(httpResponse);
 
 		// Then
 		checkSuccess(result);
@@ -90,7 +90,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 		final HttpResponse httpResponse = newResponse(actualHeader);
 
 		// When
-		final AssertionResult result = invoke(httpResponse);
+		final AssertionResult result = run(httpResponse);
 
 		// Then
 		final Class<ShouldHaveMimeType> klassError = ShouldHaveMimeType.class;

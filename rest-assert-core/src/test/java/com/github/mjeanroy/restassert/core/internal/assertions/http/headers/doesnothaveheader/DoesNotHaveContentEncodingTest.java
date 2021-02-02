@@ -38,7 +38,7 @@ public class DoesNotHaveContentEncodingTest extends AbstractDoesNotHaveHttpHeade
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveContentEncoding(response);
 	}
 }

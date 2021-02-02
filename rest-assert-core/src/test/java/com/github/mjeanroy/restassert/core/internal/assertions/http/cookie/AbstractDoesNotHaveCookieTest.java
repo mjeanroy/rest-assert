@@ -45,7 +45,7 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_pass_without_any_cookies() {
-		AssertionResult result = invoke(newResponse(null));
+		AssertionResult result = run(newResponse(null));
 		checkSuccess(result);
 	}
 
@@ -56,14 +56,14 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 				.setValue("bar")
 				.build());
 
-		AssertionResult result = invoke(response);
+		AssertionResult result = run(response);
 		checkSuccess(result);
 	}
 
 	@Test
 	public void it_should_fail_with_cookies() {
 		HttpResponse rsp = newResponse(newCookie());
-		AssertionResult result = invoke(rsp);
+		AssertionResult result = run(rsp);
 		verifyError(result);
 	}
 

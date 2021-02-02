@@ -40,7 +40,7 @@ public class IsPragmaEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isPragmaEqualTo(response, VALUE);
 	}
 

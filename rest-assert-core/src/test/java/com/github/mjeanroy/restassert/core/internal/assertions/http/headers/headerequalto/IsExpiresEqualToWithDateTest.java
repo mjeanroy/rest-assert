@@ -44,7 +44,7 @@ public class IsExpiresEqualToWithDateTest extends AbstractHttpHeaderEqualToTest 
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		Date date = fromInternetMessageFormat(VALUE);
 		return assertions.isExpiresEqualTo(response, date);
 	}

@@ -38,7 +38,7 @@ public class HasCacheControlTest extends AbstractHttpHeaderTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasCacheControl(response);
 	}
 }

@@ -38,7 +38,7 @@ public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> 
 	@Test
 	public void it_should_pass() {
 		Cookie cookie = success();
-		AssertionResult result = invoke(cookie);
+		AssertionResult result = run(cookie);
 		checkSuccess(result);
 	}
 
@@ -46,7 +46,7 @@ public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> 
 	public void it_should_fail() {
 		final Cookie cookie = failure();
 
-		AssertionResult result = invoke(cookie);
+		AssertionResult result = run(cookie);
 
 		checkError(result,
 				error(),

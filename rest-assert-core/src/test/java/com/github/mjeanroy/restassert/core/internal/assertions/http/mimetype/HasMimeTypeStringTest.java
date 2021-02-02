@@ -40,7 +40,7 @@ public class HasMimeTypeStringTest extends AbstractMimeTypeTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasMimeType(response, getMimeType());
 	}
 

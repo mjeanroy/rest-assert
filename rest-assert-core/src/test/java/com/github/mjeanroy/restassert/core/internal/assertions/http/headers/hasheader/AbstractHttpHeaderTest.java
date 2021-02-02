@@ -52,7 +52,7 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		AssertionResult result = invoke(rsp);
+		AssertionResult result = run(rsp);
 
 		// THEN
 		checkSuccess(result);
@@ -67,7 +67,7 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		AssertionResult result = invoke(rsp);
+		AssertionResult result = run(rsp);
 
 		// THEN
 		final String message = "Expecting response to have header %s";

@@ -45,7 +45,7 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHead
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isStrictTransportSecurityEqualTo(response, VALUE);
 	}
 

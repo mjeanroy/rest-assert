@@ -38,7 +38,7 @@ public class DoesNotHaveAccessControlAllowMaxAgeTest extends AbstractDoesNotHave
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveAccessControlAllowMaxAge(response);
 	}
 }

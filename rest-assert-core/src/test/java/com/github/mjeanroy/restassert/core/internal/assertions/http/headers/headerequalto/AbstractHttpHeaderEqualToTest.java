@@ -58,7 +58,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		final AssertionResult result = invoke(rsp);
+		final AssertionResult result = run(rsp);
 
 		// THEN
 		checkSuccess(result);
@@ -73,7 +73,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final boolean allowMultiple = allowMultipleValues();
 
 		// WHEN
-		final AssertionResult result = invoke(rsp);
+		final AssertionResult result = run(rsp);
 
 		// THEN
 		if (allowMultiple) {
@@ -96,7 +96,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		final AssertionResult result = invoke(rsp);
+		final AssertionResult result = run(rsp);
 
 		// THEN
 		final String message = "Expecting response to have header %s equal to %s but was %s";
@@ -111,7 +111,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		final HttpResponse rsp = newResponse(header);
 
 		// WHEN
-		final AssertionResult result = invoke(rsp);
+		final AssertionResult result = run(rsp);
 
 		// THEN
 		final String message = "Expecting response to have header %s";

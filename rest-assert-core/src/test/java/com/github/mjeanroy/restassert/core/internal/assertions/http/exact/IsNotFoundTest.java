@@ -37,7 +37,7 @@ public class IsNotFoundTest extends AbstractHttpStatusTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotFound(response);
 	}
 }

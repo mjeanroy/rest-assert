@@ -48,7 +48,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 		final Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
-				AssertionResult result = invoke(newResponse(i));
+				AssertionResult result = run(newResponse(i));
 				checkSuccess(result);
 			}
 		}
@@ -61,7 +61,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 		final int end = range.getEnd();
 
 		for (int status = start; status <= end; status++) {
-			AssertionResult result = invoke(newResponse(status));
+			AssertionResult result = run(newResponse(status));
 			checkError(result, ShouldHaveStatusOutOf.class, "Expecting status code to be out of %s and %s but was %s", start, end, status);
 		}
 	}

@@ -45,7 +45,7 @@ public class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isLocationEqualTo(response, VALUE);
 	}
 

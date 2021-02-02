@@ -49,7 +49,7 @@ public class IsStrictTransportSecurityEqualToTest extends AbstractHttpHeaderEqua
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isStrictTransportSecurityEqualTo(response, VALUE);
 	}
 

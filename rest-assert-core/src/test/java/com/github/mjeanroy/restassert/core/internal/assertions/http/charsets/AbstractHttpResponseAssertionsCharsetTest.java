@@ -47,7 +47,7 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 	@Test
 	public void it_should_pass() {
 		HttpResponse response = newResponse(expectedCharset());
-		AssertionResult result = invoke(response);
+		AssertionResult result = run(response);
 		checkSuccess(result);
 	}
 
@@ -59,7 +59,7 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 		final HttpResponse httpResponse = newResponse(actualCharset);
 
 		// WHEN
-		final AssertionResult result = invoke(httpResponse);
+		final AssertionResult result = run(httpResponse);
 
 		// THEN
 		final Class<ShouldHaveCharset> klassError = ShouldHaveCharset.class;

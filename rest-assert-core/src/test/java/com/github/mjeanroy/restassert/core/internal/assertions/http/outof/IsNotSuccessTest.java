@@ -38,7 +38,7 @@ public class IsNotSuccessTest extends AbstractHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotSuccess(response);
 	}
 }

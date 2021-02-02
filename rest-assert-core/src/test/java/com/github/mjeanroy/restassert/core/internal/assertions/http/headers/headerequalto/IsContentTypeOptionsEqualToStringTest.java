@@ -47,7 +47,7 @@ public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqu
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentTypeOptionsEqualTo(response, VALUE);
 	}
 

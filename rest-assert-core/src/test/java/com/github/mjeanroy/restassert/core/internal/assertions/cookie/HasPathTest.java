@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 public class HasPathTest extends AbstractCookieTest {
 
 	@Override
-	protected AssertionResult invoke(Cookie cookie) {
+	protected AssertionResult run(Cookie cookie) {
 		return cookieAssertions.hasPath(cookie, success().getPath());
 	}
 

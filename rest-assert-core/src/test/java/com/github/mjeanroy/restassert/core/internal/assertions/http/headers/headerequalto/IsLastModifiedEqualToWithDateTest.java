@@ -44,7 +44,7 @@ public class IsLastModifiedEqualToWithDateTest extends AbstractHttpHeaderEqualTo
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		Date date = fromInternetMessageFormat(VALUE);
 		return assertions.isLastModifiedEqualTo(response, date);
 	}

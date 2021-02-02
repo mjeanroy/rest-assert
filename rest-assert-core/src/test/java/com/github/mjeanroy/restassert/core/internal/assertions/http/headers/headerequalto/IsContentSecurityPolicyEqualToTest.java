@@ -55,7 +55,7 @@ public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualT
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentSecurityPolicyEqualTo(response, VALUE);
 	}
 

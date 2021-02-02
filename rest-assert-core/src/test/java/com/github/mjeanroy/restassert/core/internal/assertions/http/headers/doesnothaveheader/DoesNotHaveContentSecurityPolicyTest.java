@@ -38,7 +38,7 @@ public class DoesNotHaveContentSecurityPolicyTest extends AbstractDoesNotHaveHtt
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveContentSecurityPolicy(response);
 	}
 }

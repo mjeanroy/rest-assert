@@ -47,7 +47,7 @@ public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest 
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentEncodingEqualTo(response, VALUE);
 	}
 

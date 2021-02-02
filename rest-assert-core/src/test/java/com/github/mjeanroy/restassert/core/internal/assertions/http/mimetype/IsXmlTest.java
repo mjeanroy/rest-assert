@@ -39,7 +39,7 @@ public class IsXmlTest extends AbstractMimeTypeInTest {
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isXml(response);
 	}
 }

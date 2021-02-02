@@ -40,7 +40,7 @@ public class IsAccessControlAllowOriginEqualToTest extends AbstractHttpHeaderEqu
 	}
 
 	@Override
-	protected AssertionResult invoke(HttpResponse response) {
+	protected AssertionResult run(HttpResponse response) {
 		return assertions.isAccessControlAllowOriginEqualTo(response, VALUE);
 	}
 

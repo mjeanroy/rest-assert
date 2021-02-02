@@ -45,7 +45,7 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 
 	@Test
 	public void it_should_pass_with_correct_status() {
-		AssertionResult result = invoke(newResponse(status()));
+		AssertionResult result = run(newResponse(status()));
 		checkSuccess(result);
 	}
 
@@ -54,7 +54,7 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 		final int expectedStatus = status();
 		final int status = expectedStatus + 1;
 
-		AssertionResult result = invoke(newResponse(status));
+		AssertionResult result = run(newResponse(status));
 
 		checkError(result,
 				ShouldHaveStatus.class,
