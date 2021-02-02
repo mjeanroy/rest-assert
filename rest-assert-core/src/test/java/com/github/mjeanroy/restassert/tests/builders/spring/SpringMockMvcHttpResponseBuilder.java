@@ -26,16 +26,19 @@ package com.github.mjeanroy.restassert.tests.builders.spring;
 
 import com.github.mjeanroy.restassert.tests.builders.AbstractHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.ResultHandler;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.web.servlet.FlashMap;
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * DefaultCookieBuilder to create instance of {@link ResultActions} class.
@@ -60,11 +63,85 @@ public class SpringMockMvcHttpResponseBuilder extends AbstractHttpResponseBuilde
 			}
 		}
 
-		MvcResult mvcResult = mock(MvcResult.class);
-		when(mvcResult.getResponse()).thenReturn(response);
+		MvcResult mvcResult = new MockMvcResult(response);
+		return new MockResultActions(mvcResult);
+	}
 
-		ResultActions resultActions = mock(ResultActions.class);
-		when(resultActions.andReturn()).thenReturn(mvcResult);
-		return resultActions;
+	private static final class MockResultActions implements ResultActions {
+
+		private final MvcResult mvcResult;
+
+		private MockResultActions(MvcResult mvcResult) {
+			this.mvcResult = mvcResult;
+		}
+
+		@Override
+		public ResultActions andExpect(ResultMatcher matcher) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public ResultActions andDo(ResultHandler handler) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public MvcResult andReturn() {
+			return mvcResult;
+		}
+	}
+
+	private static final class MockMvcResult implements MvcResult {
+
+		private final MockHttpServletResponse response;
+
+		private MockMvcResult(MockHttpServletResponse response) {
+			this.response = response;
+		}
+
+		@Override
+		public MockHttpServletRequest getRequest() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public MockHttpServletResponse getResponse() {
+			return response;
+		}
+
+		@Override
+		public Object getHandler() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public HandlerInterceptor[] getInterceptors() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public ModelAndView getModelAndView() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Exception getResolvedException() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public FlashMap getFlashMap() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Object getAsyncResult() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Object getAsyncResult(long timeToWait) {
+			throw new UnsupportedOperationException();
+		}
 	}
 }
