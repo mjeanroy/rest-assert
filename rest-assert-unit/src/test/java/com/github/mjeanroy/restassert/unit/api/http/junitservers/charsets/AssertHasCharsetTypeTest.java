@@ -28,10 +28,11 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class AssertHasCharsetTypeTest extends AbstractJunitServersHttpAssertCharsetTest {
 
-	private static final Charset CHARSET = Charset.forName("UTF-8");
+	private static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	@Override
 	protected String getCharset() {

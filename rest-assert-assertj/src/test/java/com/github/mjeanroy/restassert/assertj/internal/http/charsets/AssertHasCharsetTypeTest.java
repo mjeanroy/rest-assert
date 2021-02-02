@@ -27,12 +27,13 @@ package com.github.mjeanroy.restassert.assertj.internal.http.charsets;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 
 public class AssertHasCharsetTypeTest extends AbstractHttpResponsesCharsetTest {
 
-	private static final Charset CHARSET = Charset.forName("UTF-8");
+	private static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	@Override
 	protected String getCharset() {

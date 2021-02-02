@@ -32,10 +32,11 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharsetTest {
 
-	private static final Charset CHARSET = Charset.forName("UTF-8");
+	private static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {

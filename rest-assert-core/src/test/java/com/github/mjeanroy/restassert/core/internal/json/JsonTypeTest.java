@@ -63,7 +63,7 @@ public class JsonTypeTest {
 	public void it_should_check_type_number() {
 		for (int i = 0; i < 10; i++) {
 			assertThat(JsonType.NUMBER.is(String.valueOf(i))).isTrue();
-			assertThat(JsonType.NUMBER.is("-" + String.valueOf(i))).isTrue();
+			assertThat(JsonType.NUMBER.is("-" + i)).isTrue();
 		}
 
 		assertThat(JsonType.NUMBER.is("10")).isTrue();
