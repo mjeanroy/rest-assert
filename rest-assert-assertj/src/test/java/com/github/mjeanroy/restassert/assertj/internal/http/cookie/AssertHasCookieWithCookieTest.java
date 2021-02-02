@@ -43,7 +43,7 @@ public class AssertHasCookieWithCookieTest extends AbstractHasCookieTest {
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertHasCookie(info, httpResponse, COOKIE);
 	}
 

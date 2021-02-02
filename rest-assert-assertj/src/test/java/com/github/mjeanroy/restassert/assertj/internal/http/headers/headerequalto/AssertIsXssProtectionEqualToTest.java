@@ -38,7 +38,7 @@ public class AssertIsXssProtectionEqualToTest extends AbstractHttpResponsesHeade
 	private static final XssProtection FAILED_VALUE = XssProtection.enable();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

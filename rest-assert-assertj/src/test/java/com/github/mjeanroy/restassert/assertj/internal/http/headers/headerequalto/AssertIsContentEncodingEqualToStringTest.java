@@ -37,7 +37,7 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractHttpRespon
 	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentEncodingEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

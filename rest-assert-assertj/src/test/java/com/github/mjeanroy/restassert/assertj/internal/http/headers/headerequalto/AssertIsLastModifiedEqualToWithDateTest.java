@@ -38,7 +38,7 @@ public class AssertIsLastModifiedEqualToWithDateTest extends AbstractHttpRespons
 	private static final String VALUE = LAST_MODIFIED.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		Date date = fromInternetMessageFormat(VALUE);
 		httpResponses.assertIsLastModifiedEqualTo(someInfo(), httpResponse, date);
 	}

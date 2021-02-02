@@ -37,7 +37,7 @@ public class AssertIsOkTest extends AbstractHttpResponsesStatusTest {
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsOk(info, httpResponse);
 	}
 }

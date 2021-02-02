@@ -47,7 +47,7 @@ public class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeader
 		.build();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

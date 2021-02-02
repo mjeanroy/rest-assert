@@ -42,7 +42,7 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 	@Test
 	public void should_pass_if_mime_type_is_ok() {
 		HttpResponse httpResponse = newHttpResponse(getHeader());
-		invoke(httpResponse);
+		run(httpResponse);
 	}
 
 	@Test
@@ -59,7 +59,7 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
-			invoke(httpResponse);
+			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			assertThat(e.getMessage())
@@ -79,5 +79,5 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
-	protected abstract void invoke(HttpResponse httpResponse);
+	protected abstract void run(HttpResponse httpResponse);
 }

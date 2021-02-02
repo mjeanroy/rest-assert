@@ -35,7 +35,7 @@ public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractHttpR
 	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlExposeHeadersEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

@@ -44,7 +44,7 @@ public class AssertIsEqualToIgnoringURLTest extends AbstractJsonsIsEqualToIgnori
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, URL json) {
+	protected void run(AssertionInfo info, URL json) {
 		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

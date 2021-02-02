@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 public class AssertHasAccessControlAllowMethodsTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertHasAccessControlAllowMethods(someInfo(), httpResponse);
 	}
 

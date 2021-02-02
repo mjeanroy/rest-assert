@@ -35,7 +35,7 @@ public class AssertIsPragmaEqualToTest extends AbstractHttpResponsesHeaderEqualT
 	private static final String VALUE = PRAGMA.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsPragmaEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

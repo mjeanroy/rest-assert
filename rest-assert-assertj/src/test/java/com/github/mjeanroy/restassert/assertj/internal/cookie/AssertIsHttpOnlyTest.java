@@ -31,7 +31,7 @@ import org.assertj.core.api.AssertionInfo;
 public class AssertIsHttpOnlyTest extends AbstractCookiesTest {
 
 	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
+	protected void run(AssertionInfo info, Cookie cookie) {
 		cookies.assertIsHttpOnly(info, cookie);
 	}
 

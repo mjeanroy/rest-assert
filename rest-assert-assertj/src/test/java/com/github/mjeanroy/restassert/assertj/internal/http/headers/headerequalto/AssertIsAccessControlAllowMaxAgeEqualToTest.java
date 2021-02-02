@@ -35,7 +35,7 @@ public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpRes
 	private static final long VALUE = Long.valueOf(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowMaxAgeEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

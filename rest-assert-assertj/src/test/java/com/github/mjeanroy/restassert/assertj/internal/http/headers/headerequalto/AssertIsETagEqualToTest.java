@@ -35,7 +35,7 @@ public class AssertIsETagEqualToTest extends AbstractHttpResponsesHeaderEqualToT
 	private static final String VALUE = ETAG.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsETagEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

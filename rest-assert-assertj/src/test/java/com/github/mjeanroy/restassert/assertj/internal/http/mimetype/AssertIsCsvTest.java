@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 public class AssertIsCsvTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsCsv(someInfo(), httpResponse);
 	}
 

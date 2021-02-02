@@ -35,7 +35,7 @@ public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractHt
 	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowCredentialsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

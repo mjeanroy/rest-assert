@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 public class AssertHasXssProtectionTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertHasXssProtection(someInfo(), httpResponse);
 	}
 

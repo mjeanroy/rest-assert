@@ -44,7 +44,7 @@ public class AssertIsEqualToIgnoringPathTest extends AbstractJsonsIsEqualToIgnor
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, Path json) {
+	protected void run(AssertionInfo info, Path json) {
 		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

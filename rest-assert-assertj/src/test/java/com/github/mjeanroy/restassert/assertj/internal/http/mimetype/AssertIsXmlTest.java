@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 public class AssertIsXmlTest extends AbstractHttpResponsesMimeTypeInTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsXml(someInfo(), httpResponse);
 	}
 

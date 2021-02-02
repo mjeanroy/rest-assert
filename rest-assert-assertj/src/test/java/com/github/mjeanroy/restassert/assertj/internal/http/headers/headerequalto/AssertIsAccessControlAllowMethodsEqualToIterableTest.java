@@ -39,7 +39,7 @@ public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends Abstra
 	private static final List<RequestMethod> VALUE = asList(RequestMethod.GET, RequestMethod.POST);
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowMethodsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

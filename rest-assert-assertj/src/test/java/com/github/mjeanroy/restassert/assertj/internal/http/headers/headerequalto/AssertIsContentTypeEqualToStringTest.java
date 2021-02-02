@@ -36,7 +36,7 @@ public class AssertIsContentTypeEqualToStringTest extends AbstractHttpResponsesH
 	private static final String VALUE = HEADER.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentTypeEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

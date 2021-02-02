@@ -35,7 +35,7 @@ public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractHttpRes
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowOriginEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

@@ -35,7 +35,7 @@ public class AssertIsContentDispositionEqualToTest extends AbstractHttpResponses
 	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentDispositionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

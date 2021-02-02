@@ -44,7 +44,7 @@ public class AssertIsEqualToIgnoringFileTest extends AbstractJsonsIsEqualToIgnor
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, File json) {
+	protected void run(AssertionInfo info, File json) {
 		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

@@ -42,7 +42,7 @@ public class AssertIsEqualToIgnoringStringTest extends AbstractJsonsIsEqualToIgn
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, String json) {
+	protected void run(AssertionInfo info, String json) {
 		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

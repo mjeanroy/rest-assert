@@ -35,7 +35,7 @@ public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractHttpRe
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowHeadersEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

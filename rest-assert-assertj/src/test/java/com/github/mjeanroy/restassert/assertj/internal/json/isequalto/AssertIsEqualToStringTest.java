@@ -42,7 +42,7 @@ public class AssertIsEqualToStringTest extends AbstractJsonsIsEqualToTest<String
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, String json) {
+	protected void run(AssertionInfo info, String json) {
 		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

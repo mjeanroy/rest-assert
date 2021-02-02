@@ -40,7 +40,7 @@ public class AssertHasCharsetTypeTest extends AbstractHttpResponsesCharsetTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertHasCharset(someInfo(), httpResponse, CHARSET);
 	}
 }

@@ -38,7 +38,7 @@ public class AssertIsServerErrorTest extends AbstractHttpResponsesStatusBetweenT
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsServerError(info, httpResponse);
 	}
 }

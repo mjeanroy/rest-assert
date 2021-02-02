@@ -44,7 +44,7 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResp
 		.serializeValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsStrictTransportSecurityEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

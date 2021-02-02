@@ -36,7 +36,7 @@ public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractHttpRes
 	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentTypeOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

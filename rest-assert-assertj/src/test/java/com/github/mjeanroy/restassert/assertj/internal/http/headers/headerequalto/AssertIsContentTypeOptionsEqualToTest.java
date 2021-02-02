@@ -37,7 +37,7 @@ public class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponses
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentTypeOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

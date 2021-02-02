@@ -37,7 +37,7 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttp
 	private static final String FAILED_VALUE = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentSecurityPolicyEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

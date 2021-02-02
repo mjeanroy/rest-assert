@@ -37,7 +37,7 @@ public class AssertIsXssProtectionEqualToStringTest extends AbstractHttpResponse
 	private static final String FAILED_VALUE = "1";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

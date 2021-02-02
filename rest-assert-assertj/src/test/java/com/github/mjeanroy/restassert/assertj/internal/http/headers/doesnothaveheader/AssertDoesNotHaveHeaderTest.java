@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.test.data.Header.header;
 public class AssertDoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveHeader(someInfo(), httpResponse, getHeader().getName());
 	}
 

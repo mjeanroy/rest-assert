@@ -40,7 +40,7 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 	@Test
 	public void should_pass() {
 		HttpResponse httpResponse = newHttpResponse(getCharset());
-		invoke(httpResponse);
+		run(httpResponse);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 		final HttpResponse httpResponse = newHttpResponse(actualCharset);
 
 		try {
-			invoke(httpResponse);
+			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			assertThat(e.getMessage())
@@ -62,7 +62,7 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 
 	protected abstract String getCharset();
 
-	protected abstract void invoke(HttpResponse httpResponse);
+	protected abstract void run(HttpResponse httpResponse);
 
 	private HttpResponse newHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);

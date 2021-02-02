@@ -37,7 +37,7 @@ public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractHt
 	private static final String FAILED_VALUE = "max-age=7200";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsStrictTransportSecurityEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

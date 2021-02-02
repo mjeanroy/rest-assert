@@ -38,7 +38,7 @@ public class AssertIsNotClientErrorTest extends AbstractHttpResponsesStatusOutOf
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsNotClientError(info, httpResponse);
 	}
 }

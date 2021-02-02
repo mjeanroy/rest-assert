@@ -38,7 +38,7 @@ public class AssertIsNotSuccessTest extends AbstractHttpResponsesStatusOutOfTest
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, HttpResponse httpResponse) {
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsNotSuccess(info, httpResponse);
 	}
 }

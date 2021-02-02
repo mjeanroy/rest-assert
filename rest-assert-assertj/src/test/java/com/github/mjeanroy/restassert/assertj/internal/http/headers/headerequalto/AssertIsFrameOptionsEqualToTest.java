@@ -38,7 +38,7 @@ public class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeader
 	private static final FrameOptions FAILED_VALUE = FrameOptions.sameOrigin();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsFrameOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

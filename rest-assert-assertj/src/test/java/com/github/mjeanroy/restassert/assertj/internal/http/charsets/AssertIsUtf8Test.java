@@ -36,7 +36,7 @@ public class AssertIsUtf8Test extends AbstractHttpResponsesCharsetTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsUtf8(someInfo(), httpResponse);
 	}
 }

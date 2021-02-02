@@ -37,7 +37,7 @@ public class AssertIsContentTypeEqualToTest extends AbstractHttpResponsesHeaderE
 	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentTypeEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

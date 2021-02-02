@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowMethodsEqualTo(someInfo(), httpResponse, RequestMethod.GET, RequestMethod.POST);
 	}
 

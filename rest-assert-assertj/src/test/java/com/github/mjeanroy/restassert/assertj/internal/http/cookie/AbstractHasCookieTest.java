@@ -46,7 +46,7 @@ public abstract class AbstractHasCookieTest {
 				.addCookie(cookie())
 				.build();
 
-		invoke(someInfo(), httpResponse);
+		run(someInfo(), httpResponse);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public abstract class AbstractHasCookieTest {
 				.build();
 
 		try {
-			invoke(info, httpResponse);
+			run(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			assertThat(e.getMessage())
@@ -76,5 +76,5 @@ public abstract class AbstractHasCookieTest {
 
 	protected abstract Cookie cookie();
 
-	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
+	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

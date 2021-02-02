@@ -42,7 +42,7 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractHttpRespon
 			.build();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentSecurityPolicyEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

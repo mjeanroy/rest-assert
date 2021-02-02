@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.outof;
 
+import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Range;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import org.assertj.core.api.AssertionInfo;
+import org.junit.Test;
+
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import com.github.mjeanroy.restassert.test.data.Range;
-import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
 
 public abstract class AbstractHttpResponsesStatusOutOfTest {
 
@@ -49,7 +49,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 					.setStatus(i)
 					.build();
 
-				invoke(someInfo(), httpResponse);
+				run(someInfo(), httpResponse);
 			}
 		}
 	}
@@ -66,7 +66,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 				.build();
 
 			try {
-				invoke(info, httpResponse);
+				run(info, httpResponse);
 				failBecauseExpectedAssertionErrorWasNotThrown();
 			} catch (AssertionError e) {
 				assertThat(e.getMessage())
@@ -79,5 +79,5 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 
 	protected abstract Range getRange();
 
-	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
+	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

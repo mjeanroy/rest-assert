@@ -31,7 +31,7 @@ import org.assertj.core.api.AssertionInfo;
 public class AssertHasValueTest extends AbstractCookiesTest {
 
 	@Override
-	protected void invoke(AssertionInfo info, Cookie cookie) {
+	protected void run(AssertionInfo info, Cookie cookie) {
 		cookies.assertHasValue(info, cookie, success().getValue());
 	}
 

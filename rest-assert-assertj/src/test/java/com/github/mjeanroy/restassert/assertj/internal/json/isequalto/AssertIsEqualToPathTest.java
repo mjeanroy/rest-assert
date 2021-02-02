@@ -44,7 +44,7 @@ public class AssertIsEqualToPathTest extends AbstractJsonsIsEqualToTest<Path> {
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, Path json) {
+	protected void run(AssertionInfo info, Path json) {
 		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

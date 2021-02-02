@@ -36,7 +36,7 @@ public class AssertIsGzippedTest extends AbstractHttpResponsesHeaderEqualToTest 
 	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsGzipped(someInfo(), httpResponse);
 	}
 

@@ -41,7 +41,7 @@ public abstract class AbstractCookiesTest {
 	@Test
 	public void should_pass() {
 		Cookie cookie = success();
-		invoke(someInfo(), cookie);
+		run(someInfo(), cookie);
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public abstract class AbstractCookiesTest {
 		final Cookie cookie = failure();
 
 		try {
-			invoke(info, cookie);
+			run(info, cookie);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		}
 		catch (AssertionError e) {
@@ -61,7 +61,7 @@ public abstract class AbstractCookiesTest {
 		}
 	}
 
-	protected abstract void invoke(AssertionInfo info, Cookie cookie);
+	protected abstract void run(AssertionInfo info, Cookie cookie);
 
 	protected abstract Cookie success();
 

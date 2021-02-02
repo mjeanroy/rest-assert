@@ -35,7 +35,7 @@ public class AssertIsLocationEqualToTest extends AbstractHttpResponsesHeaderEqua
 	private static final String VALUE = LOCATION.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsLocationEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

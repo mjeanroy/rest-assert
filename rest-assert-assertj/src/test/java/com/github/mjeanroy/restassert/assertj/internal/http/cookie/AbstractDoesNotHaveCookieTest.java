@@ -43,7 +43,7 @@ public abstract class AbstractDoesNotHaveCookieTest {
 	@Test
 	public void should_pass_if_cookie_is_missing() {
 		HttpResponse httpResponse = newResponse(fakeCookie());
-		invoke(someInfo(), httpResponse);
+		run(someInfo(), httpResponse);
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public abstract class AbstractDoesNotHaveCookieTest {
 		final HttpResponse httpResponse = newResponse(cookie());
 
 		try {
-			invoke(info, httpResponse);
+			run(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			assertThat(e.getMessage())
@@ -66,7 +66,7 @@ public abstract class AbstractDoesNotHaveCookieTest {
 
 	protected abstract Cookie cookie();
 
-	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
+	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
 
 	Cookie fakeCookie() {
 		return new CookieBuilder().setName("foo").setValue("bar").build();

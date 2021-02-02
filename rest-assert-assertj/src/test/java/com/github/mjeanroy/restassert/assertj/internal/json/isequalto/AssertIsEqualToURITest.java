@@ -44,7 +44,7 @@ public class AssertIsEqualToURITest extends AbstractJsonsIsEqualToTest<URI> {
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, URI json) {
+	protected void run(AssertionInfo info, URI json) {
 		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

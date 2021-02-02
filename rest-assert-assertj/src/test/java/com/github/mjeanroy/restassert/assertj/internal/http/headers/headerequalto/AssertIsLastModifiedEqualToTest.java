@@ -35,7 +35,7 @@ public class AssertIsLastModifiedEqualToTest extends AbstractHttpResponsesHeader
 	private static final String VALUE = LAST_MODIFIED.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsLastModifiedEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

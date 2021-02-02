@@ -37,7 +37,7 @@ public class AssertIsCacheControlEqualToStringTest extends AbstractHttpResponses
 	private static final String FAILED_VALUE = "public, no-transform, max-age=0";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

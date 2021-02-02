@@ -46,7 +46,7 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		// WHEN
-		invoke(httpResponse);
+		run(httpResponse);
 	}
 
 	@Test
@@ -57,7 +57,7 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 		try {
 			// WHEN
-			invoke(httpResponse);
+			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			// THEN
@@ -92,5 +92,5 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 	 *
 	 * @param httpResponse Http response.
 	 */
-	protected abstract void invoke(HttpResponse httpResponse);
+	protected abstract void run(HttpResponse httpResponse);
 }

@@ -38,7 +38,7 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractHttpResponsesHea
 	private static final String VALUE = EXPIRES.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		Date date = fromInternetMessageFormat(VALUE);
 		httpResponses.assertIsExpiresEqualTo(someInfo(), httpResponse, date);
 	}

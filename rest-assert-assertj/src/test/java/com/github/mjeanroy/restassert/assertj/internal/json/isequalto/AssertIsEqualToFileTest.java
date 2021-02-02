@@ -44,7 +44,7 @@ public class AssertIsEqualToFileTest extends AbstractJsonsIsEqualToTest<File> {
 	}
 
 	@Override
-	protected void invoke(AssertionInfo info, File json) {
+	protected void run(AssertionInfo info, File json) {
 		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

@@ -37,7 +37,7 @@ public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends Abstra
 	private static final List<String> VALUES = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowHeadersEqualTo(someInfo(), httpResponse, VALUES);
 	}
 

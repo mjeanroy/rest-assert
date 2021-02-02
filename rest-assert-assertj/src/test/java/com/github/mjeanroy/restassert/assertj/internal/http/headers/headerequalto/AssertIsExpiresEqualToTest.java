@@ -35,7 +35,7 @@ public class AssertIsExpiresEqualToTest extends AbstractHttpResponsesHeaderEqual
 	private static final String VALUE = EXPIRES.getValue();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsExpiresEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

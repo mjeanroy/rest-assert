@@ -37,7 +37,7 @@ public class AssertIsAccessControlExposeHeadersEqualToIterableTest extends Abstr
 	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlExposeHeadersEqualTo(someInfo(), httpResponse, VALUE);
 	}
 

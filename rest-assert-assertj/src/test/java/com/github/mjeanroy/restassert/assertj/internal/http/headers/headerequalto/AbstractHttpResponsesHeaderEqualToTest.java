@@ -46,7 +46,7 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 		final HttpResponse httpResponse = newHttpResponse(header);
 
 		// WHEN
-		invoke(httpResponse);
+		run(httpResponse);
 
 		// THEN
 	}
@@ -63,7 +63,7 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 
 		try {
 			// WHEN
-			invoke(httpResponse);
+			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			// THEN
@@ -105,5 +105,5 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	 *
 	 * @param httpResponse Http response.
 	 */
-	protected abstract void invoke(HttpResponse httpResponse);
+	protected abstract void run(HttpResponse httpResponse);
 }

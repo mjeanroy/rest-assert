@@ -40,7 +40,7 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 
 	@Test
 	public void should_pass() {
-		invoke(someInfo(), success());
+		run(someInfo(), success());
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 		final T json = failure();
 
 		try {
-			invoke(info, json);
+			run(info, json);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			String expectedMessage = "" +
@@ -75,5 +75,5 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 
 	protected abstract T failure();
 
-	protected abstract void invoke(AssertionInfo info, T json);
+	protected abstract void run(AssertionInfo info, T json);
 }

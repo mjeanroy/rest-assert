@@ -45,7 +45,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 			.setStatus(status())
 			.build();
 
-		invoke(someInfo(), httpResponse);
+		run(someInfo(), httpResponse);
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 			.build();
 
 		try {
-			invoke(info, httpResponse);
+			run(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			assertThat(e.getMessage())
@@ -70,5 +70,5 @@ public abstract class AbstractHttpResponsesStatusTest {
 
 	protected abstract int status();
 
-	protected abstract void invoke(AssertionInfo info, HttpResponse httpResponse);
+	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

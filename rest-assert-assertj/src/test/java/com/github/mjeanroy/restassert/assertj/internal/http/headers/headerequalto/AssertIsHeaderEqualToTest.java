@@ -38,7 +38,7 @@ public class AssertIsHeaderEqualToTest extends AbstractHttpResponsesHeaderTest {
 	private static final String VALUE = "bar";
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsHeaderEqualTo(someInfo(), httpResponse, NAME, VALUE);
 	}
 

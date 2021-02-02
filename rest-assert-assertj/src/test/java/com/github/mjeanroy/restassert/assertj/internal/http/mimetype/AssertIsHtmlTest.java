@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 public class AssertIsHtmlTest extends AbstractHttpResponsesMimeTypeInTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsHtml(someInfo(), httpResponse);
 	}
 

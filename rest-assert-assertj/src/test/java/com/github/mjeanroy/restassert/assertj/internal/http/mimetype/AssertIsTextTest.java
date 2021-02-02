@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 public class AssertIsTextTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
-	protected void invoke(HttpResponse httpResponse) {
+	protected void run(HttpResponse httpResponse) {
 		httpResponses.assertIsText(someInfo(), httpResponse);
 	}
 

@@ -48,7 +48,7 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 		List<Header> headers = getHeader();
 		for (Header header : headers) {
 			HttpResponse httpResponse = newHttpResponse(header);
-			invoke(httpResponse);
+			run(httpResponse);
 		}
 	}
 
@@ -72,7 +72,7 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 			final HttpResponse httpResponse = newHttpResponse(header);
 
 			try {
-				invoke(httpResponse);
+				run(httpResponse);
 				failBecauseExpectedAssertionErrorWasNotThrown();
 			}
 			catch (AssertionError e) {
@@ -100,5 +100,5 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
-	protected abstract void invoke(HttpResponse httpResponse);
+	protected abstract void run(HttpResponse httpResponse);
 }
