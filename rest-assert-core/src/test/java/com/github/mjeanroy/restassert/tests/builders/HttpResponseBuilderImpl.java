@@ -26,15 +26,14 @@ package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import static java.util.Collections.addAll;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * DefaultCookieBuilder used to create mock instance of {@link HttpResponse} class.
@@ -68,39 +67,56 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 
 	@Override
 	public HttpResponse build() {
-		HttpResponse rsp = mock(HttpResponse.class);
-		when(rsp.getStatus()).thenReturn(status);
-		when(rsp.getContent()).thenReturn(content);
-
-		final Map<String, List<String>> headers = new LinkedHashMap<>();
+		Map<String, List<String>> headers = new LinkedHashMap<>();
 		for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
 			headers.put(entry.getKey(), new LinkedList<>(entry.getValue()));
 		}
 
-		when(rsp.getHeader(anyString())).thenAnswer(new Answer<List<String>>() {
-			@Override
-			public List<String> answer(InvocationOnMock invocation) {
-				String name = (String) invocation.getArguments()[0];
-				List<String> values = headers.get(name);
-				if (values == null) {
-					return Collections.emptyList();
-				}
+		return new MockHttpResponse(status, content, headers, cookies);
+	}
 
-				return Collections.unmodifiableList(values);
+	private static final class MockHttpResponse implements HttpResponse {
+
+		private final int status;
+		private final String content;
+		private final Map<String, List<String>> headers;
+		private final List<Cookie> cookies;
+
+		private MockHttpResponse(int status, String content, Map<String, List<String>> headers, List<Cookie> cookies) {
+			this.status = status;
+			this.content = content;
+			this.headers = headers;
+			this.cookies = cookies;
+		}
+
+		@Override
+		public int getStatus() {
+			return status;
+		}
+
+		@Override
+		public boolean hasHeader(String name) {
+			return headers.containsKey(name);
+		}
+
+		@Override
+		public List<String> getHeader(String name) {
+			List<String> values = headers.get(name);
+			if (values == null) {
+				return Collections.emptyList();
 			}
-		});
 
-		when(rsp.hasHeader(anyString())).thenAnswer(new Answer<Boolean>() {
-			@Override
-			public Boolean answer(InvocationOnMock invocation) {
-				String name = (String) invocation.getArguments()[0];
-				return headers.containsKey(name);
-			}
-		});
+			return Collections.unmodifiableList(values);
+		}
 
-		final List<Cookie> cookies = new ArrayList<>(this.cookies);
-		when(rsp.getCookies()).thenReturn(cookies);
+		@Override
+		public String getContent() {
+			return content;
+		}
 
-		return rsp;
+		@Override
+		public List<Cookie> getCookies() {
+			return cookies;
+		}
 	}
 }

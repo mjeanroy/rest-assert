@@ -26,9 +26,6 @@ package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 /**
  * DefaultCookieBuilder used to create mock instance of {@link HttpHeaderValue} class.
  */
@@ -56,8 +53,20 @@ public class HeaderValueBuilder {
 	 * @return Mock instance.
 	 */
 	public HttpHeaderValue build() {
-		HttpHeaderValue hValue = mock(HttpHeaderValue.class);
-		when(hValue.serializeValue()).thenReturn(value);
-		return hValue;
+		return new MockHttpHeaderValue(value);
+	}
+
+	private static final class MockHttpHeaderValue implements HttpHeaderValue {
+
+		private final String value;
+
+		private MockHttpHeaderValue(String value) {
+			this.value = value;
+		}
+
+		@Override
+		public String serializeValue() {
+			return value;
+		}
 	}
 }

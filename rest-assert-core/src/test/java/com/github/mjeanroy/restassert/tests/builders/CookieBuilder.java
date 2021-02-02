@@ -26,8 +26,7 @@ package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import java.util.Date;
 
 /**
  * Create mock instance of {@link Cookie} class.
@@ -152,14 +151,80 @@ public class CookieBuilder {
 	 * @return Mock instance.
 	 */
 	public Cookie build() {
-		Cookie cookie = mock(Cookie.class, String.format("Cookie{name: %s}", name));
-		when(cookie.getName()).thenReturn(name);
-		when(cookie.getValue()).thenReturn(value);
-		when(cookie.getDomain()).thenReturn(domain);
-		when(cookie.getPath()).thenReturn(path);
-		when(cookie.isHttpOnly()).thenReturn(httpOnly);
-		when(cookie.isSecured()).thenReturn(secured);
-		when(cookie.getMaxAge()).thenReturn(maxAge);
-		return cookie;
+		return new MockCookie(
+			name,
+			value,
+			domain,
+			path,
+			httpOnly,
+			secured,
+			maxAge
+		);
+	}
+
+	private static final class MockCookie implements Cookie {
+
+		private final String name;
+		private final String value;
+		private final String domain;
+		private final String path;
+		private final boolean httpOnly;
+		private final boolean secured;
+		private final long maxAge;
+
+		private MockCookie(String name, String value, String domain, String path, boolean httpOnly, boolean secured, long maxAge) {
+			this.name = name;
+			this.value = value;
+			this.domain = domain;
+			this.path = path;
+			this.httpOnly = httpOnly;
+			this.secured = secured;
+			this.maxAge = maxAge;
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
+		@Override
+		public String getValue() {
+			return value;
+		}
+
+		@Override
+		public String getDomain() {
+			return domain;
+		}
+
+		@Override
+		public String getPath() {
+			return path;
+		}
+
+		@Override
+		public boolean isSecured() {
+			return secured;
+		}
+
+		@Override
+		public boolean isHttpOnly() {
+			return httpOnly;
+		}
+
+		@Override
+		public Long getMaxAge() {
+			return maxAge;
+		}
+
+		@Override
+		public Date getExpires() {
+			return null;
+		}
+
+		@Override
+		public String toString() {
+			return "Cookie{name: " + name + "}";
+		}
 	}
 }

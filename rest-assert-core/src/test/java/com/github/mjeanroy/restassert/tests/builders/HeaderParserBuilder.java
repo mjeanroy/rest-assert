@@ -27,11 +27,9 @@ package com.github.mjeanroy.restassert.tests.builders;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * DefaultCookieBuilder used to create mock instance of {@link HttpHeaderValue} class.
@@ -67,12 +65,20 @@ public class HeaderParserBuilder {
 	 *
 	 * @return Mock instance.
 	 */
-	public HttpHeaderParser build() {
-		HttpHeaderParser parser = mock(HttpHeaderParser.class);
-		for (Map.Entry<String, HttpHeaderValue> entry : pairs.entrySet()) {
-			when(parser.parse(entry.getKey())).thenReturn(entry.getValue());
+	public HttpHeaderParser<?> build() {
+		return new MockHttpHeader(pairs);
+	}
+
+	private static final class MockHttpHeader implements HttpHeaderParser<HttpHeaderValue> {
+		private final Map<String, HttpHeaderValue> values;
+
+		private MockHttpHeader(Map<String, HttpHeaderValue> values) {
+			this.values = new HashMap<>(values);
 		}
 
-		return parser;
+		@Override
+		public HttpHeaderValue parse(String value) {
+			return values.get(value);
+		}
 	}
 }
