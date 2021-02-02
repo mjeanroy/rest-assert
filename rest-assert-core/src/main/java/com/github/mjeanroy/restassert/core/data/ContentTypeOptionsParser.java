@@ -32,7 +32,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_CO
 /**
  * Parser for {@link ContentTypeOptions}.
  */
-public class ContentTypeOptionsParser extends AbstractHttpHeaderParser<ContentTypeOptions> {
+final class ContentTypeOptionsParser extends AbstractHttpHeaderParser<ContentTypeOptions> {
 
 	// Ensure no public instantiation.
 	ContentTypeOptionsParser() {

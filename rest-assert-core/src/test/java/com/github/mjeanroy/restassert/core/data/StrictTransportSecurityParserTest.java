@@ -24,15 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StrictTransportSecurityParserTest {
 
+	private StrictTransportSecurityParser parser;
+
+	@Before
+	public void setUp() {
+		parser = (StrictTransportSecurityParser) StrictTransportSecurity.parser();
+	}
+
 	@Test
 	public void it_should_parse_header_with_max_age() {
-		StrictTransportSecurityParser parser = StrictTransportSecurity.parser();
 		StrictTransportSecurity sts = parser.parse("max-age=3600");
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -42,7 +49,6 @@ public class StrictTransportSecurityParserTest {
 
 	@Test
 	public void it_should_parse_header_with_max_age_and_preload() {
-		StrictTransportSecurityParser parser = StrictTransportSecurity.parser();
 		StrictTransportSecurity sts = parser.parse("max-age=3600; preload");
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -52,7 +58,6 @@ public class StrictTransportSecurityParserTest {
 
 	@Test
 	public void it_should_parse_header_with_max_age_and_include_sub_domain() {
-		StrictTransportSecurityParser parser = StrictTransportSecurity.parser();
 		StrictTransportSecurity sts = parser.parse("max-age=3600; includeSubDomains");
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -62,7 +67,6 @@ public class StrictTransportSecurityParserTest {
 
 	@Test
 	public void it_should_parse_header_with_max_age_and_include_sub_domain_and_preload() {
-		StrictTransportSecurityParser parser = StrictTransportSecurity.parser();
 		StrictTransportSecurity sts = parser.parse("max-age=3600; includeSubDomains; preload");
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -72,7 +76,6 @@ public class StrictTransportSecurityParserTest {
 
 	@Test
 	public void it_should_parse_with_case_insensitive_header() {
-		StrictTransportSecurityParser parser = StrictTransportSecurity.parser();
 		StrictTransportSecurity sts = parser.parse("MAX-AGE=3600;  INCLUDESUBDOMAINS; PRELOAD");
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);

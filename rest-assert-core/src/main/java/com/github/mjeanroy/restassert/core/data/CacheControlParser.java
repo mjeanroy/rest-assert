@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 /**
  * Parser for {@link CacheControl} value.
  */
-public class CacheControlParser extends AbstractHttpHeaderParser<CacheControl> {
+final class CacheControlParser extends AbstractHttpHeaderParser<CacheControl> {
 
 	/**
 	 * Class Logger.

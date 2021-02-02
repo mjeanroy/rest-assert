@@ -38,7 +38,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.remove
 /**
  * Parser for {@link StrictTransportSecurity} value.
  */
-public class StrictTransportSecurityParser extends AbstractHttpHeaderParser<StrictTransportSecurity> {
+final class StrictTransportSecurityParser extends AbstractHttpHeaderParser<StrictTransportSecurity> {
 
 	/**
 	 * Class Logger.

@@ -26,6 +26,7 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.LinkedList;
@@ -59,7 +60,7 @@ public final class CacheControl implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static CacheControlParser parser() {
+	public static HttpHeaderParser<CacheControl> parser() {
 		return PARSER;
 	}
 

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 /**
@@ -49,7 +50,7 @@ public enum ContentTypeOptions implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static ContentTypeOptionsParser parser() {
+	public static HttpHeaderParser<ContentTypeOptions> parser() {
 		return PARSER;
 	}
 

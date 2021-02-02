@@ -24,15 +24,16 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
-import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.Map;
 import java.util.Objects;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
+import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
 
 /**
  * Strict-Transport-Security value.
@@ -58,7 +59,7 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static StrictTransportSecurityParser parser() {
+	public static HttpHeaderParser<StrictTransportSecurity> parser() {
 		return PARSER;
 	}
 

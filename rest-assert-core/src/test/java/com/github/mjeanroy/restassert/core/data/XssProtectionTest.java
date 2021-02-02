@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.net.URI;
-
 import com.github.mjeanroy.restassert.core.data.XssProtection.Directive;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
+
+import java.net.URI;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class XssProtectionTest {
 
 	@Test
 	public void it_should_create_disable_header() {
-		final XssProtection header = XssProtection.disable();
+		XssProtection header = XssProtection.disable();
 		assertThat(header.getDirective()).isEqualTo(Directive.DISABLE);
 		assertThat(header.getParameter()).isNull();
 		assertThat(header.serializeValue()).isEqualTo("0");
@@ -50,7 +50,7 @@ public class XssProtectionTest {
 
 	@Test
 	public void it_should_create_enable_header() {
-		final XssProtection header = XssProtection.enable();
+		XssProtection header = XssProtection.enable();
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
 		assertThat(header.getParameter()).isNull();
 		assertThat(header.serializeValue()).isEqualTo("1");
@@ -64,7 +64,7 @@ public class XssProtectionTest {
 
 	@Test
 	public void it_should_create_enable_with_mode_block_header() {
-		final XssProtection header = XssProtection.enableModeBlock();
+		XssProtection header = XssProtection.enableModeBlock();
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
 		assertThat(header.getParameter().getName()).isEqualTo("mode");
 		assertThat(header.getParameter().getValue()).isEqualTo("block");
@@ -79,8 +79,8 @@ public class XssProtectionTest {
 
 	@Test
 	public void it_should_create_enable_with_report_uri_string_header() {
-		final String uri = "https://google.com";
-		final XssProtection header = XssProtection.enableModeReport(uri);
+		String uri = "https://google.com";
+		XssProtection header = XssProtection.enableModeReport(uri);
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
 		assertThat(header.getParameter().getName()).isEqualTo("report");
 		assertThat(header.getParameter().getValue()).isEqualTo(uri);
@@ -95,8 +95,8 @@ public class XssProtectionTest {
 
 	@Test
 	public void it_should_create_enable_with_report_uri_header() {
-		final String uri = "https://google.com";
-		final XssProtection header = XssProtection.enableModeReport(URI.create(uri));
+		String uri = "https://google.com";
+		XssProtection header = XssProtection.enableModeReport(URI.create(uri));
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
 		assertThat(header.getParameter().getName()).isEqualTo("report");
 		assertThat(header.getParameter().getValue()).isEqualTo(uri);

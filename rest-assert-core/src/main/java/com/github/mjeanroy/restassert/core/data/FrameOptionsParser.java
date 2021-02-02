@@ -32,7 +32,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_FR
 /**
  * Parser for {@link FrameOptions} value.
  */
-public class FrameOptionsParser extends AbstractHttpHeaderParser<FrameOptions> {
+final class FrameOptionsParser extends AbstractHttpHeaderParser<FrameOptions> {
 
 	// Ensure no public instantiation.
 	FrameOptionsParser() {

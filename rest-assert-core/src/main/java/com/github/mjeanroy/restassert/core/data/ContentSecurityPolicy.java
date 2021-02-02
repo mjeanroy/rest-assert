@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.net.URL;
@@ -62,7 +63,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static ContentSecurityPolicyParser parser() {
+	public static HttpHeaderParser<ContentSecurityPolicy> parser() {
 		return PARSER;
 	}
 

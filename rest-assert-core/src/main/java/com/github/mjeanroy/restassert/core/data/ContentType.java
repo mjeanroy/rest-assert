@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static java.util.Collections.singletonMap;
+import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
 
-import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static java.util.Collections.singletonMap;
 
 /**
  * A model for Content-Type values.
@@ -80,7 +81,7 @@ public final class ContentType implements HttpHeaderValue {
 	 *
 	 * @return The parser instance.
 	 */
-	public static ContentTypeParser parser() {
+	public static HttpHeaderParser<ContentType> parser() {
 		return PARSER;
 	}
 

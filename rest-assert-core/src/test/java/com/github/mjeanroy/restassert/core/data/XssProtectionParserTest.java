@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class XssProtectionParserTest {
 
@@ -35,7 +35,7 @@ public class XssProtectionParserTest {
 
 	@Before
 	public void setUp() {
-		parser = XssProtection.parser();
+		parser = (XssProtectionParser) XssProtection.parser();
 	}
 
 	@Test

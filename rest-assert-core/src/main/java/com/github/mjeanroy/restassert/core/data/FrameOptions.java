@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.net.URI;
@@ -205,7 +206,7 @@ public final class FrameOptions implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static FrameOptionsParser parser() {
+	public static HttpHeaderParser<FrameOptions> parser() {
 		return PARSER;
 	}
 

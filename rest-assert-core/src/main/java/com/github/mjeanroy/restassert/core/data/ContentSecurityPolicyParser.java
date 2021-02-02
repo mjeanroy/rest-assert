@@ -24,20 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_SECURITY_POLICY;
-
-import java.util.HashSet;
-import java.util.Set;
-
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_SECURITY_POLICY;
+
 /**
  * Parser for {@link ContentSecurityPolicy} value.
  */
-public class ContentSecurityPolicyParser extends AbstractHttpHeaderParser<ContentSecurityPolicy> {
+final class ContentSecurityPolicyParser extends AbstractHttpHeaderParser<ContentSecurityPolicy> {
 
 	/**
 	 * Class logger.

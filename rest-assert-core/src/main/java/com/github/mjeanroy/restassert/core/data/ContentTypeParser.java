@@ -39,7 +39,7 @@ import static java.util.Collections.unmodifiableMap;
  *
  * @see <a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>
  */
-public final class ContentTypeParser extends AbstractHttpHeaderParser<ContentType> {
+final class ContentTypeParser extends AbstractHttpHeaderParser<ContentType> {
 
 	// Ensure no public instantiation.
 	ContentTypeParser() {

@@ -52,14 +52,14 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 	/**
 	 * The parser that will be used to build comparison.
 	 */
-	private final HttpHeaderParser parser;
+	private final HttpHeaderParser<? extends HttpHeaderValue> parser;
 
 	/**
 	 * Create assertion.
 	 *
 	 * @param name Header name.
 	 */
-	public IsHeaderMatchingAssertion(String name, HttpHeaderValue expected, HttpHeaderParser parser) {
+	public IsHeaderMatchingAssertion(String name, HttpHeaderValue expected, HttpHeaderParser<? extends HttpHeaderValue> parser) {
 		super(name);
 		this.expected = notNull(expected, "Header expected value must not be null");
 		this.parser = notNull(parser, "Header parser must not be null");
@@ -73,9 +73,9 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 
 	private static class HeaderPredicate implements Predicate<String> {
 		private final HttpHeaderValue expected;
-		private final HttpHeaderParser parser;
+		private final HttpHeaderParser<? extends HttpHeaderValue> parser;
 
-		private HeaderPredicate(HttpHeaderValue expected, HttpHeaderParser parser) {
+		private HeaderPredicate(HttpHeaderValue expected, HttpHeaderParser<? extends HttpHeaderValue> parser) {
 			this.expected = expected;
 			this.parser = parser;
 		}

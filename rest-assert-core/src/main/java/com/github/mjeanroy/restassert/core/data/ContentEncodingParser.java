@@ -24,20 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_ENCODING;
-import static java.util.Collections.unmodifiableList;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_ENCODING;
+import static java.util.Collections.unmodifiableList;
+
 /**
  * Parser for {@link ContentEncoding} header.
  */
-public class ContentEncodingParser extends AbstractHttpHeaderParser<ContentEncoding> {
+public final class ContentEncodingParser extends AbstractHttpHeaderParser<ContentEncoding> {
 
 	// Ensure no public instantiation.
 	ContentEncodingParser() {

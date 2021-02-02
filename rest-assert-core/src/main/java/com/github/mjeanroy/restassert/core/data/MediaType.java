@@ -24,12 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.Objects;
 
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
 /**
  * The media type representation.
@@ -110,7 +111,7 @@ public final class MediaType implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static MediaTypeParser parser() {
+	public static HttpHeaderParser<MediaType> parser() {
 		return PARSER;
 	}
 

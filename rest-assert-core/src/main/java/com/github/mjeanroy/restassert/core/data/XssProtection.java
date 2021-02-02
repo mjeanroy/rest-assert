@@ -24,14 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.net.URI;
 import java.util.Objects;
 
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Values of valid XSS protection value.
@@ -95,7 +96,7 @@ public final class XssProtection implements HttpHeaderValue {
 	 *
 	 * @return The parser.
 	 */
-	public static XssProtectionParser parser() {
+	public static HttpHeaderParser<XssProtection> parser() {
 		return PARSER;
 	}
 

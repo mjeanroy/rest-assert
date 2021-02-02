@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParse
 /**
  * Parser for {@link MediaType} values.
  */
-public final class MediaTypeParser extends AbstractHttpHeaderParser<MediaType> {
+final class MediaTypeParser extends AbstractHttpHeaderParser<MediaType> {
 
 	// Ensure no public instantiation.
 	MediaTypeParser() {

@@ -73,16 +73,16 @@ public class ContentSecurityPolicyParserTest {
 
 	@Before
 	public void setUp() {
-		parser = ContentSecurityPolicy.parser();
+		parser = (ContentSecurityPolicyParser) ContentSecurityPolicy.parser();
 	}
 
 	@Test
 	public void it_should_parse_default_src() {
-		final String v1 = "'unsafe-inline'";
-		final String s = "'unsafe-eval'";
-		final String v3 = "'self'";
-		final String value = v1 + " " + s + " " + v3;
-		final ContentSecurityPolicy csp = parser.parse("default-src " + value + ";");
+		String v1 = "'unsafe-inline'";
+		String s = "'unsafe-eval'";
+		String v3 = "'self'";
+		String value = v1 + " " + s + " " + v3;
+		ContentSecurityPolicy csp = parser.parse("default-src " + value + ";");
 
 		assertThat(csp.getDirectives())
 			.hasSize(1)
@@ -93,10 +93,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_sandbox() {
-		final String v1 = "allow-scripts";
-		final String v2 = "allow-forms";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; sandbox " + value);
+		String v1 = "allow-scripts";
+		String v2 = "allow-forms";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; sandbox " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -108,10 +108,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_script_src() {
-		final String v1 = "'unsafe-eval'";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; script-src " + value);
+		String v1 = "'unsafe-eval'";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; script-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -123,10 +123,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_styles_src() {
-		final String v1 = "'unsafe-inline'";
-		final String v2 = "'nonce-12345=='";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; style-src " + value);
+		String v1 = "'unsafe-inline'";
+		String v2 = "'nonce-12345=='";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; style-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -138,10 +138,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_connect_src() {
-		final String v1 = "domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; connect-src " + value);
+		String v1 = "domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; connect-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -153,10 +153,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_font_src() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; font-src " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; font-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -168,10 +168,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_img_src() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; img-src " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; img-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -183,10 +183,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_media_src() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; media-src " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; media-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -198,10 +198,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_object_src() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; object-src " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; object-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -213,10 +213,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_child_src() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; child-src " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; child-src " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -228,10 +228,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_form_action_src() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; form-action " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; form-action " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -243,10 +243,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_check_if_csp_match_header_with_plugin_types() {
-		final String v1 = "application/xml";
-		final String v2 = "application/json";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; plugin-types " + value);
+		String v1 = "application/xml";
+		String v2 = "application/json";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; plugin-types " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -258,8 +258,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_frame_ancestors() {
-		final String uri = "http://domain.com";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; frame-ancestors " + uri);
+		String uri = "http://domain.com";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; frame-ancestors " + uri);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -271,8 +271,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_report_uri() {
-		final String uri = "http://domain.com";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-uri " + uri);
+		String uri = "http://domain.com";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-uri " + uri);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -284,8 +284,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_check_if_csp_match_header_with_base_uri() {
-		final String uri = "http://domain.com";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; base-uri " + uri);
+		String uri = "http://domain.com";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; base-uri " + uri);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -297,7 +297,7 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_block_all_mixed_content() {
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; block-all-mixed-content;");
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; block-all-mixed-content;");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -309,8 +309,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_frame_src() {
-		final String uri = "https://example.com/";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; frame-src " + uri + ";");
+		String uri = "https://example.com/";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; frame-src " + uri + ";");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -322,8 +322,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_manifest_src() {
-		final String uri = "https://example.com/";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; manifest-src " + uri + ";");
+		String uri = "https://example.com/";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; manifest-src " + uri + ";");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -335,8 +335,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_prefetch_src() {
-		final String uri = "https://example.com/";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; prefetch-src " + uri + ";");
+		String uri = "https://example.com/";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; prefetch-src " + uri + ";");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -348,8 +348,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_worker_src() {
-		final String uri = "https://example.com/";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; worker-src " + uri + ";");
+		String uri = "https://example.com/";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; worker-src " + uri + ";");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -361,7 +361,7 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_disown_opener() {
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; disown-opener");
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; disown-opener");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -373,10 +373,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_with_navigate_to() {
-		final String v1 = "http://domain.com";
-		final String v2 = "'unsafe-inline'";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; navigate-to " + value);
+		String v1 = "http://domain.com";
+		String v2 = "'unsafe-inline'";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; navigate-to " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -388,7 +388,7 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_upgrade_insecure_request() {
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; upgrade-insecure-request");
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; upgrade-insecure-request");
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -400,10 +400,10 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_require_sri_for() {
-		final String v1 = "script";
-		final String v2 = "style";
-		final String value = v1 + " " + v2;
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; require-sri-for " + value);
+		String v1 = "script";
+		String v2 = "style";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; require-sri-for " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
@@ -415,8 +415,8 @@ public class ContentSecurityPolicyParserTest {
 
 	@Test
 	public void it_should_parse_report_to() {
-		final String value = "#test-group";
-		final ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-to " + value);
+		String value = "#test-group";
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-to " + value);
 
 		assertThat(csp.getDirectives())
 			.hasSize(2)
