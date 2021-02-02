@@ -38,12 +38,12 @@ public class AssertHasContentSecurityPolicyTest extends AbstractGoogleHttpHeader
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasContentSecurityPolicy(message, actual);
 	}
 }

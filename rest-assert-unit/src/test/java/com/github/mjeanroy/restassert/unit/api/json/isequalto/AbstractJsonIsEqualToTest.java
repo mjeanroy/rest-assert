@@ -36,8 +36,8 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 
 	@Test
 	public void it_should_pass() {
-		invoke(success());
-		invoke("foo", success());
+		run(success());
+		run("foo", success());
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(failure);
+				run(failure);
 			}
 		});
 	}
@@ -67,7 +67,7 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(message, failure);
+				run(message, failure);
 			}
 		});
 	}

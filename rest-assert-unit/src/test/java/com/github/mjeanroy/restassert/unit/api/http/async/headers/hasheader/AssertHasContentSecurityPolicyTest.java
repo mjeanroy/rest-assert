@@ -38,12 +38,12 @@ public class AssertHasContentSecurityPolicyTest extends AbstractAsyncHttpHeaderT
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasContentSecurityPolicy(message, actual);
 	}
 }

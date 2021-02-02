@@ -39,12 +39,12 @@ public class AssertIsJavascriptTest extends AbstractNingHttpClientMimeTypeInTest
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsJavascript(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsJavascript(message, actual);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentEncodingTest extends AbstractGoogleDoesNotH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveContentEncoding(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveContentEncoding(message, actual);
 	}
 }

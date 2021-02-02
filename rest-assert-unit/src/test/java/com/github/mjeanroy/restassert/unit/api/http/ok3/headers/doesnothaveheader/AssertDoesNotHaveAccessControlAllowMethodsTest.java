@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMethodsTest extends AbstractOkDo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowMethods(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowMethods(message, actual);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertHasStrictTransportSecurityTest extends AbstractNingHttpHeader
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasStrictTransportSecurity(message, actual);
 	}
 }

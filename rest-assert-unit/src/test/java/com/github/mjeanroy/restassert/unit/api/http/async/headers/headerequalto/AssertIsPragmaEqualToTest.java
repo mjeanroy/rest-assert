@@ -40,12 +40,12 @@ public class AssertIsPragmaEqualToTest extends AbstractAsyncHttpHeaderEqualToTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsPragmaEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsPragmaEqualTo(message, actual, VALUE);
 	}
 }

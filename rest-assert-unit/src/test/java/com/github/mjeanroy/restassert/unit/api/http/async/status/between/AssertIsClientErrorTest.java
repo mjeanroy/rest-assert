@@ -38,12 +38,12 @@ public class AssertIsClientErrorTest extends AbstractAsyncHttpStatusBetweenTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsClientError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsClientError(message, actual);
 	}
 }

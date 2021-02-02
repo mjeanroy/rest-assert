@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrl
 public class AssertIsEqualToURLTest extends AbstractJsonIsEqualToTest<URL> {
 
 	@Override
-	protected void invoke(URL actual) {
+	protected void run(URL actual) {
 		assertIsEqualTo(actual(), actual);
 	}
 
 	@Override
-	protected void invoke(String message, URL actual) {
+	protected void run(String message, URL actual) {
 		assertIsEqualTo(message, actual(), actual);
 	}
 

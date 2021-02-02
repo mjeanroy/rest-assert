@@ -48,12 +48,12 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractApacheHt
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
 	}
 

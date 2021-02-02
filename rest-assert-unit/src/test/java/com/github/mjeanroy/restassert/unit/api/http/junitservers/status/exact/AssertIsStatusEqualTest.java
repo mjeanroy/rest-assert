@@ -37,12 +37,12 @@ public class AssertIsStatusEqualTest extends AbstractJunitServersHttpStatusTest 
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStatusEqual(actual, status());
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStatusEqual(message, actual, status());
 	}
 }

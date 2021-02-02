@@ -40,12 +40,12 @@ public class AssertIsLocationEqualToTest extends AbstractGoogleHttpHeaderEqualTo
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsLocationEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsLocationEqualTo(message, actual, VALUE);
 	}
 }

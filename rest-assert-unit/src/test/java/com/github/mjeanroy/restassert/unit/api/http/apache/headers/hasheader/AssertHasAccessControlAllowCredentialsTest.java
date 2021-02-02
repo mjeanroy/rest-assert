@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowCredentialsTest extends AbstractApacheHt
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowCredentials(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowCredentials(message, actual);
 	}
 }

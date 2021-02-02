@@ -42,12 +42,12 @@ public class AssertIsFrameOptionsEqualToStringTest extends AbstractNingHttpHeade
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
-
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 
 public class AssertIsAcceptedTest extends AbstractOkHttpStatusTest {
 
@@ -37,12 +37,12 @@ public class AssertIsAcceptedTest extends AbstractOkHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsAccepted(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsAccepted(message, actual);
 	}
 }

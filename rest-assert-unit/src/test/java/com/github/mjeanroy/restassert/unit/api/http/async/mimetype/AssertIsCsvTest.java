@@ -37,12 +37,12 @@ public class AssertIsCsvTest extends AbstractAsyncHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsCsv(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsCsv(message, actual);
 	}
 }

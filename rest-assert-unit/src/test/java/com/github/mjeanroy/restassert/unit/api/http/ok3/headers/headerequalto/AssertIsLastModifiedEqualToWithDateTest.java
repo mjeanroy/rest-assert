@@ -49,13 +49,13 @@ public class AssertIsLastModifiedEqualToWithDateTest extends AbstractOkHttpHeade
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		OkHttpAssert.assertIsLastModifiedEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		OkHttpAssert.assertIsLastModifiedEqualTo(message, actual, date);
 	}

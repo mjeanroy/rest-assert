@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 public class AssertIsContentEncodingEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
 
@@ -42,12 +42,12 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractOkHttpHead
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 

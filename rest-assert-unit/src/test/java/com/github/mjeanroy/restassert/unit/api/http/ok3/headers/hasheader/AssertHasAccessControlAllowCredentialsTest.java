@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowCredentialsTest extends AbstractOkHttpHe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasAccessControlAllowCredentials(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasAccessControlAllowCredentials(message, actual);
 	}
 }

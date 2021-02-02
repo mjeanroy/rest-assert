@@ -38,12 +38,12 @@ public class AssertDoesNotHaveExpiresTest extends AbstractGoogleDoesNotHaveHttpH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveExpires(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveExpires(message, actual);
 	}
 }

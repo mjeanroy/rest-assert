@@ -38,12 +38,12 @@ public class AssertIsNotRedirectionTest extends AbstractApacheHttpStatusOutOfTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsNotRedirection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsNotRedirection(message, actual);
 	}
 }

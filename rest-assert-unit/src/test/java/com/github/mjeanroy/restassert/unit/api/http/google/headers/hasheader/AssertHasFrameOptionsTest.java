@@ -38,12 +38,12 @@ public class AssertHasFrameOptionsTest extends AbstractGoogleHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasFrameOptions(message, actual);
 	}
 }

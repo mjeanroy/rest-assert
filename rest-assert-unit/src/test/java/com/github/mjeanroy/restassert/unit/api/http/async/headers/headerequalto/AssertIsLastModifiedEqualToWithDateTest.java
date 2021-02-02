@@ -49,13 +49,13 @@ public class AssertIsLastModifiedEqualToWithDateTest extends AbstractAsyncHttpHe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		AsyncHttpAssert.assertIsLastModifiedEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		AsyncHttpAssert.assertIsLastModifiedEqualTo(message, actual, date);
 	}

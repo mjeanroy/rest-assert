@@ -37,12 +37,12 @@ public class AssertIsNotAcceptableTest extends AbstractApacheHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsNotAcceptable(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsNotAcceptable(message, actual);
 	}
 }

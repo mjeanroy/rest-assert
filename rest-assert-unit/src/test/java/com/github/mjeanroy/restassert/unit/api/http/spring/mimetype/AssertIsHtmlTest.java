@@ -39,12 +39,12 @@ public class AssertIsHtmlTest extends AbstractSpringMockMvcHttpClientMimeTypeInT
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsHtml(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsHtml(message, actual);
 	}
 }

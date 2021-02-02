@@ -37,12 +37,12 @@ public class AssertIsStatusEqualTest extends AbstractAsyncHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsStatusEqual(actual, status());
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsStatusEqual(message, actual, status());
 	}
 }

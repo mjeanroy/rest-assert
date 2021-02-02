@@ -38,12 +38,12 @@ public class AssertHasStrictTransportSecurityTest extends AbstractJunitServersHt
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasStrictTransportSecurity(message, actual);
 	}
 }

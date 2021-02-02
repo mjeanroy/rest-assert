@@ -42,12 +42,12 @@ public class AssertIsCacheControlEqualToStringTest extends AbstractJunitServersH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 

@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowHeadersTest extends AbstractApacheHttpHe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowHeaders(message, actual);
 	}
 }

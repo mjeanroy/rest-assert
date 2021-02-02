@@ -37,12 +37,12 @@ public class AssertIsCsvTest extends AbstractJunitServersHttpClientMimeTypeTest 
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsCsv(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsCsv(message, actual);
 	}
 }

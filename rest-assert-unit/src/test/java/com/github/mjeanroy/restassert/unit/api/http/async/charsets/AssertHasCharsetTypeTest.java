@@ -39,12 +39,12 @@ public class AssertHasCharsetTypeTest extends AbstractAsyncHttpAssertCharsetTest
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasCharset(actual, CHARSET);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasCharset(message, actual, CHARSET);
 	}
 }

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSV;
-
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSV;
 
 public class AssertIsCsvTest extends AbstractOkHttpClientMimeTypeTest {
 
@@ -37,12 +37,12 @@ public class AssertIsCsvTest extends AbstractOkHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsCsv(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsCsv(message, actual);
 	}
 }

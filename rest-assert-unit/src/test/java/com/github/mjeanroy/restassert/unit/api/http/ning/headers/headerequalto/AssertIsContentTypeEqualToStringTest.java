@@ -41,12 +41,12 @@ public class AssertIsContentTypeEqualToStringTest extends AbstractNingHttpHeader
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 }

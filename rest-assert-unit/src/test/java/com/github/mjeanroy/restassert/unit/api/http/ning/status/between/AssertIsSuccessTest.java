@@ -38,12 +38,12 @@ public class AssertIsSuccessTest extends AbstractNingHttpStatusBetweenTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsSuccess(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsSuccess(message, actual);
 	}
 }

@@ -42,12 +42,12 @@ public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractGo
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
 	}
 

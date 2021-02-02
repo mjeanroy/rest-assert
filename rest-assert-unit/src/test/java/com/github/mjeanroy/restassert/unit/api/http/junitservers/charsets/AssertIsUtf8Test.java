@@ -35,12 +35,12 @@ public class AssertIsUtf8Test extends AbstractJunitServersHttpAssertCharsetTest 
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsUtf8(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsUtf8(message, actual);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertIsServerErrorTest extends AbstractCoreHttpStatusBetweenTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertIsServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertIsServerError(message, actual);
 	}
 }

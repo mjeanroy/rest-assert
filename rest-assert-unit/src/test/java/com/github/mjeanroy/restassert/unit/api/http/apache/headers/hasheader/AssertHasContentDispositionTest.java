@@ -38,12 +38,12 @@ public class AssertHasContentDispositionTest extends AbstractApacheHttpHeaderTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasContentDisposition(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasContentDisposition(message, actual);
 	}
 }

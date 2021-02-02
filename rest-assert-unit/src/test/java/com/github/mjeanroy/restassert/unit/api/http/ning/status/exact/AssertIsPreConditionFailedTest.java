@@ -37,12 +37,12 @@ public class AssertIsPreConditionFailedTest extends AbstractNingHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsPreConditionFailed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsPreConditionFailed(message, actual);
 	}
 }

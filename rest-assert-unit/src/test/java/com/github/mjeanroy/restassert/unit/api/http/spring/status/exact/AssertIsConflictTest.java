@@ -37,12 +37,12 @@ public class AssertIsConflictTest extends AbstractSpringMockMvcHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsConflict(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsConflict(message, actual);
 	}
 }

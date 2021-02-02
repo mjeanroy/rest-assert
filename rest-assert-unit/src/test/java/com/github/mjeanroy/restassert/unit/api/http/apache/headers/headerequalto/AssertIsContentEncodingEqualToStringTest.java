@@ -42,12 +42,12 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractApacheHttp
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 

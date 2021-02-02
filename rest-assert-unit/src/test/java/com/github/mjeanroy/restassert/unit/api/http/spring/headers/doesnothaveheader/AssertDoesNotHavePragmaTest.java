@@ -38,12 +38,12 @@ public class AssertDoesNotHavePragmaTest extends AbstractSpringMockMcvDoesNotHav
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHavePragma(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHavePragma(message, actual);
 	}
 }

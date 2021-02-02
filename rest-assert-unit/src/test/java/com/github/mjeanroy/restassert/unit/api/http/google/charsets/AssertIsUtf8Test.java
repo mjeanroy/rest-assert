@@ -35,12 +35,12 @@ public class AssertIsUtf8Test extends AbstractGoogleHttpAssertCharsetTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsUtf8(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsUtf8(message, actual);
 	}
 }

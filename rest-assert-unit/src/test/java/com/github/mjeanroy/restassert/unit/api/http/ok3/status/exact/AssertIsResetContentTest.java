@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
-
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
 
 public class AssertIsResetContentTest extends AbstractOkHttpStatusTest {
 
@@ -37,12 +37,12 @@ public class AssertIsResetContentTest extends AbstractOkHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsResetContent(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsResetContent(message, actual);
 	}
 }

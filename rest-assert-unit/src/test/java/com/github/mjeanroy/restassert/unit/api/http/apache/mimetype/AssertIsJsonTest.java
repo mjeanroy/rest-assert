@@ -37,12 +37,12 @@ public class AssertIsJsonTest extends AbstractApacheHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsJson(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsJson(message, actual);
 	}
 }

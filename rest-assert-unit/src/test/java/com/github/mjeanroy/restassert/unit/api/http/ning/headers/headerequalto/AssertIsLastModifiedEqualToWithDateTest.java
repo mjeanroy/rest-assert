@@ -49,13 +49,13 @@ public class AssertIsLastModifiedEqualToWithDateTest extends AbstractNingHttpHea
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		NingHttpAssert.assertIsLastModifiedEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		NingHttpAssert.assertIsLastModifiedEqualTo(message, actual, date);
 	}

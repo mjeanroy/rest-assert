@@ -40,12 +40,12 @@ public class AssertIsETagEqualToTest extends AbstractJunitServersHttpHeaderEqual
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsETagEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsETagEqualTo(message, actual, VALUE);
 	}
 }

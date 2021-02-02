@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractOkDoesNotHa
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveContentTypeOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveContentTypeOptions(message, actual);
 	}
 }

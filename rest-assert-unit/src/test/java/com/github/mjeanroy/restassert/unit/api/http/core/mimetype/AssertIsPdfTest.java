@@ -37,12 +37,12 @@ public class AssertIsPdfTest extends AbstractCoreHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertIsPdf(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertIsPdf(message, actual);
 	}
 }

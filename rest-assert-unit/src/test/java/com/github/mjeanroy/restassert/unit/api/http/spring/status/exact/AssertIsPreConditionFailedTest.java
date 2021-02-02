@@ -37,12 +37,12 @@ public class AssertIsPreConditionFailedTest extends AbstractSpringMockMvcHttpSta
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPreConditionFailed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPreConditionFailed(message, actual);
 	}
 }

@@ -44,8 +44,8 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	public void it_should_pass_with_status_in_bounds() {
 		final Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
-			invoke(newHttpResponse(i));
-			invoke(CUSTOM_MESSAGE, newHttpResponse(i));
+			run(newHttpResponse(i));
+			run(CUSTOM_MESSAGE, newHttpResponse(i));
 		}
 	}
 
@@ -54,7 +54,7 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 		doTestWithDefaultMessage(null, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
-				invoke(newHttpResponse(status));
+				run(newHttpResponse(status));
 			}
 		});
 	}
@@ -64,7 +64,7 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 		doTestWithDefaultMessage(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(status));
+				run(CUSTOM_MESSAGE, newHttpResponse(status));
 			}
 		});
 	}

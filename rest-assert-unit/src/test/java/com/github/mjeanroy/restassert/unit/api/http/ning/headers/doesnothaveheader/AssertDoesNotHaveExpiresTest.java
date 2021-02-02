@@ -38,12 +38,12 @@ public class AssertDoesNotHaveExpiresTest extends AbstractNingDoesNotHaveHttpHea
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveExpires(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveExpires(message, actual);
 	}
 }

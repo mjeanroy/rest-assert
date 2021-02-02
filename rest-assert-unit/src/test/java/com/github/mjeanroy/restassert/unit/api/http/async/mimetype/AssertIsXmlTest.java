@@ -39,12 +39,12 @@ public class AssertIsXmlTest extends AbstractAsyncHttpClientMimeTypeInTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsXml(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsXml(message, actual);
 	}
 }

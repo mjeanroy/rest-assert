@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLocationTest extends AbstractJunitServersDoesNotHa
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveLocation(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveLocation(message, actual);
 	}
 }

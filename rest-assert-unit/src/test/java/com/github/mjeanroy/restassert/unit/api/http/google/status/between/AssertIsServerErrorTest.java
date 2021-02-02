@@ -38,12 +38,12 @@ public class AssertIsServerErrorTest extends AbstractGoogleHttpStatusBetweenTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsServerError(message, actual);
 	}
 }

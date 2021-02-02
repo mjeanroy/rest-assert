@@ -40,12 +40,12 @@ public class AssertIsContentDispositionEqualToTest extends AbstractCoreHttpHeade
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertIsContentDispositionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertIsContentDispositionEqualTo(message, actual, VALUE);
 	}
 }

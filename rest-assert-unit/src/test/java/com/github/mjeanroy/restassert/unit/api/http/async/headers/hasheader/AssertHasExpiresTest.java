@@ -38,12 +38,12 @@ public class AssertHasExpiresTest extends AbstractAsyncHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasExpires(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasExpires(message, actual);
 	}
 }

@@ -41,12 +41,12 @@ public class AssertIsStatusOutOfTest extends AbstractSpringMockMvcHttpStatusOutO
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

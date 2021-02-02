@@ -40,12 +40,12 @@ public class AssertHasHeaderTest extends AbstractNingHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasHeader(message, actual, getHeader().getName());
 	}
 }

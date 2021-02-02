@@ -44,12 +44,12 @@ public class AssertDoesNotHaveCookieWithNameTest extends AbstractCoreHttpDoesNot
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveCookie(actual, NAME);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveCookie(message, actual, NAME);
 	}
 }

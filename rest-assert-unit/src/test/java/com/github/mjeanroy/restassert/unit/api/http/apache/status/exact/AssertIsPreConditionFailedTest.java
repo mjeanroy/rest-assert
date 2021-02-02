@@ -37,12 +37,12 @@ public class AssertIsPreConditionFailedTest extends AbstractApacheHttpStatusTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsPreConditionFailed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsPreConditionFailed(message, actual);
 	}
 }

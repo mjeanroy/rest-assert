@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUri
 public class AssertIsEqualToIgnoringURITest extends AbstractJsonIsEqualToIgnoringTest<URI> {
 
 	@Override
-	protected void invoke(URI actual) {
+	protected void run(URI actual) {
 		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected void invoke(String message, URI actual) {
+	protected void run(String message, URI actual) {
 		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
 	}
 

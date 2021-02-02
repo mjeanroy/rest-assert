@@ -37,12 +37,12 @@ public class AssertIsForbiddenTest extends AbstractGoogleHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsForbidden(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsForbidden(message, actual);
 	}
 }

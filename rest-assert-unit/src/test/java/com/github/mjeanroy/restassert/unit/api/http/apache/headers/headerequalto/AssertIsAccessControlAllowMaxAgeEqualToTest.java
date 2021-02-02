@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractApacheH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsAccessControlAllowMaxAgeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsAccessControlAllowMaxAgeEqualTo(message, actual, VALUE);
 	}
 }

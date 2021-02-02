@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowCredentialsTest extends Abstract
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowCredentials(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowCredentials(message, actual);
 	}
 }

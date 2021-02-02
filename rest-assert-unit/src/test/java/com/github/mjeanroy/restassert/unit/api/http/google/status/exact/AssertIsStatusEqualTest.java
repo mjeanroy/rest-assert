@@ -37,12 +37,12 @@ public class AssertIsStatusEqualTest extends AbstractGoogleHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsStatusEqual(actual, status());
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsStatusEqual(message, actual, status());
 	}
 }

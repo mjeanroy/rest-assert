@@ -42,12 +42,12 @@ public class AssertIsXssProtectionEqualToStringTest extends AbstractApacheHttpHe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
 	}
 

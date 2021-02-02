@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLastModifiedTest extends AbstractNingDoesNotHaveHt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveLastModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveLastModified(message, actual);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertDoesNotHaveETagTest extends AbstractOkDoesNotHaveHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveETag(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveETag(message, actual);
 	}
 }

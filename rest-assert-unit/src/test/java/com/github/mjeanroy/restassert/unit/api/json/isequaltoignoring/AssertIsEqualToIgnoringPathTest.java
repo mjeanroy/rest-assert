@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPat
 public class AssertIsEqualToIgnoringPathTest extends AbstractJsonIsEqualToIgnoringTest<Path> {
 
 	@Override
-	protected void invoke(Path actual) {
+	protected void run(Path actual) {
 		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected void invoke(String message, Path actual) {
+	protected void run(String message, Path actual) {
 		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
 	}
 

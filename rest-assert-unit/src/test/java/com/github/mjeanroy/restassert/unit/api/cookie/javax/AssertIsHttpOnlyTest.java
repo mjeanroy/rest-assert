@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.a
 public class AssertIsHttpOnlyTest extends AbstractJavaxCookieTest {
 
 	@Override
-	protected void invoke(Cookie actual) {
+	protected void run(Cookie actual) {
 		assertIsHttpOnly(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Cookie actual) {
+	protected void run(String message, Cookie actual) {
 		assertIsHttpOnly(message, actual);
 	}
 

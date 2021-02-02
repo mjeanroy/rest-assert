@@ -37,12 +37,12 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractSpringMockMvcHttpS
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsUnsupportedMediaType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsUnsupportedMediaType(message, actual);
 	}
 }

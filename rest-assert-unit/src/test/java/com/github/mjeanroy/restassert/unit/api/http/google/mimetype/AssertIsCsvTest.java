@@ -37,12 +37,12 @@ public class AssertIsCsvTest extends AbstractGoogleHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsCsv(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsCsv(message, actual);
 	}
 }

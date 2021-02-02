@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowMethodsTest extends AbstractJunitServers
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasAccessControlAllowMethods(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasAccessControlAllowMethods(message, actual);
 	}
 }

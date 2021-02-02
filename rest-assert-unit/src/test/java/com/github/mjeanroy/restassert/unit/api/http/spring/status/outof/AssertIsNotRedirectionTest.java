@@ -38,12 +38,12 @@ public class AssertIsNotRedirectionTest extends AbstractSpringMockMvcHttpStatusO
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsNotRedirection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsNotRedirection(message, actual);
 	}
 }

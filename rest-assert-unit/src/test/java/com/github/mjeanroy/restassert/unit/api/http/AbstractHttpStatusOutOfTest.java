@@ -47,8 +47,8 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 		final Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
-				invoke(newHttpResponse(i));
-				invoke(CUSTOM_MESSAGE, newHttpResponse(i));
+				run(newHttpResponse(i));
+				run(CUSTOM_MESSAGE, newHttpResponse(i));
 			}
 		}
 	}
@@ -58,7 +58,7 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 		doTest(null, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
-				invoke(newHttpResponse(status));
+				run(newHttpResponse(status));
 			}
 		});
 	}
@@ -68,7 +68,7 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(status));
+				run(CUSTOM_MESSAGE, newHttpResponse(status));
 			}
 		});
 	}

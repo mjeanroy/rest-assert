@@ -38,12 +38,12 @@ public class AssertIsNotSuccessTest extends AbstractApacheHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsNotSuccess(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsNotSuccess(message, actual);
 	}
 }

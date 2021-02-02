@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractSpringMockM
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveContentTypeOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveContentTypeOptions(message, actual);
 	}
 }

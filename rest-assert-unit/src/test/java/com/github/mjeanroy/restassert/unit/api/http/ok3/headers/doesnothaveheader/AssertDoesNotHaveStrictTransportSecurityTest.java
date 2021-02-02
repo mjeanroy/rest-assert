@@ -38,12 +38,12 @@ public class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractOkDoes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveStrictTransportSecurity(message, actual);
 	}
 }

@@ -46,12 +46,12 @@ public class AssertIsLastModifiedEqualToTest extends AbstractNingHttpHeaderEqual
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
 	}
 }

@@ -24,19 +24,19 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	public void it_should_pass() {
 		T cookie = success();
-		invoke(cookie);
-		invoke("message", cookie);
+		run(cookie);
+		run("message", cookie);
 	}
 
 	@Test
@@ -47,7 +47,7 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(cookie);
+				run(cookie);
 			}
 		});
 	}
@@ -60,7 +60,7 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
-				invoke(message, cookie);
+				run(message, cookie);
 			}
 		});
 	}

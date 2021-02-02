@@ -41,8 +41,8 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 
 	@Test
 	public void it_should_pass_with_expected_mime_type() {
-		invoke(newHttpResponse(getCharset()));
-		invoke(CUSTOM_MESSAGE, newHttpResponse(getCharset()));
+		run(newHttpResponse(getCharset()));
+		run(CUSTOM_MESSAGE, newHttpResponse(getCharset()));
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 		invokeFailure(null, new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {
-				invoke(newHttpResponse(charset));
+				run(newHttpResponse(charset));
 			}
 		});
 	}
@@ -60,7 +60,7 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 		invokeFailure(CUSTOM_MESSAGE, new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(charset));
+				run(CUSTOM_MESSAGE, newHttpResponse(charset));
 			}
 		});
 	}

@@ -35,12 +35,12 @@ public class AssertIsUtf8Test extends AbstractSpringMockMvcHttpAssertCharsetTest
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsUtf8(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsUtf8(message, actual);
 	}
 }

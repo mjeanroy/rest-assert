@@ -38,12 +38,12 @@ public class AssertHasContentDispositionTest extends AbstractNingHttpHeaderTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasContentDisposition(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasContentDisposition(message, actual);
 	}
 }

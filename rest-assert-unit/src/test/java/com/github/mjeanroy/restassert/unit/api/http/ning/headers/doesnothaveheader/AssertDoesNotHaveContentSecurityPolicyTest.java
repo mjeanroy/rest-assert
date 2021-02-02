@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractNingDoes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveContentSecurityPolicy(message, actual);
 	}
 }

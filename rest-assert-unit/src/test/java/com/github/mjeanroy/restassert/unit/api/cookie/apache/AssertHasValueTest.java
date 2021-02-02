@@ -32,12 +32,12 @@ import org.apache.http.cookie.Cookie;
 public class AssertHasValueTest extends AbstractApacheHttpCookieTest {
 
 	@Override
-	protected void invoke(Cookie actual) {
+	protected void run(Cookie actual) {
 		assertHasValue(actual, success().getValue());
 	}
 
 	@Override
-	protected void invoke(String message, Cookie actual) {
+	protected void run(String message, Cookie actual) {
 		assertHasValue(message, actual, success().getValue());
 	}
 

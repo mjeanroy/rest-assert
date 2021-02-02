@@ -63,12 +63,12 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractAsyncHttpH
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 }

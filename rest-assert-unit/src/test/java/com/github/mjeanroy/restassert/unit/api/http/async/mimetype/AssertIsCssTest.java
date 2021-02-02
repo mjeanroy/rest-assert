@@ -37,12 +37,12 @@ public class AssertIsCssTest extends AbstractAsyncHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsCss(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsCss(message, actual);
 	}
 }

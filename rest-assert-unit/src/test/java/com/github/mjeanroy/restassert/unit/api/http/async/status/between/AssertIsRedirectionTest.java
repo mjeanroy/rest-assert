@@ -38,12 +38,12 @@ public class AssertIsRedirectionTest extends AbstractAsyncHttpStatusBetweenTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsRedirection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsRedirection(message, actual);
 	}
 }

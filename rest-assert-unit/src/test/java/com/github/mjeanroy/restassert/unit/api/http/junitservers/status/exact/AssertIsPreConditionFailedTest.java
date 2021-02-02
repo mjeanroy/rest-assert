@@ -37,12 +37,12 @@ public class AssertIsPreConditionFailedTest extends AbstractJunitServersHttpStat
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsPreConditionFailed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsPreConditionFailed(message, actual);
 	}
 }

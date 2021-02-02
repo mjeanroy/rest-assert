@@ -38,12 +38,12 @@ public class AssertHasContentTypeOptionsTest extends AbstractNingHttpHeaderTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasContentTypeOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasContentTypeOptions(message, actual);
 	}
 }

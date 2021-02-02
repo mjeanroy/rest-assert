@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentEncodingTest extends AbstractAsyncDoesNotHa
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveContentEncoding(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveContentEncoding(message, actual);
 	}
 }

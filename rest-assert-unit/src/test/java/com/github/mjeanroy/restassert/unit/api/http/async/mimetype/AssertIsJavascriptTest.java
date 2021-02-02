@@ -39,12 +39,12 @@ public class AssertIsJavascriptTest extends AbstractAsyncHttpClientMimeTypeInTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsJavascript(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsJavascript(message, actual);
 	}
 }

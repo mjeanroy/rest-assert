@@ -40,12 +40,12 @@ public class AssertHasHeaderTest extends AbstractOkHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasHeader(message, actual, getHeader().getName());
 	}
 }

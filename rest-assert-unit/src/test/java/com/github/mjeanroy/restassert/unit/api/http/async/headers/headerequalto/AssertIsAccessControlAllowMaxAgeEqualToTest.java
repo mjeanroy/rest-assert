@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractAsyncHt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsAccessControlAllowMaxAgeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsAccessControlAllowMaxAgeEqualTo(message, actual, VALUE);
 	}
 }

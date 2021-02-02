@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLastModifiedTest extends AbstractApacheDoesNotHave
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveLastModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveLastModified(message, actual);
 	}
 }

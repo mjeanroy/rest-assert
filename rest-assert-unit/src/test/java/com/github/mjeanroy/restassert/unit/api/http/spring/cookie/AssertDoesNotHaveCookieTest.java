@@ -47,12 +47,12 @@ public class AssertDoesNotHaveCookieTest extends AbstractSpringMockMvcHttpDoesNo
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveCookie(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveCookie(message, actual);
 	}
 }

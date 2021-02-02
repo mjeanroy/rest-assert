@@ -37,12 +37,12 @@ public class AssertHasCharsetTest extends AbstractNingHttpAssertCharsetTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasCharset(actual, CHARSET);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasCharset(message, actual, CHARSET);
 	}
 }

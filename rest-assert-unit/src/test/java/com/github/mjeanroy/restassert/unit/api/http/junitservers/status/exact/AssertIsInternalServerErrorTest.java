@@ -37,12 +37,12 @@ public class AssertIsInternalServerErrorTest extends AbstractJunitServersHttpSta
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsInternalServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsInternalServerError(message, actual);
 	}
 }

@@ -42,12 +42,12 @@ public class AssertIsFrameOptionsEqualToStringTest extends AbstractJunitServersH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 

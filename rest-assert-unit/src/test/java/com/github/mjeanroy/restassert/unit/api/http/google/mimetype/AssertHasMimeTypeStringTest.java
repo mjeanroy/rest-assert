@@ -39,12 +39,12 @@ public class AssertHasMimeTypeStringTest extends AbstractGoogleHttpClientMimeTyp
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.a
 public class AssertHasMaxAgeTest extends AbstractJavaxCookieTest {
 
 	@Override
-	protected void invoke(Cookie actual) {
+	protected void run(Cookie actual) {
 		assertHasMaxAge(actual, success().getMaxAge());
 	}
 
 	@Override
-	protected void invoke(String message, Cookie actual) {
+	protected void run(String message, Cookie actual) {
 		assertHasMaxAge(message, actual, success().getMaxAge());
 	}
 

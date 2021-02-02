@@ -37,12 +37,12 @@ public class AssertIsTextTest extends AbstractNingHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsText(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsText(message, actual);
 	}
 }

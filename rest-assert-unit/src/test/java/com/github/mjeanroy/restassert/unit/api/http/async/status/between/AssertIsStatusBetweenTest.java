@@ -41,12 +41,12 @@ public class AssertIsStatusBetweenTest extends AbstractAsyncHttpStatusBetweenTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

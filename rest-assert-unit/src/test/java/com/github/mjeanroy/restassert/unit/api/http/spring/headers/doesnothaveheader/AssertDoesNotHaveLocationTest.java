@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLocationTest extends AbstractSpringMockMcvDoesNotH
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveLocation(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveLocation(message, actual);
 	}
 }

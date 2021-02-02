@@ -41,12 +41,12 @@ public class AssertIsExpiresEqualToTest extends AbstractNingHttpHeaderEqualToTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsExpiresEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsExpiresEqualTo(message, actual, VALUE);
 	}
 

@@ -38,12 +38,12 @@ public class AssertHasContentLengthTest extends AbstractNingHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasContentLength(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasContentLength(message, actual);
 	}
 }

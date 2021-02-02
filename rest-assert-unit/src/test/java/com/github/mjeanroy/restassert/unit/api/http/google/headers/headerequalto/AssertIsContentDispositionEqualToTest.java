@@ -40,12 +40,12 @@ public class AssertIsContentDispositionEqualToTest extends AbstractGoogleHttpHea
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsContentDispositionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsContentDispositionEqualTo(message, actual, VALUE);
 	}
 }

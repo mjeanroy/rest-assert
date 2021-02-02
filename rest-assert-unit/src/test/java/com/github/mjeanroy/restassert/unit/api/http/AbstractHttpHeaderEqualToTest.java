@@ -43,8 +43,8 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpAsser
 	@Test
 	public void it_should_pass_with_expected_header() {
 		Header header = getHeader();
-		invoke(newHttpResponse(header));
-		invoke(CUSTOM_MESSAGE, newHttpResponse(header));
+		run(newHttpResponse(header));
+		run(CUSTOM_MESSAGE, newHttpResponse(header));
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpAsser
 		doTest(null, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
-				invoke(newHttpResponse(header));
+				run(newHttpResponse(header));
 			}
 		});
 	}
@@ -62,7 +62,7 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpAsser
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(header));
+				run(CUSTOM_MESSAGE, newHttpResponse(header));
 			}
 		});
 	}

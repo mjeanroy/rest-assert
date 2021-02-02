@@ -42,12 +42,12 @@ public class AssertIsContentTypeEqualToTest extends AbstractAsyncHttpHeaderEqual
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 }

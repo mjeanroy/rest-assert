@@ -38,12 +38,12 @@ public class AssertDoesNotHaveCacheControlTest extends AbstractGoogleDoesNotHave
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveCacheControl(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveCacheControl(message, actual);
 	}
 }

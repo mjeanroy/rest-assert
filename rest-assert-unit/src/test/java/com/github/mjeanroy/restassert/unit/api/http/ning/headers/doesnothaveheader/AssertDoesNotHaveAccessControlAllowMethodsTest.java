@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMethodsTest extends AbstractNing
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowMethods(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowMethods(message, actual);
 	}
 }

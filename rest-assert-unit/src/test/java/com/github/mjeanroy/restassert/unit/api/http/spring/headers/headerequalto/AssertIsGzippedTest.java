@@ -41,12 +41,12 @@ public class AssertIsGzippedTest extends AbstractSpringMockMvcHttpHeaderEqualToT
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsGzipped(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsGzipped(message, actual);
 	}
 

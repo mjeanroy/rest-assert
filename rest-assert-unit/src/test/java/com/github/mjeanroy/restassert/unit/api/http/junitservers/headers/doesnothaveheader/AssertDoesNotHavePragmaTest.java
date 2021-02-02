@@ -38,12 +38,12 @@ public class AssertDoesNotHavePragmaTest extends AbstractJunitServersDoesNotHave
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHavePragma(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHavePragma(message, actual);
 	}
 }

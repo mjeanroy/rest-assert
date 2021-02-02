@@ -48,8 +48,8 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 	public void it_should_pass_with_expected_mime_type() {
 		List<Header> headers = getHeaders();
 		for (Header header : headers) {
-			invoke(newHttpResponse(header));
-			invoke(CUSTOM_MESSAGE, newHttpResponse(header));
+			run(newHttpResponse(header));
+			run(CUSTOM_MESSAGE, newHttpResponse(header));
 		}
 	}
 
@@ -58,7 +58,7 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 		doTest(null, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
-				invoke(newHttpResponse(header));
+				run(newHttpResponse(header));
 			}
 		});
 	}
@@ -68,7 +68,7 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(header));
+				run(CUSTOM_MESSAGE, newHttpResponse(header));
 			}
 		});
 	}

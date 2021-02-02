@@ -38,12 +38,12 @@ public class AssertHasContentLengthTest extends AbstractJunitServersHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasContentLength(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasContentLength(message, actual);
 	}
 }

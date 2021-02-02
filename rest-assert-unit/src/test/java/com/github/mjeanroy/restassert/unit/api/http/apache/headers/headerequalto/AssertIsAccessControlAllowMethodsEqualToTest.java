@@ -39,12 +39,12 @@ public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractApache
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, RequestMethod.GET, RequestMethod.POST);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, RequestMethod.GET, RequestMethod.POST);
 	}
 }

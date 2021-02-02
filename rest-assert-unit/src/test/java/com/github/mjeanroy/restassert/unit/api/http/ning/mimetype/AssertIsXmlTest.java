@@ -39,12 +39,12 @@ public class AssertIsXmlTest extends AbstractNingHttpClientMimeTypeInTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsXml(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsXml(message, actual);
 	}
 }

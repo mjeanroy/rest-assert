@@ -42,12 +42,12 @@ public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends Abstra
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertIsAccessControlAllowHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertIsAccessControlAllowHeadersEqualTo(message, actual, VALUE);
 	}
 }

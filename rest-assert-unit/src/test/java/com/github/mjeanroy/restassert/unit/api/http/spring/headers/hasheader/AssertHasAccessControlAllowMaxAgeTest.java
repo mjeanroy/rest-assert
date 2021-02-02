@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowMaxAgeTest extends AbstractSpringMockMvc
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasAccessControlAllowMaxAge(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasAccessControlAllowMaxAge(message, actual);
 	}
 }

@@ -37,12 +37,12 @@ public class AssertIsUnauthorizedTest extends AbstractAsyncHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsUnauthorized(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsUnauthorized(message, actual);
 	}
 }

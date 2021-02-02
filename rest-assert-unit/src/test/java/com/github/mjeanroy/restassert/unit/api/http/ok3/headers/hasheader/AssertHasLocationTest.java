@@ -38,12 +38,12 @@ public class AssertHasLocationTest extends AbstractOkHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasLocation(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasLocation(message, actual);
 	}
 }

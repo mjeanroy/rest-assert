@@ -45,12 +45,12 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractNingHttpHasCook
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasCookie(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
 	}
 }

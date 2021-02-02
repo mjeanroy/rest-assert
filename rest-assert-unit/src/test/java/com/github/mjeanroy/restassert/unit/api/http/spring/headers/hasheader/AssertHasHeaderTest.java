@@ -40,12 +40,12 @@ public class AssertHasHeaderTest extends AbstractSpringMockMvcHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasHeader(message, actual, getHeader().getName());
 	}
 }

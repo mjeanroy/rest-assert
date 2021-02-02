@@ -37,12 +37,12 @@ public class AssertIsStatusEqualTest extends AbstractSpringMockMvcHttpStatusTest
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsStatusEqual(actual, status());
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsStatusEqual(message, actual, status());
 	}
 }

@@ -38,12 +38,12 @@ public class AssertIsNotSuccessTest extends AbstractJunitServersHttpStatusOutOfT
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotSuccess(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotSuccess(message, actual);
 	}
 }

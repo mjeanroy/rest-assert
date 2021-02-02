@@ -38,12 +38,12 @@ public class AssertDoesNotHaveETagTest extends AbstractNingDoesNotHaveHttpHeader
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveETag(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveETag(message, actual);
 	}
 }

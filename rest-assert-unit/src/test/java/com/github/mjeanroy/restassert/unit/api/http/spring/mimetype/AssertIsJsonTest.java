@@ -37,12 +37,12 @@ public class AssertIsJsonTest extends AbstractSpringMockMvcHttpClientMimeTypeTes
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsJson(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsJson(message, actual);
 	}
 }

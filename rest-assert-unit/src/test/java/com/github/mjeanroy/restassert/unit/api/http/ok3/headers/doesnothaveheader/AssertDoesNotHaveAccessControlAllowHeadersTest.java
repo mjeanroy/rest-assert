@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowHeadersTest extends AbstractOkDo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowHeaders(message, actual);
 	}
 }

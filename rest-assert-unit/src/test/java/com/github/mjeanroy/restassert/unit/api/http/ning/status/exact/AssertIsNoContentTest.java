@@ -37,12 +37,12 @@ public class AssertIsNoContentTest extends AbstractNingHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsNoContent(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsNoContent(message, actual);
 	}
 }

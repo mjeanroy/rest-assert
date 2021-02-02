@@ -37,12 +37,12 @@ public class AssertIsResetContentTest extends AbstractNingHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsResetContent(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsResetContent(message, actual);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentDispositionTest extends AbstractAsyncDoesNo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveContentDisposition(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveContentDisposition(message, actual);
 	}
 }

@@ -42,12 +42,12 @@ public class AssertIsXssProtectionEqualToStringTest extends AbstractNingHttpHead
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
 	}
 

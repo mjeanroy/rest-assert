@@ -43,8 +43,8 @@ public abstract class AbstractHasCookieTest<T> extends AbstractHttpAssertTest<T>
 
 	@Test
 	public void core_it_should_pass_with_expected_cookie() {
-		invoke(newHttpResponse(cookie()));
-		invoke(CUSTOM_MESSAGE, newHttpResponse(cookie()));
+		run(newHttpResponse(cookie()));
+		run(CUSTOM_MESSAGE, newHttpResponse(cookie()));
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public abstract class AbstractHasCookieTest<T> extends AbstractHttpAssertTest<T>
 		doTest(null, new TestInvocation<Cookie>() {
 			@Override
 			public void invokeTest(Cookie cookie) {
-				invoke(newHttpResponse(cookie));
+				run(newHttpResponse(cookie));
 			}
 		});
 	}
@@ -62,7 +62,7 @@ public abstract class AbstractHasCookieTest<T> extends AbstractHttpAssertTest<T>
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Cookie>() {
 			@Override
 			public void invokeTest(Cookie cookie) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(cookie));
+				run(CUSTOM_MESSAGE, newHttpResponse(cookie));
 			}
 		});
 	}

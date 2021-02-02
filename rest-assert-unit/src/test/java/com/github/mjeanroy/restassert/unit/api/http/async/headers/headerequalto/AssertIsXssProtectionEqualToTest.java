@@ -43,12 +43,12 @@ public class AssertIsXssProtectionEqualToTest extends AbstractAsyncHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsXssProtectionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsXssProtectionEqualTo(message, actual, VALUE);
 	}
 

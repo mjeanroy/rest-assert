@@ -38,12 +38,12 @@ public class AssertIsNotServerErrorTest extends AbstractJunitServersHttpStatusOu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotServerError(message, actual);
 	}
 }

@@ -57,12 +57,12 @@ public class AssertIsCacheControlEqualToTest extends AbstractGoogleHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowHeadersTest extends AbstractGoogleHttpHe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasAccessControlAllowHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasAccessControlAllowHeaders(message, actual);
 	}
 }

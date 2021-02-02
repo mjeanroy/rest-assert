@@ -38,12 +38,12 @@ public class AssertHasContentLengthTest extends AbstractSpringMockMvcHttpHeaderT
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentLength(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentLength(message, actual);
 	}
 }

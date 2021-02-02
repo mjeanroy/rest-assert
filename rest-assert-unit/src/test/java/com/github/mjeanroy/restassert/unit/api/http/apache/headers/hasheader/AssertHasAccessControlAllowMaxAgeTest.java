@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowMaxAgeTest extends AbstractApacheHttpHea
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowMaxAge(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowMaxAge(message, actual);
 	}
 }

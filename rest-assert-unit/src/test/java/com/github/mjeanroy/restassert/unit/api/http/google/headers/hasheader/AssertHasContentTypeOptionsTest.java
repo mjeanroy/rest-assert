@@ -38,12 +38,12 @@ public class AssertHasContentTypeOptionsTest extends AbstractGoogleHttpHeaderTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasContentTypeOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasContentTypeOptions(message, actual);
 	}
 }

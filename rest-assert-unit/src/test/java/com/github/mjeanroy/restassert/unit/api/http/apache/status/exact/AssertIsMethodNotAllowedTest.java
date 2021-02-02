@@ -37,12 +37,12 @@ public class AssertIsMethodNotAllowedTest extends AbstractApacheHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsMethodNotAllowed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsMethodNotAllowed(message, actual);
 	}
 }

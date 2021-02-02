@@ -41,12 +41,12 @@ public class AssertIsContentTypeEqualToStringTest extends AbstractOkHttpHeaderEq
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentEncodingTest extends AbstractJunitServersDo
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveContentEncoding(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveContentEncoding(message, actual);
 	}
 }

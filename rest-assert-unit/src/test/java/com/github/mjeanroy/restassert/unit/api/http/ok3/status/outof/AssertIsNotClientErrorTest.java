@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.outof;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
 
 public class AssertIsNotClientErrorTest extends AbstractOkHttpStatusOutOfTest {
 
@@ -38,12 +38,12 @@ public class AssertIsNotClientErrorTest extends AbstractOkHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsNotClientError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsNotClientError(message, actual);
 	}
 }

@@ -42,12 +42,12 @@ public class AssertIsFrameOptionsEqualToStringTest extends AbstractAsyncHttpHead
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 

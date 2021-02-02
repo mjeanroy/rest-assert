@@ -46,12 +46,12 @@ public class AssertIsLastModifiedEqualToTest extends AbstractAsyncHttpHeaderEqua
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
 	}
 }

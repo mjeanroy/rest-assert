@@ -37,12 +37,12 @@ public class AssertIsMethodNotAllowedTest extends AbstractJunitServersHttpStatus
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsMethodNotAllowed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsMethodNotAllowed(message, actual);
 	}
 }

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
-
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 
 public class AssertIsForbiddenTest extends AbstractOkHttpStatusTest {
 
@@ -37,12 +37,12 @@ public class AssertIsForbiddenTest extends AbstractOkHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsForbidden(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsForbidden(message, actual);
 	}
 }

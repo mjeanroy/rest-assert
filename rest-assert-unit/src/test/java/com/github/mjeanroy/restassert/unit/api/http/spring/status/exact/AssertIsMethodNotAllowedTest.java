@@ -37,12 +37,12 @@ public class AssertIsMethodNotAllowedTest extends AbstractSpringMockMvcHttpStatu
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsMethodNotAllowed(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsMethodNotAllowed(message, actual);
 	}
 }

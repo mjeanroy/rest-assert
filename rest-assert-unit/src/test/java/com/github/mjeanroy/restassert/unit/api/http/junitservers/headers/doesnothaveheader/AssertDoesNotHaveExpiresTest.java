@@ -38,12 +38,12 @@ public class AssertDoesNotHaveExpiresTest extends AbstractJunitServersDoesNotHav
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveExpires(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveExpires(message, actual);
 	}
 }

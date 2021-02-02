@@ -39,12 +39,12 @@ public class AssertIsHtmlTest extends AbstractGoogleHttpClientMimeTypeInTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsHtml(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsHtml(message, actual);
 	}
 }

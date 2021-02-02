@@ -41,12 +41,12 @@ public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractAsyncHt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsContentTypeOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
 	}
 

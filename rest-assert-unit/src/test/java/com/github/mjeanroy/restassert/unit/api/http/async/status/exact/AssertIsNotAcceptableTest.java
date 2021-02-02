@@ -37,12 +37,12 @@ public class AssertIsNotAcceptableTest extends AbstractAsyncHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsNotAcceptable(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsNotAcceptable(message, actual);
 	}
 }

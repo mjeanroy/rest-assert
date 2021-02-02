@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentDispositionTest extends AbstractGoogleDoesN
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveContentDisposition(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertDoesNotHaveContentDisposition(message, actual);
 	}
 }

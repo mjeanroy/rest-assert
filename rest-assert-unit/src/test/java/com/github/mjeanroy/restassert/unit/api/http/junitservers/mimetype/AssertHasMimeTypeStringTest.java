@@ -39,12 +39,12 @@ public class AssertHasMimeTypeStringTest extends AbstractJunitServersHttpClientM
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

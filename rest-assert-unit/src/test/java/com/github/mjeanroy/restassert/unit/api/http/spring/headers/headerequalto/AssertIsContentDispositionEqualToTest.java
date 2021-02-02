@@ -40,12 +40,12 @@ public class AssertIsContentDispositionEqualToTest extends AbstractSpringMockMvc
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentDispositionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentDispositionEqualTo(message, actual, VALUE);
 	}
 }

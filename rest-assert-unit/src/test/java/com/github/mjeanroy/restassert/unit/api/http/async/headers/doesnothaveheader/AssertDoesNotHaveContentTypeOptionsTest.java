@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractAsyncDoesNo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveContentTypeOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveContentTypeOptions(message, actual);
 	}
 }

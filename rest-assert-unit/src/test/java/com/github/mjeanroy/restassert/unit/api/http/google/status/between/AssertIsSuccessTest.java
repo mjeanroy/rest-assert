@@ -38,12 +38,12 @@ public class AssertIsSuccessTest extends AbstractGoogleHttpStatusBetweenTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsSuccess(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsSuccess(message, actual);
 	}
 }

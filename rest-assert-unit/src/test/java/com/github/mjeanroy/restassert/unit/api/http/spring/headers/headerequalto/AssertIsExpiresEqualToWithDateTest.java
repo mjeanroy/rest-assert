@@ -44,13 +44,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractSpringMockMvcHtt
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		SpringMockMvcHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		SpringMockMvcHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

@@ -37,12 +37,12 @@ public class AssertIsNotModifiedTest extends AbstractSpringMockMvcHttpStatusTest
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsNotModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsNotModified(message, actual);
 	}
 }

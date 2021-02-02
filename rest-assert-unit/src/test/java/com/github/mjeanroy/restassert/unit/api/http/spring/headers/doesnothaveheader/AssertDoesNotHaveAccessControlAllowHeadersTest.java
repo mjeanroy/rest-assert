@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowHeadersTest extends AbstractSpri
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveAccessControlAllowHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveAccessControlAllowHeaders(message, actual);
 	}
 }

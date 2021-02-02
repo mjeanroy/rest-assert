@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractCoreDoes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveContentSecurityPolicy(message, actual);
 	}
 }

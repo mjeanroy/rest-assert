@@ -37,12 +37,12 @@ public class AssertIsTextTest extends AbstractApacheHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsText(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsText(message, actual);
 	}
 }

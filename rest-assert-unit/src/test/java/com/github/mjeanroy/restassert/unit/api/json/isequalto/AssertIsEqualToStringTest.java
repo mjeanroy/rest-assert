@@ -31,12 +31,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuc
 public class AssertIsEqualToStringTest extends AbstractJsonIsEqualToTest<String> {
 
 	@Override
-	protected void invoke(String actual) {
+	protected void run(String actual) {
 		assertIsEqualTo(actual(), actual);
 	}
 
 	@Override
-	protected void invoke(String message, String actual) {
+	protected void run(String message, String actual) {
 		assertIsEqualTo(message, actual(), actual);
 	}
 

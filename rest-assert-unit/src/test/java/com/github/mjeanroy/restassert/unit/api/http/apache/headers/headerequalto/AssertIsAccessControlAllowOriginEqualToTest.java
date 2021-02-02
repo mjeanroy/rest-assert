@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractApacheH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsAccessControlAllowOriginEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsAccessControlAllowOriginEqualTo(message, actual, VALUE);
 	}
 }

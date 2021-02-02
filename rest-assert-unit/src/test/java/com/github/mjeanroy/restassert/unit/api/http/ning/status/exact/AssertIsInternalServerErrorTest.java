@@ -37,12 +37,12 @@ public class AssertIsInternalServerErrorTest extends AbstractNingHttpStatusTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsInternalServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsInternalServerError(message, actual);
 	}
 }

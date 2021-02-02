@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLastModifiedTest extends AbstractJunitServersDoesN
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveLastModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveLastModified(message, actual);
 	}
 }

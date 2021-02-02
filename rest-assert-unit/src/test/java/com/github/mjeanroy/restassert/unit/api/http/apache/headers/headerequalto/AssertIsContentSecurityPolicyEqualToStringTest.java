@@ -42,12 +42,12 @@ public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractApac
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentSecurityPolicyEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentSecurityPolicyEqualTo(message, actual, VALUE);
 	}
 

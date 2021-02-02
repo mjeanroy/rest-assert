@@ -47,12 +47,12 @@ public class AssertDoesNotHaveCookieTest extends AbstractJunitServersHttpDoesNot
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveCookie(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveCookie(message, actual);
 	}
 }

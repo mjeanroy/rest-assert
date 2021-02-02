@@ -41,12 +41,12 @@ public class AssertIsStatusOutOfTest extends AbstractAsyncHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

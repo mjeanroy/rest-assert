@@ -45,12 +45,12 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractAsyncHttpHasCoo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasCookie(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
 	}
 }

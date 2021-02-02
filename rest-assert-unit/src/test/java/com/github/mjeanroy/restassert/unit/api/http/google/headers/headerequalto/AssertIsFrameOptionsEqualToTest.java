@@ -43,12 +43,12 @@ public class AssertIsFrameOptionsEqualToTest extends AbstractGoogleHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 

@@ -41,12 +41,12 @@ public class AssertIsStatusBetweenTest extends AbstractGoogleHttpStatusBetweenTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

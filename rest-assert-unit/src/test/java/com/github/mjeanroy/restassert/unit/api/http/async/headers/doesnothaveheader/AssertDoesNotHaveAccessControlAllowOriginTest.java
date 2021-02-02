@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowOriginTest extends AbstractAsync
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveAccessControlAllowOrigin(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveAccessControlAllowOrigin(message, actual);
 	}
 }

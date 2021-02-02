@@ -42,12 +42,12 @@ public class AssertIsHeaderEqualToTest extends AbstractJunitServersHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

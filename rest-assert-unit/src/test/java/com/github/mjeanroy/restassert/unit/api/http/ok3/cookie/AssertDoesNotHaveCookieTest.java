@@ -47,12 +47,12 @@ public class AssertDoesNotHaveCookieTest extends AbstractOkHttpDoesNotHaveCookie
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveCookie(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveCookie(message, actual);
 	}
 }

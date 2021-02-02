@@ -38,12 +38,12 @@ public class AssertHasContentSecurityPolicyTest extends AbstractCoreHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertHasContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertHasContentSecurityPolicy(message, actual);
 	}
 }

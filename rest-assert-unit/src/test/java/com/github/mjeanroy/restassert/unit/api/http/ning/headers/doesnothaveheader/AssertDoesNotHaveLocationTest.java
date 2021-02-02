@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLocationTest extends AbstractNingDoesNotHaveHttpHe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveLocation(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveLocation(message, actual);
 	}
 }

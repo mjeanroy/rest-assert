@@ -42,12 +42,12 @@ public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends Abstra
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowHeadersEqualTo(message, actual, VALUE);
 	}
 }

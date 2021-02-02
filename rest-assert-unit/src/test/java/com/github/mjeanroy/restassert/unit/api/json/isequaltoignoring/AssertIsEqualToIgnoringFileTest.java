@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFil
 public class AssertIsEqualToIgnoringFileTest extends AbstractJsonIsEqualToIgnoringTest<File> {
 
 	@Override
-	protected void invoke(File actual) {
+	protected void run(File actual) {
 		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected void invoke(String message, File actual) {
+	protected void run(String message, File actual) {
 		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
 	}
 

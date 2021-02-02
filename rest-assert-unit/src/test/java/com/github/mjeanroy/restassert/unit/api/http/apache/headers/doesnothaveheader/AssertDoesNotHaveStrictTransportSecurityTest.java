@@ -38,12 +38,12 @@ public class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractApache
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveStrictTransportSecurity(message, actual);
 	}
 }

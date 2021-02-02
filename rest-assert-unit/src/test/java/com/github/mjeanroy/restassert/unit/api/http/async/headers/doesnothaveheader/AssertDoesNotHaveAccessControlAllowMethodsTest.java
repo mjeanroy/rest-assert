@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMethodsTest extends AbstractAsyn
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveAccessControlAllowMethods(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveAccessControlAllowMethods(message, actual);
 	}
 }

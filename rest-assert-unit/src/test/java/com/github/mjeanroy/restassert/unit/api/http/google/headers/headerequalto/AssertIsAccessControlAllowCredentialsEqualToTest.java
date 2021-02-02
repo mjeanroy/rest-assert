@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractGo
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowCredentialsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowCredentialsEqualTo(message, actual, VALUE);
 	}
 }

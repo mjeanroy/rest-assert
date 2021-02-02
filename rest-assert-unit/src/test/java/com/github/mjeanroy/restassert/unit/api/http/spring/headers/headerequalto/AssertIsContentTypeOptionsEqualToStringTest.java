@@ -41,12 +41,12 @@ public class AssertIsContentTypeOptionsEqualToStringTest extends AbstractSpringM
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentTypeOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
 	}
 

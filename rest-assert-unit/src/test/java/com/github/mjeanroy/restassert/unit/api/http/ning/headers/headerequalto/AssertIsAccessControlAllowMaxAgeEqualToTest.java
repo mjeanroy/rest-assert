@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractNingHtt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowMaxAgeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowMaxAgeEqualTo(message, actual, VALUE);
 	}
 }

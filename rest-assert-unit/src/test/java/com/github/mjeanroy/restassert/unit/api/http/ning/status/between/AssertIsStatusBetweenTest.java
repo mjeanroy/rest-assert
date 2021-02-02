@@ -41,12 +41,12 @@ public class AssertIsStatusBetweenTest extends AbstractNingHttpStatusBetweenTest
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

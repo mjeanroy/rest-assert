@@ -45,12 +45,12 @@ public class AssertHasCookieWithNameAndValueTest extends AbstractSpringMockMvcHt
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasCookie(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasCookie(message, actual, NAME, VALUE);
 	}
 }

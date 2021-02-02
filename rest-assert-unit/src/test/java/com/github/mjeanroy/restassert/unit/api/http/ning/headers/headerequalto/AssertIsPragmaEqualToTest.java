@@ -40,12 +40,12 @@ public class AssertIsPragmaEqualToTest extends AbstractNingHttpHeaderEqualToTest
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsPragmaEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsPragmaEqualTo(message, actual, VALUE);
 	}
 }

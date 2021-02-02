@@ -40,12 +40,12 @@ public class AssertHasHeaderTest extends AbstractApacheHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasHeader(message, actual, getHeader().getName());
 	}
 }

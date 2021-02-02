@@ -38,12 +38,12 @@ public class AssertIsNotServerErrorTest extends AbstractSpringMockMvcHttpStatusO
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsNotServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsNotServerError(message, actual);
 	}
 }

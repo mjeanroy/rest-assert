@@ -38,12 +38,12 @@ public class AssertIsNotRedirectionTest extends AbstractJunitServersHttpStatusOu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotRedirection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotRedirection(message, actual);
 	}
 }

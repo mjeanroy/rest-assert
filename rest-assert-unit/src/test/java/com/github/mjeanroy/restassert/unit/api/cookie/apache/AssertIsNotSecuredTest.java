@@ -32,12 +32,12 @@ import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAss
 public class AssertIsNotSecuredTest extends AbstractApacheHttpCookieTest {
 
 	@Override
-	protected void invoke(Cookie actual) {
+	protected void run(Cookie actual) {
 		assertIsNotSecured(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Cookie actual) {
+	protected void run(String message, Cookie actual) {
 		assertIsNotSecured(message, actual);
 	}
 

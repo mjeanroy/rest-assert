@@ -38,12 +38,12 @@ public class AssertIsNotSuccessTest extends AbstractAsyncHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsNotSuccess(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsNotSuccess(message, actual);
 	}
 }

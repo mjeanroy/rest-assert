@@ -42,12 +42,12 @@ public class AssertIsHeaderEqualToTest extends AbstractAsyncHttpHeaderEqualToTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

@@ -41,12 +41,12 @@ public class AssertIsExpiresEqualToTest extends AbstractOkHttpHeaderEqualToTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsExpiresEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsExpiresEqualTo(message, actual, VALUE);
 	}
 

@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractOkDoe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(message, actual);
 	}
 }

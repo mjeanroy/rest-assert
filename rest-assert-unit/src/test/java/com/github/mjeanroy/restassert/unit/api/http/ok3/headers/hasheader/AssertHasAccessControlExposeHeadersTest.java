@@ -38,12 +38,12 @@ public class AssertHasAccessControlExposeHeadersTest extends AbstractOkHttpHeade
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasAccessControlExposeHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasAccessControlExposeHeaders(message, actual);
 	}
 }

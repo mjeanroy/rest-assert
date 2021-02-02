@@ -44,12 +44,12 @@ public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends Abstra
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, METHODS);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, METHODS);
 	}
 }

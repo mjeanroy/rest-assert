@@ -41,12 +41,12 @@ public class AssertIsStatusBetweenTest extends AbstractJunitServersHttpStatusBet
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

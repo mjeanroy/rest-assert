@@ -38,12 +38,12 @@ public class AssertDoesNotHaveETagTest extends AbstractSpringMockMcvDoesNotHaveH
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveETag(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveETag(message, actual);
 	}
 }

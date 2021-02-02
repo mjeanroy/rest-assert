@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowCredentialsTest extends AbstractJunitSer
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasAccessControlAllowCredentials(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasAccessControlAllowCredentials(message, actual);
 	}
 }

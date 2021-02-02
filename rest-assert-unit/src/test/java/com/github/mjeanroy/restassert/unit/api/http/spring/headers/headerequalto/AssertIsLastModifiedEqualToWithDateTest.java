@@ -49,13 +49,13 @@ public class AssertIsLastModifiedEqualToWithDateTest extends AbstractSpringMockM
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		SpringMockMvcHttpAssert.assertIsLastModifiedEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		SpringMockMvcHttpAssert.assertIsLastModifiedEqualTo(message, actual, date);
 	}

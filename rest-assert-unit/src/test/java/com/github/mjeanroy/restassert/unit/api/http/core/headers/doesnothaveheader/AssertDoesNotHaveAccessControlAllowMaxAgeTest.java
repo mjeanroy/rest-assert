@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractCoreD
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(message, actual);
 	}
 }

@@ -37,12 +37,12 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractJunitServersHttpSt
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsUnsupportedMediaType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsUnsupportedMediaType(message, actual);
 	}
 }

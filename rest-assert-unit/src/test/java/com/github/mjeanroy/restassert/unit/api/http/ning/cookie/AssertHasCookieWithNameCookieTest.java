@@ -46,12 +46,12 @@ public class AssertHasCookieWithNameCookieTest extends AbstractNingHttpHasCookie
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasCookie(actual, COOKIE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasCookie(message, actual, COOKIE);
 	}
 }

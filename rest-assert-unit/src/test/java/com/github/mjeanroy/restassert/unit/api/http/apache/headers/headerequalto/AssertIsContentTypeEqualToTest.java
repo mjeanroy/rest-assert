@@ -42,12 +42,12 @@ public class AssertIsContentTypeEqualToTest extends AbstractApacheHttpHeaderEqua
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 }

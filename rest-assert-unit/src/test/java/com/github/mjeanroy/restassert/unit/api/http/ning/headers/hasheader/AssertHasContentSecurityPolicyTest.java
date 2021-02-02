@@ -38,12 +38,12 @@ public class AssertHasContentSecurityPolicyTest extends AbstractNingHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasContentSecurityPolicy(message, actual);
 	}
 }

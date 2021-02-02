@@ -41,12 +41,12 @@ public class AssertIsStatusOutOfTest extends AbstractJunitServersHttpStatusOutOf
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

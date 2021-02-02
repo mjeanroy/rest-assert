@@ -37,12 +37,12 @@ public class AssertIsMovedPermanentlyTest extends AbstractNingHttpStatusTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsMovedPermanently(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsMovedPermanently(message, actual);
 	}
 }

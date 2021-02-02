@@ -38,12 +38,12 @@ public class AssertDoesNotHaveCacheControlTest extends AbstractCoreDoesNotHaveHt
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveCacheControl(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveCacheControl(message, actual);
 	}
 }

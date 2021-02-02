@@ -38,12 +38,12 @@ public class AssertHasContentDispositionTest extends AbstractJunitServersHttpHea
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasContentDisposition(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasContentDisposition(message, actual);
 	}
 }

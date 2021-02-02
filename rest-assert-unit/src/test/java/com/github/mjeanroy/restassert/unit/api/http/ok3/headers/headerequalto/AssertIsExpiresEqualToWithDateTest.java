@@ -44,13 +44,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractOkHttpHeaderEqua
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		OkHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		OkHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

@@ -37,12 +37,12 @@ public class AssertIsJsonTest extends AbstractGoogleHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsJson(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsJson(message, actual);
 	}
 }

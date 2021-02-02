@@ -44,13 +44,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractNingHttpHeaderEq
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		NingHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		NingHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

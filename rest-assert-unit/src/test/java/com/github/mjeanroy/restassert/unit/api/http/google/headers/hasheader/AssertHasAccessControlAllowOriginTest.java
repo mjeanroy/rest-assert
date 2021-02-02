@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowOriginTest extends AbstractGoogleHttpHea
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasAccessControlAllowOrigin(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasAccessControlAllowOrigin(message, actual);
 	}
 }

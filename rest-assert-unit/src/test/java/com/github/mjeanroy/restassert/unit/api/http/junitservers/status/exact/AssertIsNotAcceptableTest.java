@@ -37,12 +37,12 @@ public class AssertIsNotAcceptableTest extends AbstractJunitServersHttpStatusTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotAcceptable(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsNotAcceptable(message, actual);
 	}
 }

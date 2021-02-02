@@ -42,12 +42,12 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractAsyncHttpH
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 

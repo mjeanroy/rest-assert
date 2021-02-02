@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLastModifiedTest extends AbstractAsyncDoesNotHaveH
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveLastModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveLastModified(message, actual);
 	}
 }

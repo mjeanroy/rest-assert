@@ -41,12 +41,12 @@ public class AssertIsGzippedTest extends AbstractGoogleHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsGzipped(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsGzipped(message, actual);
 	}
 

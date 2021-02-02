@@ -31,12 +31,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuc
 public class AssertIsEqualToIgnoringStringTest extends AbstractJsonIsEqualToIgnoringTest<String> {
 
 	@Override
-	protected void invoke(String actual) {
+	protected void run(String actual) {
 		assertIsEqualToIgnoring(actual(), actual, ignoringKeys());
 	}
 
 	@Override
-	protected void invoke(String message, String actual) {
+	protected void run(String message, String actual) {
 		assertIsEqualToIgnoring(message, actual(), actual, ignoringKeys());
 	}
 

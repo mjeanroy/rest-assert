@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractJu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsAccessControlAllowCredentialsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsAccessControlAllowCredentialsEqualTo(message, actual, VALUE);
 	}
 }

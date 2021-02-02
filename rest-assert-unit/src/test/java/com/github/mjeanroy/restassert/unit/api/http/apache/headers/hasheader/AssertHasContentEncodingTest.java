@@ -38,12 +38,12 @@ public class AssertHasContentEncodingTest extends AbstractApacheHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasContentEncoding(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasContentEncoding(message, actual);
 	}
 }

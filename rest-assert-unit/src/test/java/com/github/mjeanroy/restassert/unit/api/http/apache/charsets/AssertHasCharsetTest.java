@@ -37,12 +37,12 @@ public class AssertHasCharsetTest extends AbstractApacheHttpAssertCharsetTest {
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasCharset(actual, CHARSET);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasCharset(message, actual, CHARSET);
 	}
 }

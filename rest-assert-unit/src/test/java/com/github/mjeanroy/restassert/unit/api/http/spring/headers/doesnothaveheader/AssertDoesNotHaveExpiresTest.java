@@ -38,12 +38,12 @@ public class AssertDoesNotHaveExpiresTest extends AbstractSpringMockMcvDoesNotHa
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveExpires(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveExpires(message, actual);
 	}
 }

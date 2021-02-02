@@ -38,12 +38,12 @@ public class AssertHasLastModifiedTest extends AbstractJunitServersHttpHeaderTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertHasLastModified(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertHasLastModified(message, actual);
 	}
 }

@@ -44,13 +44,13 @@ public class AssertIsExpiresEqualToWithDateTest extends AbstractJunitServersHttp
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		JunitServersHttpAssert.assertIsExpiresEqualTo(actual, date);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		Date date = fromInternetMessageFormat(VALUE);
 		JunitServersHttpAssert.assertIsExpiresEqualTo(message, actual, date);
 	}

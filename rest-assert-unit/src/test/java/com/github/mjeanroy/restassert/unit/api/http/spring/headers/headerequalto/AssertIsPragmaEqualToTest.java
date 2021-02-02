@@ -40,12 +40,12 @@ public class AssertIsPragmaEqualToTest extends AbstractSpringMockMvcHttpHeaderEq
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPragmaEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPragmaEqualTo(message, actual, VALUE);
 	}
 }

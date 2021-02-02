@@ -39,12 +39,12 @@ public class AssertHasMimeTypeTest extends AbstractSpringMockMvcHttpClientMimeTy
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

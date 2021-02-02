@@ -38,12 +38,12 @@ public class AssertHasContentSecurityPolicyTest extends AbstractSpringMockMvcHtt
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentSecurityPolicy(message, actual);
 	}
 }

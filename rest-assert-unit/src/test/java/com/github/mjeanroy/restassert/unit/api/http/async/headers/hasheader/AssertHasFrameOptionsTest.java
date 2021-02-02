@@ -38,12 +38,12 @@ public class AssertHasFrameOptionsTest extends AbstractAsyncHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasFrameOptions(message, actual);
 	}
 }

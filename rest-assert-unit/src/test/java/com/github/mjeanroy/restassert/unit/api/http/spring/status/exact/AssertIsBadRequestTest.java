@@ -37,12 +37,12 @@ public class AssertIsBadRequestTest extends AbstractSpringMockMvcHttpStatusTest 
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsBadRequest(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsBadRequest(message, actual);
 	}
 }

@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractCo
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertIsAccessControlAllowCredentialsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertIsAccessControlAllowCredentialsEqualTo(message, actual, VALUE);
 	}
 }

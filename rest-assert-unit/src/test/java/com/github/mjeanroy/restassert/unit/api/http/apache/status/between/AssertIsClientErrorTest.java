@@ -38,12 +38,12 @@ public class AssertIsClientErrorTest extends AbstractApacheHttpStatusBetweenTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsClientError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsClientError(message, actual);
 	}
 }

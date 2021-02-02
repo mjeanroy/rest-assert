@@ -39,7 +39,7 @@ public abstract class AbstractAssertTest<T> {
 	 *
 	 * @param actual Tested object.
 	 */
-	protected abstract void invoke(T actual);
+	protected abstract void run(T actual);
 
 	/**
 	 * Invoke assert method with custom message.
@@ -47,5 +47,5 @@ public abstract class AbstractAssertTest<T> {
 	 * @param message Custom message.
 	 * @param actual  Tested object.
 	 */
-	protected abstract void invoke(String message, T actual);
+	protected abstract void run(String message, T actual);
 }

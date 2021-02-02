@@ -48,12 +48,12 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractOkHttpHe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
 	}
 

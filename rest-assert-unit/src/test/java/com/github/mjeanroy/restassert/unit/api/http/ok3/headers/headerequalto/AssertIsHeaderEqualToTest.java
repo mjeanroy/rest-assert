@@ -42,12 +42,12 @@ public class AssertIsHeaderEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

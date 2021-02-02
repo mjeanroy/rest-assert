@@ -38,12 +38,12 @@ public class AssertDoesNotHaveXssProtectionTest extends AbstractOkDoesNotHaveHtt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveXssProtection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveXssProtection(message, actual);
 	}
 }

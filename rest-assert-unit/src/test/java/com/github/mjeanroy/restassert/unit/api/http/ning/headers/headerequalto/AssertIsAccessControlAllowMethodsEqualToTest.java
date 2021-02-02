@@ -39,12 +39,12 @@ public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractNingHt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, RequestMethod.GET, RequestMethod.POST);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, RequestMethod.GET, RequestMethod.POST);
 	}
 }

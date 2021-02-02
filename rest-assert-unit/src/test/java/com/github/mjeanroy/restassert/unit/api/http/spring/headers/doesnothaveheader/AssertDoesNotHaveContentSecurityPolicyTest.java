@@ -38,12 +38,12 @@ public class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractSpringMo
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveContentSecurityPolicy(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveContentSecurityPolicy(message, actual);
 	}
 }

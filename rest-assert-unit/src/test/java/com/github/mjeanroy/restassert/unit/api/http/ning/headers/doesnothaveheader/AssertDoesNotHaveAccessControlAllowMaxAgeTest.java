@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractNingD
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(message, actual);
 	}
 }

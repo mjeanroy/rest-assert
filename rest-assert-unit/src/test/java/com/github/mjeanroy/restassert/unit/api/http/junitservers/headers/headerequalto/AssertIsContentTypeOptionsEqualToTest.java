@@ -42,12 +42,12 @@ public class AssertIsContentTypeOptionsEqualToTest extends AbstractJunitServersH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsContentTypeOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
 	}
 

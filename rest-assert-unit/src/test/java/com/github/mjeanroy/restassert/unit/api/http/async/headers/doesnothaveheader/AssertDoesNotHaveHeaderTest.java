@@ -40,12 +40,12 @@ public class AssertDoesNotHaveHeaderTest extends AbstractAsyncDoesNotHaveHttpHea
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertDoesNotHaveHeader(message, actual, getHeader().getName());
 	}
 }

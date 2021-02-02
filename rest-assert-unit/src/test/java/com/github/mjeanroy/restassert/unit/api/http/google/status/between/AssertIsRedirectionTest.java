@@ -38,12 +38,12 @@ public class AssertIsRedirectionTest extends AbstractGoogleHttpStatusBetweenTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsRedirection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsRedirection(message, actual);
 	}
 }

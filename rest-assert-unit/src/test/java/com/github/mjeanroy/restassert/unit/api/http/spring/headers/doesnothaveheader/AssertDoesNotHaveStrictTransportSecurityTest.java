@@ -38,12 +38,12 @@ public class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractSpring
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveStrictTransportSecurity(message, actual);
 	}
 }

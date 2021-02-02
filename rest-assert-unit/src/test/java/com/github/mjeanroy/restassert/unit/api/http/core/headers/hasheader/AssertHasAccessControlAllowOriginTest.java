@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowOriginTest extends AbstractCoreHttpHeade
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertHasAccessControlAllowOrigin(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertHasAccessControlAllowOrigin(message, actual);
 	}
 }

@@ -40,12 +40,12 @@ public class AssertIsETagEqualToTest extends AbstractGoogleHttpHeaderEqualToTest
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsETagEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsETagEqualTo(message, actual, VALUE);
 	}
 }

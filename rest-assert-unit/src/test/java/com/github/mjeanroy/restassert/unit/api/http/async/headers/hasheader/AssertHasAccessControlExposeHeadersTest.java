@@ -38,12 +38,12 @@ public class AssertHasAccessControlExposeHeadersTest extends AbstractAsyncHttpHe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasAccessControlExposeHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasAccessControlExposeHeaders(message, actual);
 	}
 }

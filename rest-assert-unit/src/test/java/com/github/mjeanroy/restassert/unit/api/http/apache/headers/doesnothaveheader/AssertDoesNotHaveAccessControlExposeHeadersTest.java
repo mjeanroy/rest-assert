@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlExposeHeadersTest extends AbstractApa
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveAccessControlExposeHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveAccessControlExposeHeaders(message, actual);
 	}
 }

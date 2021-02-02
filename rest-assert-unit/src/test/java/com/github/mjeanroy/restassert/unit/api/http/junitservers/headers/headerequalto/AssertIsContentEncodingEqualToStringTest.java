@@ -42,12 +42,12 @@ public class AssertIsContentEncodingEqualToStringTest extends AbstractJunitServe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 

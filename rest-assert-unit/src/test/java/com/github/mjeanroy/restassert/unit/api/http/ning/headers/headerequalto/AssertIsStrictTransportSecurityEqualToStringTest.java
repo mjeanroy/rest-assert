@@ -42,12 +42,12 @@ public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractNi
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsStrictTransportSecurityEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsStrictTransportSecurityEqualTo(message, actual, VALUE);
 	}
 

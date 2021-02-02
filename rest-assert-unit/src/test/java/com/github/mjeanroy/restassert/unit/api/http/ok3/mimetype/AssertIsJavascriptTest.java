@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
+import okhttp3.Response;
 
 import java.util.List;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
-import okhttp3.Response;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
 
 public class AssertIsJavascriptTest extends AbstractOkHttpClientMimeTypeInTest {
 
@@ -39,12 +39,12 @@ public class AssertIsJavascriptTest extends AbstractOkHttpClientMimeTypeInTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsJavascript(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsJavascript(message, actual);
 	}
 }

@@ -40,12 +40,12 @@ public class AssertIsPragmaEqualToTest extends AbstractApacheHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsPragmaEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsPragmaEqualTo(message, actual, VALUE);
 	}
 }

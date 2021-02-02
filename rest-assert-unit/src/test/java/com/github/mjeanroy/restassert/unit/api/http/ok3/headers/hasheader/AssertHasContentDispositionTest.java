@@ -38,12 +38,12 @@ public class AssertHasContentDispositionTest extends AbstractOkHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasContentDisposition(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasContentDisposition(message, actual);
 	}
 }

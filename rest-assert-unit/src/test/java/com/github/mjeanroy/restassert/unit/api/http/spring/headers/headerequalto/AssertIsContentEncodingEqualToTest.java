@@ -43,12 +43,12 @@ public class AssertIsContentEncodingEqualToTest extends AbstractSpringMockMvcHtt
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentEncodingEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentEncodingEqualTo(message, actual, VALUE);
 	}
 

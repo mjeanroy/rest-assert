@@ -38,12 +38,12 @@ public class AssertDoesNotHaveXssProtectionTest extends AbstractNingDoesNotHaveH
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveXssProtection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveXssProtection(message, actual);
 	}
 }

@@ -40,12 +40,12 @@ public class AssertIsETagEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsETagEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsETagEqualTo(message, actual, VALUE);
 	}
 }

@@ -39,12 +39,12 @@ public class AssertHasMimeTypeStringTest extends AbstractNingHttpClientMimeTypeT
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

@@ -39,12 +39,12 @@ public class AssertHasMimeTypeStringTest extends AbstractOkHttpClientMimeTypeTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasMimeType(actual, MIME_TYPE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasMimeType(message, actual, MIME_TYPE);
 	}
 }

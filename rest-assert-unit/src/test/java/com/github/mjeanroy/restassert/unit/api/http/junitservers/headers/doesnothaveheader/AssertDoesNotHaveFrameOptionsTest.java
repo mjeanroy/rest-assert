@@ -38,12 +38,12 @@ public class AssertDoesNotHaveFrameOptionsTest extends AbstractJunitServersDoesN
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveFrameOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveFrameOptions(message, actual);
 	}
 }

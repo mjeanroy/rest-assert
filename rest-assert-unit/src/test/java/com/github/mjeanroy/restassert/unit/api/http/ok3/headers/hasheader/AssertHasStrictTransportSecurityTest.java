@@ -38,12 +38,12 @@ public class AssertHasStrictTransportSecurityTest extends AbstractOkHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasStrictTransportSecurity(message, actual);
 	}
 }

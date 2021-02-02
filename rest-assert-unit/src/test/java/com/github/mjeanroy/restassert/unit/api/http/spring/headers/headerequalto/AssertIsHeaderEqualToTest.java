@@ -42,12 +42,12 @@ public class AssertIsHeaderEqualToTest extends AbstractSpringMockMvcHttpHeaderEq
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowOriginTest extends AbstractNingD
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowOrigin(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowOrigin(message, actual);
 	}
 }

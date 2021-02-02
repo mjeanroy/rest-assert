@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractAsyncH
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsAccessControlAllowHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsAccessControlAllowHeadersEqualTo(message, actual, VALUE);
 	}
 }

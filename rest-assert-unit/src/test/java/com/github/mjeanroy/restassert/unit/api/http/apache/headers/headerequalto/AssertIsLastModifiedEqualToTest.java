@@ -46,12 +46,12 @@ public class AssertIsLastModifiedEqualToTest extends AbstractApacheHttpHeaderEqu
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
 	}
 }

@@ -41,12 +41,12 @@ public class AssertIsGzippedTest extends AbstractJunitServersHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsGzipped(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsGzipped(message, actual);
 	}
 

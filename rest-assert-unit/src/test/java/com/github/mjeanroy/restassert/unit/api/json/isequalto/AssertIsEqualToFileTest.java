@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFil
 public class AssertIsEqualToFileTest extends AbstractJsonIsEqualToTest<File> {
 
 	@Override
-	protected void invoke(File actual) {
+	protected void run(File actual) {
 		assertIsEqualTo(actual(), actual);
 	}
 
 	@Override
-	protected void invoke(String message, File actual) {
+	protected void run(String message, File actual) {
 		assertIsEqualTo(message, actual(), actual);
 	}
 

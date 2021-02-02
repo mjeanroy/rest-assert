@@ -37,12 +37,12 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractGoogleHttpStatusTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsUnsupportedMediaType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsUnsupportedMediaType(message, actual);
 	}
 }

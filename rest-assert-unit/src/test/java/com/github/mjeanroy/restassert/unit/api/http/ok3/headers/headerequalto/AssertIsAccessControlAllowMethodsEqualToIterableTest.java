@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
-import static java.util.Arrays.asList;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static java.util.Arrays.asList;
 
 public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractOkHttpHeaderEqualToTest {
 
@@ -44,12 +44,12 @@ public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends Abstra
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, METHODS);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, METHODS);
 	}
 }

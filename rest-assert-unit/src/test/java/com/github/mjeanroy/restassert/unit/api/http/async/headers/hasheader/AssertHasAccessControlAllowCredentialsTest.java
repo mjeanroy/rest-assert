@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowCredentialsTest extends AbstractAsyncHtt
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasAccessControlAllowCredentials(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasAccessControlAllowCredentials(message, actual);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertHasXssProtectionTest extends AbstractAsyncHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasXssProtection(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasXssProtection(message, actual);
 	}
 }

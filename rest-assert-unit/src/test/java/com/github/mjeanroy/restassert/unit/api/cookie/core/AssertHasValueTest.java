@@ -32,12 +32,12 @@ import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assert
 public class AssertHasValueTest extends AbstractCoreCookieTest {
 
 	@Override
-	protected void invoke(Cookie actual) {
+	protected void run(Cookie actual) {
 		assertHasValue(actual, success().getValue());
 	}
 
 	@Override
-	protected void invoke(String message, Cookie actual) {
+	protected void run(String message, Cookie actual) {
 		assertHasValue(message, actual, success().getValue());
 	}
 

@@ -38,12 +38,12 @@ public class AssertHasStrictTransportSecurityTest extends AbstractAsyncHttpHeade
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasStrictTransportSecurity(message, actual);
 	}
 }

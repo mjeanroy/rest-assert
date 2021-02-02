@@ -38,12 +38,12 @@ public class AssertIsNotServerErrorTest extends AbstractNingHttpStatusOutOfTest 
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsNotServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsNotServerError(message, actual);
 	}
 }

@@ -39,12 +39,12 @@ public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractSpring
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, RequestMethod.GET, RequestMethod.POST);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, RequestMethod.GET, RequestMethod.POST);
 	}
 }

@@ -46,12 +46,12 @@ public class AssertHasCookieWithNameCookieTest extends AbstractGoogleHttpHasCook
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertHasCookie(actual, COOKIE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertHasCookie(message, actual, COOKIE);
 	}
 }

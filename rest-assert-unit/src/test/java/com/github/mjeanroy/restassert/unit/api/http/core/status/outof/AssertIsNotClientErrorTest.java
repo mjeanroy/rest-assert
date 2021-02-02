@@ -38,12 +38,12 @@ public class AssertIsNotClientErrorTest extends AbstractCoreHttpStatusOutOfTest 
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertIsNotClientError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertIsNotClientError(message, actual);
 	}
 }

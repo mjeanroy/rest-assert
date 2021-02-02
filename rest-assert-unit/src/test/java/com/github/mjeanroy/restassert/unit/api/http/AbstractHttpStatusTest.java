@@ -41,8 +41,8 @@ public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T
 
 	@Test
 	public void it_should_pass_with_correct_status() {
-		invoke(newHttpResponse(status()));
-		invoke(CUSTOM_MESSAGE, newHttpResponse(status()));
+		run(newHttpResponse(status()));
+		run(CUSTOM_MESSAGE, newHttpResponse(status()));
 	}
 
 	@Test
@@ -50,7 +50,7 @@ public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T
 		doTest(null, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
-				invoke(newHttpResponse(status));
+				run(newHttpResponse(status));
 			}
 		});
 	}
@@ -60,7 +60,7 @@ public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(status));
+				run(CUSTOM_MESSAGE, newHttpResponse(status));
 			}
 		});
 	}

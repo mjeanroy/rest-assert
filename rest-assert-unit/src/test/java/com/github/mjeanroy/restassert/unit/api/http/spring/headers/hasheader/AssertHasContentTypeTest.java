@@ -38,12 +38,12 @@ public class AssertHasContentTypeTest extends AbstractSpringMockMvcHttpHeaderTes
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentType(message, actual);
 	}
 }

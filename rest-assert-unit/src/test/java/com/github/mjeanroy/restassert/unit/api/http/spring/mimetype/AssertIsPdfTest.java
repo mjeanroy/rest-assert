@@ -37,12 +37,12 @@ public class AssertIsPdfTest extends AbstractSpringMockMvcHttpClientMimeTypeTest
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPdf(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPdf(message, actual);
 	}
 }

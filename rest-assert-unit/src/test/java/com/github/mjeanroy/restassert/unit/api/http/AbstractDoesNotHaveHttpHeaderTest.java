@@ -47,8 +47,8 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest<T> extends AbstractHttpA
 		final Header header = header("Foo", "Bar");
 		final T rsp = newHttpResponse(header);
 
-		invoke(rsp);
-		invoke(CUSTOM_MESSAGE, rsp);
+		run(rsp);
+		run(CUSTOM_MESSAGE, rsp);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest<T> extends AbstractHttpA
 		doTest(null, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
-				invoke(newHttpResponse(header));
+				run(newHttpResponse(header));
 			}
 		});
 	}
@@ -66,7 +66,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest<T> extends AbstractHttpA
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
-				invoke(CUSTOM_MESSAGE, newHttpResponse(header));
+				run(CUSTOM_MESSAGE, newHttpResponse(header));
 			}
 		});
 	}

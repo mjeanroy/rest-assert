@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowOriginTest extends AbstractOkDoe
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowOrigin(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertDoesNotHaveAccessControlAllowOrigin(message, actual);
 	}
 }

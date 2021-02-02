@@ -38,12 +38,12 @@ public class AssertDoesNotHaveExpiresTest extends AbstractCoreDoesNotHaveHttpHea
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveExpires(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		HttpAssert.assertDoesNotHaveExpires(message, actual);
 	}
 }

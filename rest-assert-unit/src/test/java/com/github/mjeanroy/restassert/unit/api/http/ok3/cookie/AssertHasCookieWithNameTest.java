@@ -44,12 +44,12 @@ public class AssertHasCookieWithNameTest extends AbstractOkHttpHasCookieTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertHasCookie(actual, NAME);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertHasCookie(message, actual, NAME);
 	}
 }

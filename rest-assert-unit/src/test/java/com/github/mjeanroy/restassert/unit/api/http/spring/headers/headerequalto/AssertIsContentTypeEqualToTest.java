@@ -42,12 +42,12 @@ public class AssertIsContentTypeEqualToTest extends AbstractSpringMockMvcHttpHea
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentTypeEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 }

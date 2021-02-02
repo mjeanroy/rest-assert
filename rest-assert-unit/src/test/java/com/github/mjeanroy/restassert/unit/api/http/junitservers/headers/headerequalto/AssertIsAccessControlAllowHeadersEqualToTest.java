@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractJunitS
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsAccessControlAllowHeadersEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsAccessControlAllowHeadersEqualTo(message, actual, VALUE);
 	}
 }

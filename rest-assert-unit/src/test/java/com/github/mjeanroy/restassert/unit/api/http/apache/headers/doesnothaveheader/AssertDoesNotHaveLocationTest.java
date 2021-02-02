@@ -38,12 +38,12 @@ public class AssertDoesNotHaveLocationTest extends AbstractApacheDoesNotHaveHttp
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveLocation(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertDoesNotHaveLocation(message, actual);
 	}
 }

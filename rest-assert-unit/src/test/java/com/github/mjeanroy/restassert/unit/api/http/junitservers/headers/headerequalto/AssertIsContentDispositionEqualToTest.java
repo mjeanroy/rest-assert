@@ -40,12 +40,12 @@ public class AssertIsContentDispositionEqualToTest extends AbstractJunitServersH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertIsContentDispositionEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertIsContentDispositionEqualTo(message, actual, VALUE);
 	}
 }

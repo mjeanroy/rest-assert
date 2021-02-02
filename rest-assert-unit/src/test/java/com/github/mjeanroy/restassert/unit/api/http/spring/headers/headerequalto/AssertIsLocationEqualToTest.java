@@ -40,12 +40,12 @@ public class AssertIsLocationEqualToTest extends AbstractSpringMockMvcHttpHeader
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsLocationEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsLocationEqualTo(message, actual, VALUE);
 	}
 }

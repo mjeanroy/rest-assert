@@ -57,12 +57,12 @@ public class AssertIsCacheControlEqualToTest extends AbstractAsyncHttpHeaderEqua
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsCacheControlEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsCacheControlEqualTo(message, actual, VALUE);
 	}
 }

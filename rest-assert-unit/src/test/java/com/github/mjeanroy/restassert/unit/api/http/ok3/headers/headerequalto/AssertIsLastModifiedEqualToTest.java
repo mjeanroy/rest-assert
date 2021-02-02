@@ -46,12 +46,12 @@ public class AssertIsLastModifiedEqualToTest extends AbstractOkHttpHeaderEqualTo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsLastModifiedEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsLastModifiedEqualTo(message, actual, VALUE);
 	}
 }

@@ -41,12 +41,12 @@ public class AssertIsExpiresEqualToTest extends AbstractApacheHttpHeaderEqualToT
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsExpiresEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsExpiresEqualTo(message, actual, VALUE);
 	}
 

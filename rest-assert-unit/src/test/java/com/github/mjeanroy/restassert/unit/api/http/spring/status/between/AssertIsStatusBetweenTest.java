@@ -41,12 +41,12 @@ public class AssertIsStatusBetweenTest extends AbstractSpringMockMvcHttpStatusBe
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsStatusBetween(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsStatusBetween(message, actual, START, END);
 	}
 }

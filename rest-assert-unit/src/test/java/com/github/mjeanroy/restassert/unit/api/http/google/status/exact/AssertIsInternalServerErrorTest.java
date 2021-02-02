@@ -37,12 +37,12 @@ public class AssertIsInternalServerErrorTest extends AbstractGoogleHttpStatusTes
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsInternalServerError(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsInternalServerError(message, actual);
 	}
 }

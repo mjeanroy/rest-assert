@@ -40,12 +40,12 @@ public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractGoogleH
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowOriginEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowOriginEqualTo(message, actual, VALUE);
 	}
 }

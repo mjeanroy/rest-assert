@@ -38,12 +38,12 @@ public class AssertHasFrameOptionsTest extends AbstractSpringMockMvcHttpHeaderTe
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasFrameOptions(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasFrameOptions(message, actual);
 	}
 }

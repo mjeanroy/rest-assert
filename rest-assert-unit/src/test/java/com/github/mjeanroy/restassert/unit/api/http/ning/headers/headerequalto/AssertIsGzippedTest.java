@@ -41,12 +41,12 @@ public class AssertIsGzippedTest extends AbstractNingHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsGzipped(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsGzipped(message, actual);
 	}
 

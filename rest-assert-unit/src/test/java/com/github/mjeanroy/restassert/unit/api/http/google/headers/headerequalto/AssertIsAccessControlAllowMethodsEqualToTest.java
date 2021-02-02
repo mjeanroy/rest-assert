@@ -39,12 +39,12 @@ public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractGoogle
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, RequestMethod.GET, RequestMethod.POST);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		GoogleHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, RequestMethod.GET, RequestMethod.POST);
 	}
 }

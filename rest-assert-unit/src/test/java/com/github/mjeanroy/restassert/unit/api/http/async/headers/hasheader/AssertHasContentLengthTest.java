@@ -38,12 +38,12 @@ public class AssertHasContentLengthTest extends AbstractAsyncHttpHeaderTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasContentLength(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasContentLength(message, actual);
 	}
 }

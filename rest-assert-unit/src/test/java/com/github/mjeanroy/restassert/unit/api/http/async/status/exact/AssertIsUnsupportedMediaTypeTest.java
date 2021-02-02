@@ -37,12 +37,12 @@ public class AssertIsUnsupportedMediaTypeTest extends AbstractAsyncHttpStatusTes
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertIsUnsupportedMediaType(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertIsUnsupportedMediaType(message, actual);
 	}
 }

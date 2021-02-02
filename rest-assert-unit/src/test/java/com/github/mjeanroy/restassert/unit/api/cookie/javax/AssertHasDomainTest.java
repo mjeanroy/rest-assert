@@ -33,12 +33,12 @@ import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.a
 public class AssertHasDomainTest extends AbstractJavaxCookieTest {
 
 	@Override
-	protected void invoke(Cookie actual) {
+	protected void run(Cookie actual) {
 		assertHasDomain(actual, success().getDomain());
 	}
 
 	@Override
-	protected void invoke(String message, Cookie actual) {
+	protected void run(String message, Cookie actual) {
 		assertHasDomain(message, actual, success().getDomain());
 	}
 

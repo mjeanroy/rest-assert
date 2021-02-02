@@ -44,12 +44,12 @@ public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends Abstra
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsAccessControlAllowMethodsEqualTo(actual, METHODS);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsAccessControlAllowMethodsEqualTo(message, actual, METHODS);
 	}
 }

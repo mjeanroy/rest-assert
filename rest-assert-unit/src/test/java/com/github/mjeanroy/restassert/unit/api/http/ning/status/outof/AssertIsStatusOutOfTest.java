@@ -41,12 +41,12 @@ public class AssertIsStatusOutOfTest extends AbstractNingHttpStatusOutOfTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertIsStatusOutOf(actual, START, END);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsStatusOutOf(message, actual, START, END);
 	}
 }

@@ -38,12 +38,12 @@ public class AssertHasContentEncodingTest extends AbstractSpringMockMvcHttpHeade
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentEncoding(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertHasContentEncoding(message, actual);
 	}
 }

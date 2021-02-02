@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractJunit
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		JunitServersHttpAssert.assertDoesNotHaveAccessControlAllowMaxAge(message, actual);
 	}
 }

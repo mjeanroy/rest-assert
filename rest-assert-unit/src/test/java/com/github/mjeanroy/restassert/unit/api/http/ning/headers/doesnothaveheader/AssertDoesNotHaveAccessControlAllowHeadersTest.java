@@ -38,12 +38,12 @@ public class AssertDoesNotHaveAccessControlAllowHeadersTest extends AbstractNing
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowHeaders(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveAccessControlAllowHeaders(message, actual);
 	}
 }

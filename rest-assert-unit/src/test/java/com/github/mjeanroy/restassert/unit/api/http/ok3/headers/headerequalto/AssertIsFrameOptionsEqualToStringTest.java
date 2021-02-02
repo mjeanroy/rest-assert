@@ -42,12 +42,12 @@ public class AssertIsFrameOptionsEqualToStringTest extends AbstractOkHttpHeaderE
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		OkHttpAssert.assertIsFrameOptionsEqualTo(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		OkHttpAssert.assertIsFrameOptionsEqualTo(message, actual, VALUE);
 	}
 

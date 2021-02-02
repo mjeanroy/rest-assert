@@ -37,12 +37,12 @@ public class AssertIsPartialContentTest extends AbstractSpringMockMvcHttpStatusT
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPartialContent(actual);
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertIsPartialContent(message, actual);
 	}
 }

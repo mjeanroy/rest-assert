@@ -38,12 +38,12 @@ public class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractNingDo
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		NingHttpAssert.assertDoesNotHaveStrictTransportSecurity(actual);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		NingHttpAssert.assertDoesNotHaveStrictTransportSecurity(message, actual);
 	}
 }

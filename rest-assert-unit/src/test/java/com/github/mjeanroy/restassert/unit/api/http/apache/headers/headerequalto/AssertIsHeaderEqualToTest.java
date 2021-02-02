@@ -42,12 +42,12 @@ public class AssertIsHeaderEqualToTest extends AbstractApacheHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertIsHeaderEqualTo(actual, NAME, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsHeaderEqualTo(message, actual, NAME, VALUE);
 	}
 }

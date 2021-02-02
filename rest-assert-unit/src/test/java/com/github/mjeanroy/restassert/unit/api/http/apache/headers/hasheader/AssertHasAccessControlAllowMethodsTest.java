@@ -38,12 +38,12 @@ public class AssertHasAccessControlAllowMethodsTest extends AbstractApacheHttpHe
 	}
 
 	@Override
-	protected void invoke(HttpResponse actual) {
+	protected void run(HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowMethods(actual);
 	}
 
 	@Override
-	protected void invoke(String message, HttpResponse actual) {
+	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertHasAccessControlAllowMethods(message, actual);
 	}
 }

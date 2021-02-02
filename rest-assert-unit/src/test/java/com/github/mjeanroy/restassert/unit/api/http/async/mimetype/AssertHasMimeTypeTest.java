@@ -41,12 +41,12 @@ public class AssertHasMimeTypeTest extends AbstractAsyncHttpClientMimeTypeTest {
 	}
 
 	@Override
-	protected void invoke(Response actual) {
+	protected void run(Response actual) {
 		AsyncHttpAssert.assertHasMimeType(actual, VALUE);
 	}
 
 	@Override
-	protected void invoke(String message, Response actual) {
+	protected void run(String message, Response actual) {
 		AsyncHttpAssert.assertHasMimeType(message, actual, VALUE);
 	}
 }

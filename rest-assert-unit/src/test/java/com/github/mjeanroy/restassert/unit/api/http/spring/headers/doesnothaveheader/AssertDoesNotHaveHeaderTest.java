@@ -40,12 +40,12 @@ public class AssertDoesNotHaveHeaderTest extends AbstractSpringMockMcvDoesNotHav
 	}
 
 	@Override
-	protected void invoke(ResultActions actual) {
+	protected void run(ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveHeader(actual, getHeader().getName());
 	}
 
 	@Override
-	protected void invoke(String message, ResultActions actual) {
+	protected void run(String message, ResultActions actual) {
 		SpringMockMvcHttpAssert.assertDoesNotHaveHeader(message, actual, getHeader().getName());
 	}
 }
