@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
-	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
+	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {

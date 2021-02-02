@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import static java.util.Collections.addAll;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.Collections.addAll;
 
 /**
  * Static Collection Utilities.
@@ -96,7 +96,7 @@ public final class Collections {
 
 	private static <T> int sizeOf(Iterable<T> iterable) {
 		if (iterable instanceof Collection) {
-			return ((Collection) iterable).size();
+			return ((Collection<T>) iterable).size();
 		}
 
 		return 10;
@@ -112,7 +112,7 @@ public final class Collections {
 	 * @return Outputs.
 	 */
 	public static <T, U> List<U> map(Iterable<T> inputs, Mapper<T, U> mapper) {
-		int size = inputs instanceof Collection ? ((Collection) inputs).size() : 10;
+		int size = inputs instanceof Collection ? ((Collection<T>) inputs).size() : 10;
 		List<U> outputs = new ArrayList<>(size);
 		for (T input : inputs) {
 			outputs.add(mapper.apply(input));

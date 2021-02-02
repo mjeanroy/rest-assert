@@ -24,10 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static java.util.Collections.unmodifiableMap;
-import static java.util.Collections.unmodifiableSet;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
+import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.net.URL;
 import java.util.LinkedHashMap;
@@ -38,11 +39,10 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
-import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static java.util.Collections.unmodifiableMap;
+import static java.util.Collections.unmodifiableSet;
 
 /**
  * Content-Security-Policy Header.
@@ -667,7 +667,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		}
 	}
 
-	static final String SCHEME_REGEX = "[a-z][a-z0-9\\+\\-\\.]*";
+	static final String SCHEME_REGEX = "[a-z][a-z0-9+\\-.]*";
 	static final String HOST_NAME_REGEX = "(\\*\\.)?([a-z0-9\\-])+(\\.[a-z0-9\\-]+)*";
 	static final String HOST_PORT_REGEX = "([0-9]+)|\\*";
 	static final String HOST_PATH_REGEX = "([^?#]*)";

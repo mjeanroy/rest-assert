@@ -24,16 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
 
 import java.net.URL;
-import java.nio.charset.MalformedInputException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class FilesTest {
 

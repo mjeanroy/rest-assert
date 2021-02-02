@@ -32,7 +32,7 @@ import org.apache.http.HttpResponse;
 
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
-	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
+	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {

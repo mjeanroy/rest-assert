@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
+
 public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
-	private static final long VALUE = Long.valueOf(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
+	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
 	protected Header getHeader() {

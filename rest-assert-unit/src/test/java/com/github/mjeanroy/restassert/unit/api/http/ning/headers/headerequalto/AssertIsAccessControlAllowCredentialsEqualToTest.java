@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
-	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
+	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {

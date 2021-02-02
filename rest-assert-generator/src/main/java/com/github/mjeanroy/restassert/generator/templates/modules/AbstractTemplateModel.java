@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.generator.templates.internal.Arg;
 import com.thoughtworks.paranamer.BytecodeReadingParanamer;
 import com.thoughtworks.paranamer.Paranamer;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -149,7 +148,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		final List<Arg> args;
 		final Class<?>[] classTypes = method.getParameterTypes();
 		final Type[] paramTypes = method.getGenericParameterTypes();
-		final int size = paramTypes == null ? 0 : paramTypes.length;
+		final int size = paramTypes.length;
 		final String[] parameterNames = paranamer.lookupParameterNames(method);
 
 		if (size > 1) {

@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
+
 public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
-	private static final long VALUE = Long.valueOf(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
+	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
 	protected Header getHeader() {

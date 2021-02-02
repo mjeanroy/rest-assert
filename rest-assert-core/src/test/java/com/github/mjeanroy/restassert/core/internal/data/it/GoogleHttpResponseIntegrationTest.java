@@ -26,15 +26,10 @@ package com.github.mjeanroy.restassert.core.internal.data.it;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpRequestFactory;
 import com.google.api.client.http.javanet.NetHttpTransport;
-import com.ning.http.client.AsyncHttpClient;
-import com.ning.http.client.Response;
-
-import java.util.concurrent.Future;
 
 public class GoogleHttpResponseIntegrationTest extends AbstractHttpResponseIntegrationTest {
 

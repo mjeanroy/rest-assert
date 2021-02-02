@@ -39,7 +39,7 @@ import java.util.Map;
  * @param <T> Concrete implementation, used for chaining.
  */
 @SuppressWarnings("unchecked")
-public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuilder> implements HttpResponseBuilder<U> {
+public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuilder<U>> implements HttpResponseBuilder<U> {
 
 	/**
 	 * Http response status code, default is 200.

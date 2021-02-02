@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
+
 public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
-	private static final boolean VALUE = Boolean.valueOf(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
+	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 
 	@Override
 	protected Header getHeader() {

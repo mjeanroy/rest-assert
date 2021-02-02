@@ -23,15 +23,10 @@
  */
 
 package com.github.mjeanroy.restassert.core.internal.data;
-
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.TimeZone;
 
 /**
  * Default cookie representation.

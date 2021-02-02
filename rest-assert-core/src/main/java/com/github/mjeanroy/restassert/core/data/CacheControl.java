@@ -479,7 +479,7 @@ public final class CacheControl implements HttpHeaderValue {
 
 			@Override
 			void setValue(String value, CacheControlBuilder builder) {
-				int maxAge = Integer.valueOf(value.split("=")[1].trim());
+				int maxAge = Integer.parseInt(value.split("=")[1].trim());
 				builder.maxAge(maxAge);
 			}
 		},
@@ -492,7 +492,7 @@ public final class CacheControl implements HttpHeaderValue {
 
 			@Override
 			void setValue(String value, CacheControlBuilder builder) {
-				int maxAge = Integer.valueOf(value.split("=")[1].trim());
+				int maxAge = Integer.parseInt(value.split("=")[1].trim());
 				builder.sMaxAge(maxAge);
 			}
 		},
