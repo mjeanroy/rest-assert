@@ -24,13 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_NAME_REGEX;
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_PATH_REGEX;
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_PORT_REGEX;
-import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SCHEME_REGEX;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.AbstractSourceValue;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective;
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 
 import java.net.URI;
 import java.util.ArrayList;
@@ -41,14 +42,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.AbstractSourceValue;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective;
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_NAME_REGEX;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_PATH_REGEX;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_PORT_REGEX;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SCHEME_REGEX;
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 
 /**
  * DefaultCookieBuilder used to create {@link ContentSecurityPolicy} instances.
@@ -406,9 +406,8 @@ public class ContentSecurityPolicyBuilder {
 	 * @throws NullPointerException If at least one parameter is {@code null}.
 	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-sandbox">https://w3c.github.io/webappsec-csp/#directive-sandbox</a>
 	 */
-	@SuppressWarnings("unchecked")
 	public ContentSecurityPolicyBuilder addSandbox(Sandbox sandbox, Sandbox... other) {
-		return add(SourceDirective.SANDBOX, sandbox, (List) asList(other));
+		return add(SourceDirective.SANDBOX, sandbox, asList(other));
 	}
 
 	/**
@@ -439,16 +438,15 @@ public class ContentSecurityPolicyBuilder {
 	 * @return Current builder.
 	 * @see <a href="https://www.w3.org/TR/mixed-content/#strict-checking">https://www.w3.org/TR/mixed-content/#strict-checking</a>
 	 */
-	@SuppressWarnings("unchecked")
 	public ContentSecurityPolicyBuilder addRequireSriFor(RequireSriFor resource, RequireSriFor... other) {
-		return add(SourceDirective.REQUIRE_SRI_FOR, resource, (List) asList(other));
+		return add(SourceDirective.REQUIRE_SRI_FOR, resource, asList(other));
 	}
 
-	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<Source> other) {
+	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<? extends Source> other) {
 		return add(directive, src, other, NO_OP_VALIDATOR);
 	}
 
-	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<Source> other, SourceValidator validator) {
+	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<? extends Source> other, SourceValidator validator) {
 		List<Source> inputs = new ArrayList<>(other.size() + 1);
 
 		if (src != null) {

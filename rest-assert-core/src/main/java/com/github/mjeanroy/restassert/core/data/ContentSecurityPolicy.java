@@ -684,7 +684,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	 *
 	 * @see <a href="https://www.w3.org/TR/CSP/#base64_value">https://www.w3.org/TR/CSP/#base64_value</a>
 	 */
-	private static final Pattern PATTERN_BASE64 = Pattern.compile("^[a-z0-9\\+/]+={2}$", Pattern.CASE_INSENSITIVE);
+	private static final Pattern PATTERN_BASE64 = Pattern.compile("^[a-z0-9+/]+={2}$", Pattern.CASE_INSENSITIVE);
 
 	/**
 	 * Pattern used to validate host name.

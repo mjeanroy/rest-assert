@@ -224,7 +224,7 @@ public final class JavaDocParser {
 	private static String toMarkdown(String text) {
 		String output = text;
 		for (String inlineTag : INLINE_JAVADOC_TAGS) {
-			output = output.replaceAll("\\{" + inlineTag + " (" + INSIDE_TAG_PATTERN + ")\\}", "`$1`");
+			output = output.replaceAll("\\{" + inlineTag + " (" + INSIDE_TAG_PATTERN + ")}", "`$1`");
 		}
 
 		return output;

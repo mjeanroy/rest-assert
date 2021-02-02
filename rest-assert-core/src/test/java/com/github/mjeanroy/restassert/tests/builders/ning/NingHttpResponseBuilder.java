@@ -39,7 +39,6 @@ import com.ning.http.client.providers.jdk.ResponseHeaders;
 import com.ning.http.client.providers.jdk.ResponseStatus;
 import com.ning.http.client.uri.Uri;
 
-import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 import java.util.List;

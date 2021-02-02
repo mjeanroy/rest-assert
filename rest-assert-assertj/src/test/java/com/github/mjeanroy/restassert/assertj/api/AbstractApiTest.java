@@ -58,9 +58,7 @@ public abstract class AbstractApiTest<T, U> {
 	@Test
 	public void it_should_return_instance() {
 		U result = run();
-		assertThat(result)
-				.isNotNull()
-				.isSameAs(api);
+		assertThat(result).isSameAs(api);
 	}
 
 	private void inject() throws Exception {
