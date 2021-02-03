@@ -27,8 +27,6 @@ package com.github.mjeanroy.restassert.generator.templates.modules;
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.utils.IOUtils;
 
-import static java.lang.String.format;
-
 /**
  * Abstract template.
  */
@@ -45,7 +43,7 @@ public abstract class AbstractTemplate implements Template {
 	 * @param prefix Template path prefix.
 	 */
 	protected AbstractTemplate(String prefix) {
-		this.path = format("%s%s.txt", prefix, getClass().getSimpleName());
+		this.path = prefix + getClass().getSimpleName() + ".mustache";
 	}
 
 	@Override

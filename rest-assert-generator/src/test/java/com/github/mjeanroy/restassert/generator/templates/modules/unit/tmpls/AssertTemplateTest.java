@@ -46,6 +46,6 @@ public class AssertTemplateTest extends AbstractTemplateTest {
 
 	@Override
 	protected String getExpectedPath() {
-		return "/unit/AssertTemplate.txt";
+		return "/unit/AssertTemplate.mustache";
 	}
 }
