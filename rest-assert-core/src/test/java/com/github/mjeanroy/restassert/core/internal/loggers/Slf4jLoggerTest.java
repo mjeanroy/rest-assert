@@ -24,182 +24,150 @@
 
 package com.github.mjeanroy.restassert.core.internal.loggers;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
+import ch.qos.logback.classic.Level;
+import com.github.mjeanroy.restassert.tests.junit.SystemOutRule;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class Slf4jLoggerTest {
 
-	private org.slf4j.Logger slf4jLogger;
-	private Logger logger;
+	@Rule
+	public SystemOutRule systemOutRule = new SystemOutRule();
+
+	private Logger log;
 
 	@Before
-	public void setUp() throws Exception {
-		slf4jLogger = mock(org.slf4j.Logger.class);
-		logger = new Slf4jLogger(Slf4jLoggerTest.class);
-		FieldUtils.writeDeclaredField(logger, "logger", slf4jLogger, true);
+	public void setUp() {
+		log = createLogger();
 	}
 
 	@Test
-	public void it_should_have_debug() {
-		String message = "foo bar";
-		logger.debug(message);
-		verify(slf4jLogger).debug(message);
+	public void it_should_log_debug_message_with_one_argument() {
+		log.debug("Message with placeholder: {}", "arg1");
+		verifyOutput("DEBUG", "Message with placeholder: arg1");
 	}
 
 	@Test
-	public void it_should_have_debug_with_one_parameter() {
-		String message = "foo bar";
-		String param = "test";
-
-		logger.debug(message, param);
-
-		verify(slf4jLogger).debug(message, param);
+	public void it_should_log_debug_message_with_two_arguments() {
+		log.debug("Message with placeholder: {} {}", "arg1", "arg2");
+		verifyOutput("DEBUG", "Message with placeholder: arg1 arg2");
 	}
 
 	@Test
-	public void it_should_have_debug_with_two_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-
-		logger.debug(message, p1, p2);
-
-		verify(slf4jLogger).debug(message, p1, p2);
+	public void it_should_log_debug_message_without_argument() {
+		log.debug("Message with placeholder");
+		verifyOutput("DEBUG", "Message with placeholder");
 	}
 
 	@Test
-	public void it_should_have_debug_with_three_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-		String p3 = "test3";
-
-		logger.debug(message, p1, p2, p3);
-
-		verify(slf4jLogger).debug(message, p1, p2, p3);
+	public void it_should_log_debug_message_with_list_of_arguments() {
+		log.debug("Message with placeholder: {} {} {}", "arg1", "arg2", "arg3");
+		verifyOutput("DEBUG", "Message with placeholder: arg1 arg2 arg3");
 	}
 
 	@Test
-	public void it_should_have_info() {
-		String message = "foo bar";
-		logger.info(message);
-		verify(slf4jLogger).info(message);
+	public void it_should_log_info_message_with_one_argument() {
+		log.info("Message with placeholder: {}", "arg1");
+		verifyOutput("INFO", "Message with placeholder: arg1");
 	}
 
 	@Test
-	public void it_should_have_info_with_one_parameter() {
-		String message = "foo bar";
-		String param = "test";
-
-		logger.info(message, param);
-
-		verify(slf4jLogger).info(message, param);
+	public void it_should_log_info_message_with_two_arguments() {
+		log.info("Message with placeholder: {} {}", "arg1", "arg2");
+		verifyOutput("INFO", "Message with placeholder: arg1 arg2");
 	}
 
 	@Test
-	public void it_should_have_info_with_two_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-
-		logger.info(message, p1, p2);
-
-		verify(slf4jLogger).info(message, p1, p2);
+	public void it_should_log_info_message_without_argument() {
+		log.info("Message with placeholder");
+		verifyOutput("INFO", "Message with placeholder");
 	}
 
 	@Test
-	public void it_should_have_info_with_three_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-		String p3 = "test3";
-
-		logger.info(message, p1, p2, p3);
-
-		verify(slf4jLogger).info(message, p1, p2, p3);
+	public void it_should_log_info_message_with_list_of_arguments() {
+		log.info("Message with placeholder: {} {} {}", "arg1", "arg2", "arg3");
+		verifyOutput("INFO", "Message with placeholder: arg1 arg2 arg3");
 	}
 
 	@Test
-	public void it_should_have_warn() {
-		String message = "foo bar";
-		logger.warn(message);
-		verify(slf4jLogger).warn(message);
+	public void it_should_log_warn_message_with_one_argument() {
+		log.warn("Message with placeholder: {}", "arg1");
+		verifyOutput("WARN", "Message with placeholder: arg1");
 	}
 
 	@Test
-	public void it_should_have_warn_with_one_parameter() {
-		String message = "foo bar";
-		String param = "test";
-
-		logger.warn(message, param);
-
-		verify(slf4jLogger).warn(message, param);
+	public void it_should_log_warn_message_with_two_arguments() {
+		log.warn("Message with placeholder: {} {}", "arg1", "arg2");
+		verifyOutput("WARN", "Message with placeholder: arg1 arg2");
 	}
 
 	@Test
-	public void it_should_have_warn_with_two_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-
-		logger.warn(message, p1, p2);
-
-		verify(slf4jLogger).warn(message, p1, p2);
+	public void it_should_log_warn_message_without_argument() {
+		log.warn("Message with placeholder");
+		verifyOutput("WARN", "Message with placeholder");
 	}
 
 	@Test
-	public void it_should_have_warn_with_three_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-		String p3 = "test3";
-
-		logger.warn(message, p1, p2, p3);
-
-		verify(slf4jLogger).warn(message, p1, p2, p3);
+	public void it_should_log_warn_message_with_list_of_arguments() {
+		log.warn("Message with placeholder: {} {} {}", "arg1", "arg2", "arg3");
+		verifyOutput("WARN", "Message with placeholder: arg1 arg2 arg3");
 	}
 
 	@Test
-	public void it_should_have_error() {
-		String message = "foo bar";
-		logger.error(message);
-		verify(slf4jLogger).error(message);
+	public void it_should_log_error_message_with_one_argument() {
+		log.error("Message with placeholder: {}", "arg1");
+		verifyOutput("ERROR", "Message with placeholder: arg1");
 	}
 
 	@Test
-	public void it_should_have_error_with_one_parameter() {
-		String message = "foo bar";
-		String param = "test";
-
-		logger.error(message, param);
-
-		verify(slf4jLogger).error(message, param);
+	public void it_should_log_error_message_with_two_arguments() {
+		log.error("Message with placeholder: {} {}", "arg1", "arg2");
+		verifyOutput("ERROR", "Message with placeholder: arg1 arg2");
 	}
 
 	@Test
-	public void it_should_have_error_with_two_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-
-		logger.error(message, p1, p2);
-
-		verify(slf4jLogger).error(message, p1, p2);
+	public void it_should_log_error_message_without_argument() {
+		log.error("Message with placeholder");
+		verifyOutput("ERROR", "Message with placeholder");
 	}
 
 	@Test
-	public void it_should_have_error_with_three_parameter() {
-		String message = "foo bar";
-		String p1 = "test1";
-		String p2 = "test2";
-		String p3 = "test3";
+	public void it_should_log_error_message_with_list_of_arguments() {
+		log.error("Message with placeholder: {} {} {}", "arg1", "arg2", "arg3");
+		verifyOutput("ERROR", "Message with placeholder: arg1 arg2 arg3");
+	}
 
-		logger.error(message, p1, p2, p3);
+	@Test
+	public void it_should_log_throwable() {
+		Exception ex = new RuntimeException("A runtime exception");
+		String message = "error message";
+		log.error(message, ex);
 
-		verify(slf4jLogger).error(message, p1, p2, p3);
+		verifyOutput("ERROR", ex.getMessage());
+	}
+
+	private void verifyOutput(String logLevel, String message) {
+		String out = systemOutRule.getOut();
+		assertThat(out).contains(logLevel);
+		assertThat(out).contains(message);
+	}
+
+	private Logger createLogger() {
+		Slf4jLogger log = new Slf4jLogger(getClass());
+
+		try {
+			ch.qos.logback.classic.Logger logback = (ch.qos.logback.classic.Logger) FieldUtils.readDeclaredField(log, "logger", true);
+			logback.setLevel(Level.TRACE);
+			logback.setAdditive(true);
+		}
+		catch (Exception ex) {
+			throw new AssertionError(ex);
+		}
+
+		return log;
 	}
 }
