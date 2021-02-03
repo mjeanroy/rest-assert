@@ -32,10 +32,13 @@ import com.thoughtworks.paranamer.Paranamer;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.findPublicMethods;
@@ -84,6 +87,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		map.put("actual_class", getActualClass());
 		map.put("methods", getMethods());
 		map.put("factory", getFactory());
+		map.put("current_tt", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.ENGLISH).format(new Date()));
 		return unmodifiableMap(map);
 	}
 

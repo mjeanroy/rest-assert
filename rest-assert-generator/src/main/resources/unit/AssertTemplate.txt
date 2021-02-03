@@ -28,7 +28,9 @@ import static com.github.mjeanroy.restassert.unit.api.AssertUtil.check;
 
 /**
  * Static assertions.
- * This class is generated.
+ *
+ * Generated on: {{current_tt}}
+ * Template: AssertTemplate.txt
  */
 public final class {{class_name}} {
 

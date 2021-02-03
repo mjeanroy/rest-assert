@@ -28,9 +28,12 @@ import org.assertj.core.api.AssertionInfo;
 
 /**
  * Reusable assertions of http response.
+ *
  * This class is implemented as a singleton.
  * This class is thread safe.
- * This class is automatically generated during build.
+ *
+ * Generated on: {{current_tt}}
+ * Template: ClassAssertionsTemplate.txt
  */
 public class {{class_name}} extends AbstractRestAssertions {
 

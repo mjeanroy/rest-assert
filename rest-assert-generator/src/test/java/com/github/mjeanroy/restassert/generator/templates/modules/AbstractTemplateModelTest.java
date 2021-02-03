@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.entry;
+import org.assertj.core.api.Condition;
+import org.junit.Test;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.assertj.core.api.Condition;
-import org.junit.Test;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 public abstract class AbstractTemplateModelTest {
 
@@ -131,8 +131,9 @@ public abstract class AbstractTemplateModelTest {
 		Map<String, Object> data = getTemplateModel().data();
 
 		assertThat(data)
-			.hasSize(6)
+			.hasSize(7)
 			.containsKey("methods")
+			.containsKey("current_tt")
 			.contains(
 				entry("core_class_name", getExpectedCoreClassName()),
 				entry("actual_class", getExpectedActualClass()),

@@ -33,7 +33,8 @@ import org.assertj.core.api.AbstractAssert;
  *          target="_blank">Emulating 'self types' using Java Generics to simplify fluent API implementation</a>&quot;
  *          for more details.
  *
- * This class is generated.
+ * Generated on: {{current_tt}}
+ * Template: ClassAssertTemplate.txt
  */
 public abstract class {{class_name}}<S extends {{class_name}}<S>> extends AbstractAssert<S, {{actual_class}}> {
 
