@@ -46,6 +46,9 @@ public final class {{class_name}} {
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *
 	 * @param actual Actual object.
+	 {{#arguments}}
+	 * @param {{name}} See {{core_class_name}}#{{core_method_name}}
+	 {{/arguments}}
 	 */
 	public static void {{method_name}}({{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		{{method_name}}(null, actual{{#arguments}}, {{name}}{{/arguments}});
@@ -57,6 +60,9 @@ public final class {{class_name}} {
 	 *
 	 * @param message  The identifying message for the {@link AssertionError}.
 	 * @param actual Actual object.
+	 {{#arguments}}
+	 * @param {{name}} See {{core_class_name}}#{{core_method_name}}
+	 {{/arguments}}
 	 */
 	public static void {{method_name}}(String message, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		check(message, assertions.{{core_method_name}}({{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}));

@@ -44,6 +44,8 @@ public class {{class_name}} extends AbstractRestAssertions {
 
 	/**
 	 * Returns the singleton instance of this class.
+	 *
+	 * @return The instance.
 	 */
 	public static {{class_name}} instance() {
 		return INSTANCE;
@@ -62,8 +64,11 @@ public class {{class_name}} extends AbstractRestAssertions {
 	/**
 	 * @see {{core_class_name}}#{{core_method_name}}
 	 *
-	 * @param info contains information about the assertion.
-	 * @param actual actual object.
+	 * @param info Contains information about the assertion.
+	 * @param actual Actual object.
+	 {{#arguments}}
+	 * @param {{name}} See {@link {{core_class_name}}#{{core_method_name}}}
+	 {{/arguments}}
 	 * @throws AssertionError When assertion fails.
 	 */
 	public void {{method_name}}(AssertionInfo info, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
