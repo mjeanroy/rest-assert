@@ -47,7 +47,6 @@ import java.util.Map;
 import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.mockito.Mockito.mock;
 
 /**
  * DefaultCookieBuilder to create mock instance of {@link Response} class.
@@ -56,7 +55,7 @@ public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Respons
 
 	@Override
 	public Response build() {
-		Uri uri = mock(Uri.class);
+		Uri uri = Uri.create("http://localhost:8080");
 		AsyncHttpClientConfig config = new AsyncHttpClientConfig.Builder().build();
 		AsyncHttpProvider provider = new JDKAsyncHttpProvider(config);
 

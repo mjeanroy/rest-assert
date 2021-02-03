@@ -26,6 +26,8 @@ package com.github.mjeanroy.restassert.tests.builders.async;
 
 import com.github.mjeanroy.restassert.tests.builders.AbstractHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.handler.codec.http.DefaultHttpHeaders;
 import io.netty.handler.codec.http.DefaultHttpResponse;
 import io.netty.handler.codec.http.HttpHeaders;
@@ -34,6 +36,7 @@ import io.netty.handler.codec.http.HttpVersion;
 import org.asynchttpclient.HttpResponseBodyPart;
 import org.asynchttpclient.HttpResponseStatus;
 import org.asynchttpclient.Response;
+import org.asynchttpclient.netty.EagerResponseBodyPart;
 import org.asynchttpclient.netty.NettyResponse;
 import org.asynchttpclient.netty.NettyResponseStatus;
 import org.asynchttpclient.uri.Uri;
@@ -44,8 +47,6 @@ import java.util.Map;
 import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * DefaultCookieBuilder to create mock instance of {@link org.asynchttpclient.Response} class.
@@ -54,7 +55,7 @@ public class AsyncHttpResponseBuilder extends AbstractHttpResponseBuilder<Respon
 
 	@Override
 	public Response build() {
-		Uri uri = mock(Uri.class);
+		Uri uri = Uri.create("http://localhost:8080");
 
 		io.netty.handler.codec.http.HttpResponseStatus rspStatus = io.netty.handler.codec.http.HttpResponseStatus.valueOf(status);
 		HttpResponse httpResponse = new DefaultHttpResponse(HttpVersion.HTTP_1_1, rspStatus);
@@ -67,10 +68,8 @@ public class AsyncHttpResponseBuilder extends AbstractHttpResponseBuilder<Respon
 
 		final List<HttpResponseBodyPart> bodyParts;
 		if (content != null) {
-			final byte[] body = content.getBytes(defaultCharset());
-			HttpResponseBodyPart part = mock(HttpResponseBodyPart.class);
-			when(part.length()).thenReturn(body.length);
-			when(part.getBodyPartBytes()).thenReturn(body);
+			ByteBuf byteBuf = Unpooled.copiedBuffer(content, defaultCharset());
+			HttpResponseBodyPart part = new EagerResponseBodyPart(byteBuf, true);
 			bodyParts = singletonList(part);
 		} else {
 			bodyParts = emptyList();

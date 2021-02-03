@@ -30,8 +30,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import static java.util.Collections.addAll;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 /**
  * Create mock instance of {@link RestAssertError} class.
@@ -83,13 +81,32 @@ public class RestAssertErrorBuilder {
 	 * @return Mock instance.
 	 */
 	public RestAssertError build() {
-		RestAssertError error = mock(RestAssertError.class);
-		when(error.message()).thenReturn(message);
+		return new MockRestAssertError(message, args);
+	}
 
-		int size = this.args.size();
-		Object[] args = this.args.toArray(new Object[size]);
-		when(error.args()).thenReturn(args);
+	private static final class MockRestAssertError implements RestAssertError {
 
-		return error;
+		private final String message;
+		private final Object[] args;
+
+		private MockRestAssertError(String message, Collection<Object> args) {
+			this.message = message;
+			this.args = args.toArray(new Object[0]);
+		}
+
+		@Override
+		public String message() {
+			return message;
+		}
+
+		@Override
+		public Object[] args() {
+			return args;
+		}
+
+		@Override
+		public String buildMessage() {
+			throw new UnsupportedOperationException();
+		}
 	}
 }
