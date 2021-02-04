@@ -200,6 +200,13 @@ public final class HttpStatusCodes {
 	 */
 	public static final int UNSUPPORTED_MEDIA_TYPE = 415;
 
+	/**
+	 * HTTP 416: REQUESTED RANGE NOT SATISFIABLE
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.17">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.17</a>
+	 */
+	public static final int REQUESTED_RANGE_NOT_SATISFIABLE = 416;
+
 	// 5XX
 
 	/**

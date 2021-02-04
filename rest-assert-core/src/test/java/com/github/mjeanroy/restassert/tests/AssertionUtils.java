@@ -46,20 +46,11 @@ public abstract class AssertionUtils {
 		assertThat(result.isFailure()).isTrue();
 
 		RestAssertError error = result.getError();
-		assertThat(error)
-				.isNotNull()
-				.isInstanceOf(klassError);
-
-		assertThat(error.args())
-				.isNotNull()
-				.hasSameSizeAs(args)
-				.contains(args);
+		assertThat(error).isInstanceOf(klassError);
+		assertThat(error.args()).hasSameSizeAs(args).contains(args);
 
 		String expectedMessage = format(pattern, args);
-		assertThat(error.buildMessage())
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo(expectedMessage);
+		assertThat(error.buildMessage()).isEqualTo(expectedMessage);
 	}
 
 	public static void assertFailure(String message, Function test) {

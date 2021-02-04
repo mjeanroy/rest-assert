@@ -441,6 +441,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "REQUESTED RANGE NOT SATISFIABLE"} status (i.e is strictly equals to {@code 416}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.17">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.17</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/416</a>
+	 * @see <a href="https://httpstatuses.com/416">https://httpstatuses.com/416</a>
+	 */
+	public AssertionResult isRequestedRangeNotSatisfiable(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.REQUESTED_RANGE_NOT_SATISFIABLE);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "NOT IMPLEMENTED"} status (i.e is strictly equals to {@code 501}).
 	 *
 	 * @param httpResponse HTTP response to be tested.

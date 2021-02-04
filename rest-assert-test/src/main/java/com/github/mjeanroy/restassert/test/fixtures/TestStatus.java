@@ -153,6 +153,11 @@ public final class TestStatus {
 	public static final int UNSUPPORTED_MEDIA_TYPE = 415;
 
 	/**
+	 * The status code for the {@code "REQUESTED RANGE NOT SATISFIABLE"} response, to use in unit test.
+	 */
+	public static final int REQUESTED_RANGE_NOT_SATISFIABLE = 416;
+
+	/**
 	 * The status code for the {@code "INTERNAL SERVER ERROR"} response, to use in unit test.
 	 */
 	public static final int INTERNAL_SERVER_ERROR = 500;
