@@ -389,6 +389,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "REQUEST ENTITY TOO LARGE"} status (i.e is strictly equals to {@code 413}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.14">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.14</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/413">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/413</a>
+	 * @see <a href="https://httpstatuses.com/413">https://httpstatuses.com/413</a>
+	 */
+	public AssertionResult isRequestEntityTooLarge(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.REQUEST_ENTITY_TOO_LARGE);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "METHOD NOT ALLOWED} status (i.e is strictly equals to {@code 405}).
 	 *
 	 * @param httpResponse HTTP response to be tested.

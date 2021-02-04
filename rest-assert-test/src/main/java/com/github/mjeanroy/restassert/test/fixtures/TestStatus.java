@@ -148,6 +148,11 @@ public final class TestStatus {
 	public static final int PRE_CONDITION_FAILED = 412;
 
 	/**
+	 * The status code for the {@code "REQUEST ENTITY TOO LARGE"} response, to use in unit test.
+	 */
+	public static final int REQUEST_ENTITY_TOO_LARGE = 413;
+
+	/**
 	 * The status code for the {@code "UNSUPPORTED MEDIA TYPE"} response, to use in unit test.
 	 */
 	public static final int UNSUPPORTED_MEDIA_TYPE = 415;

@@ -194,6 +194,13 @@ public final class HttpStatusCodes {
 	public static final int PRE_CONDITION_FAILED = 412;
 
 	/**
+	 * HTTP 413: REQUEST ENTITY TOO LARGE.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.14">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.14</a>
+	 */
+	public static final int REQUEST_ENTITY_TOO_LARGE = 413;
+
+	/**
 	 * HTTP 415: UNSUPPORTED MEDIA TYPE.
 	 *
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16</a>
