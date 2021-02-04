@@ -108,11 +108,18 @@ public final class HttpStatusCodes {
 	public static final int NOT_MODIFIED = 304;
 
 	/**
-	 * HTTP 304: NOT MODIFIED.
+	 * HTTP 307: TEMPORARY REDIRECT.
 	 *
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8</a>
 	 */
 	public static final int TEMPORARY_REDIRECT = 307;
+
+	/**
+	 * HTTP 308: PERMANENT REDIRECT.
+	 *
+	 * @see <a href="https://tools.ietf.org/html/rfc7538">https://tools.ietf.org/html/rfc7538</a>
+	 */
+	public static final int PERMANENT_REDIRECT = 308;
 
 	// 4XX
 

@@ -265,10 +265,23 @@ public final class HttpResponseAssertions {
 	 * @return Assertion result.
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8</a>
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307</a>
-	 * @see <a href="https://httpstatuses.com/304">https://httpstatuses.com/307</a>
+	 * @see <a href="https://httpstatuses.com/307">https://httpstatuses.com/307</a>
 	 */
 	public AssertionResult isTemporaryRedirect(HttpResponse httpResponse) {
 		return isStatusEqual(httpResponse, HttpStatusCodes.TEMPORARY_REDIRECT);
+	}
+
+	/**
+	 * Check that status code of http response is {@code "PERMANENT REDIRECT"} status (i.e is strictly equals to {@code 308}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://tools.ietf.org/html/rfc7538">https://tools.ietf.org/html/rfc7538</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308</a>
+	 * @see <a href="https://httpstatuses.com/308">https://httpstatuses.com/308</a>
+	 */
+	public AssertionResult isPermanentRedirect(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.PERMANENT_REDIRECT);
 	}
 
 	/**
