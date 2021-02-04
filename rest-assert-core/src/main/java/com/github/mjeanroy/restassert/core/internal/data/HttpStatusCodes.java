@@ -201,6 +201,13 @@ public final class HttpStatusCodes {
 	public static final int REQUEST_ENTITY_TOO_LARGE = 413;
 
 	/**
+	 * HTTP 414: REQUEST URI TOO LONG.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.15">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.15</a>
+	 */
+	public static final int REQUEST_URI_TOO_LONG = 414;
+
+	/**
 	 * HTTP 415: UNSUPPORTED MEDIA TYPE.
 	 *
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16</a>

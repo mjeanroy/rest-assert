@@ -402,6 +402,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "REQUEST URI TOO LONG"} status (i.e is strictly equals to {@code 414}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.15">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.15</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/414">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/414</a>
+	 * @see <a href="https://httpstatuses.com/414">https://httpstatuses.com/414</a>
+	 */
+	public AssertionResult isRequestUriTooLong(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.REQUEST_URI_TOO_LONG);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "METHOD NOT ALLOWED} status (i.e is strictly equals to {@code 405}).
 	 *
 	 * @param httpResponse HTTP response to be tested.
