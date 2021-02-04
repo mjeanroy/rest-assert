@@ -122,6 +122,32 @@ public class ContentSecurityPolicyBuilder {
 	}
 
 	/**
+	 * Add values for {@code script-src-elem} directive.
+	 *
+	 * @param src Source value.
+	 * @param other Optional other source values.
+	 * @return Current builder.
+	 * @throws NullPointerException If at least one parameter is {@code null}.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-elem">https://w3c.github.io/webappsec-csp/#directive-script-src-elem</a>
+	 */
+	public ContentSecurityPolicyBuilder addScriptSrcElem(Source src, Source... other) {
+		return add(SourceDirective.SCRIPT_SRC_ELEM, src, asList(other));
+	}
+
+	/**
+	 * Add values for {@code script-src-attr} directive.
+	 *
+	 * @param src Source value.
+	 * @param other Optional other source values.
+	 * @return Current builder.
+	 * @throws NullPointerException If at least one parameter is {@code null}.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-attr">https://w3c.github.io/webappsec-csp/#directive-script-src-attr</a>
+	 */
+	public ContentSecurityPolicyBuilder addScriptSrcAttr(Source src, Source... other) {
+		return add(SourceDirective.SCRIPT_SRC_ATTR, src, asList(other));
+	}
+
+	/**
 	 * Add values for {@code style-src} directive.
 	 *
 	 * @param src Source value.
@@ -132,6 +158,32 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder addStyleSrc(Source src, Source... other) {
 		return add(SourceDirective.STYLE_SRC, src, asList(other));
+	}
+
+	/**
+	 * Add values for {@code style-src-elem} directive.
+	 *
+	 * @param src Source value.
+	 * @param other Optional other source values.
+	 * @return Current builder.
+	 * @throws NullPointerException If at least one parameter is {@code null}.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-elem">https://w3c.github.io/webappsec-csp/#directive-style-src-elem</a>
+	 */
+	public ContentSecurityPolicyBuilder addStyleSrcElem(Source src, Source... other) {
+		return add(SourceDirective.STYLE_SRC_ELEM, src, asList(other));
+	}
+
+	/**
+	 * Add values for {@code style-src-attr} directive.
+	 *
+	 * @param src Source value.
+	 * @param other Optional other source values.
+	 * @return Current builder.
+	 * @throws NullPointerException If at least one parameter is {@code null}.
+	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-attr">https://w3c.github.io/webappsec-csp/#directive-style-src-attr</a>
+	 */
+	public ContentSecurityPolicyBuilder addStyleSrcAttr(Source src, Source... other) {
+		return add(SourceDirective.STYLE_SRC_ATTR, src, asList(other));
 	}
 
 	/**

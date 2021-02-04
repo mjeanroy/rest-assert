@@ -58,7 +58,11 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sou
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REQUIRE_SRI_FOR;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SANDBOX;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC_ATTR;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC_ELEM;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC_ATTR;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC_ELEM;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.UPGRADE_INSECURE_REQUEST;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.WORKER_SRC;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.host;
@@ -96,34 +100,68 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_style_src() {
-		final ContentSecurityPolicy csp = builder
-			.addDefaultSrc(none())
-			.addStyleSrc(self(), unsafeInline())
-			.build();
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addStyleSrc(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src 'self' 'unsafe-inline'");
-		assertThat(csp.getDirectives())
-			.hasSize(2)
-			.containsOnly(
-				entry(DEFAULT_SRC, sources("'none'")),
-				entry(STYLE_SRC, sources("'self'", "'unsafe-inline'"))
-			);
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(STYLE_SRC, sources("'self'", "'unsafe-inline'"))
+		);
+	}
+
+	@Test
+	public void it_should_handle_style_src_elem() {
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addStyleSrcElem(self(), unsafeInline()).build();
+
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src-elem 'self' 'unsafe-inline'");
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(STYLE_SRC_ELEM, sources("'self'", "'unsafe-inline'"))
+		);
+	}
+
+	@Test
+	public void it_should_handle_style_src_attr() {
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addStyleSrcAttr(self(), unsafeInline()).build();
+
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src-attr 'self' 'unsafe-inline'");
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(STYLE_SRC_ATTR, sources("'self'", "'unsafe-inline'"))
+		);
 	}
 
 	@Test
 	public void it_should_handle_script_src() {
-		final ContentSecurityPolicy csp = builder
-			.addDefaultSrc(none())
-			.addScriptSrc(self(), unsafeInline())
-			.build();
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addScriptSrc(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src 'self' 'unsafe-inline'");
-		assertThat(csp.getDirectives())
-			.hasSize(2)
-			.containsOnly(
-				entry(DEFAULT_SRC, sources("'none'")),
-				entry(SCRIPT_SRC, sources("'self'", "'unsafe-inline'"))
-			);
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(SCRIPT_SRC, sources("'self'", "'unsafe-inline'"))
+		);
+	}
+
+	@Test
+	public void it_should_handle_script_src_elem() {
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addScriptSrcElem(self(), unsafeInline()).build();
+
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src-elem 'self' 'unsafe-inline'");
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(SCRIPT_SRC_ELEM, sources("'self'", "'unsafe-inline'"))
+		);
+	}
+
+	@Test
+	public void it_should_handle_script_src_attr() {
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addScriptSrcAttr(self(), unsafeInline()).build();
+
+		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src-attr 'self' 'unsafe-inline'");
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(SCRIPT_SRC_ATTR, sources("'self'", "'unsafe-inline'"))
+		);
 	}
 
 	@Test
@@ -475,18 +513,13 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_upgrade_insecure_request() {
-		final ContentSecurityPolicy csp = builder
-			.addDefaultSrc(none())
-			.upgradeInsecureRequest()
-			.build();
+		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).upgradeInsecureRequest().build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; upgrade-insecure-request");
-		assertThat(csp.getDirectives())
-			.hasSize(2)
-			.containsOnly(
-				entry(DEFAULT_SRC, sources("'none'")),
-				entry(UPGRADE_INSECURE_REQUEST, sources())
-			);
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(UPGRADE_INSECURE_REQUEST, sources())
+		);
 	}
 
 	@Test

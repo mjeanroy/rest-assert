@@ -57,12 +57,15 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.htt
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.https;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.nonce;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.reportSample;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.scheme;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.sha256;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.sha384;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.sha512;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.strictDynamic;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeHashes;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -91,11 +94,33 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
+	public void it_should_define_unsafe_hashes_source() {
+		Source src = unsafeHashes();
+		assertThat(src).isNotNull();
+		assertThat(src.getValue()).isEqualTo("'unsafe-hashes'");
+	}
+
+	@Test
 	public void it_should_define_unsafe_inline_source() {
 		Source src = unsafeInline();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'unsafe-inline'");
 	}
+
+	@Test
+	public void it_should_define_strict_dynamic_source() {
+		Source src = strictDynamic();
+		assertThat(src).isNotNull();
+		assertThat(src.getValue()).isEqualTo("'strict-dynamic'");
+	}
+
+	@Test
+	public void it_should_define_report_sample_source() {
+		Source src = reportSample();
+		assertThat(src).isNotNull();
+		assertThat(src.getValue()).isEqualTo("'report-sample'");
+	}
+
 
 	@Test
 	public void it_should_define_http_source() {

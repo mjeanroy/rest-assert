@@ -58,7 +58,11 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sou
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.REQUIRE_SRI_FOR;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SANDBOX;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC_ATTR;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.SCRIPT_SRC_ELEM;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC_ATTR;
+import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.STYLE_SRC_ELEM;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.UPGRADE_INSECURE_REQUEST;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective.WORKER_SRC;
 import static java.util.Collections.addAll;
@@ -113,12 +117,38 @@ public class ContentSecurityPolicyParserTest {
 		String value = v1 + " " + v2;
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; script-src " + value);
 
-		assertThat(csp.getDirectives())
-			.hasSize(2)
-			.containsOnly(
-				entry(DEFAULT_SRC, sources("'none'")),
-				entry(SCRIPT_SRC, sources(v1, v2))
-			);
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(SCRIPT_SRC, sources(v1, v2))
+		);
+	}
+
+	@Test
+	public void it_should_parse_with_script_src_elem() {
+		String v1 = "'unsafe-eval'";
+		String v2 = "'unsafe-inline'";
+		String v3 = "https:";
+		String value = v1 + " " + v2 + " " + v3;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; script-src-elem " + value);
+
+		assertThat(csp.getDirectives()).containsOnly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(SCRIPT_SRC_ELEM, sources(v1, v2, v3))
+		);
+	}
+
+	@Test
+	public void it_should_parse_with_script_src_attr() {
+		String v1 = "'unsafe-eval'";
+		String v2 = "'unsafe-inline'";
+		String v3 = "https:";
+		String value = v1 + " " + v2 + " " + v3;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; script-src-attr " + value);
+
+		assertThat(csp.getDirectives()).containsOnly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(SCRIPT_SRC_ATTR, sources(v1, v2, v3))
+		);
 	}
 
 	@Test
@@ -128,12 +158,36 @@ public class ContentSecurityPolicyParserTest {
 		String value = v1 + " " + v2;
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; style-src " + value);
 
-		assertThat(csp.getDirectives())
-			.hasSize(2)
-			.containsOnly(
-				entry(DEFAULT_SRC, sources("'none'")),
-				entry(STYLE_SRC, sources(v1, v2))
-			);
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(STYLE_SRC, sources(v1, v2))
+		);
+	}
+
+	@Test
+	public void it_should_parse_with_styles_src_elem() {
+		String v1 = "'unsafe-inline'";
+		String v2 = "'nonce-12345=='";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; style-src-elem " + value);
+
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(STYLE_SRC_ELEM, sources(v1, v2))
+		);
+	}
+
+	@Test
+	public void it_should_parse_with_styles_src_attr() {
+		String v1 = "'unsafe-inline'";
+		String v2 = "'nonce-12345=='";
+		String value = v1 + " " + v2;
+		ContentSecurityPolicy csp = parser.parse("default-src 'none'; style-src-attr " + value);
+
+		assertThat(csp.getDirectives()).containsExactly(
+			entry(DEFAULT_SRC, sources("'none'")),
+			entry(STYLE_SRC_ATTR, sources(v1, v2))
+		);
 	}
 
 	@Test

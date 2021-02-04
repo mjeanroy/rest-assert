@@ -203,6 +203,30 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		},
 
 		/**
+		 * Handle {@code script-src-elem} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-elem">https://w3c.github.io/webappsec-csp/#directive-script-src-elem</a>
+		 */
+		SCRIPT_SRC_ELEM("script-src-elem") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addScriptSrcElem(new SourceValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code script-src-attr} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-attr">https://w3c.github.io/webappsec-csp/#directive-script-src-attr</a>
+		 */
+		SCRIPT_SRC_ATTR("script-src-attr") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addScriptSrcAttr(new SourceValue(value));
+			}
+		},
+
+		/**
 		 * Handle {@code style-src} directive.
 		 *
 		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src">https://w3c.github.io/webappsec-csp/#directive-style-src</a>
@@ -211,6 +235,30 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
 				builder.addStyleSrc(new SourceValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code style-src-elem} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-elem">https://w3c.github.io/webappsec-csp/#directive-style-src-elem</a>
+		 */
+		STYLE_SRC_ELEM("style-src-elem") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addStyleSrcElem(new SourceValue(value));
+			}
+		},
+
+		/**
+		 * Handle {@code style-src} directive.
+		 *
+		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-attr">https://w3c.github.io/webappsec-csp/#directive-style-src-attr</a>
+		 */
+		STYLE_SRC_ATTR("style-src-attr") {
+			@Override
+			void doParse(String value, ContentSecurityPolicyBuilder builder) {
+				builder.addStyleSrcAttr(new SourceValue(value));
 			}
 		},
 
@@ -730,6 +778,27 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	private static final Source UNSAFE_EVAL = new SourceValue("'unsafe-eval'");
 
 	/**
+	 * Unsafe-Hashes keyword.
+	 *
+	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
+	 */
+	private static final Source UNSAFE_HASHES = new SourceValue("'unsafe-hashes'");
+
+	/**
+	 * Strict-Dynamic keyword.
+	 *
+	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
+	 */
+	private static final Source STRICT_DYNAMIC = new SourceValue("'strict-dynamic'");
+
+	/**
+	 * Report-Sample keyword.
+	 *
+	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
+	 */
+	private static final Source REPORT_SAMPLE = new SourceValue("'report-sample'");
+
+	/**
 	 * Unsafe-Inline keyword.
 	 *
 	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
@@ -795,6 +864,16 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	}
 
 	/**
+	 * Get the unsafe-hashes keyword.
+	 *
+	 * @return Self Source.
+	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
+	 */
+	public static Source unsafeHashes() {
+		return UNSAFE_HASHES;
+	}
+
+	/**
 	 * Get the unsafe-inline keyword.
 	 *
 	 * @return Self Source.
@@ -802,6 +881,26 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	 */
 	public static Source unsafeInline() {
 		return UNSAFE_INLINE;
+	}
+
+	/**
+	 * Get the strict-dynamic keyword.
+	 *
+	 * @return Self Source.
+	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
+	 */
+	public static Source strictDynamic() {
+		return STRICT_DYNAMIC;
+	}
+
+	/**
+	 * Get the report-sample keyword.
+	 *
+	 * @return Self Source.
+	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
+	 */
+	public static Source reportSample() {
+		return REPORT_SAMPLE;
 	}
 
 	/**
