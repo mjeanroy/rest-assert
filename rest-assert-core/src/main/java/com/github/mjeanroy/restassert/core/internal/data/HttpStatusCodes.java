@@ -166,6 +166,13 @@ public final class HttpStatusCodes {
 	public static final int NOT_ACCEPTABLE = 406;
 
 	/**
+	 * HTTP 408: REQUEST TIMEOUT.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.9">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.9</a>
+	 */
+	public static final int REQUEST_TIMEOUT = 408;
+
+	/**
 	 * HTTP 409: CONFLICT.
 	 *
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10</a>

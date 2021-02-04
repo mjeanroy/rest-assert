@@ -402,6 +402,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "REQUEST TIMEOUT"} status (i.e is strictly equals to {@code 408}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.9">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.9</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/409</a>
+	 * @see <a href="https://httpstatuses.com/409">https://httpstatuses.com/409</a>
+	 */
+	public AssertionResult isRequestTimeout(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.REQUEST_TIMEOUT);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "CONFLICT"} status (i.e is strictly equals to {@code 406}).
 	 *
 	 * @param httpResponse HTTP response to be tested.

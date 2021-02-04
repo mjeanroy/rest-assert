@@ -128,6 +128,11 @@ public final class TestStatus {
 	public static final int NOT_ACCEPTABLE = 406;
 
 	/**
+	 * The status code for the {@code "REQUEST TIMEOUT"} response, to use in unit test.
+	 */
+	public static final int REQUEST_TIMEOUT = 408;
+
+	/**
 	 * The status code for the {@code "CONFLICT"} response, to use in unit test.
 	 */
 	public static final int CONFLICT = 409;
