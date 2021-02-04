@@ -363,6 +363,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "GONE"} status (i.e is strictly equals to {@code 410}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/411">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/411</a>
+	 * @see <a href="https://httpstatuses.com/411">https://httpstatuses.com/411</a>
+	 */
+	public AssertionResult isGone(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.GONE);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "PRE CONDITION FAILED"} status (i.e is strictly equals to {@code 412}).
 	 *
 	 * @param httpResponse HTTP response to be tested.

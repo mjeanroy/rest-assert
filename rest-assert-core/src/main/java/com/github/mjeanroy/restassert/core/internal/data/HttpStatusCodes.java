@@ -173,6 +173,13 @@ public final class HttpStatusCodes {
 	public static final int CONFLICT = 409;
 
 	/**
+	 * HTTP 410: GONE.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.11</a>
+	 */
+	public static final int GONE = 410;
+
+	/**
 	 * HTTP 412: PRE CONDITION FAILED.
 	 *
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13</a>

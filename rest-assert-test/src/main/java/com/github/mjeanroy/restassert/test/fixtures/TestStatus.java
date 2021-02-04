@@ -133,6 +133,11 @@ public final class TestStatus {
 	public static final int CONFLICT = 409;
 
 	/**
+	 * The status code for the {@code "GONE"} response, to use in unit test.
+	 */
+	public static final int GONE = 410;
+
+	/**
 	 * The status code for the {@code "PRE CONDITION FAILED"} response, to use in unit test.
 	 */
 	public static final int PRE_CONDITION_FAILED = 412;
