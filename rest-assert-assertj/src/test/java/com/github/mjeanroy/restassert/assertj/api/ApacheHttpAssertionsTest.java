@@ -42,32 +42,26 @@ public class ApacheHttpAssertionsTest {
 
 	@Test
 	public void it_should_create_new_http_assertion_object() throws Exception {
-		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
-				.build();
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().build();
 
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
 
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse)
-				.isNotNull()
-				.isExactlyInstanceOf(ApacheHttpResponse.class);
+		assertThat(httpResponse).isExactlyInstanceOf(ApacheHttpResponse.class);
 	}
 
 	@Test
 	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
-				.build();
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
 
 		assertThat(assertions).isNotNull();
 
 		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(cookie)
-				.isNotNull()
-				.isExactlyInstanceOf(ApacheHttpCookie.class);
+		assertThat(cookie).isExactlyInstanceOf(ApacheHttpCookie.class);
 	}
 
 	@Test
@@ -78,16 +72,12 @@ public class ApacheHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder()
-				.setContent(body)
-				.build();
+		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().setContent(body).build();
 
 		JsonAssert assertions = ApacheHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(body);
+		assertThat(actual).isEqualTo(body);
 	}
 }

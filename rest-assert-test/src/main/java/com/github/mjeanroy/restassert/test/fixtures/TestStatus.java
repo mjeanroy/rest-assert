@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.test.fixtures;
 
-import static com.github.mjeanroy.restassert.test.data.Range.range;
-
 import com.github.mjeanroy.restassert.test.data.Range;
+
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
 /**
  * Static pre-configured HTTP status values to use in unit test.
@@ -76,6 +76,11 @@ public final class TestStatus {
 	 * The status code for the {@code "MOVED TEMPORARILY"} response, to use in unit test.
 	 */
 	public static final int MOVED_TEMPORARILY = 302;
+
+	/**
+	 * The status code for the {@code "SEE OTHER"} response, to use in unit test.
+	 */
+	public static final int SEE_OTHER = 303;
 
 	/**
 	 * The status code for the {@code "NOT MODIFIED"} response, to use in unit test.

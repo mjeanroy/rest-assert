@@ -233,6 +233,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "SEE OTHER"} status (i.e is strictly equals to {@code 303}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.4">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.4</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/303</a>
+	 * @see <a href="https://httpstatuses.com/303">https://httpstatuses.com/304</a>
+	 */
+	public AssertionResult isSeeOther(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.SEE_OTHER);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "NOT MODIFIED"} status (i.e is strictly equals to {@code 304}).
 	 *
 	 * @param httpResponse HTTP response to be tested.

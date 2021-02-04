@@ -37,37 +37,43 @@ public final class HttpStatusCodes {
 
 	/**
 	 * HTTP 200: OK.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.1</a>
 	 */
 	public static final int OK = 200;
 
 	/**
 	 * HTTP 201: CREATED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.2</a>
 	 */
 	public static final int CREATED = 201;
 
 	/**
 	 * HTTP 202: ACCEPTED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.3</a>
 	 */
 	public static final int ACCEPTED = 202;
 
 	/**
 	 * HTTP 204: NO CONTENT.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5</a>
 	 */
 	public static final int NO_CONTENT = 204;
 
 	/**
 	 * HTTP 205: RESET CONTENT.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.6</a>
 	 */
 	public static final int RESET_CONTENT = 205;
 
 	/**
 	 * HTTP 206: PARTIAL CONTENT.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.7
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.7">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.7</a>
 	 */
 	public static final int PARTIAL_CONTENT = 206;
 
@@ -75,19 +81,29 @@ public final class HttpStatusCodes {
 
 	/**
 	 * HTTP 301: MOVED PERMANENTLY.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2</a>
 	 */
 	public static final int MOVED_PERMANENTLY = 301;
 
 	/**
 	 * HTTP 302: MOVED TEMPORARILY.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3</a>
 	 */
 	public static final int MOVED_TEMPORARILY = 302;
 
 	/**
+	 * HTTP 303: SEE OTHER.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.3</a>
+	 */
+	public static final int SEE_OTHER = 303;
+
+	/**
 	 * HTTP 304: NOT MODIFIED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.5</a>
 	 */
 	public static final int NOT_MODIFIED = 304;
 
@@ -95,55 +111,64 @@ public final class HttpStatusCodes {
 
 	/**
 	 * HTTP 400: BAD REQUEST.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1</a>
 	 */
 	public static final int BAD_REQUEST = 400;
 
 	/**
 	 * HTTP 401: UNAUTHORIZED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2</a>
 	 */
 	public static final int UNAUTHORIZED = 401;
 
 	/**
 	 * HTTP 401: FORBIDDEN.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4</a>
 	 */
 	public static final int FORBIDDEN = 403;
 
 	/**
 	 * HTTP 404: NOT FOUND.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5</a>
 	 */
 	public static final int NOT_FOUND = 404;
 
 	/**
 	 * HTTP 405: METHOD NOT ALLOWED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.6</a>
 	 */
 	public static final int METHOD_NOT_ALLOWED = 405;
 
 	/**
 	 * HTTP 406: NOT ACCEPTABLE.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7</a>
 	 */
 	public static final int NOT_ACCEPTABLE = 406;
 
 	/**
 	 * HTTP 409: CONFLICT.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.10</a>
 	 */
 	public static final int CONFLICT = 409;
 
 	/**
 	 * HTTP 412: PRE CONDITION FAILED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13</a>
 	 */
 	public static final int PRE_CONDITION_FAILED = 412;
 
 	/**
 	 * HTTP 415: UNSUPPORTED MEDIA TYPE.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16</a>
 	 */
 	public static final int UNSUPPORTED_MEDIA_TYPE = 415;
 
@@ -151,13 +176,15 @@ public final class HttpStatusCodes {
 
 	/**
 	 * HTTP 500: INTERNAL SERVER ERROR.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1</a>
 	 */
 	public static final int INTERNAL_SERVER_ERROR = 500;
 
 	/**
 	 * HTTP 501: NOT IMPLEMENTED.
-	 * http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2</a>
 	 */
 	public static final int NOT_IMPLEMENTED = 501;
 }

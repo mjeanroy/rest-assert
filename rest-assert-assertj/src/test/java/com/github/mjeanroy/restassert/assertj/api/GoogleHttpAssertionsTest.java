@@ -44,9 +44,7 @@ public class GoogleHttpAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse)
-				.isNotNull()
-				.isExactlyInstanceOf(GoogleHttpResponse.class);
+		assertThat(httpResponse).isExactlyInstanceOf(GoogleHttpResponse.class);
 	}
 
 	@Test
@@ -65,8 +63,6 @@ public class GoogleHttpAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(body);
+		assertThat(actual).isEqualTo(body);
 	}
 }

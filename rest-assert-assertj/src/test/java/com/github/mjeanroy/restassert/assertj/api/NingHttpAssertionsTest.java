@@ -48,9 +48,7 @@ public class NingHttpAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse)
-				.isNotNull()
-				.isExactlyInstanceOf(NingHttpResponse.class);
+		assertThat(httpResponse).isExactlyInstanceOf(NingHttpResponse.class);
 	}
 
 	@Test
@@ -60,9 +58,7 @@ public class NingHttpAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(cookie)
-				.isNotNull()
-				.isExactlyInstanceOf(NingHttpCookie.class);
+		assertThat(cookie).isExactlyInstanceOf(NingHttpCookie.class);
 	}
 
 	@Test
@@ -73,16 +69,12 @@ public class NingHttpAssertionsTest {
 
 		String body = object.toJson();
 
-		Response response = new NingHttpResponseBuilder()
-			.setContent(body)
-			.build();
+		Response response = new NingHttpResponseBuilder().setContent(body).build();
 
 		JsonAssert assertions = NingHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(body);
+		assertThat(actual).isEqualTo(body);
 	}
 }

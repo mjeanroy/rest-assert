@@ -47,9 +47,7 @@ public class JsonAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(json);
+		assertThat(actual).isEqualTo(json);
 	}
 
 	@Test
@@ -59,16 +57,12 @@ public class JsonAssertionsTest {
 		);
 
 		String json = jsonObject.toJson();
-		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-			.setContent(json)
-			.build();
+		HttpResponse httpResponse = new HttpResponseBuilderImpl().setContent(json).build();
 
 		JsonAssert assertions = JsonAssertions.assertThatJson(httpResponse);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(json);
+		assertThat(actual).isEqualTo(json);
 	}
 }

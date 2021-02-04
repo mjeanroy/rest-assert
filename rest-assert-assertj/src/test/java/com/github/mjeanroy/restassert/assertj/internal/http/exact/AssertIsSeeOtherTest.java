@@ -22,25 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api;
+package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.javax.JavaxCookie;
-import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
-import org.apache.commons.lang3.reflect.FieldUtils;
-import org.junit.Test;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class JavaxAssertionsTest {
+public class AssertIsSeeOtherTest extends AbstractHttpResponsesStatusTest {
 
-	@Test
-	public void it_should_create_new_cookie_assertion_object() throws Exception {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
-		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
+	@Override
+	protected int status() {
+		return SEE_OTHER;
+	}
 
-		assertThat(assertions).isNotNull();
-		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(cookie).isExactlyInstanceOf(JavaxCookie.class);
+	@Override
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsSeeOther(info, httpResponse);
 	}
 }

@@ -45,9 +45,7 @@ public class OkHttpAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse)
-				.isNotNull()
-				.isExactlyInstanceOf(OkHttpResponse.class);
+		assertThat(httpResponse).isExactlyInstanceOf(OkHttpResponse.class);
 	}
 
 	@Test
@@ -57,17 +55,12 @@ public class OkHttpAssertionsTest {
 		);
 
 		String body = object.toJson();
-
-		Response response = new OkHttpResponseBuilder()
-				.setContent(body)
-				.build();
+		Response response = new OkHttpResponseBuilder().setContent(body).build();
 
 		JsonAssert assertions = OkHttpAssertions.assertThatJson(response);
 		assertThat(assertions).isNotNull();
 
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(body);
+		assertThat(actual).isEqualTo(body);
 	}
 }

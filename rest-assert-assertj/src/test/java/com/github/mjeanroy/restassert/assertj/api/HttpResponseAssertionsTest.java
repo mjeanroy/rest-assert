@@ -45,9 +45,7 @@ public class HttpResponseAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse)
-				.isNotNull()
-				.isSameAs(response);
+		assertThat(httpResponse).isSameAs(response);
 	}
 
 	@Test
@@ -57,9 +55,7 @@ public class HttpResponseAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		Cookie actual = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isSameAs(cookie);
+		assertThat(actual).isSameAs(cookie);
 	}
 
 	@Test
@@ -69,17 +65,12 @@ public class HttpResponseAssertionsTest {
 		);
 
 		String body = object.toJson();
-
-		HttpResponse response = new HttpResponseBuilderImpl()
-			.setContent(body)
-			.build();
+		HttpResponse response = new HttpResponseBuilderImpl().setContent(body).build();
 
 		JsonAssert assertions = HttpResponseAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
 		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual)
-				.isNotNull()
-				.isEqualTo(body);
+		assertThat(actual).isEqualTo(body);
 	}
 }
