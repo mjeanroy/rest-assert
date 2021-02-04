@@ -107,6 +107,13 @@ public final class HttpStatusCodes {
 	 */
 	public static final int NOT_MODIFIED = 304;
 
+	/**
+	 * HTTP 304: NOT MODIFIED.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.8</a>
+	 */
+	public static final int TEMPORARY_REDIRECT = 307;
+
 	// 4XX
 
 	/**

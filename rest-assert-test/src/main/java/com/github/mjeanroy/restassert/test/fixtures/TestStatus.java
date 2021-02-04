@@ -88,6 +88,11 @@ public final class TestStatus {
 	public static final int NOT_MODIFIED = 304;
 
 	/**
+	 * The status code for the {@code "TEMPORARY REDIRECT"} response, to use in unit test.
+	 */
+	public static final int TEMPORARY_REDIRECT = 307;
+
+	/**
 	 * The status code for the {@code "BAD REQUEST"} response, to use in unit test.
 	 */
 	public static final int BAD_REQUEST = 400;
