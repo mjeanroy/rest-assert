@@ -170,6 +170,17 @@ public class CookieBuilder {
 	}
 
 	/**
+	 * Set {@link #sameSite}.
+	 *
+	 * @param sameSite New {@link #sameSite}.
+	 * @return Current builder.
+	 */
+	public CookieBuilder setSameSite(String sameSite) {
+		this.sameSite = SameSite.parse(sameSite);
+		return this;
+	}
+
+	/**
 	 * Build mock of {@link Cookie} class.
 	 *
 	 * @return Mock instance.

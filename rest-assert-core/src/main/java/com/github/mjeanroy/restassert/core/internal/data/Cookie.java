@@ -116,7 +116,11 @@ public interface Cookie {
 			this.value = value;
 		}
 
-		static SameSite parse(String value) {
+		public String getValue() {
+			return value;
+		}
+
+		public static SameSite parse(String value) {
 			if (value == null) {
 				return null;
 			}

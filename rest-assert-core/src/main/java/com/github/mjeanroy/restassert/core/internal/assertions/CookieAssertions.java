@@ -136,6 +136,17 @@ public final class CookieAssertions {
 	}
 
 	/**
+	 * Check that cookie has expected same site.
+	 *
+	 * @param cookie Cookie.
+	 * @param sameSite Expected same site value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasSameSite(Cookie cookie, String sameSite) {
+		return hasSameSite(cookie, SameSite.parse(sameSite));
+	}
+
+	/**
 	 * Check that cookie is secured.
 	 *
 	 * @param cookie Cookie.
