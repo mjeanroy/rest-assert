@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
@@ -49,9 +50,10 @@ public class DefaultCookieTest {
 		final boolean secure = true;
 		final boolean httpOnly = true;
 		final long maxAge = 0L;
+		final SameSite sameSite = SameSite.LAX;
 		final Date expires = null;
 
-		final DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
+		final DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 
 		assertThat(cookie.toString()).isEqualTo(
 				"DefaultCookie{" +
@@ -61,6 +63,7 @@ public class DefaultCookieTest {
 						"path=/, " +
 						"secure=true, " +
 						"httpOnly=true, " +
+						"sameSite=LAX, " +
 						"maxAge=0, " +
 						"expires=null" +
 				"}"
@@ -76,8 +79,9 @@ public class DefaultCookieTest {
 		final boolean secure = true;
 		final boolean httpOnly = true;
 		final long maxAge = 0L;
+		final SameSite sameSite = SameSite.LAX;
 		final Date expires = createUtcDate(2016, Calendar.APRIL, 21, 18, 21, 35);
-		final DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
+		final DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 		assertThat(cookie.getExpires()).isNotNull().isNotSameAs(expires).isEqualTo(expires);
 	}
 }

@@ -63,6 +63,11 @@ final class DefaultCookie implements Cookie {
 	private final boolean httpOnly;
 
 	/**
+	 * SameSite flag.
+	 */
+	private final SameSite sameSite;
+
+	/**
 	 * Cookie max-age value.
 	 */
 	private final Long maxAge;
@@ -81,15 +86,28 @@ final class DefaultCookie implements Cookie {
 	 * @param path Cookie path.
 	 * @param secure Secure flag.
 	 * @param httpOnly HTTP-Only flag.
+	 * @param sameSite SameSite flag.
 	 * @param maxAge Cookie max-age value.
+	 * @param expires Cookie expires value.
 	 */
-	DefaultCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge, Date expires) {
+	DefaultCookie(
+			String name,
+			String value,
+			String domain,
+			String path,
+			boolean secure,
+			boolean httpOnly,
+			SameSite sameSite,
+			Long maxAge,
+			Date expires) {
+
 		this.name = name;
 		this.value = value;
 		this.domain = domain;
 		this.path = path;
 		this.secure = secure;
 		this.httpOnly = httpOnly;
+		this.sameSite = sameSite;
 		this.maxAge = maxAge;
 
 		// Date class is not immutable, get a clone copy.
@@ -131,6 +149,11 @@ final class DefaultCookie implements Cookie {
 	}
 
 	@Override
+	public SameSite getSameSite() {
+		return sameSite;
+	}
+
+	@Override
 	public Long getMaxAge() {
 		return maxAge;
 	}
@@ -150,6 +173,7 @@ final class DefaultCookie implements Cookie {
 				.append("path", path)
 				.append("secure", secure)
 				.append("httpOnly", httpOnly)
+				.append("sameSite", sameSite)
 				.append("maxAge", maxAge)
 				.append("expires", expires)
 				.build();
@@ -170,6 +194,16 @@ final class DefaultCookie implements Cookie {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(getName(), getValue(), getDomain(), getPath(), isSecured(), isHttpOnly(), getMaxAge(), getExpires());
+		return Objects.hash(
+			getName(),
+			getValue(),
+			getDomain(),
+			getPath(),
+			isSecured(),
+			isHttpOnly(),
+			getSameSite(),
+			getMaxAge(),
+			getExpires()
+		);
 	}
 }

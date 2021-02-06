@@ -86,6 +86,11 @@ public class JavaxCookie implements Cookie {
 	}
 
 	@Override
+	public SameSite getSameSite() {
+		throw new UnsupportedOperationException("javax.servlet.http.Cookie does not support #getSameSite()");
+	}
+
+	@Override
 	public Long getMaxAge() {
 		return (long) cookie.getMaxAge();
 	}

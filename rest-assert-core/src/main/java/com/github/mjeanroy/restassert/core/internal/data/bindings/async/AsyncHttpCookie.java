@@ -86,6 +86,11 @@ public class AsyncHttpCookie implements Cookie {
 	}
 
 	@Override
+	public SameSite getSameSite() {
+		throw new UnsupportedOperationException("org.asynchttpclient.cookie.Cookie does not support #getSameSite()");
+	}
+
+	@Override
 	public Long getMaxAge() {
 		return cookie.maxAge();
 	}

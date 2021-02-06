@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.junit.TimeZoneRule;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
@@ -55,9 +56,11 @@ public class CookiesTest {
 		final String domain = "domain.com";
 		final boolean secure = true;
 		final boolean httpOnly = true;
+		final SameSite sameSite = SameSite.STRICT;
 		final long maxAge = 10;
+		final Date expires = null;
 
-		final Cookie cookie = newCookie(name, value, domain, path, secure, httpOnly, maxAge, null);
+		final Cookie cookie = newCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 
 		assertThat(cookie.getName()).isEqualTo(name);
 		assertThat(cookie.getValue()).isEqualTo(value);
@@ -65,6 +68,7 @@ public class CookiesTest {
 		assertThat(cookie.getDomain()).isEqualTo(domain);
 		assertThat(cookie.isSecured()).isEqualTo(secure);
 		assertThat(cookie.isHttpOnly()).isEqualTo(httpOnly);
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.STRICT);
 		assertThat(cookie.getMaxAge()).isEqualTo(maxAge);
 	}
 
@@ -76,10 +80,11 @@ public class CookiesTest {
 		final String path = "/";
 		final boolean secure = true;
 		final boolean httpOnly = true;
+		final SameSite sameSite = SameSite.LAX;
 		final long maxAge = 3600L;
 		final Date expires = createUtcDate(2016, Calendar.APRIL, 21, 18, 21, 35);
 
-		final Cookie cookie = newCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
+		final Cookie cookie = newCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 
 		assertThat(cookie.toString()).isEqualTo(
 				"DefaultCookie{" +
@@ -89,6 +94,7 @@ public class CookiesTest {
 						"path=/, " +
 						"secure=true, " +
 						"httpOnly=true, " +
+						"sameSite=LAX, " +
 						"maxAge=3600, " +
 						"expires=Thu Apr 21 18:21:35 UTC 2016" +
 				"}"
@@ -114,6 +120,7 @@ public class CookiesTest {
 		assertThat(cookie.getPath()).isEqualTo("/");
 		assertThat(cookie.isSecured()).isTrue();
 		assertThat(cookie.isHttpOnly()).isTrue();
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.LAX);
 	}
 
 	@Test
@@ -159,6 +166,15 @@ public class CookiesTest {
 
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getMaxAge()).isEqualTo(-3600L);
+	}
+
+	@Test
+	public void it_should_parse_set_cookie_with_same_site() {
+		final String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=3600; secure; HttpOnly; SameSite=Strict";
+		final Cookie cookie = Cookies.parse(setCookie);
+
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.STRICT);
 	}
 
 	@Test

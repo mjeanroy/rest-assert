@@ -63,16 +63,23 @@ public interface Cookie {
 	/**
 	 * Check if cookie is flagged as secured.
 	 *
-	 * @return True if cookie is secured, false otherwise.
+	 * @return {@code true} if cookie is secured, false otherwise.
 	 */
 	boolean isSecured();
 
 	/**
 	 * Check if cookie is flagged as http only.
 	 *
-	 * @return True if cookie is "http only", false otherwise.
+	 * @return {@code true} if cookie is "http only", false otherwise.
 	 */
 	boolean isHttpOnly();
+
+	/**
+	 * Get the {@code "SameSite"} value.
+	 *
+	 * @return Cookie {@code "SameSite"} flag.
+	 */
+	SameSite getSameSite();
 
 	/**
 	 * Get cookie max age.
@@ -92,4 +99,36 @@ public interface Cookie {
 	 * @return Expires date.
 	 */
 	Date getExpires();
+
+	/**
+	 * The Same-Site enumeration.
+	 *
+	 * @see <a href="https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite</a>
+	 */
+	enum SameSite {
+		LAX("Lax"),
+		STRICT("Strict"),
+		NONE("None");
+
+		private final String value;
+
+		SameSite(String value) {
+			this.value = value;
+		}
+
+		static SameSite parse(String value) {
+			if (value == null) {
+				return null;
+			}
+
+			String trimmedValue = value.trim();
+			for (SameSite sameSite : SameSite.values()) {
+				if (sameSite.value.equalsIgnoreCase(trimmedValue)) {
+					return sameSite;
+				}
+			}
+
+			throw new IllegalArgumentException("Unknown SameSite value: " + value);
+		}
+	}
 }

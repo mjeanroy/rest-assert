@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+
 import java.util.Date;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
@@ -64,6 +66,11 @@ public class DefaultCookieBuilder {
 	private boolean httpOnly;
 
 	/**
+	 * Cookie SameSite flag, optional (default is {@code "Lax"}).
+	 */
+	private SameSite sameSite;
+
+	/**
 	 * Cookie max-age, optional (default is {@code null}, meaning no max-age).
 	 */
 	private Long maxAge;
@@ -84,6 +91,7 @@ public class DefaultCookieBuilder {
 	DefaultCookieBuilder(String name, String value) {
 		this.name = notBlank(name, "Cookie name must not be blank");
 		this.value = notNull(value, "Cookie value must not be null");
+		this.sameSite = SameSite.LAX;
 	}
 
 	/**
@@ -162,11 +170,44 @@ public class DefaultCookieBuilder {
 	}
 
 	/**
+	 * Update SameSite value.
+	 *
+	 * @param sameSite SameSite value.
+	 * @return Current builder.
+	 */
+	public DefaultCookieBuilder setSameSite(SameSite sameSite) {
+		this.sameSite = sameSite;
+		return this;
+	}
+
+	/**
+	 * Update SameSite value.
+	 *
+	 * @param sameSite SameSite value.
+	 * @return Current builder.
+	 * @throws IllegalArgumentException If sameSite is not equals (ignoring case) to one of: {@code "Lax"}, {@code "Strict"}, {@code "None"}.
+	 */
+	public DefaultCookieBuilder setSameSite(String sameSite) {
+		this.sameSite = SameSite.parse(sameSite);
+		return this;
+	}
+
+	/**
 	 * Create cookie.
 	 *
 	 * @return Cookie.
 	 */
 	public Cookie build() {
-		return new DefaultCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
+		return new DefaultCookie(
+			name,
+			value,
+			domain,
+			path,
+			secure,
+			httpOnly,
+			sameSite,
+			maxAge,
+			expires
+		);
 	}
 }

@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -59,17 +61,34 @@ public final class Cookies {
 	 * @param path Cookie path.
 	 * @param secure Secure flag.
 	 * @param httpOnly Http-Only flag.
+	 * @param sameSite SameSite flag.
 	 * @param maxAge Cookie max-age.
 	 * @param expires Cookies expires value.
 	 * @return The cookie.
 	 * @throws NullPointerException If {@code name} or {@code value} are null.
 	 * @throws IllegalArgumentException If {@code name} is empty or blank.
 	 */
-	public static Cookie newCookie(String name, String value, String domain, String path, boolean secure, boolean httpOnly, Long maxAge, Date expires) {
+	public static Cookie newCookie(
+			String name,
+			String value,
+			String domain,
+			String path,
+			boolean secure,
+			boolean httpOnly,
+			SameSite sameSite,
+			Long maxAge,
+			Date expires) {
+
 		return new DefaultCookie(
 				notBlank(name, "Cookie name must be defined"),
 				notNull(value, "Cookie value must not be null"),
-				domain, path, secure, httpOnly, maxAge, expires
+				domain,
+				path,
+				secure,
+				httpOnly,
+				sameSite,
+				maxAge,
+				expires
 		);
 	}
 
@@ -112,8 +131,9 @@ public final class Cookies {
 				&& Objects.equals(c1.getValue(), c2.getValue())
 				&& Objects.equals(c1.getDomain(), c2.getDomain())
 				&& Objects.equals(c1.getPath(), c2.getPath())
-				&& c1.isSecured() == c2.isSecured()
-				&& c1.isHttpOnly() == c2.isHttpOnly()
+				&& Objects.equals(c1.isSecured(), c2.isSecured())
+				&& Objects.equals(c1.isHttpOnly(), c2.isHttpOnly())
+				&& Objects.equals(c1.getSameSite(), c2.getSameSite())
 				&& Objects.equals(c1.getMaxAge(), c2.getMaxAge())
 				&& Objects.equals(c1.getExpires(), c2.getExpires());
 	}
@@ -140,6 +160,7 @@ public final class Cookies {
 		String path = null;
 		boolean secure = false;
 		boolean httpOnly = false;
+		SameSite sameSite = SameSite.LAX;
 		Long maxAge = null;
 		Date expires = null;
 
@@ -167,10 +188,22 @@ public final class Cookies {
 				maxAge = parseMaxAge(attrValue);
 			} else if (attrName.equalsIgnoreCase("expires")) {
 				expires = parseExpires(attrValue);
+			} else if (attrName.equalsIgnoreCase("samesite")) {
+				sameSite = parseSameSite(attrValue);
 			}
 		}
 
-		return newCookie(name, value, domain, path, secure, httpOnly, maxAge, expires);
+		return newCookie(
+			name,
+			value,
+			domain,
+			path,
+			secure,
+			httpOnly,
+			sameSite,
+			maxAge,
+			expires
+		);
 	}
 
 	/**
@@ -329,6 +362,16 @@ public final class Cookies {
 	 */
 	private static boolean parseSecure() {
 		return true;
+	}
+
+	/**
+	 * Parse "SameSite" directive of Set-Cookie header.
+	 *
+	 * @param value The raw {@code SameSite} value.
+	 * @return The SameSite value.
+	 */
+	private static SameSite parseSameSite(String value) {
+		return SameSite.parse(value);
 	}
 
 	/**

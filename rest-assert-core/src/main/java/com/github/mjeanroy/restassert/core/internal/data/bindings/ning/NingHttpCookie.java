@@ -36,7 +36,7 @@ public class NingHttpCookie implements Cookie {
 
 	/**
 	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.Cookie} using instance
-	 * of {@link org.apache.http.cookie.Cookie}.
+	 * of {@link com.ning.http.client.cookie.Cookie}.
 	 *
 	 * @param cookie Original cookie object.
 	 * @return Cookie that can be used with rest-assert.
@@ -83,6 +83,11 @@ public class NingHttpCookie implements Cookie {
 	@Override
 	public boolean isHttpOnly() {
 		return cookie.isHttpOnly();
+	}
+
+	@Override
+	public SameSite getSameSite() {
+		throw new UnsupportedOperationException("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
 	}
 
 	@Override

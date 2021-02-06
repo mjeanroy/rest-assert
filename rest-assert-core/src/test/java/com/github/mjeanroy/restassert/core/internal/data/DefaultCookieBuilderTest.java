@@ -24,11 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.Test;
 
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class DefaultCookieBuilderTest {
 
@@ -47,6 +50,7 @@ public class DefaultCookieBuilderTest {
 		assertThat(cookie.isHttpOnly()).isFalse();
 		assertThat(cookie.getMaxAge()).isNull();
 		assertThat(cookie.getExpires()).isNull();
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.LAX);
 	}
 
 	@Test
@@ -57,6 +61,7 @@ public class DefaultCookieBuilderTest {
 		final String path = "/";
 		final long maxAge = 3600;
 		final Date expires = new Date();
+		final SameSite sameSite = SameSite.STRICT;
 
 		final Cookie cookie = Cookies.builder(name, value)
 				.setDomain(domain)
@@ -65,6 +70,7 @@ public class DefaultCookieBuilderTest {
 				.setHttpOnly()
 				.setMaxAge(maxAge)
 				.setExpires(expires)
+				.setSameSite(sameSite)
 				.build();
 
 		assertThat(cookie).isNotNull();
@@ -76,6 +82,7 @@ public class DefaultCookieBuilderTest {
 		assertThat(cookie.isHttpOnly()).isTrue();
 		assertThat(cookie.getMaxAge()).isEqualTo(maxAge);
 		assertThat(cookie.getExpires()).isNotSameAs(expires).isEqualTo(expires);
+		assertThat(cookie.getSameSite()).isEqualTo(sameSite);
 	}
 
 	@Test
@@ -92,5 +99,40 @@ public class DefaultCookieBuilderTest {
 		assertThat(cookie.getName()).isEqualTo(name);
 		assertThat(cookie.getValue()).isEqualTo(value);
 		assertThat(cookie.getExpires()).isNotSameAs(expires).isEqualTo(expires);
+	}
+
+	@Test
+	public void it_should_build_with_same_site_lax() {
+		final Cookie cookie = Cookies.builder("foo", "bar").setSameSite("lax").build();
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.LAX);
+	}
+
+	@Test
+	public void it_should_build_with_same_site_strict() {
+		final Cookie cookie = Cookies.builder("foo", "bar").setSameSite("strict").build();
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.STRICT);
+	}
+
+	@Test
+	public void it_should_build_with_same_site_none() {
+		final Cookie cookie = Cookies.builder("foo", "bar").setSameSite("none").build();
+		assertThat(cookie).isNotNull();
+		assertThat(cookie.getSameSite()).isEqualTo(SameSite.NONE);
+	}
+
+	@Test
+	public void it_should_fail_to_build_with_same_site_unknown_value() {
+		ThrowableAssert.ThrowingCallable run = new ThrowableAssert.ThrowingCallable() {
+			@Override
+			public void call() {
+				Cookies.builder("foo", "bar").setSameSite("value").build();
+			}
+		};
+
+		assertThatThrownBy(run).isInstanceOf(IllegalArgumentException.class).hasMessage(
+			"Unknown SameSite value: value"
+		);
 	}
 }
