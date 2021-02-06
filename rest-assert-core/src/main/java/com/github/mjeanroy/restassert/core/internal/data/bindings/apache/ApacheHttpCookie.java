@@ -82,7 +82,7 @@ public class ApacheHttpCookie implements Cookie {
 
 	@Override
 	public SameSite getSameSite() {
-		throw new UnsupportedOperationException("org.apache.http.cookie.Cookie does not support #getSameSite().");
+		throw new UnsupportedOperationException("org.apache.http.cookie.Cookie does not support #getSameSite()");
 	}
 
 	@Override

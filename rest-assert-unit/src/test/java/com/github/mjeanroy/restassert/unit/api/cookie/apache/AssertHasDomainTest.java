@@ -63,13 +63,12 @@ public class AssertHasDomainTest extends AbstractApacheHttpCookieTest {
 		final String expectedDomain = success().getDomain();
 		final String actualDomain = failure().getDomain();
 		return new Object[]{
-				expectedDomain, actualDomain
+			expectedDomain,
+			actualDomain
 		};
 	}
 
 	private Cookie cookie(String domain) {
-		return new ApacheHttpCookieBuilder()
-				.setDomain(domain)
-				.build();
+		return new ApacheHttpCookieBuilder().setDomain(domain).build();
 	}
 }

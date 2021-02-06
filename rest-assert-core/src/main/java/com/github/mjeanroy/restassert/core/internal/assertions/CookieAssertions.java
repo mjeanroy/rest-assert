@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
@@ -34,6 +35,7 @@ import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBe
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveDomain.shouldHaveDomain;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveMaxAge.shouldHaveMaxAge;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHavePath.shouldHavePath;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite.shouldHaveSameSite;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
@@ -119,6 +121,18 @@ public final class CookieAssertions {
 	public AssertionResult hasMaxAge(Cookie cookie, long maxAge) {
 		long actualMaxAge = cookie.getMaxAge();
 		return actualMaxAge == maxAge ? success() : failure(shouldHaveMaxAge(maxAge, actualMaxAge));
+	}
+
+	/**
+	 * Check that cookie has expected same site.
+	 *
+	 * @param cookie Cookie.
+	 * @param sameSite Expected same site value.
+	 * @return Assertion result.
+	 */
+	public AssertionResult hasSameSite(Cookie cookie, SameSite sameSite) {
+		SameSite actualSameSite = cookie.getSameSite();
+		return actualSameSite == sameSite ? success() : failure(shouldHaveSameSite(sameSite, actualSameSite));
 	}
 
 	/**

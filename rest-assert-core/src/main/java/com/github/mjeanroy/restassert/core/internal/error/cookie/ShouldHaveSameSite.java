@@ -22,48 +22,30 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
-import com.ning.http.client.cookie.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertIsSecured;
+/**
+ * Error thrown when a cookie does not have
+ * expected SameSite.
+ */
+public class ShouldHaveSameSite extends AbstractError {
 
-public class AssertIsSecuredTest extends AbstractNingHttpCookieTest {
-
-	@Override
-	protected void run(Cookie actual) {
-		assertIsSecured(actual);
+	// Private constructor, use static factory instead
+	private ShouldHaveSameSite(String message, Object... args) {
+		super(message, args);
 	}
 
-	@Override
-	protected void run(String message, Cookie actual) {
-		assertIsSecured(message, actual);
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie(true);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(false);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie to be secured";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	private Cookie cookie(boolean secured) {
-		return new NingHttpCookieBuilder()
-				.setSecure(secured)
-				.build();
+	/**
+	 * Build error.
+	 *
+	 * @param expectedSameSite Expected cookie domain.
+	 * @param actualSameSite Actual cookie domain.
+	 * @return Error.
+	 */
+	public static ShouldHaveSameSite shouldHaveSameSite(SameSite expectedSameSite, SameSite actualSameSite) {
+		return new ShouldHaveSameSite("Expecting cookie to have SameSite %s but was %s", expectedSameSite, actualSameSite);
 	}
 }

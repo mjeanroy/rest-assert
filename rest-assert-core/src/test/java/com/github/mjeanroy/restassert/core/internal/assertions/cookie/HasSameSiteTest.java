@@ -22,54 +22,52 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 
-import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
-import com.ning.http.client.cookie.Cookie;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasName;
-
-public class AssertHasNameTest extends AbstractNingHttpCookieTest {
-
-	@Override
-	protected void run(Cookie actual) {
-		assertHasName(actual, success().getName());
-	}
+public class HasSameSiteTest extends AbstractCookieTest {
 
 	@Override
-	protected void run(String message, Cookie actual) {
-		assertHasName(message, actual, success().getName());
+	protected AssertionResult run(Cookie cookie) {
+		return cookieAssertions.hasSameSite(cookie, success().getSameSite());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie("foo");
+		return cookie(SameSite.STRICT);
 	}
 
 	@Override
 	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
-		return cookie(actualName);
+		final SameSite actualSameSite = SameSite.NONE;
+		return cookie(actualSameSite);
+	}
+
+	@Override
+	protected Class<?> error() {
+		return ShouldHaveSameSite.class;
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have name %s but was %s";
+		return "Expecting cookie to have SameSite STRICT but was NONE";
 	}
 
 	@Override
-	protected Object[] placeholders() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
-		return new Object[]{
-				expectedName, actualName
+	protected Object[] params() {
+		final SameSite expectedSameSite = success().getSameSite();
+		final SameSite actualSameSite = failure().getSameSite();
+		return new SameSite[] {
+			expectedSameSite, actualSameSite
 		};
 	}
 
-	private Cookie cookie(String name) {
-		return new NingHttpCookieBuilder()
-				.setName(name)
-				.build();
+	private Cookie cookie(SameSite sameSite) {
+		return new CookieBuilder().setSameSite(sameSite).build();
 	}
 }

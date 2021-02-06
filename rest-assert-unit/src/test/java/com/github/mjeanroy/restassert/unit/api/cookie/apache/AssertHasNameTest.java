@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasName;
-
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
+
+import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasName;
 
 public class AssertHasNameTest extends AbstractApacheHttpCookieTest {
 
@@ -63,13 +63,12 @@ public class AssertHasNameTest extends AbstractApacheHttpCookieTest {
 		final String expectedName = success().getName();
 		final String actualName = failure().getName();
 		return new Object[]{
-				expectedName, actualName
+			expectedName,
+			actualName
 		};
 	}
 
 	private Cookie cookie(String name) {
-		return new ApacheHttpCookieBuilder()
-				.setName(name)
-				.build();
+		return new ApacheHttpCookieBuilder().setName(name).build();
 	}
 }

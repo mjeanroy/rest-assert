@@ -22,23 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasDomain;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasName;
 
-public class AssertHasDomainTest extends AbstractNingHttpCookieTest {
+public class AssertHasNameTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertHasDomain(actual, success().getDomain());
+		assertHasName(actual, success().getName());
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertHasDomain(message, actual, success().getDomain());
+		assertHasName(message, actual, success().getName());
 	}
 
 	@Override
@@ -48,28 +48,27 @@ public class AssertHasDomainTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedDomain = success().getDomain();
-		final String actualDomain = expectedDomain + "foo";
-		return cookie(actualDomain);
+		final String expectedName = success().getName();
+		final String actualName = expectedName + "foo";
+		return cookie(actualName);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have domain %s but was %s";
+		return "Expecting cookie to have name %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedDomain = success().getDomain();
-		final String actualDomain = failure().getDomain();
+		final String expectedName = success().getName();
+		final String actualName = failure().getName();
 		return new Object[]{
-				expectedDomain, actualDomain
+			expectedName,
+			actualName
 		};
 	}
 
-	private Cookie cookie(String domain) {
-		return new NingHttpCookieBuilder()
-				.setDomain(domain)
-				.build();
+	private Cookie cookie(String name) {
+		return new NingHttpCookieBuilder().setName(name).build();
 	}
 }

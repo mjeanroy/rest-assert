@@ -22,46 +22,53 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.core;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
+import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasDomain;
 
-public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
+public class AssertHasDomainTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+		assertHasDomain(actual, success().getDomain());
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+		assertHasDomain(message, actual, success().getDomain());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie("foo");
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = expectedDomain + "foo";
+		return cookie(actualDomain);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to have domain %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		final String expectedDomain = success().getDomain();
+		final String actualDomain = failure().getDomain();
+		return new Object[]{
+			expectedDomain,
+			actualDomain
+		};
 	}
 
-	private Cookie cookie(boolean httpOnly) {
-		return new CookieBuilder().setHttpOnly(httpOnly).build();
+	private Cookie cookie(String domain) {
+		return new NingHttpCookieBuilder().setDomain(domain).build();
 	}
 }

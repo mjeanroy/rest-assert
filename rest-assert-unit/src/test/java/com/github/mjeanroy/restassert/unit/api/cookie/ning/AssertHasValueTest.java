@@ -22,46 +22,53 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.core;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
+import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasValue;
 
-public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
+public class AssertHasValueTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+		assertHasValue(actual, success().getValue());
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+		assertHasValue(message, actual, success().getValue());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie("foo");
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
+		final String expectedValue = success().getValue();
+		final String actualValue = expectedValue + "foo";
+		return cookie(actualValue);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to have value %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		final String expectedValue = success().getValue();
+		final String actualValue = failure().getValue();
+		return new Object[]{
+			expectedValue,
+			actualValue
+		};
 	}
 
-	private Cookie cookie(boolean httpOnly) {
-		return new CookieBuilder().setHttpOnly(httpOnly).build();
+	private Cookie cookie(String value) {
+		return new NingHttpCookieBuilder().setValue(value).build();
 	}
 }

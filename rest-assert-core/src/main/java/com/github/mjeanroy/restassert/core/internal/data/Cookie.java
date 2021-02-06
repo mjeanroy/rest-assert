@@ -105,7 +105,7 @@ public interface Cookie {
 	 *
 	 * @see <a href="https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite</a>
 	 */
-	enum SameSite {
+	public enum SameSite {
 		LAX("Lax"),
 		STRICT("Strict"),
 		NONE("None");

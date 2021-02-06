@@ -22,50 +22,53 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasMaxAge;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasPath;
 
-public class AssertHasMaxAgeTest extends AbstractNingHttpCookieTest {
+public class AssertHasPathTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertHasMaxAge(actual, success().getMaxAge());
+		assertHasPath(actual, success().getPath());
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertHasMaxAge(message, actual, success().getMaxAge());
+		assertHasPath(message, actual, success().getPath());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(10);
+		return cookie("foo");
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(success().getMaxAge() + 1);
+		final String expectedPath = success().getPath();
+		final String actualPath = expectedPath + "foo";
+		return cookie(actualPath);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have max-age %s but was %s";
+		return "Expecting cookie to have path %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
+		final String expectedPath = success().getPath();
+		final String actualPath = failure().getPath();
 		return new Object[]{
-				success().getMaxAge(), failure().getMaxAge()
+			expectedPath,
+			actualPath
 		};
 	}
 
-	private Cookie cookie(long maxAge) {
-		return new NingHttpCookieBuilder()
-				.setMaxAge(maxAge)
-				.build();
+	private Cookie cookie(String path) {
+		return new NingHttpCookieBuilder().setPath(path).build();
 	}
 }

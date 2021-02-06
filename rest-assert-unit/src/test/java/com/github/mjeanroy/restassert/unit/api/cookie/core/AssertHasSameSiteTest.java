@@ -25,43 +25,49 @@
 package com.github.mjeanroy.restassert.unit.api.cookie.core;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertHasSameSite;
 
-public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
+public class AssertHasSameSiteTest extends AbstractCoreCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+		assertHasSameSite(actual, success().getSameSite());
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+		assertHasSameSite(message, actual, success().getSameSite());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie(SameSite.STRICT);
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
+		return cookie(SameSite.NONE);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to have SameSite %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		final SameSite expectedSameSite = success().getSameSite();
+		final SameSite actualSameSite = failure().getSameSite();
+		return new Object[]{
+			expectedSameSite,
+			actualSameSite
+		};
 	}
 
-	private Cookie cookie(boolean httpOnly) {
-		return new CookieBuilder().setHttpOnly(httpOnly).build();
+	private Cookie cookie(SameSite sameSite) {
+		return new CookieBuilder().setSameSite(sameSite).build();
 	}
 }

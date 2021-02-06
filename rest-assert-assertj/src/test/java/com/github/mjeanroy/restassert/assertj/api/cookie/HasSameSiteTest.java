@@ -22,46 +22,44 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.core;
+package com.github.mjeanroy.restassert.assertj.api.cookie;
 
+import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
+import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
+import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static org.mockito.ArgumentMatchers.nullable;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
-public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
+public class HasSameSiteTest extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
-	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+	protected Cookies createAssertions() {
+		return mock(Cookies.class);
 	}
 
 	@Override
-	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+	protected CookieAssert createApi() {
+		return new CookieAssert(actual());
 	}
 
 	@Override
-	protected Cookie success() {
-		return cookie(false);
+	protected CookieAssert run() {
+		return api.hasSameSite(actual().getSameSite());
 	}
 
 	@Override
-	protected Cookie failure() {
-		return cookie(true);
+	protected void verifyApiCall() {
+		verify(assertions).assertHasSameSite(any(AssertionInfo.class), any(Cookie.class), nullable(SameSite.class));
 	}
 
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	private Cookie cookie(boolean httpOnly) {
-		return new CookieBuilder().setHttpOnly(httpOnly).build();
+	private Cookie actual() {
+		return new CookieBuilder().build();
 	}
 }

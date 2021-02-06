@@ -22,48 +22,49 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.apache;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
-import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
-import com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert;
-import org.apache.http.cookie.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
+import com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert;
+import com.ning.http.client.cookie.Cookie;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite.STRICT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class AssertIsNotHttpOnly {
+public class AssertHasSameSiteTest {
 
 	@Test
 	public void it_should_fail_because_of_unsupported_operation() {
-		final Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertIsNotHttpOnly(cookie))
+		final Cookie cookie = new NingHttpCookieBuilder().build();
+		assertThatThrownBy(assertHasSameSite(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+				.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
 	}
 
 	@Test
 	public void it_should_fail_with_custom_message_because_of_unsupported_operation() {
-		final Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertIsNotHttpOnly("message", cookie))
+		final Cookie cookie = new NingHttpCookieBuilder().build();
+		assertThatThrownBy(assertHasSameSite("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+				.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
 	}
 
-	private static ThrowingCallable assertIsNotHttpOnly(final Cookie cookie) {
+	private static ThrowingCallable assertHasSameSite(final Cookie cookie) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {
-				ApacheHttpCookieAssert.assertIsNotHttpOnly(cookie);
+				NingHttpCookieAssert.assertHasSameSite(cookie, STRICT);
 			}
 		};
 	}
 
-	private static ThrowingCallable assertIsNotHttpOnly(final String message, final Cookie cookie) {
+	private static ThrowingCallable assertHasSameSite(final String message, final Cookie cookie) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {
-				ApacheHttpCookieAssert.assertIsNotHttpOnly(message, cookie);
+				NingHttpCookieAssert.assertHasSameSite(message, cookie, STRICT);
 			}
 		};
 	}

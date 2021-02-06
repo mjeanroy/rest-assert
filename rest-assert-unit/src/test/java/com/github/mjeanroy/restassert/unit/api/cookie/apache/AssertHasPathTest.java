@@ -63,13 +63,12 @@ public class AssertHasPathTest extends AbstractApacheHttpCookieTest {
 		final String expectedPath = success().getPath();
 		final String actualPath = failure().getPath();
 		return new Object[]{
-				expectedPath, actualPath
+			expectedPath,
+			actualPath
 		};
 	}
 
 	private Cookie cookie(String path) {
-		return new ApacheHttpCookieBuilder()
-				.setPath(path)
-				.build();
+		return new ApacheHttpCookieBuilder().setPath(path).build();
 	}
 }

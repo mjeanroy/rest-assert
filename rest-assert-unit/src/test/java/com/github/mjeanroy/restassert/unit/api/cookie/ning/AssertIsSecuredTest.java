@@ -22,38 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.core;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
+import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertIsSecured;
 
-public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
+public class AssertIsSecuredTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+		assertIsSecured(actual);
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+		assertIsSecured(message, actual);
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
 		return cookie(true);
 	}
 
 	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
+
+	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to be secured";
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
 		return new Object[0];
 	}
 
-	private Cookie cookie(boolean httpOnly) {
-		return new CookieBuilder().setHttpOnly(httpOnly).build();
+	private Cookie cookie(boolean secured) {
+		return new NingHttpCookieBuilder().setSecure(secured).build();
 	}
 }

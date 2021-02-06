@@ -22,11 +22,46 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
-import com.github.mjeanroy.restassert.unit.api.cookie.AbstractCookieTest;
+import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-abstract class AbstractNingHttpCookieTest extends AbstractCookieTest<Cookie> {
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertIsHttpOnly;
 
+public class AssertIsHttpOnlyTest extends AbstractNingHttpCookieTest {
+
+	@Override
+	protected void run(Cookie actual) {
+		assertIsHttpOnly(actual);
+	}
+
+	@Override
+	protected void run(String message, Cookie actual) {
+		assertIsHttpOnly(message, actual);
+	}
+
+	@Override
+	protected Cookie success() {
+		return cookie(true);
+	}
+
+	@Override
+	protected Cookie failure() {
+		return cookie(false);
+	}
+
+	@Override
+	protected String pattern() {
+		return "Expecting cookie to be 'http only'";
+	}
+
+	@Override
+	protected Object[] placeholders() {
+		return new Object[0];
+	}
+
+	private Cookie cookie(boolean httpOnly) {
+		return new NingHttpCookieBuilder().setHttpOnly(httpOnly).build();
+	}
 }

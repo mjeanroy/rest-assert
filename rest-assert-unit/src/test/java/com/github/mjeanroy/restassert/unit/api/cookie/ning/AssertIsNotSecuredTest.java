@@ -22,54 +22,46 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasPath;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertIsNotSecured;
 
-public class AssertHasPathTest extends AbstractNingHttpCookieTest {
+public class AssertIsNotSecuredTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertHasPath(actual, success().getPath());
+		assertIsNotSecured(actual);
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertHasPath(message, actual, success().getPath());
+		assertIsNotSecured(message, actual);
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie("foo");
+		return cookie(false);
 	}
 
 	@Override
 	protected Cookie failure() {
-		final String expectedPath = success().getPath();
-		final String actualPath = expectedPath + "foo";
-		return cookie(actualPath);
+		return cookie(true);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie to have path %s but was %s";
+		return "Expecting cookie not to be secured";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedPath = success().getPath();
-		final String actualPath = failure().getPath();
-		return new Object[]{
-				expectedPath, actualPath
-		};
+		return new Object[0];
 	}
 
-	private Cookie cookie(String path) {
-		return new NingHttpCookieBuilder()
-				.setPath(path)
-				.build();
+	private Cookie cookie(boolean secured) {
+		return new NingHttpCookieBuilder().setSecure(secured).build();
 	}
 }

@@ -22,48 +22,46 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.assertj.internal.cookie;
 
-import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
-import com.ning.http.client.cookie.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertIsNotSecured;
-
-public class AssertIsNotSecuredTest extends AbstractNingHttpCookieTest {
-
-	@Override
-	protected void run(Cookie actual) {
-		assertIsNotSecured(actual);
-	}
+public class AssertHasSameSiteTest extends AbstractCookiesTest {
 
 	@Override
-	protected void run(String message, Cookie actual) {
-		assertIsNotSecured(message, actual);
+	protected void run(AssertionInfo info, Cookie cookie) {
+		cookies.assertHasSameSite(info, cookie, success().getSameSite());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie(SameSite.NONE);
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
+		return cookie(SameSite.STRICT);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be secured";
+		return "Expecting cookie to have SameSite %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		final SameSite expectedSameSite = success().getSameSite();
+		final SameSite actualSameSite = failure().getSameSite();
+		return new Object[]{
+			expectedSameSite,
+			actualSameSite
+		};
 	}
 
-	private Cookie cookie(boolean secured) {
-		return new NingHttpCookieBuilder()
-			.setSecure(secured)
-			.build();
+	private Cookie cookie(SameSite sameSite) {
+		return new CookieBuilder().setSameSite(sameSite).build();
 	}
 }

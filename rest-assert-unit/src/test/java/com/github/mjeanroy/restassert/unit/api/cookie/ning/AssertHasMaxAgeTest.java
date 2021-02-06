@@ -22,48 +22,49 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.async;
+package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasMaxAge;
 
-public class AssertIsNotHttpOnlyTest extends AbstractNingHttpCookieTest {
+public class AssertHasMaxAgeTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
+		assertHasMaxAge(actual, success().getMaxAge());
 	}
 
 	@Override
 	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
+		assertHasMaxAge(message, actual, success().getMaxAge());
 	}
 
 	@Override
 	protected Cookie success() {
-		return cookie(false);
+		return cookie(10);
 	}
 
 	@Override
 	protected Cookie failure() {
-		return cookie(true);
+		return cookie(success().getMaxAge() + 1);
 	}
 
 	@Override
 	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
+		return "Expecting cookie to have max-age %s but was %s";
 	}
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[0];
+		return new Object[]{
+			success().getMaxAge(),
+			failure().getMaxAge()
+		};
 	}
 
-	private Cookie cookie(boolean httpOnly) {
-		return new NingHttpCookieBuilder()
-			.setHttpOnly(httpOnly)
-			.build();
+	private Cookie cookie(long maxAge) {
+		return new NingHttpCookieBuilder().setMaxAge(maxAge).build();
 	}
 }

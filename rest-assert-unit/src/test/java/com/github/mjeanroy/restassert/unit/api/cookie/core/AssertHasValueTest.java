@@ -62,14 +62,13 @@ public class AssertHasValueTest extends AbstractCoreCookieTest {
 	protected Object[] placeholders() {
 		final String expectedValue = success().getValue();
 		final String actualValue = failure().getValue();
-		return new Object[] {
-			expectedValue, actualValue
+		return new Object[]{
+			expectedValue,
+			actualValue
 		};
 	}
 
 	private Cookie cookie(String value) {
-		return new CookieBuilder()
-			.setValue(value)
-			.build();
+		return new CookieBuilder().setValue(value).build();
 	}
 }

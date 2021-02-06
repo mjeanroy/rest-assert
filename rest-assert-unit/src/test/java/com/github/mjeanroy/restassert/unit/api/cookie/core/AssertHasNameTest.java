@@ -62,14 +62,13 @@ public class AssertHasNameTest extends AbstractCoreCookieTest {
 	protected Object[] placeholders() {
 		final String expectedName = success().getName();
 		final String actualName = failure().getName();
-		return new Object[] {
-				expectedName, actualName
+		return new Object[]{
+			expectedName,
+			actualName
 		};
 	}
 
 	private Cookie cookie(String name) {
-		return new CookieBuilder()
-			.setName(name)
-			.build();
+		return new CookieBuilder().setName(name).build();
 	}
 }

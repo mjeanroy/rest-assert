@@ -58,14 +58,13 @@ public class AssertHasMaxAgeTest extends AbstractCoreCookieTest {
 
 	@Override
 	protected Object[] placeholders() {
-		return new Object[] {
-				success().getMaxAge(), failure().getMaxAge()
+		return new Object[]{
+			success().getMaxAge(),
+			failure().getMaxAge()
 		};
 	}
 
 	private Cookie cookie(long maxAge) {
-		return new CookieBuilder()
-			.setMaxAge(maxAge)
-			.build();
+		return new CookieBuilder().setMaxAge(maxAge).build();
 	}
 }

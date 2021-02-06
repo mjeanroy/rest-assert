@@ -62,14 +62,13 @@ public class AssertHasPathTest extends AbstractCoreCookieTest {
 	protected Object[] placeholders() {
 		final String expectedPath = success().getPath();
 		final String actualPath = failure().getPath();
-		return new Object[] {
-				expectedPath, actualPath
+		return new Object[]{
+			expectedPath,
+			actualPath
 		};
 	}
 
 	private Cookie cookie(String path) {
-		return new CookieBuilder()
-			.setPath(path)
-			.build();
+		return new CookieBuilder().setPath(path).build();
 	}
 }

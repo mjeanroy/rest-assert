@@ -62,8 +62,6 @@ public class AssertIsSecuredTest extends AbstractCoreCookieTest {
 	}
 
 	private Cookie cookie(boolean secured) {
-		return new CookieBuilder()
-				.setSecured(secured)
-				.build();
+		return new CookieBuilder().setSecured(secured).build();
 	}
 }

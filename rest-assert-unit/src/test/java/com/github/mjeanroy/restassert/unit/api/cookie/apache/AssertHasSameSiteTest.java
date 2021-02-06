@@ -30,40 +30,41 @@ import org.apache.http.cookie.Cookie;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite.STRICT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class AssertIsHttpOnly {
+public class AssertHasSameSiteTest {
 
 	@Test
 	public void it_should_fail_because_of_unsupported_operation() {
 		final Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertIsHttpOnly(cookie))
+		assertThatThrownBy(assertHasSameSite(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+				.hasMessage("org.apache.http.cookie.Cookie does not support #getSameSite()");
 	}
 
 	@Test
 	public void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		final Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertIsHttpOnly("message", cookie))
+		assertThatThrownBy(assertHasSameSite("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+				.hasMessage("org.apache.http.cookie.Cookie does not support #getSameSite()");
 	}
 
-	private static ThrowingCallable assertIsHttpOnly(final Cookie cookie) {
+	private static ThrowingCallable assertHasSameSite(final Cookie cookie) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {
-				ApacheHttpCookieAssert.assertIsHttpOnly(cookie);
+				ApacheHttpCookieAssert.assertHasSameSite(cookie, STRICT);
 			}
 		};
 	}
 
-	private static ThrowingCallable assertIsHttpOnly(final String message, final Cookie cookie) {
+	private static ThrowingCallable assertHasSameSite(final String message, final Cookie cookie) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {
-				ApacheHttpCookieAssert.assertIsHttpOnly(message, cookie);
+				ApacheHttpCookieAssert.assertHasSameSite(message, cookie, STRICT);
 			}
 		};
 	}

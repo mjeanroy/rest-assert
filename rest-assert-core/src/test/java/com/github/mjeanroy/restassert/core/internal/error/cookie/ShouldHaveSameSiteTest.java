@@ -22,46 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.cookie.core;
+package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotHttpOnly;
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite.shouldHaveSameSite;
+import static org.assertj.core.api.Assertions.assertThat;
 
-public class AssertIsNotHttpOnlyTest extends AbstractCoreCookieTest {
+public class ShouldHaveSameSiteTest {
 
-	@Override
-	protected void run(Cookie actual) {
-		assertIsNotHttpOnly(actual);
-	}
-
-	@Override
-	protected void run(String message, Cookie actual) {
-		assertIsNotHttpOnly(message, actual);
-	}
-
-	@Override
-	protected Cookie success() {
-		return cookie(false);
-	}
-
-	@Override
-	protected Cookie failure() {
-		return cookie(true);
-	}
-
-	@Override
-	protected String pattern() {
-		return "Expecting cookie not to be 'http only'";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
-	}
-
-	private Cookie cookie(boolean httpOnly) {
-		return new CookieBuilder().setHttpOnly(httpOnly).build();
+	@Test
+	public void it_should_format_error_message() {
+		SameSite actualSameSite = SameSite.LAX;
+		SameSite expectedSameSite = SameSite.STRICT;
+		ShouldHaveSameSite shouldHaveSameSite = shouldHaveSameSite(expectedSameSite, actualSameSite);
+		assertThat(shouldHaveSameSite).isNotNull();
+		assertThat(shouldHaveSameSite.toString()).isEqualTo("Expecting cookie to have SameSite STRICT but was LAX");
 	}
 }
