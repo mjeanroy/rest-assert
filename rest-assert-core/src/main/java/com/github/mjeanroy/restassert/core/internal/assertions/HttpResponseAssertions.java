@@ -207,6 +207,19 @@ public final class HttpResponseAssertions {
 	}
 
 	/**
+	 * Check that status code of http response is {@code "MULTIPLE CHOICES"} status (i.e is strictly equals to {@code 300}).
+	 *
+	 * @param httpResponse HTTP response to be tested.
+	 * @return Assertion result.
+	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.1">https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.1</a>
+	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/300">https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/300</a>
+	 * @see <a href="https://httpstatuses.com/300">https://httpstatuses.com/300</a>
+	 */
+	public AssertionResult isMultipleChoices(HttpResponse httpResponse) {
+		return isStatusEqual(httpResponse, HttpStatusCodes.MULTIPLE_CHOICES);
+	}
+
+	/**
 	 * Check that status code of http response is {@code "MOVED PERMANENTLY"} status (i.e is strictly equals to {@code 301}).
 	 *
 	 * @param httpResponse HTTP response to be tested.

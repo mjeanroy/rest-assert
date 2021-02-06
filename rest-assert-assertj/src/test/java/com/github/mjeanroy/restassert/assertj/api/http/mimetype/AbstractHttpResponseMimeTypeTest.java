@@ -35,9 +35,7 @@ public abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpRespo
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseBuilderImpl()
-			.addHeader(getHeader())
-			.build());
+		return new HttpResponseAssert(new HttpResponseBuilderImpl().addHeader(getHeader()).build());
 	}
 
 	private Header getHeader() {

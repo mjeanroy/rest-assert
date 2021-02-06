@@ -32,9 +32,7 @@ public abstract class AbstractHttpResponseStatusOutOfTest extends AbstractHttpRe
 
 	@Override
 	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseBuilderImpl()
-			.setStatus(status())
-			.build());
+		return new HttpResponseAssert(new HttpResponseBuilderImpl().setStatus(status()).build());
 	}
 
 	protected abstract int status();

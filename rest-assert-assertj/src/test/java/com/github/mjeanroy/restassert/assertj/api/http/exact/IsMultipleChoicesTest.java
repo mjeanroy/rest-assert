@@ -25,19 +25,27 @@
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
+
+public class IsMultipleChoicesTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseBuilderImpl().setStatus(status()).build());
+	protected int status() {
+		return MULTIPLE_CHOICES;
 	}
 
-	protected abstract int status();
+	@Override
+	protected HttpResponseAssert run() {
+		return api.isMultipleChoices();
+	}
 
-	protected abstract HttpResponseAssert run();
-
-	protected abstract void verifyApiCall();
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsMultipleChoices(any(AssertionInfo.class), any(HttpResponse.class));
+	}
 }

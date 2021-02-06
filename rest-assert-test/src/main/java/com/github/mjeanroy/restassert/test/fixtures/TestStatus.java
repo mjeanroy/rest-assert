@@ -68,6 +68,11 @@ public final class TestStatus {
 	public static final int PARTIAL_CONTENT = 206;
 
 	/**
+	 * The status code for the {@code "MULTIPLE CHOICES"} response, to use in unit test.
+	 */
+	public static final int MULTIPLE_CHOICES = 300;
+
+	/**
 	 * The status code for the {@code "MOVED PERMANENTLY"} response, to use in unit test.
 	 */
 	public static final int MOVED_PERMANENTLY = 301;

@@ -22,22 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api.http.exact;
+package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
-import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
+
+public class AssertIsMultipleChoicesTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseBuilderImpl().setStatus(status()).build());
+	protected int status() {
+		return MULTIPLE_CHOICES;
 	}
 
-	protected abstract int status();
+	@Override
+	protected void run(HttpResponse actual) {
+		JunitServersHttpAssert.assertIsMultipleChoices(actual);
+	}
 
-	protected abstract HttpResponseAssert run();
-
-	protected abstract void verifyApiCall();
+	@Override
+	protected void run(String message, HttpResponse actual) {
+		JunitServersHttpAssert.assertIsMultipleChoices(message, actual);
+	}
 }

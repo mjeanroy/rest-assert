@@ -22,22 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api.http.exact;
+package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
 
-public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
+
+public class AssertIsMultipleChoicesTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		return new HttpResponseAssert(new HttpResponseBuilderImpl().setStatus(status()).build());
+	protected int status() {
+		return MULTIPLE_CHOICES;
 	}
 
-	protected abstract int status();
-
-	protected abstract HttpResponseAssert run();
-
-	protected abstract void verifyApiCall();
+	@Override
+	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+		httpResponses.assertIsMultipleChoices(info, httpResponse);
+	}
 }

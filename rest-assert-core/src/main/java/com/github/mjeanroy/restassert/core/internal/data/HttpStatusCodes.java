@@ -80,6 +80,13 @@ public final class HttpStatusCodes {
 	// 3XX
 
 	/**
+	 * HTTP 300: MULTIPLE CHOICES.
+	 *
+	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.1">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.1</a>
+	 */
+	public static final int MULTIPLE_CHOICES = 300;
+
+	/**
 	 * HTTP 301: MOVED PERMANENTLY.
 	 *
 	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2">http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.2</a>
