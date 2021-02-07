@@ -24,17 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 
 /**
  * Error thrown when a json string contain an entry
  * that is not of expected type.
  */
-public class ShouldBeEntryOf extends AbstractJsonError {
+public final class ShouldBeEntryOf extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeEntryOf(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+	private ShouldBeEntryOf(String entryName, Message expectation, Message mismatch) {
+		super(entryName, expectation, mismatch);
 	}
 
 	/**
@@ -46,6 +47,9 @@ public class ShouldBeEntryOf extends AbstractJsonError {
 	 * @return Error.
 	 */
 	public static ShouldBeEntryOf shouldBeEntryOf(String entry, JsonType actualType, JsonType expectedType) {
-		return new ShouldBeEntryOf(entry, "Expecting json entry %s to be %s value but was %s value", entry, expectedType.getFormattedName(), actualType.getFormattedName());
+		return new ShouldBeEntryOf(entry,
+			Message.message("Expecting json entry %s to be %s value", entry, expectedType.getFormattedName()),
+			Message.message("was %s value", actualType.getFormattedName())
+		);
 	}
 }

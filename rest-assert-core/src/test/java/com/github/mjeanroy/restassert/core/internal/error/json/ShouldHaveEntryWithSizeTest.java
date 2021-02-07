@@ -33,9 +33,16 @@ public class ShouldHaveEntryWithSizeTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldHaveEntryWithSize shouldHaveEntryWithSize = shouldHaveEntryWithSize("foo", 5, 0);
+		String entry = "foo";
+		int actualSize = 0;
+		int expectedSize = 5;
+		ShouldHaveEntryWithSize shouldHaveEntryWithSize = shouldHaveEntryWithSize(entry, actualSize, expectedSize);
+
 		assertThat(shouldHaveEntryWithSize).isNotNull();
+		assertThat(shouldHaveEntryWithSize.message()).isEqualTo("Expecting json array %s to have size %s but was %s");
+		assertThat(shouldHaveEntryWithSize.args()).hasSize(3).containsExactly(entry, expectedSize, actualSize);
+		assertThat(shouldHaveEntryWithSize.buildMessage()).isEqualTo("Expecting json array foo to have size 5 but was 0");
 		assertThat(shouldHaveEntryWithSize.toString()).isEqualTo("Expecting json array foo to have size 5 but was 0");
-		assertThat(shouldHaveEntryWithSize.entryName()).isEqualTo("foo");
+		assertThat(shouldHaveEntryWithSize.entryName()).isEqualTo(entry);
 	}
 }

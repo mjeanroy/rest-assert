@@ -26,6 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType.shouldHaveMimeType;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,15 +36,27 @@ public class ShouldHaveMimeTypeTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType("application/json", "application/xml");
+		String expectedMimeType = "application/json";
+		String actualMimeType = "application/xml";
+		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(expectedMimeType, actualMimeType);
+
 		assertThat(shouldHaveMimeType).isNotNull();
+		assertThat(shouldHaveMimeType.message()).isEqualTo("Expecting response to have mime type %s but was %s");
+		assertThat(shouldHaveMimeType.args()).hasSize(2).containsExactly(expectedMimeType, actualMimeType);
+		assertThat(shouldHaveMimeType.buildMessage()).isEqualTo("Expecting response to have mime type application/json but was application/xml");
 		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type application/json but was application/xml");
 	}
 
 	@Test
 	public void it_should_format_error_message_with_list() {
-		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(asList("application/json", "application/javascript"), "application/xml");
+		List<String> expectedMimeType = asList("application/json", "application/javascript");
+		String actualMimeType = "application/xml";
+		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(expectedMimeType, actualMimeType);
+
 		assertThat(shouldHaveMimeType).isNotNull();
+		assertThat(shouldHaveMimeType.message()).isEqualTo("Expecting response to have mime type in %s but was %s");
+		assertThat(shouldHaveMimeType.args()).hasSize(2).containsExactly(expectedMimeType, actualMimeType);
+		assertThat(shouldHaveMimeType.buildMessage()).isEqualTo("Expecting response to have mime type in [application/json, application/javascript] but was application/xml");
 		assertThat(shouldHaveMimeType.toString()).isEqualTo("Expecting response to have mime type in [application/json, application/javascript] but was application/xml");
 	}
 }

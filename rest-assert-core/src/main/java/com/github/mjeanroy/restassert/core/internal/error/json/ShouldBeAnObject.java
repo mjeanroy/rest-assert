@@ -24,15 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
+import com.github.mjeanroy.restassert.core.internal.error.Message;
+
 /**
  * Error thrown when a json string should be an object
  * but is an array.
  */
-public class ShouldBeAnObject extends AbstractJsonError {
+public final class ShouldBeAnObject extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeAnObject(String entryName, String message, Object... args) {
-		super(entryName, message, args);
+	private ShouldBeAnObject() {
+		super(
+			Message.message("Expecting json to be an object"),
+			Message.message("was an array")
+		);
 	}
 
 	/**
@@ -41,6 +46,6 @@ public class ShouldBeAnObject extends AbstractJsonError {
 	 * @return Error.
 	 */
 	public static ShouldBeAnObject shouldBeAnObject() {
-		return new ShouldBeAnObject("", "Expecting json to be an object but was an array");
+		return new ShouldBeAnObject();
 	}
 }

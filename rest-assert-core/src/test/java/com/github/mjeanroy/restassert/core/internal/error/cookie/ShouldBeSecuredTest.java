@@ -35,14 +35,22 @@ public class ShouldBeSecuredTest {
 	@Test
 	public void it_should_format_error_message() {
 		ShouldBeSecured shouldBeSecured = shouldBeSecured();
+
 		assertThat(shouldBeSecured).isNotNull();
+		assertThat(shouldBeSecured.message()).isEqualTo("Expecting cookie to be secured");
+		assertThat(shouldBeSecured.args()).isNotNull().isEmpty();
+		assertThat(shouldBeSecured.buildMessage()).isEqualTo("Expecting cookie to be secured");
 		assertThat(shouldBeSecured.toString()).isEqualTo("Expecting cookie to be secured");
 	}
 
 	@Test
 	public void it_should_format_error_message_with_negation() {
 		ShouldBeSecured shouldNotBeSecured = shouldNotBeSecured();
+
 		assertThat(shouldNotBeSecured).isNotNull();
+		assertThat(shouldNotBeSecured.message()).isEqualTo("Expecting cookie not to be secured");
+		assertThat(shouldNotBeSecured.args()).isNotNull().isEmpty();
+		assertThat(shouldNotBeSecured.buildMessage()).isEqualTo("Expecting cookie not to be secured");
 		assertThat(shouldNotBeSecured.toString()).isEqualTo("Expecting cookie not to be secured");
 	}
 }

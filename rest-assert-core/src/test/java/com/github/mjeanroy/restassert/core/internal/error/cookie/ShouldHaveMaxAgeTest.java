@@ -33,10 +33,14 @@ public class ShouldHaveMaxAgeTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		int actualMaxAge = 10;
-		int expectedMaxAge = actualMaxAge + 1;
+		long expectedMaxAge = 11;
+		long actualMaxAge = expectedMaxAge - 1;
 		ShouldHaveMaxAge shouldHaveMaxAge = shouldHaveMaxAge(expectedMaxAge, actualMaxAge);
+
 		assertThat(shouldHaveMaxAge).isNotNull();
+		assertThat(shouldHaveMaxAge.message()).isEqualTo("Expecting cookie to have max-age %s but was %s");
+		assertThat(shouldHaveMaxAge.args()).hasSize(2).containsExactly(expectedMaxAge, actualMaxAge);
+		assertThat(shouldHaveMaxAge.buildMessage()).isEqualTo("Expecting cookie to have max-age 11 but was 10");
 		assertThat(shouldHaveMaxAge.toString()).isEqualTo("Expecting cookie to have max-age 11 but was 10");
 	}
 }

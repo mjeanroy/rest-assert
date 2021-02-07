@@ -26,16 +26,17 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 /**
  * Error thrown when an http response should contains
  * expected cookie.
  */
-public class ShouldHaveCookie extends AbstractError {
+public final class ShouldHaveCookie extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveCookie(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveCookie(Message expectation) {
+		super(expectation);
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class ShouldHaveCookie extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveCookie shouldHaveCookie(String name) {
-		return new ShouldHaveCookie("Expecting http response to contains cookie with name %s", name);
+		return new ShouldHaveCookie(Message.message("Expecting http response to contains cookie with name %s", name));
 	}
 
 	/**
@@ -56,7 +57,7 @@ public class ShouldHaveCookie extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveCookie shouldHaveCookie(String name, String value) {
-		return new ShouldHaveCookie("Expecting http response to contains cookie with name %s and value %s", name, value);
+		return new ShouldHaveCookie(Message.message("Expecting http response to contains cookie with name %s and value %s", name, value));
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class ShouldHaveCookie extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveCookie shouldHaveCookie(Cookie cookie) {
-		return new ShouldHaveCookie("Expecting http response to contains cookie %s", cookie);
+		return new ShouldHaveCookie(Message.message("Expecting http response to contains cookie %s", cookie));
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class ShouldHaveCookie extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveCookie shouldNotHaveCookie(String name) {
-		return new ShouldHaveCookie("Expecting http response not to contains cookie with name %s", name);
+		return new ShouldHaveCookie(Message.message("Expecting http response not to contains cookie with name %s", name));
 	}
 
 	/**
@@ -85,6 +86,6 @@ public class ShouldHaveCookie extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveCookie shouldNotHaveCookie() {
-		return new ShouldHaveCookie("Expecting http response not to contains cookies");
+		return new ShouldHaveCookie(Message.message("Expecting http response not to contains cookies"));
 	}
 }

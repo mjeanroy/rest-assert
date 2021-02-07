@@ -31,11 +31,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when a cookie does not have
  * expected SameSite.
  */
-public class ShouldHaveSameSite extends AbstractError {
+public final class ShouldHaveSameSite extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveSameSite(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveSameSite(String message, SameSite expectedValue, SameSite actualValue) {
+		super(message, expectedValue, actualValue);
 	}
 
 	/**
@@ -46,6 +46,6 @@ public class ShouldHaveSameSite extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveSameSite shouldHaveSameSite(SameSite expectedSameSite, SameSite actualSameSite) {
-		return new ShouldHaveSameSite("Expecting cookie to have SameSite %s but was %s", expectedSameSite, actualSameSite);
+		return new ShouldHaveSameSite("Expecting cookie to have SameSite %s", expectedSameSite, actualSameSite);
 	}
 }

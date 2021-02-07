@@ -33,30 +33,58 @@ import static java.util.Collections.addAll;
 /**
  * Composite error representation.
  */
-public class CompositeError extends AbstractError {
+public class CompositeError implements RestAssertError {
 
-	private CompositeError(Iterable<RestAssertError> errors) {
-		super(message(errors), args(errors));
+	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
+		return new CompositeError(errors);
 	}
 
-	private static String message(Iterable<RestAssertError> errors) {
+	/**
+	 * The error message.
+	 */
+	private final String message;
+
+	/**
+	 * The message arguments.
+	 */
+	private final Object[] args;
+
+	private CompositeError(Iterable<RestAssertError> errors) {
+		this.message = composeMessage(errors);
+		this.args = composeArgs(errors);
+	}
+
+	@Override
+	public String message() {
+		return message;
+	}
+
+	@Override
+	public Object[] args() {
+		return args;
+	}
+
+	@Override
+	public String buildMessage() {
+		return args.length == 0 ? message : String.format(message, args);
+	}
+
+	private static String composeMessage(Iterable<RestAssertError> errors) {
 		String separator = "," + LINE_SEPARATOR;
 		StringBuilder sb = new StringBuilder();
 		for (RestAssertError error : errors) {
 			sb.append(error.message()).append(separator);
 		}
+
 		return sb.substring(0, sb.length() - separator.length()).trim();
 	}
 
-	private static Object[] args(Iterable<RestAssertError> errors) {
+	private static Object[] composeArgs(Iterable<RestAssertError> errors) {
 		List<Object> args = new LinkedList<>();
 		for (RestAssertError error : errors) {
 			addAll(args, error.args());
 		}
-		return args.toArray();
-	}
 
-	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
-		return new CompositeError(errors);
+		return args.toArray();
 	}
 }

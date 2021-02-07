@@ -33,10 +33,14 @@ public class ShouldHavePathTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		String actualPath = "foo";
 		String expectedPath = "bar";
+		String actualPath = "foo";
 		ShouldHavePath shouldHavePath = shouldHavePath(expectedPath, actualPath);
+
 		assertThat(shouldHavePath).isNotNull();
+		assertThat(shouldHavePath.message()).isEqualTo("Expecting cookie to have path %s but was %s");
+		assertThat(shouldHavePath.args()).hasSize(2).containsExactly(expectedPath, actualPath);
+		assertThat(shouldHavePath.buildMessage()).isEqualTo("Expecting cookie to have path bar but was foo");
 		assertThat(shouldHavePath.toString()).isEqualTo("Expecting cookie to have path bar but was foo");
 	}
 }

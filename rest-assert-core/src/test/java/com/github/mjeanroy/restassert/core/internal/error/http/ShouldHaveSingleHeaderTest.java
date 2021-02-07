@@ -26,6 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import org.junit.Test;
 
+import java.util.List;
+
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,8 +37,13 @@ public class ShouldHaveSingleHeaderTest {
 	@Test
 	public void it_should_format_error_message() {
 		String headerName = "foo";
-		ShouldHaveSingleHeader shouldHaveHeader = shouldHaveSingleHeader(headerName, asList("foo", "bar"));
+		List<String> actualValues = asList("foo", "bar");
+		ShouldHaveSingleHeader shouldHaveHeader = shouldHaveSingleHeader(headerName, actualValues);
+
 		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to contains header %s with a single value but found: %s");
+		assertThat(shouldHaveHeader.args()).hasSize(2);
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to contains header foo with a single value but found: [foo, bar]");
 		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to contains header foo with a single value but found: [foo, bar]");
 	}
 }

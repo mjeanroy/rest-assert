@@ -24,19 +24,23 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName.shouldHaveName;
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName.shouldHaveName;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShouldHaveNameTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		String actualName = "foo";
 		String expectedName = "bar";
+		String actualName = "foo";
 		ShouldHaveName shouldHaveName = shouldHaveName(expectedName, actualName);
+
 		assertThat(shouldHaveName).isNotNull();
+		assertThat(shouldHaveName.message()).isEqualTo("Expecting cookie to have name %s but was %s");
+		assertThat(shouldHaveName.args()).hasSize(2).containsExactly(expectedName, actualName);
+		assertThat(shouldHaveName.buildMessage()).isEqualTo("Expecting cookie to have name bar but was foo");
 		assertThat(shouldHaveName.toString()).isEqualTo("Expecting cookie to have name bar but was foo");
 	}
 }

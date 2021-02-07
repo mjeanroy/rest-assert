@@ -26,22 +26,20 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveStatusBetweenTest {
+public class ShouldNotHaveHeaderTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		int actualStatus = 300;
-		int start = 200;
-		int end = 299;
-		ShouldHaveStatusBetween shouldHaveStatusBetween = shouldHaveStatusBetween(actualStatus, start, end);
+		String unexpectedHeaderName = "X-Requested-With";
+		ShouldNotHaveHeader shouldHaveStatus = shouldNotHaveHeader(unexpectedHeaderName);
 
-		assertThat(shouldHaveStatusBetween).isNotNull();
-		assertThat(shouldHaveStatusBetween.message()).isEqualTo("Expecting status code to be between %s and %s but was %s");
-		assertThat(shouldHaveStatusBetween.args()).hasSize(3).containsExactly(start, end, actualStatus);
-		assertThat(shouldHaveStatusBetween.buildMessage()).isEqualTo("Expecting status code to be between 200 and 299 but was 300");
-		assertThat(shouldHaveStatusBetween.toString()).isEqualTo("Expecting status code to be between 200 and 299 but was 300");
+		assertThat(shouldHaveStatus).isNotNull();
+		assertThat(shouldHaveStatus.message()).isEqualTo("Expecting response not to have header %s");
+		assertThat(shouldHaveStatus.args()).hasSize(1).containsExactly(unexpectedHeaderName);
+		assertThat(shouldHaveStatus.buildMessage()).isEqualTo("Expecting response not to have header X-Requested-With");
+		assertThat(shouldHaveStatus.toString()).isEqualTo("Expecting response not to have header X-Requested-With");
 	}
 }

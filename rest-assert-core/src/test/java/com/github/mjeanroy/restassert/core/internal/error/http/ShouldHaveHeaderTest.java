@@ -38,7 +38,11 @@ public class ShouldHaveHeaderTest {
 	public void it_should_format_error_message() {
 		String headerName = "foo";
 		ShouldHaveHeader shouldHaveHeader = shouldHaveHeader(headerName);
+
 		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s");
+		assertThat(shouldHaveHeader.args()).hasSize(1).containsExactly(headerName);
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo");
 		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo");
 	}
 
@@ -48,7 +52,11 @@ public class ShouldHaveHeaderTest {
 		String headerValue = "bar";
 		String actualValue = "quix";
 		ShouldHaveHeader shouldHaveHeader = shouldHaveHeaderWithValue(headerName, headerValue, actualValue);
+
 		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s equal to %s but was %s");
+		assertThat(shouldHaveHeader.args()).hasSize(3).containsExactly(headerName, headerValue, actualValue);
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
 		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
 	}
 
@@ -58,7 +66,11 @@ public class ShouldHaveHeaderTest {
 		String headerValue = "bar";
 		String actualValue = "quix";
 		ShouldHaveHeader shouldHaveHeader = shouldHaveHeaderWithValue(headerName, headerValue, singletonList(actualValue));
+
 		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s equal to %s but was %s");
+		assertThat(shouldHaveHeader.args()).hasSize(3).containsExactly(headerName, headerValue, actualValue);
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
 		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
 	}
 
@@ -68,8 +80,12 @@ public class ShouldHaveHeaderTest {
 		String headerValue = "bar";
 		String v1 = "foo";
 		String v2 = "bar";
+
 		ShouldHaveHeader shouldHaveHeader = shouldHaveHeaderWithValue(headerName, headerValue, asList(v1, v2));
 		assertThat(shouldHaveHeader).isNotNull();
+		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s equal to %s but contains only %s");
+		assertThat(shouldHaveHeader.args()).hasSize(3).containsExactly(headerName, headerValue, asList(v1, v2));
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo equal to bar but contains only [foo, bar]");
 		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but contains only [foo, bar]");
 	}
 }

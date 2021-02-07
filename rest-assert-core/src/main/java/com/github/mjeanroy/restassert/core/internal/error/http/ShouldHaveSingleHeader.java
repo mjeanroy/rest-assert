@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 import java.util.List;
 
@@ -32,11 +33,11 @@ import java.util.List;
  * Error thrown when an http response should contain
  * specific header multiple times.
  */
-public class ShouldHaveSingleHeader extends AbstractError {
+public final class ShouldHaveSingleHeader extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveSingleHeader(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveSingleHeader(Message expectation, Message mismatch) {
+		super(expectation, mismatch);
 	}
 
 	/**
@@ -47,6 +48,9 @@ public class ShouldHaveSingleHeader extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveSingleHeader shouldHaveSingleHeader(String headerName, List<String> values) {
-		return new ShouldHaveSingleHeader("Expecting response to contains header %s with a single value but found: %s", headerName, values);
+		return new ShouldHaveSingleHeader(
+			Message.message("Expecting response to contains header %s with a single value", headerName),
+			Message.message("found: %s", values)
+		);
 	}
 }

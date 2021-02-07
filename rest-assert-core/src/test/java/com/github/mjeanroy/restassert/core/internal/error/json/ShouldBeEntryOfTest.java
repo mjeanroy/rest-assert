@@ -34,9 +34,16 @@ public class ShouldBeEntryOfTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldBeEntryOf shouldBeEntryOf = shouldBeEntryOf("foo", JsonType.NULL, JsonType.NUMBER);
+		String entry = "foo";
+		JsonType actualType = JsonType.NULL;
+		JsonType expectedType = JsonType.NUMBER;
+		ShouldBeEntryOf shouldBeEntryOf = shouldBeEntryOf(entry, actualType, expectedType);
+
 		assertThat(shouldBeEntryOf).isNotNull();
+		assertThat(shouldBeEntryOf.message()).isEqualTo("Expecting json entry %s to be %s value but was %s value");
+		assertThat(shouldBeEntryOf.args()).hasSize(3).containsExactly(entry, expectedType.name().toLowerCase(), actualType.name().toLowerCase());
+		assertThat(shouldBeEntryOf.buildMessage()).isEqualTo("Expecting json entry foo to be number value but was null value");
 		assertThat(shouldBeEntryOf.toString()).isEqualTo("Expecting json entry foo to be number value but was null value");
-		assertThat(shouldBeEntryOf.entryName()).isEqualTo("foo");
+		assertThat(shouldBeEntryOf.entryName()).isEqualTo(entry);
 	}
 }

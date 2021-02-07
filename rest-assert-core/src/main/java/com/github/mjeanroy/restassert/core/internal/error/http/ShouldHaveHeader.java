@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 import java.util.List;
 
@@ -32,11 +33,16 @@ import java.util.List;
  * Error thrown when an http response should contain
  * specific header.
  */
-public class ShouldHaveHeader extends AbstractError {
+public final class ShouldHaveHeader extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveHeader(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveHeader(Message expectation) {
+		super(expectation);
+	}
+
+	// Private constructor, use static factory instead
+	private ShouldHaveHeader(Message expectation, Message mismatch) {
+		super(expectation, mismatch);
 	}
 
 	/**
@@ -46,7 +52,7 @@ public class ShouldHaveHeader extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveHeader shouldHaveHeader(String headerName) {
-		return new ShouldHaveHeader("Expecting response to have header %s", headerName);
+		return new ShouldHaveHeader(Message.message("Expecting response to have header %s", headerName));
 	}
 
 	/**
@@ -62,7 +68,10 @@ public class ShouldHaveHeader extends AbstractError {
 			return shouldHaveHeaderWithValue(headerName, headerValue, actualValues.get(0));
 		}
 
-		return new ShouldHaveHeader("Expecting response to have header %s equal to %s but contains only %s", headerName, headerValue, actualValues);
+		return new ShouldHaveHeader(
+			Message.message("Expecting response to have header %s equal to %s", headerName, headerValue),
+			Message.message("contains only %s", actualValues)
+		);
 	}
 
 	/**
@@ -74,6 +83,9 @@ public class ShouldHaveHeader extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveHeader shouldHaveHeaderWithValue(String headerName, String headerValue, String actualValue) {
-		return new ShouldHaveHeader("Expecting response to have header %s equal to %s but was %s", headerName, headerValue, actualValue);
+		return new ShouldHaveHeader(
+			Message.message("Expecting response to have header %s equal to %s", headerName, headerValue),
+			Message.message("was %s", actualValue)
+		);
 	}
 }

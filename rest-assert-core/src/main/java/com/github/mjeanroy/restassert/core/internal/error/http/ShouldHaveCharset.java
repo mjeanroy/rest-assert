@@ -30,11 +30,16 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when an http response should have specific
  * charset.
  */
-public class ShouldHaveCharset extends AbstractError {
+public final class ShouldHaveCharset extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveCharset(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveCharset(String message, String expectedValue, String actualValue) {
+		super(message, expectedValue, actualValue);
+	}
+
+	// Private constructor, use static factory instead
+	private ShouldHaveCharset(String message) {
+		super(message);
 	}
 
 	/**
@@ -54,6 +59,6 @@ public class ShouldHaveCharset extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveCharset shouldHaveCharset(String expectedCharset, String actualCharset) {
-		return new ShouldHaveCharset("Expecting response to have charset %s but was %s", expectedCharset, actualCharset);
+		return new ShouldHaveCharset("Expecting response to have charset %s", expectedCharset, actualCharset);
 	}
 }

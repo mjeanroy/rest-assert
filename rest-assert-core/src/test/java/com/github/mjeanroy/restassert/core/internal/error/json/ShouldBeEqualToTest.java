@@ -33,9 +33,16 @@ public class ShouldBeEqualToTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo("foo", 1, 2);
+		String entry = "foo";
+		int actualValue = 1;
+		int expectedValue = 2;
+		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo(entry, actualValue, expectedValue);
+
 		assertThat(shouldBeEqualTo).isNotNull();
+		assertThat(shouldBeEqualTo.message()).isEqualTo("Expecting json entry %s to be equal to %s but was %s");
+		assertThat(shouldBeEqualTo.args()).hasSize(3).containsExactly(entry, expectedValue, actualValue);
+		assertThat(shouldBeEqualTo.buildMessage()).isEqualTo("Expecting json entry foo to be equal to 2 but was 1");
 		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 2 but was 1");
-		assertThat(shouldBeEqualTo.entryName()).isEqualTo("foo");
+		assertThat(shouldBeEqualTo.entryName()).isEqualTo(entry);
 	}
 }

@@ -33,10 +33,14 @@ public class ShouldHaveDomainTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		String actualDomain = "foo";
 		String expectedDomain = "bar";
+		String actualDomain = "foo";
 		ShouldHaveDomain shouldHaveDomain = shouldHaveDomain(expectedDomain, actualDomain);
+
 		assertThat(shouldHaveDomain).isNotNull();
+		assertThat(shouldHaveDomain.message()).isEqualTo("Expecting cookie to have domain %s but was %s");
+		assertThat(shouldHaveDomain.args()).hasSize(2).containsExactly(expectedDomain, actualDomain);
+		assertThat(shouldHaveDomain.buildMessage()).isEqualTo("Expecting cookie to have domain bar but was foo");
 		assertThat(shouldHaveDomain.toString()).isEqualTo("Expecting cookie to have domain bar but was foo");
 	}
 }

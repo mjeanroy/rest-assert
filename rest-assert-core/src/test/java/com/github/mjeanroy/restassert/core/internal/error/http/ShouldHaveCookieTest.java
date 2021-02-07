@@ -24,6 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
@@ -34,29 +36,61 @@ public class ShouldHaveCookieTest {
 
 	@Test
 	public void it_should_create_error_with_cookie_name() {
-		ShouldHaveCookie error = shouldHaveCookie("foo");
+		String expectedCookieName = "foo";
+		ShouldHaveCookie error = shouldHaveCookie(expectedCookieName);
+
 		assertThat(error).isNotNull();
+		assertThat(error.message()).isEqualTo("Expecting http response to contains cookie with name %s");
+		assertThat(error.args()).hasSize(1).containsExactly(expectedCookieName);
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie with name foo");
 		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name foo");
 	}
 
 	@Test
 	public void it_should_create_error_with_cookie_name_and_value() {
-		ShouldHaveCookie error = shouldHaveCookie("foo", "bar");
+		String expectedCookieName = "foo";
+		String expectedCookieValue = "bar";
+		ShouldHaveCookie error = shouldHaveCookie(expectedCookieName, expectedCookieValue);
+
 		assertThat(error).isNotNull();
+		assertThat(error.message()).isEqualTo("Expecting http response to contains cookie with name %s and value %s");
+		assertThat(error.args()).hasSize(2).containsExactly(expectedCookieName, expectedCookieValue);
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie with name foo and value bar");
 		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name foo and value bar");
 	}
 
 	@Test
-	public void it_should_create_error_with_unexpected_cookie_name() {
-		ShouldHaveCookie error = shouldNotHaveCookie("foo");
+	public void it_should_create_error_with_cookie() {
+		Cookie expectedCookie = new CookieBuilder().setName("foo").setValue("bar").build();
+		ShouldHaveCookie error = shouldHaveCookie(expectedCookie);
+
 		assertThat(error).isNotNull();
+		assertThat(error.message()).isEqualTo("Expecting http response to contains cookie %s");
+		assertThat(error.args()).hasSize(1).containsExactly(expectedCookie);
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie Cookie{name: foo}");
+		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie Cookie{name: foo}");
+	}
+
+	@Test
+	public void it_should_create_error_with_unexpected_cookie_name() {
+		String unexpectedCookieName = "foo";
+		ShouldHaveCookie error = shouldNotHaveCookie(unexpectedCookieName);
+
+		assertThat(error).isNotNull();
+		assertThat(error.message()).isEqualTo("Expecting http response not to contains cookie with name %s");
+		assertThat(error.args()).hasSize(1).containsExactly(unexpectedCookieName);
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response not to contains cookie with name foo");
 		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookie with name foo");
 	}
 
 	@Test
 	public void it_should_create_error_with_unexpected_cookies() {
 		ShouldHaveCookie error = shouldNotHaveCookie();
+
 		assertThat(error).isNotNull();
+		assertThat(error.message()).isEqualTo("Expecting http response not to contains cookies");
+		assertThat(error.args()).isNotNull().isEmpty();
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response not to contains cookies");
 		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookies");
 	}
 }

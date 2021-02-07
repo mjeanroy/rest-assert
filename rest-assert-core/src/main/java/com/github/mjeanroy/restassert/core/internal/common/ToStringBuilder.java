@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
@@ -70,6 +71,20 @@ public final class ToStringBuilder {
 		this.prefix = prefix;
 		this.parameters = new ArrayList<>();
 		this.size = prefix.length();
+	}
+
+	/**
+	 * Append new field to the final output.
+	 *
+	 * @param name Parameter name.
+	 * @param values Parameter value.
+	 * @return The current builder.
+	 */
+	public ToStringBuilder append(String name, Object[] values) {
+		String parameter = name + "=" + Arrays.toString(values);
+		parameters.add(parameter);
+		size += parameter.length();
+		return this;
 	}
 
 	/**

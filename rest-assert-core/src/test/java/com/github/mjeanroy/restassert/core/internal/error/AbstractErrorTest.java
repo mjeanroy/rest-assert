@@ -53,11 +53,9 @@ public class AbstractErrorTest {
 	}
 
 	@Test
-	public void it_build_error_with_a_copy_of_array() {
-		Object[] args = new Object[]{"bar", "foo"};
-		FooError error = new FooError("foo", args);
-		args[1] = "bar";
-		assertThat(error.args()).isEqualTo(new Object[]{"bar", "foo"});
+	public void it_build_error_args() {
+		FooError error = new FooError("foo", "bar", "baz");
+		assertThat(error.args()).isEqualTo(new Object[]{"bar", "baz"});
 	}
 
 	@Test
@@ -73,8 +71,16 @@ public class AbstractErrorTest {
 	}
 
 	private static final class FooError extends AbstractError {
-		FooError(String message, Object... args) {
-			super(message, args);
+		FooError(String message) {
+			super(message);
+		}
+
+		FooError(String message, Object expectedValue) {
+			super(message, expectedValue);
+		}
+
+		FooError(String message, Object expectedValue, Object actualValue) {
+			super(message, expectedValue, actualValue);
 		}
 	}
 }

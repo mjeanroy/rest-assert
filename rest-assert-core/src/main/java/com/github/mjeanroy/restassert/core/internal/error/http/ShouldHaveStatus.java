@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when an http response status is not equals
  * to an expected status code.
  */
-public class ShouldHaveStatus extends AbstractError {
+public final class ShouldHaveStatus extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveStatus(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveStatus(String message, int expectedStatus, int actualStatus) {
+		super(message, expectedStatus, actualStatus);
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class ShouldHaveStatus extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveStatus shouldHaveStatus(int actualStatus, int expectedStatus) {
-		return new ShouldHaveStatus("Expecting status code to be %s but was %s", expectedStatus, actualStatus);
+		return new ShouldHaveStatus("Expecting status code to be %s", expectedStatus, actualStatus);
 	}
 }

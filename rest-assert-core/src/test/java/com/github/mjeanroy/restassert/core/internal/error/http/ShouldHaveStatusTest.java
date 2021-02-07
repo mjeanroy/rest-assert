@@ -24,17 +24,23 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatus.shouldHaveStatus;
-import static org.assertj.core.api.Assertions.*;
-
 import org.junit.Test;
+
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatus.shouldHaveStatus;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShouldHaveStatusTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldHaveStatus shouldHaveStatus = shouldHaveStatus(400, 200);
+		int expectedStatus = 200;
+		int actualStatus = 400;
+		ShouldHaveStatus shouldHaveStatus = shouldHaveStatus(actualStatus, expectedStatus);
+
 		assertThat(shouldHaveStatus).isNotNull();
+		assertThat(shouldHaveStatus.message()).isEqualTo("Expecting status code to be %s but was %s");
+		assertThat(shouldHaveStatus.args()).hasSize(2).containsExactly(expectedStatus, actualStatus);
+		assertThat(shouldHaveStatus.buildMessage()).isEqualTo("Expecting status code to be 200 but was 400");
 		assertThat(shouldHaveStatus.toString()).isEqualTo("Expecting status code to be 200 but was 400");
 	}
 }

@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertJsonError;
 
@@ -41,12 +42,29 @@ abstract class AbstractJsonError extends AbstractError implements RestAssertJson
 	/**
 	 * Build new error.
 	 *
-	 * @param entryName Entry name that throws error.
-	 * @param message Original message, with placeholders.
-	 * @param args Arguments that will replace placeholders in original message.
+	 * @param expectation Expectation message.
 	 */
-	AbstractJsonError(String entryName, String message, Object[] args) {
-		super(message, args);
+	AbstractJsonError(Message expectation, Message mismatch) {
+		this("", expectation, mismatch);
+	}
+
+	/**
+	 * Build new error.
+	 *
+	 * @param expectation Expectation message.
+	 */
+	AbstractJsonError(String entry, Message expectation) {
+		this(entry, expectation, null);
+	}
+
+	/**
+	 * Build new error.
+	 *
+	 * @param entryName Entry name that throws error.
+	 * @param expectation Expectation message.
+	 */
+	AbstractJsonError(String entryName, Message expectation, Message mismatch) {
+		super(expectation, mismatch);
 		this.entryName = entryName;
 	}
 

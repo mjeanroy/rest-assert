@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when a cookie does not have
  * expected name.
  */
-public class ShouldHaveName extends AbstractError {
+public final class ShouldHaveName extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveName(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveName(String message, String expectedValue, String actualValue) {
+		super(message, expectedValue, actualValue);
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class ShouldHaveName extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveName shouldHaveName(String expectedName, String actualName) {
-		return new ShouldHaveName("Expecting cookie to have name %s but was %s", expectedName, actualName);
+		return new ShouldHaveName("Expecting cookie to have name %s", expectedName, actualName);
 	}
 }

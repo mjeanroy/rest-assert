@@ -34,7 +34,11 @@ public class ShouldBeAnArrayTest {
 	@Test
 	public void it_should_format_error_message() {
 		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
+
 		assertThat(shouldBeAnArray).isNotNull();
+		assertThat(shouldBeAnArray.message()).isEqualTo("Expecting json to be an array but was an object");
+		assertThat(shouldBeAnArray.args()).isNotNull().isEmpty();
+		assertThat(shouldBeAnArray.buildMessage()).isEqualTo("Expecting json to be an array but was an object");
 		assertThat(shouldBeAnArray.toString()).isEqualTo("Expecting json to be an array but was an object");
 		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
 	}

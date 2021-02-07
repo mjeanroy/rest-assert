@@ -34,14 +34,24 @@ public class ShouldHaveCharsetTest {
 	@Test
 	public void it_should_have_error_message() {
 		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset();
+
 		assertThat(shouldHaveCharset).isNotNull();
+		assertThat(shouldHaveCharset.message()).isEqualTo("Expecting response to have defined charset");
+		assertThat(shouldHaveCharset.args()).isNotNull().isEmpty();
+		assertThat(shouldHaveCharset.buildMessage()).isEqualTo("Expecting response to have defined charset");
 		assertThat(shouldHaveCharset.toString()).isEqualTo("Expecting response to have defined charset");
 	}
 
 	@Test
 	public void it_should_have_error_message_with_expected_values() {
-		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset("UTF-8", "UTF-16");
+		String expectedCharset = "UTF-8";
+		String actualCharset = "UTF-16";
+		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset(expectedCharset, actualCharset);
+
 		assertThat(shouldHaveCharset).isNotNull();
+		assertThat(shouldHaveCharset.message()).isEqualTo("Expecting response to have charset %s but was %s");
+		assertThat(shouldHaveCharset.args()).hasSize(2).containsExactly(expectedCharset, actualCharset);
+		assertThat(shouldHaveCharset.buildMessage()).isEqualTo("Expecting response to have charset UTF-8 but was UTF-16");
 		assertThat(shouldHaveCharset.toString()).isEqualTo("Expecting response to have charset UTF-8 but was UTF-16");
 	}
 }

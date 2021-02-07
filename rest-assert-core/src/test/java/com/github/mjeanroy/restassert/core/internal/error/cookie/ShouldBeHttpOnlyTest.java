@@ -35,14 +35,22 @@ public class ShouldBeHttpOnlyTest {
 	@Test
 	public void it_should_format_error_message() {
 		ShouldBeHttpOnly shouldBeHttpOnly = shouldBeHttpOnly();
+
 		assertThat(shouldBeHttpOnly).isNotNull();
+		assertThat(shouldBeHttpOnly.message()).isEqualTo("Expecting cookie to be 'http only'");
+		assertThat(shouldBeHttpOnly.args()).isNotNull().isEmpty();
+		assertThat(shouldBeHttpOnly.buildMessage()).isEqualTo("Expecting cookie to be 'http only'");
 		assertThat(shouldBeHttpOnly.toString()).isEqualTo("Expecting cookie to be 'http only'");
 	}
 
 	@Test
 	public void it_should_format_error_message_with_negation() {
 		ShouldBeHttpOnly shouldNotBeHttpOnly = shouldNotBeHttpOnly();
+
 		assertThat(shouldNotBeHttpOnly).isNotNull();
+		assertThat(shouldNotBeHttpOnly.message()).isEqualTo("Expecting cookie not to be 'http only'");
+		assertThat(shouldNotBeHttpOnly.args()).isNotNull().isEmpty();
+		assertThat(shouldNotBeHttpOnly.buildMessage()).isEqualTo("Expecting cookie not to be 'http only'");
 		assertThat(shouldNotBeHttpOnly.toString()).isEqualTo("Expecting cookie not to be 'http only'");
 	}
 }

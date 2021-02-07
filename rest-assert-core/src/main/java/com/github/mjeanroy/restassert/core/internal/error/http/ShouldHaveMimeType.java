@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when an http response should contain
  * specific mime type.
  */
-public class ShouldHaveMimeType extends AbstractError {
+public final class ShouldHaveMimeType extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveMimeType(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveMimeType(String message, Object expected, Object actual) {
+		super(message, expected, actual);
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class ShouldHaveMimeType extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveMimeType shouldHaveMimeType(String expectedMimeType, String actualMimeType) {
-		return new ShouldHaveMimeType("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
+		return new ShouldHaveMimeType("Expecting response to have mime type %s", expectedMimeType, actualMimeType);
 	}
 
 	/**
@@ -56,6 +56,6 @@ public class ShouldHaveMimeType extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveMimeType shouldHaveMimeType(Iterable<String> expectedMimeType, String actualMimeType) {
-		return new ShouldHaveMimeType("Expecting response to have mime type in %s but was %s", expectedMimeType, actualMimeType);
+		return new ShouldHaveMimeType("Expecting response to have mime type in %s", expectedMimeType, actualMimeType);
 	}
 }

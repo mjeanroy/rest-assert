@@ -33,9 +33,14 @@ public class ShouldNotHaveEntryTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldNotHaveEntry shouldHaveEntry = shouldNotHaveEntry("foo");
+		String entry = "foo";
+		ShouldNotHaveEntry shouldHaveEntry = shouldNotHaveEntry(entry);
+
 		assertThat(shouldHaveEntry).isNotNull();
+		assertThat(shouldHaveEntry.message()).isEqualTo("Expecting json not to contain entry %s");
+		assertThat(shouldHaveEntry.args()).hasSize(1).containsExactly(entry);
+		assertThat(shouldHaveEntry.buildMessage()).isEqualTo("Expecting json not to contain entry foo");
 		assertThat(shouldHaveEntry.toString()).isEqualTo("Expecting json not to contain entry foo");
-		assertThat(shouldHaveEntry.entryName()).isEqualTo("foo");
+		assertThat(shouldHaveEntry.entryName()).isEqualTo(entry);
 	}
 }

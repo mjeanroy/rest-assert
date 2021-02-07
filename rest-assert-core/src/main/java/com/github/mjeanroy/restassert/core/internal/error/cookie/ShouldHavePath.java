@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when a cookie does not have
  * expected path.
  */
-public class ShouldHavePath extends AbstractError {
+public final class ShouldHavePath extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHavePath(String message, Object... args) {
-		super(message, args);
+	private ShouldHavePath(String message, String expectedValue, String actualValue) {
+		super(message, expectedValue, actualValue);
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class ShouldHavePath extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHavePath shouldHavePath(String expectedPath, String actualPath) {
-		return new ShouldHavePath("Expecting cookie to have path %s but was %s", expectedPath, actualPath);
+		return new ShouldHavePath("Expecting cookie to have path %s", expectedPath, actualPath);
 	}
 }

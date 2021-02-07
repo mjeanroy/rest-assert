@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when an http response should not contain
  * specific header.
  */
-public class ShouldNotHaveHeader extends AbstractError {
+public final class ShouldNotHaveHeader extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldNotHaveHeader(String message, Object... args) {
-		super(message, args);
+	private ShouldNotHaveHeader(String message, String expectedHeaderName) {
+		super(message, expectedHeaderName);
 	}
 
 	/**

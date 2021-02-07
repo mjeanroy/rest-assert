@@ -33,8 +33,15 @@ public class ShouldHaveStatusOutOfTest {
 
 	@Test
 	public void it_should_format_error_message() {
-		ShouldHaveStatusOutOf shouldHaveStatusOutOf = shouldHaveStatusOutOf(200, 200, 299);
+		int actualStatus = 200;
+		int start = 200;
+		int end = 299;
+		ShouldHaveStatusOutOf shouldHaveStatusOutOf = shouldHaveStatusOutOf(actualStatus, start, end);
+
 		assertThat(shouldHaveStatusOutOf).isNotNull();
+		assertThat(shouldHaveStatusOutOf.message()).isEqualTo("Expecting status code to be out of %s and %s but was %s");
+		assertThat(shouldHaveStatusOutOf.args()).hasSize(3).containsExactly(start, end, actualStatus);
+		assertThat(shouldHaveStatusOutOf.buildMessage()).isEqualTo("Expecting status code to be out of 200 and 299 but was 200");
 		assertThat(shouldHaveStatusOutOf.toString()).isEqualTo("Expecting status code to be out of 200 and 299 but was 200");
 	}
 }

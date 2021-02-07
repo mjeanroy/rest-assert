@@ -25,16 +25,17 @@
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 /**
  * Error thrown when an http response status is not between
  * lower and upper bound
  */
-public class ShouldHaveStatusBetween extends AbstractError {
+public final class ShouldHaveStatusBetween extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveStatusBetween(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveStatusBetween(Message expectation, Message mismatch) {
+		super(expectation, mismatch);
 	}
 
 	/**
@@ -46,6 +47,9 @@ public class ShouldHaveStatusBetween extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveStatusBetween shouldHaveStatusBetween(int actualStatus, int start, int end) {
-		return new ShouldHaveStatusBetween("Expecting status code to be between %s and %s but was %s", start, end, actualStatus);
+		return new ShouldHaveStatusBetween(
+			Message.message("Expecting status code to be between %s and %s", start, end),
+			Message.message("was %s", actualStatus)
+		);
 	}
 }

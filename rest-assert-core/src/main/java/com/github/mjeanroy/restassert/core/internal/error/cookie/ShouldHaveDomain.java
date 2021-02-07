@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when a cookie does not have
  * expected domain.
  */
-public class ShouldHaveDomain extends AbstractError {
+public final class ShouldHaveDomain extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveDomain(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveDomain(String message, String expectedValue, String actualValue) {
+		super(message, expectedValue, actualValue);
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class ShouldHaveDomain extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveDomain shouldHaveDomain(String expectedDomain, String actualDomain) {
-		return new ShouldHaveDomain("Expecting cookie to have domain %s but was %s", expectedDomain, actualDomain);
+		return new ShouldHaveDomain("Expecting cookie to have domain %s", expectedDomain, actualDomain);
 	}
 }

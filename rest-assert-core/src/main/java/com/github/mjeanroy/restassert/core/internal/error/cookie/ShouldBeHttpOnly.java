@@ -27,14 +27,13 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
 /**
- * Error thrown when a cookie is (or is not)
- * http only.
+ * Error thrown when a cookie is (or is not) http only.
  */
-public class ShouldBeHttpOnly extends AbstractError {
+public final class ShouldBeHttpOnly extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeHttpOnly(String message, Object... args) {
-		super(message, args);
+	private ShouldBeHttpOnly(String message) {
+		super(message);
 	}
 
 	/**

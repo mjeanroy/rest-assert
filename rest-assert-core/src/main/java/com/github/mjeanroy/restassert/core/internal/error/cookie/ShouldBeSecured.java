@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when a cookie does not have
  * expected value.
  */
-public class ShouldBeSecured extends AbstractError {
+public final class ShouldBeSecured extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeSecured(String message, Object... args) {
-		super(message, args);
+	private ShouldBeSecured(String message) {
+		super(message);
 	}
 
 	/**

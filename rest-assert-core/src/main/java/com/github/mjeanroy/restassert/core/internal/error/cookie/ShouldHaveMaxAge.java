@@ -30,11 +30,11 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
  * Error thrown when a cookie does not have
  * expected max-age.
  */
-public class ShouldHaveMaxAge extends AbstractError {
+public final class ShouldHaveMaxAge extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveMaxAge(String message, Object... args) {
-		super(message, args);
+	private ShouldHaveMaxAge(String message, long expectedValue, long actualValue) {
+		super(message, expectedValue, actualValue);
 	}
 
 	/**
@@ -45,6 +45,6 @@ public class ShouldHaveMaxAge extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveMaxAge shouldHaveMaxAge(long expectedMaxAge, long actualMaxAge) {
-		return new ShouldHaveMaxAge("Expecting cookie to have max-age %s but was %s", expectedMaxAge, actualMaxAge);
+		return new ShouldHaveMaxAge("Expecting cookie to have max-age %s", expectedMaxAge, actualMaxAge);
 	}
 }
