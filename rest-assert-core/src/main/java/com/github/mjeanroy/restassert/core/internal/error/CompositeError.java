@@ -69,6 +69,16 @@ public class CompositeError implements RestAssertError {
 		return args.length == 0 ? message : String.format(message, args);
 	}
 
+	@Override
+	public String getExpectation() {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public String getMismatch() {
+		throw new UnsupportedOperationException();
+	}
+
 	private static String composeMessage(Iterable<RestAssertError> errors) {
 		String separator = "," + LINE_SEPARATOR;
 		StringBuilder sb = new StringBuilder();

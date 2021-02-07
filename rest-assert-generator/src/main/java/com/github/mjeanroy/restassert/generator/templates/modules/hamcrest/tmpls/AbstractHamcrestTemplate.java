@@ -22,54 +22,21 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls;
+
+import com.github.mjeanroy.restassert.generator.Template;
+import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplate;
 
 /**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
+ * Abstract template.
  */
-public interface RestAssertError {
+abstract class AbstractHamcrestTemplate extends AbstractTemplate implements Template {
 
 	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
-	 *
-	 * @return Original message.
+	 * Create new abstract template.
+	 * Path of template is retrieved from Java class name.
 	 */
-	String message();
-
-	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
-	 *
-	 * @return Arguments array.
-	 */
-	Object[] args();
-
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
-
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	String getExpectation();
-
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	String getMismatch();
+	AbstractHamcrestTemplate() {
+		super("/hamcrest/");
+	}
 }

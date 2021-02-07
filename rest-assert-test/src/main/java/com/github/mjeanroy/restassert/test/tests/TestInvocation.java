@@ -22,54 +22,19 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.test.tests;
 
 /**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
+ * A test invocation with a single parameter.
+ *
+ * @param <T> Parameter type.
  */
-public interface RestAssertError {
+public interface TestInvocation<T> {
 
 	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
+	 * Invoke test with parameter.
 	 *
-	 * @return Original message.
+	 * @param param The parameter to use in test.
 	 */
-	String message();
-
-	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
-	 *
-	 * @return Arguments array.
-	 */
-	Object[] args();
-
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
-
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	String getExpectation();
-
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	String getMismatch();
+	void invokeTest(T param);
 }

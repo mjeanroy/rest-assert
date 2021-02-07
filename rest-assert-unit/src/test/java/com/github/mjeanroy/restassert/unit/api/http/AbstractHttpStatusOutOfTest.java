@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Range;
+import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import com.github.mjeanroy.restassert.unit.api.TestInvocation;
 import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;

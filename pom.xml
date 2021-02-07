@@ -17,6 +17,7 @@
     <module>rest-assert-generator</module>
     <module>rest-assert-unit</module>
     <module>rest-assert-assertj</module>
+    <module>rest-assert-hamcrest</module>
   </modules>
 
   <licenses>
@@ -104,6 +105,7 @@
     <jmustache.version>1.15</jmustache.version>
 
     <junit.version>4.13.1</junit.version>
+    <hamcrest.version>2.2</hamcrest.version>
     <assertj.version>2.9.1</assertj.version>
     <mockito.version>2.28.2</mockito.version>
     <commons-lang3.version>3.8.1</commons-lang3.version>

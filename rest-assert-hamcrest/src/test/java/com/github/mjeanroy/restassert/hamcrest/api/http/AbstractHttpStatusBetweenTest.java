@@ -22,30 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.http;
+package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
-public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAssertTest<T> {
-
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
-	private static final String CUSTOM_MESSAGE = "foo";
+public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {
 		final Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			run(newHttpResponse(i));
-			run(CUSTOM_MESSAGE, newHttpResponse(i));
 		}
 	}
 
@@ -55,16 +47,6 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 			@Override
 			public void invokeTest(Integer status) {
 				run(newHttpResponse(status));
-			}
-		});
-	}
-
-	@Test
-	public void it_should_fail_with_response_not_in_bounds_with_custom_message() {
-		doTestWithDefaultMessage(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(CUSTOM_MESSAGE, newHttpResponse(status));
 			}
 		});
 	}
@@ -86,7 +68,9 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 			}
 
 			final int status = i;
-			final String message = firstNonNull(msg, buildErrorMessage(start, end, status));
+			final String expectation = buildExpectationMessage(start, end);
+			final String mismatch = buildMismatchMessage(status);
+			final String message = generateHamcrestErrorMessage(expectation, mismatch);
 			assertFailure(message, new Function() {
 				@Override
 				public void apply() {
@@ -114,14 +98,23 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	}
 
 	/**
-	 * Get expected default error message.
+	 * Get expected default expectation message.
 	 *
 	 * @param start Range start.
 	 * @param end Range end.
+	 * @return The expected default message.
+	 */
+	private String buildExpectationMessage(int start, int end) {
+		return String.format("Expecting status code to be between %s and %s", start, end);
+	}
+
+	/**
+	 * Get expected default mismatch message.
+	 *
 	 * @param status The HTTP response actual status.
 	 * @return The expected default message.
 	 */
-	private String buildErrorMessage(int start, int end, int status) {
-		return String.format("Expecting status code to be between %s and %s but was %s", start, end, status);
+	private String buildMismatchMessage(int status) {
+		return String.format("was %s", status);
 	}
 }

@@ -22,54 +22,17 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.between;
 
-/**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
- */
-public interface RestAssertError {
+import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpStatusBetweenTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
+import org.apache.http.HttpResponse;
 
-	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
-	 *
-	 * @return Original message.
-	 */
-	String message();
+abstract class AbstractApacheHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
 
-	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
-	 *
-	 * @return Arguments array.
-	 */
-	Object[] args();
-
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
-
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	String getExpectation();
-
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	String getMismatch();
+	@Override
+	protected HttpResponseBuilder<HttpResponse> getBuilder() {
+		return new ApacheHttpResponseBuilder();
+	}
 }

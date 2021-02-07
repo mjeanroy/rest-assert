@@ -22,54 +22,37 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.hamcrest.api;
 
 /**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
+ * Abstract assert test.
+ *
+ * Two methods need to be defined:
+ * - First method must execute assert method, without custom message.
+ * - Second method must execute assert method, with custom message as first argument.
+ *
+ * @param <T> Type of actual objects (a.k.a tested object).
  */
-public interface RestAssertError {
+public abstract class AbstractMatcherTest<T> {
 
 	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
+	 * Invoke assert method.
 	 *
-	 * @return Original message.
+	 * @param actual Tested object.
 	 */
-	String message();
+	protected abstract void run(T actual);
 
 	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
+	 * Generate Hamcrest error message, using given expectation message and given mismatch
+	 * description.
 	 *
-	 * @return Arguments array.
+	 * @param expectation Expectation message
+	 * @param mismatch Mismatch message.
+	 * @return The message output.
 	 */
-	Object[] args();
-
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
-
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	String getExpectation();
-
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	String getMismatch();
+	protected final String generateHamcrestErrorMessage(String expectation, String mismatch) {
+		String expectationMsg = "Expected: " + expectation;
+		String mismatchMsg = "     but: " + mismatch;
+		return expectationMsg + System.getProperty("line.separator") + mismatchMsg;
+	}
 }

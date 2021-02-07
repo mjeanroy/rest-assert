@@ -22,19 +22,24 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api;
+package com.github.mjeanroy.restassert.generator.cli;
 
-/**
- * A test invocation with a single parameter.
- *
- * @param <T> Parameter type.
- */
-public interface TestInvocation<T> {
+import com.github.mjeanroy.restassert.generator.processors.HamcrestProcessor;
 
-	/**
-	 * Invoke test with parameter.
-	 *
-	 * @param param The parameter to use in test.
-	 */
-	void invokeTest(T param);
+import java.util.Collection;
+
+import static java.util.Arrays.asList;
+
+public class HamcrestGenerator extends AbstractGenerator {
+
+	public static void main(String[] args) {
+		String buildDirectory = args[args.length - 1];
+		HamcrestGenerator generator = new HamcrestGenerator();
+		generator.generate(buildDirectory);
+	}
+
+	@Override
+	Collection<HamcrestProcessor> getProcessors() {
+		return asList(HamcrestProcessor.values());
+	}
 }

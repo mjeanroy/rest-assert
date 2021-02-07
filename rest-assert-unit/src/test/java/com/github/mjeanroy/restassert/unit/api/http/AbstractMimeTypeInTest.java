@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.TestInvocation;
+import com.github.mjeanroy.restassert.test.tests.TestInvocation;
+import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T> {
 

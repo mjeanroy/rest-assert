@@ -22,54 +22,43 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http;
+
+import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpResponse;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
+import org.apache.http.HttpResponse;
 
 /**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
+ * Template model for rest-assert-hamcrest HttpResponseMatchers class.
  */
-public interface RestAssertError {
+public class ApacheHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
 	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
-	 *
-	 * @return Original message.
+	 * Singleton Instance.
 	 */
-	String message();
+	private static final ApacheHttpResponseMatchers INSTANCE = new ApacheHttpResponseMatchers();
 
 	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
+	 * Get singleton instance.
 	 *
-	 * @return Arguments array.
+	 * @return Singleton instance.
 	 */
-	Object[] args();
+	public static TemplateModel apacheHttpAssert() {
+		return INSTANCE;
+	}
 
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
+	// Ensure non instantiation
+	private ApacheHttpResponseMatchers() {
+		super();
+	}
 
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	String getExpectation();
+	@Override
+	public String getActualClass() {
+		return HttpResponse.class.getName();
+	}
 
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	String getMismatch();
+	@Override
+	public String getFactory() {
+		return ApacheHttpResponse.class.getName();
+	}
 }

@@ -108,5 +108,15 @@ public class RestAssertErrorBuilder {
 		public String buildMessage() {
 			throw new UnsupportedOperationException();
 		}
+
+		@Override
+		public String getExpectation() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public String getMismatch() {
+			throw new UnsupportedOperationException();
+		}
 	}
 }

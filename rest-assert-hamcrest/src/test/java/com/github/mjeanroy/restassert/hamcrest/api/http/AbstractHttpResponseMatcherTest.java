@@ -22,54 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.hamcrest.api.http;
+
+import com.github.mjeanroy.restassert.hamcrest.api.AbstractMatcherTest;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 
 /**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
+ * Abstract assert test related to HTTP response.
+ *
+ * The main method need to be defined is the method that returns a new {@link HttpResponseBuilder}
+ * that will be used to create underlying HTTP response.
+ *
+ * @param <T> Type of actual objects (a.k.a tested object).
  */
-public interface RestAssertError {
+public abstract class AbstractHttpResponseMatcherTest<T> extends AbstractMatcherTest<T> {
 
 	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
+	 * Returns the builder to use to build instance of http response to be tested.
 	 *
-	 * @return Original message.
+	 * @return The builder.
 	 */
-	String message();
-
-	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
-	 *
-	 * @return Arguments array.
-	 */
-	Object[] args();
-
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
-
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	String getExpectation();
-
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	String getMismatch();
+	protected abstract HttpResponseBuilder<T> getBuilder();
 }

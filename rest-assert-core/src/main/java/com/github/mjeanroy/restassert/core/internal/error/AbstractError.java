@@ -152,6 +152,16 @@ public abstract class AbstractError implements RestAssertError {
 		return args;
 	}
 
+	@Override
+	public String getExpectation() {
+		return expectation == null ? "" : expectation.formatMessage();
+	}
+
+	@Override
+	public String getMismatch() {
+		return mismatch == null ? "" : mismatch.formatMessage();
+	}
+
 	/**
 	 * Build message with placeholder values.
 	 *
