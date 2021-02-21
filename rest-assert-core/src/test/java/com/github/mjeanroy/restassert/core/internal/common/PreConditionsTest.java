@@ -34,7 +34,6 @@ import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SuppressWarnings({"ConstantConditions", "ResultOfMethodCallIgnored"})
 public class PreConditionsTest {
 
 	@Test

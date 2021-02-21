@@ -51,7 +51,6 @@ public class ClassFileTest {
 	}
 
 	@Test
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	public void it_should_write_class_on_disk() throws Exception {
 		final String packageName = "com.github.mjeanroy";
 		final String className = "Foo";

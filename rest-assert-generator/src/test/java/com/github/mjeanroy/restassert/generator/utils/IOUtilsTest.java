@@ -94,7 +94,6 @@ public class IOUtilsTest {
 				});
 	}
 
-	@SuppressWarnings("ResultOfMethodCallIgnored")
 	@Test
 	public void it_should_write_to_a_file() throws Exception {
 		final String path = FilenameUtils.normalize(FileUtils.getTempDirectoryPath() + "/foo.txt");

@@ -44,7 +44,7 @@ public class IsHeaderMatchingAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
@@ -61,7 +61,7 @@ public class IsHeaderMatchingAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).addHeader(name, value).build();
@@ -78,7 +78,7 @@ public class IsHeaderMatchingAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
@@ -96,7 +96,7 @@ public class IsHeaderMatchingAssertionTest {
 		final String name = "foo";
 		final String value = "bar";
 		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).build();
@@ -114,7 +114,7 @@ public class IsHeaderMatchingAssertionTest {
 		final String name = "Content-Type";
 		final String value = "bar";
 		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser parser = new HeaderParserBuilder().add(value, expected).build();
+		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
 		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		final HttpResponse rsp = new HttpResponseBuilderImpl()
@@ -165,7 +165,7 @@ public class IsHeaderMatchingAssertionTest {
 				.hasMessage("Header parser must not be null");
 	}
 
-	private static ThrowingCallable isHeaderMatchingAssertion(final String name, final HttpHeaderValue value, final HttpHeaderParser parser) {
+	private static ThrowingCallable isHeaderMatchingAssertion(final String name, final HttpHeaderValue value, final HttpHeaderParser<?> parser) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {

@@ -42,7 +42,6 @@ import static com.github.mjeanroy.restassert.tests.TestUtils.createUtcDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@SuppressWarnings("ConstantConditions")
 public class CookiesTest {
 
 	@ClassRule

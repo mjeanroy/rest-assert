@@ -62,6 +62,7 @@ public final class Files {
 	 * Exception to throw when a file cannot be read and
 	 * fail with {@link IOException}.
 	 */
+	@SuppressWarnings("serial")
 	public static class UnreadableFileException extends RuntimeException {
 
 		/**

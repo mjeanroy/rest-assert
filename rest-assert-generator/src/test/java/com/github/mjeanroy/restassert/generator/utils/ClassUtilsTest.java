@@ -67,7 +67,7 @@ public class ClassUtilsTest {
 				));
 	}
 
-	@SuppressWarnings({"unused", "EmptyMethod"})
+	@SuppressWarnings("unused")
 	public static final class Foo {
 
 		public static void publicStaticMethod() {
@@ -76,7 +76,6 @@ public class ClassUtilsTest {
 		public void publicMethod() {
 		}
 
-		@SuppressWarnings("unused")
 		private void methodPrivate() {
 
 		}

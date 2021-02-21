@@ -35,8 +35,9 @@ public class NingHttpResponseIntegrationTest extends AbstractHttpResponseIntegra
 
 	@Override
 	HttpResponse createHttpResponse(String url) throws Exception {
-		AsyncHttpClient ningHttpClient = new AsyncHttpClient();
-		Future<Response> whenResponse = ningHttpClient.prepareGet(url).execute();
-		return NingHttpResponse.create(whenResponse.get());
+		try (AsyncHttpClient ningHttpClient = new AsyncHttpClient()) {
+			Future<Response> whenResponse = ningHttpClient.prepareGet(url).execute();
+			return NingHttpResponse.create(whenResponse.get());
+		}
 	}
 }
