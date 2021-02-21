@@ -24,16 +24,13 @@
 
 package com.github.mjeanroy.restassert.generator.cli;
 
-import com.github.mjeanroy.restassert.generator.ClassFile;
 import com.github.mjeanroy.restassert.generator.processors.AssertJProcessor;
-import com.github.mjeanroy.restassert.generator.TemplateEngine;
-import com.github.mjeanroy.restassert.generator.templates.engine.MustacheTemplateEngine;
 
-import java.util.List;
+import java.util.Collection;
 
 import static java.util.Arrays.asList;
 
-public class AssertJGenerator {
+public class AssertJGenerator extends AbstractGenerator {
 
 	public static void main(String[] args) {
 		String buildDirectory = args[args.length - 1];
@@ -41,28 +38,8 @@ public class AssertJGenerator {
 		generator.generate(buildDirectory);
 	}
 
-	/**
-	 * Generate classes into target directory.
-	 *
-	 * @param buildDirectory Target directory.
-	 */
-	private void generate(String buildDirectory) {
-		TemplateEngine templateEngine = MustacheTemplateEngine.instance();
-		List<AssertJProcessor> templates = getProcessors();
-		for (AssertJProcessor template : templates) {
-			ClassFile classFile = template.process(templateEngine);
-			classFile.writeTo(buildDirectory);
-		}
-	}
-
-	/**
-	 * Get list of processors.
-	 * Each processor will build a class file that can be
-	 * written to disk.
-	 *
-	 * @return Processors.
-	 */
-	private List<AssertJProcessor> getProcessors() {
+	@Override
+	Collection<AssertJProcessor> getProcessors() {
 		return asList(AssertJProcessor.values());
 	}
 }

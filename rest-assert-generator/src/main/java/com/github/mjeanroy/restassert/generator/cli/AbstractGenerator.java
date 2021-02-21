@@ -24,22 +24,38 @@
 
 package com.github.mjeanroy.restassert.generator.cli;
 
-import com.github.mjeanroy.restassert.generator.processors.UnitProcessor;
+import com.github.mjeanroy.restassert.generator.ClassFile;
+import com.github.mjeanroy.restassert.generator.TemplateEngine;
+import com.github.mjeanroy.restassert.generator.processors.Processor;
+import com.github.mjeanroy.restassert.generator.templates.engine.MustacheTemplateEngine;
 
 import java.util.Collection;
 
-import static java.util.Arrays.asList;
+abstract class AbstractGenerator {
 
-public class UnitGenerator extends AbstractGenerator {
+	/**
+	 * Generate classes into target directory.
+	 *
+	 * @param buildDirectory Target directory.
+	 */
+	final void generate(String buildDirectory) {
+		TemplateEngine templateEngine = MustacheTemplateEngine.instance();
+		Iterable<? extends Processor> templates = getProcessors();
 
-	public static void main(String[] args) {
-		String buildDirectory = args[args.length - 1];
-		UnitGenerator generator = new UnitGenerator();
-		generator.generate(buildDirectory);
+		for (Processor template : templates) {
+			Collection<ClassFile> classFiles = template.process(templateEngine);
+			for (ClassFile classFile : classFiles) {
+				classFile.writeTo(buildDirectory);
+			}
+		}
 	}
 
-	@Override
-	Collection<UnitProcessor> getProcessors() {
-		return asList(UnitProcessor.values());
-	}
+	/**
+	 * Get list of processors.
+	 * Each processor will build a class file that can be
+	 * written to disk.
+	 *
+	 * @return Processors.
+	 */
+	abstract Collection<? extends Processor> getProcessors();
 }

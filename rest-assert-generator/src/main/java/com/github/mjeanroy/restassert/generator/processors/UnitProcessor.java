@@ -30,6 +30,7 @@ import com.github.mjeanroy.restassert.generator.TemplateEngine;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
@@ -53,7 +54,7 @@ import static java.util.Collections.singletonList;
  * Set of processors that will be used to generate assertions
  * classes for rest-assert-unit module.
  */
-public enum UnitProcessor {
+public enum UnitProcessor implements Processor {
 
 	/**
 	 * Processor that will generate assert class for http response
@@ -112,14 +113,10 @@ public enum UnitProcessor {
 		this.models = models;
 	}
 
-	/**
-	 * Generate class file from template and model.
-	 *
-	 * @param engine Template engine to use.
-	 * @return Class file.
-	 */
-	public List<ClassFile> process(TemplateEngine engine) {
+	@Override
+	public Collection<ClassFile> process(TemplateEngine engine) {
 		List<ClassFile> results = new ArrayList<>(models.size());
+
 		for (TemplateModel model : models) {
 			String content = engine.execute(template, model.data());
 			results.add(new ClassFile(model.getPackageName(), model.getClassName(), content));

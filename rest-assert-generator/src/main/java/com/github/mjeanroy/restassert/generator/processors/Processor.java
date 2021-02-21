@@ -22,24 +22,14 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.generator.cli;
+package com.github.mjeanroy.restassert.generator.processors;
 
-import com.github.mjeanroy.restassert.generator.processors.UnitProcessor;
+import com.github.mjeanroy.restassert.generator.ClassFile;
+import com.github.mjeanroy.restassert.generator.TemplateEngine;
 
 import java.util.Collection;
 
-import static java.util.Arrays.asList;
+public interface Processor {
 
-public class UnitGenerator extends AbstractGenerator {
-
-	public static void main(String[] args) {
-		String buildDirectory = args[args.length - 1];
-		UnitGenerator generator = new UnitGenerator();
-		generator.generate(buildDirectory);
-	}
-
-	@Override
-	Collection<UnitProcessor> getProcessors() {
-		return asList(UnitProcessor.values());
-	}
+	Collection<ClassFile> process(TemplateEngine engine);
 }

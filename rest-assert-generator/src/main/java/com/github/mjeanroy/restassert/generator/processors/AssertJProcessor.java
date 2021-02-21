@@ -29,6 +29,8 @@ import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.TemplateEngine;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
+import java.util.Collection;
+
 import static com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.cookie.CookieAssert.cookieAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.cookie.Cookies.cookiesModel;
 import static com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.http.HttpResponseAssert.httpResponseAssert;
@@ -37,8 +39,9 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.assertj
 import static com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.json.Jsons.jsonsModel;
 import static com.github.mjeanroy.restassert.generator.templates.modules.assertj.tmpls.ClassAssertTemplate.classAssertTemplate;
 import static com.github.mjeanroy.restassert.generator.templates.modules.assertj.tmpls.ClassAssertionsTemplate.classAssertionsTemplate;
+import static java.util.Collections.singleton;
 
-public enum AssertJProcessor {
+public enum AssertJProcessor implements Processor {
 
 	HTTP_RESPONSES(
 			classAssertionsTemplate(),
@@ -86,8 +89,10 @@ public enum AssertJProcessor {
 		this.model = model;
 	}
 
-	public ClassFile process(TemplateEngine engine) {
+	@Override
+	public Collection<ClassFile> process(TemplateEngine engine) {
 		String content = engine.execute(template, model.data());
-		return new ClassFile(model.getPackageName(), model.getClassName(), content);
+		ClassFile classFile = new ClassFile(model.getPackageName(), model.getClassName(), content);
+		return singleton(classFile);
 	}
 }

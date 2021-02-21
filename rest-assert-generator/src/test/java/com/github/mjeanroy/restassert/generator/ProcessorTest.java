@@ -28,6 +28,8 @@ import com.github.mjeanroy.restassert.generator.processors.AssertJProcessor;
 import com.github.mjeanroy.restassert.generator.templates.engine.MustacheTemplateEngine;
 import org.junit.Test;
 
+import java.util.Collection;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProcessorTest {
@@ -35,7 +37,10 @@ public class ProcessorTest {
 	@Test
 	public void it_should_build_http_assertions() {
 		AssertJProcessor processor = AssertJProcessor.HTTP_RESPONSES;
-		ClassFile classFile = processor.process(MustacheTemplateEngine.instance());
+		Collection<ClassFile> classFiles = processor.process(MustacheTemplateEngine.instance());
+		assertThat(classFiles).hasSize(1);
+
+		ClassFile classFile = classFiles.iterator().next();
 		assertThat(classFile).isNotNull();
 		assertThat(classFile.getClassName()).isEqualTo("HttpResponses");
 		assertThat(classFile.getPackageName()).isEqualTo("com.github.mjeanroy.restassert.assertj.internal");
