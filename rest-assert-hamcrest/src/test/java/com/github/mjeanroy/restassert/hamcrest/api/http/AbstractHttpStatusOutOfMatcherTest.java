@@ -31,19 +31,21 @@ import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
-public abstract class AbstractHttpStatusBetweenMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
+public abstract class AbstractHttpStatusOutOfMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass_with_status_in_bounds() {
+	public void it_should_pass() {
 		final Range range = getRange();
-		for (int i = range.getStart(); i <= range.getEnd(); i++) {
-			run(newHttpResponse(i));
+		for (int i = 0; i <= 999; i++) {
+			if (i < range.getStart() || i > range.getEnd()) {
+				run(newHttpResponse(i));
+			}
 		}
 	}
 
 	@Test
-	public void it_should_fail_with_response_not_in_bounds() {
-		doTestWithDefaultMessage(new TestInvocation<Integer>() {
+	public void it_should_fail() {
+		doTest(new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
 				run(newHttpResponse(status));
@@ -51,20 +53,18 @@ public abstract class AbstractHttpStatusBetweenMatcherTest<T> extends AbstractHt
 		});
 	}
 
-	private void doTestWithDefaultMessage(final TestInvocation<Integer> invocation) {
-		final Range rang = getRange();
-		final int start = rang.getStart();
-		final int end = rang.getEnd();
+	private void doTest(final TestInvocation<Integer> invocation) {
+		final Range range = getRange();
+		final int start = range.getStart();
+		final int end = range.getEnd();
 
-		for (int i = 100; i <= 599; i++) {
-			if (i >= start && i <= end) {
-				continue;
-			}
-
+		for (int i = start; i <= end; i++) {
 			final int status = i;
-			final String expectation = buildExpectationMessage(start, end);
-			final String mismatch = buildMismatchMessage(status);
-			final String message = generateHamcrestErrorMessage(expectation, mismatch);
+			final String message = generateHamcrestErrorMessage(
+				buildExpectationMessage(start, end),
+				buildMismatchMessage(status)
+			);
+
 			assertFailure(message, new Function() {
 				@Override
 				public void apply() {
@@ -81,7 +81,7 @@ public abstract class AbstractHttpStatusBetweenMatcherTest<T> extends AbstractHt
 	}
 
 	private static String buildExpectationMessage(int start, int end) {
-		return String.format("Expecting status code to be between %s and %s", start, end);
+		return String.format("Expecting status code to be out of %s and %s", start, end);
 	}
 
 	private static String buildMismatchMessage(int status) {

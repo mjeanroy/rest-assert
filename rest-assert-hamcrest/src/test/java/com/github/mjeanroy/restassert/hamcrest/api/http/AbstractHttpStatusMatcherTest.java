@@ -47,11 +47,6 @@ public abstract class AbstractHttpStatusMatcherTest<T> extends AbstractHttpRespo
 		});
 	}
 
-	/**
-	 * Invoke test with a fail test case.
-	 *
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(final TestInvocation<Integer> invocation) {
 		final int expectedStatus = status();
 		final int status = expectedStatus + 1;
@@ -68,40 +63,17 @@ public abstract class AbstractHttpStatusMatcherTest<T> extends AbstractHttpRespo
 		});
 	}
 
-	/**
-	 * The status to be tested.
-	 *
-	 * @return Status to be tested.
-	 */
 	protected abstract int status();
 
-	/**
-	 * Get expected default error message.
-	 *
-	 * @param expectedStatus Expected status.
-	 * @return The expected default message.
-	 */
-	private String buildExpectationMessage(int expectedStatus) {
+	private T newHttpResponse(int status) {
+		return getBuilder().setStatus(status).build();
+	}
+
+	private static String buildExpectationMessage(int expectedStatus) {
 		return String.format("Expecting status code to be %s", expectedStatus);
 	}
 
-	/**
-	 * Get expected default error message.
-	 *
-	 * @param status The HTTP response actual status.
-	 * @return The expected default message.
-	 */
-	private String buildMismatchMessage(int status) {
+	private static String buildMismatchMessage(int status) {
 		return String.format("was %s", status);
-	}
-
-	/**
-	 * Get the HTTP response to be tested.
-	 *
-	 * @param status HTTP Response status.
-	 * @return The HTTP response.
-	 */
-	private T newHttpResponse(int status) {
-		return getBuilder().setStatus(status).build();
 	}
 }
