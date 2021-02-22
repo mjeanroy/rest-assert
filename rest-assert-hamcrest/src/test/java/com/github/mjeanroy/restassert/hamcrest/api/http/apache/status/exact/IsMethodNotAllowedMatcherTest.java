@@ -22,24 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.between;
+package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.exact;
 
-import com.github.mjeanroy.restassert.test.data.Range;
 import org.apache.http.HttpResponse;
 import org.hamcrest.MatcherAssert;
 
-import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isClientError;
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isMethodNotAllowed;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 
-public class AssertIsClientErrorTest extends AbstractApacheHttpStatusBetweenTest {
+public class IsMethodNotAllowedMatcherTest extends AbstractApacheHttpStatusMatcherTest {
 
 	@Override
-	protected Range getRange() {
-		return CLIENT_ERROR;
+	protected int status() {
+		return METHOD_NOT_ALLOWED;
 	}
 
 	@Override
 	protected void run(HttpResponse actual) {
-		MatcherAssert.assertThat(actual, isClientError());
+		MatcherAssert.assertThat(actual, isMethodNotAllowed());
 	}
 }

@@ -28,21 +28,18 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import org.apache.http.HttpResponse;
 import org.hamcrest.MatcherAssert;
 
-import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isStatusBetween;
-import static com.github.mjeanroy.restassert.test.data.Range.range;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isClientError;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
 
-public class AssertIsStatusBetweenTest extends AbstractApacheHttpStatusBetweenTest {
-
-	private static final int START = 400;
-	private static final int END = 599;
+public class IsClientErrorMatcherTest extends AbstractApacheHttpStatusBetweenMatcherTest {
 
 	@Override
 	protected Range getRange() {
-		return range(START, END);
+		return CLIENT_ERROR;
 	}
 
 	@Override
 	protected void run(HttpResponse actual) {
-		MatcherAssert.assertThat(actual, isStatusBetween(START, END));
+		MatcherAssert.assertThat(actual, isClientError());
 	}
 }

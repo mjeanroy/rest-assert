@@ -22,24 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.between;
+package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.exact;
 
-import com.github.mjeanroy.restassert.test.data.Range;
 import org.apache.http.HttpResponse;
 import org.hamcrest.MatcherAssert;
 
-import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isRedirection;
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isTemporaryRedirect;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class AssertIsRedirectionTest extends AbstractApacheHttpStatusBetweenTest {
+public class IsTemporaryRedirectMatcherTest extends AbstractApacheHttpStatusMatcherTest {
 
 	@Override
-	protected Range getRange() {
-		return REDIRECTION;
+	protected int status() {
+		return TEMPORARY_REDIRECT;
 	}
 
 	@Override
 	protected void run(HttpResponse actual) {
-		MatcherAssert.assertThat(actual, isRedirection());
+		MatcherAssert.assertThat(actual, isTemporaryRedirect());
 	}
 }

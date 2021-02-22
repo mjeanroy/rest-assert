@@ -22,24 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.between;
+package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.exact;
 
-import com.github.mjeanroy.restassert.test.data.Range;
 import org.apache.http.HttpResponse;
 import org.hamcrest.MatcherAssert;
 
-import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isSuccess;
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isOk;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.OK;
 
-public class AssertIsSuccessTest extends AbstractApacheHttpStatusBetweenTest {
+public class IsOkMatcherTest extends AbstractApacheHttpStatusMatcherTest {
 
 	@Override
-	protected Range getRange() {
-		return SUCCESS;
+	protected int status() {
+		return OK;
 	}
 
 	@Override
 	protected void run(HttpResponse actual) {
-		MatcherAssert.assertThat(actual, isSuccess());
+		MatcherAssert.assertThat(actual, isOk());
 	}
 }

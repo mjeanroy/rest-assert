@@ -31,7 +31,7 @@ import org.junit.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
-public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpResponseMatcherTest<T> {
+public abstract class AbstractHttpStatusBetweenMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {
@@ -43,7 +43,7 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpRespo
 
 	@Test
 	public void it_should_fail_with_response_not_in_bounds() {
-		doTestWithDefaultMessage(null, new TestInvocation<Integer>() {
+		doTestWithDefaultMessage(new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
 				run(newHttpResponse(status));
@@ -54,10 +54,9 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpRespo
 	/**
 	 * Invoke test with a fail test case.
 	 *
-	 * @param msg The custom error message, optional and may be {@code null}.
 	 * @param invocation The test invocation.
 	 */
-	private void doTestWithDefaultMessage(String msg, final TestInvocation<Integer> invocation) {
+	private void doTestWithDefaultMessage(final TestInvocation<Integer> invocation) {
 		final Range rang = getRange();
 		final int start = rang.getStart();
 		final int end = rang.getEnd();

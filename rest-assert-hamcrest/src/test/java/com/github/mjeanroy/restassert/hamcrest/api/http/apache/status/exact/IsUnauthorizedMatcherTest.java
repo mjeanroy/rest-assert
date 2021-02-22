@@ -22,17 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.between;
+package com.github.mjeanroy.restassert.hamcrest.api.http.apache.status.exact;
 
-import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpStatusBetweenTest;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
+import org.hamcrest.MatcherAssert;
 
-abstract class AbstractApacheHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {
+import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isUnauthorized;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZED;
+
+public class IsUnauthorizedMatcherTest extends AbstractApacheHttpStatusMatcherTest {
 
 	@Override
-	protected HttpResponseBuilder<HttpResponse> getBuilder() {
-		return new ApacheHttpResponseBuilder();
+	protected int status() {
+		return UNAUTHORIZED;
+	}
+
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, isUnauthorized());
 	}
 }
