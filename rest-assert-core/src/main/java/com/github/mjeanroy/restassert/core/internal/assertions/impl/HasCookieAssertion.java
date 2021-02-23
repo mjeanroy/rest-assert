@@ -154,7 +154,7 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 	/**
 	 * Predicate used to check if a cookie match another cookie.
 	 */
-	private static class CookiePredicate implements Predicate<Cookie> {
+	private static final class CookiePredicate implements Predicate<Cookie> {
 		/**
 		 * Expected cookie.
 		 */
@@ -180,7 +180,7 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 	 * Predicate used to check if a cookie match expected name
 	 * and value.
 	 */
-	private static class CookieNameValuePredicate extends CookieNamePredicate implements Predicate<Cookie> {
+	private static final class CookieNameValuePredicate extends CookieNamePredicate implements Predicate<Cookie> {
 
 		/**
 		 * Expected value.

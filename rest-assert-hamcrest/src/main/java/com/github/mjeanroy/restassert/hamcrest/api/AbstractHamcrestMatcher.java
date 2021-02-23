@@ -45,7 +45,14 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	@Override
 	protected final void describeMismatchSafely(T item, Description mismatchDescription) {
-		mismatchDescription.appendText(error().getMismatch());
+		String mismatch = error().getMismatch();
+		if (mismatch == null || mismatch.isEmpty()) {
+			String expectation = error().getExpectation();
+			boolean isNegation = expectation.contains(" not ");
+			mismatch = "was" + (isNegation ? "" : " not");
+		}
+
+		mismatchDescription.appendText(mismatch);
 	}
 
 	@Override
