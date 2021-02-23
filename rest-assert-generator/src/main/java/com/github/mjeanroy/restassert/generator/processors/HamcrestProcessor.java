@@ -34,8 +34,9 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.ApacheHttpResponseMatchers.apacheHttpAssert;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpAssert;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls.HttpResponseMatchersTemplate.httpResponseMatchersTemplate;
-import static java.util.Collections.singletonList;
+import static java.util.Arrays.asList;
 
 /**
  * Set of processors that will be used to generate assertions
@@ -49,8 +50,9 @@ public enum HamcrestProcessor implements Processor {
 	 */
 	HTTP_RESPONSE_MATCHES(
 			httpResponseMatchersTemplate(),
-			singletonList(
-				apacheHttpAssert()
+			asList(
+				apacheHttpAssert(),
+				okHttpAssert()
 			)
 	);
 
