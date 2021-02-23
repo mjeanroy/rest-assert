@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
 import java.util.Collection;
@@ -110,12 +111,12 @@ public class RestAssertErrorBuilder {
 		}
 
 		@Override
-		public String getExpectation() {
+		public Message getExpectation() {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		public String getMismatch() {
+		public Message getMismatch() {
 			throw new UnsupportedOperationException();
 		}
 	}

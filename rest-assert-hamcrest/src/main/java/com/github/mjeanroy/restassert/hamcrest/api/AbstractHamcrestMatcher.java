@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.hamcrest.api;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
@@ -45,19 +46,19 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	@Override
 	protected final void describeMismatchSafely(T item, Description mismatchDescription) {
-		String mismatch = error().getMismatch();
-		if (mismatch == null || mismatch.isEmpty()) {
-			String expectation = error().getExpectation();
+		Message mismatch = error().getMismatch();
+		if (mismatch == null) {
+			String expectation = error().getExpectation().getMessage();
 			boolean isNegation = expectation.contains(" not ");
-			mismatch = "was" + (isNegation ? "" : " not");
+			mismatch = Message.message("was" + (isNegation ? "" : " not"));
 		}
 
-		mismatchDescription.appendText(mismatch);
+		mismatchDescription.appendText(mismatch.formatMessage());
 	}
 
 	@Override
 	public void describeTo(Description description) {
-		description.appendText(error().getExpectation());
+		description.appendText(error().getExpectation().formatMessage());
 	}
 
 	protected abstract AssertionResult verify(T actual);

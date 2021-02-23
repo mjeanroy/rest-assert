@@ -22,54 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error;
+package com.github.mjeanroy.restassert.hamcrest.api.http.apache.cookie;
 
-/**
- * Simple contract to rest-assert error object.
- * Each error object must provide:
- * - A message with placeholders.
- * - Arguments array that can be used to replace placeholders in original
- *   message.
- * - A formatted message (original message built with placeholders arguments).
- */
-public interface RestAssertError {
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import org.apache.http.HttpResponse;
+import org.hamcrest.MatcherAssert;
 
-	/**
-	 * Original message.
-	 * This message may contain placeholders patterns.
-	 *
-	 * @return Original message.
-	 */
-	String message();
+import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.doesNotHaveCookie;
 
-	/**
-	 * Arguments array that will replace placeholders patterns.
-	 * This array may be empty, no placeholders will be replaced.
-	 *
-	 * @return Arguments array.
-	 */
-	Object[] args();
+public class DoesNotHaveCookieWithNameMatcherTest extends AbstractApacheHttpDoesNotHaveCookieTest {
 
-	/**
-	 * Build formatted error message.
-	 * Arguments array will be used in order to replace placeholders pattern
-	 * in original message.
-	 *
-	 * @return Formatted message.
-	 */
-	String buildMessage();
+	private static final String NAME = "JSESSIONID";
 
-	/**
-	 * Get expectation description.
-	 *
-	 * @return Expectation message.
-	 */
-	Message getExpectation();
+	@Override
+	protected Cookie cookie() {
+		return new CookieBuilder().setName(NAME).setValue("12345").build();
+	}
 
-	/**
-	 * Get mismatch description.
-	 *
-	 * @return Mismatch message.
-	 */
-	Message getMismatch();
+	@Override
+	protected String buildExpectationMessage() {
+		return String.format("Expecting http response not to contains cookie with name %s", NAME);
+	}
+
+	@Override
+	protected String buildMismatchMessage() {
+		return "was";
+	}
+
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, doesNotHaveCookie(NAME));
+	}
 }

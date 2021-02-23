@@ -153,13 +153,13 @@ public abstract class AbstractError implements RestAssertError {
 	}
 
 	@Override
-	public String getExpectation() {
-		return expectation == null ? "" : expectation.formatMessage();
+	public Message getExpectation() {
+		return expectation;
 	}
 
 	@Override
-	public String getMismatch() {
-		return mismatch == null ? "" : mismatch.formatMessage();
+	public Message getMismatch() {
+		return mismatch;
 	}
 
 	/**

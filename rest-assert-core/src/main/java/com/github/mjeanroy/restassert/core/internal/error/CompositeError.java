@@ -70,12 +70,12 @@ public class CompositeError implements RestAssertError {
 	}
 
 	@Override
-	public String getExpectation() {
+	public Message getExpectation() {
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public String getMismatch() {
+	public Message getMismatch() {
 		throw new UnsupportedOperationException();
 	}
 
