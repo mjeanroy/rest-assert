@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.hamcrest.api.http.ning.cookie;
 
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpResponseHasCookieMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 

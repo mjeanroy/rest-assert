@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.hamcrest.api.http.ning.mimetype;
 
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpResponseMimeTypeMatcherMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 
