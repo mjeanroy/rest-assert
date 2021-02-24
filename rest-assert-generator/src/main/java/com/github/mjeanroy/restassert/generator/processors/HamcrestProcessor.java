@@ -35,6 +35,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.ApacheHttpResponseMatchers.apacheHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.AsyncHttpResponseMatchers.asyncHttpResponseMatchers;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.NingHttpResponseMatchers.ningHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls.HttpResponseMatchersTemplate.httpResponseMatchersTemplate;
 import static java.util.Arrays.asList;
@@ -54,6 +55,7 @@ public enum HamcrestProcessor implements Processor {
 			asList(
 				apacheHttpResponseMatchers(),
 				asyncHttpResponseMatchers(),
+				ningHttpResponseMatchers(),
 				okHttpResponseMatchers()
 			)
 	);
