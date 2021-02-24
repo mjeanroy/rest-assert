@@ -38,6 +38,7 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.hamcres
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.GoogleHttpResponseMatchers.googleHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.NingHttpResponseMatchers.ningHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpResponseMatchers;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.SpringMockMvcHttpResponseMatchers.springMockMvcHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls.HttpResponseMatchersTemplate.httpResponseMatchersTemplate;
 import static java.util.Arrays.asList;
 
@@ -58,7 +59,8 @@ public enum HamcrestProcessor implements Processor {
 				asyncHttpResponseMatchers(),
 				googleHttpResponseMatchers(),
 				ningHttpResponseMatchers(),
-				okHttpResponseMatchers()
+				okHttpResponseMatchers(),
+				springMockMvcHttpResponseMatchers()
 			)
 	);
 
