@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.doesNotHaveExpires;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-public class DoesNotHaveExpiresMatcherTest extends AbstractApacheDoesNotHaveHttpHeaderTest {
+public class DoesNotHaveExpiresMatcherTest extends AbstractApacheHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

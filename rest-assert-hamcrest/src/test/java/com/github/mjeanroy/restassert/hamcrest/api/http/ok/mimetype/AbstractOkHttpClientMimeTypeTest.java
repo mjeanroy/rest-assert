@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.ok.mimetype;
 
-import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractMimeTypeMatcherTest;
+import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpResponseMimeTypeMatcherMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
-abstract class AbstractOkHttpClientMimeTypeTest extends AbstractMimeTypeMatcherTest<Response> {
+abstract class AbstractOkHttpClientMimeTypeTest extends AbstractHttpResponseMimeTypeMatcherMatcherTest<Response> {
 
 	@Override
 	protected HttpResponseBuilder<Response> getBuilder() {

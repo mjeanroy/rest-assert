@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.doesNotHaveContentSecurityPolicy;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
-public class DoesNotHaveContentSecurityPolicyMatcherTest extends AbstractOkDoesNotHaveHttpHeaderTest {
+public class DoesNotHaveContentSecurityPolicyMatcherTest extends AbstractOkHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

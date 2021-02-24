@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.doesNotHaveCookie;
 
-public class DoesNotHaveCookieMatcherTest extends AbstractOkHttpDoesNotHaveCookieTest {
+public class DoesNotHaveCookieMatcherTest extends AbstractOkHttpResponseDoesNotHaveCookieTest {
 
 	@Override
 	protected Cookie cookie() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isStrictTransportSecurityEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class IsStrictTransportSecurityEqualToStringMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsStrictTransportSecurityEqualToStringMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
 	private static final String VALUE = HEADER.getValue();

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.doesNotHaveContentEncoding;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class DoesNotHaveContentEncodingMatcherTest extends AbstractOkDoesNotHaveHttpHeaderTest {
+public class DoesNotHaveContentEncodingMatcherTest extends AbstractOkHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

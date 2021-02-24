@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isETagEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ETAG;
 
-public class IsETagEqualToMatcherTest extends AbstractOkHttpHeaderEqualToTest {
+public class IsETagEqualToMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = ETAG.getValue();
 

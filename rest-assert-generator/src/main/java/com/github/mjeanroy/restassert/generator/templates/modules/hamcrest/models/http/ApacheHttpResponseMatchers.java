@@ -43,7 +43,7 @@ public class ApacheHttpResponseMatchers extends AbstractHamcrestHttpAssertTempla
 	 *
 	 * @return Singleton instance.
 	 */
-	public static TemplateModel apacheHttpAssert() {
+	public static TemplateModel apacheHttpResponseMatchers() {
 		return INSTANCE;
 	}
 

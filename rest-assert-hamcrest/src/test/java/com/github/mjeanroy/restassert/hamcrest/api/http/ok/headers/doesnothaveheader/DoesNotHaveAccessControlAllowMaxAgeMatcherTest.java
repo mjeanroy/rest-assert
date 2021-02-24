@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.doesNotHaveAccessControlAllowMaxAge;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
-public class DoesNotHaveAccessControlAllowMaxAgeMatcherTest extends AbstractOkDoesNotHaveHttpHeaderTest {
+public class DoesNotHaveAccessControlAllowMaxAgeMatcherTest extends AbstractOkHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

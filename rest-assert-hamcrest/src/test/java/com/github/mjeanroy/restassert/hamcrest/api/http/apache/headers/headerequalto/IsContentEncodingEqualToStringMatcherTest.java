@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isContentEncodingEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class IsContentEncodingEqualToStringMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsContentEncodingEqualToStringMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();

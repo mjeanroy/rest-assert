@@ -37,7 +37,7 @@ import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMat
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
-public class IsContentSecurityPolicyEqualToMatcherTest extends AbstractOkHttpHeaderEqualToTest {
+public class IsContentSecurityPolicyEqualToMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())

@@ -33,8 +33,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.ApacheHttpResponseMatchers.apacheHttpAssert;
-import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpAssert;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.ApacheHttpResponseMatchers.apacheHttpResponseMatchers;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.AsyncHttpResponseMatchers.asyncHttpResponseMatchers;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls.HttpResponseMatchersTemplate.httpResponseMatchersTemplate;
 import static java.util.Arrays.asList;
 
@@ -46,13 +47,14 @@ public enum HamcrestProcessor implements Processor {
 
 	/**
 	 * Processor that will generate matchers class for http response
-	 * objects.
+	 * matchers static factories.
 	 */
-	HTTP_RESPONSE_MATCHES(
+	HTTP_RESPONSE_MATCHERS(
 			httpResponseMatchersTemplate(),
 			asList(
-				apacheHttpAssert(),
-				okHttpAssert()
+				apacheHttpResponseMatchers(),
+				asyncHttpResponseMatchers(),
+				okHttpResponseMatchers()
 			)
 	);
 

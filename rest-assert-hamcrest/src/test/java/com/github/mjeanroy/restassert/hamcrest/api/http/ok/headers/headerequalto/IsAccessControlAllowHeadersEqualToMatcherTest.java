@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isAccessControlAllowHeadersEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-public class IsAccessControlAllowHeadersEqualToMatcherTest extends AbstractOkHttpHeaderEqualToTest {
+public class IsAccessControlAllowHeadersEqualToMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
 

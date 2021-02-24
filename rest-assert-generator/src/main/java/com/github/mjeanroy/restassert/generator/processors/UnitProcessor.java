@@ -63,14 +63,14 @@ public enum UnitProcessor implements Processor {
 	HTTP_RESPONSE(
 			assertTemplate(),
 			asList(
-				httpAssert(),
-				ningHttpAssert(),
-				asyncHttpAssert(),
 				apacheHttpAssert(),
+				asyncHttpAssert(),
 				googleHttpAssert(),
+				httpAssert(),
+				junitServersHttpAssert(),
+				ningHttpAssert(),
 				okHttpAssert(),
-				springMockMvcHttpAssert(),
-				junitServersHttpAssert()
+				springMockMvcHttpAssert()
 			)
 	),
 

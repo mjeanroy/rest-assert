@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isMovedTemporarily;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMPORARILY;
 
-public class IsMovedTemporarilyMatcherTest extends AbstractOkHttpStatusMatcherTest {
+public class IsMovedTemporarilyMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.hasPragma;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 
-public class HasPragmaMatcherTest extends AbstractOkHttpHeaderTest {
+public class HasPragmaMatcherTest extends AbstractOkHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

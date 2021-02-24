@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isRequestedRangeNotSatisfiable;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class IsRequestedRangeNotSatisfiableMatcherTest extends AbstractOkHttpStatusMatcherTest {
+public class IsRequestedRangeNotSatisfiableMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

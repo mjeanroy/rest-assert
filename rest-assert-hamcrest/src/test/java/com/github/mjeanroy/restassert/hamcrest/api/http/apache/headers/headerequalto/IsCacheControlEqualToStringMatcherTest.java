@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isCacheControlEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class IsCacheControlEqualToStringMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsCacheControlEqualToStringMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();

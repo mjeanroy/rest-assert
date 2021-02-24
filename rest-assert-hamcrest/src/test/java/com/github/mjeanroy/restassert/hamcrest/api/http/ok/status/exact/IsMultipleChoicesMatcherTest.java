@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isMultipleChoices;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class IsMultipleChoicesMatcherTest extends AbstractOkHttpStatusMatcherTest {
+public class IsMultipleChoicesMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

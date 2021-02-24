@@ -32,7 +32,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isContentTypeOptionsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class IsContentTypeOptionsEqualToMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsContentTypeOptionsEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;

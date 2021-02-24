@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isCreated;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
-public class IsCreatedMatcherTest extends AbstractOkHttpStatusMatcherTest {
+public class IsCreatedMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

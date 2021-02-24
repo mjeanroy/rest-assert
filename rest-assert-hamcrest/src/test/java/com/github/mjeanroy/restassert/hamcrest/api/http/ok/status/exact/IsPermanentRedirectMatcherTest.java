@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isPermanentRedirect;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_REDIRECT;
 
-public class IsPermanentRedirectMatcherTest extends AbstractOkHttpStatusMatcherTest {
+public class IsPermanentRedirectMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isContentTypeOptionsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class IsContentTypeOptionsEqualToStringMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsContentTypeOptionsEqualToStringMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();

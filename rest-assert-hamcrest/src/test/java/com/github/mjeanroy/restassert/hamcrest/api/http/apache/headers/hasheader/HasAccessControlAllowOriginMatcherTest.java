@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.hasAccessControlAllowOrigin;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-public class HasAccessControlAllowOriginMatcherTest extends AbstractApacheHttpHeaderTest {
+public class HasAccessControlAllowOriginMatcherTest extends AbstractApacheHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

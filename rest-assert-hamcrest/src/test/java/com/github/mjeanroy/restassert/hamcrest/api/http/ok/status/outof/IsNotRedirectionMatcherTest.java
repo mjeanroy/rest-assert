@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isNotRedirection;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
-public class IsNotRedirectionMatcherTest extends AbstractOkHttpStatusOutOfMatcherTest {
+public class IsNotRedirectionMatcherTest extends AbstractOkHttpResponseStatusOutOfMatcherTest {
 
 	@Override
 	protected Range getRange() {

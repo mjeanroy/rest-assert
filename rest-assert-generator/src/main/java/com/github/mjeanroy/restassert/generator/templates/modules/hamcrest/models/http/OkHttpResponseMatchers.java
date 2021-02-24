@@ -43,7 +43,7 @@ public class OkHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateMo
 	 *
 	 * @return Singleton instance.
 	 */
-	public static TemplateModel okHttpAssert() {
+	public static TemplateModel okHttpResponseMatchers() {
 		return INSTANCE;
 	}
 

@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.hasMimeType;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class HasMimeTypeStringMatcherTest extends AbstractApacheHttpClientMimeTypeTest {
+public class HasMimeTypeStringMatcherTest extends AbstractApacheHttpResponseMimeTypeMatcherTest {
 
 	private static final String MIME_TYPE = TEXT_CSS;
 

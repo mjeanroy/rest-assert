@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isStatusEqual;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
-public class IsStatusEqualMatcherTest extends AbstractApacheHttpStatusMatcherTest {
+public class IsStatusEqualMatcherTest extends AbstractApacheHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

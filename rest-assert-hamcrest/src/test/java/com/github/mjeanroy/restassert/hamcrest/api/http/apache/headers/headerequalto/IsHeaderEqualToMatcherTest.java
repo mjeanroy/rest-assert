@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isHeaderEqualTo;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class IsHeaderEqualToMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsHeaderEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String NAME = "foo";
 

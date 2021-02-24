@@ -32,7 +32,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isStrictTransportSecurityEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class IsStrictTransportSecurityEqualToMatcherTest extends AbstractApacheHttpHeaderEqualToTest {
+public class IsStrictTransportSecurityEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()
