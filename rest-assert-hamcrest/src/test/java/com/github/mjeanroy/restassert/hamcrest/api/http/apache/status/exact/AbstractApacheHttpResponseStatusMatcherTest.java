@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.apache.http.HttpResponse;
 
-abstract class AbstractApacheHttpComponentStatusMatcherTest extends AbstractHttpResponseStatusMatcherTest<HttpResponse> {
+abstract class AbstractApacheHttpResponseStatusMatcherTest extends AbstractHttpResponseStatusMatcherTest<HttpResponse> {
 
 	@Override
 	protected HttpResponseBuilder<HttpResponse> getBuilder() {
