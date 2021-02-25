@@ -22,31 +22,27 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.restassert.hamcrest.api.http.core.status.between;
 
-import org.hamcrest.TypeSafeMatcher;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Range;
+import org.hamcrest.MatcherAssert;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isStatusBetween;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-public final class {{class_name}} {
+public class IsStatusBetweenMatcherTest extends AbstractCoreHttpResponseStatusBetweenMatcherTest {
 
-	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
+	private static final int START = 400;
+	private static final int END = 599;
 
-	private {{class_name}}() {
+	@Override
+	protected Range getRange() {
+		return range(START, END);
 	}
 
-	{{#methods}}
-	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		return new AbstractHamcrestMatcher<{{actual_class}}>() {
-			@Override
-			protected final AssertionResult verify({{actual_class}} actual) {
-				return assertions.{{core_method_name}}(
-					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
-				);
-			}
-		};
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, isStatusBetween(START, END));
 	}
-
-	{{/methods}}
 }

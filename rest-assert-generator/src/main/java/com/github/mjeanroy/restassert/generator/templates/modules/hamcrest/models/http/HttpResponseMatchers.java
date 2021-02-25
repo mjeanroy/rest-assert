@@ -22,31 +22,42 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http;
 
-import org.hamcrest.TypeSafeMatcher;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.generator.TemplateModel;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
+/**
+ * Template model for rest-assert-hamcrest HttpResponseMatchers class.
+ */
+public class HttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-public final class {{class_name}} {
+	/**
+	 * Singleton Instance.
+	 */
+	private static final HttpResponseMatchers INSTANCE = new HttpResponseMatchers();
 
-	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
-
-	private {{class_name}}() {
+	/**
+	 * Get singleton instance.
+	 *
+	 * @return Singleton instance.
+	 */
+	public static TemplateModel coreHttpResponseMatchers() {
+		return INSTANCE;
 	}
 
-	{{#methods}}
-	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		return new AbstractHamcrestMatcher<{{actual_class}}>() {
-			@Override
-			protected final AssertionResult verify({{actual_class}} actual) {
-				return assertions.{{core_method_name}}(
-					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
-				);
-			}
-		};
+	// Ensure non instantiation
+	private HttpResponseMatchers() {
+		super();
 	}
 
-	{{/methods}}
+	@Override
+	public String getActualClass() {
+		return HttpResponse.class.getName();
+	}
+
+	@Override
+	public String getFactory() {
+		return null;
+	}
 }

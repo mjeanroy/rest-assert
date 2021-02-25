@@ -22,31 +22,36 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.restassert.hamcrest.api.http.core.cookie;
 
-import org.hamcrest.TypeSafeMatcher;
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import org.hamcrest.MatcherAssert;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.hasCookie;
 
-public final class {{class_name}} {
+public class HasCookieWithNameMatcherTest extends AbstractCoreHttpResponseHasCookieMatcherTest {
 
-	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
+	private static final String NAME = "JSESSIONID";
 
-	private {{class_name}}() {
+	@Override
+	protected Cookie cookie() {
+		return new CookieBuilder().setName(NAME).setValue("12345").build();
 	}
 
-	{{#methods}}
-	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		return new AbstractHamcrestMatcher<{{actual_class}}>() {
-			@Override
-			protected final AssertionResult verify({{actual_class}} actual) {
-				return assertions.{{core_method_name}}(
-					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
-				);
-			}
-		};
+	@Override
+	protected String buildExpectationMessage() {
+		return String.format("Expecting http response to contains cookie with name %s", NAME);
 	}
 
-	{{/methods}}
+	@Override
+	protected String buildMismatchMessage() {
+		return "was not";
+	}
+
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, hasCookie(NAME));
+	}
 }

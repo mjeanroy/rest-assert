@@ -22,31 +22,32 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.restassert.hamcrest.api.http.core.headers.headerequalto;
 
-import org.hamcrest.TypeSafeMatcher;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Header;
+import org.hamcrest.MatcherAssert;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isExpiresEqualTo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-public final class {{class_name}} {
+public class IsExpiresEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
 
-	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
+	private static final String VALUE = EXPIRES.getValue();
+	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
 
-	private {{class_name}}() {
+	@Override
+	protected Header getHeader() {
+		return EXPIRES;
 	}
 
-	{{#methods}}
-	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		return new AbstractHamcrestMatcher<{{actual_class}}>() {
-			@Override
-			protected final AssertionResult verify({{actual_class}} actual) {
-				return assertions.{{core_method_name}}(
-					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
-				);
-			}
-		};
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, isExpiresEqualTo(VALUE));
 	}
 
-	{{/methods}}
+	@Override
+	protected String failValue() {
+		return FAILED_VALUE;
+	}
 }

@@ -22,31 +22,24 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.restassert.hamcrest.api.http.core.headers.hasheader;
 
-import org.hamcrest.TypeSafeMatcher;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Header;
+import org.hamcrest.MatcherAssert;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
+import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.hasContentType;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public final class {{class_name}} {
+public class HasContentTypeMatcherTest extends AbstractCoreHttpResponseHasHeaderMatcherTest {
 
-	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
-
-	private {{class_name}}() {
+	@Override
+	protected Header getHeader() {
+		return JSON_CONTENT_TYPE;
 	}
 
-	{{#methods}}
-	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		return new AbstractHamcrestMatcher<{{actual_class}}>() {
-			@Override
-			protected final AssertionResult verify({{actual_class}} actual) {
-				return assertions.{{core_method_name}}(
-					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
-				);
-			}
-		};
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, hasContentType());
 	}
-
-	{{/methods}}
 }

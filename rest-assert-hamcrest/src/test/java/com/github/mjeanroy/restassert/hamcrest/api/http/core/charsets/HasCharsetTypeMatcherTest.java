@@ -22,31 +22,27 @@
  * THE SOFTWARE.
  */
 
-package {{package}};
+package com.github.mjeanroy.restassert.hamcrest.api.http.core.charsets;
 
-import org.hamcrest.TypeSafeMatcher;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.hamcrest.MatcherAssert;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
-public final class {{class_name}} {
+import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.hasCharset;
 
-	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
+public class HasCharsetTypeMatcherTest extends AbstractCoreHttpResponseCharsetMatcherTest {
 
-	private {{class_name}}() {
+	private static final Charset CHARSET = StandardCharsets.UTF_8;
+
+	@Override
+	protected String getCharset() {
+		return CHARSET.name().toLowerCase();
 	}
 
-	{{#methods}}
-	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
-		return new AbstractHamcrestMatcher<{{actual_class}}>() {
-			@Override
-			protected final AssertionResult verify({{actual_class}} actual) {
-				return assertions.{{core_method_name}}(
-					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
-				);
-			}
-		};
+	@Override
+	protected void run(HttpResponse actual) {
+		MatcherAssert.assertThat(actual, hasCharset(CHARSET));
 	}
-
-	{{/methods}}
 }
