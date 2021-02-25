@@ -37,6 +37,7 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.hamcres
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.AsyncHttpResponseMatchers.asyncHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.GoogleHttpResponseMatchers.googleHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.HttpResponseMatchers.coreHttpResponseMatchers;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.JunitServersHttpResponseMatchers.junitServersHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.NingHttpResponseMatchers.ningHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.SpringMockMvcHttpResponseMatchers.springMockMvcHttpResponseMatchers;
@@ -60,6 +61,7 @@ public enum HamcrestProcessor implements Processor {
 				asyncHttpResponseMatchers(),
 				coreHttpResponseMatchers(),
 				googleHttpResponseMatchers(),
+				junitServersHttpResponseMatchers(),
 				ningHttpResponseMatchers(),
 				okHttpResponseMatchers(),
 				springMockMvcHttpResponseMatchers()
