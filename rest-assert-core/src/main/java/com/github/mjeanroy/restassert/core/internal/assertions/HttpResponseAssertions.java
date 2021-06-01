@@ -51,7 +51,6 @@ import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
-import com.github.mjeanroy.restassert.documentation.Documentation;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -101,7 +100,6 @@ import static java.util.Arrays.asList;
  * This class is implemented as a singleton object.
  * This class is thread safe.
  */
-@Documentation
 public final class HttpResponseAssertions {
 
 	/**
