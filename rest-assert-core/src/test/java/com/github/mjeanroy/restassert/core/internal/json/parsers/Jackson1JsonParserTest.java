@@ -48,7 +48,7 @@ public class Jackson1JsonParserTest extends AbstractJsonParserTest {
 
 	@Test
 	public void it_should_wrap_checked_exception() {
-		final String json = "[ Invalid JSON ]";
+		String json = "[ Invalid JSON ]";
 		assertThatThrownBy(parse(json)).isExactlyInstanceOf(JsonException.class);
 	}
 

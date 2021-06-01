@@ -36,10 +36,6 @@ import static java.lang.String.format;
 
 public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -69,12 +65,6 @@ public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTes
 		});
 	}
 
-	/**
-	 * Execute test with a failed test case.
-	 *
-	 * @param msg The customized error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(String msg, final TestInvocation<Header> invocation) {
 		final Header expectedHeader = getHeader();
 		final Header header = header("foo", "bar");
@@ -88,31 +78,13 @@ public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTes
 		});
 	}
 
-	/**
-	 * Get header that will be tested.
-	 * Note that header value does not really matter, only name is important here.
-	 *
-	 * @return Header.
-	 */
 	protected abstract Header getHeader();
 
-	/**
-	 * Get expected error message when HTTP response does not have expected header.
-	 *
-	 * @param expectedHeader Header.
-	 * @return Error message.
-	 */
-	private String buildErrorMessage(Header expectedHeader) {
-		return format("Expecting response to have header %s", expectedHeader.getName());
-	}
-
-	/**
-	 * Get the HTTP response to be tested.
-	 *
-	 * @param header Expected header.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(Header header) {
 		return getBuilder().addHeader(header).build();
+	}
+
+	private static String buildErrorMessage(Header expectedHeader) {
+		return String.format("Expecting response to have header %s", expectedHeader.getName());
 	}
 }

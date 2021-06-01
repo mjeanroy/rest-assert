@@ -44,8 +44,8 @@ public class AssertIsNotNullTest {
 
 	@Test
 	public void it_should_fail_if_json_is_null() {
-		final AssertionInfo info = someInfo();
-		final String json = null;
+		AssertionInfo info = someInfo();
+		String json = null;
 
 		try {
 			jsons.assertIsNotNull(info, json);

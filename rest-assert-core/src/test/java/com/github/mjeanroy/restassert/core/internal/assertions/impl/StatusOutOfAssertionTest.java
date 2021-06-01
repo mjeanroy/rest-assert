@@ -37,14 +37,14 @@ public class StatusOutOfAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_status_match() {
-		final int start = 200;
-		final int end = 299;
-		final StatusOutOfAssertion assertion = new StatusOutOfAssertion(start, end);
+		int start = 200;
+		int end = 299;
+		StatusOutOfAssertion assertion = new StatusOutOfAssertion(start, end);
 
 		for (int i = 0; i <= 999; i++) {
 			if (i < start || i > end) {
-				final HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(i).build();
-				final AssertionResult result = assertion.handle(rsp);
+				HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(i).build();
+				AssertionResult result = assertion.handle(rsp);
 				assertThat(result).isNotNull();
 				assertThat(result.isSuccess()).isTrue();
 				assertThat(result.isFailure()).isFalse();
@@ -54,14 +54,12 @@ public class StatusOutOfAssertionTest {
 
 	@Test
 	public void it_should_fail_if_status_does_not_match() {
-		final int start = 200;
-		final int end = 299;
-		final StatusOutOfAssertion assertion = new StatusOutOfAssertion(start, end);
+		int start = 200;
+		int end = 299;
+		StatusOutOfAssertion assertion = new StatusOutOfAssertion(start, end);
 
 		for (int i = start; i <= end; i++) {
-			final HttpResponse rsp = new HttpResponseBuilderImpl()
-					.setStatus(i)
-					.build();
+			HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(i).build();
 
 			AssertionResult result = assertion.handle(rsp);
 

@@ -34,17 +34,13 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	// == Core HTTP Response
 
 	@Test
 	public void it_should_pass() {
-		final Range range = getRange();
+		Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
 				run(newHttpResponse(i));
@@ -73,16 +69,10 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 		});
 	}
 
-	/**
-	 * Invoke test with a fail test case.
-	 *
-	 * @param msg The custom error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(String msg, final TestInvocation<Integer> invocation) {
-		final Range range = getRange();
-		final int start = range.getStart();
-		final int end = range.getEnd();
+		Range range = getRange();
+		int start = range.getStart();
+		int end = range.getEnd();
 
 		for (int i = start; i <= end; i++) {
 			final int status = i;
@@ -97,32 +87,13 @@ public abstract class AbstractHttpStatusOutOfTest<T> extends AbstractHttpAssertT
 		}
 	}
 
-	/**
-	 * The range.
-	 *
-	 * @return The range.
-	 */
 	protected abstract Range getRange();
 
-	/**
-	 * Get expected default error message.
-	 *
-	 * @param start Range start.
-	 * @param end Range end.
-	 * @param status The HTTP response actual status.
-	 * @return The expected default message.
-	 */
-	private String buildErrorMessage(int start, int end, int status) {
-		return String.format("Expecting status code to be out of %s and %s but was %s", start, end, status);
-	}
-
-	/**
-	 * Create the HTTP response to be tested.
-	 *
-	 * @param status HTTP Response status.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(int status) {
 		return getBuilder().setStatus(status).build();
+	}
+
+	private static String buildErrorMessage(int start, int end, int status) {
+		return String.format("Expecting status code to be out of %s and %s but was %s", start, end, status);
 	}
 }

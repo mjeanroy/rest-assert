@@ -36,10 +36,5 @@ import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
  */
 public abstract class AbstractHttpAssertTest<T> extends AbstractAssertTest<T> {
 
-	/**
-	 * Returns the builder to use to build instance of http response to be tested.
-	 *
-	 * @return The builder.
-	 */
 	protected abstract HttpResponseBuilder<T> getBuilder();
 }

@@ -37,9 +37,9 @@ public class DefaultCookieBuilderTest {
 
 	@Test
 	public void it_should_build_default_cookie() {
-		final String name = "foo";
-		final String value = "bar";
-		final Cookie cookie = Cookies.builder(name, value).build();
+		String name = "foo";
+		String value = "bar";
+		Cookie cookie = Cookies.builder(name, value).build();
 
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getName()).isEqualTo(name);
@@ -55,15 +55,15 @@ public class DefaultCookieBuilderTest {
 
 	@Test
 	public void it_should_build_cookie() {
-		final String name = "foo";
-		final String value = "bar";
-		final String domain = "domain.com";
-		final String path = "/";
-		final long maxAge = 3600;
-		final Date expires = new Date();
-		final SameSite sameSite = SameSite.STRICT;
+		String name = "foo";
+		String value = "bar";
+		String domain = "domain.com";
+		String path = "/";
+		long maxAge = 3600;
+		Date expires = new Date();
+		SameSite sameSite = SameSite.STRICT;
 
-		final Cookie cookie = Cookies.builder(name, value)
+		Cookie cookie = Cookies.builder(name, value)
 				.setDomain(domain)
 				.setPath(path)
 				.setSecure()
@@ -87,11 +87,11 @@ public class DefaultCookieBuilderTest {
 
 	@Test
 	public void it_should_build_cookie_with_expires_timestamp() {
-		final String name = "foo";
-		final String value = "bar";
-		final Date expires = new Date();
+		String name = "foo";
+		String value = "bar";
+		Date expires = new Date();
 
-		final Cookie cookie = Cookies.builder(name, value)
+		Cookie cookie = Cookies.builder(name, value)
 				.setExpires(expires.getTime())
 				.build();
 
@@ -103,21 +103,21 @@ public class DefaultCookieBuilderTest {
 
 	@Test
 	public void it_should_build_with_same_site_lax() {
-		final Cookie cookie = Cookies.builder("foo", "bar").setSameSite("lax").build();
+		Cookie cookie = Cookies.builder("foo", "bar").setSameSite("lax").build();
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getSameSite()).isEqualTo(SameSite.LAX);
 	}
 
 	@Test
 	public void it_should_build_with_same_site_strict() {
-		final Cookie cookie = Cookies.builder("foo", "bar").setSameSite("strict").build();
+		Cookie cookie = Cookies.builder("foo", "bar").setSameSite("strict").build();
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getSameSite()).isEqualTo(SameSite.STRICT);
 	}
 
 	@Test
 	public void it_should_build_with_same_site_none() {
-		final Cookie cookie = Cookies.builder("foo", "bar").setSameSite("none").build();
+		Cookie cookie = Cookies.builder("foo", "bar").setSameSite("none").build();
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getSameSite()).isEqualTo(SameSite.NONE);
 	}

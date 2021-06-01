@@ -45,9 +45,9 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 
 	@Test
 	public void should_fail_if_mime_type_does_not_match() {
-		final String expectedCharset = getCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final HttpResponse httpResponse = newHttpResponse(actualCharset);
+		String expectedCharset = getCharset();
+		String actualCharset = expectedCharset + "foo";
+		HttpResponse httpResponse = newHttpResponse(actualCharset);
 
 		try {
 			run(httpResponse);
@@ -64,7 +64,7 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 
 	protected abstract void run(HttpResponse httpResponse);
 
-	private HttpResponse newHttpResponse(String charset) {
+	private static HttpResponse newHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);
 		return new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build();
 	}

@@ -50,8 +50,8 @@ public final class TestUtils {
 	 * @return The UTC Date.
 	 */
 	public static Date createUtcDate(int year, int month, int dayOfMonth, int hourOfDay, int minute, int seconds) {
-		final TimeZone utc = TimeZone.getTimeZone("UTC");
-		final Calendar calendar = new GregorianCalendar(utc);
+		TimeZone utc = TimeZone.getTimeZone("UTC");
+		Calendar calendar = new GregorianCalendar(utc);
 		calendar.setLenient(false);
 		calendar.set(Calendar.YEAR, year);
 		calendar.set(Calendar.MONTH, month);

@@ -34,18 +34,7 @@ package com.github.mjeanroy.restassert.unit.api;
  */
 public abstract class AbstractAssertTest<T> {
 
-	/**
-	 * Invoke assert method.
-	 *
-	 * @param actual Tested object.
-	 */
 	protected abstract void run(T actual);
 
-	/**
-	 * Invoke assert method with custom message.
-	 *
-	 * @param message Custom message.
-	 * @param actual  Tested object.
-	 */
 	protected abstract void run(String message, T actual);
 }

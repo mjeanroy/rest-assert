@@ -37,13 +37,13 @@ public class StatusBetweenAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_status_match() {
-		final int start = 200;
-		final int end = 299;
-		final StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
+		int start = 200;
+		int end = 299;
+		StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
 
 		for (int i = start; i <= end; i++) {
-			final HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(i).build();
-			final AssertionResult result = assertion.handle(rsp);
+			HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(i).build();
+			AssertionResult result = assertion.handle(rsp);
 			assertThat(result).isNotNull();
 			assertThat(result.isSuccess()).isTrue();
 			assertThat(result.isFailure()).isFalse();
@@ -52,12 +52,10 @@ public class StatusBetweenAssertionTest {
 
 	@Test
 	public void it_should_fail_if_status_does_not_match() {
-		final int start = 200;
-		final int end = 299;
-		final StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.setStatus(400)
-				.build();
+		int start = 200;
+		int end = 299;
+		StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
+		HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(400).build();
 
 		AssertionResult result = assertion.handle(rsp);
 

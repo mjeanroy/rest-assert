@@ -40,13 +40,13 @@ public class IOUtilsTest {
 
 	@Test
 	public void it_should_get_input_stream_from_classpath() {
-		final InputStream inputStream = IOUtils.fromClasspath("/license.txt");
+		InputStream inputStream = IOUtils.fromClasspath("/license.txt");
 		assertThat(inputStream).isNotNull();
 	}
 
 	@Test
 	public void it_should_read_from_classpath() {
-		final String content = IOUtils.read("/license.txt");
+		String content = IOUtils.read("/license.txt");
 		assertThat(content).isNotNull().isNotEmpty();
 	}
 
@@ -56,7 +56,7 @@ public class IOUtilsTest {
 		final String content = IOUtils.read("/license.txt", tab);
 		assertThat(content).isNotNull().isNotEmpty();
 
-		final String[] lines = content.split(IOUtils.LINE_SEPARATOR);
+		String[] lines = content.split(IOUtils.LINE_SEPARATOR);
 		assertThat(lines)
 				.isNotNull()
 				.isNotEmpty()
@@ -70,8 +70,8 @@ public class IOUtilsTest {
 
 	@Test
 	public void it_should_read_input_stream() {
-		final InputStream inputStream = getClass().getResourceAsStream("/license.txt");
-		final String content = IOUtils.read(inputStream);
+		InputStream inputStream = getClass().getResourceAsStream("/license.txt");
+		String content = IOUtils.read(inputStream);
 		assertThat(content).isNotNull().isNotEmpty();
 	}
 
@@ -82,7 +82,7 @@ public class IOUtilsTest {
 		final String content = IOUtils.read(inputStream, tab);
 		assertThat(content).isNotNull().isNotEmpty();
 
-		final String[] lines = content.split(IOUtils.LINE_SEPARATOR);
+		String[] lines = content.split(IOUtils.LINE_SEPARATOR);
 		assertThat(lines)
 				.isNotNull()
 				.isNotEmpty()
@@ -96,9 +96,9 @@ public class IOUtilsTest {
 
 	@Test
 	public void it_should_write_to_a_file() throws Exception {
-		final String path = FilenameUtils.normalize(FileUtils.getTempDirectoryPath() + "/foo.txt");
-		final File file = new File(path);
-		final String content = "Hello World";
+		String path = FilenameUtils.normalize(FileUtils.getTempDirectoryPath() + "/foo.txt");
+		File file = new File(path);
+		String content = "Hello World";
 
 		IOUtils.write(file, content);
 

@@ -168,21 +168,21 @@ public class CollectionsTest {
 
 	@Test
 	public void it_should_create_list_from_parameters() {
-		final String v1 = "foo";
-		final String v2 = "bar";
-		final String v3 = "baz";
-		final List<String> outputs = Collections.toList(v1, v2, v3);
+		String v1 = "foo";
+		String v2 = "bar";
+		String v3 = "baz";
+		List<String> outputs = Collections.toList(v1, v2, v3);
 		assertThat(outputs).hasSize(3).containsExactly(v1, v2, v3);
 	}
 
 	@Test
 	@SuppressWarnings("unchecked")
 	public void it_should_flat_map_inputs() {
-		final String v1 = "foo";
-		final String v2 = "bar";
-		final String v3 = "baz";
-		final String inputs = v1 + "," + v2 + "," + v3;
-		final Mapper<String, String[]> splitFn = mock(Mapper.class);
+		String v1 = "foo";
+		String v2 = "bar";
+		String v3 = "baz";
+		String inputs = v1 + "," + v2 + "," + v3;
+		Mapper<String, String[]> splitFn = mock(Mapper.class);
 
 		when(splitFn.apply(anyString())).thenAnswer(new Answer<String[]>() {
 			@Override
@@ -191,7 +191,7 @@ public class CollectionsTest {
 			}
 		});
 
-		final List<String> outputs = Collections.flatMap(singletonList(inputs), splitFn);
+		List<String> outputs = Collections.flatMap(singletonList(inputs), splitFn);
 
 		assertThat(outputs).hasSize(3).containsExactly(v1, v2, v3);
 		verify(splitFn).apply(inputs);

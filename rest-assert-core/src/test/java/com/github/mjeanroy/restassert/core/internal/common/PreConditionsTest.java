@@ -38,15 +38,15 @@ public class PreConditionsTest {
 
 	@Test
 	public void it_should_not_throw_npe_if_value_is_not_null() {
-		final String value = "foo";
-		final String result = PreConditions.notNull(value, "message");
+		String value = "foo";
+		String result = PreConditions.notNull(value, "message");
 		assertThat(result).isEqualTo(value);
 	}
 
 	@Test
 	public void it_should_throw_npe_if_value_is_null() {
-		final Object value = null;
-		final String message = "message";
+		Object value = null;
+		String message = "message";
 
 		assertThatThrownBy(notNull(value, message))
 				.isExactlyInstanceOf(NullPointerException.class)
@@ -55,8 +55,8 @@ public class PreConditionsTest {
 
 	@Test
 	public void notBlank_should_throw_npe_if_string_is_null() {
-		final String value = null;
-		final String message = "Should not be null";
+		String value = null;
+		String message = "Should not be null";
 
 		assertThatThrownBy(notBlank(value, message))
 				.isExactlyInstanceOf(NullPointerException.class)
@@ -65,8 +65,8 @@ public class PreConditionsTest {
 
 	@Test
 	public void notBlank_should_throw_illegal_argument_exception_if_string_is_empty() {
-		final String value = "";
-		final String message = "Should not be null";
+		String value = "";
+		String message = "Should not be null";
 
 		assertThatThrownBy(notBlank(value, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -75,8 +75,8 @@ public class PreConditionsTest {
 
 	@Test
 	public void notBlank_should_throw_illegal_argument_exception_if_string_is_blank() {
-		final String value = "    ";
-		final String message = "Should not be null";
+		String value = "    ";
+		String message = "Should not be null";
 
 		assertThatThrownBy(notBlank(value, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -85,16 +85,16 @@ public class PreConditionsTest {
 
 	@Test
 	public void notBlank_should_return_argument_if_string_is_ok() {
-		final String obj = "Foo";
-		final String message = "Should not be null";
+		String obj = "Foo";
+		String message = "Should not be null";
 		assertThat(PreConditions.notBlank(obj, message)).isEqualTo(obj);
 	}
 
 	@Test
 	public void isGreaterThan_should_fail_if_value_is_less_than_min() {
-		final int val = 0;
-		final int minValue = 1;
-		final String message = "Should be less than";
+		int val = 0;
+		int minValue = 1;
+		String message = "Should be less than";
 
 		assertThatThrownBy(isGreaterThan(val, minValue, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -103,25 +103,25 @@ public class PreConditionsTest {
 
 	@Test
 	public void isGreaterThan_should_not_fail_if_value_is_equal_to_min() {
-		final int val = 0;
-		final String message = "foo";
+		int val = 0;
+		String message = "foo";
 		assertThat(PreConditions.isGreaterThan(val, val, message)).isEqualTo(val);
 	}
 
 	@Test
 	public void isGreaterThan_should_not_fail_if_value_is_greater_than_min() {
-		final int val = 0;
-		final int minValue = val - 1;
-		final String message = "foo";
+		int val = 0;
+		int minValue = val - 1;
+		String message = "foo";
 		assertThat(PreConditions.isGreaterThan(val, minValue, message)).isEqualTo(val);
 	}
 
 	@Test
 	public void isInRang_should_fail_if_value_is_less_than_min() {
-		final int val = 0;
-		final int min = 1;
-		final int max = 5;
-		final String message = "Should be less than";
+		int val = 0;
+		int min = 1;
+		int max = 5;
+		String message = "Should be less than";
 
 		assertThatThrownBy(isInRange(val, min, max, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -130,10 +130,10 @@ public class PreConditionsTest {
 
 	@Test
 	public void isInRange_should_fail_if_value_is_greater_than_max() {
-		final int val = 10;
-		final int min = 1;
-		final int max = 5;
-		final String message = "Should be less than";
+		int val = 10;
+		int min = 1;
+		int max = 5;
+		String message = "Should be less than";
 
 		assertThatThrownBy(isInRange(val, min, max, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -142,41 +142,41 @@ public class PreConditionsTest {
 
 	@Test
 	public void isInRange_should_not_fail_if_value_is_equal_to_min() {
-		final int val = 0;
-		final int max = val + 1;
-		final String message = "foo";
+		int val = 0;
+		int max = val + 1;
+		String message = "foo";
 		assertThat(PreConditions.isInRange(val, val, max, message)).isEqualTo(val);
 	}
 
 	@Test
 	public void isInRange_should_not_fail_if_value_is_greater_than_min() {
-		final int val = 0;
-		final int min = val - 1;
-		final int max = val + 1;
-		final String message = "foo";
+		int val = 0;
+		int min = val - 1;
+		int max = val + 1;
+		String message = "foo";
 		assertThat(PreConditions.isInRange(val, min, max, message)).isEqualTo(val);
 	}
 
 	@Test
 	public void isInRange_should_not_fail_if_value_is_equal_to_max() {
-		final int val = 0;
-		final int min = val - 1;
-		final String message = "foo";
+		int val = 0;
+		int min = val - 1;
+		String message = "foo";
 		assertThat(PreConditions.isInRange(val, min, val, message)).isEqualTo(val);
 	}
 
 	@Test
 	public void notEmpty_should_return_not_empty_iterable() {
-		final String message = "message";
-		final Iterable<String> inputs = singleton("foo");
-		final Iterable<String> result = PreConditions.notEmpty(inputs, message);
+		String message = "message";
+		Iterable<String> inputs = singleton("foo");
+		Iterable<String> result = PreConditions.notEmpty(inputs, message);
 		assertThat(result).isSameAs(inputs);
 	}
 
 	@Test
 	public void notEmpty_should_fail_with_null_iterable() {
-		final String message = "message";
-		final Iterable<Object> inputs = null;
+		String message = "message";
+		Iterable<Object> inputs = null;
 
 		assertThatThrownBy(notEmpty(inputs, message))
 				.isExactlyInstanceOf(NullPointerException.class)
@@ -195,16 +195,16 @@ public class PreConditionsTest {
 
 	@Test
 	public void notEmpty_should_return_not_empty_collection() {
-		final String message = "message";
-		final Collection<String> inputs = singleton("foo");
-		final Collection<String> result = PreConditions.notEmpty(inputs, message);
+		String message = "message";
+		Collection<String> inputs = singleton("foo");
+		Collection<String> result = PreConditions.notEmpty(inputs, message);
 		assertThat(result).isSameAs(inputs);
 	}
 
 	@Test
 	public void notEmpty_should_fail_with_null_collection() {
-		final String message = "message";
-		final Collection<Object> inputs = null;
+		String message = "message";
+		Collection<Object> inputs = null;
 
 		assertThatThrownBy(notEmpty(inputs, message))
 				.isExactlyInstanceOf(NullPointerException.class)
@@ -213,8 +213,8 @@ public class PreConditionsTest {
 
 	@Test
 	public void notEmpty_should_fail_with_empty_collection() {
-		final String message = "message";
-		final Collection<Object> inputs = emptyList();
+		String message = "message";
+		Collection<Object> inputs = emptyList();
 
 		assertThatThrownBy(notEmpty(inputs, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -223,16 +223,16 @@ public class PreConditionsTest {
 
 	@Test
 	public void notEmpty_should_return_not_empty_string() {
-		final String message = "message";
-		final String input = "foo";
-		final String result = PreConditions.notEmpty(input, message);
+		String message = "message";
+		String input = "foo";
+		String result = PreConditions.notEmpty(input, message);
 		assertThat(result).isSameAs(input);
 	}
 
 	@Test
 	public void notEmpty_should_fail_with_null_string() {
-		final String message = "message";
-		final String input = null;
+		String message = "message";
+		String input = null;
 
 		assertThatThrownBy(notEmpty(input, message))
 				.isExactlyInstanceOf(NullPointerException.class)
@@ -241,8 +241,8 @@ public class PreConditionsTest {
 
 	@Test
 	public void notEmpty_should_fail_with_empty_string() {
-		final String message = "message";
-		final String input = "";
+		String message = "message";
+		String input = "";
 
 		assertThatThrownBy(notEmpty(input, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)

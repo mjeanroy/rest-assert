@@ -62,8 +62,8 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 		});
 
 		for (Header header : getHeaders(mimeTypes)) {
-			final HttpResponse httpResponse = newResponse(header);
-			final AssertionResult result = run(httpResponse);
+			HttpResponse httpResponse = newResponse(header);
+			AssertionResult result = run(httpResponse);
 			checkSuccess(result);
 		}
 	}
@@ -78,66 +78,49 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 		});
 
 		for (Header header : getHeaders(mimeTypes)) {
-			final HttpResponse httpResponse = newResponse(header);
-			final AssertionResult result = run(httpResponse);
+			HttpResponse httpResponse = newResponse(header);
+			AssertionResult result = run(httpResponse);
 			checkSuccess(result);
 		}
 	}
 
 	@Test
 	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		final List<String> mimeTypes = getMimeTypes();
-		final List<Header> headers = getHeaders(mimeTypes);
-		final List<String> mimeType = getMimeTypes();
+		List<String> mimeTypes = getMimeTypes();
+		List<Header> headers = getHeaders(mimeTypes);
+		List<String> mimeType = getMimeTypes();
 
 		int i = 0;
 		for (Header h : headers) {
 			// Given
-			final String expectedMimeType = mimeType.get(i);
-			final String actualMimeType = expectedMimeType + "foo";
+			String expectedMimeType = mimeType.get(i);
+			String actualMimeType = expectedMimeType + "foo";
 
-			final String expectedName = h.getName();
-			final String expectedValue = h.getValue();
-			final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-			final Header header = header(expectedName, actualValue);
+			String expectedName = h.getName();
+			String expectedValue = h.getValue();
+			String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
+			Header header = header(expectedName, actualValue);
 
 			// When
-			final AssertionResult result = run(newResponse(header));
+			AssertionResult result = run(newResponse(header));
 
 			// Then
-			final Class<ShouldHaveMimeType> klassError = ShouldHaveMimeType.class;
-			final String pattern = "Expecting response to have mime type in %s but was %s";
-			final Object[] parameters = {mimeType, actualMimeType};
+			Class<ShouldHaveMimeType> klassError = ShouldHaveMimeType.class;
+			String pattern = "Expecting response to have mime type in %s but was %s";
+			Object[] parameters = {mimeType, actualMimeType};
 			checkError(result, klassError, pattern, parameters);
 
 			i++;
 		}
 	}
 
-	/**
-	 * Get the list of mime-type to be tested.
-	 *
-	 * @return The list of mime-type.
-	 */
 	protected abstract List<String> getMimeTypes();
 
-	/**
-	 * Create HTTP response with given header.
-	 *
-	 * @param header The header.
-	 * @return The HTTP response.
-	 */
-	private HttpResponse newResponse(Header header) {
+	private static HttpResponse newResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
-	/**
-	 * Create all {@code "Content-Type"} headers corresponding to the list
-	 * of mime-type to be tested.
-	 *
-	 * @return All {@code "Content-Type"} headers.
-	 */
-	private List<Header> getHeaders(List<String> mimeTypes) {
+	private static List<Header> getHeaders(List<String> mimeTypes) {
 		return map(mimeTypes, new Mapper<String, Header>() {
 			@Override
 			public Header apply(String input) {

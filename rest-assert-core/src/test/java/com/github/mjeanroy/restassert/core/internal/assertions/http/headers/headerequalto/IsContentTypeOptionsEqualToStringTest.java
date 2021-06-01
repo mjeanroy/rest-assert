@@ -64,12 +64,12 @@ public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqu
 	@Test
 	public void it_should_compare_values_case_insensitively() {
 		// GIVEN
-		final String actual = VALUE.toLowerCase();
-		final String expected = VALUE.toUpperCase();
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = VALUE.toLowerCase();
+		String expected = VALUE.toUpperCase();
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isContentTypeOptionsEqualTo(response, expected);
+		AssertionResult result = assertions.isContentTypeOptionsEqualTo(response, expected);
 
 		// THEN
 		checkSuccess(result);
@@ -78,9 +78,9 @@ public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqu
 	@Test
 	public void it_should_fail_with_non_authorized_value() {
 		// GIVEN
-		final String actual = VALUE.toLowerCase();
-		final String expected = "no-sniff";
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = VALUE.toLowerCase();
+		String expected = "no-sniff";
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN, THEN
 		assertThatThrownBy(isContentTypeOptionsEqualTo(response, expected))

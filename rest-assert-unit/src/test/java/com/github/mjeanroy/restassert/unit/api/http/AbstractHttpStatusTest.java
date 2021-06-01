@@ -33,10 +33,6 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -65,12 +61,6 @@ public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T
 		});
 	}
 
-	/**
-	 * Invoke test with a fail test case.
-	 *
-	 * @param msg The custom error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(String msg, final TestInvocation<Integer> invocation) {
 		final int expectedStatus = status();
 		final int status = expectedStatus + 1;
@@ -84,31 +74,13 @@ public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T
 		});
 	}
 
-	/**
-	 * The status to be tested.
-	 *
-	 * @return Status to be tested.
-	 */
 	protected abstract int status();
 
-	/**
-	 * Get expected default error message.
-	 *
-	 * @param expectedStatus Expected status.
-	 * @param status The HTTP response actual status.
-	 * @return The expected default message.
-	 */
-	private String buildErrorMessage(int expectedStatus, int status) {
-		return String.format("Expecting status code to be %s but was %s", expectedStatus, status);
-	}
-
-	/**
-	 * Get the HTTP response to be tested.
-	 *
-	 * @param status HTTP Response status.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(int status) {
 		return getBuilder().setStatus(status).build();
+	}
+
+	private static String buildErrorMessage(int expectedStatus, int status) {
+		return String.format("Expecting status code to be %s but was %s", expectedStatus, status);
 	}
 }

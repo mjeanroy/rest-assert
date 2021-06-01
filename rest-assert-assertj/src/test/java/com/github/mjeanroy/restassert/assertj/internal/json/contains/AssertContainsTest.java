@@ -57,23 +57,19 @@ public class AssertContainsTest {
 
 	@Test
 	public void it_should_fail_if_json_does_not_contains_entry() {
-		final AssertionInfo info = someInfo();
-		final JsonObject jsonObject = jsonObject(
+		AssertionInfo info = someInfo();
+		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1)
 		);
 
-		final String json = jsonObject.toJson();
+		String json = jsonObject.toJson();
 
 		try {
 			jsons.assertContains(info, json, "name");
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			String expectedMessage = "Expecting json to contain entry \"name\"";
-
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(expectedMessage);
+			assertThat(e.getMessage()).isEqualTo(expectedMessage);
 		}
 	}
 }

@@ -36,8 +36,8 @@ public abstract class AbstractHttpResponseDoesNotHaveHttpHeaderMatcherTest<T> ex
 
 	@Test
 	public void it_should_pass_with_missing_header() {
-		final Header header = header("Foo", "Bar");
-		final T rsp = newHttpResponse(header);
+		Header header = header("Foo", "Bar");
+		T rsp = newHttpResponse(header);
 
 		run(rsp);
 	}

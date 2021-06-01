@@ -41,13 +41,13 @@ public class IsHeaderMatchingAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
-		final String name = "foo";
-		final String value = "bar";
-		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
+		String name = "foo";
+		String value = "bar";
+		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
-		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
-		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
+		IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -58,13 +58,13 @@ public class IsHeaderMatchingAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
-		final String name = "foo";
-		final String value = "bar";
-		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
+		String name = "foo";
+		String value = "bar";
+		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
-		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
-		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).addHeader(name, value).build();
+		IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).addHeader(name, value).build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -75,13 +75,13 @@ public class IsHeaderMatchingAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
-		final String name = "foo";
-		final String value = "bar";
-		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
+		String name = "foo";
+		String value = "bar";
+		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
-		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
-		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
+		IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -93,13 +93,13 @@ public class IsHeaderMatchingAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
-		final String name = "foo";
-		final String value = "bar";
-		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
+		String name = "foo";
+		String value = "bar";
+		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
-		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
-		final HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).build();
+		IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value + value).build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -111,13 +111,13 @@ public class IsHeaderMatchingAssertionTest {
 
 	@Test
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
-		final String name = "Content-Type";
-		final String value = "bar";
-		final HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
-		final HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
+		String name = "Content-Type";
+		String value = "bar";
+		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
+		HttpHeaderParser<?> parser = new HeaderParserBuilder().add(value, expected).build();
 
-		final IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
+		IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, "application/json")
 				.addHeader(name, "application/xml")
 				.build();

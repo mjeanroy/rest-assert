@@ -43,17 +43,17 @@ public class DefaultCookieTest {
 
 	@Test
 	public void it_should_implement_to_string() {
-		final String name = "X-Auth-Token";
-		final String value = "b145d7b2-d76c-4aa4-93d4-5f853f94b333";
-		final String domain = "localhost";
-		final String path = "/";
-		final boolean secure = true;
-		final boolean httpOnly = true;
-		final long maxAge = 0L;
-		final SameSite sameSite = SameSite.LAX;
-		final Date expires = null;
+		String name = "X-Auth-Token";
+		String value = "b145d7b2-d76c-4aa4-93d4-5f853f94b333";
+		String domain = "localhost";
+		String path = "/";
+		boolean secure = true;
+		boolean httpOnly = true;
+		long maxAge = 0L;
+		SameSite sameSite = SameSite.LAX;
+		Date expires = null;
 
-		final DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
+		DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 
 		assertThat(cookie.toString()).isEqualTo(
 				"DefaultCookie{" +
@@ -72,16 +72,16 @@ public class DefaultCookieTest {
 
 	@Test
 	public void it_should_create_cookie_with_a_clone_of_expires_dates() {
-		final String name = "X-Auth-Token";
-		final String value = "b145d7b2-d76c-4aa4-93d4-5f853f94b333";
-		final String domain = "localhost";
-		final String path = "/";
-		final boolean secure = true;
-		final boolean httpOnly = true;
-		final long maxAge = 0L;
-		final SameSite sameSite = SameSite.LAX;
-		final Date expires = createUtcDate(2016, Calendar.APRIL, 21, 18, 21, 35);
-		final DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
+		String name = "X-Auth-Token";
+		String value = "b145d7b2-d76c-4aa4-93d4-5f853f94b333";
+		String domain = "localhost";
+		String path = "/";
+		boolean secure = true;
+		boolean httpOnly = true;
+		long maxAge = 0L;
+		SameSite sameSite = SameSite.LAX;
+		Date expires = createUtcDate(2016, Calendar.APRIL, 21, 18, 21, 35);
+		DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 		assertThat(cookie.getExpires()).isNotNull().isNotSameAs(expires).isEqualTo(expires);
 	}
 }

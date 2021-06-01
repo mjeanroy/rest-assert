@@ -51,12 +51,12 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 	@Test
 	public void it_should_pass_with_expected_mime_type() {
 		// Given
-		final String mimeType = getMimeType().toLowerCase();
-		final Header header = getHeader(mimeType);
-		final HttpResponse httpResponse = newResponse(header);
+		String mimeType = getMimeType().toLowerCase();
+		Header header = getHeader(mimeType);
+		HttpResponse httpResponse = newResponse(header);
 
 		// When
-		final AssertionResult result = run(httpResponse);
+		AssertionResult result = run(httpResponse);
 
 		// Then
 		checkSuccess(result);
@@ -65,12 +65,12 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 	@Test
 	public void it_should_pass_with_expected_mime_type_in_a_different_case() {
 		// Given
-		final String mimeType = getMimeType().toUpperCase();
-		final Header header = getHeader(mimeType);
-		final HttpResponse httpResponse = newResponse(header);
+		String mimeType = getMimeType().toUpperCase();
+		Header header = getHeader(mimeType);
+		HttpResponse httpResponse = newResponse(header);
 
 		// When
-		final AssertionResult result = run(httpResponse);
+		AssertionResult result = run(httpResponse);
 
 		// Then
 		checkSuccess(result);
@@ -79,50 +79,33 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 	@Test
 	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		// Given
-		final String expectedMimeType = getMimeType();
-		final Header expectedHeader = getHeader(expectedMimeType);
-		final String actualMimeType = expectedMimeType + "foo";
+		String expectedMimeType = getMimeType();
+		Header expectedHeader = getHeader(expectedMimeType);
+		String actualMimeType = expectedMimeType + "foo";
 
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-		final Header actualHeader = header(expectedName, actualValue);
-		final HttpResponse httpResponse = newResponse(actualHeader);
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
+		Header actualHeader = header(expectedName, actualValue);
+		HttpResponse httpResponse = newResponse(actualHeader);
 
 		// When
-		final AssertionResult result = run(httpResponse);
+		AssertionResult result = run(httpResponse);
 
 		// Then
-		final Class<ShouldHaveMimeType> klassError = ShouldHaveMimeType.class;
-		final String pattern = "Expecting response to have mime type %s but was %s";
-		final Object[] parameters = {expectedMimeType, actualMimeType};
+		Class<ShouldHaveMimeType> klassError = ShouldHaveMimeType.class;
+		String pattern = "Expecting response to have mime type %s but was %s";
+		Object[] parameters = {expectedMimeType, actualMimeType};
 		checkError(result, klassError, pattern, parameters);
 	}
 
-	/**
-	 * Get the mime-type to be tested.
-	 *
-	 * @return Mime-Type to be tested.
-	 */
 	protected abstract String getMimeType();
 
-	/**
-	 * Create new HTTP with given header.
-	 *
-	 * @param header The header.
-	 * @return The HTTP response.
-	 */
-	private HttpResponse newResponse(Header header) {
+	private static HttpResponse newResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
-	/**
-	 * Generate {@code "Content-Type"} header with mime-type to be tested.
-	 *
-	 * @param mimeType Mime-Type to be tested.
-	 * @return The {@code "Content-Type} header.
-	 */
-	private Header getHeader(String mimeType) {
+	private static Header getHeader(String mimeType) {
 		String value = mimeType + ";charset=UTF-8";
 		return header("Content-Type", value);
 	}

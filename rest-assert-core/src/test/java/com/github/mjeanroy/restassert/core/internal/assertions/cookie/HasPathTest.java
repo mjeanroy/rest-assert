@@ -43,8 +43,8 @@ public class HasPathTest extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedPath = success().getPath();
-		final String actualPath = expectedPath + "foo";
+		String expectedPath = success().getPath();
+		String actualPath = expectedPath + "foo";
 		return cookie(actualPath);
 	}
 
@@ -60,16 +60,15 @@ public class HasPathTest extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final String expectedPath = success().getPath();
-		final String actualPath = failure().getPath();
+		String expectedPath = success().getPath();
+		String actualPath = failure().getPath();
 		return new String[] {
-			expectedPath, actualPath
+			expectedPath,
+			actualPath,
 		};
 	}
 
 	private Cookie cookie(String path) {
-		return new CookieBuilder()
-			.setPath(path)
-			.build();
+		return new CookieBuilder().setPath(path).build();
 	}
 }

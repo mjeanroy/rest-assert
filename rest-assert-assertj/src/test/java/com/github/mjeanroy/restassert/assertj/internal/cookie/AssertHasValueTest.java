@@ -42,8 +42,8 @@ public class AssertHasValueTest extends AbstractCookiesTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedValue = success().getValue();
-		final String actualValue = expectedValue + "foo";
+		String expectedValue = success().getValue();
+		String actualValue = expectedValue + "foo";
 		return cookie(actualValue);
 	}
 
@@ -54,8 +54,8 @@ public class AssertHasValueTest extends AbstractCookiesTest {
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedValue = success().getValue();
-		final String actualValue = failure().getValue();
+		String expectedValue = success().getValue();
+		String actualValue = failure().getValue();
 		return new Object[] {
 				expectedValue, actualValue
 		};

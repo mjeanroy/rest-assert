@@ -56,9 +56,9 @@ public class IsEqualIgnoringToURLTest extends AbstractJsonAssertion_isEqualToIgn
 
 	@Test
 	public void it_should_fail_if_uri_syntax_exception() throws Exception {
-		final String actual = "{}";
-		final URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
-		final List<String> objects = emptyList();
+		String actual = "{}";
+		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
+		List<String> objects = emptyList();
 
 		assertThatThrownBy(isEqualToIgnoring(actual, url, objects))
 				.isExactlyInstanceOf(AssertionError.class)

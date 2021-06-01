@@ -46,7 +46,7 @@ public abstract class AbstractJsonIsEqualToIgnoringTest<T> extends AbstractAsser
 	@Test
 	public void it_should_fail() {
 		final T failure = failure();
-		final String message = "" +
+		final String message =
 				"Expecting json entry array[0] to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
 				"Expecting json entry array[1] to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
 				"Expecting json entry array[2] to be equal to 3.1 but was 3.0";

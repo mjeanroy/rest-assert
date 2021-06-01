@@ -42,13 +42,10 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 
 	@Test
 	public void should_pass() {
-		final Range range = getRange();
+		Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
-				HttpResponse httpResponse = new HttpResponseBuilderImpl()
-					.setStatus(i)
-					.build();
-
+				HttpResponse httpResponse = new HttpResponseBuilderImpl().setStatus(i).build();
 				run(someInfo(), httpResponse);
 			}
 		}
@@ -56,23 +53,18 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 
 	@Test
 	public void should_fail() {
-		final AssertionInfo info = someInfo();
-		final Range range = getRange();
-		final int start = range.getStart();
-		final int end = range.getEnd();
+		AssertionInfo info = someInfo();
+		Range range = getRange();
+		int start = range.getStart();
+		int end = range.getEnd();
 		for (int status = start; status <= end; status++) {
-			final HttpResponse httpResponse = new HttpResponseBuilderImpl()
-				.setStatus(status)
-				.build();
+			HttpResponse httpResponse = new HttpResponseBuilderImpl().setStatus(status).build();
 
 			try {
 				run(info, httpResponse);
 				failBecauseExpectedAssertionErrorWasNotThrown();
 			} catch (AssertionError e) {
-				assertThat(e.getMessage())
-						.isNotNull()
-						.isNotEmpty()
-						.isEqualTo(format("Expecting status code to be out of %s and %s but was %s", start, end, status));
+				assertThat(e.getMessage()).isEqualTo(String.format("Expecting status code to be out of %s and %s but was %s", start, end, status));
 			}
 		}
 	}

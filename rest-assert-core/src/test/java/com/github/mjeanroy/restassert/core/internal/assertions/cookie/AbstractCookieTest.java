@@ -44,7 +44,7 @@ public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> 
 
 	@Test
 	public void it_should_fail() {
-		final Cookie cookie = failure();
+		Cookie cookie = failure();
 
 		AssertionResult result = run(cookie);
 

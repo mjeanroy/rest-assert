@@ -42,8 +42,8 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 	@Test
 	public void should_pass_if_header_is_missing() {
 		// GIVEN
-		final Header header = header("Foo", "Bar");
-		final HttpResponse httpResponse = newHttpResponse(header);
+		Header header = header("Foo", "Bar");
+		HttpResponse httpResponse = newHttpResponse(header);
 
 		// WHEN
 		run(httpResponse);
@@ -52,8 +52,8 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 	@Test
 	public void should_fail_if_header_is_available() {
 		// GIVEN
-		final Header header = getHeader();
-		final HttpResponse httpResponse = newHttpResponse(header);
+		Header header = getHeader();
+		HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
 			// WHEN
@@ -61,36 +61,15 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			// THEN
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting response not to have header \"%s\"", header.getName()));
+			assertThat(e.getMessage()).isEqualTo(String.format("Expecting response not to have header \"%s\"", header.getName()));
 		}
 	}
 
-	/**
-	 * Get expected header.
-	 *
-	 * @return Expected header.
-	 */
 	protected abstract Header getHeader();
 
-	/**
-	 * Create fake http response with expected {@code header}.
-	 *
-	 * @param header Expected header.
-	 * @return Fake http response.
-	 */
-	private HttpResponse newHttpResponse(Header header) {
-		return new HttpResponseBuilderImpl()
-				.addHeader(header)
-				.build();
-	}
-
-	/**
-	 * Invoke test with given {@code httpResponse}.
-	 *
-	 * @param httpResponse Http response.
-	 */
 	protected abstract void run(HttpResponse httpResponse);
+
+	private static HttpResponse newHttpResponse(Header header) {
+		return new HttpResponseBuilderImpl().addHeader(header).build();
+	}
 }

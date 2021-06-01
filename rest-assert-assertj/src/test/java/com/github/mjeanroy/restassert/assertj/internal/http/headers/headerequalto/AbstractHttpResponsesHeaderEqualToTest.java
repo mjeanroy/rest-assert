@@ -42,8 +42,8 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	@Test
 	public void should_pass_if_header_is_ok() {
 		// GIVEN
-		final Header header = getHeader();
-		final HttpResponse httpResponse = newHttpResponse(header);
+		Header header = getHeader();
+		HttpResponse httpResponse = newHttpResponse(header);
 
 		// WHEN
 		run(httpResponse);
@@ -54,12 +54,12 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 	@Test
 	public void should_fail_if_header_is_not_available() {
 		// GIVEN
-		final Header expectedHeader = getHeader();
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = failValue();
-		final Header header = header(expectedName, actualValue);
-		final HttpResponse httpResponse = newHttpResponse(header);
+		Header expectedHeader = getHeader();
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = failValue();
+		Header header = header(expectedName, actualValue);
+		HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
 			// WHEN
@@ -67,43 +67,19 @@ public abstract class AbstractHttpResponsesHeaderEqualToTest {
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
 			// THEN
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting response to have header \"%s\" equal to \"%s\" but was \"%s\"", expectedName, expectedValue, actualValue));
+			assertThat(e.getMessage()).isEqualTo(String.format("Expecting response to have header \"%s\" equal to \"%s\" but was \"%s\"", expectedName, expectedValue, actualValue));
 		}
 	}
 
-	/**
-	 * Get expected header.
-	 *
-	 * @return Expected header.
-	 */
 	protected abstract Header getHeader();
 
-	/**
-	 * Create fail value (i.e should not match expected header value).
-	 *
-	 * @return Fail value.
-	 */
+	protected abstract void run(HttpResponse httpResponse);
+
 	String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 
-	/**
-	 * Create fake http response with expected header.
-	 *
-	 * @param header Expected header.
-	 * @return Fake http response.
-	 */
-	private HttpResponse newHttpResponse(Header header) {
+	private static HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
-
-	/**
-	 * Invoke test with {@code httpResponse}.
-	 *
-	 * @param httpResponse Http response.
-	 */
-	protected abstract void run(HttpResponse httpResponse);
 }

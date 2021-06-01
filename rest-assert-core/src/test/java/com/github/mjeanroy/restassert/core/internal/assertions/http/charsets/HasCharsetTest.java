@@ -49,14 +49,14 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	@Test
 	public void it_should_compare_charset_case_insensitively() {
 		// GIVEN
-		final String expected = "UTF-8";
-		final String actual = "utf-8";
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
+		String expected = "UTF-8";
+		String actual = "utf-8";
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(NAME, "application/json; charset=" + actual)
 				.build();
 
 		// WHEN
-		final AssertionResult result = assertions.hasCharset(rsp, expected);
+		AssertionResult result = assertions.hasCharset(rsp, expected);
 
 		// THEN
 		checkSuccess(result);
@@ -65,10 +65,10 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	@Test
 	public void it_should_fail_if_response_does_not_have_content_type() {
 		// GIVEN
-		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		// WHEN
-		final AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 
 		// THEN
 		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
@@ -77,12 +77,12 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	@Test
 	public void it_should_fail_if_response_has_content_type_without_charset() {
 		// GIVEN
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 			.addHeader(NAME, "application/json")
 			.build();
 
 		// WHEN
-		final AssertionResult result = assertions.hasCharset(rsp, CHARSET);
+		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 
 		// THEN
 		checkError(result, ShouldHaveCharset.class, "Expecting response to have defined charset");

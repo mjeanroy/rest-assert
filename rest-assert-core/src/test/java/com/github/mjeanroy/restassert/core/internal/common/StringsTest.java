@@ -52,7 +52,7 @@ public class StringsTest {
 	@Test
 	@SuppressWarnings("unchecked")
 	public void it_should_join_strings_using_mapper() {
-		final Strings.StringMapper<Integer> mapper = mock(Strings.StringMapper.class);
+		Strings.StringMapper<Integer> mapper = mock(Strings.StringMapper.class);
 		when(mapper.apply(anyInt())).thenAnswer(new Answer<String>() {
 			@Override
 			public String answer(InvocationOnMock invocation) {
@@ -60,10 +60,10 @@ public class StringsTest {
 			}
 		});
 
-		final int v1 = 1;
-		final int v2 = 2;
-		final int v3 = 3;
-		final List<Integer> inputs = asList(v1, v2, v3);
+		int v1 = 1;
+		int v2 = 2;
+		int v3 = 3;
+		List<Integer> inputs = asList(v1, v2, v3);
 
 		assertThat(Strings.join(inputs, " ", mapper)).isEqualTo("1 2 3");
 		verify(mapper).apply(v1);

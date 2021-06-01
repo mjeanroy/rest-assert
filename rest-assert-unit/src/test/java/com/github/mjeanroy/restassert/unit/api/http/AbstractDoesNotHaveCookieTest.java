@@ -36,10 +36,6 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractDoesNotHaveCookieTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -68,15 +64,9 @@ public abstract class AbstractDoesNotHaveCookieTest<T> extends AbstractHttpAsser
 		});
 	}
 
-	/**
-	 * Invoke test with a fail test case.
-	 *
-	 * @param msg The custom error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(String msg, final TestInvocation<Cookie> invocation) {
 		final Cookie cookie = cookie();
-		final String message = firstNonNull(msg, buildErrorMessage());
+		String message = firstNonNull(msg, buildErrorMessage());
 		assertFailure(message, new Function() {
 			@Override
 			public void apply() {
@@ -85,35 +75,14 @@ public abstract class AbstractDoesNotHaveCookieTest<T> extends AbstractHttpAsser
 		});
 	}
 
-	/**
-	 * Create cookie to be tested.
-	 *
-	 * @return The cookie to be tested.
-	 */
 	protected abstract Cookie cookie();
 
-	/**
-	 * Create the default error message returned with a failed test.
-	 *
-	 * @return Default error message.
-	 */
 	protected abstract String buildErrorMessage();
 
-	/**
-	 * Create fake cookie that will be automatically tested.
-	 *
-	 * @return A fake cookie.
-	 */
 	protected Cookie fakeCookie() {
 		return new CookieBuilder().setName("foo").setValue("bar").build();
 	}
 
-	/**
-	 * Get the HTTP response to be tested.
-	 *
-	 * @param cookie Expected cookie.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(Cookie cookie) {
 		HttpResponseBuilder<T> builder = getBuilder();
 		if (cookie != null) {

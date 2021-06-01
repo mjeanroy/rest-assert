@@ -51,13 +51,13 @@ public abstract class AbstractHasCookieTest {
 
 	@Test
 	public void should_fail_if_status_code_are_not_equal() {
-		final AssertionInfo info = someInfo();
-		final Cookie cookie = new CookieBuilder()
+		AssertionInfo info = someInfo();
+		Cookie cookie = new CookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.build();
 
-		final HttpResponse httpResponse = new HttpResponseBuilderImpl()
+		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 				.addCookie(cookie)
 				.build();
 

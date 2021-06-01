@@ -33,10 +33,6 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -65,12 +61,6 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 		});
 	}
 
-	/**
-	 * Invoke test with failure case.
-	 *
-	 * @param msg Expected error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void invokeFailure(String msg, final TestInvocation<String> invocation) {
 		final String expectedCharset = getCharset();
 		final String actualCharset = expectedCharset + "foo";
@@ -84,32 +74,14 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 		});
 	}
 
-	/**
-	 * Get the charset to be tested.
-	 *
-	 * @return Charset value.
-	 */
 	protected abstract String getCharset();
 
-	/**
-	 * Create expected error message when test fail.
-	 *
-	 * @param expectedCharset Expected charset.
-	 * @param actualCharset Actual charset in HTTP response.
-	 * @return Expected error message.
-	 */
-	private String buildErrorMessage(String expectedCharset, String actualCharset) {
-		return String.format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset);
-	}
-
-	/**
-	 * Create the HTTP response to be tested.
-	 *
-	 * @param charset The HTTP response charset.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(String charset) {
 		String contentType = String.format("application/json;charset=%s", charset);
 		return getBuilder().addHeader("Content-Type", contentType).build();
+	}
+
+	private static String buildErrorMessage(String expectedCharset, String actualCharset) {
+		return String.format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset);
 	}
 }

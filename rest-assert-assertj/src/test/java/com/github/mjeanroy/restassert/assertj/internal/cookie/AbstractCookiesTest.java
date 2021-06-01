@@ -46,8 +46,8 @@ public abstract class AbstractCookiesTest {
 
 	@Test
 	public void should_fail() {
-		final AssertionInfo info = someInfo();
-		final Cookie cookie = failure();
+		AssertionInfo info = someInfo();
+		Cookie cookie = failure();
 
 		try {
 			run(info, cookie);

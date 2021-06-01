@@ -64,17 +64,17 @@ public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest 
 	@Test
 	public void it_should_not_pass_with_list_in_wrong_order() {
 		// GIVEN
-		final ContentEncoding expected = ContentEncoding.parser().parse("compress, identity");
-		final ContentEncoding actual = ContentEncoding.parser().parse("identity, compress");
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual.serializeValue()).build();
+		ContentEncoding expected = ContentEncoding.parser().parse("compress, identity");
+		ContentEncoding actual = ContentEncoding.parser().parse("identity, compress");
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual.serializeValue()).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
+		AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
 
 		// THEN
-		final Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
-		final String message = "Expecting response to have header %s equal to %s but was %s";
-		final Object[] args = {HEADER_NAME, expected.serializeValue(), actual.serializeValue()};
+		Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
+		String message = "Expecting response to have header %s equal to %s but was %s";
+		Object[] args = {HEADER_NAME, expected.serializeValue(), actual.serializeValue()};
 		checkError(result, klassError, message, args);
 	}
 }

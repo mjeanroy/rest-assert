@@ -62,38 +62,38 @@ public class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualT
 
 	@Test
 	public void it_should_pass_with_case_insensitive_comparison() {
-		final String actual = VALUE.toUpperCase();
-		final String expected = actual.toLowerCase();
+		String actual = VALUE.toUpperCase();
+		String expected = actual.toLowerCase();
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
 	public void it_should_pass_with_list_comparison() {
-		final String actual = "compress, identity";
-		final String expected = actual.toUpperCase();
+		String actual = "compress, identity";
+		String expected = actual.toUpperCase();
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
 	public void it_should_not_pass_with_list_in_wrong_order() {
 		// GIVEN
-		final String expected = "compress, identity";
-		final String actual = "identity, compress";
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual).build();
+		String expected = "compress, identity";
+		String actual = "identity, compress";
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
+		AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
 
 		// THEN
-		final Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
-		final String message = "Expecting response to have header %s equal to %s but was %s";
-		final Object[] args = {HEADER_NAME, expected, actual};
+		Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
+		String message = "Expecting response to have header %s equal to %s but was %s";
+		Object[] args = {HEADER_NAME, expected, actual};
 		checkError(result, klassError, message, args);
 	}
 
-	private void doTestSuccess(String actual, String expected) {
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual).build();
-		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
+	private static void doTestSuccess(String actual, String expected) {
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(HEADER_NAME, actual).build();
+		AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

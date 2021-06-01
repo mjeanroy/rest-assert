@@ -38,7 +38,7 @@ public class AssertHasSameSiteAsStringTest {
 
 	@Test
 	public void it_should_fail_because_of_unsupported_operation() {
-		final Cookie cookie = new JavaxCookieBuilder().build();
+		Cookie cookie = new JavaxCookieBuilder().build();
 		assertThatThrownBy(assertHasSameSite(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("javax.servlet.http.Cookie does not support #getSameSite()");
@@ -46,7 +46,7 @@ public class AssertHasSameSiteAsStringTest {
 
 	@Test
 	public void it_should_fail_with_custom_message_because_of_unsupported_operation() {
-		final Cookie cookie = new JavaxCookieBuilder().build();
+		Cookie cookie = new JavaxCookieBuilder().build();
 		assertThatThrownBy(assertHasSameSite("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("javax.servlet.http.Cookie does not support #getSameSite()");

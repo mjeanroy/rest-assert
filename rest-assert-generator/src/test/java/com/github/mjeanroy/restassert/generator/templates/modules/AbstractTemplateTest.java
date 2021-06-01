@@ -43,9 +43,9 @@ public abstract class AbstractTemplateTest {
 
 	@Test
 	public void it_should_starts_with_license() throws Exception {
-		final InputStream input = getClass().getResourceAsStream("/license.txt");
-		final Charset charset = StandardCharsets.UTF_8;
-		final String license = IOUtils.toString(input, charset);
+		InputStream input = getClass().getResourceAsStream("/license.txt");
+		Charset charset = StandardCharsets.UTF_8;
+		String license = IOUtils.toString(input, charset);
 		assertThat(getTemplate().read()).startsWith(license);
 	}
 

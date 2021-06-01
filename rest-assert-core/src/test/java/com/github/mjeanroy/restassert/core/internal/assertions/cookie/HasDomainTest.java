@@ -43,8 +43,8 @@ public class HasDomainTest extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedDomain = success().getDomain();
-		final String actualDomain = expectedDomain + "foo";
+		String expectedDomain = success().getDomain();
+		String actualDomain = expectedDomain + "foo";
 		return cookie(actualDomain);
 	}
 
@@ -60,16 +60,15 @@ public class HasDomainTest extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final String expectedDomain = success().getDomain();
-		final String actualDomain = failure().getDomain();
+		String expectedDomain = success().getDomain();
+		String actualDomain = failure().getDomain();
 		return new String[] {
-			expectedDomain, actualDomain
+			expectedDomain,
+			actualDomain,
 		};
 	}
 
 	private Cookie cookie(String domain) {
-		return new CookieBuilder()
-			.setDomain(domain)
-			.build();
+		return new CookieBuilder().setDomain(domain).build();
 	}
 }

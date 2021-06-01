@@ -45,14 +45,14 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 
 	@Test
 	public void should_fail() {
-		final AssertionInfo info = someInfo();
-		final T json = failure();
+		AssertionInfo info = someInfo();
+		T json = failure();
 
 		try {
 			run(info, json);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
-			String expectedMessage = "" +
+			String expectedMessage =
 					"Expecting json entry \"str\" to be equal to \"bar\" but was \"foo\"," + LINE_SEPARATOR +
 					"Expecting json entry \"nb\" to be equal to 2.0 but was 1.0," + LINE_SEPARATOR +
 					"Expecting json entry \"bool\" to be equal to false but was true," + LINE_SEPARATOR +
@@ -60,10 +60,7 @@ public abstract class AbstractJsonsIsEqualToTest<T> {
 					"Expecting json entry \"array[1]\" to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
 					"Expecting json entry \"array[2]\" to be equal to 3.1 but was 3.0";
 
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(expectedMessage);
+			assertThat(e.getMessage()).isEqualTo(expectedMessage);
 		}
 	}
 

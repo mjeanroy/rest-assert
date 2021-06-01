@@ -55,21 +55,21 @@ public class IsAccessControlAllowHeadersEqualToTest extends AbstractHttpHeaderEq
 
 	@Test
 	public void it_should_compare_with_single_string() {
-		final String actual = "X-Foo, X-Bar";
-		final String expected = "X-Bar, X-Foo";
+		String actual = "X-Foo, X-Bar";
+		String expected = "X-Bar, X-Foo";
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
 	public void it_should_compare_case_insensitively() {
-		final String actual = "x-foo, x-bar";
-		final String expected = "X-Foo, X-Bar";
+		String actual = "x-foo, x-bar";
+		String expected = "X-Foo, X-Bar";
 		doTestSuccess(actual, expected);
 	}
 
-	private void doTestSuccess(String actual, String expected) {
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isAccessControlAllowHeadersEqualTo(response, expected);
+	private static void doTestSuccess(String actual, String expected) {
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		AssertionResult result = assertions.isAccessControlAllowHeadersEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

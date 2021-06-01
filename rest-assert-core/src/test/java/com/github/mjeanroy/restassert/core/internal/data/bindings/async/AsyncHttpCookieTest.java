@@ -42,83 +42,83 @@ public class AsyncHttpCookieTest {
 
 	@Test
 	public void it_should_return_name() {
-		final String expectedName = "foo";
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setName(expectedName).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final String name = cookie.getName();
+		String expectedName = "foo";
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setName(expectedName).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
 	}
 
 	@Test
 	public void it_should_return_value() {
-		final String expectedValue = "foo";
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setValue(expectedValue).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final String value = cookie.getValue();
+		String expectedValue = "foo";
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setValue(expectedValue).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
 	}
 
 	@Test
 	public void it_should_return_domain() {
-		final String expectedDomain = "foo";
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setDomain(expectedDomain).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final String domain = cookie.getDomain();
+		String expectedDomain = "foo";
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setDomain(expectedDomain).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
 	}
 
 	@Test
 	public void it_should_return_path() {
-		final String expectedPath = "foo";
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setPath(expectedPath).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final String path = cookie.getPath();
+		String expectedPath = "foo";
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setPath(expectedPath).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setSecure(true).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final boolean secured = cookie.isSecured();
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setSecure(true).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setHttpOnly(true).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final boolean httpOnly = cookie.isHttpOnly();
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setHttpOnly(true).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
 	}
 
 	@Test
 	public void it_should_get_max_age() {
-		final long expectedMaxAge = 10;
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setMaxAge(expectedMaxAge).build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
-		final long maxAge = cookie.getMaxAge();
+		long expectedMaxAge = 10;
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setMaxAge(expectedMaxAge).build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
 	}
 
 	@Test
 	public void it_should_not_implement_expires() {
-		final io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
-		final Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
+		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
+		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 
 		assertThatThrownBy(getExpires(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.asynchttpclient.cookie.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
 	}
 
-	private ThrowingCallable getExpires(final Cookie cookie) {
+	private static ThrowingCallable getExpires(final Cookie cookie) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {

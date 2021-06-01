@@ -47,27 +47,26 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 
 	@Test
 	public void should_fail_if_header_is_not_available() {
-		final String expectedMimeType = getMimeType();
-		final String actualMimeType = expectedMimeType + "foo";
+		String expectedMimeType = getMimeType();
+		String actualMimeType = expectedMimeType + "foo";
 
-		final Header expectedHeader = getHeader();
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-		final Header header = header(expectedName, actualValue);
+		Header expectedHeader = getHeader();
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
+		Header header = header(expectedName, actualValue);
 
-		final HttpResponse httpResponse = newHttpResponse(header);
+		HttpResponse httpResponse = newHttpResponse(header);
 
 		try {
 			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting response to have mime type \"%s\" but was \"%s\"", expectedMimeType, actualMimeType));
+			assertThat(e.getMessage()).isEqualTo(String.format("Expecting response to have mime type \"%s\" but was \"%s\"", expectedMimeType, actualMimeType));
 		}
 	}
+
+	protected abstract void run(HttpResponse httpResponse);
 
 	protected abstract String getMimeType();
 
@@ -75,9 +74,7 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 		return header("Content-Type", getMimeType() + ";charset=UTF-8");
 	}
 
-	private HttpResponse newHttpResponse(Header header) {
+	private static HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
-
-	protected abstract void run(HttpResponse httpResponse);
 }

@@ -59,10 +59,11 @@ public class HasSameSiteAsStringTest extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final SameSite expectedSameSite = success().getSameSite();
-		final SameSite actualSameSite = failure().getSameSite();
+		SameSite expectedSameSite = success().getSameSite();
+		SameSite actualSameSite = failure().getSameSite();
 		return new SameSite[] {
-			expectedSameSite, actualSameSite
+			expectedSameSite,
+			actualSameSite,
 		};
 	}
 

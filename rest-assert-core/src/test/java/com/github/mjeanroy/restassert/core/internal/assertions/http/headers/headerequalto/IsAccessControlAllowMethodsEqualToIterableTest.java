@@ -74,12 +74,12 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 	@Test
 	public void it_should_not_be_order_sensitive() {
 		// GIVEN
-		final String actual = "GET,POST,PUT";
-		final List<RequestMethod> expected = asList(GET, PUT, POST);
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = "GET,POST,PUT";
+		List<RequestMethod> expected = asList(GET, PUT, POST);
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isAccessControlAllowMethodsEqualTo(response, expected);
+		AssertionResult result = assertions.isAccessControlAllowMethodsEqualTo(response, expected);
 
 		// THEN
 		checkSuccess(result);

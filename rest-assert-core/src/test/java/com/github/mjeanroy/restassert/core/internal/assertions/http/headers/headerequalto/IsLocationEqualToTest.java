@@ -57,17 +57,17 @@ public class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_fail_with_same_value_but_different_case() {
 		// GIVEN
-		final String expected = VALUE.toUpperCase();
-		final String actual = VALUE.toLowerCase();
-		final HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String expected = VALUE.toUpperCase();
+		String actual = VALUE.toLowerCase();
+		HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isLocationEqualTo(httpResponse, expected);
+		AssertionResult result = assertions.isLocationEqualTo(httpResponse, expected);
 
 		// THEN
-		final Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
-		final String message = "Expecting response to have header %s equal to %s but was %s";
-		final Object[] args = {NAME, expected, actual};
+		Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
+		String message = "Expecting response to have header %s equal to %s but was %s";
+		Object[] args = {NAME, expected, actual};
 		checkError(result, klassError, message, args);
 	}
 }

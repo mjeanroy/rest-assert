@@ -51,8 +51,8 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 
 	@Test
 	public void it_should_fail_with_response_different_than_expected_status() {
-		final int expectedStatus = status();
-		final int status = expectedStatus + 1;
+		int expectedStatus = status();
+		int status = expectedStatus + 1;
 
 		AssertionResult result = run(newResponse(status));
 
@@ -64,9 +64,7 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 	}
 
 	private HttpResponse newResponse(int status) {
-		return new HttpResponseBuilderImpl()
-			.setStatus(status)
-			.build();
+		return new HttpResponseBuilderImpl().setStatus(status).build();
 	}
 
 	protected abstract int status();

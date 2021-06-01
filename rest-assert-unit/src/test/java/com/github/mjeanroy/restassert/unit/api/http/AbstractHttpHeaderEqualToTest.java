@@ -35,9 +35,6 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message that may be used as first parameter in assertion methods.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -83,41 +80,17 @@ public abstract class AbstractHttpHeaderEqualToTest<T> extends AbstractHttpAsser
 		});
 	}
 
-	/**
-	 * Get expected header to test.
-	 *
-	 * @return Header.
-	 */
 	protected abstract Header getHeader();
 
-	/**
-	 * Get failed header value.
-	 *
-	 * @return Failed value.
-	 */
 	protected String failValue() {
 		return getHeader().getValue() + "foo";
 	}
 
-	/**
-	 * Get expected error message when header does not match expected value.
-	 *
-	 * @param expectedName Header name.
-	 * @param expectedValue Expected value.
-	 * @param actualValue Actual value.
-	 * @return Error message.
-	 */
-	private String buildErrorMessage(String expectedName, String expectedValue, String actualValue) {
-		return String.format("Expecting response to have header %s equal to %s but was %s", expectedName, expectedValue, actualValue);
-	}
-
-	/**
-	 * Get the HTTP response to be tested.
-	 *
-	 * @param header Expected header.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(Header header) {
 		return getBuilder().addHeader(header).build();
+	}
+
+	private static String buildErrorMessage(String expectedName, String expectedValue, String actualValue) {
+		return String.format("Expecting response to have header %s equal to %s but was %s", expectedName, expectedValue, actualValue);
 	}
 }

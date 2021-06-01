@@ -34,15 +34,11 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {
-		final Range range = getRange();
+		Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			run(newHttpResponse(i));
 			run(CUSTOM_MESSAGE, newHttpResponse(i));
@@ -69,16 +65,10 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 		});
 	}
 
-	/**
-	 * Invoke test with a fail test case.
-	 *
-	 * @param msg The custom error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTestWithDefaultMessage(String msg, final TestInvocation<Integer> invocation) {
-		final Range rang = getRange();
-		final int start = rang.getStart();
-		final int end = rang.getEnd();
+		Range rang = getRange();
+		int start = rang.getStart();
+		int end = rang.getEnd();
 
 		for (int i = 100; i <= 599; i++) {
 			if (i >= start && i <= end) {
@@ -96,32 +86,13 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 		}
 	}
 
-	/**
-	 * Range.
-	 *
-	 * @return The range value.
-	 */
 	protected abstract Range getRange();
 
-	/**
-	 * Create the HTTP response to be tested.
-	 *
-	 * @param status HTTP Response status.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(int status) {
 		return getBuilder().setStatus(status).build();
 	}
 
-	/**
-	 * Get expected default error message.
-	 *
-	 * @param start Range start.
-	 * @param end Range end.
-	 * @param status The HTTP response actual status.
-	 * @return The expected default message.
-	 */
-	private String buildErrorMessage(int start, int end, int status) {
+	private static String buildErrorMessage(int start, int end, int status) {
 		return String.format("Expecting status code to be between %s and %s but was %s", start, end, status);
 	}
 }

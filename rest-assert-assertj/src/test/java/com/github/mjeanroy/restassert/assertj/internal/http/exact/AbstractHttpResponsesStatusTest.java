@@ -50,10 +50,10 @@ public abstract class AbstractHttpResponsesStatusTest {
 
 	@Test
 	public void should_fail_if_status_code_are_not_equal() {
-		final AssertionInfo info = someInfo();
-		final int status = status();
-		final int expectedStatus = status + 1;
-		final HttpResponse httpResponse = new HttpResponseBuilderImpl()
+		AssertionInfo info = someInfo();
+		int status = status();
+		int expectedStatus = status + 1;
+		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 			.setStatus(expectedStatus)
 			.build();
 
@@ -61,10 +61,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 			run(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
-			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting status code to be %s but was %s", status(), expectedStatus));
+			assertThat(e.getMessage()).isEqualTo(String.format("Expecting status code to be %s but was %s", status(), expectedStatus));
 		}
 	}
 

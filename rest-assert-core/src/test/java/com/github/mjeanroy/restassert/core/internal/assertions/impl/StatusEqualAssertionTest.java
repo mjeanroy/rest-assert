@@ -37,12 +37,10 @@ public class StatusEqualAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_status_match() {
-		final StatusEqualAssertion assertion = new StatusEqualAssertion(200);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.setStatus(200)
-				.build();
+		StatusEqualAssertion assertion = new StatusEqualAssertion(200);
+		HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(200).build();
 
-		final AssertionResult result = assertion.handle(rsp);
+		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
@@ -51,12 +49,10 @@ public class StatusEqualAssertionTest {
 
 	@Test
 	public void it_should_fail_if_status_does_not_match() {
-		final StatusEqualAssertion assertion = new StatusEqualAssertion(200);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.setStatus(400)
-				.build();
+		StatusEqualAssertion assertion = new StatusEqualAssertion(200);
+		HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(400).build();
 
-		final AssertionResult result = assertion.handle(rsp);
+		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();

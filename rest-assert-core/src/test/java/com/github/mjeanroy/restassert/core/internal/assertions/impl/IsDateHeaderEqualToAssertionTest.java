@@ -41,13 +41,11 @@ public class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_value() {
-		final String name = "foo";
-		final String value = "Thu, 05 May 2016 19:29:03 GMT";
-		final Date date = createUtcDate(2016, MAY, 5, 19, 29, 3);
-		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value)
-				.build();
+		String name = "foo";
+		String value = "Thu, 05 May 2016 19:29:03 GMT";
+		Date date = createUtcDate(2016, MAY, 5, 19, 29, 3);
+		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -58,12 +56,12 @@ public class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
-		final String name = "foo";
-		final String v1 = "Thu, 05 May 2016 19:29:03 GMT";
-		final String v2 = "Thu, 05 May 2016 19:30:03 GMT";
-		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
-		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
+		String name = "foo";
+		String v1 = "Thu, 05 May 2016 19:29:03 GMT";
+		String v2 = "Thu, 05 May 2016 19:30:03 GMT";
+		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
+		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, v1)
 				.addHeader(name, v2)
 				.build();
@@ -77,10 +75,10 @@ public class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
-		final String name = "foo";
-		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
-		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
+		String name = "foo";
+		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
+		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -92,13 +90,11 @@ public class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_does_not_have_expected_value() {
-		final String name = "foo";
-		final String value = "Thu, 05 May 2016 19:29:03 GMT";
-		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
-		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, value)
-				.build();
+		String name = "foo";
+		String value = "Thu, 05 May 2016 19:29:03 GMT";
+		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
+		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, value).build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -110,12 +106,12 @@ public class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_single_value_header_has_multiple_values() {
-		final String name = "Last-Modified";
-		final String v1 = "Thu, 05 May 2016 19:29:03 GMT";
-		final String v2 = "Thu, 05 May 2016 19:30:03 GMT";
-		final Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
-		final IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
+		String name = "Last-Modified";
+		String v1 = "Thu, 05 May 2016 19:29:03 GMT";
+		String v2 = "Thu, 05 May 2016 19:30:03 GMT";
+		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
+		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader(name, v1)
 				.addHeader(name, v2)
 				.build();

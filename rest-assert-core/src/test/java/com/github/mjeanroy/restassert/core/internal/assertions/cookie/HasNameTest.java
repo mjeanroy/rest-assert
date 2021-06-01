@@ -43,8 +43,8 @@ public class HasNameTest extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
+		String expectedName = success().getName();
+		String actualName = expectedName + "foo";
 		return cookie(actualName);
 	}
 
@@ -60,16 +60,15 @@ public class HasNameTest extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
+		String expectedName = success().getName();
+		String actualName = failure().getName();
 		return new String[] {
-			expectedName, actualName
+			expectedName,
+			actualName,
 		};
 	}
 
 	private Cookie cookie(String name) {
-		return new CookieBuilder()
-			.setName(name)
-			.build();
+		return new CookieBuilder().setName(name).build();
 	}
 }

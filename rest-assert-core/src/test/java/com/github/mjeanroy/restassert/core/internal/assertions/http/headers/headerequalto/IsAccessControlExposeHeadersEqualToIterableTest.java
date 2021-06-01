@@ -60,22 +60,22 @@ public class IsAccessControlExposeHeadersEqualToIterableTest extends AbstractHtt
 
 	@Test
 	public void it_should_compare_with_single_string() {
-		final List<String> actual = asList("X-Foo", "X-Bar");
-		final List<String> expected = singletonList("X-Bar, X-Foo");
+		List<String> actual = asList("X-Foo", "X-Bar");
+		List<String> expected = singletonList("X-Bar, X-Foo");
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
 	public void it_should_compare_case_insensitively() {
-		final List<String> actual = asList("x-foo", "x-bar");
-		final List<String> expected = asList("X-Foo", "X-Bar");
+		List<String> actual = asList("x-foo", "x-bar");
+		List<String> expected = asList("X-Foo", "X-Bar");
 		doTestSuccess(actual, expected);
 	}
 
-	private void doTestSuccess(List<String> actuals, List<String> expected) {
-		final String actual = StringTestUtils.join(", ", actuals);
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isAccessControlExposeHeadersEqualTo(response, expected);
+	private static void doTestSuccess(List<String> actuals, List<String> expected) {
+		String actual = StringTestUtils.join(", ", actuals);
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		AssertionResult result = assertions.isAccessControlExposeHeadersEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

@@ -80,7 +80,7 @@ public class DatesTest {
 
 	@Test
 	public void it_should_throw_exception_if_pattern_is_not_known() {
-		final String date = "foo bar";
+		String date = "foo bar";
 
 		assertThatThrownBy(parseHttpDate(date))
 				.isExactlyInstanceOf(IllegalArgumentException.class)

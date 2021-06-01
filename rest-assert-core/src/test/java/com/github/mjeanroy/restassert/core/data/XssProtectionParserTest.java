@@ -59,7 +59,7 @@ public class XssProtectionParserTest {
 
 	@Test
 	public void it_should_parse_1_with_report_uri() {
-		final String uri = "https://google.com";
+		String uri = "https://google.com";
 		assertThat(parser.parse("1; report=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));
 		assertThat(parser.parse("1;report=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));
 		assertThat(parser.parse(" 1 ; report=" + uri + " ")).isEqualTo(XssProtection.enableModeReport(uri));

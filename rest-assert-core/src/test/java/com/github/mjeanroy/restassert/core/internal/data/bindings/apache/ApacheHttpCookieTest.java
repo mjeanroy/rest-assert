@@ -101,8 +101,8 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_return_zero_for_max_age() {
-		final org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
-		final Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		assertThatThrownBy(getMaxAge(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
@@ -111,8 +111,8 @@ public class ApacheHttpCookieTest {
 
 	@Test
 	public void it_should_return_false_for_http_only() {
-		final org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
-		final Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
+		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
+		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		assertThatThrownBy(isHttpOnly(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)

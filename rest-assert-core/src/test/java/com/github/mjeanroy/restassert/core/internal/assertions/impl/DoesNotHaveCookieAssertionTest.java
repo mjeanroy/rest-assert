@@ -39,8 +39,8 @@ public class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_does_not_have_cookies() {
-		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
-		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
+		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -51,15 +51,9 @@ public class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_response_has_cookies() {
-		final Cookie cookie = new CookieBuilder()
-				.setName("foo")
-				.build();
-
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addCookie(cookie)
-				.build();
-
-		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
+		Cookie cookie = new CookieBuilder().setName("foo").build();
+		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
+		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -71,16 +65,10 @@ public class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_response_does_not_have_cookie_with_name() {
-		final String name = "foo";
-		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
-
-		Cookie cookie = new CookieBuilder()
-				.setName(name + name)
-				.build();
-
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addCookie(cookie)
-				.build();
+		String name = "foo";
+		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
+		Cookie cookie = new CookieBuilder().setName(name + name).build();
+		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -91,16 +79,10 @@ public class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	public void it_should_fail_if_response_has_cookie_with_name() {
-		final String name = "foo";
-		final DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
-
-		Cookie cookie = new CookieBuilder()
-				.setName(name)
-				.build();
-
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addCookie(cookie)
-				.build();
+		String name = "foo";
+		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
+		Cookie cookie = new CookieBuilder().setName(name).build();
+		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
 
 		AssertionResult result = assertion.handle(rsp);
 

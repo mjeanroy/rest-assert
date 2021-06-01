@@ -39,11 +39,11 @@ public class ClassFileTest {
 
 	@Test
 	public void it_should_build_class_file() {
-		final String packageName = "com.github.mjeanroy";
-		final String className = "Foo";
-		final String content = "bar";
+		String packageName = "com.github.mjeanroy";
+		String className = "Foo";
+		String content = "bar";
 
-		final ClassFile classFile = new ClassFile(packageName, className, content);
+		ClassFile classFile = new ClassFile(packageName, className, content);
 
 		assertThat(classFile.getPackageName()).isEqualTo(packageName);
 		assertThat(classFile.getClassName()).isEqualTo(className);
@@ -52,19 +52,19 @@ public class ClassFileTest {
 
 	@Test
 	public void it_should_write_class_on_disk() throws Exception {
-		final String packageName = "com.github.mjeanroy";
-		final String className = "Foo";
-		final String content = "bar";
+		String packageName = "com.github.mjeanroy";
+		String className = "Foo";
+		String content = "bar";
 
-		final String directory = normalize(getTempDirectoryPath() + "/rest-assert");
-		final File temp = new File(directory);
+		String directory = normalize(getTempDirectoryPath() + "/rest-assert");
+		File temp = new File(directory);
 		deleteQuietly(temp);
 		temp.mkdirs();
 
-		final ClassFile classFile = new ClassFile(packageName, className, content);
+		ClassFile classFile = new ClassFile(packageName, className, content);
 		classFile.writeTo(directory);
 
-		final File klass = new File(directory + "/com/github/mjeanroy/Foo.java");
+		File klass = new File(directory + "/com/github/mjeanroy/Foo.java");
 		assertThat(klass).exists().isFile();
 		assertThat(readFileToString(klass, StandardCharsets.UTF_8).trim()).isEqualTo(content.trim());
 

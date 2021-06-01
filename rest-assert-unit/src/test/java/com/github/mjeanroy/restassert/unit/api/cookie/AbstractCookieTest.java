@@ -65,31 +65,11 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 		});
 	}
 
-	/**
-	 * Create a cookie that should pass test.
-	 *
-	 * @return Cookie.
-	 */
 	protected abstract T success();
 
-	/**
-	 * Create a cookie that should not pass test.
-	 *
-	 * @return Cookie.
-	 */
 	protected abstract T failure();
 
-	/**
-	 * Get expected message pattern when test fails.
-	 *
-	 * @return The expected error message pattern.
-	 */
 	protected abstract String pattern();
 
-	/**
-	 * Get expected message placeholders when test fails.
-	 *
-	 * @return The expected error message placeholders.
-	 */
 	protected abstract Object[] placeholders();
 }

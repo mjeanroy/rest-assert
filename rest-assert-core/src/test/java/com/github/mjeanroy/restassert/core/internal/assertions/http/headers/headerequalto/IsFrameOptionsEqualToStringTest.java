@@ -63,40 +63,39 @@ public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTe
 
 	@Test
 	public void it_should_parse_deny_case_insensitively() {
-		final String actual = "DENY";
-		final String expected = "deny";
+		String actual = "DENY";
+		String expected = "deny";
 		doTest(actual, expected);
 	}
 
 	@Test
 	public void it_should_parse_sameorigin_case_insensitively() {
-		final String actual = "SAMEORIGIN";
-		final String expected = "sameorigin";
+		String actual = "SAMEORIGIN";
+		String expected = "sameorigin";
 		doTest(actual, expected);
 	}
 
 	@Test
 	public void it_should_parse_allowfrom_case_insensitively() {
-		final String actual = "ALLOW-FROM https://example.com";
-		final String expected = "allow-from https://example.com";
+		String actual = "ALLOW-FROM https://example.com";
+		String expected = "allow-from https://example.com";
 		doTest(actual, expected);
 	}
 
 	@Test
 	public void it_should_fail_with_invalid_value() {
-		final String actual = "sameorigin";
-		final String expected = "same-origin";
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = "sameorigin";
+		String expected = "same-origin";
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		assertThatThrownBy(isFrameOptionsEqualTo(response, expected))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
-
 	}
 
 	private static void doTest(String actual, String expected) {
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isFrameOptionsEqualTo(response, expected);
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		AssertionResult result = assertions.isFrameOptionsEqualTo(response, expected);
 		checkSuccess(result);
 	}
 

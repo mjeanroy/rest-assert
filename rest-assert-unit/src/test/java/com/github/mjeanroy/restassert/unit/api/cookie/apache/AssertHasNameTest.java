@@ -48,8 +48,8 @@ public class AssertHasNameTest extends AbstractApacheHttpCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedName = success().getName();
-		final String actualName = expectedName + "foo";
+		String expectedName = success().getName();
+		String actualName = expectedName + "foo";
 		return cookie(actualName);
 	}
 
@@ -60,8 +60,8 @@ public class AssertHasNameTest extends AbstractApacheHttpCookieTest {
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedName = success().getName();
-		final String actualName = failure().getName();
+		String expectedName = success().getName();
+		String actualName = failure().getName();
 		return new Object[]{
 			expectedName,
 			actualName

@@ -44,7 +44,7 @@ public class HasSameSiteTest extends AbstractCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final SameSite actualSameSite = SameSite.NONE;
+		SameSite actualSameSite = SameSite.NONE;
 		return cookie(actualSameSite);
 	}
 
@@ -60,10 +60,11 @@ public class HasSameSiteTest extends AbstractCookieTest {
 
 	@Override
 	protected Object[] params() {
-		final SameSite expectedSameSite = success().getSameSite();
-		final SameSite actualSameSite = failure().getSameSite();
+		SameSite expectedSameSite = success().getSameSite();
+		SameSite actualSameSite = failure().getSameSite();
 		return new SameSite[] {
-			expectedSameSite, actualSameSite
+			expectedSameSite,
+			actualSameSite,
 		};
 	}
 

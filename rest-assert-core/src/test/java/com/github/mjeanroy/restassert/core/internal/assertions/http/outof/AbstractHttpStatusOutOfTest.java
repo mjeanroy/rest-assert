@@ -45,7 +45,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 
 	@Test
 	public void it_should_pass() {
-		final Range range = getRange();
+		Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
 				AssertionResult result = run(newResponse(i));
@@ -56,9 +56,9 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 
 	@Test
 	public void it_should_fail() {
-		final Range range = getRange();
-		final int start = range.getStart();
-		final int end = range.getEnd();
+		Range range = getRange();
+		int start = range.getStart();
+		int end = range.getEnd();
 
 		for (int status = start; status <= end; status++) {
 			AssertionResult result = run(newResponse(status));
@@ -66,11 +66,9 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 		}
 	}
 
-	private HttpResponse newResponse(int status) {
-		return new HttpResponseBuilderImpl()
-			.setStatus(status)
-			.build();
-	}
-
 	protected abstract Range getRange();
+
+	private static HttpResponse newResponse(int status) {
+		return new HttpResponseBuilderImpl().setStatus(status).build();
+	}
 }

@@ -43,7 +43,7 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 	@Test
 	public void it_should_fail() {
 		final T failure = failure();
-		final String message = "" +
+		final String message =
 				"Expecting json entry str to be equal to bar but was foo," + LINE_SEPARATOR +
 				"Expecting json entry nb to be equal to 2.0 but was 1.0," + LINE_SEPARATOR +
 				"Expecting json entry bool to be equal to false but was true," + LINE_SEPARATOR +

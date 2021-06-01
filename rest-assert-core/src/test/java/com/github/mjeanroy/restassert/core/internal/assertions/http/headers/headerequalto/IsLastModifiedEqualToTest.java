@@ -72,10 +72,10 @@ public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private void invokeTest(String value) {
 		// GIVEN
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, value).build();
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, value).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isLastModifiedEqualTo(response, value);
+		AssertionResult result = assertions.isLastModifiedEqualTo(response, value);
 
 		// THEN
 		checkSuccess(result);

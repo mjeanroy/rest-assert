@@ -61,28 +61,28 @@ public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeader
 
 	@Test
 	public void it_should_handle_different_directive_order() {
-		final String actual = "script-src 'self' 'unsafe-inline'; default-src 'none'";
-		final String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
+		String actual = "script-src 'self' 'unsafe-inline'; default-src 'none'";
+		String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 		doTest(actual, expected);
 	}
 
 	@Test
 	public void it_should_handle_different_source_value_order() {
-		final String actual = "default-src 'none'; script-src 'unsafe-inline' 'self'";
-		final String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
+		String actual = "default-src 'none'; script-src 'unsafe-inline' 'self'";
+		String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 		doTest(actual, expected);
 	}
 
 	@Test
 	public void it_should_handle_case_insensitive_comparison() {
-		final String actual = "DEFAULT-SRC 'none'; SCRIPT-SRC 'self' 'unsafe-inline'";
-		final String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
+		String actual = "DEFAULT-SRC 'none'; SCRIPT-SRC 'self' 'unsafe-inline'";
+		String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 		doTest(actual, expected);
 	}
 
-	private void doTest(String actual, String expected) {
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isContentSecurityPolicyEqualTo(response, expected);
+	private static void doTest(String actual, String expected) {
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		AssertionResult result = assertions.isContentSecurityPolicyEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

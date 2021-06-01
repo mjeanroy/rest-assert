@@ -53,8 +53,8 @@ public class AssertHasSameSiteAsStringTest extends AbstractCookiesTest {
 
 	@Override
 	protected Object[] placeholders() {
-		final SameSite expectedSameSite = success().getSameSite();
-		final SameSite actualSameSite = failure().getSameSite();
+		SameSite expectedSameSite = success().getSameSite();
+		SameSite actualSameSite = failure().getSameSite();
 		return new Object[]{
 			expectedSameSite,
 			actualSameSite

@@ -42,7 +42,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 
 	@Test
 	public void should_pass_if_status_code_is_in_bounds() {
-		final Range range = getRange();
+		Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			HttpResponse httpResponse = new HttpResponseBuilderImpl()
 				.setStatus(i)
@@ -54,16 +54,16 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 
 	@Test
 	public void should_fail_if_status_code_are_not_in_bounds() {
-		final AssertionInfo info = someInfo();
-		final Range range = getRange();
-		final int start = range.getStart();
-		final int end = range.getEnd();
+		AssertionInfo info = someInfo();
+		Range range = getRange();
+		int start = range.getStart();
+		int end = range.getEnd();
 		for (int status = 100; status <= 599; status++) {
 			if (status >= start && status <= end) {
 				continue;
 			}
 
-			final HttpResponse httpResponse = new HttpResponseBuilderImpl()
+			HttpResponse httpResponse = new HttpResponseBuilderImpl()
 				.setStatus(status)
 				.build();
 
@@ -71,10 +71,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 				run(info, httpResponse);
 				failBecauseExpectedAssertionErrorWasNotThrown();
 			} catch (AssertionError e) {
-				assertThat(e.getMessage())
-						.isNotNull()
-						.isNotEmpty()
-						.isEqualTo(format("Expecting status code to be between %s and %s but was %s", start, end, status));
+				assertThat(e.getMessage()).isEqualTo(String.format("Expecting status code to be between %s and %s but was %s", start, end, status));
 			}
 		}
 	}

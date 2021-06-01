@@ -54,17 +54,17 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 	@Test
 	public void it_should_fail() {
 		// GIVEN
-		final String expectedCharset = expectedCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final HttpResponse httpResponse = newResponse(actualCharset);
+		String expectedCharset = expectedCharset();
+		String actualCharset = expectedCharset + "foo";
+		HttpResponse httpResponse = newResponse(actualCharset);
 
 		// WHEN
-		final AssertionResult result = run(httpResponse);
+		AssertionResult result = run(httpResponse);
 
 		// THEN
-		final Class<ShouldHaveCharset> klassError = ShouldHaveCharset.class;
-		final String pattern = "Expecting response to have charset %s but was %s";
-		final Object[] parameters = {expectedCharset, actualCharset};
+		Class<ShouldHaveCharset> klassError = ShouldHaveCharset.class;
+		String pattern = "Expecting response to have charset %s but was %s";
+		Object[] parameters = {expectedCharset, actualCharset};
 		checkError(result, klassError, pattern, parameters);
 	}
 

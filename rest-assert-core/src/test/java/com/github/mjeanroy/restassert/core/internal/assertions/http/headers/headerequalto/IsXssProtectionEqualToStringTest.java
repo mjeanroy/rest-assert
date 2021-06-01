@@ -61,21 +61,21 @@ public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToT
 
 	@Test
 	public void it_should_compare_case_insensitively() {
-		final String actual = "1; mode=block";
-		final String expected = "1; MODE=BLOCK";
+		String actual = "1; mode=block";
+		String expected = "1; MODE=BLOCK";
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
 	public void it_should_compare_with_different_spaces() {
-		final String actual = "1; mode=block";
-		final String expected = "1 ; mode = block";
+		String actual = "1; mode=block";
+		String expected = "1 ; mode = block";
 		doTestSuccess(actual, expected);
 	}
 
-	private void doTestSuccess(String actual, String expected) {
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isXssProtectionEqualTo(response, expected);
+	private static void doTestSuccess(String actual, String expected) {
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		AssertionResult result = assertions.isXssProtectionEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

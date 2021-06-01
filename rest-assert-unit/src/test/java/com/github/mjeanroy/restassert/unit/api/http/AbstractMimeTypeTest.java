@@ -35,10 +35,6 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractMimeTypeTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
@@ -68,12 +64,6 @@ public abstract class AbstractMimeTypeTest<T> extends AbstractHttpAssertTest<T> 
 		});
 	}
 
-	/**
-	 * Invoke test with a fail test case.
-	 *
-	 * @param msg The custom error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(String msg, final TestInvocation<Header> invocation) {
 		final Header expectedHeader = getHeader();
 
@@ -95,40 +85,17 @@ public abstract class AbstractMimeTypeTest<T> extends AbstractHttpAssertTest<T> 
 		});
 	}
 
-	/**
-	 * Get expected mime type to be tested.
-	 *
-	 * @return Mime type.
-	 */
 	protected abstract String getMimeType();
 
-	/**
-	 * Generate header from mime type value.
-	 *
-	 * @return The header.
-	 */
 	private Header getHeader() {
 		return header("Content-Type", getMimeType() + ";charset=UTF-8");
 	}
 
-	/**
-	 * Get expected default error message.
-	 *
-	 * @param expectedMimeType Expected mime type.
-	 * @param actualMimeType The HTTP response actual mime type.
-	 * @return The expected default message.
-	 */
-	private String buildErrorMessage(String expectedMimeType, String actualMimeType) {
-		return String.format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
-	}
-
-	/**
-	 * Get the HTTP response to be tested.
-	 *
-	 * @param header HTTP Response header.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(Header header) {
 		return getBuilder().addHeader(header).build();
+	}
+
+	private static String buildErrorMessage(String expectedMimeType, String actualMimeType) {
+		return String.format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
 	}
 }

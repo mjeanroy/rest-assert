@@ -42,8 +42,8 @@ public class AssertHasMaxAgeTest extends AbstractCookiesTest {
 
 	@Override
 	protected Cookie failure() {
-		final long expectedMaxAge = success().getMaxAge();
-		final long actualMaxAge = expectedMaxAge + 1;
+		long expectedMaxAge = success().getMaxAge();
+		long actualMaxAge = expectedMaxAge + 1;
 		return cookie(actualMaxAge);
 	}
 
@@ -54,8 +54,8 @@ public class AssertHasMaxAgeTest extends AbstractCookiesTest {
 
 	@Override
 	protected Object[] placeholders() {
-		final long expectedMaxAge = success().getMaxAge();
-		final long actualMaxAge = failure().getMaxAge();
+		long expectedMaxAge = success().getMaxAge();
+		long actualMaxAge = failure().getMaxAge();
 		return new Long[] {
 				expectedMaxAge, actualMaxAge
 		};

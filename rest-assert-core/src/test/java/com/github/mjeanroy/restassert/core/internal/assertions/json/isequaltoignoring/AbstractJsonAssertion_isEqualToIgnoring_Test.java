@@ -49,30 +49,30 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 
 	@Test
 	public void it_should_pass() {
-		final String actual = actual();
-		final T expected = successObject();
-		final List<String> ignoringKeys = asList("str", "nb", "bool");
-		final AssertionResult result = run(actual, expected, ignoringKeys);
+		String actual = actual();
+		T expected = successObject();
+		List<String> ignoringKeys = asList("str", "nb", "bool");
+		AssertionResult result = run(actual, expected, ignoringKeys);
 
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_support_json_path() {
-		final String actual = actual();
-		final T expected = failureObject();
-		final List<String> ignoringKeys = asList("$.str", "$.nb", "$.bool", "$.array[0:3]");
-		final AssertionResult result = run(actual, expected, ignoringKeys);
+		String actual = actual();
+		T expected = failureObject();
+		List<String> ignoringKeys = asList("$.str", "$.nb", "$.bool", "$.array[0:3]");
+		AssertionResult result = run(actual, expected, ignoringKeys);
 
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_fail() {
-		final String actual = actual();
-		final T expected = failureObject();
-		final List<String> ignoringKeys = asList("str", "nb", "bool");
-		final AssertionResult result = run(actual, expected, ignoringKeys);
+		String actual = actual();
+		T expected = failureObject();
+		List<String> ignoringKeys = asList("str", "nb", "bool");
+		AssertionResult result = run(actual, expected, ignoringKeys);
 
 		String expectedPattern =
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
@@ -88,36 +88,13 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
 	}
 
-	/**
-	 * Invoke test.
-	 *
-	 * @param actual The actual object.
-	 * @param expected The expected object.
-	 * @param ignoringKeys The keys to ignore.
-	 * @return The assertion result.
-	 */
 	protected abstract AssertionResult run(String actual, T expected, Iterable<String> ignoringKeys);
 
-	/**
-	 * The actual JSON representation, i.e the JSON to be tested.
-	 *
-	 * @return The JSON value.
-	 */
 	private static String actual() {
 		return jsonSuccess();
 	}
 
-	/**
-	 * Create the object that should pass the test.
-	 *
-	 * @return The object.
-	 */
 	protected abstract T successObject();
 
-	/**
-	 * Create the object that should not pass the test.
-	 *
-	 * @return The object.
-	 */
 	protected abstract T failureObject();
 }

@@ -36,16 +36,12 @@ import static java.lang.String.format;
 
 public abstract class AbstractDoesNotHaveHttpHeaderTest<T> extends AbstractHttpAssertTest<T> {
 
-	/**
-	 * The custom message used as first parameter when optional message
-	 * is specified in assertion.
-	 */
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
 	public void it_should_pass_with_missing_header() {
-		final Header header = header("Foo", "Bar");
-		final T rsp = newHttpResponse(header);
+		Header header = header("Foo", "Bar");
+		T rsp = newHttpResponse(header);
 
 		run(rsp);
 		run(CUSTOM_MESSAGE, rsp);
@@ -71,12 +67,6 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest<T> extends AbstractHttpA
 		});
 	}
 
-	/**
-	 * Execute test.
-	 *
-	 * @param msg The customized error message, optional and may be {@code null}.
-	 * @param invocation The test invocation.
-	 */
 	private void doTest(String msg, final TestInvocation<Header> invocation) {
 		final Header header = getHeader();
 		final String message = firstNonNull(msg, buildErrorMessage(header));
@@ -88,31 +78,13 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest<T> extends AbstractHttpA
 		});
 	}
 
-	/**
-	 * Get header that will be tested.
-	 * Note that header value does not really matter, only name is important here.
-	 *
-	 * @return Header.
-	 */
 	protected abstract Header getHeader();
 
-	/**
-	 * Get the expected error message when test fail.
-	 *
-	 * @param expectedHeader The missing header.
-	 * @return The expected error message.
-	 */
-	private String buildErrorMessage(Header expectedHeader) {
-		return format("Expecting response not to have header %s", expectedHeader.getName());
-	}
-
-	/**
-	 * Create HTTP response with given header.
-	 *
-	 * @param header The header.
-	 * @return The HTTP response.
-	 */
 	private T newHttpResponse(Header header) {
 		return getBuilder().addHeader(header).build();
+	}
+
+	private static String buildErrorMessage(Header expectedHeader) {
+		return format("Expecting response not to have header %s", expectedHeader.getName());
 	}
 }

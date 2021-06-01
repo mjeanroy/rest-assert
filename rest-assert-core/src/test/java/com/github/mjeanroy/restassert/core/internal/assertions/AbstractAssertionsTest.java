@@ -29,12 +29,6 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessR
 
 public abstract class AbstractAssertionsTest<T> {
 
-	/**
-	 * Invoke main test.
-	 *
-	 * @param testedObject Object to be tested.
-	 * @return Assertion result.
-	 */
 	protected abstract AssertionResult run(T testedObject);
 
 	protected static void checkSuccess(AssertionResult result) {

@@ -62,12 +62,12 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHead
 	@Test
 	public void it_should_compare_header_with_case_insensitive_directive_name() {
 		// GIVEN
-		final String actual = "MAX-AGE=0";
-		final String expected = "max-age=0";
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = "MAX-AGE=0";
+		String expected = "max-age=0";
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isStrictTransportSecurityEqualTo(response, expected);
+		AssertionResult result = assertions.isStrictTransportSecurityEqualTo(response, expected);
 
 		// THEN
 		checkSuccess(result);
@@ -76,12 +76,12 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHead
 	@Test
 	public void it_should_compare_header_with_quoted_directive_value() {
 		// GIVEN
-		final String actual = "max-age=\"0\"";
-		final String expected = "max-age=0";
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = "max-age=\"0\"";
+		String expected = "max-age=0";
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isStrictTransportSecurityEqualTo(response, expected);
+		AssertionResult result = assertions.isStrictTransportSecurityEqualTo(response, expected);
 
 		// THEN
 		checkSuccess(result);

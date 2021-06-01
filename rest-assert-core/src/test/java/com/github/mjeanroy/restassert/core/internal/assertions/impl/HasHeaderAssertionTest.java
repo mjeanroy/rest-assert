@@ -37,11 +37,9 @@ public class HasHeaderAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set() {
-		final String name = "foo";
-		final HasHeaderAssertion assertion = new HasHeaderAssertion(name);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, "bar")
-				.build();
+		String name = "foo";
+		HasHeaderAssertion assertion = new HasHeaderAssertion(name);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, "bar").build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -52,11 +50,9 @@ public class HasHeaderAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
-		final String name = "foo";
-		final HasHeaderAssertion assertion = new HasHeaderAssertion(name);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader("bar", "bar")
-				.build();
+		String name = "foo";
+		HasHeaderAssertion assertion = new HasHeaderAssertion(name);
+		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
 
 		AssertionResult result = assertion.handle(rsp);
 

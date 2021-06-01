@@ -49,8 +49,8 @@ public class AssertHasDomainTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected Cookie failure() {
-		final String expectedDomain = success().getDomain();
-		final String actualDomain = expectedDomain + "foo";
+		String expectedDomain = success().getDomain();
+		String actualDomain = expectedDomain + "foo";
 		return cookie(actualDomain);
 	}
 
@@ -61,8 +61,8 @@ public class AssertHasDomainTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected Object[] placeholders() {
-		final String expectedDomain = success().getDomain();
-		final String actualDomain = failure().getDomain();
+		String expectedDomain = success().getDomain();
+		String actualDomain = failure().getDomain();
 		return new Object[]{
 				expectedDomain, actualDomain
 		};

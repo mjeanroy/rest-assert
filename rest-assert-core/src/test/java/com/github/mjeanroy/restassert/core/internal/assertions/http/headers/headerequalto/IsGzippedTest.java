@@ -62,12 +62,12 @@ public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_pass_with_case_insensitive_comparison() {
 		// GIVEN
-		final String actual = VALUE.toUpperCase();
-		final String expected = VALUE.toLowerCase();
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = VALUE.toUpperCase();
+		String expected = VALUE.toLowerCase();
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
+		AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
 
 		// THEN
 		checkSuccess(result);

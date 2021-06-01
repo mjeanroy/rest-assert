@@ -46,7 +46,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 	@Test
 	public void it_should_pass_with_empty_headers() {
 		// GIVEN
-		final HttpResponse rsp = newResponse();
+		HttpResponse rsp = newResponse();
 
 		// WHEN
 		AssertionResult result = run(rsp);
@@ -58,15 +58,15 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 	@Test
 	public void it_should_fail_with_if_response_contain_header() {
 		// GIVEN
-		final Header header = getHeader();
-		final HttpResponse rsp = newResponse(header);
+		Header header = getHeader();
+		HttpResponse rsp = newResponse(header);
 
 		// WHEN
 		AssertionResult result = run(rsp);
 
 		// THEN
-		final String message = "Expecting response not to have header %s";
-		final String args = header.getName();
+		String message = "Expecting response not to have header %s";
+		String args = header.getName();
 		checkError(result, ShouldNotHaveHeader.class, message, args);
 	}
 
@@ -86,9 +86,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 	 * @return Fake http response.
 	 */
 	private HttpResponse newResponse(Header header) {
-		return new HttpResponseBuilderImpl()
-				.addHeader(header)
-				.build();
+		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
 	/**

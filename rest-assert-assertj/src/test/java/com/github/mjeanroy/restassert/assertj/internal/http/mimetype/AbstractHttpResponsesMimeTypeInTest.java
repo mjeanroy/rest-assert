@@ -54,35 +54,34 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 
 	@Test
 	public void should_fail_if_header_is_not_available() {
-		final List<Header> headers = getHeader();
-		final List<String> mimeTypes = getMimeTypes();
+		List<Header> headers = getHeader();
+		List<String> mimeTypes = getMimeTypes();
 
 		int i = 0;
 		for (Header expectedHeader : headers) {
-			final String expectedMimeType = mimeTypes.get(i);
+			String expectedMimeType = mimeTypes.get(i);
 			i++;
 
-			final String actualMimeType = expectedMimeType + "foo";
+			String actualMimeType = expectedMimeType + "foo";
 
-			final String expectedName = expectedHeader.getName();
-			final String expectedValue = expectedHeader.getValue();
-			final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-			final Header header = header(expectedName, actualValue);
+			String expectedName = expectedHeader.getName();
+			String expectedValue = expectedHeader.getValue();
+			String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
+			Header header = header(expectedName, actualValue);
 
-			final HttpResponse httpResponse = newHttpResponse(header);
+			HttpResponse httpResponse = newHttpResponse(header);
 
 			try {
 				run(httpResponse);
 				failBecauseExpectedAssertionErrorWasNotThrown();
 			}
 			catch (AssertionError e) {
-				assertThat(e.getMessage())
-						.isNotNull()
-						.isNotEmpty()
-						.isEqualTo(format("Expecting response to have mime type in %s but was \"%s\"", formatList(mimeTypes), actualMimeType));
+				assertThat(e.getMessage()).isEqualTo(String.format("Expecting response to have mime type in %s but was \"%s\"", formatList(mimeTypes), actualMimeType));
 			}
 		}
 	}
+
+	protected abstract void run(HttpResponse httpResponse);
 
 	protected abstract List<String> getMimeTypes();
 
@@ -96,9 +95,7 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 		return headers;
 	}
 
-	private HttpResponse newHttpResponse(Header header) {
+	private static HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
-
-	protected abstract void run(HttpResponse httpResponse);
 }

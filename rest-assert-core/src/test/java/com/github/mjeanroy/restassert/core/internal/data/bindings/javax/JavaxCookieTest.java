@@ -36,83 +36,83 @@ public class JavaxCookieTest {
 
 	@Test
 	public void it_should_return_name() {
-		final String expectedName = "foo";
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setName(expectedName).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final String name = cookie.getName();
+		String expectedName = "foo";
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setName(expectedName).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		String name = cookie.getName();
 
 		assertThat(name).isEqualTo(expectedName);
 	}
 
 	@Test
 	public void it_should_return_value() {
-		final String expectedValue = "foo";
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setValue(expectedValue).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final String value = cookie.getValue();
+		String expectedValue = "foo";
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setValue(expectedValue).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		String value = cookie.getValue();
 
 		assertThat(value).isEqualTo(expectedValue);
 	}
 
 	@Test
 	public void it_should_return_domain() {
-		final String expectedDomain = "foo";
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setDomain(expectedDomain).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final String domain = cookie.getDomain();
+		String expectedDomain = "foo";
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setDomain(expectedDomain).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		String domain = cookie.getDomain();
 
 		assertThat(domain).isEqualTo(expectedDomain);
 	}
 
 	@Test
 	public void it_should_return_path() {
-		final String expectedPath = "foo";
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setPath(expectedPath).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final String path = cookie.getPath();
+		String expectedPath = "foo";
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setPath(expectedPath).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		String path = cookie.getPath();
 
 		assertThat(path).isEqualTo(expectedPath);
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_secured() {
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setSecured(true).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final boolean secured = cookie.isSecured();
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setSecured(true).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		boolean secured = cookie.isSecured();
 
 		assertThat(secured).isTrue();
 	}
 
 	@Test
 	public void it_should_check_if_cookie_is_http_only() {
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setHttpOnly(true).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final boolean httpOnly = cookie.isHttpOnly();
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setHttpOnly(true).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		boolean httpOnly = cookie.isHttpOnly();
 
 		assertThat(httpOnly).isTrue();
 	}
 
 	@Test
 	public void it_should_get_max_age() {
-		final int expectedMaxAge = 10;
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setMaxAge(expectedMaxAge).build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
-		final long maxAge = cookie.getMaxAge();
+		int expectedMaxAge = 10;
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setMaxAge(expectedMaxAge).build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
+		long maxAge = cookie.getMaxAge();
 
 		assertThat(maxAge).isEqualTo(expectedMaxAge);
 	}
 
 	@Test
 	public void it_should_fail_on_getExpires() {
-		final javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
-		final Cookie cookie = JavaxCookie.create(javaxCookie);
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
+		Cookie cookie = JavaxCookie.create(javaxCookie);
 
 		assertThatThrownBy(getExpires(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("javax.servlet.http.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
 	}
 
-	private ThrowingCallable getExpires(final Cookie cookie) {
+	private static ThrowingCallable getExpires(final Cookie cookie) {
 		return new ThrowingCallable() {
 			@Override
 			public void call() {

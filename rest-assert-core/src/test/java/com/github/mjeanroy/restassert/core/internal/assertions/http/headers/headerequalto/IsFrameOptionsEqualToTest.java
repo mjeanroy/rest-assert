@@ -66,13 +66,13 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_check_that_allow_from_value_match() {
 		// GIVEN
-		final String uri = "https://www.google.com";
-		final String actual = "allow-from " + uri;
-		final FrameOptions expected = allowFrom(uri);
-		final HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String uri = "https://www.google.com";
+		String actual = "allow-from " + uri;
+		FrameOptions expected = allowFrom(uri);
+		HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, expected);
+		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, expected);
 
 		// THEN
 		assertThat(r).isNotNull();
@@ -83,12 +83,12 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	@Test
 	public void it_should_check_that_allow_from_value_does_not_match() {
 		// GIVEN
-		final String actual = "deny";
-		final FrameOptions expected = sameOrigin();
-		final HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		String actual = "deny";
+		FrameOptions expected = sameOrigin();
+		HttpResponse httpResponse = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN
-		final AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, expected);
+		AssertionResult r = assertions.isFrameOptionsEqualTo(httpResponse, expected);
 
 		// THEN
 		assertThat(r).isNotNull();

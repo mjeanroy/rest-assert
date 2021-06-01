@@ -60,21 +60,21 @@ public class IsCacheControlEqualToStringTest extends AbstractHttpHeaderEqualToTe
 
 	@Test
 	public void it_should_compare_case_insensitively() {
-		final String actual = VALUE.toUpperCase();
-		final String expected = VALUE.toUpperCase();
+		String actual = VALUE.toUpperCase();
+		String expected = VALUE.toUpperCase();
 		doTest(actual, expected);
 	}
 
 	@Test
 	public void it_should_compare_in_different_order() {
-		final String actual = "public, no-transform, no-store";
-		final String expected = "public, no-store, no-transform";
+		String actual = "public, no-transform, no-store";
+		String expected = "public, no-store, no-transform";
 		doTest(actual, expected);
 	}
 
-	private void doTest(String actual, String expected) {
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
-		final AssertionResult result = assertions.isCacheControlEqualTo(response, expected);
+	private static void doTest(String actual, String expected) {
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
+		AssertionResult result = assertions.isCacheControlEqualTo(response, expected);
 		checkSuccess(result);
 	}
 }

@@ -48,8 +48,8 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 	@Test
 	public void it_should_pass_with_expected_header() {
 		// GIVEN
-		final Header header = getHeader();
-		final HttpResponse rsp = newResponse(header);
+		Header header = getHeader();
+		HttpResponse rsp = newResponse(header);
 
 		// WHEN
 		AssertionResult result = run(rsp);
@@ -61,16 +61,16 @@ public abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<Http
 	@Test
 	public void it_should_fail_with_if_response_does_not_contain_header() {
 		// GIVEN
-		final Header expectedHeader = getHeader();
-		final String expectedName = expectedHeader.getName();
-		final Header header = header(expectedHeader.getValue(), expectedName);
-		final HttpResponse rsp = newResponse(header);
+		Header expectedHeader = getHeader();
+		String expectedName = expectedHeader.getName();
+		Header header = header(expectedHeader.getValue(), expectedName);
+		HttpResponse rsp = newResponse(header);
 
 		// WHEN
 		AssertionResult result = run(rsp);
 
 		// THEN
-		final String message = "Expecting response to have header %s";
+		String message = "Expecting response to have header %s";
 		checkError(result, ShouldHaveHeader.class, message, expectedName);
 	}
 

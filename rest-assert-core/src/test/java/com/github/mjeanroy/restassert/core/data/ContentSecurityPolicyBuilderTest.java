@@ -86,7 +86,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_default_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.build();
 
@@ -166,7 +166,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_connect_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addConnectSrc(self(), unsafeInline())
 			.build();
@@ -182,7 +182,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_child_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addChildSrc(self(), unsafeInline())
 			.build();
@@ -198,7 +198,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_font_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFontSrc(self(), unsafeInline())
 			.build();
@@ -214,7 +214,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_media_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addMediaSrc(self(), unsafeInline())
 			.build();
@@ -230,7 +230,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_form_actions() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFormAction(self(), unsafeInline())
 			.build();
@@ -246,7 +246,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_img_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addImgSrc(self(), unsafeInline())
 			.build();
@@ -262,7 +262,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_object_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addObjectSrc(self(), unsafeInline())
 			.build();
@@ -278,7 +278,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_base_uri() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addBaseUri(self())
 			.build();
@@ -294,7 +294,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_frame_ancestors() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFrameAncestors(
 				host(null, "domain.com", null, null),
@@ -320,7 +320,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_plugin_types() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addPluginTypes("application/json", "application/xml")
 			.build();
@@ -336,11 +336,11 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_report_uri() {
-		final String uri1 = "http://domain.com";
-		final String uri2 = "http://fake.com";
-		final String uri3 = "http://google.com";
-		final String value = "" + uri1 + " " + uri2 + " " + uri3 + "";
-		final ContentSecurityPolicy csp = builder
+		String uri1 = "http://domain.com";
+		String uri2 = "http://fake.com";
+		String uri3 = "http://google.com";
+		String value = "" + uri1 + " " + uri2 + " " + uri3 + "";
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addReportUri(uri1, uri2)
 			.addReportUri(URI.create(uri3))
@@ -357,7 +357,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_sandbox() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addSandbox(Sandbox.ALLOW_SCRIPTS, Sandbox.ALLOW_SAME_ORIGIN)
 			.build();
@@ -373,7 +373,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_block_all_mixed_content() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.blockAllMixedContent()
 			.build();
@@ -389,7 +389,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_frame_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFrameSrc(self(), unsafeInline())
 			.build();
@@ -405,7 +405,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_prefetch_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addPrefetchSrc(self(), unsafeInline())
 			.build();
@@ -421,7 +421,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_manifest_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addManifestSrc(self(), unsafeInline())
 			.build();
@@ -437,7 +437,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_worker_src() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addWorkerSrc(self(), unsafeInline())
 			.build();
@@ -453,7 +453,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_disown_opener() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addDisownOpener()
 			.build();
@@ -469,7 +469,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_navigate_to() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addNavigateTo(
 				self(),
@@ -497,7 +497,7 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_require_sri_for() {
-		final ContentSecurityPolicy csp = builder
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addRequireSriFor(RequireSriFor.SCRIPT)
 			.build();
@@ -524,8 +524,8 @@ public class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	public void it_should_handle_report_to() {
-		final String value = "#group1";
-		final ContentSecurityPolicy csp = builder
+		String value = "#group1";
+		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.setReportTo(value)
 			.build();

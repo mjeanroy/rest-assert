@@ -37,7 +37,7 @@ public class AssertHasSameSiteTest {
 
 	@Test
 	public void it_should_fail_because_of_unsupported_operation() {
-		final Cookie cookie = new ApacheHttpCookieBuilder().build();
+		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(assertHasSameSite(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getSameSite()");
@@ -45,7 +45,7 @@ public class AssertHasSameSiteTest {
 
 	@Test
 	public void it_should_fail_with_custom_message_because_of_unsupported_operation() {
-		final Cookie cookie = new ApacheHttpCookieBuilder().build();
+		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(assertHasSameSite("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getSameSite()");

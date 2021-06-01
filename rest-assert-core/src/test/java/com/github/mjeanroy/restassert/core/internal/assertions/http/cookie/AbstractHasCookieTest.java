@@ -80,8 +80,6 @@ public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpR
 	protected abstract void verifyError(AssertionResult result);
 
 	private HttpResponse newResponse(Cookie cookie, Cookie... cookies) {
-		return new HttpResponseBuilderImpl()
-				.addCookie(cookie, cookies)
-				.build();
+		return new HttpResponseBuilderImpl().addCookie(cookie, cookies).build();
 	}
 }

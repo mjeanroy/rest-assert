@@ -39,7 +39,7 @@ public class NumbersTest {
 
 	@Test
 	public void it_should_fail_if_string_value_is_not_a_valid_long_value() {
-		final String message = "My Custom Error Message";
+		String message = "My Custom Error Message";
 		assertThatThrownBy(toLong("test", message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
@@ -47,7 +47,7 @@ public class NumbersTest {
 
 	@Test
 	public void it_should_fail_with_null() {
-		final String message = "My Custom Error Message";
+		String message = "My Custom Error Message";
 		assertThatThrownBy(toLong(null, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);

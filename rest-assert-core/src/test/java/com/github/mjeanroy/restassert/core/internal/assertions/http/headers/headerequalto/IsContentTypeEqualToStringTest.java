@@ -61,11 +61,11 @@ public class IsContentTypeEqualToStringTest extends AbstractHttpHeaderEqualToTes
 		run("application/json; charset='utf-8'");
 	}
 
-	private void run(String rawValue) {
+	private static void run(String rawValue) {
 		// GIVEN
-		final String name = "Content-Type";
-		final Header header = Header.header(name, rawValue);
-		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(header).build();
+		String name = "Content-Type";
+		Header header = Header.header(name, rawValue);
+		HttpResponse response = new HttpResponseBuilderImpl().addHeader(header).build();
 
 		// WHEN
 		AssertionResult result = assertions.isContentTypeEqualTo(response, VALUE);

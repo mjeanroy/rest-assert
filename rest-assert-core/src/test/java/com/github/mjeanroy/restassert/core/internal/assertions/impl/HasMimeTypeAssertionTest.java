@@ -42,11 +42,11 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_mime_type() {
-		final MediaType mimeType = MediaType.parser().parse("application/json");
-		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
-		final HttpResponse rsp = createHttpResponse("application/json");
+		MediaType mimeType = MediaType.parser().parse("application/json");
+		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
+		HttpResponse rsp = createHttpResponse("application/json");
 
-		final AssertionResult result = assertion.handle(rsp);
+		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
@@ -55,12 +55,12 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_not_fail_if_header_is_set_with_expected_mime_types() {
-		final MediaType m1 = MediaType.parser().parse("application/json");
-		final MediaType m2 = MediaType.parser().parse("application/xml");
-		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
-		final HttpResponse rsp = createHttpResponse("application/json");
+		MediaType m1 = MediaType.parser().parse("application/json");
+		MediaType m2 = MediaType.parser().parse("application/xml");
+		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
+		HttpResponse rsp = createHttpResponse("application/json");
 
-		final AssertionResult result = assertion.handle(rsp);
+		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isTrue();
@@ -69,11 +69,11 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set_with_expected_mime_type() {
-		final MediaType mimeType = MediaType.parser().parse("application/xml");
-		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
-		final HttpResponse rsp = createHttpResponse("application/json");
+		MediaType mimeType = MediaType.parser().parse("application/xml");
+		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
+		HttpResponse rsp = createHttpResponse("application/json");
 
-		final AssertionResult result = assertion.handle(rsp);
+		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
@@ -83,10 +83,10 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set_with_expected_mime_types() {
-		final MediaType m1 = MediaType.parser().parse("application/xml");
-		final MediaType m2 = MediaType.parser().parse("application/json");
-		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
-		final HttpResponse rsp = createHttpResponse("text/html");
+		MediaType m1 = MediaType.parser().parse("application/xml");
+		MediaType m2 = MediaType.parser().parse("application/json");
+		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
+		HttpResponse rsp = createHttpResponse("text/html");
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -98,14 +98,14 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_fail_if_content_type_header_has_multiple_values() {
-		final MediaType mediaType  = MediaType.parser().parse("application/json");
-		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
-		final HttpResponse rsp = new HttpResponseBuilderImpl()
+		MediaType mediaType  = MediaType.parser().parse("application/json");
+		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
+		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
 				.addHeader("Content-Type", "application/xml; charset=utf-8")
 				.build();
 
-		final AssertionResult result = assertion.handle(rsp);
+		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
@@ -115,9 +115,9 @@ public class HasMimeTypeAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_is_not_set() {
-		final MediaType mediaType = MediaType.parser().parse("application/json");
-		final HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
-		final HttpResponse rsp = new HttpResponseBuilderImpl().build();
+		MediaType mediaType = MediaType.parser().parse("application/json");
+		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -148,13 +148,7 @@ public class HasMimeTypeAssertionTest {
 				.hasMessage("Mime-Type values must be defined");
 	}
 
-	/**
-	 * Create HTTP Response with given mime type.
-	 *
-	 * @param mimeType Actual Mime Type.
-	 * @return The HTTP response.
-	 */
-	private HttpResponse createHttpResponse(String mimeType) {
+	private static HttpResponse createHttpResponse(String mimeType) {
 		return new HttpResponseBuilderImpl().addHeader("Content-Type", mimeType + "; charset=utf-8").build();
 	}
 

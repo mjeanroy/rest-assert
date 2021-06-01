@@ -46,7 +46,7 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_pass_with_status_in_bounds() {
-		final Range range = getRange();
+		Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			AssertionResult result = run(newResponse(i));
 			checkSuccess(result);
@@ -55,9 +55,9 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 
 	@Test
 	public void it_should_fail_with_response_not_in_bounds() {
-		final Range range = getRange();
-		final int start = range.getStart();
-		final int end = range.getEnd();
+		Range range = getRange();
+		int start = range.getStart();
+		int end = range.getEnd();
 
 		for (int status = 100; status <= 599; status++) {
 			if (status >= start && status <= end) {
@@ -74,11 +74,9 @@ public abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTe
 		}
 	}
 
-	private HttpResponse newResponse(int status) {
-		return new HttpResponseBuilderImpl()
-			.setStatus(status)
-			.build();
-	}
-
 	protected abstract Range getRange();
+
+	private HttpResponse newResponse(int status) {
+		return new HttpResponseBuilderImpl().setStatus(status).build();
+	}
 }

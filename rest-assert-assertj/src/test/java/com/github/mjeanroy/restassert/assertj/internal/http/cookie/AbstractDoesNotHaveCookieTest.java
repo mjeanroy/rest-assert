@@ -48,8 +48,8 @@ public abstract class AbstractDoesNotHaveCookieTest {
 
 	@Test
 	public void should_fail_if_cookie_is_here() {
-		final AssertionInfo info = someInfo();
-		final HttpResponse httpResponse = newResponse(cookie());
+		AssertionInfo info = someInfo();
+		HttpResponse httpResponse = newResponse(cookie());
 
 		try {
 			run(info, httpResponse);
@@ -72,7 +72,7 @@ public abstract class AbstractDoesNotHaveCookieTest {
 		return new CookieBuilder().setName("foo").setValue("bar").build();
 	}
 
-	private HttpResponse newResponse(Cookie cookie) {
+	private static HttpResponse newResponse(Cookie cookie) {
 		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl();
 		if (cookie != null) {
 			builder.addCookie(cookie);
