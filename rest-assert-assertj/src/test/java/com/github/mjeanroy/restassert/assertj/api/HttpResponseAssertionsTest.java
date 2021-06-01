@@ -29,9 +29,9 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,27 +39,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class HttpResponseAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() throws Exception {
+	public void it_should_create_new_assertion_object() {
 		HttpResponse response = new HttpResponseBuilderImpl().build();
 		HttpResponseAssert assertions = HttpResponseAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse).isSameAs(response);
+		assertThat(readField(assertions, "actual")).isSameAs(response);
 	}
 
 	@Test
-	public void it_should_create_new_cookie_assertion_object() throws Exception {
+	public void it_should_create_new_cookie_assertion_object() {
 		Cookie cookie = new CookieBuilder().build();
 		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
 
 		assertThat(assertions).isNotNull();
-		Cookie actual = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual).isSameAs(cookie);
+		assertThat(readField(assertions, "actual")).isSameAs(cookie);
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() throws Exception {
+	public void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 				jsonEntry("foo", "bar")
 		);
@@ -70,7 +68,6 @@ public class HttpResponseAssertionsTest {
 		JsonAssert assertions = HttpResponseAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual).isEqualTo(body);
+		assertThat(readField(assertions, "actual")).isEqualTo(body);
 	}
 }

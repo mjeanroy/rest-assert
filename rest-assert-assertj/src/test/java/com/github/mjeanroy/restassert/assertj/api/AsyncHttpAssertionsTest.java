@@ -27,18 +27,16 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.junit4.runif.RunIf;
 import com.github.mjeanroy.junit4.runif.RunIfRunner;
 import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.asynchttpclient.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,27 +46,25 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AsyncHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() throws Exception {
+	public void it_should_create_new_assertion_object() {
 		Response response = new AsyncHttpResponseBuilder().build();
 		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse).isExactlyInstanceOf(AsyncHttpResponse.class);
+		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpResponse.class);
 	}
 
 	@Test
-	public void it_should_create_new_cookie_assertion_object() throws Exception {
+	public void it_should_create_new_cookie_assertion_object() {
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();
-		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(cookie).isExactlyInstanceOf(AsyncHttpCookie.class);
+		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpCookie.class);
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() throws Exception {
+	public void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 				jsonEntry("foo", "bar")
 		);
@@ -79,7 +75,6 @@ public class AsyncHttpAssertionsTest {
 		JsonAssert assertions = AsyncHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual).isEqualTo(body);
+		assertThat(readField(assertions, "actual")).isEqualTo(body);
 	}
 }

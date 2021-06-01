@@ -24,14 +24,13 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,17 +38,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SpringMockMvcHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() throws Exception {
+	public void it_should_create_new_assertion_object() {
 		ResultActions response = new SpringMockMvcHttpResponseBuilder().build();
 		HttpResponseAssert assertions = SpringMockMvcHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse).isExactlyInstanceOf(SpringMockMvcHttpResponse.class);
+		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(SpringMockMvcHttpResponse.class);
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() throws Exception {
+	public void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 			jsonEntry("foo", "bar")
 		);
@@ -59,7 +57,6 @@ public class SpringMockMvcHttpAssertionsTest {
 		JsonAssert assertions = SpringMockMvcHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual).isEqualTo(body);
+		assertThat(readField(assertions, "actual")).isEqualTo(body);
 	}
 }

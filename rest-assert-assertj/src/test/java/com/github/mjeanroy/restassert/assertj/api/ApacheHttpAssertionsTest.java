@@ -24,16 +24,14 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpResponse;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,31 +39,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ApacheHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_http_assertion_object() throws Exception {
+	public void it_should_create_new_http_assertion_object() {
 		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().build();
 
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-
-		HttpResponse httpResponse = (HttpResponse) FieldUtils.readField(assertions, "actual", true);
-		assertThat(httpResponse).isExactlyInstanceOf(ApacheHttpResponse.class);
+		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpResponse.class);
 	}
 
 	@Test
-	public void it_should_create_new_cookie_assertion_object() throws Exception {
+	public void it_should_create_new_cookie_assertion_object() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
 
 		assertThat(assertions).isNotNull();
-
-		Cookie cookie = (Cookie) FieldUtils.readField(assertions, "actual", true);
-		assertThat(cookie).isExactlyInstanceOf(ApacheHttpCookie.class);
+		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpCookie.class);
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() throws Exception {
+	public void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 				jsonEntry("foo", "bar")
 		);
@@ -77,7 +71,6 @@ public class ApacheHttpAssertionsTest {
 		JsonAssert assertions = ApacheHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		String actual = (String) FieldUtils.readField(assertions, "actual", true);
-		assertThat(actual).isEqualTo(body);
+		assertThat(readField(assertions, "actual")).isEqualTo(body);
 	}
 }

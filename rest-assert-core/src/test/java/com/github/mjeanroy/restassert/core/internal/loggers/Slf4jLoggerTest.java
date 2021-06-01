@@ -26,11 +26,11 @@ package com.github.mjeanroy.restassert.core.internal.loggers;
 
 import ch.qos.logback.classic.Level;
 import com.github.mjeanroy.restassert.tests.junit.SystemOutRule;
-import org.apache.commons.lang3.reflect.FieldUtils;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Slf4jLoggerTest {
@@ -159,14 +159,9 @@ public class Slf4jLoggerTest {
 	private Logger createLogger() {
 		Slf4jLogger log = new Slf4jLogger(getClass());
 
-		try {
-			ch.qos.logback.classic.Logger logback = (ch.qos.logback.classic.Logger) FieldUtils.readDeclaredField(log, "logger", true);
-			logback.setLevel(Level.TRACE);
-			logback.setAdditive(true);
-		}
-		catch (Exception ex) {
-			throw new AssertionError(ex);
-		}
+		ch.qos.logback.classic.Logger logback = readField(log, "logger");
+		logback.setLevel(Level.TRACE);
+		logback.setAdditive(true);
 
 		return log;
 	}

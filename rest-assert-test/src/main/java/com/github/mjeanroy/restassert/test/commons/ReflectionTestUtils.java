@@ -22,23 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api;
+package com.github.mjeanroy.restassert.test.commons;
 
-import com.github.mjeanroy.restassert.core.internal.data.bindings.javax.JavaxCookie;
-import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
-import org.junit.Test;
+import org.apache.commons.lang3.reflect.FieldUtils;
 
-import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
-import static org.assertj.core.api.Assertions.assertThat;
+/**
+ * Static Reflection Utilities, to use in unit tests only.
+ */
+public final class ReflectionTestUtils {
 
-public class JavaxAssertionsTest {
+	private ReflectionTestUtils() {
+	}
 
-	@Test
-	public void it_should_create_new_cookie_assertion_object() {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
-		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
-
-		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(JavaxCookie.class);
+	@SuppressWarnings("unchecked")
+	public static <T> T readField(Object o, String fieldName) {
+		try {
+			return (T) FieldUtils.readField(o, fieldName, true);
+		}
+		catch (Exception ex) {
+			throw new AssertionError(ex);
+		}
 	}
 }
