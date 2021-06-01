@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-import static com.github.mjeanroy.restassert.test.data.Header.header;
-import static java.util.Arrays.asList;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
+import static java.util.Arrays.asList;
 
 public class IsAccessControlExposeHeadersEqualToVarargsTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String V1 = "X-Requested-With";
 	private static final String V2 = "X-H1";
 	private static final String V3 = "X-H2";
-	private static final String VALUE = join(asList(V1, V2, V3), ", ");
+	private static final String VALUE = join(", ", asList(V1, V2, V3));
 
 	@Override
 	protected Header getHeader() {

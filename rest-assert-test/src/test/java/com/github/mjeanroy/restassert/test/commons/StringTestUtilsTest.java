@@ -24,31 +24,31 @@
 
 package com.github.mjeanroy.restassert.test.commons;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.emptyList;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
 
 import java.util.List;
 
-import org.junit.Test;
+import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringTestUtilsTest {
 
 	@Test
 	public void it_should_join_strings() {
 		List<String> values = asList("foo", "bar");
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+		assertThat(StringTestUtils.join(",", values)).isEqualTo("foo,bar");
 	}
 
 	@Test
 	public void it_should_join_strings_with_empty_collection() {
 		List<String> values = emptyList();
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("");
+		assertThat(StringTestUtils.join(",", values)).isEqualTo("");
 	}
 
 	@Test
 	public void it_should_join_array_of_strings() {
 		String[] values = new String[]{"foo", "bar"};
-		assertThat(StringTestUtils.join(values, ",")).isEqualTo("foo,bar");
+		assertThat(StringTestUtils.join(",", values)).isEqualTo("foo,bar");
 	}
 }

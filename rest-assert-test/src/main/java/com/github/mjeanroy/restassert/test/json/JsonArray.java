@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.test.json;
 
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
-import static java.util.Arrays.asList;
-import static java.util.Collections.unmodifiableList;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
+import static java.util.Arrays.asList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * A JSON Array which is only an ordered list of values (a value can be a {@link String}, a {@link Number},
@@ -78,7 +78,7 @@ public final class JsonArray implements JsonValue {
 			formattedValues.add(val);
 		}
 
-		return "[" + join(formattedValues, ", ") + "]";
+		return "[" + join(", ", formattedValues) + "]";
 	}
 
 	@Override

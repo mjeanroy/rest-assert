@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
+import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
@@ -73,7 +73,7 @@ public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttp
 	}
 
 	private void doTestSuccess(List<String> actuals, List<String> expected) {
-		final String actual = StringTestUtils.join(actuals, ", ");
+		final String actual = StringTestUtils.join(", ", actuals);
 		final HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 		final AssertionResult result = assertions.isAccessControlAllowHeadersEqualTo(response, expected);
 		checkSuccess(result);

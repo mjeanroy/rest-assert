@@ -162,6 +162,6 @@ public class JavaDocParserTest {
 	}
 
 	private static String joinWithBr(String... lines) {
-		return StringTestUtils.join(lines, LINE_SEPARATOR);
+		return StringTestUtils.join(LINE_SEPARATOR, lines);
 	}
 }

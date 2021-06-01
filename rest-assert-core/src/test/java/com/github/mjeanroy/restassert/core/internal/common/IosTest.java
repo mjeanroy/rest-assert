@@ -22,49 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.core.internal.common;
 
-import java.util.Collection;
+import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
+import org.junit.Test;
+
+import java.net.URL;
 
 import static java.util.Arrays.asList;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+public class IosTest {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
+	@Test
+	public void it_should_read_url() {
+		URL url = getClass().getResource("/test.txt");
+		String output = Ios.readUrl(url);
+		assertThat(output).isEqualTo(StringTestUtils.join(System.lineSeparator(), asList(
+				"Hello World",
+				"Foo Bar",
+				"Test"
+		)));
 	}
 }

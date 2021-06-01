@@ -24,9 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.common.Ios;
 import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
 import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
@@ -45,12 +46,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
-import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
-import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.common.Files.readFileToString;
+import static com.github.mjeanroy.restassert.core.internal.common.Ios.readUrl;
+import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static java.util.Collections.addAll;
 
 /**
@@ -245,8 +247,10 @@ public final class JsonAssertions {
 		}
 
 		try {
-			return isEqualTo(actual, url.toURI());
-		} catch (URISyntaxException ex) {
+			String expected = readUrl(url);
+			return isEqualTo(actual, expected);
+		}
+		catch (Ios.UrlException ex) {
 			throw new AssertionError(ex);
 		}
 	}

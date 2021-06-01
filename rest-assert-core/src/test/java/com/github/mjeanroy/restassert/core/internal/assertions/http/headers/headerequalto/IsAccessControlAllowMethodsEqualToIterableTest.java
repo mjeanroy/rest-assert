@@ -24,22 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.core.data.RequestMethod.GET;
-import static com.github.mjeanroy.restassert.core.data.RequestMethod.POST;
-import static com.github.mjeanroy.restassert.core.data.RequestMethod.PUT;
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
-import static com.github.mjeanroy.restassert.test.data.Header.header;
-import static java.util.Arrays.asList;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.Test;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.data.RequestMethod.GET;
+import static com.github.mjeanroy.restassert.core.data.RequestMethod.POST;
+import static com.github.mjeanroy.restassert.core.data.RequestMethod.PUT;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static java.util.Arrays.asList;
 
 public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
@@ -49,7 +49,7 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 
 	private static final Header HEADER = ACCESS_CONTROL_ALLOW_METHODS;
 	private static final String NAME = HEADER.getName();
-	private static final String VALUE = join(asList(V1, V2, V3), ", ");
+	private static final String VALUE = join(", ", asList(V1, V2, V3));
 	private static final List<RequestMethod> VALUES = asList(
 			RequestMethod.valueOf(V1),
 			RequestMethod.valueOf(V2),
