@@ -63,8 +63,4 @@ public class JsonAssertionsTest {
 		assertThat(assertions).isNotNull();
 		assertThat(readField(assertions, "actual")).isEqualTo(json);
 	}
-
-	private static String readActual(JsonAssertions jsonAssertions) {
-		return readField(jsonAssertions, "actual");
-	}
 }

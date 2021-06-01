@@ -46,20 +46,19 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
 	@Test
 	public void it_should_pass_with_object() {
-		final String actual = actual();
-		final T expected = successObject();
-		final AssertionResult result = run(actual, expected);
-
+		String actual = actual();
+		T expected = successObject();
+		AssertionResult result = run(actual, expected);
 		assertSuccessResult(result);
 	}
 
 	@Test
 	public void it_should_fail() {
-		final String actual = actual();
-		final T expected = failureObject();
-		final AssertionResult result = run(actual, expected);
+		String actual = actual();
+		T expected = failureObject();
+		AssertionResult result = run(actual, expected);
 
-		String expectedPattern = "" +
+		String expectedPattern =
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
 				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +

@@ -240,6 +240,10 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, URL url) {
+		if (url == null) {
+			throw new AssertionError("Cannot extract expected JSON from <null> URL");
+		}
+
 		try {
 			return isEqualTo(actual, url.toURI());
 		} catch (URISyntaxException ex) {

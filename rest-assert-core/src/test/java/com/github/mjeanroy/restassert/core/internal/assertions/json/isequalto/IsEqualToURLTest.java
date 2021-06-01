@@ -54,11 +54,20 @@ public class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> 
 
 	@Test
 	public void it_should_fail_if_uri_syntax_exception() throws Exception {
-		final URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
-		final String actual = "{}";
+		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
+		String actual = "{}";
 		assertThatThrownBy(isEqualTo(actual, url))
 				.isExactlyInstanceOf(AssertionError.class)
 				.hasCauseExactlyInstanceOf(URISyntaxException.class);
+	}
+
+	@Test
+	public void it_should_fail_if_url_is_null() {
+		URL url = null;
+		String actual = "{}";
+		assertThatThrownBy(isEqualTo(actual, url))
+				.isExactlyInstanceOf(AssertionError.class)
+				.hasMessage("Cannot extract expected JSON from <null> URL");
 	}
 
 	private static ThrowingCallable isEqualTo(final String actual, final URL url) {
