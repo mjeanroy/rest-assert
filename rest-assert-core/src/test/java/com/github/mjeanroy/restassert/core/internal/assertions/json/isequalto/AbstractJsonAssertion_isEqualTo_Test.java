@@ -34,6 +34,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEP
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
@@ -45,11 +46,24 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	}
 
 	@Test
-	public void it_should_pass_with_object() {
+	public void it_should_pass() {
 		String actual = actual();
 		T expected = successObject();
 		AssertionResult result = run(actual, expected);
 		assertSuccessResult(result);
+	}
+
+	@Test
+	public void it_should_fail_with_actual_json_equal_to_null() {
+		String actual = null;
+		T expected = successObject();
+		AssertionResult result = run(actual, expected);
+
+		assertThat(result).isNotNull();
+		assertThat(result.isSuccess()).isFalse();
+		assertThat(result.isFailure()).isTrue();
+		assertThat(result.getError()).isNotNull();
+		assertThat(result.getError().buildMessage()).isEqualTo("Expecting json not to be null");
 	}
 
 	@Test

@@ -53,6 +53,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Ios.readUrl;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull.shouldNotBeNull;
 import static java.util.Collections.addAll;
 
 /**
@@ -94,6 +95,16 @@ public final class JsonAssertions {
 	// Private constructor to ensure singleton
 	private JsonAssertions() {
 		this.parser = JsonParserStrategy.AUTO.build();
+	}
+
+	/**
+	 * Check that given json is not null.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNotNull(String actual) {
+		return actual == null ? failure(shouldNotBeNull()) : success();
 	}
 
 	/**
@@ -171,9 +182,7 @@ public final class JsonAssertions {
 			}
 		}
 
-		return errors.isEmpty() ?
-				success() :
-				failure(composeErrors(errors));
+		return errors.isEmpty() ? success() : failure(composeErrors(errors));
 	}
 
 	private boolean doesNotHaveEntry(String actual, String entry) {
@@ -342,11 +351,13 @@ public final class JsonAssertions {
 	}
 
 	private AssertionResult doComparison(String actual, String expected) {
+		if (actual == null) {
+			return failure(shouldNotBeNull());
+		}
+
 		JsonComparator comparator = new DefaultJsonComparator(parser);
 		List<RestAssertError> errors = comparator.compare(actual, expected);
-		return errors.isEmpty() ?
-				success() :
-				failure(composeErrors(errors));
+		return errors.isEmpty() ? success() : failure(composeErrors(errors));
 	}
 
 	private static String toJsonPath(String path) {

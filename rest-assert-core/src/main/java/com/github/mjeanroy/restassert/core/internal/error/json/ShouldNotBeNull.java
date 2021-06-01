@@ -24,61 +24,27 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
-import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
-import com.github.mjeanroy.restassert.core.internal.error.RestAssertJsonError;
 
 /**
- * Abstraction of json error message.
+ * Error thrown when a json string contain an entry
+ * that is not of expected type.
  */
-abstract class AbstractJsonError extends AbstractError implements RestAssertJsonError, RestAssertError {
+public final class ShouldNotBeNull extends AbstractJsonError {
 
-	/**
-	 * Entry name of json object that throws the error.
-	 */
-	private final String entryName;
-
-	/**
-	 * Build new error.
-	 *
-	 * @param expectation Expectation message.
-	 */
-	AbstractJsonError(Message expectation) {
-		this("", expectation);
+	// Private constructor, use static factory instead
+	private ShouldNotBeNull() {
+		super(
+				Message.message("Expecting json not to be null")
+		);
 	}
 
 	/**
-	 * Build new error.
+	 * Build error.
 	 *
-	 * @param expectation Expectation message.
+	 * @return Error.
 	 */
-	AbstractJsonError(Message expectation, Message mismatch) {
-		this("", expectation, mismatch);
-	}
-
-	/**
-	 * Build new error.
-	 *
-	 * @param expectation Expectation message.
-	 */
-	AbstractJsonError(String entry, Message expectation) {
-		this(entry, expectation, null);
-	}
-
-	/**
-	 * Build new error.
-	 *
-	 * @param entryName Entry name that throws error.
-	 * @param expectation Expectation message.
-	 */
-	AbstractJsonError(String entryName, Message expectation, Message mismatch) {
-		super(expectation, mismatch);
-		this.entryName = entryName;
-	}
-
-	@Override
-	public String entryName() {
-		return entryName;
+	public static ShouldNotBeNull shouldNotBeNull() {
+		return new ShouldNotBeNull();
 	}
 }
