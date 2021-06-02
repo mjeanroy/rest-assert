@@ -101,11 +101,18 @@ public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuild
 
 	@Override
 	public T addCookie(Cookie cookie, Cookie... other) {
-		addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
+		addCookieSafely(cookie);
+
 		for (Cookie c : other) {
-			addHeader("Set-Cookie", CookieSerializer.serialize(c));
+			addCookieSafely(c);
 		}
 
 		return (T) this;
+	}
+
+	private void addCookieSafely(Cookie cookie) {
+		if (cookie != null) {
+			addHeader("Set-Cookie", CookieSerializer.serialize(cookie));
+		}
 	}
 }

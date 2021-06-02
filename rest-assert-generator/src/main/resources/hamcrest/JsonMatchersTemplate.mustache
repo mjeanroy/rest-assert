@@ -22,31 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api.http;
+package {{package}};
 
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import org.hamcrest.TypeSafeMatcher;
 
-/**
- * Abstract assert test related to HTTP response.
- *
- * The main method need to be defined is the method that returns a new {@link HttpResponseBuilder}
- * that will be used to create underlying HTTP response.
- *
- * @param <T> Type of actual objects (a.k.a tested object).
- */
-public abstract class AbstractHttpResponseMatcherTest<T> {
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
 
-	/**
-	 * Invoke assert method.
-	 *
-	 * @param actual Tested object.
-	 */
-	protected abstract void run(T actual);
+public final class {{class_name}} {
 
-	/**
-	 * Returns the builder to use to build instance of http response to be tested.
-	 *
-	 * @return The builder.
-	 */
-	protected abstract HttpResponseBuilder<T> getBuilder();
+	private static final com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions.instance();
+
+	private {{class_name}}() {
+	}
+
+	{{#methods}}
+	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
+		return new AbstractHamcrestMatcher<{{actual_class}}>() {
+			@Override
+			protected final AssertionResult verify({{actual_class}} actual) {
+				return assertions.{{core_method_name}}(
+					{{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}
+				);
+			}
+		};
+	}
+
+	{{/methods}}
 }

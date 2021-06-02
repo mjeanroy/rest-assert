@@ -43,6 +43,23 @@ public final class Strings {
 	}
 
 	/**
+	 * Repeat given character the specified amount of time to produce
+	 * a final String of given length.
+	 *
+	 * @param c Character to repeat.
+	 * @param length Required length.
+	 * @return The final String.
+	 */
+	public static String repeat(char c, int length) {
+		StringBuilder sb = new StringBuilder(length);
+		for (int i = 0; i < length; ++i) {
+			sb.append(c);
+		}
+
+		return sb.toString();
+	}
+
+	/**
 	 * Join sequence of strings into a single string separated by a given
 	 * separator.
 	 *

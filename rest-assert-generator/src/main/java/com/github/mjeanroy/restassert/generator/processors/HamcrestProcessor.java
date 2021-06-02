@@ -41,8 +41,11 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.hamcres
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.NingHttpResponseMatchers.ningHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.OkHttpResponseMatchers.okHttpResponseMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http.SpringMockMvcHttpResponseMatchers.springMockMvcHttpResponseMatchers;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.json.JsonMatchers.jsonMatchers;
 import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls.HttpResponseMatchersTemplate.httpResponseMatchersTemplate;
+import static com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls.JsonMatchersTemplate.jsonMatchersTemplate;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 /**
  * Set of processors that will be used to generate assertions
@@ -65,6 +68,17 @@ public enum HamcrestProcessor implements Processor {
 				ningHttpResponseMatchers(),
 				okHttpResponseMatchers(),
 				springMockMvcHttpResponseMatchers()
+			)
+	),
+
+	/**
+	 * Processor that will generate matchers class for JSON
+	 * matchers static factories.
+	 */
+	JSON_MATCHERS(
+			jsonMatchersTemplate(),
+			singletonList(
+				jsonMatchers()
 			)
 	);
 

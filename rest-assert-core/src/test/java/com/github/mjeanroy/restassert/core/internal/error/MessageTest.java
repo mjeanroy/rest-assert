@@ -27,6 +27,8 @@ package com.github.mjeanroy.restassert.core.internal.error;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MessageTest {
@@ -68,6 +70,83 @@ public class MessageTest {
 		assertThat(message.getMessage()).isEqualTo(str);
 		assertThat(message.getArgs()).hasSize(2).containsExactly(arg1, arg2);
 		assertThat(message.formatMessage()).isEqualTo("Simple Message: test1 test2");
+	}
+
+	@Test
+	public void it_should_concat_message_to_null() {
+		String str = "Simple Message";
+
+		Message message1 = null;
+		Message message2 = Message.message(str);
+		Message message = Message.concat(message1, message2);
+
+		assertThat(message).isNotNull();
+		assertThat(message.getMessage()).isEqualTo(str);
+		assertThat(message.getArgs()).isNotNull().isEmpty();
+		assertThat(message.formatMessage()).isEqualTo(str);
+	}
+
+	@Test
+	public void it_should_concat_null_to_message() {
+		String str = "Simple Message";
+
+		Message message1 = Message.message(str);
+		Message message2 = null;
+		Message message = Message.concat(message1, message2);
+
+		assertThat(message).isNotNull();
+		assertThat(message.getMessage()).isEqualTo(str);
+		assertThat(message.getArgs()).isNotNull().isEmpty();
+		assertThat(message.formatMessage()).isEqualTo(str);
+	}
+
+	@Test
+	public void it_should_concat_message_to_other_message_without_arguments() {
+		String str1 = "First Message";
+		String str2 = "Second Message";
+
+		Message message1 = Message.message(str1);
+		Message message2 = Message.message(str2);
+		Message message = Message.concat(message1, message2);
+
+		assertThat(message).isNotNull();
+		assertThat(message.getMessage()).isEqualTo(join(System.lineSeparator(), asList(
+				"First Message,",
+				"Second Message"
+		)));
+
+		assertThat(message.getArgs()).isNotNull().isEmpty();
+		assertThat(message.formatMessage()).isEqualTo(join(System.lineSeparator(), asList(
+				"First Message,",
+				"Second Message"
+		)));
+	}
+
+	@Test
+	public void it_should_concat_message_to_other_message_with_arguments() {
+		String str1 = "First Message From %s";
+		String str2 = "Second Message From %s To %s";
+
+		Message message1 = Message.message(str1, "John Doe");
+		Message message2 = Message.message(str2, "Jane Doe", "Mickael");
+		Message message = Message.concat(message1, message2);
+
+		assertThat(message).isNotNull();
+		assertThat(message.getMessage()).isEqualTo(join(System.lineSeparator(), asList(
+				"First Message From %s,",
+				"Second Message From %s To %s"
+		)));
+
+		assertThat(message.getArgs()).hasSize(3).containsExactly(
+				"John Doe",
+				"Jane Doe",
+				"Mickael"
+		);
+
+		assertThat(message.formatMessage()).isEqualTo(join(System.lineSeparator(), asList(
+				"First Message From John Doe,",
+				"Second Message From Jane Doe To Mickael"
+		)));
 	}
 
 	@Test

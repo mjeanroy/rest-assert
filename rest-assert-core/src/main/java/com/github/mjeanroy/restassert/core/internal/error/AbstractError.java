@@ -96,12 +96,30 @@ public abstract class AbstractError implements RestAssertError {
 	}
 
 	/**
+	 * Build new error from given set of errors.
+	 *
+	 * @param errors Original errors.
+	 */
+	AbstractError(Iterable<RestAssertError> errors) {
+		Message expectation = null;
+		Message mismatch = null;
+
+		for (RestAssertError error : errors) {
+			expectation = Message.concat(expectation, error.getExpectation());
+			mismatch = Message.concat(mismatch, error.getMismatch());
+		}
+
+		this.expectation = expectation;
+		this.mismatch = mismatch;
+	}
+
+	/**
 	 * Get original message with placeholders.
 	 *
 	 * @return Original message.
 	 */
 	@Override
-	public String message() {
+	public final String message() {
 		String rawMessage = expectation.getMessage();
 
 		if (mismatch != null) {
@@ -117,7 +135,7 @@ public abstract class AbstractError implements RestAssertError {
 	 * @return Arguments.
 	 */
 	@Override
-	public Object[] args() {
+	public final Object[] args() {
 		int nbArgs = 0;
 
 		if (expectation != null) {
@@ -153,12 +171,12 @@ public abstract class AbstractError implements RestAssertError {
 	}
 
 	@Override
-	public Message getExpectation() {
+	public final Message getExpectation() {
 		return expectation;
 	}
 
 	@Override
-	public Message getMismatch() {
+	public final Message getMismatch() {
 		return mismatch;
 	}
 
@@ -168,7 +186,7 @@ public abstract class AbstractError implements RestAssertError {
 	 * @return Formatted error message.
 	 */
 	@Override
-	public String buildMessage() {
+	public final String buildMessage() {
 		String rawMessage = message();
 		Object[] args = args();
 		return args.length == 0 ? rawMessage : String.format(rawMessage, args);

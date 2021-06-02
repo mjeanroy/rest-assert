@@ -22,31 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api.http;
+package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpls;
 
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import com.github.mjeanroy.restassert.generator.Template;
 
 /**
- * Abstract assert test related to HTTP response.
- *
- * The main method need to be defined is the method that returns a new {@link HttpResponseBuilder}
- * that will be used to create underlying HTTP response.
- *
- * @param <T> Type of actual objects (a.k.a tested object).
+ * Template used to generate assertions classes.
+ * This class is thread safe.
+ * This class is implemented as a singleton.
  */
-public abstract class AbstractHttpResponseMatcherTest<T> {
+public class JsonMatchersTemplate extends AbstractHamcrestTemplate implements Template {
 
 	/**
-	 * Invoke assert method.
-	 *
-	 * @param actual Tested object.
+	 * Singleton object.
 	 */
-	protected abstract void run(T actual);
+	private static final JsonMatchersTemplate INSTANCE = new JsonMatchersTemplate();
 
 	/**
-	 * Returns the builder to use to build instance of http response to be tested.
+	 * Get singleton instance.
 	 *
-	 * @return The builder.
+	 * @return Singleton instance.
 	 */
-	protected abstract HttpResponseBuilder<T> getBuilder();
+	public static JsonMatchersTemplate jsonMatchersTemplate() {
+		return INSTANCE;
+	}
+
+	private JsonMatchersTemplate() {
+	}
 }

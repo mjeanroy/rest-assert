@@ -24,17 +24,50 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
+import com.github.mjeanroy.restassert.core.internal.common.Files;
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
+import static java.util.Collections.addAll;
 
 /**
  * Templated message with arguments.
  */
 public final class Message {
+
+	private static final String CONCAT_SEPARATOR = "," + Files.LINE_SEPARATOR;
+
+	/**
+	 * Concat two messages into a single one.
+	 * @param first First message.
+	 * @param second Second message.
+	 * @return Concatenated message.
+	 */
+	public static Message concat(Message first, Message second) {
+		if (first == null) {
+			return second;
+		}
+
+		if (second == null) {
+			return first;
+		}
+
+		List<String> newMessages = new ArrayList<>(2);
+		List<Object> newArgs = new ArrayList<>(first.getNbArgs() + second.getNbArgs());
+
+		newMessages.add(first.message);
+		addAll(newArgs, first.args);
+
+		newMessages.add(second.message);
+		addAll(newArgs, second.args);
+
+		String finalMessage = Strings.join(newMessages, CONCAT_SEPARATOR);
+		Object[] finalArgs = newArgs.toArray();
+		return new Message(finalMessage, finalArgs);
+	}
 
 	/**
 	 * Create message without any arguments.
@@ -65,6 +98,17 @@ public final class Message {
 		}
 
 		return new Message(message, args);
+	}
+
+	/**
+	 * Create message with given arguments.
+	 *
+	 * @param message The string message template.
+	 * @param args Arguments.
+	 * @return The message.
+	 */
+	public static Message message(String message, Object[] args) {
+		return new Message(message, Arrays.copyOf(args, args.length));
 	}
 
 	/**

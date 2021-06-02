@@ -27,41 +27,93 @@ package com.github.mjeanroy.restassert.core.internal.error;
 import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.junit.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
+import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CompositeErrorTest {
 
 	@Test
-	public void it_should_compose_errors() {
-		RestAssertError error1 = createError("foo");
-		RestAssertError error2 = createError("bar %s %s", 1, 2);
-		RestAssertError error3 = createError("foobar %s", "hello");
+	public void it_should_compose_errors_messages() {
+		RestAssertError error1 = createErrorWithExpectation("foo");
+		RestAssertError error2 = createErrorWithExpectation("bar %s %s", 1, 2);
+		RestAssertError error3 = createErrorWithExpectation("foobar %s", "hello");
 
 		CompositeError error = composeErrors(asList(error1, error2, error3));
 
 		assertThat(error).isNotNull();
-		assertThat(error.message()).isEqualTo(
-			"foo," + LINE_SEPARATOR +
-			"bar %s %s," + LINE_SEPARATOR +
-			"foobar %s"
-		);
-
 		assertThat(error.args()).hasSize(3).contains(1, 2, "hello");
 
-		assertThat(error.buildMessage()).isEqualTo("" +
-			"foo," + LINE_SEPARATOR +
-			"bar 1 2," + LINE_SEPARATOR +
-			"foobar hello"
-		);
+		assertThat(error.message()).isEqualTo(join(LINE_SEPARATOR, asList(
+				"foo,",
+				"bar %s %s,",
+				"foobar %s"
+		)));
+
+		assertThat(error.buildMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+				"foo,",
+				"bar 1 2,",
+				"foobar hello"
+		)));
 	}
 
-	private RestAssertError createError(String message, Object... args) {
-		return new RestAssertErrorBuilder()
-			.setMessage(message)
-			.setArgs(args)
-			.build();
+	@Test
+	public void it_should_compose_errors_expectations() {
+		RestAssertError error1 = createErrorWithExpectation("foo");
+		RestAssertError error2 = createErrorWithExpectation("bar %s %s", 1, 2);
+		RestAssertError error3 = createErrorWithExpectation("foobar %s", "hello");
+
+		CompositeError error = composeErrors(asList(error1, error2, error3));
+		Message expectation = error.getExpectation();
+
+		assertThat(expectation).isNotNull();
+		assertThat(expectation.getArgs()).hasSize(3).contains(1, 2, "hello");
+
+		assertThat(expectation.getMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+				"foo,",
+				"bar %s %s,",
+				"foobar %s"
+		)));
+
+		assertThat(expectation.formatMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+				"foo,",
+				"bar 1 2,",
+				"foobar hello"
+		)));
+	}
+
+	@Test
+	public void it_should_compose_errors_mismatch() {
+		RestAssertError error1 = createErrorWithMismatch("foo");
+		RestAssertError error2 = createErrorWithMismatch("bar %s %s", 1, 2);
+		RestAssertError error3 = createErrorWithMismatch("foobar %s", "hello");
+
+		CompositeError error = composeErrors(asList(error1, error2, error3));
+		Message mismatch = error.getMismatch();
+
+		assertThat(mismatch).isNotNull();
+		assertThat(mismatch.getArgs()).hasSize(3).contains(1, 2, "hello");
+
+		assertThat(mismatch.getMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+				"foo,",
+				"bar %s %s,",
+				"foobar %s"
+		)));
+
+		assertThat(mismatch.formatMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+				"foo,",
+				"bar 1 2,",
+				"foobar hello"
+		)));
+	}
+
+	private static RestAssertError createErrorWithExpectation(String message, Object... args) {
+		return new RestAssertErrorBuilder().setExpectation(message, args).build();
+	}
+
+	private static RestAssertError createErrorWithMismatch(String message, Object... args) {
+		return new RestAssertErrorBuilder().setMismatch(message, args).build();
 	}
 }

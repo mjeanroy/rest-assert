@@ -24,77 +24,94 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
-import java.util.LinkedList;
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
+
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Collections.sizeOf;
 import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
-import static java.util.Collections.addAll;
 
 /**
  * Composite error representation.
  */
 public class CompositeError implements RestAssertError {
 
+	public static final String MESSAGES_SEPARATOR = "," + LINE_SEPARATOR;
+
 	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
 		return new CompositeError(errors);
 	}
 
 	/**
-	 * The error message.
+	 * The original error.
 	 */
-	private final String message;
-
-	/**
-	 * The message arguments.
-	 */
-	private final Object[] args;
+	private final List<RestAssertError> errors;
 
 	private CompositeError(Iterable<RestAssertError> errors) {
-		this.message = composeMessage(errors);
-		this.args = composeArgs(errors);
+		this.errors = new ArrayList<>(sizeOf(errors, 10));
+		for (RestAssertError error : errors) {
+			this.errors.add(error);
+		}
 	}
 
 	@Override
 	public String message() {
-		return message;
+		List<String> messages = new ArrayList<>(errors.size());
+		for (RestAssertError error : errors) {
+			messages.add(error.message());
+		}
+
+		return Strings.join(messages, MESSAGES_SEPARATOR);
 	}
 
 	@Override
 	public Object[] args() {
+		int nbArgs = 0;
+		for (RestAssertError error : errors) {
+			nbArgs += error.args().length;
+		}
+
+		Object[] args = new Object[nbArgs];
+		if (nbArgs == 0) {
+			return args;
+		}
+
+		int i = 0;
+		for (RestAssertError error : errors) {
+			for (Object arg : error.args()) {
+				args[i] = arg;
+				++i;
+			}
+		}
+
 		return args;
 	}
 
 	@Override
 	public String buildMessage() {
+		Object[] args = args();
+		String message = message();
 		return args.length == 0 ? message : String.format(message, args);
 	}
 
 	@Override
 	public Message getExpectation() {
-		throw new UnsupportedOperationException();
+		Message message = null;
+		for (RestAssertError error : errors) {
+			message = Message.concat(message, error.getExpectation());
+		}
+
+		return message;
 	}
 
 	@Override
 	public Message getMismatch() {
-		throw new UnsupportedOperationException();
-	}
-
-	private static String composeMessage(Iterable<RestAssertError> errors) {
-		String separator = "," + LINE_SEPARATOR;
-		StringBuilder sb = new StringBuilder();
+		Message message = null;
 		for (RestAssertError error : errors) {
-			sb.append(error.message()).append(separator);
+			message = Message.concat(message, error.getMismatch());
 		}
 
-		return sb.substring(0, sb.length() - separator.length()).trim();
-	}
-
-	private static Object[] composeArgs(Iterable<RestAssertError> errors) {
-		List<Object> args = new LinkedList<>();
-		for (RestAssertError error : errors) {
-			addAll(args, error.args());
-		}
-
-		return args.toArray();
+		return message;
 	}
 }

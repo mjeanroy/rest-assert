@@ -24,13 +24,9 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
+import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
-
-import java.util.Collection;
-import java.util.LinkedList;
-
-import static java.util.Collections.addAll;
 
 /**
  * Create mock instance of {@link RestAssertError} class.
@@ -38,41 +34,43 @@ import static java.util.Collections.addAll;
 public class RestAssertErrorBuilder {
 
 	/**
-	 * Error message.
+	 * Error message for expectation field.
 	 */
-	private String message;
+	private Message expectation;
 
 	/**
-	 * Message arguments (i.e placeholder values).
+	 * Error message for mismatch field.
 	 */
-	private final Collection<Object> args;
+	private Message mismatch;
 
 	/**
 	 * Create builder.
 	 */
 	public RestAssertErrorBuilder() {
-		this.args = new LinkedList<>();
+		this.expectation = Message.message("Expectation");
 	}
 
 	/**
-	 * Set {@link #message}.
+	 * Set {@link #expectation}.
 	 *
-	 * @param message New {@link #message}.
+	 * @param message New {@link #expectation} message.
+	 * @param args New {@link #expectation} arguments.
 	 * @return Current builder.
 	 */
-	public RestAssertErrorBuilder setMessage(String message) {
-		this.message = message;
+	public RestAssertErrorBuilder setExpectation(String message, Object[] args) {
+		this.expectation = Message.message(message, args);
 		return this;
 	}
 
 	/**
-	 * Set {@link #args}.
+	 * Set {@link #mismatch}.
 	 *
-	 * @param args New {@link #args}.
+	 * @param message New {@link #mismatch} message.
+	 * @param args New {@link #mismatch} arguments.
 	 * @return Current builder.
 	 */
-	public RestAssertErrorBuilder setArgs(Object... args) {
-		addAll(this.args, args);
+	public RestAssertErrorBuilder setMismatch(String message, Object[] args) {
+		this.mismatch = Message.message(message, args);
 		return this;
 	}
 
@@ -82,42 +80,12 @@ public class RestAssertErrorBuilder {
 	 * @return Mock instance.
 	 */
 	public RestAssertError build() {
-		return new MockRestAssertError(message, args);
+		return new MockRestAssertError(expectation, mismatch);
 	}
 
-	private static final class MockRestAssertError implements RestAssertError {
-
-		private final String message;
-		private final Object[] args;
-
-		private MockRestAssertError(String message, Collection<Object> args) {
-			this.message = message;
-			this.args = args.toArray(new Object[0]);
-		}
-
-		@Override
-		public String message() {
-			return message;
-		}
-
-		@Override
-		public Object[] args() {
-			return args;
-		}
-
-		@Override
-		public String buildMessage() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public Message getExpectation() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public Message getMismatch() {
-			throw new UnsupportedOperationException();
+	private static final class MockRestAssertError extends AbstractError {
+		private MockRestAssertError(Message expectation, Message mismatch) {
+			super(expectation, mismatch);
 		}
 	}
 }

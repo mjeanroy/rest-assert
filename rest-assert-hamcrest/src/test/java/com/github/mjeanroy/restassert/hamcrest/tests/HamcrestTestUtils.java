@@ -22,25 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.hamcrest.api;
+package com.github.mjeanroy.restassert.hamcrest.tests;
 
-/**
- * Abstract assert test.
- *
- * Two methods need to be defined:
- * - First method must execute assert method, without custom message.
- * - Second method must execute assert method, with custom message as first argument.
- *
- * @param <T> Type of actual objects (a.k.a tested object).
- */
-public abstract class AbstractMatcherTest<T> {
+public final class HamcrestTestUtils {
 
-	/**
-	 * Invoke assert method.
-	 *
-	 * @param actual Tested object.
-	 */
-	protected abstract void run(T actual);
+	private HamcrestTestUtils() {
+	}
 
 	/**
 	 * Generate Hamcrest error message, using given expectation message and given mismatch
@@ -50,7 +37,7 @@ public abstract class AbstractMatcherTest<T> {
 	 * @param mismatch Mismatch message.
 	 * @return The message output.
 	 */
-	protected final String generateHamcrestErrorMessage(String expectation, String mismatch) {
+	public static String generateHamcrestErrorMessage(String expectation, String mismatch) {
 		String expectationMsg = "Expected: " + expectation;
 		String mismatchMsg = "     but: " + mismatch;
 		return expectationMsg + System.getProperty("line.separator") + mismatchMsg;

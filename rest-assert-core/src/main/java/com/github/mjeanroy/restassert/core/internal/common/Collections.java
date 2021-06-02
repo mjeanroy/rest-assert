@@ -68,7 +68,7 @@ public final class Collections {
 	 * @return Outputs.
 	 */
 	public static <T> List<T> flatMap(Iterable<T> inputs, Mapper<T, T[]> split) {
-		final int initialCapacity = sizeOf(inputs) * 10;
+		final int initialCapacity = sizeOf(inputs, 10) * 10;
 		final List<T> outputs = new ArrayList<>(initialCapacity);
 		for (T input : inputs) {
 			addAll(outputs, split.apply(input));
@@ -94,12 +94,26 @@ public final class Collections {
 		return outputs;
 	}
 
-	private static <T> int sizeOf(Iterable<T> iterable) {
+	/**
+	 * Get size of given iterable:
+	 * - If size can be known in 0(1), then it is returned.
+	 * - Otherwise, default size is returned.
+	 *
+	 * @param iterable Iterable collection.
+	 * @param defaultSize Default size.
+	 * @param <T> Type of elements in iterable.
+	 * @return The size.
+	 */
+	public static <T> int sizeOf(Iterable<T> iterable, int defaultSize) {
 		if (iterable instanceof Collection) {
 			return ((Collection<T>) iterable).size();
 		}
 
-		return 10;
+		if (!iterable.iterator().hasNext()) {
+			return 0;
+		}
+
+		return defaultSize;
 	}
 
 	/**

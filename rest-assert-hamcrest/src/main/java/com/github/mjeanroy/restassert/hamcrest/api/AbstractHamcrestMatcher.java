@@ -25,12 +25,21 @@
 package com.github.mjeanroy.restassert.hamcrest.api;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.common.Collections;
+import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
+import java.util.List;
+
 public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
+
+	private static final String EXPECTATION_HAMCREST_PREFIX = "Expected: ";
+	private static final String EXPECTATION_MESSAGE_INDENT = Strings.repeat(' ', EXPECTATION_HAMCREST_PREFIX.length());
+	private static final String LINE_SEPARATOR = System.lineSeparator();
 
 	private AssertionResult assertionResult;
 
@@ -47,6 +56,7 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 	@Override
 	protected final void describeMismatchSafely(T item, Description mismatchDescription) {
 		Message mismatch = error().getMismatch();
+
 		if (mismatch == null) {
 			String expectation = error().getExpectation().getMessage();
 			boolean isNegation = expectation.contains(" not ");
@@ -58,7 +68,11 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	@Override
 	public void describeTo(Description description) {
-		description.appendText(error().getExpectation().formatMessage());
+		Message expectationMessage = error().getExpectation();
+		String rawMessage = expectationMessage.formatMessage();
+		description.appendText(
+				prettifyHamcrestMessage(rawMessage)
+		);
 	}
 
 	protected abstract AssertionResult verify(T actual);
@@ -71,5 +85,26 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 		}
 
 		return assertionResult.getError();
+	}
+
+	private static String prettifyHamcrestMessage(String rawMessage) {
+		String[] lines = rawMessage.split(LINE_SEPARATOR);
+
+		if (lines.length == 0) {
+			return "";
+		}
+
+		if (lines.length == 1) {
+			return lines[0];
+		}
+
+		List<String> outputLines = Collections.map(lines, new Mapper<String, String>() {
+			@Override
+			public String apply(String input) {
+				return EXPECTATION_MESSAGE_INDENT + "- " + input;
+			}
+		});
+
+		return Strings.join(outputLines, LINE_SEPARATOR).trim();
 	}
 }

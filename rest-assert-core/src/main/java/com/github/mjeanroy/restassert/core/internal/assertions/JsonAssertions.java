@@ -138,9 +138,7 @@ public final class JsonAssertions {
 			}
 		}
 
-		return errors.isEmpty() ?
-				success() :
-				failure(composeErrors(errors));
+		return errors.isEmpty() ? success() : failure(composeErrors(errors));
 	}
 
 	/**

@@ -31,6 +31,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import org.junit.Test;
 
+import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractHttpResponseDoesNotHaveCookieMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
