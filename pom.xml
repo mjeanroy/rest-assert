@@ -93,7 +93,7 @@
     <httpclient.version>4.5.13</httpclient.version>
     <google-http-client.version>1.38.1</google-http-client.version>
     <okhttp.version>3.12.13</okhttp.version>
-    <spring.version>4.3.30.RELEASE</spring.version>
+    <spring.version>5.2.20.RELEASE</spring.version>
     <junit-servers.version>1.0.0</junit-servers.version>
 
     <jackson-2.version>2.12.6.1</jackson-2.version>
