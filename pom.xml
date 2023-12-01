@@ -75,13 +75,10 @@
     <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
     <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
     <maven-site-plugin.version>3.9.1</maven-site-plugin.version>
-    <maven-enforcer-plugin.version>1.4.1</maven-enforcer-plugin.version>
     <exec-maven-plugin.version>3.0.0</exec-maven-plugin.version>
 
     <build-helper-maven-plugin.version>3.2.0</build-helper-maven-plugin.version>
     <versions-maven-plugin.version>2.8.1</versions-maven-plugin.version>
-    <animal-sniffer-maven-plugin.version>1.16</animal-sniffer-maven-plugin.version>
-    <java17-signature.version>1.0</java17-signature.version>
 
     <slf4j.version>2.0.9</slf4j.version>
     <logback.version>1.3.14</logback.version>
@@ -341,28 +338,6 @@
         </plugin>
 
         <plugin>
-          <groupId>org.codehaus.mojo</groupId>
-          <artifactId>animal-sniffer-maven-plugin</artifactId>
-          <version>${animal-sniffer-maven-plugin.version}</version>
-          <configuration>
-            <signature>
-              <groupId>org.codehaus.mojo.signature</groupId>
-              <artifactId>java17</artifactId>
-              <version>${java17-signature.version}</version>
-            </signature>
-          </configuration>
-          <executions>
-            <execution>
-              <id>check-jdk7-compatibility</id>
-              <phase>test</phase>
-              <goals>
-                <goal>check</goal>
-              </goals>
-            </execution>
-          </executions>
-        </plugin>
-
-        <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>${maven-compiler-plugin.version}</version>
@@ -409,11 +384,6 @@
         <configuration>
           <forkCount>1</forkCount>
         </configuration>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-enforcer-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
