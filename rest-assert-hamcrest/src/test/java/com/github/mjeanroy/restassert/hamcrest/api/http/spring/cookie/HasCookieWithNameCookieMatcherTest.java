@@ -35,7 +35,11 @@ public class HasCookieWithNameCookieMatcherTest extends AbstractSpringMockMvcHtt
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
-	private static final Cookie COOKIE = new CookieBuilder().setName(NAME).setValue(VALUE).build();
+	private static final Cookie COOKIE = new CookieBuilder()
+		.setName(NAME)
+		.setValue(VALUE)
+		.setExpires(0)
+		.build();
 
 	@Override
 	protected Cookie cookie() {

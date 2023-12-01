@@ -75,6 +75,11 @@ public class CookieBuilder {
 	private SameSite sameSite;
 
 	/**
+	 * Cookies expires Date.
+	 */
+	private Date expires;
+
+	/**
 	 * Create default builder.
 	 */
 	public CookieBuilder() {
@@ -181,6 +186,27 @@ public class CookieBuilder {
 	}
 
 	/**
+	 * Set {@link #expires}.
+	 *
+	 * @param expires New {@link #expires}.
+	 * @return Current builder.
+	 */
+	public CookieBuilder setExpires(Date expires) {
+		this.expires = expires == null ? null : new Date(expires.getTime());
+		return this;
+	}
+
+	/**
+	 * Set {@link #expires} using given timestamp.
+	 *
+	 * @param time New {@link #expires} time.
+	 * @return Current builder.
+	 */
+	public CookieBuilder setExpires(long time) {
+		return setExpires(new Date(time));
+	}
+
+	/**
 	 * Build mock of {@link Cookie} class.
 	 *
 	 * @return Mock instance.
@@ -194,7 +220,8 @@ public class CookieBuilder {
 			httpOnly,
 			secured,
 			sameSite,
-			maxAge
+			maxAge,
+			expires
 		);
 	}
 
@@ -208,17 +235,19 @@ public class CookieBuilder {
 		private final boolean secured;
 		private final SameSite sameSite;
 		private final long maxAge;
+		private final Date expires;
 
 		private MockCookie(
-				String name,
-				String value,
-				String domain,
-				String path,
-				boolean httpOnly,
-				boolean secured,
-				SameSite sameSite,
-				long maxAge) {
-
+			String name,
+			String value,
+			String domain,
+			String path,
+			boolean httpOnly,
+			boolean secured,
+			SameSite sameSite,
+			long maxAge,
+			Date expires
+		) {
 			this.name = name;
 			this.value = value;
 			this.domain = domain;
@@ -227,6 +256,7 @@ public class CookieBuilder {
 			this.secured = secured;
 			this.sameSite = sameSite;
 			this.maxAge = maxAge;
+			this.expires = expires;
 		}
 
 		@Override
@@ -271,7 +301,7 @@ public class CookieBuilder {
 
 		@Override
 		public Date getExpires() {
-			return null;
+			return expires;
 		}
 
 		@Override
