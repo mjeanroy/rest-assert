@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractOkHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

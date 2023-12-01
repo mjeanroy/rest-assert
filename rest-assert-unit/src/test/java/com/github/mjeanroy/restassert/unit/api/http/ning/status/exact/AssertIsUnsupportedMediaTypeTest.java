@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTE
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsUnsupportedMediaTypeTest extends AbstractNingHttpStatusTest {
+class AssertIsUnsupportedMediaTypeTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

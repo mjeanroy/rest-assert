@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFil
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-public class IsEqualToFileTest extends AbstractJsonIsEqualToTest {
+class IsEqualToFileTest extends AbstractJsonIsEqualToTest {
 
 	@Override
 	protected JsonAssert run() {

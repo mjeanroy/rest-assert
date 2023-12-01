@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeStringTest extends AbstractAsyncHttpClientMimeTypeTest {
+class AssertHasMimeTypeStringTest extends AbstractAsyncHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = APPLICATION_JSON;
 

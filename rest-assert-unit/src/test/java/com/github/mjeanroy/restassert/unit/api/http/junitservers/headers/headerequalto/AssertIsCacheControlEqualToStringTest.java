@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsCacheControlEqualToStringTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();

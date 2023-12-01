@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isText;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
 
-public class IsTextMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class IsTextMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

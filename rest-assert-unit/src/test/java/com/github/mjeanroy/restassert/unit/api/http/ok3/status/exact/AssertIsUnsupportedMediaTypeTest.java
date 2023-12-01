@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTED_MEDIA_TYPE;
 
-public class AssertIsUnsupportedMediaTypeTest extends AbstractOkHttpStatusTest {
+class AssertIsUnsupportedMediaTypeTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

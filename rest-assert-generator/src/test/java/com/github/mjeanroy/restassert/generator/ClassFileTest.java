@@ -24,21 +24,19 @@
 
 package com.github.mjeanroy.restassert.generator;
 
-import static org.apache.commons.io.FileUtils.deleteQuietly;
-import static org.apache.commons.io.FileUtils.getTempDirectoryPath;
 import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.apache.commons.io.FilenameUtils.normalize;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-public class ClassFileTest {
+class ClassFileTest {
 
 	@Test
-	public void it_should_build_class_file() {
+	void it_should_build_class_file() {
 		String packageName = "com.github.mjeanroy";
 		String className = "Foo";
 		String content = "bar";
@@ -51,24 +49,16 @@ public class ClassFileTest {
 	}
 
 	@Test
-	public void it_should_write_class_on_disk() throws Exception {
+	void it_should_write_class_on_disk(@TempDir File directory) throws Exception {
 		String packageName = "com.github.mjeanroy";
 		String className = "Foo";
 		String content = "bar";
 
-		String directory = normalize(getTempDirectoryPath() + "/rest-assert");
-		File temp = new File(directory);
-		deleteQuietly(temp);
-		temp.mkdirs();
-
 		ClassFile classFile = new ClassFile(packageName, className, content);
-		classFile.writeTo(directory);
+		classFile.writeTo(directory.getAbsolutePath());
 
 		File klass = new File(directory + "/com/github/mjeanroy/Foo.java");
 		assertThat(klass).exists().isFile();
 		assertThat(readFileToString(klass, StandardCharsets.UTF_8).trim()).isEqualTo(content.trim());
-
-		deleteQuietly(temp);
-		assertThat(temp).doesNotExist();
 	}
 }

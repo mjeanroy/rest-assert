@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractGoogleDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveContentTypeOptionsTest extends AbstractGoogleDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

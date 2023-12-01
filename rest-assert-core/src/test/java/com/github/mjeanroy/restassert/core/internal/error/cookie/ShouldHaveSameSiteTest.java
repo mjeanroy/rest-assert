@@ -25,15 +25,15 @@
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite.shouldHaveSameSite;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveSameSiteTest {
+class ShouldHaveSameSiteTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		SameSite actualSameSite = SameSite.LAX;
 		SameSite expectedSameSite = SameSite.STRICT;
 		ShouldHaveSameSite shouldHaveSameSite = shouldHaveSameSite(expectedSameSite, actualSameSite);

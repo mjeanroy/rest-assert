@@ -29,15 +29,15 @@ import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractHttpResponsesStatusTest {
+class AssertIsSeeOtherTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return SEE_OTHER;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsSeeOther(info, httpResponse);
 	}
 }

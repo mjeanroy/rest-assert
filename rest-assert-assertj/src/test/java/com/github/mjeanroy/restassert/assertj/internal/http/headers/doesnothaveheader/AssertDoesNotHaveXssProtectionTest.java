@@ -30,15 +30,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PRO
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertDoesNotHaveXssProtectionTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class AssertDoesNotHaveXssProtectionTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveXssProtection(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return X_XSS_PROTECTION;
 	}
 }

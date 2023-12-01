@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.hasFrameOptions;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class HasFrameOptionsMatcherTest extends AbstractAsyncHttpResponseHasHeaderMatcherTest {
+class HasFrameOptionsMatcherTest extends AbstractAsyncHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

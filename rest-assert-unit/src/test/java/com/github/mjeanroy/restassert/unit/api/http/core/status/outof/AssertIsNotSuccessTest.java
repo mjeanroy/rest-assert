@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsNotSuccessTest extends AbstractCoreHttpStatusOutOfTest {
+class AssertIsNotSuccessTest extends AbstractCoreHttpStatusOutOfTest {
 
 	@Override
 	protected Range getRange() {

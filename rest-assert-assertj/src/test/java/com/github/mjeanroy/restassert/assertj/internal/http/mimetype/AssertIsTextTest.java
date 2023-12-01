@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PL
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class AssertIsTextTest extends AbstractHttpResponsesMimeTypeTest {
+class AssertIsTextTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsText(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected String getMimeType() {
+	String getMimeType() {
 		return TEXT_PLAIN;
 	}
 }

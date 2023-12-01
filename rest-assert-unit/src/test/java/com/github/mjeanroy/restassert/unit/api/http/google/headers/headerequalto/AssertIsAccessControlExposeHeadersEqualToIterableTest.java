@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 

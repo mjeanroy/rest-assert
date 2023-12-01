@@ -28,18 +28,18 @@ import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class HasMimeTypeTest extends AbstractMimeTypeTest {
+class HasMimeTypeTest extends AbstractMimeTypeTest {
 
 	private static final MediaType VALUE = MediaType.application("json");
 	private static final String RAW_VALUE = VALUE.serializeValue();
 
 	@Override
-	protected String getMimeType() {
-		return RAW_VALUE;
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.hasMimeType(response, VALUE);
 	}
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.hasMimeType(response, VALUE);
+	String getMimeType() {
+		return RAW_VALUE;
 	}
 }

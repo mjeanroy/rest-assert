@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.doesNotHaveAccessControlAllowMethods;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-public class DoesNotHaveAccessControlAllowMethodsMatcherTest extends AbstractCoreHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveAccessControlAllowMethodsMatcherTest extends AbstractCoreHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

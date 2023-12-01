@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsResetContentTest extends AbstractHttpResponsesStatusTest {
+class AssertIsResetContentTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return RESET_CONTENT;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsResetContent(info, httpResponse);
 	}
 }

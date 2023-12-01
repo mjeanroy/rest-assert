@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.error;
 
 import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
@@ -33,10 +33,10 @@ import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CompositeErrorTest {
+class CompositeErrorTest {
 
 	@Test
-	public void it_should_compose_errors_messages() {
+	void it_should_compose_errors_messages() {
 		RestAssertError error1 = createErrorWithExpectation("foo");
 		RestAssertError error2 = createErrorWithExpectation("bar %s %s", 1, 2);
 		RestAssertError error3 = createErrorWithExpectation("foobar %s", "hello");
@@ -60,7 +60,7 @@ public class CompositeErrorTest {
 	}
 
 	@Test
-	public void it_should_compose_errors_expectations() {
+	void it_should_compose_errors_expectations() {
 		RestAssertError error1 = createErrorWithExpectation("foo");
 		RestAssertError error2 = createErrorWithExpectation("bar %s %s", 1, 2);
 		RestAssertError error3 = createErrorWithExpectation("foobar %s", "hello");
@@ -85,7 +85,7 @@ public class CompositeErrorTest {
 	}
 
 	@Test
-	public void it_should_compose_errors_mismatch() {
+	void it_should_compose_errors_mismatch() {
 		RestAssertError error1 = createErrorWithMismatch("foo");
 		RestAssertError error2 = createErrorWithMismatch("bar %s %s", 1, 2);
 		RestAssertError error3 = createErrorWithMismatch("foobar %s", "hello");

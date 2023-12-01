@@ -31,17 +31,17 @@ import java.nio.charset.StandardCharsets;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 
-public class AssertHasCharsetTypeTest extends AbstractHttpResponsesCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractHttpResponsesCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 
 	@Override
-	protected String getCharset() {
+	String getCharset() {
 		return CHARSET.name().toLowerCase();
 	}
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertHasCharset(someInfo(), httpResponse, CHARSET);
 	}
 }

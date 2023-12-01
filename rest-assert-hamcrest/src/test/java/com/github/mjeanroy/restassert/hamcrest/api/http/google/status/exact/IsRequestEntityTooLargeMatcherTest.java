@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isRequestEntityTooLarge;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class IsRequestEntityTooLargeMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
+class IsRequestEntityTooLargeMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

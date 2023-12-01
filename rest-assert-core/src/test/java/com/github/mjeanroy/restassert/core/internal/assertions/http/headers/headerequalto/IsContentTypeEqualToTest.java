@@ -31,14 +31,9 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class IsContentTypeEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsContentTypeEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final ContentType VALUE = ContentType.parser().parse(JSON_CONTENT_TYPE.getValue());
-
-	@Override
-	protected Header getHeader() {
-		return JSON_CONTENT_TYPE;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -46,7 +41,12 @@ public class IsContentTypeEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return JSON_CONTENT_TYPE;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

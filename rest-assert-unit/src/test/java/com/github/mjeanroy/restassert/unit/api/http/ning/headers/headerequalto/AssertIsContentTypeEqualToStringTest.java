@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class AssertIsContentTypeEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsContentTypeEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final String VALUE = HEADER.getValue();

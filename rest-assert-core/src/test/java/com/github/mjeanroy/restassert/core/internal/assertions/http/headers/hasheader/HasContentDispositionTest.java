@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class HasContentDispositionTest extends AbstractHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return CONTENT_DISPOSITION;
-	}
+class HasContentDispositionTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasContentDisposition(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return CONTENT_DISPOSITION;
 	}
 }

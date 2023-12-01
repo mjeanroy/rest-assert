@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isMethodNotAllowed;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 
-public class IsMethodNotAllowedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsMethodNotAllowedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

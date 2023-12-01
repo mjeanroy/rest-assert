@@ -27,15 +27,15 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.javax;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class JavaxCookieTest {
+class JavaxCookieTest {
 
 	@Test
-	public void it_should_return_name() {
+	void it_should_return_name() {
 		String expectedName = "foo";
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setName(expectedName).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
@@ -45,7 +45,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_return_value() {
+	void it_should_return_value() {
 		String expectedValue = "foo";
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setValue(expectedValue).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
@@ -55,7 +55,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_return_domain() {
+	void it_should_return_domain() {
 		String expectedDomain = "foo";
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setDomain(expectedDomain).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
@@ -65,7 +65,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_return_path() {
+	void it_should_return_path() {
 		String expectedPath = "foo";
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setPath(expectedPath).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
@@ -75,7 +75,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_secured() {
+	void it_should_check_if_cookie_is_secured() {
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setSecured(true).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean secured = cookie.isSecured();
@@ -84,7 +84,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_http_only() {
+	void it_should_check_if_cookie_is_http_only() {
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setHttpOnly(true).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean httpOnly = cookie.isHttpOnly();
@@ -93,7 +93,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_get_max_age() {
+	void it_should_get_max_age() {
 		int expectedMaxAge = 10;
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setMaxAge(expectedMaxAge).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
@@ -103,7 +103,7 @@ public class JavaxCookieTest {
 	}
 
 	@Test
-	public void it_should_fail_on_getExpires() {
+	void it_should_fail_on_getExpires() {
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 

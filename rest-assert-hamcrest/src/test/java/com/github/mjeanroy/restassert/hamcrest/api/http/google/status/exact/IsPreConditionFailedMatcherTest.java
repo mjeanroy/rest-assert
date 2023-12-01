@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isPreConditionFailed;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDITION_FAILED;
 
-public class IsPreConditionFailedMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
+class IsPreConditionFailedMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

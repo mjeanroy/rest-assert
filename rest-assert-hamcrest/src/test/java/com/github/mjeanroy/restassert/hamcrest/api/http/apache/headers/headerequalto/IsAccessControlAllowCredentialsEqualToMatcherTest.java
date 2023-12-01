@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isAccessControlAllowCredentialsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class IsAccessControlAllowCredentialsEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlAllowCredentialsEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 

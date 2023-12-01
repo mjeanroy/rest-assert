@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()

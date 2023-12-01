@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.json.isequalto;
 
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
@@ -35,13 +35,13 @@ import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEP
 public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T> {
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		run(success());
 		run("foo", success());
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		final T failure = failure();
 		final String message =
 				"Expecting json entry str to be equal to bar but was foo," + LINE_SEPARATOR +
@@ -60,7 +60,7 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message() {
+	void it_should_fail_with_custom_message() {
 		final T failure = failure();
 		final String message = "foo";
 

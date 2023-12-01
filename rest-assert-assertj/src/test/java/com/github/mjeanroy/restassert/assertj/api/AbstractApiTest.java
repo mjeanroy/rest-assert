@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.apache.commons.lang3.reflect.FieldUtils.writeField;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,8 +37,8 @@ public abstract class AbstractApiTest<T, U> {
 
 	protected U api;
 
-	@Before
-	public void setUp() throws Exception {
+	@BeforeEach
+	void setUp() throws Exception {
 		assertions = createAssertions();
 		api = createApi();
 		inject();
@@ -49,14 +49,14 @@ public abstract class AbstractApiTest<T, U> {
 	protected abstract U createApi();
 
 	@Test
-	public void it_should_invoke_internal_api() {
+	void it_should_invoke_internal_api() {
 		run();
 		verifyApiCall();
 		verifyNoMoreInteractions(assertions);
 	}
 
 	@Test
-	public void it_should_return_instance() {
+	void it_should_return_instance() {
 		U result = run();
 		assertThat(result).isSameAs(api);
 	}

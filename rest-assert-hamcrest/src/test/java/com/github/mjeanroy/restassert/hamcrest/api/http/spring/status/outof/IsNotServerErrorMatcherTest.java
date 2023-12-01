@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isNotServerError;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
 
-public class IsNotServerErrorMatcherTest extends AbstractSpringMockMvcHttpResponseStatusOutOfMatcherTest {
+class IsNotServerErrorMatcherTest extends AbstractSpringMockMvcHttpResponseStatusOutOfMatcherTest {
 
 	@Override
 	protected Range getRange() {

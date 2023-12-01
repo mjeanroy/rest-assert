@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpRe
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 
-public class GoogleHttpResponseTest extends AbstractHttpResponseTest<com.google.api.client.http.HttpResponse> {
+class GoogleHttpResponseTest extends AbstractHttpResponseTest<com.google.api.client.http.HttpResponse> {
 
 	@Override
 	protected HttpResponseBuilder<com.google.api.client.http.HttpResponse> getBuilder() {

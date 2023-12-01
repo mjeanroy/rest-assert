@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
 
-public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
+class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String V1 = "GET";
 	private static final String V2 = "POST";
@@ -57,22 +57,22 @@ public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttp
 	);
 
 	@Override
-	protected Header getHeader() {
-		return header(HEADER.getName(), VALUE);
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isAccessControlAllowMethodsEqualTo(response, VALUES);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return header(HEADER.getName(), VALUE);
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
 	@Test
-	public void it_should_not_be_order_sensitive() {
+	void it_should_not_be_order_sensitive() {
 		// GIVEN
 		String actual = "GET,POST,PUT";
 		List<RequestMethod> expected = asList(GET, PUT, POST);

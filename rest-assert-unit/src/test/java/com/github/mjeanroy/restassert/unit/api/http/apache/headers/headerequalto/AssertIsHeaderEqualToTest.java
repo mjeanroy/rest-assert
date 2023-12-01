@@ -30,7 +30,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertIsHeaderEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsHeaderEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final String NAME = "foo";
 

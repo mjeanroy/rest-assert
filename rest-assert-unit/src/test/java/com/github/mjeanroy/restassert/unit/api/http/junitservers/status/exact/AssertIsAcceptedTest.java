@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsAcceptedTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsAcceptedTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

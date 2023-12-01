@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.doesNotHaveFrameOptions;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class DoesNotHaveFrameOptionsMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveFrameOptionsMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

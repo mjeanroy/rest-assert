@@ -32,10 +32,10 @@ import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsNotAcceptableTest extends AbstractHttpResponseStatusTest {
+class IsNotAcceptableTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return NOT_ACCEPTABLE;
 	}
 

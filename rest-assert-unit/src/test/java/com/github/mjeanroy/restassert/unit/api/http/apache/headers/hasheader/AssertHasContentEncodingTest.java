@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertHasContentEncodingTest extends AbstractApacheHttpHeaderTest {
+class AssertHasContentEncodingTest extends AbstractApacheHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

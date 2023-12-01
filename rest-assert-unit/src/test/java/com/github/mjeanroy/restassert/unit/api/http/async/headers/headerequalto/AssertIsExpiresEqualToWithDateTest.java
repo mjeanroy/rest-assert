@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsExpiresEqualToWithDateTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsExpiresEqualToWithDateTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final String VALUE = EXPIRES.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";

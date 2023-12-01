@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,12 +39,12 @@ import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHttpResponsesMimeTypeInTest {
+abstract class AbstractHttpResponsesMimeTypeInTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_mime_type_is_ok() {
+	void should_pass_if_mime_type_is_ok() {
 		List<Header> headers = getHeader();
 		for (Header header : headers) {
 			HttpResponse httpResponse = newHttpResponse(header);
@@ -53,7 +53,7 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 	}
 
 	@Test
-	public void should_fail_if_header_is_not_available() {
+	void should_fail_if_header_is_not_available() {
 		List<Header> headers = getHeader();
 		List<String> mimeTypes = getMimeTypes();
 
@@ -81,9 +81,9 @@ public abstract class AbstractHttpResponsesMimeTypeInTest {
 		}
 	}
 
-	protected abstract void run(HttpResponse httpResponse);
+	abstract void run(HttpResponse httpResponse);
 
-	protected abstract List<String> getMimeTypes();
+	abstract List<String> getMimeTypes();
 
 	private List<Header> getHeader() {
 		List<String> mimeTypes = getMimeTypes();

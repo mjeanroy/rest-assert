@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractNingHttpStatusTest {
+class AssertIsSeeOtherTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

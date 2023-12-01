@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isRequestTimeout;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class IsRequestTimeoutMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsRequestTimeoutMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

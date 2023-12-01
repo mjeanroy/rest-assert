@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 import java.util.List;
 import java.util.Objects;
@@ -84,7 +85,12 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 
 		@Override
 		public boolean apply(String input) {
-			return Objects.equals(expected, parser.parse(input));
+			try {
+				return Objects.equals(expected, parser.parse(input));
+			}
+			catch (InvalidHeaderValue ex) {
+				return false;
+			}
 		}
 	}
 }

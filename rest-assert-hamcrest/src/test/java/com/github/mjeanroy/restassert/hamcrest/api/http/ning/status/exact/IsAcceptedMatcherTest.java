@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isAccepted;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 
-public class IsAcceptedMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
+class IsAcceptedMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

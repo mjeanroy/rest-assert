@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class DoesNotHaveFrameOptionsTest extends AbstractDoesNotHaveHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return X_FRAME_OPTIONS;
-	}
+class DoesNotHaveFrameOptionsTest extends AbstractDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveFrameOptions(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return X_FRAME_OPTIONS;
 	}
 }

@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsNoContentTest extends AbstractGoogleHttpStatusTest {
+class AssertIsNoContentTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

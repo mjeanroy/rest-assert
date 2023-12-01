@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class IsRequestUriTooLongTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return REQUEST_URI_TOO_LONG;
-	}
+class IsRequestUriTooLongTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isRequestUriTooLong(response);
+	}
+
+	@Override
+	int status() {
+		return REQUEST_URI_TOO_LONG;
 	}
 }

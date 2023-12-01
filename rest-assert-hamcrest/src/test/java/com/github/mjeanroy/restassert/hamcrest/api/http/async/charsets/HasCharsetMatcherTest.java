@@ -29,7 +29,7 @@ import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.hasCharset;
 
-public class HasCharsetMatcherTest extends AbstractAsyncHttpResponseCharsetMatcherTest {
+class HasCharsetMatcherTest extends AbstractAsyncHttpResponseCharsetMatcherTest {
 
 	private static final String CHARSET = "utf-8";
 

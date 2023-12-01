@@ -29,9 +29,9 @@ import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
+class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 
 	private static final String NAME = "Content-Type";
 	private static final String CHARSET = "utf-8";
@@ -42,12 +42,12 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	}
 
 	@Override
-	protected String expectedCharset() {
+	String expectedCharset() {
 		return CHARSET;
 	}
 
 	@Test
-	public void it_should_compare_charset_case_insensitively() {
+	void it_should_compare_charset_case_insensitively() {
 		// GIVEN
 		String expected = "UTF-8";
 		String actual = "utf-8";
@@ -63,7 +63,7 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	}
 
 	@Test
-	public void it_should_fail_if_response_does_not_have_content_type() {
+	void it_should_fail_if_response_does_not_have_content_type() {
 		// GIVEN
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
@@ -75,7 +75,7 @@ public class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 	}
 
 	@Test
-	public void it_should_fail_if_response_has_content_type_without_charset() {
+	void it_should_fail_if_response_has_content_type_without_charset() {
 		// GIVEN
 		HttpResponse rsp = new HttpResponseBuilderImpl()
 			.addHeader(NAME, "application/json")

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isContentTypeEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class IsContentTypeEqualToStringMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
+class IsContentTypeEqualToStringMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final String VALUE = HEADER.getValue();

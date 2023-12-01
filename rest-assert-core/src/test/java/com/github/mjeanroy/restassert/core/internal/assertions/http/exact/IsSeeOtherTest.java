@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class IsSeeOtherTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return SEE_OTHER;
-	}
+class IsSeeOtherTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isSeeOther(response);
+	}
+
+	@Override
+	int status() {
+		return SEE_OTHER;
 	}
 }

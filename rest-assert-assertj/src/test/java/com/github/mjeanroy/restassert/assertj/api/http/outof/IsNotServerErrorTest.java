@@ -31,10 +31,10 @@ import org.assertj.core.api.AssertionInfo;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsNotServerErrorTest extends AbstractHttpResponseStatusOutOfTest {
+class IsNotServerErrorTest extends AbstractHttpResponseStatusOutOfTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return 500;
 	}
 

@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.ning.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertHasCharsetTest extends AbstractNingHttpAssertCharsetTest {
+class AssertHasCharsetTest extends AbstractNingHttpAssertCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 

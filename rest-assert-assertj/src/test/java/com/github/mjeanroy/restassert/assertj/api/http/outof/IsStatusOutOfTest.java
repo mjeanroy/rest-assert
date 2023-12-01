@@ -32,13 +32,13 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsStatusOutOfTest extends AbstractHttpResponseStatusOutOfTest {
+class IsStatusOutOfTest extends AbstractHttpResponseStatusOutOfTest {
 
 	private static final int START = 200;
 	private static final int END = 299;
 
 	@Override
-	protected int status() {
+	int status() {
 		return 400;
 	}
 

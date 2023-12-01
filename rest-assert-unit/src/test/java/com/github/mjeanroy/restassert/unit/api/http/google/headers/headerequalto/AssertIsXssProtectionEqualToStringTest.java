@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsXssProtectionEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsXssProtectionEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String VALUE = HEADER.getValue();

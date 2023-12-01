@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull.shouldNotBeNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldNotBeNullTest {
+class ShouldNotBeNullTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		ShouldNotBeNull shouldHaveEntry = shouldNotBeNull();
 
 		assertThat(shouldHaveEntry).isNotNull();

@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEM
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsNotImplementedTest extends AbstractHttpResponsesStatusTest {
+class AssertIsNotImplementedTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return NOT_IMPLEMENTED;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsNotImplemented(info, httpResponse);
 	}
 }

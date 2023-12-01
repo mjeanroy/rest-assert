@@ -31,19 +31,19 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsFrameOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final FrameOptions VALUE = FrameOptions.deny();
 	private static final FrameOptions FAILED_VALUE = FrameOptions.sameOrigin();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsFrameOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 

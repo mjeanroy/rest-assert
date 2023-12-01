@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.doesNotHaveAccessControlAllowOrigin;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-public class DoesNotHaveAccessControlAllowOriginMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveAccessControlAllowOriginMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

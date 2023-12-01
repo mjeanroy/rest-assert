@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.doesNotHaveStrictTransportSecurity;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class DoesNotHaveStrictTransportSecurityMatcherTest extends AbstractNingHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveStrictTransportSecurityMatcherTest extends AbstractNingHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

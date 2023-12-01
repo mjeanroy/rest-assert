@@ -32,7 +32,7 @@ import org.assertj.core.api.AssertionInfo;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class HasContentTypeTest extends AbstractHttpResponseHeaderTest {
+class HasContentTypeTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

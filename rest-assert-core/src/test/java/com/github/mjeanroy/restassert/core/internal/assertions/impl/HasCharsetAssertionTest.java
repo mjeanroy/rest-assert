@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class HasCharsetAssertionTest {
+class HasCharsetAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_charset() {
+	void it_should_not_fail_if_header_is_set_with_expected_charset() {
 		String charset = "utf-8";
 		HasCharsetAssertion assertion = new HasCharsetAssertion(charset);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("Content-Type", "application/json; charset=utf-8").build();
@@ -49,7 +49,7 @@ public class HasCharsetAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set_with_expected_charset() {
+	void it_should_fail_if_header_is_not_set_with_expected_charset() {
 		String charset = "utf-8";
 		HasCharsetAssertion assertion = new HasCharsetAssertion(charset);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("Content-Type", "application/json; charset=utf-16").build();
@@ -63,7 +63,7 @@ public class HasCharsetAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_content_type_header_has_multiple_values() {
+	void it_should_fail_if_content_type_header_has_multiple_values() {
 		HasCharsetAssertion assertion = new HasCharsetAssertion("utf-8");
 		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addHeader("Content-Type", "application/json; charset=utf-8")
@@ -79,7 +79,7 @@ public class HasCharsetAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_charset_is_not_set() {
+	void it_should_fail_if_charset_is_not_set() {
 		HasCharsetAssertion assertion = new HasCharsetAssertion("utf-8");
 		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("Content-Type", "application/json").build();
 
@@ -92,7 +92,7 @@ public class HasCharsetAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set() {
+	void it_should_fail_if_header_is_not_set() {
 		HasCharsetAssertion assertion = new HasCharsetAssertion("utf-8");
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
@@ -105,21 +105,21 @@ public class HasCharsetAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_charset_is_null() {
+	void it_should_fail_if_charset_is_null() {
 		assertThatThrownBy(hasCharsetAssertion(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Charset value must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_charset_is_empty() {
+	void it_should_fail_if_charset_is_empty() {
 		assertThatThrownBy(hasCharsetAssertion(""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Charset value must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_blank() {
+	void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(hasCharsetAssertion("    "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Charset value must be defined");

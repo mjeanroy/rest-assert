@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 
-public class IsNotSuccessTest extends AbstractHttpStatusOutOfTest {
-
-	@Override
-	protected Range getRange() {
-		return SUCCESS;
-	}
+class IsNotSuccessTest extends AbstractHttpStatusOutOfTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotSuccess(response);
+	}
+
+	@Override
+	Range getRange() {
+		return SUCCESS;
 	}
 }

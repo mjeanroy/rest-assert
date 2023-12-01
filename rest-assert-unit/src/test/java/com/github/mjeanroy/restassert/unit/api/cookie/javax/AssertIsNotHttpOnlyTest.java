@@ -30,7 +30,7 @@ import javax.servlet.http.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertIsNotHttpOnly;
 
-public class AssertIsNotHttpOnlyTest extends AbstractJavaxCookieTest {
+class AssertIsNotHttpOnlyTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

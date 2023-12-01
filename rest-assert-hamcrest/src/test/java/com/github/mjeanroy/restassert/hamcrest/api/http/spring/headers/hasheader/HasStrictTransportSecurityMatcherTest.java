@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasStrictTransportSecurity;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class HasStrictTransportSecurityMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
+class HasStrictTransportSecurityMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

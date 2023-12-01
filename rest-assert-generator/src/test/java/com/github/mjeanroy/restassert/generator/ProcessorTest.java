@@ -26,16 +26,16 @@ package com.github.mjeanroy.restassert.generator;
 
 import com.github.mjeanroy.restassert.generator.processors.AssertJProcessor;
 import com.github.mjeanroy.restassert.generator.templates.engine.MustacheTemplateEngine;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProcessorTest {
+class ProcessorTest {
 
 	@Test
-	public void it_should_build_http_assertions() {
+	void it_should_build_http_assertions() {
 		AssertJProcessor processor = AssertJProcessor.HTTP_RESPONSES;
 		Collection<ClassFile> classFiles = processor.process(MustacheTemplateEngine.instance());
 		assertThat(classFiles).hasSize(1);

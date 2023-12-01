@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CO
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsPartialContentTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return PARTIAL_CONTENT;
-	}
+class IsPartialContentTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isPartialContent(response);
+	}
+
+	@Override
+	int status() {
+		return PARTIAL_CONTENT;
 	}
 }

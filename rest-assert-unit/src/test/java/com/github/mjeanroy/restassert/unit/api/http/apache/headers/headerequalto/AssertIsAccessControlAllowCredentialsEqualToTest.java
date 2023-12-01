@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 

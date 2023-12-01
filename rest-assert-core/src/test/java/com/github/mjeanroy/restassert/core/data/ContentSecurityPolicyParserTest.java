@@ -30,8 +30,8 @@ import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -71,17 +71,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
 
-public class ContentSecurityPolicyParserTest {
+class ContentSecurityPolicyParserTest {
 
 	private ContentSecurityPolicyParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (ContentSecurityPolicyParser) ContentSecurityPolicy.parser();
 	}
 
 	@Test
-	public void it_should_parse_default_src() {
+	void it_should_parse_default_src() {
 		String v1 = "'unsafe-inline'";
 		String s = "'unsafe-eval'";
 		String v3 = "'self'";
@@ -96,7 +96,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_sandbox() {
+	void it_should_parse_with_sandbox() {
 		String v1 = "allow-scripts";
 		String v2 = "allow-forms";
 		String value = v1 + " " + v2;
@@ -111,7 +111,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_script_src() {
+	void it_should_parse_with_script_src() {
 		String v1 = "'unsafe-eval'";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -124,7 +124,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_script_src_elem() {
+	void it_should_parse_with_script_src_elem() {
 		String v1 = "'unsafe-eval'";
 		String v2 = "'unsafe-inline'";
 		String v3 = "https:";
@@ -138,7 +138,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_script_src_attr() {
+	void it_should_parse_with_script_src_attr() {
 		String v1 = "'unsafe-eval'";
 		String v2 = "'unsafe-inline'";
 		String v3 = "https:";
@@ -152,7 +152,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_styles_src() {
+	void it_should_parse_with_styles_src() {
 		String v1 = "'unsafe-inline'";
 		String v2 = "'nonce-12345=='";
 		String value = v1 + " " + v2;
@@ -165,7 +165,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_styles_src_elem() {
+	void it_should_parse_with_styles_src_elem() {
 		String v1 = "'unsafe-inline'";
 		String v2 = "'nonce-12345=='";
 		String value = v1 + " " + v2;
@@ -178,7 +178,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_styles_src_attr() {
+	void it_should_parse_with_styles_src_attr() {
 		String v1 = "'unsafe-inline'";
 		String v2 = "'nonce-12345=='";
 		String value = v1 + " " + v2;
@@ -191,7 +191,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_connect_src() {
+	void it_should_parse_with_connect_src() {
 		String v1 = "domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -206,7 +206,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_font_src() {
+	void it_should_parse_font_src() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -221,7 +221,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_img_src() {
+	void it_should_parse_with_img_src() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -236,7 +236,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_media_src() {
+	void it_should_parse_with_media_src() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -251,7 +251,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_object_src() {
+	void it_should_parse_with_object_src() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -266,7 +266,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_child_src() {
+	void it_should_parse_with_child_src() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -281,7 +281,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_form_action_src() {
+	void it_should_parse_with_form_action_src() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -296,7 +296,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_check_if_csp_match_header_with_plugin_types() {
+	void it_should_check_if_csp_match_header_with_plugin_types() {
 		String v1 = "application/xml";
 		String v2 = "application/json";
 		String value = v1 + " " + v2;
@@ -311,7 +311,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_frame_ancestors() {
+	void it_should_parse_with_frame_ancestors() {
 		String uri = "http://domain.com";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; frame-ancestors " + uri);
 
@@ -324,7 +324,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_report_uri() {
+	void it_should_parse_with_report_uri() {
 		String uri = "http://domain.com";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-uri " + uri);
 
@@ -337,7 +337,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_check_if_csp_match_header_with_base_uri() {
+	void it_should_check_if_csp_match_header_with_base_uri() {
 		String uri = "http://domain.com";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; base-uri " + uri);
 
@@ -350,7 +350,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_block_all_mixed_content() {
+	void it_should_parse_with_block_all_mixed_content() {
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; block-all-mixed-content;");
 
 		assertThat(csp.getDirectives())
@@ -362,7 +362,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_frame_src() {
+	void it_should_parse_frame_src() {
 		String uri = "https://example.com/";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; frame-src " + uri + ";");
 
@@ -375,7 +375,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_manifest_src() {
+	void it_should_parse_manifest_src() {
 		String uri = "https://example.com/";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; manifest-src " + uri + ";");
 
@@ -388,7 +388,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_prefetch_src() {
+	void it_should_parse_prefetch_src() {
 		String uri = "https://example.com/";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; prefetch-src " + uri + ";");
 
@@ -401,7 +401,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_worker_src() {
+	void it_should_parse_worker_src() {
 		String uri = "https://example.com/";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; worker-src " + uri + ";");
 
@@ -414,7 +414,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_disown_opener() {
+	void it_should_parse_disown_opener() {
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; disown-opener");
 
 		assertThat(csp.getDirectives())
@@ -426,7 +426,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_navigate_to() {
+	void it_should_parse_with_navigate_to() {
 		String v1 = "http://domain.com";
 		String v2 = "'unsafe-inline'";
 		String value = v1 + " " + v2;
@@ -441,7 +441,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_upgrade_insecure_request() {
+	void it_should_parse_upgrade_insecure_request() {
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; upgrade-insecure-request");
 
 		assertThat(csp.getDirectives())
@@ -453,7 +453,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_require_sri_for() {
+	void it_should_parse_require_sri_for() {
 		String v1 = "script";
 		String v2 = "style";
 		String value = v1 + " " + v2;
@@ -468,7 +468,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_parse_report_to() {
+	void it_should_parse_report_to() {
 		String value = "#test-group";
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; report-to " + value);
 
@@ -481,7 +481,7 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_ignore_duplicated_directives() {
+	void it_should_ignore_duplicated_directives() {
 		ContentSecurityPolicy csp = parser.parse("default-src 'none'; default-src 'unsafe-inline';");
 
 		assertThat(csp.getDirectives())
@@ -492,14 +492,14 @@ public class ContentSecurityPolicyParserTest {
 	}
 
 	@Test
-	public void it_should_fail_if_directive_name_is_not_found() {
+	void it_should_fail_if_directive_name_is_not_found() {
 		assertThatThrownBy(parse(parser, "default-src 'none'; foo http://domain.com"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Cannot parse Content-Security-Policy value since directive foo seems not valid");
 	}
 
 	@Test
-	public void it_should_fail_if_directive_does_not_have_name() {
+	void it_should_fail_if_directive_does_not_have_name() {
 		assertThatThrownBy(parse(parser, "default-src 'none'; ;"))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("Content-Security-Policy value 'default-src 'none'; ;' is not a valid one.");

@@ -33,7 +33,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsLocationEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsLocationEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

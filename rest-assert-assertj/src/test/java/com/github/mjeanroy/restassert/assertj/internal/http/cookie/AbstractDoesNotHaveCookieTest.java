@@ -30,24 +30,24 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractDoesNotHaveCookieTest {
+abstract class AbstractDoesNotHaveCookieTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_cookie_is_missing() {
+	void should_pass_if_cookie_is_missing() {
 		HttpResponse httpResponse = newResponse(fakeCookie());
 		run(someInfo(), httpResponse);
 	}
 
 	@Test
-	public void should_fail_if_cookie_is_here() {
+	void should_fail_if_cookie_is_here() {
 		AssertionInfo info = someInfo();
 		HttpResponse httpResponse = newResponse(cookie());
 
@@ -62,11 +62,11 @@ public abstract class AbstractDoesNotHaveCookieTest {
 		}
 	}
 
-	protected abstract String buildErrorMessage();
+	abstract String buildErrorMessage();
 
-	protected abstract Cookie cookie();
+	abstract Cookie cookie();
 
-	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
+	abstract void run(AssertionInfo info, HttpResponse httpResponse);
 
 	Cookie fakeCookie() {
 		return new CookieBuilder().setName("foo").setValue("bar").build();

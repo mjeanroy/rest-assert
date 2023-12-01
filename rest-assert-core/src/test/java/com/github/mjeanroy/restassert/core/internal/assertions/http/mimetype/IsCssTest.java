@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CS
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsCssTest extends AbstractMimeTypeTest {
-
-	@Override
-	protected String getMimeType() {
-		return TEXT_CSS;
-	}
+class IsCssTest extends AbstractMimeTypeTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isCss(response);
+	}
+
+	@Override
+	String getMimeType() {
+		return TEXT_CSS;
 	}
 }

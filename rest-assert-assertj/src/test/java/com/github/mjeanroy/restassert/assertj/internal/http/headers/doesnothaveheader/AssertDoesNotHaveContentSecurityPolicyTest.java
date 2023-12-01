@@ -30,15 +30,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveContentSecurityPolicy(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return CONTENT_SECURITY_POLICY;
 	}
 }

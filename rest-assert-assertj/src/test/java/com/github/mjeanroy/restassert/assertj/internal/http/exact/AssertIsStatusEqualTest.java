@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsStatusEqualTest extends AbstractHttpResponsesStatusTest {
+class AssertIsStatusEqualTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return CREATED;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsStatusEqual(info, httpResponse, status());
 	}
 }

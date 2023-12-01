@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CO
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlExposeHeadersEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ACCESS_CONTROL_EXPOSE_HEADERS;
 	}
 }

@@ -31,7 +31,7 @@ import java.util.List;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsHtmlTest extends AbstractSpringMockMvcHttpClientMimeTypeInTest {
+class AssertIsHtmlTest extends AbstractSpringMockMvcHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

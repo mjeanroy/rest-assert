@@ -30,14 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
-
-	@Override
-	protected Header getHeader() {
-		return ACCESS_CONTROL_ALLOW_MAX_AGE;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -45,7 +40,12 @@ public class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpHeaderEqu
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_MAX_AGE;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

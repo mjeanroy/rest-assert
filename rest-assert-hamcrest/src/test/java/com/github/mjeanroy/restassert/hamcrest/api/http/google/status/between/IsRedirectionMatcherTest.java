@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isRedirection;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
-public class IsRedirectionMatcherTest extends AbstractGoogleHttpResponseStatusBetweenMatcherTest {
+class IsRedirectionMatcherTest extends AbstractGoogleHttpResponseStatusBetweenMatcherTest {
 
 	@Override
 	protected Range getRange() {

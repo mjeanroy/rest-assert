@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_PERMANENTLY;
 
-public class AssertIsMovedPermanentlyTest extends AbstractOkHttpStatusTest {
+class AssertIsMovedPermanentlyTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

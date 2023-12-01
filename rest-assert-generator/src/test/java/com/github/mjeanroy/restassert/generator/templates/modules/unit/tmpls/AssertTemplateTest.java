@@ -26,16 +26,16 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.tmpls;
 
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateTest;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.tmpls.AssertTemplate.assertTemplate;
 
-public class AssertTemplateTest extends AbstractTemplateTest {
+class AssertTemplateTest extends AbstractTemplateTest {
 
 	private AssertTemplate template;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		template = assertTemplate();
 	}
 

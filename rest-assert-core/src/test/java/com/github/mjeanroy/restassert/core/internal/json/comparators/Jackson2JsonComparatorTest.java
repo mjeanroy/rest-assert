@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
 
-public class Jackson2JsonComparatorTest extends AbstractJsonComparatorTest {
+class Jackson2JsonComparatorTest extends AbstractJsonComparatorTest {
 
 	@Override
 	protected JsonParser jsonParser() {

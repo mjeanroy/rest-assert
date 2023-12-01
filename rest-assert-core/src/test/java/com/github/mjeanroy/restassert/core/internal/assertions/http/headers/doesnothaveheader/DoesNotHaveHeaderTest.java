@@ -30,17 +30,17 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class DoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpHeaderTest {
+class DoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpHeaderTest {
 
 	private static final String NAME = "foo";
 
 	@Override
-	protected Header getHeader() {
-		return header(NAME, "bar");
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.doesNotHaveHeader(response, NAME);
 	}
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.doesNotHaveHeader(response, NAME);
+	Header getHeader() {
+		return header(NAME, "bar");
 	}
 }

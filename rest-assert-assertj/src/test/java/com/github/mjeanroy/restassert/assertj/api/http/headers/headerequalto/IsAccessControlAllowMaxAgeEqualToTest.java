@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpRespo
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final long VALUE = 3600;
 

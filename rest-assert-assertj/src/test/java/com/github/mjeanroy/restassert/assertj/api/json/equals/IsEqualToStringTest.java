@@ -30,7 +30,7 @@ import org.assertj.core.api.AssertionInfo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-public class IsEqualToStringTest extends AbstractJsonIsEqualToTest {
+class IsEqualToStringTest extends AbstractJsonIsEqualToTest {
 
 	@Override
 	protected JsonAssert run() {

@@ -31,7 +31,7 @@ import java.util.List;
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsHtmlTest extends AbstractJunitServersHttpClientMimeTypeInTest {
+class AssertIsHtmlTest extends AbstractJunitServersHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

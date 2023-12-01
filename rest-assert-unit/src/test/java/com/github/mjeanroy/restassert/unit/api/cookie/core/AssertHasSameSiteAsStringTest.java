@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertHasSameSite;
 
-public class AssertHasSameSiteAsStringTest extends AbstractCoreCookieTest {
+class AssertHasSameSiteAsStringTest extends AbstractCoreCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

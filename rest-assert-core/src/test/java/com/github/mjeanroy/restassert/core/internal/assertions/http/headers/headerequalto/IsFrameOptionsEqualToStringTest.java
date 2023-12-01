@@ -30,21 +30,16 @@ import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValu
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final String VALUE = HEADER.getValue();
 	private static final String NAME = HEADER.getName();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -52,7 +47,12 @@ public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
@@ -62,28 +62,28 @@ public class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTe
 	}
 
 	@Test
-	public void it_should_parse_deny_case_insensitively() {
+	void it_should_parse_deny_case_insensitively() {
 		String actual = "DENY";
 		String expected = "deny";
 		doTest(actual, expected);
 	}
 
 	@Test
-	public void it_should_parse_sameorigin_case_insensitively() {
+	void it_should_parse_sameorigin_case_insensitively() {
 		String actual = "SAMEORIGIN";
 		String expected = "sameorigin";
 		doTest(actual, expected);
 	}
 
 	@Test
-	public void it_should_parse_allowfrom_case_insensitively() {
+	void it_should_parse_allowfrom_case_insensitively() {
 		String actual = "ALLOW-FROM https://example.com";
 		String expected = "allow-from https://example.com";
 		doTest(actual, expected);
 	}
 
 	@Test
-	public void it_should_fail_with_invalid_value() {
+	void it_should_fail_with_invalid_value() {
 		String actual = "sameorigin";
 		String expected = "same-origin";
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();

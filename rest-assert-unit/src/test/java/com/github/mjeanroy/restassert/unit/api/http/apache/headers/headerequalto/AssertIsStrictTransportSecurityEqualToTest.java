@@ -31,7 +31,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()

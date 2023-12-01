@@ -27,17 +27,17 @@ package com.github.mjeanroy.restassert.unit.api.cookie.javax;
 import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.Cookie;
 
 import static com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite.STRICT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class AssertHasSameSiteTest {
+class AssertHasSameSiteTest {
 
 	@Test
-	public void it_should_fail_because_of_unsupported_operation() {
+	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new JavaxCookieBuilder().build();
 		assertThatThrownBy(assertHasSameSite(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
@@ -45,7 +45,7 @@ public class AssertHasSameSiteTest {
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message_because_of_unsupported_operation() {
+	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new JavaxCookieBuilder().build();
 		assertThatThrownBy(assertHasSameSite("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)

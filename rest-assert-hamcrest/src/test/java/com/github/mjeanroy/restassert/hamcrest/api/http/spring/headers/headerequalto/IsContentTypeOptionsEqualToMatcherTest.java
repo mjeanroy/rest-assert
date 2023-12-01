@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isContentTypeOptionsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class IsContentTypeOptionsEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsContentTypeOptionsEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
@@ -45,10 +45,5 @@ public class IsContentTypeOptionsEqualToMatcherTest extends AbstractSpringMockMv
 	@Override
 	protected void run(ResultActions actual) {
 		MatcherAssert.assertThat(actual, isContentTypeOptionsEqualTo(VALUE));
-	}
-
-	@Override
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

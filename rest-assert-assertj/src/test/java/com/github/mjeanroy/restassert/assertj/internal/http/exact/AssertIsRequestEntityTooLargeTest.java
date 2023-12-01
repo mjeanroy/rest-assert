@@ -29,15 +29,15 @@ import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractHttpResponsesStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUEST_ENTITY_TOO_LARGE;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsRequestEntityTooLarge(info, httpResponse);
 	}
 }

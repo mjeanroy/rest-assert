@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractApacheHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

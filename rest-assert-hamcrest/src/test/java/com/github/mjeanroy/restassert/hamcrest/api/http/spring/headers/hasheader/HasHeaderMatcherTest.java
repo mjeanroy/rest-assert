@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasHeader;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class HasHeaderMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
+class HasHeaderMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
 
 	private static final String NAME = "X-MyHeader";
 

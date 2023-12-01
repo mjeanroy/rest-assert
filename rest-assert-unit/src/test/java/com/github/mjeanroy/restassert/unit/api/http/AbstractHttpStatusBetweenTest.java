@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -37,7 +37,7 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
-	public void it_should_pass_with_status_in_bounds() {
+	void it_should_pass_with_status_in_bounds() {
 		Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			run(newHttpResponse(i));
@@ -46,7 +46,7 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	}
 
 	@Test
-	public void it_should_fail_with_response_not_in_bounds() {
+	void it_should_fail_with_response_not_in_bounds() {
 		doTestWithDefaultMessage(null, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {
@@ -56,7 +56,7 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 	}
 
 	@Test
-	public void it_should_fail_with_response_not_in_bounds_with_custom_message() {
+	void it_should_fail_with_response_not_in_bounds_with_custom_message() {
 		doTestWithDefaultMessage(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {

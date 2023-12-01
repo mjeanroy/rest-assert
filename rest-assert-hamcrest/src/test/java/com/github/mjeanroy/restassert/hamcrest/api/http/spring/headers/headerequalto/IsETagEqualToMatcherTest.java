@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isETagEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ETAG;
 
-public class IsETagEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsETagEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = ETAG.getValue();
 

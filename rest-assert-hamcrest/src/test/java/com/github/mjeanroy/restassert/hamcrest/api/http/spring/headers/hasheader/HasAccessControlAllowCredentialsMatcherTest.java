@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasAccessControlAllowCredentials;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class HasAccessControlAllowCredentialsMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
+class HasAccessControlAllowCredentialsMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

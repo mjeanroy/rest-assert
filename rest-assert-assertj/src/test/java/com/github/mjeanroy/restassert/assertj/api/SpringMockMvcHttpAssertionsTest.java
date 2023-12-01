@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
@@ -35,10 +35,10 @@ import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SpringMockMvcHttpAssertionsTest {
+class SpringMockMvcHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() {
+	void it_should_create_new_assertion_object() {
 		ResultActions response = new SpringMockMvcHttpResponseBuilder().build();
 		HttpResponseAssert assertions = SpringMockMvcHttpAssertions.assertThat(response);
 
@@ -47,7 +47,7 @@ public class SpringMockMvcHttpAssertionsTest {
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() {
+	void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 			jsonEntry("foo", "bar")
 		);

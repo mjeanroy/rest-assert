@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isNotServerError;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
 
-public class IsNotServerErrorMatcherTest extends AbstractJunitServersHttpResponseStatusOutOfMatcherTest {
+class IsNotServerErrorMatcherTest extends AbstractJunitServersHttpResponseStatusOutOfMatcherTest {
 
 	@Override
 	protected Range getRange() {

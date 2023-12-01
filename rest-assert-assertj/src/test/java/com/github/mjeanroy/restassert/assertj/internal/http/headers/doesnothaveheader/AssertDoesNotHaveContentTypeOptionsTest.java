@@ -30,15 +30,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertDoesNotHaveContentTypeOptionsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class AssertDoesNotHaveContentTypeOptionsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveContentTypeOptions(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return X_CONTENT_TYPE_OPTIONS;
 	}
 }

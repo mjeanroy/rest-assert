@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isResetContent;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
 
-public class IsResetContentMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
+class IsResetContentMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

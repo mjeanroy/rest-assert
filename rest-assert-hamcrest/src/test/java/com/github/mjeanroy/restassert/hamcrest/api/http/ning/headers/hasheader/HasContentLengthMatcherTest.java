@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.hasContentLength;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_LENGTH;
 
-public class HasContentLengthMatcherTest extends AbstractNingHttpResponseHasHeaderMatcherTest {
+class HasContentLengthMatcherTest extends AbstractNingHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.doesNotHaveLocation;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 
-public class DoesNotHaveLocationMatcherTest extends AbstractCoreHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveLocationMatcherTest extends AbstractCoreHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

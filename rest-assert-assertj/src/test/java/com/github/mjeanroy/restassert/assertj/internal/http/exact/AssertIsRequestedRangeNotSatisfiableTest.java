@@ -29,15 +29,15 @@ import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractHttpResponsesStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUESTED_RANGE_NOT_SATISFIABLE;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsRequestedRangeNotSatisfiable(info, httpResponse);
 	}
 }

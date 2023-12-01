@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractApacheHttpStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

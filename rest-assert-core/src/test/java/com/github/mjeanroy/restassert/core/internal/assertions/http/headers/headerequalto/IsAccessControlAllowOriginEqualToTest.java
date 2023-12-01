@@ -30,14 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsAccessControlAllowOriginEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsAccessControlAllowOriginEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
-
-	@Override
-	protected Header getHeader() {
-		return ACCESS_CONTROL_ALLOW_ORIGIN;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -45,7 +40,12 @@ public class IsAccessControlAllowOriginEqualToTest extends AbstractHttpHeaderEqu
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_ORIGIN;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.data;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -34,15 +34,15 @@ import java.util.Date;
 import static com.github.mjeanroy.restassert.tests.TestUtils.createUtcDate;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DefaultCookieTest {
+class DefaultCookieTest {
 
 	@Test
-	public void it_should_implement_equals() {
+	void it_should_implement_equals() {
 		EqualsVerifier.forClass(DefaultCookie.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		String name = "X-Auth-Token";
 		String value = "b145d7b2-d76c-4aa4-93d4-5f853f94b333";
 		String domain = "localhost";
@@ -71,7 +71,7 @@ public class DefaultCookieTest {
 	}
 
 	@Test
-	public void it_should_create_cookie_with_a_clone_of_expires_dates() {
+	void it_should_create_cookie_with_a_clone_of_expires_dates() {
 		String name = "X-Auth-Token";
 		String value = "b145d7b2-d76c-4aa4-93d4-5f853f94b333";
 		String domain = "localhost";

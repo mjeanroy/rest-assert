@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isContentEncodingEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class IsContentEncodingEqualToStringMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsContentEncodingEqualToStringMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();

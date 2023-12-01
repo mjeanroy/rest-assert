@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class IsGoneTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return GONE;
-	}
+class IsGoneTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isGone(response);
+	}
+
+	@Override
+	int status() {
+		return GONE;
 	}
 }

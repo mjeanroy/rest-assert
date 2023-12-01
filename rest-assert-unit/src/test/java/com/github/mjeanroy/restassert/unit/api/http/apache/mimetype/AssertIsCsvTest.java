@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CS
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsCsvTest extends AbstractApacheHttpClientMimeTypeTest {
+class AssertIsCsvTest extends AbstractApacheHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

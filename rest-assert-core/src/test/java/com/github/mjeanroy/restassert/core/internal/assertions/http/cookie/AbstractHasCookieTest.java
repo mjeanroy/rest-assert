@@ -31,34 +31,34 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_with_expected_cookie() {
+	void it_should_pass_with_expected_cookie() {
 		Cookie cookie = newCookie();
 		AssertionResult result = run(newResponse(cookie));
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_fail_without_any_cookies() {
+	void it_should_fail_without_any_cookies() {
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 		AssertionResult result = run(rsp);
 		verifyError(result);
 	}
 
 	@Test
-	public void it_should_fail_without_expected_cookies() {
+	void it_should_fail_without_expected_cookies() {
 		HttpResponse rsp = new HttpResponseBuilderImpl()
 				.addCookie(new CookieBuilder()
 						.setName("foo1")
@@ -75,9 +75,9 @@ public abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpR
 		verifyError(result);
 	}
 
-	protected abstract Cookie newCookie();
+	abstract Cookie newCookie();
 
-	protected abstract void verifyError(AssertionResult result);
+	abstract void verifyError(AssertionResult result);
 
 	private HttpResponse newResponse(Cookie cookie, Cookie... cookies) {
 		return new HttpResponseBuilderImpl().addCookie(cookie, cookies).build();

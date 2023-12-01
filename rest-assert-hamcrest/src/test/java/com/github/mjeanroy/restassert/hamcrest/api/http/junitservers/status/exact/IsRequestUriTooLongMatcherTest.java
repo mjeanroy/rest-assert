@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isRequestUriTooLong;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class IsRequestUriTooLongMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
+class IsRequestUriTooLongMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

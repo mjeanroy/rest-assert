@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isInternalServerError;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_SERVER_ERROR;
 
-public class IsInternalServerErrorMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
+class IsInternalServerErrorMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

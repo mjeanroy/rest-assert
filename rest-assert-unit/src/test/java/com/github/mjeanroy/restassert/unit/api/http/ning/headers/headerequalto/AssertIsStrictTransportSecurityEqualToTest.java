@@ -31,7 +31,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()

@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsGoneTest extends AbstractHttpResponseStatusTest {
+class IsGoneTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return GONE;
 	}
 

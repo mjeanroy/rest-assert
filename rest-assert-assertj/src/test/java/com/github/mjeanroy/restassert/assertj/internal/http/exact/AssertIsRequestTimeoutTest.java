@@ -29,15 +29,15 @@ import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractHttpResponsesStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUEST_TIMEOUT;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsRequestTimeout(info, httpResponse);
 	}
 }

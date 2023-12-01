@@ -30,7 +30,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class AssertIsContentTypeEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsContentTypeEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final String VALUE = HEADER.getValue();

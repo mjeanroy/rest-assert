@@ -33,7 +33,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isAccessControlAllowHeadersEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-public class IsAccessControlAllowHeadersEqualToIterableMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlAllowHeadersEqualToIterableMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
 
 	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 

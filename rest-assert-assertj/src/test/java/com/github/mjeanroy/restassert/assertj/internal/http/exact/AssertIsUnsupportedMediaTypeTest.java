@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTE
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsUnsupportedMediaTypeTest extends AbstractHttpResponsesStatusTest {
+class AssertIsUnsupportedMediaTypeTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return UNSUPPORTED_MEDIA_TYPE;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsUnsupportedMediaType(info, httpResponse);
 	}
 }

@@ -31,7 +31,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
 
-public class AssertIsJavascriptTest extends AbstractOkHttpClientMimeTypeInTest {
+class AssertIsJavascriptTest extends AbstractOkHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

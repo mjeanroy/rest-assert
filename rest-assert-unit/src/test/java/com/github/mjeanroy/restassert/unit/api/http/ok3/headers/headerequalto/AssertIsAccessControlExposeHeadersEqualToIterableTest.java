@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
-public class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 

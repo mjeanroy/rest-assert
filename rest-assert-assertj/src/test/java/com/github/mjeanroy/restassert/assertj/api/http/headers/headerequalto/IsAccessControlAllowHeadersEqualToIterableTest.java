@@ -32,7 +32,7 @@ import org.assertj.core.api.AssertionInfo;
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.*;
 
-public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

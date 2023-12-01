@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
 
-public class AssertIsTextTest extends AbstractOkHttpClientMimeTypeTest {
+class AssertIsTextTest extends AbstractOkHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

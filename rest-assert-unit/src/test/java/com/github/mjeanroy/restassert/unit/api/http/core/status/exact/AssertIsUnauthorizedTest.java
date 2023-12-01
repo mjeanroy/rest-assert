@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZ
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsUnauthorizedTest extends AbstractCoreHttpStatusTest {
+class AssertIsUnauthorizedTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

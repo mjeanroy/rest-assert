@@ -30,7 +30,7 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertHasExpiresTest extends AbstractJunitServersHttpHeaderTest {
+class AssertHasExpiresTest extends AbstractJunitServersHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

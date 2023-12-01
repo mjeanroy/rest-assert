@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.json.contains;
 
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContains;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -34,17 +34,17 @@ import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static java.util.Collections.singleton;
 
-public class AssertContainsIterableTest {
+class AssertContainsIterableTest {
 
 	@Test
-	public void it_should_pass_if_json_contains_entries() {
+	void it_should_pass_if_json_contains_entries() {
 		String json = createJson();
 		assertContains(json, singleton("id"));
 		assertContains(json, singleton("name"));
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		final String json = createJson();
 		final String message = "Expecting json to contain entry foo";
 
@@ -57,7 +57,7 @@ public class AssertContainsIterableTest {
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message() {
+	void it_should_fail_with_custom_message() {
 		final String json = createJson();
 		final String message = "error";
 

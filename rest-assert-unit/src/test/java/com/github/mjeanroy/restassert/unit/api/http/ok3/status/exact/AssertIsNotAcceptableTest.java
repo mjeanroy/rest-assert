@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_ACCEPTABLE;
 
-public class AssertIsNotAcceptableTest extends AbstractOkHttpStatusTest {
+class AssertIsNotAcceptableTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

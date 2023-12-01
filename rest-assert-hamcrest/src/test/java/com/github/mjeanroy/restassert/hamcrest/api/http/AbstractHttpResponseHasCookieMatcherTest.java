@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;

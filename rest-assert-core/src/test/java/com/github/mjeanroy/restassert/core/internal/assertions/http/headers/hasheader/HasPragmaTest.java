@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class HasPragmaTest extends AbstractHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return PRAGMA;
-	}
+class HasPragmaTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasPragma(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return PRAGMA;
 	}
 }

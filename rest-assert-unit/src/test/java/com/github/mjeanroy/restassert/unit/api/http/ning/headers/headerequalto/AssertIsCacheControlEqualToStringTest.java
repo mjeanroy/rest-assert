@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsCacheControlEqualToStringTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();

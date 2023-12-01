@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractNingHttpStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

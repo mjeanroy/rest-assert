@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.doesNotHaveContentDisposition;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_DISPOSITION;
 
-public class DoesNotHaveContentDispositionMatcherTest extends AbstractApacheHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveContentDispositionMatcherTest extends AbstractApacheHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertIsXssProtectionEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsXssProtectionEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final XssProtection VALUE = XssProtection.disable();

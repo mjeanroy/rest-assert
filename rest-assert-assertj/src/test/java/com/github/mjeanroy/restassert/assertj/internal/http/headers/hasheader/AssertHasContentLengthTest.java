@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_L
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertHasContentLengthTest extends AbstractHttpResponsesHeaderTest {
+class AssertHasContentLengthTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void run(HttpResponse httpResponse) {

@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEM
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsNotImplementedTest extends AbstractAsyncHttpStatusTest {
+class AssertIsNotImplementedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

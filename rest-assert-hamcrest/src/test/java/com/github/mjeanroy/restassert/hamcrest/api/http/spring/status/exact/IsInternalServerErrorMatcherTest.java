@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isInternalServerError;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_SERVER_ERROR;
 
-public class IsInternalServerErrorMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsInternalServerErrorMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

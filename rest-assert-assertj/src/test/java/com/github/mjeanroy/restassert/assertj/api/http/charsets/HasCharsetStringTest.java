@@ -35,7 +35,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
-public class HasCharsetStringTest extends AbstractHttpResponseTest {
+class HasCharsetStringTest extends AbstractHttpResponseTest {
 
 	private static final String CHARSET = "UTF-8";
 

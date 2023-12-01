@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
 

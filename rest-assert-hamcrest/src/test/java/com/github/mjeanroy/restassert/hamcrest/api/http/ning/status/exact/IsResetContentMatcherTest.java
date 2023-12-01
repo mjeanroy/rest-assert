@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isResetContent;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
 
-public class IsResetContentMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
+class IsResetContentMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

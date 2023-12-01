@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isRequestTimeout;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class IsRequestTimeoutMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
+class IsRequestTimeoutMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

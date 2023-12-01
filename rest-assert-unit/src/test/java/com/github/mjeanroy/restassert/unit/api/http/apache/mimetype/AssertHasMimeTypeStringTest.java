@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class AssertHasMimeTypeStringTest extends AbstractApacheHttpClientMimeTypeTest {
+class AssertHasMimeTypeStringTest extends AbstractApacheHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = TEXT_CSS;
 

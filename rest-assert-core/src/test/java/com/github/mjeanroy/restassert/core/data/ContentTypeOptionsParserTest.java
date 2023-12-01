@@ -26,30 +26,30 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ContentTypeOptionsParserTest {
+class ContentTypeOptionsParserTest {
 
 	private ContentTypeOptionsParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (ContentTypeOptionsParser) ContentTypeOptions.parser();
 	}
 
 	@Test
-	public void it_should_parse_no_sniff_value() {
+	void it_should_parse_no_sniff_value() {
 		assertThat(parser.parse("nosniff")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 		assertThat(parser.parse("NOSNIFF")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 		assertThat(parser.parse(" nosniff ")).isEqualTo(ContentTypeOptions.NO_SNIFF);
 	}
 
 	@Test
-	public void it_should_failed_to_parse_invalid_value() {
+	void it_should_failed_to_parse_invalid_value() {
 		assertThatThrownBy(parse(parser, "foo"))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("X-Content-Type-Options value 'foo' is not a valid one.");

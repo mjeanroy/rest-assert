@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isXssProtectionEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
-public class IsXssProtectionEqualToStringMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
+class IsXssProtectionEqualToStringMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String VALUE = HEADER.getValue();

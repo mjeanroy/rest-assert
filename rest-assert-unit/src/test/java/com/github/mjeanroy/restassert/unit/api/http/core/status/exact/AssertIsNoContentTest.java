@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsNoContentTest extends AbstractCoreHttpStatusTest {
+class AssertIsNoContentTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

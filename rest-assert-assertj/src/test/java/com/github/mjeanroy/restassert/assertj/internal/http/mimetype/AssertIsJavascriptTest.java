@@ -31,15 +31,15 @@ import java.util.List;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class AssertIsJavascriptTest extends AbstractHttpResponsesMimeTypeInTest {
+class AssertIsJavascriptTest extends AbstractHttpResponsesMimeTypeInTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsJavascript(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected List<String> getMimeTypes() {
+	List<String> getMimeTypes() {
 		return JAVASCRIPT;
 	}
 }

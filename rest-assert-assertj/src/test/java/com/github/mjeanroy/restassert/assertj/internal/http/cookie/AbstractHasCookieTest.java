@@ -30,18 +30,18 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHasCookieTest {
+abstract class AbstractHasCookieTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_status_code_is_ok() {
+	void should_pass_if_status_code_is_ok() {
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 				.addCookie(cookie())
 				.build();
@@ -50,7 +50,7 @@ public abstract class AbstractHasCookieTest {
 	}
 
 	@Test
-	public void should_fail_if_status_code_are_not_equal() {
+	void should_fail_if_status_code_are_not_equal() {
 		AssertionInfo info = someInfo();
 		Cookie cookie = new CookieBuilder()
 				.setName("foo")
@@ -72,9 +72,9 @@ public abstract class AbstractHasCookieTest {
 		}
 	}
 
-	protected abstract String buildErrorMessage();
+	abstract String buildErrorMessage();
 
-	protected abstract Cookie cookie();
+	abstract Cookie cookie();
 
-	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
+	abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

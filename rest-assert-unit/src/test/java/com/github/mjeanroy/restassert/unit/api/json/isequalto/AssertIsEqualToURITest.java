@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEq
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUriFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUriSuccess;
 
-public class AssertIsEqualToURITest extends AbstractJsonIsEqualToTest<URI> {
+class AssertIsEqualToURITest extends AbstractJsonIsEqualToTest<URI> {
 
 	@Override
 	protected void run(URI actual) {

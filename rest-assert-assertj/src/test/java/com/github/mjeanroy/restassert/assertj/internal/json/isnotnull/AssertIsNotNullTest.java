@@ -26,24 +26,24 @@ package com.github.mjeanroy.restassert.assertj.internal.json.isnotnull;
 
 import com.github.mjeanroy.restassert.assertj.internal.Jsons;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AssertIsNotNullTest {
+class AssertIsNotNullTest {
 
 	private final Jsons jsons = Jsons.instance();
 
 	@Test
-	public void it_should_pass_if_json_is_not_null() {
+	void it_should_pass_if_json_is_not_null() {
 		jsons.assertIsNotNull(someInfo(), "{}");
 		jsons.assertIsNotNull(someInfo(), "[]");
 	}
 
 	@Test
-	public void it_should_fail_if_json_is_null() {
+	void it_should_fail_if_json_is_null() {
 		AssertionInfo info = someInfo();
 		String json = null;
 

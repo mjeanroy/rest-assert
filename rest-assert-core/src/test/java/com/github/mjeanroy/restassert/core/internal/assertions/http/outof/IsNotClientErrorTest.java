@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 
-public class IsNotClientErrorTest extends AbstractHttpStatusOutOfTest {
-
-	@Override
-	protected Range getRange() {
-		return CLIENT_ERROR;
-	}
+class IsNotClientErrorTest extends AbstractHttpStatusOutOfTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotClientError(response);
+	}
+
+	@Override
+	Range getRange() {
+		return CLIENT_ERROR;
 	}
 }

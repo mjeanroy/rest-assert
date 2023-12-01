@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertDoesNotHaveCacheControlTest extends AbstractCoreDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveCacheControlTest extends AbstractCoreDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

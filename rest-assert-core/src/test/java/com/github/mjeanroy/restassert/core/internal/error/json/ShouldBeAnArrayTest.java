@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnArray.shouldBeAnArray;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldBeAnArrayTest {
+class ShouldBeAnArrayTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
 
 		assertThat(shouldBeAnArray).isNotNull();

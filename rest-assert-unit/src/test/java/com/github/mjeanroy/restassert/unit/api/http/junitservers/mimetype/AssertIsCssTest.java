@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CS
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsCssTest extends AbstractJunitServersHttpClientMimeTypeTest {
+class AssertIsCssTest extends AbstractJunitServersHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

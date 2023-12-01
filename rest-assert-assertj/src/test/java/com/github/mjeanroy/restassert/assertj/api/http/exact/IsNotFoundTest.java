@@ -32,10 +32,10 @@ import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsNotFoundTest extends AbstractHttpResponseStatusTest {
+class IsNotFoundTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return NOT_FOUND;
 	}
 

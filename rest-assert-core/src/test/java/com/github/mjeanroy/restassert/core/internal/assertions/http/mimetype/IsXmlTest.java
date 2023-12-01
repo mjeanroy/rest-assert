@@ -31,15 +31,15 @@ import java.util.List;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsXmlTest extends AbstractMimeTypeInTest {
-
-	@Override
-	protected List<String> getMimeTypes() {
-		return XML;
-	}
+class IsXmlTest extends AbstractMimeTypeInTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isXml(response);
+	}
+
+	@Override
+	List<String> getMimeTypes() {
+		return XML;
 	}
 }

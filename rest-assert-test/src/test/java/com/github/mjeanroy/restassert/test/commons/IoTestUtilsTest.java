@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.test.commons;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.net.URI;
@@ -33,36 +33,36 @@ import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IoTestUtilsTest {
+class IoTestUtilsTest {
 
 	private static final String BR = System.getProperty("line.separator");
 
 	@Test
-	public void it_should_get_file_from_classpath() {
+	void it_should_get_file_from_classpath() {
 		File file = IoTestUtils.fileFromClasspath("/test.txt");
 		assertThat(file).isNotNull().exists().hasName("test.txt");
 	}
 
 	@Test
-	public void it_should_get_path_from_classpath() {
+	void it_should_get_path_from_classpath() {
 		Path path = IoTestUtils.pathFromClasspath("/test.txt");
 		assertThat(path).isNotNull().exists().hasFileName("test.txt");
 	}
 
 	@Test
-	public void it_should_get_URL_from_classpath() {
+	void it_should_get_URL_from_classpath() {
 		URL url = IoTestUtils.urlFromClasspath("/test.txt");
 		assertThat(url).isNotNull().hasProtocol("file");
 	}
 
 	@Test
-	public void it_should_get_URI_from_classpath() {
+	void it_should_get_URI_from_classpath() {
 		URI url = IoTestUtils.uriFromClasspath("/test.txt");
 		assertThat(url).isNotNull().hasScheme("file");
 	}
 
 	@Test
-	public void it_should_read_file_content() {
+	void it_should_read_file_content() {
 		String content = IoTestUtils.readFile("test.txt");
 		assertThat(content).isEqualTo(
 				"Hello World" + BR +

@@ -32,10 +32,10 @@ import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsConflictTest extends AbstractHttpResponseStatusTest {
+class IsConflictTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return CONFLICT;
 	}
 

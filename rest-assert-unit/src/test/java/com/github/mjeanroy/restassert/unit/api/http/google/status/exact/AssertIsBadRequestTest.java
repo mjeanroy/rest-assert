@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUES
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsBadRequestTest extends AbstractGoogleHttpStatusTest {
+class AssertIsBadRequestTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

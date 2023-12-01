@@ -31,20 +31,20 @@ import java.io.File;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileSuccess;
 
-public class AssertIsEqualToIgnoringFileTest extends AbstractJsonsIsEqualToIgnoringTest<File> {
+class AssertIsEqualToIgnoringFileTest extends AbstractJsonsIsEqualToIgnoringTest<File> {
 
 	@Override
-	protected File success() {
+	File success() {
 		return jsonFileSuccess();
 	}
 
 	@Override
-	protected File failure() {
+	File failure() {
 		return jsonFileFailure();
 	}
 
 	@Override
-	protected void run(AssertionInfo info, File json) {
+	void run(AssertionInfo info, File json) {
 		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isUnauthorized;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZED;
 
-public class IsUnauthorizedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsUnauthorizedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

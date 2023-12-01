@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isNotModified;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFIED;
 
-public class IsNotModifiedMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
+class IsNotModifiedMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

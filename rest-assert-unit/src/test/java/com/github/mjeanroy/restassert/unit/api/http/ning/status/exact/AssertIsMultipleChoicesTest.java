@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractNingHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

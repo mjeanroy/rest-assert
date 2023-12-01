@@ -30,7 +30,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeTest extends AbstractGoogleHttpClientMimeTypeTest {
+class AssertHasMimeTypeTest extends AbstractGoogleHttpClientMimeTypeTest {
 
 	private static final String RAW_VALUE = APPLICATION_JSON;
 	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);

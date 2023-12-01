@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractGoogleHttpStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

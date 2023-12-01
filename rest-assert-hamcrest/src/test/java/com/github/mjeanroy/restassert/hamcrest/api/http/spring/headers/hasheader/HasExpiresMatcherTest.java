@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasExpires;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-public class HasExpiresMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
+class HasExpiresMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

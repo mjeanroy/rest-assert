@@ -31,7 +31,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsFrameOptionsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final FrameOptions VALUE = FrameOptions.deny();

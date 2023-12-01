@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsForbiddenTest extends AbstractAsyncHttpStatusTest {
+class AssertIsForbiddenTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

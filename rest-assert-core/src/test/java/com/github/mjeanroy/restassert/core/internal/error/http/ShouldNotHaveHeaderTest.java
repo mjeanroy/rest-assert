@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldNotHaveHeaderTest {
+class ShouldNotHaveHeaderTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String unexpectedHeaderName = "X-Requested-With";
 		ShouldNotHaveHeader shouldHaveStatus = shouldNotHaveHeader(unexpectedHeaderName);
 

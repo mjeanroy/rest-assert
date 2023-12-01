@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.doesNotHaveLastModified;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
-public class DoesNotHaveLastModifiedMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveLastModifiedMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

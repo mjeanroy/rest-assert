@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class IsTemporaryRedirectTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return TEMPORARY_REDIRECT;
-	}
+class IsTemporaryRedirectTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isTemporaryRedirect(response);
+	}
+
+	@Override
+	int status() {
+		return TEMPORARY_REDIRECT;
 	}
 }

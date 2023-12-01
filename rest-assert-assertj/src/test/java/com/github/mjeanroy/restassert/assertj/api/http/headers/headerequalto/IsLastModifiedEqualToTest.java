@@ -33,7 +33,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsLastModifiedEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsLastModifiedEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

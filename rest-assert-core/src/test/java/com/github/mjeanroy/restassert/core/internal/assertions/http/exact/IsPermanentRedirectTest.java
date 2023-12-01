@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_REDIRECT;
 
-public class IsPermanentRedirectTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return PERMANENT_REDIRECT;
-	}
+class IsPermanentRedirectTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isPermanentRedirect(response);
+	}
+
+	@Override
+	int status() {
+		return PERMANENT_REDIRECT;
 	}
 }

@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class DoesNotHaveStrictTransportSecurityTest extends AbstractDoesNotHaveHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return STRICT_TRANSPORT_SECURITY;
-	}
+class DoesNotHaveStrictTransportSecurityTest extends AbstractDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveStrictTransportSecurity(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return STRICT_TRANSPORT_SECURITY;
 	}
 }

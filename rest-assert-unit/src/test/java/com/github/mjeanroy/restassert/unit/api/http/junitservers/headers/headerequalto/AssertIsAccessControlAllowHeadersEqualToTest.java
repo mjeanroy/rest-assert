@@ -30,7 +30,7 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
 

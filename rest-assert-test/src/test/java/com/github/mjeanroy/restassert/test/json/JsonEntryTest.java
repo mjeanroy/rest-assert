@@ -29,12 +29,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class JsonEntryTest {
+class JsonEntryTest {
 
 	@Test
-	public void it_should_format_null() {
+	void it_should_format_null() {
 		String key = "foo";
 		String value = null;
 		JsonEntry e = JsonEntry.jsonEntry(key, value);
@@ -45,7 +45,7 @@ public class JsonEntryTest {
 	}
 
 	@Test
-	public void it_should_format_string() {
+	void it_should_format_string() {
 		String key = "foo";
 		String value = "bar";
 		JsonEntry e = JsonEntry.jsonEntry(key, value);
@@ -56,7 +56,7 @@ public class JsonEntryTest {
 	}
 
 	@Test
-	public void it_should_format_numbers() {
+	void it_should_format_numbers() {
 		String key = "foo";
 		double value = 2;
 		JsonEntry e = JsonEntry.jsonEntry(key, value);
@@ -67,7 +67,7 @@ public class JsonEntryTest {
 	}
 
 	@Test
-	public void it_should_format_boolean() {
+	void it_should_format_boolean() {
 		String key = "foo";
 		boolean value = true;
 		JsonEntry e = JsonEntry.jsonEntry(key, value);
@@ -78,7 +78,7 @@ public class JsonEntryTest {
 	}
 
 	@Test
-	public void it_should_format_json_value() {
+	void it_should_format_json_value() {
 		String key = "foo";
 		JsonValue value = mock(JsonValue.class);
 		when(value.toJson()).thenReturn("{}");
@@ -91,7 +91,7 @@ public class JsonEntryTest {
 	}
 
 	@Test
-	public void it_should_escape_key_name() {
+	void it_should_escape_key_name() {
 		String key = "foo \"bar\"";
 		String value = "bar";
 		JsonEntry e = JsonEntry.jsonEntry(key, value);
@@ -102,12 +102,12 @@ public class JsonEntryTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(JsonEntry.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		String key = "foo";
 		String value = "bar";
 		JsonEntry e = JsonEntry.jsonEntry(key, value);

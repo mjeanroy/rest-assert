@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isAccessControlExposeHeadersEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
-public class IsAccessControlExposeHeadersEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlExposeHeadersEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 

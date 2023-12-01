@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AbstractErrorTest {
+class AbstractErrorTest {
 
 	@Test
-	public void it_should_build_error_object() {
+	void it_should_build_error_object() {
 		String message = "foo %s";
 		String arg = "bar";
 
@@ -43,7 +43,7 @@ public class AbstractErrorTest {
 	}
 
 	@Test
-	public void it_build_error_with_empty_array() {
+	void it_build_error_with_empty_array() {
 		String message = "foo";
 		FooError error = new FooError(message);
 		assertThat(error.args()).isNotNull().isEmpty();
@@ -53,13 +53,13 @@ public class AbstractErrorTest {
 	}
 
 	@Test
-	public void it_build_error_args() {
+	void it_build_error_args() {
 		FooError error = new FooError("foo", "bar", "baz");
 		assertThat(error.args()).isEqualTo(new Object[]{"bar", "baz"});
 	}
 
 	@Test
-	public void it_should_return_a_copy_of_arguments() {
+	void it_should_return_a_copy_of_arguments() {
 		String message = "foo %s";
 		String arg = "bar";
 

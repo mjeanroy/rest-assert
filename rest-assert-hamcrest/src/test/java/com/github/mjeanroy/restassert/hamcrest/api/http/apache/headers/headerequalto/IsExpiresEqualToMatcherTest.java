@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isExpiresEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-public class IsExpiresEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
+class IsExpiresEqualToMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = EXPIRES.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";

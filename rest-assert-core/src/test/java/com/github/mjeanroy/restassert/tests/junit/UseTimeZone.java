@@ -24,43 +24,19 @@
 
 package com.github.mjeanroy.restassert.tests.junit;
 
-import org.junit.rules.ExternalResource;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.util.TimeZone;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-/**
- * A JUnit {@link org.junit.Rule} that can be used to run unit test
- * on a specific TimeZone.
- */
-public class TimeZoneRule extends ExternalResource {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.TYPE)
+@ExtendWith(TimeZoneExtension.class)
+@Documented
+public @interface UseTimeZone {
 
-	/**
-	 * The TimeZone to use.
-	 */
-	private final TimeZone timeZone;
-
-	/**
-	 * The default TimeZone that was defined before updating before test.
-	 */
-	private final TimeZone defaultTimeZone;
-
-	/**
-	 * Create the JUnit Rule.
-	 *
-	 * @param tzId The TimeZone identifier.
-	 */
-	public TimeZoneRule(String tzId) {
-		this.timeZone = TimeZone.getTimeZone(tzId);
-		this.defaultTimeZone = TimeZone.getDefault();
-	}
-
-	@Override
-	protected void before() throws Throwable {
-		TimeZone.setDefault(timeZone);
-	}
-
-	@Override
-	protected void after() {
-		TimeZone.setDefault(defaultTimeZone);
-	}
+	String tzId();
 }

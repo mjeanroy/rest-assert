@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpResponseTest {
+abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpResponseTest {
 
 	@Override
 	protected HttpResponseAssert createApi() {
@@ -42,9 +42,5 @@ public abstract class AbstractHttpResponseMimeTypeTest extends AbstractHttpRespo
 		return header("Content-Type", getMimeType());
 	}
 
-	protected abstract HttpResponseAssert run();
-
-	protected abstract void verifyApiCall();
-
-	protected abstract String getMimeType();
+	abstract String getMimeType();
 }

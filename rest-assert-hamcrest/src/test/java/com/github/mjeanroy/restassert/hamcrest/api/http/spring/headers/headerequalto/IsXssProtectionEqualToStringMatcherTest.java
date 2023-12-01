@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isXssProtectionEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
-public class IsXssProtectionEqualToStringMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsXssProtectionEqualToStringMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String VALUE = HEADER.getValue();

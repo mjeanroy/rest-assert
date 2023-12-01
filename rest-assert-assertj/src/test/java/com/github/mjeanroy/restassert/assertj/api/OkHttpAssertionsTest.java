@@ -28,17 +28,17 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResp
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class OkHttpAssertionsTest {
+class OkHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() {
+	void it_should_create_new_assertion_object() {
 		Response response = new OkHttpResponseBuilder().build();
 		HttpResponseAssert assertions = OkHttpAssertions.assertThat(response);
 
@@ -47,7 +47,7 @@ public class OkHttpAssertionsTest {
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() {
+	void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 				jsonEntry("foo", "bar")
 		);

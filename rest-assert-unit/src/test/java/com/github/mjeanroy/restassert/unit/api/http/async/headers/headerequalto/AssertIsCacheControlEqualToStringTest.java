@@ -30,7 +30,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToStringTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsCacheControlEqualToStringTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();

@@ -32,15 +32,15 @@ import com.github.mjeanroy.restassert.tests.builders.HeaderParserBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HeaderValueBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsHeaderMatchingAssertionTest {
+class IsHeaderMatchingAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_value() {
+	void it_should_not_fail_if_header_is_set_with_expected_value() {
 		String name = "foo";
 		String value = "bar";
 		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
@@ -57,7 +57,7 @@ public class IsHeaderMatchingAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
+	void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		String name = "foo";
 		String value = "bar";
 		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
@@ -74,7 +74,7 @@ public class IsHeaderMatchingAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set() {
+	void it_should_fail_if_header_is_not_set() {
 		String name = "foo";
 		String value = "bar";
 		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
@@ -92,7 +92,7 @@ public class IsHeaderMatchingAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_does_not_have_expected_value() {
+	void it_should_fail_if_header_is_does_not_have_expected_value() {
 		String name = "foo";
 		String value = "bar";
 		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
@@ -110,7 +110,7 @@ public class IsHeaderMatchingAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_single_value_header_has_multiple_values() {
+	void it_should_fail_if_single_value_header_has_multiple_values() {
 		String name = "Content-Type";
 		String value = "bar";
 		HttpHeaderValue expected = new HeaderValueBuilder().setValue(value).build();
@@ -131,35 +131,35 @@ public class IsHeaderMatchingAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_null() {
+	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(isHeaderMatchingAssertion(null, new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_empty() {
+	void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(isHeaderMatchingAssertion("", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_blank() {
+	void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(isHeaderMatchingAssertion("   ", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_value_is_null() {
+	void it_should_fail_if_header_value_is_null() {
 		assertThatThrownBy(isHeaderMatchingAssertion("name", null, new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header expected value must not be null");
 	}
 
 	@Test
-	public void it_should_fail_if_header_parser_is_null() {
+	void it_should_fail_if_header_parser_is_null() {
 		assertThatThrownBy(isHeaderMatchingAssertion("name", new HeaderValueBuilder().build(), null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header parser must not be null");

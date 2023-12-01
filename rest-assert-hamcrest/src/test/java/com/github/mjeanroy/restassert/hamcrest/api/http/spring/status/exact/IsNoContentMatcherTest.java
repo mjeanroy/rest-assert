@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isNoContent;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT;
 
-public class IsNoContentMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsNoContentMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

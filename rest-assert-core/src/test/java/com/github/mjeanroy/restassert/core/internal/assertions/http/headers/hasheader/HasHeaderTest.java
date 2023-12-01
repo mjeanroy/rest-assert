@@ -30,17 +30,17 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class HasHeaderTest extends AbstractHttpHeaderTest {
+class HasHeaderTest extends AbstractHttpHeaderTest {
 
 	private static final String NAME = "foo";
 
 	@Override
-	protected Header getHeader() {
-		return header(NAME, "bar");
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.hasHeader(response, NAME);
 	}
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.hasHeader(response, NAME);
+	Header getHeader() {
+		return header(NAME, "bar");
 	}
 }

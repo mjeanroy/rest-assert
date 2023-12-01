@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.doesNotHaveLastModified;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
-public class DoesNotHaveLastModifiedMatcherTest extends AbstractAsyncHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveLastModifiedMatcherTest extends AbstractAsyncHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

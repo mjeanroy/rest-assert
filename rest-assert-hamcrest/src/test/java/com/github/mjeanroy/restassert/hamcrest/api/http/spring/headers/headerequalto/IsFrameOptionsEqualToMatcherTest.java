@@ -32,7 +32,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isFrameOptionsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class IsFrameOptionsEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsFrameOptionsEqualToMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final FrameOptions VALUE = FrameOptions.deny();

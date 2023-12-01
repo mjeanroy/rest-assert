@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDITION_FAILED;
 
-public class AssertIsPreConditionFailedTest extends AbstractOkHttpStatusTest {
+class AssertIsPreConditionFailedTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

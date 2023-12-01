@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasContentType;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class HasContentTypeMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
+class HasContentTypeMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

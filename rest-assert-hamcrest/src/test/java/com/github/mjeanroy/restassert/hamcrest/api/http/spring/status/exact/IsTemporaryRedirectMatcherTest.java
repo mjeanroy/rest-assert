@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isTemporaryRedirect;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class IsTemporaryRedirectMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsTemporaryRedirectMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

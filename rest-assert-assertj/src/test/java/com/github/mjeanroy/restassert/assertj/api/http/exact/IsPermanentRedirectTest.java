@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsPermanentRedirectTest extends AbstractHttpResponseStatusTest {
+class IsPermanentRedirectTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return PERMANENT_REDIRECT;
 	}
 

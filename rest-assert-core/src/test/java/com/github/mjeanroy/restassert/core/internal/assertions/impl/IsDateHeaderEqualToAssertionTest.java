@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
@@ -37,10 +37,10 @@ import static java.util.Calendar.MAY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsDateHeaderEqualToAssertionTest {
+class IsDateHeaderEqualToAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_value() {
+	void it_should_not_fail_if_header_is_set_with_expected_value() {
 		String name = "foo";
 		String value = "Thu, 05 May 2016 19:29:03 GMT";
 		Date date = createUtcDate(2016, MAY, 5, 19, 29, 3);
@@ -55,7 +55,7 @@ public class IsDateHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
+	void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		String name = "foo";
 		String v1 = "Thu, 05 May 2016 19:29:03 GMT";
 		String v2 = "Thu, 05 May 2016 19:30:03 GMT";
@@ -74,7 +74,7 @@ public class IsDateHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set() {
+	void it_should_fail_if_header_is_not_set() {
 		String name = "foo";
 		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
@@ -89,7 +89,7 @@ public class IsDateHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_does_not_have_expected_value() {
+	void it_should_fail_if_header_is_does_not_have_expected_value() {
 		String name = "foo";
 		String value = "Thu, 05 May 2016 19:29:03 GMT";
 		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
@@ -105,7 +105,7 @@ public class IsDateHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_single_value_header_has_multiple_values() {
+	void it_should_fail_if_single_value_header_has_multiple_values() {
 		String name = "Last-Modified";
 		String v1 = "Thu, 05 May 2016 19:29:03 GMT";
 		String v2 = "Thu, 05 May 2016 19:30:03 GMT";

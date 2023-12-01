@@ -28,19 +28,19 @@ import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
+abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_header_is_missing() {
+	void should_pass_if_header_is_missing() {
 		// GIVEN
 		Header header = header("Foo", "Bar");
 		HttpResponse httpResponse = newHttpResponse(header);
@@ -50,7 +50,7 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 	}
 
 	@Test
-	public void should_fail_if_header_is_available() {
+	void should_fail_if_header_is_available() {
 		// GIVEN
 		Header header = getHeader();
 		HttpResponse httpResponse = newHttpResponse(header);
@@ -65,9 +65,9 @@ public abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 		}
 	}
 
-	protected abstract Header getHeader();
+	abstract Header getHeader();
 
-	protected abstract void run(HttpResponse httpResponse);
+	abstract void run(HttpResponse httpResponse);
 
 	private static HttpResponse newHttpResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();

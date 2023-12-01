@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasXssProtection;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
-public class HasXssProtectionMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
+class HasXssProtectionMatcherTest extends AbstractSpringMockMvcHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

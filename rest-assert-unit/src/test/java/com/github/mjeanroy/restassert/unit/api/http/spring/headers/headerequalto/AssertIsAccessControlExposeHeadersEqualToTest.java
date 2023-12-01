@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValue();
 

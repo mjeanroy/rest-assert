@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -34,12 +34,12 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 public abstract class AbstractHttpResponseCharsetMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	void it_should_pass_with_expected_mime_type() {
 		run(newHttpResponse(getCharset()));
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		invokeFailure(new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {

@@ -24,22 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CacheControlParserTest {
+class CacheControlParserTest {
 
 	private CacheControlParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (CacheControlParser) CacheControl.parser();
 	}
 
 	@Test
-	public void it_should_parse_no_cache_header() {
+	void it_should_parse_no_cache_header() {
 		CacheControl cacheControl = parser.parse("no-cache");
 
 		assertThat(cacheControl.getVisibility()).isNull();
@@ -53,7 +53,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_create_no_store_header() {
+	void it_should_create_no_store_header() {
 		CacheControl cacheControl = parser.parse("no-store");
 
 		assertThat(cacheControl.getVisibility()).isNull();
@@ -67,7 +67,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_create_public_with_max_age_header() {
+	void it_should_create_public_with_max_age_header() {
 		CacheControl cacheControl = parser.parse("public, max-age=0");
 
 		assertThat(cacheControl.getVisibility()).isEqualTo(CacheControl.Visibility.PUBLIC);
@@ -81,7 +81,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_create_private_with_max_age_header() {
+	void it_should_create_private_with_max_age_header() {
 		CacheControl cacheControl = parser.parse("private, max-age=0");
 
 		assertThat(cacheControl.getVisibility()).isEqualTo(CacheControl.Visibility.PRIVATE);
@@ -95,7 +95,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_parse_no_cache_and_no_store() {
+	void it_should_parse_no_cache_and_no_store() {
 		CacheControl cacheControl = parser.parse("no-cache, no-store");
 
 		assertThat(cacheControl.getVisibility()).isNull();
@@ -109,7 +109,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_parse_proxy_revalidate_directive() {
+	void it_should_parse_proxy_revalidate_directive() {
 		CacheControl cacheControl = parser.parse("proxy-revalidate");
 
 		assertThat(cacheControl.getVisibility()).isNull();
@@ -123,7 +123,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_parse_must_revalidate_directive() {
+	void it_should_parse_must_revalidate_directive() {
 		CacheControl cacheControl = parser.parse("must-revalidate");
 
 		assertThat(cacheControl.getVisibility()).isNull();
@@ -137,7 +137,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_parse_no_transform_directive() {
+	void it_should_parse_no_transform_directive() {
 		CacheControl cacheControl = parser.parse("no-transform");
 
 		assertThat(cacheControl.getVisibility()).isNull();
@@ -151,7 +151,7 @@ public class CacheControlParserTest {
 	}
 
 	@Test
-	public void it_should_parse_s_maxage_directive() {
+	void it_should_parse_s_maxage_directive() {
 		CacheControl cacheControl = parser.parse("public, s-maxage=3600");
 
 		assertThat(cacheControl.getVisibility()).isEqualTo(CacheControl.Visibility.PUBLIC);

@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertHasCookieWithNameAndValueTest extends AbstractJunitServersHttpHasCookieTest {
+class AssertHasCookieWithNameAndValueTest extends AbstractJunitServersHttpHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";

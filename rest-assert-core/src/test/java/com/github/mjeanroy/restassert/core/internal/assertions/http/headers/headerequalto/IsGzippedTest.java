@@ -30,9 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
+class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String NAME = HEADER.getName();
@@ -40,17 +40,17 @@ public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isGzipped(response);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
@@ -60,7 +60,7 @@ public class IsGzippedTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Test
-	public void it_should_pass_with_case_insensitive_comparison() {
+	void it_should_pass_with_case_insensitive_comparison() {
 		// GIVEN
 		String actual = VALUE.toUpperCase();
 		String expected = VALUE.toLowerCase();

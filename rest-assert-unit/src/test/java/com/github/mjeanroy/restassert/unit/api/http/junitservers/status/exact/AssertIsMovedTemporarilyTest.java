@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMP
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsMovedTemporarilyTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsMovedTemporarilyTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

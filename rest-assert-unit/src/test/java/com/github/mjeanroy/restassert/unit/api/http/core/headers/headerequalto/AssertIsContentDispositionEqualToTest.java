@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsContentDispositionEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
+class AssertIsContentDispositionEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
 	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 

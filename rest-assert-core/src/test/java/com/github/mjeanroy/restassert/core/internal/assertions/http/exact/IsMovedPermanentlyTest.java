@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_PERM
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsMovedPermanentlyTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return MOVED_PERMANENTLY;
-	}
+class IsMovedPermanentlyTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isMovedPermanently(response);
+	}
+
+	@Override
+	int status() {
+		return MOVED_PERMANENTLY;
 	}
 }

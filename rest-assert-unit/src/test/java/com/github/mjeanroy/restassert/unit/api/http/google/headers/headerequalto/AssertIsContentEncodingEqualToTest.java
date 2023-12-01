@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsContentEncodingEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsContentEncodingEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();

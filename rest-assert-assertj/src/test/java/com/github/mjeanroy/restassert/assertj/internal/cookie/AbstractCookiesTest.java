@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.internal.cookie;
 import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
@@ -39,13 +39,13 @@ public abstract class AbstractCookiesTest {
 	final Cookies cookies = Cookies.instance();
 
 	@Test
-	public void should_pass() {
+	void should_pass() {
 		Cookie cookie = success();
 		run(someInfo(), cookie);
 	}
 
 	@Test
-	public void should_fail() {
+	void should_fail() {
 		AssertionInfo info = someInfo();
 		Cookie cookie = failure();
 

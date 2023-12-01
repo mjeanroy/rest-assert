@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CS
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsCsvTest extends AbstractNingHttpClientMimeTypeTest {
+class AssertIsCsvTest extends AbstractNingHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

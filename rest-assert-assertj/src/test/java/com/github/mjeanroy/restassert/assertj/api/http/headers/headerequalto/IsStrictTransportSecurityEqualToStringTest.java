@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpRespo
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponseHeaderTest {
+class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponseHeaderTest {
 
 	private static final String VALUE = "max-age=31536000; includeSubDomains";
 

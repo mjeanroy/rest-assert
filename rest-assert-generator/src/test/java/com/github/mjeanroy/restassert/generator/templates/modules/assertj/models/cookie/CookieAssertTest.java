@@ -31,14 +31,14 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
 import org.assertj.core.api.Condition;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class CookieAssertTest extends AbstractTemplateModelTest {
+class CookieAssertTest extends AbstractTemplateModelTest {
 
 	private CookieAssert cookieAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		cookieAssert = (CookieAssert) CookieAssert.cookieAssert();
 	}
 

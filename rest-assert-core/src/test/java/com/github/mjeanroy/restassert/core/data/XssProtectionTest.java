@@ -26,16 +26,16 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.XssProtection.Directive;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class XssProtectionTest {
+class XssProtectionTest {
 
 	@Test
-	public void it_should_create_disable_header() {
+	void it_should_create_disable_header() {
 		XssProtection header = XssProtection.disable();
 		assertThat(header.getDirective()).isEqualTo(Directive.DISABLE);
 		assertThat(header.getParameter()).isNull();
@@ -49,7 +49,7 @@ public class XssProtectionTest {
 	}
 
 	@Test
-	public void it_should_create_enable_header() {
+	void it_should_create_enable_header() {
 		XssProtection header = XssProtection.enable();
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
 		assertThat(header.getParameter()).isNull();
@@ -63,7 +63,7 @@ public class XssProtectionTest {
 	}
 
 	@Test
-	public void it_should_create_enable_with_mode_block_header() {
+	void it_should_create_enable_with_mode_block_header() {
 		XssProtection header = XssProtection.enableModeBlock();
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
 		assertThat(header.getParameter().getName()).isEqualTo("mode");
@@ -78,7 +78,7 @@ public class XssProtectionTest {
 	}
 
 	@Test
-	public void it_should_create_enable_with_report_uri_string_header() {
+	void it_should_create_enable_with_report_uri_string_header() {
 		String uri = "https://google.com";
 		XssProtection header = XssProtection.enableModeReport(uri);
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
@@ -94,7 +94,7 @@ public class XssProtectionTest {
 	}
 
 	@Test
-	public void it_should_create_enable_with_report_uri_header() {
+	void it_should_create_enable_with_report_uri_header() {
 		String uri = "https://google.com";
 		XssProtection header = XssProtection.enableModeReport(URI.create(uri));
 		assertThat(header.getDirective()).isEqualTo(Directive.ENABLE);
@@ -110,7 +110,7 @@ public class XssProtectionTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(XssProtection.class).verify();
 	}
 }

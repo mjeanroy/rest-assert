@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isContentTypeOptionsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class IsContentTypeOptionsEqualToStringMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
+class IsContentTypeOptionsEqualToStringMatcherTest extends AbstractApacheHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
@@ -44,10 +44,5 @@ public class IsContentTypeOptionsEqualToStringMatcherTest extends AbstractApache
 	@Override
 	protected void run(HttpResponse actual) {
 		MatcherAssert.assertThat(actual, isContentTypeOptionsEqualTo(VALUE));
-	}
-
-	@Override
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

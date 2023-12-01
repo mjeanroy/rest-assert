@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isContentSecurityPolicyEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
-public class IsContentSecurityPolicyEqualToStringMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
+class IsContentSecurityPolicyEqualToStringMatcherTest extends AbstractSpringMockMvcHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();

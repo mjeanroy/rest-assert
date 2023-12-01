@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.doesNotHavePragma;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 
-public class DoesNotHavePragmaMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHavePragmaMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

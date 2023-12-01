@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isLastModifiedEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
-public class IsLastModifiedEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
+class IsLastModifiedEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = LAST_MODIFIED.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";

@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isForbidden;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 
-public class IsForbiddenMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsForbiddenMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

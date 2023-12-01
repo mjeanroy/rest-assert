@@ -29,15 +29,15 @@ import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractHttpResponsesStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return MULTIPLE_CHOICES;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsMultipleChoices(info, httpResponse);
 	}
 }

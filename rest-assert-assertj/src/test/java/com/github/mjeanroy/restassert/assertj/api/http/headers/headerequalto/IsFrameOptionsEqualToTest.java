@@ -34,7 +34,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsFrameOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsFrameOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final FrameOptions VALUE = FrameOptions.sameOrigin();
 

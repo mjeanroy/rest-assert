@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class AssertIsTemporaryRedirectTest extends AbstractApacheHttpStatusTest {
+class AssertIsTemporaryRedirectTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

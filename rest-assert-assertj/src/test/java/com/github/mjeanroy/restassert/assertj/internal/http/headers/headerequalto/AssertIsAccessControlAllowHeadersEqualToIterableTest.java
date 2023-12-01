@@ -32,17 +32,17 @@ import java.util.List;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final List<String> VALUES = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowHeadersEqualTo(someInfo(), httpResponse, VALUES);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 }

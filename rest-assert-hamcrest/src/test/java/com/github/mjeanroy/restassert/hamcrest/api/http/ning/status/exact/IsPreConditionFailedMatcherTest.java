@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isPreConditionFailed;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDITION_FAILED;
 
-public class IsPreConditionFailedMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
+class IsPreConditionFailedMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

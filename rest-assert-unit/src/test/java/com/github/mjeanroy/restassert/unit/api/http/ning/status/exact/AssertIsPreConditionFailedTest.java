@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDIT
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsPreConditionFailedTest extends AbstractNingHttpStatusTest {
+class AssertIsPreConditionFailedTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

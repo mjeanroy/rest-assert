@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.json.parsers;
 import com.github.mjeanroy.restassert.test.json.JsonArray;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
@@ -45,14 +45,14 @@ import static org.mockito.Mockito.verify;
 public abstract class AbstractJsonParserTest {
 
 	@Test
-	public void it_should_fail_to_parse_non_object_non_array() {
+	void it_should_fail_to_parse_non_object_non_array() {
 		assertThatThrownBy(parse(parser(), "null"))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("Parser support object or array conversion only");
 	}
 
 	@Test
-	public void it_should_parse_with_object() {
+	void it_should_parse_with_object() {
 		JsonObject jsonObject = jsonObject(
 				jsonEntry("str", "bar"),
 				jsonEntry("nb", 1.0),
@@ -69,7 +69,7 @@ public abstract class AbstractJsonParserTest {
 	}
 
 	@Test
-	public void it_should_parse_with_array() {
+	void it_should_parse_with_array() {
 		JsonArray jsonArray = jsonArray(1, 2, 3);
 
 		JsonParser parser = spy(parser());
@@ -82,7 +82,7 @@ public abstract class AbstractJsonParserTest {
 	}
 
 	@Test
-	public void it_should_parse_json_object() {
+	void it_should_parse_json_object() {
 		JsonObject jsonObject = jsonObject(
 				jsonEntry("str", "bar"),
 				jsonEntry("nb", 1.0),
@@ -103,7 +103,7 @@ public abstract class AbstractJsonParserTest {
 	}
 
 	@Test
-	public void it_should_parse_complex_object() {
+	void it_should_parse_complex_object() {
 		JsonObject jsonObject = jsonObject(
 				jsonEntry("foo", jsonObject(
 						jsonEntry("id", 1.0),
@@ -134,7 +134,7 @@ public abstract class AbstractJsonParserTest {
 	}
 
 	@Test
-	public void it_should_parse_json_array() {
+	void it_should_parse_json_array() {
 		JsonArray jsonArray = jsonArray(
 				"foo", 1.0, true
 		);
@@ -149,7 +149,7 @@ public abstract class AbstractJsonParserTest {
 	}
 
 	@Test
-	public void it_should_parse_json_array_of_objects() {
+	void it_should_parse_json_array_of_objects() {
 		JsonArray jsonArray = jsonArray(
 				jsonObject(
 						jsonEntry("id", 1.0),
@@ -193,7 +193,7 @@ public abstract class AbstractJsonParserTest {
 				);
 	}
 
-	protected abstract JsonParser parser();
+	abstract JsonParser parser();
 
 	private static ThrowingCallable parse(final JsonParser parser, final String json) {
 		return new ThrowingCallable() {

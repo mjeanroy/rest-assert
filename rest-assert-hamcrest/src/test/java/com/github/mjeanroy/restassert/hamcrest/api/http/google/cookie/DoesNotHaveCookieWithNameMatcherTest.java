@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.doesNotHaveCookie;
 
-public class DoesNotHaveCookieWithNameMatcherTest extends AbstractGoogleHttpResponseDoesNotHaveCookieMatcherTest {
+class DoesNotHaveCookieWithNameMatcherTest extends AbstractGoogleHttpResponseDoesNotHaveCookieMatcherTest {
 
 	private static final String NAME = "JSESSIONID";
 

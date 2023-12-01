@@ -27,24 +27,24 @@ package com.github.mjeanroy.restassert.assertj.internal.http.charsets;
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHttpResponsesCharsetTest  {
+abstract class AbstractHttpResponsesCharsetTest  {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass() {
+	void should_pass() {
 		HttpResponse httpResponse = newHttpResponse(getCharset());
 		run(httpResponse);
 	}
 
 	@Test
-	public void should_fail_if_mime_type_does_not_match() {
+	void should_fail_if_mime_type_does_not_match() {
 		String expectedCharset = getCharset();
 		String actualCharset = expectedCharset + "foo";
 		HttpResponse httpResponse = newHttpResponse(actualCharset);
@@ -60,9 +60,9 @@ public abstract class AbstractHttpResponsesCharsetTest  {
 		}
 	}
 
-	protected abstract String getCharset();
+	abstract String getCharset();
 
-	protected abstract void run(HttpResponse httpResponse);
+	abstract void run(HttpResponse httpResponse);
 
 	private static HttpResponse newHttpResponse(String charset) {
 		String contentType = format("application/json;charset=%s", charset);

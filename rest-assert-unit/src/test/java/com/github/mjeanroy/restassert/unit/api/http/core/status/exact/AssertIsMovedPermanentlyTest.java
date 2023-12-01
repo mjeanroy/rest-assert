@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_PERM
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsMovedPermanentlyTest extends AbstractCoreHttpStatusTest {
+class AssertIsMovedPermanentlyTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

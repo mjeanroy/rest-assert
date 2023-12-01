@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isNotAcceptable;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_ACCEPTABLE;
 
-public class IsNotAcceptableMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsNotAcceptableMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

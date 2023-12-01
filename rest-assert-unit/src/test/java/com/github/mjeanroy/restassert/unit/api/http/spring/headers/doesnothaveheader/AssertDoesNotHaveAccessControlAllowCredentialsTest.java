@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class AssertDoesNotHaveAccessControlAllowCredentialsTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveAccessControlAllowCredentialsTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

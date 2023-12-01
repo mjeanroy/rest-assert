@@ -30,7 +30,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 

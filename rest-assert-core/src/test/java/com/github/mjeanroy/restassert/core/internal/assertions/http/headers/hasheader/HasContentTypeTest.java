@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class HasContentTypeTest extends AbstractHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return JSON_CONTENT_TYPE;
-	}
+class HasContentTypeTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasContentType(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return JSON_CONTENT_TYPE;
 	}
 }

@@ -30,15 +30,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertDoesNotHaveExpiresTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class AssertDoesNotHaveExpiresTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveExpires(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return EXPIRES;
 	}
 }

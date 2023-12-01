@@ -32,7 +32,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isCacheControlEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class IsCacheControlEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
+class IsCacheControlEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
 
 	private static final CacheControl VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)

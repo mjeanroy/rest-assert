@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpRe
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 
-public class ApacheHttpResponseTest extends AbstractHttpResponseTest<org.apache.http.HttpResponse> {
+class ApacheHttpResponseTest extends AbstractHttpResponseTest<org.apache.http.HttpResponse> {
 
 	@Override
 	protected HttpResponseBuilder<org.apache.http.HttpResponse> getBuilder() {

@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsPragmaEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsPragmaEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = PRAGMA.getValue();
 

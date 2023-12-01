@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsNotFoundTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsNotFoundTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -31,20 +31,20 @@ import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAsser
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_with_empty_headers() {
+	void it_should_pass_with_empty_headers() {
 		// GIVEN
 		HttpResponse rsp = newResponse();
 
@@ -56,7 +56,7 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_contain_header() {
+	void it_should_fail_with_if_response_contain_header() {
 		// GIVEN
 		Header header = getHeader();
 		HttpResponse rsp = newResponse(header);
@@ -70,29 +70,13 @@ public abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertio
 		checkError(result, ShouldNotHaveHeader.class, message, args);
 	}
 
-	/**
-	 * Create fake http response without any header.
-	 *
-	 * @return Http response.
-	 */
 	private HttpResponse newResponse() {
 		return new HttpResponseBuilderImpl().build();
 	}
 
-	/**
-	 * Create fake http header with expected header.
-	 *
-	 * @param header Expected header.
-	 * @return Fake http response.
-	 */
 	private HttpResponse newResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();
 	}
 
-	/**
-	 * Get expected header (tested header).
-	 *
-	 * @return Expected header.
-	 */
-	protected abstract Header getHeader();
+	abstract Header getHeader();
 }

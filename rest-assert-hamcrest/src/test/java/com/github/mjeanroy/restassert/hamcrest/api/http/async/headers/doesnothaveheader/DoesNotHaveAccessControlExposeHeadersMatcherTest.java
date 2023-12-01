@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.doesNotHaveAccessControlExposeHeaders;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
-public class DoesNotHaveAccessControlExposeHeadersMatcherTest extends AbstractAsyncHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveAccessControlExposeHeadersMatcherTest extends AbstractAsyncHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

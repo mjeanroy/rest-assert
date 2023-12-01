@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.apache.http.HttpResponse;
 
-public class AssertDoesNotHaveCookieWithNameTest extends AbstractApacheHttpDoesNotHaveCookieTest {
+class AssertDoesNotHaveCookieWithNameTest extends AbstractApacheHttpDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 

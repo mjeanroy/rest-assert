@@ -28,17 +28,17 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 
-public class AssertHasCharsetTest extends AbstractHttpResponsesCharsetTest {
+class AssertHasCharsetTest extends AbstractHttpResponsesCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 
 	@Override
-	protected String getCharset() {
+	String getCharset() {
 		return CHARSET;
 	}
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertHasCharset(someInfo(), httpResponse, CHARSET);
 	}
 }

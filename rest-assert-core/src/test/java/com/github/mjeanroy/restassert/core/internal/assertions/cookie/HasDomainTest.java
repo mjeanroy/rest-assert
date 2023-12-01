@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class HasDomainTest extends AbstractCookieTest {
+class HasDomainTest extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult run(Cookie cookie) {
@@ -37,29 +37,29 @@ public class HasDomainTest extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Cookie success() {
+	Cookie success() {
 		return cookie("foo");
 	}
 
 	@Override
-	protected Cookie failure() {
+	Cookie failure() {
 		String expectedDomain = success().getDomain();
 		String actualDomain = expectedDomain + "foo";
 		return cookie(actualDomain);
 	}
 
 	@Override
-	protected Class<?> error() {
+	Class<?> error() {
 		return ShouldHaveDomain.class;
 	}
 
 	@Override
-	protected String pattern() {
+	String pattern() {
 		return "Expecting cookie to have domain %s but was %s";
 	}
 
 	@Override
-	protected Object[] params() {
+	Object[] params() {
 		String expectedDomain = success().getDomain();
 		String actualDomain = failure().getDomain();
 		return new String[] {

@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.doesNotHaveAccessControlAllowHeaders;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-public class DoesNotHaveAccessControlAllowHeadersMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveAccessControlAllowHeadersMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

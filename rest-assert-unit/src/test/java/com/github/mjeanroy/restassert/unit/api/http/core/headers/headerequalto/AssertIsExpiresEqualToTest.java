@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsExpiresEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
+class AssertIsExpiresEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
 	private static final String VALUE = EXPIRES.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";

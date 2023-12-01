@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.hasETag;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ETAG;
 
-public class HasETagMatcherTest extends AbstractAsyncHttpResponseHasHeaderMatcherTest {
+class HasETagMatcherTest extends AbstractAsyncHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

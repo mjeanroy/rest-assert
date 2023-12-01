@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsXssProtectionEqualToStringTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsXssProtectionEqualToStringTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String VALUE = HEADER.getValue();

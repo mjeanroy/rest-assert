@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -44,12 +44,12 @@ public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharse
 	}
 
 	@Override
-	protected String expectedCharset() {
+	String expectedCharset() {
 		return CHARSET.displayName().toLowerCase();
 	}
 
 	@Test
-	public void it_should_fail_if_response_does_not_have_content_type() {
+	void it_should_fail_if_response_does_not_have_content_type() {
 		// GIVEN
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
@@ -61,7 +61,7 @@ public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharse
 	}
 
 	@Test
-	public void it_should_fail_if_response_has_content_type_without_charset() {
+	void it_should_fail_if_response_has_content_type_without_charset() {
 		// GIVEN
 		HttpResponse rsp = new HttpResponseBuilderImpl()
 			.addHeader("Content-Type", "application/json")

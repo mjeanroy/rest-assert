@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeTest extends AbstractJunitServersHttpClientMimeTypeTest {
+class AssertHasMimeTypeTest extends AbstractJunitServersHttpClientMimeTypeTest {
 
 	private static final String RAW_VALUE = APPLICATION_JSON;
 	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.isContentDispositionEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_DISPOSITION;
 
-public class IsContentDispositionEqualToMatcherTest extends AbstractAsyncHttpResponseHeaderEqualToMatcherTest {
+class IsContentDispositionEqualToMatcherTest extends AbstractAsyncHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 

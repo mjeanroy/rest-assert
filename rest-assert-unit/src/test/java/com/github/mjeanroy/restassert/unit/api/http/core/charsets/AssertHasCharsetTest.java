@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.core.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class AssertHasCharsetTest extends AbstractCoreHttpAssertCharsetTest {
+class AssertHasCharsetTest extends AbstractCoreHttpAssertCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 

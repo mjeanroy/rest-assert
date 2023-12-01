@@ -32,27 +32,23 @@ import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static java.util.Arrays.asList;
 
-/**
- * Test that http response contains expected header with expected value.
- * Each sub-class must specify which header has to be tested.
- */
-public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<HttpResponse> {
 
 	static HttpResponseAssertions assertions;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	static void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_with_expected_header() {
+	void it_should_pass_with_expected_header() {
 		// GIVEN
 		Header header = getHeader();
 		HttpResponse rsp = newResponse(header);
@@ -65,7 +61,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	}
 
 	@Test
-	public void it_should_pass_with_expected_header_and_list_of_values() {
+	void it_should_pass_with_expected_header_and_list_of_values() {
 		// GIVEN
 		Header h1 = getHeader();
 		Header h2 = header(h1.getName(), h1.getValue() + "foobar");
@@ -87,7 +83,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
+	void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
 		// GIVEN
 		Header expectedHeader = getHeader();
 		String expectedName = expectedHeader.getName();
@@ -105,7 +101,7 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header() {
+	void it_should_fail_with_if_response_does_not_contain_header() {
 		// GIVEN
 		Header header = header("foo", "bar");
 		HttpResponse rsp = newResponse(header);
@@ -128,9 +124,9 @@ public abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTe
 		return builder.build();
 	}
 
-	protected abstract Header getHeader();
+	abstract Header getHeader();
 
-	protected abstract boolean allowMultipleValues();
+	abstract boolean allowMultipleValues();
 
 	String failValue() {
 		return getHeader().getValue() + "foo";

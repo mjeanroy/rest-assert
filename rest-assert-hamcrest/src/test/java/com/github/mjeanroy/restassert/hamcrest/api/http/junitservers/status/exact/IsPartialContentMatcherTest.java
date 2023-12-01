@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isPartialContent;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CONTENT;
 
-public class IsPartialContentMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
+class IsPartialContentMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

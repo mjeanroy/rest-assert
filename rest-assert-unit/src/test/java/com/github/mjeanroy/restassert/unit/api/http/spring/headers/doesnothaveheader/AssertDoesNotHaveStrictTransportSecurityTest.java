@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

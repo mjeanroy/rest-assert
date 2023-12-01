@@ -35,7 +35,12 @@ public class HasCookieWithNameTest extends AbstractHasCookieTest {
 	private static final String NAME = "JSESSIONID";
 
 	@Override
-	protected Cookie newCookie() {
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.hasCookie(response, NAME);
+	}
+
+	@Override
+	Cookie newCookie() {
 		return new CookieBuilder()
 				.setName(NAME)
 				.setValue("12345")
@@ -43,12 +48,7 @@ public class HasCookieWithNameTest extends AbstractHasCookieTest {
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
+	void verifyError(AssertionResult result) {
 		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s", NAME);
-	}
-
-	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.hasCookie(response, NAME);
 	}
 }

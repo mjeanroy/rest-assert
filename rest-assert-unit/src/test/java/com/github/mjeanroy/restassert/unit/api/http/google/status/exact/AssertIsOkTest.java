@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.OK;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsOkTest extends AbstractGoogleHttpStatusTest {
+class AssertIsOkTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

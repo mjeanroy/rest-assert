@@ -32,7 +32,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class HasCookieWithNameTest extends AbstractCookieTest {
+class HasCookieWithNameTest extends AbstractCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 

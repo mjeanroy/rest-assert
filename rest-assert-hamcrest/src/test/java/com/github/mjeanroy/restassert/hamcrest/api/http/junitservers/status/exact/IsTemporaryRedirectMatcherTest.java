@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isTemporaryRedirect;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class IsTemporaryRedirectMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
+class IsTemporaryRedirectMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

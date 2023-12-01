@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractGoogleHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

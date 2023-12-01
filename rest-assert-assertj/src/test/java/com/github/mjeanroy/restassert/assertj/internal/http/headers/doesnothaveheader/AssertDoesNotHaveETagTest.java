@@ -30,15 +30,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ETAG;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertDoesNotHaveETagTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class AssertDoesNotHaveETagTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveETag(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ETAG;
 	}
 }

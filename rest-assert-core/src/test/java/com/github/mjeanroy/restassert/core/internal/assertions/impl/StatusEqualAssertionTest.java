@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class StatusEqualAssertionTest {
+class StatusEqualAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_status_match() {
+	void it_should_not_fail_if_status_match() {
 		StatusEqualAssertion assertion = new StatusEqualAssertion(200);
 		HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(200).build();
 
@@ -48,7 +48,7 @@ public class StatusEqualAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_status_does_not_match() {
+	void it_should_fail_if_status_does_not_match() {
 		StatusEqualAssertion assertion = new StatusEqualAssertion(200);
 		HttpResponse rsp = new HttpResponseBuilderImpl().setStatus(400).build();
 
@@ -61,7 +61,7 @@ public class StatusEqualAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_status_is_negative() {
+	void it_should_fail_if_status_is_negative() {
 		assertThatThrownBy(statusEqualAssertion(-1))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Http status code must be positive");

@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isForbidden;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 
-public class IsForbiddenMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
+class IsForbiddenMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

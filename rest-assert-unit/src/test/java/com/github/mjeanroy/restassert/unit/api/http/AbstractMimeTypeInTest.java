@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,7 +41,7 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	void it_should_pass_with_expected_mime_type() {
 		List<Header> headers = getHeaders();
 		for (Header header : headers) {
 			run(newHttpResponse(header));
@@ -50,7 +50,7 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		doTest(null, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
@@ -60,7 +60,7 @@ public abstract class AbstractMimeTypeInTest<T> extends AbstractHttpAssertTest<T
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {

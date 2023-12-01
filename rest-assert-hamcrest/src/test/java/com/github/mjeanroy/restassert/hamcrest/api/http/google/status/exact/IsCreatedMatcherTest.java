@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isCreated;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
-public class IsCreatedMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
+class IsCreatedMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

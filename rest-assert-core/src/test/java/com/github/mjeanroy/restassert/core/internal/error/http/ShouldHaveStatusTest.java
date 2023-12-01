@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatus.shouldHaveStatus;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveStatusTest {
+class ShouldHaveStatusTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		int expectedStatus = 200;
 		int actualStatus = 400;
 		ShouldHaveStatus shouldHaveStatus = shouldHaveStatus(actualStatus, expectedStatus);

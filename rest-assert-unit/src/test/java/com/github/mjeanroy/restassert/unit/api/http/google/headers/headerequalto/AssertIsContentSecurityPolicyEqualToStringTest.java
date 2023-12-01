@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String VALUE = HEADER.getValue();

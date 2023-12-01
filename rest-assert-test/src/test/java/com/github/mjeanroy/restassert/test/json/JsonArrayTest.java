@@ -30,12 +30,12 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class JsonArrayTest {
+class JsonArrayTest {
 
 	@Test
-	public void it_should_create_array_of_strings() {
+	void it_should_create_array_of_strings() {
 		String v1 = "foo";
 		String v2 = "bar";
 		String v3 = "baz";
@@ -46,7 +46,7 @@ public class JsonArrayTest {
 	}
 
 	@Test
-	public void it_should_create_array_of_numbers() {
+	void it_should_create_array_of_numbers() {
 		int v1 = 1;
 		int v2 = 2;
 		int v3 = 3;
@@ -57,7 +57,7 @@ public class JsonArrayTest {
 	}
 
 	@Test
-	public void it_should_create_array_of_booleans() {
+	void it_should_create_array_of_booleans() {
 		boolean v1 = true;
 		boolean v2 = false;
 		boolean v3 = true;
@@ -68,7 +68,7 @@ public class JsonArrayTest {
 	}
 
 	@Test
-	public void it_should_create_array_of_json() {
+	void it_should_create_array_of_json() {
 		String json1 =
 			"{" +
 				"\"id\" : 1, " +
@@ -97,12 +97,12 @@ public class JsonArrayTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(JsonArray.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		JsonArray array = JsonArray.jsonArray(true, "foo", 1);
 		assertThat(array.toString()).isEqualTo("JsonArray{values=[true, foo, 1]}");
 	}

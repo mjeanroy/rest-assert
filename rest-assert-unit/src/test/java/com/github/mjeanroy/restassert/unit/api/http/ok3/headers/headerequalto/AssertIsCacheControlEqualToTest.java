@@ -31,7 +31,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsCacheControlEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final CacheControl VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)

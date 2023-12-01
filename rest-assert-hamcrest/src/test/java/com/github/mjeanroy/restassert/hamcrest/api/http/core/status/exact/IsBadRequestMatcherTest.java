@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isBadRequest;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUEST;
 
-public class IsBadRequestMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
+class IsBadRequestMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

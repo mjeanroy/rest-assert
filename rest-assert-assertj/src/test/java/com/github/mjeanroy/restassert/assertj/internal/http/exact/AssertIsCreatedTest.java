@@ -30,15 +30,15 @@ import org.assertj.core.api.AssertionInfo;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class AssertIsCreatedTest extends AbstractHttpResponsesStatusTest {
+class AssertIsCreatedTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return CREATED;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsCreated(info, httpResponse);
 	}
 }

@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeStringTest extends AbstractGoogleHttpClientMimeTypeTest {
+class AssertHasMimeTypeStringTest extends AbstractGoogleHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = APPLICATION_JSON;
 

@@ -31,7 +31,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class AssertIsContentTypeOptionsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsContentTypeOptionsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
@@ -49,15 +49,5 @@ public class AssertIsContentTypeOptionsEqualToTest extends AbstractApacheHttpHea
 	@Override
 	protected void run(String message, HttpResponse actual) {
 		ApacheHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
-	}
-
-	@Override
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		// Can't provide a failed value since only "nosniff" is authorized.
-	}
-
-	@Override
-	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
-		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

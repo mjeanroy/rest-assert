@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.hasXssProtection;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
-public class HasXssProtectionMatcherTest extends AbstractAsyncHttpResponseHasHeaderMatcherTest {
+class HasXssProtectionMatcherTest extends AbstractAsyncHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

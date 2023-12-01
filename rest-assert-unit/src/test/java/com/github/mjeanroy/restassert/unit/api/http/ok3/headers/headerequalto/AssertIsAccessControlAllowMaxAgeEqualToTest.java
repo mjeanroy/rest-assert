@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
-public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 

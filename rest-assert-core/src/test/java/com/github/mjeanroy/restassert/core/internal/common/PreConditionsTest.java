@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
@@ -34,17 +34,17 @@ import static java.util.Collections.singleton;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class PreConditionsTest {
+class PreConditionsTest {
 
 	@Test
-	public void it_should_not_throw_npe_if_value_is_not_null() {
+	void it_should_not_throw_npe_if_value_is_not_null() {
 		String value = "foo";
 		String result = PreConditions.notNull(value, "message");
 		assertThat(result).isEqualTo(value);
 	}
 
 	@Test
-	public void it_should_throw_npe_if_value_is_null() {
+	void it_should_throw_npe_if_value_is_null() {
 		Object value = null;
 		String message = "message";
 

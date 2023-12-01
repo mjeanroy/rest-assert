@@ -26,10 +26,9 @@ package com.github.mjeanroy.restassert.core.internal.data;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
-import com.github.mjeanroy.restassert.tests.junit.TimeZoneRule;
+import com.github.mjeanroy.restassert.tests.junit.UseTimeZone;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.ClassRule;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -42,13 +41,11 @@ import static com.github.mjeanroy.restassert.tests.TestUtils.createUtcDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CookiesTest {
-
-	@ClassRule
-	public static TimeZoneRule tzRule = new TimeZoneRule("UTC");
+@UseTimeZone(tzId = "UTC")
+class CookiesTest {
 
 	@Test
-	public void it_should_create_cookie() {
+	void it_should_create_cookie() {
 		String name = "foo";
 		String value = "bar";
 		String path = "/";
@@ -72,7 +69,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		String name = "name";
 		String value = "value";
 		String domain = "domain.com";
@@ -101,14 +98,14 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_not_parse_empty_set_cookie_header() {
+	void it_should_not_parse_empty_set_cookie_header() {
 		assertThatThrownBy(parseCookie("  "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header Set-Cookie must be defined");
 }
 
 	@Test
-	public void it_should_parse_set_cookie() {
+	void it_should_parse_set_cookie() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; expires=Fri, 06 May 2016 16:19:20 -0000; secure; HttpOnly";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -123,7 +120,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_without_secure_flag() {
+	void it_should_parse_set_cookie_without_secure_flag() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; expires=Fri, 06 May 2016 16:19:20 -0000; HttpOnly";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -132,7 +129,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_without_http_only_flag() {
+	void it_should_parse_set_cookie_without_http_only_flag() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; expires=Fri, 06 May 2016 16:19:20 -0000";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -141,7 +138,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_with_max_age() {
+	void it_should_parse_set_cookie_with_max_age() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=3600; secure; HttpOnly";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -150,7 +147,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_with_max_age_equal_to_zero() {
+	void it_should_parse_set_cookie_with_max_age_equal_to_zero() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=0; secure; HttpOnly";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -159,7 +156,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_with_max_age_less_than_zero() {
+	void it_should_parse_set_cookie_with_max_age_less_than_zero() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=-3600; secure; HttpOnly";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -168,7 +165,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_with_same_site() {
+	void it_should_parse_set_cookie_with_same_site() {
 		String setCookie = "user_session=foobar==; domain=github.com; path=/; max-age=3600; secure; HttpOnly; SameSite=Strict";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -177,7 +174,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_max_age_is_a_float() {
+	void it_should_fail_if_max_age_is_a_float() {
 		String value = "user_session=foobar==; domain=github.com; path=/; max-age=-3600.5; secure; HttpOnly";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -185,7 +182,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_max_age_is_not_a_number() {
+	void it_should_fail_if_max_age_is_not_a_number() {
 		String value = "user_session=foobar==; domain=github.com; path=/; max-age=-3600ab; secure; HttpOnly";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -193,7 +190,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_cookie_does_not_have_a_name() {
+	void it_should_fail_if_cookie_does_not_have_a_name() {
 		String value = "=foobar; domain=github.com; path=/; max-age=-3600; secure; HttpOnly";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -201,7 +198,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_not_parse_set_cookie_if_it_does_not_have_a_value() {
+	void it_should_not_parse_set_cookie_if_it_does_not_have_a_value() {
 		String value = "user_session";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -209,7 +206,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_set_cookie_with_only_name_and_value() {
+	void it_should_parse_set_cookie_with_only_name_and_value() {
 		String setCookie = "user_session=foobar==";
 		Cookie cookie = Cookies.parse(setCookie);
 
@@ -219,7 +216,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_expires_date() {
+	void it_should_parse_expires_date() {
 		String setCookie = "name=value; expires=Thu, 21 Apr 2016 18:21:35 +0000";
 		Cookie cookie = parse(setCookie);
 
@@ -238,7 +235,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_expires_date_and_convert_year_between_70_and_99() {
+	void it_should_parse_expires_date_and_convert_year_between_70_and_99() {
 		for (int i = 70; i <= 99; i++) {
 			String setCookie = String.format("name=value; expires=Thu, 21 Apr %s 18:21:35 +0000", i);
 			Cookie cookie = parse(setCookie);
@@ -251,7 +248,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_parse_expires_date_and_convert_year_between_0_and_69() {
+	void it_should_parse_expires_date_and_convert_year_between_0_and_69() {
 		for (int i = 0; i <= 69; i++) {
 			String year = i < 10 ? ("0" + i) : String.valueOf(i);
 			String setCookie = String.format("name=value; expires=Thu, 21 Apr %s 18:21:35 +0000", year);
@@ -263,7 +260,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_year_is_less_than_1601() {
+	void it_should_fail_if_year_is_less_than_1601() {
 		String value = "name=value; expires=Thu, 21 Apr 1600 18:21:35 +0000";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -271,7 +268,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_day_is_less_than_1() {
+	void it_should_fail_if_day_is_less_than_1() {
 		String value = "name=value; expires=Thu, 0 Apr 2016 18:21:35 +0000";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -279,7 +276,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_day_is_greater_than_31() {
+	void it_should_fail_if_day_is_greater_than_31() {
 		String value = "name=value; expires=Thu, 32 Apr 2016 18:21:35 +0000";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -287,7 +284,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_hours_is_greater_than_23() {
+	void it_should_fail_if_hours_is_greater_than_23() {
 		String value = "name=value; expires=Thu, 10 Apr 2016 24:21:35 +0000";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -295,7 +292,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_minutes_is_greater_than_59() {
+	void it_should_fail_if_minutes_is_greater_than_59() {
 		String value = "name=value; expires=Thu, 10 Apr 2016 18:60:35 +0000";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -303,7 +300,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_fail_if_seconds_is_greater_than_59() {
+	void it_should_fail_if_seconds_is_greater_than_59() {
 		String value = "name=value; expires=Thu, 10 Apr 2016 18:30:60 +0000";
 		assertThatThrownBy(parseCookie(value))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -311,7 +308,7 @@ public class CookiesTest {
 	}
 
 	@Test
-	public void it_should_compare_cookies() {
+	void it_should_compare_cookies() {
 		assertThat(Cookies.equals(null, null)).isTrue();
 		assertThat(Cookies.equals(null, new CookieBuilder().build())).isFalse();
 		assertThat(Cookies.equals(new CookieBuilder().build(), null)).isFalse();

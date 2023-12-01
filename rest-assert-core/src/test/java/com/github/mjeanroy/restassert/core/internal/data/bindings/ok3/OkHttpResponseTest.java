@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 
-public class OkHttpResponseTest extends AbstractHttpResponseTest<Response> {
+class OkHttpResponseTest extends AbstractHttpResponseTest<Response> {
 
 	@Override
 	protected HttpResponseBuilder<Response> getBuilder() {

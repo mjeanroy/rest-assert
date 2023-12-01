@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsRequestedRangeNotSatisfiableTest extends AbstractHttpResponseStatusTest {
+class IsRequestedRangeNotSatisfiableTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUESTED_RANGE_NOT_SATISFIABLE;
 	}
 

@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_D
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsContentDispositionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsContentDispositionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentDispositionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return CONTENT_DISPOSITION;
 	}
 }

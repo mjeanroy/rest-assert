@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertIsHeaderEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsHeaderEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final String NAME = "foo";
 

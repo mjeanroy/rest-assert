@@ -31,26 +31,26 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_without_any_cookies() {
+	void it_should_pass_without_any_cookies() {
 		AssertionResult result = run(newResponse(null));
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_pass_without_cookie() {
+	void it_should_pass_without_cookie() {
 		HttpResponse response = newResponse(new CookieBuilder()
 				.setName("foo")
 				.setValue("bar")
@@ -61,15 +61,15 @@ public abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTe
 	}
 
 	@Test
-	public void it_should_fail_with_cookies() {
+	void it_should_fail_with_cookies() {
 		HttpResponse rsp = newResponse(newCookie());
 		AssertionResult result = run(rsp);
 		verifyError(result);
 	}
 
-	protected abstract Cookie newCookie();
+	abstract Cookie newCookie();
 
-	protected abstract void verifyError(AssertionResult result);
+	abstract void verifyError(AssertionResult result);
 
 	private HttpResponse newResponse(Cookie cookie) {
 		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl();

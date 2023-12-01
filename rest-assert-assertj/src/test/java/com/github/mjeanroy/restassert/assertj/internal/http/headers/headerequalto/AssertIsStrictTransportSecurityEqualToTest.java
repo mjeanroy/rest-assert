@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()
@@ -44,12 +44,12 @@ public class AssertIsStrictTransportSecurityEqualToTest extends AbstractHttpResp
 		.serializeValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsStrictTransportSecurityEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return STRICT_TRANSPORT_SECURITY;
 	}
 

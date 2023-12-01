@@ -30,7 +30,7 @@ import javax.servlet.http.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasDomain;
 
-public class AssertHasDomainTest extends AbstractJavaxCookieTest {
+class AssertHasDomainTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isSeeOther;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class IsSeeOtherMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
+class IsSeeOtherMatcherTest extends AbstractGoogleHttpComponentStatusMatcherTest {
 
 	@Override
 	protected int status() {

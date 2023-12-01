@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertIsGzippedTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsGzippedTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String FAILED_VALUE = "deflate";

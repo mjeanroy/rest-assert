@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
-public class AssertIsRedirectionTest extends AbstractOkHttpHttpStatusBetweenTest {
+class AssertIsRedirectionTest extends AbstractOkHttpHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isFrameOptionsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class IsFrameOptionsEqualToStringMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
+class IsFrameOptionsEqualToStringMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final String VALUE = X_FRAME_OPTIONS.getValue();

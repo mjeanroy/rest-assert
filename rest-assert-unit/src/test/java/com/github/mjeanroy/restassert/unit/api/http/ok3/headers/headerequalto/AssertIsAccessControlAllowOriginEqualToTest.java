@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowOriginEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 

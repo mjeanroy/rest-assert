@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractAsyncHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

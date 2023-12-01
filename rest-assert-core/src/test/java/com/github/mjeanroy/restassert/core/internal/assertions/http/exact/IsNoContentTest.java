@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsNoContentTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return NO_CONTENT;
-	}
+class IsNoContentTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNoContent(response);
+	}
+
+	@Override
+	int status() {
+		return NO_CONTENT;
 	}
 }

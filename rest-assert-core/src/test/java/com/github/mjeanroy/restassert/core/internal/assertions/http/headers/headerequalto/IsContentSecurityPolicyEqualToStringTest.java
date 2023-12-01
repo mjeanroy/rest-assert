@@ -30,9 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String NAME = HEADER.getName();
@@ -40,17 +40,17 @@ public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeader
 	private static final String FAILED_VALUE = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentSecurityPolicyEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
@@ -60,21 +60,21 @@ public class IsContentSecurityPolicyEqualToStringTest extends AbstractHttpHeader
 	}
 
 	@Test
-	public void it_should_handle_different_directive_order() {
+	void it_should_handle_different_directive_order() {
 		String actual = "script-src 'self' 'unsafe-inline'; default-src 'none'";
 		String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 		doTest(actual, expected);
 	}
 
 	@Test
-	public void it_should_handle_different_source_value_order() {
+	void it_should_handle_different_source_value_order() {
 		String actual = "default-src 'none'; script-src 'unsafe-inline' 'self'";
 		String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 		doTest(actual, expected);
 	}
 
 	@Test
-	public void it_should_handle_case_insensitive_comparison() {
+	void it_should_handle_case_insensitive_comparison() {
 		String actual = "DEFAULT-SRC 'none'; SCRIPT-SRC 'self' 'unsafe-inline'";
 		String expected = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 		doTest(actual, expected);

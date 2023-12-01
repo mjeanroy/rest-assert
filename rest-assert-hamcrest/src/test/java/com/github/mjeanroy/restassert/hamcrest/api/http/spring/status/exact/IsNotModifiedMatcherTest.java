@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isNotModified;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFIED;
 
-public class IsNotModifiedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsNotModifiedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

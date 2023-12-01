@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODI
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsLastModifiedEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsLastModifiedEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = LAST_MODIFIED.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsLastModifiedEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return LAST_MODIFIED;
 	}
 

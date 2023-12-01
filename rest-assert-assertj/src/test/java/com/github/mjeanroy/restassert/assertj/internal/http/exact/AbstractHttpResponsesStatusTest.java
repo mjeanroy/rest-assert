@@ -28,19 +28,19 @@ import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHttpResponsesStatusTest {
+abstract class AbstractHttpResponsesStatusTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_status_code_is_ok() {
+	void should_pass_if_status_code_is_ok() {
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
 			.setStatus(status())
 			.build();
@@ -49,7 +49,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 	}
 
 	@Test
-	public void should_fail_if_status_code_are_not_equal() {
+	void should_fail_if_status_code_are_not_equal() {
 		AssertionInfo info = someInfo();
 		int status = status();
 		int expectedStatus = status + 1;
@@ -65,7 +65,7 @@ public abstract class AbstractHttpResponsesStatusTest {
 		}
 	}
 
-	protected abstract int status();
+	abstract int status();
 
-	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
+	abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

@@ -27,13 +27,6 @@ package com.github.mjeanroy.restassert.unit.api.http;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 
-/**
- * Abstract assert test related to HTTP response.
- * The main method need to be defined is the method that returns a new {@link HttpResponseBuilder}
- * that will be used to create underlying HTTP response.
- *
- * @param <T> Type of actual objects (a.k.a tested object).
- */
 public abstract class AbstractHttpAssertTest<T> extends AbstractAssertTest<T> {
 
 	protected abstract HttpResponseBuilder<T> getBuilder();

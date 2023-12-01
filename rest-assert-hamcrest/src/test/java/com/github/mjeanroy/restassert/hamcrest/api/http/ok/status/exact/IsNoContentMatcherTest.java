@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isNoContent;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT;
 
-public class IsNoContentMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
+class IsNoContentMatcherTest extends AbstractOkHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

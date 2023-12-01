@@ -32,10 +32,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsStatusBetweenTest extends AbstractHttpResponseStatusBetweenTest {
+class IsStatusBetweenTest extends AbstractHttpResponseStatusBetweenTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return 400;
 	}
 

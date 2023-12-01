@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertIsHeaderEqualToTest extends AbstractHttpResponsesHeaderTest {
+class AssertIsHeaderEqualToTest extends AbstractHttpResponsesHeaderTest {
 
 	private static final String NAME = "foo";
 

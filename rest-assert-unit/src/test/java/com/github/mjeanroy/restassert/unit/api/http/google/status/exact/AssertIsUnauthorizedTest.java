@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZ
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsUnauthorizedTest extends AbstractGoogleHttpStatusTest {
+class AssertIsUnauthorizedTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

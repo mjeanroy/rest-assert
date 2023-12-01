@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.isOk;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.OK;
 
-public class IsOkMatcherTest extends AbstractAsyncHttpResponseStatusMatcherTest {
+class IsOkMatcherTest extends AbstractAsyncHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

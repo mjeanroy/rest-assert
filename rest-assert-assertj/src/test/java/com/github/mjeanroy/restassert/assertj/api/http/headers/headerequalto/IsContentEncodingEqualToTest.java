@@ -34,7 +34,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsContentEncodingEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsContentEncodingEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();
 

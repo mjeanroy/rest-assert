@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_ACCEPT
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsNotAcceptableTest extends AbstractGoogleHttpStatusTest {
+class AssertIsNotAcceptableTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

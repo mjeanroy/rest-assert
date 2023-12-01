@@ -35,7 +35,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsEqualToIgnoringFileTest extends AbstractJsonIsEqualIgnoringToTest {
+class IsEqualToIgnoringFileTest extends AbstractJsonIsEqualIgnoringToTest {
 
 	@Override
 	protected JsonAssert run() {

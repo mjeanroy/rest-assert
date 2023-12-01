@@ -24,29 +24,23 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
-public class AsyncHttpAssertionsTest {
+class AsyncHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_assertion_object() {
+	void it_should_create_new_assertion_object() {
 		Response response = new AsyncHttpResponseBuilder().build();
 		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
 
@@ -55,7 +49,7 @@ public class AsyncHttpAssertionsTest {
 	}
 
 	@Test
-	public void it_should_create_new_cookie_assertion_object() {
+	void it_should_create_new_cookie_assertion_object() {
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
 
@@ -64,7 +58,7 @@ public class AsyncHttpAssertionsTest {
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() {
+	void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 				jsonEntry("foo", "bar")
 		);

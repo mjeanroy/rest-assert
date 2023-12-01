@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class StatusBetweenAssertionTest {
+class StatusBetweenAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_status_match() {
+	void it_should_not_fail_if_status_match() {
 		int start = 200;
 		int end = 299;
 		StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
@@ -51,7 +51,7 @@ public class StatusBetweenAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_status_does_not_match() {
+	void it_should_fail_if_status_does_not_match() {
 		int start = 200;
 		int end = 299;
 		StatusBetweenAssertion assertion = new StatusBetweenAssertion(start, end);
@@ -66,21 +66,21 @@ public class StatusBetweenAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_status_start_is_negative() {
+	void it_should_fail_if_status_start_is_negative() {
 		assertThatThrownBy(statusBetweenAssertion(-1, 200))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Http status code must be positive");
 	}
 
 	@Test
-	public void it_should_fail_if_status_end_is_negative() {
+	void it_should_fail_if_status_end_is_negative() {
 		assertThatThrownBy(statusBetweenAssertion(200, -1))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Http status code must be positive");
 	}
 
 	@Test
-	public void it_should_fail_if_status_start_is_greater_than_end() {
+	void it_should_fail_if_status_start_is_greater_than_end() {
 		assertThatThrownBy(statusBetweenAssertion(201, 200))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Lower bound must be strictly less than upper bound");

@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 

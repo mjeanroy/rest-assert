@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsSuccessTest extends AbstractAsyncHttpStatusBetweenTest {
+class AssertIsSuccessTest extends AbstractAsyncHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

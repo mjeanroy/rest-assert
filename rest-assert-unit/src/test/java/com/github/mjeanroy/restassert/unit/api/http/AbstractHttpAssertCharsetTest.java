@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -36,13 +36,13 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	void it_should_pass_with_expected_mime_type() {
 		run(newHttpResponse(getCharset()));
 		run(CUSTOM_MESSAGE, newHttpResponse(getCharset()));
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		invokeFailure(null, new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {
@@ -52,7 +52,7 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
 		invokeFailure(CUSTOM_MESSAGE, new TestInvocation<String>() {
 			@Override
 			public void invokeTest(String charset) {

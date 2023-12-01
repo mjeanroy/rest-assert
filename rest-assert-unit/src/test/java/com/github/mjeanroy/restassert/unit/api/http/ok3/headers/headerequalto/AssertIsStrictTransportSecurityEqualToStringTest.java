@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
 	private static final String VALUE = HEADER.getValue();

@@ -30,7 +30,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeTest extends AbstractAsyncHttpClientMimeTypeTest {
+class AssertHasMimeTypeTest extends AbstractAsyncHttpClientMimeTypeTest {
 
 	private static final String RAW_VALUE = APPLICATION_JSON;
 	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);

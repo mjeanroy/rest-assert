@@ -30,13 +30,18 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class HasCookieWithNameAndValueTest extends AbstractHasCookieTest {
+class HasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
 
 	@Override
-	protected Cookie newCookie() {
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.hasCookie(response, NAME, VALUE);
+	}
+
+	@Override
+	Cookie newCookie() {
 		return new CookieBuilder()
 				.setName(NAME)
 				.setValue(VALUE)
@@ -44,12 +49,7 @@ public class HasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
+	void verifyError(AssertionResult result) {
 		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s and value %s", NAME, VALUE);
-	}
-
-	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.hasCookie(response, NAME, VALUE);
 	}
 }

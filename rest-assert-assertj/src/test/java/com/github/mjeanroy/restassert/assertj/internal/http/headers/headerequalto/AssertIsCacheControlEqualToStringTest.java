@@ -30,19 +30,19 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsCacheControlEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();
 	private static final String FAILED_VALUE = "public, no-transform, max-age=0";
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 

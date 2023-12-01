@@ -32,7 +32,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isHtml;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.HTML;
 
-public class IsHtmlMatcherTest extends AbstractNingHttpResponseMimeTypeInMatcherTest {
+class IsHtmlMatcherTest extends AbstractNingHttpResponseMimeTypeInMatcherTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

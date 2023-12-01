@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractCoreHttpStatusTest {
+class AssertIsSeeOtherTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

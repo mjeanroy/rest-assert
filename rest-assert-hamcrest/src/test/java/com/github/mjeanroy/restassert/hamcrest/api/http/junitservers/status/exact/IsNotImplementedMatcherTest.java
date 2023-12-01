@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isNotImplemented;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEMENTED;
 
-public class IsNotImplementedMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
+class IsNotImplementedMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

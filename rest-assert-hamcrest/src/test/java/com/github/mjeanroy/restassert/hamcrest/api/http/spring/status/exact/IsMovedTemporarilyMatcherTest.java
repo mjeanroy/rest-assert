@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isMovedTemporarily;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMPORARILY;
 
-public class IsMovedTemporarilyMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsMovedTemporarilyMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

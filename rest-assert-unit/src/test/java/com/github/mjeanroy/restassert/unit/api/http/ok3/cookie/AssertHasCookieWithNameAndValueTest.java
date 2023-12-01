@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import okhttp3.Response;
 
-public class AssertHasCookieWithNameAndValueTest extends AbstractOkHttpHasCookieTest {
+class AssertHasCookieWithNameAndValueTest extends AbstractOkHttpHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";

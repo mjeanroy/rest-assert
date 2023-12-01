@@ -30,7 +30,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertHasHeaderTest extends AbstractGoogleHttpHeaderTest {
+class AssertHasHeaderTest extends AbstractGoogleHttpHeaderTest {
 
 	private static final String NAME = "X-MyHeader";
 

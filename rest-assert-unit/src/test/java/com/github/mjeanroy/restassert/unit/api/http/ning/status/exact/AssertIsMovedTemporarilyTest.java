@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMP
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsMovedTemporarilyTest extends AbstractNingHttpStatusTest {
+class AssertIsMovedTemporarilyTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

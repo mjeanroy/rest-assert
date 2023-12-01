@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

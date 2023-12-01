@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeStringTest extends AbstractJunitServersHttpClientMimeTypeTest {
+class AssertHasMimeTypeStringTest extends AbstractJunitServersHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = APPLICATION_JSON;
 

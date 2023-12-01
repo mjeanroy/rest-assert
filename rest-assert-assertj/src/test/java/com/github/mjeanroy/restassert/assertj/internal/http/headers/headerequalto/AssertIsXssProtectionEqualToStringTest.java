@@ -30,19 +30,19 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PRO
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsXssProtectionEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsXssProtectionEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String VALUE = HEADER.getValue();
 	private static final String FAILED_VALUE = "1";
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsXssProtectionEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 

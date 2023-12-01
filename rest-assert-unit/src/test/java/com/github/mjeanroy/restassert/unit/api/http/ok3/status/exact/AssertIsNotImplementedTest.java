@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEMENTED;
 
-public class AssertIsNotImplementedTest extends AbstractOkHttpStatusTest {
+class AssertIsNotImplementedTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -28,18 +28,13 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class IsContentTypeEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsContentTypeEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String VALUE = JSON_CONTENT_TYPE.getValue();
-
-	@Override
-	protected Header getHeader() {
-		return JSON_CONTENT_TYPE;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -47,17 +42,22 @@ public class IsContentTypeEqualToStringTest extends AbstractHttpHeaderEqualToTes
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return JSON_CONTENT_TYPE;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
 	@Test
-	public void it_should_be_a_case_insensitive_comparison() {
+	void it_should_be_a_case_insensitive_comparison() {
 		run("APPLICATION/JSON; charset=utf-8");
 	}
 
 	@Test
-	public void it_should_compare_with_quoted_charset() {
+	void it_should_compare_with_quoted_charset() {
 		run("application/json; charset='utf-8'");
 	}
 

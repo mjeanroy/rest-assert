@@ -31,20 +31,20 @@ import java.net.URI;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUriFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUriSuccess;
 
-public class IsEqualIgnoringToURITest extends AbstractJsonAssertion_isEqualToIgnoring_Test<URI> {
+class IsEqualIgnoringToURITest extends AbstractJsonAssertion_isEqualToIgnoring_Test<URI> {
 
 	@Override
-	protected AssertionResult run(String actual, URI expected, Iterable<String> ignoringKeys) {
+	AssertionResult run(String actual, URI expected, Iterable<String> ignoringKeys) {
 		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys);
 	}
 
 	@Override
-	protected URI successObject() {
+	URI successObject() {
 		return jsonUriSuccess();
 	}
 
 	@Override
-	protected URI failureObject() {
+	URI failureObject() {
 		return jsonUriFailure();
 	}
 }

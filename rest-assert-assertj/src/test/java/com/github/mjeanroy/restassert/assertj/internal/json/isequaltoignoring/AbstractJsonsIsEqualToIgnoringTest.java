@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.internal.json.isequaltoignoring;
 
 import com.github.mjeanroy.restassert.assertj.internal.Jsons;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 
@@ -37,17 +37,17 @@ import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEP
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
+abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
 
 	final Jsons jsons = Jsons.instance();
 
 	@Test
-	public void should_pass() {
+	void should_pass() {
 		run(someInfo(), success());
 	}
 
 	@Test
-	public void should_fail() {
+	void should_fail() {
 		AssertionInfo info = someInfo();
 		T json = failure();
 
@@ -72,9 +72,9 @@ public abstract class AbstractJsonsIsEqualToIgnoringTest<T> {
 		return asList("str", "nb", "bool");
 	}
 
-	protected abstract T success();
+	abstract T success();
 
-	protected abstract T failure();
+	abstract T failure();
 
-	protected abstract void run(AssertionInfo info, T json);
+	abstract void run(AssertionInfo info, T json);
 }

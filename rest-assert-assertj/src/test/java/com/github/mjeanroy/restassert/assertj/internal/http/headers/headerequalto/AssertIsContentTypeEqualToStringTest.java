@@ -30,18 +30,18 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class AssertIsContentTypeEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsContentTypeEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final String VALUE = HEADER.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentTypeEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 }

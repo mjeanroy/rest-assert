@@ -26,15 +26,15 @@ package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ParameterTest {
+class ParameterTest {
 
 	@Test
-	public void it_should_create_parameter() {
+	void it_should_create_parameter() {
 		Parameter parameter = Parameter.parameter("foo", "bar");
 		assertThat(parameter.getName()).isEqualTo("foo");
 		assertThat(parameter.getValue()).isEqualTo("bar");
@@ -48,7 +48,7 @@ public class ParameterTest {
 	}
 
 	@Test
-	public void it_should_parse_parameter() {
+	void it_should_parse_parameter() {
 		Parameter parameter = Parameter.parse("foo=bar");
 		assertThat(parameter.getName()).isEqualTo("foo");
 		assertThat(parameter.getValue()).isEqualTo("bar");
@@ -62,7 +62,7 @@ public class ParameterTest {
 	}
 
 	@Test
-	public void it_should_parse_parameter_with_uppercase_name() {
+	void it_should_parse_parameter_with_uppercase_name() {
 		Parameter parameter = Parameter.parse("FOO=bar");
 		assertThat(parameter.getName()).isEqualTo("foo");
 		assertThat(parameter.getValue()).isEqualTo("bar");
@@ -76,7 +76,7 @@ public class ParameterTest {
 	}
 
 	@Test
-	public void it_should_parse_with_spaces() {
+	void it_should_parse_with_spaces() {
 		Parameter parameter = Parameter.parse("foo = bar");
 		assertThat(parameter.getName()).isEqualTo("foo");
 		assertThat(parameter.getValue()).isEqualTo("bar");
@@ -90,33 +90,33 @@ public class ParameterTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(Parameter.class).verify();
 	}
 
 	@Test
-	public void it_should_not_create_parameter_with_null_name() {
+	void it_should_not_create_parameter_with_null_name() {
 		assertThatThrownBy(parameter(null, "bar"))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
-	public void it_should_not_create_parameter_with_empty_name() {
+	void it_should_not_create_parameter_with_empty_name() {
 		assertThatThrownBy(parameter("", "bar"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
-	public void it_should_not_create_parameter_with_null_value() {
+	void it_should_not_create_parameter_with_null_value() {
 		assertThatThrownBy(parameter("foo", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Parameter value must be defined");
 	}
 
 	@Test
-	public void it_should_not_parse_parameter_with_null_raw_value() {
+	void it_should_not_parse_parameter_with_null_raw_value() {
 		assertThatThrownBy(parse(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Parameter raw value must be defined");

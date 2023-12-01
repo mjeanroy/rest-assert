@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isUnsupportedMediaType;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTED_MEDIA_TYPE;
 
-public class IsUnsupportedMediaTypeMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
+class IsUnsupportedMediaTypeMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

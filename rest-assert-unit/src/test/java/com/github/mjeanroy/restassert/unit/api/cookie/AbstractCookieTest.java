@@ -26,21 +26,21 @@ package com.github.mjeanroy.restassert.unit.api.cookie;
 
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		T cookie = success();
 		run(cookie);
 		run("message", cookie);
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		final T cookie = failure();
 		final String message = String.format(pattern(), placeholders());
 
@@ -53,7 +53,7 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message() {
+	void it_should_fail_with_custom_message() {
 		final T cookie = failure();
 		final String message = "foo";
 

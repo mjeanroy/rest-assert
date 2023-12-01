@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEq
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileSuccess;
 
-public class AssertIsEqualToFileTest extends AbstractJsonIsEqualToTest<File> {
+class AssertIsEqualToFileTest extends AbstractJsonIsEqualToTest<File> {
 
 	@Override
 	protected void run(File actual) {

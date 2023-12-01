@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
-public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 

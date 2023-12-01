@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -37,16 +37,11 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CO
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
-public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
+class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = ACCESS_CONTROL_ALLOW_HEADERS;
 	private static final String NAME = HEADER.getName();
 	private static final List<String> VALUE = HEADER.getValues();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -54,19 +49,24 @@ public class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttp
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
 	@Test
-	public void it_should_compare_with_single_string() {
+	void it_should_compare_with_single_string() {
 		List<String> actual = asList("X-Foo", "X-Bar");
 		List<String> expected = singletonList("X-Bar, X-Foo");
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
-	public void it_should_compare_case_insensitively() {
+	void it_should_compare_case_insensitively() {
 		List<String> actual = asList("x-foo", "x-bar");
 		List<String> expected = asList("X-Foo", "X-Bar");
 		doTestSuccess(actual, expected);

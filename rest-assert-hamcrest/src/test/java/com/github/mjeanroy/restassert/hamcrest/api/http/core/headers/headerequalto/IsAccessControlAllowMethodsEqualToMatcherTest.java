@@ -32,7 +32,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isAccessControlAllowMethodsEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-public class IsAccessControlAllowMethodsEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlAllowMethodsEqualToMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
 
 	@Override
 	protected Header getHeader() {

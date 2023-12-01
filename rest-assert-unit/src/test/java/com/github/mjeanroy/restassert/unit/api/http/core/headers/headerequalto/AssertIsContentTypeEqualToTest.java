@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class AssertIsContentTypeEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
+class AssertIsContentTypeEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
 	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());

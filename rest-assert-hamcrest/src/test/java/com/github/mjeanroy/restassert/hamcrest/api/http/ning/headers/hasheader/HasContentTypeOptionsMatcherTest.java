@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.hasContentTypeOptions;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class HasContentTypeOptionsMatcherTest extends AbstractNingHttpResponseHasHeaderMatcherTest {
+class HasContentTypeOptionsMatcherTest extends AbstractNingHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

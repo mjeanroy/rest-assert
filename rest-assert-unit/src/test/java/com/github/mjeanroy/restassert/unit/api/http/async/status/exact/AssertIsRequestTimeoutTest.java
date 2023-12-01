@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractAsyncHttpStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

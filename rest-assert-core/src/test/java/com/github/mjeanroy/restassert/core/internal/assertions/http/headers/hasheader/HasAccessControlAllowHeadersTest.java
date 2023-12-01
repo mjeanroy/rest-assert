@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class HasAccessControlAllowHeadersTest extends AbstractHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return ACCESS_CONTROL_ALLOW_HEADERS;
-	}
+class HasAccessControlAllowHeadersTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasAccessControlAllowHeaders(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 }

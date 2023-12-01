@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsLastModifiedEqualToWithDateTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsLastModifiedEqualToWithDateTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final String VALUE = LAST_MODIFIED.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";

@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String FAILED_VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)
@@ -47,12 +47,12 @@ public class AssertIsCacheControlEqualToTest extends AbstractHttpResponsesHeader
 		.build();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsCacheControlEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return CACHE_CONTROL;
 	}
 

@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZED;
 
-public class AssertIsUnauthorizedTest extends AbstractOkHttpStatusTest {
+class AssertIsUnauthorizedTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isRedirection;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
-public class IsRedirectionMatcherTest extends AbstractSpringMockMvcHttpResponseStatusBetweenMatcherTest {
+class IsRedirectionMatcherTest extends AbstractSpringMockMvcHttpResponseStatusBetweenMatcherTest {
 
 	@Override
 	protected Range getRange() {

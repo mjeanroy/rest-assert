@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isNotAcceptable;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_ACCEPTABLE;
 
-public class IsNotAcceptableMatcherTest extends AbstractApacheHttpResponseStatusMatcherTest {
+class IsNotAcceptableMatcherTest extends AbstractApacheHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

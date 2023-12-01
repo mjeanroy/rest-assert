@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.isUnauthorized;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZED;
 
-public class IsUnauthorizedMatcherTest extends AbstractAsyncHttpResponseStatusMatcherTest {
+class IsUnauthorizedMatcherTest extends AbstractAsyncHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

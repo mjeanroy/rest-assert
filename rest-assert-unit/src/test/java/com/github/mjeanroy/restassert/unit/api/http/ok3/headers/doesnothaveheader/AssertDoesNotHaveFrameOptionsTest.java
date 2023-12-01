@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertDoesNotHaveFrameOptionsTest extends AbstractOkDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveFrameOptionsTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.hasHeader;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class HasHeaderMatcherTest extends AbstractOkHttpResponseHasHeaderMatcherTest {
+class HasHeaderMatcherTest extends AbstractOkHttpResponseHasHeaderMatcherTest {
 
 	private static final String NAME = "X-MyHeader";
 

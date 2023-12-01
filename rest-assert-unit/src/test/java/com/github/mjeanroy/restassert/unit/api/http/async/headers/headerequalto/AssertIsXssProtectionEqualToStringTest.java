@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsXssProtectionEqualToStringTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsXssProtectionEqualToStringTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String VALUE = HEADER.getValue();

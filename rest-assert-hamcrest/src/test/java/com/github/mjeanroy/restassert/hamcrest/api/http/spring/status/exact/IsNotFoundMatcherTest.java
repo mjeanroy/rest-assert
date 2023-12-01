@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isNotFound;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 
-public class IsNotFoundMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsNotFoundMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

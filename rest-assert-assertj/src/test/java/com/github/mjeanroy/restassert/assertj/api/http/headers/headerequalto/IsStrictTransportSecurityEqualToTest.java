@@ -34,7 +34,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsStrictTransportSecurityEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsStrictTransportSecurityEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000).includeSubDomains().build();
 

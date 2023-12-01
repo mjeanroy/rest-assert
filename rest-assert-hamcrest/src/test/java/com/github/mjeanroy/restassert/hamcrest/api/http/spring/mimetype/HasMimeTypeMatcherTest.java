@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasMimeType;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class HasMimeTypeMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class HasMimeTypeMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	private static final String RAW_VALUE = TEXT_CSS;
 	private static final MediaType VALUE = MediaType.parser().parse(TEXT_CSS);

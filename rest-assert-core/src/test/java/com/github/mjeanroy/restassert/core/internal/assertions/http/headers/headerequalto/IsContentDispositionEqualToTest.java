@@ -30,14 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsContentDispositionEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsContentDispositionEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String VALUE = CONTENT_DISPOSITION.getValue();
-
-	@Override
-	protected Header getHeader() {
-		return CONTENT_DISPOSITION;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -45,7 +40,12 @@ public class IsContentDispositionEqualToTest extends AbstractHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return CONTENT_DISPOSITION;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

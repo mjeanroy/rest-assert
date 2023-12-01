@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -36,13 +36,13 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 public abstract class AbstractHttpResponseMimeTypeMatcherMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	void it_should_pass_with_expected_mime_type() {
 		Header header = getHeader();
 		run(newHttpResponse(header));
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		doTest(new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {

@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isAccepted;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 
-public class IsAcceptedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsAcceptedMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

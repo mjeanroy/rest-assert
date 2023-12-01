@@ -26,16 +26,16 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContentEncodingTest {
+class ContentEncodingTest {
 
 	@Test
-	public void it_should_create_gzip_content_encoding() {
+	void it_should_create_gzip_content_encoding() {
 		ContentEncoding contentEncoding = ContentEncoding.gzip();
 		assertThat(contentEncoding.getDirectives()).isEqualTo(singletonList(Directive.GZIP));
 		assertThat(contentEncoding.serializeValue()).isEqualTo("gzip");
@@ -47,7 +47,7 @@ public class ContentEncodingTest {
 	}
 
 	@Test
-	public void it_should_create_deflate_content_encoding() {
+	void it_should_create_deflate_content_encoding() {
 		ContentEncoding contentEncoding = ContentEncoding.deflate();
 		assertThat(contentEncoding.getDirectives()).isEqualTo(singletonList(Directive.DEFLATE));
 		assertThat(contentEncoding.serializeValue()).isEqualTo("deflate");
@@ -59,7 +59,7 @@ public class ContentEncodingTest {
 	}
 
 	@Test
-	public void it_should_create_br_content_encoding() {
+	void it_should_create_br_content_encoding() {
 		ContentEncoding contentEncoding = ContentEncoding.br();
 		assertThat(contentEncoding.getDirectives()).isEqualTo(singletonList(Directive.BR));
 		assertThat(contentEncoding.serializeValue()).isEqualTo("br");
@@ -71,7 +71,7 @@ public class ContentEncodingTest {
 	}
 
 	@Test
-	public void it_should_create_content_encoding_with_several_transformations() {
+	void it_should_create_content_encoding_with_several_transformations() {
 		ContentEncoding contentEncoding = new ContentEncoding(asList(
 			Directive.COMPRESS,
 			Directive.IDENTITY
@@ -87,7 +87,7 @@ public class ContentEncodingTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(ContentEncoding.class).verify();
 	}
 }

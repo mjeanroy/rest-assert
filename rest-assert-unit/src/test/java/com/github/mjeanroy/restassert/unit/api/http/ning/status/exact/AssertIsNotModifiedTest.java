@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFI
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsNotModifiedTest extends AbstractNingHttpStatusTest {
+class AssertIsNotModifiedTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

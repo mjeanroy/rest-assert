@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertHasPragmaTest extends AbstractNingHttpHeaderTest {
+class AssertHasPragmaTest extends AbstractNingHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

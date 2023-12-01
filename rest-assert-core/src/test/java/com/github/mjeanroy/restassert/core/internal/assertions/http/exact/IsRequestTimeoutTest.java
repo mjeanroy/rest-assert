@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class IsRequestTimeoutTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return REQUEST_TIMEOUT;
-	}
+class IsRequestTimeoutTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isRequestTimeout(response);
+	}
+
+	@Override
+	int status() {
+		return REQUEST_TIMEOUT;
 	}
 }

@@ -31,16 +31,11 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsXssProtectionEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsXssProtectionEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final XssProtection VALUE = XssProtection.disable();
 	private static final XssProtection FAILED_VALUE = XssProtection.enable();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -48,7 +43,12 @@ public class IsXssProtectionEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 

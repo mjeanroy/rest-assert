@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CS
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsCssTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class AssertIsCssTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

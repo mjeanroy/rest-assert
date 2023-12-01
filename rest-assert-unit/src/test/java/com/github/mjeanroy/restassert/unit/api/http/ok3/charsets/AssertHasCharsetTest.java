@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.ok3.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertHasCharsetTest extends AbstractOkHttpAssertCharsetTest {
+class AssertHasCharsetTest extends AbstractOkHttpAssertCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 

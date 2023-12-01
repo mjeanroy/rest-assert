@@ -26,14 +26,14 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.ning;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NingHttpCookieTest {
+class NingHttpCookieTest {
 
 	@Test
-	public void it_should_return_name() {
+	void it_should_return_name() {
 		String expectedName = "foo";
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setName(expectedName)
@@ -46,7 +46,7 @@ public class NingHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_value() {
+	void it_should_return_value() {
 		String expectedValue = "foo";
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setValue(expectedValue)
@@ -59,7 +59,7 @@ public class NingHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_domain() {
+	void it_should_return_domain() {
 		String expectedDomain = "foo";
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setDomain(expectedDomain)
@@ -72,7 +72,7 @@ public class NingHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_path() {
+	void it_should_return_path() {
 		String expectedPath = "foo";
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setPath(expectedPath)
@@ -85,7 +85,7 @@ public class NingHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_secured() {
+	void it_should_check_if_cookie_is_secured() {
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setSecure(true)
 			.build();
@@ -97,7 +97,7 @@ public class NingHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_http_only() {
+	void it_should_check_if_cookie_is_http_only() {
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setHttpOnly(true)
 			.build();
@@ -109,7 +109,7 @@ public class NingHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_get_max_age() {
+	void it_should_get_max_age() {
 		long expectedMaxAge = 10;
 		com.ning.http.client.cookie.Cookie asyncHttpCookie = new NingHttpCookieBuilder()
 			.setMaxAge(expectedMaxAge)

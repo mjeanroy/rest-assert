@@ -25,15 +25,15 @@
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeEntryOf.shouldBeEntryOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldBeEntryOfTest {
+class ShouldBeEntryOfTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String entry = "foo";
 		JsonType actualType = JsonType.NULL;
 		JsonType expectedType = JsonType.NUMBER;

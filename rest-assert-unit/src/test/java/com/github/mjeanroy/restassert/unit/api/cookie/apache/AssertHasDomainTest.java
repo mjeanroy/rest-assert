@@ -29,7 +29,7 @@ import org.apache.http.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasDomain;
 
-public class AssertHasDomainTest extends AbstractApacheHttpCookieTest {
+class AssertHasDomainTest extends AbstractApacheHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

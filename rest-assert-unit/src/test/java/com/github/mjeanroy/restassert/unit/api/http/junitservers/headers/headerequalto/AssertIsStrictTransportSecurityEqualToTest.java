@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-public class AssertIsStrictTransportSecurityEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
 		.includeSubDomains()

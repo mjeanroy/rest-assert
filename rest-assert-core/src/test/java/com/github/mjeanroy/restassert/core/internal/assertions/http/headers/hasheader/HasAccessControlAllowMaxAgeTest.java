@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class HasAccessControlAllowMaxAgeTest extends AbstractHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return ACCESS_CONTROL_ALLOW_MAX_AGE;
-	}
+class HasAccessControlAllowMaxAgeTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasAccessControlAllowMaxAge(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_MAX_AGE;
 	}
 }

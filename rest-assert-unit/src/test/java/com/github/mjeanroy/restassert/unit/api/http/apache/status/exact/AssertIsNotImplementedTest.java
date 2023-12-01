@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEM
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsNotImplementedTest extends AbstractApacheHttpStatusTest {
+class AssertIsNotImplementedTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

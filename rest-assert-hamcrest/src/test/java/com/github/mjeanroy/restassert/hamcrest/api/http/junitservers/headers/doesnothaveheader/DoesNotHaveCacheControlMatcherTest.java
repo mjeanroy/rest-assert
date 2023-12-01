@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.doesNotHaveCacheControl;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class DoesNotHaveCacheControlMatcherTest extends AbstractJunitServersHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveCacheControlMatcherTest extends AbstractJunitServersHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

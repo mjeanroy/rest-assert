@@ -31,14 +31,14 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
 import org.assertj.core.api.Condition;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class HttpResponsesTest extends AbstractTemplateModelTest {
+class HttpResponsesTest extends AbstractTemplateModelTest {
 
 	private HttpResponses httpResponses;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		httpResponses = (HttpResponses) HttpResponses.httpResponsesModel();
 	}
 

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isGzipped;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class IsGzippedMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
+class IsGzippedMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String FAILED_VALUE = "deflate";

@@ -31,7 +31,7 @@ import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.Mockito.*;
 
-public class IsAccessControlAllowHeadersEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowHeadersEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICA
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsPdfTest extends AbstractMimeTypeTest {
-
-	@Override
-	protected String getMimeType() {
-		return APPLICATION_PDF;
-	}
+class IsPdfTest extends AbstractMimeTypeTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isPdf(response);
+	}
+
+	@Override
+	String getMimeType() {
+		return APPLICATION_PDF;
 	}
 }

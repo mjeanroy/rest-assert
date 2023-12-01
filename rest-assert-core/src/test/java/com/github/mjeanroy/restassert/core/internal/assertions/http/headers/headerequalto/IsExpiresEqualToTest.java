@@ -30,19 +30,19 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsExpiresEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsExpiresEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String VALUE = EXPIRES.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
 
 	@Override
-	protected Header getHeader() {
-		return EXPIRES;
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.isExpiresEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.isExpiresEqualTo(response, VALUE);
+	Header getHeader() {
+		return EXPIRES;
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class IsExpiresEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

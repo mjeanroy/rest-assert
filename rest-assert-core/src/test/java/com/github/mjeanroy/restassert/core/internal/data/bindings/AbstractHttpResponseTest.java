@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public abstract class AbstractHttpResponseTest<T> {
 
 	@Test
-	public void it_should_return_status_code() {
+	void it_should_return_status_code() {
 		int expectedStatus = 200;
 		T response = getBuilder()
 				.setStatus(expectedStatus)
@@ -48,7 +48,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_check_if_http_response_contains_header() {
+	void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
 		T response = getBuilder()
 				.addHeader("foo", "foo")
@@ -62,7 +62,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_return_false_if_http_response_does_not_contain_header() {
+	void it_should_return_false_if_http_response_does_not_contain_header() {
 		String headerName = "header-name";
 		T response = getBuilder()
 				.addHeader("foo", "foo")
@@ -75,7 +75,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_return_header_value() {
+	void it_should_return_header_value() {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 		T response = getBuilder()
@@ -95,7 +95,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_return_header_value_with_null_if_header_does_not_exist() {
+	void it_should_return_header_value_with_null_if_header_does_not_exist() {
 		String headerName = "header-name";
 		T response = getBuilder()
 				.addHeader("foo", "bar")
@@ -108,7 +108,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_return_response_body() {
+	void it_should_return_response_body() {
 		String body = "foo";
 		T response = getBuilder()
 				.setContent(body)
@@ -120,7 +120,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_return_empty_list_if_set_cookie_header_is_missing() {
+	void it_should_return_empty_list_if_set_cookie_header_is_missing() {
 		T response = getBuilder().build();
 		HttpResponse httpResponse = create(response);
 		List<Cookie> cookies = httpResponse.getCookies();
@@ -128,7 +128,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	}
 
 	@Test
-	public void it_should_return_all_cookies() {
+	void it_should_return_all_cookies() {
 		T response = getBuilder()
 				.addHeader("Set-Cookie", "foo=bar")
 				.addHeader("Set-Cookie", "quix=123")

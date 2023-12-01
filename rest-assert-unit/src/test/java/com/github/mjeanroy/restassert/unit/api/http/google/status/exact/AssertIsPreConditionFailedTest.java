@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDIT
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsPreConditionFailedTest extends AbstractGoogleHttpStatusTest {
+class AssertIsPreConditionFailedTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

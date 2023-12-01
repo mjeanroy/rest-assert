@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
 

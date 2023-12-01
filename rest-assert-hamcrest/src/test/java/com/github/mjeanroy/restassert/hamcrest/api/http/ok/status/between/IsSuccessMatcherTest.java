@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isSuccess;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
-public class IsSuccessMatcherTest extends AbstractOkHttpResponseStatusBetweenMatcherTest {
+class IsSuccessMatcherTest extends AbstractOkHttpResponseStatusBetweenMatcherTest {
 
 	@Override
 	protected Range getRange() {

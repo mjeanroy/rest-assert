@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertHasContentEncodingTest extends AbstractHttpResponsesHeaderTest {
+class AssertHasContentEncodingTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void run(HttpResponse httpResponse) {

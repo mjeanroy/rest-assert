@@ -37,7 +37,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsContentTypeEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsContentTypeEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final ContentType VALUE = ContentType.contentType(
 		MediaType.application("json"),

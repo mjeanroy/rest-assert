@@ -29,12 +29,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class DateTestUtilsTest {
+class DateTestUtilsTest {
 
 	@Test
-	public void it_should_parse_internet_format_date() {
+	void it_should_parse_internet_format_date() {
 		String dateAsString = "Wed, 15 Nov 1995 12:45:26 GMT";
 		Date date = DateTestUtils.fromInternetMessageFormat(dateAsString);
 

@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-public class AssertIsStatusBetweenTest extends AbstractOkHttpHttpStatusBetweenTest {
+class AssertIsStatusBetweenTest extends AbstractOkHttpHttpStatusBetweenTest {
 
 	private static final int START = 300;
 	private static final int END = 399;

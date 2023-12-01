@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class IsRequestedRangeNotSatisfiableTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return REQUESTED_RANGE_NOT_SATISFIABLE;
-	}
+class IsRequestedRangeNotSatisfiableTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isRequestedRangeNotSatisfiable(response);
+	}
+
+	@Override
+	int status() {
+		return REQUESTED_RANGE_NOT_SATISFIABLE;
 	}
 }

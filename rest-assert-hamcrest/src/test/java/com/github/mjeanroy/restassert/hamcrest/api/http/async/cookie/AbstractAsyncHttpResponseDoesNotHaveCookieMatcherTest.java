@@ -24,17 +24,11 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.async.cookie;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpResponseDoesNotHaveCookieMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
-import org.junit.runner.RunWith;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
 abstract class AbstractAsyncHttpResponseDoesNotHaveCookieMatcherTest extends AbstractHttpResponseDoesNotHaveCookieMatcherTest<Response> {
 
 	@Override

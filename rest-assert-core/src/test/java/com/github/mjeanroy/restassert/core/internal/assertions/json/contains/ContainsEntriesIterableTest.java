@@ -28,8 +28,8 @@ import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
@@ -39,17 +39,17 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 
-public class ContainsEntriesIterableTest {
+class ContainsEntriesIterableTest {
 
 	private JsonAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = JsonAssertions.instance();
 	}
 
 	@Test
-	public void it_should_check_if_json_contains_entries() {
+	void it_should_check_if_json_contains_entries() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
@@ -69,7 +69,7 @@ public class ContainsEntriesIterableTest {
 	}
 
 	@Test
-	public void it_should_fail_if_json_does_contains_entries() {
+	void it_should_fail_if_json_does_contains_entries() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")

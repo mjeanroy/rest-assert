@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeStringTest extends AbstractOkHttpClientMimeTypeTest {
+class AssertHasMimeTypeStringTest extends AbstractOkHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = APPLICATION_JSON;
 

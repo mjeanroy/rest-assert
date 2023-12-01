@@ -30,7 +30,7 @@ import javax.servlet.http.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasMaxAge;
 
-public class AssertHasMaxAgeTest extends AbstractJavaxCookieTest {
+class AssertHasMaxAgeTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

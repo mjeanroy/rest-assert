@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 
-public class AssertIsUtf8Test extends AbstractHttpResponsesCharsetTest {
+class AssertIsUtf8Test extends AbstractHttpResponsesCharsetTest {
 
 	@Override
-	protected String getCharset() {
+	String getCharset() {
 		return "utf-8";
 	}
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsUtf8(someInfo(), httpResponse);
 	}
 }

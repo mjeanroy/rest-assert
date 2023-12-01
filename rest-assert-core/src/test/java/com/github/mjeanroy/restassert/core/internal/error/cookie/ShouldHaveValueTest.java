@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveValue.shouldHaveValue;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveValueTest {
+class ShouldHaveValueTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String expectedValue = "bar";
 		String actualValue = "foo";
 		ShouldHaveValue shouldHaveValue = shouldHaveValue(expectedValue, actualValue);

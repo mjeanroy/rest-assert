@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -38,10 +38,10 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class HasMimeTypeAssertionTest {
+class HasMimeTypeAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_mime_type() {
+	void it_should_not_fail_if_header_is_set_with_expected_mime_type() {
 		MediaType mimeType = MediaType.parser().parse("application/json");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
 		HttpResponse rsp = createHttpResponse("application/json");
@@ -54,7 +54,7 @@ public class HasMimeTypeAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_mime_types() {
+	void it_should_not_fail_if_header_is_set_with_expected_mime_types() {
 		MediaType m1 = MediaType.parser().parse("application/json");
 		MediaType m2 = MediaType.parser().parse("application/xml");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
@@ -68,7 +68,7 @@ public class HasMimeTypeAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set_with_expected_mime_type() {
+	void it_should_fail_if_header_is_not_set_with_expected_mime_type() {
 		MediaType mimeType = MediaType.parser().parse("application/xml");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mimeType);
 		HttpResponse rsp = createHttpResponse("application/json");
@@ -82,7 +82,7 @@ public class HasMimeTypeAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set_with_expected_mime_types() {
+	void it_should_fail_if_header_is_not_set_with_expected_mime_types() {
 		MediaType m1 = MediaType.parser().parse("application/xml");
 		MediaType m2 = MediaType.parser().parse("application/json");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(asList(m1, m2));
@@ -97,7 +97,7 @@ public class HasMimeTypeAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_content_type_header_has_multiple_values() {
+	void it_should_fail_if_content_type_header_has_multiple_values() {
 		MediaType mediaType  = MediaType.parser().parse("application/json");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
 		HttpResponse rsp = new HttpResponseBuilderImpl()
@@ -114,7 +114,7 @@ public class HasMimeTypeAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set() {
+	void it_should_fail_if_header_is_not_set() {
 		MediaType mediaType = MediaType.parser().parse("application/json");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
@@ -128,21 +128,21 @@ public class HasMimeTypeAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_mime_type_is_null() {
+	void it_should_fail_if_mime_type_is_null() {
 		assertThatThrownBy(hasMimeTypeAssertion((MediaType) null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Mime-Type value must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_list_mime_type_is_null() {
+	void it_should_fail_if_list_mime_type_is_null() {
 		assertThatThrownBy(hasMimeTypeAssertion((Collection<MediaType>) null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Mime-Type values must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_list_mime_type_is_empty() {
+	void it_should_fail_if_list_mime_type_is_empty() {
 		assertThatThrownBy(hasMimeTypeAssertion(Collections.<MediaType>emptyList()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Mime-Type values must be defined");

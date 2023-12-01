@@ -32,9 +32,9 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();
@@ -42,17 +42,17 @@ public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest 
 	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentEncodingEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
@@ -62,7 +62,7 @@ public class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest 
 	}
 
 	@Test
-	public void it_should_not_pass_with_list_in_wrong_order() {
+	void it_should_not_pass_with_list_in_wrong_order() {
 		// GIVEN
 		ContentEncoding expected = ContentEncoding.parser().parse("compress, identity");
 		ContentEncoding actual = ContentEncoding.parser().parse("identity, compress");

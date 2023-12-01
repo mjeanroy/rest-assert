@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class AssertHasMimeTypeStringTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class AssertHasMimeTypeStringTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	private static final String RAW_VALUE = APPLICATION_JSON;
 	private static final MediaType VALUE = MediaType.parser().parse(APPLICATION_JSON);

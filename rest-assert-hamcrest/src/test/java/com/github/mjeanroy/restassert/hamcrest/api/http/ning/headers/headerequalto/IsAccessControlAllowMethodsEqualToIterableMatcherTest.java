@@ -35,7 +35,7 @@ import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseM
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
 
-public class IsAccessControlAllowMethodsEqualToIterableMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlAllowMethodsEqualToIterableMatcherTest extends AbstractNingHttpResponseHeaderEqualToMatcherTest {
 
 	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
 

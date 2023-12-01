@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
-public class AssertHasAccessControlExposeHeadersTest extends AbstractSpringMockMvcHttpHeaderTest {
+class AssertHasAccessControlExposeHeadersTest extends AbstractSpringMockMvcHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

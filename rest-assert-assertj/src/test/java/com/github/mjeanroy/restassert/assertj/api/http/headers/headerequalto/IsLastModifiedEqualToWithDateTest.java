@@ -35,7 +35,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsLastModifiedEqualToWithDateTest extends AbstractHttpResponseHeaderTest {
+class IsLastModifiedEqualToWithDateTest extends AbstractHttpResponseHeaderTest {
 
 	private static final Date LAST_MODIFIED_VALUE = new Date();
 

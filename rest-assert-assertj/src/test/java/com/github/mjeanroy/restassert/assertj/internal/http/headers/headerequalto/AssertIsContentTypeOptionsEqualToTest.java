@@ -31,23 +31,23 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsContentTypeOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentTypeOptionsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 
 	@Override
-	public void should_fail_if_header_is_not_available() {
+	void should_fail_if_header_is_not_available() {
 		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

@@ -29,20 +29,20 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 
-public class IsEqualToStringTest extends AbstractJsonAssertion_isEqualTo_Test<String> {
+class IsEqualToStringTest extends AbstractJsonAssertion_isEqualTo_Test<String> {
 
 	@Override
-	protected AssertionResult run(String actual, String expected) {
+	AssertionResult run(String actual, String expected) {
 		return assertions.isEqualTo(actual, expected);
 	}
 
 	@Override
-	protected String successObject() {
+	String successObject() {
 		return jsonSuccess();
 	}
 
 	@Override
-	protected String failureObject() {
+	String failureObject() {
 		return jsonFailure();
 	}
 }

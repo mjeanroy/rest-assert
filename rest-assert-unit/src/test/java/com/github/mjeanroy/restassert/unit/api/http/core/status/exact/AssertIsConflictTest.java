@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsConflictTest extends AbstractCoreHttpStatusTest {
+class AssertIsConflictTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

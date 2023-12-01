@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class SpringMockMvcHttpResponseTest extends AbstractHttpResponseTest<ResultActions> {
+class SpringMockMvcHttpResponseTest extends AbstractHttpResponseTest<ResultActions> {
 
 	@Override
 	protected HttpResponseBuilder<ResultActions> getBuilder() {

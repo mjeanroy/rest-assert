@@ -30,21 +30,16 @@ import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValu
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final String NAME = HEADER.getName();
 	private static final String VALUE = X_CONTENT_TYPE_OPTIONS.getValue();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -52,17 +47,22 @@ public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqu
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
 	@Override
-	public void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
+	void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
 		// Can't provide failed value since only "nosniff" is a valid value.
 	}
 
 	@Test
-	public void it_should_compare_values_case_insensitively() {
+	void it_should_compare_values_case_insensitively() {
 		// GIVEN
 		String actual = VALUE.toLowerCase();
 		String expected = VALUE.toUpperCase();
@@ -76,7 +76,7 @@ public class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqu
 	}
 
 	@Test
-	public void it_should_fail_with_non_authorized_value() {
+	void it_should_fail_with_non_authorized_value() {
 		// GIVEN
 		String actual = VALUE.toLowerCase();
 		String expected = "no-sniff";

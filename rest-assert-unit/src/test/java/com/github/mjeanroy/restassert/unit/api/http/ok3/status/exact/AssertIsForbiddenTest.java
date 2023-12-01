@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 
-public class AssertIsForbiddenTest extends AbstractOkHttpStatusTest {
+class AssertIsForbiddenTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

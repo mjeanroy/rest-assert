@@ -31,7 +31,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsFrameOptionsEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final FrameOptions VALUE = FrameOptions.deny();

@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTE
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsUnsupportedMediaTypeTest extends AbstractApacheHttpStatusTest {
+class AssertIsUnsupportedMediaTypeTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

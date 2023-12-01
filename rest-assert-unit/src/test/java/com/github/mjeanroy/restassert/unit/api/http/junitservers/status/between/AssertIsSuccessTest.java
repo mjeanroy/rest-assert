@@ -30,7 +30,7 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsSuccessTest extends AbstractJunitServersHttpStatusBetweenTest {
+class AssertIsSuccessTest extends AbstractJunitServersHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

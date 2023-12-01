@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsGzippedTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsGzippedTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String FAILED_VALUE = "deflate";

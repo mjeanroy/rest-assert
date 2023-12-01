@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_REDIRECT;
 
-public class AssertIsPermanentRedirectTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsPermanentRedirectTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

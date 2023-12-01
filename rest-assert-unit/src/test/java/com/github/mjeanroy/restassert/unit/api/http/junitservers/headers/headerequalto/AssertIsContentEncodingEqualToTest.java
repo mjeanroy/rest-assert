@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsContentEncodingEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsContentEncodingEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();

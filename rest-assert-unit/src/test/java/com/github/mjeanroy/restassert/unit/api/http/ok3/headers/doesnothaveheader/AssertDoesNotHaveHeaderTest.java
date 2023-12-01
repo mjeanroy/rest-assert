@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertDoesNotHaveHeaderTest extends AbstractOkDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveHeaderTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 
 	private static final String NAME = "FooFoo";
 

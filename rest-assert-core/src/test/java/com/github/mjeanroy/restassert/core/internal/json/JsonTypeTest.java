@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.json;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -35,10 +35,10 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class JsonTypeTest {
+class JsonTypeTest {
 
 	@Test
-	public void it_should_check_type_null() {
+	void it_should_check_type_null() {
 		assertThat(JsonType.NULL.is("null")).isTrue();
 
 		assertThat(JsonType.NULL.is(null)).isFalse();
@@ -47,7 +47,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_check_type_string() {
+	void it_should_check_type_string() {
 		assertThat(JsonType.STRING.is("\"hello\"")).isTrue();
 		assertThat(JsonType.STRING.is("\"\"")).isTrue();
 
@@ -60,7 +60,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_check_type_number() {
+	void it_should_check_type_number() {
 		for (int i = 0; i < 10; i++) {
 			assertThat(JsonType.NUMBER.is(String.valueOf(i))).isTrue();
 			assertThat(JsonType.NUMBER.is("-" + i)).isTrue();
@@ -80,7 +80,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_check_type_boolean() {
+	void it_should_check_type_boolean() {
 		assertThat(JsonType.BOOLEAN.is("true")).isTrue();
 		assertThat(JsonType.BOOLEAN.is("false")).isTrue();
 
@@ -91,7 +91,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_check_type_array() {
+	void it_should_check_type_array() {
 		assertThat(JsonType.ARRAY.is("[]")).isTrue();
 		assertThat(JsonType.ARRAY.is("[1, 2, 3]")).isTrue();
 
@@ -102,7 +102,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_check_type_object() {
+	void it_should_check_type_object() {
 		assertThat(JsonType.OBJECT.is("{}")).isTrue();
 		assertThat(JsonType.OBJECT.is("{\"id\": 1}")).isTrue();
 
@@ -113,100 +113,100 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_get_boolean_formatted_name() {
+	void it_should_get_boolean_formatted_name() {
 		assertThat(JsonType.BOOLEAN.getFormattedName()).isEqualTo("boolean");
 	}
 
 	@Test
-	public void it_should_get_number_formatted_name() {
+	void it_should_get_number_formatted_name() {
 		assertThat(JsonType.NUMBER.getFormattedName()).isEqualTo("number");
 	}
 
 	@Test
-	public void it_should_get_string_formatted_name() {
+	void it_should_get_string_formatted_name() {
 		assertThat(JsonType.STRING.getFormattedName()).isEqualTo("string");
 	}
 
 	@Test
-	public void it_should_get_null_formatted_name() {
+	void it_should_get_null_formatted_name() {
 		assertThat(JsonType.NULL.getFormattedName()).isEqualTo("null");
 	}
 
 	@Test
-	public void it_should_get_array_formatted_name() {
+	void it_should_get_array_formatted_name() {
 		assertThat(JsonType.ARRAY.getFormattedName()).isEqualTo("array");
 	}
 
 	@Test
-	public void it_should_get_object_formatted_name() {
+	void it_should_get_object_formatted_name() {
 		assertThat(JsonType.OBJECT.getFormattedName()).isEqualTo("object");
 	}
 
 	@Test
-	public void it_should_return_type_null() {
+	void it_should_return_type_null() {
 		assertThat(JsonType.parseType(null))
 				.isNotNull()
 				.isEqualTo(JsonType.NULL);
 	}
 
 	@Test
-	public void it_should_return_type_number_with_integer() {
+	void it_should_return_type_number_with_integer() {
 		assertThat(JsonType.parseType(10))
 				.isNotNull()
 				.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
-	public void it_should_return_type_number_with_long() {
+	void it_should_return_type_number_with_long() {
 		assertThat(JsonType.parseType(100000L))
 				.isNotNull()
 				.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
-	public void it_should_return_type_number_with_float() {
+	void it_should_return_type_number_with_float() {
 		assertThat(JsonType.parseType(1.5))
 				.isNotNull()
 				.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
-	public void it_should_return_type_number_with_double() {
+	void it_should_return_type_number_with_double() {
 		assertThat(JsonType.parseType(1.5D))
 				.isNotNull()
 				.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
-	public void it_should_return_type_boolean_with_false() {
+	void it_should_return_type_boolean_with_false() {
 		assertThat(JsonType.parseType(false))
 				.isNotNull()
 				.isEqualTo(JsonType.BOOLEAN);
 	}
 
 	@Test
-	public void it_should_return_type_boolean_with_true() {
+	void it_should_return_type_boolean_with_true() {
 		assertThat(JsonType.parseType(true))
 				.isNotNull()
 				.isEqualTo(JsonType.BOOLEAN);
 	}
 
 	@Test
-	public void it_should_return_type_string_with_string() {
+	void it_should_return_type_string_with_string() {
 		assertThat(JsonType.parseType("foo"))
 				.isNotNull()
 				.isEqualTo(JsonType.STRING);
 	}
 
 	@Test
-	public void it_should_return_type_string_with_empty_string() {
+	void it_should_return_type_string_with_empty_string() {
 		assertThat(JsonType.parseType(""))
 				.isNotNull()
 				.isEqualTo(JsonType.STRING);
 	}
 
 	@Test
-	public void it_should_return_type_object_with_map() {
+	void it_should_return_type_object_with_map() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("foo", "bar");
 
@@ -216,7 +216,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_return_type_array_with_collection() {
+	void it_should_return_type_array_with_collection() {
 		Collection<String> list = asList("foo", "bar");
 		assertThat(JsonType.parseType(list))
 				.isNotNull()
@@ -224,7 +224,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_return_type_array_with_array() {
+	void it_should_return_type_array_with_array() {
 		String[] array = new String[]{
 				"foo",
 				"bar"
@@ -236,7 +236,7 @@ public class JsonTypeTest {
 	}
 
 	@Test
-	public void it_should_fail_with_unknown_object() {
+	void it_should_fail_with_unknown_object() {
 		Foo foo = new Foo();
 
 		assertThatThrownBy(parseType(foo))

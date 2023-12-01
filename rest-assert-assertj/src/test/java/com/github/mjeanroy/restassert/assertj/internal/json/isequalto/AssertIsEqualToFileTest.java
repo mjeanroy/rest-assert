@@ -31,20 +31,20 @@ import java.io.File;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileSuccess;
 
-public class AssertIsEqualToFileTest extends AbstractJsonsIsEqualToTest<File> {
+class AssertIsEqualToFileTest extends AbstractJsonsIsEqualToTest<File> {
 
 	@Override
-	protected File success() {
+	File success() {
 		return jsonFileSuccess();
 	}
 
 	@Override
-	protected File failure() {
+	File failure() {
 		return jsonFileFailure();
 	}
 
 	@Override
-	protected void run(AssertionInfo info, File json) {
+	void run(AssertionInfo info, File json) {
 		jsons.assertIsEqualTo(info, actual(), json);
 	}
 }

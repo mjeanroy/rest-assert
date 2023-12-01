@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class HasLocationTest extends AbstractHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return LOCATION;
-	}
+class HasLocationTest extends AbstractHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.hasLocation(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return LOCATION;
 	}
 }

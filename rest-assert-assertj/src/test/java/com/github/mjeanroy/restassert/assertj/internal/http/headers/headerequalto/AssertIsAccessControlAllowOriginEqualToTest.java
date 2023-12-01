@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CO
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsAccessControlAllowOriginEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsAccessControlAllowOriginEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowOriginEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ACCESS_CONTROL_ALLOW_ORIGIN;
 	}
 }

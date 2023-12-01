@@ -30,7 +30,7 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsNotRedirectionTest extends AbstractJunitServersHttpStatusOutOfTest {
+class AssertIsNotRedirectionTest extends AbstractJunitServersHttpStatusOutOfTest {
 
 	@Override
 	protected Range getRange() {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.doesNotHaveHeader;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class DoesNotHaveHeaderMatcherTest extends AbstractJunitServersHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveHeaderMatcherTest extends AbstractJunitServersHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	private static final String NAME = "FooFoo";
 

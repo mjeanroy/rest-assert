@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.isequalto;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
@@ -36,17 +36,17 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessR
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
+abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 
 	static JsonAssertions assertions;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	static void setUp() {
 		assertions = JsonAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		String actual = actual();
 		T expected = successObject();
 		AssertionResult result = run(actual, expected);
@@ -54,7 +54,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	}
 
 	@Test
-	public void it_should_fail_with_actual_json_equal_to_null() {
+	void it_should_fail_with_actual_json_equal_to_null() {
 		String actual = null;
 		T expected = successObject();
 		AssertionResult result = run(actual, expected);
@@ -67,7 +67,7 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		String actual = actual();
 		T expected = failureObject();
 		AssertionResult result = run(actual, expected);
@@ -92,13 +92,13 @@ public abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
 	}
 
-	protected abstract AssertionResult run(String actual, T expected);
+	abstract AssertionResult run(String actual, T expected);
+
+	abstract T successObject();
+
+	abstract T failureObject();
 
 	private static String actual() {
 		return jsonSuccess();
 	}
-
-	protected abstract T successObject();
-
-	protected abstract T failureObject();
 }

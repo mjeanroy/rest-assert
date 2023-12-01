@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsHeaderEqualToAssertionTest {
+class IsHeaderEqualToAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_value() {
+	void it_should_not_fail_if_header_is_set_with_expected_value() {
 		String name = "foo";
 		String value = "bar";
 		IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value, false);
@@ -50,7 +50,7 @@ public class IsHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
+	void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		String name = "foo";
 		String v1 = "bar";
 		String v2 = v1 + v1;
@@ -65,7 +65,7 @@ public class IsHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set() {
+	void it_should_fail_if_header_is_not_set() {
 		String name = "foo";
 		String value = "bar";
 		IsHeaderEqualToAssertion assertion = new IsHeaderEqualToAssertion(name, value, false);
@@ -80,7 +80,7 @@ public class IsHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_does_not_have_expected_value() {
+	void it_should_fail_if_header_is_does_not_have_expected_value() {
 		String name = "foo";
 		String v1 = "bar";
 		String v2 = v1 + v1;
@@ -96,7 +96,7 @@ public class IsHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_single_value_header_has_multiple_values() {
+	void it_should_fail_if_single_value_header_has_multiple_values() {
 		String name = "Content-Type";
 		String v1 = "application/json";
 		String v2 = "application/xml";
@@ -112,7 +112,7 @@ public class IsHeaderEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_null() {
+	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(isHeaderEqualToAssertion(null, "value", false))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");

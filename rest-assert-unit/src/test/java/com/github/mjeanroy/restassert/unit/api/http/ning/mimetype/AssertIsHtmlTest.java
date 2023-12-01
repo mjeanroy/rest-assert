@@ -31,7 +31,7 @@ import java.util.List;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsHtmlTest extends AbstractNingHttpClientMimeTypeInTest {
+class AssertIsHtmlTest extends AbstractNingHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isJson;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class IsJsonMatcherTest extends AbstractGoogleHttpResponseMimeTypeMatcherTest {
+class IsJsonMatcherTest extends AbstractGoogleHttpResponseMimeTypeMatcherTest {
 
 	@Override
 	protected String getMimeType() {

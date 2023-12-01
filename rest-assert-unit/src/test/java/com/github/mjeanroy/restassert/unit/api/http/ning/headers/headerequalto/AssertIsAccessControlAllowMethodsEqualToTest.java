@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {

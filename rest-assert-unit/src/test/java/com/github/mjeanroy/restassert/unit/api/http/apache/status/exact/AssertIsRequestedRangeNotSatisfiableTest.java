@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractApacheHttpStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

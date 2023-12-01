@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsSeeOtherTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

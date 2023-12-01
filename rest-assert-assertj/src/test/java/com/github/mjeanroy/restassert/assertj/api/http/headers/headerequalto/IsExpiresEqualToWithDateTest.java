@@ -35,7 +35,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsExpiresEqualToWithDateTest extends AbstractHttpResponseHeaderTest {
+class IsExpiresEqualToWithDateTest extends AbstractHttpResponseHeaderTest {
 
 	private static final Date EXPIRES_VALUE = new Date();
 

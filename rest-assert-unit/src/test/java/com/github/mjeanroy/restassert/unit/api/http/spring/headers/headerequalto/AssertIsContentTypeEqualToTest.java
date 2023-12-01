@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-public class AssertIsContentTypeEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsContentTypeEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final Header HEADER = JSON_CONTENT_TYPE;
 	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());

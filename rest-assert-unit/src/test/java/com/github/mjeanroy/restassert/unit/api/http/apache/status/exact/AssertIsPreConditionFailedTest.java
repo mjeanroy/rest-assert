@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDIT
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsPreConditionFailedTest extends AbstractApacheHttpStatusTest {
+class AssertIsPreConditionFailedTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

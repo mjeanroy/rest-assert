@@ -36,7 +36,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsContentSecurityPolicyEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())

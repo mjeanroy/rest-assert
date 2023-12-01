@@ -24,24 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.async;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
-public class AsyncHttpCookieTest {
+class AsyncHttpCookieTest {
 
 	@Test
-	public void it_should_return_name() {
+	void it_should_return_name() {
 		String expectedName = "foo";
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setName(expectedName).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
@@ -51,7 +45,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_value() {
+	void it_should_return_value() {
 		String expectedValue = "foo";
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setValue(expectedValue).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
@@ -61,7 +55,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_domain() {
+	void it_should_return_domain() {
 		String expectedDomain = "foo";
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setDomain(expectedDomain).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
@@ -71,7 +65,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_path() {
+	void it_should_return_path() {
 		String expectedPath = "foo";
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setPath(expectedPath).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
@@ -81,7 +75,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_secured() {
+	void it_should_check_if_cookie_is_secured() {
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setSecure(true).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		boolean secured = cookie.isSecured();
@@ -90,7 +84,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_http_only() {
+	void it_should_check_if_cookie_is_http_only() {
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setHttpOnly(true).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 		boolean httpOnly = cookie.isHttpOnly();
@@ -99,7 +93,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_get_max_age() {
+	void it_should_get_max_age() {
 		long expectedMaxAge = 10;
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().setMaxAge(expectedMaxAge).build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
@@ -109,7 +103,7 @@ public class AsyncHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_not_implement_expires() {
+	void it_should_not_implement_expires() {
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 

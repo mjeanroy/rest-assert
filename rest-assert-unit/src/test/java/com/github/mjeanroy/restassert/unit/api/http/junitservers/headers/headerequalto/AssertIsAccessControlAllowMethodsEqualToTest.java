@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {

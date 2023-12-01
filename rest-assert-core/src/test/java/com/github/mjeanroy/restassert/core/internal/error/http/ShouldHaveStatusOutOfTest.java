@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveStatusOutOfTest {
+class ShouldHaveStatusOutOfTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		int actualStatus = 200;
 		int start = 200;
 		int end = 299;

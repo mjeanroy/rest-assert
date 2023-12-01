@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class AssertIsGoneTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsGoneTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

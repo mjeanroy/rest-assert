@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractGoogleHttpStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

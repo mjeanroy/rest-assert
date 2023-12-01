@@ -32,17 +32,17 @@ import java.nio.charset.StandardCharsets;
 
 import com.github.mjeanroy.restassert.generator.Template;
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public abstract class AbstractTemplateTest {
 
 	@Test
-	public void it_should_get_path() {
+	void it_should_get_path() {
 		assertThat(getTemplate().getPath()).isEqualTo(getExpectedPath());
 	}
 
 	@Test
-	public void it_should_starts_with_license() throws Exception {
+	void it_should_starts_with_license() throws Exception {
 		InputStream input = getClass().getResourceAsStream("/license.txt");
 		Charset charset = StandardCharsets.UTF_8;
 		String license = IOUtils.toString(input, charset);

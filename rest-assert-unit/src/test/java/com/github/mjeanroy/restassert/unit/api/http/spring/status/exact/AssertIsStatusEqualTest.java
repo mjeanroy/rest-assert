@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsStatusEqualTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsStatusEqualTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

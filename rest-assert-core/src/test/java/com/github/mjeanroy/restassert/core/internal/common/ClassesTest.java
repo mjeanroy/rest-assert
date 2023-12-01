@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ClassesTest {
+class ClassesTest {
 
 	@Test
-	public void it_should_check_if_class_is_present() {
+	void it_should_check_if_class_is_present() {
 		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.core.internal.common.ClassUtils")).isTrue();
 		assertThat(ClassUtils.isPresent("com.github.mjeanroy.restassert.core.utils.Foo")).isFalse();
 	}

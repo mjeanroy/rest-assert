@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CO
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsPartialContentTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsPartialContentTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

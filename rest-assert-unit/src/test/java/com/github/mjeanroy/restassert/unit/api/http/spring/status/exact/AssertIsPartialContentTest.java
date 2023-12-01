@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CO
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsPartialContentTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsPartialContentTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

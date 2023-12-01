@@ -30,9 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
 	private static final String NAME = HEADER.getName();
@@ -40,17 +40,17 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHead
 	private static final String FAILED_VALUE = "max-age=7200";
 
 	@Override
-	protected Header getHeader() {
-		return STRICT_TRANSPORT_SECURITY;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isStrictTransportSecurityEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return STRICT_TRANSPORT_SECURITY;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
@@ -60,7 +60,7 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHead
 	}
 
 	@Test
-	public void it_should_compare_header_with_case_insensitive_directive_name() {
+	void it_should_compare_header_with_case_insensitive_directive_name() {
 		// GIVEN
 		String actual = "MAX-AGE=0";
 		String expected = "max-age=0";
@@ -74,7 +74,7 @@ public class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpHead
 	}
 
 	@Test
-	public void it_should_compare_header_with_quoted_directive_value() {
+	void it_should_compare_header_with_quoted_directive_value() {
 		// GIVEN
 		String actual = "max-age=\"0\"";
 		String expected = "max-age=0";

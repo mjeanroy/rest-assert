@@ -28,16 +28,16 @@ import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTempla
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import org.assertj.core.api.Condition;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.Map;
 
-public class JsonAssertTest extends AbstractTemplateModelTest {
+class JsonAssertTest extends AbstractTemplateModelTest {
 
 	private JsonAssert jsonAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		jsonAssert = (JsonAssert) JsonAssert.jsonAssert();
 	}
 

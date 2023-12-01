@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT;
 
-public class AssertIsNoContentTest extends AbstractOkHttpStatusTest {
+class AssertIsNoContentTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -36,7 +36,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())

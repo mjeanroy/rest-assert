@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
-public class AssertIsSuccessTest extends AbstractOkHttpHttpStatusBetweenTest {
+class AssertIsSuccessTest extends AbstractOkHttpHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

@@ -34,7 +34,7 @@ import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class HasCookieWithCookieTest extends AbstractCookieTest {
+class HasCookieWithCookieTest extends AbstractCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";

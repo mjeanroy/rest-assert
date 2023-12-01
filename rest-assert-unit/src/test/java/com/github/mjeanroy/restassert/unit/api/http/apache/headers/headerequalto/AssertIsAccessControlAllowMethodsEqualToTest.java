@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {

@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertHasCookieWithNameAndValueTest extends AbstractSpringMockMvcHttpHasCookieTest {
+class AssertHasCookieWithNameAndValueTest extends AbstractSpringMockMvcHttpHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";

@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
-public class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMaxAgeEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 
 	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 

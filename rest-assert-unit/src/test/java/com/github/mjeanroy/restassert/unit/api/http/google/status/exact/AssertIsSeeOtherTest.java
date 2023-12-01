@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractGoogleHttpStatusTest {
+class AssertIsSeeOtherTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

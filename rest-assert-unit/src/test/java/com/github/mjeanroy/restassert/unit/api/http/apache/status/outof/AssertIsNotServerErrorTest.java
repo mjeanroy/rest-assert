@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsNotServerErrorTest extends AbstractApacheHttpStatusOutOfTest {
+class AssertIsNotServerErrorTest extends AbstractApacheHttpStatusOutOfTest {
 
 	@Override
 	protected Range getRange() {

@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isJson;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
-public class IsJsonMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class IsJsonMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

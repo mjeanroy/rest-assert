@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isContentSecurityPolicyEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
-public class IsContentSecurityPolicyEqualToStringMatcherTest extends AbstractJunitServersHttpResponseHeaderEqualToMatcherTest {
+class IsContentSecurityPolicyEqualToStringMatcherTest extends AbstractJunitServersHttpResponseHeaderEqualToMatcherTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();

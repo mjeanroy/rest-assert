@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.ning.http.client.Response;
 
-public class AssertHasCookieWithNameTest extends AbstractNingHttpHasCookieTest {
+class AssertHasCookieWithNameTest extends AbstractNingHttpHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 

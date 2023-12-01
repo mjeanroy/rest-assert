@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsNotServerErrorTest extends AbstractGoogleHttpStatusOutOfTest {
+class AssertIsNotServerErrorTest extends AbstractGoogleHttpStatusOutOfTest {
 
 	@Override
 	protected Range getRange() {

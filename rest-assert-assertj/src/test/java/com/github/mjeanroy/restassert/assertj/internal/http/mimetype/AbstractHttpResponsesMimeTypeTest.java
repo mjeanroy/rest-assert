@@ -28,25 +28,25 @@ import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHttpResponsesMimeTypeTest {
+abstract class AbstractHttpResponsesMimeTypeTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_mime_type_is_ok() {
+	void should_pass_if_mime_type_is_ok() {
 		HttpResponse httpResponse = newHttpResponse(getHeader());
 		run(httpResponse);
 	}
 
 	@Test
-	public void should_fail_if_header_is_not_available() {
+	void should_fail_if_header_is_not_available() {
 		String expectedMimeType = getMimeType();
 		String actualMimeType = expectedMimeType + "foo";
 
@@ -66,9 +66,9 @@ public abstract class AbstractHttpResponsesMimeTypeTest {
 		}
 	}
 
-	protected abstract void run(HttpResponse httpResponse);
+	abstract void run(HttpResponse httpResponse);
 
-	protected abstract String getMimeType();
+	abstract String getMimeType();
 
 	private Header getHeader() {
 		return header("Content-Type", getMimeType() + ";charset=UTF-8");

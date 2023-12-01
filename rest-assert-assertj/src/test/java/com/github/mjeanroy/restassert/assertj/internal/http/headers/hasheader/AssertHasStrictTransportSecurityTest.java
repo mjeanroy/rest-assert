@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TR
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertHasStrictTransportSecurityTest extends AbstractHttpResponsesHeaderTest {
+class AssertHasStrictTransportSecurityTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void run(HttpResponse httpResponse) {

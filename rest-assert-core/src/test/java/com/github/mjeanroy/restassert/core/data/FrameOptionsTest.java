@@ -25,16 +25,16 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FrameOptionsTest {
+class FrameOptionsTest {
 
 	@Test
-	public void it_should_create_deny_header() {
+	void it_should_create_deny_header() {
 		FrameOptions frameOptions = FrameOptions.deny();
 
 		assertThat(frameOptions.getDirective()).isEqualTo(FrameOptions.Directive.DENY);
@@ -49,7 +49,7 @@ public class FrameOptionsTest {
 	}
 
 	@Test
-	public void it_should_create_same_origin_header() {
+	void it_should_create_same_origin_header() {
 		FrameOptions frameOptions = FrameOptions.sameOrigin();
 
 		assertThat(frameOptions.getDirective()).isEqualTo(FrameOptions.Directive.SAME_ORIGIN);
@@ -64,7 +64,7 @@ public class FrameOptionsTest {
 	}
 
 	@Test
-	public void it_should_create_allow_from_header() {
+	void it_should_create_allow_from_header() {
 		String uri = "https://example.com";
 		FrameOptions frameOptions = FrameOptions.allowFrom(uri);
 
@@ -80,7 +80,7 @@ public class FrameOptionsTest {
 	}
 
 	@Test
-	public void it_should_create_allow_from_header_using_uri_object() {
+	void it_should_create_allow_from_header_using_uri_object() {
 		URI uri = URI.create("https://example.com");
 		FrameOptions frameOptions = FrameOptions.allowFrom(uri);
 
@@ -96,7 +96,7 @@ public class FrameOptionsTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(FrameOptions.class).verify();
 	}
 }

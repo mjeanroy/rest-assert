@@ -31,7 +31,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsFrameOptionsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final FrameOptions VALUE = FrameOptions.deny();
 

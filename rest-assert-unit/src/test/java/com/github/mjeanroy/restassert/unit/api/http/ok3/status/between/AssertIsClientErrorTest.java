@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
 
-public class AssertIsClientErrorTest extends AbstractOkHttpHttpStatusBetweenTest {
+class AssertIsClientErrorTest extends AbstractOkHttpHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

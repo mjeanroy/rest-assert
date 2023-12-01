@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isConflict;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 
-public class IsConflictMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsConflictMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

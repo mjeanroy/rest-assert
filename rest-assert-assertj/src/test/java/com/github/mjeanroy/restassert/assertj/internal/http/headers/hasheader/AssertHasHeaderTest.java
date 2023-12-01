@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertHasHeaderTest extends AbstractHttpResponsesHeaderTest {
+class AssertHasHeaderTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void run(HttpResponse httpResponse) {

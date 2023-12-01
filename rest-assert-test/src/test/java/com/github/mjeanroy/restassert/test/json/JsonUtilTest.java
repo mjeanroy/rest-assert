@@ -29,27 +29,27 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class JsonUtilTest {
+class JsonUtilTest {
 
 	@Test
-	public void it_should_return_null_with_null() {
+	void it_should_return_null_with_null() {
 		assertThat(JsonUtil.formatValue(null)).isNull();
 	}
 
 	@Test
-	public void it_should_format_string() {
+	void it_should_format_string() {
 		assertThat(JsonUtil.formatValue("foo")).isEqualTo("\"foo\"");
 	}
 
 	@Test
-	public void it_should_format_string_and_escape_double_quotes() {
+	void it_should_format_string_and_escape_double_quotes() {
 		assertThat(JsonUtil.formatValue("Hello \"Mr\"")).isEqualTo("\"Hello \\\"Mr\\\"\"");
 	}
 
 	@Test
-	public void it_should_format_json_value_using_toJson() {
+	void it_should_format_json_value_using_toJson() {
 		String output = "{}";
 		JsonValue jsonValue = mock(JsonValue.class);
 		when(jsonValue.toJson()).thenReturn(output);
@@ -60,12 +60,12 @@ public class JsonUtilTest {
 	}
 
 	@Test
-	public void it_should_return_to_string_as_default() {
+	void it_should_return_to_string_as_default() {
 		assertThat(JsonUtil.formatValue(new TestBean())).isEqualTo("{}");
 	}
 
 	@Test
-	public void it_should_escape_value() {
+	void it_should_escape_value() {
 		assertThat(JsonUtil.jsonEscape(null)).isNull();
 		assertThat(JsonUtil.jsonEscape("")).isEmpty();
 		assertThat(JsonUtil.jsonEscape("foo")).isEqualTo("foo");

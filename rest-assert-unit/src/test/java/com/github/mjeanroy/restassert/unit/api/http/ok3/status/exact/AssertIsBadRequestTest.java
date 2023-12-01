@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUEST;
 
-public class AssertIsBadRequestTest extends AbstractOkHttpStatusTest {
+class AssertIsBadRequestTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

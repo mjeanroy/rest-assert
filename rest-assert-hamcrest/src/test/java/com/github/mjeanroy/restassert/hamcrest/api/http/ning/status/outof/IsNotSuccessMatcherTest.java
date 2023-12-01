@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isNotSuccess;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
-public class IsNotSuccessMatcherTest extends AbstractNingHttpResponseStatusOutOfMatcherTest {
+class IsNotSuccessMatcherTest extends AbstractNingHttpResponseStatusOutOfMatcherTest {
 
 	@Override
 	protected Range getRange() {

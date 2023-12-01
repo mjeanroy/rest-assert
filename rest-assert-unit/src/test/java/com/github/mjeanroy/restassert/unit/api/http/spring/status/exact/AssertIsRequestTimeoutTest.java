@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

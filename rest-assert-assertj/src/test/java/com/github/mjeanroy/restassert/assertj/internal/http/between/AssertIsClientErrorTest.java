@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsClientErrorTest extends AbstractHttpResponsesStatusBetweenTest {
+class AssertIsClientErrorTest extends AbstractHttpResponsesStatusBetweenTest {
 
 	@Override
-	protected Range getRange() {
+	Range getRange() {
 		return CLIENT_ERROR;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsClientError(info, httpResponse);
 	}
 }

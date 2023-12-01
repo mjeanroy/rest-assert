@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFI
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsNotModifiedTest extends AbstractAsyncHttpStatusTest {
+class AssertIsNotModifiedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

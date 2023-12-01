@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasCharset;
 
-public class HasCharsetMatcherTest extends AbstractSpringMockMvcHttpResponseAssertCharsetTest {
+class HasCharsetMatcherTest extends AbstractSpringMockMvcHttpResponseAssertCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 

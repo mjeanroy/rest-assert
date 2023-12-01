@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractJunitServersHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractJunitServersHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

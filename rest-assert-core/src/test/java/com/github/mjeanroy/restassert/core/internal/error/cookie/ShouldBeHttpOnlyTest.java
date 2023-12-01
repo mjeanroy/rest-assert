@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldBeHttpOnlyTest {
+class ShouldBeHttpOnlyTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		ShouldBeHttpOnly shouldBeHttpOnly = shouldBeHttpOnly();
 
 		assertThat(shouldBeHttpOnly).isNotNull();
@@ -44,7 +44,7 @@ public class ShouldBeHttpOnlyTest {
 	}
 
 	@Test
-	public void it_should_format_error_message_with_negation() {
+	void it_should_format_error_message_with_negation() {
 		ShouldBeHttpOnly shouldNotBeHttpOnly = shouldNotBeHttpOnly();
 
 		assertThat(shouldNotBeHttpOnly).isNotNull();

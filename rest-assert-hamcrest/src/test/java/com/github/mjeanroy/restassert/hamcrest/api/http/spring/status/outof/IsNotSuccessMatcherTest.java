@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isNotSuccess;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
-public class IsNotSuccessMatcherTest extends AbstractSpringMockMvcHttpResponseStatusOutOfMatcherTest {
+class IsNotSuccessMatcherTest extends AbstractSpringMockMvcHttpResponseStatusOutOfMatcherTest {
 
 	@Override
 	protected Range getRange() {

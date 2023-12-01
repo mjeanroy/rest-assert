@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONT
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsResetContentTest extends AbstractApacheHttpStatusTest {
+class AssertIsResetContentTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 

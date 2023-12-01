@@ -28,17 +28,17 @@ import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAsser
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.SpringMockMvcHttpAssert.springMockMvcHttpAssert;
 
-public class SpringMockMvcHttpAssertTest extends AbstractUnitTemplateModelTest {
+class SpringMockMvcHttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private SpringMockMvcHttpAssert httpAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		httpAssert = (SpringMockMvcHttpAssert) springMockMvcHttpAssert();
 	}
 

@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isNotFound;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 
-public class IsNotFoundMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
+class IsNotFoundMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

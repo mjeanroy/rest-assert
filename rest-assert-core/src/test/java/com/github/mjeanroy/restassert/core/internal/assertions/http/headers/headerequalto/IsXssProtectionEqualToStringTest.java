@@ -30,9 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final String NAME = HEADER.getName();
@@ -40,17 +40,17 @@ public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToT
 	private static final String FAILED_VALUE = "1";
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isXssProtectionEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
@@ -60,14 +60,14 @@ public class IsXssProtectionEqualToStringTest extends AbstractHttpHeaderEqualToT
 	}
 
 	@Test
-	public void it_should_compare_case_insensitively() {
+	void it_should_compare_case_insensitively() {
 		String actual = "1; mode=block";
 		String expected = "1; MODE=BLOCK";
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
-	public void it_should_compare_with_different_spaces() {
+	void it_should_compare_with_different_spaces() {
 		String actual = "1; mode=block";
 		String expected = "1 ; mode = block";
 		doTestSuccess(actual, expected);

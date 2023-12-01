@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsETagEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsETagEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final String VALUE = ETAG.getValue();
 

@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
-public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String VALUE = HEADER.getValue();

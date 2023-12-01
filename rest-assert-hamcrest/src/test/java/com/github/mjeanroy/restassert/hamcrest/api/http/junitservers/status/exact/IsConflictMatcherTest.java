@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isConflict;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 
-public class IsConflictMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
+class IsConflictMatcherTest extends AbstractJunitServersHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

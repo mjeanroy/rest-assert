@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

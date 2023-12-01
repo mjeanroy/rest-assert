@@ -33,18 +33,18 @@ import java.util.Date;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsLastModifiedEqualToWithDateTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsLastModifiedEqualToWithDateTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = LAST_MODIFIED.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		Date date = fromInternetMessageFormat(VALUE);
 		httpResponses.assertIsLastModifiedEqualTo(someInfo(), httpResponse, date);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return LAST_MODIFIED;
 	}
 

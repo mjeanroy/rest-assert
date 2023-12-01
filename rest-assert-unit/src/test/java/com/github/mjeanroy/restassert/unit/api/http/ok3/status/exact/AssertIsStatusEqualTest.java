@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
-public class AssertIsStatusEqualTest extends AbstractOkHttpStatusTest {
+class AssertIsStatusEqualTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

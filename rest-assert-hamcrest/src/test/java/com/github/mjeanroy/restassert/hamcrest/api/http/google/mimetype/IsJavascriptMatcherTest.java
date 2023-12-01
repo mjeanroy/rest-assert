@@ -32,7 +32,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isJavascript;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
 
-public class IsJavascriptMatcherTest extends AbstractGoogleHttpResponseMimeTypeInMatcherTest {
+class IsJavascriptMatcherTest extends AbstractGoogleHttpResponseMimeTypeInMatcherTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

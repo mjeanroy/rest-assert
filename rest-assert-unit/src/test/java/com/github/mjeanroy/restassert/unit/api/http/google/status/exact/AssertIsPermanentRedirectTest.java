@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_REDIRECT;
 
-public class AssertIsPermanentRedirectTest extends AbstractGoogleHttpStatusTest {
+class AssertIsPermanentRedirectTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

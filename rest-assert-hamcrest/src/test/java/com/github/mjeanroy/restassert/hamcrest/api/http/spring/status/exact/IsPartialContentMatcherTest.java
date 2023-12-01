@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isPartialContent;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CONTENT;
 
-public class IsPartialContentMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsPartialContentMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

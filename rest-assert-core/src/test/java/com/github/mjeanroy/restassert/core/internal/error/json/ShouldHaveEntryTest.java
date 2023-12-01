@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveEntryTest {
+class ShouldHaveEntryTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String entry = "foo";
 		ShouldHaveEntry shouldHaveEntry = shouldHaveEntry(entry);
 

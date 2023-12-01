@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsTemporaryRedirectTest extends AbstractHttpResponseStatusTest {
+class IsTemporaryRedirectTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return TEMPORARY_REDIRECT;
 	}
 

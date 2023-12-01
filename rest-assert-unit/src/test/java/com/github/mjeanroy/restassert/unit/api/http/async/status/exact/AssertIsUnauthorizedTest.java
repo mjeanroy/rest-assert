@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNAUTHORIZ
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsUnauthorizedTest extends AbstractAsyncHttpStatusTest {
+class AssertIsUnauthorizedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

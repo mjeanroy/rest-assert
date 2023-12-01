@@ -30,18 +30,18 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 
-public class IsOutOfTest extends AbstractHttpStatusOutOfTest {
+class IsOutOfTest extends AbstractHttpStatusOutOfTest {
 
 	private static final int START = 0;
 	private static final int END = 399;
 
 	@Override
-	protected Range getRange() {
-		return range(START, END);
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.isStatusOutOf(response, START, END);
 	}
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.isStatusOutOf(response, START, END);
+	Range getRange() {
+		return range(START, END);
 	}
 }

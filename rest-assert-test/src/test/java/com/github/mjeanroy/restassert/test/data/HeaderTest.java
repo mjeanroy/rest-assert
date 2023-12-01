@@ -29,12 +29,12 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class HeaderTest {
+class HeaderTest {
 
 	@Test
-	public void it_should_create_header() {
+	void it_should_create_header() {
 		String name = "foo";
 		String value = "bar";
 		Header header = Header.header(name, value);
@@ -46,7 +46,7 @@ public class HeaderTest {
 	}
 
 	@Test
-	public void it_should_create_multi_value_header() {
+	void it_should_create_multi_value_header() {
 		String name = "foo";
 		String v1 = "bar1";
 		String v2 = "bar1";
@@ -60,12 +60,12 @@ public class HeaderTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(Header.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		String name = "foo";
 		String value = "bar";
 		Header header = Header.header(name, value);

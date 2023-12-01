@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsCreatedTest extends AbstractAsyncHttpStatusTest {
+class AssertIsCreatedTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

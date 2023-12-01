@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isMovedPermanently;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_PERMANENTLY;
 
-public class IsMovedPermanentlyMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
+class IsMovedPermanentlyMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

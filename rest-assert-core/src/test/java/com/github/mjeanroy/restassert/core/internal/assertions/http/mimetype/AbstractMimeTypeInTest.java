@@ -32,28 +32,25 @@ import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
 
-	/**
-	 * The assertion object.
-	 */
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	void it_should_pass_with_expected_mime_type() {
 		List<String> mimeTypes = map(getMimeTypes(), new Mapper<String, String>() {
 			@Override
 			public String apply(String input) {
@@ -69,7 +66,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 	}
 
 	@Test
-	public void it_should_pass_with_expected_mime_type_in_a_different_case() {
+	void it_should_pass_with_expected_mime_type_in_a_different_case() {
 		List<String> mimeTypes = map(getMimeTypes(), new Mapper<String, String>() {
 			@Override
 			public String apply(String input) {
@@ -85,7 +82,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		List<String> mimeTypes = getMimeTypes();
 		List<Header> headers = getHeaders(mimeTypes);
 		List<String> mimeType = getMimeTypes();
@@ -114,7 +111,7 @@ public abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<Http
 		}
 	}
 
-	protected abstract List<String> getMimeTypes();
+	abstract List<String> getMimeTypes();
 
 	private static HttpResponse newResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();

@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsCacheControlEqualToStringTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = CACHE_CONTROL.getValue();

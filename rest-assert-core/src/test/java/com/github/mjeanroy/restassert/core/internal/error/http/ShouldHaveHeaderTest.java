@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
@@ -32,10 +32,10 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveHeaderTest {
+class ShouldHaveHeaderTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String headerName = "foo";
 		ShouldHaveHeader shouldHaveHeader = shouldHaveHeader(headerName);
 
@@ -47,7 +47,7 @@ public class ShouldHaveHeaderTest {
 	}
 
 	@Test
-	public void it_should_format_error_message_with_expected_value() {
+	void it_should_format_error_message_with_expected_value() {
 		String headerName = "foo";
 		String headerValue = "bar";
 		String actualValue = "quix";
@@ -61,7 +61,7 @@ public class ShouldHaveHeaderTest {
 	}
 
 	@Test
-	public void it_should_format_error_message_with_collection_of_one_value() {
+	void it_should_format_error_message_with_collection_of_one_value() {
 		String headerName = "foo";
 		String headerValue = "bar";
 		String actualValue = "quix";
@@ -75,7 +75,7 @@ public class ShouldHaveHeaderTest {
 	}
 
 	@Test
-	public void it_should_format_error_message_with_collection_of_values() {
+	void it_should_format_error_message_with_collection_of_values() {
 		String headerName = "foo";
 		String headerValue = "bar";
 		String v1 = "foo";

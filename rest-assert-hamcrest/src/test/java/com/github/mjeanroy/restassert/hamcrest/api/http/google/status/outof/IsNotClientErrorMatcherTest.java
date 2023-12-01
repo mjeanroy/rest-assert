@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.isNotClientError;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
 
-public class IsNotClientErrorMatcherTest extends AbstractGoogleHttpResponseStatusOutOfMatcherTest {
+class IsNotClientErrorMatcherTest extends AbstractGoogleHttpResponseStatusOutOfMatcherTest {
 
 	@Override
 	protected Range getRange() {

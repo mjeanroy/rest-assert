@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUES
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsBadRequestTest extends AbstractNingHttpStatusTest {
+class AssertIsBadRequestTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

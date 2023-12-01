@@ -27,14 +27,14 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.j
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class JsonAssertTest extends AbstractUnitTemplateModelTest {
+class JsonAssertTest extends AbstractUnitTemplateModelTest {
 
 	private JsonAssert jsonAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		jsonAssert = (JsonAssert) JsonAssert.jsonAssert();
 	}
 

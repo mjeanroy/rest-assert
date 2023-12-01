@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractOkHttpStatusTest {
+class AssertIsSeeOtherTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

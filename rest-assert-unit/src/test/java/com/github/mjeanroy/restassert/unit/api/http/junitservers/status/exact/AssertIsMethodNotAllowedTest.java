@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsMethodNotAllowedTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsMethodNotAllowedTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

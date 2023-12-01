@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertIsHeaderEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsHeaderEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final String NAME = "foo";
 

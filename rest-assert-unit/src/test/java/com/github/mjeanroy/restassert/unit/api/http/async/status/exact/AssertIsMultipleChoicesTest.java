@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractAsyncHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -31,27 +31,26 @@ import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.assertj.core.api.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
-public class IOUtilsTest {
+class IOUtilsTest {
 
 	@Test
-	public void it_should_get_input_stream_from_classpath() {
+	void it_should_get_input_stream_from_classpath() {
 		InputStream inputStream = IOUtils.fromClasspath("/license.txt");
 		assertThat(inputStream).isNotNull();
 	}
 
 	@Test
-	public void it_should_read_from_classpath() {
+	void it_should_read_from_classpath() {
 		String content = IOUtils.read("/license.txt");
 		assertThat(content).isNotNull().isNotEmpty();
 	}
 
 	@Test
-	public void it_should_read_from_classpath_and_prepend_string() {
+	void it_should_read_from_classpath_and_prepend_string() {
 		final String tab = "\t";
 		final String content = IOUtils.read("/license.txt", tab);
 		assertThat(content).isNotNull().isNotEmpty();
@@ -69,14 +68,14 @@ public class IOUtilsTest {
 	}
 
 	@Test
-	public void it_should_read_input_stream() {
+	void it_should_read_input_stream() {
 		InputStream inputStream = getClass().getResourceAsStream("/license.txt");
 		String content = IOUtils.read(inputStream);
 		assertThat(content).isNotNull().isNotEmpty();
 	}
 
 	@Test
-	public void it_should_read_input_stream_and_prepend_string() {
+	void it_should_read_input_stream_and_prepend_string() {
 		final String tab = "\t";
 		final InputStream inputStream = getClass().getResourceAsStream("/license.txt");
 		final String content = IOUtils.read(inputStream, tab);
@@ -95,8 +94,8 @@ public class IOUtilsTest {
 	}
 
 	@Test
-	public void it_should_write_to_a_file() throws Exception {
-		String path = FilenameUtils.normalize(FileUtils.getTempDirectoryPath() + "/foo.txt");
+	void it_should_write_to_a_file(@TempDir File tempDir) throws Exception {
+		String path = new File(tempDir.getAbsolutePath(), "foo.txt").getAbsolutePath();
 		File file = new File(path);
 		String content = "Hello World";
 

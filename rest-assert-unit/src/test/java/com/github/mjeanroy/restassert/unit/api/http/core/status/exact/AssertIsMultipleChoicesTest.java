@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractCoreHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

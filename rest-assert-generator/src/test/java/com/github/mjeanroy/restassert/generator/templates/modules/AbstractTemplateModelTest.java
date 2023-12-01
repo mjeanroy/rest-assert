@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.generator.templates.modules;
 
 import org.assertj.core.api.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.List;
@@ -36,89 +36,33 @@ import static org.assertj.core.api.Assertions.entry;
 
 public abstract class AbstractTemplateModelTest {
 
-	/**
-	 * Get the template model to be tested.
-	 *
-	 * @return Template model to be tested.
-	 */
-	protected abstract AbstractTemplateModel getTemplateModel();
-
-	/**
-	 * Get the expected package name of the generated class.
-	 *
-	 * @return Expected package name.
-	 */
-	protected abstract String getExpectedPackageName();
-
-	/**
-	 * Get the expected class name of the generated class.
-	 *
-	 * @return Expected class name.
-	 */
-	protected abstract String getExpectedClassName();
-
-	/**
-	 * Get the expected class name of the core class that will be used as delegated assertions.
-	 *
-	 * @return Expected core class name.
-	 */
-	protected abstract String getExpectedCoreClassName();
-
-	/**
-	 * Get the expected core class that will be used as delegated assertions.
-	 *
-	 * @return Expected core class.
-	 */
-	protected abstract Class<?> getExpectedCoreClass();
-
-	/**
-	 * Get the expected class name that will be tested.
-	 *
-	 * @return Expected tested class name.
-	 */
-	protected abstract String getExpectedActualClass();
-
-	/**
-	 * Get the expected class assertj condition, used to validate the method name generation.
-	 *
-	 * @return AssertJ condition.
-	 */
-	protected abstract Condition<Map<String, Object>> getMethodCondition();
-
-	/**
-	 * Get expected factory name.
-	 *
-	 * @return Expected factory.
-	 */
-	protected abstract String getFactory();
-
 	@Test
-	public void it_should_have_package_name() {
+	void it_should_have_package_name() {
 		assertThat(getTemplateModel().getPackageName()).isEqualTo(getExpectedPackageName());
 	}
 
 	@Test
-	public void it_should_have_class_name() {
+	void it_should_have_class_name() {
 		assertThat(getTemplateModel().getClassName()).isEqualTo(getExpectedClassName());
 	}
 
 	@Test
-	public void it_should_define_core_class_name() {
+	void it_should_define_core_class_name() {
 		assertThat(getTemplateModel().getCoreClassName()).isEqualTo(getExpectedCoreClassName());
 	}
 
 	@Test
-	public void it_should_define_core_class() {
+	void it_should_define_core_class() {
 		assertThat(getTemplateModel().coreClass()).isEqualTo(getExpectedCoreClass());
 	}
 
 	@Test
-	public void it_should_define_actual_class() {
+	void it_should_define_actual_class() {
 		assertThat(getTemplateModel().getActualClass()).isEqualTo(getExpectedActualClass());
 	}
 
 	@Test
-	public void it_should_build_methods_list() {
+	void it_should_build_methods_list() {
 		List<Map<String, Object>> methods = getTemplateModel().getMethods();
 		assertThat(methods)
 			.are(getMethodCondition())
@@ -127,7 +71,7 @@ public abstract class AbstractTemplateModelTest {
 	}
 
 	@Test
-	public void it_should_build_data() {
+	void it_should_build_data() {
 		Map<String, Object> data = getTemplateModel().data();
 
 		assertThat(data)
@@ -142,6 +86,22 @@ public abstract class AbstractTemplateModelTest {
 				entry("factory", getFactory())
 			);
 	}
+
+	protected abstract AbstractTemplateModel getTemplateModel();
+
+	protected abstract String getExpectedPackageName();
+
+	protected abstract String getExpectedClassName();
+
+	protected abstract String getExpectedCoreClassName();
+
+	protected abstract Class<?> getExpectedCoreClass();
+
+	protected abstract String getExpectedActualClass();
+
+	protected abstract Condition<Map<String, Object>> getMethodCondition();
+
+	protected abstract String getFactory();
 
 	private static final Condition<Map<String, Object>> HAS_ARGUMENTS_CONDITION = new Condition<Map<String, Object>>() {
 		@Override

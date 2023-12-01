@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 import static java.util.Arrays.asList;
 
-public class IsAccessControlAllowHeadersEqualToVarargsTest extends AbstractHttpHeaderEqualToTest {
+class IsAccessControlAllowHeadersEqualToVarargsTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String V1 = "X-Requested-With";
 	private static final String V2 = "X-H1";
@@ -41,17 +41,17 @@ public class IsAccessControlAllowHeadersEqualToVarargsTest extends AbstractHttpH
 	private static final String VALUE = join(", ", asList(V1, V2, V3));
 
 	@Override
-	protected Header getHeader() {
-		return header(ACCESS_CONTROL_ALLOW_HEADERS.getName(), VALUE);
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isAccessControlAllowHeadersEqualTo(response, V1, V2, V3);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return header(ACCESS_CONTROL_ALLOW_HEADERS.getName(), VALUE);
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

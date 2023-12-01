@@ -33,15 +33,10 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsLastModifiedEqualToWithDateTest extends AbstractHttpHeaderEqualToTest {
+class IsLastModifiedEqualToWithDateTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String VALUE = LAST_MODIFIED.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
-
-	@Override
-	protected Header getHeader() {
-		return LAST_MODIFIED;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -50,12 +45,17 @@ public class IsLastModifiedEqualToWithDateTest extends AbstractHttpHeaderEqualTo
 	}
 
 	@Override
+	Header getHeader() {
+		return LAST_MODIFIED;
+	}
+
+	@Override
 	protected String failValue() {
 		return FAILED_VALUE;
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

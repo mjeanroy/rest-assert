@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.isPragmaEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 
-public class IsPragmaEqualToMatcherTest extends AbstractAsyncHttpResponseHeaderEqualToMatcherTest {
+class IsPragmaEqualToMatcherTest extends AbstractAsyncHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = PRAGMA.getValue();
 

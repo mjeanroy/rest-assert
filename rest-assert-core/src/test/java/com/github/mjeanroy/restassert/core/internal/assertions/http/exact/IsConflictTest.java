@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsConflictTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return CONFLICT;
-	}
+class IsConflictTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isConflict(response);
+	}
+
+	@Override
+	int status() {
+		return CONFLICT;
 	}
 }

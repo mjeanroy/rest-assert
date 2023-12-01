@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsStatusOutOfTest extends AbstractGoogleHttpStatusOutOfTest {
+class AssertIsStatusOutOfTest extends AbstractGoogleHttpStatusOutOfTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

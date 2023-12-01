@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveDomain.shouldHaveDomain;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveDomainTest {
+class ShouldHaveDomainTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String expectedDomain = "bar";
 		String actualDomain = "foo";
 		ShouldHaveDomain shouldHaveDomain = shouldHaveDomain(expectedDomain, actualDomain);

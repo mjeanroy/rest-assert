@@ -101,6 +101,7 @@
     <jmustache.version>1.15</jmustache.version>
 
     <junit.version>4.13.2</junit.version>
+    <jupiter.version>5.10.1</jupiter.version>
     <hamcrest.version>2.2</hamcrest.version>
     <assertj.version>3.24.2</assertj.version>
     <mockito.version>4.11.0</mockito.version>
@@ -209,46 +210,73 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>${jupiter.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>${jupiter.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+        <version>${jupiter.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.assertj</groupId>
         <artifactId>assertj-core</artifactId>
         <version>${assertj.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.mockito</groupId>
         <artifactId>mockito-core</artifactId>
         <version>${mockito.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>
         <version>${commons-lang3.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>${commons-io.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.github.mjeanroy</groupId>
         <artifactId>junit-runif</artifactId>
         <version>${junit-runif.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.github.mjeanroy</groupId>
         <artifactId>junit-customclassloader</artifactId>
         <version>${junit-customclassloader.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>nl.jqno.equalsverifier</groupId>
         <artifactId>equalsverifier</artifactId>
         <version>${equalsverifier.version}</version>
+        <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock</artifactId>
         <version>${wiremock.version}</version>
+        <scope>test</scope>
       </dependency>
 
       <!-- Ensure byte-buddy version compatible with java 21 are used -->

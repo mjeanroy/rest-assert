@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractCoreHttpHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractCoreHttpHeaderEqualToTest {
 
 	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
 	private static final String VALUE = HEADER.getValue();

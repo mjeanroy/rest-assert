@@ -29,17 +29,17 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheH
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ApacheHttpAssertionsTest {
+class ApacheHttpAssertionsTest {
 
 	@Test
-	public void it_should_create_new_http_assertion_object() {
+	void it_should_create_new_http_assertion_object() {
 		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().build();
 
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
@@ -49,7 +49,7 @@ public class ApacheHttpAssertionsTest {
 	}
 
 	@Test
-	public void it_should_create_new_cookie_assertion_object() {
+	void it_should_create_new_cookie_assertion_object() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
@@ -59,7 +59,7 @@ public class ApacheHttpAssertionsTest {
 	}
 
 	@Test
-	public void it_should_create_new_json_assertion_object() {
+	void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
 				jsonEntry("foo", "bar")
 		);

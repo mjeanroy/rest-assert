@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JsonContextTest {
+class JsonContextTest {
 
 	@Test
-	public void it_should_create_context() {
+	void it_should_create_context() {
 		JsonContext context = JsonContext.rootContext();
 		assertThat(context).isNotNull();
 		assertThat(context.toString()).isEqualTo("");
 	}
 
 	@Test
-	public void it_should_append_key_to_context() {
+	void it_should_append_key_to_context() {
 		JsonContext context = JsonContext.rootContext();
 		assertThat(context.toString()).isEqualTo("");
 
@@ -50,7 +50,7 @@ public class JsonContextTest {
 	}
 
 	@Test
-	public void it_should_append_and_remove_key_to_context() {
+	void it_should_append_and_remove_key_to_context() {
 		JsonContext context = JsonContext.rootContext();
 		assertThat(context.toString()).isEqualTo("");
 
@@ -62,7 +62,7 @@ public class JsonContextTest {
 	}
 
 	@Test
-	public void it_should_get_path_with_array() {
+	void it_should_get_path_with_array() {
 		JsonContext context = JsonContext.rootContext();
 		assertThat(context.toPath("foo")).isEqualTo("foo");
 
@@ -71,7 +71,7 @@ public class JsonContextTest {
 	}
 
 	@Test
-	public void it_should_get_path_with_array_as_last_value() {
+	void it_should_get_path_with_array_as_last_value() {
 		JsonContext context = JsonContext.rootContext();
 		assertThat(context.toPath("[0]")).isEqualTo("[0]");
 

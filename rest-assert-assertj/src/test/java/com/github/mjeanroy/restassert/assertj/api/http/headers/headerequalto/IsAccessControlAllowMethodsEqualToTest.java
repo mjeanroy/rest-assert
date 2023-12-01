@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsAccessControlAllowMethodsEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowMethodsEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

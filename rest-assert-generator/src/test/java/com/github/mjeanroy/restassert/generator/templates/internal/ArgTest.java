@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.internal;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ArgTest {
+class ArgTest {
 
 	@Test
-	public void it_should_build_argument_object() {
+	void it_should_build_argument_object() {
 		Arg arg = new Arg("int", "foo", "arg1", 1);
 		assertThat(arg.getName()).isEqualTo("arg1");
 		assertThat(arg.getType()).isEqualTo("int");
@@ -39,7 +39,7 @@ public class ArgTest {
 	}
 
 	@Test
-	public void it_should_check_if_argument_is_the_first() {
+	void it_should_check_if_argument_is_the_first() {
 		assertThat(new Arg("int", null, "arg1", 1).isFirst()).isTrue();
 		assertThat(new Arg("int", null, "arg0", 0).isFirst()).isFalse();
 		assertThat(new Arg("int", null, "arg2", 2).isFirst()).isFalse();

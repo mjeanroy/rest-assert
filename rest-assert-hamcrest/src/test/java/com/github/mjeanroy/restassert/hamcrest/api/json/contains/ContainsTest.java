@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.Function;
 import org.hamcrest.MatcherAssert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +40,10 @@ import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static java.util.Arrays.asList;
 
-public class ContainsTest {
+class ContainsTest {
 
 	@Test
-	public void it_should_pass_if_json_contains_entries() {
+	void it_should_pass_if_json_contains_entries() {
 		String json = createJson();
 		MatcherAssert.assertThat(json, contains("id"));
 		MatcherAssert.assertThat(json, contains("name"));
@@ -51,7 +51,7 @@ public class ContainsTest {
 	}
 
 	@Test
-	public void it_should_fail_using_single_entry() {
+	void it_should_fail_using_single_entry() {
 		final String json = createJson();
 		final String entryName = "foo";
 		final String message = HamcrestTestUtils.generateHamcrestErrorMessage(
@@ -68,7 +68,7 @@ public class ContainsTest {
 	}
 
 	@Test
-	public void it_should_fail_using_multiple_entry() {
+	void it_should_fail_using_multiple_entry() {
 		final String json = createJson();
 		final String entryName1 = "foo";
 		final String entryName2 = "bar";

@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_EN
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsRequestEntityTooLargeTest extends AbstractHttpResponseStatusTest {
+class IsRequestEntityTooLargeTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUEST_ENTITY_TOO_LARGE;
 	}
 

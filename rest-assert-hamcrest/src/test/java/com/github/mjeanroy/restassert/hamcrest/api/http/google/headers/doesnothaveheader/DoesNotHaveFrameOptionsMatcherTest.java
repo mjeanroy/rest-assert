@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.GoogleHttpResponseMatchers.doesNotHaveFrameOptions;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class DoesNotHaveFrameOptionsMatcherTest extends AbstractGoogleHttpResponseDoesNotHaveHttpHeaderMatcherTest {
+class DoesNotHaveFrameOptionsMatcherTest extends AbstractGoogleHttpResponseDoesNotHaveHttpHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

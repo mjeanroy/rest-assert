@@ -31,7 +31,7 @@ import java.util.List;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsJavascriptTest extends AbstractCoreHttpClientMimeTypeInTest {
+class AssertIsJavascriptTest extends AbstractCoreHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

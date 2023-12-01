@@ -30,18 +30,18 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsGzippedTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsGzippedTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsGzipped(someInfo(), httpResponse);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 

@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isText;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
 
-public class IsTextMatcherTest extends AbstractOkHttpClientMimeTypeTest {
+class IsTextMatcherTest extends AbstractOkHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

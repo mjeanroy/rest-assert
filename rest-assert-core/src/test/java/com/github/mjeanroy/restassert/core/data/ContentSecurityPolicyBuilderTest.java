@@ -28,8 +28,8 @@ import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSri
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 import java.util.LinkedHashSet;
@@ -75,17 +75,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
 
-public class ContentSecurityPolicyBuilderTest {
+class ContentSecurityPolicyBuilderTest {
 
 	private ContentSecurityPolicyBuilder builder;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		builder = ContentSecurityPolicy.builder();
 	}
 
 	@Test
-	public void it_should_handle_default_src() {
+	void it_should_handle_default_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.build();
@@ -99,7 +99,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_style_src() {
+	void it_should_handle_style_src() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addStyleSrc(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src 'self' 'unsafe-inline'");
@@ -110,7 +110,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_style_src_elem() {
+	void it_should_handle_style_src_elem() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addStyleSrcElem(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src-elem 'self' 'unsafe-inline'");
@@ -121,7 +121,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_style_src_attr() {
+	void it_should_handle_style_src_attr() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addStyleSrcAttr(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; style-src-attr 'self' 'unsafe-inline'");
@@ -132,7 +132,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_script_src() {
+	void it_should_handle_script_src() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addScriptSrc(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src 'self' 'unsafe-inline'");
@@ -143,7 +143,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_script_src_elem() {
+	void it_should_handle_script_src_elem() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addScriptSrcElem(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src-elem 'self' 'unsafe-inline'");
@@ -154,7 +154,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_script_src_attr() {
+	void it_should_handle_script_src_attr() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).addScriptSrcAttr(self(), unsafeInline()).build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; script-src-attr 'self' 'unsafe-inline'");
@@ -165,7 +165,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_connect_src() {
+	void it_should_handle_connect_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addConnectSrc(self(), unsafeInline())
@@ -181,7 +181,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_child_src() {
+	void it_should_handle_child_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addChildSrc(self(), unsafeInline())
@@ -197,7 +197,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_font_src() {
+	void it_should_handle_font_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFontSrc(self(), unsafeInline())
@@ -213,7 +213,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_media_src() {
+	void it_should_handle_media_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addMediaSrc(self(), unsafeInline())
@@ -229,7 +229,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_form_actions() {
+	void it_should_handle_form_actions() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFormAction(self(), unsafeInline())
@@ -245,7 +245,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_img_src() {
+	void it_should_handle_img_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addImgSrc(self(), unsafeInline())
@@ -261,7 +261,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_object_src() {
+	void it_should_handle_object_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addObjectSrc(self(), unsafeInline())
@@ -277,7 +277,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_base_uri() {
+	void it_should_handle_base_uri() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addBaseUri(self())
@@ -293,7 +293,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_frame_ancestors() {
+	void it_should_handle_frame_ancestors() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFrameAncestors(
@@ -319,7 +319,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_plugin_types() {
+	void it_should_handle_plugin_types() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addPluginTypes("application/json", "application/xml")
@@ -335,7 +335,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_report_uri() {
+	void it_should_handle_report_uri() {
 		String uri1 = "http://domain.com";
 		String uri2 = "http://fake.com";
 		String uri3 = "http://google.com";
@@ -356,7 +356,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_sandbox() {
+	void it_should_handle_sandbox() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addSandbox(Sandbox.ALLOW_SCRIPTS, Sandbox.ALLOW_SAME_ORIGIN)
@@ -372,7 +372,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_block_all_mixed_content() {
+	void it_should_handle_block_all_mixed_content() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.blockAllMixedContent()
@@ -388,7 +388,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_frame_src() {
+	void it_should_handle_frame_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addFrameSrc(self(), unsafeInline())
@@ -404,7 +404,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_prefetch_src() {
+	void it_should_handle_prefetch_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addPrefetchSrc(self(), unsafeInline())
@@ -420,7 +420,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_manifest_src() {
+	void it_should_handle_manifest_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addManifestSrc(self(), unsafeInline())
@@ -436,7 +436,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_worker_src() {
+	void it_should_handle_worker_src() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addWorkerSrc(self(), unsafeInline())
@@ -452,7 +452,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_disown_opener() {
+	void it_should_handle_disown_opener() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addDisownOpener()
@@ -468,7 +468,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_navigate_to() {
+	void it_should_handle_navigate_to() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addNavigateTo(
@@ -496,7 +496,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_require_sri_for() {
+	void it_should_handle_require_sri_for() {
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addRequireSriFor(RequireSriFor.SCRIPT)
@@ -512,7 +512,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_upgrade_insecure_request() {
+	void it_should_handle_upgrade_insecure_request() {
 		ContentSecurityPolicy csp = builder.addDefaultSrc(none()).upgradeInsecureRequest().build();
 
 		assertThat(csp.serializeValue()).isEqualTo("default-src 'none'; upgrade-insecure-request");
@@ -523,7 +523,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_report_to() {
+	void it_should_handle_report_to() {
 		String value = "#group1";
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
@@ -540,7 +540,7 @@ public class ContentSecurityPolicyBuilderTest {
 	}
 
 	@Test
-	public void it_should_handle_frame_ancestors_and_fail_if_source_is_not_host() {
+	void it_should_handle_frame_ancestors_and_fail_if_source_is_not_host() {
 		assertThatThrownBy(addFrameAncestors(builder, self()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Source must be a valid host value");

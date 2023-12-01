@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsRedirectionTest extends AbstractApacheHttpStatusBetweenTest {
+class AssertIsRedirectionTest extends AbstractApacheHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CO
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsAccessControlAllowHeadersEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowHeadersEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 }

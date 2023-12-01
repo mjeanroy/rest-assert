@@ -25,32 +25,32 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.http.exact;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatus;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_with_correct_status() {
+	void it_should_pass_with_correct_status() {
 		AssertionResult result = run(newResponse(status()));
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_fail_with_response_different_than_expected_status() {
+	void it_should_fail_with_response_different_than_expected_status() {
 		int expectedStatus = status();
 		int status = expectedStatus + 1;
 
@@ -63,9 +63,9 @@ public abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<Http
 		);
 	}
 
+	abstract int status();
+
 	private HttpResponse newResponse(int status) {
 		return new HttpResponseBuilderImpl().setStatus(status).build();
 	}
-
-	protected abstract int status();
 }

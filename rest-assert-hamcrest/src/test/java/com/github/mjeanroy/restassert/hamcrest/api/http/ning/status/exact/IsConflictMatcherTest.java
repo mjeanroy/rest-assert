@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isConflict;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 
-public class IsConflictMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
+class IsConflictMatcherTest extends AbstractNingHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

@@ -31,10 +31,10 @@ import org.assertj.core.api.AssertionInfo;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsSuccessTest extends AbstractHttpResponseStatusBetweenTest {
+class IsSuccessTest extends AbstractHttpResponseStatusBetweenTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return 200;
 	}
 

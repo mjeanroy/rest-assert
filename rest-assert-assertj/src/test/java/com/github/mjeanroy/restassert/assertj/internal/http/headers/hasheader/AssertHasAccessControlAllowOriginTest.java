@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CO
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertHasAccessControlAllowOriginTest extends AbstractHttpResponsesHeaderTest {
+class AssertHasAccessControlAllowOriginTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void run(HttpResponse httpResponse) {

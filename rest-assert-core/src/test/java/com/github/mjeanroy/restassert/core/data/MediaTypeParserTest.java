@@ -24,22 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MediaTypeParserTest {
+class MediaTypeParserTest {
 
 	private MediaTypeParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (MediaTypeParser) MediaType.parser();
 	}
 
 	@Test
-	public void it_should_parse_media_type() {
+	void it_should_parse_media_type() {
 		MediaType mediaType = parser.parse("text/html");
 		assertThat(mediaType.getType()).isEqualTo("text");
 		assertThat(mediaType.getSubtype()).isEqualTo("html");
@@ -47,7 +47,7 @@ public class MediaTypeParserTest {
 	}
 
 	@Test
-	public void it_should_parse_uppercase_media_type() {
+	void it_should_parse_uppercase_media_type() {
 		MediaType mediaType = parser.parse("APPLICATION/JSON");
 		assertThat(mediaType.getType()).isEqualTo("application");
 		assertThat(mediaType.getSubtype()).isEqualTo("json");
@@ -55,7 +55,7 @@ public class MediaTypeParserTest {
 	}
 
 	@Test
-	public void it_should_parse_media_type_with_space() {
+	void it_should_parse_media_type_with_space() {
 		MediaType mediaType = parser.parse(" application / xml ");
 		assertThat(mediaType.getType()).isEqualTo("application");
 		assertThat(mediaType.getSubtype()).isEqualTo("xml");

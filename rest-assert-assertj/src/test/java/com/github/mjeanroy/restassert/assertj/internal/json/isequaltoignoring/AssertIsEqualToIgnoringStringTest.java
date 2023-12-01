@@ -29,20 +29,20 @@ import org.assertj.core.api.AssertionInfo;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 
-public class AssertIsEqualToIgnoringStringTest extends AbstractJsonsIsEqualToIgnoringTest<String> {
+class AssertIsEqualToIgnoringStringTest extends AbstractJsonsIsEqualToIgnoringTest<String> {
 
 	@Override
-	protected String success() {
+	String success() {
 		return jsonSuccess();
 	}
 
 	@Override
-	protected String failure() {
+	String failure() {
 		return jsonFailure();
 	}
 
 	@Override
-	protected void run(AssertionInfo info, String json) {
+	void run(AssertionInfo info, String json) {
 		jsons.assertIsEqualToIgnoring(info, actual(), json, ignoringKeys());
 	}
 }

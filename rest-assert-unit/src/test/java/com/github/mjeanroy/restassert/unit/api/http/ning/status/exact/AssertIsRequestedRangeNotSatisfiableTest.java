@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractNingHttpStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

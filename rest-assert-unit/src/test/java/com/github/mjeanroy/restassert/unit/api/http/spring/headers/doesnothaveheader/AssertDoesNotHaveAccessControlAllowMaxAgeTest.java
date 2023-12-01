@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
-public class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

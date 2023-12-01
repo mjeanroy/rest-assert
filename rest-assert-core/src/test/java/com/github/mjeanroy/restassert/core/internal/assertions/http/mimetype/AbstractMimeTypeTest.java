@@ -31,25 +31,22 @@ import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAsser
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse> {
 
-	/**
-	 * The assertion object.
-	 */
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass_with_expected_mime_type() {
+	void it_should_pass_with_expected_mime_type() {
 		// Given
 		String mimeType = getMimeType().toLowerCase();
 		Header header = getHeader(mimeType);
@@ -63,7 +60,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 	}
 
 	@Test
-	public void it_should_pass_with_expected_mime_type_in_a_different_case() {
+	void it_should_pass_with_expected_mime_type_in_a_different_case() {
 		// Given
 		String mimeType = getMimeType().toUpperCase();
 		Header header = getHeader(mimeType);
@@ -77,7 +74,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_is_not_expected_mime_type() {
+	void it_should_fail_with_if_response_is_not_expected_mime_type() {
 		// Given
 		String expectedMimeType = getMimeType();
 		Header expectedHeader = getHeader(expectedMimeType);
@@ -99,7 +96,7 @@ public abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpRe
 		checkError(result, klassError, pattern, parameters);
 	}
 
-	protected abstract String getMimeType();
+	abstract String getMimeType();
 
 	private static HttpResponse newResponse(Header header) {
 		return new HttpResponseBuilderImpl().addHeader(header).build();

@@ -32,7 +32,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isJavascript;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
 
-public class IsJavascriptMatcherTest extends AbstractSpringMockMvcHttpResponseMimeTypeInMatcherTest {
+class IsJavascriptMatcherTest extends AbstractSpringMockMvcHttpResponseMimeTypeInMatcherTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

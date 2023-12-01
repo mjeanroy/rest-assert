@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertHasContentTypeTest extends AbstractHttpResponsesHeaderTest {
+class AssertHasContentTypeTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
 	protected void run(HttpResponse httpResponse) {

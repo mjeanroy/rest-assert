@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertIsETagEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsETagEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final String VALUE = ETAG.getValue();
 

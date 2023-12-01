@@ -31,7 +31,7 @@ import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.Mockito.*;
 
-public class IsAccessControlAllowOriginEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowOriginEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

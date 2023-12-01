@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.generator.utils;
 
 import org.assertj.core.api.Condition;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -35,10 +35,10 @@ import static java.io.File.separator;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ClassUtilsTest {
+class ClassUtilsTest {
 
 	@Test
-	public void it_should_get_public_methods() {
+	void it_should_get_public_methods() {
 		List<Method> methods = ClassUtils.findPublicMethods(Foo.class);
 		assertThat(methods)
 				.isNotNull()
@@ -56,7 +56,7 @@ public class ClassUtilsTest {
 	}
 
 	@Test
-	public void it_should_turn_a_package_name_to_a_path() {
+	void it_should_turn_a_package_name_to_a_path() {
 		String path = ClassUtils.packageNameToDirectory("com.github.mjeanroy.restassert.generator.utils");
 		assertThat(path)
 				.isNotNull()

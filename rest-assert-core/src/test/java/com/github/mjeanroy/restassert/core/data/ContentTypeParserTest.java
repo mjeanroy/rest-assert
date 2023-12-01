@@ -24,22 +24,23 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 
-public class ContentTypeParserTest {
+class ContentTypeParserTest {
 
 	private ContentTypeParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (ContentTypeParser) ContentType.parser();
 	}
+
 	@Test
-	public void it_should_parse_content_type_without_charsets() {
+	void it_should_parse_content_type_without_charsets() {
 		ContentType contentType = parser.parse("application/json");
 		assertThat(contentType).isNotNull();
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
@@ -49,7 +50,7 @@ public class ContentTypeParserTest {
 	}
 
 	@Test
-	public void it_should_create_content_type_with_charset() {
+	void it_should_create_content_type_with_charset() {
 		ContentType contentType = parser.parse("application/json; charset=utf-8");
 		assertThat(contentType).isNotNull();
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
@@ -64,7 +65,7 @@ public class ContentTypeParserTest {
 	}
 
 	@Test
-	public void it_should_create_content_type_with_single_quoted_charset() {
+	void it_should_create_content_type_with_single_quoted_charset() {
 		ContentType contentType = parser.parse("application/json; charset='utf-8'");
 		assertThat(contentType).isNotNull();
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
@@ -79,7 +80,7 @@ public class ContentTypeParserTest {
 	}
 
 	@Test
-	public void it_should_create_content_type_with_double_quoted_charset() {
+	void it_should_create_content_type_with_double_quoted_charset() {
 		ContentType contentType = parser.parse("application/json; charset=\"utf-8\"");
 		assertThat(contentType).isNotNull();
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");
@@ -93,7 +94,7 @@ public class ContentTypeParserTest {
 	}
 
 	@Test
-	public void it_should_create_content_type_with_more_than_one_parameter() {
+	void it_should_create_content_type_with_more_than_one_parameter() {
 		ContentType contentType = parser.parse("application/json; foo=bar; charset=\"utf-8\"");
 		assertThat(contentType).isNotNull();
 		assertThat(contentType.getMediaType().getType()).isEqualTo("application");

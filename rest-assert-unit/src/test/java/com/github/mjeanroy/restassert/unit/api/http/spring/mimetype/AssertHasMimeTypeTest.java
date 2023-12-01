@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICA
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertHasMimeTypeTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class AssertHasMimeTypeTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = APPLICATION_JSON;
 

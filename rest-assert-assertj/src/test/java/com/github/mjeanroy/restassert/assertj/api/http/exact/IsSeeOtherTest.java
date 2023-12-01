@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsSeeOtherTest extends AbstractHttpResponseStatusTest {
+class IsSeeOtherTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return SEE_OTHER;
 	}
 

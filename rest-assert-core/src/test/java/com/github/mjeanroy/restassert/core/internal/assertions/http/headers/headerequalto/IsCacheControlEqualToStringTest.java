@@ -28,20 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class IsCacheControlEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsCacheControlEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CACHE_CONTROL;
 	private static final String VALUE = HEADER.getValue();
 	private static final String NAME = HEADER.getName();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -49,7 +44,12 @@ public class IsCacheControlEqualToStringTest extends AbstractHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
@@ -59,14 +59,14 @@ public class IsCacheControlEqualToStringTest extends AbstractHttpHeaderEqualToTe
 	}
 
 	@Test
-	public void it_should_compare_case_insensitively() {
+	void it_should_compare_case_insensitively() {
 		String actual = VALUE.toUpperCase();
 		String expected = VALUE.toUpperCase();
 		doTest(actual, expected);
 	}
 
 	@Test
-	public void it_should_compare_in_different_order() {
+	void it_should_compare_in_different_order() {
 		String actual = "public, no-transform, no-store";
 		String expected = "public, no-store, no-transform";
 		doTest(actual, expected);

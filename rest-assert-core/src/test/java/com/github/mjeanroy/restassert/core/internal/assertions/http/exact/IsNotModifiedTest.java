@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFI
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsNotModifiedTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return NOT_MODIFIED;
-	}
+class IsNotModifiedTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotModified(response);
+	}
+
+	@Override
+	int status() {
+		return NOT_MODIFIED;
 	}
 }

@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertDoesNotHaveExpiresTest extends AbstractAsyncDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveExpiresTest extends AbstractAsyncDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

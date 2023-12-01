@@ -25,17 +25,17 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IosTest {
+class IosTest {
 
 	@Test
-	public void it_should_read_url() {
+	void it_should_read_url() {
 		URL url = getClass().getResource("/test.txt");
 		String output = Ios.readUrl(url);
 		assertThat(output).isEqualTo(StringTestUtils.join(System.lineSeparator(), asList(

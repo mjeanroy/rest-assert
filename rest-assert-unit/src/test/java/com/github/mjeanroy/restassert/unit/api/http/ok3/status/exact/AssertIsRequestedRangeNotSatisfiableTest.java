@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractOkHttpStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

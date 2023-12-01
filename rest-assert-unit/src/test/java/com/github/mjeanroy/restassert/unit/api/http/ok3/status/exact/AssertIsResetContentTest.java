@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
 
-public class AssertIsResetContentTest extends AbstractOkHttpStatusTest {
+class AssertIsResetContentTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class AssertHasAccessControlAllowCredentialsTest extends AbstractJunitServersHttpHeaderTest {
+class AssertHasAccessControlAllowCredentialsTest extends AbstractJunitServersHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

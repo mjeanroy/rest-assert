@@ -24,41 +24,41 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class XssProtectionParserTest {
+class XssProtectionParserTest {
 
 	private XssProtectionParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (XssProtectionParser) XssProtection.parser();
 	}
 
 	@Test
-	public void it_should_parse_0() {
+	void it_should_parse_0() {
 		assertThat(parser.parse("0")).isEqualTo(XssProtection.disable());
 		assertThat(parser.parse(" 0 ")).isEqualTo(XssProtection.disable());
 	}
 
 	@Test
-	public void it_should_parse_1() {
+	void it_should_parse_1() {
 		assertThat(parser.parse("1")).isEqualTo(XssProtection.enable());
 		assertThat(parser.parse(" 1 ")).isEqualTo(XssProtection.enable());
 	}
 
 	@Test
-	public void it_should_parse_1_with_block_mode() {
+	void it_should_parse_1_with_block_mode() {
 		assertThat(parser.parse("1; mode=block")).isEqualTo(XssProtection.enableModeBlock());
 		assertThat(parser.parse("1;mode=block")).isEqualTo(XssProtection.enableModeBlock());
 		assertThat(parser.parse(" 1 ; mode=block ")).isEqualTo(XssProtection.enableModeBlock());
 	}
 
 	@Test
-	public void it_should_parse_1_with_report_uri() {
+	void it_should_parse_1_with_report_uri() {
 		String uri = "https://google.com";
 		assertThat(parser.parse("1; report=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));
 		assertThat(parser.parse("1;report=" + uri)).isEqualTo(XssProtection.enableModeReport(uri));

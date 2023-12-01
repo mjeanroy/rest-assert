@@ -29,7 +29,7 @@ import org.apache.http.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertIsSecured;
 
-public class AssertIsSecuredTest extends AbstractApacheHttpCookieTest {
+class AssertIsSecuredTest extends AbstractApacheHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

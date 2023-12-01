@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpRespo
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class DoesNotHaveAccessControlExposeHeadersTest extends AbstractHttpResponseHeaderTest {
+class DoesNotHaveAccessControlExposeHeadersTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

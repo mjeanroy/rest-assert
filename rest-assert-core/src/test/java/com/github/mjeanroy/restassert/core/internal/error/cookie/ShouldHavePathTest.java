@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHavePath.shouldHavePath;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHavePathTest {
+class ShouldHavePathTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String expectedPath = "bar";
 		String actualPath = "foo";
 		ShouldHavePath shouldHavePath = shouldHavePath(expectedPath, actualPath);

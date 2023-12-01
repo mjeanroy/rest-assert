@@ -32,7 +32,7 @@ import org.assertj.core.api.AssertionInfo;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class HttpResponseAssert_doesNotHaveCookie_Test extends AbstractCookieTest {
+class HttpResponseAssert_doesNotHaveCookie_Test extends AbstractCookieTest {
 
 	@Override
 	protected HttpResponseAssert run() {

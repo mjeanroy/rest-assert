@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsXssProtectionEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
+class AssertIsXssProtectionEqualToTest extends AbstractCoreHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_XSS_PROTECTION;
 	private static final XssProtection VALUE = XssProtection.disable();

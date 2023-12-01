@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.apache.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsUtf8Test extends AbstractApacheHttpAssertCharsetTest {
+class AssertIsUtf8Test extends AbstractApacheHttpAssertCharsetTest {
 
 	@Override
 	protected String getCharset() {

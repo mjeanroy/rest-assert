@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class HasSameSiteTest extends AbstractCookieTest {
+class HasSameSiteTest extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult run(Cookie cookie) {
@@ -38,28 +38,28 @@ public class HasSameSiteTest extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Cookie success() {
+	Cookie success() {
 		return cookie(SameSite.STRICT);
 	}
 
 	@Override
-	protected Cookie failure() {
+	Cookie failure() {
 		SameSite actualSameSite = SameSite.NONE;
 		return cookie(actualSameSite);
 	}
 
 	@Override
-	protected Class<?> error() {
+	Class<?> error() {
 		return ShouldHaveSameSite.class;
 	}
 
 	@Override
-	protected String pattern() {
+	String pattern() {
 		return "Expecting cookie to have SameSite STRICT but was NONE";
 	}
 
 	@Override
-	protected Object[] params() {
+	Object[] params() {
 		SameSite expectedSameSite = success().getSameSite();
 		SameSite actualSameSite = failure().getSameSite();
 		return new SameSite[] {

@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.hasMimeType;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class HasMimeTypeMatcherTest extends AbstractAsyncHttpResponseMimeTypeMatcherTest {
+class HasMimeTypeMatcherTest extends AbstractAsyncHttpResponseMimeTypeMatcherTest {
 
 	private static final String RAW_VALUE = TEXT_CSS;
 	private static final MediaType VALUE = MediaType.parser().parse(TEXT_CSS);

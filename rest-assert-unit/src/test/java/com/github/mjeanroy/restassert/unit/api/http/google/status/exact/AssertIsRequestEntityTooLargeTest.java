@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractGoogleHttpStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -29,14 +29,19 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
+class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 
 	@Override
-	protected Cookie newCookie() {
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.doesNotHaveCookie(response);
+	}
+
+	@Override
+	Cookie newCookie() {
 		return new CookieBuilder()
 				.setName(NAME)
 				.setValue("12345")
@@ -44,18 +49,13 @@ public class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
+	void verifyError(AssertionResult result) {
 		checkError(result, ShouldHaveCookie.class, "Expecting http response not to contains cookies");
-	}
-
-	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.doesNotHaveCookie(response);
 	}
 
 	@Test
 	@Override
-	public void it_should_pass_without_cookie() {
+	void it_should_pass_without_cookie() {
 		// Nothing to test.
 	}
 }

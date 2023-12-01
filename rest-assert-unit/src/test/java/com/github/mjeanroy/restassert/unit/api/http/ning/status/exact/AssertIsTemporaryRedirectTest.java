@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class AssertIsTemporaryRedirectTest extends AbstractNingHttpStatusTest {
+class AssertIsTemporaryRedirectTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

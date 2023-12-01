@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsSecuredTest extends AbstractCookiesTest {
+class AssertIsSecuredTest extends AbstractCookiesTest {
 
 	@Override
 	protected void run(AssertionInfo info, Cookie cookie) {

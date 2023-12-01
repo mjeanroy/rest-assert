@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.doesNotHaveCookie;
 
-public class DoesNotHaveCookieMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveCookieTest {
+class DoesNotHaveCookieMatcherTest extends AbstractSpringMockMvcHttpResponseDoesNotHaveCookieTest {
 
 	@Override
 	protected Cookie cookie() {

@@ -31,7 +31,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {

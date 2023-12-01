@@ -30,29 +30,29 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static java.lang.String.format;
 
-public abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		HttpResponse response = newResponse(expectedCharset());
 		AssertionResult result = run(response);
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		// GIVEN
 		String expectedCharset = expectedCharset();
 		String actualCharset = expectedCharset + "foo";
@@ -68,19 +68,8 @@ public abstract class AbstractHttpResponseAssertionsCharsetTest extends Abstract
 		checkError(result, klassError, pattern, parameters);
 	}
 
-	/**
-	 * Get the expected charset to be tested.
-	 *
-	 * @return Expected charset.
-	 */
-	protected abstract String expectedCharset();
+	abstract String expectedCharset();
 
-	/**
-	 * Create the fake HTTP response with given charset.
-	 *
-	 * @param charset THe charset.
-	 * @return The HTTP response to be tested.
-	 */
 	private HttpResponse newResponse(String charset) {
 		String contentType = format("application/json; charset=%s", charset);
 		return new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build();

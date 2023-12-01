@@ -30,14 +30,9 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class IsAccessControlAllowCredentialsEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsAccessControlAllowCredentialsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
-
-	@Override
-	protected Header getHeader() {
-		return ACCESS_CONTROL_ALLOW_CREDENTIALS;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -45,7 +40,12 @@ public class IsAccessControlAllowCredentialsEqualToTest extends AbstractHttpHead
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_CREDENTIALS;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

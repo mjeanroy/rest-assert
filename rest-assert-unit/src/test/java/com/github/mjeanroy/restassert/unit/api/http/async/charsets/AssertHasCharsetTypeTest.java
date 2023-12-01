@@ -30,7 +30,7 @@ import org.asynchttpclient.Response;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractAsyncHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractAsyncHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

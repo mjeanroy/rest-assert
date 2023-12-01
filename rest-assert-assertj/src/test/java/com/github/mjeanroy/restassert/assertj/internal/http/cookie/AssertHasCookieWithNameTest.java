@@ -29,12 +29,12 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertHasCookieWithNameTest extends AbstractHasCookieTest {
+class AssertHasCookieWithNameTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 
 	@Override
-	protected Cookie cookie() {
+	Cookie cookie() {
 		return new CookieBuilder()
 				.setName(NAME)
 				.setValue("12345")
@@ -42,12 +42,12 @@ public class AssertHasCookieWithNameTest extends AbstractHasCookieTest {
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertHasCookie(info, httpResponse, NAME);
 	}
 
 	@Override
-	protected String buildErrorMessage() {
+	String buildErrorMessage() {
 		return String.format("Expecting http response to contains cookie with name \"%s\"", NAME);
 	}
 }

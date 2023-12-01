@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractOkHttpStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractGoogleHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

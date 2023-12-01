@@ -35,7 +35,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class ContainsTest extends AbstractApiTest<Jsons, JsonAssert> {
+class ContainsTest extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
 	protected Jsons createAssertions() {

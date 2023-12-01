@@ -30,14 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsETagEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsETagEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String VALUE = ETAG.getValue();
-
-	@Override
-	protected Header getHeader() {
-		return ETAG;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -45,7 +40,12 @@ public class IsETagEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return ETAG;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 }

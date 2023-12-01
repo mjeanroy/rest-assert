@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DoesNotHaveCookieAssertionTest {
+class DoesNotHaveCookieAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_does_not_have_cookies() {
+	void it_should_not_fail_if_header_does_not_have_cookies() {
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 
@@ -50,7 +50,7 @@ public class DoesNotHaveCookieAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_response_has_cookies() {
+	void it_should_not_fail_if_response_has_cookies() {
 		Cookie cookie = new CookieBuilder().setName("foo").build();
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
@@ -64,7 +64,7 @@ public class DoesNotHaveCookieAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_response_does_not_have_cookie_with_name() {
+	void it_should_not_fail_if_response_does_not_have_cookie_with_name() {
 		String name = "foo";
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
 		Cookie cookie = new CookieBuilder().setName(name + name).build();
@@ -78,7 +78,7 @@ public class DoesNotHaveCookieAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_response_has_cookie_with_name() {
+	void it_should_fail_if_response_has_cookie_with_name() {
 		String name = "foo";
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
 		Cookie cookie = new CookieBuilder().setName(name).build();
@@ -93,21 +93,21 @@ public class DoesNotHaveCookieAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_cookie_name_is_null() {
+	void it_should_fail_if_cookie_name_is_null() {
 		assertThatThrownBy(doesNotHaveCookieAssertion(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_cookie_name_is_empty() {
+	void it_should_fail_if_cookie_name_is_empty() {
 		assertThatThrownBy(doesNotHaveCookieAssertion(""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_cookie_name_is_blank() {
+	void it_should_fail_if_cookie_name_is_blank() {
 		assertThatThrownBy(doesNotHaveCookieAssertion("   "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Cookie name must be defined");

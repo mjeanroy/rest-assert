@@ -31,7 +31,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CACHE_CONTROL;
 
-public class AssertIsCacheControlEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsCacheControlEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final CacheControl VALUE = CacheControl.builder()
 		.visibility(CacheControl.Visibility.PUBLIC)

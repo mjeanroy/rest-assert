@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CONTENT;
 
-public class AssertIsPartialContentTest extends AbstractOkHttpStatusTest {
+class AssertIsPartialContentTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

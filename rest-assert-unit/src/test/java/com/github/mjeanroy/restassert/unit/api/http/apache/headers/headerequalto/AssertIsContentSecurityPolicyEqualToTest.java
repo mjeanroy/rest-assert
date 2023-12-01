@@ -36,7 +36,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsContentSecurityPolicyEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())

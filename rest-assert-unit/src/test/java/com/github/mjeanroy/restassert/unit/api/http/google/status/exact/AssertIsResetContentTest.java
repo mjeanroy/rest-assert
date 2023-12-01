@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONT
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsResetContentTest extends AbstractGoogleHttpStatusTest {
+class AssertIsResetContentTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

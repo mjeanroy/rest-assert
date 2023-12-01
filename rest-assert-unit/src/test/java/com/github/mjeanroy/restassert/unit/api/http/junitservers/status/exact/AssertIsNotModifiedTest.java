@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFI
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsNotModifiedTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsNotModifiedTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

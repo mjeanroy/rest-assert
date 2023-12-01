@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isGone;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class IsGoneMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
+class IsGoneMatcherTest extends AbstractCoreHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

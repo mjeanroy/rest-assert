@@ -36,7 +36,7 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.uns
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
-public class AssertIsContentSecurityPolicyEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())

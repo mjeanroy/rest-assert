@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsServerErrorTest extends AbstractNingHttpStatusBetweenTest {
+class AssertIsServerErrorTest extends AbstractNingHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

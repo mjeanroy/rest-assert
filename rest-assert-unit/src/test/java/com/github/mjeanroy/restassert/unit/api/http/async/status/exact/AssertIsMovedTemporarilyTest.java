@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMP
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsMovedTemporarilyTest extends AbstractAsyncHttpStatusTest {
+class AssertIsMovedTemporarilyTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

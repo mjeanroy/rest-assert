@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
 

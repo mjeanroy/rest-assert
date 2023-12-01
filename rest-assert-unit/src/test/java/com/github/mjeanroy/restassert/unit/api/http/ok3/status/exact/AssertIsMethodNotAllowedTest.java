@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 
-public class AssertIsMethodNotAllowedTest extends AbstractOkHttpStatusTest {
+class AssertIsMethodNotAllowedTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

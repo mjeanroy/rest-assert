@@ -30,7 +30,7 @@ import javax.servlet.http.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertIsNotSecured;
 
-public class AssertIsNotSecuredTest extends AbstractJavaxCookieTest {
+class AssertIsNotSecuredTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

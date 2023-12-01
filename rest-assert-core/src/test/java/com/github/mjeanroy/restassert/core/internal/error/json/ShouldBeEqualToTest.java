@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldBeEqualToTest {
+class ShouldBeEqualToTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String entry = "foo";
 		int actualValue = 1;
 		int expectedValue = 2;

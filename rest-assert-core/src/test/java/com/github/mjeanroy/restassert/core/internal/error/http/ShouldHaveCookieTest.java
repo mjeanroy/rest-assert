@@ -26,16 +26,16 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldNotHaveCookie;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveCookieTest {
+class ShouldHaveCookieTest {
 
 	@Test
-	public void it_should_create_error_with_cookie_name() {
+	void it_should_create_error_with_cookie_name() {
 		String expectedCookieName = "foo";
 		ShouldHaveCookie error = shouldHaveCookie(expectedCookieName);
 
@@ -47,7 +47,7 @@ public class ShouldHaveCookieTest {
 	}
 
 	@Test
-	public void it_should_create_error_with_cookie_name_and_value() {
+	void it_should_create_error_with_cookie_name_and_value() {
 		String expectedCookieName = "foo";
 		String expectedCookieValue = "bar";
 		ShouldHaveCookie error = shouldHaveCookie(expectedCookieName, expectedCookieValue);
@@ -60,7 +60,7 @@ public class ShouldHaveCookieTest {
 	}
 
 	@Test
-	public void it_should_create_error_with_cookie() {
+	void it_should_create_error_with_cookie() {
 		Cookie expectedCookie = new CookieBuilder().setName("foo").setValue("bar").build();
 		ShouldHaveCookie error = shouldHaveCookie(expectedCookie);
 
@@ -72,7 +72,7 @@ public class ShouldHaveCookieTest {
 	}
 
 	@Test
-	public void it_should_create_error_with_unexpected_cookie_name() {
+	void it_should_create_error_with_unexpected_cookie_name() {
 		String unexpectedCookieName = "foo";
 		ShouldHaveCookie error = shouldNotHaveCookie(unexpectedCookieName);
 
@@ -84,7 +84,7 @@ public class ShouldHaveCookieTest {
 	}
 
 	@Test
-	public void it_should_create_error_with_unexpected_cookies() {
+	void it_should_create_error_with_unexpected_cookies() {
 		ShouldHaveCookie error = shouldNotHaveCookie();
 
 		assertThat(error).isNotNull();

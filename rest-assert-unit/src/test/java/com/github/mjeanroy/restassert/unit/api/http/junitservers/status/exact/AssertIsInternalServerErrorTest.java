@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_S
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsInternalServerErrorTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsInternalServerErrorTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

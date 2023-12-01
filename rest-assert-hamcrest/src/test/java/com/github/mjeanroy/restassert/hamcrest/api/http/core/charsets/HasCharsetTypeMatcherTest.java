@@ -32,7 +32,7 @@ import java.nio.charset.StandardCharsets;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.hasCharset;
 
-public class HasCharsetTypeMatcherTest extends AbstractCoreHttpResponseCharsetMatcherTest {
+class HasCharsetTypeMatcherTest extends AbstractCoreHttpResponseCharsetMatcherTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

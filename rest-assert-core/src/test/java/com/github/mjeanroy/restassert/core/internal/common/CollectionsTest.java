@@ -38,15 +38,15 @@ import java.util.List;
 
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-public class CollectionsTest {
+class CollectionsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_map_inputs_to_outputs() {
+	void it_should_map_inputs_to_outputs() {
 		List<Integer> inputs = asList(1, 2, 3);
 
 		Mapper<Integer, Integer> mapper = mock(Mapper.class);
@@ -73,7 +73,7 @@ public class CollectionsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_map_inputs_array_to_outputs() {
+	void it_should_map_inputs_array_to_outputs() {
 		Integer[] inputs = new Integer[] {1, 2, 3};
 
 		Mapper<Integer, Integer> mapper = mock(Mapper.class);
@@ -100,7 +100,7 @@ public class CollectionsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_filter_inputs() {
+	void it_should_filter_inputs() {
 		List<Integer> inputs = asList(1, 2, 3);
 
 		Predicate<Integer> predicate = mock(Predicate.class);
@@ -127,7 +127,7 @@ public class CollectionsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_return_true_if_some_find_a_match() {
+	void it_should_return_true_if_some_find_a_match() {
 		Predicate<String> predicate = mock(Predicate.class);
 		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
 			@Override
@@ -148,7 +148,7 @@ public class CollectionsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_return_false_if_some_does_not_find_a_match() {
+	void it_should_return_false_if_some_does_not_find_a_match() {
 		Predicate<String> predicate = mock(Predicate.class);
 		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
 			@Override
@@ -167,7 +167,7 @@ public class CollectionsTest {
 	}
 
 	@Test
-	public void it_should_create_list_from_parameters() {
+	void it_should_create_list_from_parameters() {
 		String v1 = "foo";
 		String v2 = "bar";
 		String v3 = "baz";
@@ -177,7 +177,7 @@ public class CollectionsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_flat_map_inputs() {
+	void it_should_flat_map_inputs() {
 		String v1 = "foo";
 		String v2 = "bar";
 		String v3 = "baz";

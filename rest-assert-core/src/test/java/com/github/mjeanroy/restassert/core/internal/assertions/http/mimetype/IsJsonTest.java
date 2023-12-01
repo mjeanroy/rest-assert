@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICA
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsJsonTest extends AbstractMimeTypeTest {
-
-	@Override
-	protected String getMimeType() {
-		return APPLICATION_JSON;
-	}
+class IsJsonTest extends AbstractMimeTypeTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isJson(response);
+	}
+
+	@Override
+	String getMimeType() {
+		return APPLICATION_JSON;
 	}
 }

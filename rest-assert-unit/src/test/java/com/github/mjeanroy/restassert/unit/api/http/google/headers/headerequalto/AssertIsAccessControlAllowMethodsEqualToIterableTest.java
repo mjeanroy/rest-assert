@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractGoogleHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractGoogleHttpHeaderEqualToTest {
 
 	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
 

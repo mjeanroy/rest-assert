@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-public class AssertIsStatusOutOfTest extends AbstractOkHttpStatusOutOfTest {
+class AssertIsStatusOutOfTest extends AbstractOkHttpStatusOutOfTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

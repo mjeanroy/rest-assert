@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -34,12 +34,12 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 public abstract class AbstractHttpResponseStatusMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass_with_correct_status() {
+	void it_should_pass_with_correct_status() {
 		run(newHttpResponse(status()));
 	}
 
 	@Test
-	public void it_should_fail_with_response_different_than_expected_status() {
+	void it_should_fail_with_response_different_than_expected_status() {
 		doTest(new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {

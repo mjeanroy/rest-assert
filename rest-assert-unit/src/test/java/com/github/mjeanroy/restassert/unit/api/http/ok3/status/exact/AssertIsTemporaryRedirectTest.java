@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class AssertIsTemporaryRedirectTest extends AbstractOkHttpStatusTest {
+class AssertIsTemporaryRedirectTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

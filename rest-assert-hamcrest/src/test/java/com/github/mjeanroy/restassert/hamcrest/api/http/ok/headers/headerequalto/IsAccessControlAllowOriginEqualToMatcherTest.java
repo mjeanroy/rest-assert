@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.OkHttpResponseMatchers.isAccessControlAllowOriginEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-public class IsAccessControlAllowOriginEqualToMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlAllowOriginEqualToMatcherTest extends AbstractOkHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 

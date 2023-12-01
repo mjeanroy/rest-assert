@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsStatusBetweenTest extends AbstractAsyncHttpStatusBetweenTest {
+class AssertIsStatusBetweenTest extends AbstractAsyncHttpStatusBetweenTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

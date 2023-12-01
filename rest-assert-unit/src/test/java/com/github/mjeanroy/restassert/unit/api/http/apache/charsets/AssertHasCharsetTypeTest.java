@@ -30,7 +30,7 @@ import org.apache.http.HttpResponse;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractApacheHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractApacheHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

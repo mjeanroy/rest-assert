@@ -24,19 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.async;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponseTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
-import org.junit.runner.RunWith;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
-public class AsyncHttpResponseTest extends AbstractHttpResponseTest<Response> {
+class AsyncHttpResponseTest extends AbstractHttpResponseTest<Response> {
 
 	@Override
 	protected HttpResponseBuilder<Response> getBuilder() {

@@ -26,10 +26,10 @@ package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser.gsonParser;
 
-public class GsonJsonParserTest extends AbstractJsonParserTest {
+class GsonJsonParserTest extends AbstractJsonParserTest {
 
 	@Override
-	protected JsonParser parser() {
+	JsonParser parser() {
 		return gsonParser();
 	}
 }

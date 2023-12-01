@@ -31,14 +31,14 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleH
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import com.google.api.client.http.HttpResponse;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class GoogleHttpAssertTest extends AbstractUnitTemplateModelTest {
+class GoogleHttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private GoogleHttpAssert httpAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		httpAssert = (GoogleHttpAssert) googleHttpAssert();
 	}
 

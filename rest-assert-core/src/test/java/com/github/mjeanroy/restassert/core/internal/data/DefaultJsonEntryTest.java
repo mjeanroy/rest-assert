@@ -25,14 +25,14 @@
 package com.github.mjeanroy.restassert.core.internal.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DefaultJsonEntryTest {
+class DefaultJsonEntryTest {
 
 	@Test
-	public void it_should_create_json_entry() {
+	void it_should_create_json_entry() {
 		String key = "foo";
 		String value = "bar";
 		JsonEntry entry = new DefaultJsonEntry(key, value);
@@ -41,13 +41,13 @@ public class DefaultJsonEntryTest {
 	}
 
 	@Test
-	public void it_should_have_to_string() {
+	void it_should_have_to_string() {
 		JsonEntry entry = new DefaultJsonEntry("foo", "bar");
 		assertThat(entry.toString()).isEqualTo("foo = bar");
 	}
 
 	@Test
-	public void it_should_implement_equals() {
+	void it_should_implement_equals() {
 		EqualsVerifier.forClass(DefaultJsonEntry.class).verify();
 	}
 }

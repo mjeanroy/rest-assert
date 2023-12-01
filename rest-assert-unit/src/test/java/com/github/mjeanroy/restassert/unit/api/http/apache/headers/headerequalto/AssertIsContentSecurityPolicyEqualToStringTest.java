@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String VALUE = CONTENT_SECURITY_POLICY.getValue();

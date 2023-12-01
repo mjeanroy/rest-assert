@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_S
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsInternalServerErrorTest extends AbstractNingHttpStatusTest {
+class AssertIsInternalServerErrorTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

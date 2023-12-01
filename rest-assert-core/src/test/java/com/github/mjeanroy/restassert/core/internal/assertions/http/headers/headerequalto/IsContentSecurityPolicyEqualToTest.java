@@ -36,7 +36,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String FAILED_VALUE = ContentSecurityPolicy.builder()
 		.addDefaultSrc(self())
@@ -50,17 +50,17 @@ public class IsContentSecurityPolicyEqualToTest extends AbstractHttpHeaderEqualT
 		.build();
 
 	@Override
-	protected Header getHeader() {
-		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.serializeValue());
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentSecurityPolicyEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.serializeValue());
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 

@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrl
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-public class IsEqualToURLTest extends AbstractJsonIsEqualToTest {
+class IsEqualToURLTest extends AbstractJsonIsEqualToTest {
 
 	@Override
 	protected JsonAssert run() {

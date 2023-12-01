@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.util.Collections;
@@ -70,52 +70,52 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.uns
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContentSecurityPolicyTest {
+class ContentSecurityPolicyTest {
 
 	@Test
-	public void it_should_define_self_source() {
+	void it_should_define_self_source() {
 		Source src = self();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'self'");
 	}
 
 	@Test
-	public void it_should_define_none_source() {
+	void it_should_define_none_source() {
 		Source src = none();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'none'");
 	}
 
 	@Test
-	public void it_should_define_unsafe_eval_source() {
+	void it_should_define_unsafe_eval_source() {
 		Source src = unsafeEval();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'unsafe-eval'");
 	}
 
 	@Test
-	public void it_should_define_unsafe_hashes_source() {
+	void it_should_define_unsafe_hashes_source() {
 		Source src = unsafeHashes();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'unsafe-hashes'");
 	}
 
 	@Test
-	public void it_should_define_unsafe_inline_source() {
+	void it_should_define_unsafe_inline_source() {
 		Source src = unsafeInline();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'unsafe-inline'");
 	}
 
 	@Test
-	public void it_should_define_strict_dynamic_source() {
+	void it_should_define_strict_dynamic_source() {
 		Source src = strictDynamic();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'strict-dynamic'");
 	}
 
 	@Test
-	public void it_should_define_report_sample_source() {
+	void it_should_define_report_sample_source() {
 		Source src = reportSample();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("'report-sample'");
@@ -123,35 +123,35 @@ public class ContentSecurityPolicyTest {
 
 
 	@Test
-	public void it_should_define_http_source() {
+	void it_should_define_http_source() {
 		Source src = http();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("http:");
 	}
 
 	@Test
-	public void it_should_define_https_source() {
+	void it_should_define_https_source() {
 		Source src = https();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("https:");
 	}
 
 	@Test
-	public void it_should_define_data_source() {
+	void it_should_define_data_source() {
 		Source src = data();
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("data:");
 	}
 
 	@Test
-	public void it_should_define_scheme_source() {
+	void it_should_define_scheme_source() {
 		Source src = scheme("npm");
 		assertThat(src).isNotNull();
 		assertThat(src.getValue()).isEqualTo("npm:");
 	}
 
 	@Test
-	public void it_should_define_nonce_source() {
+	void it_should_define_nonce_source() {
 		assertThat(nonce("abcd==").getValue()).isEqualTo("'nonce-abcd=='");
 		assertThat(nonce("abcd123==").getValue()).isEqualTo("'nonce-abcd123=='");
 		assertThat(nonce("abcd123+==").getValue()).isEqualTo("'nonce-abcd123+=='");
@@ -159,7 +159,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_define_algo_source() {
+	void it_should_define_algo_source() {
 		assertThat(sha256("abcd==").getValue()).isEqualTo("'sha256-abcd=='");
 		assertThat(sha384("abcd==").getValue()).isEqualTo("'sha384-abcd=='");
 		assertThat(sha512("abcd==").getValue()).isEqualTo("'sha512-abcd=='");
@@ -170,12 +170,12 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_define_all_host_source() {
+	void it_should_define_all_host_source() {
 		assertThat(allHosts().getValue()).isEqualTo("*");
 	}
 
 	@Test
-	public void it_should_define_host_source() {
+	void it_should_define_host_source() {
 		assertThat(host(null, "domain.com", null, null).getValue()).isEqualTo("domain.com");
 		assertThat(host("http", "domain.com", null, null).getValue()).isEqualTo("http://domain.com");
 		assertThat(host("http", "domain.com", "80", null).getValue()).isEqualTo("http://domain.com:80");
@@ -187,13 +187,13 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_define_host_source_with_URL() throws Exception {
+	void it_should_define_host_source_with_URL() throws Exception {
 		assertThat(host(new URL("http://domain.com:80/")).getValue()).isEqualTo("http://domain.com:80/");
 		assertThat(host(new URL("http://domain.com/")).getValue()).isEqualTo("http://domain.com/");
 	}
 
 	@Test
-	public void it_should_handle_default_src() {
+	void it_should_handle_default_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			DEFAULT_SRC, sources("'none'")
 		));
@@ -209,7 +209,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_style_src() {
+	void it_should_handle_style_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			STYLE_SRC, sources("'none'")
 		));
@@ -225,7 +225,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_script_src() {
+	void it_should_handle_script_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			SCRIPT_SRC, sources("'none'")
 		));
@@ -241,7 +241,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_connect_src() {
+	void it_should_handle_connect_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			CONNECT_SRC, sources("'none'")
 		));
@@ -257,7 +257,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_child_src() {
+	void it_should_handle_child_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			CHILD_SRC, sources("'self'", "'unsafe-inline'")
 		));
@@ -273,7 +273,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_font_src() {
+	void it_should_handle_font_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			FONT_SRC, sources("'self'", "'unsafe-inline'")
 		));
@@ -289,7 +289,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_media_src() {
+	void it_should_handle_media_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			MEDIA_SRC, sources("'self'", "'unsafe-inline'")
 		));
@@ -305,7 +305,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_form_actions() {
+	void it_should_handle_form_actions() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			FORM_ACTION, sources("'self'", "'unsafe-inline'")
 		));
@@ -321,7 +321,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_img_src() {
+	void it_should_handle_img_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			IMG_SRC, sources("'self'", "'unsafe-inline'")
 		));
@@ -337,7 +337,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_object_src() {
+	void it_should_handle_object_src() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			OBJECT_SRC, sources("'self'", "'unsafe-inline'")
 		));
@@ -353,7 +353,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_base_uri() {
+	void it_should_handle_base_uri() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			BASE_URI, sources("'self'")
 		));
@@ -369,7 +369,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_frame_ancestors() {
+	void it_should_handle_frame_ancestors() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			FRAME_ANCESTORS, sources("'self'", "'unsafe-inline'")
 		));
@@ -385,7 +385,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_plugin_types() {
+	void it_should_handle_plugin_types() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			PLUGIN_TYPES, sources("application/json", "application/xml")
 		));
@@ -401,7 +401,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_report_uri() {
+	void it_should_handle_report_uri() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			REPORT_URI, sources("http://domain.com", "http://fake.com", "http://google.com")
 		));
@@ -417,7 +417,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_sandbox() {
+	void it_should_handle_sandbox() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			SANDBOX, sources(Sandbox.ALLOW_SCRIPTS, Sandbox.ALLOW_SAME_ORIGIN)
 		));
@@ -433,7 +433,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_handle_block_all_mixed_content() {
+	void it_should_handle_block_all_mixed_content() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
 			BLOCK_ALL_MIXED_CONTENT, Collections.<Source>emptySet()
 		));
@@ -449,7 +449,7 @@ public class ContentSecurityPolicyTest {
 	}
 
 	@Test
-	public void it_should_implement_equals() {
+	void it_should_implement_equals() {
 		EqualsVerifier.forClass(ContentSecurityPolicy.class).verify();
 	}
 

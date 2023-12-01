@@ -30,7 +30,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertIsHeaderEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsHeaderEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final String NAME = "foo";
 

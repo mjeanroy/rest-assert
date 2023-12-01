@@ -28,19 +28,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class JsonObjectTest {
+class JsonObjectTest {
 
 	@Test
-	public void it_should_create_empty_object() {
+	void it_should_create_empty_object() {
 		JsonObject object = JsonObject.jsonObject();
 		assertThat(object.getEntries()).isNotNull().isEmpty();
 		assertThat(object.toJson()).isEqualTo("{}");
 	}
 
 	@Test
-	public void it_should_create_object_with_entries() {
+	void it_should_create_object_with_entries() {
 		JsonObject object = JsonObject.jsonObject(
 			JsonEntry.jsonEntry("id", 1),
 			JsonEntry.jsonEntry("name", "John Doe")
@@ -63,7 +63,7 @@ public class JsonObjectTest {
 	}
 
 	@Test
-	public void it_should_create_object_and_escape_double_quotes() {
+	void it_should_create_object_and_escape_double_quotes() {
 		JsonObject object = JsonObject.jsonObject(
 			JsonEntry.jsonEntry("\"id\"", 1),
 			JsonEntry.jsonEntry("\"name\"", "\"John Doe\"")
@@ -86,12 +86,12 @@ public class JsonObjectTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(JsonObject.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		JsonObject object = JsonObject.jsonObject(
 			JsonEntry.jsonEntry("id", 1),
 			JsonEntry.jsonEntry("name", "John Doe")

@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class IsHttpOnlyTest extends AbstractCookieTest {
+class IsHttpOnlyTest extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult run(Cookie cookie) {
@@ -37,27 +37,27 @@ public class IsHttpOnlyTest extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Cookie success() {
+	Cookie success() {
 		return cookie(true);
 	}
 
 	@Override
-	protected Cookie failure() {
+	Cookie failure() {
 		return cookie(false);
 	}
 
 	@Override
-	protected Class<?> error() {
+	Class<?> error() {
 		return ShouldBeHttpOnly.class;
 	}
 
 	@Override
-	protected String pattern() {
+	String pattern() {
 		return "Expecting cookie to be 'http only'";
 	}
 
 	@Override
-	protected Object[] params() {
+	Object[] params() {
 		return new Object[0];
 	}
 

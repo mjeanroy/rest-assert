@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.isPdf;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_PDF;
 
-public class IsPdfMatcherTest extends AbstractCoreHttpResponseMimeTypeMatcherTest {
+class IsPdfMatcherTest extends AbstractCoreHttpResponseMimeTypeMatcherTest {
 
 	@Override
 	protected String getMimeType() {

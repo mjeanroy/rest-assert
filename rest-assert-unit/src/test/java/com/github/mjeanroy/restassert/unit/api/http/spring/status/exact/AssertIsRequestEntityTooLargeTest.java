@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

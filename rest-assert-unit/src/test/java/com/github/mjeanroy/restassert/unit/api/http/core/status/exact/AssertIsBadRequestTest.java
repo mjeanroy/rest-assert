@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUES
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsBadRequestTest extends AbstractCoreHttpStatusTest {
+class AssertIsBadRequestTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

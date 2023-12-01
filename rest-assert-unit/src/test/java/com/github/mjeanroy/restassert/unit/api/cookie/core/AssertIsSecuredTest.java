@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsSecured;
 
-public class AssertIsSecuredTest extends AbstractCoreCookieTest {
+class AssertIsSecuredTest extends AbstractCoreCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

@@ -34,7 +34,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsCacheControlEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsCacheControlEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final CacheControl VALUE = CacheControl.builder()
 		.noCache()

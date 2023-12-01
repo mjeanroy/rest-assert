@@ -30,7 +30,7 @@ import javax.servlet.http.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasName;
 
-public class AssertHasNameTest extends AbstractJavaxCookieTest {
+class AssertHasNameTest extends AbstractJavaxCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

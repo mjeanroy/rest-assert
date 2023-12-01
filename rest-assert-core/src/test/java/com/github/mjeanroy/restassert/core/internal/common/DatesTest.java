@@ -25,17 +25,17 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DatesTest {
+class DatesTest {
 
 	@Test
-	public void it_should_parse_rfc_1123() {
+	void it_should_parse_rfc_1123() {
 		String date = "Sun, 06 Nov 1994 08:49:37 GMT";
 
 		Date result = Dates.parseHttpDate(date);
@@ -46,7 +46,7 @@ public class DatesTest {
 	}
 
 	@Test
-	public void it_should_parse_rfc_1036() {
+	void it_should_parse_rfc_1036() {
 		String date = "Sunday, 06-Nov-94 08:49:37 GMT";
 
 		Date result = Dates.parseHttpDate(date);
@@ -57,7 +57,7 @@ public class DatesTest {
 	}
 
 	@Test
-	public void it_should_parse_ansi_c_format() {
+	void it_should_parse_ansi_c_format() {
 		String date = "Sun Nov  6 08:49:37 1994";
 
 		Date result = Dates.parseHttpDate(date);
@@ -68,7 +68,7 @@ public class DatesTest {
 	}
 
 	@Test
-	public void it_should_parse_without_single_quotes() {
+	void it_should_parse_without_single_quotes() {
 		String date = "'Sun, 06 Nov 1994 08:49:37 GMT'";
 
 		Date result = Dates.parseHttpDate(date);
@@ -79,7 +79,7 @@ public class DatesTest {
 	}
 
 	@Test
-	public void it_should_throw_exception_if_pattern_is_not_known() {
+	void it_should_throw_exception_if_pattern_is_not_known() {
 		String date = "foo bar";
 
 		assertThatThrownBy(parseHttpDate(date))
@@ -88,7 +88,7 @@ public class DatesTest {
 	}
 
 	@Test
-	public void it_should_format_date() {
+	void it_should_format_date() {
 		Date date = new Date();
 		date.setTime(784111777000L);
 

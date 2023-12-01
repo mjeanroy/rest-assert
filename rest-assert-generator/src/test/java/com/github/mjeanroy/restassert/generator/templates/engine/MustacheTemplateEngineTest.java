@@ -24,21 +24,21 @@
 
 package com.github.mjeanroy.restassert.generator.templates.engine;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
 import com.github.mjeanroy.restassert.generator.TemplateEngine;
 
-public class MustacheTemplateEngineTest extends AbstractTemplateEngineTest {
+class MustacheTemplateEngineTest extends AbstractTemplateEngineTest {
 
 	private TemplateEngine templateEngine;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		templateEngine = MustacheTemplateEngine.instance();
 	}
 
 	@Override
-	protected TemplateEngine templateEngine() {
+	TemplateEngine templateEngine() {
 		return templateEngine;
 	}
 }

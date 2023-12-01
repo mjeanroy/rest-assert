@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDIT
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsPreConditionFailedTest extends AbstractCoreHttpStatusTest {
+class AssertIsPreConditionFailedTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class IsMultipleChoicesTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return MULTIPLE_CHOICES;
-	}
+class IsMultipleChoicesTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isMultipleChoices(response);
+	}
+
+	@Override
+	int status() {
+		return MULTIPLE_CHOICES;
 	}
 }

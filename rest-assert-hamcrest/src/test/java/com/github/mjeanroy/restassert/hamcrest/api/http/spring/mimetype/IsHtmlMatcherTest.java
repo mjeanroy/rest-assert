@@ -32,7 +32,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isHtml;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.HTML;
 
-public class IsHtmlMatcherTest extends AbstractSpringMockMvcHttpResponseMimeTypeInMatcherTest {
+class IsHtmlMatcherTest extends AbstractSpringMockMvcHttpResponseMimeTypeInMatcherTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsExpiresEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsExpiresEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = EXPIRES.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsExpiresEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return EXPIRES;
 	}
 

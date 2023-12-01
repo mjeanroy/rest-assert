@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StrictTransportSecurityBuilderTest {
+class StrictTransportSecurityBuilderTest {
 
 	@Test
-	public void it_should_create_strict_transport_security_with_max_age() {
+	void it_should_create_strict_transport_security_with_max_age() {
 		StrictTransportSecurity sts = StrictTransportSecurity.builder(3600).build();
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -40,7 +40,7 @@ public class StrictTransportSecurityBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_strict_transport_security_with_include_sub_domains() {
+	void it_should_create_strict_transport_security_with_include_sub_domains() {
 		StrictTransportSecurity sts = StrictTransportSecurity.builder(3600)
 			.includeSubDomains()
 			.build();
@@ -51,7 +51,7 @@ public class StrictTransportSecurityBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_strict_transport_security_with_include_preload() {
+	void it_should_create_strict_transport_security_with_include_preload() {
 		StrictTransportSecurity sts = StrictTransportSecurity.builder(3600)
 			.includeSubDomains()
 			.preload()

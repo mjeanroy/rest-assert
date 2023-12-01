@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsForbiddenTest extends AbstractGoogleHttpStatusTest {
+class AssertIsForbiddenTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -41,8 +41,4 @@ public abstract class AbstractHttpResponseHeaderTest extends AbstractHttpRespons
 	protected Header getHeader() {
 		return header("foo", "bar");
 	}
-
-	protected abstract HttpResponseAssert run();
-
-	protected abstract void verifyApiCall();
 }

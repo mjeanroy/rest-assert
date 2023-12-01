@@ -30,7 +30,7 @@ import okhttp3.Response;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractOkHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractOkHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

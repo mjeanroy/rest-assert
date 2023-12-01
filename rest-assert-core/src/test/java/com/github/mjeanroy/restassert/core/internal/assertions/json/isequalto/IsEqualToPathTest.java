@@ -31,20 +31,20 @@ import java.nio.file.Path;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathSuccess;
 
-public class IsEqualToPathTest extends AbstractJsonAssertion_isEqualTo_Test<Path> {
+class IsEqualToPathTest extends AbstractJsonAssertion_isEqualTo_Test<Path> {
 
 	@Override
-	protected AssertionResult run(String actual, Path expected) {
+	AssertionResult run(String actual, Path expected) {
 		return assertions.isEqualTo(actual, expected);
 	}
 
 	@Override
-	protected Path successObject() {
+	Path successObject() {
 		return jsonPathSuccess();
 	}
 
 	@Override
-	protected Path failureObject() {
+	Path failureObject() {
 		return jsonPathFailure();
 	}
 }

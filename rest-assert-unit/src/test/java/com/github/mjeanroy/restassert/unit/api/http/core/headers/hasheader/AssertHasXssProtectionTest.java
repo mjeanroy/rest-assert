@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertHasXssProtectionTest extends AbstractCoreHttpHeaderTest {
+class AssertHasXssProtectionTest extends AbstractCoreHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

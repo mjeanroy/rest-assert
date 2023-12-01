@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ETAG;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsETagEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsETagEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = ETAG.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsETagEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ETAG;
 	}
 }

@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_C
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsMultipleChoicesTest extends AbstractHttpResponseStatusTest {
+class IsMultipleChoicesTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return MULTIPLE_CHOICES;
 	}
 

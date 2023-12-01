@@ -27,17 +27,17 @@ package com.github.mjeanroy.restassert.core.internal.assertions;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class AssertionResultTest {
+class AssertionResultTest {
 
 	@Test
-	public void it_should_be_a_success_result() {
+	void it_should_be_a_success_result() {
 		AssertionResult result = success();
 		assertThat(result.isSuccess()).isTrue();
 		assertThat(result.isFailure()).isFalse();
@@ -45,7 +45,7 @@ public class AssertionResultTest {
 	}
 
 	@Test
-	public void it_should_be_a_failure() {
+	void it_should_be_a_failure() {
 		RestAssertError error = new RestAssertErrorBuilder().build();
 		AssertionResult result = failure(error);
 		assertThat(result.isSuccess()).isFalse();
@@ -54,7 +54,7 @@ public class AssertionResultTest {
 	}
 
 	@Test
-	public void it_should_fail_if_error_object_is_null_with_a_failure() {
+	void it_should_fail_if_error_object_is_null_with_a_failure() {
 		assertThatThrownBy(invokeFailure(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Error object must not be null");

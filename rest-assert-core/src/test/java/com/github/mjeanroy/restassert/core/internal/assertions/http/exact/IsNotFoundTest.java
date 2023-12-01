@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsNotFoundTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return NOT_FOUND;
-	}
+class IsNotFoundTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotFound(response);
+	}
+
+	@Override
+	int status() {
+		return NOT_FOUND;
 	}
 }

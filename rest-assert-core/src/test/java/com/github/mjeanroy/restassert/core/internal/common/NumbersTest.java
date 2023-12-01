@@ -25,20 +25,20 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class NumbersTest {
+class NumbersTest {
 
 	@Test
-	public void it_should_get_long_value_from_string() {
+	void it_should_get_long_value_from_string() {
 		assertThat(Numbers.toLong("1", "Test")).isEqualTo(1L);
 	}
 
 	@Test
-	public void it_should_fail_if_string_value_is_not_a_valid_long_value() {
+	void it_should_fail_if_string_value_is_not_a_valid_long_value() {
 		String message = "My Custom Error Message";
 		assertThatThrownBy(toLong("test", message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
@@ -46,7 +46,7 @@ public class NumbersTest {
 	}
 
 	@Test
-	public void it_should_fail_with_null() {
+	void it_should_fail_with_null() {
 		String message = "My Custom Error Message";
 		assertThatThrownBy(toLong(null, message))
 				.isExactlyInstanceOf(NullPointerException.class)

@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 
-public class IsNotRedirectionTest extends AbstractHttpStatusOutOfTest {
-
-	@Override
-	protected Range getRange() {
-		return REDIRECTION;
-	}
+class IsNotRedirectionTest extends AbstractHttpStatusOutOfTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isNotRedirection(response);
+	}
+
+	@Override
+	Range getRange() {
+		return REDIRECTION;
 	}
 }

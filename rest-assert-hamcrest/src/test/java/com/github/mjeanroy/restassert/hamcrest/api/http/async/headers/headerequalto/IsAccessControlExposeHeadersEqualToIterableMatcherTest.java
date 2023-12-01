@@ -33,7 +33,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.isAccessControlExposeHeadersEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
-public class IsAccessControlExposeHeadersEqualToIterableMatcherTest extends AbstractAsyncHttpResponseHeaderEqualToMatcherTest {
+class IsAccessControlExposeHeadersEqualToIterableMatcherTest extends AbstractAsyncHttpResponseHeaderEqualToMatcherTest {
 
 	private static final List<String> VALUE = ACCESS_CONTROL_EXPOSE_HEADERS.getValues();
 

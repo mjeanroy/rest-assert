@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertHasAccessControlAllowHeadersTest extends AbstractSpringMockMvcHttpHeaderTest {
+class AssertHasAccessControlAllowHeadersTest extends AbstractSpringMockMvcHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

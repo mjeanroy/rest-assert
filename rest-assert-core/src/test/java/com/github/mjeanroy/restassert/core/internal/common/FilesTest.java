@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URL;
 import java.nio.file.Path;
@@ -32,12 +32,12 @@ import java.nio.file.Paths;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FilesTest {
+class FilesTest {
 
 	private static final String BR = System.getProperty("line.separator");
 
 	@Test
-	public void it_should_read_file_to_string() throws Exception {
+	void it_should_read_file_to_string() throws Exception {
 		URL resource = getClass().getResource("/test.txt");
 		Path path = Paths.get(resource.toURI());
 

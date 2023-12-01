@@ -29,20 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 
-public class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = LOCATION;
 	private static final String VALUE = HEADER.getValue();
 	private static final String NAME = HEADER.getName();
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -50,12 +45,17 @@ public class IsLocationEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
 	@Test
-	public void it_should_fail_with_same_value_but_different_case() {
+	void it_should_fail_with_same_value_but_different_case() {
 		// GIVEN
 		String expected = VALUE.toUpperCase();
 		String actual = VALUE.toLowerCase();

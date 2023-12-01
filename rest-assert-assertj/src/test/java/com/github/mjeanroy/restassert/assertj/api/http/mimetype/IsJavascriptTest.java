@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsJavascriptTest extends AbstractHttpResponseMimeTypeTest {
+class IsJavascriptTest extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
 	protected HttpResponseAssert run() {
@@ -45,7 +45,7 @@ public class IsJavascriptTest extends AbstractHttpResponseMimeTypeTest {
 	}
 
 	@Override
-	protected String getMimeType() {
+	String getMimeType() {
 		return JAVASCRIPT.get(0);
 	}
 }

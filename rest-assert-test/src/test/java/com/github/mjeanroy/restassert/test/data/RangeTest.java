@@ -27,12 +27,12 @@ package com.github.mjeanroy.restassert.test.data;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class RangeTest {
+class RangeTest {
 
 	@Test
-	public void it_should_create_range() {
+	void it_should_create_range() {
 		int start = 200;
 		int end = 299;
 		Range range = Range.range(start, end);
@@ -43,12 +43,12 @@ public class RangeTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(Range.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		Range range = Range.range(200, 299);
 		assertThat(range.toString()).isEqualTo("Range{start=200, end=299}");
 	}

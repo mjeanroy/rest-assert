@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractOkHttpStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsXssProtectionEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsXssProtectionEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final XssProtection VALUE = XssProtection.enableModeBlock();
 

@@ -30,7 +30,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
 
-public class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowCredentialsEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final boolean VALUE = Boolean.parseBoolean(ACCESS_CONTROL_ALLOW_CREDENTIALS.getValue());
 

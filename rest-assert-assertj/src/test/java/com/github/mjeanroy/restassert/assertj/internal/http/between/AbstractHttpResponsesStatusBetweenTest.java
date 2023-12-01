@@ -29,19 +29,18 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHttpResponsesStatusBetweenTest {
+abstract class AbstractHttpResponsesStatusBetweenTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_status_code_is_in_bounds() {
+	void should_pass_if_status_code_is_in_bounds() {
 		Range range = getRange();
 		for (int i = range.getStart(); i <= range.getEnd(); i++) {
 			HttpResponse httpResponse = new HttpResponseBuilderImpl()
@@ -53,7 +52,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 	}
 
 	@Test
-	public void should_fail_if_status_code_are_not_in_bounds() {
+	void should_fail_if_status_code_are_not_in_bounds() {
 		AssertionInfo info = someInfo();
 		Range range = getRange();
 		int start = range.getStart();
@@ -76,7 +75,7 @@ public abstract class AbstractHttpResponsesStatusBetweenTest {
 		}
 	}
 
-	protected abstract Range getRange();
+	abstract Range getRange();
 
-	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
+	abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

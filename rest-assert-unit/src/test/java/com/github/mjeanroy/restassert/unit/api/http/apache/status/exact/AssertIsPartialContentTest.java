@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PARTIAL_CO
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsPartialContentTest extends AbstractApacheHttpStatusTest {
+class AssertIsPartialContentTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsSuccessTest extends AbstractSpringMockMvcHttpStatusBetweenTest {
+class AssertIsSuccessTest extends AbstractSpringMockMvcHttpStatusBetweenTest {
 
 	@Override
 	protected Range getRange() {

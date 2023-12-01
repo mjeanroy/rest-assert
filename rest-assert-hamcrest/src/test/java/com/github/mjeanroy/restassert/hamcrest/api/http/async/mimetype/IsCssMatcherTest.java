@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.AsyncHttpResponseMatchers.isCss;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class IsCssMatcherTest extends AbstractAsyncHttpResponseMimeTypeMatcherTest {
+class IsCssMatcherTest extends AbstractAsyncHttpResponseMimeTypeMatcherTest {
 
 	@Override
 	protected String getMimeType() {

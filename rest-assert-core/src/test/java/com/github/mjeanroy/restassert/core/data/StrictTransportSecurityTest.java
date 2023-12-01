@@ -25,13 +25,14 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class StrictTransportSecurityTest {
+class StrictTransportSecurityTest {
+
 	@Test
-	public void it_should_create_strict_transport_security_with_max_age() {
+	void it_should_create_strict_transport_security_with_max_age() {
 		StrictTransportSecurity sts = new StrictTransportSecurity(3600, false, false);
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -48,7 +49,7 @@ public class StrictTransportSecurityTest {
 	}
 
 	@Test
-	public void it_should_create_strict_transport_security_with_include_sub_domains() {
+	void it_should_create_strict_transport_security_with_include_sub_domains() {
 		StrictTransportSecurity sts = new StrictTransportSecurity(3600, true, false);
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -65,7 +66,7 @@ public class StrictTransportSecurityTest {
 	}
 
 	@Test
-	public void it_should_create_strict_transport_security_with_include_preload() {
+	void it_should_create_strict_transport_security_with_include_preload() {
 		StrictTransportSecurity sts = new StrictTransportSecurity(3600, true, true);
 
 		assertThat(sts.getMaxAge()).isEqualTo(3600);
@@ -82,7 +83,7 @@ public class StrictTransportSecurityTest {
 	}
 
 	@Test
-	public void it_should_implement_equals() {
+	void it_should_implement_equals() {
 		EqualsVerifier.forClass(StrictTransportSecurity.class).verify();
 	}
 }

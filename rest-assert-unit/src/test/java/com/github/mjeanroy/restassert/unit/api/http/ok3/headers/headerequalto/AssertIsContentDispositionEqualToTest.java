@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_DISPOSITION;
 
-public class AssertIsContentDispositionEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsContentDispositionEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 

@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PL
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsTextTest extends AbstractCoreHttpClientMimeTypeTest {
+class AssertIsTextTest extends AbstractCoreHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

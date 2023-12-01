@@ -28,16 +28,12 @@ import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
-public abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
+abstract class AbstractHttpResponseStatusTest extends AbstractHttpResponseTest {
 
 	@Override
 	protected HttpResponseAssert createApi() {
 		return new HttpResponseAssert(new HttpResponseBuilderImpl().setStatus(status()).build());
 	}
 
-	protected abstract int status();
-
-	protected abstract HttpResponseAssert run();
-
-	protected abstract void verifyApiCall();
+	abstract int status();
 }

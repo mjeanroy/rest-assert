@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class DoesNotHaveContentEncodingTest extends AbstractDoesNotHaveHttpHeaderTest {
-
-	@Override
-	protected Header getHeader() {
-		return GZIP_CONTENT_ENCODING;
-	}
+class DoesNotHaveContentEncodingTest extends AbstractDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.doesNotHaveContentEncoding(response);
+	}
+
+	@Override
+	Header getHeader() {
+		return GZIP_CONTENT_ENCODING;
 	}
 }

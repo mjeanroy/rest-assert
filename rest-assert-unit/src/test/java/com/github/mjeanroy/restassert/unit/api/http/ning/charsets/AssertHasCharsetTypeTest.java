@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractNingHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractNingHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

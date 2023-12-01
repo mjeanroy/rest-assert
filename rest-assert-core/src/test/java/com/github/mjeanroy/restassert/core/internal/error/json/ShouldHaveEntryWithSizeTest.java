@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveEntryWithSizeTest {
+class ShouldHaveEntryWithSizeTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String entry = "foo";
 		int actualSize = 0;
 		int expectedSize = 5;

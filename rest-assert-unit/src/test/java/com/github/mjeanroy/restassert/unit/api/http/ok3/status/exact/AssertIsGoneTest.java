@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class AssertIsGoneTest extends AbstractOkHttpStatusTest {
+class AssertIsGoneTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

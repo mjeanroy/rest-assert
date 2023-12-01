@@ -29,15 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class IsRequestEntityTooLargeTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return REQUEST_ENTITY_TOO_LARGE;
-	}
+class IsRequestEntityTooLargeTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isRequestEntityTooLarge(response);
+	}
+
+	@Override
+	int status() {
+		return REQUEST_ENTITY_TOO_LARGE;
 	}
 }

@@ -31,7 +31,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class AssertIsContentTypeOptionsEqualToTest extends AbstractNingHttpHeaderEqualToTest {
+class AssertIsContentTypeOptionsEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
@@ -49,15 +49,5 @@ public class AssertIsContentTypeOptionsEqualToTest extends AbstractNingHttpHeade
 	@Override
 	protected void run(String message, Response actual) {
 		NingHttpAssert.assertIsContentTypeOptionsEqualTo(message, actual, VALUE);
-	}
-
-	@Override
-	public void it_should_fail_with_if_response_does_not_contain_header() {
-		// Can't provide a failed value since only "nosniff" is authorized.
-	}
-
-	@Override
-	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
-		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

@@ -36,8 +36,8 @@ import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import com.github.mjeanroy.restassert.test.json.JsonArray;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -52,22 +52,22 @@ public abstract class AbstractJsonComparatorTest {
 
 	private JsonComparator comparator;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		comparator = new DefaultJsonComparator(jsonParser());
 	}
 
 	protected abstract JsonParser jsonParser();
 
 	@Test
-	public void it_should_create_comparator_with_arguments() throws Exception {
+	void it_should_create_comparator_with_arguments() throws Exception {
 		JsonParser parser = mock(JsonParser.class);
 		JsonComparator comparator = new DefaultJsonComparator(parser);
 		assertThat(readField(comparator, "parser", true)).isSameAs(parser);
 	}
 
 	@Test
-	public void it_should_fail_if_actual_should_be_an_array() {
+	void it_should_fail_if_actual_should_be_an_array() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", "bar")
 		);
@@ -82,7 +82,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_should_be_an_object() {
+	void it_should_fail_if_actual_should_be_an_object() {
 		JsonArray actual = jsonArray(
 				jsonObject(
 						jsonEntry("foo", "bar")
@@ -97,7 +97,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_does_not_contain_expected_entry() {
+	void it_should_fail_if_actual_does_not_contain_expected_entry() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", "bar")
 		);
@@ -111,7 +111,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_contain_an_unexpected_entry() {
+	void it_should_fail_if_actual_contain_an_unexpected_entry() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", "bar"),
 				jsonEntry("bar", "foo")
@@ -125,7 +125,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_null_and_expected_is_not() {
+	void it_should_fail_if_actual_entry_is_null_and_expected_is_not() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", null)
 		);
@@ -138,7 +138,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_string_and_expected_is_not() {
+	void it_should_fail_if_actual_entry_is_string_and_expected_is_not() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", "bar")
 		);
@@ -151,7 +151,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_boolean_and_expected_is_not() {
+	void it_should_fail_if_actual_entry_is_boolean_and_expected_is_not() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", true)
 		);
@@ -164,7 +164,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_object_and_expected_is_not() {
+	void it_should_fail_if_actual_entry_is_object_and_expected_is_not() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", jsonObject(
 						jsonEntry("hello", "world")
@@ -179,7 +179,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_array_and_expected_is_not() {
+	void it_should_fail_if_actual_entry_is_array_and_expected_is_not() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", jsonArray(
 						jsonObject(
@@ -196,7 +196,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_array_and_expected_is_array_with_different_size() {
+	void it_should_fail_if_actual_entry_is_array_and_expected_is_array_with_different_size() {
 		JsonObject actual = jsonObject(
 			jsonEntry("foo", jsonArray(1, 2, 3))
 		);
@@ -209,7 +209,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_numbers() {
+	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_numbers() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", 1.0)
 		);
@@ -222,7 +222,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_strings() {
+	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_strings() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", "bar1")
 		);
@@ -235,7 +235,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_booleans() {
+	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_booleans() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", true)
 		);
@@ -248,7 +248,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_nested_object() {
+	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_nested_object() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", jsonObject(
 						jsonEntry("bar", true)
@@ -265,7 +265,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_array_values() {
+	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_array_values() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", jsonArray("foo", 1.0, true))
 		);
@@ -278,7 +278,7 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_array_objects() {
+	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_array_objects() {
 		JsonObject actual = jsonObject(
 				jsonEntry("foo", jsonArray(
 						jsonObject(
@@ -299,28 +299,28 @@ public abstract class AbstractJsonComparatorTest {
 	}
 
 	@Test
-	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_numbers() {
+	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_numbers() {
 		JsonArray actual = jsonArray("foo", 1.0);
 		JsonArray expected = jsonArray("foo", 2.0);
 		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[1]", 1.0, 2.0);
 	}
 
 	@Test
-	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_strings() {
+	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_strings() {
 		JsonArray actual = jsonArray("foo", 1.0);
 		JsonArray expected = jsonArray("bar", 1.0);
 		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[0]", "foo", "bar");
 	}
 
 	@Test
-	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_booleans() {
+	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_booleans() {
 		JsonArray actual = jsonArray("foo", true);
 		JsonArray expected = jsonArray("foo", false);
 		checkShouldBeEqualTo(actual.toJson(), expected.toJson(), "[1]", true, false);
 	}
 
 	@Test
-	public void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_objects() {
+	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_objects() {
 		JsonArray actual = jsonArray(
 				jsonObject(
 						jsonEntry("foo", "foo")

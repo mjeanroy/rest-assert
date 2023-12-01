@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasCookie;
 
-public class HasCookieWithNameAndValueMatcherTest extends AbstractSpringMockMvcHttpResponseHasCookieTest {
+class HasCookieWithNameAndValueMatcherTest extends AbstractSpringMockMvcHttpResponseHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 

@@ -25,14 +25,14 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.ContentEncoding.Directive;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ContentEncodingParserTest {
+class ContentEncodingParserTest {
 
 	@Test
-	public void it_should_parse_header() {
+	void it_should_parse_header() {
 		ContentEncoding contentEncoding = ContentEncoding.parser().parse("compress, identity");
 		assertThat(contentEncoding.getDirectives()).hasSize(2).containsExactly(Directive.COMPRESS, Directive.IDENTITY);
 		assertThat(contentEncoding.serializeValue()).isEqualTo("compress, identity");
@@ -44,7 +44,7 @@ public class ContentEncodingParserTest {
 	}
 
 	@Test
-	public void it_should_parse_header_case_insensitive() {
+	void it_should_parse_header_case_insensitive() {
 		ContentEncoding contentEncoding = ContentEncoding.parser().parse("GZIP");
 		assertThat(contentEncoding.getDirectives()).hasSize(1).containsExactly(Directive.GZIP);
 		assertThat(contentEncoding.serializeValue()).isEqualTo("gzip");

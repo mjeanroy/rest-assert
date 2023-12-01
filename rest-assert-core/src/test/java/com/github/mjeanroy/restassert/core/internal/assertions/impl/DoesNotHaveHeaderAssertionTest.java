@@ -28,15 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class DoesNotHaveHeaderAssertionTest {
+class DoesNotHaveHeaderAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_not_set() {
+	void it_should_not_fail_if_header_is_not_set() {
 		String name = "foo";
 		DoesNotHaveHeaderAssertion assertion = new DoesNotHaveHeaderAssertion(name);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader("bar", "bar").build();
@@ -49,7 +49,7 @@ public class DoesNotHaveHeaderAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_set() {
+	void it_should_fail_if_header_is_set() {
 		String name = "foo";
 		DoesNotHaveHeaderAssertion assertion = new DoesNotHaveHeaderAssertion(name);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addHeader(name, "bar").build();
@@ -63,21 +63,21 @@ public class DoesNotHaveHeaderAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_null() {
+	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(doesNotHaveHeaderAssertion(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_empty() {
+	void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(doesNotHaveHeaderAssertion(""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_blank() {
+	void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(doesNotHaveHeaderAssertion("   "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");

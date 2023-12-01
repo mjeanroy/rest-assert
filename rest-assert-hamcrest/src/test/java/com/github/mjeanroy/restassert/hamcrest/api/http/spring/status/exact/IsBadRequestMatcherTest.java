@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isBadRequest;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUEST;
 
-public class IsBadRequestMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsBadRequestMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

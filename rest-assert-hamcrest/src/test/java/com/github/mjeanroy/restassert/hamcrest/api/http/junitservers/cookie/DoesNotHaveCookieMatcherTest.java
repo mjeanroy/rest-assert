@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.doesNotHaveCookie;
 
-public class DoesNotHaveCookieMatcherTest extends AbstractJunitServersHttpResponseDoesNotHaveCookieMatcherTest {
+class DoesNotHaveCookieMatcherTest extends AbstractJunitServersHttpResponseDoesNotHaveCookieMatcherTest {
 
 	@Override
 	protected Cookie cookie() {

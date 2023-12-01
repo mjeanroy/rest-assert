@@ -34,7 +34,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.eq;
 import static org.mockito.Mockito.verify;
 
-public class IsContentTypeOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsContentTypeOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 

@@ -30,7 +30,7 @@ import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEq
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathSuccess;
 
-public class AssertIsEqualToIgnoringPathTest extends AbstractJsonIsEqualToIgnoringTest<Path> {
+class AssertIsEqualToIgnoringPathTest extends AbstractJsonIsEqualToIgnoringTest<Path> {
 
 	@Override
 	protected void run(Path actual) {

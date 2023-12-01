@@ -33,7 +33,7 @@ import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class HasMimeTypeTest extends AbstractHttpResponseMimeTypeTest {
+class HasMimeTypeTest extends AbstractHttpResponseMimeTypeTest {
 
 	@Override
 	protected HttpResponseAssert run() {
@@ -46,7 +46,7 @@ public class HasMimeTypeTest extends AbstractHttpResponseMimeTypeTest {
 	}
 
 	@Override
-	protected String getMimeType() {
+	String getMimeType() {
 		return APPLICATION_JSON;
 	}
 }

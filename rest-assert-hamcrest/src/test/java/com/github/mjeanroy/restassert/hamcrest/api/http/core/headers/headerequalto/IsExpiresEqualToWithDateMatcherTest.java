@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatch
 import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-public class IsExpiresEqualToWithDateMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
+class IsExpiresEqualToWithDateMatcherTest extends AbstractCoreHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = EXPIRES.getValue();
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";

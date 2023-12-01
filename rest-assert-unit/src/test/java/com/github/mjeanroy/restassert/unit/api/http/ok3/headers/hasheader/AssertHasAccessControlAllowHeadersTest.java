@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
-public class AssertHasAccessControlAllowHeadersTest extends AbstractOkHttpHeaderTest {
+class AssertHasAccessControlAllowHeadersTest extends AbstractOkHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

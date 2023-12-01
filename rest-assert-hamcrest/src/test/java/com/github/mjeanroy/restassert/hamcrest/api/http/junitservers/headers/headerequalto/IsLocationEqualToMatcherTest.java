@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isLocationEqualTo;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 
-public class IsLocationEqualToMatcherTest extends AbstractJunitServersHttpResponseHeaderEqualToMatcherTest {
+class IsLocationEqualToMatcherTest extends AbstractJunitServersHttpResponseHeaderEqualToMatcherTest {
 
 	private static final String VALUE = LOCATION.getValue();
 

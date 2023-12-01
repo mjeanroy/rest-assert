@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICA
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsJsonTest extends AbstractGoogleHttpClientMimeTypeTest {
+class AssertIsJsonTest extends AbstractGoogleHttpClientMimeTypeTest {
 
 	@Override
 	protected String getMimeType() {

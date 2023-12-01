@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsAcceptedTest extends AbstractNingHttpStatusTest {
+class AssertIsAcceptedTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

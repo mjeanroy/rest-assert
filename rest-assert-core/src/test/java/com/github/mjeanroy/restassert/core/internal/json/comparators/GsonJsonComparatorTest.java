@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser.gsonParser;
 
-public class GsonJsonComparatorTest extends AbstractJsonComparatorTest {
+class GsonJsonComparatorTest extends AbstractJsonComparatorTest {
 
 	@Override
 	protected JsonParser jsonParser() {

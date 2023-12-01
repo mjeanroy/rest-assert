@@ -30,7 +30,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertIsHeaderEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsHeaderEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final String NAME = "foo";
 

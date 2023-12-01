@@ -28,11 +28,11 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
-public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = LAST_MODIFIED;
 	private static final String VALUE = HEADER.getValue();
@@ -40,13 +40,13 @@ public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 	private static final String FAILED_VALUE = "Wed, 15 Nov 1995 12:45:26 GMT";
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.isLastModifiedEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.isLastModifiedEqualTo(response, VALUE);
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
@@ -55,18 +55,18 @@ public class IsLastModifiedEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	boolean allowMultipleValues() {
 		return false;
 	}
 
 	@Test
-	public void it_should_support_obsolete_rfc_850_format() {
+	void it_should_support_obsolete_rfc_850_format() {
 		// GIVEN
 		invokeTest("Wednesday, 15-Nov-95 12:45:26 GMT");
 	}
 
 	@Test
-	public void it_should_support_obsolete_asctime_format() {
+	void it_should_support_obsolete_asctime_format() {
 		invokeTest("Wed Nov 15 12:45:26 1995");
 	}
 

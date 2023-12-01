@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpRe
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.junitservers.JunitServersHttpResponseBuilder;
 
-public class JunitServersHttpResponseTest extends AbstractHttpResponseTest<com.github.mjeanroy.junit.servers.client.HttpResponse> {
+class JunitServersHttpResponseTest extends AbstractHttpResponseTest<com.github.mjeanroy.junit.servers.client.HttpResponse> {
 
 	@Override
 	protected HttpResponseBuilder<com.github.mjeanroy.junit.servers.client.HttpResponse> getBuilder() {

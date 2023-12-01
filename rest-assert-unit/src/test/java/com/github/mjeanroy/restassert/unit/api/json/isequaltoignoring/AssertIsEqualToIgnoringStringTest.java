@@ -28,7 +28,7 @@ import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEq
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 
-public class AssertIsEqualToIgnoringStringTest extends AbstractJsonIsEqualToIgnoringTest<String> {
+class AssertIsEqualToIgnoringStringTest extends AbstractJsonIsEqualToIgnoringTest<String> {
 
 	@Override
 	protected void run(String actual) {

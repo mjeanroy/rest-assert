@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ToStringBuilderTest {
+class ToStringBuilderTest {
 
 	@Test
-	public void it_should_generate_string_value() {
+	void it_should_generate_string_value() {
 		String output = ToStringBuilder.toStringBuilder(getClass())
 			.append("id", 1L)
 			.append("name", "John Doe")

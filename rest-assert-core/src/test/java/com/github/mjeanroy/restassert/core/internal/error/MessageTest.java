@@ -25,16 +25,16 @@
 package com.github.mjeanroy.restassert.core.internal.error;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MessageTest {
+class MessageTest {
 
 	@Test
-	public void it_should_create_simple_message() {
+	void it_should_create_simple_message() {
 		String str = "Simple Message";
 
 		Message message = Message.message(str);
@@ -46,7 +46,7 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_create_message_with_one_argument() {
+	void it_should_create_message_with_one_argument() {
 		String str = "Simple Message: %s";
 		Object arg = "test";
 
@@ -59,7 +59,7 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_create_message_with_arguments() {
+	void it_should_create_message_with_arguments() {
 		String str = "Simple Message: %s %s";
 		Object arg1 = "test1";
 		Object arg2 = "test2";
@@ -73,7 +73,7 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_concat_message_to_null() {
+	void it_should_concat_message_to_null() {
 		String str = "Simple Message";
 
 		Message message1 = null;
@@ -87,7 +87,7 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_concat_null_to_message() {
+	void it_should_concat_null_to_message() {
 		String str = "Simple Message";
 
 		Message message1 = Message.message(str);
@@ -101,7 +101,7 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_concat_message_to_other_message_without_arguments() {
+	void it_should_concat_message_to_other_message_without_arguments() {
 		String str1 = "First Message";
 		String str2 = "Second Message";
 
@@ -123,7 +123,7 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_concat_message_to_other_message_with_arguments() {
+	void it_should_concat_message_to_other_message_with_arguments() {
 		String str1 = "First Message From %s";
 		String str2 = "Second Message From %s To %s";
 
@@ -150,12 +150,12 @@ public class MessageTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(Message.class).verify();
 	}
 
 	@Test
-	public void it_should_implement_to_string() {
+	void it_should_implement_to_string() {
 		String str = "Simple Message: %s %s";
 		Object arg1 = "test1";
 		Object arg2 = "test2";

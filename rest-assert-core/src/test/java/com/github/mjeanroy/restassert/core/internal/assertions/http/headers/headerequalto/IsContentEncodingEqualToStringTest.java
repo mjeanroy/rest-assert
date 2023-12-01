@@ -31,9 +31,9 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualToTest {
+class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final String VALUE = HEADER.getValue();
@@ -41,17 +41,17 @@ public class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualT
 	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isContentEncodingEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return false;
 	}
 
@@ -61,21 +61,21 @@ public class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualT
 	}
 
 	@Test
-	public void it_should_pass_with_case_insensitive_comparison() {
+	void it_should_pass_with_case_insensitive_comparison() {
 		String actual = VALUE.toUpperCase();
 		String expected = actual.toLowerCase();
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
-	public void it_should_pass_with_list_comparison() {
+	void it_should_pass_with_list_comparison() {
 		String actual = "compress, identity";
 		String expected = actual.toUpperCase();
 		doTestSuccess(actual, expected);
 	}
 
 	@Test
-	public void it_should_not_pass_with_list_in_wrong_order() {
+	void it_should_not_pass_with_list_in_wrong_order() {
 		// GIVEN
 		String expected = "compress, identity";
 		String actual = "identity, compress";

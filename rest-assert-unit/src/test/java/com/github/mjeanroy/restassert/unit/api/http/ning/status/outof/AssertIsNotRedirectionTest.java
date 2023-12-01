@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsNotRedirectionTest extends AbstractNingHttpStatusOutOfTest {
+class AssertIsNotRedirectionTest extends AbstractNingHttpStatusOutOfTest {
 
 	@Override
 	protected Range getRange() {

@@ -25,14 +25,14 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.CacheControl.Visibility;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CacheControlBuilderTest {
+class CacheControlBuilderTest {
 
 	@Test
-	public void it_should_create_no_cache_header() {
+	void it_should_create_no_cache_header() {
 		CacheControl expected = CacheControl.builder()
 			.noCache()
 			.build();
@@ -63,7 +63,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_no_store_header() {
+	void it_should_create_no_store_header() {
 		CacheControl expected = CacheControl.builder()
 			.noCache()
 			.noStore()
@@ -95,7 +95,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_public_with_max_age_header() {
+	void it_should_create_public_with_max_age_header() {
 		CacheControl expected = CacheControl.builder()
 			.noCache()
 			.noStore()
@@ -128,7 +128,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_private_with_max_age_header() {
+	void it_should_create_private_with_max_age_header() {
 		CacheControl expected = CacheControl.builder()
 			.visibility(Visibility.PRIVATE)
 			.noCache()
@@ -162,7 +162,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_private_with_must_revalidate_header() {
+	void it_should_create_private_with_must_revalidate_header() {
 		CacheControl expected = CacheControl.builder()
 			.visibility(Visibility.PRIVATE)
 			.noCache()
@@ -197,7 +197,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_private_with_proxy_revalidate_header() {
+	void it_should_create_private_with_proxy_revalidate_header() {
 		CacheControl expected = CacheControl.builder()
 			.visibility(Visibility.PRIVATE)
 			.noCache()
@@ -233,7 +233,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_private_with_no_transform_header() {
+	void it_should_create_private_with_no_transform_header() {
 		CacheControl expected = CacheControl.builder()
 			.visibility(Visibility.PRIVATE)
 			.noCache()
@@ -270,7 +270,7 @@ public class CacheControlBuilderTest {
 	}
 
 	@Test
-	public void it_should_create_private_with_s_max_age_header() {
+	void it_should_create_private_with_s_max_age_header() {
 		CacheControl expected = CacheControl.builder()
 			.visibility(Visibility.PRIVATE)
 			.noCache()

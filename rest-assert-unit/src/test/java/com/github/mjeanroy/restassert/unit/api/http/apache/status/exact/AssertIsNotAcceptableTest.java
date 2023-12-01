@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_ACCEPT
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
 
-public class AssertIsNotAcceptableTest extends AbstractApacheHttpStatusTest {
+class AssertIsNotAcceptableTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

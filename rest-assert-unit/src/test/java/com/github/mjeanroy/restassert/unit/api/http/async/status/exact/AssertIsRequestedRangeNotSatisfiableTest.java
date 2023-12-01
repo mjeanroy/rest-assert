@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class AssertIsRequestedRangeNotSatisfiableTest extends AbstractAsyncHttpStatusTest {
+class AssertIsRequestedRangeNotSatisfiableTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

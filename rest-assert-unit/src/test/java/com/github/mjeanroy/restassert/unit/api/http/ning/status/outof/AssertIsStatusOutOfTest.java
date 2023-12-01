@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
-public class AssertIsStatusOutOfTest extends AbstractNingHttpStatusOutOfTest {
+class AssertIsStatusOutOfTest extends AbstractNingHttpStatusOutOfTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

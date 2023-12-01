@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.spring.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertHasCharsetTest extends AbstractSpringMockMvcHttpAssertCharsetTest {
+class AssertHasCharsetTest extends AbstractSpringMockMvcHttpAssertCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 

@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractOkHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

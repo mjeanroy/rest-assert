@@ -28,7 +28,8 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -38,17 +39,17 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessR
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static java.util.Arrays.asList;
 
-public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
+abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 
 	static JsonAssertions assertions;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	static void setUp() {
 		assertions = JsonAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		String actual = actual();
 		T expected = successObject();
 		List<String> ignoringKeys = asList("str", "nb", "bool");
@@ -58,7 +59,7 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 	}
 
 	@Test
-	public void it_should_support_json_path() {
+	void it_should_support_json_path() {
 		String actual = actual();
 		T expected = failureObject();
 		List<String> ignoringKeys = asList("$.str", "$.nb", "$.bool", "$.array[0:3]");
@@ -68,7 +69,7 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		String actual = actual();
 		T expected = failureObject();
 		List<String> ignoringKeys = asList("str", "nb", "bool");
@@ -88,13 +89,13 @@ public abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		assertFailureResult(result, CompositeError.class, expectedPattern, args);
 	}
 
-	protected abstract AssertionResult run(String actual, T expected, Iterable<String> ignoringKeys);
+	abstract AssertionResult run(String actual, T expected, Iterable<String> ignoringKeys);
+
+	abstract T successObject();
+
+	abstract T failureObject();
 
 	private static String actual() {
 		return jsonSuccess();
 	}
-
-	protected abstract T successObject();
-
-	protected abstract T failureObject();
 }

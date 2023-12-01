@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_TEMP
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsMovedTemporarilyTest extends AbstractGoogleHttpStatusTest {
+class AssertIsMovedTemporarilyTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

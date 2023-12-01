@@ -29,19 +29,19 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public abstract class AbstractHttpResponsesStatusOutOfTest {
+abstract class AbstractHttpResponsesStatusOutOfTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass() {
+	void should_pass() {
 		Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
@@ -52,7 +52,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 	}
 
 	@Test
-	public void should_fail() {
+	void should_fail() {
 		AssertionInfo info = someInfo();
 		Range range = getRange();
 		int start = range.getStart();
@@ -69,7 +69,7 @@ public abstract class AbstractHttpResponsesStatusOutOfTest {
 		}
 	}
 
-	protected abstract Range getRange();
+	abstract Range getRange();
 
-	protected abstract void run(AssertionInfo info, HttpResponse httpResponse);
+	abstract void run(AssertionInfo info, HttpResponse httpResponse);
 }

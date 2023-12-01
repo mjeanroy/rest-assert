@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -35,7 +35,7 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 public abstract class AbstractHttpResponseStatusOutOfMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		final Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
@@ -45,7 +45,7 @@ public abstract class AbstractHttpResponseStatusOutOfMatcherTest<T> extends Abst
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		doTest(new TestInvocation<Integer>() {
 			@Override
 			public void invokeTest(Integer status) {

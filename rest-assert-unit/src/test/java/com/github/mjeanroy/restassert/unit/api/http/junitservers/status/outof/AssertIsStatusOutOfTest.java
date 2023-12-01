@@ -30,7 +30,7 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsStatusOutOfTest extends AbstractJunitServersHttpStatusOutOfTest {
+class AssertIsStatusOutOfTest extends AbstractJunitServersHttpStatusOutOfTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

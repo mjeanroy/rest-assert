@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isCsv;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSV;
 
-public class IsCsvMatcherTest extends AbstractJunitServersHttpResponseMimeTypeMatcherTest {
+class IsCsvMatcherTest extends AbstractJunitServersHttpResponseMimeTypeMatcherTest {
 
 	@Override
 	protected String getMimeType() {

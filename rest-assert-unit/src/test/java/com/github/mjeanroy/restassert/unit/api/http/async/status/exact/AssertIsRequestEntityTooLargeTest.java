@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractAsyncHttpStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

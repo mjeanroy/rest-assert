@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertHasHeaderTest extends AbstractSpringMockMvcHttpHeaderTest {
+class AssertHasHeaderTest extends AbstractSpringMockMvcHttpHeaderTest {
 
 	private static final String NAME = "X-MyHeader";
 

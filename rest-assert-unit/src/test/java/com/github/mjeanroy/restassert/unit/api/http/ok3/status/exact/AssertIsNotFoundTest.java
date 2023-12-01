@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 
-public class AssertIsNotFoundTest extends AbstractOkHttpStatusTest {
+class AssertIsNotFoundTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

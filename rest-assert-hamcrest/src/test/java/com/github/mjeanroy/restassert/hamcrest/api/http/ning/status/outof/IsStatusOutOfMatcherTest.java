@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.NingHttpResponseMatchers.isStatusOutOf;
 import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-public class IsStatusOutOfMatcherTest extends AbstractNingHttpResponseStatusOutOfMatcherTest {
+class IsStatusOutOfMatcherTest extends AbstractNingHttpResponseStatusOutOfMatcherTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

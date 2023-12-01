@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertHasDomain;
 
-public class AssertHasDomainTest extends AbstractCoreCookieTest {
+class AssertHasDomainTest extends AbstractCoreCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

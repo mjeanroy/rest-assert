@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_UR
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsRequestUriTooLongTest extends AbstractHttpResponseStatusTest {
+class IsRequestUriTooLongTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUEST_URI_TOO_LONG;
 	}
 

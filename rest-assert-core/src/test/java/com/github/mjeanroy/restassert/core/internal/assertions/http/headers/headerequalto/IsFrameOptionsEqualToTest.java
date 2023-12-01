@@ -29,14 +29,14 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.data.FrameOptions.allowFrom;
 import static com.github.mjeanroy.restassert.core.data.FrameOptions.sameOrigin;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final String NAME = HEADER.getName();
@@ -44,17 +44,17 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	private static final FrameOptions FAILED_VALUE = FrameOptions.sameOrigin();
 
 	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isFrameOptionsEqualTo(response, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
@@ -64,7 +64,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Test
-	public void it_should_check_that_allow_from_value_match() {
+	void it_should_check_that_allow_from_value_match() {
 		// GIVEN
 		String uri = "https://www.google.com";
 		String actual = "allow-from " + uri;
@@ -81,7 +81,7 @@ public class IsFrameOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 	}
 
 	@Test
-	public void it_should_check_that_allow_from_value_does_not_match() {
+	void it_should_check_that_allow_from_value_does_not_match() {
 		// GIVEN
 		String actual = "deny";
 		FrameOptions expected = sameOrigin();

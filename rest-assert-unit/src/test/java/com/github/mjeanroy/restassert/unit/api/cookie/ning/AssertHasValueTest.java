@@ -29,7 +29,7 @@ import com.ning.http.client.cookie.Cookie;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasValue;
 
-public class AssertHasValueTest extends AbstractNingHttpCookieTest {
+class AssertHasValueTest extends AbstractNingHttpCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

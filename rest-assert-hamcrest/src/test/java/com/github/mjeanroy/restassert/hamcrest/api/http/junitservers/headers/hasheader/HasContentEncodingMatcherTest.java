@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.hasContentEncoding;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class HasContentEncodingMatcherTest extends AbstractJunitServersHttpResponseHasHeaderMatcherTest {
+class HasContentEncodingMatcherTest extends AbstractJunitServersHttpResponseHasHeaderMatcherTest {
 
 	@Override
 	protected Header getHeader() {

@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TIMEOUT;
 
-public class AssertIsRequestTimeoutTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsRequestTimeoutTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

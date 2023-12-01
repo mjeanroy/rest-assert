@@ -31,20 +31,20 @@ import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAsser
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Range;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest<HttpResponse> {
+abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = HttpResponseAssertions.instance();
 	}
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		Range range = getRange();
 		for (int i = 0; i <= 999; i++) {
 			if (i < range.getStart() || i > range.getEnd()) {
@@ -55,7 +55,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		Range range = getRange();
 		int start = range.getStart();
 		int end = range.getEnd();
@@ -66,7 +66,7 @@ public abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest
 		}
 	}
 
-	protected abstract Range getRange();
+	abstract Range getRange();
 
 	private static HttpResponse newResponse(int status) {
 		return new HttpResponseBuilderImpl().setStatus(status).build();

@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHave
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveMimeTypeTest {
+class ShouldHaveMimeTypeTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String expectedMimeType = "application/json";
 		String actualMimeType = "application/xml";
 		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(expectedMimeType, actualMimeType);
@@ -48,7 +48,7 @@ public class ShouldHaveMimeTypeTest {
 	}
 
 	@Test
-	public void it_should_format_error_message_with_list() {
+	void it_should_format_error_message_with_list() {
 		List<String> expectedMimeType = asList("application/json", "application/javascript");
 		String actualMimeType = "application/xml";
 		ShouldHaveMimeType shouldHaveMimeType = shouldHaveMimeType(expectedMimeType, actualMimeType);

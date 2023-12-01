@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -39,14 +39,14 @@ public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTes
 	private static final String CUSTOM_MESSAGE = "foo";
 
 	@Test
-	public void it_should_pass_with_expected_header() {
+	void it_should_pass_with_expected_header() {
 		Header header = getHeader();
 		run(newHttpResponse(header));
 		run(CUSTOM_MESSAGE, newHttpResponse(header));
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_does_not_contain_header() {
+	void it_should_fail_with_if_response_does_not_contain_header() {
 		doTest(null, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {
@@ -56,7 +56,7 @@ public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTes
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
+	void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
 		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {

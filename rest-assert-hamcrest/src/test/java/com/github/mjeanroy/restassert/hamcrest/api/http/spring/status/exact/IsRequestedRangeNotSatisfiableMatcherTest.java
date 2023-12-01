@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.isRequestedRangeNotSatisfiable;
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUESTED_RANGE_NOT_SATISFIABLE;
 
-public class IsRequestedRangeNotSatisfiableMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
+class IsRequestedRangeNotSatisfiableMatcherTest extends AbstractSpringMockMvcHttpResponseStatusMatcherTest {
 
 	@Override
 	protected int status() {

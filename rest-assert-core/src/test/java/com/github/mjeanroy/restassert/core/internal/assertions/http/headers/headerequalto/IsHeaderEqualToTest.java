@@ -29,35 +29,35 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class IsHeaderEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsHeaderEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final String NAME = "ETag";
 
 	private static final String VALUE = "123";
 
 	@Override
-	protected Header getHeader() {
-		return header(NAME, VALUE);
-	}
-
-	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isHeaderEqualTo(response, NAME, VALUE);
 	}
 
-	@Test
-	public void it_should_fail_if_response_does_not_have_header() {
-		HttpResponse rsp = new HttpResponseBuilderImpl().build();
-		AssertionResult result = assertions.isHeaderEqualTo(rsp, NAME, VALUE);
-		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", NAME);
+	@Override
+	Header getHeader() {
+		return header(NAME, VALUE);
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	boolean allowMultipleValues() {
 		return false;
+	}
+
+	@Test
+	void it_should_fail_if_response_does_not_have_header() {
+		HttpResponse rsp = new HttpResponseBuilderImpl().build();
+		AssertionResult result = assertions.isHeaderEqualTo(rsp, NAME, VALUE);
+		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", NAME);
 	}
 }

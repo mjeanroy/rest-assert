@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class AssertIsTemporaryRedirectTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsTemporaryRedirectTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

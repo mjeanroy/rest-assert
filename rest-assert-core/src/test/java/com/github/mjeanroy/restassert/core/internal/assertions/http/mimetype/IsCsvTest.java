@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CS
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsCsvTest extends AbstractMimeTypeTest {
-
-	@Override
-	protected String getMimeType() {
-		return TEXT_CSV;
-	}
+class IsCsvTest extends AbstractMimeTypeTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isCsv(response);
+	}
+
+	@Override
+	String getMimeType() {
+		return TEXT_CSV;
 	}
 }

@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class AssertDoesNotHaveCookieTest extends AbstractCoreHttpDoesNotHaveCookieTest {
+class AssertDoesNotHaveCookieTest extends AbstractCoreHttpDoesNotHaveCookieTest {
 
 	@Override
 	protected Cookie cookie() {

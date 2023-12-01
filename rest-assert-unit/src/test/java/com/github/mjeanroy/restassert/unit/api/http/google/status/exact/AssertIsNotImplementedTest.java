@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEM
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsNotImplementedTest extends AbstractGoogleHttpStatusTest {
+class AssertIsNotImplementedTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

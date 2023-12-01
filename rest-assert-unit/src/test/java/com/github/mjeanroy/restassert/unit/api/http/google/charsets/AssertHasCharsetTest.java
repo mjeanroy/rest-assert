@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.google.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertHasCharsetTest extends AbstractGoogleHttpAssertCharsetTest {
+class AssertHasCharsetTest extends AbstractGoogleHttpAssertCharsetTest {
 
 	private static final String CHARSET = "utf-8";
 

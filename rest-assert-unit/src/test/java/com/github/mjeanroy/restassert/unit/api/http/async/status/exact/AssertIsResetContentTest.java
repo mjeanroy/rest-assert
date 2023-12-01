@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONT
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsResetContentTest extends AbstractAsyncHttpStatusTest {
+class AssertIsResetContentTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -35,7 +35,7 @@ import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-public class IsNotHttpOnlyTest extends AbstractApiTest<Cookies, CookieAssert> {
+class IsNotHttpOnlyTest extends AbstractApiTest<Cookies, CookieAssert> {
 
 	@Override
 	protected Cookies createAssertions() {

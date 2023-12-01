@@ -26,15 +26,15 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.bindings.javax.JavaxCookie;
 import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class JavaxAssertionsTest {
+class JavaxAssertionsTest {
 
 	@Test
-	public void it_should_create_new_cookie_assertion_object() {
+	void it_should_create_new_cookie_assertion_object() {
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
 		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
 

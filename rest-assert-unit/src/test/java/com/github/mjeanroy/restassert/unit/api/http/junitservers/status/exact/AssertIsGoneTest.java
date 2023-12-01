@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class AssertIsGoneTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsGoneTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

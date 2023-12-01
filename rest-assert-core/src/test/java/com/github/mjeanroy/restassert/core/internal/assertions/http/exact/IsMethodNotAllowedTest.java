@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsMethodNotAllowedTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return METHOD_NOT_ALLOWED;
-	}
+class IsMethodNotAllowedTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isMethodNotAllowed(response);
+	}
+
+	@Override
+	int status() {
+		return METHOD_NOT_ALLOWED;
 	}
 }

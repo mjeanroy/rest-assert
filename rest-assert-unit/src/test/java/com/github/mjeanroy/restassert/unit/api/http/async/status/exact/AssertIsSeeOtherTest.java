@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SEE_OTHER;
 
-public class AssertIsSeeOtherTest extends AbstractAsyncHttpStatusTest {
+class AssertIsSeeOtherTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

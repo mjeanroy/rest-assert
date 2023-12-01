@@ -34,7 +34,7 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
 
-public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
 

@@ -28,11 +28,10 @@ import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
-import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesHeaderTest {
@@ -40,7 +39,7 @@ public abstract class AbstractHttpResponsesHeaderTest {
 	protected final HttpResponses httpResponses = HttpResponses.instance();
 
 	@Test
-	public void should_pass_if_header_is_ok() {
+	void should_pass_if_header_is_ok() {
 		// GIVEN
 		Header header = getHeader();
 		HttpResponse httpResponse = newHttpResponse(header);
@@ -52,7 +51,7 @@ public abstract class AbstractHttpResponsesHeaderTest {
 	}
 
 	@Test
-	public void should_fail_if_header_is_not_available() {
+	void should_fail_if_header_is_not_available() {
 		// GIVEN
 		Header expectedHeader = getHeader();
 		Header header = header(expectedHeader.getValue(), expectedHeader.getName());

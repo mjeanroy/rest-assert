@@ -34,17 +34,17 @@ import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final List<RequestMethod> VALUE = asList(RequestMethod.GET, RequestMethod.POST);
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsAccessControlAllowMethodsEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return ACCESS_CONTROL_ALLOW_METHODS;
 	}
 }

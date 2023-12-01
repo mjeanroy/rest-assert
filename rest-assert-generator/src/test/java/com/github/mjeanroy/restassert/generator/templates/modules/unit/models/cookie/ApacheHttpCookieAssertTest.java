@@ -31,14 +31,14 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheH
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.apache.http.cookie.Cookie;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class ApacheHttpCookieAssertTest extends AbstractUnitTemplateModelTest {
+class ApacheHttpCookieAssertTest extends AbstractUnitTemplateModelTest {
 
 	private ApacheHttpCookieAssert cookieAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		cookieAssert = (ApacheHttpCookieAssert) apacheHttpCookieAssert();
 	}
 

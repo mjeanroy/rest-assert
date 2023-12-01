@@ -28,14 +28,14 @@ import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuil
 import com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert;
 import org.apache.http.cookie.Cookie;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class AssertIsHttpOnlyTest {
+class AssertIsHttpOnlyTest {
 
 	@Test
-	public void it_should_fail_because_of_unsupported_operation() {
+	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(assertIsHttpOnly(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
@@ -43,7 +43,7 @@ public class AssertIsHttpOnlyTest {
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message_because_of_unsupported_operation() {
+	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(assertIsHttpOnly("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)

@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

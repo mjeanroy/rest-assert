@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_REDIRECT;
 
-public class AssertIsPermanentRedirectTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsPermanentRedirectTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

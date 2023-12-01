@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.charsets;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsUtf8Test extends AbstractHttpResponseAssertionsCharsetTest {
+class IsUtf8Test extends AbstractHttpResponseAssertionsCharsetTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse httpResponse) {
@@ -35,7 +35,7 @@ public class IsUtf8Test extends AbstractHttpResponseAssertionsCharsetTest {
 	}
 
 	@Override
-	protected String expectedCharset() {
+	String expectedCharset() {
 		return "utf-8";
 	}
 }

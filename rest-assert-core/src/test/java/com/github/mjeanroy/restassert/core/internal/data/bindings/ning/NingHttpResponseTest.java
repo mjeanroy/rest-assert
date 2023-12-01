@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
 import com.ning.http.client.Response;
 
-public class NingHttpResponseTest extends AbstractHttpResponseTest<Response> {
+class NingHttpResponseTest extends AbstractHttpResponseTest<Response> {
 
 	@Override
 	protected HttpResponseBuilder<Response> getBuilder() {

@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PERMANENT_REDIRECT;
 
-public class AssertIsPermanentRedirectTest extends AbstractAsyncHttpStatusTest {
+class AssertIsPermanentRedirectTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

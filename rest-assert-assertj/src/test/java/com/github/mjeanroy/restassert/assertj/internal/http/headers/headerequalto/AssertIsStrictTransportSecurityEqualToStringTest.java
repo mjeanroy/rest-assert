@@ -30,19 +30,19 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TR
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
 	private static final String VALUE = HEADER.getValue();
 	private static final String FAILED_VALUE = "max-age=7200";
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsStrictTransportSecurityEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 

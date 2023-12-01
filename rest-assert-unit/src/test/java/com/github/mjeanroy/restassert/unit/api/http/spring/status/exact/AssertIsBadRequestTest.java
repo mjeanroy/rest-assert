@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUES
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsBadRequestTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsBadRequestTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

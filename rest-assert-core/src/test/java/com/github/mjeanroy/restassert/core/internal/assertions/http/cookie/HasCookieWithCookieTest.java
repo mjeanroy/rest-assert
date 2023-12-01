@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class HasCookieWithCookieTest extends AbstractHasCookieTest {
+class HasCookieWithCookieTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
@@ -40,17 +40,17 @@ public class HasCookieWithCookieTest extends AbstractHasCookieTest {
 			.build();
 
 	@Override
-	protected Cookie newCookie() {
+	protected AssertionResult run(HttpResponse response) {
+		return assertions.hasCookie(response, COOKIE);
+	}
+
+	@Override
+	Cookie newCookie() {
 		return COOKIE;
 	}
 
 	@Override
-	protected void verifyError(AssertionResult result) {
+	void verifyError(AssertionResult result) {
 		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie %s", COOKIE);
-	}
-
-	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.hasCookie(response, COOKIE);
 	}
 }

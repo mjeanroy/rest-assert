@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsLocationEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsLocationEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	private static final String VALUE = LOCATION.getValue();
 

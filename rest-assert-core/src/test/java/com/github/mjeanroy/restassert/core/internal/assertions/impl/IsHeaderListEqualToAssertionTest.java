@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -39,10 +39,10 @@ import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsHeaderListEqualToAssertionTest {
+class IsHeaderListEqualToAssertionTest {
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_single_value() {
+	void it_should_not_fail_if_header_is_set_with_expected_single_value() {
 		// GIVEN
 		String name = "foo";
 		String value = "bar";
@@ -59,7 +59,7 @@ public class IsHeaderListEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_header_is_set_with_expected_multiple_value() {
+	void it_should_not_fail_if_header_is_set_with_expected_multiple_value() {
 		// GIVEN
 		String name = "foo";
 		String value = "foo, bar";
@@ -76,7 +76,7 @@ public class IsHeaderListEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
+	void it_should_not_fail_if_multiple_value_header_contains_expected_value() {
 		// GIVEN
 		String name = "foo";
 		String value = "foo, bar";
@@ -93,7 +93,7 @@ public class IsHeaderListEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_not_set() {
+	void it_should_fail_if_header_is_not_set() {
 		// GIVEN
 		String name = "foo";
 		String value = "bar";
@@ -111,7 +111,7 @@ public class IsHeaderListEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_is_does_not_have_expected_value() {
+	void it_should_fail_if_header_is_does_not_have_expected_value() {
 		// GIVEN
 		String name = "foo";
 		String value = "bar";
@@ -129,7 +129,7 @@ public class IsHeaderListEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_single_value_header_has_multiple_values() {
+	void it_should_fail_if_single_value_header_has_multiple_values() {
 		// GIVEN
 		String name = "Content-Type";
 		IsHeaderListEqualToAssertion assertion = new IsHeaderListEqualToAssertion(name, singletonList("application/json"));
@@ -146,35 +146,35 @@ public class IsHeaderListEqualToAssertionTest {
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_null() {
+	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(isHeaderListEqualToAssertion(null, singletonList("foo")))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_empty() {
+	void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(isHeaderListEqualToAssertion("", singletonList("foo")))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_name_is_blank() {
+	void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(isHeaderListEqualToAssertion("   ", singletonList("foo")))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
-	public void it_should_fail_if_header_value_is_null() {
+	void it_should_fail_if_header_value_is_null() {
 		assertThatThrownBy(isHeaderListEqualToAssertion("name", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Values must not be empty");
 	}
 
 	@Test
-	public void it_should_fail_if_header_value_is_empty() {
+	void it_should_fail_if_header_value_is_empty() {
 		assertThatThrownBy(isHeaderListEqualToAssertion("name", Collections.<String>emptyList()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Values must not be empty");

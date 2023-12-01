@@ -31,7 +31,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
 
-public class AssertIsXmlTest extends AbstractOkHttpClientMimeTypeInTest {
+class AssertIsXmlTest extends AbstractOkHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

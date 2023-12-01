@@ -31,7 +31,7 @@ import java.util.List;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsJavascriptTest extends AbstractGoogleHttpClientMimeTypeInTest {
+class AssertIsJavascriptTest extends AbstractGoogleHttpClientMimeTypeInTest {
 
 	@Override
 	protected List<String> getMimeTypes() {

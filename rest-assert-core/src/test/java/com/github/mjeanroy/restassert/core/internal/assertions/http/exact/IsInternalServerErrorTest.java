@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_S
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsInternalServerErrorTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return INTERNAL_SERVER_ERROR;
-	}
+class IsInternalServerErrorTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isInternalServerError(response);
+	}
+
+	@Override
+	int status() {
+		return INTERNAL_SERVER_ERROR;
 	}
 }

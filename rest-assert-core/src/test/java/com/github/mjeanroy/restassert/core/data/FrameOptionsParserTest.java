@@ -26,23 +26,23 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class FrameOptionsParserTest {
+class FrameOptionsParserTest {
 
 	private FrameOptionsParser parser;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		parser = (FrameOptionsParser) FrameOptions.parser();
 	}
 
 	@Test
-	public void it_should_match_deny() {
+	void it_should_match_deny() {
 		FrameOptions header = parser.parse("deny");
 
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.DENY);
@@ -50,7 +50,7 @@ public class FrameOptionsParserTest {
 	}
 
 	@Test
-	public void it_should_match_deny_case_insensitive() {
+	void it_should_match_deny_case_insensitive() {
 		FrameOptions header = parser.parse("DENY");
 
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.DENY);
@@ -58,7 +58,7 @@ public class FrameOptionsParserTest {
 	}
 
 	@Test
-	public void it_should_match_same_origin() {
+	void it_should_match_same_origin() {
 		FrameOptions header = parser.parse("sameorigin");
 
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.SAME_ORIGIN);
@@ -66,7 +66,7 @@ public class FrameOptionsParserTest {
 	}
 
 	@Test
-	public void it_should_match_same_origin_case_insensitive() {
+	void it_should_match_same_origin_case_insensitive() {
 		FrameOptions header = parser.parse("SAMEORIGIN");
 
 		assertThat(header.getDirective()).isEqualTo(FrameOptions.Directive.SAME_ORIGIN);
@@ -74,7 +74,7 @@ public class FrameOptionsParserTest {
 	}
 
 	@Test
-	public void it_should_match_allow_from() {
+	void it_should_match_allow_from() {
 		String uri = "https://example.com";
 		FrameOptions header = parser.parse("allow-from " + uri);
 
@@ -83,7 +83,7 @@ public class FrameOptionsParserTest {
 	}
 
 	@Test
-	public void it_should_match_allow_from_case_insensitive() {
+	void it_should_match_allow_from_case_insensitive() {
 		String uri = "https://example.com";
 		FrameOptions header = parser.parse("ALLOW-FROM " + uri);
 
@@ -92,7 +92,7 @@ public class FrameOptionsParserTest {
 	}
 
 	@Test
-	public void it_should_fail_with_invalid_value() {
+	void it_should_fail_with_invalid_value() {
 		String value = "same-origin";
 		assertThatThrownBy(parse(parser, value))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)

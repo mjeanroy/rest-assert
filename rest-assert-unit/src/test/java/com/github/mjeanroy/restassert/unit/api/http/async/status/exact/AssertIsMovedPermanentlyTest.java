@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MOVED_PERM
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsMovedPermanentlyTest extends AbstractAsyncHttpStatusTest {
+class AssertIsMovedPermanentlyTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

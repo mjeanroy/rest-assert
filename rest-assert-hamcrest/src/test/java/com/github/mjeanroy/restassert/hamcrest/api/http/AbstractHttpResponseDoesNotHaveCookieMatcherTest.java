@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -37,12 +37,12 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 public abstract class AbstractHttpResponseDoesNotHaveCookieMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass_without_cookies() {
+	void it_should_pass_without_cookies() {
 		run(newHttpResponse(fakeCookie()));
 	}
 
 	@Test
-	public void it_should_fail_with_response_with_cookie() {
+	void it_should_fail_with_response_with_cookie() {
 		doTest(new TestInvocation<Cookie>() {
 			@Override
 			public void invokeTest(Cookie cookie) {

@@ -27,15 +27,15 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.apache;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class ApacheHttpCookieTest {
+class ApacheHttpCookieTest {
 
 	@Test
-	public void it_should_return_name() {
+	void it_should_return_name() {
 		String expectedName = "foo";
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setName(expectedName)
@@ -48,7 +48,7 @@ public class ApacheHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_value() {
+	void it_should_return_value() {
 		String expectedValue = "foo";
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setValue(expectedValue)
@@ -61,7 +61,7 @@ public class ApacheHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_domain() {
+	void it_should_return_domain() {
 		String expectedDomain = "foo";
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setDomain(expectedDomain)
@@ -74,7 +74,7 @@ public class ApacheHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_path() {
+	void it_should_return_path() {
 		String expectedPath = "foo";
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setPath(expectedPath)
@@ -87,7 +87,7 @@ public class ApacheHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_check_if_cookie_is_secured() {
+	void it_should_check_if_cookie_is_secured() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder()
 			.setSecure(true)
 			.build();
@@ -100,7 +100,7 @@ public class ApacheHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_zero_for_max_age() {
+	void it_should_return_zero_for_max_age() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
@@ -110,7 +110,7 @@ public class ApacheHttpCookieTest {
 	}
 
 	@Test
-	public void it_should_return_false_for_http_only() {
+	void it_should_return_false_for_http_only() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 

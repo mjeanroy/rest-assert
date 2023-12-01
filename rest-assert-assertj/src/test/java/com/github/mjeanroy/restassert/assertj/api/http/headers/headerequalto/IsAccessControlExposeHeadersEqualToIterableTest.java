@@ -36,7 +36,7 @@ import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpRespo
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsAccessControlExposeHeadersEqualToIterableTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlExposeHeadersEqualToIterableTest extends AbstractHttpResponseHeaderTest {
 
 	private static final List<String> VALUE = asList("Content-Length", "Content-Type");
 

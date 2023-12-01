@@ -29,7 +29,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.MULTIPLE_CHOICES;
 
-public class AssertIsMultipleChoicesTest extends AbstractApacheHttpStatusTest {
+class AssertIsMultipleChoicesTest extends AbstractApacheHttpStatusTest {
 
 	@Override
 	protected int status() {

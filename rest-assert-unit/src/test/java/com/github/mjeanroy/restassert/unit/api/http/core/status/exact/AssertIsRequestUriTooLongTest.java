@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractCoreHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

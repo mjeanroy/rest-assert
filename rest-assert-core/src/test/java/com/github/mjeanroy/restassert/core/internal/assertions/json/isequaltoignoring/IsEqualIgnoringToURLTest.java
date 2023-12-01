@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.isequaltoig
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -37,25 +37,25 @@ import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrl
 import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class IsEqualIgnoringToURLTest extends AbstractJsonAssertion_isEqualToIgnoring_Test<URL> {
+class IsEqualIgnoringToURLTest extends AbstractJsonAssertion_isEqualToIgnoring_Test<URL> {
 
 	@Override
-	protected AssertionResult run(String actual, URL expected, Iterable<String> ignoringKeys) {
+	AssertionResult run(String actual, URL expected, Iterable<String> ignoringKeys) {
 		return assertions.isEqualToIgnoring(actual, expected, ignoringKeys);
 	}
 
 	@Override
-	protected URL successObject() {
+	URL successObject() {
 		return jsonUrlSuccess();
 	}
 
 	@Override
-	protected URL failureObject() {
+	URL failureObject() {
 		return jsonUrlFailure();
 	}
 
 	@Test
-	public void it_should_fail_if_uri_syntax_exception() throws Exception {
+	void it_should_fail_if_uri_syntax_exception() throws Exception {
 		String actual = "{}";
 		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
 		List<String> objects = emptyList();

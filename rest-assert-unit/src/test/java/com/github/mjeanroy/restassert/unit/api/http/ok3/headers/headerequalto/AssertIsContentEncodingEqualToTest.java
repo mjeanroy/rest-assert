@@ -31,7 +31,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-public class AssertIsContentEncodingEqualToTest extends AbstractOkHttpHeaderEqualToTest {
+class AssertIsContentEncodingEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 
 	private static final Header HEADER = GZIP_CONTENT_ENCODING;
 	private static final ContentEncoding VALUE = ContentEncoding.gzip();

@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsCreatedTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return CREATED;
-	}
+class IsCreatedTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isCreated(response);
+	}
+
+	@Override
+	int status() {
+		return CREATED;
 	}
 }

@@ -35,7 +35,7 @@ import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsContentSecurityPolicyEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsContentSecurityPolicyEqualToTest extends AbstractHttpResponseHeaderTest {
 
 	@Override
 	protected HttpResponseAssert run() {

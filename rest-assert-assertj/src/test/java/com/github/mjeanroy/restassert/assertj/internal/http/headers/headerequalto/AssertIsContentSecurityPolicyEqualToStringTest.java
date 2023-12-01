@@ -30,19 +30,19 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final Header HEADER = CONTENT_SECURITY_POLICY;
 	private static final String VALUE = HEADER.getValue();
 	private static final String FAILED_VALUE = "default-src 'none'; script-src 'self' 'unsafe-inline'";
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentSecurityPolicyEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return HEADER;
 	}
 

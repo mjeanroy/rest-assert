@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsLocationEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsLocationEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = LOCATION.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsLocationEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return LOCATION;
 	}
 }

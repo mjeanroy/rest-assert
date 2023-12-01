@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import org.assertj.core.api.AssertionInfo;
 
-public class AssertIsSuccessTest extends AbstractHttpResponsesStatusBetweenTest {
+class AssertIsSuccessTest extends AbstractHttpResponsesStatusBetweenTest {
 
 	@Override
-	protected Range getRange() {
+	Range getRange() {
 		return SUCCESS;
 	}
 
 	@Override
-	protected void run(AssertionInfo info, HttpResponse httpResponse) {
+	void run(AssertionInfo info, HttpResponse httpResponse) {
 		httpResponses.assertIsSuccess(info, httpResponse);
 	}
 }

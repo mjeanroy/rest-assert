@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsAcceptedTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsAcceptedTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

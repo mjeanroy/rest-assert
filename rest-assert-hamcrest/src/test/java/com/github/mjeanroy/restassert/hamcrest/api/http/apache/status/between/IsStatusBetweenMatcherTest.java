@@ -31,7 +31,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.ApacheHttpResponseMatchers.isStatusBetween;
 import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-public class IsStatusBetweenMatcherTest extends AbstractApacheHttpResponseStatusBetweenMatcherTest {
+class IsStatusBetweenMatcherTest extends AbstractApacheHttpResponseStatusBetweenMatcherTest {
 
 	private static final int START = 400;
 	private static final int END = 599;

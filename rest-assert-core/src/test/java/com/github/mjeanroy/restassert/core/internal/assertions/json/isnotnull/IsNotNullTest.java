@@ -28,25 +28,25 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 
-public class IsNotNullTest {
+class IsNotNullTest {
 
 	private JsonAssertions assertions;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		assertions = JsonAssertions.instance();
 	}
 
 	@Test
-	public void it_should_check_if_json_is_not_null() {
+	void it_should_check_if_json_is_not_null() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
@@ -58,7 +58,7 @@ public class IsNotNullTest {
 	}
 
 	@Test
-	public void it_should_fail_if_json_is_null() {
+	void it_should_fail_if_json_is_null() {
 		String actual = null;
 		AssertionResult assertionResult = assertions.isNotNull(actual);
 		assertFailureResult(assertionResult, ShouldNotBeNull.class, "Expecting json not to be null", new Object[]{});

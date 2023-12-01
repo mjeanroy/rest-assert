@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-public class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
+class AssertIsAccessControlAllowMethodsEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 
 	@Override
 	protected Header getHeader() {

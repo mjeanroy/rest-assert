@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFI
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsNotModifiedTest extends AbstractGoogleHttpStatusTest {
+class AssertIsNotModifiedTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

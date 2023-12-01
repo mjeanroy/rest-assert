@@ -32,7 +32,7 @@ import java.nio.charset.StandardCharsets;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasCharset;
 
-public class HasCharsetTypeMatcherTest extends AbstractSpringMockMvcHttpResponseAssertCharsetTest {
+class HasCharsetTypeMatcherTest extends AbstractSpringMockMvcHttpResponseAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.test.tests.TestInvocation;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -36,7 +36,7 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 public abstract class AbstractHttpResponseDoesNotHaveHttpHeaderMatcherTest<T> extends AbstractHttpResponseMatcherTest<T> {
 
 	@Test
-	public void it_should_pass_with_missing_header() {
+	void it_should_pass_with_missing_header() {
 		Header header = header("Foo", "Bar");
 		T rsp = newHttpResponse(header);
 
@@ -44,7 +44,7 @@ public abstract class AbstractHttpResponseDoesNotHaveHttpHeaderMatcherTest<T> ex
 	}
 
 	@Test
-	public void it_should_fail_with_if_response_not_contain_header() {
+	void it_should_fail_with_if_response_not_contain_header() {
 		doTest(new TestInvocation<Header>() {
 			@Override
 			public void invokeTest(Header header) {

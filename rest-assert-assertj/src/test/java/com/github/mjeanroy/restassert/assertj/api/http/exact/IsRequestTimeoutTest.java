@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_TI
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
 
-public class IsRequestTimeoutTest extends AbstractHttpResponseStatusTest {
+class IsRequestTimeoutTest extends AbstractHttpResponseStatusTest {
 
 	@Override
-	protected int status() {
+	int status() {
 		return REQUEST_TIMEOUT;
 	}
 

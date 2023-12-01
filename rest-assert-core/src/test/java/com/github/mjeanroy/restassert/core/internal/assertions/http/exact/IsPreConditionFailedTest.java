@@ -29,15 +29,15 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.PRE_CONDIT
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-public class IsPreConditionFailedTest extends AbstractHttpStatusTest {
-
-	@Override
-	protected int status() {
-		return PRE_CONDITION_FAILED;
-	}
+class IsPreConditionFailedTest extends AbstractHttpStatusTest {
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
 		return assertions.isPreConditionFailed(response);
+	}
+
+	@Override
+	int status() {
+		return PRE_CONDITION_FAILED;
 	}
 }

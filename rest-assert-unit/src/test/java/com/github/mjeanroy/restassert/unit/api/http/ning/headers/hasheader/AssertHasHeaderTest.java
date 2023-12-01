@@ -30,7 +30,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertHasHeaderTest extends AbstractNingHttpHeaderTest {
+class AssertHasHeaderTest extends AbstractNingHttpHeaderTest {
 
 	private static final String NAME = "X-MyHeader";
 

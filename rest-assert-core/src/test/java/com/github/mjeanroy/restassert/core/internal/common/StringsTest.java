@@ -35,14 +35,14 @@ import static org.mockito.Mockito.when;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-public class StringsTest {
+class StringsTest {
 
 	@Test
-	public void it_should_join_strings() {
+	void it_should_join_strings() {
 		assertThat(Strings.join(Collections.<String>emptyList(), " ")).isEqualTo("");
 		assertThat(Strings.join(asList("foo", "bar"), " ")).isEqualTo("foo bar");
 		assertThat(Strings.join(asList("foo", "bar"), " ")).isEqualTo("foo bar");
@@ -51,7 +51,7 @@ public class StringsTest {
 
 	@Test
 	@SuppressWarnings("unchecked")
-	public void it_should_join_strings_using_mapper() {
+	void it_should_join_strings_using_mapper() {
 		Strings.StringMapper<Integer> mapper = mock(Strings.StringMapper.class);
 		when(mapper.apply(anyInt())).thenAnswer(new Answer<String>() {
 			@Override
@@ -72,7 +72,7 @@ public class StringsTest {
 	}
 
 	@Test
-	public void it_should_check_if_string_is_quoted() {
+	void it_should_check_if_string_is_quoted() {
 		assertThat(Strings.isQuoted(null)).isFalse();
 		assertThat(Strings.isQuoted("")).isFalse();
 		assertThat(Strings.isQuoted("a")).isFalse();

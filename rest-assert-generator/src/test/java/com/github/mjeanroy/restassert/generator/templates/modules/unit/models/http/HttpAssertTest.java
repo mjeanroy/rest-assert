@@ -30,14 +30,14 @@ import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAsser
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class HttpAssertTest extends AbstractUnitTemplateModelTest {
+class HttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private HttpAssert httpAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		httpAssert = (HttpAssert) httpAssert();
 	}
 

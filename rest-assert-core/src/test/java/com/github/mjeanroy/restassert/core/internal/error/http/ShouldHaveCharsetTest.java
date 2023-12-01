@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset.shouldHaveCharset;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveCharsetTest {
+class ShouldHaveCharsetTest {
 
 	@Test
-	public void it_should_have_error_message() {
+	void it_should_have_error_message() {
 		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset();
 
 		assertThat(shouldHaveCharset).isNotNull();
@@ -43,7 +43,7 @@ public class ShouldHaveCharsetTest {
 	}
 
 	@Test
-	public void it_should_have_error_message_with_expected_values() {
+	void it_should_have_error_message_with_expected_values() {
 		String expectedCharset = "UTF-8";
 		String actualCharset = "UTF-16";
 		ShouldHaveCharset shouldHaveCharset = shouldHaveCharset(expectedCharset, actualCharset);

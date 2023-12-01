@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-public class AssertDoesNotHaveAccessControlAllowMethodsTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveAccessControlAllowMethodsTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
 
 	@Override
 	protected Header getHeader() {

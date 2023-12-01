@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.assertj.internal.Jsons;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static org.mockito.Mockito.mock;
 
-public abstract class AbstractJsonIsEqualIgnoringToTest extends AbstractApiTest<Jsons, JsonAssert> {
+abstract class AbstractJsonIsEqualIgnoringToTest extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
 	protected Jsons createAssertions() {

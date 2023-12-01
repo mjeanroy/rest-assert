@@ -26,25 +26,19 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.h
 
 import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.AsyncHttpAssert.asyncHttpAssert;
 
-import com.github.mjeanroy.junit4.runif.RunIf;
-import com.github.mjeanroy.junit4.runif.RunIfRunner;
-import com.github.mjeanroy.junit4.runif.conditions.AtLeastJava8Condition;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.asynchttpclient.Response;
-import org.junit.Before;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
 
-@RunWith(RunIfRunner.class)
-@RunIf(AtLeastJava8Condition.class)
-public class AsyncHttpAssertTest extends AbstractUnitTemplateModelTest {
+class AsyncHttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private AsyncHttpAssert httpAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		httpAssert = (AsyncHttpAssert) asyncHttpAssert();
 	}
 

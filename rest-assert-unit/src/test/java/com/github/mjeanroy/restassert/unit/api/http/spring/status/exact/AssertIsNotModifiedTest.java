@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_MODIFI
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsNotModifiedTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsNotModifiedTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

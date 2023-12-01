@@ -30,7 +30,7 @@ import com.google.api.client.http.HttpResponse;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractGoogleHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractGoogleHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

@@ -29,7 +29,7 @@ import com.google.api.client.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class AssertIsGoneTest extends AbstractGoogleHttpStatusTest {
+class AssertIsGoneTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

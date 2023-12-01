@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import org.asynchttpclient.Response;
 
-public class AssertDoesNotHaveCookieWithNameTest extends AbstractAsyncHttpDoesNotHaveCookieTest {
+class AssertDoesNotHaveCookieWithNameTest extends AbstractAsyncHttpDoesNotHaveCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 

@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_URI_TOO_LONG;
 
-public class AssertIsRequestUriTooLongTest extends AbstractNingHttpStatusTest {
+class AssertIsRequestUriTooLongTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

@@ -26,15 +26,15 @@ package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class MediaTypeTest {
+class MediaTypeTest {
 
 	@Test
-	public void it_should_create_media_type_text() {
+	void it_should_create_media_type_text() {
 		MediaType mediaType = MediaType.text("plain");
 		assertThat(mediaType.getType()).isEqualTo("text");
 		assertThat(mediaType.getSubtype()).isEqualTo("plain");
@@ -48,7 +48,7 @@ public class MediaTypeTest {
 	}
 
 	@Test
-	public void it_should_create_media_type_application() {
+	void it_should_create_media_type_application() {
 		MediaType mediaType = MediaType.application("json");
 		assertThat(mediaType.getType()).isEqualTo("application");
 		assertThat(mediaType.getSubtype()).isEqualTo("json");
@@ -62,7 +62,7 @@ public class MediaTypeTest {
 	}
 
 	@Test
-	public void it_should_create_media_type_image() {
+	void it_should_create_media_type_image() {
 		MediaType mediaType = MediaType.image("png");
 		assertThat(mediaType.getType()).isEqualTo("image");
 		assertThat(mediaType.getSubtype()).isEqualTo("png");
@@ -76,7 +76,7 @@ public class MediaTypeTest {
 	}
 
 	@Test
-	public void it_should_create_media_type_video() {
+	void it_should_create_media_type_video() {
 		MediaType mediaType = MediaType.video("ogg");
 		assertThat(mediaType.getType()).isEqualTo("video");
 		assertThat(mediaType.getSubtype()).isEqualTo("ogg");
@@ -90,7 +90,7 @@ public class MediaTypeTest {
 	}
 
 	@Test
-	public void it_should_create_media_type_audio() {
+	void it_should_create_media_type_audio() {
 		MediaType mediaType = MediaType.audio("mp3");
 		assertThat(mediaType.getType()).isEqualTo("audio");
 		assertThat(mediaType.getSubtype()).isEqualTo("mp3");
@@ -104,47 +104,47 @@ public class MediaTypeTest {
 	}
 
 	@Test
-	public void it_should_implement_equals_hash_code() {
+	void it_should_implement_equals_hash_code() {
 		EqualsVerifier.forClass(MediaType.class).verify();
 	}
 
 	@Test
-	public void it_should_fail_if_type_is_null() {
+	void it_should_fail_if_type_is_null() {
 		assertThatThrownBy(newMediaType(null, "subtype"))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_type_is_empty() {
+	void it_should_fail_if_type_is_empty() {
 		assertThatThrownBy(newMediaType("", "subtype"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_type_is_blank() {
+	void it_should_fail_if_type_is_blank() {
 		assertThatThrownBy(newMediaType("    ", "subtype"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_subtype_is_null() {
+	void it_should_fail_if_subtype_is_null() {
 		assertThatThrownBy(newMediaType("type", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_subtype_is_empty() {
+	void it_should_fail_if_subtype_is_empty() {
 		assertThatThrownBy(newMediaType("type", ""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
-	public void it_should_fail_if_subtype_is_blank() {
+	void it_should_fail_if_subtype_is_blank() {
 		assertThatThrownBy(newMediaType("type", "    "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType subtype must be defined");

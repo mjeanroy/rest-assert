@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -32,10 +32,10 @@ import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHave
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldHaveSingleHeaderTest {
+class ShouldHaveSingleHeaderTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		String headerName = "foo";
 		List<String> actualValues = asList("foo", "bar");
 		ShouldHaveSingleHeader shouldHaveHeader = shouldHaveSingleHeader(headerName, actualValues);

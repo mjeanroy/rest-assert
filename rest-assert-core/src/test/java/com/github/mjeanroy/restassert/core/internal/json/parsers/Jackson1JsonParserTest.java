@@ -26,28 +26,28 @@ package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
 import com.github.mjeanroy.restassert.core.internal.json.JsonException;
 import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class Jackson1JsonParserTest extends AbstractJsonParserTest {
+class Jackson1JsonParserTest extends AbstractJsonParserTest {
 
 	private static JsonParser parser;
 
-	@BeforeClass
-	public static void setUp() {
+	@BeforeAll
+	static void setUp() {
 		parser = jackson1Parser();
 	}
 
 	@Override
-	protected JsonParser parser() {
+	JsonParser parser() {
 		return jackson1Parser();
 	}
 
 	@Test
-	public void it_should_wrap_checked_exception() {
+	void it_should_wrap_checked_exception() {
 		String json = "[ Invalid JSON ]";
 		assertThatThrownBy(parse(json)).isExactlyInstanceOf(JsonException.class);
 	}

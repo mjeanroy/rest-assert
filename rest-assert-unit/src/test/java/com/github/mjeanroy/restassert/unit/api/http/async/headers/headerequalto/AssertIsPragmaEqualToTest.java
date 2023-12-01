@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsPragmaEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
+class AssertIsPragmaEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 
 	private static final String VALUE = PRAGMA.getValue();
 

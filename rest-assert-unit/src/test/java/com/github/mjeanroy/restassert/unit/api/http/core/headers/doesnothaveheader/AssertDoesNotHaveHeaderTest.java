@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertDoesNotHaveHeaderTest extends AbstractCoreDoesNotHaveHttpHeaderTest {
+class AssertDoesNotHaveHeaderTest extends AbstractCoreDoesNotHaveHttpHeaderTest {
 
 	private static final String NAME = "FooFoo";
 

@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.GONE;
 
-public class AssertIsGoneTest extends AbstractAsyncHttpStatusTest {
+class AssertIsGoneTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

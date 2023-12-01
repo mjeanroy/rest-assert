@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CONFLICT;
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
-public class AssertIsConflictTest extends AbstractJunitServersHttpStatusTest {
+class AssertIsConflictTest extends AbstractJunitServersHttpStatusTest {
 
 	@Override
 	protected int status() {

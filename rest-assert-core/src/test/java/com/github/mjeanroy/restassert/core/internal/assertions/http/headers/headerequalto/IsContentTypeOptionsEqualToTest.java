@@ -31,15 +31,10 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-public class IsContentTypeOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
+class IsContentTypeOptionsEqualToTest extends AbstractHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
-
-	@Override
-	protected Header getHeader() {
-		return HEADER;
-	}
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {
@@ -47,12 +42,17 @@ public class IsContentTypeOptionsEqualToTest extends AbstractHttpHeaderEqualToTe
 	}
 
 	@Override
-	protected boolean allowMultipleValues() {
+	Header getHeader() {
+		return HEADER;
+	}
+
+	@Override
+	boolean allowMultipleValues() {
 		return true;
 	}
 
 	@Override
-	public void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
+	void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
 		// Can't provide failed value since only "nosniff" is a valid value.
 	}
 }

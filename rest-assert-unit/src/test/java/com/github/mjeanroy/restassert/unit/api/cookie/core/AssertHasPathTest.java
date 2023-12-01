@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertHasPath;
 
-public class AssertHasPathTest extends AbstractCoreCookieTest {
+class AssertHasPathTest extends AbstractCoreCookieTest {
 
 	@Override
 	protected void run(Cookie actual) {

@@ -30,17 +30,17 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsPragmaEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsPragmaEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final String VALUE = PRAGMA.getValue();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsPragmaEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return PRAGMA;
 	}
 }

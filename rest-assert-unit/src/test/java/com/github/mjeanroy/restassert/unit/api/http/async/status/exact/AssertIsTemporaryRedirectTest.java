@@ -29,7 +29,7 @@ import org.asynchttpclient.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.TEMPORARY_REDIRECT;
 
-public class AssertIsTemporaryRedirectTest extends AbstractAsyncHttpStatusTest {
+class AssertIsTemporaryRedirectTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

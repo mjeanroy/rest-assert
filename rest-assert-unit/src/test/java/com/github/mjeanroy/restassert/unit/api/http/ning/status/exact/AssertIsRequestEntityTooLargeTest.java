@@ -29,7 +29,7 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
 
-public class AssertIsRequestEntityTooLargeTest extends AbstractNingHttpStatusTest {
+class AssertIsRequestEntityTooLargeTest extends AbstractNingHttpStatusTest {
 
 	@Override
 	protected int status() {

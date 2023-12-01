@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.json.isequaltoignoring;
 
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import com.github.mjeanroy.restassert.tests.Function;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -38,13 +38,13 @@ import static java.util.Arrays.asList;
 public abstract class AbstractJsonIsEqualToIgnoringTest<T> extends AbstractAssertTest<T> {
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		run(success());
 		run("foo", success());
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		final T failure = failure();
 		final String message =
 				"Expecting json entry array[0] to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
@@ -60,7 +60,7 @@ public abstract class AbstractJsonIsEqualToIgnoringTest<T> extends AbstractAsser
 	}
 
 	@Test
-	public void it_should_fail_with_custom_message() {
+	void it_should_fail_with_custom_message() {
 		final T failure = failure();
 		final String message = "foo";
 

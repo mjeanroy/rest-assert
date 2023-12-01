@@ -30,15 +30,15 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-public class AssertDoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class AssertDoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertDoesNotHaveHeader(someInfo(), httpResponse, getHeader().getName());
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return header("foo", "bar");
 	}
 }

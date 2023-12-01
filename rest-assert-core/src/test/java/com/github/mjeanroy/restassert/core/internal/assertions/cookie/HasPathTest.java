@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 
-public class HasPathTest extends AbstractCookieTest {
+class HasPathTest extends AbstractCookieTest {
 
 	@Override
 	protected AssertionResult run(Cookie cookie) {
@@ -37,29 +37,29 @@ public class HasPathTest extends AbstractCookieTest {
 	}
 
 	@Override
-	protected Cookie success() {
+	Cookie success() {
 		return cookie("foo");
 	}
 
 	@Override
-	protected Cookie failure() {
+	Cookie failure() {
 		String expectedPath = success().getPath();
 		String actualPath = expectedPath + "foo";
 		return cookie(actualPath);
 	}
 
 	@Override
-	protected Class<?> error() {
+	Class<?> error() {
 		return ShouldHavePath.class;
 	}
 
 	@Override
-	protected String pattern() {
+	String pattern() {
 		return "Expecting cookie to have path %s but was %s";
 	}
 
 	@Override
-	protected Object[] params() {
+	Object[] params() {
 		String expectedPath = success().getPath();
 		String actualPath = failure().getPath();
 		return new String[] {

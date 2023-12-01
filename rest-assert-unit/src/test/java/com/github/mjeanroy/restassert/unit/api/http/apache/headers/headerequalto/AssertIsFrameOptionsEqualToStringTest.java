@@ -30,7 +30,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-public class AssertIsFrameOptionsEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
+class AssertIsFrameOptionsEqualToStringTest extends AbstractApacheHttpHeaderEqualToTest {
 
 	private static final Header HEADER = X_FRAME_OPTIONS;
 	private static final String VALUE = X_FRAME_OPTIONS.getValue();

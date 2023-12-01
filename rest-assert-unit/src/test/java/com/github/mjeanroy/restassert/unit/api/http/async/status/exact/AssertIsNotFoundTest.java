@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsNotFoundTest extends AbstractAsyncHttpStatusTest {
+class AssertIsNotFoundTest extends AbstractAsyncHttpStatusTest {
 
 	@Override
 	protected int status() {

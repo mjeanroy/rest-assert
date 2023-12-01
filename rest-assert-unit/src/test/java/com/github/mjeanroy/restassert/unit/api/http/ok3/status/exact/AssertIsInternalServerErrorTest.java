@@ -29,7 +29,7 @@ import okhttp3.Response;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_SERVER_ERROR;
 
-public class AssertIsInternalServerErrorTest extends AbstractOkHttpStatusTest {
+class AssertIsInternalServerErrorTest extends AbstractOkHttpStatusTest {
 
 	@Override
 	protected int status() {

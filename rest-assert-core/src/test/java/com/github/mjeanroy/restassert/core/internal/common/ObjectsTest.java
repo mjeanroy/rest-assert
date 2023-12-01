@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ObjectsTest {
+class ObjectsTest {
 
 	@Test
-	public void it_should_get_first_non_null_value() {
+	void it_should_get_first_non_null_value() {
 		assertThat(Objects.firstNonNull((String) null, null)).isNull();
 		assertThat(Objects.firstNonNull("foo", null)).isEqualTo("foo");
 		assertThat(Objects.firstNonNull(null, "bar")).isEqualTo("bar");

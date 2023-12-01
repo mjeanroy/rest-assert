@@ -30,7 +30,7 @@ import org.apache.http.HttpResponse;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class AssertHasMimeTypeTest extends AbstractApacheHttpClientMimeTypeTest {
+class AssertHasMimeTypeTest extends AbstractApacheHttpClientMimeTypeTest {
 
 	private static final String RAW_VALUE = TEXT_CSS;
 	private static final MediaType VALUE = MediaType.parser().parse(TEXT_CSS);

@@ -31,14 +31,14 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResp
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import okhttp3.Response;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 
-public class OkHttpAssertTest extends AbstractUnitTemplateModelTest {
+class OkHttpAssertTest extends AbstractUnitTemplateModelTest {
 
 	private OkHttpAssert httpAssert;
 
-	@Before
-	public void setUp() {
+	@BeforeEach
+	void setUp() {
 		httpAssert = (OkHttpAssert) okHttpAssert();
 	}
 

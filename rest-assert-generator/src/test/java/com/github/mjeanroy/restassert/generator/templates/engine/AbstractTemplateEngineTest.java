@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.generator.templates.engine;
 
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.TemplateEngine;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +38,7 @@ import static org.mockito.Mockito.when;
 public abstract class AbstractTemplateEngineTest {
 
 	@Test
-	public void it_should_render_template() {
+	void it_should_render_template() {
 		Template template = createTemplate("Hello {{name}}");
 		Map<String, Object> placeholders = placeholders("name", "foo");
 		String content = templateEngine().execute(template, placeholders);
@@ -46,14 +46,14 @@ public abstract class AbstractTemplateEngineTest {
 	}
 
 	@Test
-	public void it_should_render_template_with_three_mustache() {
+	void it_should_render_template_with_three_mustache() {
 		Template template = createTemplate("Hello {{{name}}}");
 		Map<String, Object> placeholders = placeholders("name", "foo");
 		String content = templateEngine().execute(template, placeholders);
 		assertThat(content).isEqualTo("Hello foo");
 	}
 
-	protected abstract TemplateEngine templateEngine();
+	abstract TemplateEngine templateEngine();
 
 	private Template createTemplate(String text) {
 		Template template = mock(Template.class);

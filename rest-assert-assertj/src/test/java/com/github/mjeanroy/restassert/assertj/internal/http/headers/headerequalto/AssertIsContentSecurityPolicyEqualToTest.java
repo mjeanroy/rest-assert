@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-public class AssertIsContentSecurityPolicyEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+class AssertIsContentSecurityPolicyEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
 			.addDefaultSrc(none())
@@ -42,12 +42,12 @@ public class AssertIsContentSecurityPolicyEqualToTest extends AbstractHttpRespon
 			.build();
 
 	@Override
-	protected void run(HttpResponse httpResponse) {
+	void run(HttpResponse httpResponse) {
 		httpResponses.assertIsContentSecurityPolicyEqualTo(someInfo(), httpResponse, VALUE);
 	}
 
 	@Override
-	protected Header getHeader() {
+	Header getHeader() {
 		return header(CONTENT_SECURITY_POLICY.getName(), VALUE.serializeValue());
 	}
 

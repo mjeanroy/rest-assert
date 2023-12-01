@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import static com.github.mjeanroy.restassert.hamcrest.api.http.SpringMockMvcHttpResponseMatchers.hasMimeType;
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-public class HasMimeTypeStringMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
+class HasMimeTypeStringMatcherTest extends AbstractSpringMockMvcHttpClientMimeTypeTest {
 
 	private static final String MIME_TYPE = TEXT_CSS;
 

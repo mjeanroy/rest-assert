@@ -37,7 +37,7 @@ import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-public class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpResponseHeaderTest {
 
 	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
 

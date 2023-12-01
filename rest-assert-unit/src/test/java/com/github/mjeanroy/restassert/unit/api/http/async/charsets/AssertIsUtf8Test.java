@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.http.async.charsets;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
-public class AssertIsUtf8Test extends AbstractAsyncHttpAssertCharsetTest {
+class AssertIsUtf8Test extends AbstractAsyncHttpAssertCharsetTest {
 
 	@Override
 	protected String getCharset() {

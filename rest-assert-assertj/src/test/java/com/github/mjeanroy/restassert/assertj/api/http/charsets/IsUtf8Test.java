@@ -34,7 +34,7 @@ import static java.lang.String.format;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 
-public class IsUtf8Test extends AbstractHttpResponseTest {
+class IsUtf8Test extends AbstractHttpResponseTest {
 
 	private static final String CHARSET = "UTF-8";
 

@@ -30,7 +30,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-public class AssertHasCharsetTypeTest extends AbstractSpringMockMvcHttpAssertCharsetTest {
+class AssertHasCharsetTypeTest extends AbstractSpringMockMvcHttpAssertCharsetTest {
 
 	private static final Charset CHARSET = StandardCharsets.UTF_8;
 

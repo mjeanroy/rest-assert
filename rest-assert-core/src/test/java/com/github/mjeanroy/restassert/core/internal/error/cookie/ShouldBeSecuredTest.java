@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeSecured.shouldBeSecured;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeSecured.shouldNotBeSecured;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ShouldBeSecuredTest {
+class ShouldBeSecuredTest {
 
 	@Test
-	public void it_should_format_error_message() {
+	void it_should_format_error_message() {
 		ShouldBeSecured shouldBeSecured = shouldBeSecured();
 
 		assertThat(shouldBeSecured).isNotNull();
@@ -44,7 +44,7 @@ public class ShouldBeSecuredTest {
 	}
 
 	@Test
-	public void it_should_format_error_message_with_negation() {
+	void it_should_format_error_message_with_negation() {
 		ShouldBeSecured shouldNotBeSecured = shouldNotBeSecured();
 
 		assertThat(shouldNotBeSecured).isNotNull();

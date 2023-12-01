@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.OK;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
 
-public class AssertIsOkTest extends AbstractCoreHttpStatusTest {
+class AssertIsOkTest extends AbstractCoreHttpStatusTest {
 
 	@Override
 	protected int status() {

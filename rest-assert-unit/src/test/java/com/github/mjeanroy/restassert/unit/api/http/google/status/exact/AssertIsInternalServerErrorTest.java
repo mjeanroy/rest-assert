@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_S
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
-public class AssertIsInternalServerErrorTest extends AbstractGoogleHttpStatusTest {
+class AssertIsInternalServerErrorTest extends AbstractGoogleHttpStatusTest {
 
 	@Override
 	protected int status() {

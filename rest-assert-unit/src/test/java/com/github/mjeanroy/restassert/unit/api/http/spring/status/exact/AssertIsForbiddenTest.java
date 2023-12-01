@@ -29,7 +29,7 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
 
-public class AssertIsForbiddenTest extends AbstractSpringMockMvcHttpStatusTest {
+class AssertIsForbiddenTest extends AbstractSpringMockMvcHttpStatusTest {
 
 	@Override
 	protected int status() {

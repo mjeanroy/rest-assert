@@ -24,26 +24,26 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
-public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
+abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
 
 	final CookieAssertions cookieAssertions = CookieAssertions.instance();
 
 	@Test
-	public void it_should_pass() {
+	void it_should_pass() {
 		Cookie cookie = success();
 		AssertionResult result = run(cookie);
 		checkSuccess(result);
 	}
 
 	@Test
-	public void it_should_fail() {
+	void it_should_fail() {
 		Cookie cookie = failure();
 
 		AssertionResult result = run(cookie);
@@ -55,13 +55,13 @@ public abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> 
 		);
 	}
 
-	protected abstract Cookie success();
+	abstract Cookie success();
 
-	protected abstract Cookie failure();
+	abstract Cookie failure();
 
-	protected abstract Class<?> error();
+	abstract Class<?> error();
 
-	protected abstract String pattern();
+	abstract String pattern();
 
-	protected abstract Object[] params();
+	abstract Object[] params();
 }
