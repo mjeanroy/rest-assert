@@ -42,6 +42,8 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
           cache: 'maven'
+      - name: java -version
+        run: java -version
       - name: Build
         run: mvn -B install --file pom.xml -DskipTests
       - name: Test
