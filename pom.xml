@@ -111,7 +111,8 @@
     <commons-io.version>2.15.1</commons-io.version>
     <junit-runif.version>0.2.0</junit-runif.version>
     <junit-customclassloader.version>0.1.1</junit-customclassloader.version>
-    <equalsverifier.version>2.5.2</equalsverifier.version>
+    <equalsverifier.version>3.15.4</equalsverifier.version>
+    <byte-buddy.version>1.14.10</byte-buddy.version>
     <wiremock.version>2.27.2</wiremock.version>
   </properties>
 
@@ -251,6 +252,21 @@
         <groupId>com.github.tomakehurst</groupId>
         <artifactId>wiremock</artifactId>
         <version>${wiremock.version}</version>
+      </dependency>
+
+      <!-- Ensure byte-buddy version compatible with java 21 are used -->
+      <!-- Dependencies using byte-buddy as a transitive dependencies: mockito, equalsverfier, assertj -->
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${byte-buddy.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>${byte-buddy.version}</version>
+        <scope>test</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
