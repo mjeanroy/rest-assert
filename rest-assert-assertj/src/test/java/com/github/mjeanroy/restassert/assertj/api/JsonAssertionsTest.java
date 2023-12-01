@@ -46,7 +46,7 @@ public class JsonAssertionsTest {
 		JsonAssert assertions = JsonAssertions.assertThatJson(json);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(json);
+		assertThat((String) readField(assertions, "actual")).isEqualTo(json);
 	}
 
 	@Test
@@ -61,6 +61,6 @@ public class JsonAssertionsTest {
 		JsonAssert assertions = JsonAssertions.assertThatJson(httpResponse);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(json);
+		assertThat((String) readField(assertions, "actual")).isEqualTo(json);
 	}
 }

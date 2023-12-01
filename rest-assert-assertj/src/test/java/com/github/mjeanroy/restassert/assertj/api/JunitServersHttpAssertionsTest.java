@@ -41,7 +41,7 @@ public class JunitServersHttpAssertionsTest {
 		com.github.mjeanroy.junit.servers.client.HttpResponse response = new JunitServersHttpResponseBuilder().build();
 		HttpResponseAssert assertions = JunitServersHttpAssertions.assertThat(response);
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(JunitServersHttpResponse.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(JunitServersHttpResponse.class);
 	}
 
 	@Test
@@ -55,6 +55,6 @@ public class JunitServersHttpAssertionsTest {
 		JsonAssert assertions = JunitServersHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

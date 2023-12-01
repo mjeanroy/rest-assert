@@ -43,7 +43,7 @@ public class OkHttpAssertionsTest {
 		HttpResponseAssert assertions = OkHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(OkHttpResponse.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(OkHttpResponse.class);
 	}
 
 	@Test
@@ -57,6 +57,6 @@ public class OkHttpAssertionsTest {
 
 		JsonAssert assertions = OkHttpAssertions.assertThatJson(response);
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

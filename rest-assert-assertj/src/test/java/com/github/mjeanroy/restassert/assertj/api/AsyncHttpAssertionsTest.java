@@ -51,7 +51,7 @@ public class AsyncHttpAssertionsTest {
 		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpResponse.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpResponse.class);
 	}
 
 	@Test
@@ -60,7 +60,7 @@ public class AsyncHttpAssertionsTest {
 		CookieAssert assertions = AsyncHttpAssertions.assertThat(asyncHttpCookie);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpCookie.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpCookie.class);
 	}
 
 	@Test
@@ -75,6 +75,6 @@ public class AsyncHttpAssertionsTest {
 		JsonAssert assertions = AsyncHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

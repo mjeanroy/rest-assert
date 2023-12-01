@@ -43,7 +43,7 @@ public class SpringMockMvcHttpAssertionsTest {
 		HttpResponseAssert assertions = SpringMockMvcHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(SpringMockMvcHttpResponse.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(SpringMockMvcHttpResponse.class);
 	}
 
 	@Test
@@ -57,6 +57,6 @@ public class SpringMockMvcHttpAssertionsTest {
 		JsonAssert assertions = SpringMockMvcHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

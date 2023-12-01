@@ -45,7 +45,7 @@ public class ApacheHttpAssertionsTest {
 		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpResponse.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpResponse.class);
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class ApacheHttpAssertionsTest {
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpCookie.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpCookie.class);
 	}
 
 	@Test
@@ -71,6 +71,6 @@ public class ApacheHttpAssertionsTest {
 		JsonAssert assertions = ApacheHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

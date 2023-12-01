@@ -42,7 +42,7 @@ public class GoogleHttpAssertionsTest {
 		HttpResponseAssert assertions = GoogleHttpAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(GoogleHttpResponse.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(GoogleHttpResponse.class);
 	}
 
 	@Test
@@ -60,6 +60,6 @@ public class GoogleHttpAssertionsTest {
 		JsonAssert assertions = GoogleHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

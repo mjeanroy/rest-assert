@@ -44,7 +44,7 @@ public class HttpResponseAssertionsTest {
 		HttpResponseAssert assertions = HttpResponseAssertions.assertThat(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isSameAs(response);
+		assertThat((Object) readField(assertions, "actual")).isSameAs(response);
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class HttpResponseAssertionsTest {
 		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isSameAs(cookie);
+		assertThat((Object) readField(assertions, "actual")).isSameAs(cookie);
 	}
 
 	@Test
@@ -68,6 +68,6 @@ public class HttpResponseAssertionsTest {
 		JsonAssert assertions = HttpResponseAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isEqualTo(body);
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
 }

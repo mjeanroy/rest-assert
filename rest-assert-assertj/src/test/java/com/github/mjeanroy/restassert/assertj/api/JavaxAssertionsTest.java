@@ -39,6 +39,6 @@ public class JavaxAssertionsTest {
 		CookieAssert assertions = JavaxAssertions.assertThat(javaxCookie);
 
 		assertThat(assertions).isNotNull();
-		assertThat(readField(assertions, "actual")).isExactlyInstanceOf(JavaxCookie.class);
+		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(JavaxCookie.class);
 	}
 }
