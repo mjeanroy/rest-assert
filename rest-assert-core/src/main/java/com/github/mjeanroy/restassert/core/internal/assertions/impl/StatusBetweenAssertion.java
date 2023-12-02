@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 
 /**
  * Check that http response status code is between a lower and an upper

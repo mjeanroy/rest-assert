@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie.core;
 
-import com.github.mjeanroy.restassert.unit.api.cookie.AbstractCookieTest;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.unit.api.cookie.AbstractCookieTest;
 
 abstract class AbstractCoreCookieTest extends AbstractCookieTest<Cookie> {
 

@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.async.status.outof;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import org.asynchttpclient.Response;
 
 abstract class AbstractAsyncHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {

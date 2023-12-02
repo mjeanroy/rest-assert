@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
-import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 /**

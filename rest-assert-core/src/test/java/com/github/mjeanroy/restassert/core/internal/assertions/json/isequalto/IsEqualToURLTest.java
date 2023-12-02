@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.json.isequalto;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;
@@ -55,24 +54,15 @@ class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 	void it_should_fail_with_non_reachable_url() throws Exception {
 		URL url = new URL("http://localhost:9999");
 		String actual = "{}";
-		assertThatThrownBy(isEqualTo(actual, url)).isExactlyInstanceOf(AssertionError.class);
+		assertThatThrownBy(() -> assertions.isEqualTo(actual, url)).isExactlyInstanceOf(AssertionError.class);
 	}
 
 	@Test
 	void it_should_fail_if_url_is_null() {
 		URL url = null;
 		String actual = "{}";
-		assertThatThrownBy(isEqualTo(actual, url))
+		assertThatThrownBy(() -> assertions.isEqualTo(actual, url))
 				.isExactlyInstanceOf(AssertionError.class)
 				.hasMessage("Cannot extract expected JSON from <null> URL");
-	}
-
-	private static ThrowingCallable isEqualTo(final String actual, final URL url) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				assertions.isEqualTo(actual, url);
-			}
-		};
 	}
 }

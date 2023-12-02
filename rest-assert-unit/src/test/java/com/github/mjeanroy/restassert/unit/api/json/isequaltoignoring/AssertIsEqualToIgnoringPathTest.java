@@ -26,9 +26,9 @@ package com.github.mjeanroy.restassert.unit.api.json.isequaltoignoring;
 
 import java.nio.file.Path;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualToIgnoring;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonPathSuccess;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualToIgnoring;
 
 class AssertIsEqualToIgnoringPathTest extends AbstractJsonIsEqualToIgnoringTest<Path> {
 

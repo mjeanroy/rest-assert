@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.RequireSriFor;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -339,7 +338,7 @@ class ContentSecurityPolicyBuilderTest {
 		String uri1 = "http://domain.com";
 		String uri2 = "http://fake.com";
 		String uri3 = "http://google.com";
-		String value = "" + uri1 + " " + uri2 + " " + uri3 + "";
+		String value = uri1 + " " + uri2 + " " + uri3;
 		ContentSecurityPolicy csp = builder
 			.addDefaultSrc(none())
 			.addReportUri(uri1, uri2)
@@ -541,7 +540,7 @@ class ContentSecurityPolicyBuilderTest {
 
 	@Test
 	void it_should_handle_frame_ancestors_and_fail_if_source_is_not_host() {
-		assertThatThrownBy(addFrameAncestors(builder, self()))
+		assertThatThrownBy(() -> builder.addFrameAncestors(self()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Source must be a valid host value");
 	}
@@ -565,14 +564,5 @@ class ContentSecurityPolicyBuilderTest {
 		sources.add(value);
 		addAll(sources, values);
 		return sources;
-	}
-
-	private static ThrowingCallable addFrameAncestors(final ContentSecurityPolicyBuilder builder, final ContentSecurityPolicy.Source source) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				builder.addFrameAncestors(source);
-			}
-		};
 	}
 }

@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -48,7 +47,7 @@ class PreConditionsTest {
 		Object value = null;
 		String message = "message";
 
-		assertThatThrownBy(notNull(value, message))
+		assertThatThrownBy(() -> PreConditions.notNull(value, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);
 	}
@@ -58,7 +57,7 @@ class PreConditionsTest {
 		String value = null;
 		String message = "Should not be null";
 
-		assertThatThrownBy(notBlank(value, message))
+		assertThatThrownBy(() -> PreConditions.notBlank(value, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);
 	}
@@ -68,7 +67,7 @@ class PreConditionsTest {
 		String value = "";
 		String message = "Should not be null";
 
-		assertThatThrownBy(notBlank(value, message))
+		assertThatThrownBy(() -> PreConditions.notBlank(value, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -78,7 +77,7 @@ class PreConditionsTest {
 		String value = "    ";
 		String message = "Should not be null";
 
-		assertThatThrownBy(notBlank(value, message))
+		assertThatThrownBy(() -> PreConditions.notBlank(value, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -96,7 +95,7 @@ class PreConditionsTest {
 		int minValue = 1;
 		String message = "Should be less than";
 
-		assertThatThrownBy(isGreaterThan(val, minValue, message))
+		assertThatThrownBy(() -> PreConditions.isGreaterThan(val, minValue, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -123,7 +122,7 @@ class PreConditionsTest {
 		int max = 5;
 		String message = "Should be less than";
 
-		assertThatThrownBy(isInRange(val, min, max, message))
+		assertThatThrownBy(() -> PreConditions.isInRange(val, min, max, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -135,7 +134,7 @@ class PreConditionsTest {
 		int max = 5;
 		String message = "Should be less than";
 
-		assertThatThrownBy(isInRange(val, min, max, message))
+		assertThatThrownBy(() -> PreConditions.isInRange(val, min, max, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -178,7 +177,7 @@ class PreConditionsTest {
 		String message = "message";
 		Iterable<Object> inputs = null;
 
-		assertThatThrownBy(notEmpty(inputs, message))
+		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);
 	}
@@ -188,7 +187,7 @@ class PreConditionsTest {
 		String message = "message";
 		Iterable<Object> inputs = emptyList();
 
-		assertThatThrownBy(notEmpty(inputs, message))
+		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -206,7 +205,7 @@ class PreConditionsTest {
 		String message = "message";
 		Collection<Object> inputs = null;
 
-		assertThatThrownBy(notEmpty(inputs, message))
+		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);
 	}
@@ -216,7 +215,7 @@ class PreConditionsTest {
 		String message = "message";
 		Collection<Object> inputs = emptyList();
 
-		assertThatThrownBy(notEmpty(inputs, message))
+		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -234,7 +233,7 @@ class PreConditionsTest {
 		String message = "message";
 		String input = null;
 
-		assertThatThrownBy(notEmpty(input, message))
+		assertThatThrownBy(() -> PreConditions.notEmpty(input, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);
 	}
@@ -244,71 +243,8 @@ class PreConditionsTest {
 		String message = "message";
 		String input = "";
 
-		assertThatThrownBy(notEmpty(input, message))
+		assertThatThrownBy(() -> PreConditions.notEmpty(input, message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
-	}
-
-	private static ThrowingCallable notNull(final Object value, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.notNull(value, message);
-			}
-		};
-	}
-
-	private static ThrowingCallable notBlank(final String value, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.notBlank(value, message);
-			}
-		};
-	}
-
-	private static ThrowingCallable isGreaterThan(final int val, final int min, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.isGreaterThan(val, min, message);
-			}
-		};
-	}
-
-	private static ThrowingCallable isInRange(final int val, final int min, final int max, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.isInRange(val, min, max, message);
-			}
-		};
-	}
-
-	private static ThrowingCallable notEmpty(final Iterable<Object> inputs, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.notEmpty(inputs, message);
-			}
-		};
-	}
-
-	private static ThrowingCallable notEmpty(final Collection<Object> inputs, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.notEmpty(inputs, message);
-			}
-		};
-	}
-
-	private static ThrowingCallable notEmpty(final String input, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				PreConditions.notEmpty(input, message);
-			}
-		};
 	}
 }

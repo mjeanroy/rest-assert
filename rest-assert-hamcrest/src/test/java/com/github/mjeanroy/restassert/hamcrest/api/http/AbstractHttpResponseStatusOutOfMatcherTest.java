@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Range;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -46,32 +46,22 @@ public abstract class AbstractHttpResponseStatusOutOfMatcherTest<T> extends Abst
 
 	@Test
 	void it_should_fail() {
-		doTest(new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(newHttpResponse(status));
-			}
-		});
+		doTest((status) -> run(newHttpResponse(status)));
 	}
 
-	private void doTest(final TestInvocation<Integer> invocation) {
-		final Range range = getRange();
-		final int start = range.getStart();
-		final int end = range.getEnd();
+	private void doTest(Consumer<Integer> testFn) {
+		Range range = getRange();
+		int start = range.getStart();
+		int end = range.getEnd();
 
 		for (int i = start; i <= end; i++) {
-			final int status = i;
-			final String message = generateHamcrestErrorMessage(
+			int status = i;
+			String message = generateHamcrestErrorMessage(
 				buildExpectationMessage(start, end),
 				buildMismatchMessage(status)
 			);
 
-			assertFailure(message, new Function() {
-				@Override
-				public void apply() {
-					invocation.invokeTest(status);
-				}
-			});
+			assertFailure(message, () -> testFn.accept(status));
 		}
 	}
 

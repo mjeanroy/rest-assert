@@ -30,6 +30,8 @@ import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
@@ -72,13 +74,14 @@ abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 		T expected = failureObject();
 		AssertionResult result = run(actual, expected);
 
-		String expectedPattern =
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s";
+		String expectedPattern = String.join(LINE_SEPARATOR, Arrays.asList(
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s"
+		));
 
 		Object[] args = new Object[] {
 				"str", "bar", "foo",

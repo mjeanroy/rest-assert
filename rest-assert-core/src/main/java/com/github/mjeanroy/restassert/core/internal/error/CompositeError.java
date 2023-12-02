@@ -24,10 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
-import com.github.mjeanroy.restassert.core.internal.common.Strings;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.sizeOf;
 import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
@@ -57,12 +56,9 @@ public class CompositeError implements RestAssertError {
 
 	@Override
 	public String message() {
-		List<String> messages = new ArrayList<>(errors.size());
-		for (RestAssertError error : errors) {
-			messages.add(error.message());
-		}
-
-		return Strings.join(messages, MESSAGES_SEPARATOR);
+		return errors.stream()
+			.map(RestAssertError::message)
+			.collect(Collectors.joining(MESSAGES_SEPARATOR));
 	}
 
 	@Override

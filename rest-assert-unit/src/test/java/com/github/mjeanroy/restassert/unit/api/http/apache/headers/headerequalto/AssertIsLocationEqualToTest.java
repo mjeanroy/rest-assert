@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 
 class AssertIsLocationEqualToTest extends AbstractApacheHttpHeaderEqualToTest {
 

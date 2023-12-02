@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 
 class AssertDoesNotHavePragmaTest extends AbstractSpringMockMcvDoesNotHaveHttpHeaderTest {
 

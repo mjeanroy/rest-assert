@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.outof;
 
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusOutOf;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusOutOf;
 import com.github.mjeanroy.restassert.test.data.Range;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

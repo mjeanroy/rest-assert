@@ -26,9 +26,9 @@ package com.github.mjeanroy.restassert.unit.api.json.isequaltoignoring;
 
 import java.io.File;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualToIgnoring;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileSuccess;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualToIgnoring;
 
 class AssertIsEqualToIgnoringFileTest extends AbstractJsonIsEqualToIgnoringTest<File> {
 

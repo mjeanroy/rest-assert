@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 
 class AssertIsMethodNotAllowedTest extends AbstractJunitServersHttpStatusTest {
 

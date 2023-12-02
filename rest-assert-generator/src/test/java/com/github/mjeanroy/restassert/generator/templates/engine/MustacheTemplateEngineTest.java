@@ -24,9 +24,8 @@
 
 package com.github.mjeanroy.restassert.generator.templates.engine;
 
-import org.junit.jupiter.api.BeforeEach;
-
 import com.github.mjeanroy.restassert.generator.TemplateEngine;
+import org.junit.jupiter.api.BeforeEach;
 
 class MustacheTemplateEngineTest extends AbstractTemplateEngineTest {
 

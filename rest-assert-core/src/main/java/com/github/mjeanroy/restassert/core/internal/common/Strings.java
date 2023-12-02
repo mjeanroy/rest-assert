@@ -31,12 +31,6 @@ public final class Strings {
 
 	private static final char SINGLE_QUOTE = '\'';
 	private static final char DOUBLE_QUOTE = '"';
-	private static final StringMapper<String> IDENTITY_MAPPER = new StringMapper<String>() {
-		@Override
-		public String apply(String input) {
-			return input;
-		}
-	};
 
 	// Ensure non instantiation.
 	private Strings() {
@@ -57,63 +51,6 @@ public final class Strings {
 		}
 
 		return sb.toString();
-	}
-
-	/**
-	 * Join sequence of strings into a single string separated by a given
-	 * separator.
-	 *
-	 * @param lines Sequence of strings.
-	 * @param separator Separator between each strings.
-	 * @return Single string.
-	 */
-	public static String join(Iterable<String> lines, String separator) {
-		return join(lines, separator, IDENTITY_MAPPER);
-	}
-
-	/**
-	 * Join sequence of object into a single string separated by a given
-	 * separator.
-	 *
-	 * The transformation from object of type {@code T} to a {@link String} is made using
-	 * given string mapper.
-	 *
-	 * @param lines Sequence of strings.
-	 * @param separator Separator between each strings.
-	 * @param mapper The string mapper.
-	 * @param <T> Type of inputs.
-	 * @return Single string.
-	 */
-	public static <T> String join(Iterable<T> lines, String separator, StringMapper<T> mapper) {
-		boolean first = true;
-
-		StringBuilder sb = new StringBuilder();
-		for (T line : lines) {
-			if (!first) {
-				sb.append(separator);
-			}
-
-			sb.append(mapper.apply(line));
-			first = false;
-		}
-
-		return sb.toString();
-	}
-
-	/**
-	 * A mapper that can translate any object to a {@link String} value.
-	 *
-	 * @param <T> Type of input.
-	 */
-	public interface StringMapper<T> {
-
-		/**
-		 * Transform input to a {@link String} output.
-		 *
-		 * @param input Input value.
-		 * @return String output.
-		 */
-		String apply(T input);
 	}
 
 	/**

@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
-
-import java.util.Objects;
-
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+
+import java.util.Objects;
+
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * A parameter that can be displayed in header raw values formatted as {@code "<name>=<value>"}.

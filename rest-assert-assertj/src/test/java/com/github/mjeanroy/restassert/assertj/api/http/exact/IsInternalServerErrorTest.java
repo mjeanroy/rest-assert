@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_SERVER_ERROR;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_SERVER_ERROR;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
 class IsInternalServerErrorTest extends AbstractHttpResponseStatusTest {
 

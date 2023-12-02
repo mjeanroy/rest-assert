@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_FOUND;
 
 class IsNotFoundTest extends AbstractHttpStatusTest {
 

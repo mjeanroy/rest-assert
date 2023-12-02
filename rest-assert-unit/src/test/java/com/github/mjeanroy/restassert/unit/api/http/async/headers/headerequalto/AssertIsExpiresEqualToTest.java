@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
 class AssertIsExpiresEqualToTest extends AbstractAsyncHttpHeaderEqualToTest {
 

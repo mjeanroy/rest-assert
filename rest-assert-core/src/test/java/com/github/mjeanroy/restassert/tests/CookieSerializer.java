@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.tests;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
 public final class CookieSerializer {
 

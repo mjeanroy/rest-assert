@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.generator.utils;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.assertj.core.api.Condition;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
-import org.assertj.core.api.Condition;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class IOUtilsTest {
 

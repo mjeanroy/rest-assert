@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
-
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
 class AssertIsXssProtectionEqualToTest extends AbstractGoogleHttpHeaderEqualToTest {
 

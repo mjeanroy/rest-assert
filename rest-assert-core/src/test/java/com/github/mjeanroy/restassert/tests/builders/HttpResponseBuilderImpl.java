@@ -27,13 +27,14 @@ package com.github.mjeanroy.restassert.tests.builders;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import static java.util.Collections.addAll;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * DefaultCookieBuilder used to create mock instance of {@link HttpResponse} class.
@@ -103,10 +104,10 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 		public List<String> getHeader(String name) {
 			List<String> values = headers.get(name);
 			if (values == null) {
-				return Collections.emptyList();
+				return emptyList();
 			}
 
-			return Collections.unmodifiableList(values);
+			return unmodifiableList(values);
 		}
 
 		@Override

@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.headers.hasheader;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
+
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.verify;
 
 class HasAccessControlAllowCredentialsTest extends AbstractHttpResponseHeaderTest {
 

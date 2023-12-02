@@ -61,7 +61,7 @@ public final class Ios {
 			throw new UrlException(ex);
 		}
 
-		return Strings.join(lines, System.lineSeparator());
+		return String.join(System.lineSeparator(), lines);
 	}
 
 	private static URLConnection openUrl(URL url) {

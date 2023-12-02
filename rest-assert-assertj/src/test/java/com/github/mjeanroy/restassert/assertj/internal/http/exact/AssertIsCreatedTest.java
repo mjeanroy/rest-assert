@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
-
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
 
 class AssertIsCreatedTest extends AbstractHttpResponsesStatusTest {
 

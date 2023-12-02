@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
+import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
+import org.apache.http.HttpResponse;
 
 import java.util.List;
 
-import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
-import org.apache.http.HttpResponse;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
 
 class AssertIsJavascriptTest extends AbstractApacheHttpClientMimeTypeInTest {
 

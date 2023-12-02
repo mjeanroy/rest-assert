@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -46,43 +46,28 @@ public abstract class AbstractMimeTypeTest<T> extends AbstractHttpAssertTest<T> 
 
 	@Test
 	void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		doTest(null, new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(newHttpResponse(header));
-			}
-		});
+		doTest(null, (header) -> run(newHttpResponse(header)));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(CUSTOM_MESSAGE, newHttpResponse(header));
-			}
-		});
+		doTest(CUSTOM_MESSAGE, (header) -> run(CUSTOM_MESSAGE, newHttpResponse(header)));
 	}
 
-	private void doTest(String msg, final TestInvocation<Header> invocation) {
-		final Header expectedHeader = getHeader();
+	private void doTest(String msg, Consumer<Header> testFn) {
+		Header expectedHeader = getHeader();
 
-		final String expectedMimeType = getMimeType();
-		final String actualMimeType = expectedMimeType + "foo";
+		String expectedMimeType = getMimeType();
+		String actualMimeType = expectedMimeType + "foo";
 
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-		final Header header = header(expectedName, actualValue);
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
+		Header header = header(expectedName, actualValue);
 
-		final String message = firstNonNull(msg, buildErrorMessage(expectedMimeType, actualMimeType));
+		String message = firstNonNull(msg, buildErrorMessage(expectedMimeType, actualMimeType));
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(header);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(header));
 	}
 
 	protected abstract String getMimeType();

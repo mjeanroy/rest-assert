@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.status.outof;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
 class AssertIsNotRedirectionTest extends AbstractSpringMockMvcHttpStatusOutOfTest {
 

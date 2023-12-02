@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models;
 
-import java.util.Map;
-
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModelTest;
 import org.assertj.core.api.Condition;
+
+import java.util.Map;
 
 public abstract class AbstractUnitTemplateModelTest extends AbstractTemplateModelTest {
 

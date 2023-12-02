@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.async;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -107,17 +106,8 @@ class AsyncHttpCookieTest {
 		io.netty.handler.codec.http.cookie.Cookie asyncHttpCookie = new AsyncHttpCookieBuilder().build();
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 
-		assertThatThrownBy(getExpires(cookie))
+		assertThatThrownBy(cookie::getExpires)
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.asynchttpclient.cookie.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
-	}
-
-	private static ThrowingCallable getExpires(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				cookie.getExpires();
-			}
-		};
 	}
 }

@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
 class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractNingHttpHeaderEqualToTest {
 

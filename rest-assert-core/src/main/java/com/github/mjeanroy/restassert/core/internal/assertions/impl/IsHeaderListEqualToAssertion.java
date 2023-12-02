@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
@@ -36,9 +35,7 @@ import java.util.Set;
 
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
 /**
@@ -94,23 +91,7 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 
 	@Override
 	AssertionResult doAssertion(List<String> values) {
-		boolean found = some(values, new SetPredicate(this.lowercaseValues));
-		return found ? success() : getFailure(values);
-	}
-
-	private AssertionResult getFailure(List<String> values) {
-		return failure(shouldHaveHeaderWithValue(name, join(this.values, ", "), values));
-	}
-
-	private static class SetPredicate implements Predicate<String> {
-		private final Set<String> expected;
-
-		private SetPredicate(Set<String> expected) {
-			this.expected = expected;
-		}
-
-		@Override
-		public boolean apply(String input) {
+		boolean found = values.stream().anyMatch((input) -> {
 			log.debug("Extracting list of values from '{}'", input);
 
 			String[] inputs = input.split(",");
@@ -126,7 +107,13 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 				}
 			}
 
-			return actualValues.containsAll(expected);
-		}
+			return actualValues.containsAll(lowercaseValues);
+		});
+
+		return found ? success() : getFailure(values);
+	}
+
+	private AssertionResult getFailure(List<String> values) {
+		return failure(shouldHaveHeaderWithValue(name, String.join(", ", this.values), values));
 	}
 }

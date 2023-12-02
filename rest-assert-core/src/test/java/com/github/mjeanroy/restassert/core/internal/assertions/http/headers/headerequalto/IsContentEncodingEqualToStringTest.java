@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 

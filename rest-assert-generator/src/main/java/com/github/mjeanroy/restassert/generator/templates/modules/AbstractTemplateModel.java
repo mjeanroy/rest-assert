@@ -44,7 +44,6 @@ import java.util.Map;
 import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.findPublicMethods;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
-import static java.util.Collections.sort;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 
@@ -135,7 +134,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		// Sort methods by name
 		// Not mandatory but useful for tests and to group
 		// methods by name
-		sort(methods, METHOD_NAME_COMPARATOR);
+		methods.sort(Comparator.comparing(Method::getName));
 
 		// Just build model for each methods
 		List<Map<String, Object>> models = new ArrayList<>(methods.size());
@@ -219,15 +218,4 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 * @return Method name that is generated.
 	 */
 	protected abstract String buildMethodName(String methodName);
-
-	/**
-	 * A comparator that will execute a string comparison on the returned
-	 * values of {@link Method#getName()}.
-	 */
-	private static final Comparator<Method> METHOD_NAME_COMPARATOR = new Comparator<Method>() {
-		@Override
-		public int compare(Method o1, Method o2) {
-			return o1.getName().compareTo(o2.getName());
-		}
-	};
 }

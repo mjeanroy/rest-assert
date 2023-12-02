@@ -24,23 +24,22 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.List;
+import java.util.function.Predicate;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
 
 /**
  * Check that http response contains expected cookie.
@@ -135,7 +134,7 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 			log.debug("-> With name: '{}'", name);
 		}
 
-		boolean found = some(cookies, predicate);
+		boolean found = cookies.stream().anyMatch(predicate);
 		return found ? success() : failure(getError());
 	}
 
@@ -171,7 +170,7 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		}
 
 		@Override
-		public boolean apply(Cookie cookie) {
+		public boolean test(Cookie cookie) {
 			return Cookies.equals(this.cookie, cookie);
 		}
 	}
@@ -200,8 +199,8 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		}
 
 		@Override
-		public boolean apply(Cookie cookie) {
-			return super.apply(cookie) && value.equals(cookie.getValue());
+		public boolean test(Cookie cookie) {
+			return super.test(cookie) && value.equals(cookie.getValue());
 		}
 	}
 }

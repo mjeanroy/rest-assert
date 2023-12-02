@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
 class AssertDoesNotHaveFrameOptionsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 

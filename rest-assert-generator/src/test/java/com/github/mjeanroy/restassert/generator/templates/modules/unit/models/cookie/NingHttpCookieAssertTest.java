@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.NingHttpCookieAssert.asyncHttpCookieAssert;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpCookie;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import com.ning.http.client.cookie.Cookie;
 import org.junit.jupiter.api.BeforeEach;
+
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.NingHttpCookieAssert.asyncHttpCookieAssert;
 
 class NingHttpCookieAssertTest extends AbstractUnitTemplateModelTest {
 

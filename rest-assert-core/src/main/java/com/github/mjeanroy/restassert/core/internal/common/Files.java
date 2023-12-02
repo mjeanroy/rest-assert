@@ -52,7 +52,7 @@ public final class Files {
 	public static String readFileToString(Path file) {
 		try {
 			List<String> lines = java.nio.file.Files.readAllLines(file, Charset.defaultCharset());
-			return Strings.join(lines, LINE_SEPARATOR);
+			return String.join(LINE_SEPARATOR, lines);
 		} catch (IOException ex) {
 			throw new UnreadableFileException(file, ex);
 		}

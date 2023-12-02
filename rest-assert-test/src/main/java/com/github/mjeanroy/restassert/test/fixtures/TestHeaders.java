@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.test.fixtures;
 
-import static com.github.mjeanroy.restassert.test.data.Header.header;
-
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 /**
  * Static pre-configured headers to use in unit test.

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
 class AssertDoesNotHaveFrameOptionsTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.ACCEPTED;
 
 class IsAcceptedTest extends AbstractHttpStatusTest {
 

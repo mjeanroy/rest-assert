@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -40,28 +40,18 @@ public abstract class AbstractHttpResponseCharsetMatcherTest<T> extends Abstract
 
 	@Test
 	void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(new TestInvocation<String>() {
-			@Override
-			public void invokeTest(String charset) {
-				run(newHttpResponse(charset));
-			}
-		});
+		invokeFailure((charset) -> run(newHttpResponse(charset)));
 	}
 
-	private void invokeFailure(final TestInvocation<String> invocation) {
-		final String expectedCharset = getCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final String message = generateHamcrestErrorMessage(
+	private void invokeFailure(Consumer<String> testFn) {
+		String expectedCharset = getCharset();
+		String actualCharset = expectedCharset + "foo";
+		String message = generateHamcrestErrorMessage(
 			buildExpectationMessage(expectedCharset),
 			buildMismatchMessage(actualCharset)
 		);
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(actualCharset);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(actualCharset));
 	}
 
 	protected abstract String getCharset();

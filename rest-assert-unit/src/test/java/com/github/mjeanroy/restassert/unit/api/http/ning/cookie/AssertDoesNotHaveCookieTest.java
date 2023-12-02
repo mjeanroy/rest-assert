@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
 
 class AssertDoesNotHaveCookieTest extends AbstractNingHttpDoesNotHaveCookieTest {

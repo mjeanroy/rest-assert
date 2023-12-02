@@ -26,8 +26,8 @@ package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 

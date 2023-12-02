@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
 
 class AssertDoesNotHaveCookieWithNameTest extends AbstractOkHttpDoesNotHaveCookieTest {

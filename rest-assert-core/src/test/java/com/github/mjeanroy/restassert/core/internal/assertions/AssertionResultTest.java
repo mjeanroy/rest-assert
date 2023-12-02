@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions;
 
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
@@ -55,17 +54,8 @@ class AssertionResultTest {
 
 	@Test
 	void it_should_fail_if_error_object_is_null_with_a_failure() {
-		assertThatThrownBy(invokeFailure(null))
+		assertThatThrownBy(() -> failure(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Error object must not be null");
-	}
-
-	private static ThrowingCallable invokeFailure(final RestAssertError error) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				failure(error);
-			}
-		};
 	}
 }

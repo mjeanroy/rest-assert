@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.HttpAssert.httpAssert;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.junit.jupiter.api.BeforeEach;
+
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.HttpAssert.httpAssert;
 
 class HttpAssertTest extends AbstractUnitTemplateModelTest {
 

@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Range;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -44,34 +44,24 @@ public abstract class AbstractHttpResponseStatusBetweenMatcherTest<T> extends Ab
 
 	@Test
 	void it_should_fail_with_response_not_in_bounds() {
-		doTestWithDefaultMessage(new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(newHttpResponse(status));
-			}
-		});
+		doTestWithDefaultMessage((status) -> run(newHttpResponse(status)));
 	}
 
-	private void doTestWithDefaultMessage(final TestInvocation<Integer> invocation) {
-		final Range rang = getRange();
-		final int start = rang.getStart();
-		final int end = rang.getEnd();
+	private void doTestWithDefaultMessage(Consumer<Integer> testFn) {
+		Range rang = getRange();
+		int start = rang.getStart();
+		int end = rang.getEnd();
 
 		for (int i = 100; i <= 599; i++) {
 			if (i >= start && i <= end) {
 				continue;
 			}
 
-			final int status = i;
-			final String expectation = buildExpectationMessage(start, end);
-			final String mismatch = buildMismatchMessage(status);
-			final String message = generateHamcrestErrorMessage(expectation, mismatch);
-			assertFailure(message, new Function() {
-				@Override
-				public void apply() {
-					invocation.invokeTest(status);
-				}
-			});
+			int status = i;
+			String expectation = buildExpectationMessage(start, end);
+			String mismatch = buildMismatchMessage(status);
+			String message = generateHamcrestErrorMessage(expectation, mismatch);
+			assertFailure(message, () -> testFn.accept(status));
 		}
 	}
 

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http;
 
-import static org.mockito.Mockito.*;
-
 import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
+
+import static org.mockito.Mockito.mock;
 
 public abstract class AbstractHttpResponseTest extends AbstractApiTest<HttpResponses, HttpResponseAssert> {
 

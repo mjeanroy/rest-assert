@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
 class AssertIsJsonTest extends AbstractNingHttpClientMimeTypeTest {
 

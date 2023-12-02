@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-
 /**
  * An helper to write {@code toString()} methods easily.
  */
@@ -111,7 +109,7 @@ public final class ToStringBuilder {
 		return new StringBuilder(finalSize)
 			.append(prefix)
 			.append(OPEN_CHAR)
-			.append(join(parameters, PARAMETER_SEPARATOR))
+			.append(String.join(PARAMETER_SEPARATOR, parameters))
 			.append(CLOSE_CHAR)
 			.toString();
 	}

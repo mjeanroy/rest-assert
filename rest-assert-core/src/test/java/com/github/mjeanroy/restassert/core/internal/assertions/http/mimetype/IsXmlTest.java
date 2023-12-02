@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 
 import java.util.List;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
 
 class IsXmlTest extends AbstractMimeTypeInTest {
 

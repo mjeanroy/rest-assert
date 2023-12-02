@@ -29,9 +29,9 @@ import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 abstract class AbstractJsonsIsEqualToTest<T> {

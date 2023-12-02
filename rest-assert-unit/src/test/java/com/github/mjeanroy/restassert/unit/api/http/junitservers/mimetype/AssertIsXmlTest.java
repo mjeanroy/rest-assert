@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
 
 import java.util.List;
 
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
-import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
 
 class AssertIsXmlTest extends AbstractJunitServersHttpClientMimeTypeInTest {
 

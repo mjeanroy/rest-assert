@@ -27,17 +27,16 @@ package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert;
 import org.apache.http.cookie.Cookie;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-class AssertHasMaxAge {
+class AssertHasMaxAgeTest {
 
 	@Test
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertHasMaxAge(cookie, 0L))
+		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertHasMaxAge(cookie, 0L))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
@@ -45,26 +44,8 @@ class AssertHasMaxAge {
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertHasMaxAge("message", cookie, 0L))
+		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertHasMaxAge("message", cookie, 0L))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
-	}
-
-	private static ThrowingCallable assertHasMaxAge(final Cookie cookie, final Long maxAge) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				ApacheHttpCookieAssert.assertHasMaxAge(cookie, maxAge);
-			}
-		};
-	}
-
-	private static ThrowingCallable assertHasMaxAge(final String message, final Cookie cookie, final Long maxAge) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				ApacheHttpCookieAssert.assertHasMaxAge(message, cookie, maxAge);
-			}
-		};
 	}
 }

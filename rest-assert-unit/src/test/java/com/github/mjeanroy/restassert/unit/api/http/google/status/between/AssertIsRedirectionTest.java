@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.between;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
 class AssertIsRedirectionTest extends AbstractGoogleHttpStatusBetweenTest {
 

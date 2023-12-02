@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.data;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
-import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -124,14 +123,7 @@ class DefaultCookieBuilderTest {
 
 	@Test
 	void it_should_fail_to_build_with_same_site_unknown_value() {
-		ThrowableAssert.ThrowingCallable run = new ThrowableAssert.ThrowingCallable() {
-			@Override
-			public void call() {
-				Cookies.builder("foo", "bar").setSameSite("value").build();
-			}
-		};
-
-		assertThatThrownBy(run).isInstanceOf(IllegalArgumentException.class).hasMessage(
+		assertThatThrownBy(() -> Cookies.builder("foo", "bar").setSameSite("value").build()).isInstanceOf(IllegalArgumentException.class).hasMessage(
 			"Unknown SameSite value: value"
 		);
 	}

@@ -25,14 +25,13 @@
 package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static java.lang.String.format;
 
 public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTest<T> {
 
@@ -47,35 +46,19 @@ public abstract class AbstractHasHttpHeaderTest<T> extends AbstractHttpAssertTes
 
 	@Test
 	void it_should_fail_with_if_response_does_not_contain_header() {
-		doTest(null, new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(newHttpResponse(header));
-			}
-		});
+		doTest(null, (header) -> run(newHttpResponse(header)));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message_if_response_does_not_contain_header() {
-		doTest(CUSTOM_MESSAGE, new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(CUSTOM_MESSAGE, newHttpResponse(header));
-			}
-		});
+		doTest(CUSTOM_MESSAGE, (header) -> run(CUSTOM_MESSAGE, newHttpResponse(header)));
 	}
 
-	private void doTest(String msg, final TestInvocation<Header> invocation) {
-		final Header expectedHeader = getHeader();
-		final Header header = header("foo", "bar");
-		final String message = firstNonNull(msg, buildErrorMessage(expectedHeader));
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(header);
-			}
-		});
+	private void doTest(String msg, Consumer<Header> testFn) {
+		Header expectedHeader = getHeader();
+		Header header = header("foo", "bar");
+		String message = firstNonNull(msg, buildErrorMessage(expectedHeader));
+		assertFailure(message, () -> testFn.accept(header));
 	}
 
 	protected abstract Header getHeader();

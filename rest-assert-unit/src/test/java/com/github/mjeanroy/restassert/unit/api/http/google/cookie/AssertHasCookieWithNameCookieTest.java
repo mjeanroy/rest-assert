@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
 
 class AssertHasCookieWithNameCookieTest extends AbstractGoogleHttpHasCookieTest {

@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
-import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 abstract class AbstractHttpResponsesStatusTest {

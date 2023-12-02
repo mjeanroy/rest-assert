@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
+import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
+import org.springframework.test.web.servlet.ResultActions;
+
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.none;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.self;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
-
-import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
-import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
-import org.springframework.test.web.servlet.ResultActions;
 
 class AssertIsContentSecurityPolicyEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 

@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.cookie;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
 /**
  * Abstract model for {@link com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions} assertions.

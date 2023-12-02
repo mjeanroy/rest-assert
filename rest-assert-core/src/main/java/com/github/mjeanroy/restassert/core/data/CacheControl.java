@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
@@ -349,7 +348,7 @@ public final class CacheControl implements HttpHeaderValue {
 			values.add(DIR_IMMUTABLE);
 		}
 
-		return Strings.join(values, SEPARATOR);
+		return String.join(SEPARATOR, values);
 	}
 
 	@Override

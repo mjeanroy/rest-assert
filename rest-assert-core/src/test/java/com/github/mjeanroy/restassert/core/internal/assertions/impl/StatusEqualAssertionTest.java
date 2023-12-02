@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -62,17 +61,8 @@ class StatusEqualAssertionTest {
 
 	@Test
 	void it_should_fail_if_status_is_negative() {
-		assertThatThrownBy(statusEqualAssertion(-1))
+		assertThatThrownBy(() -> new StatusEqualAssertion(-1))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Http status code must be positive");
-	}
-
-	private static ThrowingCallable statusEqualAssertion(final int status) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new StatusEqualAssertion(status);
-			}
-		};
 	}
 }

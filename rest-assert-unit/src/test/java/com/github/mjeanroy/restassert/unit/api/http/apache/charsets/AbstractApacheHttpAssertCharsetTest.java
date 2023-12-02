@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.apache.charsets;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpAssertCharsetTest;
 import org.apache.http.HttpResponse;
 
 abstract class AbstractApacheHttpAssertCharsetTest extends AbstractHttpAssertCharsetTest<HttpResponse> {

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_PDF;
-
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_PDF;
 
 class AssertIsPdfTest extends AbstractGoogleHttpClientMimeTypeTest {
 

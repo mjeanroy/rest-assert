@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.junitservers.headers.hasheader;
 
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpResponseHasHttpHeaderMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.junitservers.JunitServersHttpResponseBuilder;
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
 
 abstract class AbstractJunitServersHttpResponseHasHeaderMatcherTest extends AbstractHttpResponseHasHttpHeaderMatcherTest<HttpResponse> {
 

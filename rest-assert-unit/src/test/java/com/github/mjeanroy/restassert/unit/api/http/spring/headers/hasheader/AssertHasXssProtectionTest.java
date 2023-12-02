@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
 class AssertHasXssProtectionTest extends AbstractSpringMockMvcHttpHeaderTest {
 

@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.mode
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.AbstractHamcrestTemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
 class AssertDoesNotHaveFrameOptionsTest extends AbstractJunitServersDoesNotHaveHttpHeaderTest {
 

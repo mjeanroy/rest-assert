@@ -25,10 +25,12 @@
 package com.github.mjeanroy.restassert.core.internal.error;
 
 import com.github.mjeanroy.restassert.core.internal.common.Files;
-import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 import static java.util.Collections.addAll;
@@ -64,7 +66,7 @@ public final class Message {
 		newMessages.add(second.message);
 		addAll(newArgs, second.args);
 
-		String finalMessage = Strings.join(newMessages, CONCAT_SEPARATOR);
+		String finalMessage = String.join(CONCAT_SEPARATOR, newMessages);
 		Object[] finalArgs = newArgs.toArray();
 		return new Message(finalMessage, finalArgs);
 	}

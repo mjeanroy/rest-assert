@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
-import static java.util.Arrays.asList;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
 
 class IsAccessControlExposeHeadersEqualToIterableTest extends AbstractHttpResponseHeaderTest {
 

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.outof;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
 
 class AssertIsNotServerErrorTest extends AbstractAsyncHttpStatusOutOfTest {
 

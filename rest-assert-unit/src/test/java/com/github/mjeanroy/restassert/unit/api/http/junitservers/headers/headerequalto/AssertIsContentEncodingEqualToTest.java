@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 class AssertIsContentEncodingEqualToTest extends AbstractJunitServersHttpHeaderEqualToTest {
 

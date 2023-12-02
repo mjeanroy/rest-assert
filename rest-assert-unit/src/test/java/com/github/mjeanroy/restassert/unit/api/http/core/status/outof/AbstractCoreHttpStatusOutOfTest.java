@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.outof;
 
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 
 abstract class AbstractCoreHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<HttpResponse> {
 

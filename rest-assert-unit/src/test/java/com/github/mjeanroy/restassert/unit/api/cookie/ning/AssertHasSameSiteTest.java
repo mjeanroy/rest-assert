@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert;
 import com.ning.http.client.cookie.Cookie;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite.STRICT;
@@ -38,7 +37,7 @@ class AssertHasSameSiteTest {
 	@Test
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new NingHttpCookieBuilder().build();
-		assertThatThrownBy(assertHasSameSite(cookie))
+		assertThatThrownBy(() -> NingHttpCookieAssert.assertHasSameSite(cookie, STRICT))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
 	}
@@ -46,26 +45,8 @@ class AssertHasSameSiteTest {
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new NingHttpCookieBuilder().build();
-		assertThatThrownBy(assertHasSameSite("message", cookie))
+		assertThatThrownBy(() -> NingHttpCookieAssert.assertHasSameSite("message", cookie, STRICT))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
-	}
-
-	private static ThrowingCallable assertHasSameSite(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				NingHttpCookieAssert.assertHasSameSite(cookie, STRICT);
-			}
-		};
-	}
-
-	private static ThrowingCallable assertHasSameSite(final String message, final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				NingHttpCookieAssert.assertHasSameSite(message, cookie, STRICT);
-			}
-		};
 	}
 }

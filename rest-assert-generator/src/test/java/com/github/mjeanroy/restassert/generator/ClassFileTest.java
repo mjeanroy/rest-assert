@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator;
 
-import static org.apache.commons.io.FileUtils.readFileToString;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
 
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
+import static org.apache.commons.io.FileUtils.readFileToString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class ClassFileTest {
 

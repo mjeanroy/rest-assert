@@ -67,6 +67,7 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.str
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeEval;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeHashes;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.unsafeInline;
+import static java.util.Collections.emptySet;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -435,7 +436,7 @@ class ContentSecurityPolicyTest {
 	@Test
 	void it_should_handle_block_all_mixed_content() {
 		ContentSecurityPolicy csp = new ContentSecurityPolicy(singletonMap(
-			BLOCK_ALL_MIXED_CONTENT, Collections.<Source>emptySet()
+			BLOCK_ALL_MIXED_CONTENT, emptySet()
 		));
 
 		assertThat(csp.serializeValue()).isEqualTo("block-all-mixed-content");

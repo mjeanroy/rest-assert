@@ -24,8 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+
+import java.util.function.Predicate;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
@@ -49,7 +50,7 @@ class CookieNamePredicate implements Predicate<Cookie> {
 	}
 
 	@Override
-	public boolean apply(Cookie cookie) {
+	public boolean test(Cookie cookie) {
 		return name.equals(cookie.getName());
 	}
 }

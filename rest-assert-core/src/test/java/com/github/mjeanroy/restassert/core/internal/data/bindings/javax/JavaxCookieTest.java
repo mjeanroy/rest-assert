@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.javax;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -107,17 +106,8 @@ class JavaxCookieTest {
 		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 
-		assertThatThrownBy(getExpires(cookie))
+		assertThatThrownBy(cookie::getExpires)
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("javax.servlet.http.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
-	}
-
-	private static ThrowingCallable getExpires(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				cookie.getExpires();
-			}
-		};
 	}
 }

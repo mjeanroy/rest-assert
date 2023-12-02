@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -96,47 +95,29 @@ class ParameterTest {
 
 	@Test
 	void it_should_not_create_parameter_with_null_name() {
-		assertThatThrownBy(parameter(null, "bar"))
+		assertThatThrownBy(() -> Parameter.parameter(null, "bar"))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
 	void it_should_not_create_parameter_with_empty_name() {
-		assertThatThrownBy(parameter("", "bar"))
+		assertThatThrownBy(() -> Parameter.parameter("", "bar"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
 	void it_should_not_create_parameter_with_null_value() {
-		assertThatThrownBy(parameter("foo", null))
+		assertThatThrownBy(() -> Parameter.parameter("foo", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Parameter value must be defined");
 	}
 
 	@Test
 	void it_should_not_parse_parameter_with_null_raw_value() {
-		assertThatThrownBy(parse(null))
+		assertThatThrownBy(() -> Parameter.parse(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Parameter raw value must be defined");
-	}
-
-	private static ThrowingCallable parameter(final String name, final String value) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				Parameter.parameter(name, value);
-			}
-		};
-	}
-
-	private static ThrowingCallable parse(final String rawValue) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				Parameter.parse(rawValue);
-			}
-		};
 	}
 }

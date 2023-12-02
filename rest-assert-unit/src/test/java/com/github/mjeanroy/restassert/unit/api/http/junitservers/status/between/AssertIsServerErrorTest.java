@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.between;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
 
 class AssertIsServerErrorTest extends AbstractJunitServersHttpStatusBetweenTest {
 

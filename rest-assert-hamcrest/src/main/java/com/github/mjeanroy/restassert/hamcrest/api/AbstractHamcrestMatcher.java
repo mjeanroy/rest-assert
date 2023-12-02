@@ -25,15 +25,14 @@
 package com.github.mjeanroy.restassert.hamcrest.api;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
@@ -98,13 +97,9 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 			return lines[0];
 		}
 
-		List<String> outputLines = Collections.map(lines, new Mapper<String, String>() {
-			@Override
-			public String apply(String input) {
-				return EXPECTATION_MESSAGE_INDENT + "- " + input;
-			}
-		});
-
-		return Strings.join(outputLines, LINE_SEPARATOR).trim();
+		return Arrays.stream(lines)
+			.map((input) -> EXPECTATION_MESSAGE_INDENT + "- " + input)
+			.collect(Collectors.joining(LINE_SEPARATOR))
+			.trim();
 	}
 }

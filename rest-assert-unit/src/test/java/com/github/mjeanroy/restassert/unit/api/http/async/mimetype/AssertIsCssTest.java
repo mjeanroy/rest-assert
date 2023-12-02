@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
-
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
 class AssertIsCssTest extends AbstractAsyncHttpClientMimeTypeTest {
 

@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.test.json;
 
-import static com.github.mjeanroy.restassert.test.json.JsonUtil.jsonEscape;
-
 import java.util.Objects;
+
+import static com.github.mjeanroy.restassert.test.json.JsonUtil.jsonEscape;
 
 /**
  * A JSON entry: contains a key name (as a {@link String} and a value (basically anything

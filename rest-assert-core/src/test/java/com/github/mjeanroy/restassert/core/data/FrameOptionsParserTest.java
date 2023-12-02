@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -94,17 +93,8 @@ class FrameOptionsParserTest {
 	@Test
 	void it_should_fail_with_invalid_value() {
 		String value = "same-origin";
-		assertThatThrownBy(parse(parser, value))
+		assertThatThrownBy(() -> parser.parse(value))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
-	}
-
-	private static ThrowingCallable parse(final FrameOptionsParser parser, final String value) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				parser.parse(value);
-			}
-		};
 	}
 }

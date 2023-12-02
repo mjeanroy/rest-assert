@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
 class AssertDoesNotHaveContentSecurityPolicyTest extends AbstractOkDoesNotHaveHttpHeaderTest {
 

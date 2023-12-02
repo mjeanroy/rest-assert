@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 class DoesNotHaveContentTypeOptionsTest extends AbstractDoesNotHaveHttpHeaderTest {
 

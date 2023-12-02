@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaders;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
 
 abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion implements HttpResponseAssertion {
 

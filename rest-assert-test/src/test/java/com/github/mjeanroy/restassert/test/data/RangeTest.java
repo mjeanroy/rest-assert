@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.test.data;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 class RangeTest {
 

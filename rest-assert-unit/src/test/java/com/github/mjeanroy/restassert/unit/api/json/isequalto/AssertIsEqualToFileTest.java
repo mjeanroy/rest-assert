@@ -26,9 +26,9 @@ package com.github.mjeanroy.restassert.unit.api.json.isequalto;
 
 import java.io.File;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualTo;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFileSuccess;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualTo;
 
 class AssertIsEqualToFileTest extends AbstractJsonIsEqualToTest<File> {
 

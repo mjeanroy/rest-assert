@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.between;
 
-import static com.github.mjeanroy.restassert.test.data.Range.range;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
 class AssertIsStatusBetweenTest extends AbstractApacheHttpStatusBetweenTest {
 

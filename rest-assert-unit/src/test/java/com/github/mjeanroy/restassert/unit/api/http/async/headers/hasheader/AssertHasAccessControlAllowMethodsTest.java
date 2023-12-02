@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
 class AssertHasAccessControlAllowMethodsTest extends AbstractAsyncHttpHeaderTest {
 

@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.tests;
 
-import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,9 +53,9 @@ public abstract class AssertionUtils {
 		assertThat(error.buildMessage()).isEqualTo(expectedMessage);
 	}
 
-	public static void assertFailure(String message, Function test) {
+	public static void assertFailure(String message, Runnable test) {
 		try {
-			test.apply();
+			test.run();
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError error) {
 			assertThat(error.getMessage().trim()).isEqualTo(message);

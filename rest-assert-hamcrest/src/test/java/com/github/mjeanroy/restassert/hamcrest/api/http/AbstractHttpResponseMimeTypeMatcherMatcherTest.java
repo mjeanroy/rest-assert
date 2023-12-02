@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -43,36 +43,26 @@ public abstract class AbstractHttpResponseMimeTypeMatcherMatcherTest<T> extends 
 
 	@Test
 	void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		doTest(new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(newHttpResponse(header));
-			}
-		});
+		doTest((header) -> run(newHttpResponse(header)));
 	}
 
-	private void doTest(final TestInvocation<Header> invocation) {
-		final Header expectedHeader = getHeader();
+	private void doTest(Consumer<Header> testFn) {
+		Header expectedHeader = getHeader();
 
-		final String expectedMimeType = getMimeType();
-		final String actualMimeType = expectedMimeType + "foo";
+		String expectedMimeType = getMimeType();
+		String actualMimeType = expectedMimeType + "foo";
 
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
-		final Header header = header(expectedName, actualValue);
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
+		Header header = header(expectedName, actualValue);
 
-		final String message = generateHamcrestErrorMessage(
+		String message = generateHamcrestErrorMessage(
 			buildExpectationMessage(expectedMimeType),
 			buildMismatchMessage(actualMimeType)
 		);
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(header);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(header));
 	}
 
 	protected abstract String getMimeType();

@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert;
 import org.apache.http.cookie.Cookie;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -37,7 +36,7 @@ class AssertIsNotHttpOnlyTest {
 	@Test
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertIsNotHttpOnly(cookie))
+		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertIsNotHttpOnly(cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
 	}
@@ -45,26 +44,8 @@ class AssertIsNotHttpOnlyTest {
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertIsNotHttpOnly("message", cookie))
+		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertIsNotHttpOnly("message", cookie))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
-	}
-
-	private static ThrowingCallable assertIsNotHttpOnly(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				ApacheHttpCookieAssert.assertIsNotHttpOnly(cookie);
-			}
-		};
-	}
-
-	private static ThrowingCallable assertIsNotHttpOnly(final String message, final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				ApacheHttpCookieAssert.assertIsNotHttpOnly(message, cookie);
-			}
-		};
 	}
 }

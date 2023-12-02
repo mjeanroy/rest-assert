@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
 class AssertDoesNotHaveAccessControlAllowMethodsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 

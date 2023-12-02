@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert;
 import org.apache.http.cookie.Cookie;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite.STRICT;
@@ -38,7 +37,7 @@ class AssertHasSameSiteAsStringTest {
 	@Test
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertHasSameSite(cookie))
+		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertHasSameSite(cookie, STRICT.getValue()))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getSameSite()");
 	}
@@ -46,26 +45,8 @@ class AssertHasSameSiteAsStringTest {
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
-		assertThatThrownBy(assertHasSameSite("message", cookie))
+		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertHasSameSite("message", cookie, STRICT.getValue()))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getSameSite()");
-	}
-
-	private static ThrowingCallable assertHasSameSite(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				ApacheHttpCookieAssert.assertHasSameSite(cookie, STRICT.getValue());
-			}
-		};
-	}
-
-	private static ThrowingCallable assertHasSameSite(final String message, final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				ApacheHttpCookieAssert.assertHasSameSite(message, cookie, STRICT.getValue());
-			}
-		};
 	}
 }

@@ -28,13 +28,12 @@ import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -129,44 +128,26 @@ class HasMimeTypeAssertionTest {
 
 	@Test
 	void it_should_fail_if_mime_type_is_null() {
-		assertThatThrownBy(hasMimeTypeAssertion((MediaType) null))
+		assertThatThrownBy(() -> new HasMimeTypeAssertion((MediaType) null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Mime-Type value must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_list_mime_type_is_null() {
-		assertThatThrownBy(hasMimeTypeAssertion((Collection<MediaType>) null))
+		assertThatThrownBy(() -> new HasMimeTypeAssertion((Collection<MediaType>) null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Mime-Type values must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_list_mime_type_is_empty() {
-		assertThatThrownBy(hasMimeTypeAssertion(Collections.<MediaType>emptyList()))
+		assertThatThrownBy(() -> new HasMimeTypeAssertion(emptyList()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Mime-Type values must be defined");
 	}
 
 	private static HttpResponse createHttpResponse(String mimeType) {
 		return new HttpResponseBuilderImpl().addHeader("Content-Type", mimeType + "; charset=utf-8").build();
-	}
-
-	private static ThrowingCallable hasMimeTypeAssertion(final Collection<MediaType> mediaTypes) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new HasMimeTypeAssertion(mediaTypes);
-			}
-		};
-	}
-
-	private static ThrowingCallable hasMimeTypeAssertion(final MediaType mediaType) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new HasMimeTypeAssertion(mediaType);
-			}
-		};
 	}
 }

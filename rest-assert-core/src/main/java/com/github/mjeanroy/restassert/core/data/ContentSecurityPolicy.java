@@ -24,9 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
-import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
@@ -38,10 +36,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
+import static java.util.Arrays.stream;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 
@@ -136,21 +135,17 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 
 	@Override
 	public String serializeValue() {
-		return join(directives.entrySet(), "; ", new StringMapper<Entry<SourceDirective, Set<Source>>>() {
-			@Override
-			public String apply(Entry<SourceDirective, Set<Source>> input) {
-				final SourceDirective directive = input.getKey();
-				final Set<Source> sources = input.getValue();
-				final String name = directive.getName();
-				final String value = join(sources, " ", new StringMapper<Source>() {
-					@Override
-					public String apply(Source input) {
-						return input.getValue();
-					}
-				});
+		return directives.entrySet().stream()
+			.map((input) -> {
+				SourceDirective directive = input.getKey();
+				Set<Source> sources = input.getValue();
+				String name = directive.getName();
+				String value = sources.stream()
+					.map(Source::getValue)
+					.collect(Collectors.joining(" "));
 
-				final int capacity = name.length() + value.length() + 1;
-				final StringBuilder sb = new StringBuilder(capacity);
+				int capacity = name.length() + value.length() + 1;
+				StringBuilder sb = new StringBuilder(capacity);
 
 				sb.append(name);
 				if (!value.isEmpty()) {
@@ -158,8 +153,8 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 				}
 
 				return sb.toString();
-			}
-		});
+			})
+			.collect(Collectors.joining("; "));
 	}
 
 	/**
@@ -560,12 +555,12 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		/**
 		 * Map of directives indexed by name.
 		 */
-		private static final Map<String, SourceDirective> map = indexBy(SourceDirective.values(), new Mapper<SourceDirective, String>() {
-			@Override
-			public String apply(SourceDirective input) {
-				return input.getName().toLowerCase();
-			}
-		});
+		private static final Map<String, SourceDirective> map = stream(SourceDirective.values()).collect(
+			Collectors.toMap(
+				(input) -> input.getName().toLowerCase(),
+				Function.identity()
+			)
+		);
 
 		/**
 		 * Get {@link SourceDirective} by name (search is case-insensitive).
@@ -1108,12 +1103,12 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			return value;
 		}
 
-		private static final Map<String, Sandbox> map = indexBy(Sandbox.values(), new Mapper<Sandbox, String>() {
-			@Override
-			public String apply(Sandbox input) {
-				return input.getValue().toLowerCase();
-			}
-		});
+		private static final Map<String, Sandbox> map = stream(Sandbox.values()).collect(
+			Collectors.toMap(
+				(input) -> input.getValue().toLowerCase(),
+				Function.identity()
+			)
+		);
 
 		/**
 		 * Get sandbox item from value.
@@ -1157,12 +1152,12 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			return value;
 		}
 
-		private static final Map<String, RequireSriFor> map = indexBy(RequireSriFor.values(), new Mapper<RequireSriFor, String>() {
-			@Override
-			public String apply(RequireSriFor input) {
-				return input.getValue().toLowerCase();
-			}
-		});
+		private static final Map<String, RequireSriFor> map = stream(RequireSriFor.values()).collect(
+			Collectors.toMap(
+				(input) -> input.getValue().toLowerCase(),
+				Function.identity()
+			)
+		);
 
 		/**
 		 * Get {@link RequireSriFor} item from value.

@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.google.status.between;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.google.api.client.http.HttpResponse;
 
 abstract class AbstractGoogleHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<HttpResponse> {

@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -50,17 +49,8 @@ class ContentTypeOptionsParserTest {
 
 	@Test
 	void it_should_failed_to_parse_invalid_value() {
-		assertThatThrownBy(parse(parser, "foo"))
+		assertThatThrownBy(() -> parser.parse("foo"))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("X-Content-Type-Options value 'foo' is not a valid one.");
-	}
-
-	private static ThrowingCallable parse(final ContentTypeOptionsParser parser, final String value) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				parser.parse(value);
-			}
-		};
 	}
 }

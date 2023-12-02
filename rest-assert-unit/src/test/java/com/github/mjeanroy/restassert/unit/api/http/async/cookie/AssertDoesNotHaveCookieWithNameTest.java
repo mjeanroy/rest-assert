@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.cookie;
 
-import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
 
 class AssertDoesNotHaveCookieWithNameTest extends AbstractAsyncHttpDoesNotHaveCookieTest {

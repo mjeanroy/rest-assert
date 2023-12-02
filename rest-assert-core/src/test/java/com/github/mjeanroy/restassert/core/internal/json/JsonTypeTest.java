@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.json;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -239,7 +238,7 @@ class JsonTypeTest {
 	void it_should_fail_with_unknown_object() {
 		Foo foo = new Foo();
 
-		assertThatThrownBy(parseType(foo))
+		assertThatThrownBy(() -> JsonType.parseType(foo))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("Json type of object Foo{} cannot be found");
 	}
@@ -249,14 +248,5 @@ class JsonTypeTest {
 		public String toString() {
 			return "Foo{}";
 		}
-	}
-
-	private static ThrowingCallable parseType(final Object value) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				JsonType.parseType(value);
-			}
-		};
 	}
 }

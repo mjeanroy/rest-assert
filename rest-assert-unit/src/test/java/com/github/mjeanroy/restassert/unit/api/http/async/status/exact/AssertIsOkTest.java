@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.OK;
-
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.OK;
 
 class AssertIsOkTest extends AbstractAsyncHttpStatusTest {
 

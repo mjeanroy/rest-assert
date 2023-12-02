@@ -24,17 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
+import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 
 class ContainsEntriesTest {
 

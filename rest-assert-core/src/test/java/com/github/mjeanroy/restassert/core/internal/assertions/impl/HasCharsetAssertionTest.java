@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,31 +105,22 @@ class HasCharsetAssertionTest {
 
 	@Test
 	void it_should_fail_if_charset_is_null() {
-		assertThatThrownBy(hasCharsetAssertion(null))
+		assertThatThrownBy(() -> new HasCharsetAssertion(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Charset value must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_charset_is_empty() {
-		assertThatThrownBy(hasCharsetAssertion(""))
+		assertThatThrownBy(() -> new HasCharsetAssertion(""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Charset value must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_blank() {
-		assertThatThrownBy(hasCharsetAssertion("    "))
+		assertThatThrownBy(() -> new HasCharsetAssertion("    "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Charset value must be defined");
-	}
-
-	private static ThrowingCallable hasCharsetAssertion(final String expectedCharset) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new HasCharsetAssertion(expectedCharset);
-			}
-		};
 	}
 }

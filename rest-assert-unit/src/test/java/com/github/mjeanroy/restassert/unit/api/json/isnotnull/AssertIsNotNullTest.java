@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.unit.api.json.isnotnull;
 
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -40,27 +39,15 @@ class AssertIsNotNullTest {
 
 	@Test
 	void it_should_fail_if_json_is_null() {
-		final String json = null;
-		final String message = "Expecting json not to be null";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				assertIsNotNull(json);
-			}
-		});
+		String json = null;
+		String message = "Expecting json not to be null";
+		assertFailure(message, () -> assertIsNotNull(json));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message() {
-		final String json = null;
-		final String message = "error";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				assertIsNotNull(message, json);
-			}
-		});
+		String json = null;
+		String message = "error";
+		assertFailure(message, () -> assertIsNotNull(message, json));
 	}
 }

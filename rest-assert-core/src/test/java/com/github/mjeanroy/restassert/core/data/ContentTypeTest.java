@@ -25,15 +25,13 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.Map;
 
 import static com.github.mjeanroy.restassert.core.data.ContentType.contentType;
 import static com.github.mjeanroy.restassert.core.data.MediaType.application;
+import static java.util.Collections.emptyMap;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.groups.Tuple.tuple;
@@ -89,17 +87,8 @@ class ContentTypeTest {
 
 	@Test
 	void it_should_fail_if_media_type_is_null() {
-		assertThatThrownBy(newContentType(null, Collections.<String, Parameter>emptyMap()))
+		assertThatThrownBy(() -> new ContentType(null, emptyMap()))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Media Type must not be null");
-	}
-
-	private static ThrowingCallable newContentType(final MediaType mediaType, final Map<String, Parameter> parameters) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new ContentType(mediaType, parameters);
-			}
-		};
 	}
 }

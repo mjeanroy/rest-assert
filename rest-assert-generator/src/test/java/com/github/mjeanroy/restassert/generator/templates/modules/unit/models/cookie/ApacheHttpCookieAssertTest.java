@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import org.apache.http.cookie.Cookie;
 import org.junit.jupiter.api.BeforeEach;
+
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie.ApacheHttpCookieAssert.apacheHttpCookieAssert;
 
 class ApacheHttpCookieAssertTest extends AbstractUnitTemplateModelTest {
 

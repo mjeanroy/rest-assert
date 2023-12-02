@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTED_MEDIA_TYPE;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.UNSUPPORTED_MEDIA_TYPE;
 
 class IsUnsupportedMediaTypeTest extends AbstractHttpStatusTest {
 

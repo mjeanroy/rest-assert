@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
 class AssertDoesNotHaveAccessControlAllowMaxAgeTest extends AbstractApacheDoesNotHaveHttpHeaderTest {
 

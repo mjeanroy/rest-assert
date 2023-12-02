@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -113,38 +112,29 @@ class IsHeaderEqualToAssertionTest {
 
 	@Test
 	void it_should_fail_if_header_name_is_null() {
-		assertThatThrownBy(isHeaderEqualToAssertion(null, "value", false))
+		assertThatThrownBy(() -> new IsHeaderEqualToAssertion(null, "value", false))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
-		assertThatThrownBy(isHeaderEqualToAssertion("", "value", false))
+		assertThatThrownBy(() -> new IsHeaderEqualToAssertion("", "value", false))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
-		assertThatThrownBy(isHeaderEqualToAssertion("   ", "value", false))
+		assertThatThrownBy(() -> new IsHeaderEqualToAssertion("   ", "value", false))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
-		assertThatThrownBy(isHeaderEqualToAssertion("name", null, false))
+		assertThatThrownBy(() -> new IsHeaderEqualToAssertion("name", null, false))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header value must not be null");
-	}
-
-	private static ThrowingCallable isHeaderEqualToAssertion(final String name, final String value, final boolean caseInsensitive) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() throws Throwable {
-				new IsHeaderEqualToAssertion(name, value, caseInsensitive);
-			}
-		};
 	}
 }

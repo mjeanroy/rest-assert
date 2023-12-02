@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
+import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
+import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import org.assertj.core.api.AssertionInfo;
+
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.verify;
-
-import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 class HasMimeTypeTest extends AbstractHttpResponseMimeTypeTest {
 

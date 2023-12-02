@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.outof;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SUCCESS;
 
 class AssertIsNotSuccessTest extends AbstractNingHttpStatusOutOfTest {
 

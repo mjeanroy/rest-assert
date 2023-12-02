@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
 
 class IsJsonTest extends AbstractMimeTypeTest {
 

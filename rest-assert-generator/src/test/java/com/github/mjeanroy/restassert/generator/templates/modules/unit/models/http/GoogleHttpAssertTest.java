@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
-import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.GoogleHttpAssert.googleHttpAssert;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModelTest;
 import com.google.api.client.http.HttpResponse;
 import org.junit.jupiter.api.BeforeEach;
+
+import static com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http.GoogleHttpAssert.googleHttpAssert;
 
 class GoogleHttpAssertTest extends AbstractUnitTemplateModelTest {
 

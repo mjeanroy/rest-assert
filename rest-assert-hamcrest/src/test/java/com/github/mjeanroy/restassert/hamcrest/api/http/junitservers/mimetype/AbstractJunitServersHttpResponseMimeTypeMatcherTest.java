@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.junitservers.mimetype;
 
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpResponseMimeTypeMatcherMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.junitservers.JunitServersHttpResponseBuilder;
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
 
 abstract class AbstractJunitServersHttpResponseMimeTypeMatcherTest extends AbstractHttpResponseMimeTypeMatcherMatcherTest<HttpResponse> {
 

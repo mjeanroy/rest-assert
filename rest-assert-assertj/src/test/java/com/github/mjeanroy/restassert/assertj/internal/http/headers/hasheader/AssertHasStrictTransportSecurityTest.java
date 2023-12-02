@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 class AssertHasStrictTransportSecurityTest extends AbstractHttpResponsesHeaderTest {
 

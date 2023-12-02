@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.async.status.exact;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import org.asynchttpclient.Response;
 
 abstract class AbstractAsyncHttpStatusTest extends AbstractHttpStatusTest<Response> {

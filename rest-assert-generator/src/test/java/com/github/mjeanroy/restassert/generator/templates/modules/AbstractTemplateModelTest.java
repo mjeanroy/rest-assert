@@ -106,7 +106,7 @@ public abstract class AbstractTemplateModelTest {
 	private static final Condition<Map<String, Object>> HAS_ARGUMENTS_CONDITION = new Condition<Map<String, Object>>() {
 		@Override
 		public boolean matches(Map<String, Object> value) {
-			return ((Collection<?>) value.get("arguments")).size() > 0;
+			return !((Collection<?>) value.get("arguments")).isEmpty();
 		}
 	};
 

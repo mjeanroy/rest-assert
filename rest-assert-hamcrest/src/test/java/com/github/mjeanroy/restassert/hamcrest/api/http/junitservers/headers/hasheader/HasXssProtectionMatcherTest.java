@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.junitservers.headers.hasheader;
 
-import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Header;
 import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.hasXssProtection;

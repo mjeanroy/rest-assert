@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
 
 class AssertIsTextTest extends AbstractApacheHttpClientMimeTypeTest {
 

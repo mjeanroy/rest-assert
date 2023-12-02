@@ -25,14 +25,13 @@
 package com.github.mjeanroy.restassert.unit.api.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContainsEntries;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContainsEntries;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 
@@ -53,28 +52,16 @@ class AssertContainsEntriesIterableTest {
 
 	@Test
 	void it_should_fail() {
-		final String json = createJson();
-		final String message = "Expecting json entry id to be equal to 2 but was 1";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				assertContainsEntries(json, singleton(JsonAssertions.jsonEntry("id", 2)));
-			}
-		});
+		String json = createJson();
+		String message = "Expecting json entry id to be equal to 2 but was 1";
+		assertFailure(message, () -> assertContainsEntries(json, singleton(JsonAssertions.jsonEntry("id", 2))));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message() {
-		final String json = createJson();
-		final String message = "error";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				assertContainsEntries(message, json, singleton(JsonAssertions.jsonEntry("id", 2)));
-			}
-		});
+		String json = createJson();
+		String message = "error";
+		assertFailure(message, () -> assertContainsEntries(message, json, singleton(JsonAssertions.jsonEntry("id", 2))));
 	}
 
 	private String createJson() {

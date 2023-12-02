@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
@@ -33,7 +32,6 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
@@ -105,11 +103,6 @@ public class IsHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion imp
 	 * @return {@code true} if {@link #value} is in {@code actualValues}, {@code false} otherwise.
 	 */
 	private boolean containsCaseInsensitive(List<String> actualValues) {
-		return some(actualValues, new Collections.Predicate<String>() {
-			@Override
-			public boolean apply(String input) {
-				return value.equalsIgnoreCase(input);
-			}
-		});
+		return actualValues.stream().anyMatch(value::equalsIgnoreCase);
 	}
 }

@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
 class AssertIsAccessControlExposeHeadersEqualToTest extends AbstractNingHttpHeaderEqualToTest {
 

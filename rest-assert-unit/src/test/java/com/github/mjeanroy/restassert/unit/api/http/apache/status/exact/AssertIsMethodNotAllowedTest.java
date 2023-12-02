@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.apache.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
-
 import com.github.mjeanroy.restassert.unit.api.http.ApacheHttpAssert;
 import org.apache.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 
 class AssertIsMethodNotAllowedTest extends AbstractApacheHttpStatusTest {
 

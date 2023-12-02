@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.outof;
 
-import static com.github.mjeanroy.restassert.test.data.Range.range;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
+
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
 class IsOutOfTest extends AbstractHttpStatusOutOfTest {
 

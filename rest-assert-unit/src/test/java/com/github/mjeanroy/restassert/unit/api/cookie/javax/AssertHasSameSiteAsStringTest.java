@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.unit.api.cookie.javax;
 
 import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import javax.servlet.http.Cookie;
@@ -39,7 +38,7 @@ class AssertHasSameSiteAsStringTest {
 	@Test
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new JavaxCookieBuilder().build();
-		assertThatThrownBy(assertHasSameSite(cookie))
+		assertThatThrownBy(() -> JavaxCookieAssert.assertHasSameSite(cookie, STRICT.getValue()))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("javax.servlet.http.Cookie does not support #getSameSite()");
 	}
@@ -47,26 +46,8 @@ class AssertHasSameSiteAsStringTest {
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new JavaxCookieBuilder().build();
-		assertThatThrownBy(assertHasSameSite("message", cookie))
+		assertThatThrownBy(() -> JavaxCookieAssert.assertHasSameSite("message", cookie, STRICT.getValue()))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("javax.servlet.http.Cookie does not support #getSameSite()");
-	}
-
-	private static ThrowingCallable assertHasSameSite(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				JavaxCookieAssert.assertHasSameSite(cookie, STRICT.getValue());
-			}
-		};
-	}
-
-	private static ThrowingCallable assertHasSameSite(final String message, final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				JavaxCookieAssert.assertHasSameSite(message, cookie, STRICT.getValue());
-			}
-		};
 	}
 }

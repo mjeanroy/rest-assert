@@ -34,7 +34,6 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
 import static java.util.Collections.singleton;
 import static java.util.Collections.unmodifiableSet;
 
@@ -260,7 +259,7 @@ public final class FrameOptions implements HttpHeaderValue {
 
 	@Override
 	public String serializeValue() {
-		String opts = options.isEmpty() ? "" : " " + join(options, " ");
+		String opts = options.isEmpty() ? "" : " " + String.join(" ", options);
 		return directive.getPrefix() + opts;
 	}
 

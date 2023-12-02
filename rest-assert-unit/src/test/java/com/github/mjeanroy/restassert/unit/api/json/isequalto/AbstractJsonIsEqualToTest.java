@@ -25,12 +25,12 @@
 package com.github.mjeanroy.restassert.unit.api.json.isequalto;
 
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
+import static java.util.Arrays.asList;
 
 public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T> {
 
@@ -42,34 +42,24 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 
 	@Test
 	void it_should_fail() {
-		final T failure = failure();
-		final String message =
-				"Expecting json entry str to be equal to bar but was foo," + LINE_SEPARATOR +
-				"Expecting json entry nb to be equal to 2.0 but was 1.0," + LINE_SEPARATOR +
-				"Expecting json entry bool to be equal to false but was true," + LINE_SEPARATOR +
-				"Expecting json entry array[0] to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
-				"Expecting json entry array[1] to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
-				"Expecting json entry array[2] to be equal to 3.1 but was 3.0";
+		T failure = failure();
+		String message = String.join(LINE_SEPARATOR, asList(
+			"Expecting json entry str to be equal to bar but was foo,",
+			"Expecting json entry nb to be equal to 2.0 but was 1.0,",
+			"Expecting json entry bool to be equal to false but was true,",
+			"Expecting json entry array[0] to be equal to 1.1 but was 1.0,",
+			"Expecting json entry array[1] to be equal to 2.1 but was 2.0,",
+			"Expecting json entry array[2] to be equal to 3.1 but was 3.0"
+		));
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				run(failure);
-			}
-		});
+		assertFailure(message, () -> run(failure));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message() {
-		final T failure = failure();
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				run(message, failure);
-			}
-		});
+		T failure = failure();
+		String message = "foo";
+		assertFailure(message, () -> run(message, failure));
 	}
 
 	String actual() {

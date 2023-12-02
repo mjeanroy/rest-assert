@@ -24,147 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import static java.util.Arrays.asList;
-import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
-import org.junit.jupiter.api.Test;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class CollectionsTest {
-
-	@Test
-	@SuppressWarnings("unchecked")
-	void it_should_map_inputs_to_outputs() {
-		List<Integer> inputs = asList(1, 2, 3);
-
-		Mapper<Integer, Integer> mapper = mock(Mapper.class);
-
-		when(mapper.apply(anyInt())).thenAnswer(new Answer<Integer>() {
-			@Override
-			public Integer answer(InvocationOnMock invocation) {
-				int input = (Integer) invocation.getArguments()[0];
-				return input * input;
-			}
-		});
-
-		List<Integer> outputs = Collections.map(inputs, mapper);
-
-		assertThat(outputs)
-				.isNotNull()
-				.hasSameSizeAs(inputs)
-				.contains(1, 4, 9);
-
-		verify(mapper).apply(1);
-		verify(mapper).apply(2);
-		verify(mapper).apply(3);
-	}
-
-	@Test
-	@SuppressWarnings("unchecked")
-	void it_should_map_inputs_array_to_outputs() {
-		Integer[] inputs = new Integer[] {1, 2, 3};
-
-		Mapper<Integer, Integer> mapper = mock(Mapper.class);
-
-		when(mapper.apply(anyInt())).thenAnswer(new Answer<Integer>() {
-			@Override
-			public Integer answer(InvocationOnMock invocation) {
-				int input = (Integer) invocation.getArguments()[0];
-				return input * input;
-			}
-		});
-
-		List<Integer> outputs = Collections.map(inputs, mapper);
-
-		assertThat(outputs)
-				.isNotNull()
-				.hasSameSizeAs(inputs)
-				.contains(1, 4, 9);
-
-		verify(mapper).apply(1);
-		verify(mapper).apply(2);
-		verify(mapper).apply(3);
-	}
-
-	@Test
-	@SuppressWarnings("unchecked")
-	void it_should_filter_inputs() {
-		List<Integer> inputs = asList(1, 2, 3);
-
-		Predicate<Integer> predicate = mock(Predicate.class);
-
-		when(predicate.apply(anyInt())).thenAnswer(new Answer<Boolean>() {
-			@Override
-			public Boolean answer(InvocationOnMock invocation) {
-				int input = (Integer) invocation.getArguments()[0];
-				return input % 2 == 0;
-			}
-		});
-
-		List<Integer> outputs = Collections.filter(inputs, predicate);
-
-		assertThat(outputs)
-				.isNotNull()
-				.hasSize(1)
-				.contains(2);
-
-		verify(predicate).apply(1);
-		verify(predicate).apply(2);
-		verify(predicate).apply(3);
-	}
-
-	@Test
-	@SuppressWarnings("unchecked")
-	void it_should_return_true_if_some_find_a_match() {
-		Predicate<String> predicate = mock(Predicate.class);
-		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
-			@Override
-			public Boolean answer(InvocationOnMock invocation) {
-				return invocation.getArguments()[0].equals("foo");
-			}
-		});
-
-		List<String> inputs = asList("quix", "foo", "bar");
-
-		boolean found = Collections.some(inputs, predicate);
-
-		assertThat(found).isTrue();
-		verify(predicate).apply("quix");
-		verify(predicate).apply("foo");
-		verify(predicate, never()).apply("bar");
-	}
-
-	@Test
-	@SuppressWarnings("unchecked")
-	void it_should_return_false_if_some_does_not_find_a_match() {
-		Predicate<String> predicate = mock(Predicate.class);
-		when(predicate.apply(anyString())).thenAnswer(new Answer<Boolean>() {
-			@Override
-			public Boolean answer(InvocationOnMock invocation) {
-				return invocation.getArguments()[0].equals("foo");
-			}
-		});
-
-		List<String> inputs = asList("quix", "bar");
-
-		boolean found = Collections.some(inputs, predicate);
-
-		assertThat(found).isFalse();
-		verify(predicate).apply("quix");
-		verify(predicate).apply("bar");
-	}
 
 	@Test
 	void it_should_create_list_from_parameters() {
@@ -173,27 +39,5 @@ class CollectionsTest {
 		String v3 = "baz";
 		List<String> outputs = Collections.toList(v1, v2, v3);
 		assertThat(outputs).hasSize(3).containsExactly(v1, v2, v3);
-	}
-
-	@Test
-	@SuppressWarnings("unchecked")
-	void it_should_flat_map_inputs() {
-		String v1 = "foo";
-		String v2 = "bar";
-		String v3 = "baz";
-		String inputs = v1 + "," + v2 + "," + v3;
-		Mapper<String, String[]> splitFn = mock(Mapper.class);
-
-		when(splitFn.apply(anyString())).thenAnswer(new Answer<String[]>() {
-			@Override
-			public String[] answer(InvocationOnMock invocation) {
-				return ((String) invocation.getArgument(0)).split(",");
-			}
-		});
-
-		List<String> outputs = Collections.flatMap(singletonList(inputs), splitFn);
-
-		assertThat(outputs).hasSize(3).containsExactly(v1, v2, v3);
-		verify(splitFn).apply(inputs);
 	}
 }

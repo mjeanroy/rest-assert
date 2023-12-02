@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -94,31 +93,22 @@ class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	void it_should_fail_if_cookie_name_is_null() {
-		assertThatThrownBy(doesNotHaveCookieAssertion(null))
+		assertThatThrownBy(() -> new DoesNotHaveCookieAssertion(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_name_is_empty() {
-		assertThatThrownBy(doesNotHaveCookieAssertion(""))
+		assertThatThrownBy(() -> new DoesNotHaveCookieAssertion(""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_name_is_blank() {
-		assertThatThrownBy(doesNotHaveCookieAssertion("   "))
+		assertThatThrownBy(() -> new DoesNotHaveCookieAssertion("   "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Cookie name must be defined");
-	}
-
-	private static ThrowingCallable doesNotHaveCookieAssertion(final String name) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new DoesNotHaveCookieAssertion(name);
-			}
-		};
 	}
 }

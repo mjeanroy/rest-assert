@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LOCATION;
 
 class AssertHasLocationTest extends AbstractOkHttpHeaderTest {
 

@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -110,52 +109,43 @@ class MediaTypeTest {
 
 	@Test
 	void it_should_fail_if_type_is_null() {
-		assertThatThrownBy(newMediaType(null, "subtype"))
+		assertThatThrownBy(() -> new MediaType(null, "subtype"))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_type_is_empty() {
-		assertThatThrownBy(newMediaType("", "subtype"))
+		assertThatThrownBy(() -> new MediaType("", "subtype"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_type_is_blank() {
-		assertThatThrownBy(newMediaType("    ", "subtype"))
+		assertThatThrownBy(() -> new MediaType("    ", "subtype"))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_subtype_is_null() {
-		assertThatThrownBy(newMediaType("type", null))
+		assertThatThrownBy(() -> new MediaType("type", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_subtype_is_empty() {
-		assertThatThrownBy(newMediaType("type", ""))
+		assertThatThrownBy(() -> new MediaType("type", ""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_subtype_is_blank() {
-		assertThatThrownBy(newMediaType("type", "    "))
+		assertThatThrownBy(() -> new MediaType("type", "    "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("MediaType subtype must be defined");
-	}
-
-	private static ThrowingCallable newMediaType(final String type, final String subtype) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new MediaType(type, subtype);
-			}
-		};
 	}
 }

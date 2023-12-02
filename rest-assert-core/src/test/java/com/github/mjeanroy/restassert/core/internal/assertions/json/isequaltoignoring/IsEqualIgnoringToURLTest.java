@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.json.isequaltoignoring;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.net.URISyntaxException;
@@ -60,17 +59,8 @@ class IsEqualIgnoringToURLTest extends AbstractJsonAssertion_isEqualToIgnoring_T
 		URL url = new URL("http://fgoogle.com/q/h?s=^IXIC");
 		List<String> objects = emptyList();
 
-		assertThatThrownBy(isEqualToIgnoring(actual, url, objects))
-				.isExactlyInstanceOf(AssertionError.class)
-				.hasCauseExactlyInstanceOf(URISyntaxException.class);
-	}
-
-	private static ThrowingCallable isEqualToIgnoring(final String actual, final URL url, final List<String> objects) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				assertions.isEqualToIgnoring(actual, url, objects);
-			}
-		};
+		assertThatThrownBy(() -> assertions.isEqualToIgnoring(actual, url, objects))
+			.isExactlyInstanceOf(AssertionError.class)
+			.hasCauseExactlyInstanceOf(URISyntaxException.class);
 	}
 }

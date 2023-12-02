@@ -30,7 +30,9 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
 import static java.util.Collections.singletonList;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.verify;
 
 class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpResponseHeaderTest {
 

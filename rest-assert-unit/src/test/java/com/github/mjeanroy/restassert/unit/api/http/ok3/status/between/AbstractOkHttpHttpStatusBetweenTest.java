@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.ok3.status.between;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import okhttp3.Response;
 
 abstract class AbstractOkHttpHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<Response> {

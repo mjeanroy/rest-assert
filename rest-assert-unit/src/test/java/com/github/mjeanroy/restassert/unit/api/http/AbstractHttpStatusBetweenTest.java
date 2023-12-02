@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Range;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -47,25 +47,15 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 
 	@Test
 	void it_should_fail_with_response_not_in_bounds() {
-		doTestWithDefaultMessage(null, new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(newHttpResponse(status));
-			}
-		});
+		doTestWithDefaultMessage(null, (status) -> run(newHttpResponse(status)));
 	}
 
 	@Test
 	void it_should_fail_with_response_not_in_bounds_with_custom_message() {
-		doTestWithDefaultMessage(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(CUSTOM_MESSAGE, newHttpResponse(status));
-			}
-		});
+		doTestWithDefaultMessage(CUSTOM_MESSAGE, (status) -> run(CUSTOM_MESSAGE, newHttpResponse(status)));
 	}
 
-	private void doTestWithDefaultMessage(String msg, final TestInvocation<Integer> invocation) {
+	private void doTestWithDefaultMessage(String msg, Consumer<Integer> testFn) {
 		Range rang = getRange();
 		int start = rang.getStart();
 		int end = rang.getEnd();
@@ -75,14 +65,9 @@ public abstract class AbstractHttpStatusBetweenTest<T> extends AbstractHttpAsser
 				continue;
 			}
 
-			final int status = i;
-			final String message = firstNonNull(msg, buildErrorMessage(start, end, status));
-			assertFailure(message, new Function() {
-				@Override
-				public void apply() {
-					invocation.invokeTest(status);
-				}
-			});
+			int status = i;
+			String message = firstNonNull(msg, buildErrorMessage(start, end, status));
+			assertFailure(message, () -> testFn.accept(status));
 		}
 	}
 

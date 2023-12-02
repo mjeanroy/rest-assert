@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -43,31 +43,21 @@ public abstract class AbstractHttpResponseHeaderEqualToMatcherTest<T> extends Ab
 
 	@Test
 	void it_should_fail_with_if_response_does_not_contain_header() {
-		doTest(new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(newHttpResponse(header));
-			}
-		});
+		doTest((header) -> run(newHttpResponse(header)));
 	}
 
-	private void doTest(final TestInvocation<Header> invocation) {
-		final Header expectedHeader = getHeader();
-		final String expectedName = expectedHeader.getName();
-		final String expectedValue = expectedHeader.getValue();
-		final String actualValue = failValue();
-		final Header header = header(expectedName, actualValue);
-		final String message = generateHamcrestErrorMessage(
+	private void doTest(Consumer<Header> testFn) {
+		Header expectedHeader = getHeader();
+		String expectedName = expectedHeader.getName();
+		String expectedValue = expectedHeader.getValue();
+		String actualValue = failValue();
+		Header header = header(expectedName, actualValue);
+		String message = generateHamcrestErrorMessage(
 			buildExpectationMessage(expectedName, expectedValue),
 			buildMismatchMessage(actualValue)
 		);
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(header);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(header));
 	}
 
 	protected abstract Header getHeader();

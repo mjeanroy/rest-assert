@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
 import com.github.mjeanroy.restassert.test.json.JsonArray;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -46,7 +45,7 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_fail_to_parse_non_object_non_array() {
-		assertThatThrownBy(parse(parser(), "null"))
+		assertThatThrownBy(() -> parser().parse("null"))
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("Parser support object or array conversion only");
 	}
@@ -194,13 +193,4 @@ public abstract class AbstractJsonParserTest {
 	}
 
 	abstract JsonParser parser();
-
-	private static ThrowingCallable parse(final JsonParser parser, final String json) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				parser.parse(json);
-			}
-		};
-	}
 }

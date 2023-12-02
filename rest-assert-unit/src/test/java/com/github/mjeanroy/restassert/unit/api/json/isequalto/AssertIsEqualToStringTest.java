@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.json.isequalto;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualTo;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualTo;
 
 class AssertIsEqualToStringTest extends AbstractJsonIsEqualToTest<String> {
 

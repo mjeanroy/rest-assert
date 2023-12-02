@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -82,7 +81,7 @@ class DatesTest {
 	void it_should_throw_exception_if_pattern_is_not_known() {
 		String date = "foo bar";
 
-		assertThatThrownBy(parseHttpDate(date))
+		assertThatThrownBy(() -> Dates.parseHttpDate(date))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("HTTP Date must respect standard formats: EEE, dd MMM yyyy HH:mm:ss zzz, EEE, dd-MMM-yy HH:mm:ss zzz or EEE MMM d HH:mm:ss yyyy");
 	}
@@ -93,14 +92,5 @@ class DatesTest {
 		date.setTime(784111777000L);
 
 		assertThat(Dates.formatHttpDate(date)).isEqualTo("Sun, 06 Nov 1994 08:49:37 GMT");
-	}
-
-	private static ThrowingCallable parseHttpDate(final String date) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				Dates.parseHttpDate(date);
-			}
-		};
 	}
 }

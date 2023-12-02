@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
-import static java.util.Arrays.asList;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
+import static java.util.Arrays.asList;
 
 class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractCoreHttpHeaderEqualToTest {
 

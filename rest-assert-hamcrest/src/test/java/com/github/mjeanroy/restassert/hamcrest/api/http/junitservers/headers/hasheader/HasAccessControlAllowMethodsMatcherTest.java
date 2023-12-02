@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.junitservers.headers.hasheader;
 
+import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers;
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;

@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_PDF;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_PDF;
 
 class AssertIsPdfTest extends AbstractJunitServersHttpClientMimeTypeTest {
 

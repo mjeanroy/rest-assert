@@ -24,10 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
+import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeSecured.shouldBeSecured;
@@ -37,8 +39,6 @@ import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHa
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHavePath.shouldHavePath;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite.shouldHaveSameSite;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveValue.shouldHaveValue;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
-import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 
 /**
  * Re-usable assertion for {@link Cookie} objects.

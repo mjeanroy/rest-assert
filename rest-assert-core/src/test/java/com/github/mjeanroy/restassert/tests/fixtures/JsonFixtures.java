@@ -24,6 +24,13 @@
 
 package com.github.mjeanroy.restassert.tests.fixtures;
 
+import com.github.mjeanroy.restassert.test.json.JsonObject;
+
+import java.io.File;
+import java.net.URI;
+import java.net.URL;
+import java.nio.file.Path;
+
 import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.fileFromClasspath;
 import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.pathFromClasspath;
 import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.uriFromClasspath;
@@ -31,13 +38,6 @@ import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.urlFromCla
 import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
-
-import java.io.File;
-import java.net.URI;
-import java.net.URL;
-import java.nio.file.Path;
-
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 
 public final class JsonFixtures {
 

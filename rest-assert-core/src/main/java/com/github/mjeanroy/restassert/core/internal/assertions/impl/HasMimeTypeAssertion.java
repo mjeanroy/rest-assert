@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaders;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
@@ -34,10 +33,10 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType.shouldHaveMimeType;
@@ -136,13 +135,7 @@ public class HasMimeTypeAssertion extends AbstractHeaderEqualToAssertion impleme
 	 * @return The failure instance.
 	 */
 	private ShouldHaveMimeType getPluralFailure(String actualMimeType) {
-		List<String> rawValues = map(mimeTypes, new Mapper<MediaType, String>() {
-			@Override
-			public String apply(MediaType input) {
-				return input.serializeValue();
-			}
-		});
-
+		List<String> rawValues = mimeTypes.stream().map(MediaType::serializeValue).collect(Collectors.toList());
 		return shouldHaveMimeType(rawValues, actualMimeType);
 	}
 }

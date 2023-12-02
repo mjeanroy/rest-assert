@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.junitservers.mimetype;
 
-import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.MediaType;
 import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.hasMimeType;

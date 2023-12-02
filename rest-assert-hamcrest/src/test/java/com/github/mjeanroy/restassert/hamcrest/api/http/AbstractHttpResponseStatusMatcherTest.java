@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -40,28 +40,18 @@ public abstract class AbstractHttpResponseStatusMatcherTest<T> extends AbstractH
 
 	@Test
 	void it_should_fail_with_response_different_than_expected_status() {
-		doTest(new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(newHttpResponse(status));
-			}
-		});
+		doTest((status) -> run(newHttpResponse(status)));
 	}
 
-	private void doTest(final TestInvocation<Integer> invocation) {
-		final int expectedStatus = status();
-		final int status = expectedStatus + 1;
-		final String message = generateHamcrestErrorMessage(
+	private void doTest(Consumer<Integer> testFn) {
+		int expectedStatus = status();
+		int status = expectedStatus + 1;
+		String message = generateHamcrestErrorMessage(
 			buildExpectationMessage(expectedStatus),
 			buildMismatchMessage(status)
 		);
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(status);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(status));
 	}
 
 	protected abstract int status();

@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.test.data.Header;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
@@ -45,27 +45,17 @@ public abstract class AbstractHttpResponseDoesNotHaveHttpHeaderMatcherTest<T> ex
 
 	@Test
 	void it_should_fail_with_if_response_not_contain_header() {
-		doTest(new TestInvocation<Header>() {
-			@Override
-			public void invokeTest(Header header) {
-				run(newHttpResponse(header));
-			}
-		});
+		doTest((header) -> run(newHttpResponse(header)));
 	}
 
-	private void doTest(final TestInvocation<Header> invocation) {
-		final Header header = getHeader();
-		final String message = generateHamcrestErrorMessage(
+	private void doTest(Consumer<Header> testFn) {
+		Header header = getHeader();
+		String message = generateHamcrestErrorMessage(
 			buildExpectationMessage(header),
 			buildMismatchMessage()
 		);
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(header);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(header));
 	}
 
 	protected abstract Header getHeader();

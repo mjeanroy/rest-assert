@@ -25,11 +25,11 @@
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -43,27 +43,17 @@ public abstract class AbstractHttpResponseDoesNotHaveCookieMatcherTest<T> extend
 
 	@Test
 	void it_should_fail_with_response_with_cookie() {
-		doTest(new TestInvocation<Cookie>() {
-			@Override
-			public void invokeTest(Cookie cookie) {
-				run(newHttpResponse(cookie));
-			}
-		});
+		doTest((cookie) -> run(newHttpResponse(cookie)));
 	}
 
-	private void doTest(final TestInvocation<Cookie> invocation) {
-		final Cookie cookie = cookie();
-		final String message = generateHamcrestErrorMessage(
+	private void doTest(Consumer<Cookie> testFn) {
+		Cookie cookie = cookie();
+		String message = generateHamcrestErrorMessage(
 			buildExpectationMessage(),
 			buildMismatchMessage()
 		);
 
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(cookie);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(cookie));
 	}
 
 	protected abstract Cookie cookie();

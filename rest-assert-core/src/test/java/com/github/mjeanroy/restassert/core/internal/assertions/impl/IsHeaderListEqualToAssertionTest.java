@@ -27,13 +27,10 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
-import java.util.Collection;
-import java.util.Collections;
-
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -147,45 +144,36 @@ class IsHeaderListEqualToAssertionTest {
 
 	@Test
 	void it_should_fail_if_header_name_is_null() {
-		assertThatThrownBy(isHeaderListEqualToAssertion(null, singletonList("foo")))
+		assertThatThrownBy(() -> new IsHeaderListEqualToAssertion(null, singletonList("foo")))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_empty() {
-		assertThatThrownBy(isHeaderListEqualToAssertion("", singletonList("foo")))
+		assertThatThrownBy(() -> new IsHeaderListEqualToAssertion("", singletonList("foo")))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_blank() {
-		assertThatThrownBy(isHeaderListEqualToAssertion("   ", singletonList("foo")))
+		assertThatThrownBy(() -> new IsHeaderListEqualToAssertion("   ", singletonList("foo")))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_value_is_null() {
-		assertThatThrownBy(isHeaderListEqualToAssertion("name", null))
+		assertThatThrownBy(() -> new IsHeaderListEqualToAssertion("name", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Values must not be empty");
 	}
 
 	@Test
 	void it_should_fail_if_header_value_is_empty() {
-		assertThatThrownBy(isHeaderListEqualToAssertion("name", Collections.<String>emptyList()))
+		assertThatThrownBy(() -> new IsHeaderListEqualToAssertion("name", emptyList()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Values must not be empty");
-	}
-
-	private static ThrowingCallable isHeaderListEqualToAssertion(final String name, final Collection<String> values) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new IsHeaderListEqualToAssertion(name, values);
-			}
-		};
 	}
 }

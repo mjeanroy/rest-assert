@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEMENTED;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NOT_IMPLEMENTED;
 
 class AssertIsNotImplementedTest extends AbstractJunitServersHttpStatusTest {
 

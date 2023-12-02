@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -43,35 +43,19 @@ public abstract class AbstractHttpStatusTest<T> extends AbstractHttpAssertTest<T
 
 	@Test
 	void it_should_fail_with_response_different_than_expected_status() {
-		doTest(null, new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(newHttpResponse(status));
-			}
-		});
+		doTest(null, (status) -> run(newHttpResponse(status)));
 	}
 
 	@Test
 	void it_should_pass_with_custom_message_with_response_different_than_200() {
-		doTest(CUSTOM_MESSAGE, new TestInvocation<Integer>() {
-			@Override
-			public void invokeTest(Integer status) {
-				run(CUSTOM_MESSAGE, newHttpResponse(status));
-			}
-		});
+		doTest(CUSTOM_MESSAGE, (status) -> run(CUSTOM_MESSAGE, newHttpResponse(status)));
 	}
 
-	private void doTest(String msg, final TestInvocation<Integer> invocation) {
-		final int expectedStatus = status();
-		final int status = expectedStatus + 1;
-		final String message = firstNonNull(msg, buildErrorMessage(expectedStatus, status));
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(status);
-			}
-		});
+	private void doTest(String msg, Consumer<Integer> testFn) {
+		int expectedStatus = status();
+		int status = expectedStatus + 1;
+		String message = firstNonNull(msg, buildErrorMessage(expectedStatus, status));
+		assertFailure(message, () -> testFn.accept(status));
 	}
 
 	protected abstract int status();

@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.between;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusBetweenTest;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpStatusBetweenTest extends AbstractHttpStatusBetweenTest<Response> {

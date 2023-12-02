@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.test.commons;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.TimeZone;
 
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class DateTestUtilsTest {
 

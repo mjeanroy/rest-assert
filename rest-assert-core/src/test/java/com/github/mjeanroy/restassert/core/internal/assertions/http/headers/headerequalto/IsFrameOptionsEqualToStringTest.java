@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
@@ -88,7 +87,7 @@ class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 		String expected = "same-origin";
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
-		assertThatThrownBy(isFrameOptionsEqualTo(response, expected))
+		assertThatThrownBy(() -> assertions.isFrameOptionsEqualTo(response, expected))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
 	}
@@ -97,14 +96,5 @@ class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 		AssertionResult result = assertions.isFrameOptionsEqualTo(response, expected);
 		checkSuccess(result);
-	}
-
-	private static ThrowingCallable isFrameOptionsEqualTo(final HttpResponse response, final String expected) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				assertions.isFrameOptionsEqualTo(response, expected);
-			}
-		};
 	}
 }

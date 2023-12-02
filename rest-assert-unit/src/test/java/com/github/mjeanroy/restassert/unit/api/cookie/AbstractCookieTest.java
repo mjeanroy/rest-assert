@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie;
 
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import org.junit.jupiter.api.Test;
 
@@ -41,28 +40,16 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 
 	@Test
 	void it_should_fail() {
-		final T cookie = failure();
-		final String message = String.format(pattern(), placeholders());
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				run(cookie);
-			}
-		});
+		T cookie = failure();
+		String message = String.format(pattern(), placeholders());
+		assertFailure(message, () -> run(cookie));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message() {
-		final T cookie = failure();
-		final String message = "foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				run(message, cookie);
-			}
-		});
+		T cookie = failure();
+		String message = "foo";
+		assertFailure(message, () -> run(message, cookie));
 	}
 
 	protected abstract T success();

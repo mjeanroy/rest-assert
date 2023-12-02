@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_SECURITY_POLICY;
 
 class AssertIsContentSecurityPolicyEqualToStringTest extends AbstractAsyncHttpHeaderEqualToTest {
 

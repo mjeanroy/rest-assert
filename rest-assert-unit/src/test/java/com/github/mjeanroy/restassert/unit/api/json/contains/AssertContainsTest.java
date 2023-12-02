@@ -24,14 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api.json.contains;
 
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContains;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContains;
 
 class AssertContainsTest {
 
@@ -44,28 +43,16 @@ class AssertContainsTest {
 
 	@Test
 	void it_should_fail() {
-		final String json = createJson();
-		final String message = "Expecting json to contain entry foo";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				assertContains(json, "foo");
-			}
-		});
+		String json = createJson();
+		String message = "Expecting json to contain entry foo";
+		assertFailure(message, () -> assertContains(json, "foo"));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message() {
-		final String json = createJson();
-		final String message = "error";
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				assertContains(message, json, "foo", new String[0]);
-			}
-		});
+		String json = createJson();
+		String message = "error";
+		assertFailure(message, () -> assertContains(message, json, "foo", new String[0]));
 	}
 
 	private String createJson() {

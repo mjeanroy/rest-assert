@@ -24,18 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
-import static java.util.Collections.singletonList;
+import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
+import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
-import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
-import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
-import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
+import static java.util.Arrays.stream;
+import static java.util.Collections.singletonList;
 
 /**
  * The list of available content-encoding values.
@@ -122,12 +121,12 @@ public final class ContentEncoding implements HttpHeaderValue {
 		/**
 		 * Index of directive, each one being indexed by its value.
 		 */
-		private static final Map<String, Directive> map = indexBy(Directive.values(), new Mapper<Directive, String>() {
-			@Override
-			public String apply(Directive input) {
-				return input.getValue();
-			}
-		});
+		private static final Map<String, Directive> map = stream(Directive.values()).collect(
+			Collectors.toMap(
+				Directive::getValue,
+				Function.identity()
+			)
+		);
 
 		/**
 		 * Get the directive element by its value.
@@ -166,12 +165,9 @@ public final class ContentEncoding implements HttpHeaderValue {
 
 	@Override
 	public String serializeValue() {
-		return join(directives, ", ", new StringMapper<Directive>() {
-			@Override
-			public String apply(Directive input) {
-				return input.getValue();
-			}
-		});
+		return directives.stream()
+			.map(Directive::getValue)
+			.collect(Collectors.joining(", "));
 	}
 
 	@Override

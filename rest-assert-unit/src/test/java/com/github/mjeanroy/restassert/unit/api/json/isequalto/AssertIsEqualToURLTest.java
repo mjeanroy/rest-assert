@@ -26,9 +26,9 @@ package com.github.mjeanroy.restassert.unit.api.json.isequalto;
 
 import java.net.URL;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualTo;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonUrlSuccess;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualTo;
 
 class AssertIsEqualToURLTest extends AbstractJsonIsEqualToTest<URL> {
 

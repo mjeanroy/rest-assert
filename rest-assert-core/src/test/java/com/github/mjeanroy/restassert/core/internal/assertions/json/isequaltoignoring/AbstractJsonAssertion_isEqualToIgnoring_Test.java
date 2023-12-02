@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.isequaltoig
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
-import org.junit.BeforeClass;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

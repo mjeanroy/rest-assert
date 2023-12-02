@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.headers.doesnothaveheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
 class AssertDoesNotHaveStrictTransportSecurityTest extends AbstractGoogleDoesNotHaveHttpHeaderTest {
 

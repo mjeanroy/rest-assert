@@ -31,7 +31,6 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HeaderParserBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HeaderValueBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -132,45 +131,36 @@ class IsHeaderMatchingAssertionTest {
 
 	@Test
 	void it_should_fail_if_header_name_is_null() {
-		assertThatThrownBy(isHeaderMatchingAssertion(null, new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
+		assertThatThrownBy(() -> new IsHeaderMatchingAssertion(null, new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_empty() {
-		assertThatThrownBy(isHeaderMatchingAssertion("", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
+		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_blank() {
-		assertThatThrownBy(isHeaderMatchingAssertion("   ", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
+		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("   ", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_value_is_null() {
-		assertThatThrownBy(isHeaderMatchingAssertion("name", null, new HeaderParserBuilder().build()))
+		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("name", null, new HeaderParserBuilder().build()))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header expected value must not be null");
 	}
 
 	@Test
 	void it_should_fail_if_header_parser_is_null() {
-		assertThatThrownBy(isHeaderMatchingAssertion("name", new HeaderValueBuilder().build(), null))
+		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("name", new HeaderValueBuilder().build(), null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header parser must not be null");
-	}
-
-	private static ThrowingCallable isHeaderMatchingAssertion(final String name, final HttpHeaderValue value, final HttpHeaderParser<?> parser) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new IsHeaderMatchingAssertion(name, value, parser);
-			}
-		};
 	}
 }

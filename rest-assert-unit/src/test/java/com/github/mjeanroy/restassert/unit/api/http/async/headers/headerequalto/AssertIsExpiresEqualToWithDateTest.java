@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.async.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
-
-import java.util.Date;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.AsyncHttpAssert;
 import org.asynchttpclient.Response;
+
+import java.util.Date;
+
+import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
 class AssertIsExpiresEqualToWithDateTest extends AbstractAsyncHttpHeaderEqualToTest {
 

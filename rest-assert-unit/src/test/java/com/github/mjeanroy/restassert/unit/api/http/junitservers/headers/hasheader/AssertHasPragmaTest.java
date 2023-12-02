@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 
 class AssertHasPragmaTest extends AbstractJunitServersHttpHeaderTest {
 

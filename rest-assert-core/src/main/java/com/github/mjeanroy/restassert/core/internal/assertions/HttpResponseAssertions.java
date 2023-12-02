@@ -47,18 +47,19 @@ import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatc
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.flatMap;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.toList;
 import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
@@ -94,6 +95,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_P
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
 import static java.util.Arrays.asList;
+import static java.util.stream.StreamSupport.stream;
 
 /**
  * Reusable Assertions of http response.
@@ -106,12 +108,7 @@ public final class HttpResponseAssertions {
 	 * Singleton object.
 	 */
 	private static final HttpResponseAssertions INSTANCE = new HttpResponseAssertions();
-	private static final Mapper<String, String[]> STRING_SPLIT = new Mapper<String, String[]>() {
-		@Override
-		public String[] apply(String input) {
-			return input.split(",");
-		}
-	};
+	private static final Function<String, String[]> STRING_SPLIT = (input) ->input.split(",");
 
 	/**
 	 * Get singleton object.
@@ -1473,7 +1470,7 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
 	 */
 	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
-		return isAccessControlAllowHeadersEqualTo(httpResponse, flatMap(toList(value, other), STRING_SPLIT));
+		return isAccessControlAllowHeadersEqualTo(httpResponse, toList(value, other).stream());
 	}
 
 	/**
@@ -1489,7 +1486,16 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers</a>
 	 */
 	public AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlAllowHeaders) {
-		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), flatMap(accessControlAllowHeaders, STRING_SPLIT)));
+		return isAccessControlAllowHeadersEqualTo(httpResponse, stream(accessControlAllowHeaders.spliterator(), false));
+	}
+
+	private AssertionResult isAccessControlAllowHeadersEqualTo(HttpResponse httpResponse, Stream<String> accessControlAllowHeaders) {
+		Iterable<String> values = accessControlAllowHeaders
+			.map(STRING_SPLIT)
+			.flatMap(Arrays::stream)
+			.collect(Collectors.toList());
+
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_HEADERS.getName(), values));
 	}
 
 	/**
@@ -1531,7 +1537,7 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>
 	 */
 	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, String value, String... other) {
-		return isAccessControlExposeHeadersEqualTo(httpResponse, flatMap(toList(value, other), STRING_SPLIT));
+		return isAccessControlExposeHeadersEqualTo(httpResponse, toList(value, other).stream());
 	}
 
 	/**
@@ -1547,7 +1553,16 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Expose-Headers</a>
 	 */
 	public AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, Iterable<String> accessControlExposeHeaders) {
-		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_EXPOSE_HEADERS.getName(), flatMap(accessControlExposeHeaders, STRING_SPLIT)));
+		return isAccessControlExposeHeadersEqualTo(httpResponse, stream(accessControlExposeHeaders.spliterator(), false));
+	}
+
+	private AssertionResult isAccessControlExposeHeadersEqualTo(HttpResponse httpResponse, Stream<String> accessControlExposeHeaders) {
+		Iterable<String> values = accessControlExposeHeaders
+			.map(STRING_SPLIT)
+			.flatMap(Arrays::stream)
+			.collect(Collectors.toList());
+
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_EXPOSE_HEADERS.getName(), values));
 	}
 
 	/**
@@ -1601,12 +1616,8 @@ public final class HttpResponseAssertions {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Methods</a>
 	 */
 	public AssertionResult isAccessControlAllowMethodsEqualTo(HttpResponse httpResponse, Iterable<RequestMethod> methods) {
-		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_METHODS.getName(), map(methods, new Mapper<RequestMethod, String>() {
-			@Override
-			public String apply(RequestMethod input) {
-				return input.verb();
-			}
-		})));
+		List<String> verbs = stream(methods.spliterator(), false).map(RequestMethod::verb).collect(Collectors.toList());
+		return assertWith(httpResponse, new IsHeaderListEqualToAssertion(ACCESS_CONTROL_ALLOW_METHODS.getName(), verbs));
 	}
 
 	/**

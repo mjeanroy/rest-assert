@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
+import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
+import com.google.api.client.http.HttpResponse;
 
 import java.util.List;
 
-import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
-import com.google.api.client.http.HttpResponse;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.JAVASCRIPT;
 
 class AssertIsJavascriptTest extends AbstractGoogleHttpClientMimeTypeInTest {
 

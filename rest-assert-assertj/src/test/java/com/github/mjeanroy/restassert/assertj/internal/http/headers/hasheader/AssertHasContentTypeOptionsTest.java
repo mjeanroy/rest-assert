@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
 class AssertHasContentTypeOptionsTest extends AbstractHttpResponsesHeaderTest {
 

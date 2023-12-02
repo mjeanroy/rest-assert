@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.generator;
 
-import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.packageNameToDirectory;
+import com.github.mjeanroy.restassert.generator.utils.IOUtils;
 
 import java.io.File;
 
-import com.github.mjeanroy.restassert.generator.utils.IOUtils;
+import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.packageNameToDirectory;
 
 /**
  * Class file that will generated and written to disk.

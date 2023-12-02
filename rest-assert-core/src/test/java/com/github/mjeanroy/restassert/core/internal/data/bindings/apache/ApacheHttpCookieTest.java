@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.data.bindings.apache;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -104,7 +103,7 @@ class ApacheHttpCookieTest {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
-		assertThatThrownBy(getMaxAge(cookie))
+		assertThatThrownBy(cookie::getMaxAge)
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
@@ -114,26 +113,8 @@ class ApacheHttpCookieTest {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
-		assertThatThrownBy(isHttpOnly(cookie))
+		assertThatThrownBy(cookie::isHttpOnly)
 				.isExactlyInstanceOf(UnsupportedOperationException.class)
 				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
-	}
-
-	private static ThrowingCallable getMaxAge(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				cookie.getMaxAge();
-			}
-		};
-	}
-
-	private static ThrowingCallable isHttpOnly(final Cookie cookie) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				cookie.isHttpOnly();
-			}
-		};
 	}
 }

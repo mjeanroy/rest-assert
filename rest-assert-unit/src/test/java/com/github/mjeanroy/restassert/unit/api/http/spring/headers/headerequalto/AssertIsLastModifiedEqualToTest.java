@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.spring.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.SpringMockMvcHttpAssert;
 import org.springframework.test.web.servlet.ResultActions;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
 class AssertIsLastModifiedEqualToTest extends AbstractSpringMockMvcHttpHeaderEqualToTest {
 

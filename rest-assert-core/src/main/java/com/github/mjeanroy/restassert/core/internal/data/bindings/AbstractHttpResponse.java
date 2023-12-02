@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
@@ -32,8 +31,8 @@ import com.github.mjeanroy.restassert.core.internal.exceptions.NonParsableRespon
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.SET_COOKIE;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
@@ -71,13 +70,7 @@ public abstract class AbstractHttpResponse implements HttpResponse {
 		}
 
 		// Parse header to create valid cookie object.
-		List<Cookie> cookies = map(setCookieHeaders, new Mapper<String, Cookie>() {
-			@Override
-			public Cookie apply(String input) {
-				return Cookies.parse(input);
-			}
-		});
-
+		List<Cookie> cookies = setCookieHeaders.stream().map(Cookies::parse).collect(Collectors.toList());
 		return unmodifiableList(cookies);
 	}
 

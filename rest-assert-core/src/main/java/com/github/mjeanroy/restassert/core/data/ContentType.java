@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Strings.StringMapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
@@ -33,10 +32,10 @@ import java.nio.charset.Charset;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.join;
 import static java.util.Collections.singletonMap;
 
 /**
@@ -151,12 +150,9 @@ public final class ContentType implements HttpHeaderValue {
 		String output = mediaType.serializeValue();
 
 		if (!parameters.isEmpty()) {
-			output += SEPARATOR + join(parameters.values(), SEPARATOR, new StringMapper<Parameter>() {
-				@Override
-				public String apply(Parameter input) {
-					return input.serializeValue();
-				}
-			});
+			output += SEPARATOR + parameters.values().stream()
+				.map(Parameter::serializeValue)
+				.collect(Collectors.joining(SEPARATOR));
 		}
 
 		return output;

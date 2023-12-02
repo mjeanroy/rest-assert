@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
@@ -83,17 +82,8 @@ class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTes
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		// WHEN, THEN
-		assertThatThrownBy(isContentTypeOptionsEqualTo(response, expected))
+		assertThatThrownBy(() -> assertions.isContentTypeOptionsEqualTo(response, expected))
 				.isExactlyInstanceOf(InvalidHeaderValue.class)
 				.hasMessage("X-Content-Type-Options value 'no-sniff' is not a valid one.");
-	}
-
-	private ThrowingCallable isContentTypeOptionsEqualTo(final HttpResponse response, final String expected) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				assertions.isContentTypeOptionsEqualTo(response, expected);
-			}
-		};
 	}
 }

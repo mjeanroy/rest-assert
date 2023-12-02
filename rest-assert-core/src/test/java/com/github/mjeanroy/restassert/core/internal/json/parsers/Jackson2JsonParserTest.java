@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
 import com.github.mjeanroy.restassert.core.internal.json.JsonException;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -49,15 +48,6 @@ class Jackson2JsonParserTest extends AbstractJsonParserTest {
 	@Test
 	void it_should_wrap_checked_exception() {
 		String json = "[ Invalid JSON ]";
-		assertThatThrownBy(parse(json)).isExactlyInstanceOf(JsonException.class);
-	}
-
-	private static ThrowingCallable parse(final String json) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				parser.parse(json);
-			}
-		};
+		assertThatThrownBy(() -> parser.parse(json)).isExactlyInstanceOf(JsonException.class);
 	}
 }

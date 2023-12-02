@@ -25,11 +25,11 @@
 package com.github.mjeanroy.restassert.unit.api.http;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -46,33 +46,18 @@ public abstract class AbstractDoesNotHaveCookieTest<T> extends AbstractHttpAsser
 
 	@Test
 	void it_should_fail_with_response_with_cookie() {
-		doTest(null, new TestInvocation<Cookie>() {
-			@Override
-			public void invokeTest(Cookie cookie) {
-				run(newHttpResponse(cookie));
-			}
-		});
+		doTest(null, (cookie) -> run(newHttpResponse(cookie)));
 	}
 
 	@Test
 	void it_should_pass_with_custom_message_with_response_with_cookie() {
-		doTest(CUSTOM_MESSAGE, new TestInvocation<Cookie>() {
-			@Override
-			public void invokeTest(Cookie cookie) {
-				run(CUSTOM_MESSAGE, newHttpResponse(cookie));
-			}
-		});
+		doTest(CUSTOM_MESSAGE, (cookie) -> run(CUSTOM_MESSAGE, newHttpResponse(cookie)));
 	}
 
-	private void doTest(String msg, final TestInvocation<Cookie> invocation) {
-		final Cookie cookie = cookie();
+	private void doTest(String msg, Consumer<Cookie> testFn) {
+		Cookie cookie = cookie();
 		String message = firstNonNull(msg, buildErrorMessage());
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(cookie);
-			}
-		});
+		assertFailure(message, () -> testFn.accept(cookie));
 	}
 
 	protected abstract Cookie cookie();

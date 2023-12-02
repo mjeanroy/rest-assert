@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;
@@ -126,38 +125,29 @@ class IsDateHeaderEqualToAssertionTest {
 
 	@Test
 	public void it_should_fail_if_header_name_is_null() {
-		assertThatThrownBy(isDateHeaderEqualToAssertion(null, new Date()))
+		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion(null, new Date()))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
-		assertThatThrownBy(isDateHeaderEqualToAssertion("", new Date()))
+		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion("", new Date()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
-		assertThatThrownBy(isDateHeaderEqualToAssertion("   ", new Date()))
+		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion("   ", new Date()))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
-		assertThatThrownBy(isDateHeaderEqualToAssertion("name", null))
+		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion("name", null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header value must not be null");
-	}
-
-	private static ThrowingCallable isDateHeaderEqualToAssertion(final String name, final Date value) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new IsDateHeaderEqualToAssertion(name, value);
-			}
-		};
 	}
 }

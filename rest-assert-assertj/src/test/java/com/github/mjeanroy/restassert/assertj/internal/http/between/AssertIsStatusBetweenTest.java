@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.between;
 
-import static com.github.mjeanroy.restassert.test.data.Range.range;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import org.assertj.core.api.AssertionInfo;
+
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
 class AssertIsStatusBetweenTest extends AbstractHttpResponsesStatusBetweenTest {
 

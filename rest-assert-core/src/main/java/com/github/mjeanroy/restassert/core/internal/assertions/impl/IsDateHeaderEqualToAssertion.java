@@ -25,20 +25,19 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
+import com.github.mjeanroy.restassert.core.internal.common.Dates;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.core.internal.common.Dates.formatHttpDate;
-import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
 /**
  * Check that http response has at least one header with
@@ -72,7 +71,10 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 	@Override
 	AssertionResult doAssertion(List<String> values) {
 		log.debug("Extracting and parsing date values from: {}", values);
-		List<String> actualDates = map(values, httpDateMapper);
+		List<String> actualDates = values.stream()
+			.map(Dates::parseHttpDate)
+			.map(Dates::formatHttpDate)
+			.collect(Collectors.toList());
 
 		log.debug("-> Following dates extracted: {}", actualDates);
 		log.debug("-> Try to find: {}", value);
@@ -80,15 +82,4 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 				success() :
 				failure(shouldHaveHeaderWithValue(name, value, values));
 	}
-
-	private static final Mapper<String, String> httpDateMapper = new Mapper<String, String>() {
-		@Override
-		public String apply(String input) {
-			log.debug("  --> Parsing date: {}", input);
-			Date date = parseHttpDate(input);
-
-			log.debug("  --> Reformat date: {}", date);
-			return formatHttpDate(date);
-		}
-	};
 }

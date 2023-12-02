@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.outof;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
-
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CLIENT_ERROR;
 
 class AssertIsNotClientErrorTest extends AbstractGoogleHttpStatusOutOfTest {
 

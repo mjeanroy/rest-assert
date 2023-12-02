@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
-
-import java.util.List;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_EXPOSE_HEADERS;
 
 class AssertIsAccessControlExposeHeadersEqualToIterableTest extends AbstractCoreHttpHeaderEqualToTest {
 

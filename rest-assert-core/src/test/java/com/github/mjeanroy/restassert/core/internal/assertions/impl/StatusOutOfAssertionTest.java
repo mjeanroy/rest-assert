@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -74,31 +73,22 @@ class StatusOutOfAssertionTest {
 
 	@Test
 	void it_should_fail_if_status_start_is_negative() {
-		assertThatThrownBy(statusOutOfAssertion(-1, 200))
+		assertThatThrownBy(() -> new StatusOutOfAssertion(-1, 200))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Http status code must be positive");
 	}
 
 	@Test
 	void it_should_fail_if_status_end_is_negative() {
-		assertThatThrownBy(statusOutOfAssertion(200, -1))
+		assertThatThrownBy(() -> new StatusOutOfAssertion(200, -1))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Http status code must be positive");
 	}
 
 	@Test
 	void it_should_fail_if_status_start_is_greater_than_end() {
-		assertThatThrownBy(statusOutOfAssertion(201, 200))
+		assertThatThrownBy(() -> new StatusOutOfAssertion(201, 200))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Lower bound must be strictly less than upper bound");
-	}
-
-	private static ThrowingCallable statusOutOfAssertion(final int start, final int end) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				new StatusOutOfAssertion(start, end);
-			}
-		};
 	}
 }

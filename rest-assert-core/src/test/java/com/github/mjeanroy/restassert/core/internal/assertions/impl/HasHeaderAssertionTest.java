@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,31 +63,22 @@ class HasHeaderAssertionTest {
 
 	@Test
 	void it_should_fail_if_header_name_is_null() {
-		assertThatThrownBy(hasHeaderAssertion(null))
+		assertThatThrownBy(() -> new HasHeaderAssertion(null))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_empty() {
-		assertThatThrownBy(hasHeaderAssertion(""))
+		assertThatThrownBy(() -> new HasHeaderAssertion(""))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_blank() {
-		assertThatThrownBy(hasHeaderAssertion("   "))
+		assertThatThrownBy(() -> new HasHeaderAssertion("   "))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage("Header name cannot be blank");
-	}
-
-	private static ThrowingCallable hasHeaderAssertion(final String name) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() throws Throwable {
-				new HasHeaderAssertion(name);
-			}
-		};
 	}
 }

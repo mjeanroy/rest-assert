@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
-
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.METHOD_NOT_ALLOWED;
 
 class AssertIsMethodNotAllowedTest extends AbstractNingHttpStatusTest {
 

@@ -26,12 +26,12 @@ package com.github.mjeanroy.restassert.assertj.internal.http.headers.hasheader;
 
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AbstractHttpResponsesHeaderTest {

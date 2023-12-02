@@ -24,20 +24,19 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpResponse> {
@@ -51,12 +50,7 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 
 	@Test
 	void it_should_pass_with_expected_mime_type() {
-		List<String> mimeTypes = map(getMimeTypes(), new Mapper<String, String>() {
-			@Override
-			public String apply(String input) {
-				return input.toLowerCase();
-			}
-		});
+		List<String> mimeTypes = getMimeTypes().stream().map(String::toLowerCase).collect(Collectors.toList());
 
 		for (Header header : getHeaders(mimeTypes)) {
 			HttpResponse httpResponse = newResponse(header);
@@ -67,12 +61,7 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 
 	@Test
 	void it_should_pass_with_expected_mime_type_in_a_different_case() {
-		List<String> mimeTypes = map(getMimeTypes(), new Mapper<String, String>() {
-			@Override
-			public String apply(String input) {
-				return input.toUpperCase();
-			}
-		});
+		List<String> mimeTypes = getMimeTypes().stream().map(String::toUpperCase).collect(Collectors.toList());
 
 		for (Header header : getHeaders(mimeTypes)) {
 			HttpResponse httpResponse = newResponse(header);
@@ -118,11 +107,6 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 	}
 
 	private static List<Header> getHeaders(List<String> mimeTypes) {
-		return map(mimeTypes, new Mapper<String, Header>() {
-			@Override
-			public Header apply(String input) {
-				return header("Content-Type", input + ";charset=UTF-8");
-			}
-		});
+		return mimeTypes.stream().map((input) -> header("Content-Type", input + ";charset=UTF-8")).collect(Collectors.toList());
 	}
 }

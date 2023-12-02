@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.json.isequaltoignoring;
 
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualToIgnoring;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsEqualToIgnoring;
 
 class AssertIsEqualToIgnoringStringTest extends AbstractJsonIsEqualToIgnoringTest<String> {
 

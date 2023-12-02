@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.mimetype;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
 
 class AssertIsTextTest extends AbstractNingHttpClientMimeTypeTest {
 

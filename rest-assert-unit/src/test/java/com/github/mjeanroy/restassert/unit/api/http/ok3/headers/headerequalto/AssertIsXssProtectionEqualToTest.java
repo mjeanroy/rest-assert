@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ok3.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
-
 import com.github.mjeanroy.restassert.core.data.XssProtection;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.OkHttpAssert;
 import okhttp3.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
 class AssertIsXssProtectionEqualToTest extends AbstractOkHttpHeaderEqualToTest {
 

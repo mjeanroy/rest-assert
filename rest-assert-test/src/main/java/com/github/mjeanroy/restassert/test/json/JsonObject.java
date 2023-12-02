@@ -24,12 +24,12 @@
 
 package com.github.mjeanroy.restassert.test.json;
 
-import static java.util.Collections.unmodifiableCollection;
-
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import static java.util.Collections.unmodifiableCollection;
 
 /**
  * A JSON Object that can be used to serialize data to a JSON representation
@@ -113,7 +113,7 @@ public final class JsonObject implements JsonValue {
 			first = false;
 		}
 
-		return "{" + sub.toString() + "}";
+		return "{" + sub + "}";
 	}
 
 	@Override

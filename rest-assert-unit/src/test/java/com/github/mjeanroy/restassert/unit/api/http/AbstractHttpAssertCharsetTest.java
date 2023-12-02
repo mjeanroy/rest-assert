@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
-import com.github.mjeanroy.restassert.test.tests.TestInvocation;
-import com.github.mjeanroy.restassert.tests.Function;
 import org.junit.jupiter.api.Test;
+
+import java.util.function.Consumer;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -43,35 +43,19 @@ public abstract class AbstractHttpAssertCharsetTest<T> extends AbstractHttpAsser
 
 	@Test
 	void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		invokeFailure(null, new TestInvocation<String>() {
-			@Override
-			public void invokeTest(String charset) {
-				run(newHttpResponse(charset));
-			}
-		});
+		invokeFailure(null, (charset) -> run(newHttpResponse(charset)));
 	}
 
 	@Test
 	void it_should_fail_with_custom_message_if_response_is_not_expected_mime_type() {
-		invokeFailure(CUSTOM_MESSAGE, new TestInvocation<String>() {
-			@Override
-			public void invokeTest(String charset) {
-				run(CUSTOM_MESSAGE, newHttpResponse(charset));
-			}
-		});
+		invokeFailure(CUSTOM_MESSAGE, (charset) -> run(CUSTOM_MESSAGE, newHttpResponse(charset)));
 	}
 
-	private void invokeFailure(String msg, final TestInvocation<String> invocation) {
-		final String expectedCharset = getCharset();
-		final String actualCharset = expectedCharset + "foo";
-		final String message = firstNonNull(msg, buildErrorMessage(expectedCharset, actualCharset));
-
-		assertFailure(message, new Function() {
-			@Override
-			public void apply() {
-				invocation.invokeTest(actualCharset);
-			}
-		});
+	private void invokeFailure(String msg, Consumer<String> testFn) {
+		String expectedCharset = getCharset();
+		String actualCharset = expectedCharset + "foo";
+		String message = firstNonNull(msg, buildErrorMessage(expectedCharset, actualCharset));
+		assertFailure(message, () -> testFn.accept(actualCharset));
 	}
 
 	protected abstract String getCharset();

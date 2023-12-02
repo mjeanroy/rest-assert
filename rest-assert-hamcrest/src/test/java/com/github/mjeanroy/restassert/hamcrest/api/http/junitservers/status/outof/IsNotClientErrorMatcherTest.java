@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.junitservers.status.outof;
 
-import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
+import com.github.mjeanroy.restassert.test.data.Range;
 import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.http.JunitServersHttpResponseMatchers.isNotClientError;

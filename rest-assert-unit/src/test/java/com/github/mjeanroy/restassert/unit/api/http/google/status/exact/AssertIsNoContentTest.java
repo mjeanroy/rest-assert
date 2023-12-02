@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.google.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT;
-
 import com.github.mjeanroy.restassert.unit.api.http.GoogleHttpAssert;
 import com.google.api.client.http.HttpResponse;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.NO_CONTENT;
 
 class AssertIsNoContentTest extends AbstractGoogleHttpStatusTest {
 

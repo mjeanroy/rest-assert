@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
-
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.PRAGMA;
 
 class IsPragmaEqualToTest extends AbstractHttpHeaderEqualToTest {
 

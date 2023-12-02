@@ -24,14 +24,14 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.junitservers.headers.headerequalto;
 
-import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
-
-import java.util.Date;
-
 import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.JunitServersHttpAssert;
+
+import java.util.Date;
+
+import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
 class AssertIsLastModifiedEqualToWithDateTest extends AbstractJunitServersHttpHeaderEqualToTest {
 

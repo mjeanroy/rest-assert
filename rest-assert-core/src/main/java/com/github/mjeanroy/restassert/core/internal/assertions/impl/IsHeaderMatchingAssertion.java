@@ -24,20 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Predicate;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 import java.util.List;
 import java.util.Objects;
 
-import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.some;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
 /**
  * Check that http response has at least one header matching
@@ -70,27 +68,15 @@ public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion im
 
 	@Override
 	AssertionResult doAssertion(List<String> values) {
-		boolean found = some(values, new HeaderPredicate(expected, parser));
-		return found ? success() : failure(shouldHaveHeaderWithValue(name, expected.serializeValue(), values));
-	}
-
-	private static class HeaderPredicate implements Predicate<String> {
-		private final HttpHeaderValue expected;
-		private final HttpHeaderParser<? extends HttpHeaderValue> parser;
-
-		private HeaderPredicate(HttpHeaderValue expected, HttpHeaderParser<? extends HttpHeaderValue> parser) {
-			this.expected = expected;
-			this.parser = parser;
-		}
-
-		@Override
-		public boolean apply(String input) {
+		boolean found = values.stream().anyMatch((input) -> {
 			try {
 				return Objects.equals(expected, parser.parse(input));
 			}
 			catch (InvalidHeaderValue ex) {
 				return false;
 			}
-		}
+		});
+
+		return found ? success() : failure(shouldHaveHeaderWithValue(name, expected.serializeValue(), values));
 	}
 }

@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,7 +39,7 @@ class NumbersTest {
 	@Test
 	void it_should_fail_if_string_value_is_not_a_valid_long_value() {
 		String message = "My Custom Error Message";
-		assertThatThrownBy(toLong("test", message))
+		assertThatThrownBy(() -> Numbers.toLong("test", message))
 				.isExactlyInstanceOf(IllegalArgumentException.class)
 				.hasMessage(message);
 	}
@@ -48,17 +47,8 @@ class NumbersTest {
 	@Test
 	void it_should_fail_with_null() {
 		String message = "My Custom Error Message";
-		assertThatThrownBy(toLong(null, message))
+		assertThatThrownBy(() -> Numbers.toLong(null, message))
 				.isExactlyInstanceOf(NullPointerException.class)
 				.hasMessage(message);
-	}
-
-	private static ThrowingCallable toLong(final String value, final String message) {
-		return new ThrowingCallable() {
-			@Override
-			public void call() {
-				Numbers.toLong(value, message);
-			}
-		};
 	}
 }

@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.outof;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusOutOfTest;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpStatusOutOfTest extends AbstractHttpStatusOutOfTest<Response> {

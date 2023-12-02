@@ -30,23 +30,23 @@ import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Sandbox;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.Source;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceDirective;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SourceValue;
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.PreConditions;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_NAME_REGEX;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_PATH_REGEX;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.HOST_PORT_REGEX;
 import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SCHEME_REGEX;
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.map;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
@@ -352,12 +352,9 @@ public class ContentSecurityPolicyBuilder {
 	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-ancestors">https://w3c.github.io/webappsec-csp/#directive-frame-ancestors</a>
 	 */
 	public ContentSecurityPolicyBuilder addFrameAncestors(Source src, Source... other) {
-		return add(SourceDirective.FRAME_ANCESTORS, src, asList(other), new SourceValidator() {
-			@Override
-			public void validate(Source src) {
-				PreConditions.match(src.getValue(), PATTERN_HOST_VALUE, "Source must be a valid host value");
-			}
-		});
+		return add(SourceDirective.FRAME_ANCESTORS, src, asList(other), input ->
+			PreConditions.match(input.getValue(), PATTERN_HOST_VALUE, "Source must be a valid host value")
+		);
 	}
 
 	/**
@@ -371,13 +368,7 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder addPluginTypes(String mediaType, String... other) {
 		Source src = new SourceValue(mediaType);
-		List<Source> otherSources = map(other, new Mapper<String, Source>() {
-			@Override
-			public Source apply(String input) {
-				return new SourceValue(input);
-			}
-		});
-
+		List<Source> otherSources = Arrays.stream(other).map(SourceValue::new).collect(Collectors.toList());
 		return add(SourceDirective.PLUGIN_TYPES, src, otherSources);
 	}
 
@@ -389,7 +380,7 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder addDisownOpener() {
 		List<Source> sources = emptyList();
-		return add(SourceDirective.DISOWN_OPENER, sources, NO_OP_VALIDATOR);
+		return add(SourceDirective.DISOWN_OPENER, sources, null);
 	}
 
 	/**
@@ -404,13 +395,7 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder addReportUri(String uri, String... other) {
 		Source src = new UriSource(uri);
-		List<Source> otherSources = map(other, new Mapper<String, Source>() {
-			@Override
-			public Source apply(String input) {
-				return new UriSource(input);
-			}
-		});
-
+		List<Source> otherSources = Arrays.stream(other).map(UriSource::new).collect(Collectors.toList());
 		return add(SourceDirective.REPORT_URI, src, otherSources);
 	}
 
@@ -439,13 +424,7 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder addReportUri(URI uri, URI... other) {
 		Source src = new UriSource(uri);
-		List<Source> otherSources = map(other, new Mapper<URI, Source>() {
-			@Override
-			public Source apply(URI input) {
-				return new UriSource(input);
-			}
-		});
-
+		List<Source> otherSources = Arrays.stream(other).map(UriSource::new).collect(Collectors.toList());
 		return add(SourceDirective.REPORT_URI, src, otherSources);
 	}
 
@@ -470,7 +449,7 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder blockAllMixedContent() {
 		List<Source> sources = emptyList();
-		return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, sources, NO_OP_VALIDATOR);
+		return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, sources, null);
 	}
 
 	/**
@@ -481,7 +460,7 @@ public class ContentSecurityPolicyBuilder {
 	 */
 	public ContentSecurityPolicyBuilder upgradeInsecureRequest() {
 		List<Source> sources = emptyList();
-		return add(SourceDirective.UPGRADE_INSECURE_REQUEST, sources, NO_OP_VALIDATOR);
+		return add(SourceDirective.UPGRADE_INSECURE_REQUEST, sources, null);
 	}
 
 	/**
@@ -497,7 +476,7 @@ public class ContentSecurityPolicyBuilder {
 	}
 
 	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<? extends Source> other) {
-		return add(directive, src, other, NO_OP_VALIDATOR);
+		return add(directive, src, other, null);
 	}
 
 	private ContentSecurityPolicyBuilder add(SourceDirective directive, Source src, List<? extends Source> other, SourceValidator validator) {
@@ -513,15 +492,12 @@ public class ContentSecurityPolicyBuilder {
 	}
 
 	private ContentSecurityPolicyBuilder add(SourceDirective directive, List<Source> src, SourceValidator validator) {
-		Set<Source> list = sources.get(directive);
+		Set<Source> list = sources.computeIfAbsent(directive, k -> new LinkedHashSet<>());
 
-		if (list == null) {
-			list = new LinkedHashSet<>();
-			sources.put(directive, list);
-		}
-
-		for (Source o : src) {
-			validator.validate(o);
+		if (validator != null) {
+			for (Source o : src) {
+				validator.validate(o);
+			}
 		}
 
 		list.addAll(src);
@@ -544,15 +520,6 @@ public class ContentSecurityPolicyBuilder {
 	private interface SourceValidator {
 		void validate(Source src);
 	}
-
-	/**
-	 * Validator used as a fallback.
-	 */
-	private static final SourceValidator NO_OP_VALIDATOR = new SourceValidator() {
-		@Override
-		public void validate(Source src) {
-		}
-	};
 
 	private static class UriSource extends AbstractSourceValue implements Source {
 		private final URI uri;

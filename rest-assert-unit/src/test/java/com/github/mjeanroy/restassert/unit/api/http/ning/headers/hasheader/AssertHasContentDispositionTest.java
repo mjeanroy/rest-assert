@@ -24,11 +24,11 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.ning.headers.hasheader;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_DISPOSITION;
-
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.unit.api.http.NingHttpAssert;
 import com.ning.http.client.Response;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_DISPOSITION;
 
 class AssertHasContentDispositionTest extends AbstractNingHttpHeaderTest {
 

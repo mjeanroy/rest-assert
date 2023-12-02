@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.ning.status.exact;
 
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
-import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpStatusTest;
 import com.ning.http.client.Response;
 
 abstract class AbstractNingHttpStatusTest extends AbstractHttpStatusTest<Response> {

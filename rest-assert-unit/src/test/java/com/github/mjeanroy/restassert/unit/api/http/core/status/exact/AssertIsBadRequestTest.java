@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.http.core.status.exact;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUEST;
-
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAssert;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.BAD_REQUEST;
 
 class AssertIsBadRequestTest extends AbstractCoreHttpStatusTest {
 

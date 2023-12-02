@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.test.fixtures;
 
-import static java.util.Arrays.asList;
-
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 /**
  * Static pre-configured mime-type values to use in unit test.

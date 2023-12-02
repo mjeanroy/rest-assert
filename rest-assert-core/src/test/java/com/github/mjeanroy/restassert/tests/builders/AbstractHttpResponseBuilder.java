@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.CookieSerializer;
 import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.tests.CookieSerializer;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -79,12 +79,7 @@ public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuild
 
 	@Override
 	public T addHeader(String name, String value) {
-		List<String> header = headers.get(name);
-		if (header == null) {
-			header = new LinkedList<>();
-			headers.put(name, header);
-		}
-
+		List<String> header = headers.computeIfAbsent(name, k -> new LinkedList<>());
 		header.add(value);
 		return (T) this;
 	}

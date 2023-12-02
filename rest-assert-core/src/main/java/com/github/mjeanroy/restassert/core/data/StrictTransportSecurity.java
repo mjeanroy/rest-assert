@@ -24,16 +24,17 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.common.Collections.Mapper;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.indexBy;
 import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
+import static java.util.Arrays.stream;
 
 /**
  * Strict-Transport-Security value.
@@ -246,12 +247,12 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 		/**
 		 * List of directives, indexed by lowercase directive name.
 		 */
-		private static final Map<String, Directive> map = indexBy(Directive.values(), new Mapper<Directive, String>() {
-			@Override
-			public String apply(Directive input) {
-				return input.name.toLowerCase();
-			}
-		});
+		private static final Map<String, Directive> map = stream(Directive.values()).collect(
+			Collectors.toMap(
+				(input) -> input.name.toLowerCase(),
+				Function.identity()
+			)
+		);
 
 		/**
 		 * Get directive from its name. As specified by RFC 6797, directive name
