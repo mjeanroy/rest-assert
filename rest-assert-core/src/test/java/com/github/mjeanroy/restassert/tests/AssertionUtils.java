@@ -26,10 +26,10 @@ package com.github.mjeanroy.restassert.tests;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
+import org.junit.jupiter.api.Assertions;
 
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
 
 public abstract class AssertionUtils {
 
@@ -63,6 +63,6 @@ public abstract class AssertionUtils {
 	}
 
 	public static void failBecauseExpectedAssertionErrorWasNotThrown() {
-		fail("Exception was not thrown");
+		Assertions.fail("Exception was not thrown");
 	}
 }

@@ -22,59 +22,40 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.unit.api.http.header_equal_to;
 
-import java.util.Collection;
-import java.util.UUID;
+import com.github.mjeanroy.restassert.core.data.RequestMethod;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAsserter;
 
+import java.util.List;
+
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+class AssertIsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
+
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, T actual) {
+		httpAssert.assertIsAccessControlAllowMethodsEqualTo(
+			actual,
+			METHODS
+		);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, String message, T actual) {
+		httpAssert.assertIsAccessControlAllowMethodsEqualTo(
+			message,
+			actual,
+			METHODS
+		);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
-	}
-
-	/**
-	 * Generate a random string.
-	 *
-	 * @return Random string.
-	 */
-	public static String randomString() {
-		return UUID.randomUUID().toString();
+	@Override
+	Header header() {
+		return ACCESS_CONTROL_ALLOW_METHODS;
 	}
 }

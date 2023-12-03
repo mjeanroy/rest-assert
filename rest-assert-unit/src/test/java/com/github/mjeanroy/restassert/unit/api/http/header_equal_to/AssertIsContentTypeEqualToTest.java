@@ -22,59 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.unit.api.http.header_equal_to;
 
-import java.util.Collection;
-import java.util.UUID;
+import com.github.mjeanroy.restassert.core.data.ContentType;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAsserter;
 
-import static java.util.Arrays.asList;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+class AssertIsContentTypeEqualToTest extends AbstractHttpHeaderEqualToTest {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
+
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, T actual) {
+		httpAssert.assertIsContentTypeEqualTo(actual, VALUE);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, String message, T actual) {
+		httpAssert.assertIsContentTypeEqualTo(message, actual, VALUE);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
-	}
-
-	/**
-	 * Generate a random string.
-	 *
-	 * @return Random string.
-	 */
-	public static String randomString() {
-		return UUID.randomUUID().toString();
+	@Override
+	Header header() {
+		return HEADER;
 	}
 }

@@ -22,59 +22,38 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.unit.api.http.header_equal_to;
 
-import java.util.Collection;
-import java.util.UUID;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAsserter;
 
-import static java.util.Arrays.asList;
+import java.util.List;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_HEADERS;
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+class AssertIsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderEqualToTest {
+
+	private static final List<String> VALUE = ACCESS_CONTROL_ALLOW_HEADERS.getValues();
+
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, T actual) {
+		httpAssert.assertIsAccessControlAllowHeadersEqualTo(
+			actual,
+			VALUE
+		);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, String message, T actual) {
+		httpAssert.assertIsAccessControlAllowHeadersEqualTo(
+			message,
+			actual,
+			VALUE
+		);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
-	}
-
-	/**
-	 * Generate a random string.
-	 *
-	 * @return Random string.
-	 */
-	public static String randomString() {
-		return UUID.randomUUID().toString();
+	@Override
+	Header header() {
+		return ACCESS_CONTROL_ALLOW_HEADERS;
 	}
 }

@@ -32,7 +32,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static java.util.Collections.addAll;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
@@ -61,9 +60,18 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 	 */
 	@Override
 	public HttpResponseBuilderImpl addCookie(Cookie cookie, Cookie... other) {
-		this.cookies.add(cookie);
-		addAll(cookies, other);
+		addCookie(cookie);
+		for (Cookie c : other) {
+			addCookie(c);
+		}
+
 		return this;
+	}
+
+	private void addCookie(Cookie cookie) {
+		if (cookie != null) {
+			this.cookies.add(cookie);
+		}
 	}
 
 	@Override

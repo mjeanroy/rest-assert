@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
+import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -32,6 +33,7 @@ import java.util.Map;
 
 import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isQuoted;
+import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_TYPE;
 import static java.util.Collections.unmodifiableMap;
 
 /**
@@ -50,9 +52,13 @@ final class ContentTypeParser extends AbstractHttpHeaderParser<ContentType> {
 		String[] parts = value.split(";");
 		MediaType mediaType = MediaType.parser().parse(parts[0].trim().toLowerCase());
 
+		if (mediaType == null) {
+			throw new InvalidHeaderValue(CONTENT_TYPE.getName(), value);
+		}
+
 		int nbParts = parts.length;
 		if (nbParts == 1) {
-			return new ContentType(mediaType, Collections.<String, Parameter>emptyMap());
+			return new ContentType(mediaType, Collections.emptyMap());
 		}
 
 		Map<String, Parameter> parameters = new LinkedHashMap<>();

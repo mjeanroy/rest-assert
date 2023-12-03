@@ -22,59 +22,43 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.unit.api.http.status_equal_to;
 
-import java.util.Collection;
-import java.util.UUID;
+import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpTest;
 
-import static java.util.Arrays.asList;
+import java.util.function.Consumer;
+import java.util.stream.Stream;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+abstract class AbstractHttpStatusEqualToTest extends AbstractHttpTest<Integer> {
+
+	abstract int status();
+
+	@Override
+	protected final Stream<Integer> testInputs() {
+		return Stream.of(
+			status()
+		);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	@Override
+	protected final void runTestFailure(String msg, Consumer<Integer> testFn) {
+		int expectedStatus = status();
+		int status = expectedStatus + 1;
+		String message = msg == null ? defaultErrorMessage(expectedStatus, status) : msg;
+		assertFailure(message, () ->
+			testFn.accept(status)
+		);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
+	@Override
+	protected final <T> void setupHttpResponse(HttpResponseBuilder<T> builder, Integer status) {
+		builder.setStatus(status);
 	}
 
-	/**
-	 * Generate a random string.
-	 *
-	 * @return Random string.
-	 */
-	public static String randomString() {
-		return UUID.randomUUID().toString();
+	private static String defaultErrorMessage(int expectedStatus, int status) {
+		return String.format("Expecting status code to be %s but was %s", expectedStatus, status);
 	}
 }

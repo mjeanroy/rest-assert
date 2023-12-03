@@ -22,59 +22,35 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.unit.api.http.header_equal_to;
 
-import java.util.Collection;
-import java.util.UUID;
+import com.github.mjeanroy.restassert.test.data.Header;
+import com.github.mjeanroy.restassert.unit.api.http.HttpAsserter;
 
-import static java.util.Arrays.asList;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-/**
- * Static Test String Utilities.
- */
-public final class StringTestUtils {
+class AssertIsGzippedTest extends AbstractHttpHeaderEqualToTest {
 
-	// Ensure non instantiation.
-	private StringTestUtils() {
+	private static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final String FAILED_VALUE = "deflate";
+
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, T actual) {
+		httpAssert.assertIsGzipped(actual);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
+	@Override
+	protected <T> void runTest(HttpAsserter<T> httpAssert, String message, T actual) {
+		httpAssert.assertIsGzipped(message, actual);
 	}
 
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
+	@Override
+	Header header() {
+		return HEADER;
 	}
 
-	/**
-	 * Generate a random string.
-	 *
-	 * @return Random string.
-	 */
-	public static String randomString() {
-		return UUID.randomUUID().toString();
+	@Override
+	String failValue() {
+		return FAILED_VALUE;
 	}
 }
