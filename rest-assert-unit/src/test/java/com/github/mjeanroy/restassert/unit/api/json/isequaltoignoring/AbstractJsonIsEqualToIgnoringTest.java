@@ -29,7 +29,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static java.util.Arrays.asList;
@@ -45,7 +44,7 @@ public abstract class AbstractJsonIsEqualToIgnoringTest<T> extends AbstractAsser
 	@Test
 	void it_should_fail() {
 		T failure = failure();
-		String message = String.join(LINE_SEPARATOR, asList(
+		String message = String.join(System.lineSeparator(), asList(
 			"Expecting json entry array[0] to be equal to 1.1 but was 1.0,",
 			"Expecting json entry array[1] to be equal to 2.1 but was 2.0,",
 			"Expecting json entry array[2] to be equal to 3.1 but was 3.0"

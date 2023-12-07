@@ -27,9 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error;
 import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -46,17 +44,21 @@ class CompositeErrorTest {
 		assertThat(error).isNotNull();
 		assertThat(error.args()).hasSize(3).contains(1, 2, "hello");
 
-		assertThat(error.message()).isEqualTo(join(LINE_SEPARATOR, asList(
+		assertThat(error.message()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"foo,",
 				"bar %s %s,",
 				"foobar %s"
-		)));
+			))
+		);
 
-		assertThat(error.buildMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+		assertThat(error.buildMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"foo,",
 				"bar 1 2,",
 				"foobar hello"
-		)));
+			))
+		);
 	}
 
 	@Test
@@ -71,17 +73,21 @@ class CompositeErrorTest {
 		assertThat(expectation).isNotNull();
 		assertThat(expectation.getArgs()).hasSize(3).contains(1, 2, "hello");
 
-		assertThat(expectation.getMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+		assertThat(expectation.getMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"foo,",
 				"bar %s %s,",
 				"foobar %s"
-		)));
+			))
+		);
 
-		assertThat(expectation.formatMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+		assertThat(expectation.formatMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"foo,",
 				"bar 1 2,",
 				"foobar hello"
-		)));
+			))
+		);
 	}
 
 	@Test
@@ -96,17 +102,21 @@ class CompositeErrorTest {
 		assertThat(mismatch).isNotNull();
 		assertThat(mismatch.getArgs()).hasSize(3).contains(1, 2, "hello");
 
-		assertThat(mismatch.getMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+		assertThat(mismatch.getMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"foo,",
 				"bar %s %s,",
 				"foobar %s"
-		)));
+			))
+		);
 
-		assertThat(mismatch.formatMessage()).isEqualTo(join(LINE_SEPARATOR, asList(
+		assertThat(mismatch.formatMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"foo,",
 				"bar 1 2,",
 				"foobar hello"
-		)));
+			))
+		);
 	}
 
 	private static RestAssertError createErrorWithExpectation(String message, Object... args) {

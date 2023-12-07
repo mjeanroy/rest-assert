@@ -41,11 +41,6 @@ public final class IOUtils {
 	}
 
 	/**
-	 * Line separator, system dependent !
-	 */
-	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
-	/**
 	 * Get input stream object from a file relative to classpath.
 	 *
 	 * @param path Path, relative to classpath.
@@ -103,7 +98,7 @@ public final class IOUtils {
 			StringBuilder sb = new StringBuilder();
 			String read = br.readLine();
 			while (read != null) {
-				sb.append(prependString).append(read).append(LINE_SEPARATOR);
+				sb.append(prependString).append(read).append(System.lineSeparator());
 				read = br.readLine();
 			}
 

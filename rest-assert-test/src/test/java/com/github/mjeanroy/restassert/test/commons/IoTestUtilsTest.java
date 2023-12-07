@@ -31,11 +31,10 @@ import java.net.URI;
 import java.net.URL;
 import java.nio.file.Path;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class IoTestUtilsTest {
-
-	private static final String BR = System.getProperty("line.separator");
 
 	@Test
 	void it_should_get_file_from_classpath() {
@@ -65,9 +64,11 @@ class IoTestUtilsTest {
 	void it_should_read_file_content() {
 		String content = IoTestUtils.readFile("test.txt");
 		assertThat(content).isEqualTo(
-				"Hello World" + BR +
-				"Foo Bar" + BR +
+			String.join(System.lineSeparator(), asList(
+				"Hello World",
+				"Foo Bar",
 				"Test"
+			))
 		);
 	}
 }

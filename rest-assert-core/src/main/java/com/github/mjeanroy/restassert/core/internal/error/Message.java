@@ -24,13 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
-import com.github.mjeanroy.restassert.core.internal.common.Files;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 import static java.util.Collections.addAll;
@@ -40,7 +40,7 @@ import static java.util.Collections.addAll;
  */
 public final class Message {
 
-	private static final String CONCAT_SEPARATOR = "," + Files.LINE_SEPARATOR;
+	private static final String CONCAT_SEPARATOR = "," + System.lineSeparator();
 
 	/**
 	 * Concat two messages into a single one.
@@ -90,15 +90,7 @@ public final class Message {
 	 * @return The message.
 	 */
 	public static Message message(String message, Object arg, Object... others) {
-		Object[] args = new Object[1 + others.length];
-		args[0] = arg;
-
-		int i = 1;
-		for (Object o : others) {
-			args[i] = o;
-			++i;
-		}
-
+		Object[] args = Stream.concat(Stream.of(arg), Arrays.stream(others)).toArray(Object[]::new);
 		return new Message(message, args);
 	}
 

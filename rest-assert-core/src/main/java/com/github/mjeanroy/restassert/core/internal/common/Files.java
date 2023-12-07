@@ -34,11 +34,6 @@ import java.util.List;
  */
 public final class Files {
 
-	/**
-	 * Line separator (system dependent).
-	 */
-	public static final String LINE_SEPARATOR = System.getProperty("line.separator");
-
 	// Private constructor to ensure non instantiation.
 	private Files() {
 	}
@@ -52,7 +47,7 @@ public final class Files {
 	public static String readFileToString(Path file) {
 		try {
 			List<String> lines = java.nio.file.Files.readAllLines(file, Charset.defaultCharset());
-			return String.join(LINE_SEPARATOR, lines);
+			return String.join(System.lineSeparator(), lines);
 		} catch (IOException ex) {
 			throw new UnreadableFileException(file, ex);
 		}
@@ -62,7 +57,6 @@ public final class Files {
 	 * Exception to throw when a file cannot be read and
 	 * fail with {@link IOException}.
 	 */
-	@SuppressWarnings("serial")
 	public static class UnreadableFileException extends RuntimeException {
 
 		/**

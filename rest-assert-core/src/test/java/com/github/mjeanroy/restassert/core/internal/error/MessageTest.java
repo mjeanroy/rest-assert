@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.error;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -110,16 +109,20 @@ class MessageTest {
 		Message message = Message.concat(message1, message2);
 
 		assertThat(message).isNotNull();
-		assertThat(message.getMessage()).isEqualTo(join(System.lineSeparator(), asList(
+		assertThat(message.getMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"First Message,",
 				"Second Message"
-		)));
+			))
+		);
 
 		assertThat(message.getArgs()).isNotNull().isEmpty();
-		assertThat(message.formatMessage()).isEqualTo(join(System.lineSeparator(), asList(
+		assertThat(message.formatMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"First Message,",
 				"Second Message"
-		)));
+			))
+		);
 	}
 
 	@Test
@@ -132,10 +135,12 @@ class MessageTest {
 		Message message = Message.concat(message1, message2);
 
 		assertThat(message).isNotNull();
-		assertThat(message.getMessage()).isEqualTo(join(System.lineSeparator(), asList(
+		assertThat(message.getMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"First Message From %s,",
 				"Second Message From %s To %s"
-		)));
+			))
+		);
 
 		assertThat(message.getArgs()).hasSize(3).containsExactly(
 				"John Doe",
@@ -143,10 +148,12 @@ class MessageTest {
 				"Mickael"
 		);
 
-		assertThat(message.formatMessage()).isEqualTo(join(System.lineSeparator(), asList(
+		assertThat(message.formatMessage()).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"First Message From John Doe,",
 				"Second Message From Jane Doe To Mickael"
-		)));
+			))
+		);
 	}
 
 	@Test

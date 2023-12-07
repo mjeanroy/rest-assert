@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.json;
 
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -165,13 +166,9 @@ public enum JsonType {
 	 * @return Json Type.
 	 */
 	public static JsonType parseType(Object object) {
-		for (JsonType jsonType : JsonType.values()) {
-			if (jsonType.isValid(object)) {
-				return jsonType;
-			}
-		}
-
-		// It should not happen...
-		throw new UnsupportedOperationException("Json type of object " + object + " cannot be found");
+		return Arrays.stream(JsonType.values())
+			.filter(jsonType -> jsonType.isValid(object))
+			.findFirst()
+			.orElseThrow(() -> new UnsupportedOperationException("Json type of object " + object + " cannot be found"));
 	}
 }

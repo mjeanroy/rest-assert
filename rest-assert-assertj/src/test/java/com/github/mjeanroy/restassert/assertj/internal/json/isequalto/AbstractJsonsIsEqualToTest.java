@@ -29,9 +29,9 @@ import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 abstract class AbstractJsonsIsEqualToTest<T> {
@@ -52,13 +52,14 @@ abstract class AbstractJsonsIsEqualToTest<T> {
 			run(info, json);
 			failBecauseExpectedAssertionErrorWasNotThrown();
 		} catch (AssertionError e) {
-			String expectedMessage =
-					"Expecting json entry \"str\" to be equal to \"bar\" but was \"foo\"," + LINE_SEPARATOR +
-					"Expecting json entry \"nb\" to be equal to 2.0 but was 1.0," + LINE_SEPARATOR +
-					"Expecting json entry \"bool\" to be equal to false but was true," + LINE_SEPARATOR +
-					"Expecting json entry \"array[0]\" to be equal to 1.1 but was 1.0," + LINE_SEPARATOR +
-					"Expecting json entry \"array[1]\" to be equal to 2.1 but was 2.0," + LINE_SEPARATOR +
-					"Expecting json entry \"array[2]\" to be equal to 3.1 but was 3.0";
+			String expectedMessage = String.join(System.lineSeparator(), asList(
+				"Expecting json entry \"str\" to be equal to \"bar\" but was \"foo\",",
+				"Expecting json entry \"nb\" to be equal to 2.0 but was 1.0,",
+				"Expecting json entry \"bool\" to be equal to false but was true,",
+				"Expecting json entry \"array[0]\" to be equal to 1.1 but was 1.0,",
+				"Expecting json entry \"array[1]\" to be equal to 2.1 but was 2.0,",
+				"Expecting json entry \"array[2]\" to be equal to 3.1 but was 3.0"
+			));
 
 			assertThat(e.getMessage()).isEqualTo(expectedMessage);
 		}

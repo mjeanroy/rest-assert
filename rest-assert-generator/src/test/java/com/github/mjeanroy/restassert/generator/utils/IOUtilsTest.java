@@ -55,7 +55,7 @@ class IOUtilsTest {
 		final String content = IOUtils.read("/license.txt", tab);
 		assertThat(content).isNotNull().isNotEmpty();
 
-		String[] lines = content.split(IOUtils.LINE_SEPARATOR);
+		String[] lines = content.split(System.lineSeparator());
 		assertThat(lines)
 				.isNotNull()
 				.isNotEmpty()
@@ -81,7 +81,7 @@ class IOUtilsTest {
 		final String content = IOUtils.read(inputStream, tab);
 		assertThat(content).isNotNull().isNotEmpty();
 
-		String[] lines = content.split(IOUtils.LINE_SEPARATOR);
+		String[] lines = content.split(System.lineSeparator());
 		assertThat(lines)
 				.isNotNull()
 				.isNotEmpty()

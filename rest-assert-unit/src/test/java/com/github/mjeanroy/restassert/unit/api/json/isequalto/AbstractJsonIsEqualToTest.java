@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.unit.api.json.isequalto;
 import com.github.mjeanroy.restassert.unit.api.AbstractAssertTest;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
 import static java.util.Arrays.asList;
@@ -43,7 +42,7 @@ public abstract class AbstractJsonIsEqualToTest<T> extends AbstractAssertTest<T>
 	@Test
 	void it_should_fail() {
 		T failure = failure();
-		String message = String.join(LINE_SEPARATOR, asList(
+		String message = String.join(System.lineSeparator(), asList(
 			"Expecting json entry str to be equal to bar but was foo,",
 			"Expecting json entry nb to be equal to 2.0 but was 1.0,",
 			"Expecting json entry bool to be equal to false but was true,",

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -126,13 +127,12 @@ public interface Cookie {
 			}
 
 			String trimmedValue = value.trim();
-			for (SameSite sameSite : SameSite.values()) {
-				if (sameSite.value.equalsIgnoreCase(trimmedValue)) {
-					return sameSite;
-				}
-			}
-
-			throw new IllegalArgumentException("Unknown SameSite value: " + value);
+			return Arrays.stream(SameSite.values())
+				.filter(sameSite -> sameSite.value.equalsIgnoreCase(trimmedValue))
+				.findFirst()
+				.orElseThrow(() ->
+						new IllegalArgumentException("Unknown SameSite value: " + value)
+				);
 		}
 	}
 }

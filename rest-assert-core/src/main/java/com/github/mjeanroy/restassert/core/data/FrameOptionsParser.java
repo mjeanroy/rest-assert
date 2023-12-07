@@ -27,6 +27,8 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
+import java.util.Arrays;
+
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_FRAME_OPTIONS;
 
 /**
@@ -41,12 +43,10 @@ final class FrameOptionsParser extends AbstractHttpHeaderParser<FrameOptions> {
 	@Override
 	protected FrameOptions doParse(String value) {
 		String rawValue = value.toUpperCase();
-		for (FrameOptions.Directive x : FrameOptions.Directive.values()) {
-			if (x.match(rawValue)) {
-				return x.parse(value);
-			}
-		}
-
-		throw new InvalidHeaderValue(X_FRAME_OPTIONS.getName(), value);
+		return Arrays.stream(FrameOptions.Directive.values())
+			.filter(x -> x.match(rawValue))
+			.map(x -> x.parse(value))
+			.findFirst()
+			.orElseThrow(() -> new InvalidHeaderValue(X_FRAME_OPTIONS.getName(), value));
 	}
 }

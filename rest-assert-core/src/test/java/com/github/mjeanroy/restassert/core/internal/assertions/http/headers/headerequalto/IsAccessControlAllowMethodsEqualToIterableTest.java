@@ -36,7 +36,6 @@ import java.util.List;
 import static com.github.mjeanroy.restassert.core.data.RequestMethod.GET;
 import static com.github.mjeanroy.restassert.core.data.RequestMethod.POST;
 import static com.github.mjeanroy.restassert.core.data.RequestMethod.PUT;
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
@@ -49,7 +48,7 @@ class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderE
 
 	private static final Header HEADER = ACCESS_CONTROL_ALLOW_METHODS;
 	private static final String NAME = HEADER.getName();
-	private static final String VALUE = join(", ", asList(V1, V2, V3));
+	private static final String VALUE = String.join(", ", asList(V1, V2, V3));
 	private static final List<RequestMethod> VALUES = asList(
 			RequestMethod.valueOf(V1),
 			RequestMethod.valueOf(V2),

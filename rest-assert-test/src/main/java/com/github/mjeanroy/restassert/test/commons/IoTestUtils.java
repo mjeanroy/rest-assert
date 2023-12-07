@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.test.commons;
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -94,9 +95,13 @@ public final class IoTestUtils {
 	public static String readFile(String resource) {
 		try {
 			ClassLoader classLoader = IoTestUtils.class.getClassLoader();
-			Path path = Paths.get(classLoader.getResource(resource).toURI());
-			byte[] fileBytes = Files.readAllBytes(path);
-			return new String(fileBytes);
+			URL url = classLoader.getResource(resource);
+			if (url == null) {
+				throw new AssertionError("Resource does not exist: " + resource);
+			}
+
+			Path path = Paths.get(url.toURI());
+			return String.join(System.lineSeparator(), Files.readAllLines(path, StandardCharsets.UTF_8));
 		} catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}

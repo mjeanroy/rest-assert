@@ -24,9 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * List of standards http headers names.
@@ -208,16 +209,12 @@ public enum HttpHeaders {
 	}
 
 	// Keep headers in an immutable map for fast lookup.
-	private static final Map<String, HttpHeaders> MAP;
-
-	static {
-		Map<String, HttpHeaders> tmp = new HashMap<>();
-		for (HttpHeaders httpHeader : HttpHeaders.values()) {
-			tmp.put(httpHeader.getName().toLowerCase(), httpHeader);
-		}
-
-		MAP = Collections.unmodifiableMap(tmp);
-	}
+	private static final Map<String, HttpHeaders> MAP = Arrays.stream(HttpHeaders.values()).collect(
+		Collectors.toMap(
+			httpHeaders -> httpHeaders.getName().toLowerCase(),
+			Function.identity()
+		)
+	);
 
 	/**
 	 * Find header by its name.

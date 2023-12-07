@@ -73,7 +73,7 @@ class IsAccessControlAllowHeadersEqualToIterableTest extends AbstractHttpHeaderE
 	}
 
 	private static void doTestSuccess(List<String> actuals, List<String> expected) {
-		String actual = StringTestUtils.join(", ", actuals);
+		String actual = String.join(", ", actuals);
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 		AssertionResult result = assertions.isAccessControlAllowHeadersEqualTo(response, expected);
 		checkSuccess(result);

@@ -27,6 +27,8 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValue;
 
+import java.util.Arrays;
+
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_CONTENT_TYPE_OPTIONS;
 
 /**
@@ -41,13 +43,9 @@ final class ContentTypeOptionsParser extends AbstractHttpHeaderParser<ContentTyp
 	@Override
 	protected ContentTypeOptions doParse(String value) {
 		String rawValue = value.toLowerCase();
-
-		for (ContentTypeOptions x : ContentTypeOptions.values()) {
-			if (rawValue.equals(x.getValue())) {
-				return x;
-			}
-		}
-
-		throw new InvalidHeaderValue(X_CONTENT_TYPE_OPTIONS.getName(), value);
+		return Arrays.stream(ContentTypeOptions.values())
+			.filter(x -> rawValue.equals(x.getValue()))
+			.findFirst()
+			.orElseThrow(() -> new InvalidHeaderValue(X_CONTENT_TYPE_OPTIONS.getName(), value));
 	}
 }

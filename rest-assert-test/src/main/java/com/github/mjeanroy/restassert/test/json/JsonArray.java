@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.restassert.test.json;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableList;
 
@@ -72,13 +71,11 @@ public final class JsonArray implements JsonValue {
 
 	@Override
 	public String toJson() {
-		List<String> formattedValues = new ArrayList<>(values.size());
-		for (Object value : values) {
-			String val = JsonUtil.formatValue(value);
-			formattedValues.add(val);
-		}
+		String array = values.stream()
+			.map(JsonUtil::formatValue)
+			.collect(Collectors.joining(","));
 
-		return "[" + join(", ", formattedValues) + "]";
+		return "[" + array + "]";
 	}
 
 	@Override

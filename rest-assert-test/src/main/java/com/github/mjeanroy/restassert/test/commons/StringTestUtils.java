@@ -24,10 +24,7 @@
 
 package com.github.mjeanroy.restassert.test.commons;
 
-import java.util.Collection;
 import java.util.UUID;
-
-import static java.util.Arrays.asList;
 
 /**
  * Static Test String Utilities.
@@ -36,37 +33,6 @@ public final class StringTestUtils {
 
 	// Ensure non instantiation.
 	private StringTestUtils() {
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, Collection<String> strings) {
-		if (strings.isEmpty()) {
-			return "";
-		}
-
-		StringBuilder sb = new StringBuilder();
-		for (String str : strings) {
-			sb.append(str).append(separator);
-		}
-
-		return sb.substring(0, sb.length() - separator.length());
-	}
-
-	/**
-	 * Join string with given character.
-	 *
-	 * @param separator The string separator.
-	 * @param strings Collection of strings.
-	 * @return The final string.
-	 */
-	public static String join(String separator, String[] strings) {
-		return join(separator, asList(strings));
 	}
 
 	/**

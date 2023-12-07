@@ -41,7 +41,7 @@ class JsonArrayTest {
 		String v3 = "baz";
 		JsonArray array = JsonArray.jsonArray(v1, v2, v3);
 
-		assertThat(array.toJson()).isEqualTo("[\"foo\", \"bar\", \"baz\"]");
+		assertThat(array.toJson()).isEqualTo("[\"foo\",\"bar\",\"baz\"]");
 		assertThat(array.getValues()).isEqualTo(asList(v1, v2, v3));
 	}
 
@@ -52,7 +52,7 @@ class JsonArrayTest {
 		int v3 = 3;
 		JsonArray array = JsonArray.jsonArray(v1, v2, v3);
 
-		assertThat(array.toJson()).isEqualTo("[1, 2, 3]");
+		assertThat(array.toJson()).isEqualTo("[1,2,3]");
 		assertThat(array.getValues()).isEqualTo(asList(v1, v2, v3));
 	}
 
@@ -63,7 +63,7 @@ class JsonArrayTest {
 		boolean v3 = true;
 		JsonArray array = JsonArray.jsonArray(v1, v2, v3);
 
-		assertThat(array.toJson()).isEqualTo("[true, false, true]");
+		assertThat(array.toJson()).isEqualTo("[true,false,true]");
 		assertThat(array.getValues()).isEqualTo(asList(v1, v2, v3));
 	}
 
@@ -88,7 +88,7 @@ class JsonArrayTest {
 
 		assertThat(array.toJson()).isEqualTo(
 			"[" +
-				"{\"id\" : 1, \"name\": \"John Doe\"}, " +
+				"{\"id\" : 1, \"name\": \"John Doe\"}," +
 				"{\"id\" : 2, \"name\": \"Jane Doe\"}" +
 			"]"
 		);

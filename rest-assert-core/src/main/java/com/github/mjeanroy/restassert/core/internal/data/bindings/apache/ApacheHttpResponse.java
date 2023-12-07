@@ -31,10 +31,10 @@ import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
 /**
@@ -72,17 +72,7 @@ public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResp
 	@Override
 	public List<String> getHeader(String name) {
 		Header[] headers = response.getHeaders(name);
-
-		int size = headers == null ? 0 : headers.length;
-		if (size == 0) {
-			return emptyList();
-		}
-
-		List<String> results = new ArrayList<>(size);
-		for (Header header : headers) {
-			results.add(header.getValue());
-		}
-
+		List<String> results = Arrays.stream(headers).map(Header::getValue).collect(Collectors.toList());
 		return unmodifiableList(results);
 	}
 

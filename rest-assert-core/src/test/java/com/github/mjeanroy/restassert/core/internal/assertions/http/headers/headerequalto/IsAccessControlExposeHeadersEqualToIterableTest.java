@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hea
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
@@ -73,7 +72,7 @@ class IsAccessControlExposeHeadersEqualToIterableTest extends AbstractHttpHeader
 	}
 
 	private static void doTestSuccess(List<String> actuals, List<String> expected) {
-		String actual = StringTestUtils.join(", ", actuals);
+		String actual = String.join(", ", actuals);
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 		AssertionResult result = assertions.isAccessControlExposeHeadersEqualTo(response, expected);
 		checkSuccess(result);

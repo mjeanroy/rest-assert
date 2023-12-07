@@ -100,7 +100,7 @@ class ContainsTest {
 			outputLines.add(outputLine);
 		}
 
-		return StringTestUtils.join("," + System.lineSeparator(), outputLines);
+		return String.join("," + System.lineSeparator(), outputLines);
 	}
 
 	private static String buildMismatchMessage() {

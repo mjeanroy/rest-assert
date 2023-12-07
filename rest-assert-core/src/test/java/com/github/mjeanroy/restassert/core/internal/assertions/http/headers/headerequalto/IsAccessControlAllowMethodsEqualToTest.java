@@ -29,7 +29,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.join;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
@@ -39,7 +38,7 @@ class IsAccessControlAllowMethodsEqualToTest extends AbstractHttpHeaderEqualToTe
 	private static final String V1 = "GET";
 	private static final String V2 = "POST";
 	private static final String V3 = "PUT";
-	private static final String VALUE = join(", ", asList(V1, V2, V3));
+	private static final String VALUE = String.join(", ", asList(V1, V2, V3));
 
 	@Override
 	protected AssertionResult run(HttpResponse response) {

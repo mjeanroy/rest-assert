@@ -32,7 +32,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
@@ -74,10 +73,11 @@ abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		List<String> ignoringKeys = asList("str", "nb", "bool");
 		AssertionResult result = run(actual, expected, ignoringKeys);
 
-		String expectedPattern =
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s," + LINE_SEPARATOR +
-				"Expecting json entry %s to be equal to %s but was %s";
+		String expectedPattern = String.join(System.lineSeparator(), asList(
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s,",
+			"Expecting json entry %s to be equal to %s but was %s"
+		));
 
 		Object[] args = new Object[] {
 				"array[0]", 1.1, 1.0,

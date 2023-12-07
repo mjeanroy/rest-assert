@@ -38,10 +38,12 @@ class IosTest {
 	void it_should_read_url() {
 		URL url = getClass().getResource("/test.txt");
 		String output = Ios.readUrl(url);
-		assertThat(output).isEqualTo(StringTestUtils.join(System.lineSeparator(), asList(
+		assertThat(output).isEqualTo(
+			String.join(System.lineSeparator(), asList(
 				"Hello World",
 				"Foo Bar",
 				"Test"
-		)));
+			))
+		);
 	}
 }

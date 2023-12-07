@@ -28,6 +28,7 @@ import org.assertj.core.api.AssertionInfo;
 import org.assertj.core.api.WritableAssertionInfo;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class AssertJUtils {
 
@@ -39,12 +40,10 @@ public final class AssertJUtils {
 	}
 
 	public static String formatList(List<String> list) {
-		StringBuilder sb = new StringBuilder();
-		String separator = ", ";
-		for (String item : list) {
-			sb.append("\"").append(item).append("\"").append(separator);
-		}
+		String rawList = list.stream()
+			.map(item -> "\"" + item + "\"")
+			.collect(Collectors.joining(", "));
 
-		return "[" + sb.substring(0, sb.length() - separator.length()) + "]";
+		return "[" + rawList + "]";
 	}
 }

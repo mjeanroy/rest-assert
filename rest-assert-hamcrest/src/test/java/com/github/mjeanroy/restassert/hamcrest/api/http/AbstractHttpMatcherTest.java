@@ -33,7 +33,6 @@ import java.util.stream.Stream;
 
 public abstract class AbstractHttpMatcherTest<TEST_INPUT> {
 
-
 	@ParameterizedTest
 	@ArgumentsSource(HttpMatcherArgumentProvider.class)
 	<T> void it_should_pass(HttpMatcher<T> httpMatcher) {

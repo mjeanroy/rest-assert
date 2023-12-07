@@ -38,7 +38,6 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	private static final String EXPECTATION_HAMCREST_PREFIX = "Expected: ";
 	private static final String EXPECTATION_MESSAGE_INDENT = Strings.repeat(' ', EXPECTATION_HAMCREST_PREFIX.length());
-	private static final String LINE_SEPARATOR = System.lineSeparator();
 
 	private AssertionResult assertionResult;
 
@@ -87,7 +86,7 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 	}
 
 	private static String prettifyHamcrestMessage(String rawMessage) {
-		String[] lines = rawMessage.split(LINE_SEPARATOR);
+		String[] lines = rawMessage.split(System.lineSeparator());
 
 		if (lines.length == 0) {
 			return "";
@@ -99,7 +98,7 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 		return Arrays.stream(lines)
 			.map((input) -> EXPECTATION_MESSAGE_INDENT + "- " + input)
-			.collect(Collectors.joining(LINE_SEPARATOR))
+			.collect(Collectors.joining(System.lineSeparator()))
 			.trim();
 	}
 }

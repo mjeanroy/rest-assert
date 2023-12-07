@@ -24,19 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Collections.sizeOf;
-import static com.github.mjeanroy.restassert.core.internal.common.Files.LINE_SEPARATOR;
+import static java.util.stream.StreamSupport.stream;
 
 /**
  * Composite error representation.
  */
 public class CompositeError implements RestAssertError {
 
-	public static final String MESSAGES_SEPARATOR = "," + LINE_SEPARATOR;
+	public static final String MESSAGES_SEPARATOR = "," + System.lineSeparator();
 
 	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
 		return new CompositeError(errors);
@@ -48,10 +47,7 @@ public class CompositeError implements RestAssertError {
 	private final List<RestAssertError> errors;
 
 	private CompositeError(Iterable<RestAssertError> errors) {
-		this.errors = new ArrayList<>(sizeOf(errors, 10));
-		for (RestAssertError error : errors) {
-			this.errors.add(error);
-		}
+		this.errors = stream(errors.spliterator(), false).collect(Collectors.toList());
 	}
 
 	@Override
@@ -63,25 +59,10 @@ public class CompositeError implements RestAssertError {
 
 	@Override
 	public Object[] args() {
-		int nbArgs = 0;
-		for (RestAssertError error : errors) {
-			nbArgs += error.args().length;
-		}
-
-		Object[] args = new Object[nbArgs];
-		if (nbArgs == 0) {
-			return args;
-		}
-
-		int i = 0;
-		for (RestAssertError error : errors) {
-			for (Object arg : error.args()) {
-				args[i] = arg;
-				++i;
-			}
-		}
-
-		return args;
+		return errors.stream()
+			.map(RestAssertError::args)
+			.flatMap(Arrays::stream)
+			.toArray(Object[]::new);
 	}
 
 	@Override
