@@ -75,7 +75,7 @@ class JavaxCookieTest {
 
 	@Test
 	void it_should_check_if_cookie_is_secured() {
-		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setSecured(true).build();
+		javax.servlet.http.Cookie javaxCookie = new JavaxCookieBuilder().setSecure(true).build();
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 		boolean secured = cookie.isSecured();
 

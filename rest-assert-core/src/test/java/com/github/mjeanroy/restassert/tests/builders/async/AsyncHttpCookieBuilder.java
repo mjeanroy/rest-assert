@@ -24,146 +24,30 @@
 
 package com.github.mjeanroy.restassert.tests.builders.async;
 
+import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 import io.netty.handler.codec.http.cookie.Cookie;
 import io.netty.handler.codec.http.cookie.DefaultCookie;
 
 /**
  * Build mock instance of {@link Cookie} class.
  */
-public class AsyncHttpCookieBuilder {
-
-	/**
-	 * Cookie name.
-	 */
-	private String name;
-
-	/**
-	 * Cookie value.
-	 */
-	private String value;
-
-	/**
-	 * Cookie domain.
-	 */
-	private String domain;
-
-	/**
-	 * Cookie path.
-	 */
-	private String path;
-
-	/**
-	 * Cookie "http-only" flag.
-	 */
-	private boolean httpOnly;
-
-	/**
-	 * Cookie "secure" flag.
-	 */
-	private boolean secure;
-
-	/**
-	 * Cookie max-age value.
-	 */
-	private long maxAge;
+public class AsyncHttpCookieBuilder extends AbstractCookieBuilder<Cookie, AsyncHttpCookieBuilder> {
 
 	/**
 	 * Create builder with default values.
 	 */
 	public AsyncHttpCookieBuilder() {
-		this.name = "foo";
-		this.value = "bar";
+		super();
 	}
 
-	/**
-	 * Set {@link #secure}.
-	 *
-	 * @param secure New {@link #secure}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setSecure(boolean secure) {
-		this.secure = secure;
-		return this;
-	}
-
-	/**
-	 * Set {@link #domain}.
-	 *
-	 * @param domain New {@link #domain}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setDomain(String domain) {
-		this.domain = domain;
-		return this;
-	}
-
-	/**
-	 * Set {@link #name}.
-	 *
-	 * @param name New {@link #name}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	/**
-	 * Set {@link #value}.
-	 *
-	 * @param value New {@link #value}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setValue(String value) {
-		this.value = value;
-		return this;
-	}
-
-	/**
-	 * Set {@link #path}.
-	 *
-	 * @param path New {@link #path}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setPath(String path) {
-		this.path = path;
-		return this;
-	}
-
-	/**
-	 * Set {@link #httpOnly}.
-	 *
-	 * @param httpOnly New {@link #httpOnly}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setHttpOnly(boolean httpOnly) {
-		this.httpOnly = httpOnly;
-		return this;
-	}
-
-	/**
-	 * Set {@link #maxAge}.
-	 *
-	 * @param maxAge New {@link #maxAge}.
-	 * @return Current builder.
-	 */
-	public AsyncHttpCookieBuilder setMaxAge(long maxAge) {
-		this.maxAge = maxAge;
-		return this;
-	}
-
-	/**
-	 * Create mock instance of {@link com.ning.http.client.cookie.Cookie}.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public Cookie build() {
-		DefaultCookie cookie = new DefaultCookie(name, value);
-		cookie.setDomain(domain);
-		cookie.setPath(path);
-		cookie.setMaxAge(maxAge);
-		cookie.setSecure(secure);
-		cookie.setHttpOnly(httpOnly);
+		DefaultCookie cookie = new DefaultCookie(getName(), getValue());
+		cookie.setDomain(getDomain());
+		cookie.setPath(getPath());
+		cookie.setMaxAge(getMaxAge());
+		cookie.setSecure(isSecure());
+		cookie.setHttpOnly(isHttpOnly());
 		return cookie;
 	}
 }

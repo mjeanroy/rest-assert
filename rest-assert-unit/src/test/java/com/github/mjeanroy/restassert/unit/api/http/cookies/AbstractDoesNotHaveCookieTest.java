@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.unit.api.http.cookies;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpTest;
 
@@ -61,6 +61,6 @@ abstract class AbstractDoesNotHaveCookieTest extends AbstractHttpTest<Cookie> {
 	abstract String defaultErrorMessage();
 
 	Cookie randomCookie() {
-		return new CookieBuilder().setName(randomString()).setValue(randomString()).build();
+		return new MockCookieBuilder().setName(randomString()).setValue(randomString()).build();
 	}
 }

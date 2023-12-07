@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.unit.api.cookie.core;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertHasDomain;
 
@@ -69,6 +69,6 @@ class AssertHasDomainTest extends AbstractCoreCookieTest {
 	}
 
 	private Cookie cookie(String domain) {
-		return new CookieBuilder().setDomain(domain).build();
+		return new MockCookieBuilder().setDomain(domain).build();
 	}
 }

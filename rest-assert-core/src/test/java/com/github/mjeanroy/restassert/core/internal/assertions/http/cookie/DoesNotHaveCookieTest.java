@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
 
 class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
@@ -42,7 +42,7 @@ class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
 
 	@Override
 	Cookie newCookie() {
-		return new CookieBuilder()
+		return new MockCookieBuilder()
 				.setName(NAME)
 				.setValue("12345")
 				.build();

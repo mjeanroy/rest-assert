@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +50,7 @@ class DoesNotHaveCookieAssertionTest {
 
 	@Test
 	void it_should_not_fail_if_response_has_cookies() {
-		Cookie cookie = new CookieBuilder().setName("foo").build();
+		Cookie cookie = new MockCookieBuilder().setName("foo").build();
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion();
 
@@ -66,7 +66,7 @@ class DoesNotHaveCookieAssertionTest {
 	void it_should_not_fail_if_response_does_not_have_cookie_with_name() {
 		String name = "foo";
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
-		Cookie cookie = new CookieBuilder().setName(name + name).build();
+		Cookie cookie = new MockCookieBuilder().setName(name + name).build();
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
 
 		AssertionResult result = assertion.handle(rsp);
@@ -80,7 +80,7 @@ class DoesNotHaveCookieAssertionTest {
 	void it_should_fail_if_response_has_cookie_with_name() {
 		String name = "foo";
 		DoesNotHaveCookieAssertion assertion = new DoesNotHaveCookieAssertion(name);
-		Cookie cookie = new CookieBuilder().setName(name).build();
+		Cookie cookie = new MockCookieBuilder().setName(name).build();
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
 
 		AssertionResult result = assertion.handle(rsp);

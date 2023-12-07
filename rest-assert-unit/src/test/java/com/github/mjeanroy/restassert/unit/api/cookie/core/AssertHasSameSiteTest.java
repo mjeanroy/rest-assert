@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.core;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertHasSameSite;
 
@@ -68,6 +68,6 @@ class AssertHasSameSiteTest extends AbstractCoreCookieTest {
 	}
 
 	private Cookie cookie(SameSite sameSite) {
-		return new CookieBuilder().setSameSite(sameSite).build();
+		return new MockCookieBuilder().setSameSite(sameSite).build();
 	}
 }

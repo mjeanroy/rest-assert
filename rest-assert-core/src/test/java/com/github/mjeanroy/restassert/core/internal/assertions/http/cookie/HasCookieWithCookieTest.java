@@ -28,13 +28,13 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 class HasCookieWithCookieTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
-	private static final Cookie COOKIE = new CookieBuilder()
+	private static final Cookie COOKIE = new MockCookieBuilder()
 			.setName(NAME)
 			.setValue(VALUE)
 			.build();

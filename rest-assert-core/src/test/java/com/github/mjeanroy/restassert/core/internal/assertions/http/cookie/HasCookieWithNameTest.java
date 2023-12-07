@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 public class HasCookieWithNameTest extends AbstractHasCookieTest {
 
@@ -41,7 +41,7 @@ public class HasCookieWithNameTest extends AbstractHasCookieTest {
 
 	@Override
 	Cookie newCookie() {
-		return new CookieBuilder()
+		return new MockCookieBuilder()
 				.setName(NAME)
 				.setValue("12345")
 				.build();

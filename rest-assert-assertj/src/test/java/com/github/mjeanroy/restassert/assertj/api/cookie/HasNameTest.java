@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
 import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.ArgumentMatchers.nullable;
@@ -59,6 +59,6 @@ class HasNameTest extends AbstractApiTest<Cookies, CookieAssert> {
 	}
 
 	private Cookie actual() {
-		return new CookieBuilder().build();
+		return new MockCookieBuilder().build();
 	}
 }

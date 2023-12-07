@@ -24,112 +24,28 @@
 
 package com.github.mjeanroy.restassert.tests.builders.apache;
 
+import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * Build mock instance of {@link Cookie} class.
  */
-public class ApacheHttpCookieBuilder {
-
-	/**
-	 * Cookie name.
-	 */
-	private String name;
-
-	/**
-	 * Cookie value.
-	 */
-	private String value;
-
-	/**
-	 * Cookie domain.
-	 */
-	private String domain;
-
-	/**
-	 * Cookie path.
-	 */
-	private String path;
-
-	/**
-	 * Cookie "secure" flag.
-	 */
-	private boolean secure;
+public class ApacheHttpCookieBuilder extends AbstractCookieBuilder<Cookie, ApacheHttpCookieBuilder> {
 
 	/**
 	 * Create builder.
 	 */
 	public ApacheHttpCookieBuilder() {
-		this.name = "cookie";
-		this.value = "";
+		super();
 	}
 
-	/**
-	 * Set {@link #secure}.
-	 *
-	 * @param secure New {@link #secure}.
-	 * @return Current builder.
-	 */
-	public ApacheHttpCookieBuilder setSecure(boolean secure) {
-		this.secure = secure;
-		return this;
-	}
-
-	/**
-	 * Set {@link #domain}.
-	 *
-	 * @param domain New {@link #domain}.
-	 * @return Current builder.
-	 */
-	public ApacheHttpCookieBuilder setDomain(String domain) {
-		this.domain = domain;
-		return this;
-	}
-
-	/**
-	 * Set {@link #name}.
-	 *
-	 * @param name New {@link #name}.
-	 * @return Current builder.
-	 */
-	public ApacheHttpCookieBuilder setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	/**
-	 * Set {@link #value}.
-	 *
-	 * @param value New {@link #value}.
-	 * @return Current builder.
-	 */
-	public ApacheHttpCookieBuilder setValue(String value) {
-		this.value = value;
-		return this;
-	}
-
-	/**
-	 * Set {@link #path}.
-	 *
-	 * @param path New {@link #path}.
-	 * @return Current builder.
-	 */
-	public ApacheHttpCookieBuilder setPath(String path) {
-		this.path = path;
-		return this;
-	}
-
-	/**
-	 * Create mock instance of {@link Cookie}.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public Cookie build() {
-		BasicClientCookie cookie = new BasicClientCookie(name, value);
-		cookie.setDomain(domain);
-		cookie.setSecure(secure);
-		cookie.setPath(path);
+		BasicClientCookie cookie = new BasicClientCookie(getName(), getValue());
+		cookie.setDomain(getDomain());
+		cookie.setSecure(isSecure());
+		cookie.setPath(getPath());
 		return cookie;
 	}
 }

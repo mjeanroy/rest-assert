@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 class AssertHasMaxAgeTest extends AbstractCookiesTest {
@@ -62,6 +62,6 @@ class AssertHasMaxAgeTest extends AbstractCookiesTest {
 	}
 
 	private Cookie cookie(long maxAge) {
-		return new CookieBuilder().setMaxAge(maxAge).build();
+		return new MockCookieBuilder().setMaxAge(maxAge).build();
 	}
 }

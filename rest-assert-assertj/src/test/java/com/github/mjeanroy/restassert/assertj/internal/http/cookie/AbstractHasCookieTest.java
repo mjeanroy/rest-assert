@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.cookie;
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
@@ -52,7 +52,7 @@ abstract class AbstractHasCookieTest {
 	@Test
 	void should_fail_if_status_code_are_not_equal() {
 		AssertionInfo info = someInfo();
-		Cookie cookie = new CookieBuilder()
+		Cookie cookie = new MockCookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.build();

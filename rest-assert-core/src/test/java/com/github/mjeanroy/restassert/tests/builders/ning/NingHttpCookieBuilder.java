@@ -24,139 +24,32 @@
 
 package com.github.mjeanroy.restassert.tests.builders.ning;
 
+import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
 /**
  * Build mock instance of {@link Cookie} class.
  */
-public class NingHttpCookieBuilder {
-
-	/**
-	 * Cookie name.
-	 */
-	private String name;
-
-	/**
-	 * Cookie value.
-	 */
-	private String value;
-
-	/**
-	 * Cookie domain.
-	 */
-	private String domain;
-
-	/**
-	 * Cookie path.
-	 */
-	private String path;
-
-	/**
-	 * Cookie "http-only" flag.
-	 */
-	private boolean httpOnly;
-
-	/**
-	 * Cookie "secure" flag.
-	 */
-	private boolean secure;
-
-	/**
-	 * Cookie max-age value.
-	 */
-	private long maxAge;
+public class NingHttpCookieBuilder extends AbstractCookieBuilder<Cookie, NingHttpCookieBuilder> {
 
 	/**
 	 * Create builder with default values.
 	 */
 	public NingHttpCookieBuilder() {
-		this.name = "foo";
-		this.value = "bar";
+		super();
 	}
 
-	/**
-	 * Set {@link #secure}.
-	 *
-	 * @param secure New {@link #secure}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setSecure(boolean secure) {
-		this.secure = secure;
-		return this;
-	}
-
-	/**
-	 * Set {@link #domain}.
-	 *
-	 * @param domain New {@link #domain}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setDomain(String domain) {
-		this.domain = domain;
-		return this;
-	}
-
-	/**
-	 * Set {@link #name}.
-	 *
-	 * @param name New {@link #name}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	/**
-	 * Set {@link #value}.
-	 *
-	 * @param value New {@link #value}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setValue(String value) {
-		this.value = value;
-		return this;
-	}
-
-	/**
-	 * Set {@link #path}.
-	 *
-	 * @param path New {@link #path}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setPath(String path) {
-		this.path = path;
-		return this;
-	}
-
-	/**
-	 * Set {@link #httpOnly}.
-	 *
-	 * @param httpOnly New {@link #httpOnly}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setHttpOnly(boolean httpOnly) {
-		this.httpOnly = httpOnly;
-		return this;
-	}
-
-	/**
-	 * Set {@link #maxAge}.
-	 *
-	 * @param maxAge New {@link #maxAge}.
-	 * @return Current builder.
-	 */
-	public NingHttpCookieBuilder setMaxAge(long maxAge) {
-		this.maxAge = maxAge;
-		return this;
-	}
-
-	/**
-	 * Create mock instance of {@link Cookie}.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public Cookie build() {
-		return Cookie.newValidCookie(name, value, false, domain, path, maxAge, secure, httpOnly);
+		return Cookie.newValidCookie(
+			getName(),
+			getValue(),
+			false,
+			getDomain(),
+			getPath(),
+			getMaxAge(),
+			isSecure(),
+			isHttpOnly()
+		);
 	}
 }

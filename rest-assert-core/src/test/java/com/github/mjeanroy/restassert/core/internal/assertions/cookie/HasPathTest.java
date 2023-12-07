@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHavePath;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 class HasPathTest extends AbstractCookieTest {
 
@@ -69,6 +69,6 @@ class HasPathTest extends AbstractCookieTest {
 	}
 
 	private Cookie cookie(String path) {
-		return new CookieBuilder().setPath(path).build();
+		return new MockCookieBuilder().setPath(path).build();
 	}
 }

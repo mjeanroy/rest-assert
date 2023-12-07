@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
@@ -61,7 +61,7 @@ class ShouldHaveCookieTest {
 
 	@Test
 	void it_should_create_error_with_cookie() {
-		Cookie expectedCookie = new CookieBuilder().setName("foo").setValue("bar").build();
+		Cookie expectedCookie = new MockCookieBuilder().setName("foo").setValue("bar").build();
 		ShouldHaveCookie error = shouldHaveCookie(expectedCookie);
 
 		assertThat(error).isNotNull();

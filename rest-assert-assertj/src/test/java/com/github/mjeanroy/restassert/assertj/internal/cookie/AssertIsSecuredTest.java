@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 class AssertIsSecuredTest extends AbstractCookiesTest {
@@ -56,6 +56,6 @@ class AssertIsSecuredTest extends AbstractCookiesTest {
 	}
 
 	private Cookie cookie(boolean secured) {
-		return new CookieBuilder().setSecured(secured).build();
+		return new MockCookieBuilder().setSecure(secured).build();
 	}
 }

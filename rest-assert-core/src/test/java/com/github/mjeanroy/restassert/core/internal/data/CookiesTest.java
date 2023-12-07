@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.data;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.junit.UseTimeZone;
 import org.junit.jupiter.api.Test;
 
@@ -309,19 +309,19 @@ class CookiesTest {
 	@Test
 	void it_should_compare_cookies() {
 		assertThat(Cookies.equals(null, null)).isTrue();
-		assertThat(Cookies.equals(null, new CookieBuilder().build())).isFalse();
-		assertThat(Cookies.equals(new CookieBuilder().build(), null)).isFalse();
+		assertThat(Cookies.equals(null, new MockCookieBuilder().build())).isFalse();
+		assertThat(Cookies.equals(new MockCookieBuilder().build(), null)).isFalse();
 
 		String domain = "domain.com";
 		String path = "path";
-		Cookie c1 = new CookieBuilder()
+		Cookie c1 = new MockCookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.setDomain(domain)
 				.setPath(path)
 				.build();
 
-		Cookie c2 = new CookieBuilder()
+		Cookie c2 = new MockCookieBuilder()
 				.setName("foo")
 				.setValue("bar")
 				.setDomain(domain)

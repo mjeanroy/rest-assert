@@ -24,152 +24,39 @@
 
 package com.github.mjeanroy.restassert.tests.builders.javax;
 
+import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
+
 import javax.servlet.http.Cookie;
 
 /**
  * Create mock instance of {@link Cookie} class.
  */
-public class JavaxCookieBuilder {
-
-	/**
-	 * Cookie name.
-	 */
-	private String name;
-
-	/**
-	 * Cookie value.
-	 */
-	private String value;
-
-	/**
-	 * Cookie domain.
-	 */
-	private String domain;
-
-	/**
-	 * Cookie path.
-	 */
-	private String path;
-
-	/**
-	 * Cookie "http-only" flag.
-	 */
-	private boolean httpOnly;
-
-	/**
-	 * Cookie "secure" flag.
-	 */
-	private boolean secured;
-
-	/**
-	 * Cookie max-age value.
-	 */
-	private int maxAge;
+public class JavaxCookieBuilder extends AbstractCookieBuilder<Cookie, JavaxCookieBuilder> {
 
 	/**
 	 * Create cookie builder with default values.
 	 */
 	public JavaxCookieBuilder() {
-		this.name = "FOO";
-		this.value = "BAR";
+		super();
 	}
 
-	/**
-	 * Set {@link #name}.
-	 *
-	 * @param name New {@link #name}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setName(String name) {
-		this.name = name;
-		return this;
-	}
-
-	/**
-	 * Set {@link #value}.
-	 *
-	 * @param value New {@link #value}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setValue(String value) {
-		this.value = value;
-		return this;
-	}
-
-	/**
-	 * Set {@link #domain}.
-	 *
-	 * @param domain New {@link #domain}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setDomain(String domain) {
-		this.domain = domain;
-		return this;
-	}
-
-	/**
-	 * Set {@link #path}.
-	 *
-	 * @param path New {@link #path}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setPath(String path) {
-		this.path = path;
-		return this;
-	}
-
-	/**
-	 * Set {@link #httpOnly}.
-	 *
-	 * @param httpOnly New {@link #httpOnly}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setHttpOnly(boolean httpOnly) {
-		this.httpOnly = httpOnly;
-		return this;
-	}
-
-	/**
-	 * Set {@link #secured}.
-	 *
-	 * @param secured New {@link #secured}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setSecured(boolean secured) {
-		this.secured = secured;
-		return this;
-	}
-
-	/**
-	 * Set {@link #maxAge}.
-	 *
-	 * @param maxAge New {@link #maxAge}.
-	 * @return Current builder.
-	 */
-	public JavaxCookieBuilder setMaxAge(int maxAge) {
-		this.maxAge = maxAge;
-		return this;
-	}
-
-	/**
-	 * Build mock of {@link Cookie} class.
-	 *
-	 * @return Mock instance.
-	 */
+	@Override
 	public Cookie build() {
-		Cookie cookie = new Cookie(name, value);
+		Cookie cookie = new Cookie(getName(), getValue());
 
+		String domain = getDomain();
 		if (domain != null) {
 			cookie.setDomain(domain);
 		}
 
+		String path = getPath();
 		if (path != null) {
 			cookie.setPath(path);
 		}
 
-		cookie.setHttpOnly(httpOnly);
-		cookie.setSecure(secured);
-		cookie.setMaxAge(maxAge);
+		cookie.setHttpOnly(isHttpOnly());
+		cookie.setSecure(isSecure());
+		cookie.setMaxAge(Long.valueOf(getMaxAge()).intValue());
 		return cookie;
 	}
 }

@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.internal.http.cookie;
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
@@ -69,7 +69,7 @@ abstract class AbstractDoesNotHaveCookieTest {
 	abstract void run(AssertionInfo info, HttpResponse httpResponse);
 
 	Cookie fakeCookie() {
-		return new CookieBuilder().setName("foo").setValue("bar").build();
+		return new MockCookieBuilder().setName("foo").setValue("bar").build();
 	}
 
 	private static HttpResponse newResponse(Cookie cookie) {

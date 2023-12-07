@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http.cookies;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpMatcherTest;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 
 import java.util.function.Consumer;
@@ -71,6 +71,6 @@ abstract class AbstractDoesNotHaveCookieMatcherTest extends AbstractHttpMatcherT
 	abstract String buildMismatchMessage();
 
 	Cookie randomCookie() {
-		return new CookieBuilder().setName(randomString()).setValue(randomString()).build();
+		return new MockCookieBuilder().setName(randomString()).setValue(randomString()).build();
 	}
 }

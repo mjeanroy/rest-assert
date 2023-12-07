@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.unit.api.cookie.core;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 import static com.github.mjeanroy.restassert.unit.api.cookie.CookieAssert.assertIsNotSecured;
 
@@ -62,6 +62,6 @@ class AssertIsNotSecuredTest extends AbstractCoreCookieTest {
 	}
 
 	private Cookie cookie(boolean secured) {
-		return new CookieBuilder().setSecured(secured).build();
+		return new MockCookieBuilder().setSecure(secured).build();
 	}
 }

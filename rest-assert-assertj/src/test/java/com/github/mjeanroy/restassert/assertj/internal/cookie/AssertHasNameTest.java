@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 
 class AssertHasNameTest extends AbstractCookiesTest {
@@ -62,6 +62,6 @@ class AssertHasNameTest extends AbstractCookiesTest {
 	}
 
 	private Cookie cookie(String name) {
-		return new CookieBuilder().setName(name).build();
+		return new MockCookieBuilder().setName(name).build();
 	}
 }

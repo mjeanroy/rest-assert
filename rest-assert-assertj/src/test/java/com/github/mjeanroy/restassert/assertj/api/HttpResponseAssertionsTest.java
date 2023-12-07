@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +49,7 @@ class HttpResponseAssertionsTest {
 
 	@Test
 	void it_should_create_new_cookie_assertion_object() {
-		Cookie cookie = new CookieBuilder().build();
+		Cookie cookie = new MockCookieBuilder().build();
 		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
 
 		assertThat(assertions).isNotNull();

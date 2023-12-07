@@ -26,14 +26,14 @@ package com.github.mjeanroy.restassert.hamcrest.api.http.cookies;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.hamcrest.api.http.HttpMatcher;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.hamcrest.MatcherAssert;
 
 class HasCookieWithNameCookieMatcherTest extends AbstractHasCookieMatcherTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
-	private static final Cookie COOKIE = new CookieBuilder()
+	private static final Cookie COOKIE = new MockCookieBuilder()
 		.setName(NAME)
 		.setValue(VALUE)
 		.setExpires(0)

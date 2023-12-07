@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveMaxAge;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 class HasMaxAgeTest extends AbstractCookieTest {
 
@@ -69,6 +69,6 @@ class HasMaxAgeTest extends AbstractCookieTest {
 	}
 
 	private Cookie cookie(long maxAge) {
-		return new CookieBuilder().setMaxAge(maxAge).build();
+		return new MockCookieBuilder().setMaxAge(maxAge).build();
 	}
 }

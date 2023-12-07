@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.unit.api.http.cookies;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAsserter;
 
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
@@ -53,7 +53,7 @@ class AssertHasCookieWithNameTest extends AbstractHasCookieTest {
 
 	@Override
 	Cookie cookie() {
-		return new CookieBuilder().setName(NAME).setValue(randomString()).build();
+		return new MockCookieBuilder().setName(NAME).setValue(randomString()).build();
 	}
 
 	@Override

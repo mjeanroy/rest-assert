@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.hamcrest.api.http.cookies;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.hamcrest.api.http.HttpMatcher;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
@@ -42,7 +42,7 @@ class DoesNotHaveCookieWithNameMatcherTest extends AbstractDoesNotHaveCookieMatc
 
 	@Override
 	Cookie cookie() {
-		return new CookieBuilder().setName(NAME).setValue(randomString()).build();
+		return new MockCookieBuilder().setName(NAME).setValue(randomString()).build();
 	}
 
 	@Override

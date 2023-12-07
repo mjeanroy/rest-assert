@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.CookieBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
@@ -40,8 +40,8 @@ class HasCookieAssertionTest {
 	void it_should_not_fail_if_header_has_cookie() {
 		String name = "foo";
 		String value = "bar";
-		Cookie c1 = new CookieBuilder().setName(name).setValue(value).build();
-		Cookie c2 = new CookieBuilder().setName(name).setValue(value).build();
+		Cookie c1 = new MockCookieBuilder().setName(name).setValue(value).build();
+		Cookie c2 = new MockCookieBuilder().setName(name).setValue(value).build();
 
 		HasCookieAssertion assertion = new HasCookieAssertion(c1);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(c2).build();
@@ -57,7 +57,7 @@ class HasCookieAssertionTest {
 	void it_should_not_fail_if_header_has_cookie_with_name() {
 		String name = "foo";
 		String value = "bar";
-		Cookie cookie = new CookieBuilder().setName(name).setValue(value).build();
+		Cookie cookie = new MockCookieBuilder().setName(name).setValue(value).build();
 
 		HasCookieAssertion assertion = new HasCookieAssertion(name);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
@@ -73,7 +73,7 @@ class HasCookieAssertionTest {
 	void it_should_not_fail_if_header_has_cookie_with_name_and_value() {
 		String name = "foo";
 		String value = "bar";
-		Cookie cookie = new CookieBuilder().setName(name).setValue(value).build();
+		Cookie cookie = new MockCookieBuilder().setName(name).setValue(value).build();
 
 		HasCookieAssertion assertion = new HasCookieAssertion(name, value);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
@@ -89,8 +89,8 @@ class HasCookieAssertionTest {
 	void it_should_fail_if_response_does_not_have_cookie() {
 		String name = "foo";
 		String value = "bar";
-		Cookie c1 = new CookieBuilder().setName(name).setValue(value).build();
-		Cookie c2 = new CookieBuilder().setName(name).setValue(value + value).build();
+		Cookie c1 = new MockCookieBuilder().setName(name).setValue(value).build();
+		Cookie c2 = new MockCookieBuilder().setName(name).setValue(value + value).build();
 
 		HasCookieAssertion assertion = new HasCookieAssertion(c1);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(c2).build();
@@ -107,7 +107,7 @@ class HasCookieAssertionTest {
 	void it_should_fail_if_response_does_not_have_cookie_with_name() {
 		String name = "foo";
 		String value = "bar";
-		Cookie cookie = new CookieBuilder().setName(name).setValue(value).build();
+		Cookie cookie = new MockCookieBuilder().setName(name).setValue(value).build();
 
 		HasCookieAssertion assertion = new HasCookieAssertion(name + name);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
@@ -124,7 +124,7 @@ class HasCookieAssertionTest {
 	void it_should_fail_if_response_does_not_have_cookie_with_name_and_value() {
 		String name = "foo";
 		String value = "bar";
-		Cookie cookie = new CookieBuilder().setName(name).setValue(value).build();
+		Cookie cookie = new MockCookieBuilder().setName(name).setValue(value).build();
 
 		HasCookieAssertion assertion = new HasCookieAssertion(name, value + value);
 		HttpResponse rsp = new HttpResponseBuilderImpl().addCookie(cookie).build();
