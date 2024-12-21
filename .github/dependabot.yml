@@ -1,0 +1,28 @@
+version: 2
+updates:
+  - package-ecosystem: maven
+    directory: "/"
+    schedule:
+      interval: daily
+    open-pull-requests-limit: 10
+    ignore:
+      # logback-classic >= 1.4.0 requires Java 11
+      - dependency-name: ch.qos.logback:logback-classic
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # mockito >= 5.0.0 requires Java 11
+      - dependency-name: org.mockito:mockito-core
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # async-http-client >= 3.0.0 requires Java 11
+      - dependency-name: org.asynchttpclient:async-http-client
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # jmustache >= 1.16 requires Java 11
+      - dependency-name: com.samskivert:jmustache
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # wiremock >= 3.0.0 requires Java 11
+      - dependency-name: com.github.tomakehurst:wiremock
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      # spring >= 6.0.0 requires Java 17
+      - dependency-name: org.springframework:spring-web
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+      - dependency-name: org.springframework:spring-test
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
