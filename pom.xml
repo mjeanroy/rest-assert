@@ -102,7 +102,7 @@
 
     <junit.version>4.13.2</junit.version>
     <jupiter.version>5.11.4</jupiter.version>
-    <hamcrest.version>2.2</hamcrest.version>
+    <hamcrest.version>3.0</hamcrest.version>
     <assertj.version>3.27.0</assertj.version>
     <mockito.version>4.11.0</mockito.version>
     <commons-lang3.version>3.17.0</commons-lang3.version>
