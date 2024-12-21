@@ -33,6 +33,17 @@ jobs:
       matrix:
         os: [ windows-latest, ubuntu-latest, macos-latest ]
         java: [ 11, 17, 21 ]
+        distribution: [ 'temurin' ]
+        include:
+          - os: windows-latest
+            java: '8'
+            distribution: 'zulu'
+          - os: ubuntu-latest
+            java: '8'
+            distribution: 'zulu'
+          - os: macos-latest
+            java: '8'
+            distribution: 'zulu'
 
     steps:
       - uses: actions/checkout@v4.2.2
@@ -40,7 +51,7 @@ jobs:
         uses: actions/setup-java@v4.6.0
         with:
           java-version: ${{ matrix.java }}
-          distribution: 'temurin'
+          distribution: ${{ matrix.distribution }}
           cache: 'maven'
       - name: java -version
         run: java -version
