@@ -40,6 +40,6 @@ public final class HamcrestTestUtils {
 	public static String generateHamcrestErrorMessage(String expectation, String mismatch) {
 		String expectationMsg = "Expected: " + expectation;
 		String mismatchMsg = "     but: " + mismatch;
-		return expectationMsg + System.getProperty("line.separator") + mismatchMsg;
+		return expectationMsg + System.lineSeparator() + mismatchMsg;
 	}
 }
