@@ -77,9 +77,7 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	private RestAssertError error() {
 		if (assertionResult == null) {
-			throw new IllegalStateException(
-				"Cannot read assertion result, did you call `matchesSafely`?"
-			);
+			assertionResult = verify(null);
 		}
 
 		return assertionResult.getError();

@@ -83,6 +83,15 @@ public final class JsonObject implements JsonValue {
 	}
 
 	/**
+	 * Get JSON keys.
+	 *
+	 * @return JSON keys.
+	 */
+	public Collection<String> getKeys() {
+		return entries.keySet();
+	}
+
+	/**
 	 * Add new entry to object, and fails if an entry with the same name already exist (fail fast).
 	 *
 	 * @param entry The JSON entry.
