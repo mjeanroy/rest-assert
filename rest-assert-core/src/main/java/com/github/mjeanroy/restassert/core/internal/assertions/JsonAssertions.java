@@ -238,6 +238,10 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, URI uri) {
+		if (uri == null) {
+			throw new AssertionError("Cannot extract expected JSON from <null> URI");
+		}
+
 		return isEqualTo(actual, Paths.get(uri));
 	}
 
