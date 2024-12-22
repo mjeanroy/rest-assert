@@ -29,29 +29,36 @@ import org.hamcrest.MatcherAssert;
 
 import static com.github.mjeanroy.restassert.hamcrest.api.json.JsonMatchers.contains;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
+import static java.util.Arrays.asList;
 
-class ContainsTest extends AbstractJsonTest {
+class ContainsIterableTest extends AbstractJsonTest {
 
 	@Override
 	void test_pass() {
 		MatcherAssert.assertThat(
 			input.toJson(),
-			contains("id")
+			contains(
+				asList("id", "name")
+			)
 		);
 	}
 
 	@Override
 	void test_fail() {
-		String entryName = "foo";
+		String entryName1 = "foo";
+		String entryName2 = "bar";
+		String entryName3 = "id";
 		String message = HamcrestTestUtils.generateHamcrestErrorMessage(
-			buildExpectationMessage(entryName),
+			buildExpectationMessage(entryName1, entryName2, entryName3),
 			buildMismatchMessage()
 		);
 
 		assertFailure(message, () ->
 			MatcherAssert.assertThat(
-				input.toJson(),
-				contains(entryName)
+				input.toString(),
+				contains(
+					asList(entryName1, entryName2, entryName3)
+				)
 			)
 		);
 	}
