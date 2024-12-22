@@ -31,7 +31,7 @@ import static com.github.mjeanroy.restassert.hamcrest.api.json.JsonMatchers.cont
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static java.util.Arrays.asList;
 
-class ContainsIterableTest extends AbstractJsonTest {
+class ContainsIterableTest extends AbstractJsonContainsTest {
 
 	@Override
 	void test_pass() {

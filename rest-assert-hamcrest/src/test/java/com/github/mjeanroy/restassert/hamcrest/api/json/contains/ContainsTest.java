@@ -30,7 +30,7 @@ import org.hamcrest.MatcherAssert;
 import static com.github.mjeanroy.restassert.hamcrest.api.json.JsonMatchers.contains;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
-class ContainsTest extends AbstractJsonTest {
+class ContainsTest extends AbstractJsonContainsTest {
 
 	@Override
 	void test_pass() {

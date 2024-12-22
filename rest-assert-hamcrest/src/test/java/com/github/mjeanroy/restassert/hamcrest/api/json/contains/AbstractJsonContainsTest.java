@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static java.util.Arrays.asList;
 
-abstract class AbstractJsonTest {
+abstract class AbstractJsonContainsTest {
 
 	final JsonObject input = jsonObject(
 		jsonEntry("id", 1),
