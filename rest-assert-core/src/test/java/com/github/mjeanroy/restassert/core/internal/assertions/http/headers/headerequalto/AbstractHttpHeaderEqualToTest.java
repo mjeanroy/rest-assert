@@ -28,8 +28,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertion
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeAll;
@@ -75,10 +73,10 @@ abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<Http
 		if (allowMultiple) {
 			checkSuccess(result);
 		} else {
-			Class<ShouldHaveSingleHeader> klassError = ShouldHaveSingleHeader.class;
-			String message = "Expecting response to contains header %s with a single value but found: %s";
-			Object[] args = {h1.getName(), asList(h1.getValue(), h2.getValue())};
-			checkError(result, klassError, message, args);
+			checkError(
+				result,
+				String.format("Expecting response to contains header %s with a single value but found: %s", h1.getName(), asList(h1.getValue(), h2.getValue()))
+			);
 		}
 	}
 
@@ -95,9 +93,10 @@ abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<Http
 		AssertionResult result = run(rsp);
 
 		// THEN
-		String message = "Expecting response to have header %s equal to %s but was %s";
-		Object[] args = {expectedHeader.getName(), expectedHeader.getValue(), header.getValue()};
-		checkError(result, ShouldHaveHeader.class, message, args);
+		checkError(
+			result,
+			String.format("Expecting response to have header %s equal to %s but was %s", expectedHeader.getName(), expectedHeader.getValue(), header.getValue())
+		);
 	}
 
 	@Test
@@ -110,9 +109,10 @@ abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<Http
 		AssertionResult result = run(rsp);
 
 		// THEN
-		String message = "Expecting response to have header %s";
-		String args = getHeader().getName();
-		checkError(result, ShouldHaveHeader.class, message, args);
+		checkError(
+			result,
+			String.format("Expecting response to have header %s", getHeader().getName())
+		);
 	}
 
 	private HttpResponse newResponse(Header header, Header... other) {

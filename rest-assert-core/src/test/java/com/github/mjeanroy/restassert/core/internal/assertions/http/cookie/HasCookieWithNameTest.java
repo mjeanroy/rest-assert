@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.cookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 public class HasCookieWithNameTest extends AbstractHasCookieTest {
@@ -49,6 +48,9 @@ public class HasCookieWithNameTest extends AbstractHasCookieTest {
 
 	@Override
 	void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response to contains cookie with name %s", NAME);
+		checkError(
+			result,
+			String.format("Expecting http response to contains cookie with name %s", NAME)
+		);
 	}
 }

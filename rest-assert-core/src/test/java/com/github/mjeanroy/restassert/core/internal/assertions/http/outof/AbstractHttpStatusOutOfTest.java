@@ -28,7 +28,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertion
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusOutOf;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,7 +61,10 @@ abstract class AbstractHttpStatusOutOfTest extends AbstractAssertionsTest<HttpRe
 
 		for (int status = start; status <= end; status++) {
 			AssertionResult result = run(newResponse(status));
-			checkError(result, ShouldHaveStatusOutOf.class, "Expecting status code to be out of %s and %s but was %s", start, end, status);
+			checkError(
+				result,
+				String.format("Expecting status code to be out of %s and %s but was %s", start, end, status)
+			);
 		}
 	}
 

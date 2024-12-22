@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.isequaltoig
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -74,18 +73,12 @@ abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		AssertionResult result = run(actual, expected, ignoringKeys);
 
 		String expectedPattern = String.join(System.lineSeparator(), asList(
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s"
+			"Expecting json entry array[0] to be equal to 1.1 but was 1.0,",
+			"Expecting json entry array[1] to be equal to 2.1 but was 2.0,",
+			"Expecting json entry array[2] to be equal to 3.1 but was 3.0"
 		));
 
-		Object[] args = new Object[] {
-				"array[0]", 1.1, 1.0,
-				"array[1]", 2.1, 2.0,
-				"array[2]", 3.1, 3.0
-		};
-
-		assertFailureResult(result, CompositeError.class, expectedPattern, args);
+		assertFailureResult(result, expectedPattern);
 	}
 
 	abstract AssertionResult run(String actual, T expected, Iterable<String> ignoringKeys);

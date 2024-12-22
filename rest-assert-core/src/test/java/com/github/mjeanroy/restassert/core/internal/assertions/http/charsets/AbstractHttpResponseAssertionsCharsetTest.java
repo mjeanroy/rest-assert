@@ -28,7 +28,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertion
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,10 +61,10 @@ abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAsserti
 		AssertionResult result = run(httpResponse);
 
 		// THEN
-		Class<ShouldHaveCharset> klassError = ShouldHaveCharset.class;
-		String pattern = "Expecting response to have charset %s but was %s";
-		Object[] parameters = {expectedCharset, actualCharset};
-		checkError(result, klassError, pattern, parameters);
+		checkError(
+			result,
+			String.format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset)
+		);
 	}
 
 	abstract String expectedCharset();

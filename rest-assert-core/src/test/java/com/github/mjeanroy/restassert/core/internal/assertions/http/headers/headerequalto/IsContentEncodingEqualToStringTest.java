@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hea
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
@@ -85,10 +84,10 @@ class IsContentEncodingEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 		AssertionResult result = assertions.isContentEncodingEqualTo(response, expected);
 
 		// THEN
-		Class<ShouldHaveHeader> klassError = ShouldHaveHeader.class;
-		String message = "Expecting response to have header %s equal to %s but was %s";
-		Object[] args = {HEADER_NAME, expected, actual};
-		checkError(result, klassError, message, args);
+		checkError(
+			result,
+			String.format("Expecting response to have header %s equal to %s but was %s", HEADER_NAME, expected, actual)
+		);
 	}
 
 	private static void doTestSuccess(String actual, String expected) {

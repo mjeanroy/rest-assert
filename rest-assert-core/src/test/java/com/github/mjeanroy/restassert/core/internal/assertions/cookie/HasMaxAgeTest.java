@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveMaxAge;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 class HasMaxAgeTest extends AbstractCookieTest {
@@ -49,23 +48,8 @@ class HasMaxAgeTest extends AbstractCookieTest {
 	}
 
 	@Override
-	Class<?> error() {
-		return ShouldHaveMaxAge.class;
-	}
-
-	@Override
-	String pattern() {
-		return "Expecting cookie to have max-age %s but was %s";
-	}
-
-	@Override
-	Object[] params() {
-		long expectedMaxAge = success().getMaxAge();
-		long actualMaxAge = failure().getMaxAge();
-		return new Long[] {
-			expectedMaxAge,
-			actualMaxAge,
-		};
+	String expectedMessage() {
+		return String.format("Expecting cookie to have max-age %s but was %s", success().getMaxAge(), failure().getMaxAge());
 	}
 
 	private Cookie cookie(long maxAge) {

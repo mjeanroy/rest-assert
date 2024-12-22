@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hea
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
@@ -58,6 +57,9 @@ class IsHeaderEqualToTest extends AbstractHttpHeaderEqualToTest {
 	void it_should_fail_if_response_does_not_have_header() {
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 		AssertionResult result = assertions.isHeaderEqualTo(rsp, NAME, VALUE);
-		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", NAME);
+		checkError(
+			result,
+			String.format("Expecting response to have header %s", NAME)
+		);
 	}
 }

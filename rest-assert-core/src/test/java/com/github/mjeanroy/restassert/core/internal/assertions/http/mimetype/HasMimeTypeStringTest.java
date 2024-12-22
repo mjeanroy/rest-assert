@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.mimetype;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
@@ -48,6 +47,9 @@ class HasMimeTypeStringTest extends AbstractMimeTypeTest {
 	void it_should_fail_if_response_does_not_have_content_type() {
 		HttpResponse rsp = new HttpResponseBuilderImpl().build();
 		AssertionResult result = assertions.hasMimeType(rsp, getMimeType());
-		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
+		checkError(
+			result,
+			String.format("Expecting response to have header %s", "Content-Type")
+		);
 	}
 }

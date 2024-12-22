@@ -28,7 +28,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertion
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveMimeType;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,10 +90,10 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 			AssertionResult result = run(newResponse(header));
 
 			// Then
-			Class<ShouldHaveMimeType> klassError = ShouldHaveMimeType.class;
-			String pattern = "Expecting response to have mime type in %s but was %s";
-			Object[] parameters = {mimeType, actualMimeType};
-			checkError(result, klassError, pattern, parameters);
+			checkError(
+				result,
+				String.format("Expecting response to have mime type in %s but was %s", mimeType, actualMimeType)
+			);
 
 			i++;
 		}

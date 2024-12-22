@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.cookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
 
@@ -50,7 +49,7 @@ class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
 
 	@Override
 	void verifyError(AssertionResult result) {
-		checkError(result, ShouldHaveCookie.class, "Expecting http response not to contains cookies");
+		checkError(result, "Expecting http response not to contains cookies");
 	}
 
 	@Test

@@ -26,15 +26,13 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.isequalto;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
@@ -73,25 +71,16 @@ abstract class AbstractJsonAssertion_isEqualTo_Test<T> {
 		T expected = failureObject();
 		AssertionResult result = run(actual, expected);
 
-		String expectedPattern = String.join(System.lineSeparator(), Arrays.asList(
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s,",
-			"Expecting json entry %s to be equal to %s but was %s"
+		String expectedPattern = String.join(System.lineSeparator(), asList(
+			"Expecting json entry str to be equal to bar but was foo,",
+			"Expecting json entry nb to be equal to 2.0 but was 1.0,",
+			"Expecting json entry bool to be equal to false but was true,",
+			"Expecting json entry array[0] to be equal to 1.1 but was 1.0,",
+			"Expecting json entry array[1] to be equal to 2.1 but was 2.0,",
+			"Expecting json entry array[2] to be equal to 3.1 but was 3.0"
 		));
 
-		Object[] args = new Object[] {
-				"str", "bar", "foo",
-				"nb", 2.0, 1.0,
-				"bool", false, true,
-				"array[0]", 1.1, 1.0,
-				"array[1]", 2.1, 2.0,
-				"array[2]", 3.1, 3.0
-		};
-
-		assertFailureResult(result, CompositeError.class, expectedPattern, args);
+		assertFailureResult(result, expectedPattern);
 	}
 
 	abstract AssertionResult run(String actual, T expected);

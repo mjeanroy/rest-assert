@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 class HasNameTest extends AbstractCookieTest {
@@ -49,23 +48,8 @@ class HasNameTest extends AbstractCookieTest {
 	}
 
 	@Override
-	Class<?> error() {
-		return ShouldHaveName.class;
-	}
-
-	@Override
-	String pattern() {
-		return "Expecting cookie to have name %s but was %s";
-	}
-
-	@Override
-	Object[] params() {
-		String expectedName = success().getName();
-		String actualName = failure().getName();
-		return new String[] {
-			expectedName,
-			actualName,
-		};
+	String expectedMessage() {
+		return String.format("Expecting cookie to have name %s but was %s", success().getName(), failure().getName());
 	}
 
 	private Cookie cookie(String name) {

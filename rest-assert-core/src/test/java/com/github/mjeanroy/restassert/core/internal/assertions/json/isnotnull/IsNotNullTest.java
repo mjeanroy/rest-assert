@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.isnotnull;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,6 +60,6 @@ class IsNotNullTest {
 	void it_should_fail_if_json_is_null() {
 		String actual = null;
 		AssertionResult assertionResult = assertions.isNotNull(actual);
-		assertFailureResult(assertionResult, ShouldNotBeNull.class, "Expecting json not to be null", new Object[]{});
+		assertFailureResult(assertionResult, "Expecting json not to be null");
 	}
 }

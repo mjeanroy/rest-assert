@@ -28,7 +28,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertion
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -70,8 +69,10 @@ abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<HttpRespons
 		AssertionResult result = run(rsp);
 
 		// THEN
-		String message = "Expecting response to have header %s";
-		checkError(result, ShouldHaveHeader.class, message, expectedName);
+		checkError(
+			result,
+			String.format("Expecting response to have header %s", expectedName)
+		);
 	}
 
 	private HttpResponse newResponse(Header header) {

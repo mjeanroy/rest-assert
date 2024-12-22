@@ -26,8 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.charsets;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset;
-import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
@@ -57,7 +55,10 @@ public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharse
 		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 
 		// THEN
-		checkError(result, ShouldHaveHeader.class, "Expecting response to have header %s", "Content-Type");
+		checkError(
+			result,
+			String.format("Expecting response to have header %s", "Content-Type")
+		);
 	}
 
 	@Test
@@ -71,6 +72,6 @@ public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharse
 		AssertionResult result = assertions.hasCharset(rsp, CHARSET);
 
 		// THEN
-		checkError(result, ShouldHaveCharset.class, "Expecting response to have defined charset");
+		checkError(result, "Expecting response to have defined charset");
 	}
 }

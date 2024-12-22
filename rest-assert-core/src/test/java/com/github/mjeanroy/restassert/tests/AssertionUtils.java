@@ -25,10 +25,8 @@
 package com.github.mjeanroy.restassert.tests;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import org.junit.jupiter.api.Assertions;
 
-import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class AssertionUtils {
@@ -42,41 +40,12 @@ public abstract class AssertionUtils {
 
 	public static void assertFailureResult(
 		AssertionResult result,
-		Class<?> klassError,
-		String pattern,
-		Object arg,
-		Object... args
-	) {
-		Object[] array = new Object[args.length + 1];
-		array[0] = arg;
-		for (int i = 0; i < args.length; i++) {
-			array[i + 1] = args[i];
-		}
-
-		assertFailureResult(
-			result,
-			klassError,
-			pattern,
-			array
-		);
-	}
-
-	public static void assertFailureResult(
-		AssertionResult result,
-		Class<?> klassError,
-		String pattern,
-		Object[] args
+		String expectedMessage
 	) {
 		assertThat(result).overridingErrorMessage("Expecting result not to be null").isNotNull();
 		assertThat(result.isSuccess()).overridingErrorMessage("Expecting isSuccess() to returns false").isFalse();
 		assertThat(result.isFailure()).overridingErrorMessage("Expecting isFailure() to returns true").isTrue();
-
-		RestAssertError error = result.getError();
-		assertThat(error).isInstanceOf(klassError);
-		assertThat(error.args()).hasSameSizeAs(args).contains(args);
-
-		String expectedMessage = format(pattern, args);
-		assertThat(error.buildMessage()).isEqualTo(expectedMessage);
+		assertThat(result.getError().buildMessage()).isEqualTo(expectedMessage);
 	}
 
 	public static void assertFailure(String message, Runnable test) {

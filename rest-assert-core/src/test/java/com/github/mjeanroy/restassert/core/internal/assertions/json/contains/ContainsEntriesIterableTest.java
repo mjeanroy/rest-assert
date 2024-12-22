@@ -27,7 +27,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -97,15 +96,11 @@ class ContainsEntriesIterableTest {
 			singleton(entry)
 		);
 
+		String key = entry.getKey();
+
 		assertFailureResult(
 			result,
-			CompositeError.class,
-			"Expecting json entry %s to be equal to %s but was %s",
-			entry.getKey(),
-			entry.getValue(),
-			actual.getValue(
-				entry.getKey()
-			)
+			String.format("Expecting json entry %s to be equal to %s but was %s", key, entry.getValue(), actual.getValue(key))
 		);
 	}
 
@@ -117,9 +112,7 @@ class ContainsEntriesIterableTest {
 
 		assertFailureResult(
 			result,
-			CompositeError.class,
-			"Expecting json to contain entry %s",
-			entry.getKey()
+			String.format("Expecting json to contain entry %s", entry.getKey())
 		);
 	}
 }

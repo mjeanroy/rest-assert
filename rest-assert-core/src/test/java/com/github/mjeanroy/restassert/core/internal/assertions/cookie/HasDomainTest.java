@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveDomain;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 class HasDomainTest extends AbstractCookieTest {
@@ -49,23 +48,8 @@ class HasDomainTest extends AbstractCookieTest {
 	}
 
 	@Override
-	Class<?> error() {
-		return ShouldHaveDomain.class;
-	}
-
-	@Override
-	String pattern() {
-		return "Expecting cookie to have domain %s but was %s";
-	}
-
-	@Override
-	Object[] params() {
-		String expectedDomain = success().getDomain();
-		String actualDomain = failure().getDomain();
-		return new String[] {
-			expectedDomain,
-			actualDomain,
-		};
+	String expectedMessage() {
+		return String.format("Expecting cookie to have domain %s but was %s", success().getDomain(), failure().getDomain());
 	}
 
 	private Cookie cookie(String domain) {

@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,9 +79,7 @@ class ContainsTest {
 	private void test_failure(String actual, String key) {
 		assertFailureResult(
 			assertions.contains(actual, key),
-			CompositeError.class,
-			"Expecting json to contain entry %s",
-			key
+			String.format("Expecting json to contain entry %s", key)
 		);
 	}
 }
