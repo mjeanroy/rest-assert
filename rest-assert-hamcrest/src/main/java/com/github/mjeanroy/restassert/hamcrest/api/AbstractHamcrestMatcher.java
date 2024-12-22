@@ -77,6 +77,7 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	private RestAssertError error() {
 		if (assertionResult == null) {
+			// If we are there, it means it likely has been called with null.
 			assertionResult = verify(null);
 		}
 

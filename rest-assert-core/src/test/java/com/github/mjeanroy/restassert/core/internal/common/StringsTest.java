@@ -42,4 +42,11 @@ class StringsTest {
 		assertThat(Strings.isQuoted("'a'")).isTrue();
 		assertThat(Strings.isQuoted("\"a\"")).isTrue();
 	}
+
+	@Test
+	void it_should_check_if_string_is_empty() {
+		assertThat(Strings.isEmpty(null)).isTrue();
+		assertThat(Strings.isEmpty("")).isTrue();
+		assertThat(Strings.isEmpty(" ")).isFalse();
+	}
 }

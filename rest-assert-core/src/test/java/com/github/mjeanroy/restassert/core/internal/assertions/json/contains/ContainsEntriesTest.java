@@ -26,6 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
+import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
 import com.github.mjeanroy.restassert.core.internal.error.CompositeError;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -66,6 +67,13 @@ class ContainsEntriesTest {
 	}
 
 	@Test
+	void it_should_fail_if_json_is_null_or_empty() {
+		JsonEntry entry = JsonAssertions.jsonEntry("name", "Jane Doe");
+		test_failure_on_missing_entry(null, entry);
+		test_failure_on_missing_entry("", entry);
+	}
+
+	@Test
 	void it_should_fail_if_json_does_contains_entries() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1),
@@ -74,13 +82,41 @@ class ContainsEntriesTest {
 
 		String actual = jsonObject.toJson();
 
-		AssertionResult r1 = assertions.containsEntries(actual, JsonAssertions.jsonEntry("name", "Jane Doe"));
-		assertFailureResult(r1, CompositeError.class, "Expecting json entry %s to be equal to %s but was %s", new Object[]{"name", "Jane Doe", "John Doe"});
+		test_failure_on_value_mismatch(jsonObject, JsonAssertions.jsonEntry("name", "Jane Doe"));
+		test_failure_on_value_mismatch(jsonObject, JsonAssertions.jsonEntry("$.name", "Jane Doe"));
+		test_failure_on_missing_entry(actual, JsonAssertions.jsonEntry("$.foo", "Jane Doe"));
+		test_failure_on_missing_entry(actual, JsonAssertions.jsonEntry("foo", "Jane Doe"));
+	}
 
-		AssertionResult r2 = assertions.containsEntries(actual, JsonAssertions.jsonEntry("$.name", "Jane Doe"));
-		assertFailureResult(r2, CompositeError.class, "Expecting json entry %s to be equal to %s but was %s", new Object[]{"$.name", "Jane Doe", "John Doe"});
+	private void test_failure_on_value_mismatch(JsonObject actual, JsonEntry entry) {
+		AssertionResult result = assertions.containsEntries(
+			actual.toJson(),
+			entry
+		);
 
-		AssertionResult r3 = assertions.containsEntries(actual, JsonAssertions.jsonEntry("foo", "Jane Doe"));
-		assertFailureResult(r3, CompositeError.class, "Expecting json to contain entry %s", new Object[]{"foo"});
+		assertFailureResult(
+			result,
+			CompositeError.class,
+			"Expecting json entry %s to be equal to %s but was %s",
+			entry.getKey(),
+			entry.getValue(),
+			actual.getValue(
+				entry.getKey()
+			)
+		);
+	}
+
+	private void test_failure_on_missing_entry(String actual, JsonEntry entry) {
+		AssertionResult result = assertions.containsEntries(
+			actual,
+			entry
+		);
+
+		assertFailureResult(
+			result,
+			CompositeError.class,
+			"Expecting json to contain entry %s",
+			entry.getKey()
+		);
 	}
 }

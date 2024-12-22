@@ -83,6 +83,32 @@ public final class JsonObject implements JsonValue {
 	}
 
 	/**
+	 * Get entry for given name (only works for direct child, not composite keys).
+	 *
+	 * @param name Entry name.
+	 * @return Entry, may be {@code null}.
+	 */
+	public JsonEntry getEntry(String name) {
+		if (name.startsWith("$.")) {
+			name = name.substring(2);
+		}
+
+		return entries.get(name);
+	}
+
+	/**
+	 * Get value for given key (only works for direct child, not composite keys).
+	 * If entry is missing, {@code null} is returned.
+	 *
+	 * @param name Entry key.
+	 * @return Value, may be {@code null}.
+	 */
+	public Object getValue(String name) {
+		JsonEntry entry = getEntry(name);
+		return entry == null ? null : entry.getValue();
+	}
+
+	/**
 	 * Get JSON keys.
 	 *
 	 * @return JSON keys.

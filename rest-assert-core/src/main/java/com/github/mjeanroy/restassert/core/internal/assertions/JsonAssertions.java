@@ -50,6 +50,7 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.common.Files.readFileToString;
 import static com.github.mjeanroy.restassert.core.internal.common.Ios.readUrl;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.isEmpty;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
@@ -133,8 +134,10 @@ public final class JsonAssertions {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
 		for (String e : keys) {
-			if (doesNotHaveEntry(actual, e)) {
-				errors.add(shouldHaveEntry(e));
+			if (isEmpty(actual) || doesNotHaveEntry(actual, e)) {
+				errors.add(
+					shouldHaveEntry(e)
+				);
 			}
 		}
 
@@ -169,13 +172,15 @@ public final class JsonAssertions {
 		// Collect errors
 		for (JsonEntry e : entries) {
 			String key = e.getKey();
-			if (doesNotHaveEntry(actual, key)) {
+			if (isEmpty(actual) || doesNotHaveEntry(actual, key)) {
 				errors.add(shouldHaveEntry(key));
 			} else {
 				Object expectedValue = e.getValue();
 				Object actualValue = getEntry(actual, key);
 				if (!expectedValue.equals(actualValue)) {
-					errors.add(shouldHaveEntryEqualTo(key, actualValue, expectedValue));
+					errors.add(
+						shouldHaveEntryEqualTo(key, actualValue, expectedValue)
+					);
 				}
 			}
 		}

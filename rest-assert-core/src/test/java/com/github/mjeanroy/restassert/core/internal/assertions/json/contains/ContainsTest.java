@@ -61,14 +61,28 @@ class ContainsTest {
 	}
 
 	@Test
+	void it_should_fail_if_json_is_null_or_empty() {
+		test_failure(null, "id");
+		test_failure("", "id");
+	}
+
+	@Test
 	void it_should_fail_if_json_does_contains_entries() {
 		JsonObject jsonObject = jsonObject(
 			jsonEntry("id", 1)
 		);
 
 		String actual = jsonObject.toJson();
+		test_failure(actual, "name");
+		test_failure(actual, "$.name");
+	}
 
-		assertFailureResult(assertions.contains(actual, "name"), CompositeError.class, "Expecting json to contain entry %s", new Object[]{"name"});
-		assertFailureResult(assertions.contains(actual, "$.name"), CompositeError.class, "Expecting json to contain entry %s", new Object[]{"$.name"});
+	private void test_failure(String actual, String key) {
+		assertFailureResult(
+			assertions.contains(actual, key),
+			CompositeError.class,
+			"Expecting json to contain entry %s",
+			key
+		);
 	}
 }

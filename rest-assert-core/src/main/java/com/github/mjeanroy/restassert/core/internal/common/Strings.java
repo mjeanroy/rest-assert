@@ -64,6 +64,16 @@ public final class Strings {
 	}
 
 	/**
+	 * Check if given string is {@code null} or empty.
+	 *
+	 * @param value The value.
+	 * @return {@code true} if {@code value} is {@code null} or empty, {@code false} otherwise.
+	 */
+	public static boolean isEmpty(String value) {
+		return value == null || value.isEmpty();
+	}
+
+	/**
 	 * Remove quote of given string.
 	 *
 	 * @param value Input string.

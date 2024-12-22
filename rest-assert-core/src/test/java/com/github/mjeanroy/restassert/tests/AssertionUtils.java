@@ -40,10 +40,36 @@ public abstract class AssertionUtils {
 		assertThat(result.getError()).isNull();
 	}
 
-	public static void assertFailureResult(AssertionResult result, Class<?> klassError, String pattern, Object[] args) {
-		assertThat(result).isNotNull();
-		assertThat(result.isSuccess()).isFalse();
-		assertThat(result.isFailure()).isTrue();
+	public static void assertFailureResult(
+		AssertionResult result,
+		Class<?> klassError,
+		String pattern,
+		Object arg,
+		Object... args
+	) {
+		Object[] array = new Object[args.length + 1];
+		array[0] = arg;
+		for (int i = 0; i < args.length; i++) {
+			array[i + 1] = args[i];
+		}
+
+		assertFailureResult(
+			result,
+			klassError,
+			pattern,
+			array
+		);
+	}
+
+	public static void assertFailureResult(
+		AssertionResult result,
+		Class<?> klassError,
+		String pattern,
+		Object[] args
+	) {
+		assertThat(result).overridingErrorMessage("Expecting result not to be null").isNotNull();
+		assertThat(result.isSuccess()).overridingErrorMessage("Expecting isSuccess() to returns false").isFalse();
+		assertThat(result.isFailure()).overridingErrorMessage("Expecting isFailure() to returns true").isTrue();
 
 		RestAssertError error = result.getError();
 		assertThat(error).isInstanceOf(klassError);
