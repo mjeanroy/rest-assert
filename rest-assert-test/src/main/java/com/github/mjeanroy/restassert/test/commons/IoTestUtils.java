@@ -94,8 +94,7 @@ public final class IoTestUtils {
 	 */
 	public static String readFile(String resource) {
 		try {
-			ClassLoader classLoader = IoTestUtils.class.getClassLoader();
-			URL url = classLoader.getResource(resource);
+			URL url = IoTestUtils.class.getResource(resource);
 			if (url == null) {
 				throw new AssertionError("Resource does not exist: " + resource);
 			}

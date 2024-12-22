@@ -22,53 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.test.commons;
+package com.github.mjeanroy.restassert.hamcrest.api.json.isequalto;
 
-import org.junit.jupiter.api.Test;
+import com.github.mjeanroy.restassert.hamcrest.api.json.JsonMatchers;
+import org.hamcrest.TypeSafeMatcher;
 
-import java.io.File;
-import java.net.URI;
 import java.net.URL;
-import java.nio.file.Path;
 
-import static java.util.Arrays.asList;
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.urlFromClasspath;
 
-class IoTestUtilsTest {
+class IsEqualToURLTest extends AbstractJsonEqualToTest<URL> {
 
-	@Test
-	void it_should_get_file_from_classpath() {
-		File file = IoTestUtils.fileFromClasspath("/test.txt");
-		assertThat(file).isNotNull().exists().hasName("test.txt");
+	@Override
+	TypeSafeMatcher<String> run(URL expected) {
+		return JsonMatchers.isEqualTo(expected);
 	}
 
-	@Test
-	void it_should_get_path_from_classpath() {
-		Path path = IoTestUtils.pathFromClasspath("/test.txt");
-		assertThat(path).isNotNull().exists().hasFileName("test.txt");
+	@Override
+	URL actual() {
+		return urlFromClasspath("/json/actual.json");
 	}
 
-	@Test
-	void it_should_get_URL_from_classpath() {
-		URL url = IoTestUtils.urlFromClasspath("/test.txt");
-		assertThat(url).isNotNull().hasProtocol("file");
-	}
-
-	@Test
-	void it_should_get_URI_from_classpath() {
-		URI url = IoTestUtils.uriFromClasspath("/test.txt");
-		assertThat(url).isNotNull().hasScheme("file");
-	}
-
-	@Test
-	void it_should_read_file_content() {
-		String content = IoTestUtils.readFile("/test.txt");
-		assertThat(content).isEqualTo(
-			String.join(System.lineSeparator(), asList(
-				"Hello World",
-				"Foo Bar",
-				"Test"
-			))
-		);
+	@Override
+	URL expected() {
+		return urlFromClasspath("/json/expected.json");
 	}
 }
