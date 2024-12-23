@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasValue;
 
 class AssertHasValueTest extends AbstractJavaxCookieTest {
@@ -55,22 +56,13 @@ class AssertHasValueTest extends AbstractJavaxCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have value %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedValue = success().getValue();
-		String actualValue = failure().getValue();
-		return new Object[]{
-				expectedValue, actualValue
-		};
+	protected String message() {
+		String expected = success().getValue();
+		String actual = failure().getValue();
+		return "Expecting cookie to have value " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String value) {
-		return new JavaxCookieBuilder()
-				.setValue(value)
-				.build();
+		return new JavaxCookieBuilder().setValue(value).build();
 	}
 }

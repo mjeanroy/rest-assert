@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset.shouldHaveCharset;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveCharsetTest {
@@ -51,7 +52,7 @@ class ShouldHaveCharsetTest {
 		assertThat(shouldHaveCharset).isNotNull();
 		assertThat(shouldHaveCharset.message()).isEqualTo("Expecting response to have charset %s but was %s");
 		assertThat(shouldHaveCharset.args()).hasSize(2).containsExactly(expectedCharset, actualCharset);
-		assertThat(shouldHaveCharset.buildMessage()).isEqualTo("Expecting response to have charset UTF-8 but was UTF-16");
-		assertThat(shouldHaveCharset.toString()).isEqualTo("Expecting response to have charset UTF-8 but was UTF-16");
+		assertThat(shouldHaveCharset.buildMessage()).isEqualTo("Expecting response to have charset " + fmt(expectedCharset) + " but was " + fmt(actualCharset));
+		assertThat(shouldHaveCharset.toString()).isEqualTo("Expecting response to have charset " + fmt(expectedCharset) + " but was " + fmt(actualCharset));
 	}
 }

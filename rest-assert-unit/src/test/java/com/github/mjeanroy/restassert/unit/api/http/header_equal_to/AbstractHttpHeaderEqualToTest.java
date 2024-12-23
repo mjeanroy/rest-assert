@@ -32,6 +32,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
@@ -72,6 +73,6 @@ abstract class AbstractHttpHeaderEqualToTest extends AbstractHttpTest<Header> {
 	}
 
 	private static String defaultErrorMessage(String expectedName, String expectedValue, String actualValue) {
-		return String.format("Expecting response to have header %s equal to %s but was %s", expectedName, expectedValue, actualValue);
+		return "Expecting response to have header " + fmt(expectedName) + " equal to " + fmt(expectedValue) + " but was " + fmt(actualValue);
 	}
 }

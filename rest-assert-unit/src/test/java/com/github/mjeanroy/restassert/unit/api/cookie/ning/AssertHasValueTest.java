@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasValue;
 
 class AssertHasValueTest extends AbstractNingHttpCookieTest {
@@ -54,18 +55,10 @@ class AssertHasValueTest extends AbstractNingHttpCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have value %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedValue = success().getValue();
-		String actualValue = failure().getValue();
-		return new Object[]{
-			expectedValue,
-			actualValue
-		};
+	protected String message() {
+		String expected = success().getValue();
+		String actual = failure().getValue();
+		return "Expecting cookie to have value " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String value) {

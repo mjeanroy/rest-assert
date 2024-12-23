@@ -40,8 +40,8 @@ class ShouldHaveSameSiteTest {
 
 		assertThat(shouldHaveSameSite).isNotNull();
 		assertThat(shouldHaveSameSite.message()).isEqualTo("Expecting cookie to have SameSite %s but was %s");
-		assertThat(shouldHaveSameSite.args()).hasSize(2).containsExactly(expectedSameSite, actualSameSite);
-		assertThat(shouldHaveSameSite.buildMessage()).isEqualTo("Expecting cookie to have SameSite STRICT but was LAX");
-		assertThat(shouldHaveSameSite.toString()).isEqualTo("Expecting cookie to have SameSite STRICT but was LAX");
+		assertThat(shouldHaveSameSite.args()).hasSize(2).containsExactly(expectedSameSite.name(), actualSameSite.name());
+		assertThat(shouldHaveSameSite.buildMessage()).isEqualTo("Expecting cookie to have SameSite \"STRICT\" but was \"LAX\"");
+		assertThat(shouldHaveSameSite.toString()).isEqualTo("Expecting cookie to have SameSite \"STRICT\" but was \"LAX\"");
 	}
 }

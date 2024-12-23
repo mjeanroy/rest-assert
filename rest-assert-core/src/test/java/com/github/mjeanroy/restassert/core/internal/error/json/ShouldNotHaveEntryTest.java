@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldNotHaveEntryTest {
@@ -39,8 +40,8 @@ class ShouldNotHaveEntryTest {
 		assertThat(shouldHaveEntry).isNotNull();
 		assertThat(shouldHaveEntry.message()).isEqualTo("Expecting json not to contain entry %s");
 		assertThat(shouldHaveEntry.args()).hasSize(1).containsExactly(entry);
-		assertThat(shouldHaveEntry.buildMessage()).isEqualTo("Expecting json not to contain entry foo");
-		assertThat(shouldHaveEntry.toString()).isEqualTo("Expecting json not to contain entry foo");
+		assertThat(shouldHaveEntry.buildMessage()).isEqualTo("Expecting json not to contain entry " + fmt(entry));
+		assertThat(shouldHaveEntry.toString()).isEqualTo("Expecting json not to contain entry " + fmt(entry));
 		assertThat(shouldHaveEntry.entryName()).isEqualTo(entry);
 	}
 }

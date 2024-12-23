@@ -48,7 +48,7 @@ class HasSameSiteAsStringTest extends AbstractCookieTest {
 
 	@Override
 	String expectedMessage() {
-		return "Expecting cookie to have SameSite STRICT but was NONE";
+		return "Expecting cookie to have SameSite \"STRICT\" but was \"NONE\"";
 	}
 
 	private Cookie cookie(SameSite sameSite) {

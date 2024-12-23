@@ -48,17 +48,10 @@ class AssertHasValueTest extends AbstractCookiesTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have value \"%s\" but was \"%s\"";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedValue = success().getValue();
-		String actualValue = failure().getValue();
-		return new Object[] {
-				expectedValue, actualValue
-		};
+	protected String message() {
+		String expected = success().getValue();
+		String actual = failure().getValue();
+		return "Expecting cookie to have value \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
 	private Cookie cookie(String value) {

@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveEntryWithSizeTest {
@@ -41,8 +42,8 @@ class ShouldHaveEntryWithSizeTest {
 		assertThat(shouldHaveEntryWithSize).isNotNull();
 		assertThat(shouldHaveEntryWithSize.message()).isEqualTo("Expecting json array %s to have size %s but was %s");
 		assertThat(shouldHaveEntryWithSize.args()).hasSize(3).containsExactly(entry, expectedSize, actualSize);
-		assertThat(shouldHaveEntryWithSize.buildMessage()).isEqualTo("Expecting json array foo to have size 5 but was 0");
-		assertThat(shouldHaveEntryWithSize.toString()).isEqualTo("Expecting json array foo to have size 5 but was 0");
+		assertThat(shouldHaveEntryWithSize.buildMessage()).isEqualTo("Expecting json array " + fmt(entry) + " to have size 5 but was 0");
+		assertThat(shouldHaveEntryWithSize.toString()).isEqualTo("Expecting json array " + fmt(entry) + " to have size 5 but was 0");
 		assertThat(shouldHaveEntryWithSize.entryName()).isEqualTo(entry);
 	}
 }

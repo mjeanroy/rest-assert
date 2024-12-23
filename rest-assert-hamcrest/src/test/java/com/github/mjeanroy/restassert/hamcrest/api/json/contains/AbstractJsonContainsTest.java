@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static java.util.Arrays.asList;
@@ -56,7 +57,7 @@ abstract class AbstractJsonContainsTest {
 	abstract void test_fail();
 
 	static String buildExpectationMessage(String entry) {
-		return String.format("Expecting json to contain entry %s", entry);
+		return "Expecting json to contain entry " + fmt(entry);
 	}
 
 	static String buildExpectationMessage(String... missingEntries) {

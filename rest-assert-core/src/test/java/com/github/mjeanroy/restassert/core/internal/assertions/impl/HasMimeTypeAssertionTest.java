@@ -1,18 +1,18 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * Copyright (c) 2014-2021 Mickael Jeanroy
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -77,7 +77,9 @@ class HasMimeTypeAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have mime type application/xml but was application/json");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have mime type \"application/xml\" but was \"application/json\""
+		);
 	}
 
 	@Test
@@ -92,24 +94,28 @@ class HasMimeTypeAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have mime type in [application/xml, application/json] but was text/html");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have mime type in [\"application/xml\", \"application/json\"] but was \"text/html\""
+		);
 	}
 
 	@Test
 	void it_should_fail_if_content_type_header_has_multiple_values() {
-		MediaType mediaType  = MediaType.parser().parse("application/json");
+		MediaType mediaType = MediaType.parser().parse("application/json");
 		HasMimeTypeAssertion assertion = new HasMimeTypeAssertion(mediaType);
 		HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader("Content-Type", "application/json; charset=utf-8")
-				.addHeader("Content-Type", "application/xml; charset=utf-8")
-				.build();
+			.addHeader("Content-Type", "application/json; charset=utf-8")
+			.addHeader("Content-Type", "application/xml; charset=utf-8")
+			.build();
 
 		AssertionResult result = assertion.handle(rsp);
 
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to contains header Content-Type with a single value but found: [application/json; charset=utf-8, application/xml; charset=utf-8]");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to contains header \"Content-Type\" with a single value but found: [\"application/json; charset=utf-8\", \"application/xml; charset=utf-8\"]"
+		);
 	}
 
 	@Test
@@ -123,28 +129,30 @@ class HasMimeTypeAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have header Content-Type");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have header \"Content-Type\""
+		);
 	}
 
 	@Test
 	void it_should_fail_if_mime_type_is_null() {
 		assertThatThrownBy(() -> new HasMimeTypeAssertion((MediaType) null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Mime-Type value must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Mime-Type value must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_list_mime_type_is_null() {
 		assertThatThrownBy(() -> new HasMimeTypeAssertion((Collection<MediaType>) null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Mime-Type values must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Mime-Type values must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_list_mime_type_is_empty() {
 		assertThatThrownBy(() -> new HasMimeTypeAssertion(emptyList()))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Mime-Type values must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Mime-Type values must be defined");
 	}
 
 	private static HttpResponse createHttpResponse(String mimeType) {

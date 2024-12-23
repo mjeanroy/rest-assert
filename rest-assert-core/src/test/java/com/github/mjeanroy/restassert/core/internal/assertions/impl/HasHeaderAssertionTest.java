@@ -58,7 +58,9 @@ class HasHeaderAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have header foo");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have header \"foo\""
+		);
 	}
 
 	@Test

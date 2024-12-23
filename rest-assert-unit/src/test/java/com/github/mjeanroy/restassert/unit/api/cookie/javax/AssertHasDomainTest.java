@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasDomain;
 
 class AssertHasDomainTest extends AbstractJavaxCookieTest {
@@ -55,22 +56,13 @@ class AssertHasDomainTest extends AbstractJavaxCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have domain %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedDomain = success().getDomain();
-		String actualDomain = failure().getDomain();
-		return new Object[]{
-				expectedDomain, actualDomain
-		};
+	protected String message() {
+		String expected = success().getDomain();
+		String actual = failure().getDomain();
+		return "Expecting cookie to have domain " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String domain) {
-		return new JavaxCookieBuilder()
-				.setDomain(domain)
-				.build();
+		return new JavaxCookieBuilder().setDomain(domain).build();
 	}
 }

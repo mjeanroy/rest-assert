@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldNotHaveHeaderTest {
@@ -39,7 +40,7 @@ class ShouldNotHaveHeaderTest {
 		assertThat(shouldHaveStatus).isNotNull();
 		assertThat(shouldHaveStatus.message()).isEqualTo("Expecting response not to have header %s");
 		assertThat(shouldHaveStatus.args()).hasSize(1).containsExactly(unexpectedHeaderName);
-		assertThat(shouldHaveStatus.buildMessage()).isEqualTo("Expecting response not to have header X-Requested-With");
-		assertThat(shouldHaveStatus.toString()).isEqualTo("Expecting response not to have header X-Requested-With");
+		assertThat(shouldHaveStatus.buildMessage()).isEqualTo("Expecting response not to have header " + fmt(unexpectedHeaderName));
+		assertThat(shouldHaveStatus.toString()).isEqualTo("Expecting response not to have header " + fmt(unexpectedHeaderName));
 	}
 }

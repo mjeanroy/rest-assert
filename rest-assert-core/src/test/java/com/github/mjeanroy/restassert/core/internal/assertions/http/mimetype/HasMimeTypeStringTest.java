@@ -49,7 +49,7 @@ class HasMimeTypeStringTest extends AbstractMimeTypeTest {
 		AssertionResult result = assertions.hasMimeType(rsp, getMimeType());
 		checkError(
 			result,
-			String.format("Expecting response to have header %s", "Content-Type")
+			"Expecting response to have header \"Content-Type\""
 		);
 	}
 }

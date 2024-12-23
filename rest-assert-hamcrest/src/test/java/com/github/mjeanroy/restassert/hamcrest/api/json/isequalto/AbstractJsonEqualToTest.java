@@ -48,13 +48,13 @@ abstract class AbstractJsonEqualToTest<T> {
 
 		String message = HamcrestTestUtils.generateHamcrestErrorMessage(
 			String.join(System.lineSeparator(), Arrays.asList(
-				"- Expecting json entry firstName to be equal to Jane,",
-				"          - Expecting json entry gender to be equal to F"
+				"- Expecting json entry \"firstName\" to be equal to \"Jane\",",
+				"          - Expecting json entry \"gender\" to be equal to \"F\""
 			)),
 
 			String.join(System.lineSeparator(), Arrays.asList(
-				"was John,",
-				"was M"
+				"was \"John\",",
+				"was \"M\""
 			))
 		);
 

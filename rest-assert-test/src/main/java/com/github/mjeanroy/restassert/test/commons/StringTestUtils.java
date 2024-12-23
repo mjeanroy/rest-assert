@@ -24,7 +24,10 @@
 
 package com.github.mjeanroy.restassert.test.commons;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Static Test String Utilities.
@@ -42,5 +45,13 @@ public final class StringTestUtils {
 	 */
 	public static String randomString() {
 		return UUID.randomUUID().toString();
+	}
+
+	public static String fmt(String value) {
+		return "\"" + value + "\"";
+	}
+
+	public static List<String> fmt(Collection<String> values) {
+		return values.stream().map(StringTestUtils::fmt).collect(Collectors.toList());
 	}
 }

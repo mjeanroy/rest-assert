@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasName;
 
 class AssertHasNameTest extends AbstractJavaxCookieTest {
@@ -55,22 +56,13 @@ class AssertHasNameTest extends AbstractJavaxCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have name %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedName = success().getName();
-		String actualName = failure().getName();
-		return new Object[]{
-				expectedName, actualName
-		};
+	protected String message() {
+		String expected = success().getName();
+		String actual = failure().getName();
+		return "Expecting cookie to have name " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String name) {
-		return new JavaxCookieBuilder()
-				.setName(name)
-				.build();
+		return new JavaxCookieBuilder().setName(name).build();
 	}
 }

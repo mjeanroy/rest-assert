@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.tests.builders.RestAssertErrorBuilder;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -63,9 +64,9 @@ class CompositeErrorTest {
 
 	@Test
 	void it_should_compose_errors_expectations() {
-		RestAssertError error1 = createErrorWithExpectation("foo");
-		RestAssertError error2 = createErrorWithExpectation("bar %s %s", 1, 2);
-		RestAssertError error3 = createErrorWithExpectation("foobar %s", "hello");
+		RestAssertError error1 = createErrorWithExpectation("m1");
+		RestAssertError error2 = createErrorWithExpectation("m2: %s %s", 1, 2);
+		RestAssertError error3 = createErrorWithExpectation("m3: %s", "hello");
 
 		CompositeError error = composeErrors(asList(error1, error2, error3));
 		Message expectation = error.getExpectation();
@@ -75,26 +76,26 @@ class CompositeErrorTest {
 
 		assertThat(expectation.getMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"foo,",
-				"bar %s %s,",
-				"foobar %s"
+				"m1,",
+				"m2: %s %s,",
+				"m3: %s"
 			))
 		);
 
 		assertThat(expectation.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"foo,",
-				"bar 1 2,",
-				"foobar hello"
+				"m1,",
+				"m2: 1 2,",
+				"m3: " + fmt("hello")
 			))
 		);
 	}
 
 	@Test
 	void it_should_compose_errors_mismatch() {
-		RestAssertError error1 = createErrorWithMismatch("foo");
-		RestAssertError error2 = createErrorWithMismatch("bar %s %s", 1, 2);
-		RestAssertError error3 = createErrorWithMismatch("foobar %s", "hello");
+		RestAssertError error1 = createErrorWithMismatch("m1");
+		RestAssertError error2 = createErrorWithMismatch("m2: %s %s", 1, 2);
+		RestAssertError error3 = createErrorWithMismatch("m3: %s", "hello");
 
 		CompositeError error = composeErrors(asList(error1, error2, error3));
 		Message mismatch = error.getMismatch();
@@ -104,17 +105,17 @@ class CompositeErrorTest {
 
 		assertThat(mismatch.getMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"foo,",
-				"bar %s %s,",
-				"foobar %s"
+				"m1,",
+				"m2: %s %s,",
+				"m3: %s"
 			))
 		);
 
 		assertThat(mismatch.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"foo,",
-				"bar 1 2,",
-				"foobar hello"
+				"m1,",
+				"m2: 1 2,",
+				"m3: " + fmt("hello")
 			))
 		);
 	}

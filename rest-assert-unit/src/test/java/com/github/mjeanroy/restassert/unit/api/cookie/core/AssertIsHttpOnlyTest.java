@@ -52,13 +52,8 @@ class AssertIsHttpOnlyTest extends AbstractCoreCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
+	protected String message() {
 		return "Expecting cookie to be 'http only'";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
 	}
 
 	private Cookie cookie(boolean httpOnly) {

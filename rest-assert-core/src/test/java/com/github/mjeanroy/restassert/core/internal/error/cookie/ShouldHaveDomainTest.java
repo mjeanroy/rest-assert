@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveDomain.shouldHaveDomain;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveDomainTest {
@@ -40,7 +41,7 @@ class ShouldHaveDomainTest {
 		assertThat(shouldHaveDomain).isNotNull();
 		assertThat(shouldHaveDomain.message()).isEqualTo("Expecting cookie to have domain %s but was %s");
 		assertThat(shouldHaveDomain.args()).hasSize(2).containsExactly(expectedDomain, actualDomain);
-		assertThat(shouldHaveDomain.buildMessage()).isEqualTo("Expecting cookie to have domain bar but was foo");
-		assertThat(shouldHaveDomain.toString()).isEqualTo("Expecting cookie to have domain bar but was foo");
+		assertThat(shouldHaveDomain.buildMessage()).isEqualTo("Expecting cookie to have domain " + fmt(expectedDomain) + " but was " + fmt(actualDomain));
+		assertThat(shouldHaveDomain.toString()).isEqualTo("Expecting cookie to have domain " + fmt(expectedDomain) + " but was " + fmt(actualDomain));
 	}
 }

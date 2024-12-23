@@ -57,7 +57,7 @@ public class HasCharsetConstantTest extends AbstractHttpResponseAssertionsCharse
 		// THEN
 		checkError(
 			result,
-			String.format("Expecting response to have header %s", "Content-Type")
+			"Expecting response to have header \"Content-Type\""
 		);
 	}
 

@@ -31,6 +31,7 @@ import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpTest;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
@@ -61,6 +62,6 @@ abstract class AbstractHasHttpHeaderTest extends AbstractHttpTest<Header> {
 	}
 
 	private static String defaultErrorMessage(Header expectedHeader) {
-		return String.format("Expecting response to have header %s", expectedHeader.getName());
+		return "Expecting response to have header " + fmt(expectedHeader.getName());
 	}
 }

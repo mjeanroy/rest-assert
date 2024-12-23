@@ -31,6 +31,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 abstract class AbstractAssertCharsetTest extends AbstractHttpMatcherTest<String> {
@@ -66,10 +67,10 @@ abstract class AbstractAssertCharsetTest extends AbstractHttpMatcherTest<String>
 	}
 
 	private static String buildExpectationMessage(String expectedCharset) {
-		return String.format("Expecting response to have charset %s", expectedCharset);
+		return "Expecting response to have charset " + fmt(expectedCharset);
 	}
 
 	private static String buildMismatchMessage(String actualCharset) {
-		return String.format("was %s", actualCharset);
+		return "was " + fmt(actualCharset);
 	}
 }

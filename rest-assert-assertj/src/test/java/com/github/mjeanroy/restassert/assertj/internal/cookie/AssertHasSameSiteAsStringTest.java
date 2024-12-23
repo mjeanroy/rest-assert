@@ -47,18 +47,10 @@ class AssertHasSameSiteAsStringTest extends AbstractCookiesTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have SameSite %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		SameSite expectedSameSite = success().getSameSite();
-		SameSite actualSameSite = failure().getSameSite();
-		return new Object[]{
-			expectedSameSite,
-			actualSameSite
-		};
+	protected String message() {
+		SameSite expected = success().getSameSite();
+		SameSite actual = failure().getSameSite();
+		return "Expecting cookie to have SameSite \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
 	private Cookie cookie(SameSite sameSite) {

@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName.shouldHaveName;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveNameTest {
@@ -40,7 +41,7 @@ class ShouldHaveNameTest {
 		assertThat(shouldHaveName).isNotNull();
 		assertThat(shouldHaveName.message()).isEqualTo("Expecting cookie to have name %s but was %s");
 		assertThat(shouldHaveName.args()).hasSize(2).containsExactly(expectedName, actualName);
-		assertThat(shouldHaveName.buildMessage()).isEqualTo("Expecting cookie to have name bar but was foo");
-		assertThat(shouldHaveName.toString()).isEqualTo("Expecting cookie to have name bar but was foo");
+		assertThat(shouldHaveName.buildMessage()).isEqualTo("Expecting cookie to have name " + fmt(expectedName) + " but was " + fmt(actualName));
+		assertThat(shouldHaveName.toString()).isEqualTo("Expecting cookie to have name " + fmt(expectedName) + " but was " + fmt(actualName));
 	}
 }

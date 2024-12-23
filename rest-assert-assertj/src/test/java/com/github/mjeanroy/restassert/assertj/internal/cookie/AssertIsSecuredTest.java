@@ -46,13 +46,8 @@ class AssertIsSecuredTest extends AbstractCookiesTest {
 	}
 
 	@Override
-	protected String pattern() {
+	protected String message() {
 		return "Expecting cookie to be secured";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		return new Object[0];
 	}
 
 	private Cookie cookie(boolean secured) {

@@ -117,7 +117,9 @@ class HasCookieAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting http response to contains cookie with name foofoo");
+		assertThat(result.getError()).hasToString(
+			"Expecting http response to contains cookie with name \"foofoo\""
+		);
 	}
 
 	@Test
@@ -134,7 +136,9 @@ class HasCookieAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting http response to contains cookie with name foo and value barbar");
+		assertThat(result.getError()).hasToString(
+			"Expecting http response to contains cookie with name \"foo\" and value \"barbar\""
+		);
 	}
 
 	@Test

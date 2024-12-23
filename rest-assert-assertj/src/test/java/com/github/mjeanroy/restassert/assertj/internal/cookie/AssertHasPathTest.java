@@ -48,17 +48,10 @@ class AssertHasPathTest extends AbstractCookiesTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have path \"%s\" but was \"%s\"";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedPath = success().getPath();
-		String actualPath = failure().getPath();
-		return new Object[] {
-				expectedPath, actualPath
-		};
+	protected String message() {
+		String expected = success().getPath();
+		String actual = failure().getPath();
+		return "Expecting cookie to have path \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
 	private Cookie cookie(String path) {

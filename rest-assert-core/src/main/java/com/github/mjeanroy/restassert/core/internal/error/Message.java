@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 
 import java.util.ArrayList;
@@ -149,7 +150,8 @@ public final class Message {
 			return message;
 		}
 
-		return String.format(message, args);
+		Object[] formattedArgs = Arrays.stream(args).map(Strings::serialize).toArray(Object[]::new);
+		return String.format(message, formattedArgs);
 	}
 
 	/**

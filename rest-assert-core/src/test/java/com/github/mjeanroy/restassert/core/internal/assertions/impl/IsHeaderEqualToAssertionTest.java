@@ -75,7 +75,9 @@ class IsHeaderEqualToAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have header foo");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have header \"foo\""
+		);
 	}
 
 	@Test
@@ -91,7 +93,9 @@ class IsHeaderEqualToAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have header foo equal to bar but was barbar");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have header \"foo\" equal to \"bar\" but was \"barbar\""
+		);
 	}
 
 	@Test
@@ -107,7 +111,10 @@ class IsHeaderEqualToAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to contains header Content-Type with a single value but found: [application/json, application/xml]");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to contains header \"Content-Type\" with a single value but found: [\"application/json\", \"application/xml\"]"
+		);
+
 	}
 
 	@Test

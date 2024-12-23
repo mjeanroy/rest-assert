@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasValue;
 
 class AssertHasValueTest extends AbstractApacheHttpCookieTest {
@@ -54,18 +55,10 @@ class AssertHasValueTest extends AbstractApacheHttpCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have value %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedValue = success().getValue();
-		String actualValue = failure().getValue();
-		return new Object[]{
-			expectedValue,
-			actualValue
-		};
+	protected String message() {
+		String expected = success().getValue();
+		String actual = failure().getValue();
+		return "Expecting cookie to have value " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String value) {

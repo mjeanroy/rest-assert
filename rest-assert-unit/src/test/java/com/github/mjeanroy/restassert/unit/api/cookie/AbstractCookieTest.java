@@ -41,8 +41,7 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 	@Test
 	void it_should_fail() {
 		T cookie = failure();
-		String message = String.format(pattern(), placeholders());
-		assertFailure(message, () -> run(cookie));
+		assertFailure(message(), () -> run(cookie));
 	}
 
 	@Test
@@ -56,7 +55,5 @@ public abstract class AbstractCookieTest<T> extends AbstractAssertTest<T> {
 
 	protected abstract T failure();
 
-	protected abstract String pattern();
-
-	protected abstract Object[] placeholders();
+	protected abstract String message();
 }

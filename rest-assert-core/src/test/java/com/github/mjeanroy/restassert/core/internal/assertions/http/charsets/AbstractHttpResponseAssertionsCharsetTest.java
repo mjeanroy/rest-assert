@@ -32,6 +32,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static java.lang.String.format;
 
 abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAssertionsTest<HttpResponse> {
@@ -63,7 +64,7 @@ abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAsserti
 		// THEN
 		checkError(
 			result,
-			String.format("Expecting response to have charset %s but was %s", expectedCharset, actualCharset)
+			"Expecting response to have charset " + fmt(expectedCharset) + " but was " + fmt(actualCharset)
 		);
 	}
 

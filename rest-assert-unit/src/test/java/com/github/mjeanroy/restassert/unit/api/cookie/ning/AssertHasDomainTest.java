@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasDomain;
 
 class AssertHasDomainTest extends AbstractNingHttpCookieTest {
@@ -54,18 +55,10 @@ class AssertHasDomainTest extends AbstractNingHttpCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have domain %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedDomain = success().getDomain();
-		String actualDomain = failure().getDomain();
-		return new Object[]{
-			expectedDomain,
-			actualDomain
-		};
+	protected String message() {
+		String expected = success().getDomain();
+		String actual = failure().getDomain();
+		return "Expecting cookie to have domain " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String domain) {

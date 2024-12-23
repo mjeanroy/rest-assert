@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -78,6 +79,6 @@ abstract class AbstractMimeTypeInTest extends AbstractHttpTest<Header> {
 	}
 
 	private static String defaultErrorMessage(Collection<String> mimeTypes, String actualMimeType) {
-		return String.format("Expecting response to have mime type in %s but was %s", mimeTypes, actualMimeType);
+		return "Expecting response to have mime type in " + fmt(mimeTypes) + " but was " + fmt(actualMimeType);
 	}
 }

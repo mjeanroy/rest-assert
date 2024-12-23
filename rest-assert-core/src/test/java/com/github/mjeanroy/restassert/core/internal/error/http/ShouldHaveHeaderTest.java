@@ -24,10 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.http;
 
+import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeader;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,8 +44,8 @@ class ShouldHaveHeaderTest {
 		assertThat(shouldHaveHeader).isNotNull();
 		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s");
 		assertThat(shouldHaveHeader.args()).hasSize(1).containsExactly(headerName);
-		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo");
-		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo");
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header " + fmt(headerName));
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header " + fmt(headerName));
 	}
 
 	@Test
@@ -56,8 +58,8 @@ class ShouldHaveHeaderTest {
 		assertThat(shouldHaveHeader).isNotNull();
 		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s equal to %s but was %s");
 		assertThat(shouldHaveHeader.args()).hasSize(3).containsExactly(headerName, headerValue, actualValue);
-		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
-		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header " + fmt(headerName) + " equal to " + fmt(headerValue) + " but was " + fmt(actualValue));
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header " + fmt(headerName) + " equal to " + fmt(headerValue) + " but was " + fmt(actualValue));
 	}
 
 	@Test
@@ -70,8 +72,8 @@ class ShouldHaveHeaderTest {
 		assertThat(shouldHaveHeader).isNotNull();
 		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s equal to %s but was %s");
 		assertThat(shouldHaveHeader.args()).hasSize(3).containsExactly(headerName, headerValue, actualValue);
-		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
-		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but was quix");
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header " + fmt(headerName) + " equal to " + fmt(headerValue) + " but was " + fmt(actualValue));
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header " + fmt(headerName) + " equal to " + fmt(headerValue) + " but was " + fmt(actualValue));
 	}
 
 	@Test
@@ -85,7 +87,7 @@ class ShouldHaveHeaderTest {
 		assertThat(shouldHaveHeader).isNotNull();
 		assertThat(shouldHaveHeader.message()).isEqualTo("Expecting response to have header %s equal to %s but contains only %s");
 		assertThat(shouldHaveHeader.args()).hasSize(3).containsExactly(headerName, headerValue, asList(v1, v2));
-		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header foo equal to bar but contains only [foo, bar]");
-		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header foo equal to bar but contains only [foo, bar]");
+		assertThat(shouldHaveHeader.buildMessage()).isEqualTo("Expecting response to have header " + fmt(headerName) + " equal to " + fmt(headerValue) + " but contains only " + StringTestUtils.fmt(asList(v1, v2)));
+		assertThat(shouldHaveHeader.toString()).isEqualTo("Expecting response to have header " + fmt(headerName) + " equal to " + fmt(headerValue) + " but contains only " + StringTestUtils.fmt(asList(v1, v2)));
 	}
 }

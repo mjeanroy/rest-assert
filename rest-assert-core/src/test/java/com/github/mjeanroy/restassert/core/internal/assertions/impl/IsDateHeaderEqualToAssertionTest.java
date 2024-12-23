@@ -84,7 +84,9 @@ class IsDateHeaderEqualToAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have header foo");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have header \"foo\""
+		);
 	}
 
 	@Test
@@ -100,7 +102,9 @@ class IsDateHeaderEqualToAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to have header foo equal to Thu, 05 May 2016 19:30:03 GMT but was Thu, 05 May 2016 19:29:03 GMT");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to have header \"foo\" equal to \"Thu, 05 May 2016 19:30:03 GMT\" but was \"Thu, 05 May 2016 19:29:03 GMT\""
+		);
 	}
 
 	@Test
@@ -120,7 +124,9 @@ class IsDateHeaderEqualToAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting response to contains header Last-Modified with a single value but found: [Thu, 05 May 2016 19:29:03 GMT, Thu, 05 May 2016 19:30:03 GMT]");
+		assertThat(result.getError()).hasToString(
+			"Expecting response to contains header \"Last-Modified\" with a single value but found: [\"Thu, 05 May 2016 19:29:03 GMT\", \"Thu, 05 May 2016 19:30:03 GMT\"]"
+		);
 	}
 
 	@Test

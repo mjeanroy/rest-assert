@@ -31,6 +31,7 @@ import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
 class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest {
@@ -73,7 +74,7 @@ class IsContentEncodingEqualToTest extends AbstractHttpHeaderEqualToTest {
 		// THEN
 		checkError(
 			result,
-			String.format("Expecting response to have header %s equal to %s but was %s", HEADER_NAME, expected.serializeValue(), actual.serializeValue())
+			"Expecting response to have header " + fmt(HEADER_NAME) + " equal to " + fmt(expected.serializeValue()) + " but was " + fmt(actual.serializeValue())
 		);
 	}
 }

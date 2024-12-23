@@ -150,16 +150,6 @@ public enum JsonType {
 	}
 
 	/**
-	 * Get name of json type, that can be used in error
-	 * message.
-	 *
-	 * @return Type.
-	 */
-	public String getFormattedName() {
-		return name().toLowerCase();
-	}
-
-	/**
 	 * Find json type of object.
 	 *
 	 * @param object Object.

@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHavePath.shouldHavePath;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHavePathTest {
@@ -40,7 +41,7 @@ class ShouldHavePathTest {
 		assertThat(shouldHavePath).isNotNull();
 		assertThat(shouldHavePath.message()).isEqualTo("Expecting cookie to have path %s but was %s");
 		assertThat(shouldHavePath.args()).hasSize(2).containsExactly(expectedPath, actualPath);
-		assertThat(shouldHavePath.buildMessage()).isEqualTo("Expecting cookie to have path bar but was foo");
-		assertThat(shouldHavePath.toString()).isEqualTo("Expecting cookie to have path bar but was foo");
+		assertThat(shouldHavePath.buildMessage()).isEqualTo("Expecting cookie to have path " + fmt(expectedPath) + " but was " + fmt(actualPath));
+		assertThat(shouldHavePath.toString()).isEqualTo("Expecting cookie to have path " + fmt(expectedPath) + " but was " + fmt(actualPath));
 	}
 }

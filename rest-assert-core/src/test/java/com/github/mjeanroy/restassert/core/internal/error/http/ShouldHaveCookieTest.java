@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldNotHaveCookie;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveCookieTest {
@@ -42,8 +43,8 @@ class ShouldHaveCookieTest {
 		assertThat(error).isNotNull();
 		assertThat(error.message()).isEqualTo("Expecting http response to contains cookie with name %s");
 		assertThat(error.args()).hasSize(1).containsExactly(expectedCookieName);
-		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie with name foo");
-		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name foo");
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie with name " + fmt(expectedCookieName));
+		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name " + fmt(expectedCookieName));
 	}
 
 	@Test
@@ -55,8 +56,8 @@ class ShouldHaveCookieTest {
 		assertThat(error).isNotNull();
 		assertThat(error.message()).isEqualTo("Expecting http response to contains cookie with name %s and value %s");
 		assertThat(error.args()).hasSize(2).containsExactly(expectedCookieName, expectedCookieValue);
-		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie with name foo and value bar");
-		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name foo and value bar");
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response to contains cookie with name " + fmt(expectedCookieName) + " and value " + fmt(expectedCookieValue));
+		assertThat(error.toString()).isEqualTo("Expecting http response to contains cookie with name " + fmt(expectedCookieName) + " and value " + fmt(expectedCookieValue));
 	}
 
 	@Test
@@ -79,8 +80,8 @@ class ShouldHaveCookieTest {
 		assertThat(error).isNotNull();
 		assertThat(error.message()).isEqualTo("Expecting http response not to contains cookie with name %s");
 		assertThat(error.args()).hasSize(1).containsExactly(unexpectedCookieName);
-		assertThat(error.buildMessage()).isEqualTo("Expecting http response not to contains cookie with name foo");
-		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookie with name foo");
+		assertThat(error.buildMessage()).isEqualTo("Expecting http response not to contains cookie with name " + fmt(unexpectedCookieName));
+		assertThat(error.toString()).isEqualTo("Expecting http response not to contains cookie with name " + fmt(unexpectedCookieName));
 	}
 
 	@Test

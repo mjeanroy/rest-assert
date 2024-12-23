@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeEqualToTest {
@@ -41,8 +42,8 @@ class ShouldBeEqualToTest {
 		assertThat(shouldBeEqualTo).isNotNull();
 		assertThat(shouldBeEqualTo.message()).isEqualTo("Expecting json entry %s to be equal to %s but was %s");
 		assertThat(shouldBeEqualTo.args()).hasSize(3).containsExactly(entry, expectedValue, actualValue);
-		assertThat(shouldBeEqualTo.buildMessage()).isEqualTo("Expecting json entry foo to be equal to 2 but was 1");
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry foo to be equal to 2 but was 1");
+		assertThat(shouldBeEqualTo.buildMessage()).isEqualTo("Expecting json entry " + fmt(entry) + " to be equal to 2 but was 1");
+		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry " + fmt(entry) + " to be equal to 2 but was 1");
 		assertThat(shouldBeEqualTo.entryName()).isEqualTo(entry);
 	}
 }

@@ -48,17 +48,10 @@ class AssertHasMaxAgeTest extends AbstractCookiesTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have max-age %sL but was %sL";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		long expectedMaxAge = success().getMaxAge();
-		long actualMaxAge = failure().getMaxAge();
-		return new Long[] {
-				expectedMaxAge, actualMaxAge
-		};
+	protected String message() {
+		long expected = success().getMaxAge();
+		long actual = failure().getMaxAge();
+		return "Expecting cookie to have max-age " + expected + "L but was " + actual + "L";
 	}
 
 	private Cookie cookie(long maxAge) {

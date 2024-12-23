@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 public final class ShouldHaveSameSite extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveSameSite(String message, SameSite expectedValue, SameSite actualValue) {
+	private ShouldHaveSameSite(String message, String expectedValue, String actualValue) {
 		super(message, expectedValue, actualValue);
 	}
 
@@ -46,6 +46,10 @@ public final class ShouldHaveSameSite extends AbstractError {
 	 * @return Error.
 	 */
 	public static ShouldHaveSameSite shouldHaveSameSite(SameSite expectedSameSite, SameSite actualSameSite) {
-		return new ShouldHaveSameSite("Expecting cookie to have SameSite %s", expectedSameSite, actualSameSite);
+		return new ShouldHaveSameSite("Expecting cookie to have SameSite %s", serialize(expectedSameSite), serialize(actualSameSite));
+	}
+
+	private static String serialize(SameSite sameSite) {
+		return sameSite == null ? null : sameSite.name();
 	}
 }

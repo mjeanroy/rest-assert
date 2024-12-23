@@ -29,6 +29,7 @@ import com.github.mjeanroy.restassert.hamcrest.api.http.HttpMatcher;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.hamcrest.MatcherAssert;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 
 class DoesNotHaveCookieWithNameMatcherTest extends AbstractDoesNotHaveCookieMatcherTest {
@@ -47,7 +48,7 @@ class DoesNotHaveCookieWithNameMatcherTest extends AbstractDoesNotHaveCookieMatc
 
 	@Override
 	String buildExpectationMessage() {
-		return String.format("Expecting http response not to contains cookie with name %s", NAME);
+		return "Expecting http response not to contains cookie with name " + fmt(NAME);
 	}
 
 	@Override

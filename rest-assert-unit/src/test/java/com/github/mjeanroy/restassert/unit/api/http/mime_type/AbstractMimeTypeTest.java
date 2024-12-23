@@ -31,6 +31,7 @@ import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpTest;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
@@ -74,6 +75,6 @@ abstract class AbstractMimeTypeTest extends AbstractHttpTest<Header> {
 	}
 
 	private static String defaultErrorMessage(String expectedMimeType, String actualMimeType) {
-		return String.format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType);
+		return "Expecting response to have mime type " + fmt(expectedMimeType) + " but was " + fmt(actualMimeType);
 	}
 }

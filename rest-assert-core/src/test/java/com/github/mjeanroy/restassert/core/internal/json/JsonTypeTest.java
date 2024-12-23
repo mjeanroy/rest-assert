@@ -112,36 +112,6 @@ class JsonTypeTest {
 	}
 
 	@Test
-	void it_should_get_boolean_formatted_name() {
-		assertThat(JsonType.BOOLEAN.getFormattedName()).isEqualTo("boolean");
-	}
-
-	@Test
-	void it_should_get_number_formatted_name() {
-		assertThat(JsonType.NUMBER.getFormattedName()).isEqualTo("number");
-	}
-
-	@Test
-	void it_should_get_string_formatted_name() {
-		assertThat(JsonType.STRING.getFormattedName()).isEqualTo("string");
-	}
-
-	@Test
-	void it_should_get_null_formatted_name() {
-		assertThat(JsonType.NULL.getFormattedName()).isEqualTo("null");
-	}
-
-	@Test
-	void it_should_get_array_formatted_name() {
-		assertThat(JsonType.ARRAY.getFormattedName()).isEqualTo("array");
-	}
-
-	@Test
-	void it_should_get_object_formatted_name() {
-		assertThat(JsonType.OBJECT.getFormattedName()).isEqualTo("object");
-	}
-
-	@Test
 	void it_should_return_type_null() {
 		assertThat(JsonType.parseType(null))
 				.isNotNull()

@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
+
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -188,8 +191,14 @@ public abstract class AbstractError implements RestAssertError {
 	@Override
 	public final String buildMessage() {
 		String rawMessage = message();
-		Object[] args = args();
+		Object[] args = formatArgs();
 		return args.length == 0 ? rawMessage : String.format(rawMessage, args);
+	}
+
+	private Object[] formatArgs() {
+		return Arrays.stream(args())
+			.map(Strings::serialize)
+			.toArray();
 	}
 
 	@Override

@@ -33,6 +33,8 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+
 abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertionsTest<HttpResponse> {
 
 	HttpResponseAssertions assertions;
@@ -66,7 +68,7 @@ abstract class AbstractDoesNotHaveHttpHeaderTest extends AbstractAssertionsTest<
 		// THEN
 		checkError(
 			result,
-			String.format("Expecting response not to have header %s", header.getName())
+			"Expecting response not to have header " + fmt(header.getName())
 		);
 	}
 

@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.tests.builders.javax.JavaxCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.JavaxCookieAssert.assertHasPath;
 
 class AssertHasPathTest extends AbstractJavaxCookieTest {
@@ -55,22 +56,13 @@ class AssertHasPathTest extends AbstractJavaxCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have path %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedPath = success().getPath();
-		String actualPath = failure().getPath();
-		return new Object[]{
-				expectedPath, actualPath
-		};
+	protected String message() {
+		String expected = success().getPath();
+		String actual = failure().getPath();
+		return "Expecting cookie to have path " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String path) {
-		return new JavaxCookieBuilder()
-				.setPath(path)
-				.build();
+		return new JavaxCookieBuilder().setPath(path).build();
 	}
 }

@@ -48,17 +48,10 @@ class AssertHasDomainTest extends AbstractCookiesTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have domain \"%s\" but was \"%s\"";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedDomain = success().getDomain();
-		String actualDomain = failure().getDomain();
-		return new Object[] {
-				expectedDomain, actualDomain
-		};
+	protected String message() {
+		String expected = success().getDomain();
+		String actual = failure().getDomain();
+		return "Expecting cookie to have domain \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
 	private Cookie cookie(String domain) {

@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.ning;
 import com.github.mjeanroy.restassert.tests.builders.ning.NingHttpCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.NingHttpCookieAssert.assertHasPath;
 
 class AssertHasPathTest extends AbstractNingHttpCookieTest {
@@ -54,18 +55,10 @@ class AssertHasPathTest extends AbstractNingHttpCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have path %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedPath = success().getPath();
-		String actualPath = failure().getPath();
-		return new Object[]{
-			expectedPath,
-			actualPath
-		};
+	protected String message() {
+		String expected = success().getPath();
+		String actual = failure().getPath();
+		return "Expecting cookie to have path " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String path) {

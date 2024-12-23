@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 /**
  * Static String Utilities.
  */
@@ -54,6 +57,16 @@ public final class Strings {
 	}
 
 	/**
+	 * Surround given input with double quotes.
+	 *
+	 * @param input Input.
+	 * @return Quoted input.
+	 */
+	public static String quote(String input) {
+		return input == null ? null : "\"" + input + "\"";
+	}
+
+	/**
 	 * Check if string values is quoted, using single or double quote.
 	 *
 	 * @param value The input value.
@@ -81,6 +94,28 @@ public final class Strings {
 	 */
 	public static String removeQuote(String value) {
 		return value.substring(1, value.length() - 1);
+	}
+
+	/**
+	 * Serialize given value to a formatted string value.
+	 *
+	 * @param value Value.
+	 * @return The formatted value.
+	 */
+	public static String serialize(Object value) {
+		if (value == null) {
+			return null;
+		}
+
+		if (value instanceof String) {
+			return Strings.quote((String) value);
+		}
+
+		if (value instanceof Collection) {
+			return ((Collection) value).stream().map(Strings::serialize).collect(Collectors.toList()).toString();
+		}
+
+		return String.valueOf(value);
 	}
 
 	private static boolean isSingleQuoted(String value) {

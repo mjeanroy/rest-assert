@@ -28,6 +28,8 @@ import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.HttpAsserter;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+
 class AssertHasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
@@ -59,10 +61,6 @@ class AssertHasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 
 	@Override
 	String defaultErrorMessage() {
-		return String.format(
-			"Expecting http response to contains cookie with name %s and value %s",
-			NAME,
-			VALUE
-		);
+		return "Expecting http response to contains cookie with name " + fmt(NAME) + " and value " + fmt(VALUE);
 	}
 }

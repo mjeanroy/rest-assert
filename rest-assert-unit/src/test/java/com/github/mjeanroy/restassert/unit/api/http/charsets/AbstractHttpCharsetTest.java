@@ -30,6 +30,7 @@ import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpTest;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
@@ -59,10 +60,6 @@ abstract class AbstractHttpCharsetTest extends AbstractHttpTest<String> {
 	}
 
 	private static String defaultErrorMessage(String expectedCharset, String actualCharset) {
-		return String.format(
-			"Expecting response to have charset %s but was %s",
-			expectedCharset,
-			actualCharset
-		);
+		return "Expecting response to have charset " + fmt(expectedCharset) + " but was " + fmt(actualCharset);
 	}
 }

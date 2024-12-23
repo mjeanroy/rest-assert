@@ -47,9 +47,25 @@ public final class ShouldBeEntryOf extends AbstractJsonError {
 	 * @return Error.
 	 */
 	public static ShouldBeEntryOf shouldBeEntryOf(String entry, JsonType actualType, JsonType expectedType) {
-		return new ShouldBeEntryOf(entry,
-			Message.message("Expecting json entry %s to be %s value", entry, expectedType.getFormattedName()),
-			Message.message("was %s value", actualType.getFormattedName())
+		return new ShouldBeEntryOf(
+			entry,
+			Message.message("Expecting json entry %s to be " + serializeType(expectedType), entry),
+			Message.message("was " + serializeType(actualType))
 		);
+	}
+
+	private static String serializeType(JsonType type) {
+		if (type == JsonType.NULL) {
+			return "null";
+		}
+
+		String formattedName = type.name().toLowerCase();
+		char firstChar = formattedName.charAt(0);
+		String article = isVowel(firstChar) ? "an" : "a";
+		return article + " " + formattedName;
+	}
+
+	private static boolean isVowel(char c) {
+		return c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'y';
 	}
 }

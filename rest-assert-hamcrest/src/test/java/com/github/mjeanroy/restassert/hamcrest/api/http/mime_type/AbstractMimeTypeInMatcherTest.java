@@ -34,6 +34,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
@@ -83,10 +84,10 @@ abstract class AbstractMimeTypeInMatcherTest extends AbstractHttpMatcherTest<Hea
 	}
 
 	private static String buildExpectationMessage(Collection<String> mimeTypes) {
-		return String.format("Expecting response to have mime type in %s", mimeTypes);
+		return "Expecting response to have mime type in " + fmt(mimeTypes);
 	}
 
 	private static String buildMismatchMessage(String actualMimeType) {
-		return String.format("was %s", actualMimeType);
+		return "was " + fmt(actualMimeType);
 	}
 }

@@ -88,7 +88,7 @@ class DoesNotHaveCookieAssertionTest {
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
-		assertThat(result.getError().toString()).isEqualTo("Expecting http response not to contains cookie with name foo");
+		assertThat(result.getError()).hasToString("Expecting http response not to contains cookie with name \"foo\"");
 	}
 
 	@Test

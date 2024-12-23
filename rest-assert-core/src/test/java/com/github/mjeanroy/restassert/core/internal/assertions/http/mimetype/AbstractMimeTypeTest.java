@@ -33,6 +33,7 @@ import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.data.Header.header;
 
 abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse> {
@@ -91,7 +92,7 @@ abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse>
 		// Then
 		checkError(
 			result,
-			String.format("Expecting response to have mime type %s but was %s", expectedMimeType, actualMimeType)
+			"Expecting response to have mime type " + fmt(expectedMimeType) + " but was " + fmt(actualMimeType)
 		);
 	}
 

@@ -32,6 +32,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.randomString;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
@@ -71,7 +72,7 @@ abstract class AbstractDoesNotHaveHttpHeaderMatcherTest extends AbstractHttpMatc
 	}
 
 	private static String buildExpectationMessage(Header expectedHeader) {
-		return String.format("Expecting response not to have header %s", expectedHeader.getName());
+		return "Expecting response not to have header " + fmt(expectedHeader.getName());
 	}
 
 	private static String buildMismatchMessage() {

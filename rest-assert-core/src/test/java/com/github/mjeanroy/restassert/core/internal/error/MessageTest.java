@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,7 +55,9 @@ class MessageTest {
 		assertThat(message).isNotNull();
 		assertThat(message.getMessage()).isEqualTo(str);
 		assertThat(message.getArgs()).hasSize(1).containsOnly(arg);
-		assertThat(message.formatMessage()).isEqualTo("Simple Message: test");
+		assertThat(message.formatMessage()).isEqualTo(
+			"Simple Message: " + fmt("test")
+		);
 	}
 
 	@Test
@@ -68,7 +71,9 @@ class MessageTest {
 		assertThat(message).isNotNull();
 		assertThat(message.getMessage()).isEqualTo(str);
 		assertThat(message.getArgs()).hasSize(2).containsExactly(arg1, arg2);
-		assertThat(message.formatMessage()).isEqualTo("Simple Message: test1 test2");
+		assertThat(message.formatMessage()).isEqualTo(
+			"Simple Message: " + fmt("test1") + " " + fmt("test2")
+		);
 	}
 
 	@Test
@@ -150,8 +155,8 @@ class MessageTest {
 
 		assertThat(message.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"First Message From John Doe,",
-				"Second Message From Jane Doe To Mickael"
+				"First Message From " + fmt("John Doe") + ",",
+				"Second Message From " + fmt("Jane Doe") + " To " + fmt("Mickael")
 			))
 		);
 	}

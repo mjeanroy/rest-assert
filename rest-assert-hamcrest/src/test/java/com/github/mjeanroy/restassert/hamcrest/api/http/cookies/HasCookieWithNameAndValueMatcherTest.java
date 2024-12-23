@@ -29,6 +29,8 @@ import com.github.mjeanroy.restassert.hamcrest.api.http.HttpMatcher;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.hamcrest.MatcherAssert;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+
 class HasCookieWithNameAndValueMatcherTest extends AbstractHasCookieMatcherTest {
 
 	private static final String NAME = "JSESSIONID";
@@ -47,7 +49,7 @@ class HasCookieWithNameAndValueMatcherTest extends AbstractHasCookieMatcherTest 
 
 	@Override
 	String buildExpectationMessage() {
-		return String.format("Expecting http response to contains cookie with name %s and value %s", NAME, VALUE);
+		return "Expecting http response to contains cookie with name " + fmt(NAME) + " and value " + fmt(VALUE);
 	}
 
 	@Override

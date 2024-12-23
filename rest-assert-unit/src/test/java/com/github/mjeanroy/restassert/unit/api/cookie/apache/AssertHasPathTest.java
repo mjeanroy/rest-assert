@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasPath;
 
 class AssertHasPathTest extends AbstractApacheHttpCookieTest {
@@ -54,18 +55,10 @@ class AssertHasPathTest extends AbstractApacheHttpCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have path %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedPath = success().getPath();
-		String actualPath = failure().getPath();
-		return new Object[]{
-			expectedPath,
-			actualPath
-		};
+	protected String message() {
+		String expected = success().getPath();
+		String actual = failure().getPath();
+		return "Expecting cookie to have path " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String path) {

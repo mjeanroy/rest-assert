@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeEntryOf.shouldBeEntryOf;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeEntryOfTest {
@@ -40,10 +41,10 @@ class ShouldBeEntryOfTest {
 		ShouldBeEntryOf shouldBeEntryOf = shouldBeEntryOf(entry, actualType, expectedType);
 
 		assertThat(shouldBeEntryOf).isNotNull();
-		assertThat(shouldBeEntryOf.message()).isEqualTo("Expecting json entry %s to be %s value but was %s value");
-		assertThat(shouldBeEntryOf.args()).hasSize(3).containsExactly(entry, expectedType.name().toLowerCase(), actualType.name().toLowerCase());
-		assertThat(shouldBeEntryOf.buildMessage()).isEqualTo("Expecting json entry foo to be number value but was null value");
-		assertThat(shouldBeEntryOf.toString()).isEqualTo("Expecting json entry foo to be number value but was null value");
+		assertThat(shouldBeEntryOf.message()).isEqualTo("Expecting json entry %s to be a number but was null");
+		assertThat(shouldBeEntryOf.args()).hasSize(1).containsExactly(entry);
+		assertThat(shouldBeEntryOf.buildMessage()).isEqualTo("Expecting json entry " + fmt(entry) + " to be a number but was null");
+		assertThat(shouldBeEntryOf.toString()).isEqualTo("Expecting json entry " + fmt(entry) + " to be a number but was null");
 		assertThat(shouldBeEntryOf.entryName()).isEqualTo(entry);
 	}
 }

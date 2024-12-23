@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.unit.api.cookie.apache;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import org.apache.http.cookie.Cookie;
 
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert.assertHasDomain;
 
 class AssertHasDomainTest extends AbstractApacheHttpCookieTest {
@@ -54,18 +55,10 @@ class AssertHasDomainTest extends AbstractApacheHttpCookieTest {
 	}
 
 	@Override
-	protected String pattern() {
-		return "Expecting cookie to have domain %s but was %s";
-	}
-
-	@Override
-	protected Object[] placeholders() {
-		String expectedDomain = success().getDomain();
-		String actualDomain = failure().getDomain();
-		return new Object[]{
-			expectedDomain,
-			actualDomain
-		};
+	protected String message() {
+		String expected = success().getDomain();
+		String actual = failure().getDomain();
+		return "Expecting cookie to have domain " + fmt(expected) + " but was " + fmt(actual);
 	}
 
 	private Cookie cookie(String domain) {

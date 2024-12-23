@@ -32,14 +32,14 @@ class AbstractErrorTest {
 
 	@Test
 	void it_should_build_error_object() {
-		String message = "foo %s";
+		String message = "Message with param: %s";
 		String arg = "bar";
 
 		FooError error = new FooError(message, arg);
 		assertThat(error.message()).isEqualTo(message);
 		assertThat(error.args()).isEqualTo(new Object[]{arg});
-		assertThat(error.buildMessage()).isEqualTo("foo bar");
-		assertThat(error.toString()).isEqualTo("foo bar");
+		assertThat(error.buildMessage()).isEqualTo("Message with param: \"bar\"");
+		assertThat(error.toString()).isEqualTo("Message with param: \"bar\"");
 	}
 
 	@Test

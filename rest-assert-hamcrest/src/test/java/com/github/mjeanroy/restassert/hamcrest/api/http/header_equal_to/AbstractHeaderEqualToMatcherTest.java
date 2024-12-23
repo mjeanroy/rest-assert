@@ -32,6 +32,7 @@ import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.hamcrest.tests.HamcrestTestUtils.generateHamcrestErrorMessage;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 
 abstract class AbstractHeaderEqualToMatcherTest extends AbstractHttpMatcherTest<Header> {
@@ -75,10 +76,10 @@ abstract class AbstractHeaderEqualToMatcherTest extends AbstractHttpMatcherTest<
 	}
 
 	private static String buildExpectationMessage(String expectedName, String expectedValue) {
-		return String.format("Expecting response to have header %s equal to %s", expectedName, expectedValue);
+		return "Expecting response to have header " + fmt(expectedName) + " equal to " + fmt(expectedValue);
 	}
 
 	private static String buildMismatchMessage(String actualValue) {
-		return String.format("was %s", actualValue);
+		return "was " + fmt(actualValue);
 	}
 }
