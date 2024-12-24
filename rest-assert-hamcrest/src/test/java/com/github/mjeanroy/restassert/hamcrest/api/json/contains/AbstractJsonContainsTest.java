@@ -68,7 +68,7 @@ abstract class AbstractJsonContainsTest {
 		List<String> outputLines = new ArrayList<>(missingEntries.size());
 
 		for (String missingEntry : missingEntries) {
-			String outputLine = "- " + buildExpectationMessage(missingEntry);
+			String outputLine = "→ " + buildExpectationMessage(missingEntry);
 			if (!outputLines.isEmpty()) {
 				outputLine = "          " + outputLine;
 			}
@@ -76,7 +76,7 @@ abstract class AbstractJsonContainsTest {
 			outputLines.add(outputLine);
 		}
 
-		return String.join("," + System.lineSeparator(), outputLines);
+		return String.join(System.lineSeparator(), outputLines);
 	}
 
 	static String buildMismatchMessage() {

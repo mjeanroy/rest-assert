@@ -31,17 +31,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
-import static java.util.Collections.addAll;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * Templated message with arguments.
  */
 public final class Message {
 
-	private static final String CONCAT_SEPARATOR = "," + System.lineSeparator();
+	private static final String LINE_SEPARATOR = System.lineSeparator();
+	private static final String BULLET_PREFIX = "→ ";
 
 	/**
 	 * Concat two messages into a single one.
@@ -49,7 +53,7 @@ public final class Message {
 	 * @param second Second message.
 	 * @return Concatenated message.
 	 */
-	public static Message concat(Message first, Message second) {
+	static Message concat(Message first, Message second) {
 		if (first == null) {
 			return second;
 		}
@@ -58,18 +62,19 @@ public final class Message {
 			return first;
 		}
 
-		List<String> newMessages = new ArrayList<>(2);
-		List<Object> newArgs = new ArrayList<>(first.getNbArgs() + second.getNbArgs());
+		List<String> newTemplates = new ArrayList<>(first.templates.size() + second.templates.size());
+		newTemplates.addAll(first.templates);
+		newTemplates.addAll(second.templates);
 
-		newMessages.add(first.message);
-		addAll(newArgs, first.args);
+		List<Object[]> newArgs = new ArrayList<>(first.args.size() + second.args.size());
+		newArgs.addAll(first.args);
+		newArgs.addAll(second.args);
 
-		newMessages.add(second.message);
-		addAll(newArgs, second.args);
-
-		String finalMessage = String.join(CONCAT_SEPARATOR, newMessages);
-		Object[] finalArgs = newArgs.toArray();
-		return new Message(finalMessage, finalArgs);
+		return new Message(
+			newTemplates,
+			newArgs,
+			first.nbArgs + second.nbArgs
+		);
 	}
 
 	/**
@@ -109,22 +114,44 @@ public final class Message {
 	/**
 	 * The message template.
 	 */
-	private final String message;
+	private final List<String> templates;
 
 	/**
 	 * The message parameters.
 	 */
-	private final Object[] args;
+	private final List<Object[]> args;
+
+	/**
+	 * Total number of arguments.
+	 */
+	private final int nbArgs;
 
 	/**
 	 * Create message with given arguments.
 	 *
-	 * @param message The message.
+	 * @param template The message.
 	 * @param args Message arguments.
 	 */
-	private Message(String message, Object[] args) {
-		this.message = notBlank(message, "Message must be defined");
-		this.args = args;
+	private Message(String template, Object[] args) {
+		this.templates = singletonList(
+			notBlank(template, "Message must be defined")
+		);
+
+		this.args = singletonList(args);
+		this.nbArgs = args.length;
+	}
+
+	/**
+	 * Create message with given arguments.
+	 *
+	 * @param templates All templates.
+	 * @param args Message arguments.
+	 * @param nbArgs Total number of arguments.
+	 */
+	private Message(List<String> templates, List<Object[]> args, int nbArgs) {
+		this.templates = unmodifiableList(templates);
+		this.args = unmodifiableList(args);
+		this.nbArgs = nbArgs;
 	}
 
 	/**
@@ -133,7 +160,26 @@ public final class Message {
 	 * @return {@link #message}
 	 */
 	public String getMessage() {
-		return message;
+		if (templates.isEmpty()) {
+			return "";
+		}
+
+		if (templates.size() == 1) {
+			return templates.get(0);
+		}
+
+		return templates.stream().map((tmpl) -> BULLET_PREFIX + tmpl).collect(
+			Collectors.joining(LINE_SEPARATOR)
+		);
+	}
+
+	/**
+	 * Check if message contains more than one error.
+	 *
+	 * @return {@code true} if message contains more than one error, {@code false} otherwise.
+	 */
+	public boolean isMulti() {
+		return templates.size() > 1;
 	}
 
 	/**
@@ -142,16 +188,54 @@ public final class Message {
 	 * @return {@link #args}
 	 */
 	public Object[] getArgs() {
-		return Arrays.copyOf(args, args.length);
-	}
+		Object[] allArgs = new Object[nbArgs];
+		int i = 0;
 
-	public String formatMessage() {
-		if (args.length == 0) {
-			return message;
+		for (Object[] args : this.args) {
+			for (Object o : args) {
+				allArgs[i++] = o;
+			}
 		}
 
-		Object[] formattedArgs = Arrays.stream(args).map(Strings::serialize).toArray(Object[]::new);
-		return String.format(message, formattedArgs);
+		return allArgs;
+	}
+
+	/**
+	 * Format output message.
+	 *
+	 * @return Output message.
+	 */
+	public String formatMessage() {
+		return String.join(LINE_SEPARATOR, formatMessages());
+	}
+
+	/**
+	 * Format output message.
+	 *
+	 * @return Output message.
+	 */
+	public List<String> formatMessages() {
+		if (templates.isEmpty()) {
+			return emptyList();
+		}
+
+		if (templates.size() == 1) {
+			return singletonList(formatTemplateAt(0));
+		}
+
+		List<String> formattedMessages = new ArrayList<>(templates.size());
+		for (int i = 0; i < templates.size(); i++) {
+			formattedMessages.add(
+				BULLET_PREFIX + formatTemplateAt(i)
+			);
+		}
+
+		return unmodifiableList(formattedMessages);
+	}
+
+	private String formatTemplateAt(int i) {
+		Object[] formattedArgs = Arrays.stream(args.get(i)).map(Strings::serialize).toArray(Object[]::new);
+		return String.format(templates.get(i), formattedArgs);
 	}
 
 	/**
@@ -160,7 +244,7 @@ public final class Message {
 	 * @return The number of arguments.
 	 */
 	public int getNbArgs() {
-		return args.length;
+		return nbArgs;
 	}
 
 	@Override
@@ -171,7 +255,7 @@ public final class Message {
 
 		if (o instanceof Message) {
 			Message m = (Message) o;
-			return Objects.equals(message, m.message) && Arrays.equals(args, m.args);
+			return Objects.equals(templates, m.templates) && Objects.equals(args, m.args) && Objects.equals(nbArgs, m.nbArgs);
 		}
 
 		return false;
@@ -179,14 +263,15 @@ public final class Message {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(message, Arrays.hashCode(args));
+		return Objects.hash(templates, args, nbArgs);
 	}
 
 	@Override
 	public String toString() {
 		return ToStringBuilder.toStringBuilder(getClass())
-			.append("message", message)
-			.append("args", args)
+			.append("templates", templates)
+			.append("args", args.stream().map(Arrays::toString).collect(Collectors.toList()))
+			.append("nbArgs", nbArgs)
 			.build();
 	}
 }

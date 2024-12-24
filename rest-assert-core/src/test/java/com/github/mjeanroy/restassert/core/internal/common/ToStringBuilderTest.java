@@ -35,12 +35,14 @@ class ToStringBuilderTest {
 		String output = ToStringBuilder.toStringBuilder(getClass())
 			.append("id", 1L)
 			.append("name", "John Doe")
+			.append("array", new Object[]{"a", "b", "c"})
 			.build();
 
 		assertThat(output).isEqualTo(
 			"ToStringBuilderTest{" +
 				"id=1, " +
-				"name=John Doe" +
+				"name=John Doe, " +
+				"array=[a, b, c]" +
 			"}"
 		);
 	}

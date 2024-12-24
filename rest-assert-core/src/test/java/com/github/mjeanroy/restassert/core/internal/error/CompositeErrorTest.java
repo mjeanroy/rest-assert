@@ -76,17 +76,17 @@ class CompositeErrorTest {
 
 		assertThat(expectation.getMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"m1,",
-				"m2: %s %s,",
-				"m3: %s"
+				"→ m1",
+				"→ m2: %s %s",
+				"→ m3: %s"
 			))
 		);
 
 		assertThat(expectation.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"m1,",
-				"m2: 1 2,",
-				"m3: " + fmt("hello")
+				"→ m1",
+				"→ m2: 1 2",
+				"→ m3: " + fmt("hello")
 			))
 		);
 	}
@@ -105,17 +105,17 @@ class CompositeErrorTest {
 
 		assertThat(mismatch.getMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"m1,",
-				"m2: %s %s,",
-				"m3: %s"
+				"→ m1",
+				"→ m2: %s %s",
+				"→ m3: %s"
 			))
 		);
 
 		assertThat(mismatch.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"m1,",
-				"m2: 1 2,",
-				"m3: " + fmt("hello")
+				"→ m1",
+				"→ m2: 1 2",
+				"→ m3: " + fmt("hello")
 			))
 		);
 	}

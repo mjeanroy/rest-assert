@@ -1,18 +1,18 @@
 /**
  * The MIT License (MIT)
- *
+ * <p>
  * Copyright (c) 2014-2021 Mickael Jeanroy
- *
+ * <p>
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- *
+ * <p>
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ * <p>
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
@@ -61,15 +61,16 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 			mismatch = Message.message("was" + (isNegation ? "" : " not"));
 		}
 
-		mismatchDescription.appendText(mismatch.formatMessage());
+		mismatchDescription.appendText(
+			prettifyHamcrestMessage(mismatch)
+		);
 	}
 
 	@Override
 	public void describeTo(Description description) {
 		Message expectationMessage = error().getExpectation();
-		String rawMessage = expectationMessage.formatMessage();
 		description.appendText(
-				prettifyHamcrestMessage(rawMessage)
+			prettifyHamcrestMessage(expectationMessage)
 		);
 	}
 
@@ -84,20 +85,17 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 		return assertionResult.getError();
 	}
 
-	private static String prettifyHamcrestMessage(String rawMessage) {
-		String[] lines = rawMessage.split(System.lineSeparator());
-
-		if (lines.length == 0) {
-			return "";
+	private static String prettifyHamcrestMessage(Message expectationMessage) {
+		if (!expectationMessage.isMulti()) {
+			return expectationMessage.formatMessage();
 		}
 
-		if (lines.length == 1) {
-			return lines[0];
-		}
+		List<String> messages = expectationMessage.formatMessages();
+		String indent = Strings.repeat(' ', "Expected: ".length());
+		String output = messages.stream()
+			.map(m -> indent + m)
+			.collect(Collectors.joining(System.lineSeparator()));
 
-		return Arrays.stream(lines)
-			.map((input) -> EXPECTATION_MESSAGE_INDENT + "- " + input)
-			.collect(Collectors.joining(System.lineSeparator()))
-			.trim();
+		return output.trim();
 	}
 }

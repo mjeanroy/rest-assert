@@ -116,16 +116,16 @@ class MessageTest {
 		assertThat(message).isNotNull();
 		assertThat(message.getMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"First Message,",
-				"Second Message"
+				"→ First Message",
+				"→ Second Message"
 			))
 		);
 
 		assertThat(message.getArgs()).isNotNull().isEmpty();
 		assertThat(message.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"First Message,",
-				"Second Message"
+				"→ First Message",
+				"→ Second Message"
 			))
 		);
 	}
@@ -142,8 +142,8 @@ class MessageTest {
 		assertThat(message).isNotNull();
 		assertThat(message.getMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"First Message From %s,",
-				"Second Message From %s To %s"
+				"→ First Message From %s",
+				"→ Second Message From %s To %s"
 			))
 		);
 
@@ -155,8 +155,8 @@ class MessageTest {
 
 		assertThat(message.formatMessage()).isEqualTo(
 			String.join(System.lineSeparator(), asList(
-				"First Message From " + fmt("John Doe") + ",",
-				"Second Message From " + fmt("Jane Doe") + " To " + fmt("Mickael")
+				"→ First Message From " + fmt("John Doe"),
+				"→ Second Message From " + fmt("Jane Doe") + " To " + fmt("Mickael")
 			))
 		);
 	}
@@ -169,14 +169,15 @@ class MessageTest {
 	@Test
 	void it_should_implement_to_string() {
 		String str = "Simple Message: %s %s";
-		Object arg1 = "test1";
-		Object arg2 = "test2";
+		String arg1 = "test1";
+		String arg2 = "test2";
 		Message message = Message.message(str, arg1, arg2);
 
 		assertThat(message).hasToString(
 			"Message{" +
-				"message=Simple Message: %s %s, " +
-				"args=[test1, test2]" +
+				"templates=[Simple Message: %s %s], " +
+				"args=[[test1, test2]], " +
+				"nbArgs=2" +
 			"}"
 		);
 	}

@@ -38,8 +38,8 @@ public final class HamcrestTestUtils {
 	 * @return The message output.
 	 */
 	public static String generateHamcrestErrorMessage(String expectation, String mismatch) {
-		String expectationMsg = "Expected: " + expectation;
-		String mismatchMsg = "     but: " + mismatch;
+		String expectationMsg = "Expected: " + expectation.trim();
+		String mismatchMsg    = "     but: " + mismatch.trim();
 		return expectationMsg + System.lineSeparator() + mismatchMsg;
 	}
 }
