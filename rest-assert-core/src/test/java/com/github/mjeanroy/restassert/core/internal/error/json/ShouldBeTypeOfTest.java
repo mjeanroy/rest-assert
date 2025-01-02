@@ -24,46 +24,24 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
-import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
+import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.isVowel;
+import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
- */
-public final class ShouldBeEntryOf extends AbstractJsonError {
+class ShouldBeTypeOfTest {
 
-	// Private constructor, use static factory instead
-	private ShouldBeEntryOf(String entryName, Message expectation, Message mismatch) {
-		super(entryName, expectation, mismatch);
-	}
+	@Test
+	void it_should_format_error_message() {
+		JsonType actualType = JsonType.NULL;
+		JsonType expectedType = JsonType.NUMBER;
+		ShouldBeTypeOf shouldBeTypeOf = ShouldBeTypeOf.shouldBeTypeOf(expectedType, actualType);
 
-	/**
-	 * Build error.
-	 *
-	 * @param entry Entry name.
-	 * @param actualType Actual type.
-	 * @param expectedType Expected type.
-	 * @return Error.
-	 */
-	public static ShouldBeEntryOf shouldBeEntryOf(String entry, JsonType actualType, JsonType expectedType) {
-		return new ShouldBeEntryOf(
-			entry,
-			Message.message("Expecting json entry %s to be " + serializeType(expectedType), entry),
-			Message.message("was " + serializeType(actualType))
-		);
-	}
-
-	private static String serializeType(JsonType type) {
-		if (type == JsonType.NULL) {
-			return "null";
-		}
-
-		String formattedName = type.name().toLowerCase();
-		char firstChar = formattedName.charAt(0);
-		String article = isVowel(firstChar) ? "an" : "a";
-		return article + " " + formattedName;
+		assertThat(shouldBeTypeOf).isNotNull();
+		assertThat(shouldBeTypeOf.message()).isEqualTo("Expecting json to be a number but was null");
+		assertThat(shouldBeTypeOf.args()).hasSize(0);
+		assertThat(shouldBeTypeOf.buildMessage()).isEqualTo("Expecting json to be a number but was null");
+		assertThat(shouldBeTypeOf.toString()).isEqualTo("Expecting json to be a number but was null");
+		assertThat(shouldBeTypeOf.entryName()).isEmpty();
 	}
 }

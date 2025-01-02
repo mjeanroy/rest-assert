@@ -35,161 +35,160 @@ import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
 
 @SuppressWarnings("unchecked")
 public abstract class AbstractJsonParserTest {
 
 	@Test
-	void it_should_fail_to_parse_non_object_non_array() {
-		assertThatThrownBy(() -> parser().parse("null"))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("Parser support object or array conversion only");
+	void it_should_parse_null() {
+		assertThat(parser().parse("null")).isEqualTo(null);
+	}
+
+	@Test
+	void it_should_parse_string() {
+		assertThat(parser().parse("\"Hello World\"")).isEqualTo("Hello World");
+	}
+
+	@Test
+	void it_should_parse_boolean() {
+		assertThat(parser().parse("false")).isEqualTo(false);
+		assertThat(parser().parse("true")).isEqualTo(true);
+	}
+
+	@Test
+	void it_should_parse_number() {
+		assertThat(parser().parse("1")).isEqualTo(1D);
+		assertThat(parser().parse("1.1")).isEqualTo(1.1D);
+	}
+
+	@Test
+	void it_should_parse_object() {
+		JsonObject jsonObject = jsonObject(
+			jsonEntry("str", "bar"),
+			jsonEntry("nb", 1.0),
+			jsonEntry("bool", true)
+		);
+
+		Object result = parser().parse(jsonObject.toJson());
+
+		assertThat(result).isInstanceOf(Map.class);
+		assertThat(((Map<String, Object>) result)).hasSize(3);
+	}
+
+	@Test
+	void it_should_parse_array() {
+		JsonArray jsonArray = jsonArray(
+			"Hello World"
+		);
+
+		Object result = parser().parse(jsonArray.toJson());
+
+		assertThat(result).isInstanceOf(List.class);
+		assertThat(((List<Object>) result)).hasSize(1);
 	}
 
 	@Test
 	void it_should_parse_with_object() {
 		JsonObject jsonObject = jsonObject(
-				jsonEntry("str", "bar"),
-				jsonEntry("nb", 1.0),
-				jsonEntry("bool", true)
+			jsonEntry("str", "bar"),
+			jsonEntry("nb", 1.0),
+			jsonEntry("bool", true)
 		);
 
-		JsonParser parser = spy(parser());
-		Object result = parser.parse(jsonObject.toJson());
-
-		verify(parser).parseObject(jsonObject.toJson());
-		assertThat(result)
-				.isNotNull()
-				.isInstanceOf(Map.class);
+		Object result = parser().parse(jsonObject.toJson());
+		assertThat(result).isInstanceOf(Map.class);
 	}
 
 	@Test
 	void it_should_parse_with_array() {
 		JsonArray jsonArray = jsonArray(1, 2, 3);
-
-		JsonParser parser = spy(parser());
-		Object result = parser.parse(jsonArray.toJson());
-
-		verify(parser).parseArray(jsonArray.toJson());
-		assertThat(result)
-				.isNotNull()
-				.isInstanceOf(Iterable.class);
+		Object result = parser().parse(jsonArray.toJson());
+		assertThat(result).isInstanceOf(Iterable.class);
 	}
 
 	@Test
 	void it_should_parse_json_object() {
 		JsonObject jsonObject = jsonObject(
-				jsonEntry("str", "bar"),
-				jsonEntry("nb", 1.0),
-				jsonEntry("bool", true)
+			jsonEntry("str", "bar"),
+			jsonEntry("nb", 1.0),
+			jsonEntry("bool", true)
 		);
 
 		Map<String, Object> map = parser().parseObject(jsonObject.toJson());
 
-		assertThat(map)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(3)
-				.contains(
-						entry("str", "bar"),
-						entry("nb", 1.0),
-						entry("bool", true)
-				);
+		assertThat(map).hasSize(3).contains(
+			entry("str", "bar"),
+			entry("nb", 1.0),
+			entry("bool", true)
+		);
 	}
 
 	@Test
 	void it_should_parse_complex_object() {
 		JsonObject jsonObject = jsonObject(
-				jsonEntry("foo", jsonObject(
-						jsonEntry("id", 1.0),
-						jsonEntry("name", "bar")
-				))
+			jsonEntry("foo", jsonObject(
+					jsonEntry("id", 1.0),
+					jsonEntry("name", "bar")
+				)
+			)
 		);
 
 		Map<String, Object> map = parser().parseObject(jsonObject.toJson());
 
-		assertThat(map)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1)
-				.containsKey("foo");
-
-		assertThat(map.get("foo"))
-				.isNotNull()
-				.isInstanceOf(Map.class);
+		assertThat(map).hasSize(1).containsKey("foo");
+		assertThat(map.get("foo")).isInstanceOf(Map.class);
 
 		Map<String, Object> nestedObject = (Map<String, Object>) map.get("foo");
-		assertThat(nestedObject)
-				.isNotNull()
-				.hasSize(2)
-				.contains(
-						entry("id", 1.0),
-						entry("name", "bar")
-				);
+		assertThat(nestedObject).hasSize(2).contains(
+			entry("id", 1.0),
+			entry("name", "bar")
+		);
 	}
 
 	@Test
 	void it_should_parse_json_array() {
 		JsonArray jsonArray = jsonArray(
-				"foo", 1.0, true
+			"foo", 1.0, true
 		);
 
 		List<Object> list = parser().parseArray(jsonArray.toJson());
 
-		assertThat(list)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(3)
-				.contains("foo", 1.0, true);
+		assertThat(list).hasSize(3).contains(
+			"foo", 1.0, true
+		);
 	}
 
 	@Test
 	void it_should_parse_json_array_of_objects() {
 		JsonArray jsonArray = jsonArray(
-				jsonObject(
-						jsonEntry("id", 1.0),
-						jsonEntry("name", "foo")
-				),
-				jsonObject(
-						jsonEntry("id", 2.0),
-						jsonEntry("name", "bar")
-				)
+			jsonObject(
+				jsonEntry("id", 1.0),
+				jsonEntry("name", "foo")
+			),
+			jsonObject(
+				jsonEntry("id", 2.0),
+				jsonEntry("name", "bar")
+			)
 		);
 
 		List<Object> list = parser().parseArray(jsonArray.toJson());
 
-		assertThat(list)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(2);
-
-		assertThat(list.get(0))
-				.isNotNull()
-				.isInstanceOf(Map.class);
-
-		assertThat(list.get(1))
-				.isNotNull()
-				.isInstanceOf(Map.class);
+		assertThat(list).hasSize(2);
+		assertThat(list.get(0)).isInstanceOf(Map.class);
+		assertThat(list.get(1)).isInstanceOf(Map.class);
 
 		Map<String, Object> obj1 = (Map<String, Object>) list.get(0);
-		assertThat(obj1)
-				.hasSize(2)
-				.contains(
-						entry("id", 1.0),
-						entry("name", "foo")
-				);
+		assertThat(obj1).hasSize(2).contains(
+			entry("id", 1.0),
+			entry("name", "foo")
+		);
 
 		Map<String, Object> obj2 = (Map<String, Object>) list.get(1);
-		assertThat(obj2)
-				.hasSize(2)
-				.contains(
-						entry("id", 2.0),
-						entry("name", "bar")
-				);
+		assertThat(obj2).hasSize(2).contains(
+			entry("id", 2.0),
+			entry("name", "bar")
+		);
 	}
 
 	abstract JsonParser parser();

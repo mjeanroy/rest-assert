@@ -25,7 +25,10 @@
 package com.github.mjeanroy.restassert.core.internal.common;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 /**
  * Static String Utilities.
@@ -34,9 +37,33 @@ public final class Strings {
 
 	private static final char SINGLE_QUOTE = '\'';
 	private static final char DOUBLE_QUOTE = '"';
+	private static final List<Character> VOWELS = asList(
+		'a', 'e', 'i', 'o', 'u', 'y'
+	);
 
 	// Ensure non instantiation.
 	private Strings() {
+	}
+
+	/**
+	 * Trim given string and returns trimmed value or {@code null} if {@code str} is {@code null}, empty or blank.
+	 *
+	 * @param str Input.
+	 * @return Trimmed output.
+	 */
+	public static String trimToNull(String str) {
+		String trimmed = trim(str);
+		return isEmpty(trimmed) ? null : trimmed;
+	}
+
+	/**
+	 * Trim given string and returns trimmed value (returns {@code null} if {@code str} is {@code null}).
+	 *
+	 * @param str Input.
+	 * @return Trimmed output.
+	 */
+	public static String trim(String str) {
+		return str == null ? null : str.trim();
 	}
 
 	/**
@@ -49,11 +76,30 @@ public final class Strings {
 	 */
 	public static String repeat(char c, int length) {
 		StringBuilder sb = new StringBuilder(length);
+
 		for (int i = 0; i < length; ++i) {
 			sb.append(c);
 		}
 
 		return sb.toString();
+	}
+
+	/**
+	 * Check if given char is a vowel.
+	 *
+	 * @param c Character.
+	 * @return {@code true} if {@code c} is a vowel, {@code false} otherwise.
+	 */
+	public static boolean isVowel(char c) {
+		char lowerC = Character.toLowerCase(c);
+
+		for (char vowel : VOWELS) {
+			if (vowel == lowerC) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -63,7 +109,7 @@ public final class Strings {
 	 * @return Quoted input.
 	 */
 	public static String quote(String input) {
-		return input == null ? null : "\"" + input + "\"";
+		return input == null ? null : (DOUBLE_QUOTE + input + DOUBLE_QUOTE);
 	}
 
 	/**
@@ -73,7 +119,27 @@ public final class Strings {
 	 * @return {@code true} if {@code value} is quoted, {@code false} otherwise.
 	 */
 	public static boolean isQuoted(String value) {
-		return value != null && value.length() >= 2 && (isSingleQuoted(value) || isDoubleQuoted(value));
+		return isSurroundedBy(value, SINGLE_QUOTE) || isSurroundedBy(value, DOUBLE_QUOTE);
+	}
+
+	private static boolean isSurroundedBy(String value, char leftRight) {
+		return isSurroundedBy(value, leftRight, leftRight);
+	}
+
+	/**
+	 * Check that given string value is surrounded by given left and right characters;
+	 *
+	 * @param value Value.
+	 * @param left Left character;
+	 * @param right Right character.
+	 * @return {@code true} if {@code value} is surrounded by {@code left} and {@code right}, {@code false} otherwise.
+	 */
+	public static boolean isSurroundedBy(String value, char left, char right) {
+		if (value == null || value.length() < 2) {
+			return false;
+		}
+
+		return value.charAt(0) == left && value.charAt(value.length() - 1) == right;
 	}
 
 	/**
@@ -84,6 +150,16 @@ public final class Strings {
 	 */
 	public static boolean isEmpty(String value) {
 		return value == null || value.isEmpty();
+	}
+
+	/**
+	 * Check that given string value is not {@code null} and not empty.
+	 *
+	 * @param value String value.
+	 * @return {@code true} if {@code value} is not {@code null} and not empty, false otherwise (including blank string).
+	 */
+	public static boolean isNotEmpty(String value) {
+		return !isEmpty(value);
 	}
 
 	/**
@@ -102,6 +178,7 @@ public final class Strings {
 	 * @param value Value.
 	 * @return The formatted value.
 	 */
+	@SuppressWarnings("unchecked")
 	public static String serialize(Object value) {
 		if (value == null) {
 			return null;
@@ -112,17 +189,9 @@ public final class Strings {
 		}
 
 		if (value instanceof Collection) {
-			return ((Collection) value).stream().map(Strings::serialize).collect(Collectors.toList()).toString();
+			return ((Collection<Object>) value).stream().map(Strings::serialize).collect(Collectors.toList()).toString();
 		}
 
 		return String.valueOf(value);
-	}
-
-	private static boolean isSingleQuoted(String value) {
-		return value.charAt(0) == SINGLE_QUOTE && value.charAt(value.length() - 1) == SINGLE_QUOTE;
-	}
-
-	private static boolean isDoubleQuoted(String value) {
-		return value.charAt(0) == DOUBLE_QUOTE && value.charAt(value.length() - 1) == DOUBLE_QUOTE;
 	}
 }

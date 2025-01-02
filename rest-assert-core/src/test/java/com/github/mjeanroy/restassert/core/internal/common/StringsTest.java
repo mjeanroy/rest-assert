@@ -26,9 +26,35 @@ package com.github.mjeanroy.restassert.core.internal.common;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class StringsTest {
+
+	@Test
+	void it_should_check_if_string_is_surrounded_by_given_chars() {
+		assertThat(Strings.isSurroundedBy(null, '[', ']')).isFalse();
+		assertThat(Strings.isSurroundedBy("", '[', ']')).isFalse();
+		assertThat(Strings.isSurroundedBy("[", '[', ']')).isFalse();
+
+		assertThat(Strings.isSurroundedBy("[]", '[', ']')).isTrue();
+		assertThat(Strings.isSurroundedBy("[0,1,2]", '[', ']')).isTrue();
+	}
+
+	@Test
+	void it_should_check_if_character_is_a_vowel() {
+		List<Character> vowels = asList('a', 'e', 'i', 'o', 'u');
+
+		for (char c : vowels) {
+			assertThat(Strings.isVowel(Character.toLowerCase(c))).isTrue();
+			assertThat(Strings.isVowel(Character.toUpperCase(c))).isTrue();
+		}
+
+		assertThat(Strings.isVowel('x')).isFalse();
+		assertThat(Strings.isVowel('X')).isFalse();
+	}
 
 	@Test
 	void it_should_check_if_string_is_quoted() {
@@ -48,5 +74,28 @@ class StringsTest {
 		assertThat(Strings.isEmpty(null)).isTrue();
 		assertThat(Strings.isEmpty("")).isTrue();
 		assertThat(Strings.isEmpty(" ")).isFalse();
+	}
+
+	@Test
+	void it_should_check_if_string_is_not_empty() {
+		assertThat(Strings.isNotEmpty(null)).isFalse();
+		assertThat(Strings.isNotEmpty("")).isFalse();
+		assertThat(Strings.isNotEmpty(" ")).isTrue();
+	}
+
+	@Test
+	void it_should_trim_value() {
+		assertThat(Strings.trim(null)).isNull();
+		assertThat(Strings.trim("")).isEqualTo("");
+		assertThat(Strings.trim("   ")).isEqualTo("");
+		assertThat(Strings.trim(" test ")).isEqualTo("test");
+	}
+
+	@Test
+	void it_should_trim_value_to_null() {
+		assertThat(Strings.trimToNull(null)).isNull();
+		assertThat(Strings.trimToNull("")).isNull();
+		assertThat(Strings.trimToNull("   ")).isNull();
+		assertThat(Strings.trimToNull(" test ")).isEqualTo("test");
 	}
 }

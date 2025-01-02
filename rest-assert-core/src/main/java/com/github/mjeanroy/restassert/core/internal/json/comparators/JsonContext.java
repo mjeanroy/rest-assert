@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
-import com.github.mjeanroy.restassert.core.internal.json.JsonType;
-
 import java.util.LinkedList;
 import java.util.List;
+
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.isSurroundedBy;
 
 /**
  * Json context (a.k.a current fully qualified entry
@@ -91,6 +91,6 @@ class JsonContext {
 	}
 
 	private static boolean isArrayNotation(String context) {
-		return JsonType.ARRAY.is(context);
+		return isSurroundedBy(context, '[', ']');
 	}
 }

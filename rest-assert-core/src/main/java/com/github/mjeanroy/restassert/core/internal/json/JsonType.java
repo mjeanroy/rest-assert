@@ -39,8 +39,8 @@ public enum JsonType {
 		}
 
 		@Override
-		protected boolean doCheck(String json) {
-			return "true".equals(json) || "false".equals(json);
+		public boolean match(Object value) {
+			return value instanceof Boolean;
 		}
 	},
 
@@ -51,8 +51,8 @@ public enum JsonType {
 		}
 
 		@Override
-		protected boolean doCheck(String json) {
-			return json.matches("^-?\\d+(\\.\\d+)?$");
+		public boolean match(Object value) {
+			return value instanceof Number;
 		}
 	},
 
@@ -63,14 +63,8 @@ public enum JsonType {
 		}
 
 		@Override
-		protected boolean doCheck(String json) {
-			if (json.length() < 2) {
-				return false;
-			}
-
-			char firstChar = json.charAt(0);
-			char lastChar = json.charAt(json.length() - 1);
-			return firstChar == '"' && lastChar == '"';
+		public boolean match(Object value) {
+			return value instanceof String;
 		}
 	},
 
@@ -81,14 +75,8 @@ public enum JsonType {
 		}
 
 		@Override
-		protected boolean doCheck(String json) {
-			if (json.length() < 2) {
-				return false;
-			}
-
-			char firstChar = json.charAt(0);
-			char lastChar = json.charAt(json.length() - 1);
-			return firstChar == '{' && lastChar == '}';
+		public boolean match(Object value) {
+			return value instanceof Map;
 		}
 	},
 
@@ -100,14 +88,8 @@ public enum JsonType {
 		}
 
 		@Override
-		protected boolean doCheck(String json) {
-			if (json.length() < 2) {
-				return false;
-			}
-
-			char firstChar = json.charAt(0);
-			char lastChar = json.charAt(json.length() - 1);
-			return firstChar == '[' && lastChar == ']';
+		public boolean match(Object value) {
+			return value instanceof Iterable;
 		}
 	},
 
@@ -118,8 +100,8 @@ public enum JsonType {
 		}
 
 		@Override
-		protected boolean doCheck(String json) {
-			return json.equals("null");
+		public boolean match(Object value) {
+			return value == null;
 		}
 	};
 
@@ -132,22 +114,12 @@ public enum JsonType {
 	abstract boolean isValid(Object object);
 
 	/**
-	 * Check if json value is of expected json type.
+	 * Check if given parsed value is of given type.
 	 *
-	 * @param json Json value.
-	 * @return True if json is that type, false otherwise.
+	 * @param value Parsed value.
+	 * @return {@code true} if {@code value} if of given type, {@code false} otherwise.
 	 */
-	abstract boolean doCheck(String json);
-
-	/**
-	 * Check if json value is of expected json type.
-	 *
-	 * @param json Json value.
-	 * @return True if json is that type, false otherwise.
-	 */
-	public boolean is(String json) {
-		return json != null && doCheck(json);
-	}
+	abstract boolean match(Object value);
 
 	/**
 	 * Find json type of object.
@@ -158,6 +130,19 @@ public enum JsonType {
 	public static JsonType parseType(Object object) {
 		return Arrays.stream(JsonType.values())
 			.filter(jsonType -> jsonType.isValid(object))
+			.findFirst()
+			.orElseThrow(() -> new UnsupportedOperationException("Json type of object " + object + " cannot be found"));
+	}
+
+	/**
+	 * Get type of parsed json value.
+	 *
+	 * @param object Parsed value.
+	 * @return The type.
+	 */
+	public static JsonType getType(Object object) {
+		return Arrays.stream(JsonType.values())
+			.filter(jsonType -> jsonType.match(object))
 			.findFirst()
 			.orElseThrow(() -> new UnsupportedOperationException("Json type of object " + object + " cannot be found"));
 	}

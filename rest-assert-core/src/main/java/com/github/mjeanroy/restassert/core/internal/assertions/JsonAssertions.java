@@ -25,9 +25,11 @@
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
 import com.github.mjeanroy.restassert.core.internal.common.Ios;
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
 import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
+import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
@@ -52,6 +54,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Files.readFile
 import static com.github.mjeanroy.restassert.core.internal.common.Ios.readUrl;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isEmpty;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeTypeOf.shouldBeTypeOf;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull.shouldNotBeNull;
@@ -106,6 +109,34 @@ public final class JsonAssertions {
 	 */
 	public AssertionResult isNotNull(String actual) {
 		return actual == null ? failure(shouldNotBeNull()) : success();
+	}
+
+	/**
+	 * Check that given json is a JSON string type.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isString(String actual) {
+		return isType(actual, JsonType.STRING);
+	}
+
+	private AssertionResult isType(String actual, JsonType expectedType) {
+		String trimmedActual = Strings.trimToNull(actual.trim());
+
+		if (isEmpty(trimmedActual)) {
+			return failure(shouldNotBeNull());
+		}
+
+		Object parsedValue = parser.parse(trimmedActual);
+		JsonType actualType = JsonType.getType(parsedValue);
+		if (actualType == expectedType) {
+			return success();
+		}
+
+		return failure(
+			shouldBeTypeOf(expectedType, actualType)
+		);
 	}
 
 	/**

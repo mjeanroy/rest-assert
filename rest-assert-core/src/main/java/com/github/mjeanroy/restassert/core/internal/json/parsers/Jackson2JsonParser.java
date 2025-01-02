@@ -75,6 +75,11 @@ public class Jackson2JsonParser extends AbstractJsonParser {
 		return parse(json, List.class);
 	}
 
+	@Override
+	Object doParse(String json) {
+		return parse(json, Object.class);
+	}
+
 	private <T> T parse(String json, Class<T> klass) {
 		try {
 			return mapper.readValue(json, klass);

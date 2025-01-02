@@ -22,60 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.assertj.api.json.isstring;
 
-import com.google.gson.Gson;
+import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
+import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
+import com.github.mjeanroy.restassert.assertj.internal.Jsons;
+import org.assertj.core.api.AssertionInfo;
 
-import java.util.List;
-import java.util.Map;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
-/**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser}
- * using Google Gson as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
-public class GsonJsonParser extends AbstractJsonParser {
+class IsStringTest extends AbstractApiTest<Jsons, JsonAssert> {
 
-	/**
-	 * Singleton instance.
-	 */
-	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
-
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
-	public static GsonJsonParser gsonParser() {
-		return INSTANCE;
-	}
-
-	/**
-	 * Internal parser.
-	 */
-	private final Gson gson;
-
-	private GsonJsonParser() {
-		super();
-		this.gson = new Gson();
+	@Override
+	protected Jsons createAssertions() {
+		return mock(Jsons.class);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> parseObject(String json) {
-		return gson.fromJson(json, Map.class);
+	protected JsonAssert createApi() {
+		return new JsonAssert(actual());
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public List<Object> parseArray(String json) {
-		return gson.fromJson(json, List.class);
+	protected JsonAssert run() {
+		return api.isString();
 	}
 
 	@Override
-	Object doParse(String json) {
-		return gson.fromJson(json, Object.class);
+	protected void verifyApiCall() {
+		verify(assertions).assertIsString(any(AssertionInfo.class), eq(actual()));
+	}
+
+	private String actual() {
+		return "\"Hello World\"";
 	}
 }

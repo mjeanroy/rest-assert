@@ -24,46 +24,40 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
+import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 
-import static com.github.mjeanroy.restassert.core.internal.common.Strings.isVowel;
-
 /**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
+ * Error thrown when a json string should be an array
+ * but is an object.
  */
-public final class ShouldBeEntryOf extends AbstractJsonError {
+public final class ShouldBeTypeOf extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeEntryOf(String entryName, Message expectation, Message mismatch) {
-		super(entryName, expectation, mismatch);
+	private ShouldBeTypeOf(String expected, String actual) {
+		super(
+			Message.message("Expecting json to be " + expected),
+			Message.message("was " + actual)
+		);
 	}
 
 	/**
 	 * Build error.
 	 *
-	 * @param entry Entry name.
-	 * @param actualType Actual type.
-	 * @param expectedType Expected type.
 	 * @return Error.
 	 */
-	public static ShouldBeEntryOf shouldBeEntryOf(String entry, JsonType actualType, JsonType expectedType) {
-		return new ShouldBeEntryOf(
-			entry,
-			Message.message("Expecting json entry %s to be " + serializeType(expectedType), entry),
-			Message.message("was " + serializeType(actualType))
-		);
+	public static ShouldBeTypeOf shouldBeTypeOf(JsonType expected, JsonType actual) {
+		return new ShouldBeTypeOf(rawType(expected), rawType(actual));
 	}
 
-	private static String serializeType(JsonType type) {
+	private static String rawType(JsonType type) {
 		if (type == JsonType.NULL) {
 			return "null";
 		}
 
-		String formattedName = type.name().toLowerCase();
-		char firstChar = formattedName.charAt(0);
-		String article = isVowel(firstChar) ? "an" : "a";
-		return article + " " + formattedName;
+		String name = type.name().toLowerCase();
+		String article = Strings.isVowel(name.charAt(0)) ? "an" : "a";
+		return article + " " + name;
 	}
 }

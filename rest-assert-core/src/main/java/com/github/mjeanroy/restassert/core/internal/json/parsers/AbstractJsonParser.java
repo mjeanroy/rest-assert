@@ -24,7 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import com.github.mjeanroy.restassert.core.internal.json.JsonType;
+import com.github.mjeanroy.restassert.core.internal.json.JsonException;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.trimToNull;
 
 /**
  * Abstract json parser.
@@ -32,13 +39,35 @@ import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 abstract class AbstractJsonParser implements JsonParser {
 
 	@Override
-	public Object parse(String json) {
-		if (JsonType.OBJECT.is(json)) {
-			return parseObject(json);
-		} else if (JsonType.ARRAY.is(json)) {
-			return parseArray(json);
+	public final Object parse(String json) {
+		String trimmedJson = notNull(trimToNull(json), "JSON");
+
+		try {
+			return translateValue(
+				doParse(trimmedJson)
+			);
+		}
+		catch (Exception ex) {
+			throw new JsonException(ex);
+		}
+	}
+
+	abstract Object doParse(String json);
+
+	@SuppressWarnings("unchecked")
+	private static Object translateValue(Object value) {
+		if (value instanceof Number) {
+			return ((Number) value).doubleValue();
 		}
 
-		throw new UnsupportedOperationException("Parser support object or array conversion only");
+		if (value instanceof Map) {
+			return Collections.unmodifiableMap((Map<String, Object>) value);
+		}
+
+		if (value instanceof List) {
+			return Collections.unmodifiableList((List<Object>) value);
+		}
+
+		return value;
 	}
 }
