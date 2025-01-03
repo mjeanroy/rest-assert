@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.assertj.internal.http.cookie;
 import com.github.mjeanroy.restassert.assertj.internal.HttpResponses;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
 
@@ -43,8 +43,8 @@ abstract class AbstractHasCookieTest {
 	@Test
 	void should_pass_if_status_code_is_ok() {
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-				.addCookie(cookie())
-				.build();
+			.addCookie(cookie())
+			.build();
 
 		run(someInfo(), httpResponse);
 	}
@@ -53,22 +53,23 @@ abstract class AbstractHasCookieTest {
 	void should_fail_if_status_code_are_not_equal() {
 		AssertionInfo info = someInfo();
 		Cookie cookie = new MockCookieBuilder()
-				.setName("foo")
-				.setValue("bar")
-				.build();
+			.setName("foo")
+			.setValue("bar")
+			.build();
 
 		HttpResponse httpResponse = new HttpResponseBuilderImpl()
-				.addCookie(cookie)
-				.build();
+			.addCookie(cookie)
+			.build();
 
 		try {
 			run(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(buildErrorMessage());
+				.isNotNull()
+				.isNotEmpty()
+				.isEqualTo(buildErrorMessage());
 		}
 	}
 

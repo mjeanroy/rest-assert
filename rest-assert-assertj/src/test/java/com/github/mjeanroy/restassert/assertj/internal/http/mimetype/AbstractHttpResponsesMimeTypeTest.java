@@ -60,7 +60,8 @@ abstract class AbstractHttpResponsesMimeTypeTest {
 		try {
 			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			assertThat(e.getMessage()).isEqualTo(String.format("Expecting response to have mime type \"%s\" but was \"%s\"", expectedMimeType, actualMimeType));
 		}
 	}

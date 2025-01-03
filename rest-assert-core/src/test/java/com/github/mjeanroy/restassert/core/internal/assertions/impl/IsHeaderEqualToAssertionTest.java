@@ -120,28 +120,28 @@ class IsHeaderEqualToAssertionTest {
 	@Test
 	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(() -> new IsHeaderEqualToAssertion(null, "value", false))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(() -> new IsHeaderEqualToAssertion("", "value", false))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(() -> new IsHeaderEqualToAssertion("   ", "value", false))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
 		assertThatThrownBy(() -> new IsHeaderEqualToAssertion("name", null, false))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header value must not be null");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header value must not be null");
 	}
 }

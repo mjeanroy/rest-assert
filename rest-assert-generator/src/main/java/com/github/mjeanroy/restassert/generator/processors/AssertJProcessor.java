@@ -44,34 +44,35 @@ import static java.util.Collections.singleton;
 public enum AssertJProcessor implements Processor {
 
 	HTTP_RESPONSES(
-			classAssertionsTemplate(),
-			httpResponsesModel()
+		classAssertionsTemplate(),
+		httpResponsesModel()
 	),
 
 	HTTP_RESPONSES_ASSERT(
-			classAssertTemplate(),
-			httpResponseAssert()
+		classAssertTemplate(),
+		httpResponseAssert()
 	),
 
 	COOKIES(
-			classAssertionsTemplate(),
-			cookiesModel()
+		classAssertionsTemplate(),
+		cookiesModel()
 	),
 
 	COOKIES_ASSERT(
-			classAssertTemplate(),
-			cookieAssert()
+		classAssertTemplate(),
+		cookieAssert()
 	),
 
 	JSONS(
-			classAssertionsTemplate(),
-			jsonsModel()
+		classAssertionsTemplate(),
+		jsonsModel()
 	),
 
 	JSONS_ASSERT(
-			classAssertTemplate(),
-			jsonAssert()
-	),;
+		classAssertTemplate(),
+		jsonAssert()
+	),
+	;
 
 	/**
 	 * Template that will be processed.

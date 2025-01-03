@@ -50,10 +50,10 @@ public final class JsonFixtures {
 
 	public static String jsonSuccess() {
 		JsonObject object = jsonObject(
-				jsonEntry("str", "foo"),
-				jsonEntry("nb", 1.0),
-				jsonEntry("bool", true),
-				jsonEntry("array", jsonArray(1.0, 2.0, 3.0))
+			jsonEntry("str", "foo"),
+			jsonEntry("nb", 1.0),
+			jsonEntry("bool", true),
+			jsonEntry("array", jsonArray(1.0, 2.0, 3.0))
 		);
 
 		return object.toJson();
@@ -61,10 +61,10 @@ public final class JsonFixtures {
 
 	public static String jsonFailure() {
 		JsonObject object = jsonObject(
-				jsonEntry("str", "bar"),
-				jsonEntry("nb", 2.0),
-				jsonEntry("bool", false),
-				jsonEntry("array", jsonArray(1.1, 2.1, 3.1))
+			jsonEntry("str", "bar"),
+			jsonEntry("nb", 2.0),
+			jsonEntry("bool", false),
+			jsonEntry("array", jsonArray(1.1, 2.1, 3.1))
 		);
 
 		return object.toJson();

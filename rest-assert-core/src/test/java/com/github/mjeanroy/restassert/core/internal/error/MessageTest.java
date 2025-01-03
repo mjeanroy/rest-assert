@@ -148,9 +148,9 @@ class MessageTest {
 		);
 
 		assertThat(message.getArgs()).hasSize(3).containsExactly(
-				"John Doe",
-				"Jane Doe",
-				"Mickael"
+			"John Doe",
+			"Jane Doe",
+			"Mickael"
 		);
 
 		assertThat(message.formatMessage()).isEqualTo(
@@ -178,7 +178,7 @@ class MessageTest {
 				"templates=[Simple Message: %s %s], " +
 				"args=[[test1, test2]], " +
 				"nbArgs=2" +
-			"}"
+				"}"
 		);
 	}
 }

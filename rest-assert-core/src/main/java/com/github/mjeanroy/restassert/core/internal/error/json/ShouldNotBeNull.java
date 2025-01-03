@@ -35,7 +35,7 @@ public final class ShouldNotBeNull extends AbstractJsonError {
 	// Private constructor, use static factory instead
 	private ShouldNotBeNull() {
 		super(
-				Message.message("Expecting json not to be null")
+			Message.message("Expecting json not to be null")
 		);
 	}
 

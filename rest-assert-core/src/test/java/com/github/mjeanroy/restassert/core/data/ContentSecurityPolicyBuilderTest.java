@@ -541,8 +541,8 @@ class ContentSecurityPolicyBuilderTest {
 	@Test
 	void it_should_handle_frame_ancestors_and_fail_if_source_is_not_host() {
 		assertThatThrownBy(() -> builder.addFrameAncestors(self()))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Source must be a valid host value");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Source must be a valid host value");
 	}
 
 	private static Set<Source> sources() {

@@ -33,7 +33,7 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExp
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
-abstract class AbstractHttpResponsesCharsetTest  {
+abstract class AbstractHttpResponsesCharsetTest {
 
 	final HttpResponses httpResponses = HttpResponses.instance();
 
@@ -52,11 +52,12 @@ abstract class AbstractHttpResponsesCharsetTest  {
 		try {
 			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			assertThat(e.getMessage())
-					.isNotNull()
-					.isNotEmpty()
-					.isEqualTo(format("Expecting response to have charset \"%s\" but was \"%s\"", expectedCharset, actualCharset));
+				.isNotNull()
+				.isNotEmpty()
+				.isEqualTo(format("Expecting response to have charset \"%s\" but was \"%s\"", expectedCharset, actualCharset));
 		}
 	}
 

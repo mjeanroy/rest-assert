@@ -25,8 +25,8 @@
 package com.github.mjeanroy.restassert.unit.api.http.cookies;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.unit.api.http.AbstractHttpTest;
 
 import java.util.function.Consumer;

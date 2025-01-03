@@ -128,9 +128,11 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		log.debug("Try to find cookie: ");
 		if (cookie != null) {
 			log.debug("-> Matching: {}", cookies);
-		} else if (value != null) {
+		}
+		else if (value != null) {
 			log.debug("-> With name / value: '{}' / '{}'", name, value);
-		} else {
+		}
+		else {
 			log.debug("-> With name: '{}'", name);
 		}
 

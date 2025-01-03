@@ -50,7 +50,8 @@ class AssertIsNotNullTest {
 		try {
 			jsons.assertIsNotNull(info, json);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			assertThat(e.getMessage().trim()).isEqualTo("Expecting actual not to be null");
 		}
 	}

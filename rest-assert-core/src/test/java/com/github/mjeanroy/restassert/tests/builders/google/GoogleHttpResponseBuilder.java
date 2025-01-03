@@ -60,7 +60,8 @@ public class GoogleHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpR
 		try {
 			HttpRequest request = createHttpRequest();
 			return request.execute();
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new AssertionError(ex);
 		}
 	}
@@ -69,10 +70,11 @@ public class GoogleHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpR
 		try {
 			HttpTransport transport = new MockHttpTransportImpl(status, content, headers);
 			return transport.createRequestFactory()
-					.buildGetRequest(HttpTesting.SIMPLE_GENERIC_URL)
-					.setThrowExceptionOnExecuteError(false);
+				.buildGetRequest(HttpTesting.SIMPLE_GENERIC_URL)
+				.setThrowExceptionOnExecuteError(false);
 
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new AssertionError(ex);
 		}
 	}

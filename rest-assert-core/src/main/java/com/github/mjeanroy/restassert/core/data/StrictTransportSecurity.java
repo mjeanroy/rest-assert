@@ -170,8 +170,8 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 		if (o instanceof StrictTransportSecurity) {
 			StrictTransportSecurity sts = (StrictTransportSecurity) o;
 			return maxAge == sts.maxAge
-					&& includeSubDomains == sts.includeSubDomains
-					&& preload == sts.preload;
+				&& includeSubDomains == sts.includeSubDomains
+				&& preload == sts.preload;
 		}
 
 		return false;

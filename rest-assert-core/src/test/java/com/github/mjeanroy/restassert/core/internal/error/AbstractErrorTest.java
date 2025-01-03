@@ -37,7 +37,7 @@ class AbstractErrorTest {
 
 		FooError error = new FooError(message, arg);
 		assertThat(error.message()).isEqualTo(message);
-		assertThat(error.args()).isEqualTo(new Object[]{arg});
+		assertThat(error.args()).isEqualTo(new Object[]{ arg });
 		assertThat(error.buildMessage()).isEqualTo("Message with param: \"bar\"");
 		assertThat(error.toString()).isEqualTo("Message with param: \"bar\"");
 	}
@@ -55,7 +55,7 @@ class AbstractErrorTest {
 	@Test
 	void it_build_error_args() {
 		FooError error = new FooError("foo", "bar", "baz");
-		assertThat(error.args()).isEqualTo(new Object[]{"bar", "baz"});
+		assertThat(error.args()).isEqualTo(new Object[]{ "bar", "baz" });
 	}
 
 	@Test

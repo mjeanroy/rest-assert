@@ -23,6 +23,7 @@
  */
 
 package com.github.mjeanroy.restassert.core.internal.data;
+
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 
 import java.util.Date;
@@ -91,15 +92,15 @@ final class DefaultCookie implements Cookie {
 	 * @param expires Cookie expires value.
 	 */
 	DefaultCookie(
-			String name,
-			String value,
-			String domain,
-			String path,
-			boolean secure,
-			boolean httpOnly,
-			SameSite sameSite,
-			Long maxAge,
-			Date expires) {
+		String name,
+		String value,
+		String domain,
+		String path,
+		boolean secure,
+		boolean httpOnly,
+		SameSite sameSite,
+		Long maxAge,
+		Date expires) {
 
 		this.name = name;
 		this.value = value;
@@ -113,7 +114,8 @@ final class DefaultCookie implements Cookie {
 		// Date class is not immutable, get a clone copy.
 		if (expires == null) {
 			this.expires = null;
-		} else {
+		}
+		else {
 			this.expires = new Date(expires.getTime());
 		}
 	}
@@ -167,16 +169,16 @@ final class DefaultCookie implements Cookie {
 	@Override
 	public String toString() {
 		return ToStringBuilder.toStringBuilder(getClass())
-				.append("name", name)
-				.append("value", value)
-				.append("domain", domain)
-				.append("path", path)
-				.append("secure", secure)
-				.append("httpOnly", httpOnly)
-				.append("sameSite", sameSite)
-				.append("maxAge", maxAge)
-				.append("expires", expires)
-				.build();
+			.append("name", name)
+			.append("value", value)
+			.append("domain", domain)
+			.append("path", path)
+			.append("secure", secure)
+			.append("httpOnly", httpOnly)
+			.append("sameSite", sameSite)
+			.append("maxAge", maxAge)
+			.append("expires", expires)
+			.build();
 	}
 
 	@Override

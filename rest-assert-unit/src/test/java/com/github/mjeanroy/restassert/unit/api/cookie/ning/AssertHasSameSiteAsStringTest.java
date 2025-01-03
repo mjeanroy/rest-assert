@@ -38,15 +38,15 @@ class AssertHasSameSiteAsStringTest {
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new NingHttpCookieBuilder().build();
 		assertThatThrownBy(() -> NingHttpCookieAssert.assertHasSameSite(cookie, STRICT.getValue()))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
 	}
 
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new NingHttpCookieBuilder().build();
 		assertThatThrownBy(() -> NingHttpCookieAssert.assertHasSameSite("message", cookie, STRICT.getValue()))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("com.ning.http.client.cookie.Cookie does not support #getSameSite()");
 	}
 }

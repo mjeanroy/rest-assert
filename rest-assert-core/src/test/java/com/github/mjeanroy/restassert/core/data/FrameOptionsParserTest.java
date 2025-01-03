@@ -94,7 +94,7 @@ class FrameOptionsParserTest {
 	void it_should_fail_with_invalid_value() {
 		String value = "same-origin";
 		assertThatThrownBy(() -> parser.parse(value))
-				.isExactlyInstanceOf(InvalidHeaderValue.class)
-				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+			.isExactlyInstanceOf(InvalidHeaderValue.class)
+			.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
 	}
 }

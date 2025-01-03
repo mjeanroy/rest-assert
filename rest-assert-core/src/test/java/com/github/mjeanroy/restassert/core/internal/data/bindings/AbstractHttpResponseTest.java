@@ -39,8 +39,8 @@ public abstract class AbstractHttpResponseTest<T> {
 	void it_should_return_status_code() {
 		int expectedStatus = 200;
 		T response = getBuilder()
-				.setStatus(expectedStatus)
-				.build();
+			.setStatus(expectedStatus)
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		int status = httpResponse.getStatus();
@@ -51,10 +51,10 @@ public abstract class AbstractHttpResponseTest<T> {
 	void it_should_check_if_http_response_contains_header() {
 		String headerName = "header-name";
 		T response = getBuilder()
-				.addHeader("foo", "foo")
-				.addHeader(headerName, headerName)
-				.addHeader("bar", "bar")
-				.build();
+			.addHeader("foo", "foo")
+			.addHeader(headerName, headerName)
+			.addHeader("bar", "bar")
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
@@ -65,9 +65,9 @@ public abstract class AbstractHttpResponseTest<T> {
 	void it_should_return_false_if_http_response_does_not_contain_header() {
 		String headerName = "header-name";
 		T response = getBuilder()
-				.addHeader("foo", "foo")
-				.addHeader("bar", "bar")
-				.build();
+			.addHeader("foo", "foo")
+			.addHeader("bar", "bar")
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		boolean containsHeader = httpResponse.hasHeader(headerName);
@@ -79,28 +79,28 @@ public abstract class AbstractHttpResponseTest<T> {
 		String headerName = "header-name";
 		String headerValue = "header-value";
 		T response = getBuilder()
-				.addHeader("foo", "bar")
-				.addHeader(headerName, headerValue)
-				.addHeader("bar", "foo")
-				.build();
+			.addHeader("foo", "bar")
+			.addHeader(headerName, headerValue)
+			.addHeader("bar", "foo")
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		List<String> result = httpResponse.getHeader(headerName);
 
 		assertThat(result)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1)
-				.contains(headerValue);
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(1)
+			.contains(headerValue);
 	}
 
 	@Test
 	void it_should_return_header_value_with_null_if_header_does_not_exist() {
 		String headerName = "header-name";
 		T response = getBuilder()
-				.addHeader("foo", "bar")
-				.addHeader("bar", "foo")
-				.build();
+			.addHeader("foo", "bar")
+			.addHeader("bar", "foo")
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		List<String> result = httpResponse.getHeader(headerName);
@@ -111,8 +111,8 @@ public abstract class AbstractHttpResponseTest<T> {
 	void it_should_return_response_body() {
 		String body = "foo";
 		T response = getBuilder()
-				.setContent(body)
-				.build();
+			.setContent(body)
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getContent();
@@ -130,19 +130,19 @@ public abstract class AbstractHttpResponseTest<T> {
 	@Test
 	void it_should_return_all_cookies() {
 		T response = getBuilder()
-				.addHeader("Set-Cookie", "foo=bar")
-				.addHeader("Set-Cookie", "quix=123")
-				.build();
+			.addHeader("Set-Cookie", "foo=bar")
+			.addHeader("Set-Cookie", "quix=123")
+			.build();
 
 		HttpResponse httpResponse = create(response);
 		List<Cookie> cookies = httpResponse.getCookies();
 
 		assertThat(cookies)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(2)
-				.extracting("name")
-				.contains("foo", "quix");
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(2)
+			.extracting("name")
+			.contains("foo", "quix");
 	}
 
 	protected abstract HttpResponseBuilder<T> getBuilder();

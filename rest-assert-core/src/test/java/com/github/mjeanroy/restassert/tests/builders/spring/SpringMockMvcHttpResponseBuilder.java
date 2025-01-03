@@ -52,7 +52,8 @@ public class SpringMockMvcHttpResponseBuilder extends AbstractHttpResponseBuilde
 
 		try {
 			response.getWriter().write(content);
-		} catch (UnsupportedEncodingException ex) {
+		}
+		catch (UnsupportedEncodingException ex) {
 			throw new AssertionError(ex);
 		}
 

@@ -61,9 +61,9 @@ class IsDateHeaderEqualToAssertionTest {
 		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, v1)
-				.addHeader(name, v2)
-				.build();
+			.addHeader(name, v1)
+			.addHeader(name, v2)
+			.build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -115,9 +115,9 @@ class IsDateHeaderEqualToAssertionTest {
 		Date date = createUtcDate(2016, MAY, 5, 19, 30, 3);
 		IsDateHeaderEqualToAssertion assertion = new IsDateHeaderEqualToAssertion(name, date);
 		HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, v1)
-				.addHeader(name, v2)
-				.build();
+			.addHeader(name, v1)
+			.addHeader(name, v2)
+			.build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -132,28 +132,28 @@ class IsDateHeaderEqualToAssertionTest {
 	@Test
 	public void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion(null, new Date()))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion("", new Date()))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion("   ", new Date()))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	public void it_should_fail_if_header_value_is_null() {
 		assertThatThrownBy(() -> new IsDateHeaderEqualToAssertion("name", null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header value must not be null");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header value must not be null");
 	}
 }

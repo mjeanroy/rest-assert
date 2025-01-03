@@ -83,7 +83,7 @@ public final class JsonAssertions {
 	/**
 	 * Create JSON entry object.
 	 *
-	 * @param key   Entry key.
+	 * @param key Entry key.
 	 * @param value Entry value.
 	 * @return The JSON entry.
 	 */
@@ -153,8 +153,8 @@ public final class JsonAssertions {
 	 * Check that given json contains given entries.
 	 *
 	 * @param actual JSON object.
-	 * @param key    Entry to check.
-	 * @param other  Other entries to check.
+	 * @param key Entry to check.
+	 * @param other Other entries to check.
 	 * @return Assertion result.
 	 */
 	public AssertionResult contains(String actual, String key, String... other) {
@@ -168,7 +168,7 @@ public final class JsonAssertions {
 	 * Check that given json contains given entries.
 	 *
 	 * @param actual JSON object.
-	 * @param keys   Entries to check.
+	 * @param keys Entries to check.
 	 * @return Assertion result.
 	 */
 	public AssertionResult contains(String actual, Iterable<String> keys) {
@@ -189,8 +189,8 @@ public final class JsonAssertions {
 	 * Check that given json contains given entries.
 	 *
 	 * @param actual JSON object.
-	 * @param entry  Entry to check.
-	 * @param other  Other entries to check.
+	 * @param entry Entry to check.
+	 * @param other Other entries to check.
 	 * @return Assertion result.
 	 */
 	public AssertionResult containsEntries(String actual, JsonEntry entry, JsonEntry... other) {
@@ -203,7 +203,7 @@ public final class JsonAssertions {
 	/**
 	 * Check that given json contains given entries.
 	 *
-	 * @param actual  JSON object.
+	 * @param actual JSON object.
 	 * @param entries Entries to check.
 	 * @return Assertion result.
 	 */
@@ -215,7 +215,8 @@ public final class JsonAssertions {
 			String key = e.getKey();
 			if (isEmpty(actual) || doesNotHaveEntry(actual, key)) {
 				errors.add(shouldHaveEntry(key));
-			} else {
+			}
+			else {
 				Object expectedValue = e.getValue();
 				Object actualValue = getEntry(actual, key);
 				if (!expectedValue.equals(actualValue)) {
@@ -233,7 +234,8 @@ public final class JsonAssertions {
 		try {
 			getEntry(actual, entry);
 			return false;
-		} catch (PathNotFoundException ex) {
+		}
+		catch (PathNotFoundException ex) {
 			return true;
 		}
 	}
@@ -246,7 +248,7 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual   Actual representation.
+	 * @param actual Actual representation.
 	 * @param expected Expected representation.
 	 * @return Assertion result.
 	 */
@@ -258,7 +260,7 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param file   Expected representation.
+	 * @param file Expected representation.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, File file) {
@@ -269,7 +271,7 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param path   Expected representation.
+	 * @param path Expected representation.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, Path path) {
@@ -280,7 +282,7 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param uri    Expected representation.
+	 * @param uri Expected representation.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, URI uri) {
@@ -295,7 +297,7 @@ public final class JsonAssertions {
 	 * Check that two json representation are equals.
 	 *
 	 * @param actual Actual representation.
-	 * @param url    Expected representation.
+	 * @param url Expected representation.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualTo(String actual, URL url) {
@@ -315,9 +317,9 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual   Actual representation.
+	 * @param actual Actual representation.
 	 * @param expected Expected representation.
-	 * @param entries  Name of entries to ignore.
+	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualToIgnoring(String actual, String expected, Iterable<String> entries) {
@@ -338,7 +340,8 @@ public final class JsonAssertions {
 
 			actualJson = actualCtx.jsonString();
 			expectedJson = expectedCtx.jsonString();
-		} else {
+		}
+		else {
 			actualJson = actual;
 			expectedJson = expected;
 		}
@@ -349,8 +352,8 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual  Actual representation.
-	 * @param file    Expected representation.
+	 * @param actual Actual representation.
+	 * @param file Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
@@ -361,8 +364,8 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual  Actual representation.
-	 * @param path    Expected representation.
+	 * @param actual Actual representation.
+	 * @param path Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
@@ -373,8 +376,8 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual  Actual representation.
-	 * @param uri     Expected representation.
+	 * @param actual Actual representation.
+	 * @param uri Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
@@ -385,15 +388,16 @@ public final class JsonAssertions {
 	/**
 	 * Check that two json representation are equals.
 	 *
-	 * @param actual  Actual representation.
-	 * @param url     Expected representation.
+	 * @param actual Actual representation.
+	 * @param url Expected representation.
 	 * @param entries Name of entries to ignore.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isEqualToIgnoring(String actual, URL url, Iterable<String> entries) {
 		try {
 			return isEqualToIgnoring(actual, new File(url.toURI()), entries);
-		} catch (URISyntaxException ex) {
+		}
+		catch (URISyntaxException ex) {
 			throw new AssertionError(ex);
 		}
 	}

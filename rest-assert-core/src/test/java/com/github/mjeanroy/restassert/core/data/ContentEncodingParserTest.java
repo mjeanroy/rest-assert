@@ -39,7 +39,7 @@ class ContentEncodingParserTest {
 		assertThat(contentEncoding.toString()).isEqualTo(
 			"ContentEncoding{" +
 				"directives=[COMPRESS, IDENTITY]" +
-			"}"
+				"}"
 		);
 	}
 
@@ -51,7 +51,7 @@ class ContentEncodingParserTest {
 		assertThat(contentEncoding.toString()).isEqualTo(
 			"ContentEncoding{" +
 				"directives=[GZIP]" +
-			"}"
+				"}"
 		);
 	}
 }

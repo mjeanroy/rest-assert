@@ -58,7 +58,7 @@ class JsonObjectTest {
 			"{" +
 				"\"id\" : 1, " +
 				"\"name\" : \"John Doe\"" +
-			"}"
+				"}"
 		);
 	}
 
@@ -100,10 +100,10 @@ class JsonObjectTest {
 		assertThat(object.toString()).isEqualTo(
 			"JsonObject{" +
 				"entries={" +
-					"id=JsonEntry{key=id, value=1}, " +
-					"name=JsonEntry{key=name, value=John Doe}" +
+				"id=JsonEntry{key=id, value=1}, " +
+				"name=JsonEntry{key=name, value=John Doe}" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 }

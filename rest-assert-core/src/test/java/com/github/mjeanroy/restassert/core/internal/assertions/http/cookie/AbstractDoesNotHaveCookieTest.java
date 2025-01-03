@@ -29,8 +29,8 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,9 +52,9 @@ abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTest<Http
 	@Test
 	void it_should_pass_without_cookie() {
 		HttpResponse response = newResponse(new MockCookieBuilder()
-				.setName("foo")
-				.setValue("bar")
-				.build());
+			.setName("foo")
+			.setValue("bar")
+			.build());
 
 		AssertionResult result = run(response);
 		checkSuccess(result);

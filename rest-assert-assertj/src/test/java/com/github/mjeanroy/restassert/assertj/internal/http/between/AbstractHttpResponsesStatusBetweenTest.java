@@ -69,7 +69,8 @@ abstract class AbstractHttpResponsesStatusBetweenTest {
 			try {
 				run(info, httpResponse);
 				failBecauseExpectedAssertionErrorWasNotThrown();
-			} catch (AssertionError e) {
+			}
+			catch (AssertionError e) {
 				assertThat(e.getMessage()).isEqualTo(String.format("Expecting status code to be between %s and %s but was %s", start, end, status));
 			}
 		}

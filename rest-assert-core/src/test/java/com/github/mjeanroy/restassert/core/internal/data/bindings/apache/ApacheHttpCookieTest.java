@@ -104,8 +104,8 @@ class ApacheHttpCookieTest {
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		assertThatThrownBy(cookie::getMaxAge)
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
 
 	@Test
@@ -114,7 +114,7 @@ class ApacheHttpCookieTest {
 		Cookie cookie = ApacheHttpCookie.create(apacheHttpCookie);
 
 		assertThatThrownBy(cookie::isHttpOnly)
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
 	}
 }

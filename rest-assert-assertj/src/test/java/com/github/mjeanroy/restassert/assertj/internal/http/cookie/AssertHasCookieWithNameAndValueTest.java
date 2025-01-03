@@ -38,9 +38,9 @@ class AssertHasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 	@Override
 	Cookie cookie() {
 		return new MockCookieBuilder()
-				.setName(NAME)
-				.setValue(VALUE)
-				.build();
+			.setName(NAME)
+			.setValue(VALUE)
+			.build();
 	}
 
 	@Override

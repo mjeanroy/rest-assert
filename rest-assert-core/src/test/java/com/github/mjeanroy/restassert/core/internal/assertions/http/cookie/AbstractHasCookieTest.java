@@ -29,8 +29,8 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -60,15 +60,15 @@ abstract class AbstractHasCookieTest extends AbstractAssertionsTest<HttpResponse
 	@Test
 	void it_should_fail_without_expected_cookies() {
 		HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addCookie(new MockCookieBuilder()
-						.setName("foo1")
-						.setValue("bar1")
-						.build())
-				.addCookie(new MockCookieBuilder()
-						.setName("foo2")
-						.setValue("bar2")
-						.build())
-				.build();
+			.addCookie(new MockCookieBuilder()
+				.setName("foo1")
+				.setValue("bar1")
+				.build())
+			.addCookie(new MockCookieBuilder()
+				.setName("foo2")
+				.setValue("bar2")
+				.build())
+			.build();
 
 		AssertionResult result = run(rsp);
 

@@ -42,7 +42,7 @@ class MediaTypeTest {
 			"MediaType{" +
 				"type=text, " +
 				"subtype=plain" +
-			"}"
+				"}"
 		);
 	}
 
@@ -56,7 +56,7 @@ class MediaTypeTest {
 			"MediaType{" +
 				"type=application, " +
 				"subtype=json" +
-			"}"
+				"}"
 		);
 	}
 
@@ -70,7 +70,7 @@ class MediaTypeTest {
 			"MediaType{" +
 				"type=image, " +
 				"subtype=png" +
-			"}"
+				"}"
 		);
 	}
 
@@ -84,7 +84,7 @@ class MediaTypeTest {
 			"MediaType{" +
 				"type=video, " +
 				"subtype=ogg" +
-			"}"
+				"}"
 		);
 	}
 
@@ -98,7 +98,7 @@ class MediaTypeTest {
 			"MediaType{" +
 				"type=audio, " +
 				"subtype=mp3" +
-			"}"
+				"}"
 		);
 	}
 
@@ -110,42 +110,42 @@ class MediaTypeTest {
 	@Test
 	void it_should_fail_if_type_is_null() {
 		assertThatThrownBy(() -> new MediaType(null, "subtype"))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("MediaType type must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_type_is_empty() {
 		assertThatThrownBy(() -> new MediaType("", "subtype"))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("MediaType type must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_type_is_blank() {
 		assertThatThrownBy(() -> new MediaType("    ", "subtype"))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("MediaType type must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("MediaType type must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_subtype_is_null() {
 		assertThatThrownBy(() -> new MediaType("type", null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("MediaType subtype must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_subtype_is_empty() {
 		assertThatThrownBy(() -> new MediaType("type", ""))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("MediaType subtype must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("MediaType subtype must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_subtype_is_blank() {
 		assertThatThrownBy(() -> new MediaType("type", "    "))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("MediaType subtype must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("MediaType subtype must be defined");
 	}
 }

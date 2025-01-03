@@ -57,7 +57,7 @@ class ContentTypeTest {
 			"ContentType{" +
 				"mediaType=MediaType{type=application, subtype=json}, " +
 				"parameters={charset=Parameter{name=charset, value=utf-8}}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -76,7 +76,7 @@ class ContentTypeTest {
 			"ContentType{" +
 				"mediaType=MediaType{type=application, subtype=json}, " +
 				"parameters={}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -88,7 +88,7 @@ class ContentTypeTest {
 	@Test
 	void it_should_fail_if_media_type_is_null() {
 		assertThatThrownBy(() -> new ContentType(null, emptyMap()))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Media Type must not be null");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Media Type must not be null");
 	}
 }

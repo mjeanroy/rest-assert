@@ -42,9 +42,9 @@ class DoesNotHaveCookieTest extends AbstractDoesNotHaveCookieTest {
 	@Override
 	Cookie newCookie() {
 		return new MockCookieBuilder()
-				.setName(NAME)
-				.setValue("12345")
-				.build();
+			.setName(NAME)
+			.setValue("12345")
+			.build();
 	}
 
 	@Override

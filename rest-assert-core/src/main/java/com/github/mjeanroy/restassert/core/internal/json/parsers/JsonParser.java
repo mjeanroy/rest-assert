@@ -36,6 +36,7 @@ public interface JsonParser {
 
 	/**
 	 * Parse JSON representation and return object result.
+	 *
 	 * @param json Json string.
 	 * @return Object result.
 	 */

@@ -41,15 +41,15 @@ class ClassUtilsTest {
 	void it_should_get_public_methods() {
 		List<Method> methods = ClassUtils.findPublicMethods(Foo.class);
 		assertThat(methods)
-				.isNotNull()
-				.isNotEmpty()
-				.hasSize(1)
-				.are(new Condition<Method>() {
-					@Override
-					public boolean matches(Method method) {
-						return Modifier.isPublic(method.getModifiers());
-					}
-				});
+			.isNotNull()
+			.isNotEmpty()
+			.hasSize(1)
+			.are(new Condition<Method>() {
+				@Override
+				public boolean matches(Method method) {
+					return Modifier.isPublic(method.getModifiers());
+				}
+			});
 
 		Method method = methods.get(0);
 		assertThat(method.getName()).isEqualTo("publicMethod");
@@ -59,12 +59,12 @@ class ClassUtilsTest {
 	void it_should_turn_a_package_name_to_a_path() {
 		String path = ClassUtils.packageNameToDirectory("com.github.mjeanroy.restassert.generator.utils");
 		assertThat(path)
-				.isNotNull()
-				.isNotEmpty()
-				.isEqualTo(format(
-						"com%sgithub%smjeanroy%srestassert%sgenerator%sutils",
-						separator, separator, separator, separator, separator
-				));
+			.isNotNull()
+			.isNotEmpty()
+			.isEqualTo(format(
+				"com%sgithub%smjeanroy%srestassert%sgenerator%sutils",
+				separator, separator, separator, separator, separator
+			));
 	}
 
 	@SuppressWarnings("unused")

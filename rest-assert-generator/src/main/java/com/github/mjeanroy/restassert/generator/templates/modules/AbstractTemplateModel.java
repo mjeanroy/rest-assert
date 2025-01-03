@@ -168,8 +168,8 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 				}
 
 				final String name = paramType.isArray() ?
-						paramType.getComponentType().getName() + (i == size - 1 ? "..." : "[]") :
-						paramType.getName();
+					paramType.getComponentType().getName() + (i == size - 1 ? "..." : "[]") :
+					paramType.getName();
 
 				final String typeName = name.replace("$", ".");
 
@@ -186,7 +186,8 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 
 				args.add(new Arg(typeName, genericType, parameterName, i));
 			}
-		} else {
+		}
+		else {
 			args = emptyList();
 		}
 

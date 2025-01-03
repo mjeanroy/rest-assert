@@ -108,7 +108,7 @@ public final class HttpResponseAssertions {
 	 * Singleton object.
 	 */
 	private static final HttpResponseAssertions INSTANCE = new HttpResponseAssertions();
-	private static final Function<String, String[]> STRING_SPLIT = (input) ->input.split(",");
+	private static final Function<String, String[]> STRING_SPLIT = (input) -> input.split(",");
 
 	/**
 	 * Get singleton object.
@@ -1974,8 +1974,8 @@ public final class HttpResponseAssertions {
 	 */
 	public AssertionResult isJavascript(HttpResponse httpResponse) {
 		return hasMimeTypeIn(httpResponse, asList(
-				APPLICATION_JAVASCRIPT,
-				TEXT_JAVASCRIPT
+			APPLICATION_JAVASCRIPT,
+			TEXT_JAVASCRIPT
 		));
 	}
 
@@ -2065,7 +2065,7 @@ public final class HttpResponseAssertions {
 
 	/**
 	 * Check that HTTP response has expected charset (the response charset is the one specified in
-	 * 	 * the {@code "Content-Type"} header).
+	 * * the {@code "Content-Type"} header).
 	 *
 	 * @param httpResponse HTTP response to be tested.
 	 * @param expectedCharset Expected charset.

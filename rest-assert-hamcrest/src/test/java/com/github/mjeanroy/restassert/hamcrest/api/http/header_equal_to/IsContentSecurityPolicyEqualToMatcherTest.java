@@ -38,13 +38,13 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 class IsContentSecurityPolicyEqualToMatcherTest extends AbstractHeaderEqualToMatcherTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
-			.addDefaultSrc(none())
-			.addScriptSrc(self(), unsafeEval(), unsafeInline())
-			.addStyleSrc(unsafeInline())
-			.addFontSrc(self())
-			.addObjectSrc(self())
-			.addFormAction(self())
-			.build();
+		.addDefaultSrc(none())
+		.addScriptSrc(self(), unsafeEval(), unsafeInline())
+		.addStyleSrc(unsafeInline())
+		.addFontSrc(self())
+		.addObjectSrc(self())
+		.addFormAction(self())
+		.build();
 
 	private static final ContentSecurityPolicy FAILED_VALUE = ContentSecurityPolicy.builder()
 		.addDefaultSrc(self())

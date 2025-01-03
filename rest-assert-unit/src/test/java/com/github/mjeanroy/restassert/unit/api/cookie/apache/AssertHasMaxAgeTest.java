@@ -37,15 +37,15 @@ class AssertHasMaxAgeTest {
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertHasMaxAge(cookie, 0L))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
 
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertHasMaxAge("message", cookie, 0L))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.apache.http.cookie.Cookie does not support #getMaxAge(), please use #getExpires() instead.");
 	}
 }

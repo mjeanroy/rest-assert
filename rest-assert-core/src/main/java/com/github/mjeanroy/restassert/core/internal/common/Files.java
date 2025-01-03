@@ -48,7 +48,8 @@ public final class Files {
 		try {
 			List<String> lines = java.nio.file.Files.readAllLines(file, Charset.defaultCharset());
 			return String.join(System.lineSeparator(), lines);
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new UnreadableFileException(file, ex);
 		}
 	}
@@ -66,6 +67,7 @@ public final class Files {
 
 		/**
 		 * Create exception.
+		 *
 		 * @param ex Original exception.
 		 */
 		private UnreadableFileException(Path path, IOException ex) {

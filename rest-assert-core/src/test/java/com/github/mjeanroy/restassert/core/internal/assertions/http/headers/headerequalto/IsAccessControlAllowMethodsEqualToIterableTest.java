@@ -50,9 +50,9 @@ class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpHeaderE
 	private static final String NAME = HEADER.getName();
 	private static final String VALUE = String.join(", ", asList(V1, V2, V3));
 	private static final List<RequestMethod> VALUES = asList(
-			RequestMethod.valueOf(V1),
-			RequestMethod.valueOf(V2),
-			RequestMethod.valueOf(V3)
+		RequestMethod.valueOf(V1),
+		RequestMethod.valueOf(V2),
+		RequestMethod.valueOf(V3)
 	);
 
 	@Override

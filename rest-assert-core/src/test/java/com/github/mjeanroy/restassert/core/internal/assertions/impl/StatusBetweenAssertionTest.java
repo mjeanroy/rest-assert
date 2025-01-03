@@ -67,21 +67,21 @@ class StatusBetweenAssertionTest {
 	@Test
 	void it_should_fail_if_status_start_is_negative() {
 		assertThatThrownBy(() -> new StatusBetweenAssertion(-1, 200))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Http status code must be positive");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Http status code must be positive");
 	}
 
 	@Test
 	void it_should_fail_if_status_end_is_negative() {
 		assertThatThrownBy(() -> new StatusBetweenAssertion(200, -1))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Http status code must be positive");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Http status code must be positive");
 	}
 
 	@Test
 	void it_should_fail_if_status_start_is_greater_than_end() {
 		assertThatThrownBy(() -> new StatusBetweenAssertion(201, 200))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Lower bound must be strictly less than upper bound");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Lower bound must be strictly less than upper bound");
 	}
 }

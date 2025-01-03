@@ -39,7 +39,7 @@ public final class Header {
 	/**
 	 * Create new header.
 	 *
-	 * @param name  Header name.
+	 * @param name Header name.
 	 * @param value Header value.
 	 * @return Header.
 	 */

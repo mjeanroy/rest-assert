@@ -50,8 +50,8 @@ class HasCharsetTest extends AbstractHttpResponseAssertionsCharsetTest {
 		String expected = "UTF-8";
 		String actual = "utf-8";
 		HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(NAME, "application/json; charset=" + actual)
-				.build();
+			.addHeader(NAME, "application/json; charset=" + actual)
+			.build();
 
 		// WHEN
 		AssertionResult result = assertions.hasCharset(rsp, expected);

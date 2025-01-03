@@ -64,21 +64,21 @@ class DoesNotHaveHeaderAssertionTest {
 	@Test
 	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(() -> new DoesNotHaveHeaderAssertion(null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(() -> new DoesNotHaveHeaderAssertion(""))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(() -> new DoesNotHaveHeaderAssertion("   "))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 }

@@ -76,7 +76,7 @@ class CacheControlTest {
 				"maxAge=null, " +
 				"sMaxAge=null, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -124,7 +124,7 @@ class CacheControlTest {
 				"maxAge=null, " +
 				"sMaxAge=null, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -172,7 +172,7 @@ class CacheControlTest {
 				"maxAge=3600, " +
 				"sMaxAge=null, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -220,7 +220,7 @@ class CacheControlTest {
 				"maxAge=3600, " +
 				"sMaxAge=null, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -316,7 +316,7 @@ class CacheControlTest {
 				"maxAge=3600, " +
 				"sMaxAge=null, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -364,7 +364,7 @@ class CacheControlTest {
 				"maxAge=3600, " +
 				"sMaxAge=null, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -412,7 +412,7 @@ class CacheControlTest {
 				"maxAge=3600, " +
 				"sMaxAge=1000, " +
 				"immutable=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -460,7 +460,7 @@ class CacheControlTest {
 				"maxAge=3600, " +
 				"sMaxAge=1000, " +
 				"immutable=true" +
-			"}"
+				"}"
 		);
 	}
 

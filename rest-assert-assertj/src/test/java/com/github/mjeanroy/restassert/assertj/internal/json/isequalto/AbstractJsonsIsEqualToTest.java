@@ -51,7 +51,8 @@ abstract class AbstractJsonsIsEqualToTest<T> {
 		try {
 			run(info, json);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			String expectedMessage = String.join(System.lineSeparator(), asList(
 				"Expecting json entry \"str\" to be equal to \"bar\" but was \"foo\",",
 				"Expecting json entry \"nb\" to be equal to 2.0 but was 1.0,",

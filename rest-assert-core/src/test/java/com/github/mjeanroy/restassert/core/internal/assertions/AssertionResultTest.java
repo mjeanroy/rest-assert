@@ -55,7 +55,7 @@ class AssertionResultTest {
 	@Test
 	void it_should_fail_if_error_object_is_null_with_a_failure() {
 		assertThatThrownBy(() -> failure(null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Error object must not be null");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Error object must not be null");
 	}
 }

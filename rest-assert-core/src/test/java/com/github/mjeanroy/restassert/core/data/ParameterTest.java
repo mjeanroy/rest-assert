@@ -42,7 +42,7 @@ class ParameterTest {
 			"Parameter{" +
 				"name=foo, " +
 				"value=bar" +
-			"}"
+				"}"
 		);
 	}
 
@@ -56,7 +56,7 @@ class ParameterTest {
 			"Parameter{" +
 				"name=foo, " +
 				"value=bar" +
-			"}"
+				"}"
 		);
 	}
 
@@ -70,7 +70,7 @@ class ParameterTest {
 			"Parameter{" +
 				"name=foo, " +
 				"value=bar" +
-			"}"
+				"}"
 		);
 	}
 
@@ -84,7 +84,7 @@ class ParameterTest {
 			"Parameter{" +
 				"name=foo, " +
 				"value=bar" +
-			"}"
+				"}"
 		);
 	}
 
@@ -96,28 +96,28 @@ class ParameterTest {
 	@Test
 	void it_should_not_create_parameter_with_null_name() {
 		assertThatThrownBy(() -> Parameter.parameter(null, "bar"))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Parameter name must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
 	void it_should_not_create_parameter_with_empty_name() {
 		assertThatThrownBy(() -> Parameter.parameter("", "bar"))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Parameter name must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Parameter name must be defined");
 	}
 
 	@Test
 	void it_should_not_create_parameter_with_null_value() {
 		assertThatThrownBy(() -> Parameter.parameter("foo", null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Parameter value must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Parameter value must be defined");
 	}
 
 	@Test
 	void it_should_not_parse_parameter_with_null_raw_value() {
 		assertThatThrownBy(() -> Parameter.parse(null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Parameter raw value must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Parameter raw value must be defined");
 	}
 }

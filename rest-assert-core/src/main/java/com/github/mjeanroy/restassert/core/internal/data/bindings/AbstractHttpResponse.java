@@ -52,7 +52,8 @@ public abstract class AbstractHttpResponse implements HttpResponse {
 	public String getContent() {
 		try {
 			return doGetContent();
-		} catch (IOException ex) {
+		}
+		catch (IOException ex) {
 			throw new NonParsableResponseBodyException(ex);
 		}
 	}

@@ -61,9 +61,9 @@ public class OkHttpResponseBuilder extends AbstractHttpResponseBuilder<Response,
 	@Override
 	public Response build() {
 		Response.Builder builder = new Response.Builder()
-				.request(request)
-				.protocol(protocol)
-				.code(status);
+			.request(request)
+			.protocol(protocol)
+			.code(status);
 
 		if (content != null) {
 			builder.body(new OkHttpResponseBodyBuilder().setBody(content).build());

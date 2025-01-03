@@ -59,10 +59,10 @@ public final class PreConditions {
 	 *
 	 * @param list Collection to check.
 	 * @param message Error message if {@code obj} is blank.
+	 * @param <T> Type of elements in given iterable.
 	 * @return Original {@code obj}.
 	 * @throws NullPointerException If {@code obj} is null.
 	 * @throws IllegalArgumentException If {@code obj} is empty.
-	 * @param <T> Type of elements in given iterable.
 	 */
 	public static <T> Iterable<T> notEmpty(Iterable<T> list, String message) {
 		notNull(list, message);
@@ -78,10 +78,10 @@ public final class PreConditions {
 	 *
 	 * @param list Collection to check.
 	 * @param message Error message if {@code obj} is blank.
+	 * @param <T> Type of elements in given collection.
 	 * @return Original {@code obj}.
 	 * @throws NullPointerException If {@code obj} is null.
 	 * @throws IllegalArgumentException If {@code obj} is empty.
-	 * @param <T> Type of elements in given collection.
 	 */
 	public static <T> Collection<T> notEmpty(Collection<T> list, String message) {
 		notNull(list, message);
@@ -181,6 +181,7 @@ public final class PreConditions {
 
 	/**
 	 * Check that given string match given pattern.
+	 *
 	 * @param value String value.
 	 * @param pattern Pattern to check.
 	 * @param message Error message.

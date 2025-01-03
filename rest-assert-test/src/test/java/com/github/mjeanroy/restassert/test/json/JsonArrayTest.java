@@ -73,13 +73,13 @@ class JsonArrayTest {
 			"{" +
 				"\"id\" : 1, " +
 				"\"name\": \"John Doe\"" +
-			"}";
+				"}";
 
 		String json2 =
 			"{" +
 				"\"id\" : 2, " +
 				"\"name\": \"Jane Doe\"" +
-			"}";
+				"}";
 
 		JsonValue o1 = newJsonObject(json1);
 		JsonValue o2 = newJsonObject(json2);
@@ -90,7 +90,7 @@ class JsonArrayTest {
 			"[" +
 				"{\"id\" : 1, \"name\": \"John Doe\"}," +
 				"{\"id\" : 2, \"name\": \"Jane Doe\"}" +
-			"]"
+				"]"
 		);
 
 		assertThat(array.getValues()).isEqualTo(asList(o1, o2));

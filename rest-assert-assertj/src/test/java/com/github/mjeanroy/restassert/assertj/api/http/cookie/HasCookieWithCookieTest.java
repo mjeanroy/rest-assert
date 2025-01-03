@@ -39,9 +39,9 @@ class HasCookieWithCookieTest extends AbstractCookieTest {
 	private static final String NAME = "JSESSIONID";
 	private static final String VALUE = "12345";
 	private static final Cookie COOKIE = new MockCookieBuilder()
-			.setName(NAME)
-			.setValue(VALUE)
-			.build();
+		.setName(NAME)
+		.setValue(VALUE)
+		.build();
 
 	@Override
 	protected HttpResponseAssert run() {

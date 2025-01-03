@@ -88,8 +88,8 @@ class IsFrameOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTest {
 		HttpResponse response = new HttpResponseBuilderImpl().addHeader(NAME, actual).build();
 
 		assertThatThrownBy(() -> assertions.isFrameOptionsEqualTo(response, expected))
-				.isExactlyInstanceOf(InvalidHeaderValue.class)
-				.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
+			.isExactlyInstanceOf(InvalidHeaderValue.class)
+			.hasMessage("X-Frame-Options value 'same-origin' is not a valid one.");
 	}
 
 	private static void doTest(String actual, String expected) {

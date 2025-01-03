@@ -69,26 +69,26 @@ public final class Cookies {
 	 * @throws IllegalArgumentException If {@code name} is empty or blank.
 	 */
 	public static Cookie newCookie(
-			String name,
-			String value,
-			String domain,
-			String path,
-			boolean secure,
-			boolean httpOnly,
-			SameSite sameSite,
-			Long maxAge,
-			Date expires) {
+		String name,
+		String value,
+		String domain,
+		String path,
+		boolean secure,
+		boolean httpOnly,
+		SameSite sameSite,
+		Long maxAge,
+		Date expires) {
 
 		return new DefaultCookie(
-				notBlank(name, "Cookie name must be defined"),
-				notNull(value, "Cookie value must not be null"),
-				domain,
-				path,
-				secure,
-				httpOnly,
-				sameSite,
-				maxAge,
-				expires
+			notBlank(name, "Cookie name must be defined"),
+			notNull(value, "Cookie value must not be null"),
+			domain,
+			path,
+			secure,
+			httpOnly,
+			sameSite,
+			maxAge,
+			expires
 		);
 	}
 
@@ -128,14 +128,14 @@ public final class Cookies {
 		}
 
 		return Objects.equals(c1.getName(), c2.getName())
-				&& Objects.equals(c1.getValue(), c2.getValue())
-				&& Objects.equals(c1.getDomain(), c2.getDomain())
-				&& Objects.equals(c1.getPath(), c2.getPath())
-				&& Objects.equals(c1.isSecured(), c2.isSecured())
-				&& Objects.equals(c1.isHttpOnly(), c2.isHttpOnly())
-				&& Objects.equals(c1.getSameSite(), c2.getSameSite())
-				&& Objects.equals(c1.getMaxAge(), c2.getMaxAge())
-				&& Objects.equals(c1.getExpires(), c2.getExpires());
+			&& Objects.equals(c1.getValue(), c2.getValue())
+			&& Objects.equals(c1.getDomain(), c2.getDomain())
+			&& Objects.equals(c1.getPath(), c2.getPath())
+			&& Objects.equals(c1.isSecured(), c2.isSecured())
+			&& Objects.equals(c1.isHttpOnly(), c2.isHttpOnly())
+			&& Objects.equals(c1.getSameSite(), c2.getSameSite())
+			&& Objects.equals(c1.getMaxAge(), c2.getMaxAge())
+			&& Objects.equals(c1.getExpires(), c2.getExpires());
 	}
 
 	/**
@@ -178,17 +178,23 @@ public final class Cookies {
 
 			if (attrName.equalsIgnoreCase("domain")) {
 				domain = parseDomain(attrValue);
-			} else if (attrName.equalsIgnoreCase("path")) {
+			}
+			else if (attrName.equalsIgnoreCase("path")) {
 				path = parsePath(attrValue);
-			} else if (attrName.equalsIgnoreCase("secure")) {
+			}
+			else if (attrName.equalsIgnoreCase("secure")) {
 				secure = parseSecure();
-			} else if (attrName.equalsIgnoreCase("httponly")) {
+			}
+			else if (attrName.equalsIgnoreCase("httponly")) {
 				httpOnly = parseHttpOnly();
-			} else if (attrName.equalsIgnoreCase("max-age")) {
+			}
+			else if (attrName.equalsIgnoreCase("max-age")) {
 				maxAge = parseMaxAge(attrValue);
-			} else if (attrName.equalsIgnoreCase("expires")) {
+			}
+			else if (attrName.equalsIgnoreCase("expires")) {
 				expires = parseExpires(attrValue);
-			} else if (attrName.equalsIgnoreCase("samesite")) {
+			}
+			else if (attrName.equalsIgnoreCase("samesite")) {
 				sameSite = parseSameSite(attrValue);
 			}
 		}
@@ -242,8 +248,8 @@ public final class Cookies {
 		}
 
 		return new String[]{
-				nameValuePair.toString(),
-				unparsedAttributes.toString()
+			nameValuePair.toString(),
+			unparsedAttributes.toString()
 		};
 	}
 
@@ -300,7 +306,7 @@ public final class Cookies {
 			throw new IllegalArgumentException("Set-Cookie header must have a name");
 		}
 
-		return new String[]{name, value};
+		return new String[]{ name, value };
 	}
 
 	private static MetaDataAttribute parseNextPart(char[] attributes, int pos) {
@@ -326,9 +332,9 @@ public final class Cookies {
 		}
 
 		return new MetaDataAttribute(
-				field.toString(),
-				name.toString().trim(),
-				value.toString().trim()
+			field.toString(),
+			name.toString().trim(),
+			value.toString().trim()
 		);
 	}
 
@@ -426,12 +432,15 @@ public final class Cookies {
 				hour = Integer.parseInt(matcher.group(1));
 				minute = Integer.parseInt(matcher.group(2));
 				second = Integer.parseInt(matcher.group(3));
-			} else if (dayOfMonth == -1 && matcher.usePattern(DAY_OF_MONTH_PATTERN).matches()) {
+			}
+			else if (dayOfMonth == -1 && matcher.usePattern(DAY_OF_MONTH_PATTERN).matches()) {
 				dayOfMonth = Integer.parseInt(matcher.group(1));
-			} else if (month == -1 && matcher.usePattern(MONTH_PATTERN).matches()) {
+			}
+			else if (month == -1 && matcher.usePattern(MONTH_PATTERN).matches()) {
 				String monthString = matcher.group(1).toLowerCase(Locale.US);
 				month = MONTH_PATTERN.pattern().indexOf(monthString) / 4;
-			} else if (year == -1 && matcher.usePattern(YEAR_PATTERN).matches()) {
+			}
+			else if (year == -1 && matcher.usePattern(YEAR_PATTERN).matches()) {
 				year = Integer.parseInt(matcher.group(1));
 			}
 		}
@@ -480,7 +489,8 @@ public final class Cookies {
 					tokens.add(currentToken.toString());
 					currentToken = new StringBuilder();
 				}
-			} else {
+			}
+			else {
 				currentToken.append(c);
 			}
 		}
@@ -490,10 +500,10 @@ public final class Cookies {
 
 	private static boolean isNonDelimiter(char c) {
 		return (c < ' ' && c != '\t') || (c >= '\u007f')
-				|| (c >= '0' && c <= '9')
-				|| (c >= 'a' && c <= 'z')
-				|| (c >= 'A' && c <= 'Z')
-				|| (c == ':');
+			|| (c >= '0' && c <= '9')
+			|| (c >= 'a' && c <= 'z')
+			|| (c >= 'A' && c <= 'Z')
+			|| (c == ':');
 	}
 
 	private static boolean isDelimiter(char c) {

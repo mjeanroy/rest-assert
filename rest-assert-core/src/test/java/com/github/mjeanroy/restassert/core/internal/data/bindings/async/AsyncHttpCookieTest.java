@@ -107,7 +107,7 @@ class AsyncHttpCookieTest {
 		Cookie cookie = AsyncHttpCookie.create(asyncHttpCookie);
 
 		assertThatThrownBy(cookie::getExpires)
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.asynchttpclient.cookie.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.asynchttpclient.cookie.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
 	}
 }

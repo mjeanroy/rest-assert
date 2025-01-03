@@ -57,11 +57,11 @@ abstract class AbstractHttpResponseIntegrationTest {
 
 	private void stubGetRequest() {
 		stubFor(get(urlEqualTo(path))
-				.willReturn(aResponse()
-						.withHeader("Content-Type", "application/json")
-						.withHeader("X-Auth-Token", uuid)
-						.withHeader("Set-Cookie", "foo=bar")
-						.withBody(body)));
+			.willReturn(aResponse()
+				.withHeader("Content-Type", "application/json")
+				.withHeader("X-Auth-Token", uuid)
+				.withHeader("Set-Cookie", "foo=bar")
+				.withBody(body)));
 	}
 
 	@Test
@@ -101,7 +101,7 @@ abstract class AbstractHttpResponseIntegrationTest {
 		assertThat(response.getCookies()).hasSize(1)
 			.extracting("name", "value")
 			.containsOnly(
-					tuple("foo", "bar")
+				tuple("foo", "bar")
 			);
 	}
 

@@ -90,8 +90,8 @@ public final class IOUtils {
 	 */
 	public static String read(InputStream in, String prepend) {
 		try (
-				InputStreamReader is = new InputStreamReader(in);
-				BufferedReader br = new BufferedReader(is)
+			InputStreamReader is = new InputStreamReader(in);
+			BufferedReader br = new BufferedReader(is)
 		) {
 
 			String prependString = prepend == null ? "" : prepend;

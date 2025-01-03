@@ -105,7 +105,7 @@ public final class ContentEncoding implements HttpHeaderValue {
 		 *
 		 * @param value The value.
 		 */
-		Directive (String value) {
+		Directive(String value) {
 			this.value = value;
 		}
 

@@ -65,7 +65,7 @@ public class DefaultJsonComparator implements JsonComparator {
 	/**
 	 * Create new comparator with custom option.
 	 *
-	 * @param parser  Parser used to extract json data.
+	 * @param parser Parser used to extract json data.
 	 */
 	public DefaultJsonComparator(JsonParser parser) {
 		this.parser = parser;
@@ -93,7 +93,8 @@ public class DefaultJsonComparator implements JsonComparator {
 			Map<String, Object> actualMap = parser.parseObject(actual);
 			Map<String, Object> expectedMap = parser.parseObject(expected);
 			return compareObjects(actualMap, expectedMap);
-		} else {
+		}
+		else {
 			List<Object> actualArray = parser.parseArray(actual);
 			List<Object> expectedArray = parser.parseArray(expected);
 			return compareArrays(actualArray, expectedArray);
@@ -103,7 +104,8 @@ public class DefaultJsonComparator implements JsonComparator {
 	private RestAssertJsonError checkType(String actual, String expected) {
 		if (isObject(actual) && isArray(expected)) {
 			return shouldBeAnArray();
-		} else if (isArray(actual) && isObject(expected)) {
+		}
+		else if (isArray(actual) && isObject(expected)) {
 			// It should be an object
 			return shouldBeAnObject();
 		}
@@ -154,7 +156,8 @@ public class DefaultJsonComparator implements JsonComparator {
 		JsonType expectedType = parseType(expectedObject);
 		if (actualType != expectedType) {
 			errors.add(shouldBeEntryOf(contexts.get().toPath(key), actualType, expectedType));
-		} else {
+		}
+		else {
 			// Same types, check values
 			if (actualType == JsonType.OBJECT) {
 				@SuppressWarnings("unchecked") Map<String, Object> newActual = (Map<String, Object>) actualObject;
@@ -164,7 +167,8 @@ public class DefaultJsonComparator implements JsonComparator {
 				contexts.get().append(key);
 				errors.addAll(compareObjects(newActual, newExpected));
 				contexts.get().remove();
-			} else if (actualType == JsonType.ARRAY) {
+			}
+			else if (actualType == JsonType.ARRAY) {
 				@SuppressWarnings("unchecked") List<Object> newActualArray = (List<Object>) actualObject;
 				@SuppressWarnings("unchecked") List<Object> newExpectedArray = (List<Object>) expectedObject;
 
@@ -172,7 +176,8 @@ public class DefaultJsonComparator implements JsonComparator {
 				contexts.get().append(key);
 				errors.addAll(compareArrays(newActualArray, newExpectedArray));
 				contexts.get().remove();
-			} else if (actualType != JsonType.NULL && !actualObject.equals(expectedObject)) {
+			}
+			else if (actualType != JsonType.NULL && !actualObject.equals(expectedObject)) {
 				// Not null and not equals
 				errors.add(shouldHaveEntryEqualTo(contexts.get().toPath(key), actualObject, expectedObject));
 			}
@@ -206,11 +211,11 @@ public class DefaultJsonComparator implements JsonComparator {
 
 	private static boolean isObject(String json) {
 		return json.charAt(0) == '{' &&
-				json.charAt(json.length() - 1) == '}';
+			json.charAt(json.length() - 1) == '}';
 	}
 
 	private static boolean isArray(String json) {
 		return json.charAt(0) == '[' &&
-				json.charAt(json.length() - 1) == ']';
+			json.charAt(json.length() - 1) == ']';
 	}
 }

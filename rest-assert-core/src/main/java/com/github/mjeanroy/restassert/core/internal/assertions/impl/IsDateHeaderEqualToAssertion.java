@@ -79,7 +79,7 @@ public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion
 		log.debug("-> Following dates extracted: {}", actualDates);
 		log.debug("-> Try to find: {}", value);
 		return actualDates.contains(value) ?
-				success() :
-				failure(shouldHaveHeaderWithValue(name, value, values));
+			success() :
+			failure(shouldHaveHeaderWithValue(name, value, values));
 	}
 }

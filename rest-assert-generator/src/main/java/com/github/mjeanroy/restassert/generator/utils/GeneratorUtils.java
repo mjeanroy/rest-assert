@@ -12,7 +12,7 @@ public final class GeneratorUtils {
 	/**
 	 * Generate assertion method name.
 	 * This will build a method name such as:
-	 *   isOk ==> assertIsOk
+	 * isOk ==> assertIsOk
 	 *
 	 * @param methodName Method name.
 	 * @return Assertion method name.

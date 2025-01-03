@@ -58,17 +58,17 @@ public enum HamcrestProcessor implements Processor {
 	 * matchers static factories.
 	 */
 	HTTP_RESPONSE_MATCHERS(
-			httpResponseMatchersTemplate(),
-			asList(
-				apacheHttpResponseMatchers(),
-				asyncHttpResponseMatchers(),
-				coreHttpResponseMatchers(),
-				googleHttpResponseMatchers(),
-				junitServersHttpResponseMatchers(),
-				ningHttpResponseMatchers(),
-				okHttpResponseMatchers(),
-				springMockMvcHttpResponseMatchers()
-			)
+		httpResponseMatchersTemplate(),
+		asList(
+			apacheHttpResponseMatchers(),
+			asyncHttpResponseMatchers(),
+			coreHttpResponseMatchers(),
+			googleHttpResponseMatchers(),
+			junitServersHttpResponseMatchers(),
+			ningHttpResponseMatchers(),
+			okHttpResponseMatchers(),
+			springMockMvcHttpResponseMatchers()
+		)
 	),
 
 	/**
@@ -76,10 +76,10 @@ public enum HamcrestProcessor implements Processor {
 	 * matchers static factories.
 	 */
 	JSON_MATCHERS(
-			jsonMatchersTemplate(),
-			singletonList(
-				jsonMatchers()
-			)
+		jsonMatchersTemplate(),
+		singletonList(
+			jsonMatchers()
+		)
 	);
 
 	/**

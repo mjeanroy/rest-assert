@@ -62,7 +62,7 @@ class IsEqualToURLTest extends AbstractJsonAssertion_isEqualTo_Test<URL> {
 		URL url = null;
 		String actual = "{}";
 		assertThatThrownBy(() -> assertions.isEqualTo(actual, url))
-				.isExactlyInstanceOf(AssertionError.class)
-				.hasMessage("Cannot extract expected JSON from <null> URL");
+			.isExactlyInstanceOf(AssertionError.class)
+			.hasMessage("Cannot extract expected JSON from <null> URL");
 	}
 }

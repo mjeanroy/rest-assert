@@ -44,7 +44,7 @@ class FrameOptionsTest {
 			"FrameOptions{" +
 				"directive=DENY, " +
 				"options=[]" +
-			"}"
+				"}"
 		);
 	}
 
@@ -91,7 +91,7 @@ class FrameOptionsTest {
 			"FrameOptions{" +
 				"directive=ALLOW_FROM, " +
 				"options=[https://example.com]" +
-			"}"
+				"}"
 		);
 	}
 

@@ -42,7 +42,7 @@ class ContentEncodingTest {
 		assertThat(contentEncoding.toString()).isEqualTo(
 			"ContentEncoding{" +
 				"directives=[GZIP]" +
-			"}"
+				"}"
 		);
 	}
 
@@ -54,7 +54,7 @@ class ContentEncodingTest {
 		assertThat(contentEncoding.toString()).isEqualTo(
 			"ContentEncoding{" +
 				"directives=[DEFLATE]" +
-			"}"
+				"}"
 		);
 	}
 
@@ -66,7 +66,7 @@ class ContentEncodingTest {
 		assertThat(contentEncoding.toString()).isEqualTo(
 			"ContentEncoding{" +
 				"directives=[BR]" +
-			"}"
+				"}"
 		);
 	}
 
@@ -82,7 +82,7 @@ class ContentEncodingTest {
 		assertThat(contentEncoding.toString()).isEqualTo(
 			"ContentEncoding{" +
 				"directives=[COMPRESS, IDENTITY]" +
-			"}"
+				"}"
 		);
 	}
 

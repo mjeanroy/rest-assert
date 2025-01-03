@@ -206,15 +206,15 @@ public final class CacheControl implements HttpHeaderValue {
 	private final boolean immutable;
 
 	CacheControl(
-			Visibility visibility,
-			boolean noStore,
-			boolean noCache,
-			boolean noTransform,
-			boolean mustRevalidate,
-			boolean proxyRevalidate,
-			Long maxAge,
-			Long sMaxAge,
-			boolean immutable) {
+		Visibility visibility,
+		boolean noStore,
+		boolean noCache,
+		boolean noTransform,
+		boolean mustRevalidate,
+		boolean proxyRevalidate,
+		Long maxAge,
+		Long sMaxAge,
+		boolean immutable) {
 
 		this.visibility = visibility;
 		this.noCache = noCache;

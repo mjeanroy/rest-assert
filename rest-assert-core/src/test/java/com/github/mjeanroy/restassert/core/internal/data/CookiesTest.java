@@ -82,16 +82,16 @@ class CookiesTest {
 		Cookie cookie = newCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 
 		assertThat(cookie.toString()).isEqualTo(
-				"DefaultCookie{" +
-						"name=name, " +
-						"value=value, " +
-						"domain=domain.com, " +
-						"path=/, " +
-						"secure=true, " +
-						"httpOnly=true, " +
-						"sameSite=LAX, " +
-						"maxAge=3600, " +
-						"expires=Thu Apr 21 18:21:35 UTC 2016" +
+			"DefaultCookie{" +
+				"name=name, " +
+				"value=value, " +
+				"domain=domain.com, " +
+				"path=/, " +
+				"secure=true, " +
+				"httpOnly=true, " +
+				"sameSite=LAX, " +
+				"maxAge=3600, " +
+				"expires=Thu Apr 21 18:21:35 UTC 2016" +
 				"}"
 		);
 	}
@@ -99,9 +99,9 @@ class CookiesTest {
 	@Test
 	void it_should_not_parse_empty_set_cookie_header() {
 		assertThatThrownBy(() -> Cookies.parse("  "))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header Set-Cookie must be defined");
-}
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header Set-Cookie must be defined");
+	}
 
 	@Test
 	void it_should_parse_set_cookie() {
@@ -176,32 +176,32 @@ class CookiesTest {
 	void it_should_fail_if_max_age_is_a_float() {
 		String value = "user_session=foobar==; domain=github.com; path=/; max-age=-3600.5; secure; HttpOnly";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Max-Age is not a valid number");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Max-Age is not a valid number");
 	}
 
 	@Test
 	void it_should_fail_if_max_age_is_not_a_number() {
 		String value = "user_session=foobar==; domain=github.com; path=/; max-age=-3600ab; secure; HttpOnly";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Max-Age is not a valid number");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Max-Age is not a valid number");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_does_not_have_a_name() {
 		String value = "=foobar; domain=github.com; path=/; max-age=-3600; secure; HttpOnly";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Set-Cookie header must have a name");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Set-Cookie header must have a name");
 	}
 
 	@Test
 	void it_should_not_parse_set_cookie_if_it_does_not_have_a_value() {
 		String value = "user_session";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Set-Cookie header must have a value");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Set-Cookie header must have a value");
 	}
 
 	@Test
@@ -241,8 +241,8 @@ class CookiesTest {
 
 			assertThat(cookie).isNotNull();
 			assertThat(cookie.getExpires())
-					.isNotNull()
-					.hasYear(1900 + i);
+				.isNotNull()
+				.hasYear(1900 + i);
 		}
 	}
 
@@ -262,48 +262,48 @@ class CookiesTest {
 	void it_should_fail_if_year_is_less_than_1601() {
 		String value = "name=value; expires=Thu, 21 Apr 1600 18:21:35 +0000";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Expires year must be greater than 1601");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Expires year must be greater than 1601");
 	}
 
 	@Test
 	void it_should_fail_if_day_is_less_than_1() {
 		String value = "name=value; expires=Thu, 0 Apr 2016 18:21:35 +0000";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Expires day cannot be less than 1 or greater than 31");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Expires day cannot be less than 1 or greater than 31");
 	}
 
 	@Test
 	void it_should_fail_if_day_is_greater_than_31() {
 		String value = "name=value; expires=Thu, 32 Apr 2016 18:21:35 +0000";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Expires day cannot be less than 1 or greater than 31");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Expires day cannot be less than 1 or greater than 31");
 	}
 
 	@Test
 	void it_should_fail_if_hours_is_greater_than_23() {
 		String value = "name=value; expires=Thu, 10 Apr 2016 24:21:35 +0000";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Expires hour cannot be less than 0 or greater than 23");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Expires hour cannot be less than 0 or greater than 23");
 	}
 
 	@Test
 	void it_should_fail_if_minutes_is_greater_than_59() {
 		String value = "name=value; expires=Thu, 10 Apr 2016 18:60:35 +0000";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Expires minutes cannot be less than 0 or greater than 59");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Expires minutes cannot be less than 0 or greater than 59");
 	}
 
 	@Test
 	void it_should_fail_if_seconds_is_greater_than_59() {
 		String value = "name=value; expires=Thu, 10 Apr 2016 18:30:60 +0000";
 		assertThatThrownBy(() -> Cookies.parse(value))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Expires second cannot be less than 0 or greater than 59");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Expires second cannot be less than 0 or greater than 59");
 	}
 
 	@Test
@@ -315,17 +315,17 @@ class CookiesTest {
 		String domain = "domain.com";
 		String path = "path";
 		Cookie c1 = new MockCookieBuilder()
-				.setName("foo")
-				.setValue("bar")
-				.setDomain(domain)
-				.setPath(path)
-				.build();
+			.setName("foo")
+			.setValue("bar")
+			.setDomain(domain)
+			.setPath(path)
+			.build();
 
 		Cookie c2 = new MockCookieBuilder()
-				.setName("foo")
-				.setValue("bar")
-				.setDomain(domain)
-				.build();
+			.setName("foo")
+			.setValue("bar")
+			.setDomain(domain)
+			.build();
 
 		assertThat(Cookies.equals(c1, c1)).isTrue();
 		assertThat(Cookies.equals(c1, c2)).isFalse();

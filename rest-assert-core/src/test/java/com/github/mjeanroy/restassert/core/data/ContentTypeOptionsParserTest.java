@@ -50,7 +50,7 @@ class ContentTypeOptionsParserTest {
 	@Test
 	void it_should_failed_to_parse_invalid_value() {
 		assertThatThrownBy(() -> parser.parse("foo"))
-				.isExactlyInstanceOf(InvalidHeaderValue.class)
-				.hasMessage("X-Content-Type-Options value 'foo' is not a valid one.");
+			.isExactlyInstanceOf(InvalidHeaderValue.class)
+			.hasMessage("X-Content-Type-Options value 'foo' is not a valid one.");
 	}
 }

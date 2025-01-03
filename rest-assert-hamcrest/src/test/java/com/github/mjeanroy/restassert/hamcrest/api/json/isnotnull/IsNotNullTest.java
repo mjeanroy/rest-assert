@@ -12,7 +12,7 @@ import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 class IsNotNullTest {
 
 	@ParameterizedTest()
-	@ValueSource(strings = {"[]", "{}"})
+	@ValueSource(strings = { "[]", "{}" })
 	void it_should_pass(String input) {
 		MatcherAssert.assertThat(input, isNotNull());
 		MatcherAssert.assertThat(input, isNotNull());

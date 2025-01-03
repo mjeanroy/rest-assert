@@ -37,15 +37,15 @@ class AssertIsNotHttpOnlyTest {
 	void it_should_fail_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertIsNotHttpOnly(cookie))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
 	}
 
 	@Test
 	void it_should_fail_with_custom_message_because_of_unsupported_operation() {
 		Cookie cookie = new ApacheHttpCookieBuilder().build();
 		assertThatThrownBy(() -> ApacheHttpCookieAssert.assertIsNotHttpOnly("message", cookie))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("org.apache.http.cookie.Cookie does not support #isHttpOnly().");
 	}
 }

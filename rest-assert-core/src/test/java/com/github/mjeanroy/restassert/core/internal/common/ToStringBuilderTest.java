@@ -35,7 +35,7 @@ class ToStringBuilderTest {
 		String output = ToStringBuilder.toStringBuilder(getClass())
 			.append("id", 1L)
 			.append("name", "John Doe")
-			.append("array", new Object[]{"a", "b", "c"})
+			.append("array", new Object[]{ "a", "b", "c" })
 			.build();
 
 		assertThat(output).isEqualTo(
@@ -43,7 +43,7 @@ class ToStringBuilderTest {
 				"id=1, " +
 				"name=John Doe, " +
 				"array=[a, b, c]" +
-			"}"
+				"}"
 		);
 	}
 }

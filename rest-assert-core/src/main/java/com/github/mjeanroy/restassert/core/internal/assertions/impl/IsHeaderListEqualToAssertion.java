@@ -83,7 +83,8 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 				log.debug("-> Adding: '{}'", trimmedValue);
 				this.values.add(trimmedValue);
 				this.lowercaseValues.add(trimmedValue.toLowerCase());
-			} else {
+			}
+			else {
 				log.warn("-> Found an empty string, ignore it");
 			}
 		}
@@ -102,7 +103,8 @@ public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion
 				if (!trimmedValue.isEmpty()) {
 					log.debug("-> Found: '{}'", trimmedValue);
 					actualValues.add(trimmedValue.toLowerCase());
-				} else {
+				}
+				else {
 					log.warn("-> Found empty value during parsing of header: '{}', ignore it", input);
 				}
 			}

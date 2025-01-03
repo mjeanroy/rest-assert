@@ -71,7 +71,8 @@ class AssertContainsEntriesTest {
 		try {
 			jsons.assertContainsEntries(info, json, JsonAssertions.jsonEntry("id", 2));
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			String expectedMessage = "Expecting json entry \"id\" to be equal to 2 but was 1";
 			assertThat(e.getMessage()).isEqualTo(expectedMessage);
 		}

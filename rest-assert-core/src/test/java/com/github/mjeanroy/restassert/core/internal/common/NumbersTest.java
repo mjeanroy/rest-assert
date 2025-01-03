@@ -40,15 +40,15 @@ class NumbersTest {
 	void it_should_fail_if_string_value_is_not_a_valid_long_value() {
 		String message = "My Custom Error Message";
 		assertThatThrownBy(() -> Numbers.toLong("test", message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
 	void it_should_fail_with_null() {
 		String message = "My Custom Error Message";
 		assertThatThrownBy(() -> Numbers.toLong(null, message))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage(message);
 	}
 }

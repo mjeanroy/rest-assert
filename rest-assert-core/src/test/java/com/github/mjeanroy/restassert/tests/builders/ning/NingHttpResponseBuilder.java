@@ -68,7 +68,8 @@ public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Respons
 			byte[] body = content.getBytes(defaultCharset());
 			HttpResponseBodyPart part = new ResponseBodyPart(body, true);
 			bodyParts = singletonList(part);
-		} else {
+		}
+		else {
 			bodyParts = emptyList();
 		}
 

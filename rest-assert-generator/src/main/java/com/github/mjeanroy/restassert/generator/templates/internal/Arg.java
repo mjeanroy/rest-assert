@@ -109,8 +109,8 @@ public class Arg {
 		if (o instanceof Arg) {
 			Arg a = (Arg) o;
 			return Objects.equals(getType(), a.getType()) &&
-					Objects.equals(getName(), a.getName()) &&
-					Objects.equals(getGenericType(), a.getGenericType());
+				Objects.equals(getName(), a.getName()) &&
+				Objects.equals(getGenericType(), a.getGenericType());
 		}
 		return false;
 	}

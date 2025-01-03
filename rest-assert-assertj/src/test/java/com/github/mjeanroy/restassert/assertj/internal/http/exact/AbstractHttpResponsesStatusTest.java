@@ -59,7 +59,8 @@ abstract class AbstractHttpResponsesStatusTest {
 		try {
 			run(info, httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			assertThat(e.getMessage()).isEqualTo(String.format("Expecting status code to be %s but was %s", status(), expectedStatus));
 		}
 	}

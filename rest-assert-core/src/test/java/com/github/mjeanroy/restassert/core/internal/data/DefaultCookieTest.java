@@ -56,16 +56,16 @@ class DefaultCookieTest {
 		DefaultCookie cookie = new DefaultCookie(name, value, domain, path, secure, httpOnly, sameSite, maxAge, expires);
 
 		assertThat(cookie.toString()).isEqualTo(
-				"DefaultCookie{" +
-						"name=X-Auth-Token, " +
-						"value=b145d7b2-d76c-4aa4-93d4-5f853f94b333, " +
-						"domain=localhost, " +
-						"path=/, " +
-						"secure=true, " +
-						"httpOnly=true, " +
-						"sameSite=LAX, " +
-						"maxAge=0, " +
-						"expires=null" +
+			"DefaultCookie{" +
+				"name=X-Auth-Token, " +
+				"value=b145d7b2-d76c-4aa4-93d4-5f853f94b333, " +
+				"domain=localhost, " +
+				"path=/, " +
+				"secure=true, " +
+				"httpOnly=true, " +
+				"sameSite=LAX, " +
+				"maxAge=0, " +
+				"expires=null" +
 				"}"
 		);
 	}

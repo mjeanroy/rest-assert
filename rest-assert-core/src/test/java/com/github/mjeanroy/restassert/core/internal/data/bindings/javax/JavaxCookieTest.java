@@ -107,7 +107,7 @@ class JavaxCookieTest {
 		Cookie cookie = JavaxCookie.create(javaxCookie);
 
 		assertThatThrownBy(cookie::getExpires)
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("javax.servlet.http.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("javax.servlet.http.Cookie does not support #getExpires(), please use #getMaxAge() instead.");
 	}
 }

@@ -84,7 +84,7 @@ public enum JsonType {
 		@Override
 		protected boolean isValid(Object object) {
 			return object instanceof Iterable ||
-					object instanceof Object[];
+				object instanceof Object[];
 		}
 
 		@Override

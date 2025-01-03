@@ -33,9 +33,9 @@ class AssertHasCookieWithCookieTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
 	private static final Cookie COOKIE = new MockCookieBuilder()
-			.setName(NAME)
-			.setValue("12345")
-			.build();
+		.setName(NAME)
+		.setValue("12345")
+		.build();
 
 	@Override
 	Cookie cookie() {

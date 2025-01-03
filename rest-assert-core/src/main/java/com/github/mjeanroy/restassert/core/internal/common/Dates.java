@@ -64,9 +64,9 @@ public final class Dates {
 	 * List of patterns to use to convert http date as string to date object.
 	 */
 	private static final List<String> PATTERNS = asList(
-			PATTERN_RFC1123,
-			PATTERN_RFC1036,
-			PATTERN_ASCTIME
+		PATTERN_RFC1123,
+		PATTERN_RFC1036,
+		PATTERN_ASCTIME
 	);
 
 	/**
@@ -102,7 +102,8 @@ public final class Dates {
 			DateFormat df = createDateFormat(pattern);
 			try {
 				return df.parse(date);
-			} catch (ParseException ex) {
+			}
+			catch (ParseException ex) {
 				// try next...
 			}
 		}

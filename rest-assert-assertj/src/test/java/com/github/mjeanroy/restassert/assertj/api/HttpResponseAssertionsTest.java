@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
@@ -59,7 +59,7 @@ class HttpResponseAssertionsTest {
 	@Test
 	void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
-				jsonEntry("foo", "bar")
+			jsonEntry("foo", "bar")
 		);
 
 		String body = object.toJson();

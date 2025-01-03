@@ -31,7 +31,6 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveSingleHeader.shouldHaveSingleHeader;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 

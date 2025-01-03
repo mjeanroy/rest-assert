@@ -29,7 +29,7 @@ package com.github.mjeanroy.restassert.core.internal.error;
  * Each error object must provide:
  * - A message with placeholders.
  * - Arguments array that can be used to replace placeholders in original
- *   message.
+ * message.
  * - A formatted message (original message built with placeholders arguments).
  */
 public interface RestAssertError {

@@ -52,7 +52,8 @@ public abstract class AssertionUtils {
 		try {
 			test.run();
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError error) {
+		}
+		catch (AssertionError error) {
 			assertThat(error.getMessage().trim()).isEqualTo(message);
 		}
 	}

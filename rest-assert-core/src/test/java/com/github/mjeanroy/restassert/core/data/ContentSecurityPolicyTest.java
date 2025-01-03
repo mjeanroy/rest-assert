@@ -203,9 +203,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"DEFAULT_SRC=['none']" +
+				"DEFAULT_SRC=['none']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -219,9 +219,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"STYLE_SRC=['none']" +
+				"STYLE_SRC=['none']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -235,9 +235,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"SCRIPT_SRC=['none']" +
+				"SCRIPT_SRC=['none']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -251,9 +251,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"CONNECT_SRC=['none']" +
+				"CONNECT_SRC=['none']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -267,9 +267,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"CHILD_SRC=['self', 'unsafe-inline']" +
+				"CHILD_SRC=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -283,9 +283,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"FONT_SRC=['self', 'unsafe-inline']" +
+				"FONT_SRC=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -299,9 +299,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"MEDIA_SRC=['self', 'unsafe-inline']" +
+				"MEDIA_SRC=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -315,9 +315,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"FORM_ACTION=['self', 'unsafe-inline']" +
+				"FORM_ACTION=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -331,9 +331,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"IMG_SRC=['self', 'unsafe-inline']" +
+				"IMG_SRC=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -347,9 +347,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"OBJECT_SRC=['self', 'unsafe-inline']" +
+				"OBJECT_SRC=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -363,9 +363,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"BASE_URI=['self']" +
+				"BASE_URI=['self']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -379,9 +379,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"FRAME_ANCESTORS=['self', 'unsafe-inline']" +
+				"FRAME_ANCESTORS=['self', 'unsafe-inline']" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -395,9 +395,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"PLUGIN_TYPES=[application/json, application/xml]" +
+				"PLUGIN_TYPES=[application/json, application/xml]" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -411,9 +411,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"REPORT_URI=[http://domain.com, http://fake.com, http://google.com]" +
+				"REPORT_URI=[http://domain.com, http://fake.com, http://google.com]" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -427,9 +427,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"SANDBOX=[ALLOW_SCRIPTS, ALLOW_SAME_ORIGIN]" +
+				"SANDBOX=[ALLOW_SCRIPTS, ALLOW_SAME_ORIGIN]" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -443,9 +443,9 @@ class ContentSecurityPolicyTest {
 		assertThat(csp.toString()).isEqualTo(
 			"ContentSecurityPolicy{" +
 				"directives={" +
-					"BLOCK_ALL_MIXED_CONTENT=[]" +
+				"BLOCK_ALL_MIXED_CONTENT=[]" +
 				"}" +
-			"}"
+				"}"
 		);
 	}
 

@@ -121,9 +121,9 @@ class IsHeaderMatchingAssertionTest {
 
 		IsHeaderMatchingAssertion assertion = new IsHeaderMatchingAssertion(name, expected, parser);
 		HttpResponse rsp = new HttpResponseBuilderImpl()
-				.addHeader(name, "application/json")
-				.addHeader(name, "application/xml")
-				.build();
+			.addHeader(name, "application/json")
+			.addHeader(name, "application/xml")
+			.build();
 
 		AssertionResult result = assertion.handle(rsp);
 
@@ -138,35 +138,35 @@ class IsHeaderMatchingAssertionTest {
 	@Test
 	void it_should_fail_if_header_name_is_null() {
 		assertThatThrownBy(() -> new IsHeaderMatchingAssertion(null, new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_empty() {
 		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_name_is_blank() {
 		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("   ", new HeaderValueBuilder().build(), new HeaderParserBuilder().build()))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Header name cannot be blank");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Header name cannot be blank");
 	}
 
 	@Test
 	void it_should_fail_if_header_value_is_null() {
 		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("name", null, new HeaderParserBuilder().build()))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header expected value must not be null");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header expected value must not be null");
 	}
 
 	@Test
 	void it_should_fail_if_header_parser_is_null() {
 		assertThatThrownBy(() -> new IsHeaderMatchingAssertion("name", new HeaderValueBuilder().build(), null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Header parser must not be null");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Header parser must not be null");
 	}
 }

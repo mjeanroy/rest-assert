@@ -125,64 +125,64 @@ class JsonTypeTest {
 	@Test
 	void it_should_return_type_null() {
 		assertThat(JsonType.parseType(null))
-				.isNotNull()
-				.isEqualTo(JsonType.NULL);
+			.isNotNull()
+			.isEqualTo(JsonType.NULL);
 	}
 
 	@Test
 	void it_should_return_type_number_with_integer() {
 		assertThat(JsonType.parseType(10))
-				.isNotNull()
-				.isEqualTo(JsonType.NUMBER);
+			.isNotNull()
+			.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
 	void it_should_return_type_number_with_long() {
 		assertThat(JsonType.parseType(100000L))
-				.isNotNull()
-				.isEqualTo(JsonType.NUMBER);
+			.isNotNull()
+			.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
 	void it_should_return_type_number_with_float() {
 		assertThat(JsonType.parseType(1.5))
-				.isNotNull()
-				.isEqualTo(JsonType.NUMBER);
+			.isNotNull()
+			.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
 	void it_should_return_type_number_with_double() {
 		assertThat(JsonType.parseType(1.5D))
-				.isNotNull()
-				.isEqualTo(JsonType.NUMBER);
+			.isNotNull()
+			.isEqualTo(JsonType.NUMBER);
 	}
 
 	@Test
 	void it_should_return_type_boolean_with_false() {
 		assertThat(JsonType.parseType(false))
-				.isNotNull()
-				.isEqualTo(JsonType.BOOLEAN);
+			.isNotNull()
+			.isEqualTo(JsonType.BOOLEAN);
 	}
 
 	@Test
 	void it_should_return_type_boolean_with_true() {
 		assertThat(JsonType.parseType(true))
-				.isNotNull()
-				.isEqualTo(JsonType.BOOLEAN);
+			.isNotNull()
+			.isEqualTo(JsonType.BOOLEAN);
 	}
 
 	@Test
 	void it_should_return_type_string_with_string() {
 		assertThat(JsonType.parseType("foo"))
-				.isNotNull()
-				.isEqualTo(JsonType.STRING);
+			.isNotNull()
+			.isEqualTo(JsonType.STRING);
 	}
 
 	@Test
 	void it_should_return_type_string_with_empty_string() {
 		assertThat(JsonType.parseType(""))
-				.isNotNull()
-				.isEqualTo(JsonType.STRING);
+			.isNotNull()
+			.isEqualTo(JsonType.STRING);
 	}
 
 	@Test
@@ -191,28 +191,28 @@ class JsonTypeTest {
 		map.put("foo", "bar");
 
 		assertThat(JsonType.parseType(map))
-				.isNotNull()
-				.isEqualTo(JsonType.OBJECT);
+			.isNotNull()
+			.isEqualTo(JsonType.OBJECT);
 	}
 
 	@Test
 	void it_should_return_type_array_with_collection() {
 		Collection<String> list = asList("foo", "bar");
 		assertThat(JsonType.parseType(list))
-				.isNotNull()
-				.isEqualTo(JsonType.ARRAY);
+			.isNotNull()
+			.isEqualTo(JsonType.ARRAY);
 	}
 
 	@Test
 	void it_should_return_type_array_with_array() {
 		String[] array = new String[]{
-				"foo",
-				"bar"
+			"foo",
+			"bar"
 		};
 
 		assertThat(JsonType.parseType(array))
-				.isNotNull()
-				.isEqualTo(JsonType.ARRAY);
+			.isNotNull()
+			.isEqualTo(JsonType.ARRAY);
 	}
 
 	@Test
@@ -220,8 +220,8 @@ class JsonTypeTest {
 		Foo foo = new Foo();
 
 		assertThatThrownBy(() -> JsonType.parseType(foo))
-				.isExactlyInstanceOf(UnsupportedOperationException.class)
-				.hasMessage("Json type of object Foo{} cannot be found");
+			.isExactlyInstanceOf(UnsupportedOperationException.class)
+			.hasMessage("Json type of object Foo{} cannot be found");
 	}
 
 	private static class Foo {

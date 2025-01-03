@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -144,56 +144,56 @@ class HasCookieAssertionTest {
 	@Test
 	void it_should_fail_if_cookie_is_null() {
 		assertThatThrownBy(() -> new HasCookieAssertion((Cookie) null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Cookie must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Cookie must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_name_null() {
 		assertThatThrownBy(() -> new HasCookieAssertion((String) null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Cookie name must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_name_is_empty() {
 		assertThatThrownBy(() -> new HasCookieAssertion(""))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Cookie name must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_name_is_blank() {
 		assertThatThrownBy(() -> new HasCookieAssertion("   "))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Cookie name must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	void it_should_fail_if_cookie_name_is_null_and_value_is_set() {
 		assertThatThrownBy(() -> new HasCookieAssertion(null, "value"))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Cookie name must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_empty_an_value_is_set() {
 		assertThatThrownBy(() -> new HasCookieAssertion("", "value"))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Cookie name must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_name_is_blank_and_value_is_set() {
 		assertThatThrownBy(() -> new HasCookieAssertion("   ", "value"))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Cookie name must be defined");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Cookie name must be defined");
 	}
 
 	@Test
 	public void it_should_fail_if_cookie_value_is_null() {
 		assertThatThrownBy(() -> new HasCookieAssertion("name", null))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage("Cookie value must be defined");
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage("Cookie value must be defined");
 	}
 }

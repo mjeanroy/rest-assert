@@ -39,7 +39,7 @@ public final class HamcrestTestUtils {
 	 */
 	public static String generateHamcrestErrorMessage(String expectation, String mismatch) {
 		String expectationMsg = "Expected: " + expectation.trim();
-		String mismatchMsg    = "     but: " + mismatch.trim();
+		String mismatchMsg = "     but: " + mismatch.trim();
 		return expectationMsg + System.lineSeparator() + mismatchMsg;
 	}
 }

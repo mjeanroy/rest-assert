@@ -49,6 +49,7 @@ public final class Message {
 
 	/**
 	 * Concat two messages into a single one.
+	 *
 	 * @param first First message.
 	 * @param second Second message.
 	 * @return Concatenated message.

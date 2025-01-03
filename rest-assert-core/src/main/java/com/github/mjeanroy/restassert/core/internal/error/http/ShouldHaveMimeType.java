@@ -41,7 +41,7 @@ public final class ShouldHaveMimeType extends AbstractError {
 	 * Build error.
 	 *
 	 * @param expectedMimeType Expected mime type.
-	 * @param actualMimeType   Actual mime type.
+	 * @param actualMimeType Actual mime type.
 	 * @return Error.
 	 */
 	public static ShouldHaveMimeType shouldHaveMimeType(String expectedMimeType, String actualMimeType) {
@@ -52,7 +52,7 @@ public final class ShouldHaveMimeType extends AbstractError {
 	 * Build error.
 	 *
 	 * @param expectedMimeType Expected mime types.
-	 * @param actualMimeType   Actual mime type.
+	 * @param actualMimeType Actual mime type.
 	 * @return Error.
 	 */
 	public static ShouldHaveMimeType shouldHaveMimeType(Iterable<String> expectedMimeType, String actualMimeType) {

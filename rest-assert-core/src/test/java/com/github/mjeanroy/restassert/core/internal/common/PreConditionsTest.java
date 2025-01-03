@@ -48,8 +48,8 @@ class PreConditionsTest {
 		String message = "message";
 
 		assertThatThrownBy(() -> PreConditions.notNull(value, message))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -58,8 +58,8 @@ class PreConditionsTest {
 		String message = "Should not be null";
 
 		assertThatThrownBy(() -> PreConditions.notBlank(value, message))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -68,8 +68,8 @@ class PreConditionsTest {
 		String message = "Should not be null";
 
 		assertThatThrownBy(() -> PreConditions.notBlank(value, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -78,8 +78,8 @@ class PreConditionsTest {
 		String message = "Should not be null";
 
 		assertThatThrownBy(() -> PreConditions.notBlank(value, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -96,8 +96,8 @@ class PreConditionsTest {
 		String message = "Should be less than";
 
 		assertThatThrownBy(() -> PreConditions.isGreaterThan(val, minValue, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -123,8 +123,8 @@ class PreConditionsTest {
 		String message = "Should be less than";
 
 		assertThatThrownBy(() -> PreConditions.isInRange(val, min, max, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -135,8 +135,8 @@ class PreConditionsTest {
 		String message = "Should be less than";
 
 		assertThatThrownBy(() -> PreConditions.isInRange(val, min, max, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -178,8 +178,8 @@ class PreConditionsTest {
 		Iterable<Object> inputs = null;
 
 		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -188,8 +188,8 @@ class PreConditionsTest {
 		Iterable<Object> inputs = emptyList();
 
 		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -206,8 +206,8 @@ class PreConditionsTest {
 		Collection<Object> inputs = null;
 
 		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -216,8 +216,8 @@ class PreConditionsTest {
 		Collection<Object> inputs = emptyList();
 
 		assertThatThrownBy(() -> PreConditions.notEmpty(inputs, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -234,8 +234,8 @@ class PreConditionsTest {
 		String input = null;
 
 		assertThatThrownBy(() -> PreConditions.notEmpty(input, message))
-				.isExactlyInstanceOf(NullPointerException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(NullPointerException.class)
+			.hasMessage(message);
 	}
 
 	@Test
@@ -244,7 +244,7 @@ class PreConditionsTest {
 		String input = "";
 
 		assertThatThrownBy(() -> PreConditions.notEmpty(input, message))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage(message);
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage(message);
 	}
 }

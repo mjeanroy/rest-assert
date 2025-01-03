@@ -131,7 +131,7 @@ public interface Cookie {
 				.filter(sameSite -> sameSite.value.equalsIgnoreCase(trimmedValue))
 				.findFirst()
 				.orElseThrow(() ->
-						new IllegalArgumentException("Unknown SameSite value: " + value)
+					new IllegalArgumentException("Unknown SameSite value: " + value)
 				);
 		}
 	}

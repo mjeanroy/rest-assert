@@ -62,7 +62,7 @@ class StatusEqualAssertionTest {
 	@Test
 	void it_should_fail_if_status_is_negative() {
 		assertThatThrownBy(() -> new StatusEqualAssertion(-1))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Http status code must be positive");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Http status code must be positive");
 	}
 }

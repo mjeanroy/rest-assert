@@ -83,7 +83,7 @@ class IsContentTypeOptionsEqualToStringTest extends AbstractHttpHeaderEqualToTes
 
 		// WHEN, THEN
 		assertThatThrownBy(() -> assertions.isContentTypeOptionsEqualTo(response, expected))
-				.isExactlyInstanceOf(InvalidHeaderValue.class)
-				.hasMessage("X-Content-Type-Options value 'no-sniff' is not a valid one.");
+			.isExactlyInstanceOf(InvalidHeaderValue.class)
+			.hasMessage("X-Content-Type-Options value 'no-sniff' is not a valid one.");
 	}
 }

@@ -63,14 +63,14 @@ class DefaultCookieBuilderTest {
 		SameSite sameSite = SameSite.STRICT;
 
 		Cookie cookie = Cookies.builder(name, value)
-				.setDomain(domain)
-				.setPath(path)
-				.setSecure()
-				.setHttpOnly()
-				.setMaxAge(maxAge)
-				.setExpires(expires)
-				.setSameSite(sameSite)
-				.build();
+			.setDomain(domain)
+			.setPath(path)
+			.setSecure()
+			.setHttpOnly()
+			.setMaxAge(maxAge)
+			.setExpires(expires)
+			.setSameSite(sameSite)
+			.build();
 
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getName()).isEqualTo(name);
@@ -91,8 +91,8 @@ class DefaultCookieBuilderTest {
 		Date expires = new Date();
 
 		Cookie cookie = Cookies.builder(name, value)
-				.setExpires(expires.getTime())
-				.build();
+			.setExpires(expires.getTime())
+			.build();
 
 		assertThat(cookie).isNotNull();
 		assertThat(cookie.getName()).isEqualTo(name);

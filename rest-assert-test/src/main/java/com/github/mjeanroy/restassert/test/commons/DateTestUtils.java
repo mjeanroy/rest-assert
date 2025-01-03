@@ -56,7 +56,8 @@ public final class DateTestUtils {
 		DateFormat df = new SimpleDateFormat(IMF_FORMAT, Locale.US);
 		try {
 			return df.parse(date);
-		} catch (ParseException ex) {
+		}
+		catch (ParseException ex) {
 			throw new AssertionError(ex);
 		}
 	}

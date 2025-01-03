@@ -58,7 +58,8 @@ abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 			// WHEN
 			run(httpResponse);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			// THEN
 			assertThat(e.getMessage()).isEqualTo(String.format("Expecting response not to have header \"%s\"", header.getName()));
 		}

@@ -37,9 +37,9 @@ import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_S
 class AssertIsContentSecurityPolicyEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
 	private static final ContentSecurityPolicy VALUE = ContentSecurityPolicy.builder()
-			.addDefaultSrc(none())
-			.addScriptSrc(self())
-			.build();
+		.addDefaultSrc(none())
+		.addScriptSrc(self())
+		.build();
 
 	@Override
 	void run(HttpResponse httpResponse) {

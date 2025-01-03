@@ -44,7 +44,7 @@ class XssProtectionTest {
 			"XssProtection{" +
 				"directive=DISABLE, " +
 				"parameter=null" +
-			"}"
+				"}"
 		);
 	}
 
@@ -58,7 +58,7 @@ class XssProtectionTest {
 			"XssProtection{" +
 				"directive=ENABLE, " +
 				"parameter=null" +
-			"}"
+				"}"
 		);
 	}
 
@@ -73,7 +73,7 @@ class XssProtectionTest {
 			"XssProtection{" +
 				"directive=ENABLE, " +
 				"parameter=Parameter{name=mode, value=block}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -89,7 +89,7 @@ class XssProtectionTest {
 			"XssProtection{" +
 				"directive=ENABLE, " +
 				"parameter=Parameter{name=report, value=https://google.com}" +
-			"}"
+				"}"
 		);
 	}
 
@@ -105,7 +105,7 @@ class XssProtectionTest {
 			"XssProtection{" +
 				"directive=ENABLE, " +
 				"parameter=Parameter{name=report, value=https://google.com}" +
-			"}"
+				"}"
 		);
 	}
 

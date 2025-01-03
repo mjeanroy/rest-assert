@@ -67,7 +67,8 @@ class AssertContainsTest {
 		try {
 			jsons.assertContains(info, json, "name");
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
+		}
+		catch (AssertionError e) {
 			String expectedMessage = "Expecting json to contain entry \"name\"";
 			assertThat(e.getMessage()).isEqualTo(expectedMessage);
 		}

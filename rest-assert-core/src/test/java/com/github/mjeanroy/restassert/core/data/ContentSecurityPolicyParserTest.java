@@ -493,15 +493,15 @@ class ContentSecurityPolicyParserTest {
 	@Test
 	void it_should_fail_if_directive_name_is_not_found() {
 		assertThatThrownBy(() -> parser.parse("default-src 'none'; foo http://domain.com"))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("Cannot parse Content-Security-Policy value since directive foo seems not valid");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("Cannot parse Content-Security-Policy value since directive foo seems not valid");
 	}
 
 	@Test
 	void it_should_fail_if_directive_does_not_have_name() {
 		assertThatThrownBy(() -> parser.parse("default-src 'none'; ;"))
-				.isExactlyInstanceOf(InvalidHeaderValue.class)
-				.hasMessage("Content-Security-Policy value 'default-src 'none'; ;' is not a valid one.");
+			.isExactlyInstanceOf(InvalidHeaderValue.class)
+			.hasMessage("Content-Security-Policy value 'default-src 'none'; ;' is not a valid one.");
 	}
 
 	private static Set<Source> sources() {

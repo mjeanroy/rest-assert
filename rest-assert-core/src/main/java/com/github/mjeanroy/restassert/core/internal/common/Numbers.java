@@ -48,7 +48,8 @@ public final class Numbers {
 
 		try {
 			return Long.valueOf(value);
-		} catch (NumberFormatException ex) {
+		}
+		catch (NumberFormatException ex) {
 			throw new IllegalArgumentException(message, ex);
 		}
 	}

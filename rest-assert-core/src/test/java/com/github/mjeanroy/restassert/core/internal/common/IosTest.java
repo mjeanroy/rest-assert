@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-import com.github.mjeanroy.restassert.test.commons.StringTestUtils;
 import org.junit.jupiter.api.Test;
 
 import java.net.URL;

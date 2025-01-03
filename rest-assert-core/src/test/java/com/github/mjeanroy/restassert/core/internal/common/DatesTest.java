@@ -82,8 +82,8 @@ class DatesTest {
 		String date = "foo bar";
 
 		assertThatThrownBy(() -> Dates.parseHttpDate(date))
-				.isExactlyInstanceOf(IllegalArgumentException.class)
-				.hasMessage("HTTP Date must respect standard formats: EEE, dd MMM yyyy HH:mm:ss zzz, EEE, dd-MMM-yy HH:mm:ss zzz or EEE MMM d HH:mm:ss yyyy");
+			.isExactlyInstanceOf(IllegalArgumentException.class)
+			.hasMessage("HTTP Date must respect standard formats: EEE, dd MMM yyyy HH:mm:ss zzz, EEE, dd-MMM-yy HH:mm:ss zzz or EEE MMM d HH:mm:ss yyyy");
 	}
 
 	@Test

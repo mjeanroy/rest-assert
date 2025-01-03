@@ -44,7 +44,7 @@ class StrictTransportSecurityTest {
 				"maxAge=3600, " +
 				"includeSubDomains=false, " +
 				"preload=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -61,7 +61,7 @@ class StrictTransportSecurityTest {
 				"maxAge=3600, " +
 				"includeSubDomains=true, " +
 				"preload=false" +
-			"}"
+				"}"
 		);
 	}
 
@@ -78,7 +78,7 @@ class StrictTransportSecurityTest {
 				"maxAge=3600, " +
 				"includeSubDomains=true, " +
 				"preload=true" +
-			"}"
+				"}"
 		);
 	}
 

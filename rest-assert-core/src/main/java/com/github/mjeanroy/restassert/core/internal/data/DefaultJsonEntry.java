@@ -46,7 +46,7 @@ public final class DefaultJsonEntry implements JsonEntry {
 	/**
 	 * Create JSON entry.
 	 *
-	 * @param key   JSON entry (must not be null).
+	 * @param key JSON entry (must not be null).
 	 * @param value JSON value.
 	 */
 	public DefaultJsonEntry(String key, Object value) {
@@ -78,7 +78,7 @@ public final class DefaultJsonEntry implements JsonEntry {
 		if (o instanceof DefaultJsonEntry) {
 			DefaultJsonEntry e = (DefaultJsonEntry) o;
 			return Objects.equals(getKey(), e.getKey())
-					&& Objects.equals(getValue(), e.getValue());
+				&& Objects.equals(getValue(), e.getValue());
 		}
 
 		return false;

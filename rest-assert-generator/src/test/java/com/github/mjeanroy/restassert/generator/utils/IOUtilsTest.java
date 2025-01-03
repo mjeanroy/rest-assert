@@ -57,14 +57,14 @@ class IOUtilsTest {
 
 		String[] lines = content.split(System.lineSeparator());
 		assertThat(lines)
-				.isNotNull()
-				.isNotEmpty()
-				.are(new Condition<String>() {
-					@Override
-					public boolean matches(String line) {
-						return line.startsWith(tab);
-					}
-				});
+			.isNotNull()
+			.isNotEmpty()
+			.are(new Condition<String>() {
+				@Override
+				public boolean matches(String line) {
+					return line.startsWith(tab);
+				}
+			});
 	}
 
 	@Test
@@ -83,14 +83,14 @@ class IOUtilsTest {
 
 		String[] lines = content.split(System.lineSeparator());
 		assertThat(lines)
-				.isNotNull()
-				.isNotEmpty()
-				.are(new Condition<String>() {
-					@Override
-					public boolean matches(String line) {
-						return line.startsWith(tab);
-					}
-				});
+			.isNotNull()
+			.isNotEmpty()
+			.are(new Condition<String>() {
+				@Override
+				public boolean matches(String line) {
+					return line.startsWith(tab);
+				}
+			});
 	}
 
 	@Test

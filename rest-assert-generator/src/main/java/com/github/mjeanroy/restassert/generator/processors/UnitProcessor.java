@@ -61,17 +61,17 @@ public enum UnitProcessor implements Processor {
 	 * objects.
 	 */
 	HTTP_RESPONSE(
-			assertTemplate(),
-			asList(
-				apacheHttpAssert(),
-				asyncHttpAssert(),
-				googleHttpAssert(),
-				httpAssert(),
-				junitServersHttpAssert(),
-				ningHttpAssert(),
-				okHttpAssert(),
-				springMockMvcHttpAssert()
-			)
+		assertTemplate(),
+		asList(
+			apacheHttpAssert(),
+			asyncHttpAssert(),
+			googleHttpAssert(),
+			httpAssert(),
+			junitServersHttpAssert(),
+			ningHttpAssert(),
+			okHttpAssert(),
+			springMockMvcHttpAssert()
+		)
 	),
 
 	/**
@@ -79,13 +79,13 @@ public enum UnitProcessor implements Processor {
 	 * objects.
 	 */
 	COOKIES(
-			assertTemplate(),
-			asList(
-				cookieAssert(),
-				asyncHttpCookieAssert(),
-				apacheHttpCookieAssert(),
-				javaxCookieAssert()
-			)
+		assertTemplate(),
+		asList(
+			cookieAssert(),
+			asyncHttpCookieAssert(),
+			apacheHttpCookieAssert(),
+			javaxCookieAssert()
+		)
 	),
 
 	/**
@@ -93,8 +93,8 @@ public enum UnitProcessor implements Processor {
 	 * objects.
 	 */
 	JSON(
-			assertTemplate(),
-			singletonList(jsonAssert())
+		assertTemplate(),
+		singletonList(jsonAssert())
 	);
 
 	/**

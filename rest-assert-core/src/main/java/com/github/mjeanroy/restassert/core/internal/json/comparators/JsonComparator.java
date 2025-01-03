@@ -36,7 +36,7 @@ public interface JsonComparator {
 	/**
 	 * Compare functions.
 	 *
-	 * @param actual   Actual json representation.
+	 * @param actual Actual json representation.
 	 * @param expected Expected json representation.
 	 * @return List of errors (a.k.a differences).
 	 */

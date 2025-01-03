@@ -49,7 +49,7 @@ public class DoesNotHaveHeaderAssertion extends AbstractHeaderAssertion implemen
 	@Override
 	public AssertionResult handle(HttpResponse httpResponse) {
 		return httpResponse.hasHeader(name) ?
-				failure(shouldNotHaveHeader(name)) :
-				success();
+			failure(shouldNotHaveHeader(name)) :
+			success();
 	}
 }

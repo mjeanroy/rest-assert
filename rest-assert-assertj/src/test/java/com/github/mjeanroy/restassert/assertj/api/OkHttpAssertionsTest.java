@@ -49,7 +49,7 @@ class OkHttpAssertionsTest {
 	@Test
 	void it_should_create_new_json_assertion_object() {
 		JsonObject object = jsonObject(
-				jsonEntry("foo", "bar")
+			jsonEntry("foo", "bar")
 		);
 
 		String body = object.toJson();

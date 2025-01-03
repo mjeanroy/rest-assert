@@ -40,7 +40,7 @@ public class JsonAssertions {
 	 * Basically, a shortcut to {@link com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
 	 * this method may be used to avoid to import the same class name.
 	 *
-	 * @param key   JSON key.
+	 * @param key JSON key.
 	 * @param value JSON value.
 	 * @return JSON entry.
 	 */

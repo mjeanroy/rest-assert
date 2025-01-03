@@ -39,7 +39,7 @@ class JsonAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object() {
 		JsonObject jsonObject = jsonObject(
-				jsonEntry("foo", "bar")
+			jsonEntry("foo", "bar")
 		);
 
 		String json = jsonObject.toJson();
@@ -52,7 +52,7 @@ class JsonAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object_from_http_response() {
 		JsonObject jsonObject = jsonObject(
-				jsonEntry("foo", "bar")
+			jsonEntry("foo", "bar")
 		);
 
 		String json = jsonObject.toJson();

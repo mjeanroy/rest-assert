@@ -101,7 +101,8 @@ public final class IoTestUtils {
 
 			Path path = Paths.get(url.toURI());
 			return String.join(System.lineSeparator(), Files.readAllLines(path, StandardCharsets.UTF_8));
-		} catch (Exception ex) {
+		}
+		catch (Exception ex) {
 			throw new RuntimeException(ex);
 		}
 	}
