@@ -33,11 +33,20 @@ import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson2
  * Access json parser implementation.
  */
 public enum JsonParserStrategy {
+	/**
+	 * Json parser using Jackson2 as internal implementation.
+	 */
+	JACKSON2("com.fasterxml.jackson.databind.ObjectMapper") {
+		@Override
+		public JsonParser build() {
+			return jackson2Parser();
+		}
+	},
 
 	/**
 	 * Json parser using Google Gson as internal implementation.
 	 */
-	GSON {
+	GSON("com.google.gson.Gson") {
 		@Override
 		public JsonParser build() {
 			return gsonParser();
@@ -47,7 +56,7 @@ public enum JsonParserStrategy {
 	/**
 	 * Json parser using Jackson1 as internal implementation.
 	 */
-	JACKSON1 {
+	JACKSON1("org.codehaus.jackson.map.ObjectMapper") {
 		@Override
 		public JsonParser build() {
 			return jackson1Parser();
@@ -55,38 +64,33 @@ public enum JsonParserStrategy {
 	},
 
 	/**
-	 * Json parser using Jackson2 as internal implementation.
-	 */
-	JACKSON2 {
-		@Override
-		public JsonParser build() {
-			return jackson2Parser();
-		}
-	},
-
-	/**
 	 * Strategy that try to detect available implementation on classpath
 	 * and return associated parser.
 	 */
-	AUTO {
+	AUTO(null) {
 		@Override
 		public JsonParser build() {
-			if (isPresent("com.fasterxml.jackson.databind.ObjectMapper")) {
-				return JsonParserStrategy.JACKSON2.build();
-			}
+			for (JsonParserStrategy strategy : JsonParserStrategy.values()) {
+				String className = strategy.className;
+				if (className == null) {
+					continue;
+				}
 
-			if (isPresent("org.codehaus.jackson.map.ObjectMapper")) {
-				return JsonParserStrategy.JACKSON1.build();
-			}
-
-			if (isPresent("com.google.gson.Gson")) {
-				return JsonParserStrategy.GSON.build();
+				if (isPresent(className)) {
+					return strategy.build();
+				}
 			}
 
 			// Fail if no available implementation found
 			throw new UnsupportedOperationException("Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)");
 		}
 	};
+
+	private final String className;
+
+	JsonParserStrategy(String className) {
+		this.className = className;
+	}
 
 	/**
 	 * Get parser instance according to strategy.
