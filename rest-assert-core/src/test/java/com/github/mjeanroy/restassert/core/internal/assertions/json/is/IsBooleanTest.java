@@ -22,52 +22,51 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.assertions.json.isstring;
+package com.github.mjeanroy.restassert.core.internal.assertions.json.is;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class IsNumberTest {
+class IsBooleanTest {
 
-	@Test
-	void it_should_succeed_with_a_number() {
-		it_should_succeed("0");
-		it_should_succeed("1");
-		it_should_succeed("0.5");
+	@ParameterizedTest
+	@ValueSource(strings = { "true", "false" })
+	void it_should_succeed_with_a_boolean(String json) {
+		it_should_succeed(json);
 	}
 
-	@Test
-	void it_should_fail_with_a_string() {
-		it_should_fail("\"\"", "Expecting json to be a number but was a string");
-		it_should_fail("\"Message\"", "Expecting json to be a number but was a string");
+	@ParameterizedTest
+	@ValueSource(strings = { "\"\"", "\"Message\"" })
+	void it_should_fail_with_a_string(String json) {
+		it_should_fail(json, "a string");
 	}
 
-	@Test
-	void it_should_fail_with_a_boolean() {
-		it_should_fail("false", "Expecting json to be a number but was a boolean");
-		it_should_fail("true", "Expecting json to be a number but was a boolean");
+	@ParameterizedTest
+	@ValueSource(strings = { "0", "1", "-1" })
+	void it_should_fail_with_a_number(String json) {
+		it_should_fail(json, "a number");
 	}
 
 	@Test
 	void it_should_fail_with_null() {
-		it_should_fail("null", "Expecting json to be a number but was null");
+		it_should_fail("null", "null");
 	}
 
-	@Test
-	void it_should_fail_with_array() {
-		it_should_fail("[]", "Expecting json to be a number but was an array");
-		it_should_fail("[ ]", "Expecting json to be a number but was an array");
-		it_should_fail("[0,1,2]", "Expecting json to be a number but was an array");
+	@ParameterizedTest
+	@ValueSource(strings = { "[]", "[ ]", "[0,1,2]" })
+	void it_should_fail_with_array(String json) {
+		it_should_fail(json, "an array");
 	}
 
-	@Test
-	void it_should_fail_with_object() {
-		it_should_fail("{}", "Expecting json to be a number but was an object");
-		it_should_fail("{ }", "Expecting json to be a number but was an object");
-		it_should_fail("{\"id\":1}", "Expecting json to be a number but was an object");
+	@ParameterizedTest
+	@ValueSource(strings = { "{}", "{ }", "{\"id\":1}"})
+	void it_should_fail_with_object(String json) {
+		it_should_fail(json, "an object");
 	}
 
 	private static void it_should_succeed(String json) {
@@ -78,16 +77,18 @@ class IsNumberTest {
 		assertThat(result.getError()).isNull();
 	}
 
-	private static void it_should_fail(String json, String expectedError) {
+	private static void it_should_fail(String json, String actualType) {
 		AssertionResult result = run(json);
 		assertThat(result).isNotNull();
 		assertThat(result.isSuccess()).isFalse();
 		assertThat(result.isFailure()).isTrue();
 		assertThat(result.getError()).isNotNull();
-		assertThat(result.getError().buildMessage()).isEqualTo(expectedError);
+		assertThat(result.getError().buildMessage()).isEqualTo(
+			"Expecting json to be a boolean but was " + actualType
+		);
 	}
 
 	private static AssertionResult run(String json) {
-		return JsonAssertions.instance().isNumber(json);
+		return JsonAssertions.instance().isBoolean(json);
 	}
 }

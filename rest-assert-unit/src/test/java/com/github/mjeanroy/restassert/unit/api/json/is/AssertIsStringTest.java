@@ -25,17 +25,19 @@
 package com.github.mjeanroy.restassert.unit.api.json.is;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsString;
 
 class AssertIsStringTest {
 
-	@Test
-	void it_should_pass_with_string() {
-		run("\"\"");
-		run("\"Hello World\"");
-		run("Custom Message", "\"Hello World\"");
+	@ParameterizedTest
+	@ValueSource(strings = { "\"\"", "\"Hello World\"" })
+	void it_should_pass_with_string(String json) {
+		run(json);
+		run("Custom Message", json);
 	}
 
 	@Test
@@ -44,36 +46,32 @@ class AssertIsStringTest {
 		assertFailure(message, () -> run("null"));
 	}
 
-	@Test
-	void it_should_fail_with_a_boolean() {
-		String message = defaultMessage("a boolean");
-		assertFailure(message, () -> run("true"));
-		assertFailure(message, () -> run("false"));
+	@ParameterizedTest
+	@ValueSource(strings = { "false", "true" })
+	void it_should_fail_with_a_boolean(String json) {
+		assertFailure(defaultMessage("a boolean"), () -> run(json));
+		assertFailure("Custom Message", () -> run("Custom Message", json));
 	}
 
-	@Test
-	void it_should_fail_with_a_number() {
-		String message = defaultMessage("a number");
-		assertFailure(message, () -> run("0"));
-		assertFailure(message, () -> run("1.1"));
+	@ParameterizedTest
+	@ValueSource(strings = { "0", "1.1" })
+	void it_should_fail_with_a_number(String json) {
+		assertFailure(defaultMessage("a number"), () -> run(json));
+		assertFailure("Custom Message", () -> run("Custom Message", json));
 	}
 
-	@Test
-	void it_should_fail_with_an_array() {
-		String message = defaultMessage("an array");
-		assertFailure(message, () -> run("[0,1,2]"));
+	@ParameterizedTest
+	@ValueSource(strings = { "[]", "[0,1,2]" })
+	void it_should_fail_with_an_array(String json) {
+		assertFailure(defaultMessage("an array"), () -> run(json));
+		assertFailure("Custom Message", () -> run("Custom Message", json));
 	}
 
-	@Test
-	void it_should_fail_with_an_object() {
-		String message = defaultMessage("an object");
-		assertFailure(message, () -> run("{}"));
-	}
-
-	@Test
-	void it_should_fail_with_a_custom_message() {
-		String message = "Message";
-		assertFailure(message, () -> run(message, "null"));
+	@ParameterizedTest
+	@ValueSource(strings = { "{}", "{ }", "{\"id\":1}" })
+	void it_should_fail_with_an_object(String json) {
+		assertFailure(defaultMessage("an object"), () -> run(json));
+		assertFailure("Custom Message", () -> run("Custom Message", json));
 	}
 
 	private static void run(String json) {

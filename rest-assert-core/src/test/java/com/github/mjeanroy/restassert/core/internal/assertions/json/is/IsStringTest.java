@@ -22,34 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.json.is;
+package com.github.mjeanroy.restassert.core.internal.assertions.json.is;
 
-import com.github.mjeanroy.restassert.assertj.internal.Jsons;
+import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
+import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AssertIsStringTest {
-	private final Jsons jsons = Jsons.instance();
+class IsStringTest {
 
 	@ParameterizedTest
 	@ValueSource(strings = { "\"\"", "\"Hello World\"" })
-	void it_should_pass_with_a_string(String json) {
+	void it_should_succeed_with_a_string(String json) {
 		it_should_succeed(json);
 	}
 
-	@Test
-	void it_should_fail_with_null_string() {
-		it_should_fail("null", "null");
-	}
-
 	@ParameterizedTest
-	@ValueSource(strings = { "0", "0.5", "-0.5" })
-	void it_should_fail_with_number(String json) {
+	@ValueSource(strings = { "0", "1", "1.1", "-1.5" })
+	void it_should_fail_with_a_number(String json) {
 		it_should_fail(json, "a number");
 	}
 
@@ -59,35 +52,43 @@ class AssertIsStringTest {
 		it_should_fail(json, "a boolean");
 	}
 
+	@Test
+	void it_should_fail_with_null() {
+		it_should_fail("null", "null");
+	}
+
 	@ParameterizedTest
-	@ValueSource(strings = { "[]", "[ ]", "[0,1,2]" })
-	void it_should_fail_with_an_array(String json) {
+	@ValueSource(strings = { "[]", "[ ]", "[1,2,3]" })
+	void it_should_fail_with_array(String json) {
 		it_should_fail(json, "an array");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "{}", "{ }", "{\"id\": 1}" })
-	void it_should_fail_with_an_object(String json) {
+	@ValueSource(strings = { "{}", "{ }", "{\"id\":1}" })
+	void it_should_fail_with_object(String json) {
 		it_should_fail(json, "an object");
 	}
 
-	private void it_should_succeed(String json) {
-		run(json);
+	private static void it_should_succeed(String json) {
+		AssertionResult result = run(json);
+		assertThat(result).isNotNull();
+		assertThat(result.isSuccess()).isTrue();
+		assertThat(result.isFailure()).isFalse();
+		assertThat(result.getError()).isNull();
 	}
 
-	private void it_should_fail(String json, String actualType) {
-		try {
-			run(json);
-			failBecauseExpectedAssertionErrorWasNotThrown();
-		}
-		catch (AssertionError e) {
-			assertThat(e.getMessage()).isEqualTo(
-				"Expecting json to be a string but was " + actualType
-			);
-		}
+	private static void it_should_fail(String json, String actualType) {
+		AssertionResult result = run(json);
+		assertThat(result).isNotNull();
+		assertThat(result.isSuccess()).isFalse();
+		assertThat(result.isFailure()).isTrue();
+		assertThat(result.getError()).isNotNull();
+		assertThat(result.getError().buildMessage()).isEqualTo(
+			"Expecting json to be a string but was " + actualType
+		);
 	}
 
-	private void run(String json) {
-		jsons.assertIsString(someInfo(), json);
+	private static AssertionResult run(String json) {
+		return JsonAssertions.instance().isString(json);
 	}
 }

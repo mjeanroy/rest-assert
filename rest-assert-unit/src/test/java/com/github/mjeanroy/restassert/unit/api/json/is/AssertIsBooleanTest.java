@@ -29,13 +29,13 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsNumber;
+import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsBoolean;
 
-class AssertIsNumberTest {
+class AssertIsBooleanTest {
 
 	@ParameterizedTest
-	@ValueSource(strings = { "0", "0.5", "-0.5" })
-	void it_should_pass_with_a_number(String json) {
+	@ValueSource(strings = { "false", "true" })
+	void it_should_pass_with_a_boolean(String json) {
 		run(json);
 		run("Custom Message", json);
 	}
@@ -46,9 +46,9 @@ class AssertIsNumberTest {
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "false", "true" })
-	void it_should_fail_with_a_boolean(String json) {
-		assertFailure(defaultMessage("a boolean"), () -> run(json));
+	@ValueSource(strings = { "0", "1", "-1" })
+	void it_should_fail_with_a_number(String json) {
+		assertFailure(defaultMessage("a number"), () -> run(json));
 		assertFailure("Custom Message", () -> run("Custom Message", json));
 	}
 
@@ -80,14 +80,14 @@ class AssertIsNumberTest {
 	}
 
 	private static void run(String json) {
-		assertIsNumber(json);
+		assertIsBoolean(json);
 	}
 
 	private static void run(String message, String json) {
-		assertIsNumber(message, json);
+		assertIsBoolean(message, json);
 	}
 
 	private static String defaultMessage(String actualType) {
-		return "Expecting json to be a number but was " + actualType;
+		return "Expecting json to be a boolean but was " + actualType;
 	}
 }

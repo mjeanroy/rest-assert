@@ -131,6 +131,16 @@ public final class JsonAssertions {
 		return isType(actual, JsonType.NUMBER);
 	}
 
+	/**
+	 * Check that given json is a JSON boolean.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isBoolean(String actual) {
+		return isType(actual, JsonType.BOOLEAN);
+	}
+
 	private AssertionResult isType(String actual, JsonType expectedType) {
 		String trimmedActual = trimToNull(actual.trim());
 

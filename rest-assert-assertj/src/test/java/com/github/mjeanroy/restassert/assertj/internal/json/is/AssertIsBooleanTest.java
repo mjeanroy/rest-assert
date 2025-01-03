@@ -22,72 +22,73 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.unit.api.json.is;
+package com.github.mjeanroy.restassert.assertj.internal.json.is;
 
+import com.github.mjeanroy.restassert.assertj.internal.Jsons;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
-import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertIsNumber;
+import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class AssertIsNumberTest {
+class AssertIsBooleanTest {
+
+	private final Jsons jsons = Jsons.instance();
 
 	@ParameterizedTest
-	@ValueSource(strings = { "0", "0.5", "-0.5" })
-	void it_should_pass_with_a_number(String json) {
-		run(json);
-		run("Custom Message", json);
+	@ValueSource(strings = { "false", "true" })
+	void it_should_pass_with_a_boolean(String json) {
+		it_should_succeed(json);
 	}
 
 	@Test
 	void it_should_fail_with_null_string() {
-		assertFailure(defaultMessage("null"), () -> run("null"));
+		it_should_fail("null", "null");
 	}
 
 	@ParameterizedTest
-	@ValueSource(strings = { "false", "true" })
-	void it_should_fail_with_a_boolean(String json) {
-		assertFailure(defaultMessage("a boolean"), () -> run(json));
-		assertFailure("Custom Message", () -> run("Custom Message", json));
+	@ValueSource(strings = { "0", "1", "-1" })
+	void it_should_fail_with_number(String json) {
+		it_should_fail(json, "a number");
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "\"\"", "\"Hello World\"" })
 	void it_should_fail_with_a_string(String json) {
-		assertFailure(defaultMessage("a string"), () -> run(json));
-		assertFailure("Custom Message", () -> run("Custom Message", json));
+		it_should_fail(json, "a string");
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "[]", "[ ]", "[0,1,2]" })
 	void it_should_fail_with_an_array(String json) {
-		assertFailure(defaultMessage("an array"), () -> run(json));
-		assertFailure("Custom Message", () -> run("Custom Message", json));
+		it_should_fail(json, "an array");
 	}
 
 	@ParameterizedTest
 	@ValueSource(strings = { "{}", "{ }", "{\"id\":1}" })
 	void it_should_fail_with_an_object(String json) {
-		assertFailure(defaultMessage("an object"), () -> run(json));
-		assertFailure("Custom Message", () -> run("Custom Message", json));
+		it_should_fail(json, "an object");
 	}
 
-	@Test
-	void it_should_fail_with_a_custom_message() {
-		String message = "Message";
-		assertFailure(message, () -> run(message, "null"));
+	private void it_should_succeed(String json) {
+		run(json);
 	}
 
-	private static void run(String json) {
-		assertIsNumber(json);
+	private void it_should_fail(String json, String actualType) {
+		try {
+			run(json);
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage()).isEqualTo(
+				"Expecting json to be a boolean but was " + actualType
+			);
+		}
 	}
 
-	private static void run(String message, String json) {
-		assertIsNumber(message, json);
-	}
-
-	private static String defaultMessage(String actualType) {
-		return "Expecting json to be a number but was " + actualType;
+	private void run(String json) {
+		jsons.assertIsBoolean(someInfo(), json);
 	}
 }

@@ -26,6 +26,8 @@ package com.github.mjeanroy.restassert.assertj.internal.json.is;
 
 import com.github.mjeanroy.restassert.assertj.internal.Jsons;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
@@ -35,11 +37,10 @@ class AssertIsNumberTest {
 
 	private final Jsons jsons = Jsons.instance();
 
-	@Test
-	void it_should_pass_with_a_number() {
-		it_should_succeed("0");
-		it_should_succeed("0.5");
-		it_should_succeed("-0.5");
+	@ParameterizedTest
+	@ValueSource(strings = { "0", "0.5", "-0.5" })
+	void it_should_pass_with_a_number(String json) {
+		it_should_succeed(json);
 	}
 
 	@Test
@@ -47,26 +48,28 @@ class AssertIsNumberTest {
 		it_should_fail("null", "null");
 	}
 
-	@Test
-	void it_should_fail_with_a_string() {
-		it_should_fail("\"\"", "a string");
-		it_should_fail("\"Hello World\"", "a string");
+	@ParameterizedTest
+	@ValueSource(strings = { "\"\"", "\"Hello World\"" })
+	void it_should_fail_with_a_string(String json) {
+		it_should_fail(json, "a string");
 	}
 
-	@Test
-	void it_should_fail_with_a_boolean() {
-		it_should_fail("false", "a boolean");
-		it_should_fail("true", "a boolean");
+	@ParameterizedTest
+	@ValueSource(strings = { "false", "true" })
+	void it_should_fail_with_a_boolean(String json) {
+		it_should_fail(json, "a boolean");
 	}
 
-	@Test
-	void it_should_fail_with_an_array() {
-		it_should_fail("[]", "an array");
+	@ParameterizedTest
+	@ValueSource(strings = { "[]", "[ ]", "[0,1,2]" })
+	void it_should_fail_with_an_array(String json) {
+		it_should_fail(json, "an array");
 	}
 
-	@Test
-	void it_should_fail_with_an_object() {
-		it_should_fail("{}", "an object");
+	@ParameterizedTest
+	@ValueSource(strings = { "{}", "{ }", "{\"id\": 1}" })
+	void it_should_fail_with_an_object(String json) {
+		it_should_fail(json, "an object");
 	}
 
 	private void it_should_succeed(String json) {
