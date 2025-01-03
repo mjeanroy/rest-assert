@@ -108,7 +108,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotNull(String actual) {
-		return actual == null ? failure(shouldNotBeNull()) : success();
+		return actual == null ? failure(shouldNotBeNull(actual)) : success();
 	}
 
 	/**
@@ -165,7 +165,7 @@ public final class JsonAssertions {
 		String trimmedActual = trimToNull(actual.trim());
 
 		if (isEmpty(trimmedActual)) {
-			return failure(shouldNotBeNull());
+			return failure(shouldNotBeNull(actual));
 		}
 
 		Object parsedValue = parser.parse(trimmedActual);
@@ -175,7 +175,7 @@ public final class JsonAssertions {
 		}
 
 		return failure(
-			shouldBeTypeOf(expectedType, actualType)
+			shouldBeTypeOf(actual, expectedType, actualType)
 		);
 	}
 
@@ -207,7 +207,7 @@ public final class JsonAssertions {
 		for (String e : keys) {
 			if (isEmpty(actual) || doesNotHaveEntry(actual, e)) {
 				errors.add(
-					shouldHaveEntry(e)
+					shouldHaveEntry(actual, e)
 				);
 			}
 		}
@@ -244,16 +244,16 @@ public final class JsonAssertions {
 		for (JsonEntry e : entries) {
 			String key = e.getKey();
 			if (isEmpty(actual) || doesNotHaveEntry(actual, key)) {
-				errors.add(shouldHaveEntry(key));
+				errors.add(shouldHaveEntry(actual, key));
+				continue;
 			}
-			else {
-				Object expectedValue = e.getValue();
-				Object actualValue = getEntry(actual, key);
-				if (!expectedValue.equals(actualValue)) {
-					errors.add(
-						shouldHaveEntryEqualTo(key, actualValue, expectedValue)
-					);
-				}
+
+			Object expectedValue = e.getValue();
+			Object actualValue = getEntry(actual, key);
+			if (!expectedValue.equals(actualValue)) {
+				errors.add(
+					shouldHaveEntryEqualTo(actual, key, actualValue, expectedValue)
+				);
 			}
 		}
 
@@ -434,7 +434,7 @@ public final class JsonAssertions {
 
 	private AssertionResult doComparison(String actual, String expected) {
 		if (actual == null) {
-			return failure(shouldNotBeNull());
+			return failure(shouldNotBeNull(actual));
 		}
 
 		JsonComparator comparator = new DefaultJsonComparator(parser);

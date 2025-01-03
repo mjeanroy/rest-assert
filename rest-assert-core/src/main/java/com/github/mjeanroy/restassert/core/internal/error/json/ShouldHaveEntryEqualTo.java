@@ -33,20 +33,33 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 public final class ShouldHaveEntryEqualTo extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveEntryEqualTo(String entryName, Message expectation, Message mismatch) {
-		super(entryName, expectation, mismatch);
+	private ShouldHaveEntryEqualTo(
+		String json,
+		String entryName,
+		Message expectation,
+		Message mismatch
+	) {
+		super(json, entryName, expectation, mismatch);
 	}
 
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
 	 * @param entry Entry name.
 	 * @param actualValue Actual value.
 	 * @param expectedValue Expected value.
 	 * @return Error.
 	 */
-	public static ShouldHaveEntryEqualTo shouldHaveEntryEqualTo(String entry, Object actualValue, Object expectedValue) {
-		return new ShouldHaveEntryEqualTo(entry,
+	public static ShouldHaveEntryEqualTo shouldHaveEntryEqualTo(
+		String json,
+		String entry,
+		Object actualValue,
+		Object expectedValue
+	) {
+		return new ShouldHaveEntryEqualTo(
+			json,
+			entry,
 			Message.message("Expecting json entry %s to be equal to %s", entry, expectedValue),
 			Message.message("was %s", actualValue)
 		);

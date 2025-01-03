@@ -33,15 +33,22 @@ class ShouldBeTypeOfTest {
 
 	@Test
 	void it_should_format_error_message() {
+		String json = "0";
 		JsonType actualType = JsonType.NULL;
 		JsonType expectedType = JsonType.NUMBER;
-		ShouldBeTypeOf shouldBeTypeOf = ShouldBeTypeOf.shouldBeTypeOf(expectedType, actualType);
+		ShouldBeTypeOf shouldBeTypeOf = ShouldBeTypeOf.shouldBeTypeOf(
+			json,
+			expectedType,
+			actualType
+		);
 
 		assertThat(shouldBeTypeOf).isNotNull();
+		assertThat(shouldBeTypeOf.json()).isEqualTo(json);
+		assertThat(shouldBeTypeOf.entryName()).isEmpty();
+
 		assertThat(shouldBeTypeOf.message()).isEqualTo("Expecting json to be a number but was null");
 		assertThat(shouldBeTypeOf.args()).hasSize(0);
 		assertThat(shouldBeTypeOf.buildMessage()).isEqualTo("Expecting json to be a number but was null");
-		assertThat(shouldBeTypeOf.toString()).isEqualTo("Expecting json to be a number but was null");
-		assertThat(shouldBeTypeOf.entryName()).isEmpty();
+		assertThat(shouldBeTypeOf.toString()).isEqualTo(shouldBeTypeOf.buildMessage());
 	}
 }

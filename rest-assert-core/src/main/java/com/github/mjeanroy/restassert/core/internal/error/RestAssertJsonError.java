@@ -30,6 +30,12 @@ package com.github.mjeanroy.restassert.core.internal.error;
  * - The entry name that throws the error.
  */
 public interface RestAssertJsonError extends RestAssertError {
+	/**
+	 * Original JSON.
+	 *
+	 * @return Original JSON.
+	 */
+	String json();
 
 	/**
 	 * Entry name.

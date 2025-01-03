@@ -36,20 +36,32 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.isVowe
 public final class ShouldBeEntryOf extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeEntryOf(String entryName, Message expectation, Message mismatch) {
-		super(entryName, expectation, mismatch);
+	private ShouldBeEntryOf(
+		String json,
+		String entryName,
+		Message expectation,
+		Message mismatch
+	) {
+		super(json, entryName, expectation, mismatch);
 	}
 
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
 	 * @param entry Entry name.
 	 * @param actualType Actual type.
 	 * @param expectedType Expected type.
 	 * @return Error.
 	 */
-	public static ShouldBeEntryOf shouldBeEntryOf(String entry, JsonType actualType, JsonType expectedType) {
+	public static ShouldBeEntryOf shouldBeEntryOf(
+		String json,
+		String entry,
+		JsonType actualType,
+		JsonType expectedType
+	) {
 		return new ShouldBeEntryOf(
+			json,
 			entry,
 			Message.message("Expecting json entry %s to be " + serializeType(expectedType), entry),
 			Message.message("was " + serializeType(actualType))

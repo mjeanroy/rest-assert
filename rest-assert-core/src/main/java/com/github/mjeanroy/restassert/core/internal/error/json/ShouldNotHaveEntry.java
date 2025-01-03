@@ -32,17 +32,22 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 public final class ShouldNotHaveEntry extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldNotHaveEntry(String entryName, Message expectation) {
-		super(entryName, expectation);
+	private ShouldNotHaveEntry(String json, String entryName, Message expectation) {
+		super(json, entryName, expectation);
 	}
 
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
 	 * @param entryName Unexpected entry name.
 	 * @return Error.
 	 */
-	public static ShouldNotHaveEntry shouldNotHaveEntry(String entryName) {
-		return new ShouldNotHaveEntry(entryName, Message.message("Expecting json not to contain entry %s", entryName));
+	public static ShouldNotHaveEntry shouldNotHaveEntry(String json, String entryName) {
+		return new ShouldNotHaveEntry(
+			json,
+			entryName,
+			Message.message("Expecting json not to contain entry %s", entryName)
+		);
 	}
 }

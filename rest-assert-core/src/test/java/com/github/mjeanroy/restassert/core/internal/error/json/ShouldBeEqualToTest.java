@@ -28,22 +28,36 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeEqualToTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String entry = "foo";
+		String json = toJson(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe")
+		);
+
+		String entry = "id";
 		int actualValue = 1;
 		int expectedValue = 2;
-		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo(entry, actualValue, expectedValue);
+		ShouldHaveEntryEqualTo shouldBeEqualTo = shouldHaveEntryEqualTo(
+			json,
+			entry,
+			actualValue,
+			expectedValue
+		);
 
 		assertThat(shouldBeEqualTo).isNotNull();
+		assertThat(shouldBeEqualTo.json()).isEqualTo(json);
+		assertThat(shouldBeEqualTo.entryName()).isEqualTo(entry);
+
 		assertThat(shouldBeEqualTo.message()).isEqualTo("Expecting json entry %s to be equal to %s but was %s");
 		assertThat(shouldBeEqualTo.args()).hasSize(3).containsExactly(entry, expectedValue, actualValue);
 		assertThat(shouldBeEqualTo.buildMessage()).isEqualTo("Expecting json entry " + fmt(entry) + " to be equal to 2 but was 1");
-		assertThat(shouldBeEqualTo.toString()).isEqualTo("Expecting json entry " + fmt(entry) + " to be equal to 2 but was 1");
-		assertThat(shouldBeEqualTo.entryName()).isEqualTo(entry);
+		assertThat(shouldBeEqualTo.toString()).isEqualTo(shouldBeEqualTo.buildMessage());
 	}
 }

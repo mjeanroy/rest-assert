@@ -27,19 +27,28 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnArray.shouldBeAnArray;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeAnArrayTest {
 
 	@Test
 	void it_should_format_error_message() {
-		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray();
+		String json = toJson(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe")
+		);
+
+		ShouldBeAnArray shouldBeAnArray = shouldBeAnArray(json);
 
 		assertThat(shouldBeAnArray).isNotNull();
+		assertThat(shouldBeAnArray.json()).isEqualTo(json);
+		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
+
 		assertThat(shouldBeAnArray.message()).isEqualTo("Expecting json to be an array but was an object");
 		assertThat(shouldBeAnArray.args()).isNotNull().isEmpty();
 		assertThat(shouldBeAnArray.buildMessage()).isEqualTo("Expecting json to be an array but was an object");
-		assertThat(shouldBeAnArray.toString()).isEqualTo("Expecting json to be an array but was an object");
-		assertThat(shouldBeAnArray.entryName()).isEqualTo("");
+		assertThat(shouldBeAnArray.toString()).isEqualTo(shouldBeAnArray.buildMessage());
 	}
 }

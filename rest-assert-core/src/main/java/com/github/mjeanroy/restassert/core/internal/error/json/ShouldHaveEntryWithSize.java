@@ -33,20 +33,33 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 public final class ShouldHaveEntryWithSize extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveEntryWithSize(String entryName, Message expectation, Message mismatch) {
-		super(entryName, expectation, mismatch);
+	private ShouldHaveEntryWithSize(
+		String json,
+		String entryName,
+		Message expectation,
+		Message mismatch
+	) {
+		super(json, entryName, expectation, mismatch);
 	}
 
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
 	 * @param entry Entry name.
 	 * @param actualSize Actual size.
 	 * @param expectedSize Expected size.
 	 * @return Error.
 	 */
-	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(String entry, int actualSize, int expectedSize) {
-		return new ShouldHaveEntryWithSize(entry,
+	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(
+		String json,
+		String entry,
+		int actualSize,
+		int expectedSize
+	) {
+		return new ShouldHaveEntryWithSize(
+			json,
+			entry,
 			Message.message("Expecting json array %s to have size %s", entry, expectedSize),
 			Message.message("was %s", actualSize)
 		);

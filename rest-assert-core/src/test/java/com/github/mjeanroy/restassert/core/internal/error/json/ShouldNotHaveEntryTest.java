@@ -28,20 +28,25 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldNotHaveEntryTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String entry = "foo";
-		ShouldNotHaveEntry shouldHaveEntry = shouldNotHaveEntry(entry);
+		String json = toJson(jsonEntry("id", 1));
+		String entry = "name";
+		ShouldNotHaveEntry shouldHaveEntry = shouldNotHaveEntry(json, entry);
 
 		assertThat(shouldHaveEntry).isNotNull();
+		assertThat(shouldHaveEntry.json()).isEqualTo(json);
+		assertThat(shouldHaveEntry.entryName()).isEqualTo(entry);
+
 		assertThat(shouldHaveEntry.message()).isEqualTo("Expecting json not to contain entry %s");
 		assertThat(shouldHaveEntry.args()).hasSize(1).containsExactly(entry);
 		assertThat(shouldHaveEntry.buildMessage()).isEqualTo("Expecting json not to contain entry " + fmt(entry));
-		assertThat(shouldHaveEntry.toString()).isEqualTo("Expecting json not to contain entry " + fmt(entry));
-		assertThat(shouldHaveEntry.entryName()).isEqualTo(entry);
+		assertThat(shouldHaveEntry.toString()).isEqualTo(shouldHaveEntry.buildMessage());
 	}
 }

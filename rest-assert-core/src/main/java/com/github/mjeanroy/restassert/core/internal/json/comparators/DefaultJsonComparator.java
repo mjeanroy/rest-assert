@@ -74,11 +74,14 @@ public class DefaultJsonComparator implements JsonComparator {
 	@Override
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List<RestAssertError> compare(String actual, String expected) {
-		contexts.set(rootContext());
-		List<RestAssertJsonError> errors = doCompare(actual.trim(), expected.trim());
-		contexts.remove();
-
-		return (List) errors;
+		contexts.set(rootContext(actual, expected));
+		try {
+			List<RestAssertJsonError> errors = doCompare(actual.trim(), expected.trim());
+			return (List) errors;
+		}
+		finally {
+			contexts.remove();
+		}
 	}
 
 	private List<RestAssertJsonError> doCompare(String actual, String expected) {
@@ -103,11 +106,11 @@ public class DefaultJsonComparator implements JsonComparator {
 
 	private RestAssertJsonError checkType(String actual, String expected) {
 		if (isObject(actual) && isArray(expected)) {
-			return shouldBeAnArray();
+			return shouldBeAnArray(actual);
 		}
 		else if (isArray(actual) && isObject(expected)) {
 			// It should be an object
-			return shouldBeAnObject();
+			return shouldBeAnObject(actual);
 		}
 
 		return null;
@@ -126,13 +129,23 @@ public class DefaultJsonComparator implements JsonComparator {
 		Set<String> missingEntries = new HashSet<>(expectedEntries);
 		missingEntries.removeAll(actualEntries);
 		for (String missingEntry : missingEntries) {
-			errors.add(shouldHaveEntry(contexts.get().toPath(missingEntry)));
+			errors.add(
+				shouldHaveEntry(
+					contexts.get().actual(),
+					contexts.get().toPath(missingEntry)
+				)
+			);
 		}
 
 		Set<String> unexpectedEntries = new HashSet<>(actualEntries);
 		unexpectedEntries.removeAll(expectedEntries);
 		for (String unexpectedEntry : unexpectedEntries) {
-			errors.add(shouldNotHaveEntry(contexts.get().toPath(unexpectedEntry)));
+			errors.add(
+				shouldNotHaveEntry(
+					contexts.get().actual(),
+					contexts.get().toPath(unexpectedEntry)
+				)
+			);
 		}
 
 		return errors;
@@ -155,7 +168,14 @@ public class DefaultJsonComparator implements JsonComparator {
 		JsonType actualType = parseType(actualObject);
 		JsonType expectedType = parseType(expectedObject);
 		if (actualType != expectedType) {
-			errors.add(shouldBeEntryOf(contexts.get().toPath(key), actualType, expectedType));
+			errors.add(
+				shouldBeEntryOf(
+					contexts.get().actual(),
+					contexts.get().toPath(key),
+					actualType,
+					expectedType
+				)
+			);
 		}
 		else {
 			// Same types, check values
@@ -179,7 +199,14 @@ public class DefaultJsonComparator implements JsonComparator {
 			}
 			else if (actualType != JsonType.NULL && !actualObject.equals(expectedObject)) {
 				// Not null and not equals
-				errors.add(shouldHaveEntryEqualTo(contexts.get().toPath(key), actualObject, expectedObject));
+				errors.add(
+					shouldHaveEntryEqualTo(
+						contexts.get().actual(),
+						contexts.get().toPath(key),
+						actualObject,
+						expectedObject
+					)
+				);
 			}
 		}
 
@@ -192,7 +219,14 @@ public class DefaultJsonComparator implements JsonComparator {
 		int actualSize = actualArray.size();
 		int expectedSize = expectedArray.size();
 		if (actualSize != expectedSize) {
-			errors.add(shouldHaveEntryWithSize(contexts.get().toPath(""), actualSize, expectedSize));
+			errors.add(
+				shouldHaveEntryWithSize(
+					contexts.get().actual(),
+					contexts.get().toPath(""),
+					actualSize,
+					expectedSize
+				)
+			);
 		}
 
 		// Same size

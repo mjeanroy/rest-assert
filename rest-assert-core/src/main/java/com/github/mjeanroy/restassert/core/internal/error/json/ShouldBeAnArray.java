@@ -33,8 +33,9 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 public final class ShouldBeAnArray extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeAnArray() {
+	private ShouldBeAnArray(String json) {
 		super(
+			json,
 			Message.message("Expecting json to be an array"),
 			Message.message("was an object")
 		);
@@ -43,9 +44,10 @@ public final class ShouldBeAnArray extends AbstractJsonError {
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
 	 * @return Error.
 	 */
-	public static ShouldBeAnArray shouldBeAnArray() {
-		return new ShouldBeAnArray();
+	public static ShouldBeAnArray shouldBeAnArray(String json) {
+		return new ShouldBeAnArray(json);
 	}
 }

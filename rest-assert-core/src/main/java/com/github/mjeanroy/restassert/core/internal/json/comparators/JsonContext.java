@@ -35,14 +35,26 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.isSurr
  */
 class JsonContext {
 
-	static JsonContext rootContext() {
-		return new JsonContext();
+	static JsonContext rootContext(String actual, String expected) {
+		return new JsonContext(actual, expected);
 	}
 
+	private final String actual;
+	private final String expected;
 	private final List<String> contexts;
 
-	private JsonContext() {
-		contexts = new LinkedList<>();
+	private JsonContext(String actual, String expected) {
+		this.actual = actual;
+		this.expected = expected;
+		this.contexts = new LinkedList<>();
+	}
+
+	String actual() {
+		return actual;
+	}
+
+	String expected() {
+		return expected;
 	}
 
 	void append(String entryName) {

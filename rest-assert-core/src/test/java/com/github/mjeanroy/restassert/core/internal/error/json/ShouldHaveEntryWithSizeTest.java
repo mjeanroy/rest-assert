@@ -28,22 +28,38 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveEntryWithSizeTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String entry = "foo";
+		String json = toJson(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe"),
+			jsonEntry("nicknames", emptyList())
+		);
+
+		String entry = "nicknames";
 		int actualSize = 0;
 		int expectedSize = 5;
-		ShouldHaveEntryWithSize shouldHaveEntryWithSize = shouldHaveEntryWithSize(entry, actualSize, expectedSize);
+		ShouldHaveEntryWithSize shouldHaveEntryWithSize = shouldHaveEntryWithSize(
+			json,
+			entry,
+			actualSize,
+			expectedSize
+		);
 
 		assertThat(shouldHaveEntryWithSize).isNotNull();
+		assertThat(shouldHaveEntryWithSize.json()).isEqualTo(json);
+		assertThat(shouldHaveEntryWithSize.entryName()).isEqualTo(entry);
+
 		assertThat(shouldHaveEntryWithSize.message()).isEqualTo("Expecting json array %s to have size %s but was %s");
 		assertThat(shouldHaveEntryWithSize.args()).hasSize(3).containsExactly(entry, expectedSize, actualSize);
 		assertThat(shouldHaveEntryWithSize.buildMessage()).isEqualTo("Expecting json array " + fmt(entry) + " to have size 5 but was 0");
-		assertThat(shouldHaveEntryWithSize.toString()).isEqualTo("Expecting json array " + fmt(entry) + " to have size 5 but was 0");
-		assertThat(shouldHaveEntryWithSize.entryName()).isEqualTo(entry);
+		assertThat(shouldHaveEntryWithSize.toString()).isEqualTo(shouldHaveEntryWithSize.buildMessage());
 	}
 }

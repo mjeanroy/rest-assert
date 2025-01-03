@@ -51,6 +51,16 @@ public final class JsonArray implements JsonValue {
 	}
 
 	/**
+	 * Create JSON array as string.
+	 *
+	 * @param values Array values.
+	 * @return The JSON string output.
+	 */
+	public static String toJson(Object... values) {
+		return jsonArray(values).toJson();
+	}
+
+	/**
 	 * The ordered list of values in array.
 	 */
 	private final List<Object> values;

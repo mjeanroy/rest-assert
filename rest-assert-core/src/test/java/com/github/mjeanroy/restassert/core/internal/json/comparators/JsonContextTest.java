@@ -26,20 +26,29 @@ package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
 import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class JsonContextTest {
 
 	@Test
 	void it_should_create_context() {
-		JsonContext context = JsonContext.rootContext();
+		String actual = toJson(jsonEntry("id", 1), jsonEntry("name", "John Doe"));
+		String expected = toJson(jsonEntry("id", 2), jsonEntry("name", "Jane Doe"));
+
+		JsonContext context = JsonContext.rootContext(actual, expected);
 		assertThat(context).isNotNull();
+		assertThat(context.actual()).isEqualTo(actual);
+		assertThat(context.expected()).isEqualTo(expected);
 		assertThat(context.toString()).isEqualTo("");
 	}
 
 	@Test
 	void it_should_append_key_to_context() {
-		JsonContext context = JsonContext.rootContext();
+		String actual = toJson(jsonEntry("id", 1), jsonEntry("name", "John Doe"));
+		String expected = toJson(jsonEntry("id", 2), jsonEntry("name", "Jane Doe"));
+		JsonContext context = JsonContext.rootContext(actual, expected);
 		assertThat(context.toString()).isEqualTo("");
 
 		context.append("foo");
@@ -51,7 +60,9 @@ class JsonContextTest {
 
 	@Test
 	void it_should_append_and_remove_key_to_context() {
-		JsonContext context = JsonContext.rootContext();
+		String actual = toJson(jsonEntry("id", 1), jsonEntry("name", "John Doe"));
+		String expected = toJson(jsonEntry("id", 2), jsonEntry("name", "Jane Doe"));
+		JsonContext context = JsonContext.rootContext(actual, expected);
 		assertThat(context.toString()).isEqualTo("");
 
 		context.append("foo");
@@ -63,7 +74,9 @@ class JsonContextTest {
 
 	@Test
 	void it_should_get_path_with_array() {
-		JsonContext context = JsonContext.rootContext();
+		String actual = toJson(jsonEntry("id", 1), jsonEntry("name", "John Doe"));
+		String expected = toJson(jsonEntry("id", 2), jsonEntry("name", "Jane Doe"));
+		JsonContext context = JsonContext.rootContext(actual, expected);
 		assertThat(context.toPath("foo")).isEqualTo("foo");
 
 		context.append("[0]");
@@ -72,7 +85,9 @@ class JsonContextTest {
 
 	@Test
 	void it_should_get_path_with_array_as_last_value() {
-		JsonContext context = JsonContext.rootContext();
+		String actual = toJson(jsonEntry("id", 1), jsonEntry("name", "John Doe"));
+		String expected = toJson(jsonEntry("id", 2), jsonEntry("name", "Jane Doe"));
+		JsonContext context = JsonContext.rootContext(actual, expected);
 		assertThat(context.toPath("[0]")).isEqualTo("[0]");
 
 		context.append("foo");

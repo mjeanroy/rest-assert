@@ -33,8 +33,9 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 public final class ShouldNotBeNull extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldNotBeNull() {
+	private ShouldNotBeNull(String json) {
 		super(
+			json,
 			Message.message("Expecting json not to be null")
 		);
 	}
@@ -42,9 +43,10 @@ public final class ShouldNotBeNull extends AbstractJsonError {
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
 	 * @return Error.
 	 */
-	public static ShouldNotBeNull shouldNotBeNull() {
-		return new ShouldNotBeNull();
+	public static ShouldNotBeNull shouldNotBeNull(String json) {
+		return new ShouldNotBeNull(json);
 	}
 }

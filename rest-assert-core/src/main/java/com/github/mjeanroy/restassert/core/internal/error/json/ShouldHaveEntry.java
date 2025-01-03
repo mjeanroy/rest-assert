@@ -32,8 +32,12 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 public final class ShouldHaveEntry extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldHaveEntry(String entryName, Message expectation) {
-		super(entryName, expectation);
+	private ShouldHaveEntry(
+		String json,
+		String entryName,
+		Message expectation
+	) {
+		super(json, entryName, expectation);
 	}
 
 	/**
@@ -42,7 +46,11 @@ public final class ShouldHaveEntry extends AbstractJsonError {
 	 * @param entryName Missing entry name.
 	 * @return Error.
 	 */
-	public static ShouldHaveEntry shouldHaveEntry(String entryName) {
-		return new ShouldHaveEntry(entryName, Message.message("Expecting json to contain entry %s", entryName));
+	public static ShouldHaveEntry shouldHaveEntry(String json, String entryName) {
+		return new ShouldHaveEntry(
+			json,
+			entryName,
+			Message.message("Expecting json to contain entry %s", entryName)
+		);
 	}
 }

@@ -27,19 +27,23 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnObject.shouldBeAnObject;
+import static com.github.mjeanroy.restassert.test.json.JsonArray.toJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeAnObjectTest {
 
 	@Test
 	void it_should_format_error_message() {
-		ShouldBeAnObject shouldBeAnObject = shouldBeAnObject();
+		String json = toJson(0, 1, 2);
+		ShouldBeAnObject shouldBeAnObject = shouldBeAnObject(json);
 
 		assertThat(shouldBeAnObject).isNotNull();
+		assertThat(shouldBeAnObject.json()).isEqualTo(json);
+		assertThat(shouldBeAnObject.entryName()).isEqualTo("");
+
 		assertThat(shouldBeAnObject.message()).isEqualTo("Expecting json to be an object but was an array");
 		assertThat(shouldBeAnObject.args()).isNotNull().isEmpty();
 		assertThat(shouldBeAnObject.buildMessage()).isEqualTo("Expecting json to be an object but was an array");
-		assertThat(shouldBeAnObject.toString()).isEqualTo("Expecting json to be an object but was an array");
-		assertThat(shouldBeAnObject.entryName()).isEqualTo("");
+		assertThat(shouldBeAnObject.toString()).isEqualTo(shouldBeAnObject.buildMessage());
 	}
 }

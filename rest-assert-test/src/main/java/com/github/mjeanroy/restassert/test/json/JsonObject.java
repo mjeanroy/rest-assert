@@ -64,6 +64,16 @@ public final class JsonObject implements JsonValue {
 	}
 
 	/**
+	 * Create JSON object with given entries.
+	 *
+	 * @param entries JSON Object entries.
+	 * @return JSON Object.
+	 */
+	public static String toJson(JsonEntry... entries) {
+		return jsonObject(entries).toJson();
+	}
+
+	/**
 	 * The JSON object entries: basically a list of key-value pairs.
 	 */
 	private final Map<String, JsonEntry> entries;

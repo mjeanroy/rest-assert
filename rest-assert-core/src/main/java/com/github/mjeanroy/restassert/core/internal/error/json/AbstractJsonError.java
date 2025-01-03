@@ -34,6 +34,8 @@ import com.github.mjeanroy.restassert.core.internal.error.RestAssertJsonError;
  */
 abstract class AbstractJsonError extends AbstractError implements RestAssertJsonError, RestAssertError {
 
+	private final String json;
+
 	/**
 	 * Entry name of json object that throws the error.
 	 */
@@ -44,8 +46,8 @@ abstract class AbstractJsonError extends AbstractError implements RestAssertJson
 	 *
 	 * @param expectation Expectation message.
 	 */
-	AbstractJsonError(Message expectation) {
-		this("", expectation);
+	AbstractJsonError(String json, Message expectation) {
+		this(json, "", expectation);
 	}
 
 	/**
@@ -53,8 +55,8 @@ abstract class AbstractJsonError extends AbstractError implements RestAssertJson
 	 *
 	 * @param expectation Expectation message.
 	 */
-	AbstractJsonError(Message expectation, Message mismatch) {
-		this("", expectation, mismatch);
+	AbstractJsonError(String json, Message expectation, Message mismatch) {
+		this(json, "", expectation, mismatch);
 	}
 
 	/**
@@ -62,8 +64,8 @@ abstract class AbstractJsonError extends AbstractError implements RestAssertJson
 	 *
 	 * @param expectation Expectation message.
 	 */
-	AbstractJsonError(String entry, Message expectation) {
-		this(entry, expectation, null);
+	AbstractJsonError(String json, String entry, Message expectation) {
+		this(json, entry, expectation, null);
 	}
 
 	/**
@@ -72,13 +74,24 @@ abstract class AbstractJsonError extends AbstractError implements RestAssertJson
 	 * @param entryName Entry name that throws error.
 	 * @param expectation Expectation message.
 	 */
-	AbstractJsonError(String entryName, Message expectation, Message mismatch) {
+	AbstractJsonError(
+		String json,
+		String entryName,
+		Message expectation,
+		Message mismatch
+	) {
 		super(expectation, mismatch);
+		this.json = json;
 		this.entryName = entryName;
 	}
 
 	@Override
 	public String entryName() {
 		return entryName;
+	}
+
+	@Override
+	public String json() {
+		return json;
 	}
 }

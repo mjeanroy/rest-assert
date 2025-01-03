@@ -35,8 +35,9 @@ import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 public final class ShouldBeTypeOf extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
-	private ShouldBeTypeOf(String expected, String actual) {
+	private ShouldBeTypeOf(String json, String expected, String actual) {
 		super(
+			json,
 			Message.message("Expecting json to be " + expected),
 			Message.message("was " + actual)
 		);
@@ -45,10 +46,17 @@ public final class ShouldBeTypeOf extends AbstractJsonError {
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON input.
+	 * @param expected Expected type.
+	 * @param actual Actual type.
 	 * @return Error.
 	 */
-	public static ShouldBeTypeOf shouldBeTypeOf(JsonType expected, JsonType actual) {
-		return new ShouldBeTypeOf(rawType(expected), rawType(actual));
+	public static ShouldBeTypeOf shouldBeTypeOf(String json, JsonType expected, JsonType actual) {
+		return new ShouldBeTypeOf(
+			json,
+			rawType(expected),
+			rawType(actual)
+		);
 	}
 
 	private static String rawType(JsonType type) {

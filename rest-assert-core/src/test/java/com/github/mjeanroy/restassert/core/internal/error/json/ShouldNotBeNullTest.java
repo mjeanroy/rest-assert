@@ -33,12 +33,16 @@ class ShouldNotBeNullTest {
 
 	@Test
 	void it_should_format_error_message() {
-		ShouldNotBeNull shouldHaveEntry = shouldNotBeNull();
+		String json = null;
+		ShouldNotBeNull shouldNotBeNull = shouldNotBeNull(json);
 
-		assertThat(shouldHaveEntry).isNotNull();
-		assertThat(shouldHaveEntry.message()).isEqualTo("Expecting json not to be null");
-		assertThat(shouldHaveEntry.args()).isEmpty();
-		assertThat(shouldHaveEntry.buildMessage()).isEqualTo("Expecting json not to be null");
-		assertThat(shouldHaveEntry.toString()).isEqualTo("Expecting json not to be null");
+		assertThat(shouldNotBeNull).isNotNull();
+		assertThat(shouldNotBeNull.json()).isEqualTo(json);
+		assertThat(shouldNotBeNull.entryName()).isEqualTo("");
+
+		assertThat(shouldNotBeNull.message()).isEqualTo("Expecting json not to be null");
+		assertThat(shouldNotBeNull.args()).isEmpty();
+		assertThat(shouldNotBeNull.buildMessage()).isEqualTo("Expecting json not to be null");
+		assertThat(shouldNotBeNull.toString()).isEqualTo(shouldNotBeNull.buildMessage());
 	}
 }
