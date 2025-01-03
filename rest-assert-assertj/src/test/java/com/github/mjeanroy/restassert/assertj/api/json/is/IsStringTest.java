@@ -22,38 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.assertions.http.cookie;
+package com.github.mjeanroy.restassert.assertj.api.json.is;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
+import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
+import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
+import com.github.mjeanroy.restassert.assertj.internal.Jsons;
+import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
-class HasCookieWithNameAndValueTest extends AbstractHasCookieTest {
-
-	private static final String NAME = "JSESSIONID";
-	private static final String VALUE = "12345";
+class IsStringTest extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
-	protected AssertionResult run(HttpResponse response) {
-		return assertions.hasCookie(response, NAME, VALUE);
+	protected Jsons createAssertions() {
+		return mock(Jsons.class);
 	}
 
 	@Override
-	Cookie newCookie() {
-		return new MockCookieBuilder()
-			.setName(NAME)
-			.setValue(VALUE)
-			.build();
+	protected JsonAssert createApi() {
+		return new JsonAssert(actual());
 	}
 
 	@Override
-	void verifyError(AssertionResult result) {
-		checkError(
-			result,
-			"Expecting http response to contains cookie with name " + fmt(NAME) + " and value " + fmt(VALUE)
-		);
+	protected JsonAssert run() {
+		return api.isString();
+	}
+
+	@Override
+	protected void verifyApiCall() {
+		verify(assertions).assertIsString(any(AssertionInfo.class), eq(actual()));
+	}
+
+	private static String actual() {
+		return "\"Hello World\"";
 	}
 }

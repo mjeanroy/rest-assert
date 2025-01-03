@@ -22,59 +22,70 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.internal.json.isstring;
+package com.github.mjeanroy.restassert.assertj.internal.json.is;
 
 import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class AssertIsStringTest {
+class AssertIsNumberTest {
+
 	private final Jsons jsons = Jsons.instance();
 
 	@Test
-	void it_should_pass_with_a_string() {
-		jsons.assertIsString(someInfo(), "\"\"");
-		jsons.assertIsString(someInfo(), "\"Hello World\"");
+	void it_should_pass_with_a_number() {
+		it_should_succeed("0");
+		it_should_succeed("0.5");
+		it_should_succeed("-0.5");
 	}
 
 	@Test
 	void it_should_fail_with_null_string() {
-		it_should_fail("null", "Expecting json to be a string but was null");
+		it_should_fail("null", "null");
 	}
 
 	@Test
-	void it_should_fail_with_number() {
-		it_should_fail("0", "Expecting json to be a string but was a number");
+	void it_should_fail_with_a_string() {
+		it_should_fail("\"\"", "a string");
+		it_should_fail("\"Hello World\"", "a string");
 	}
 
 	@Test
 	void it_should_fail_with_a_boolean() {
-		it_should_fail("false", "Expecting json to be a string but was a boolean");
-		it_should_fail("true", "Expecting json to be a string but was a boolean");
+		it_should_fail("false", "a boolean");
+		it_should_fail("true", "a boolean");
 	}
 
 	@Test
 	void it_should_fail_with_an_array() {
-		it_should_fail("[]", "Expecting json to be a string but was an array");
+		it_should_fail("[]", "an array");
 	}
 
 	@Test
 	void it_should_fail_with_an_object() {
-		it_should_fail("{}", "Expecting json to be a string but was an object");
+		it_should_fail("{}", "an object");
 	}
 
-	private void it_should_fail(String json, String expectedMessage) {
-		AssertionInfo info = someInfo();
+	private void it_should_succeed(String json) {
+		run(json);
+	}
 
+	private void it_should_fail(String json, String actualType) {
 		try {
-			jsons.assertIsString(info, json);
+			run(json);
 			failBecauseExpectedAssertionErrorWasNotThrown();
-		} catch (AssertionError e) {
-			assertThat(e.getMessage()).isEqualTo(expectedMessage);
 		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage()).isEqualTo(
+				"Expecting json to be a number but was " + actualType
+			);
+		}
+	}
+
+	private void run(String json) {
+		jsons.assertIsNumber(someInfo(), json);
 	}
 }

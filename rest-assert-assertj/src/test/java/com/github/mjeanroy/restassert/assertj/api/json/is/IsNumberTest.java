@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api.json.isstring;
+package com.github.mjeanroy.restassert.assertj.api.json.is;
 
 import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
@@ -34,7 +34,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-class IsStringTest extends AbstractApiTest<Jsons, JsonAssert> {
+class IsNumberTest extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
 	protected Jsons createAssertions() {
@@ -48,15 +48,15 @@ class IsStringTest extends AbstractApiTest<Jsons, JsonAssert> {
 
 	@Override
 	protected JsonAssert run() {
-		return api.isString();
+		return api.isNumber();
 	}
 
 	@Override
 	protected void verifyApiCall() {
-		verify(assertions).assertIsString(any(AssertionInfo.class), eq(actual()));
+		verify(assertions).assertIsNumber(any(AssertionInfo.class), eq(actual()));
 	}
 
-	private String actual() {
-		return "\"Hello World\"";
+	private static String actual() {
+		return "0.5";
 	}
 }

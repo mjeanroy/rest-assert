@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
 import com.github.mjeanroy.restassert.core.internal.common.Ios;
-import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
 import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
@@ -53,6 +52,7 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.common.Files.readFileToString;
 import static com.github.mjeanroy.restassert.core.internal.common.Ios.readUrl;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isEmpty;
+import static com.github.mjeanroy.restassert.core.internal.common.Strings.trimToNull;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeTypeOf.shouldBeTypeOf;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
@@ -121,8 +121,18 @@ public final class JsonAssertions {
 		return isType(actual, JsonType.STRING);
 	}
 
+	/**
+	 * Check that given json is a JSON number.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNumber(String actual) {
+		return isType(actual, JsonType.NUMBER);
+	}
+
 	private AssertionResult isType(String actual, JsonType expectedType) {
-		String trimmedActual = Strings.trimToNull(actual.trim());
+		String trimmedActual = trimToNull(actual.trim());
 
 		if (isEmpty(trimmedActual)) {
 			return failure(shouldNotBeNull());

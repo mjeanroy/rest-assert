@@ -30,41 +30,44 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class IsStringTest {
+class IsNumberTest {
 
 	@Test
-	void it_should_succeed_with_a_string() {
-		it_should_succeed("\"\"");
-		it_should_succeed("\"Hello World\"");
+	void it_should_succeed_with_a_number() {
+		it_should_succeed("0");
+		it_should_succeed("1");
+		it_should_succeed("0.5");
 	}
 
 	@Test
-	void it_should_fail_with_a_number() {
-		it_should_fail("1.1", "Expecting json to be a string but was a number");
+	void it_should_fail_with_a_string() {
+		it_should_fail("\"\"", "Expecting json to be a number but was a string");
+		it_should_fail("\"Message\"", "Expecting json to be a number but was a string");
 	}
 
 	@Test
 	void it_should_fail_with_a_boolean() {
-		it_should_fail("false", "Expecting json to be a string but was a boolean");
-		it_should_fail("true", "Expecting json to be a string but was a boolean");
+		it_should_fail("false", "Expecting json to be a number but was a boolean");
+		it_should_fail("true", "Expecting json to be a number but was a boolean");
 	}
 
 	@Test
 	void it_should_fail_with_null() {
-		it_should_fail("null", "Expecting json to be a string but was null");
+		it_should_fail("null", "Expecting json to be a number but was null");
 	}
 
 	@Test
 	void it_should_fail_with_array() {
-		it_should_fail("[]", "Expecting json to be a string but was an array");
-		it_should_fail("[ ]", "Expecting json to be a string but was an array");
-		it_should_fail("[0,1,2]", "Expecting json to be a string but was an array");
+		it_should_fail("[]", "Expecting json to be a number but was an array");
+		it_should_fail("[ ]", "Expecting json to be a number but was an array");
+		it_should_fail("[0,1,2]", "Expecting json to be a number but was an array");
 	}
 
 	@Test
 	void it_should_fail_with_object() {
-		it_should_fail("{ }", "Expecting json to be a string but was an object");
-		it_should_fail("{\"id\":1}", "Expecting json to be a string but was an object");
+		it_should_fail("{}", "Expecting json to be a number but was an object");
+		it_should_fail("{ }", "Expecting json to be a number but was an object");
+		it_should_fail("{\"id\":1}", "Expecting json to be a number but was an object");
 	}
 
 	private static void it_should_succeed(String json) {
@@ -85,6 +88,6 @@ class IsStringTest {
 	}
 
 	private static AssertionResult run(String json) {
-		return JsonAssertions.instance().isString(json);
+		return JsonAssertions.instance().isNumber(json);
 	}
 }
