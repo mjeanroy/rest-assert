@@ -32,4 +32,19 @@ public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseA
 		super(actual, HttpResponseAssert.class);
 	}
 
+	/**
+	 * Extract body and returns JSON assertion object, such as:
+	 *
+	 * @code {
+	 *   assertThat(response).isOk().extractingJsonBody().isEqualTo(
+	 *     readFile("/json/expected.json")
+	 *   );
+	 * }
+	 * @return The {@link JsonAssert JSON assertion} object.
+	 */
+	public JsonAssert extractingJsonBody() {
+		return new JsonAssert(
+			actual.getContent()
+		);
+	}
 }

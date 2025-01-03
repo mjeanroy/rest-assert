@@ -70,4 +70,18 @@ class HttpResponseAssertionsTest {
 		assertThat(assertions).isNotNull();
 		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}
+
+	@Test
+	void it_should_fluently_create_assertion_object() {
+		JsonObject object = jsonObject(
+			jsonEntry("foo", "bar")
+		);
+
+		String body = object.toJson();
+		HttpResponse response = new HttpResponseBuilderImpl().setContent(body).build();
+		JsonAssert assertions = HttpResponseAssertions.assertThat(response).isOk().extractingJsonBody();
+
+		assertThat(assertions).isNotNull();
+		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
+	}
 }
