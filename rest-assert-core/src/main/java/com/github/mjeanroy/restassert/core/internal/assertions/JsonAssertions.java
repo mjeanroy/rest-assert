@@ -141,6 +141,16 @@ public final class JsonAssertions {
 		return isType(actual, JsonType.BOOLEAN);
 	}
 
+	/**
+	 * Check that given json is a JSON array.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isArray(String actual) {
+		return isType(actual, JsonType.ARRAY);
+	}
+
 	private AssertionResult isType(String actual, JsonType expectedType) {
 		String trimmedActual = trimToNull(actual.trim());
 
