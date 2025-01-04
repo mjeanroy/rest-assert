@@ -32,7 +32,7 @@ import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.JsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParserStrategy;
+import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParsers;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
@@ -98,7 +98,7 @@ public final class JsonAssertions {
 
 	// Private constructor to ensure singleton
 	private JsonAssertions() {
-		this.parser = JsonParserStrategy.AUTO.build();
+		this.parser = JsonParsers.getParser();
 	}
 
 	/**

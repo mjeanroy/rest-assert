@@ -32,13 +32,13 @@ import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson2
 /**
  * Access json parser implementation.
  */
-public enum JsonParserStrategy {
+enum JsonParserStrategy {
 	/**
 	 * Json parser using Jackson2 as internal implementation.
 	 */
 	JACKSON2("com.fasterxml.jackson.databind.ObjectMapper") {
 		@Override
-		public JsonParser build() {
+		JsonParser build() {
 			return jackson2Parser();
 		}
 	},
@@ -48,7 +48,7 @@ public enum JsonParserStrategy {
 	 */
 	GSON("com.google.gson.Gson") {
 		@Override
-		public JsonParser build() {
+		JsonParser build() {
 			return gsonParser();
 		}
 	},
@@ -58,31 +58,8 @@ public enum JsonParserStrategy {
 	 */
 	JACKSON1("org.codehaus.jackson.map.ObjectMapper") {
 		@Override
-		public JsonParser build() {
+		JsonParser build() {
 			return jackson1Parser();
-		}
-	},
-
-	/**
-	 * Strategy that try to detect available implementation on classpath
-	 * and return associated parser.
-	 */
-	AUTO(null) {
-		@Override
-		public JsonParser build() {
-			for (JsonParserStrategy strategy : JsonParserStrategy.values()) {
-				String className = strategy.className;
-				if (className == null) {
-					continue;
-				}
-
-				if (isPresent(className)) {
-					return strategy.build();
-				}
-			}
-
-			// Fail if no available implementation found
-			throw new UnsupportedOperationException("Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)");
 		}
 	};
 
@@ -93,9 +70,18 @@ public enum JsonParserStrategy {
 	}
 
 	/**
+	 * Check if given strategy is available.
+	 *
+	 * @return {@code true} if strategy is available, {@code false} otherwise.
+	 */
+	boolean isAvailable() {
+		return isPresent(className);
+	}
+
+	/**
 	 * Get parser instance according to strategy.
 	 *
 	 * @return Parser.
 	 */
-	public abstract JsonParser build();
+	abstract JsonParser build();
 }
