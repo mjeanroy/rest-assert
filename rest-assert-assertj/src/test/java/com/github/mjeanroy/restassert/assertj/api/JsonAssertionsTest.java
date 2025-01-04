@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.test.json.JsonArray;
 import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,7 @@ import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.re
 import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
 class JsonAssertionsTest {
 
@@ -62,5 +64,45 @@ class JsonAssertionsTest {
 
 		assertThat(assertions).isNotNull();
 		assertThat((String) readField(assertions, "actual")).isEqualTo(json);
+	}
+
+	@Test
+	void it_should_translate_to_map_assert() {
+		String actual = JsonObject.toJson(
+			jsonEntry("foo", "bar")
+		);
+
+		JsonAssertions.assertThatJson(actual).asObject().hasSize(1).contains(
+			entry("foo", "bar")
+		);
+	}
+
+	@Test
+	void it_should_translate_to_list_assert() {
+		String actual = JsonArray.toJson(
+			0, 1, 2
+		);
+
+		JsonAssertions.assertThatJson(actual).asArray().hasSize(3).containsExactly(
+			0, 1, 2
+		);
+	}
+
+	@Test
+	void it_should_translate_to_boolean_assert() {
+		JsonAssertions.assertThatJson("false").asBoolean().isFalse();
+		JsonAssertions.assertThatJson("true").asBoolean().isTrue();
+	}
+
+	@Test
+	void it_should_translate_to_double_assert() {
+		JsonAssertions.assertThatJson("0.5").asNumber().isEqualTo(0.5);
+	}
+
+	@Test
+	void it_should_translate_to_string_assert() {
+		JsonAssertions.assertThatJson("\"Hello World\"").asString().isEqualTo(
+			"Hello World"
+		);
 	}
 }
