@@ -43,6 +43,16 @@ public final class ShouldBeTypeOf extends AbstractJsonError {
 		);
 	}
 
+	// Private constructor, use static factory instead
+	private ShouldBeTypeOf(String json, String entry, String expected, String actual) {
+		super(
+			json,
+			entry,
+			Message.message("Expecting json entry %s to be " + expected, entry),
+			Message.message("was " + actual)
+		);
+	}
+
 	/**
 	 * Build error.
 	 *
@@ -54,6 +64,29 @@ public final class ShouldBeTypeOf extends AbstractJsonError {
 	public static ShouldBeTypeOf shouldBeTypeOf(String json, JsonType expected, JsonType actual) {
 		return new ShouldBeTypeOf(
 			json,
+			rawType(expected),
+			rawType(actual)
+		);
+	}
+
+	/**
+	 * Build error.
+	 *
+	 * @param json Original JSON input.
+	 * @param entry JSON entry.
+	 * @param expected Expected type.
+	 * @param actual Actual type.
+	 * @return Error.
+	 */
+	public static ShouldBeTypeOf shouldBeTypeOf(
+		String json,
+		String entry,
+		JsonType expected,
+		JsonType actual
+	) {
+		return new ShouldBeTypeOf(
+			json,
+			entry,
 			rawType(expected),
 			rawType(actual)
 		);

@@ -122,6 +122,66 @@ public final class JsonAssertions {
 	}
 
 	/**
+	 * Check that given json is a JSON string type.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isStringEntry(String actual, String path) {
+		return isEntryWithType(actual, path, JsonType.STRING);
+	}
+
+	/**
+	 * Check that given json is a JSON number type.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isNumberEntry(String actual, String path) {
+		return isEntryWithType(actual, path, JsonType.NUMBER);
+	}
+
+	/**
+	 * Check that given json is a JSON boolean type.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isBooleanEntry(String actual, String path) {
+		return isEntryWithType(actual, path, JsonType.BOOLEAN);
+	}
+
+	/**
+	 * Check that given json is a JSON array type.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isArrayEntry(String actual, String path) {
+		return isEntryWithType(actual, path, JsonType.ARRAY);
+	}
+
+	/**
+	 * Check that given json is a JSON object type.
+	 *
+	 * @param actual JSON.
+	 * @return Assertion result.
+	 */
+	public AssertionResult isObjectEntry(String actual, String path) {
+		return isEntryWithType(actual, path, JsonType.OBJECT);
+	}
+
+	private AssertionResult isEntryWithType(String actual, String path, JsonType expectedType) {
+		AssertionResult result = contains(actual, path);
+		if (result.isFailure()) {
+			return result;
+		}
+
+		Object parsedValue = getEntry(actual, path);
+		return isType(actual, path, parsedValue, expectedType);
+	}
+
+	/**
 	 * Check that given json is a JSON number.
 	 *
 	 * @param actual JSON.
@@ -176,6 +236,22 @@ public final class JsonAssertions {
 
 		return failure(
 			shouldBeTypeOf(actual, expectedType, actualType)
+		);
+	}
+
+	private AssertionResult isType(String actual, String path, Object parsedValue, JsonType expectedType) {
+		JsonType actualType = JsonType.getType(parsedValue);
+		if (actualType == expectedType) {
+			return success();
+		}
+
+		return failure(
+			shouldBeTypeOf(
+				actual,
+				path,
+				expectedType,
+				actualType
+			)
 		);
 	}
 
@@ -260,7 +336,7 @@ public final class JsonAssertions {
 		return errors.isEmpty() ? success() : failure(composeErrors(errors));
 	}
 
-	private boolean doesNotHaveEntry(String actual, String entry) {
+	private static boolean doesNotHaveEntry(String actual, String entry) {
 		try {
 			getEntry(actual, entry);
 			return false;
@@ -270,7 +346,7 @@ public final class JsonAssertions {
 		}
 	}
 
-	private <T> T getEntry(String actual, String entry) {
+	private static <T> T getEntry(String actual, String entry) {
 		String path = toJsonPath(entry);
 		return JsonPath.read(actual, path);
 	}
@@ -443,10 +519,6 @@ public final class JsonAssertions {
 	}
 
 	private static String toJsonPath(String path) {
-		if (!path.startsWith("$.")) {
-			return "$." + path;
-		}
-
-		return path;
+		return path.startsWith("$.") ? path : ("$." + path);
 	}
 }
