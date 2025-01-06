@@ -26,7 +26,6 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
@@ -51,6 +50,18 @@ class HttpResponseAssertionsTest {
 	void it_should_create_new_cookie_assertion_object() {
 		Cookie cookie = new MockCookieBuilder().build();
 		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
+
+		assertThat(assertions).isNotNull();
+		assertThat((Object) readField(assertions, "actual")).isSameAs(cookie);
+	}
+
+	@Test
+	void it_should_extract_and_create_new_cookie_assertion_object() {
+		String cookieName = "JSESSIONID";
+		Cookie cookie = new MockCookieBuilder().setName(cookieName).build();
+		HttpResponse response = new HttpResponseBuilderImpl().addCookie(cookie).build();
+
+		CookieAssert assertions = HttpResponseAssertions.assertThat(response).extractingCookie(cookieName);
 
 		assertThat(assertions).isNotNull();
 		assertThat((Object) readField(assertions, "actual")).isSameAs(cookie);
