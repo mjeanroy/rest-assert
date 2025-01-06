@@ -100,8 +100,8 @@ final class DefaultCookie implements Cookie {
 		boolean httpOnly,
 		SameSite sameSite,
 		Long maxAge,
-		Date expires) {
-
+		Date expires
+	) {
 		this.name = name;
 		this.value = value;
 		this.domain = domain;

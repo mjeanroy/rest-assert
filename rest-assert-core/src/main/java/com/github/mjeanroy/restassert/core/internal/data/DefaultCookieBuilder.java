@@ -122,7 +122,17 @@ public class DefaultCookieBuilder {
 	 * @return Current builder.
 	 */
 	public DefaultCookieBuilder setSecure() {
-		this.secure = true;
+		return setSecure(true);
+	}
+
+	/**
+	 * Set secure flag..
+	 *
+	 * @param secure Secure flag.
+	 * @return Current builder.
+	 */
+	public DefaultCookieBuilder setSecure(boolean secure) {
+		this.secure = secure;
 		return this;
 	}
 
@@ -132,7 +142,17 @@ public class DefaultCookieBuilder {
 	 * @return Current builder.
 	 */
 	public DefaultCookieBuilder setHttpOnly() {
-		this.httpOnly = true;
+		return setHttpOnly(true);
+	}
+
+	/**
+	 * Set httpOnly flag.
+	 *
+	 * @param httpOnly The HttpOnly flag.
+	 * @return Current builder.
+	 */
+	public DefaultCookieBuilder setHttpOnly(boolean httpOnly) {
+		this.httpOnly = httpOnly;
 		return this;
 	}
 
@@ -142,7 +162,7 @@ public class DefaultCookieBuilder {
 	 * @param maxAge Max-Age value.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setMaxAge(long maxAge) {
+	public DefaultCookieBuilder setMaxAge(Long maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}

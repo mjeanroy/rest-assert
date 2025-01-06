@@ -41,7 +41,6 @@ import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isGreaterThan;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isInRange;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
-import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
 /**
  * Cookies utilities.
@@ -77,19 +76,17 @@ public final class Cookies {
 		boolean httpOnly,
 		SameSite sameSite,
 		Long maxAge,
-		Date expires) {
-
-		return new DefaultCookie(
-			notBlank(name, "Cookie name must be defined"),
-			notNull(value, "Cookie value must not be null"),
-			domain,
-			path,
-			secure,
-			httpOnly,
-			sameSite,
-			maxAge,
-			expires
-		);
+		Date expires
+	) {
+		return new DefaultCookieBuilder(name, value)
+			.setDomain(domain)
+			.setPath(path)
+			.setSecure(secure)
+			.setHttpOnly(httpOnly)
+			.setSameSite(sameSite)
+			.setMaxAge(maxAge)
+			.setExpires(expires)
+			.build();
 	}
 
 	/**
