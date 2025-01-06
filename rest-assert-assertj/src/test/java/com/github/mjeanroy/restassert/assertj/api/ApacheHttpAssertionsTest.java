@@ -26,14 +26,13 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpResponse;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ApacheHttpAssertionsTest {
@@ -60,12 +59,7 @@ class ApacheHttpAssertionsTest {
 
 	@Test
 	void it_should_create_new_json_assertion_object() {
-		JsonObject object = jsonObject(
-			jsonEntry("foo", "bar")
-		);
-
-		String body = object.toJson();
-
+		String body = toJSON(jsonEntry("foo", "bar"));
 		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().setContent(body).build();
 
 		JsonAssert assertions = ApacheHttpAssertions.assertThatJson(response);

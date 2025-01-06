@@ -28,15 +28,15 @@ import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldHaveEntryTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String json = toJson(jsonEntry("id", 1));
+		String json = toJSON(jsonEntry("id", 1));
 		String entry = "name";
 		ShouldHaveEntry shouldHaveEntry = shouldHaveEntry(json, entry);
 

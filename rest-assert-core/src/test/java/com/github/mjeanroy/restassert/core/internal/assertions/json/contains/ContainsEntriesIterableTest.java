@@ -27,12 +27,14 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JSONObject;
+import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 import static java.util.Arrays.asList;
@@ -50,49 +52,47 @@ class ContainsEntriesIterableTest {
 
 	@Test
 	void it_should_check_if_json_contains_entries() {
-		JsonObject jsonObject = jsonObject(
+		String actual = toJSON(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);
-
-		String actual = jsonObject.toJson();
 
 		assertSuccessResult(assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("id", 1))));
 		assertSuccessResult(assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("name", "John Doe"))));
 		assertSuccessResult(assertions.containsEntries(actual, singleton(JsonAssertions.jsonEntry("$.id", 1))));
 		assertSuccessResult(assertions.containsEntries(actual, singletonList(JsonAssertions.jsonEntry("$.name", "John Doe"))));
 
-		assertSuccessResult(assertions.containsEntries(actual, asList(
-			JsonAssertions.jsonEntry("id", 1),
-			JsonAssertions.jsonEntry("name", "John Doe")
-		)));
+		assertSuccessResult(
+			assertions.containsEntries(actual, asList(
+				JsonAssertions.jsonEntry("id", 1),
+				JsonAssertions.jsonEntry("name", "John Doe")
+			))
+		);
 	}
 
 	@Test
 	void it_should_fail_if_json_is_null_or_empty() {
 		JsonEntry entry = JsonAssertions.jsonEntry("name", "Jane Doe");
-		test_failure_on_missing_entry(null, entry);
+		test_failure_on_missing_entry((String) null, entry);
 		test_failure_on_missing_entry("", entry);
 	}
 
 	@Test
 	void it_should_fail_if_json_does_contains_entries() {
-		JsonObject jsonObject = jsonObject(
+		JSONObject jsonObject = jsonObject(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);
 
-		String actual = jsonObject.toJson();
-
 		test_failure_on_value_mismatch(jsonObject, JsonAssertions.jsonEntry("name", "Jane Doe"));
 		test_failure_on_value_mismatch(jsonObject, JsonAssertions.jsonEntry("$.name", "Jane Doe"));
-		test_failure_on_missing_entry(actual, JsonAssertions.jsonEntry("foo", "Jane Doe"));
-		test_failure_on_missing_entry(actual, JsonAssertions.jsonEntry("$.foo", "Jane Doe"));
+		test_failure_on_missing_entry(jsonObject, JsonAssertions.jsonEntry("foo", "Jane Doe"));
+		test_failure_on_missing_entry(jsonObject, JsonAssertions.jsonEntry("$.foo", "Jane Doe"));
 	}
 
-	private void test_failure_on_value_mismatch(JsonObject actual, JsonEntry entry) {
+	private void test_failure_on_value_mismatch(JSONObject actual, JsonEntry entry) {
 		AssertionResult result = assertions.containsEntries(
-			actual.toJson(),
+			actual.toJSON(),
 			singleton(entry)
 		);
 
@@ -102,6 +102,10 @@ class ContainsEntriesIterableTest {
 			result,
 			String.format("Expecting json entry %s to be equal to %s but was %s", key, entry.getValue(), actual.getValue(key))
 		);
+	}
+
+	private void test_failure_on_missing_entry(JSONObject actual, JsonEntry entry) {
+		test_failure_on_missing_entry(actual.toJSON(), entry);
 	}
 
 	private void test_failure_on_missing_entry(String actual, JsonEntry entry) {

@@ -25,12 +25,11 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertSuccessResult;
 
@@ -45,12 +44,10 @@ class ContainsTest {
 
 	@Test
 	void it_should_check_if_json_contains_entries() {
-		JsonObject jsonObject = jsonObject(
+		String actual = toJSON(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);
-
-		String actual = jsonObject.toJson();
 
 		assertSuccessResult(assertions.contains(actual, "id"));
 		assertSuccessResult(assertions.contains(actual, "$.id"));
@@ -67,11 +64,7 @@ class ContainsTest {
 
 	@Test
 	void it_should_fail_if_json_does_contains_entries() {
-		JsonObject jsonObject = jsonObject(
-			jsonEntry("id", 1)
-		);
-
-		String actual = jsonObject.toJson();
+		String actual = toJSON(jsonEntry("id", 1));
 		test_failure(actual, "name");
 		test_failure(actual, "$.name");
 	}

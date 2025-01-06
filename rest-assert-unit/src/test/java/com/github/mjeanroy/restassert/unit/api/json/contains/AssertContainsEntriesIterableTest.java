@@ -25,11 +25,11 @@
 package com.github.mjeanroy.restassert.unit.api.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContainsEntries;
 import static java.util.Arrays.asList;
@@ -65,11 +65,9 @@ class AssertContainsEntriesIterableTest {
 	}
 
 	private String createJson() {
-		JsonObject jsonObject = jsonObject(
+		return toJSON(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);
-
-		return jsonObject.toJson();
 	}
 }

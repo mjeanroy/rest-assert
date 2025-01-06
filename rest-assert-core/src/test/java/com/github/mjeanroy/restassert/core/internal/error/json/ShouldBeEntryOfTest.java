@@ -25,20 +25,21 @@
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
+import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeEntryOf.shouldBeEntryOf;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeEntryOfTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String json = toJson(
-			jsonEntry("id", null),
+		String json = toJSON(
+			jsonEntry("id"),
 			jsonEntry("name", "John Doe")
 		);
 

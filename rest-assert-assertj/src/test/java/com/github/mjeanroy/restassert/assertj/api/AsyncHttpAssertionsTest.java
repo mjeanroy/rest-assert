@@ -26,15 +26,14 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpCookie;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AsyncHttpAssertionsTest {
@@ -59,11 +58,7 @@ class AsyncHttpAssertionsTest {
 
 	@Test
 	void it_should_create_new_json_assertion_object() {
-		JsonObject object = jsonObject(
-			jsonEntry("foo", "bar")
-		);
-
-		String body = object.toJson();
+		String body = toJSON(jsonEntry("foo", "bar"));
 		Response response = new AsyncHttpResponseBuilder().setContent(body).build();
 
 		JsonAssert assertions = AsyncHttpAssertions.assertThatJson(response);

@@ -35,7 +35,7 @@ class ContainsEntriesTest extends AbstractJsonContainsTest {
 	@Override
 	void test_pass() {
 		MatcherAssert.assertThat(
-			input.toJson(),
+			input.toJSON(),
 			contains("id", "name")
 		);
 	}

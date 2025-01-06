@@ -36,7 +36,7 @@ class ContainsIterableTest extends AbstractJsonContainsTest {
 	@Override
 	void test_pass() {
 		MatcherAssert.assertThat(
-			input.toJson(),
+			input.toJSON(),
 			contains(
 				asList("id", "name")
 			)

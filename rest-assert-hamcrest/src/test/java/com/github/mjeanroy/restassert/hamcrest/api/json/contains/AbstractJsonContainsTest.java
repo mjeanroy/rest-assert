@@ -24,20 +24,20 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.json.contains;
 
-import com.github.mjeanroy.restassert.test.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonObject;
 import static java.util.Arrays.asList;
 
 abstract class AbstractJsonContainsTest {
 
-	final JsonObject input = jsonObject(
+	final JSONObject input = jsonObject(
 		jsonEntry("id", 1),
 		jsonEntry("name", "John Doe")
 	);

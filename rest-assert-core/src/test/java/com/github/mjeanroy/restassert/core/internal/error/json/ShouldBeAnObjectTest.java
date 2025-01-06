@@ -27,14 +27,15 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeAnObject.shouldBeAnObject;
-import static com.github.mjeanroy.restassert.test.json.JsonArray.toJson;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonArray;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeAnObjectTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String json = toJson(0, 1, 2);
+		String json = jsonArray(0, 1, 2).toJSON();
+
 		ShouldBeAnObject shouldBeAnObject = shouldBeAnObject(json);
 
 		assertThat(shouldBeAnObject).isNotNull();

@@ -26,14 +26,14 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class HttpResponseAssertionsTest {
@@ -58,11 +58,7 @@ class HttpResponseAssertionsTest {
 
 	@Test
 	void it_should_create_new_json_assertion_object() {
-		JsonObject object = jsonObject(
-			jsonEntry("foo", "bar")
-		);
-
-		String body = object.toJson();
+		String body = toJSON(jsonEntry("foo", "bar"));
 		HttpResponse response = new HttpResponseBuilderImpl().setContent(body).build();
 
 		JsonAssert assertions = HttpResponseAssertions.assertThatJson(response);
@@ -73,11 +69,7 @@ class HttpResponseAssertionsTest {
 
 	@Test
 	void it_should_fluently_create_assertion_object() {
-		JsonObject object = jsonObject(
-			jsonEntry("foo", "bar")
-		);
-
-		String body = object.toJson();
+		String body = toJSON(jsonEntry("foo", "bar"));
 		HttpResponse response = new HttpResponseBuilderImpl().setContent(body).build();
 		JsonAssert assertions = HttpResponseAssertions.assertThat(response).isOk().extractingJsonBody();
 

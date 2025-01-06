@@ -24,19 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.error.json;
 
+import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.toJson;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldBeEqualToTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String json = toJson(
+		String json = toJSON(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);

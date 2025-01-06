@@ -25,13 +25,12 @@
 package com.github.mjeanroy.restassert.assertj.internal.json.contains;
 
 import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.assertj.core.api.AssertionInfo;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,12 +40,10 @@ class AssertContainsTest {
 
 	@Test
 	void it_should_pass_if_json_contains_entries() {
-		JsonObject jsonObject = jsonObject(
+		String json = toJSON(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);
-
-		String json = jsonObject.toJson();
 
 		jsons.assertContains(someInfo(), json, "id");
 		jsons.assertContains(someInfo(), json, "name");
@@ -58,11 +55,7 @@ class AssertContainsTest {
 	@Test
 	void it_should_fail_if_json_does_not_contains_entry() {
 		AssertionInfo info = someInfo();
-		JsonObject jsonObject = jsonObject(
-			jsonEntry("id", 1)
-		);
-
-		String json = jsonObject.toJson();
+		String json = toJSON(jsonEntry("id", 1));
 
 		try {
 			jsons.assertContains(info, json, "name");

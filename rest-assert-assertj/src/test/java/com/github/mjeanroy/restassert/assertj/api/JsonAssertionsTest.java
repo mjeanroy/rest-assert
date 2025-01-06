@@ -25,14 +25,13 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-import com.github.mjeanroy.restassert.test.json.JsonArray;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.readField;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonArray;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
@@ -40,11 +39,7 @@ class JsonAssertionsTest {
 
 	@Test
 	void it_should_create_new_assertion_object() {
-		JsonObject jsonObject = jsonObject(
-			jsonEntry("foo", "bar")
-		);
-
-		String json = jsonObject.toJson();
+		String json = toJSON(jsonEntry("foo", "bar"));
 		JsonAssert assertions = JsonAssertions.assertThatJson(json);
 
 		assertThat(assertions).isNotNull();
@@ -53,11 +48,7 @@ class JsonAssertionsTest {
 
 	@Test
 	void it_should_create_new_assertion_object_from_http_response() {
-		JsonObject jsonObject = jsonObject(
-			jsonEntry("foo", "bar")
-		);
-
-		String json = jsonObject.toJson();
+		String json = toJSON(jsonEntry("foo", "bar"));
 		HttpResponse httpResponse = new HttpResponseBuilderImpl().setContent(json).build();
 
 		JsonAssert assertions = JsonAssertions.assertThatJson(httpResponse);
@@ -68,10 +59,7 @@ class JsonAssertionsTest {
 
 	@Test
 	void it_should_translate_to_map_assert() {
-		String actual = JsonObject.toJson(
-			jsonEntry("foo", "bar")
-		);
-
+		String actual = toJSON(jsonEntry("foo", "bar"));
 		JsonAssertions.assertThatJson(actual).asObject().hasSize(1).contains(
 			entry("foo", "bar")
 		);
@@ -79,10 +67,7 @@ class JsonAssertionsTest {
 
 	@Test
 	void it_should_translate_to_list_assert() {
-		String actual = JsonArray.toJson(
-			0, 1, 2
-		);
-
+		String actual = jsonArray(0, 1, 2).toJSON();
 		JsonAssertions.assertThatJson(actual).asArray().hasSize(3).containsExactly(
 			0, 1, 2
 		);

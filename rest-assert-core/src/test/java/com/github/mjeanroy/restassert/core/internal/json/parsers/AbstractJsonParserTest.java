@@ -24,16 +24,16 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import com.github.mjeanroy.restassert.test.json.JsonArray;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JSONArray;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Map;
 
-import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonArray;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.entry;
 
@@ -64,13 +64,13 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_parse_object() {
-		JsonObject jsonObject = jsonObject(
+		String actual = toJSON(
 			jsonEntry("str", "bar"),
 			jsonEntry("nb", 1.0),
 			jsonEntry("bool", true)
 		);
 
-		Object result = parser().parse(jsonObject.toJson());
+		Object result = parser().parse(actual);
 
 		assertThat(result).isInstanceOf(Map.class);
 		assertThat(((Map<String, Object>) result)).hasSize(3);
@@ -78,11 +78,8 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_parse_array() {
-		JsonArray jsonArray = jsonArray(
-			"Hello World"
-		);
-
-		Object result = parser().parse(jsonArray.toJson());
+		String actual = jsonArray("Hello World").toJSON();
+		Object result = parser().parse(actual);
 
 		assertThat(result).isInstanceOf(List.class);
 		assertThat(((List<Object>) result)).hasSize(1);
@@ -90,32 +87,32 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_parse_with_object() {
-		JsonObject jsonObject = jsonObject(
+		String actual = toJSON(
 			jsonEntry("str", "bar"),
 			jsonEntry("nb", 1.0),
 			jsonEntry("bool", true)
 		);
 
-		Object result = parser().parse(jsonObject.toJson());
+		Object result = parser().parse(actual);
 		assertThat(result).isInstanceOf(Map.class);
 	}
 
 	@Test
 	void it_should_parse_with_array() {
-		JsonArray jsonArray = jsonArray(1, 2, 3);
-		Object result = parser().parse(jsonArray.toJson());
+		String actual = jsonArray(1, 2, 3).toJSON();
+		Object result = parser().parse(actual);
 		assertThat(result).isInstanceOf(Iterable.class);
 	}
 
 	@Test
 	void it_should_parse_json_object() {
-		JsonObject jsonObject = jsonObject(
+		String actual = toJSON(
 			jsonEntry("str", "bar"),
 			jsonEntry("nb", 1.0),
 			jsonEntry("bool", true)
 		);
 
-		Map<String, Object> map = parser().parseObject(jsonObject.toJson());
+		Map<String, Object> map = parser().parseObject(actual);
 
 		assertThat(map).hasSize(3).contains(
 			entry("str", "bar"),
@@ -126,7 +123,7 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_parse_complex_object() {
-		JsonObject jsonObject = jsonObject(
+		String actual = toJSON(
 			jsonEntry("foo", jsonObject(
 					jsonEntry("id", 1.0),
 					jsonEntry("name", "bar")
@@ -134,7 +131,7 @@ public abstract class AbstractJsonParserTest {
 			)
 		);
 
-		Map<String, Object> map = parser().parseObject(jsonObject.toJson());
+		Map<String, Object> map = parser().parseObject(actual);
 
 		assertThat(map).hasSize(1).containsKey("foo");
 		assertThat(map.get("foo")).isInstanceOf(Map.class);
@@ -148,12 +145,8 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_parse_json_array() {
-		JsonArray jsonArray = jsonArray(
-			"foo", 1.0, true
-		);
-
-		List<Object> list = parser().parseArray(jsonArray.toJson());
-
+		String actual = jsonArray().add("foo").add(1.0).add(true).toJSON();
+		List<Object> list = parser().parseArray(actual);
 		assertThat(list).hasSize(3).contains(
 			"foo", 1.0, true
 		);
@@ -161,7 +154,7 @@ public abstract class AbstractJsonParserTest {
 
 	@Test
 	void it_should_parse_json_array_of_objects() {
-		JsonArray jsonArray = jsonArray(
+		JSONArray jsonArray = jsonArray(
 			jsonObject(
 				jsonEntry("id", 1.0),
 				jsonEntry("name", "foo")
@@ -172,7 +165,7 @@ public abstract class AbstractJsonParserTest {
 			)
 		);
 
-		List<Object> list = parser().parseArray(jsonArray.toJson());
+		List<Object> list = parser().parseArray(jsonArray.toJSON());
 
 		assertThat(list).hasSize(2);
 		assertThat(list.get(0)).isInstanceOf(Map.class);

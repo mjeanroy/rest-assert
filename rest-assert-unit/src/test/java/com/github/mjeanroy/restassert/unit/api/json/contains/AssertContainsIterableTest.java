@@ -24,11 +24,10 @@
 
 package com.github.mjeanroy.restassert.unit.api.json.contains;
 
-import com.github.mjeanroy.restassert.test.json.JsonObject;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailure;
 import static com.github.mjeanroy.restassert.unit.api.json.JsonAssert.assertContains;
 import static java.util.Collections.singleton;
@@ -57,11 +56,9 @@ class AssertContainsIterableTest {
 	}
 
 	private String createJson() {
-		JsonObject jsonObject = jsonObject(
+		return toJSON(
 			jsonEntry("id", 1),
 			jsonEntry("name", "John Doe")
 		);
-
-		return jsonObject.toJson();
 	}
 }

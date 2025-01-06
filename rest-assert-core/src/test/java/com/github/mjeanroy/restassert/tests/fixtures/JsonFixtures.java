@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.restassert.tests.fixtures;
 
-import com.github.mjeanroy.restassert.test.json.JsonObject;
-
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
@@ -35,9 +33,9 @@ import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.fileFromCl
 import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.pathFromClasspath;
 import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.uriFromClasspath;
 import static com.github.mjeanroy.restassert.test.commons.IoTestUtils.urlFromClasspath;
-import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonArray;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 
 public final class JsonFixtures {
 
@@ -49,25 +47,21 @@ public final class JsonFixtures {
 	private static final String JSON_FAILURE = "/json/failure.json";
 
 	public static String jsonSuccess() {
-		JsonObject object = jsonObject(
+		return toJSON(
 			jsonEntry("str", "foo"),
 			jsonEntry("nb", 1.0),
 			jsonEntry("bool", true),
 			jsonEntry("array", jsonArray(1.0, 2.0, 3.0))
 		);
-
-		return object.toJson();
 	}
 
 	public static String jsonFailure() {
-		JsonObject object = jsonObject(
+		return toJSON(
 			jsonEntry("str", "bar"),
 			jsonEntry("nb", 2.0),
 			jsonEntry("bool", false),
 			jsonEntry("array", jsonArray(1.1, 2.1, 3.1))
 		);
-
-		return object.toJson();
 	}
 
 	public static URL jsonUrlSuccess() {

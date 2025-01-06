@@ -24,16 +24,62 @@
 
 package com.github.mjeanroy.restassert.test.json;
 
+import java.util.Objects;
+
 /**
- * A JSON value: an object that can be serialized to JSON using the {@link #toJson()}
- * method.
+ * Implementation of (immutable) JSON object entry.
  */
-interface JsonValue {
+public final class JSONEntry {
 
 	/**
-	 * Serialize value to JSON (can be an object, an array, a primitive value, etc.).
-	 *
-	 * @return JSON Value.
+	 * Entry name.
 	 */
-	String toJson();
+	private final String name;
+
+	/**
+	 * Entry value.
+	 */
+	private final Object value;
+
+	JSONEntry(String name, Object value) {
+		this.name = Objects.requireNonNull(name);
+		this.value = value;
+	}
+
+	/**
+	 * Get {@link #name}
+	 *
+	 * @return {@link #name}
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Get {@link #value}
+	 *
+	 * @return {@link #value}
+	 */
+	public Object getValue() {
+		return value;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+
+		if (o instanceof JSONEntry) {
+			JSONEntry e = (JSONEntry) o;
+			return Objects.equals(name, e.name) && Objects.equals(value, e.value);
+		}
+
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, value);
+	}
 }

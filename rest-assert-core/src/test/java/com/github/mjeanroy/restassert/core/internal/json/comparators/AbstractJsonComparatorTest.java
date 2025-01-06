@@ -26,16 +26,16 @@ package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
-import com.github.mjeanroy.restassert.test.json.JsonArray;
-import com.github.mjeanroy.restassert.test.json.JsonObject;
+import com.github.mjeanroy.restassert.test.json.JSONArray;
+import com.github.mjeanroy.restassert.test.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.github.mjeanroy.restassert.test.json.JsonArray.jsonArray;
-import static com.github.mjeanroy.restassert.test.json.JsonEntry.jsonEntry;
-import static com.github.mjeanroy.restassert.test.json.JsonObject.jsonObject;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonArray;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonObject;
 import static org.apache.commons.lang3.reflect.FieldUtils.readField;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -60,151 +60,151 @@ public abstract class AbstractJsonComparatorTest {
 
 	@Test
 	void it_should_fail_if_actual_should_be_an_array() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", "bar")
 		);
 
-		JsonArray expected = jsonArray(
+		JSONArray expected = jsonArray(
 			jsonObject(
 				jsonEntry("foo", "bar")
 			)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json to be an array but was an object"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_should_be_an_object() {
-		JsonArray actual = jsonArray(
+		JSONArray actual = jsonArray(
 			jsonObject(
 				jsonEntry("foo", "bar")
 			)
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", "bar")
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json to be an object but was an array"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_does_not_contain_expected_entry() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", "bar")
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", "bar"),
 			jsonEntry("bar", "foo")
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json to contain entry \"bar\""
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_contain_an_unexpected_entry() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", "bar"),
 			jsonEntry("bar", "foo")
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", "bar")
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json not to contain entry \"bar\""
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_null_and_expected_is_not() {
-		JsonObject actual = jsonObject(
-			jsonEntry("foo", null)
+		JSONObject actual = jsonObject(
+			jsonEntry("foo")
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", "bar")
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be a string but was null"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_string_and_expected_is_not() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", "bar")
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", 0)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be a number but was a string"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_boolean_and_expected_is_not() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", true)
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", 0)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be a number but was a boolean"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_object_and_expected_is_not() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", jsonObject(
 				jsonEntry("hello", "world")
 			))
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", 0)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be a number but was an object"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_array_and_expected_is_not() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", jsonArray(
 				jsonObject(
 					jsonEntry("hello", "world")
@@ -212,126 +212,126 @@ public abstract class AbstractJsonComparatorTest {
 			))
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", 0)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be a number but was an array"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_array_and_expected_is_array_with_different_size() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", jsonArray(1, 2, 3))
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", jsonArray(1, 2))
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json array \"foo\" to have size 2 but was 3"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_numbers() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", 1.0)
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", 2.0)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be equal to 2.0 but was 1.0"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_strings() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", "bar1")
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", "bar2")
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be equal to \"bar2\" but was \"bar1\""
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_booleans() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", true)
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", false)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo\" to be equal to false but was true"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_nested_object() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", jsonObject(
 				jsonEntry("bar", true)
 			))
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", jsonObject(
 				jsonEntry("bar", false)
 			))
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo.bar\" to be equal to false but was true"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_array_values() {
-		JsonObject actual = jsonObject(
-			jsonEntry("foo", jsonArray("foo", 1.0, true))
+		JSONObject actual = jsonObject(
+			jsonEntry("foo", jsonArray().add("foo").add(1.0).add(true))
 		);
 
-		JsonObject expected = jsonObject(
-			jsonEntry("foo", jsonArray("bar", 1.0, true))
+		JSONObject expected = jsonObject(
+			jsonEntry("foo", jsonArray().add("bar").add(1.0).add(true))
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo[0]\" to be equal to \"bar\" but was \"foo\""
 		);
 	}
 
 	@Test
 	void it_should_fail_if_actual_entry_is_not_equal_to_expected_entry_with_array_objects() {
-		JsonObject actual = jsonObject(
+		JSONObject actual = jsonObject(
 			jsonEntry("foo", jsonArray(
 				jsonObject(
 					jsonEntry("bar", "foo")
@@ -339,7 +339,7 @@ public abstract class AbstractJsonComparatorTest {
 			))
 		);
 
-		JsonObject expected = jsonObject(
+		JSONObject expected = jsonObject(
 			jsonEntry("foo", jsonArray(
 				jsonObject(
 					jsonEntry("bar", "bar")
@@ -348,62 +348,62 @@ public abstract class AbstractJsonComparatorTest {
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"foo[0].bar\" to be equal to \"bar\" but was \"foo\""
 		);
 	}
 
 	@Test
 	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_numbers() {
-		JsonArray actual = jsonArray("foo", 1.0);
-		JsonArray expected = jsonArray("foo", 2.0);
+		JSONArray actual = jsonArray().add("foo").add(1.0);
+		JSONArray expected = jsonArray().add("foo").add(2.0);
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"[1]\" to be equal to 2.0 but was 1.0"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_strings() {
-		JsonArray actual = jsonArray("foo", 1.0);
-		JsonArray expected = jsonArray("bar", 1.0);
+		JSONArray actual = jsonArray().add("foo").add(1.0);
+		JSONArray expected = jsonArray().add("bar").add(1.0);
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"[0]\" to be equal to \"bar\" but was \"foo\""
 		);
 	}
 
 	@Test
 	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_booleans() {
-		JsonArray actual = jsonArray("foo", true);
-		JsonArray expected = jsonArray("foo", false);
+		JSONArray actual = jsonArray().add("foo").add(true);
+		JSONArray expected = jsonArray().add("foo").add(false);
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"[1]\" to be equal to false but was true"
 		);
 	}
 
 	@Test
 	void it_should_fail_if_array_entry_is_not_equal_to_expected_array_entry_with_objects() {
-		JsonArray actual = jsonArray(
+		JSONArray actual = jsonArray(
 			jsonObject(
 				jsonEntry("foo", "foo")
 			)
 		);
 
-		JsonArray expected = jsonArray(
+		JSONArray expected = jsonArray(
 			jsonObject(
 				jsonEntry("foo", "bar")
 			)
 		);
 
 		checkComparison(
-			actual.toJson(),
-			expected.toJson(),
+			actual.toJSON(),
+			expected.toJSON(),
 			"Expecting json entry \"[0].foo\" to be equal to \"bar\" but was \"foo\""
 		);
 	}
