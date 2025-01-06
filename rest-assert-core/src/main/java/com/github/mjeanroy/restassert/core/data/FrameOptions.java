@@ -92,7 +92,7 @@ public final class FrameOptions implements HttpHeaderValue {
 	/**
 	 * The {@code X-Frame-Options} directives.
 	 */
-	enum Directive {
+	public enum Directive {
 		/**
 		 * A browser receiving content with this directive MUST NOT display
 		 * this content in any frame.

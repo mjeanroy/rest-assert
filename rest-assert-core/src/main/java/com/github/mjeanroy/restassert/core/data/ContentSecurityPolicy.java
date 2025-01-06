@@ -90,7 +90,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		Map<SourceDirective, Set<Source>> clone = new LinkedHashMap<>();
 
 		for (Entry<SourceDirective, Set<Source>> entry : directives.entrySet()) {
-			LinkedHashSet<Source> sources = new LinkedHashSet<>(entry.getValue());
+			Set<Source> sources = new LinkedHashSet<>(entry.getValue());
 			SourceDirective directive = entry.getKey();
 			clone.put(directive, unmodifiableSet(sources));
 		}
@@ -160,7 +160,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	/**
 	 * List of CSP directive.
 	 */
-	enum SourceDirective {
+	public enum SourceDirective {
 		/**
 		 * Handle {@code base-uri} directive.
 		 *

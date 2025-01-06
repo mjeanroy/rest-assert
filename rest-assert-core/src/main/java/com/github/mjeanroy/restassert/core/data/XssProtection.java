@@ -107,7 +107,7 @@ public final class XssProtection implements HttpHeaderValue {
 	 *
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection</a>
 	 */
-	enum Directive {
+	public enum Directive {
 		/**
 		 * Disables the XSS Protections offered by the user-agent.
 		 */

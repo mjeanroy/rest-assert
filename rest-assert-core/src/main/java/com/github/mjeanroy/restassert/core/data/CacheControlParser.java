@@ -34,9 +34,6 @@ import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
  */
 final class CacheControlParser extends AbstractHttpHeaderParser<CacheControl> {
 
-	/**
-	 * Class Logger.
-	 */
 	private static final Logger log = Loggers.getLogger(StrictTransportSecurityParser.class);
 
 	// Ensure non public instantiation.

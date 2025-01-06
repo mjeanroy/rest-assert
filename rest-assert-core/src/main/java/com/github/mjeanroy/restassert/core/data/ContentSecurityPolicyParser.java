@@ -39,9 +39,6 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONT
  */
 final class ContentSecurityPolicyParser extends AbstractHttpHeaderParser<ContentSecurityPolicy> {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(ContentSecurityPolicyParser.class);
 
 	// Ensure non public instantiation.

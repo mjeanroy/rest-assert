@@ -184,5 +184,4 @@ public final class ContentType implements HttpHeaderValue {
 			.append("parameters", parameters)
 			.build();
 	}
-
 }

@@ -408,8 +408,8 @@ public class ContentSecurityPolicyBuilder {
 	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-report-to">https://w3c.github.io/webappsec-csp/#directive-report-to</a>
 	 */
 	public ContentSecurityPolicyBuilder setReportTo(String token) {
-		final Source src = new SourceValue(token);
-		final List<Source> others = emptyList();
+		Source src = new SourceValue(token);
+		List<Source> others = emptyList();
 		return add(SourceDirective.REPORT_TO, src, others);
 	}
 

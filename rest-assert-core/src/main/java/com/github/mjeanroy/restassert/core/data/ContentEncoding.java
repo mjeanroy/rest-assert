@@ -35,6 +35,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
 import static java.util.Collections.singletonList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * The list of available content-encoding values.
@@ -87,7 +88,7 @@ public final class ContentEncoding implements HttpHeaderValue {
 	 *
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
 	 */
-	enum Directive {
+	public enum Directive {
 		GZIP("gzip"),
 		COMPRESS("compress"),
 		DEFLATE("deflate"),
@@ -151,7 +152,7 @@ public final class ContentEncoding implements HttpHeaderValue {
 	 * @param directives List of directives.
 	 */
 	ContentEncoding(List<Directive> directives) {
-		this.directives = directives;
+		this.directives = unmodifiableList(directives);
 	}
 
 	/**

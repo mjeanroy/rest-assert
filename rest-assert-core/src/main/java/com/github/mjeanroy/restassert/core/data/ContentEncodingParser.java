@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_ENCODING;
-import static java.util.Collections.unmodifiableList;
 
 /**
  * Parser for {@link ContentEncoding} header.
@@ -57,6 +56,6 @@ public final class ContentEncodingParser extends AbstractHttpHeaderParser<Conten
 			directives.add(directive);
 		}
 
-		return new ContentEncoding(unmodifiableList(directives));
+		return new ContentEncoding(directives);
 	}
 }

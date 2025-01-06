@@ -40,9 +40,6 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.remove
  */
 final class StrictTransportSecurityParser extends AbstractHttpHeaderParser<StrictTransportSecurity> {
 
-	/**
-	 * Class Logger.
-	 */
 	private static final Logger log = Loggers.getLogger(StrictTransportSecurityParser.class);
 
 	// Ensure non public instantiation.

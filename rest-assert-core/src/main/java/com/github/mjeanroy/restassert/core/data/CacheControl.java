@@ -28,7 +28,7 @@ import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -214,8 +214,8 @@ public final class CacheControl implements HttpHeaderValue {
 		boolean proxyRevalidate,
 		Long maxAge,
 		Long sMaxAge,
-		boolean immutable) {
-
+		boolean immutable
+	) {
 		this.visibility = visibility;
 		this.noCache = noCache;
 		this.noStore = noStore;
@@ -310,7 +310,7 @@ public final class CacheControl implements HttpHeaderValue {
 
 	@Override
 	public String serializeValue() {
-		List<String> values = new LinkedList<>();
+		List<String> values = new ArrayList<>(10);
 
 		if (visibility != null) {
 			values.add(visibility.name().toLowerCase());
