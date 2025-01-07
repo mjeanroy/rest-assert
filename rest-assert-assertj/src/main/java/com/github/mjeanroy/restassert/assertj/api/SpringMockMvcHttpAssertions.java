@@ -44,7 +44,9 @@ public final class SpringMockMvcHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(ResultActions actual) {
-		return new HttpResponseAssert(toHttpResponse(actual));
+		return HttpResponseAssertions.assertThat(
+			toHttpResponse(actual)
+		);
 	}
 
 	/**
@@ -54,7 +56,9 @@ public final class SpringMockMvcHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static JsonAssert assertThatJson(ResultActions actual) {
-		return JsonAssertions.assertThatJson(toHttpResponse(actual));
+		return JsonAssertions.assertThatJson(
+			toHttpResponse(actual)
+		);
 	}
 
 	private static HttpResponse toHttpResponse(ResultActions actual) {

@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import okhttp3.Response;
 import org.junit.jupiter.api.Test;
@@ -39,18 +38,21 @@ class OkHttpAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object() {
 		Response response = new OkHttpResponseBuilder().build();
-		HttpResponseAssert assertions = OkHttpAssertions.assertThat(response);
+		OkHttpAssertions.assertThat(response).isNotNull();
+	}
 
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(OkHttpResponse.class);
+	@Test
+	void it_should_create_new_assertion_object_from_null() {
+		Response response = null;
+		OkHttpAssertions.assertThat(response).isNull();
 	}
 
 	@Test
 	void it_should_create_new_json_assertion_object() {
 		String body = toJSON(jsonEntry("foo", "bar"));
 		Response response = new OkHttpResponseBuilder().setContent(body).build();
-
 		JsonAssert assertions = OkHttpAssertions.assertThatJson(response);
+
 		assertThat(assertions).isNotNull();
 		assertThat((Object) readField(assertions, "actual")).isEqualTo(body);
 	}

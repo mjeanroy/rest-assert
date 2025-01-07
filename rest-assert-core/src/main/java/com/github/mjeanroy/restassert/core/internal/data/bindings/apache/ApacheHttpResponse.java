@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
 
 /**
@@ -44,14 +45,14 @@ import static java.util.Collections.unmodifiableList;
 public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance
-	 * of {@link org.apache.http.HttpResponse}.
+	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance of {@link org.apache.http.HttpResponse},
+	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
 	public static ApacheHttpResponse create(org.apache.http.HttpResponse response) {
-		return new ApacheHttpResponse(response);
+		return response == null ? null : new ApacheHttpResponse(response);
 	}
 
 	/**
@@ -61,7 +62,7 @@ public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResp
 
 	// Use static factory
 	private ApacheHttpResponse(org.apache.http.HttpResponse response) {
-		this.response = response;
+		this.response = notNull(response, "Response must not be null");
 	}
 
 	@Override

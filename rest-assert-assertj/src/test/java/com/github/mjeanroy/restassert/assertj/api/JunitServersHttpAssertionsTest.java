@@ -24,7 +24,6 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.bindings.junitservers.JunitServersHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.junitservers.JunitServersHttpResponseBuilder;
 import org.junit.jupiter.api.Test;
 
@@ -38,9 +37,13 @@ class JunitServersHttpAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object() {
 		com.github.mjeanroy.junit.servers.client.HttpResponse response = new JunitServersHttpResponseBuilder().build();
-		HttpResponseAssert assertions = JunitServersHttpAssertions.assertThat(response);
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(JunitServersHttpResponse.class);
+		JunitServersHttpAssertions.assertThat(response).isNotNull();
+	}
+
+	@Test
+	void it_should_create_new_assertion_object_from_null() {
+		com.github.mjeanroy.junit.servers.client.HttpResponse response = null;
+		JunitServersHttpAssertions.assertThat(response).isNull();
 	}
 
 	@Test

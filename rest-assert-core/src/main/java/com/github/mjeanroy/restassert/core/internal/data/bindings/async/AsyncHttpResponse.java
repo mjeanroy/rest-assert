@@ -30,6 +30,7 @@ import org.asynchttpclient.Response;
 
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
@@ -40,14 +41,14 @@ import static java.util.Collections.unmodifiableList;
 public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance
-	 * of {@link org.asynchttpclient.Response}.
+	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance of {@link org.asynchttpclient.Response},
+	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
 	public static AsyncHttpResponse create(Response response) {
-		return new AsyncHttpResponse(response);
+		return response == null ? null : new AsyncHttpResponse(response);
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class AsyncHttpResponse extends AbstractHttpResponse implements HttpRespo
 
 	// Use static factory
 	private AsyncHttpResponse(Response response) {
-		this.response = response;
+		this.response = notNull(response, "Response must not be null");
 	}
 
 	@Override

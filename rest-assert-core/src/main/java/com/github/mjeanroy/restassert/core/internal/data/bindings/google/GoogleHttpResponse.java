@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.google.api.client.util.IOUtils.copy;
 import static java.util.Collections.emptyList;
 
@@ -43,14 +44,14 @@ import static java.util.Collections.emptyList;
 public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance
-	 * of {@link com.ning.http.client.Response}.
+	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance of {@link com.ning.http.client.Response},
+	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
 	public static GoogleHttpResponse create(com.google.api.client.http.HttpResponse response) {
-		return new GoogleHttpResponse(response);
+		return response == null ? null : new GoogleHttpResponse(response);
 	}
 
 	/**
@@ -60,7 +61,7 @@ public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResp
 
 	// Use static factory
 	private GoogleHttpResponse(com.google.api.client.http.HttpResponse response) {
-		this.response = response;
+		this.response = notNull(response, "Response must not be null");
 	}
 
 	@Override

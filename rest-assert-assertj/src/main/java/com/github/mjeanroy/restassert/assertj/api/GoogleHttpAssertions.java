@@ -25,8 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
-
-import static com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse.create;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse;
 
 /**
  * Entry point for assertion methods for Google HttpClient
@@ -45,7 +44,9 @@ public final class GoogleHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(com.google.api.client.http.HttpResponse actual) {
-		return new HttpResponseAssert(toHttpResponse(actual));
+		return HttpResponseAssertions.assertThat(
+			toHttpResponse(actual)
+		);
 	}
 
 	/**
@@ -55,10 +56,12 @@ public final class GoogleHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static JsonAssert assertThatJson(com.google.api.client.http.HttpResponse actual) {
-		return JsonAssertions.assertThatJson(toHttpResponse(actual));
+		return JsonAssertions.assertThatJson(
+			toHttpResponse(actual)
+		);
 	}
 
 	private static HttpResponse toHttpResponse(com.google.api.client.http.HttpResponse actual) {
-		return create(actual);
+		return GoogleHttpResponse.create(actual);
 	}
 }

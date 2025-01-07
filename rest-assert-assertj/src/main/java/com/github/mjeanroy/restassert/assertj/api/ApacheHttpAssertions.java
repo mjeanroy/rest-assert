@@ -26,9 +26,9 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpResponse;
 
 import static com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie.create;
-import static com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Apache HttpClient
@@ -47,7 +47,9 @@ public final class ApacheHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(org.apache.http.HttpResponse actual) {
-		return new HttpResponseAssert(toHttpResponse(actual));
+		return HttpResponseAssertions.assertThat(
+			toHttpResponse(actual)
+		);
 	}
 
 	/**
@@ -68,10 +70,12 @@ public final class ApacheHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static JsonAssert assertThatJson(org.apache.http.HttpResponse actual) {
-		return JsonAssertions.assertThatJson(toHttpResponse(actual));
+		return JsonAssertions.assertThatJson(
+			toHttpResponse(actual)
+		);
 	}
 
 	private static HttpResponse toHttpResponse(org.apache.http.HttpResponse actual) {
-		return create(actual);
+		return ApacheHttpResponse.create(actual);
 	}
 }

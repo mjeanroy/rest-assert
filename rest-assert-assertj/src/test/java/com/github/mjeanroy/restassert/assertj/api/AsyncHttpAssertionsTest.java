@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpCookie;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.async.AsyncHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.async.AsyncHttpResponseBuilder;
 import org.asynchttpclient.Response;
@@ -41,10 +40,13 @@ class AsyncHttpAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object() {
 		Response response = new AsyncHttpResponseBuilder().build();
-		HttpResponseAssert assertions = AsyncHttpAssertions.assertThat(response);
+		AsyncHttpAssertions.assertThat(response).isNotNull();
+	}
 
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(AsyncHttpResponse.class);
+	@Test
+	void it_should_create_new_assertion_object_from_null() {
+		Response response = null;
+		AsyncHttpAssertions.assertThat(response).isNull();
 	}
 
 	@Test
@@ -60,7 +62,6 @@ class AsyncHttpAssertionsTest {
 	void it_should_create_new_json_assertion_object() {
 		String body = toJSON(jsonEntry("foo", "bar"));
 		Response response = new AsyncHttpResponseBuilder().setContent(body).build();
-
 		JsonAssert assertions = AsyncHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();

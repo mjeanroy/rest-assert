@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
-import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.ResultActions;
@@ -40,10 +38,13 @@ class SpringMockMvcHttpAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object() {
 		ResultActions response = new SpringMockMvcHttpResponseBuilder().build();
-		HttpResponseAssert assertions = SpringMockMvcHttpAssertions.assertThat(response);
+		SpringMockMvcHttpAssertions.assertThat(response).isNotNull();
+	}
 
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(SpringMockMvcHttpResponse.class);
+	@Test
+	void it_should_create_new_assertion_object_from_null() {
+		ResultActions response = null;
+		SpringMockMvcHttpAssertions.assertThat(response).isNull();
 	}
 
 	@Test

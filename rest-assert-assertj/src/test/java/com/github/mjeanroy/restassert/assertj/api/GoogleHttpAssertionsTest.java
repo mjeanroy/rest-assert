@@ -24,8 +24,6 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse;
-import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import com.github.mjeanroy.restassert.tests.builders.google.GoogleHttpResponseBuilder;
 import org.junit.jupiter.api.Test;
 
@@ -39,22 +37,19 @@ class GoogleHttpAssertionsTest {
 	@Test
 	void it_should_create_new_assertion_object() {
 		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder().build();
-		HttpResponseAssert assertions = GoogleHttpAssertions.assertThat(response);
+		GoogleHttpAssertions.assertThat(response).isNotNull();
+	}
 
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(GoogleHttpResponse.class);
+	@Test
+	void it_should_create_new_assertion_object_from_null() {
+		com.google.api.client.http.HttpResponse response = null;
+		GoogleHttpAssertions.assertThat(response).isNull();
 	}
 
 	@Test
 	void it_should_create_new_json_assertion_object() {
-		String body = toJSON(
-			jsonEntry("foo", "bar")
-		);
-
-		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder()
-			.setContent(body)
-			.build();
-
+		String body = toJSON(jsonEntry("foo", "bar"));
+		com.google.api.client.http.HttpResponse response = new GoogleHttpResponseBuilder().setContent(body).build();
 		JsonAssert assertions = GoogleHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();

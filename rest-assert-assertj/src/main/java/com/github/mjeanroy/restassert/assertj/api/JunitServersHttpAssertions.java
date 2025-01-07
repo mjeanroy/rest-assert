@@ -44,7 +44,9 @@ public final class JunitServersHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {
-		return new HttpResponseAssert(toHttpResponse(actual));
+		return HttpResponseAssertions.assertThat(
+			toHttpResponse(actual)
+		);
 	}
 
 	/**
@@ -54,7 +56,9 @@ public final class JunitServersHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static JsonAssert assertThatJson(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {
-		return JsonAssertions.assertThatJson(toHttpResponse(actual));
+		return JsonAssertions.assertThatJson(
+			toHttpResponse(actual)
+		);
 	}
 
 	private static HttpResponse toHttpResponse(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {

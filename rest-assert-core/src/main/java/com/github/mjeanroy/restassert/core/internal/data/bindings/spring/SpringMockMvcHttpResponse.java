@@ -34,24 +34,26 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.io.IOException;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
 
 /**
  * Implementation to integrate spring-test into rest-assert.
+ *
  * This implementation translate a {@link ResultActions} (result of {@link MockMvc#perform(RequestBuilder)})
  * to an {@link HttpResponse} that can be used with rest-assert.
  */
 public class SpringMockMvcHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link HttpResponse} using instance of {@link ResultActions} (result of
-	 * the {@link MockMvc#perform(RequestBuilder)} method).
+	 * Create new {@link HttpResponse} using instance of {@link ResultActions} (result of the {@link MockMvc#perform(RequestBuilder)} method),
+	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param resultActions Original result instance..
 	 * @return Http response that can be used with rest-assert.
 	 */
 	public static SpringMockMvcHttpResponse create(ResultActions resultActions) {
-		return new SpringMockMvcHttpResponse(resultActions.andReturn().getResponse());
+		return resultActions == null ? null : new SpringMockMvcHttpResponse(resultActions.andReturn().getResponse());
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class SpringMockMvcHttpResponse extends AbstractHttpResponse implements H
 	private final MockHttpServletResponse response;
 
 	private SpringMockMvcHttpResponse(MockHttpServletResponse response) {
-		this.response = response;
+		this.response = notNull(response, "Response must not be null");
 	}
 
 	@Override

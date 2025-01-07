@@ -38,23 +38,27 @@ public final class OkHttpAssertions {
 	}
 
 	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert}.
+	 * Creates a new instance of {@link HttpResponseAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(Response actual) {
-		return new HttpResponseAssert(toHttpResponse(actual));
+		return HttpResponseAssertions.assertThat(
+			toHttpResponse(actual)
+		);
 	}
 
 	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.restassert.assertj.api.JsonAssert}.
+	 * Creates a new instance of {@link JsonAssert}.
 	 *
 	 * @param actual the actual value.
 	 * @return the created assertion object.
 	 */
 	public static JsonAssert assertThatJson(Response actual) {
-		return JsonAssertions.assertThatJson(toHttpResponse(actual));
+		return JsonAssertions.assertThatJson(
+			toHttpResponse(actual)
+		);
 	}
 
 	private static HttpResponse toHttpResponse(Response actual) {

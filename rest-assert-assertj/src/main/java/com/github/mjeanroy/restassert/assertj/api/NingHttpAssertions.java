@@ -26,10 +26,10 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse;
 import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpCookie.create;
-import static com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse.create;
 
 /**
  * Entry point for assertion methods for Async-Http
@@ -48,7 +48,9 @@ public final class NingHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static HttpResponseAssert assertThat(Response actual) {
-		return new HttpResponseAssert(toHttpResponse(actual));
+		return HttpResponseAssertions.assertThat(
+			toHttpResponse(actual)
+		);
 	}
 
 	/**
@@ -69,10 +71,12 @@ public final class NingHttpAssertions {
 	 * @return the created assertion object.
 	 */
 	public static JsonAssert assertThatJson(Response actual) {
-		return JsonAssertions.assertThatJson(toHttpResponse(actual));
+		return JsonAssertions.assertThatJson(
+			toHttpResponse(actual)
+		);
 	}
 
 	private static HttpResponse toHttpResponse(Response actual) {
-		return create(actual);
+		return NingHttpResponse.create(actual);
 	}
 }

@@ -32,6 +32,7 @@ import okhttp3.ResponseBody;
 import java.io.IOException;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
 
 /**
@@ -40,13 +41,14 @@ import static java.util.Collections.unmodifiableList;
 public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link HttpResponse} using instance of {@link okhttp3.Response}.
+	 * Create new {@link HttpResponse} using instance of {@link okhttp3.Response},
+	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
 	public static OkHttpResponse create(Response response) {
-		return new OkHttpResponse(response);
+		return response == null ? null : new OkHttpResponse(response);
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse
 
 	// Use static factory
 	private OkHttpResponse(Response response) {
-		this.response = response;
+		this.response = notNull(response, "Response must not be null");
 	}
 
 	@Override

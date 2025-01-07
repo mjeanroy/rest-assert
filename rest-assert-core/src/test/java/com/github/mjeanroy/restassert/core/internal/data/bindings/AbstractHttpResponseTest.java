@@ -36,11 +36,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public abstract class AbstractHttpResponseTest<T> {
 
 	@Test
+	void it_should_create_null_http_response() {
+		assertThat(create(null)).isNull();
+	}
+
+	@Test
 	void it_should_return_status_code() {
 		int expectedStatus = 200;
-		T response = getBuilder()
-			.setStatus(expectedStatus)
-			.build();
+		T response = getBuilder().setStatus(expectedStatus).build();
 
 		HttpResponse httpResponse = create(response);
 		int status = httpResponse.getStatus();
@@ -86,12 +89,9 @@ public abstract class AbstractHttpResponseTest<T> {
 
 		HttpResponse httpResponse = create(response);
 		List<String> result = httpResponse.getHeader(headerName);
-
-		assertThat(result)
-			.isNotNull()
-			.isNotEmpty()
-			.hasSize(1)
-			.contains(headerValue);
+		assertThat(result).hasSize(1).containsOnly(
+			headerValue
+		);
 	}
 
 	@Test
@@ -110,9 +110,7 @@ public abstract class AbstractHttpResponseTest<T> {
 	@Test
 	void it_should_return_response_body() {
 		String body = "foo";
-		T response = getBuilder()
-			.setContent(body)
-			.build();
+		T response = getBuilder().setContent(body).build();
 
 		HttpResponse httpResponse = create(response);
 		String result = httpResponse.getContent();
@@ -136,13 +134,10 @@ public abstract class AbstractHttpResponseTest<T> {
 
 		HttpResponse httpResponse = create(response);
 		List<Cookie> cookies = httpResponse.getCookies();
-
-		assertThat(cookies)
-			.isNotNull()
-			.isNotEmpty()
-			.hasSize(2)
-			.extracting("name")
-			.contains("foo", "quix");
+		assertThat(cookies).hasSize(2).extracting(Cookie::getName).contains(
+			"foo",
+			"quix"
+		);
 	}
 
 	protected abstract HttpResponseBuilder<T> getBuilder();

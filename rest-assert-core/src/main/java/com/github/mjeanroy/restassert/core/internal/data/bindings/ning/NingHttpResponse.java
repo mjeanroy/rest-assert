@@ -31,6 +31,7 @@ import com.ning.http.client.Response;
 import java.io.IOException;
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
@@ -41,14 +42,14 @@ import static java.util.Collections.unmodifiableList;
 public class NingHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link HttpResponse} using instance
-	 * of {@link Response}.
+	 * Create new {@link HttpResponse} using instance of {@link Response},
+	 * or returns {@code null} {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.
 	 * @return Http response that can be used with rest-assert.
 	 */
 	public static NingHttpResponse create(Response response) {
-		return new NingHttpResponse(response);
+		return response == null ? null : new NingHttpResponse(response);
 	}
 
 	/**
@@ -58,7 +59,7 @@ public class NingHttpResponse extends AbstractHttpResponse implements HttpRespon
 
 	// Use static factory
 	private NingHttpResponse(Response response) {
-		this.response = response;
+		this.response = notNull(response, "Response must not be null");
 	}
 
 	@Override

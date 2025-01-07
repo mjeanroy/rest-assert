@@ -25,7 +25,6 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie;
-import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpCookieBuilder;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
 import org.junit.jupiter.api.Test;
@@ -40,17 +39,18 @@ class ApacheHttpAssertionsTest {
 	@Test
 	void it_should_create_new_http_assertion_object() {
 		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().build();
+		ApacheHttpAssertions.assertThat(response).isNotNull();
+	}
 
-		HttpResponseAssert assertions = ApacheHttpAssertions.assertThat(response);
-
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isExactlyInstanceOf(ApacheHttpResponse.class);
+	@Test
+	void it_should_create_new_http_assertion_object_from_null() {
+		org.apache.http.HttpResponse response = null;
+		ApacheHttpAssertions.assertThat(response).isNull();
 	}
 
 	@Test
 	void it_should_create_new_cookie_assertion_object() {
 		org.apache.http.cookie.Cookie apacheHttpCookie = new ApacheHttpCookieBuilder().build();
-
 		CookieAssert assertions = ApacheHttpAssertions.assertThat(apacheHttpCookie);
 
 		assertThat(assertions).isNotNull();
@@ -61,7 +61,6 @@ class ApacheHttpAssertionsTest {
 	void it_should_create_new_json_assertion_object() {
 		String body = toJSON(jsonEntry("foo", "bar"));
 		org.apache.http.HttpResponse response = new ApacheHttpResponseBuilder().setContent(body).build();
-
 		JsonAssert assertions = ApacheHttpAssertions.assertThatJson(response);
 
 		assertThat(assertions).isNotNull();
