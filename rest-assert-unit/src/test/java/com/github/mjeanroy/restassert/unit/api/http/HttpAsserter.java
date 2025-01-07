@@ -34,7 +34,7 @@ import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
 import com.github.mjeanroy.restassert.core.data.XssProtection;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 
 import java.nio.charset.Charset;

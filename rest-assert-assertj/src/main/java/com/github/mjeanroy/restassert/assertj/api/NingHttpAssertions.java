@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse;
 import com.ning.http.client.Response;
 

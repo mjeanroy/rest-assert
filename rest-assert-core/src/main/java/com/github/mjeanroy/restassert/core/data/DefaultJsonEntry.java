@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
 import java.util.Objects;
 
@@ -31,7 +31,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 /**
  * Default implement for {@link JsonEntry} interface.
  */
-public final class DefaultJsonEntry implements JsonEntry {
+final class DefaultJsonEntry implements JsonEntry {
 
 	/**
 	 * Entry key.
@@ -48,8 +48,9 @@ public final class DefaultJsonEntry implements JsonEntry {
 	 *
 	 * @param key JSON entry (must not be null).
 	 * @param value JSON value.
+	 * @throws NullPointerException If {@code key} is {@code null}.
 	 */
-	public DefaultJsonEntry(String key, Object value) {
+	DefaultJsonEntry(String key, Object value) {
 		this.key = notNull(key, "JSON key cannot be null");
 		this.value = value;
 	}

@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 
 import java.util.Date;
 
@@ -34,7 +34,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 /**
  * DefaultCookieBuilder class that can be used to build {@link Cookie} instance.
  */
-public class DefaultCookieBuilder {
+public class CookieBuilder {
 	/**
 	 * Cookie name, mandatory.
 	 */
@@ -88,7 +88,7 @@ public class DefaultCookieBuilder {
 	 * @param name Cookie name.
 	 * @param value Cookie value.
 	 */
-	DefaultCookieBuilder(String name, String value) {
+	CookieBuilder(String name, String value) {
 		this.name = notBlank(name, "Cookie name must not be blank");
 		this.value = notNull(value, "Cookie value must not be null");
 		this.sameSite = SameSite.LAX;
@@ -100,7 +100,7 @@ public class DefaultCookieBuilder {
 	 * @param domain New domain value.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setDomain(String domain) {
+	public CookieBuilder setDomain(String domain) {
 		this.domain = domain;
 		return this;
 	}
@@ -111,7 +111,7 @@ public class DefaultCookieBuilder {
 	 * @param path New path value.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setPath(String path) {
+	public CookieBuilder setPath(String path) {
 		this.path = path;
 		return this;
 	}
@@ -121,7 +121,7 @@ public class DefaultCookieBuilder {
 	 *
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setSecure() {
+	public CookieBuilder setSecure() {
 		return setSecure(true);
 	}
 
@@ -131,7 +131,7 @@ public class DefaultCookieBuilder {
 	 * @param secure Secure flag.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setSecure(boolean secure) {
+	public CookieBuilder setSecure(boolean secure) {
 		this.secure = secure;
 		return this;
 	}
@@ -141,7 +141,7 @@ public class DefaultCookieBuilder {
 	 *
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setHttpOnly() {
+	public CookieBuilder setHttpOnly() {
 		return setHttpOnly(true);
 	}
 
@@ -151,7 +151,7 @@ public class DefaultCookieBuilder {
 	 * @param httpOnly The HttpOnly flag.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setHttpOnly(boolean httpOnly) {
+	public CookieBuilder setHttpOnly(boolean httpOnly) {
 		this.httpOnly = httpOnly;
 		return this;
 	}
@@ -162,7 +162,7 @@ public class DefaultCookieBuilder {
 	 * @param maxAge Max-Age value.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setMaxAge(Long maxAge) {
+	public CookieBuilder setMaxAge(Long maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
@@ -173,7 +173,7 @@ public class DefaultCookieBuilder {
 	 * @param expires Expires value.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setExpires(Date expires) {
+	public CookieBuilder setExpires(Date expires) {
 		this.expires = expires;
 		return this;
 	}
@@ -184,7 +184,7 @@ public class DefaultCookieBuilder {
 	 * @param expires Expires value (timestamp).
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setExpires(long expires) {
+	public CookieBuilder setExpires(long expires) {
 		this.expires = new Date(expires);
 		return this;
 	}
@@ -195,7 +195,7 @@ public class DefaultCookieBuilder {
 	 * @param sameSite SameSite value.
 	 * @return Current builder.
 	 */
-	public DefaultCookieBuilder setSameSite(SameSite sameSite) {
+	public CookieBuilder setSameSite(SameSite sameSite) {
 		this.sameSite = sameSite;
 		return this;
 	}
@@ -207,7 +207,7 @@ public class DefaultCookieBuilder {
 	 * @return Current builder.
 	 * @throws IllegalArgumentException If sameSite is not equals (ignoring case) to one of: {@code "Lax"}, {@code "Strict"}, {@code "None"}.
 	 */
-	public DefaultCookieBuilder setSameSite(String sameSite) {
+	public CookieBuilder setSameSite(String sameSite) {
 		this.sameSite = SameSite.parse(sameSite);
 		return this;
 	}

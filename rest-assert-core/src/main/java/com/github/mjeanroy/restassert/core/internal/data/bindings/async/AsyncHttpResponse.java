@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.async;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import org.asynchttpclient.Response;
 
@@ -35,13 +35,13 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
 /**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse}
+ * Implementation of {@link HttpResponse}
  * using Async-Http (version &gt;= 2.0.0) framework as real implementation.
  */
 public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance of {@link org.asynchttpclient.Response},
+	 * Create new {@link HttpResponse} using instance of {@link org.asynchttpclient.Response},
 	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.

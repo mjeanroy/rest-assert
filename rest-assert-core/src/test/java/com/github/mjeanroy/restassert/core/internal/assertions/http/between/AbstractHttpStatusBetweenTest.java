@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.between;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Range;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeEach;

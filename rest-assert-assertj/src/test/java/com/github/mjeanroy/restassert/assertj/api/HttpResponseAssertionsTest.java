@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.junit.jupiter.api.Test;

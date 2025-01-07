@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.http.charsets;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 class IsUtf8Test extends AbstractHttpResponseAssertionsCharsetTest {
 

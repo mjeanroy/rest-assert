@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.async;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.util.Date;
 
 /**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.Cookie}
+ * Implementation of {@link Cookie}
  * using Async-Http (version &gt;= 2.0.0) framework as real implementation.
  */
 public class AsyncHttpCookie implements Cookie {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.Cookie} using instance
+	 * Create new {@link Cookie} using instance
 	 * of {@link io.netty.handler.codec.http.cookie.Cookie}.
 	 *
 	 * @param cookie Original cookie object.

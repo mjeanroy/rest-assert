@@ -26,9 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.assertions.json.contains;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
+import com.github.mjeanroy.restassert.core.data.JsonEntry;
 import com.github.mjeanroy.restassert.test.json.JSONObject;
-import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

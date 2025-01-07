@@ -25,9 +25,9 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.Cookies;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookies;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;

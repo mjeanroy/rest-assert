@@ -24,18 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.ning;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.util.Date;
 
 /**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.Cookie}
+ * Implementation of {@link Cookie}
  * using Async-Http framework as real implementation.
  */
 public class NingHttpCookie implements Cookie {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.Cookie} using instance
+	 * Create new {@link Cookie} using instance
 	 * of {@link com.ning.http.client.cookie.Cookie}.
 	 *
 	 * @param cookie Original cookie object.

@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 import org.junit.jupiter.api.Test;
 
 import java.util.Date;

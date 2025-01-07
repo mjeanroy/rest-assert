@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.it;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpResponse;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;

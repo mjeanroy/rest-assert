@@ -22,29 +22,32 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
-/**
- * Standard JSON entry defined by:
- *
- * <ul>
- *   <li>A key</li>
- *   <li>A value</li>
- * </ul>.
- */
-public interface JsonEntry {
+import nl.jqno.equalsverifier.EqualsVerifier;
+import org.junit.jupiter.api.Test;
 
-	/**
-	 * Get entry key.
-	 *
-	 * @return JSON entry key.
-	 */
-	String getKey();
+import static org.assertj.core.api.Assertions.assertThat;
 
-	/**
-	 * Get entry value.
-	 *
-	 * @return JSON entry value.
-	 */
-	Object getValue();
+class DefaultJsonEntryTest {
+
+	@Test
+	void it_should_create_json_entry() {
+		String key = "foo";
+		String value = "bar";
+		JsonEntry entry = JsonEntry.of(key, value);
+		assertThat(entry.getKey()).isEqualTo(key);
+		assertThat(entry.getValue()).isEqualTo(value);
+	}
+
+	@Test
+	void it_should_have_to_string() {
+		JsonEntry entry = JsonEntry.of("foo", "bar");
+		assertThat(entry.toString()).isEqualTo("foo = bar");
+	}
+
+	@Test
+	void it_should_implement_equals() {
+		EqualsVerifier.forClass(DefaultJsonEntry.class).verify();
+	}
 }

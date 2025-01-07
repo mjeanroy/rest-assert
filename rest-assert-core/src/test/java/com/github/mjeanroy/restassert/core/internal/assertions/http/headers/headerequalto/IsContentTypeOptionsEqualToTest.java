@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.hea
 
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;

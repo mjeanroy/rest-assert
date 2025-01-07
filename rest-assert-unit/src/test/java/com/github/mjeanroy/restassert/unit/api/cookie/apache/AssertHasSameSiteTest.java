@@ -29,7 +29,7 @@ import com.github.mjeanroy.restassert.unit.api.cookie.ApacheHttpCookieAssert;
 import org.apache.http.cookie.Cookie;
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite.STRICT;
+import static com.github.mjeanroy.restassert.core.data.Cookie.SameSite.STRICT;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class AssertHasSameSiteTest {

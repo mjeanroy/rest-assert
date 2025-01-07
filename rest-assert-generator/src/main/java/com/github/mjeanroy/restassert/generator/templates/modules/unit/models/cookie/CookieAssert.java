@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 

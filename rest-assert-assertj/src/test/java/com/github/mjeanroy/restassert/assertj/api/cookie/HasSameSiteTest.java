@@ -27,8 +27,8 @@ package com.github.mjeanroy.restassert.assertj.api.cookie;
 import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
 import com.github.mjeanroy.restassert.assertj.internal.Cookies;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 import org.assertj.core.api.AssertionInfo;
 

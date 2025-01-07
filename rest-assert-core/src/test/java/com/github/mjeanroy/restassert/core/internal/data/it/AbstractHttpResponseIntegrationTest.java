@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.it;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.junit.WireMockTest;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import org.junit.jupiter.api.BeforeEach;

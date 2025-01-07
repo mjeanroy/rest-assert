@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.google;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import com.google.api.client.http.HttpHeaders;
 
@@ -38,13 +38,13 @@ import static com.google.api.client.util.IOUtils.copy;
 import static java.util.Collections.emptyList;
 
 /**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse}
+ * Implementation of {@link HttpResponse}
  * using Google Http Client framework as real implementation.
  */
 public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance of {@link com.ning.http.client.Response},
+	 * Create new {@link HttpResponse} using instance of {@link com.ning.http.client.Response},
 	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.

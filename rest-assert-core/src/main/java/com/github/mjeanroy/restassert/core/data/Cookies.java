@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -78,7 +78,7 @@ public final class Cookies {
 		Long maxAge,
 		Date expires
 	) {
-		return new DefaultCookieBuilder(name, value)
+		return new CookieBuilder(name, value)
 			.setDomain(domain)
 			.setPath(path)
 			.setSecure(secure)
@@ -96,8 +96,8 @@ public final class Cookies {
 	 * @param value Cookie value, must not be null.
 	 * @return The builder.
 	 */
-	public static DefaultCookieBuilder builder(String name, String value) {
-		return new DefaultCookieBuilder(name, value);
+	public static CookieBuilder builder(String name, String value) {
+		return new CookieBuilder(name, value);
 	}
 
 	/**

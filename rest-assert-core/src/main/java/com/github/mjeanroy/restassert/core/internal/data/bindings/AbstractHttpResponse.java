@@ -24,9 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.Cookies;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookies;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.exceptions.NonParsableResponseBodyException;
 
 import java.io.IOException;

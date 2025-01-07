@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.cookie.core;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
 import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;

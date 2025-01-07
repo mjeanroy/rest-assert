@@ -24,13 +24,14 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.cookie;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 
 /**
  * Abstract model for {@link com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions} assertions.
- * Actual object (a.k.a tested object) is an instance of {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} class.
+ * Actual object (a.k.a tested object) is an instance of {@link HttpResponse} class.
  * Convention: class name is defined by current model class.
  */
 public abstract class AbstractCookieModel extends AbstractTemplateModel implements TemplateModel {

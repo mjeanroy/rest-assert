@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.cookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 import org.junit.jupiter.api.Test;
 
 abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {

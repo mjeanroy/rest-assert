@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.assertj.api.http.charsets;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
 import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.assertj.core.api.AssertionInfo;
 

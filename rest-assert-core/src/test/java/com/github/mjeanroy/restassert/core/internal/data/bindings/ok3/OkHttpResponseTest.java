@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.ok3;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponseTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;

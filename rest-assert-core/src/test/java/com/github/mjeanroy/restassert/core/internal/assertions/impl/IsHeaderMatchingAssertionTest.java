@@ -27,7 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HeaderParserBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HeaderValueBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;

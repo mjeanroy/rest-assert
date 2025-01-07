@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaders;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 

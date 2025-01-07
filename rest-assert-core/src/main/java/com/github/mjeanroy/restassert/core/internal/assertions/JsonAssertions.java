@@ -24,9 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
+import com.github.mjeanroy.restassert.core.data.JsonEntry;
 import com.github.mjeanroy.restassert.core.internal.common.Ios;
-import com.github.mjeanroy.restassert.core.internal.data.DefaultJsonEntry;
-import com.github.mjeanroy.restassert.core.internal.data.JsonEntry;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 import com.github.mjeanroy.restassert.core.internal.json.comparators.DefaultJsonComparator;
@@ -86,9 +85,10 @@ public final class JsonAssertions {
 	 * @param key Entry key.
 	 * @param value Entry value.
 	 * @return The JSON entry.
+	 * @throws NullPointerException If {@code key} is {code null}.
 	 */
 	public static JsonEntry jsonEntry(String key, Object value) {
-		return new DefaultJsonEntry(key, value);
+		return JsonEntry.of(key, value);
 	}
 
 	/**

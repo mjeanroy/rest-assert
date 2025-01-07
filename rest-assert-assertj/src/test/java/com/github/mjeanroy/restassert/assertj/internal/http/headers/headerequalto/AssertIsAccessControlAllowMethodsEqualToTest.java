@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.internal.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 
 import static com.github.mjeanroy.restassert.assertj.tests.AssertJUtils.someInfo;

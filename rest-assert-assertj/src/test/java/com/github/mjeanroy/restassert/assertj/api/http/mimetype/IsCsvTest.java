@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSV;

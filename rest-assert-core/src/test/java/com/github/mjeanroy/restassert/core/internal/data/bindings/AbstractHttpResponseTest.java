@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import org.junit.jupiter.api.Test;
 

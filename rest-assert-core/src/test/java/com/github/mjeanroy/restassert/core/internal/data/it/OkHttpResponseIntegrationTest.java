@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.it;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie.SameSite;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 
 import java.util.Date;
 

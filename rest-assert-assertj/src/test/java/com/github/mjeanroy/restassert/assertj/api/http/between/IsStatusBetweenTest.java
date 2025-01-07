@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api.http.between;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import org.assertj.core.api.AssertionInfo;
 
 import static org.mockito.ArgumentMatchers.eq;

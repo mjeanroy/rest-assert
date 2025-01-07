@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;

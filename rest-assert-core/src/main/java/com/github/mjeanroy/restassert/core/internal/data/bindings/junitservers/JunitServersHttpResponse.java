@@ -1,7 +1,7 @@
 package com.github.mjeanroy.restassert.core.internal.data.bindings.junitservers;
 
 import com.github.mjeanroy.junit.servers.client.HttpHeader;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 
 import java.util.List;

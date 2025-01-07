@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.tests;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

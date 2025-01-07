@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.models.http;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
 /**

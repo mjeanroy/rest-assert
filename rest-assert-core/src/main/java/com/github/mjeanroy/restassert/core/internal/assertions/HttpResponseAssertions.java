@@ -47,8 +47,8 @@ import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatc
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
 
 import java.nio.charset.Charset;

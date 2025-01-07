@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.unit.api.http;
 
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
@@ -80,9 +81,9 @@ final class HttpAsserters {
 		JunitServersHttpResponseBuilder.class
 	);
 
-	private static final HttpAsserter<com.github.mjeanroy.restassert.core.internal.data.HttpResponse> CORE_HTTP = generate(
+	private static final HttpAsserter<HttpResponse> CORE_HTTP = generate(
 		HttpAssert.class,
-		com.github.mjeanroy.restassert.core.internal.data.HttpResponse.class,
+		HttpResponse.class,
 		HttpResponseBuilderImpl.class
 	);
 
@@ -116,7 +117,7 @@ final class HttpAsserters {
 		return JUNIT_SERVERS;
 	}
 
-	static HttpAsserter<com.github.mjeanroy.restassert.core.internal.data.HttpResponse> coreHttp() {
+	static HttpAsserter<HttpResponse> coreHttp() {
 		return CORE_HTTP;
 	}
 

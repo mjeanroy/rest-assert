@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http;
 
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.builders.apache.ApacheHttpResponseBuilder;
@@ -77,9 +78,9 @@ final class HttpMatchers {
 		JunitServersHttpResponseBuilder.class
 	);
 
-	private static final HttpMatcher<com.github.mjeanroy.restassert.core.internal.data.HttpResponse> CORE_HTTP = generate(
+	private static final HttpMatcher<HttpResponse> CORE_HTTP = generate(
 		com.github.mjeanroy.restassert.hamcrest.api.http.HttpResponseMatchers.class,
-		com.github.mjeanroy.restassert.core.internal.data.HttpResponse.class,
+		HttpResponse.class,
 		HttpResponseBuilderImpl.class
 	);
 
@@ -116,7 +117,7 @@ final class HttpMatchers {
 		return JUNIT_SERVERS;
 	}
 
-	static HttpMatcher<com.github.mjeanroy.restassert.core.internal.data.HttpResponse> coreHttpMatcher() {
+	static HttpMatcher<HttpResponse> coreHttpMatcher() {
 		return CORE_HTTP;
 	}
 

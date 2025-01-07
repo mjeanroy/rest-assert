@@ -24,8 +24,8 @@
 
 package com.github.mjeanroy.restassert.tests.builders;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;

@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 

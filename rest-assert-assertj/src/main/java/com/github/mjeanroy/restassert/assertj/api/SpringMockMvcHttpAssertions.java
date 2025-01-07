@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import org.springframework.test.web.servlet.ResultActions;
 

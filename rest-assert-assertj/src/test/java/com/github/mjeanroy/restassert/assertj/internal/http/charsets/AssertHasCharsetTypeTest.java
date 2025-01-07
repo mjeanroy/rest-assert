@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.charsets;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;

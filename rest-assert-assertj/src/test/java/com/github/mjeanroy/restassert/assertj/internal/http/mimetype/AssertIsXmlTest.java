@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.internal.http.mimetype;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 import java.util.List;
 

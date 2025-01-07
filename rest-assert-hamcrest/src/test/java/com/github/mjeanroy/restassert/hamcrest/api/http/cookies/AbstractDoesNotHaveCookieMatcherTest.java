@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.hamcrest.api.http.cookies;
 
-import com.github.mjeanroy.restassert.core.internal.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.hamcrest.api.http.AbstractHttpMatcherTest;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;

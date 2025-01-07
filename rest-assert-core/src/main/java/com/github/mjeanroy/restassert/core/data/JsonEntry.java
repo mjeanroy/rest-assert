@@ -22,32 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.data;
+package com.github.mjeanroy.restassert.core.data;
 
-import nl.jqno.equalsverifier.EqualsVerifier;
-import org.junit.jupiter.api.Test;
+/**
+ * Standard JSON entry defined by:
+ *
+ * <ul>
+ *   <li>A key</li>
+ *   <li>A value</li>
+ * </ul>.
+ */
+public interface JsonEntry {
 
-import static org.assertj.core.api.Assertions.assertThat;
+	/**
+	 * Get entry key.
+	 *
+	 * @return JSON entry key.
+	 */
+	String getKey();
 
-class DefaultJsonEntryTest {
+	/**
+	 * Get entry value.
+	 *
+	 * @return JSON entry value.
+	 */
+	Object getValue();
 
-	@Test
-	void it_should_create_json_entry() {
-		String key = "foo";
-		String value = "bar";
-		JsonEntry entry = new DefaultJsonEntry(key, value);
-		assertThat(entry.getKey()).isEqualTo(key);
-		assertThat(entry.getValue()).isEqualTo(value);
-	}
-
-	@Test
-	void it_should_have_to_string() {
-		JsonEntry entry = new DefaultJsonEntry("foo", "bar");
-		assertThat(entry.toString()).isEqualTo("foo = bar");
-	}
-
-	@Test
-	void it_should_implement_equals() {
-		EqualsVerifier.forClass(DefaultJsonEntry.class).verify();
+	/**
+	 * Create JSON entry object.
+	 *
+	 * @param key Entry key.
+	 * @param value Entry value.
+	 * @return The JSON entry.
+	 * @throws NullPointerException If {@code key} is {code null}.
+	 */
+	static JsonEntry of(String key, Object value) {
+		return new DefaultJsonEntry(key, value);
 	}
 }

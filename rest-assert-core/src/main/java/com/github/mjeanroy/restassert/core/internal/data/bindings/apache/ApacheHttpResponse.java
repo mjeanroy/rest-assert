@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.apache;
 
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -39,13 +39,13 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 import static java.util.Collections.unmodifiableList;
 
 /**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse}
+ * Implementation of {@link HttpResponse}
  * using Apache HttpClient framework as real implementation.
  */
 public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
 	/**
-	 * Create new {@link com.github.mjeanroy.restassert.core.internal.data.HttpResponse} using instance of {@link org.apache.http.HttpResponse},
+	 * Create new {@link HttpResponse} using instance of {@link org.apache.http.HttpResponse},
 	 * or returns {@code null} if {@code response} is {@code null}.
 	 *
 	 * @param response Original response object.

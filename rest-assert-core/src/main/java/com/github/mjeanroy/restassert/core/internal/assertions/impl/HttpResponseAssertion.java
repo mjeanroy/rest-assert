@@ -26,7 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.Assertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 /**
  * Assertion for {@link HttpResponse} objects.

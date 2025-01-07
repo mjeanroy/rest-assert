@@ -25,7 +25,7 @@
 package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.http;
 
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.internal.data.HttpResponse;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 
