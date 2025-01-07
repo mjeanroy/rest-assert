@@ -49,10 +49,7 @@ class HttpResponseAssertionsTest {
 	@Test
 	void it_should_create_new_cookie_assertion_object() {
 		Cookie cookie = new MockCookieBuilder().build();
-		CookieAssert assertions = HttpResponseAssertions.assertThat(cookie);
-
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isSameAs(cookie);
+		HttpResponseAssertions.assertThat(cookie).isNotNull().isSameAs(cookie);
 	}
 
 	@Test
@@ -60,11 +57,14 @@ class HttpResponseAssertionsTest {
 		String cookieName = "JSESSIONID";
 		Cookie cookie = new MockCookieBuilder().setName(cookieName).build();
 		HttpResponse response = new HttpResponseBuilderImpl().addCookie(cookie).build();
+		HttpResponseAssertions.assertThat(response).extractingCookie(cookieName).isSameAs(cookie);
+	}
 
-		CookieAssert assertions = HttpResponseAssertions.assertThat(response).extractingCookie(cookieName);
-
-		assertThat(assertions).isNotNull();
-		assertThat((Object) readField(assertions, "actual")).isSameAs(cookie);
+	@Test
+	void it_should_extract_and_create_new_cookies_assertion_object() {
+		Cookie cookie = new MockCookieBuilder().build();
+		HttpResponse response = new HttpResponseBuilderImpl().addCookie(cookie).build();
+		HttpResponseAssertions.assertThat(response).extractingCookies().hasSize(1);
 	}
 
 	@Test

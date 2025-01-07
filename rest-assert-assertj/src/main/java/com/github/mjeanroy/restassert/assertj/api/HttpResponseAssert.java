@@ -26,6 +26,7 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
+import org.assertj.core.api.ListAssert;
 
 import java.util.Objects;
 
@@ -82,5 +83,26 @@ public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseA
 			.orElse(null);
 
 		return new CookieAssert(cookie);
+	}
+
+	/**
+	 * Extract cookies returns new assertion with cookie list as value
+	 * under test.
+	 *
+	 * For example:
+	 *
+	 * <pre><code>
+	 *   assertThat(response).isOk().extractingCookies().extracting(Cookie::getName).contains(
+	 *     "JSESSIONID"
+	 *   );
+	 * </code></pre>
+	 *
+	 * @return New {@link ListAssert ListAssert<Cookie>} assertion.
+	 */
+	public ListAssert<Cookie> extractingCookies() {
+		isNotNull();
+		return new ListAssert<>(
+			actual.getCookies()
+		);
 	}
 }
