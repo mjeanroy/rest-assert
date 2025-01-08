@@ -24,41 +24,37 @@
 
 package com.github.mjeanroy.restassert.assertj.api.cookie;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-class HasValueTest extends AbstractApiTest<Cookies, CookieAssert> {
+class HasValueTest extends AbstractCookiesTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	void run(CookieAssert assertion) {
+		assertion.hasValue(success().getValue());
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	Cookie success() {
+		return cookie("foo");
 	}
 
 	@Override
-	protected CookieAssert run() {
-		return api.hasValue(actual().getName());
+	Cookie failure() {
+		String expectedValue = success().getValue();
+		String actualValue = expectedValue + "foo";
+		return cookie(actualValue);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasValue(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
+	String message() {
+		String expected = success().getValue();
+		String actual = failure().getValue();
+		return "Expecting cookie to have value \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
-	private Cookie actual() {
-		return new MockCookieBuilder().build();
+	private static Cookie cookie(String value) {
+		return new MockCookieBuilder().setValue(value).build();
 	}
 }

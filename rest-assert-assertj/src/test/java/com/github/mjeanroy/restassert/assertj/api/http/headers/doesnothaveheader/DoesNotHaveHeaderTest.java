@@ -25,23 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.doesnothaveheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-class DoesNotHaveHeaderTest extends AbstractHttpResponseHeaderTest {
+class DoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.doesNotHaveHeader("foo");
+	Header getHeader() {
+		return header("foo", "bar");
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertDoesNotHaveHeader(any(AssertionInfo.class), any(HttpResponse.class), eq("foo"));
+	void run(HttpResponseAssert assertion) {
+		assertion.doesNotHaveHeader(getHeader().getName());
 	}
 }

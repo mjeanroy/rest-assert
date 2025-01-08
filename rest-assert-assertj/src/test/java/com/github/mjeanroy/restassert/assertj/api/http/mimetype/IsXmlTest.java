@@ -25,27 +25,20 @@
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+
+import java.util.List;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.XML;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsXmlTest extends AbstractHttpResponseMimeTypeTest {
+class IsXmlTest extends AbstractHttpResponsesMimeTypeInTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isXml();
+	List<String> getMimeTypes() {
+		return XML;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsXml(any(AssertionInfo.class), any(HttpResponse.class));
-	}
-
-	@Override
-	String getMimeType() {
-		return XML.get(0);
+	void run(HttpResponseAssert assertion) {
+		assertion.isXml();
 	}
 }

@@ -25,25 +25,28 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponseHeaderTest {
+class IsStrictTransportSecurityEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final String VALUE = "max-age=31536000; includeSubDomains";
+	private static final Header HEADER = STRICT_TRANSPORT_SECURITY;
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "max-age=7200";
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isStrictTransportSecurityEqualTo(VALUE);
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsStrictTransportSecurityEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
+	String failValue() {
+		return FAILED_VALUE;
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isStrictTransportSecurityEqualTo(VALUE);
 	}
 }

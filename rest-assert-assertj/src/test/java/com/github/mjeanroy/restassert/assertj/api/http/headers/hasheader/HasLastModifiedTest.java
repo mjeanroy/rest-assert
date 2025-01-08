@@ -25,22 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.hasheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
-class HasLastModifiedTest extends AbstractHttpResponseHeaderTest {
+class HasLastModifiedTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.hasLastModified();
+	Header getHeader() {
+		return LAST_MODIFIED;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasLastModified(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.hasLastModified();
 	}
 }

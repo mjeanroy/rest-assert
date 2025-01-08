@@ -25,22 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.doesnothaveheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 
-class DoesNotHaveAccessControlAllowMethodsTest extends AbstractHttpResponseHeaderTest {
+class DoesNotHaveAccessControlAllowMethodsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.doesNotHaveAccessControlAllowMethods();
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_METHODS;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertDoesNotHaveAccessControlAllowMethods(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.doesNotHaveAccessControlAllowMethods();
 	}
 }

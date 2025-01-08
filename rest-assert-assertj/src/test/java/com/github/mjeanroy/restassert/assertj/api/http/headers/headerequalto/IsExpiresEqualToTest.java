@@ -25,23 +25,26 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-class IsExpiresEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsExpiresEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final String VALUE = EXPIRES.getValue();
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isExpiresEqualTo(getHeader().getValue());
+	Header getHeader() {
+		return EXPIRES;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsExpiresEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+	String failValue() {
+		return "Wed, 15 Nov 1995 12:45:26 GMT";
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isExpiresEqualTo(VALUE);
 	}
 }

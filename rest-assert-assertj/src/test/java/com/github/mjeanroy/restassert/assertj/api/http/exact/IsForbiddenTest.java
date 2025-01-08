@@ -25,14 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.FORBIDDEN;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsForbiddenTest extends AbstractHttpResponseStatusTest {
+class IsForbiddenTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	int status() {
@@ -40,12 +36,7 @@ class IsForbiddenTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isForbidden();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsForbidden(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isForbidden();
 	}
 }

@@ -25,32 +25,23 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.ContentType;
-import com.github.mjeanroy.restassert.core.data.MediaType;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import java.nio.charset.StandardCharsets;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.JSON_CONTENT_TYPE;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+class IsContentTypeEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-class IsContentTypeEqualToTest extends AbstractHttpResponseHeaderTest {
-
-	private static final ContentType VALUE = ContentType.contentType(
-		MediaType.application("json"),
-		StandardCharsets.UTF_8
-	);
+	private static final Header HEADER = JSON_CONTENT_TYPE;
+	private static final ContentType VALUE = ContentType.parser().parse(HEADER.getValue());
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isContentTypeEqualTo(VALUE);
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsContentTypeEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
+	void run(HttpResponseAssert assertion) {
+		assertion.isContentTypeEqualTo(VALUE);
 	}
 }

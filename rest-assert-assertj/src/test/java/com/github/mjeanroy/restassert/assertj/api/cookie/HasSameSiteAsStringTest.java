@@ -24,41 +24,36 @@
 
 package com.github.mjeanroy.restassert.assertj.api.cookie;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-class HasSameSiteAsStringTest extends AbstractApiTest<Cookies, CookieAssert> {
+class HasSameSiteAsStringTest extends AbstractCookiesTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	void run(CookieAssert assertion) {
+		assertion.hasSameSite(success().getSameSite().getValue());
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	Cookie success() {
+		return cookie(SameSite.NONE);
 	}
 
 	@Override
-	protected CookieAssert run() {
-		return api.hasSameSite(actual().getSameSite().getValue());
+	Cookie failure() {
+		return cookie(SameSite.STRICT);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasSameSite(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
+	String message() {
+		SameSite expected = success().getSameSite();
+		SameSite actual = failure().getSameSite();
+		return "Expecting cookie to have SameSite \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
-	private Cookie actual() {
-		return new MockCookieBuilder().build();
+	private static Cookie cookie(SameSite sameSite) {
+		return new MockCookieBuilder().setSameSite(sameSite).build();
 	}
 }

@@ -25,14 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REQUEST_ENTITY_TOO_LARGE;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsRequestEntityTooLargeTest extends AbstractHttpResponseStatusTest {
+class IsRequestEntityTooLargeTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	int status() {
@@ -40,12 +36,7 @@ class IsRequestEntityTooLargeTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isRequestEntityTooLarge();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsRequestEntityTooLarge(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isRequestEntityTooLarge();
 	}
 }

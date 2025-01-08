@@ -25,26 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.between;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Range;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.REDIRECTION;
 
-class IsRedirectionTest extends AbstractHttpResponseStatusBetweenTest {
+class IsRedirectionTest extends AbstractHttpResponsesStatusBetweenTest {
 
 	@Override
-	int status() {
-		return 300;
+	Range getRange() {
+		return REDIRECTION;
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isRedirection();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsRedirection(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isRedirection();
 	}
 }

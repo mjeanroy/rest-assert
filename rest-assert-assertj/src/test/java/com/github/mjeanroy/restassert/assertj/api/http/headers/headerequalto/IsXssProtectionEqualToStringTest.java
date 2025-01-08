@@ -25,27 +25,28 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_XSS_PROTECTION;
 
-class IsXssProtectionEqualToStringTest extends AbstractHttpResponseHeaderTest {
+class IsXssProtectionEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final Header HEADER = X_XSS_PROTECTION;
+	private static final String VALUE = HEADER.getValue();
+	private static final String FAILED_VALUE = "1";
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isXssProtectionEqualTo(getValue());
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsXssProtectionEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
+	String failValue() {
+		return FAILED_VALUE;
 	}
 
-	private String getValue() {
-		return getHeader().getValue();
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isXssProtectionEqualTo(VALUE);
 	}
 }

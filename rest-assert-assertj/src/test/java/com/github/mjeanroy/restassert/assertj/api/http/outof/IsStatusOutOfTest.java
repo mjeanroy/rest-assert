@@ -25,30 +25,22 @@
 package com.github.mjeanroy.restassert.assertj.api.http.outof;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Range;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-class IsStatusOutOfTest extends AbstractHttpResponseStatusOutOfTest {
+class IsStatusOutOfTest extends AbstractHttpResponsesStatusOutOfTest {
 
-	private static final int START = 200;
-	private static final int END = 299;
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	int status() {
-		return 400;
+	Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isStatusOutOf(START, END);
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsStatusOutOf(any(AssertionInfo.class), any(HttpResponse.class), eq(START), eq(END));
+	void run(HttpResponseAssert assertion) {
+		assertion.isStatusOutOf(START, END);
 	}
 }

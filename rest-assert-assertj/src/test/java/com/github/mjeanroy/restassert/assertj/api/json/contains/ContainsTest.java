@@ -24,40 +24,42 @@
 
 package com.github.mjeanroy.restassert.assertj.api.json.contains;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.assertj.api.JsonAssertions.assertThatJson;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class ContainsTest extends AbstractApiTest<Jsons, JsonAssert> {
+class ContainsTest {
 
-	@Override
-	protected Jsons createAssertions() {
-		return mock(Jsons.class);
+	@Test
+	void it_should_pass_if_json_contains_entries() {
+		String json = toJSON(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe")
+		);
+
+		assertThatJson(json).contains("id");
+		assertThatJson(json).contains("name");
+		assertThatJson(json).contains("$.id");
+		assertThatJson(json).contains("$.name");
+		assertThatJson(json).contains("id", "name");
 	}
 
-	@Override
-	protected JsonAssert createApi() {
-		return new JsonAssert(actual());
-	}
+	@Test
+	void it_should_fail_if_json_does_not_contains_entry() {
+		String json = toJSON(jsonEntry("id", 1));
 
-	@Override
-	protected JsonAssert run() {
-		return api.contains("foo");
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertContains(any(AssertionInfo.class), eq(actual()), eq("foo"));
-	}
-
-	private String actual() {
-		return jsonSuccess();
+		try {
+			assertThatJson(json).contains("name");
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage()).isEqualTo(
+				"Expecting json to contain entry \"name\""
+			);
+		}
 	}
 }

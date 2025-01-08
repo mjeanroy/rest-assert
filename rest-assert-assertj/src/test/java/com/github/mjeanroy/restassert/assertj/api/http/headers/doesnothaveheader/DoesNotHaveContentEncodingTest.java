@@ -25,22 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.doesnothaveheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-class DoesNotHaveContentEncodingTest extends AbstractHttpResponseHeaderTest {
+class DoesNotHaveContentEncodingTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.doesNotHaveContentEncoding();
+	Header getHeader() {
+		return GZIP_CONTENT_ENCODING;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertDoesNotHaveContentEncoding(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.doesNotHaveContentEncoding();
 	}
 }

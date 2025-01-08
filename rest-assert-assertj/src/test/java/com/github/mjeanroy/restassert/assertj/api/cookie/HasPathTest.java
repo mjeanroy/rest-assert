@@ -24,41 +24,37 @@
 
 package com.github.mjeanroy.restassert.assertj.api.cookie;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-class HasPathTest extends AbstractApiTest<Cookies, CookieAssert> {
+class HasPathTest extends AbstractCookiesTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	void run(CookieAssert assertion) {
+		assertion.hasPath(success().getPath());
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	Cookie success() {
+		return cookie("foo");
 	}
 
 	@Override
-	protected CookieAssert run() {
-		return api.hasPath(actual().getPath());
+	Cookie failure() {
+		String expectedPath = success().getPath();
+		String actualPath = expectedPath + "foo";
+		return cookie(actualPath);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasPath(any(AssertionInfo.class), any(Cookie.class), nullable(String.class));
+	String message() {
+		String expected = success().getPath();
+		String actual = failure().getPath();
+		return "Expecting cookie to have path \"" + expected + "\" but was \"" + actual + "\"";
 	}
 
-	private Cookie actual() {
-		return new MockCookieBuilder().build();
+	private static Cookie cookie(String path) {
+		return new MockCookieBuilder().setPath(path).build();
 	}
 }

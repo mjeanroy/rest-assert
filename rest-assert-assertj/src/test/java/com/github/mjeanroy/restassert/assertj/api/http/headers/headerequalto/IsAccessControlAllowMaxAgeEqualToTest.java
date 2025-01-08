@@ -25,25 +25,21 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_MAX_AGE;
 
-class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowMaxAgeEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final long VALUE = 3600;
+	private static final long VALUE = Long.parseLong(ACCESS_CONTROL_ALLOW_MAX_AGE.getValue());
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isAccessControlAllowMaxAgeEqualTo(VALUE);
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_MAX_AGE;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsAccessControlAllowMaxAgeEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
+	void run(HttpResponseAssert assertion) {
+		assertion.isAccessControlAllowMaxAgeEqualTo(VALUE);
 	}
 }

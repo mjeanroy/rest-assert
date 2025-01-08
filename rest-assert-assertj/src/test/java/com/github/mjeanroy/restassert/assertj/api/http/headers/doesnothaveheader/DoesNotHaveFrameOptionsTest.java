@@ -25,22 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.doesnothaveheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-class DoesNotHaveFrameOptionsTest extends AbstractHttpResponseHeaderTest {
+class DoesNotHaveFrameOptionsTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.doesNotHaveFrameOptions();
+	Header getHeader() {
+		return X_FRAME_OPTIONS;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertDoesNotHaveFrameOptions(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.doesNotHaveFrameOptions();
 	}
 }

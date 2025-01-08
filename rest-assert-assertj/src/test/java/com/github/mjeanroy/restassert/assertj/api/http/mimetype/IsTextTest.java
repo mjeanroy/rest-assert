@@ -25,27 +25,18 @@
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_PLAIN;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsTextTest extends AbstractHttpResponseMimeTypeTest {
-
-	@Override
-	protected HttpResponseAssert run() {
-		return api.isText();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsText(any(AssertionInfo.class), any(HttpResponse.class));
-	}
+class IsTextTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
 	String getMimeType() {
 		return TEXT_PLAIN;
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isText();
 	}
 }

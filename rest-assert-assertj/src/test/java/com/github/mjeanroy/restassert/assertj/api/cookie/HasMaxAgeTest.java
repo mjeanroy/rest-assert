@@ -24,41 +24,37 @@
 
 package com.github.mjeanroy.restassert.assertj.api.cookie;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.ArgumentMatchers.nullable;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-class HasMaxAgeTest extends AbstractApiTest<Cookies, CookieAssert> {
+class HasMaxAgeTest extends AbstractCookiesTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	void run(CookieAssert assertion) {
+		assertion.hasMaxAge(success().getMaxAge());
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	Cookie success() {
+		return cookie(10);
 	}
 
 	@Override
-	protected CookieAssert run() {
-		return api.hasMaxAge(actual().getMaxAge());
+	Cookie failure() {
+		long expectedMaxAge = success().getMaxAge();
+		long actualMaxAge = expectedMaxAge + 1;
+		return cookie(actualMaxAge);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasMaxAge(any(AssertionInfo.class), any(Cookie.class), nullable(Long.class));
+	String message() {
+		long expected = success().getMaxAge();
+		long actual = failure().getMaxAge();
+		return "Expecting cookie to have max-age " + expected + "L but was " + actual + "L";
 	}
 
-	private Cookie actual() {
-		return new MockCookieBuilder().build();
+	private static Cookie cookie(long maxAge) {
+		return new MockCookieBuilder().setMaxAge(maxAge).build();
 	}
 }

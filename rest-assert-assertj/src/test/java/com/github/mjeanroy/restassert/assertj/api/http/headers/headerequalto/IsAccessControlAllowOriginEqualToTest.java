@@ -25,23 +25,21 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_ORIGIN;
 
-class IsAccessControlAllowOriginEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowOriginEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final String VALUE = ACCESS_CONTROL_ALLOW_ORIGIN.getValue();
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isAccessControlAllowOriginEqualTo(getHeader().getValue());
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_ORIGIN;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsAccessControlAllowOriginEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+	void run(HttpResponseAssert assertion) {
+		assertion.isAccessControlAllowOriginEqualTo(VALUE);
 	}
 }

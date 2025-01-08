@@ -25,29 +25,25 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 import java.util.List;
 
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.ACCESS_CONTROL_ALLOW_METHODS;
 import static java.util.Arrays.asList;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
 
-class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpResponseHeaderTest {
+class IsAccessControlAllowMethodsEqualToIterableTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final List<RequestMethod> METHODS = asList(RequestMethod.GET, RequestMethod.POST);
+	private static final List<RequestMethod> VALUE = asList(RequestMethod.GET, RequestMethod.POST);
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isAccessControlAllowMethodsEqualTo(METHODS);
+	Header getHeader() {
+		return ACCESS_CONTROL_ALLOW_METHODS;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsAccessControlAllowMethodsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(METHODS));
+	void run(HttpResponseAssert assertion) {
+		assertion.isAccessControlAllowMethodsEqualTo(VALUE);
 	}
 }

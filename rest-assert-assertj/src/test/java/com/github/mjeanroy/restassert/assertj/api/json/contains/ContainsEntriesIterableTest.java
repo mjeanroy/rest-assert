@@ -24,42 +24,48 @@
 
 package com.github.mjeanroy.restassert.assertj.api.json.contains;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
 import com.github.mjeanroy.restassert.assertj.api.JsonAssertions;
-import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
+import static com.github.mjeanroy.restassert.assertj.api.JsonAssertions.assertThatJson;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
+import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class ContainsEntriesIterableTest extends AbstractApiTest<Jsons, JsonAssert> {
+class ContainsEntriesIterableTest {
 
-	@Override
-	protected Jsons createAssertions() {
-		return mock(Jsons.class);
+	@Test
+	void it_should_pass_if_json_contains_entries() {
+		String json = toJSON(
+			jsonEntry("id", 1),
+			jsonEntry("name", "John Doe")
+		);
+
+		assertThatJson(json).containsEntries(singleton(JsonAssertions.jsonEntry("id", 1)));
+		assertThatJson(json).containsEntries(singleton(JsonAssertions.jsonEntry("name", "John Doe")));
+		assertThatJson(json).containsEntries(singleton(JsonAssertions.jsonEntry("$.id", 1)));
+		assertThatJson(json).containsEntries(singleton(JsonAssertions.jsonEntry("$.name", "John Doe")));
+		assertThatJson(json).containsEntries(asList(
+			JsonAssertions.jsonEntry("id", 1),
+			JsonAssertions.jsonEntry("name", "John Doe")
+		));
 	}
 
-	@Override
-	protected JsonAssert createApi() {
-		return new JsonAssert(actual());
-	}
+	@Test
+	void it_should_fail_if_json_does_not_contains_entry() {
+		String json = toJSON(jsonEntry("id", 1));
 
-	@Override
-	protected JsonAssert run() {
-		return api.containsEntries(singleton(JsonAssertions.jsonEntry("id", 1)));
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertContainsEntries(any(AssertionInfo.class), eq(actual()), eq(singleton(JsonAssertions.jsonEntry("id", 1))));
-	}
-
-	private String actual() {
-		return jsonSuccess();
+		try {
+			assertThatJson(json).containsEntries(singleton(JsonAssertions.jsonEntry("id", 2)));
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage()).isEqualTo(
+				"Expecting json entry \"id\" to be equal to 2 but was 1"
+			);
+		}
 	}
 }

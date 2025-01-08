@@ -25,27 +25,28 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_FRAME_OPTIONS;
 
-class IsFrameOptionsEqualToStringTest extends AbstractHttpResponseHeaderTest {
+class IsFrameOptionsEqualToStringTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final Header HEADER = X_FRAME_OPTIONS;
+	private static final String VALUE = X_FRAME_OPTIONS.getValue();
+	private static final String FAILED_VALUE = "sameorigin";
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isFrameOptionsEqualTo(getValue());
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsFrameOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getValue()));
+	String failValue() {
+		return FAILED_VALUE;
 	}
 
-	private String getValue() {
-		return getHeader().getValue();
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isFrameOptionsEqualTo(VALUE);
 	}
 }

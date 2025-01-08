@@ -25,27 +25,22 @@
 package com.github.mjeanroy.restassert.assertj.api.http.between;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Range;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.data.Range.range;
 
-class IsStatusBetweenTest extends AbstractHttpResponseStatusBetweenTest {
+class IsStatusBetweenTest extends AbstractHttpResponsesStatusBetweenTest {
+
+	private static final int START = 400;
+	private static final int END = 599;
 
 	@Override
-	int status() {
-		return 400;
+	Range getRange() {
+		return range(START, END);
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isStatusBetween(400, 499);
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsStatusBetween(any(AssertionInfo.class), any(HttpResponse.class), eq(400), eq(499));
+	void run(HttpResponseAssert assertion) {
+		assertion.isStatusBetween(START, END);
 	}
 }

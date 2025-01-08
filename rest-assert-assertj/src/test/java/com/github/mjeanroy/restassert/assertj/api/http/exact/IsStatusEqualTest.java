@@ -25,15 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.CREATED;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsStatusEqualTest extends AbstractHttpResponseStatusTest {
+class IsStatusEqualTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	int status() {
@@ -41,12 +36,7 @@ class IsStatusEqualTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isStatusEqual(status());
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsStatusEqual(any(AssertionInfo.class), any(HttpResponse.class), eq(status()));
+	void run(HttpResponseAssert assertion) {
+		assertion.isStatusEqual(status());
 	}
 }

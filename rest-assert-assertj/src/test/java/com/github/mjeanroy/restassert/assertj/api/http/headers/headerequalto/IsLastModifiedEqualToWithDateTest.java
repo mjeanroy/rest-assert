@@ -25,27 +25,30 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 import java.util.Date;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.LAST_MODIFIED;
 
-class IsLastModifiedEqualToWithDateTest extends AbstractHttpResponseHeaderTest {
+class IsLastModifiedEqualToWithDateTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final Date LAST_MODIFIED_VALUE = new Date();
+	private static final String VALUE = LAST_MODIFIED.getValue();
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isLastModifiedEqualTo(LAST_MODIFIED_VALUE);
+	Header getHeader() {
+		return LAST_MODIFIED;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsLastModifiedEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(LAST_MODIFIED_VALUE));
+	String failValue() {
+		return "Wed, 15 Nov 1995 12:45:26 GMT";
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		Date date = fromInternetMessageFormat(VALUE);
+		assertion.isLastModifiedEqualTo(date);
 	}
 }

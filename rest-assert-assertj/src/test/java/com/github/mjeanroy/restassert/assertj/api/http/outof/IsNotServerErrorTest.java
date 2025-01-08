@@ -25,26 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.outof;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Range;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.SERVER_ERROR;
 
-class IsNotServerErrorTest extends AbstractHttpResponseStatusOutOfTest {
+class IsNotServerErrorTest extends AbstractHttpResponsesStatusOutOfTest {
 
 	@Override
-	int status() {
-		return 500;
+	Range getRange() {
+		return SERVER_ERROR;
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isNotServerError();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotServerError(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isNotServerError();
 	}
 }

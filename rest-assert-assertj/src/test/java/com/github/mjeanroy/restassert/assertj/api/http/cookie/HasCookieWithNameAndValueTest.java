@@ -25,26 +25,26 @@
 package com.github.mjeanroy.restassert.assertj.api.http.cookie;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
-
-class HasCookieWithNameAndValueTest extends AbstractCookieTest {
+class HasCookieWithNameAndValueTest extends AbstractHasCookieTest {
 
 	private static final String NAME = "JSESSIONID";
-
 	private static final String VALUE = "12345";
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.hasCookie(NAME, VALUE);
+	Cookie cookie() {
+		return new MockCookieBuilder().setName(NAME).setValue(VALUE).build();
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasCookie(any(AssertionInfo.class), any(HttpResponse.class), eq(NAME), eq(VALUE));
+	void run(HttpResponseAssert assertion) {
+		assertion.hasCookie(NAME, VALUE);
+	}
+
+	@Override
+	String buildErrorMessage() {
+		return String.format("Expecting http response to contains cookie with name \"%s\" and value \"%s\"", NAME, VALUE);
 	}
 }

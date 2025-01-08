@@ -25,26 +25,35 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.STRICT_TRANSPORT_SECURITY;
 
-class IsStrictTransportSecurityEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsStrictTransportSecurityEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000).includeSubDomains().build();
+	private static final StrictTransportSecurity VALUE = StrictTransportSecurity.builder(31536000)
+		.includeSubDomains()
+		.build();
+
+	private static final String FAILED_VALUE = StrictTransportSecurity.builder(31536000)
+		.includeSubDomains()
+		.preload()
+		.build()
+		.serializeValue();
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isStrictTransportSecurityEqualTo(VALUE);
+	Header getHeader() {
+		return STRICT_TRANSPORT_SECURITY;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsStrictTransportSecurityEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
+	String failValue() {
+		return FAILED_VALUE;
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isStrictTransportSecurityEqualTo(VALUE);
 	}
 }

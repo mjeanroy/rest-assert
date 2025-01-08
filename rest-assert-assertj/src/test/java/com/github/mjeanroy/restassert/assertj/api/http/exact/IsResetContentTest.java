@@ -25,14 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.RESET_CONTENT;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsResetContentTest extends AbstractHttpResponseStatusTest {
+class IsResetContentTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	int status() {
@@ -40,12 +36,7 @@ class IsResetContentTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isResetContent();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsResetContent(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isResetContent();
 	}
 }

@@ -24,19 +24,12 @@
 
 package com.github.mjeanroy.restassert.assertj.tests;
 
-import org.assertj.core.api.AssertionInfo;
-import org.assertj.core.api.WritableAssertionInfo;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 public final class AssertJUtils {
 
 	private AssertJUtils() {
-	}
-
-	public static AssertionInfo someInfo() {
-		return new WritableAssertionInfo();
 	}
 
 	public static String formatList(List<String> list) {

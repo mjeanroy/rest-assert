@@ -24,40 +24,67 @@
 
 package com.github.mjeanroy.restassert.assertj.api.json.is;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.jupiter.api.Test;
 
+import static com.github.mjeanroy.restassert.assertj.api.JsonAssertions.assertThatJson;
+import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.fmt;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonArray;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonObject;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class IsNumberEntryTest extends AbstractApiTest<Jsons, JsonAssert> {
+class IsNumberEntryTest {
 
-	@Override
-	protected Jsons createAssertions() {
-		return mock(Jsons.class);
+	@Test
+	void it_should_pass_with_a_number() {
+		it_should_succeed("id");
 	}
 
-	@Override
-	protected JsonAssert createApi() {
-		return new JsonAssert(actual());
+	@Test
+	void it_should_fail_with_null_string() {
+		it_should_fail("gender", "null");
 	}
 
-	@Override
-	protected JsonAssert run() {
-		return api.isNumberEntry("id");
+	@Test
+	void it_should_fail_with_a_boolean() {
+		it_should_fail("active", "a boolean");
 	}
 
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNumberEntry(any(AssertionInfo.class), eq(actual()), eq("id"));
+	@Test
+	void it_should_fail_with_an_array() {
+		it_should_fail("roles", "an array");
+	}
+
+	@Test
+	void it_should_fail_with_a_string() {
+		it_should_fail("name", "a string");
+	}
+
+	@Test
+	void it_should_fail_with_an_object() {
+		it_should_fail("permissions", "an object");
+	}
+
+	private static void it_should_succeed(String path) {
+		run(path);
+	}
+
+	private static void it_should_fail(String path, String actualType) {
+		try {
+			run(path);
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage()).isEqualTo(
+				"Expecting json entry " + fmt(path) + " to be a number but was " + actualType
+			);
+		}
+	}
+
+	private static void run(String path) {
+		assertThatJson(actual()).isNumberEntry(path);
 	}
 
 	private static String actual() {

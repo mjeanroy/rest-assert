@@ -25,22 +25,19 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.hasheader;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-class HasContentTypeOptionsTest extends AbstractHttpResponseHeaderTest {
+class HasContentTypeOptionsTest extends AbstractHttpResponsesHeaderTest {
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.hasContentTypeOptions();
+	Header getHeader() {
+		return X_CONTENT_TYPE_OPTIONS;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasContentTypeOptions(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.hasContentTypeOptions();
 	}
 }

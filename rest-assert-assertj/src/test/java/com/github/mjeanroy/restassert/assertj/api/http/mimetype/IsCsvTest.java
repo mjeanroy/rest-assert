@@ -25,27 +25,18 @@
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSV;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsCsvTest extends AbstractHttpResponseMimeTypeTest {
-
-	@Override
-	protected HttpResponseAssert run() {
-		return api.isCsv();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsCsv(any(AssertionInfo.class), any(HttpResponse.class));
-	}
+class IsCsvTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
 	String getMimeType() {
 		return TEXT_CSV;
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isCsv();
 	}
 }

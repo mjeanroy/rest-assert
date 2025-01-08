@@ -25,27 +25,30 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
 import java.util.Date;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.commons.DateTestUtils.fromInternetMessageFormat;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.EXPIRES;
 
-class IsExpiresEqualToWithDateTest extends AbstractHttpResponseHeaderTest {
+class IsExpiresEqualToWithDateTest extends AbstractHttpResponsesHeaderEqualToTest {
 
-	private static final Date EXPIRES_VALUE = new Date();
+	private static final String VALUE = EXPIRES.getValue();
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isExpiresEqualTo(EXPIRES_VALUE);
+	Header getHeader() {
+		return EXPIRES;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsExpiresEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(EXPIRES_VALUE));
+	String failValue() {
+		return "Wed, 15 Nov 1995 12:45:26 GMT";
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		Date date = fromInternetMessageFormat(VALUE);
+		assertion.isExpiresEqualTo(date);
 	}
 }

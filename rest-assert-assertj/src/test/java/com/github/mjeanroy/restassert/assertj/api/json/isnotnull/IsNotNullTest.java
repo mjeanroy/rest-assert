@@ -24,40 +24,30 @@
 
 package com.github.mjeanroy.restassert.assertj.api.json.isnotnull;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
-import com.github.mjeanroy.restassert.assertj.api.JsonAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Jsons;
-import org.assertj.core.api.AssertionInfo;
+import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.tests.fixtures.JsonFixtures.jsonSuccess;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.assertj.api.JsonAssertions.assertThatJson;
+import static com.github.mjeanroy.restassert.tests.AssertionUtils.failBecauseExpectedAssertionErrorWasNotThrown;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class IsNotNullTest extends AbstractApiTest<Jsons, JsonAssert> {
+class IsNotNullTest {
 
-	@Override
-	protected Jsons createAssertions() {
-		return mock(Jsons.class);
+	@Test
+	void it_should_pass_if_json_is_not_null() {
+		assertThatJson("{}").isNotNull();
+		assertThatJson("[]").isNotNull();
 	}
 
-	@Override
-	protected JsonAssert createApi() {
-		return new JsonAssert(actual());
-	}
-
-	@Override
-	protected JsonAssert run() {
-		return api.isNotNull();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotNull(any(AssertionInfo.class), eq(actual()));
-	}
-
-	private String actual() {
-		return jsonSuccess();
+	@Test
+	void it_should_fail_if_json_is_null() {
+		try {
+			assertThatJson((String) null).isNotNull();
+			failBecauseExpectedAssertionErrorWasNotThrown();
+		}
+		catch (AssertionError e) {
+			assertThat(e.getMessage().trim()).isEqualTo(
+				"Expecting actual not to be null"
+			);
+		}
 	}
 }

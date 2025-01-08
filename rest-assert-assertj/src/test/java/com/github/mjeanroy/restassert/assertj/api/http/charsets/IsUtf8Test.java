@@ -25,32 +25,16 @@
 package com.github.mjeanroy.restassert.assertj.api.http.charsets;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.AbstractHttpResponseTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
-import org.assertj.core.api.AssertionInfo;
 
-import static java.lang.String.format;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-
-class IsUtf8Test extends AbstractHttpResponseTest {
-
-	private static final String CHARSET = "UTF-8";
+class IsUtf8Test extends AbstractHttpResponsesCharsetTest {
 
 	@Override
-	protected HttpResponseAssert createApi() {
-		String contentType = format("application/json;charset=%s", CHARSET);
-		return new HttpResponseAssert(new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build());
+	String getCharset() {
+		return "utf-8";
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isUtf8();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsUtf8(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isUtf8();
 	}
 }

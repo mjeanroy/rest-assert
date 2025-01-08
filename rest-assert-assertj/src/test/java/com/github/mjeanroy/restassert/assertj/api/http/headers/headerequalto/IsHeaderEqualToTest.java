@@ -25,23 +25,22 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.data.Header.header;
 
-class IsHeaderEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsHeaderEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final String NAME = "foo";
+	private static final String VALUE = "bar";
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isHeaderEqualTo(getHeader().getName(), getHeader().getValue());
+	Header getHeader() {
+		return header(NAME, VALUE);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsHeaderEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getName()), eq(getHeader().getValue()));
+	void run(HttpResponseAssert assertion) {
+		assertion.isHeaderEqualTo(NAME, VALUE);
 	}
 }

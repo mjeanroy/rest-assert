@@ -25,22 +25,27 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.GZIP_CONTENT_ENCODING;
 
-class IsGzippedTest extends AbstractHttpResponseHeaderTest {
+class IsGzippedTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final Header HEADER = GZIP_CONTENT_ENCODING;
+	private static final String FAILED_VALUE = "deflate";
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isGzipped();
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsGzipped(any(AssertionInfo.class), any(HttpResponse.class));
+	String failValue() {
+		return FAILED_VALUE;
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.isGzipped();
 	}
 }

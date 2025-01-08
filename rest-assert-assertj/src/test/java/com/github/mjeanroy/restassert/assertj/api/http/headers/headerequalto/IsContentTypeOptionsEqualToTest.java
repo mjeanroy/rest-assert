@@ -25,26 +25,28 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.X_CONTENT_TYPE_OPTIONS;
 
-class IsContentTypeOptionsEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsContentTypeOptionsEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
 
+	private static final Header HEADER = X_CONTENT_TYPE_OPTIONS;
 	private static final ContentTypeOptions VALUE = ContentTypeOptions.NO_SNIFF;
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isContentTypeOptionsEqualTo(VALUE);
+	Header getHeader() {
+		return HEADER;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsContentTypeOptionsEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(VALUE));
+	void run(HttpResponseAssert assertion) {
+		assertion.isContentTypeOptionsEqualTo(VALUE);
+	}
+
+	@Override
+	void should_fail_if_header_is_not_available() {
+		// Can't provide a failed value since only "nosniff" is authorized.
 	}
 }

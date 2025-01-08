@@ -24,40 +24,33 @@
 
 package com.github.mjeanroy.restassert.assertj.api.cookie;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-class IsNotSecuredTest extends AbstractApiTest<Cookies, CookieAssert> {
+class IsNotSecuredTest extends AbstractCookiesTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	void run(CookieAssert assertion) {
+		assertion.isNotSecured();
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	Cookie success() {
+		return cookie(false);
 	}
 
 	@Override
-	protected CookieAssert run() {
-		return api.isNotSecured();
+	Cookie failure() {
+		return cookie(true);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotSecured(any(AssertionInfo.class), any(Cookie.class));
+	String message() {
+		return "Expecting cookie not to be secured";
 	}
 
-	private Cookie actual() {
-		return new MockCookieBuilder().build();
+	private static Cookie cookie(boolean secured) {
+		return new MockCookieBuilder().setSecure(secured).build();
 	}
 }

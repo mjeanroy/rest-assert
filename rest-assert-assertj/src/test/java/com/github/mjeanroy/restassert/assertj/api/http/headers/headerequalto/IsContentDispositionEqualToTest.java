@@ -25,23 +25,21 @@
 package com.github.mjeanroy.restassert.assertj.api.http.headers.headerequalto;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.assertj.api.http.headers.AbstractHttpResponseHeaderTest;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
+import com.github.mjeanroy.restassert.test.data.Header;
 
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestHeaders.CONTENT_DISPOSITION;
 
-class IsContentDispositionEqualToTest extends AbstractHttpResponseHeaderTest {
+class IsContentDispositionEqualToTest extends AbstractHttpResponsesHeaderEqualToTest {
+
+	private static final String VALUE = CONTENT_DISPOSITION.getValue();
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isContentDispositionEqualTo(getHeader().getValue());
+	Header getHeader() {
+		return CONTENT_DISPOSITION;
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsContentDispositionEqualTo(any(AssertionInfo.class), any(HttpResponse.class), eq(getHeader().getValue()));
+	void run(HttpResponseAssert assertion) {
+		assertion.isContentDispositionEqualTo(VALUE);
 	}
 }

@@ -25,14 +25,10 @@
 package com.github.mjeanroy.restassert.assertj.api.http.exact;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
 import static com.github.mjeanroy.restassert.test.fixtures.TestStatus.INTERNAL_SERVER_ERROR;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
 
-class IsInternalServerErrorTest extends AbstractHttpResponseStatusTest {
+class IsInternalServerErrorTest extends AbstractHttpResponsesStatusTest {
 
 	@Override
 	int status() {
@@ -40,12 +36,7 @@ class IsInternalServerErrorTest extends AbstractHttpResponseStatusTest {
 	}
 
 	@Override
-	protected HttpResponseAssert run() {
-		return api.isInternalServerError();
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsInternalServerError(any(AssertionInfo.class), any(HttpResponse.class));
+	void run(HttpResponseAssert assertion) {
+		assertion.isInternalServerError();
 	}
 }

@@ -24,40 +24,33 @@
 
 package com.github.mjeanroy.restassert.assertj.api.cookie;
 
-import com.github.mjeanroy.restassert.assertj.api.AbstractApiTest;
 import com.github.mjeanroy.restassert.assertj.api.CookieAssert;
-import com.github.mjeanroy.restassert.assertj.internal.Cookies;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
-import org.assertj.core.api.AssertionInfo;
 
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-class IsNotHttpOnlyTest extends AbstractApiTest<Cookies, CookieAssert> {
+class IsNotHttpOnlyTest extends AbstractCookiesTest {
 
 	@Override
-	protected Cookies createAssertions() {
-		return mock(Cookies.class);
+	void run(CookieAssert assertion) {
+		assertion.isNotHttpOnly();
 	}
 
 	@Override
-	protected CookieAssert createApi() {
-		return new CookieAssert(actual());
+	Cookie success() {
+		return cookie(false);
 	}
 
 	@Override
-	protected CookieAssert run() {
-		return api.isNotHttpOnly();
+	Cookie failure() {
+		return cookie(true);
 	}
 
 	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertIsNotHttpOnly(any(AssertionInfo.class), any(Cookie.class));
+	String message() {
+		return "Expecting cookie not to be 'http only'";
 	}
 
-	private Cookie actual() {
-		return new MockCookieBuilder().build();
+	private static Cookie cookie(boolean httpOnly) {
+		return new MockCookieBuilder().setHttpOnly(httpOnly).build();
 	}
 }

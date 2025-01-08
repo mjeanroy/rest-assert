@@ -25,28 +25,18 @@
 package com.github.mjeanroy.restassert.assertj.api.http.mimetype;
 
 import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
-import org.assertj.core.api.AssertionInfo;
 
-import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.APPLICATION_JSON;
-import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.verify;
+import static com.github.mjeanroy.restassert.test.fixtures.TestMimeTypes.TEXT_CSS;
 
-class HasMimeTypeTest extends AbstractHttpResponseMimeTypeTest {
-
-	@Override
-	protected HttpResponseAssert run() {
-		return api.hasMimeType(getMimeType());
-	}
-
-	@Override
-	protected void verifyApiCall() {
-		verify(assertions).assertHasMimeType(any(AssertionInfo.class), any(HttpResponse.class), eq(getMimeType()));
-	}
+class HasMimeTypeTest extends AbstractHttpResponsesMimeTypeTest {
 
 	@Override
 	String getMimeType() {
-		return APPLICATION_JSON;
+		return TEXT_CSS;
+	}
+
+	@Override
+	void run(HttpResponseAssert assertion) {
+		assertion.hasMimeType(getMimeType());
 	}
 }
