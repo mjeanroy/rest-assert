@@ -53,10 +53,10 @@ import static com.github.mjeanroy.restassert.core.internal.common.Ios.readUrl;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isEmpty;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.trimToNull;
 import static com.github.mjeanroy.restassert.core.internal.error.CompositeError.composeErrors;
+import static com.github.mjeanroy.restassert.core.internal.error.common.ShouldNotBeNull.shouldNotBeNull;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldBeTypeOf.shouldBeTypeOf;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntry.shouldHaveEntry;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
-import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull.shouldNotBeNull;
 import static java.util.Collections.addAll;
 
 /**
@@ -108,7 +108,7 @@ public final class JsonAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotNull(String actual) {
-		return actual == null ? failure(shouldNotBeNull(actual)) : success();
+		return actual == null ? failure(shouldNotBeNull("json")) : success();
 	}
 
 	/**
@@ -224,8 +224,8 @@ public final class JsonAssertions {
 	private AssertionResult isType(String actual, JsonType expectedType) {
 		String trimmedActual = trimToNull(actual.trim());
 
-		if (isEmpty(trimmedActual)) {
-			return failure(shouldNotBeNull(actual));
+		if (trimmedActual == null) {
+			return failure(shouldNotBeNull("json"));
 		}
 
 		Object parsedValue = parser.parse(trimmedActual);
@@ -510,7 +510,7 @@ public final class JsonAssertions {
 
 	private AssertionResult doComparison(String actual, String expected) {
 		if (actual == null) {
-			return failure(shouldNotBeNull(actual));
+			return failure(shouldNotBeNull("json"));
 		}
 
 		JsonComparator comparator = new DefaultJsonComparator(parser);

@@ -22,27 +22,24 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error.json;
+package com.github.mjeanroy.restassert.core.internal.error.common;
 
 import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotBeNull.shouldNotBeNull;
+import static com.github.mjeanroy.restassert.core.internal.error.common.ShouldNotBeNull.shouldNotBeNull;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ShouldNotBeNullTest {
 
 	@Test
 	void it_should_format_error_message() {
-		String json = null;
-		ShouldNotBeNull shouldNotBeNull = shouldNotBeNull(json);
+		String label = "HTTP Response";
+		ShouldNotBeNull shouldNotBeNull = shouldNotBeNull(label);
 
 		assertThat(shouldNotBeNull).isNotNull();
-		assertThat(shouldNotBeNull.json()).isEqualTo(json);
-		assertThat(shouldNotBeNull.entryName()).isEqualTo("");
-
-		assertThat(shouldNotBeNull.message()).isEqualTo("Expecting json not to be null");
+		assertThat(shouldNotBeNull.message()).isEqualTo("Expecting HTTP Response not to be null");
 		assertThat(shouldNotBeNull.args()).isEmpty();
-		assertThat(shouldNotBeNull.buildMessage()).isEqualTo("Expecting json not to be null");
+		assertThat(shouldNotBeNull.buildMessage()).isEqualTo("Expecting HTTP Response not to be null");
 		assertThat(shouldNotBeNull.toString()).isEqualTo(shouldNotBeNull.buildMessage());
 	}
 }

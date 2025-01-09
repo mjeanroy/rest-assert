@@ -79,7 +79,6 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 
 		int i = 0;
 		for (Header h : headers) {
-			// Given
 			String expectedMimeType = mimeType.get(i);
 			String actualMimeType = expectedMimeType + "foo";
 
@@ -88,10 +87,8 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 			String actualValue = expectedValue.replace(expectedMimeType, actualMimeType);
 			Header header = header(expectedName, actualValue);
 
-			// When
 			AssertionResult result = run(newResponse(header));
 
-			// Then
 			checkError(
 				result,
 				"Expecting response to have mime type in " + StringTestUtils.fmt(mimeType) + " but was " + fmt(actualMimeType)
@@ -101,6 +98,12 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 		}
 	}
 
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
+	}
+
 	abstract List<String> getMimeTypes();
 
 	private static HttpResponse newResponse(Header header) {
@@ -108,6 +111,8 @@ abstract class AbstractMimeTypeInTest extends AbstractAssertionsTest<HttpRespons
 	}
 
 	private static List<Header> getHeaders(List<String> mimeTypes) {
-		return mimeTypes.stream().map((input) -> header("Content-Type", input + ";charset=UTF-8")).collect(Collectors.toList());
+		return mimeTypes.stream()
+			.map((input) -> header("Content-Type", input + ";charset=UTF-8"))
+			.collect(Collectors.toList());
 	}
 }

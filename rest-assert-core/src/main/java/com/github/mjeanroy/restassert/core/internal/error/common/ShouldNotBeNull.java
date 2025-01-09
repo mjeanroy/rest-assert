@@ -22,31 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.error.json;
+package com.github.mjeanroy.restassert.core.internal.error.common;
 
-import com.github.mjeanroy.restassert.core.internal.error.Message;
+import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
 /**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
+ * Error thrown when actual (i.e object under test) is {@code null}.
  */
-public final class ShouldNotBeNull extends AbstractJsonError {
+public final class ShouldNotBeNull extends AbstractError {
 
 	// Private constructor, use static factory instead
-	private ShouldNotBeNull(String json) {
-		super(
-			json,
-			Message.message("Expecting json not to be null")
-		);
+	private ShouldNotBeNull(String message) {
+		super(message);
 	}
 
 	/**
 	 * Build error.
 	 *
-	 * @param json Original JSON input.
+	 * @param label Actual label.
 	 * @return Error.
 	 */
-	public static ShouldNotBeNull shouldNotBeNull(String json) {
-		return new ShouldNotBeNull(json);
+	public static ShouldNotBeNull shouldNotBeNull(String label) {
+		return new ShouldNotBeNull(
+			String.format("Expecting %s not to be null", label)
+		);
 	}
 }

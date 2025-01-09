@@ -47,35 +47,24 @@ abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse>
 
 	@Test
 	void it_should_pass_with_expected_mime_type() {
-		// Given
 		String mimeType = getMimeType().toLowerCase();
 		Header header = getHeader(mimeType);
 		HttpResponse httpResponse = newResponse(header);
-
-		// When
 		AssertionResult result = run(httpResponse);
-
-		// Then
 		checkSuccess(result);
 	}
 
 	@Test
 	void it_should_pass_with_expected_mime_type_in_a_different_case() {
-		// Given
 		String mimeType = getMimeType().toUpperCase();
 		Header header = getHeader(mimeType);
 		HttpResponse httpResponse = newResponse(header);
-
-		// When
 		AssertionResult result = run(httpResponse);
-
-		// Then
 		checkSuccess(result);
 	}
 
 	@Test
 	void it_should_fail_with_if_response_is_not_expected_mime_type() {
-		// Given
 		String expectedMimeType = getMimeType();
 		Header expectedHeader = getHeader(expectedMimeType);
 		String actualMimeType = expectedMimeType + "foo";
@@ -86,14 +75,18 @@ abstract class AbstractMimeTypeTest extends AbstractAssertionsTest<HttpResponse>
 		Header actualHeader = header(expectedName, actualValue);
 		HttpResponse httpResponse = newResponse(actualHeader);
 
-		// When
 		AssertionResult result = run(httpResponse);
 
-		// Then
 		checkError(
 			result,
 			"Expecting response to have mime type " + fmt(expectedMimeType) + " but was " + fmt(actualMimeType)
 		);
+	}
+
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
 	}
 
 	abstract String getMimeType();

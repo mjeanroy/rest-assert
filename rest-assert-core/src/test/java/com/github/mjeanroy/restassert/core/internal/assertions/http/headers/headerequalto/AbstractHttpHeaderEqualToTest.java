@@ -24,10 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions.http.headers.headerequalto;
 
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.assertions.AbstractAssertionsTest;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.test.data.Header;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import org.junit.jupiter.api.BeforeAll;
@@ -48,54 +48,42 @@ abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<Http
 
 	@Test
 	void it_should_pass_with_expected_header() {
-		// GIVEN
 		Header header = getHeader();
 		HttpResponse rsp = newResponse(header);
-
-		// WHEN
 		AssertionResult result = run(rsp);
-
-		// THEN
 		checkSuccess(result);
 	}
 
 	@Test
 	void it_should_pass_with_expected_header_and_list_of_values() {
-		// GIVEN
 		Header h1 = getHeader();
 		Header h2 = header(h1.getName(), h1.getValue() + "foobar");
 		HttpResponse rsp = newResponse(h1, h2);
 		boolean allowMultiple = allowMultipleValues();
 
-		// WHEN
 		AssertionResult result = run(rsp);
 
-		// THEN
 		if (allowMultiple) {
 			checkSuccess(result);
 		}
 		else {
 			checkError(
 				result,
-				"Expecting response to contains header " + fmt(h1.getName()) + " with a single value " +
-					"but found: " + asList(fmt(h1.getValue()), fmt(h2.getValue()))
+				"Expecting response to contains header " + fmt(h1.getName()) + " with a single value but found: " + asList(fmt(h1.getValue()), fmt(h2.getValue()))
 			);
 		}
 	}
 
 	@Test
 	void it_should_fail_with_if_response_does_not_contain_header_with_expected_value() {
-		// GIVEN
 		Header expectedHeader = getHeader();
 		String expectedName = expectedHeader.getName();
 		String actualValue = failValue();
 		Header header = header(expectedName, actualValue);
 		HttpResponse rsp = newResponse(header);
 
-		// WHEN
 		AssertionResult result = run(rsp);
 
-		// THEN
 		checkError(
 			result,
 			"Expecting response to have header " + fmt(expectedHeader.getName()) + " equal to " + fmt(expectedHeader.getValue()) + " but was " + fmt(header.getValue())
@@ -104,27 +92,24 @@ abstract class AbstractHttpHeaderEqualToTest extends AbstractAssertionsTest<Http
 
 	@Test
 	void it_should_fail_with_if_response_does_not_contain_header() {
-		// GIVEN
 		Header header = header("foo", "bar");
 		HttpResponse rsp = newResponse(header);
-
-		// WHEN
 		AssertionResult result = run(rsp);
 
-		// THEN
 		checkError(
 			result,
 			"Expecting response to have header " + fmt(getHeader().getName())
 		);
 	}
 
-	private HttpResponse newResponse(Header header, Header... other) {
-		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl().addHeader(header);
-		for (Header h : other) {
-			builder.addHeader(h.getName(), h.getValue());
-		}
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
+	}
 
-		return builder.build();
+	private static HttpResponse newResponse(Header header, Header... other) {
+		return new HttpResponseBuilderImpl().addHeader(header, other).build();
 	}
 
 	abstract Header getHeader();

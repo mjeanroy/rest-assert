@@ -27,6 +27,7 @@ package com.github.mjeanroy.restassert.tests.builders;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 	 * Create builder.
 	 */
 	public HttpResponseBuilderImpl() {
-		this.cookies = new LinkedList<>();
+		this.cookies = new ArrayList<>();
 	}
 
 	/**
@@ -65,6 +66,18 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 			addCookie(c);
 		}
 
+		return this;
+	}
+
+	/**
+	 * Add new cookie.
+	 *
+	 * @param name Cookie name.
+	 * @param value Cookie value.
+	 * @return Current builder.
+	 */
+	public HttpResponseBuilderImpl addCookie(String name, String value) {
+		addCookie(new MockCookieBuilder().setName(name).setValue(value).build());
 		return this;
 	}
 

@@ -71,9 +71,15 @@ abstract class AbstractHttpStatusBetweenTest extends AbstractAssertionsTest<Http
 		}
 	}
 
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
+	}
+
 	abstract Range getRange();
 
-	private HttpResponse newResponse(int status) {
+	private static HttpResponse newResponse(int status) {
 		return new HttpResponseBuilderImpl().setStatus(status).build();
 	}
 }

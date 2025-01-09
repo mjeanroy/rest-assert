@@ -53,24 +53,27 @@ abstract class AbstractHttpResponseAssertionsCharsetTest extends AbstractAsserti
 
 	@Test
 	void it_should_fail() {
-		// GIVEN
 		String expectedCharset = expectedCharset();
 		String actualCharset = expectedCharset + "foo";
 		HttpResponse httpResponse = newResponse(actualCharset);
 
-		// WHEN
 		AssertionResult result = run(httpResponse);
 
-		// THEN
 		checkError(
 			result,
 			"Expecting response to have charset " + fmt(expectedCharset) + " but was " + fmt(actualCharset)
 		);
 	}
 
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
+	}
+
 	abstract String expectedCharset();
 
-	private HttpResponse newResponse(String charset) {
+	private static HttpResponse newResponse(String charset) {
 		String contentType = format("application/json; charset=%s", charset);
 		return new HttpResponseBuilderImpl().addHeader("Content-Type", contentType).build();
 	}

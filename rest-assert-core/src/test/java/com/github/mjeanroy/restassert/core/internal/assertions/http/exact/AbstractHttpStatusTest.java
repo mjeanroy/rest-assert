@@ -43,7 +43,10 @@ abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpRespons
 
 	@Test
 	void it_should_pass_with_correct_status() {
-		AssertionResult result = run(newResponse(status()));
+		AssertionResult result = run(
+			newResponse(status())
+		);
+
 		checkSuccess(result);
 	}
 
@@ -52,7 +55,9 @@ abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpRespons
 		int expectedStatus = status();
 		int status = expectedStatus + 1;
 
-		AssertionResult result = run(newResponse(status));
+		AssertionResult result = run(
+			newResponse(status)
+		);
 
 		checkError(
 			result,
@@ -60,9 +65,15 @@ abstract class AbstractHttpStatusTest extends AbstractAssertionsTest<HttpRespons
 		);
 	}
 
+	@Test
+	void it_should_fail_with_null_response() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
+	}
+
 	abstract int status();
 
-	private HttpResponse newResponse(int status) {
+	private static HttpResponse newResponse(int status) {
 		return new HttpResponseBuilderImpl().setStatus(status).build();
 	}
 }

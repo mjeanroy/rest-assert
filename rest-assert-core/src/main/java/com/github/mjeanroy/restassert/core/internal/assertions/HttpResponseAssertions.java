@@ -29,7 +29,9 @@ import com.github.mjeanroy.restassert.core.data.ContentEncoding;
 import com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy;
 import com.github.mjeanroy.restassert.core.data.ContentType;
 import com.github.mjeanroy.restassert.core.data.ContentTypeOptions;
+import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.data.FrameOptions;
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.MediaType;
 import com.github.mjeanroy.restassert.core.data.RequestMethod;
 import com.github.mjeanroy.restassert.core.data.StrictTransportSecurity;
@@ -47,8 +49,6 @@ import com.github.mjeanroy.restassert.core.internal.assertions.impl.IsHeaderMatc
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusBetweenAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusEqualAssertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.impl.StatusOutOfAssertion;
-import com.github.mjeanroy.restassert.core.data.Cookie;
-import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.HttpStatusCodes;
 
 import java.nio.charset.Charset;
@@ -60,6 +60,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
+import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.common.Collections.toList;
 import static com.github.mjeanroy.restassert.core.internal.common.Dates.parseHttpDate;
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS;
@@ -94,6 +96,7 @@ import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_J
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_PLAIN;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.TEXT_XML;
 import static com.github.mjeanroy.restassert.core.internal.data.MimeTypes.XHTML;
+import static com.github.mjeanroy.restassert.core.internal.error.common.ShouldNotBeNull.shouldNotBeNull;
 import static java.util.Arrays.asList;
 import static java.util.stream.StreamSupport.stream;
 
@@ -2167,7 +2170,16 @@ public final class HttpResponseAssertions {
 		return assertWith(httpResponse, new HasCookieAssertion(cookie));
 	}
 
-	private AssertionResult assertWith(HttpResponse httpResponse, Assertion<HttpResponse> assertion) {
+	private static AssertionResult assertWith(HttpResponse httpResponse, Assertion<HttpResponse> assertion) {
+		AssertionResult r = isNotNull(httpResponse);
+		if (r.isFailure()) {
+			return r;
+		}
+
 		return assertion.handle(httpResponse);
+	}
+
+	private static AssertionResult isNotNull(HttpResponse httpResponse) {
+		return httpResponse == null ? failure(shouldNotBeNull("HTTP Response")) : success();
 	}
 }

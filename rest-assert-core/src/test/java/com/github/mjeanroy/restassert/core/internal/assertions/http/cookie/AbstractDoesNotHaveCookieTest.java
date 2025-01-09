@@ -51,10 +51,9 @@ abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTest<Http
 
 	@Test
 	void it_should_pass_without_cookie() {
-		HttpResponse response = newResponse(new MockCookieBuilder()
-			.setName("foo")
-			.setValue("bar")
-			.build());
+		HttpResponse response = newResponse(
+			new MockCookieBuilder().setName("foo").setValue("bar").build()
+		);
 
 		AssertionResult result = run(response);
 		checkSuccess(result);
@@ -67,12 +66,19 @@ abstract class AbstractDoesNotHaveCookieTest extends AbstractAssertionsTest<Http
 		verifyError(result);
 	}
 
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
+	}
+
 	abstract Cookie newCookie();
 
 	abstract void verifyError(AssertionResult result);
 
-	private HttpResponse newResponse(Cookie cookie) {
+	private static HttpResponse newResponse(Cookie cookie) {
 		HttpResponseBuilderImpl builder = new HttpResponseBuilderImpl();
+
 		if (cookie != null) {
 			builder.addCookie(cookie);
 		}

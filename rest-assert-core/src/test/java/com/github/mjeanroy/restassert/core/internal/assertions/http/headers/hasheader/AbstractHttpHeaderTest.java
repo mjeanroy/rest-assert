@@ -47,33 +47,26 @@ abstract class AbstractHttpHeaderTest extends AbstractAssertionsTest<HttpRespons
 
 	@Test
 	void it_should_pass_with_expected_header() {
-		// GIVEN
 		Header header = getHeader();
 		HttpResponse rsp = newResponse(header);
-
-		// WHEN
 		AssertionResult result = run(rsp);
-
-		// THEN
 		checkSuccess(result);
 	}
 
 	@Test
 	void it_should_fail_with_if_response_does_not_contain_header() {
-		// GIVEN
 		Header expectedHeader = getHeader();
 		String expectedName = expectedHeader.getName();
 		Header header = header(expectedHeader.getValue(), expectedName);
 		HttpResponse rsp = newResponse(header);
-
-		// WHEN
 		AssertionResult result = run(rsp);
+		checkError(result, "Expecting response to have header " + fmt(expectedName));
+	}
 
-		// THEN
-		checkError(
-			result,
-			"Expecting response to have header " + fmt(expectedName)
-		);
+	@Test
+	void it_should_fail_if_response_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting HTTP Response not to be null");
 	}
 
 	private HttpResponse newResponse(Header header) {
