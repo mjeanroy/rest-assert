@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.spring;
 
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -33,6 +34,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
@@ -78,6 +80,15 @@ public class SpringMockMvcHttpResponse extends AbstractHttpResponse implements H
 	@Override
 	public List<String> getHeader(String name) {
 		return unmodifiableList(response.getHeaders(name));
+	}
+
+	@Override
+	public List<HttpHeader> getHeaders() {
+		return unmodifiableList(
+			response.getHeaderNames().stream()
+				.map((name) -> HttpHeader.of(name, getHeader(name)))
+				.collect(Collectors.toList())
+		);
 	}
 
 	@Override

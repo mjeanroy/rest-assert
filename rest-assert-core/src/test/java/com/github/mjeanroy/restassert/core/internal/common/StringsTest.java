@@ -34,6 +34,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 class StringsTest {
 
 	@Test
+	void it_should_capitalize_string() {
+		assertThat(Strings.capitalize(null)).isEqualTo(null);
+		assertThat(Strings.capitalize("")).isEqualTo("");
+		assertThat(Strings.capitalize("h")).isEqualTo("H");
+		assertThat(Strings.capitalize("hello")).isEqualTo("Hello");
+		assertThat(Strings.capitalize("Hello")).isEqualTo("Hello");
+		assertThat(Strings.capitalize("HELLO")).isEqualTo("Hello");
+	}
+
+	@Test
 	void it_should_check_if_string_is_surrounded_by_given_chars() {
 		assertThat(Strings.isSurroundedBy(null, '[', ']')).isFalse();
 		assertThat(Strings.isSurroundedBy("", '[', ']')).isFalse();

@@ -24,10 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.apache;
 
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
@@ -72,9 +74,21 @@ public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResp
 
 	@Override
 	public List<String> getHeader(String name) {
-		Header[] headers = response.getHeaders(name);
-		List<String> results = Arrays.stream(headers).map(Header::getValue).collect(Collectors.toList());
-		return unmodifiableList(results);
+		return unmodifiableList(
+			Arrays.stream(response.getHeaders(name))
+				.map(Header::getValue)
+				.collect(Collectors.toList())
+		);
+	}
+
+	@Override
+	public List<HttpHeader> getHeaders() {
+		return unmodifiableList(
+			Arrays.stream(response.getAllHeaders())
+				.map(NameValuePair::getName)
+				.map((name) -> HttpHeader.of(name, getHeader(name)))
+				.collect(Collectors.toList())
+		);
 	}
 
 	@Override

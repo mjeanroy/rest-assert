@@ -22,22 +22,22 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api.http.headers.doesnothaveheader;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.test.data.Header;
+import org.junit.jupiter.api.Test;
 
-import static com.github.mjeanroy.restassert.test.data.Header.header;
+import static java.util.Collections.singletonList;
+import static org.assertj.core.api.Assertions.assertThat;
 
-class DoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+class HttpHeaderTest {
 
-	@Override
-	Header getHeader() {
-		return header("X-Xss-Protection", "1; mode=block");
-	}
-
-	@Override
-	void run(HttpResponseAssert assertion) {
-		assertion.doesNotHaveHeader(getHeader().getName());
+	@Test
+	void it_should_create_header() {
+		String name = "x-xss-protection";
+		String value = "1; mode=block";
+		HttpHeader httpHeader = HttpHeader.of(name, singletonList(value));
+		assertThat(httpHeader.getName()).isEqualTo("X-Xss-Protection");
+		assertThat(httpHeader.getValue()).isEqualTo("1; mode=block");
+		assertThat(httpHeader.getValues()).hasSize(1).containsOnly("1; mode=block");
 	}
 }

@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import org.assertj.core.api.ListAssert;
 
@@ -103,6 +104,30 @@ public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseA
 		isNotNull();
 		return new ListAssert<>(
 			actual.getCookies()
+		);
+	}
+
+	/**
+	 * Extract cookies returns new assertion with header list as value
+	 * under test.
+	 *
+	 * For example:
+	 *
+	 * <pre><code>
+	 *   assertThat(response).isOk().extractingHeaders()
+	 *     .extracting(HttpHeader::getName, HttpHeader::getValue)
+	 *     .contains(
+	 *       tuple("X-Xss-Protection", "1; mode=block"),
+	 *       tuple("X-Frame-Options", "deny")
+	 *     );
+	 * </code></pre>
+	 *
+	 * @return New {@link ListAssert ListAssert<Cookie>} assertion.
+	 */
+	public ListAssert<HttpHeader> extractingHeaders() {
+		isNotNull();
+		return new ListAssert<>(
+			actual.getHeaders()
 		);
 	}
 }

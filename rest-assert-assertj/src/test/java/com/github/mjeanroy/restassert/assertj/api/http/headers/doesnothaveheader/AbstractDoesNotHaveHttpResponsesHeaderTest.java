@@ -39,7 +39,7 @@ abstract class AbstractDoesNotHaveHttpResponsesHeaderTest {
 
 	@Test
 	void should_pass_if_header_is_missing() {
-		Header header = header("Foo", "Bar");
+		Header header = header("X-Random-Header", "Random Value");
 		HttpResponse httpResponse = newHttpResponse(header);
 		run(assertThat(httpResponse));
 	}

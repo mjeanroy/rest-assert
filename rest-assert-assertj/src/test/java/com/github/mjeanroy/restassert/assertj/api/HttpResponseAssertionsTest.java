@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilderImpl;
 import com.github.mjeanroy.restassert.tests.builders.MockCookieBuilder;
@@ -34,6 +35,7 @@ import static com.github.mjeanroy.restassert.test.commons.ReflectionTestUtils.re
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 class HttpResponseAssertionsTest {
 
@@ -65,6 +67,21 @@ class HttpResponseAssertionsTest {
 		Cookie cookie = new MockCookieBuilder().build();
 		HttpResponse response = new HttpResponseBuilderImpl().addCookie(cookie).build();
 		HttpResponseAssertions.assertThat(response).extractingCookies().hasSize(1);
+	}
+
+	@Test
+	void it_should_extract_and_create_new_http_headers_assertion_object() {
+		HttpResponse response = new HttpResponseBuilderImpl()
+			.addHeader("x-xss-protection", "1; mode=block")
+			.addHeader("x-frame-options", "deny")
+			.build();
+
+		HttpResponseAssertions.assertThat(response).extractingHeaders()
+			.extracting(HttpHeader::getName, HttpHeader::getValue)
+			.contains(
+				tuple("X-Xss-Protection", "1; mode=block"),
+				tuple("X-Frame-Options", "deny")
+			);
 	}
 
 	@Test

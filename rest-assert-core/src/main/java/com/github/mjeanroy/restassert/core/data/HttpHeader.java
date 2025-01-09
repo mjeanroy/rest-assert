@@ -22,22 +22,51 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.assertj.api.http.headers.doesnothaveheader;
+package com.github.mjeanroy.restassert.core.data;
 
-import com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert;
-import com.github.mjeanroy.restassert.test.data.Header;
+import java.util.List;
 
-import static com.github.mjeanroy.restassert.test.data.Header.header;
+public interface HttpHeader {
 
-class DoesNotHaveHeaderTest extends AbstractDoesNotHaveHttpResponsesHeaderTest {
+	/**
+	 * Header name.
+	 *
+	 * @return Header name.
+	 */
+	String getName();
 
-	@Override
-	Header getHeader() {
-		return header("X-Xss-Protection", "1; mode=block");
+	/**
+	 * Header value:
+	 *
+	 * <ul>
+	 *   <li>May be {@code null}</li>
+	 *   <li>For multi-value headers, all values are joined with a comma.</li>
+	 * </ul>
+	 *
+	 * @return Header value.
+	 */
+	default String getValue() {
+		return String.join(",", getValues());
 	}
 
-	@Override
-	void run(HttpResponseAssert assertion) {
-		assertion.doesNotHaveHeader(getHeader().getName());
+	/**
+	 * Get header values, may be empty.
+	 *
+	 * @return Header values.
+	 */
+	List<String> getValues();
+
+	/**
+	 * Create new HTTP Header.
+	 *
+	 * Since HTTP header name is case-insensitive, name is normalized so each call returns a consistent
+	 * output and name can be used as map key.
+	 *
+	 * @param name Name.
+	 * @param values Values.
+	 * @return Header.
+	 */
+	static HttpHeader of(String name, List<String> values) {
+		return new DefaultHttpHeader(name, values);
 	}
 }

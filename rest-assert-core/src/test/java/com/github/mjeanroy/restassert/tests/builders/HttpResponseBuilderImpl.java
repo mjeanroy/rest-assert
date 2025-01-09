@@ -25,15 +25,15 @@
 package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
 /**
@@ -89,10 +89,9 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 
 	@Override
 	public HttpResponse build() {
-		Map<String, List<String>> headers = new LinkedHashMap<>();
-		for (Map.Entry<String, List<String>> entry : this.headers.entrySet()) {
-			headers.put(entry.getKey(), new LinkedList<>(entry.getValue()));
-		}
+		List<HttpHeader> headers = this.headers.entrySet().stream()
+			.map((h) -> HttpHeader.of(h.getKey(), h.getValue()))
+			.collect(Collectors.toList());
 
 		return new MockHttpResponse(status, content, headers, cookies);
 	}
@@ -101,14 +100,25 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 
 		private final int status;
 		private final String content;
-		private final Map<String, List<String>> headers;
+		private final List<HttpHeader> headers;
 		private final List<Cookie> cookies;
 
-		private MockHttpResponse(int status, String content, Map<String, List<String>> headers, List<Cookie> cookies) {
+		private MockHttpResponse(
+			int status,
+			String content,
+			List<HttpHeader> headers,
+			List<Cookie> cookies
+		) {
 			this.status = status;
 			this.content = content;
-			this.headers = headers;
-			this.cookies = cookies;
+
+			this.headers = unmodifiableList(
+				new ArrayList<>(headers)
+			);
+
+			this.cookies = unmodifiableList(
+				new ArrayList<>(cookies)
+			);
 		}
 
 		@Override
@@ -118,17 +128,23 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 
 		@Override
 		public boolean hasHeader(String name) {
-			return headers.containsKey(name);
+			return headers.stream().anyMatch((h) -> (
+				Objects.equals(h.getName().toLowerCase(), name.toLowerCase())
+			));
 		}
 
 		@Override
 		public List<String> getHeader(String name) {
-			List<String> values = headers.get(name);
-			if (values == null) {
-				return emptyList();
-			}
+			return headers.stream()
+				.filter((h) -> Objects.equals(h.getName().toLowerCase(), name.toLowerCase()))
+				.map(HttpHeader::getValues)
+				.findFirst()
+				.orElseGet(Collections::emptyList);
+		}
 
-			return unmodifiableList(values);
+		@Override
+		public List<HttpHeader> getHeaders() {
+			return headers;
 		}
 
 		@Override

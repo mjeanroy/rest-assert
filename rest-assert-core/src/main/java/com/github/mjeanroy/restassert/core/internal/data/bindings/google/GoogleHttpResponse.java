@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.google;
 
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import com.google.api.client.http.HttpHeaders;
@@ -32,10 +33,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.google.api.client.util.IOUtils.copy;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.unmodifiableList;
 
 /**
  * Implementation of {@link HttpResponse}
@@ -72,11 +75,23 @@ public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResp
 	@Override
 	public List<String> getHeader(String name) {
 		HttpHeaders headers = response.getHeaders();
+
 		if (headers == null || headers.isEmpty()) {
 			return emptyList();
 		}
 
-		return headers.getHeaderStringValues(name);
+		return unmodifiableList(
+			headers.getHeaderStringValues(name)
+		);
+	}
+
+	@Override
+	public List<HttpHeader> getHeaders() {
+		return unmodifiableList(
+			response.getHeaders().keySet().stream()
+				.map((name) -> HttpHeader.of(name, getHeader(name)))
+				.collect(Collectors.toList())
+		);
 	}
 
 	@Override

@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.ok3;
 
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import okhttp3.Response;
@@ -31,6 +32,7 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
@@ -76,5 +78,14 @@ public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse
 	public List<String> getHeader(String name) {
 		List<String> values = response.headers(name);
 		return unmodifiableList(values);
+	}
+
+	@Override
+	public List<HttpHeader> getHeaders() {
+		return unmodifiableList(
+			response.headers().names().stream()
+				.map((name) -> HttpHeader.of(name, getHeader(name)))
+				.collect(Collectors.toList())
+		);
 	}
 }

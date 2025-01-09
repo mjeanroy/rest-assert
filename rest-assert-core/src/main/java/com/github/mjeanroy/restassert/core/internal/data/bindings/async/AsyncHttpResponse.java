@@ -24,11 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.data.bindings.async;
 
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import org.asynchttpclient.Response;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.emptyList;
@@ -69,11 +71,21 @@ public class AsyncHttpResponse extends AbstractHttpResponse implements HttpRespo
 	@Override
 	public List<String> getHeader(String name) {
 		List<String> headers = response.getHeaders(name);
+
 		if (headers.isEmpty()) {
 			return emptyList();
 		}
 
 		return unmodifiableList(headers);
+	}
+
+	@Override
+	public List<HttpHeader> getHeaders() {
+		return unmodifiableList(
+			response.getHeaders().names().stream()
+				.map((name) -> HttpHeader.of(name, getHeader(name)))
+				.collect(Collectors.toList())
+		);
 	}
 
 	@Override

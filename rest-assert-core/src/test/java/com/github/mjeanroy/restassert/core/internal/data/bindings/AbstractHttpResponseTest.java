@@ -25,6 +25,7 @@
 package com.github.mjeanroy.restassert.core.internal.data.bindings;
 
 import com.github.mjeanroy.restassert.core.data.Cookie;
+import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.tests.builders.HttpResponseBuilder;
 import org.junit.jupiter.api.Test;
@@ -32,6 +33,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public abstract class AbstractHttpResponseTest<T> {
 
@@ -48,6 +50,23 @@ public abstract class AbstractHttpResponseTest<T> {
 		HttpResponse httpResponse = create(response);
 		int status = httpResponse.getStatus();
 		assertThat(status).isEqualTo(expectedStatus);
+	}
+
+	@Test
+	void it_should_get_response_headers() {
+		T response = getBuilder()
+			.addHeader("x-xss-protection", "1; mode=block")
+			.addHeader("x-frame-options", "deny")
+			.build();
+
+		HttpResponse httpResponse = create(response);
+
+		assertThat(httpResponse.getHeaders()).hasSize(2)
+			.extracting(HttpHeader::getName, HttpHeader::getValue)
+			.containsExactlyInAnyOrder(
+				tuple("X-Xss-Protection", "1; mode=block"),
+				tuple("X-Frame-Options", "deny")
+			);
 	}
 
 	@Test

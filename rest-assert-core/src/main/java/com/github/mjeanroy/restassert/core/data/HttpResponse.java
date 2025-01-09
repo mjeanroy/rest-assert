@@ -60,6 +60,13 @@ public interface HttpResponse {
 	List<String> getHeader(String name);
 
 	/**
+	 * Get all response HTTP headers.
+	 *
+	 * @return HTTP Headers.
+	 */
+	List<HttpHeader> getHeaders();
+
+	/**
 	 * Get response body.
 	 *
 	 * @return Response body.

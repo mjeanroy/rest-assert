@@ -46,6 +46,30 @@ public final class Strings {
 	}
 
 	/**
+	 * Capitalize string:
+	 * <ul>
+	 *   <li>Returns {@code null} if {@code input} is {@code null}</li>
+	 *   <li>Returns an empty string if {@code input} is empty</li>
+	 *   <li>Returns an uppercase value if {@code input} is one char length.</li>
+	 *   <li>Returns first character as uppercase and rest of input as lowercase.</li>
+	 * </ul>
+	 *
+	 * @param input Input.
+	 * @return Capitalized output.
+	 */
+	public static String capitalize(String input) {
+		if (isEmpty(input)) {
+			return input;
+		}
+
+		if (input.length() == 1) {
+			return input.toUpperCase();
+		}
+
+		return Character.toUpperCase(input.charAt(0)) + input.substring(1).toLowerCase();
+	}
+
+	/**
 	 * Trim given string and returns trimmed value or {@code null} if {@code str} is {@code null}, empty or blank.
 	 *
 	 * @param str Input.
