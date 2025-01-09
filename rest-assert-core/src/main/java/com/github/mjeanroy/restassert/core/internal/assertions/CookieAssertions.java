@@ -28,8 +28,11 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveName;
 
+import java.util.function.Supplier;
+
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.failure;
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
+import static com.github.mjeanroy.restassert.core.internal.error.common.ShouldNotBeNull.shouldNotBeNull;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeHttpOnly.shouldNotBeHttpOnly;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldBeSecured.shouldBeSecured;
@@ -71,8 +74,10 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasName(Cookie cookie, String name) {
-		String actualName = cookie.getName();
-		return actualName.equals(name) ? success() : failure(ShouldHaveName.shouldHaveName(name, actualName));
+		return assertWith(cookie, () -> {
+			String actualName = cookie.getName();
+			return actualName.equals(name) ? success() : failure(ShouldHaveName.shouldHaveName(name, actualName));
+		});
 	}
 
 	/**
@@ -83,8 +88,10 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasValue(Cookie cookie, String value) {
-		String actualValue = cookie.getValue();
-		return actualValue.equals(value) ? success() : failure(shouldHaveValue(value, actualValue));
+		return assertWith(cookie, () -> {
+			String actualValue = cookie.getValue();
+			return actualValue.equals(value) ? success() : failure(shouldHaveValue(value, actualValue));
+		});
 	}
 
 	/**
@@ -95,8 +102,10 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasDomain(Cookie cookie, String domain) {
-		String actualDomain = cookie.getDomain();
-		return actualDomain.equals(domain) ? success() : failure(shouldHaveDomain(domain, actualDomain));
+		return assertWith(cookie, () -> {
+			String actualDomain = cookie.getDomain();
+			return actualDomain.equals(domain) ? success() : failure(shouldHaveDomain(domain, actualDomain));
+		});
 	}
 
 	/**
@@ -107,8 +116,10 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasPath(Cookie cookie, String path) {
-		String actualPath = cookie.getPath();
-		return actualPath.equals(path) ? success() : failure(shouldHavePath(path, actualPath));
+		return assertWith(cookie, () -> {
+			String actualPath = cookie.getPath();
+			return actualPath.equals(path) ? success() : failure(shouldHavePath(path, actualPath));
+		});
 	}
 
 	/**
@@ -119,8 +130,10 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasMaxAge(Cookie cookie, long maxAge) {
-		long actualMaxAge = cookie.getMaxAge();
-		return actualMaxAge == maxAge ? success() : failure(shouldHaveMaxAge(maxAge, actualMaxAge));
+		return assertWith(cookie, () -> {
+			long actualMaxAge = cookie.getMaxAge();
+			return actualMaxAge == maxAge ? success() : failure(shouldHaveMaxAge(maxAge, actualMaxAge));
+		});
 	}
 
 	/**
@@ -131,8 +144,10 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasSameSite(Cookie cookie, SameSite sameSite) {
-		SameSite actualSameSite = cookie.getSameSite();
-		return actualSameSite == sameSite ? success() : failure(shouldHaveSameSite(sameSite, actualSameSite));
+		return assertWith(cookie, () -> {
+			SameSite actualSameSite = cookie.getSameSite();
+			return actualSameSite == sameSite ? success() : failure(shouldHaveSameSite(sameSite, actualSameSite));
+		});
 	}
 
 	/**
@@ -143,7 +158,9 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult hasSameSite(Cookie cookie, String sameSite) {
-		return hasSameSite(cookie, SameSite.parse(sameSite));
+		return assertWith(cookie, () -> (
+			hasSameSite(cookie, SameSite.parse(sameSite))
+		));
 	}
 
 	/**
@@ -153,7 +170,9 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isSecured(Cookie cookie) {
-		return cookie.isSecured() ? success() : failure(shouldBeSecured());
+		return assertWith(cookie, () -> (
+			cookie.isSecured() ? success() : failure(shouldBeSecured())
+		));
 	}
 
 	/**
@@ -163,7 +182,9 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotSecured(Cookie cookie) {
-		return !cookie.isSecured() ? success() : failure(shouldNotBeSecured());
+		return assertWith(cookie, () -> (
+			!cookie.isSecured() ? success() : failure(shouldNotBeSecured())
+		));
 	}
 
 	/**
@@ -173,7 +194,9 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isHttpOnly(Cookie cookie) {
-		return cookie.isHttpOnly() ? success() : failure(shouldBeHttpOnly());
+		return assertWith(cookie, () -> (
+			cookie.isHttpOnly() ? success() : failure(shouldBeHttpOnly())
+		));
 	}
 
 	/**
@@ -183,6 +206,21 @@ public final class CookieAssertions {
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNotHttpOnly(Cookie cookie) {
-		return !cookie.isHttpOnly() ? success() : failure(shouldNotBeHttpOnly());
+		return assertWith(cookie, () -> (
+			!cookie.isHttpOnly() ? success() : failure(shouldNotBeHttpOnly())
+		));
+	}
+
+	private static AssertionResult assertWith(Cookie cookie, Supplier<AssertionResult> assertion) {
+		AssertionResult r = isNotNull(cookie);
+		if (r.isFailure()) {
+			return r;
+		}
+
+		return assertion.get();
+	}
+
+	private static AssertionResult isNotNull(Cookie cookie) {
+		return cookie == null ? failure(shouldNotBeNull("cookie")) : success();
 	}
 }

@@ -44,13 +44,14 @@ abstract class AbstractCookieTest extends AbstractAssertionsTest<Cookie> {
 	@Test
 	void it_should_fail() {
 		Cookie cookie = failure();
-
 		AssertionResult result = run(cookie);
+		checkError(result, expectedMessage());
+	}
 
-		checkError(
-			result,
-			expectedMessage()
-		);
+	@Test
+	void it_should_fail_if_cookie_is_null() {
+		AssertionResult result = run(null);
+		checkError(result, "Expecting cookie not to be null");
 	}
 
 	abstract Cookie success();

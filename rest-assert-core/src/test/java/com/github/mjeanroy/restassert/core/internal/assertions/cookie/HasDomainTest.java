@@ -56,7 +56,7 @@ class HasDomainTest extends AbstractCookieTest {
 		return "Expecting cookie to have domain " + fmt(expected) + " but was " + fmt(actual);
 	}
 
-	private Cookie cookie(String domain) {
+	private static Cookie cookie(String domain) {
 		return new MockCookieBuilder().setDomain(domain).build();
 	}
 }
