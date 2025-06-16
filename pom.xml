@@ -93,7 +93,7 @@
     <spring.version>5.3.39</spring.version>
     <junit-servers.version>3.3.1</junit-servers.version>
 
-    <jackson-2.version>2.19.0</jackson-2.version>
+    <jackson-2.version>2.19.1</jackson-2.version>
     <jackson-1.version>1.9.13</jackson-1.version>
     <gson.version>2.13.1</gson.version>
 
