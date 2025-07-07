@@ -101,7 +101,7 @@
     <jmustache.version>1.15</jmustache.version>
 
     <junit.version>4.13.2</junit.version>
-    <jupiter.version>5.13.2</jupiter.version>
+    <jupiter.version>5.13.3</jupiter.version>
     <hamcrest.version>3.0</hamcrest.version>
     <assertj.version>3.27.3</assertj.version>
     <mockito.version>4.11.0</mockito.version>
