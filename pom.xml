@@ -110,7 +110,7 @@
     <junit-runif.version>0.2.0</junit-runif.version>
     <junit-customclassloader.version>0.1.1</junit-customclassloader.version>
     <equalsverifier.version>3.19.4</equalsverifier.version>
-    <byte-buddy.version>1.17.8</byte-buddy.version>
+    <byte-buddy.version>1.18.1</byte-buddy.version>
     <wiremock.version>2.27.2</wiremock.version>
   </properties>
 
