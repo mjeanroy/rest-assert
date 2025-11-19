@@ -105,7 +105,7 @@
     <hamcrest.version>3.0</hamcrest.version>
     <assertj.version>3.27.6</assertj.version>
     <mockito.version>4.11.0</mockito.version>
-    <commons-lang3.version>3.19.0</commons-lang3.version>
+    <commons-lang3.version>3.20.0</commons-lang3.version>
     <commons-io.version>2.21.0</commons-io.version>
     <junit-runif.version>0.2.0</junit-runif.version>
     <junit-customclassloader.version>0.1.1</junit-customclassloader.version>
