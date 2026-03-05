@@ -27,15 +27,12 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.c
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 import org.apache.http.cookie.Cookie;
-
-import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
  * Template model for rest-assert-unit CookieAssert class.
  */
-public class ApacheHttpCookieAssert extends AbstractUnitTemplateModel implements TemplateModel {
+public final class ApacheHttpCookieAssert extends AbstractCookieAssert implements TemplateModel {
 
 	/**
 	 * Singleton instance.
@@ -57,13 +54,8 @@ public class ApacheHttpCookieAssert extends AbstractUnitTemplateModel implements
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return Cookie.class.getName();
-	}
-
-	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
 	}
 
 	@Override
@@ -72,27 +64,12 @@ public class ApacheHttpCookieAssert extends AbstractUnitTemplateModel implements
 	}
 
 	@Override
-	protected String getSubPackage() {
-		return "cookie";
-	}
-
-	@Override
-	public String getClassName() {
-		return getClass().getSimpleName();
-	}
-
-	@Override
-	public String buildCoreMethodName(String methodName) {
-		return methodName;
-	}
-
-	@Override
-	public String buildMethodName(String methodName) {
-		return generateAssertMethodName(methodName);
-	}
-
-	@Override
 	public String getFactory() {
 		return ApacheHttpCookie.class.getName();
+	}
+
+	@Override
+	public String getAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.Cookie.class.getName();
 	}
 }

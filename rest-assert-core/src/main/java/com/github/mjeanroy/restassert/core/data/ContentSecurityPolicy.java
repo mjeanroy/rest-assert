@@ -580,6 +580,11 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	 * @see <a href="https://www.w3.org/TR/CSP/#source_list">https://www.w3.org/TR/CSP/#source_list</a>
 	 */
 	public interface Source {
+		/**
+		 * Get source value.
+		 *
+		 * @return The source value.
+		 */
 		String getValue();
 	}
 
@@ -1077,11 +1082,34 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	 * @see <a href="https://www.w3.org/TR/CSP/#sandbox-usage">https://www.w3.org/TR/CSP/#sandbox-usage</a>
 	 */
 	public enum Sandbox implements Source {
+		/**
+		 * The 'allow-scripts' sandbox value of a CSP.
+		 */
 		ALLOW_SCRIPTS("allow-scripts"),
+
+		/**
+		 * The 'allow-same-origin' sandbox value of a CSP.
+		 */
 		ALLOW_SAME_ORIGIN("allow-same-origin"),
+
+		/**
+		 * The 'allow-forms' sandbox value of a CSP.
+		 */
 		ALLOW_FORMS("allow-forms"),
+
+		/**
+		 * The 'allow-pointer-lock' sandbox value of a CSP.
+		 */
 		ALLOW_POINTER_LOCK("allow-pointer-lock"),
+
+		/**
+		 * The 'allow-top-navigation' sandbox value of a CSP.
+		 */
 		ALLOW_POPUPS("allow-popups"),
+
+		/**
+		 * The 'allow-top-navigation' sandbox value of a CSP.
+		 */
 		ALLOW_TOP_NAVIGATION("allow-top-navigation");
 
 		/**
@@ -1128,7 +1156,14 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for</a>
 	 */
 	public enum RequireSriFor implements Source {
+		/**
+		 * The script value for the SRI attribute.
+		 */
 		SCRIPT("script"),
+
+		/**
+		 * The style value for the SRI attribute.
+		 */
 		STYLE("style");
 
 		/**

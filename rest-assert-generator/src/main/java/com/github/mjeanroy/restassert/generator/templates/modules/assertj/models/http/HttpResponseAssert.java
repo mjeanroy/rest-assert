@@ -67,22 +67,22 @@ public class HttpResponseAssert extends AbstractHttpResponseModel implements Tem
 	}
 
 	@Override
-	public String getCoreClassName() {
+	protected String getCoreClassName() {
 		return "com.github.mjeanroy.restassert.assertj.internal.HttpResponses";
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
+	protected String buildCoreMethodName(String methodName) {
 		return generateAssertMethodName(methodName);
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
+	protected String buildMethodName(String methodName) {
 		return methodName;
 	}
 }

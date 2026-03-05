@@ -31,7 +31,7 @@ import okhttp3.Response;
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class OkHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class OkHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.

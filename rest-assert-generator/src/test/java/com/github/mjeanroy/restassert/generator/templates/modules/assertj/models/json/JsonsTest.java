@@ -87,4 +87,9 @@ class JsonsTest extends AbstractTemplateModelTest {
 			}
 		};
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return null;
+	}
 }

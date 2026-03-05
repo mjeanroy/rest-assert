@@ -89,10 +89,29 @@ public final class ContentEncoding implements HttpHeaderValue {
 	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
 	 */
 	public enum Directive {
+		/**
+		 * GZIP Encoding.
+		 */
 		GZIP("gzip"),
+
+		/**
+		 * Compress Encoding.
+		 */
 		COMPRESS("compress"),
+
+		/**
+		 * Deflate Encoding.
+		 */
 		DEFLATE("deflate"),
+
+		/**
+		 * No Encoding (i.e identity).
+		 */
 		IDENTITY("identity"),
+
+		/**
+		 * Brotli Encoding.
+		 */
 		BR("br");
 
 		/**

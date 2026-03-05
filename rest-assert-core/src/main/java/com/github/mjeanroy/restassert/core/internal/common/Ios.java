@@ -73,8 +73,10 @@ public final class Ios {
 		}
 	}
 
+	/**
+	 * URL connection exception.
+	 */
 	public static class UrlException extends RuntimeException {
-
 		private UrlException(Exception cause) {
 			super(cause);
 		}

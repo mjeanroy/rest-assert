@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.generator.TemplateModel;
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class AsyncHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class AsyncHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -52,7 +52,7 @@ public class AsyncHttpAssert extends AbstractUnitHttpAssertTemplateModel impleme
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		// Be careful, do not import org.asynchttpclient, as it will not compile on JDK 7
 		// and the unit test suite run on JDK 7.
 		return "org.asynchttpclient.Response";

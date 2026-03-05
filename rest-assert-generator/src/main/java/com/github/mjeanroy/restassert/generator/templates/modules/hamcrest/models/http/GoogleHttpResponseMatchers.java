@@ -53,7 +53,7 @@ public class GoogleHttpResponseMatchers extends AbstractHamcrestHttpAssertTempla
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return HttpResponse.class.getName();
 	}
 

@@ -76,4 +76,9 @@ class OkHttpAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return OkHttpResponse.class.getName();
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.HttpResponse.class.getName();
+	}
 }

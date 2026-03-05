@@ -29,6 +29,9 @@ import org.hamcrest.TypeSafeMatcher;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.hamcrest.api.AbstractHamcrestMatcher;
 
+/**
+ * Matchers for {@link {{actual_class}}} instances.
+ */
 public final class {{class_name}} {
 
 	private static final com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions assertions = com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions.instance();
@@ -37,6 +40,14 @@ public final class {{class_name}} {
 	}
 
 	{{#methods}}
+	/**
+	 * Hamcrest assertion for {@link com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions#{{core_method_name}}(com.github.mjeanroy.restassert.core.data.HttpResponse{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}}{{/arguments}})}
+	 *
+     {{#arguments}}
+	 * @param {{name}} See {{core_class_name}}#{{core_method_name}}
+	 {{/arguments}}
+	 * @return The Hamcrest matcher.
+	 */
 	public static TypeSafeMatcher<{{actual_class}}> {{core_method_name}}({{#arguments}}{{^first}}, {{/first}}final {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		return new AbstractHamcrestMatcher<{{actual_class}}>() {
 			@Override

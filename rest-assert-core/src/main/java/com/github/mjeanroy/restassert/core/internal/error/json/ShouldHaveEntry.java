@@ -43,6 +43,7 @@ public final class ShouldHaveEntry extends AbstractJsonError {
 	/**
 	 * Build error.
 	 *
+	 * @param json Original JSON.
 	 * @param entryName Missing entry name.
 	 * @return Error.
 	 */

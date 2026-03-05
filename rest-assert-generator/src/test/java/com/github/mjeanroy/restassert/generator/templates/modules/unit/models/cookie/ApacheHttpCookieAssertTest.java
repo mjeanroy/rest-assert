@@ -76,4 +76,9 @@ class ApacheHttpCookieAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return ApacheHttpCookie.class.getName();
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.Cookie.class.getName();
+	}
 }

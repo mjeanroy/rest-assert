@@ -31,7 +31,7 @@ import com.ning.http.client.Response;
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class NingHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class NingHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.

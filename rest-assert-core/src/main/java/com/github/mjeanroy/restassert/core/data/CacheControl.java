@@ -72,6 +72,9 @@ public final class CacheControl implements HttpHeaderValue {
 		return new CacheControlBuilder();
 	}
 
+	/**
+	 * Cache-Control visibility.
+	 */
 	public enum Visibility {
 		/**
 		 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.6">RFC 7234</a>:

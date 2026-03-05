@@ -52,7 +52,7 @@ public class AsyncHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplat
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		// Be careful, do not import org.asynchttpclient, as it will not compile on JDK 7
 		// and the unit test suite run on JDK 7.
 		return "org.asynchttpclient.Response";

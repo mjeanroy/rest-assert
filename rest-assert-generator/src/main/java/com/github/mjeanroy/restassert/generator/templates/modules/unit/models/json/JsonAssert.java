@@ -36,7 +36,7 @@ import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.gene
  * This class is implemented as a singleton.
  * This class is thread safe.
  */
-public class JsonAssert extends AbstractUnitTemplateModel implements TemplateModel {
+public final class JsonAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton instance.
@@ -63,11 +63,6 @@ public class JsonAssert extends AbstractUnitTemplateModel implements TemplateMod
 	}
 
 	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
 	protected Class<?> coreClass() {
 		return JsonAssertions.class;
 	}
@@ -83,12 +78,17 @@ public class JsonAssert extends AbstractUnitTemplateModel implements TemplateMod
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
+	protected String buildCoreMethodName(String methodName) {
 		return methodName;
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
+	protected String buildMethodName(String methodName) {
 		return generateAssertMethodName(methodName);
+	}
+
+	@Override
+	public String getAssertedClassName() {
+		return String.class.getName();
 	}
 }

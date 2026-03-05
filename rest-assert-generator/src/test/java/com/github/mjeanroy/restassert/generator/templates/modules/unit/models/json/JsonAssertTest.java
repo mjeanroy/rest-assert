@@ -72,4 +72,9 @@ class JsonAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return null;
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return java.lang.String.class.getName();
+	}
 }

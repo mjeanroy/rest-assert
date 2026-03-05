@@ -77,4 +77,9 @@ class JavaxCookieAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return JavaxCookie.class.getName();
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.Cookie.class.getName();
+	}
 }

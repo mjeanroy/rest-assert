@@ -42,7 +42,7 @@ public abstract class AbstractCookieModel extends AbstractTemplateModel implemen
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return Cookie.class.getName();
 	}
 }

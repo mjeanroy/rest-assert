@@ -32,6 +32,9 @@ import java.util.Map;
  */
 public enum JsonType {
 
+	/**
+	 * Boolean JSON type.
+	 */
 	BOOLEAN {
 		@Override
 		protected boolean isValid(Object object) {
@@ -44,6 +47,9 @@ public enum JsonType {
 		}
 	},
 
+	/**
+	 * Number JSON type.
+	 */
 	NUMBER {
 		@Override
 		protected boolean isValid(Object object) {
@@ -56,6 +62,9 @@ public enum JsonType {
 		}
 	},
 
+	/**
+	 * String JSON type.
+	 */
 	STRING {
 		@Override
 		protected boolean isValid(Object object) {
@@ -68,6 +77,9 @@ public enum JsonType {
 		}
 	},
 
+	/**
+	 * Object JSON type.
+	 */
 	OBJECT {
 		@Override
 		protected boolean isValid(Object object) {
@@ -80,6 +92,9 @@ public enum JsonType {
 		}
 	},
 
+	/**
+	 * Array JSON type.
+	 */
 	ARRAY {
 		@Override
 		protected boolean isValid(Object object) {
@@ -93,6 +108,9 @@ public enum JsonType {
 		}
 	},
 
+	/**
+	 * The NULL JSON value.
+	 */
 	NULL {
 		@Override
 		protected boolean isValid(Object object) {

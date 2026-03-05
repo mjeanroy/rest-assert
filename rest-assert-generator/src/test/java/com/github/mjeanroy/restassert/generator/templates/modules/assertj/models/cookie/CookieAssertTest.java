@@ -86,4 +86,9 @@ class CookieAssertTest extends AbstractTemplateModelTest {
 			}
 		};
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return null;
+	}
 }

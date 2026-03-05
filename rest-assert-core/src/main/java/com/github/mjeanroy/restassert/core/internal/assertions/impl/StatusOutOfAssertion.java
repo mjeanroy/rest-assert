@@ -33,6 +33,9 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 
+/**
+ * Assert that a given HTTP status is out of a given range (for example, not between 200 and 299).
+ */
 public class StatusOutOfAssertion extends AbstractStatusRangeAssertion implements HttpResponseAssertion {
 
 	/**

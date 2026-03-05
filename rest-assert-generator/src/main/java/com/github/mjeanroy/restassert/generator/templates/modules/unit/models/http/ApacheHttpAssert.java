@@ -31,7 +31,7 @@ import org.apache.http.HttpResponse;
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class ApacheHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class ApacheHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -53,7 +53,7 @@ public class ApacheHttpAssert extends AbstractUnitHttpAssertTemplateModel implem
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return HttpResponse.class.getName();
 	}
 

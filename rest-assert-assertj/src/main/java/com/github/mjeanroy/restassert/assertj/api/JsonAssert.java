@@ -34,8 +34,18 @@ import org.assertj.core.api.StringAssert;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Assertion methods for JSON payloads.
+ * <br>
+ * To create an instance of this class, invoke {@link JsonAssertions#assertThatJson(String)}.
+ */
 public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 
+	/**
+	 * Create new assertion instance.
+	 *
+	 * @param actual JSON payload.
+	 */
 	public JsonAssert(String actual) {
 		super(actual, JsonAssert.class);
 	}
@@ -43,6 +53,8 @@ public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 	/**
 	 * Ensure the actual JSON is a valid JSON of type `string`, the parsed value becoming the new value
 	 * under test.
+	 *
+	 * <br>
 	 *
 	 * Examples:
 	 *
@@ -66,6 +78,8 @@ public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 	/**
 	 * Ensure the actual JSON is a valid JSON of type `number`, the parsed value becoming the new value
 	 * under test.
+	 *
+	 * <br>
 	 *
 	 * Examples:
 	 *

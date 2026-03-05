@@ -62,7 +62,7 @@ public final class {{class_name}} extends AbstractRestAssertions {
 
 	{{#methods}}
 	/**
-	 * @see {{core_class_name}}#{{core_method_name}}
+	 * AssertJ assertion for {@link {{core_class_name}}#{{core_method_name}}}.
 	 *
 	 * @param info Contains information about the assertion.
 	 * @param actual Actual object.
@@ -70,6 +70,7 @@ public final class {{class_name}} extends AbstractRestAssertions {
 	 * @param {{name}} See {@link {{core_class_name}}#{{core_method_name}}}
 	 {{/arguments}}
 	 * @throws AssertionError When assertion fails.
+	 * @see {{core_class_name}}#{{core_method_name}}
 	 */
 	public void {{method_name}}(AssertionInfo info, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		assertNotNull(info, actual);

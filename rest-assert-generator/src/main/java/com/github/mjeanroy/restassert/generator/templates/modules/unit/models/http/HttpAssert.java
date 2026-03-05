@@ -30,7 +30,7 @@ import com.github.mjeanroy.restassert.generator.TemplateModel;
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class HttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class HttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -64,7 +64,7 @@ public class HttpAssert extends AbstractUnitHttpAssertTemplateModel implements T
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return HttpResponse.class.getName();
 	}
 

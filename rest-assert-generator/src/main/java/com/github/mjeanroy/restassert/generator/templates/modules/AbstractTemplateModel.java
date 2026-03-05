@@ -78,7 +78,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	}
 
 	@Override
-	public Map<String, Object> data() {
+	public final Map<String, Object> data() {
 		Map<String, Object> map = new HashMap<>();
 		map.put("package", getPackageName());
 		map.put("class_name", getClassName());
@@ -86,14 +86,9 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		map.put("actual_class", getActualClass());
 		map.put("methods", getMethods());
 		map.put("factory", getFactory());
+		map.put("asserted_class_name", getAssertedClassName());
 		map.put("current_tt", DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, Locale.ENGLISH).format(new Date()));
 		return unmodifiableMap(map);
-	}
-
-	@Override
-	public String getFactory() {
-		// Default implementation.
-		return null;
 	}
 
 	/**
@@ -111,7 +106,10 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return Core class.
 	 */
-	protected abstract String getCoreClassName();
+	protected String getCoreClassName() {
+		// By default
+		return coreClass().getName();
+	}
 
 	/**
 	 * Get Rest-Assert core class that will be used
@@ -128,7 +126,7 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 	 *
 	 * @return List of methods.
 	 */
-	protected List<Map<String, Object>> getMethods() {
+	protected final List<Map<String, Object>> getMethods() {
 		List<Method> methods = findPublicMethods(coreClass());
 
 		// Sort methods by name

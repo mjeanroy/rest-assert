@@ -125,6 +125,7 @@ public final class JsonAssertions {
 	 * Check that given json is a JSON string type.
 	 *
 	 * @param actual JSON.
+	 * @param path Entry path.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isStringEntry(String actual, String path) {
@@ -135,6 +136,7 @@ public final class JsonAssertions {
 	 * Check that given json is a JSON number type.
 	 *
 	 * @param actual JSON.
+	 * @param path Entry path.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isNumberEntry(String actual, String path) {
@@ -145,6 +147,7 @@ public final class JsonAssertions {
 	 * Check that given json is a JSON boolean type.
 	 *
 	 * @param actual JSON.
+	 * @param path Entry path.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isBooleanEntry(String actual, String path) {
@@ -155,6 +158,7 @@ public final class JsonAssertions {
 	 * Check that given json is a JSON array type.
 	 *
 	 * @param actual JSON.
+	 * @param path Entry path.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isArrayEntry(String actual, String path) {
@@ -165,6 +169,7 @@ public final class JsonAssertions {
 	 * Check that given json is a JSON object type.
 	 *
 	 * @param actual JSON.
+	 * @param path Entry path.
 	 * @return Assertion result.
 	 */
 	public AssertionResult isObjectEntry(String actual, String path) {

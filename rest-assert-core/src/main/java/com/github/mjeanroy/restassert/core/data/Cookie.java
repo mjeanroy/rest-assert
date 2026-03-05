@@ -107,8 +107,19 @@ public interface Cookie {
 	 * @see <a href="https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite</a>
 	 */
 	public enum SameSite {
+		/**
+		 * Lax value for the Same-Site cookie attribute.
+		 */
 		LAX("Lax"),
+
+		/**
+		 * Strict value for the Same-Site cookie attribute.
+		 */
 		STRICT("Strict"),
+
+		/**
+		 * None value for the Same-Site cookie attribute.
+		 */
 		NONE("None");
 
 		private final String value;
@@ -117,10 +128,21 @@ public interface Cookie {
 			this.value = value;
 		}
 
+		/**
+		 * Get the Same-Site raw value, one that can be used in Cookie serialization.
+		 *
+		 * @return Same-Site value.
+		 */
 		public String getValue() {
 			return value;
 		}
 
+		/**
+		 * Parse the Same-Site value of a cookie;
+		 *
+		 * @param value Same-Site cookie, may be {@code null} or emptu.
+		 * @return The Same-Site value.
+		 */
 		public static SameSite parse(String value) {
 			if (value == null) {
 				return null;

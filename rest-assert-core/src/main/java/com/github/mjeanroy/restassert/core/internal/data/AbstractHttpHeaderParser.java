@@ -28,8 +28,16 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 
 /**
  * Abstract template implementation for {@link HttpHeaderParser} interface.
+ *
+ * @param <T> Type of HTTP header value, output of parsing.
  */
 public abstract class AbstractHttpHeaderParser<T extends HttpHeaderValue> implements HttpHeaderParser<T> {
+
+	/**
+	 * Create parser.
+	 */
+	protected AbstractHttpHeaderParser() {
+	}
 
 	@Override
 	public T parse(String value) {

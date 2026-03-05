@@ -75,7 +75,7 @@ public abstract class AbstractTemplateModelTest {
 		Map<String, Object> data = getTemplateModel().data();
 
 		assertThat(data)
-			.hasSize(7)
+			.hasSize(8)
 			.containsKey("methods")
 			.containsKey("current_tt")
 			.contains(
@@ -83,7 +83,8 @@ public abstract class AbstractTemplateModelTest {
 				entry("actual_class", getExpectedActualClass()),
 				entry("class_name", getExpectedClassName()),
 				entry("package", getExpectedPackageName()),
-				entry("factory", getFactory())
+				entry("factory", getFactory()),
+				entry("asserted_class_name", getExpectedAssertedClassName())
 			);
 	}
 
@@ -102,6 +103,8 @@ public abstract class AbstractTemplateModelTest {
 	protected abstract Condition<Map<String, Object>> getMethodCondition();
 
 	protected abstract String getFactory();
+
+	protected abstract String getExpectedAssertedClassName();
 
 	private static final Condition<Map<String, Object>> HAS_ARGUMENTS_CONDITION = new Condition<Map<String, Object>>() {
 		@Override

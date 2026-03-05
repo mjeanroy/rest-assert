@@ -31,7 +31,7 @@ import com.google.api.client.http.HttpResponse;
 /**
  * Template model for rest-assert-unit HttpAssert class.
  */
-public class GoogleHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class GoogleHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.
@@ -53,7 +53,7 @@ public class GoogleHttpAssert extends AbstractUnitHttpAssertTemplateModel implem
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return HttpResponse.class.getName();
 	}
 

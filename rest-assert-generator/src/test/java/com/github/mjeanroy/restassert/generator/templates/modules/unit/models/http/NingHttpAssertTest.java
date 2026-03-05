@@ -76,4 +76,9 @@ class NingHttpAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return NingHttpResponse.class.getName();
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.HttpResponse.class.getName();
+	}
 }

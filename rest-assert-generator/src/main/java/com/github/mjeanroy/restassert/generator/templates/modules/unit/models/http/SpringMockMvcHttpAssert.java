@@ -31,7 +31,7 @@ import org.springframework.test.web.servlet.ResultActions;
 /**
  * Template model for rest-assert-unit spring mockmvc class.
  */
-public class SpringMockMvcHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class SpringMockMvcHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.

@@ -27,8 +27,12 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.JsonEntry;
 
+/**
+ * Entry point for assertion methods for JSON payloads.
+ */
 public class JsonAssertions {
 
+	// Ensure non instantiation.
 	private JsonAssertions() {
 	}
 

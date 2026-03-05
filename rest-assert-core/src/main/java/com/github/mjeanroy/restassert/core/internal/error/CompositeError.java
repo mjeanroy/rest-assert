@@ -35,8 +35,14 @@ import static java.util.stream.StreamSupport.stream;
  */
 public class CompositeError implements RestAssertError {
 
-	public static final String MESSAGES_SEPARATOR = "," + System.lineSeparator();
+	private static final String MESSAGES_SEPARATOR = "," + System.lineSeparator();
 
+	/**
+	 * Compose errors.
+	 *
+	 * @param errors Errors.
+	 * @return The joined errors.
+	 */
 	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
 		return new CompositeError(errors);
 	}

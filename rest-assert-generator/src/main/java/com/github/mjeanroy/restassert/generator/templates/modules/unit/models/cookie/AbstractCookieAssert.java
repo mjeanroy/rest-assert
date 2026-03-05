@@ -22,27 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.generator.templates.modules.assertj.models.json;
+package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.cookie;
 
-import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
+import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
+
+import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
- * Abstract model for {@link JsonAssertions} assertions.
- * Actual object (a.k.a tested object) is an instance of {@link java.lang.String} class
- * representing json object or array.
- * Convention: class name is defined by current model class.
+ * Template model for rest-assert-unit CookieAssert class.
  */
-public abstract class AbstractJsonsModel extends AbstractTemplateModel implements TemplateModel {
+public abstract class AbstractCookieAssert extends AbstractUnitTemplateModel implements TemplateModel {
+
+	AbstractCookieAssert() {
+		super();
+	}
 
 	@Override
-	public String getClassName() {
+	protected final String getSubPackage() {
+		return "cookie";
+	}
+
+	@Override
+	public final String getClassName() {
 		return getClass().getSimpleName();
 	}
 
 	@Override
-	protected String getActualClass() {
-		return String.class.getName();
+	protected final String buildCoreMethodName(String methodName) {
+		return methodName;
+	}
+
+	@Override
+	protected final String buildMethodName(String methodName) {
+		return generateAssertMethodName(methodName);
 	}
 }

@@ -31,6 +31,11 @@ package com.github.mjeanroy.restassert.core.internal.json;
 @SuppressWarnings("serial")
 public class JsonException extends RuntimeException {
 
+	/**
+	 * Create exception.
+	 *
+	 * @param th The original cause.
+	 */
 	public JsonException(Throwable th) {
 		super(th);
 	}

@@ -52,7 +52,7 @@ public class HttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateMode
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return HttpResponse.class.getName();
 	}
 

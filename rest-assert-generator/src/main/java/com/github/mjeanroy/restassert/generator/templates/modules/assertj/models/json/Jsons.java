@@ -62,22 +62,17 @@ public class Jsons extends AbstractJsonsModel implements TemplateModel {
 	}
 
 	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
 	protected Class<?> coreClass() {
 		return JsonAssertions.class;
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
+	protected String buildCoreMethodName(String methodName) {
 		return methodName;
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
+	protected String buildMethodName(String methodName) {
 		return generateAssertMethodName(methodName);
 	}
 }

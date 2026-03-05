@@ -31,7 +31,7 @@ import com.github.mjeanroy.restassert.generator.TemplateModel;
 /**
  * Template model for rest-assert-unit spring mockmvc class.
  */
-public class JunitServersHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
+public final class JunitServersHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
 	/**
 	 * Singleton Instance.

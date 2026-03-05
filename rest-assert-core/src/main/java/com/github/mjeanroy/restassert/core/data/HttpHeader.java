@@ -26,6 +26,9 @@ package com.github.mjeanroy.restassert.core.data;
 
 import java.util.List;
 
+/**
+ * HTTP Header, mainly a key-value(s) pair.
+ */
 public interface HttpHeader {
 
 	/**

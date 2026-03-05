@@ -76,4 +76,9 @@ class GoogleHttpAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return GoogleHttpResponse.class.getName();
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.HttpResponse.class.getName();
+	}
 }

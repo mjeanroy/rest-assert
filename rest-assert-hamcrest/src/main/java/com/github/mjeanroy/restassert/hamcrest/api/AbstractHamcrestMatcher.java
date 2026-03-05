@@ -34,13 +34,18 @@ import org.hamcrest.TypeSafeMatcher;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Internal and abstract representation of {@link TypeSafeMatcher}
+ *
+ * @param <T> Type of object being tested.
+ */
 public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
-
-	private static final String EXPECTATION_HAMCREST_PREFIX = "Expected: ";
-	private static final String EXPECTATION_MESSAGE_INDENT = Strings.repeat(' ', EXPECTATION_HAMCREST_PREFIX.length());
 
 	private AssertionResult assertionResult;
 
+	/**
+	 * Create new instance.
+	 */
 	protected AbstractHamcrestMatcher() {
 		this.assertionResult = null;
 	}
@@ -74,6 +79,12 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 		);
 	}
 
+	/**
+	 * Verify assertion and returns the assertion result.
+	 *
+	 * @param actual Object being tested.
+	 * @return The assertion result.
+	 */
 	protected abstract AssertionResult verify(T actual);
 
 	private RestAssertError error() {

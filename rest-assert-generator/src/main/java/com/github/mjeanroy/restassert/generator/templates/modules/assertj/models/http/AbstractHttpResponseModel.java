@@ -42,7 +42,7 @@ public abstract class AbstractHttpResponseModel extends AbstractTemplateModel im
 	}
 
 	@Override
-	public String getActualClass() {
+	protected String getActualClass() {
 		return HttpResponse.class.getName();
 	}
 }

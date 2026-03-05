@@ -67,22 +67,22 @@ public class JsonAssert extends AbstractJsonsModel implements TemplateModel {
 	}
 
 	@Override
-	public String getCoreClassName() {
+	protected String getCoreClassName() {
 		return "com.github.mjeanroy.restassert.assertj.internal.Jsons";
 	}
 
 	@Override
-	public Class<?> coreClass() {
+	protected Class<?> coreClass() {
 		return JsonAssertions.class;
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
+	protected String buildCoreMethodName(String methodName) {
 		return generateAssertMethodName(methodName);
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
+	protected String buildMethodName(String methodName) {
 		return methodName;
 	}
 }

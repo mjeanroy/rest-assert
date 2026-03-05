@@ -28,14 +28,46 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import org.assertj.core.api.ListAssert;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Objects;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.trimToNull;
 
+/**
+ * Assertion methods for {@link HttpResponse}.
+ * <br>
+ * To create an instance of this class, invoke {@link HttpResponseAssertions#assertThat(HttpResponse)}.
+ *
+ * <br><br>
+ *
+ * Various wrappers exists to create {@link HttpResponse} from HTTP Clients:
+ * <ul>
+ *   <li>{@link OkHttpAssertions#assertThat(okhttp3.Response)}</li>
+ *   <li>{@link GoogleHttpAssertions#assertThat(com.google.api.client.http.HttpResponse)}</li>
+ *   <li>{@link AsyncHttpAssertions#assertThat(org.asynchttpclient.Response)}</li>
+ *   <li>{@link ApacheHttpAssertions#assertThat(org.apache.http.HttpResponse)}</li>
+ *   <li>{@link JunitServersHttpAssertions#assertThat(com.github.mjeanroy.junit.servers.client.HttpResponse)}</li>
+ *   <li>{@link SpringMockMvcHttpAssertions#assertThat(ResultActions)}</li>
+ *   <li>{@link NingHttpAssertions#assertThat(com.ning.http.client.Response)}</li>
+ * </ul>
+ *
+ * @see OkHttpAssertions#assertThat(okhttp3.Response)
+ * @see GoogleHttpAssertions#assertThat(com.google.api.client.http.HttpResponse)
+ * @see AsyncHttpAssertions#assertThat(org.asynchttpclient.Response)
+ * @see ApacheHttpAssertions#assertThat(org.apache.http.HttpResponse)
+ * @see JunitServersHttpAssertions#assertThat(com.github.mjeanroy.junit.servers.client.HttpResponse)
+ * @see SpringMockMvcHttpAssertions#assertThat(ResultActions)
+ * @see NingHttpAssertions#assertThat(com.ning.http.client.Response)
+ */
 public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseAssert> {
 
+	/**
+	 * Create new assertion instance.
+	 *
+	 * @param actual HTTP Response.
+	 */
 	public HttpResponseAssert(HttpResponse actual) {
 		super(actual, HttpResponseAssert.class);
 	}
@@ -43,11 +75,12 @@ public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseA
 	/**
 	 * Extract body and returns JSON assertion object, such as:
 	 *
-	 * @code {
+	 * <pre><code>
 	 *   assertThat(response).isOk().extractingJsonBody().isEqualTo(
 	 *     readFile("/json/expected.json")
 	 *   );
-	 * }
+	 * </code></pre>
+	 *
 	 * @return The {@link JsonAssert JSON assertion} object.
 	 */
 	public JsonAssert extractingJsonBody() {
@@ -98,7 +131,7 @@ public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseA
 	 *   );
 	 * </code></pre>
 	 *
-	 * @return New {@link ListAssert ListAssert<Cookie>} assertion.
+	 * @return New {@link ListAssert ListAssert&lt;Cookie&gt;} assertion.
 	 */
 	public ListAssert<Cookie> extractingCookies() {
 		isNotNull();
@@ -122,7 +155,7 @@ public class HttpResponseAssert extends AbstractHttpResponseAssert<HttpResponseA
 	 *     );
 	 * </code></pre>
 	 *
-	 * @return New {@link ListAssert ListAssert<Cookie>} assertion.
+	 * @return New {@link ListAssert ListAssert&lt;Cookie&gt;} assertion.
 	 */
 	public ListAssert<HttpHeader> extractingHeaders() {
 		isNotNull();

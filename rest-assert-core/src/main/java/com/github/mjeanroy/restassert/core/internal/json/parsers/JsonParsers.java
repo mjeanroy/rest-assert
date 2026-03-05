@@ -24,6 +24,9 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
+/**
+ * Static helper that can auto-detect the most appropriate JSON parser.
+ */
 public final class JsonParsers {
 
 	private static class InstanceHolder {

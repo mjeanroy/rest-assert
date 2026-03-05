@@ -76,4 +76,9 @@ class JunitServersHttpAssertTest extends AbstractUnitTemplateModelTest {
 	protected String getFactory() {
 		return JunitServersHttpResponse.class.getName();
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.HttpResponse.class.getName();
+	}
 }

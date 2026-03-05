@@ -42,20 +42,21 @@ public final class {{class_name}} {
 
 	{{#methods}}
 	/**
-	 * @see {{core_class_name}}#{{core_method_name}}
+	 * Static assertion for {@link {{core_class_name}}#{{core_method_name}}({{asserted_class_name}}{{#arguments}}, {{type}}{{/arguments}})}
 	 * Throws an {@link AssertionError} with default message if test failed.
 	 *
 	 * @param actual Actual object.
 	 {{#arguments}}
 	 * @param {{name}} See {{core_class_name}}#{{core_method_name}}
 	 {{/arguments}}
+	 * @see {{core_class_name}}#{{core_method_name}}({{asserted_class_name}}{{#arguments}}, {{type}}{{/arguments}})
 	 */
 	public static void {{method_name}}({{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		{{method_name}}(null, actual{{#arguments}}, {{name}}{{/arguments}});
 	}
 
 	/**
-	 * @see {{core_class_name}}#{{core_method_name}}
+	 * Static assertion for {@link {{core_class_name}}#{{core_method_name}}({{asserted_class_name}}{{#arguments}}, {{type}}{{/arguments}})}
 	 * Throws an {@link AssertionError} with given message if test failed.
 	 *
 	 * @param message  The identifying message for the {@link AssertionError}.
@@ -63,6 +64,7 @@ public final class {{class_name}} {
 	 {{#arguments}}
 	 * @param {{name}} See {{core_class_name}}#{{core_method_name}}
 	 {{/arguments}}
+	 * @see {{core_class_name}}#{{core_method_name}}({{asserted_class_name}}{{#arguments}}, {{type}}{{/arguments}})
 	 */
 	public static void {{method_name}}(String message, {{actual_class}} actual{{#arguments}}, {{type}}{{#genericType}}<{{genericType}}>{{/genericType}} {{name}}{{/arguments}}) {
 		check(message, assertions.{{core_method_name}}({{#factory}}{{factory}}.create({{/factory}}actual{{#factory}}){{/factory}}{{#arguments}}, {{name}}{{/arguments}}));

@@ -27,15 +27,12 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.c
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpCookie;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
-import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
 import com.ning.http.client.cookie.Cookie;
-
-import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
 /**
  * Template model for rest-assert-unit CookieAssert class.
  */
-public class NingHttpCookieAssert extends AbstractUnitTemplateModel implements TemplateModel {
+public final class NingHttpCookieAssert extends AbstractCookieAssert implements TemplateModel {
 
 	/**
 	 * Singleton instance.
@@ -62,37 +59,17 @@ public class NingHttpCookieAssert extends AbstractUnitTemplateModel implements T
 	}
 
 	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
 	protected Class<?> coreClass() {
 		return CookieAssertions.class;
 	}
 
 	@Override
-	protected String getSubPackage() {
-		return "cookie";
-	}
-
-	@Override
-	public String getClassName() {
-		return getClass().getSimpleName();
-	}
-
-	@Override
-	public String buildCoreMethodName(String methodName) {
-		return methodName;
-	}
-
-	@Override
-	public String buildMethodName(String methodName) {
-		return generateAssertMethodName(methodName);
-	}
-
-	@Override
 	public String getFactory() {
 		return NingHttpCookie.class.getName();
+	}
+
+	@Override
+	public String getAssertedClassName() {
+		return com.github.mjeanroy.restassert.core.data.Cookie.class.getName();
 	}
 }

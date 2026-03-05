@@ -54,5 +54,16 @@ public interface TemplateModel {
 	 *
 	 * @return Factory name.
 	 */
-	String getFactory();
+	default String getFactory() {
+		return null;
+	}
+
+	/**
+	 * The class being asserted, i.e output of factory or the actual class.
+	 *
+	 * @return Asserted class.
+	 */
+	default String getAssertedClassName() {
+		return null;
+	}
 }

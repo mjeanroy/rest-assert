@@ -62,22 +62,17 @@ public class HttpResponses extends AbstractHttpResponseModel implements Template
 	}
 
 	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
 	protected Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
+	protected String buildCoreMethodName(String methodName) {
 		return methodName;
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
+	protected String buildMethodName(String methodName) {
 		return generateAssertMethodName(methodName);
 	}
 }

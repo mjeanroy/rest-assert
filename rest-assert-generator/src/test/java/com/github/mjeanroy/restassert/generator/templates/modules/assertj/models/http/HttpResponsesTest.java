@@ -88,4 +88,9 @@ class HttpResponsesTest extends AbstractTemplateModelTest {
 			}
 		};
 	}
+
+	@Override
+	protected String getExpectedAssertedClassName() {
+		return null;
+	}
 }

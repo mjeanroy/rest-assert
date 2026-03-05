@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.http;
 
+import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.assertions.HttpResponseAssertions;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.AbstractUnitTemplateModel;
@@ -40,32 +41,32 @@ abstract class AbstractUnitHttpAssertTemplateModel extends AbstractUnitTemplateM
 	}
 
 	@Override
-	public String getCoreClassName() {
-		return coreClass().getName();
-	}
-
-	@Override
-	protected Class<?> coreClass() {
+	protected final Class<?> coreClass() {
 		return HttpResponseAssertions.class;
 	}
 
 	@Override
-	protected String getSubPackage() {
+	protected final String getSubPackage() {
 		return "http";
 	}
 
 	@Override
-	public String getClassName() {
+	public final String getClassName() {
 		return getClass().getSimpleName();
 	}
 
 	@Override
-	public String buildCoreMethodName(String methodName) {
+	protected final String buildCoreMethodName(String methodName) {
 		return methodName;
 	}
 
 	@Override
-	public String buildMethodName(String methodName) {
+	protected final String buildMethodName(String methodName) {
 		return generateAssertMethodName(methodName);
+	}
+
+	@Override
+	public final String getAssertedClassName() {
+		return HttpResponse.class.getName();
 	}
 }
