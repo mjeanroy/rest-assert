@@ -22,12 +22,23 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-class Jackson2JsonParserTest extends AbstractJsonParserTest {
+import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
-	@Override
-	JsonParser parser() {
-		return Jackson2JsonParser.getInstance();
-	}
+import java.util.List;
+
+/**
+ * Json Comparator.
+ */
+public interface JsonComparator {
+
+	/**
+	 * Compare functions.
+	 *
+	 * @param actual Actual json representation.
+	 * @param expected Expected json representation.
+	 * @return List of errors (a.k.a differences).
+	 */
+	List<RestAssertError> compare(String actual, String expected);
 }

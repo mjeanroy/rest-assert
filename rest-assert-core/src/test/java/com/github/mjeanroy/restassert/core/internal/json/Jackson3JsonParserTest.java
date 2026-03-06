@@ -22,47 +22,16 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import tools.jackson.databind.ObjectMapper;
-import tools.jackson.databind.json.JsonMapper;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
-/**
- * Implementation of {@link JsonParser}
- * using Jackson 3 as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
-public final class Jackson3JsonParser extends AbstractJsonParser {
-
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
-	public static Jackson3JsonParser getInstance() {
-		return Holder.INSTANCE;
-	}
-
-	/**
-	 * Jackson 3 parser.
-	 */
-	private final ObjectMapper mapper;
-
-	private Jackson3JsonParser(ObjectMapper mapper) {
-		super();
-		this.mapper = mapper;
-	}
+@EnabledForJreRange(min = JRE.JAVA_17)
+class Jackson3JsonParserTest extends AbstractJsonParserTest {
 
 	@Override
-	<T> T doParse(String json, Class<T> klass) {
-		return mapper.readValue(json, klass);
-	}
-
-	private static final class Holder {
-		private static final Jackson3JsonParser INSTANCE = new Jackson3JsonParser(
-			JsonMapper.builder().build()
-		);
+	JsonParser parser() {
+		return Jackson3JsonParser.getInstance();
 	}
 }

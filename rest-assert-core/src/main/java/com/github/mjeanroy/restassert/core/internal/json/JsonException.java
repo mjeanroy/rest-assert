@@ -36,7 +36,7 @@ public class JsonException extends RuntimeException {
 	 *
 	 * @param th The original cause.
 	 */
-	public JsonException(Throwable th) {
+	JsonException(Throwable th) {
 		super(th);
 	}
 }

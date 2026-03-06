@@ -22,9 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
-
-import com.github.mjeanroy.restassert.core.internal.json.JsonException;
+package com.github.mjeanroy.restassert.core.internal.json;
 
 import java.util.Collections;
 import java.util.List;
@@ -39,6 +37,9 @@ import static java.util.Collections.unmodifiableMap;
  * Abstract json parser.
  */
 abstract class AbstractJsonParser implements JsonParser {
+
+	AbstractJsonParser() {
+	}
 
 	@Override
 	public final Object parse(String json) {

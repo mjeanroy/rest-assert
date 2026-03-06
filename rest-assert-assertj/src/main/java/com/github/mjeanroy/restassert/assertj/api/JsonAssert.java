@@ -24,7 +24,7 @@
 
 package com.github.mjeanroy.restassert.assertj.api;
 
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParsers;
+import com.github.mjeanroy.restassert.core.internal.json.JsonParsers;
 import org.assertj.core.api.BooleanAssert;
 import org.assertj.core.api.DoubleAssert;
 import org.assertj.core.api.ListAssert;

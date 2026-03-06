@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import com.github.mjeanroy.restassert.core.internal.json.JsonException;
 import com.github.mjeanroy.restassert.test.json.JSONArray;
 import org.junit.jupiter.api.Test;
 

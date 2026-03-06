@@ -22,26 +22,45 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * Static helper that can auto-detect the most appropriate JSON parser.
+ * Implementation of {@link JsonParser}
+ * using Jackson2 as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
  */
-public final class JsonParsers {
+final class Jackson2JsonParser extends AbstractJsonParser {
 
 	/**
-	 * Get JSON parser.
+	 * Get parser.
 	 *
-	 * @return JSON parser.
+	 * @return Parser.
 	 */
-	public static JsonParser getParser() {
+	static Jackson2JsonParser getInstance() {
 		return Holder.INSTANCE;
 	}
 
-	private JsonParsers() {
+	/**
+	 * Jackson2 parser.
+	 */
+	private final ObjectMapper mapper;
+
+	private Jackson2JsonParser(ObjectMapper mapper) {
+		super();
+		this.mapper = mapper;
 	}
 
-	private static class Holder {
-		public static final JsonParser INSTANCE = JsonParserStrategy.autoDetect();
+	<T> T doParse(String json, Class<T> klass) throws Exception {
+		return mapper.readValue(json, klass);
+	}
+
+	private static final class Holder {
+		private static final Jackson2JsonParser INSTANCE = new Jackson2JsonParser(
+			new ObjectMapper()
+		);
 	}
 }

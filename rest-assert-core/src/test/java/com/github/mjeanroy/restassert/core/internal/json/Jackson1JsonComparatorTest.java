@@ -22,39 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import java.util.List;
-import java.util.Map;
+class Jackson1JsonComparatorTest extends AbstractJsonComparatorTest {
 
-/**
- * Json parser interface.
- * A Json parser turn a json string into a map
- * object.
- */
-public interface JsonParser {
-
-	/**
-	 * Parse JSON representation and return object result.
-	 *
-	 * @param json Json string.
-	 * @return Object result.
-	 */
-	Object parse(String json);
-
-	/**
-	 * Parse JSON object and deserialize result into a map object.
-	 *
-	 * @param json Json string.
-	 * @return Map object.
-	 */
-	Map<String, Object> parseObject(String json);
-
-	/**
-	 * Parse JSON array and deserialize result into a list of objects.
-	 *
-	 * @param json Json string.
-	 * @return List of objects.
-	 */
-	List<Object> parseArray(String json);
+	@Override
+	protected JsonParser jsonParser() {
+		return Jackson1JsonParser.getInstance();
+	}
 }

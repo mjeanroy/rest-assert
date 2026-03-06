@@ -22,12 +22,12 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-class Jackson1JsonParserTest extends AbstractJsonParserTest {
+class GsonJsonComparatorTest extends AbstractJsonComparatorTest {
 
 	@Override
-	JsonParser parser() {
-		return Jackson1JsonParser.getInstance();
+	protected JsonParser jsonParser() {
+		return GsonJsonParser.getInstance();
 	}
 }

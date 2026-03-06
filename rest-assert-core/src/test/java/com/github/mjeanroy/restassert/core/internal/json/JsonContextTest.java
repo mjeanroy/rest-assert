@@ -22,9 +22,8 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import com.github.mjeanroy.restassert.test.json.JSONTestUtils;
 import org.junit.jupiter.api.Test;
 
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;

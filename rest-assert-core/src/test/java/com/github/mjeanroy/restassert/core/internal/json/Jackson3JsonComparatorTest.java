@@ -22,46 +22,16 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import com.google.gson.Gson;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
-/**
- * Implementation of {@link com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser}
- * using Google Gson as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
-public final class GsonJsonParser extends AbstractJsonParser {
-
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
-	public static GsonJsonParser getInstance() {
-		return Holder.INSTANCE;
-	}
-
-	/**
-	 * Internal parser.
-	 */
-	private final Gson gson;
-
-	private GsonJsonParser(Gson gson) {
-		super();
-		this.gson = gson;
-	}
+@EnabledForJreRange(min = JRE.JAVA_17)
+class Jackson3JsonComparatorTest extends AbstractJsonComparatorTest {
 
 	@Override
-	<T> T doParse(String json, Class<T> klass) {
-		return gson.fromJson(json, klass);
-	}
-
-	private static final class Holder {
-		private static final GsonJsonParser INSTANCE = new GsonJsonParser(
-			new Gson()
-		);
+	protected JsonParser jsonParser() {
+		return Jackson3JsonParser.getInstance();
 	}
 }

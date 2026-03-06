@@ -22,15 +22,46 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson1JsonParser;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
+import com.google.gson.Gson;
 
-class Jackson1JsonComparatorTest extends AbstractJsonComparatorTest {
+/**
+ * Implementation of {@link JsonParser}
+ * using Google Gson as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
+ */
+final class GsonJsonParser extends AbstractJsonParser {
+
+	/**
+	 * Get parser.
+	 *
+	 * @return Parser.
+	 */
+	static GsonJsonParser getInstance() {
+		return Holder.INSTANCE;
+	}
+
+	/**
+	 * Internal parser.
+	 */
+	private final Gson gson;
+
+	private GsonJsonParser(Gson gson) {
+		super();
+		this.gson = gson;
+	}
 
 	@Override
-	protected JsonParser jsonParser() {
-		return Jackson1JsonParser.getInstance();
+	<T> T doParse(String json, Class<T> klass) {
+		return gson.fromJson(json, klass);
+	}
+
+	private static final class Holder {
+		private static final GsonJsonParser INSTANCE = new GsonJsonParser(
+			new Gson()
+		);
 	}
 }

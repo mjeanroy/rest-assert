@@ -22,18 +22,39 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson3JsonParser;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
-import org.junit.jupiter.api.condition.EnabledForJreRange;
-import org.junit.jupiter.api.condition.JRE;
+import java.util.List;
+import java.util.Map;
 
-@EnabledForJreRange(min = JRE.JAVA_17)
-class Jackson3JsonComparatorTest extends AbstractJsonComparatorTest {
+/**
+ * Json parser interface.
+ * A Json parser turn a json string into a map
+ * object.
+ */
+public interface JsonParser {
 
-	@Override
-	protected JsonParser jsonParser() {
-		return Jackson3JsonParser.getInstance();
-	}
+	/**
+	 * Parse JSON representation and return object result.
+	 *
+	 * @param json Json string.
+	 * @return Object result.
+	 */
+	Object parse(String json);
+
+	/**
+	 * Parse JSON object and deserialize result into a map object.
+	 *
+	 * @param json Json string.
+	 * @return Map object.
+	 */
+	Map<String, Object> parseObject(String json);
+
+	/**
+	 * Parse JSON array and deserialize result into a list of objects.
+	 *
+	 * @param json Json string.
+	 * @return List of objects.
+	 */
+	List<Object> parseArray(String json);
 }

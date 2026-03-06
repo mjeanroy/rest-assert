@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
 import java.util.LinkedList;
 import java.util.List;

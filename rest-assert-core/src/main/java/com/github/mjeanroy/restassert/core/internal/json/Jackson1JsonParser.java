@@ -22,15 +22,46 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
-import com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
+import org.codehaus.jackson.map.ObjectMapper;
 
-class GsonJsonComparatorTest extends AbstractJsonComparatorTest {
+/**
+ * Implementation of {@link JsonParser}
+ * using Jackson1 as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
+ */
+final class Jackson1JsonParser extends AbstractJsonParser {
+
+	/**
+	 * Get parser.
+	 *
+	 * @return Parser.
+	 */
+	static Jackson1JsonParser getInstance() {
+		return Holder.INSTANCE;
+	}
+
+	/**
+	 * Jackson mapper.
+	 */
+	private final ObjectMapper mapper;
+
+	private Jackson1JsonParser(ObjectMapper mapper) {
+		super();
+		this.mapper = mapper;
+	}
 
 	@Override
-	protected JsonParser jsonParser() {
-		return GsonJsonParser.getInstance();
+	<T> T doParse(String json, Class<T> klass) throws Exception {
+		return mapper.readValue(json, klass);
+	}
+
+	private static final class Holder {
+		private static final Jackson1JsonParser INSTANCE = new Jackson1JsonParser(
+			new ObjectMapper()
+		);
 	}
 }

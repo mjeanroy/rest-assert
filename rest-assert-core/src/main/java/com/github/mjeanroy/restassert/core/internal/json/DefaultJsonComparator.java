@@ -22,12 +22,10 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertJsonError;
-import com.github.mjeanroy.restassert.core.internal.json.JsonType;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -44,7 +42,7 @@ import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHave
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryWithSize.shouldHaveEntryWithSize;
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldNotHaveEntry.shouldNotHaveEntry;
 import static com.github.mjeanroy.restassert.core.internal.json.JsonType.parseType;
-import static com.github.mjeanroy.restassert.core.internal.json.comparators.JsonContext.rootContext;
+import static com.github.mjeanroy.restassert.core.internal.json.JsonContext.rootContext;
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 

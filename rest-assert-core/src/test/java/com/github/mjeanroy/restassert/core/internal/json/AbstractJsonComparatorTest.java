@@ -22,10 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.comparators;
+package com.github.mjeanroy.restassert.core.internal.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
-import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
 import com.github.mjeanroy.restassert.test.json.JSONArray;
 import com.github.mjeanroy.restassert.test.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
