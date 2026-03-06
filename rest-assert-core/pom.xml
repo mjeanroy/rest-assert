@@ -201,31 +201,4 @@
       </plugin>
     </plugins>
   </build>
-
-  <profiles>
-    <profile>
-      <id>documentation</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>${maven-compiler-plugin.version}</version>
-            <configuration>
-              <source>${maven.compiler.source}</source>
-              <target>${maven.compiler.target}</target>
-              <encoding>${project.build.sourceEncoding}</encoding>
-              <annotationProcessors>
-                <annotationProcessor>com.github.mjeanroy.restassert.documentation.DocumentationProcessor
-                </annotationProcessor>
-              </annotationProcessors>
-              <compilerArgs>
-                <arg>-Aoutput=${project.parent.basedir}/docs/rest-assert-unit</arg>
-              </compilerArgs>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
 </project>
