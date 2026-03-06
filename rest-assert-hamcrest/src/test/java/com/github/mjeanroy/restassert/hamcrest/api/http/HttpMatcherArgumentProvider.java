@@ -27,13 +27,14 @@ package com.github.mjeanroy.restassert.hamcrest.api.http;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.support.ParameterDeclarations;
 
 import java.util.stream.Stream;
 
 public final class HttpMatcherArgumentProvider implements ArgumentsProvider {
 
 	@Override
-	public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) {
+	public Stream<? extends Arguments> provideArguments(ParameterDeclarations parameters, ExtensionContext extensionContext) {
 		return Stream.of(
 			Arguments.of(HttpMatchers.okHttpMatcher()),
 			Arguments.of(HttpMatchers.apacheHttpMatcher()),
