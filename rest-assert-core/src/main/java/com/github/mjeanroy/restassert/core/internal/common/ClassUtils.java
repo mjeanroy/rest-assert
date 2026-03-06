@@ -54,7 +54,10 @@ public final class ClassUtils {
 			Class.forName(klass, false, classLoader);
 			return true;
 		}
-		catch (ClassNotFoundException ex) {
+		catch (Exception ex) {
+			return false;
+		}
+		catch (Error e) {
 			return false;
 		}
 	}

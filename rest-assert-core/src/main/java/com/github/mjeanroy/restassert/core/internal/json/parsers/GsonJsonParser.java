@@ -26,9 +26,6 @@ package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
 import com.google.gson.Gson;
 
-import java.util.List;
-import java.util.Map;
-
 /**
  * Implementation of {@link com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser}
  * using Google Gson as internal implementation.
@@ -36,20 +33,15 @@ import java.util.Map;
  * This class is implemented as a singleton.
  * This class is thread safe.
  */
-public class GsonJsonParser extends AbstractJsonParser {
-
-	/**
-	 * Singleton instance.
-	 */
-	private static final GsonJsonParser INSTANCE = new GsonJsonParser();
+public final class GsonJsonParser extends AbstractJsonParser {
 
 	/**
 	 * Get parser.
 	 *
 	 * @return Parser.
 	 */
-	public static GsonJsonParser gsonParser() {
-		return INSTANCE;
+	public static GsonJsonParser getInstance() {
+		return Holder.INSTANCE;
 	}
 
 	/**
@@ -57,25 +49,19 @@ public class GsonJsonParser extends AbstractJsonParser {
 	 */
 	private final Gson gson;
 
-	private GsonJsonParser() {
+	private GsonJsonParser(Gson gson) {
 		super();
-		this.gson = new Gson();
+		this.gson = gson;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public Map<String, Object> parseObject(String json) {
-		return gson.fromJson(json, Map.class);
+	<T> T doParse(String json, Class<T> klass) {
+		return gson.fromJson(json, klass);
 	}
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<Object> parseArray(String json) {
-		return gson.fromJson(json, List.class);
-	}
-
-	@Override
-	Object doParse(String json) {
-		return gson.fromJson(json, Object.class);
+	private static final class Holder {
+		private static final GsonJsonParser INSTANCE = new GsonJsonParser(
+			new Gson()
+		);
 	}
 }

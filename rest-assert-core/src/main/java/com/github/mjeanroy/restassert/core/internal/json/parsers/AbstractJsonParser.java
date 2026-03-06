@@ -32,6 +32,8 @@ import java.util.Map;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.trimToNull;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableMap;
 
 /**
  * Abstract json parser.
@@ -40,22 +42,42 @@ abstract class AbstractJsonParser implements JsonParser {
 
 	@Override
 	public final Object parse(String json) {
+		return translateValue(
+			trimAndParse(json, Object.class)
+		);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public final List<Object> parseArray(String json) {
+		return unmodifiableList(
+			trimAndParse(json, List.class)
+		);
+	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public final Map<String, Object> parseObject(String json) {
+		return unmodifiableMap(
+			trimAndParse(json, Map.class)
+		);
+	}
+
+	private <T> T trimAndParse(String json, Class<T> klass) {
 		String trimmedJson = notNull(trimToNull(json), "JSON");
 
 		try {
-			return translateValue(
-				doParse(trimmedJson)
-			);
+			return doParse(trimmedJson, klass);
 		}
 		catch (Exception ex) {
 			throw new JsonException(ex);
 		}
 	}
 
-	abstract Object doParse(String json);
+	abstract <T> T doParse(String json, Class<T> klazz) throws Exception;
 
 	@SuppressWarnings("unchecked")
-	private static Object translateValue(Object value) {
+	private static <T> Object translateValue(T value) {
 		if (value instanceof Number) {
 			return ((Number) value).doubleValue();
 		}
@@ -65,7 +87,7 @@ abstract class AbstractJsonParser implements JsonParser {
 		}
 
 		if (value instanceof List) {
-			return Collections.unmodifiableList((List<Object>) value);
+			return unmodifiableList((List<Object>) value);
 		}
 
 		return value;

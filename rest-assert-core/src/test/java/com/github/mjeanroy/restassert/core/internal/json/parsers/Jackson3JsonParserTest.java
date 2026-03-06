@@ -24,24 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-/**
- * Static helper that can auto-detect the most appropriate JSON parser.
- */
-public final class JsonParsers {
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
-	/**
-	 * Get JSON parser.
-	 *
-	 * @return JSON parser.
-	 */
-	public static JsonParser getParser() {
-		return Holder.INSTANCE;
-	}
+@EnabledForJreRange(min = JRE.JAVA_17)
+class Jackson3JsonParserTest extends AbstractJsonParserTest {
 
-	private JsonParsers() {
-	}
-
-	private static class Holder {
-		public static final JsonParser INSTANCE = JsonParserStrategy.autoDetect();
+	@Override
+	JsonParser parser() {
+		return Jackson3JsonParser.getInstance();
 	}
 }

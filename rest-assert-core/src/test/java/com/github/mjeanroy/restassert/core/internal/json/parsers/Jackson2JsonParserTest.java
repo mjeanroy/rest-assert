@@ -24,30 +24,10 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import com.github.mjeanroy.restassert.core.internal.json.JsonException;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
-import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 class Jackson2JsonParserTest extends AbstractJsonParserTest {
-
-	private static JsonParser parser;
-
-	@BeforeAll
-	static void setUp() {
-		parser = jackson2Parser();
-	}
 
 	@Override
 	JsonParser parser() {
-		return parser;
-	}
-
-	@Test
-	void it_should_wrap_checked_exception() {
-		String json = "[ Invalid JSON ]";
-		assertThatThrownBy(() -> parser.parse(json)).isExactlyInstanceOf(JsonException.class);
+		return Jackson2JsonParser.getInstance();
 	}
 }

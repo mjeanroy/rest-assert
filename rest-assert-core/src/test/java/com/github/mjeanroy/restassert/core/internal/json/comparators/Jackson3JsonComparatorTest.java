@@ -22,26 +22,18 @@
  * THE SOFTWARE.
  */
 
-package com.github.mjeanroy.restassert.core.internal.json.parsers;
+package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
-/**
- * Static helper that can auto-detect the most appropriate JSON parser.
- */
-public final class JsonParsers {
+import com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson3JsonParser;
+import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
+import org.junit.jupiter.api.condition.EnabledForJreRange;
+import org.junit.jupiter.api.condition.JRE;
 
-	/**
-	 * Get JSON parser.
-	 *
-	 * @return JSON parser.
-	 */
-	public static JsonParser getParser() {
-		return Holder.INSTANCE;
-	}
+@EnabledForJreRange(min = JRE.JAVA_17)
+class Jackson3JsonComparatorTest extends AbstractJsonComparatorTest {
 
-	private JsonParsers() {
-	}
-
-	private static class Holder {
-		public static final JsonParser INSTANCE = JsonParserStrategy.autoDetect();
+	@Override
+	protected JsonParser jsonParser() {
+		return Jackson3JsonParser.getInstance();
 	}
 }

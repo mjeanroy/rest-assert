@@ -24,24 +24,45 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.json.JsonMapper;
+
 /**
- * Static helper that can auto-detect the most appropriate JSON parser.
+ * Implementation of {@link JsonParser}
+ * using Jackson 3 as internal implementation.
+ *
+ * This class is implemented as a singleton.
+ * This class is thread safe.
  */
-public final class JsonParsers {
+public final class Jackson3JsonParser extends AbstractJsonParser {
 
 	/**
-	 * Get JSON parser.
+	 * Get parser.
 	 *
-	 * @return JSON parser.
+	 * @return Parser.
 	 */
-	public static JsonParser getParser() {
+	public static Jackson3JsonParser getInstance() {
 		return Holder.INSTANCE;
 	}
 
-	private JsonParsers() {
+	/**
+	 * Jackson 3 parser.
+	 */
+	private final ObjectMapper mapper;
+
+	private Jackson3JsonParser(ObjectMapper mapper) {
+		super();
+		this.mapper = mapper;
 	}
 
-	private static class Holder {
-		public static final JsonParser INSTANCE = JsonParserStrategy.autoDetect();
+	@Override
+	<T> T doParse(String json, Class<T> klass) {
+		return mapper.readValue(json, klass);
+	}
+
+	private static final class Holder {
+		private static final Jackson3JsonParser INSTANCE = new Jackson3JsonParser(
+			JsonMapper.builder().build()
+		);
 	}
 }

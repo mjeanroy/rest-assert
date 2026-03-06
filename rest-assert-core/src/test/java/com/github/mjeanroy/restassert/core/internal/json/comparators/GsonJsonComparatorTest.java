@@ -24,14 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.comparators;
 
+import com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser;
 import com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser;
-
-import static com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser.gsonParser;
 
 class GsonJsonComparatorTest extends AbstractJsonComparatorTest {
 
 	@Override
 	protected JsonParser jsonParser() {
-		return gsonParser();
+		return GsonJsonParser.getInstance();
 	}
 }

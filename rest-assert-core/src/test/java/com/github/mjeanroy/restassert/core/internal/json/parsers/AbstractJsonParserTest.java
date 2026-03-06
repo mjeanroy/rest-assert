@@ -24,6 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
+import com.github.mjeanroy.restassert.core.internal.json.JsonException;
 import com.github.mjeanroy.restassert.test.json.JSONArray;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +36,7 @@ import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonEntry;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.jsonObject;
 import static com.github.mjeanroy.restassert.test.json.JSONTestUtils.toJSON;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.entry;
 
 @SuppressWarnings("unchecked")
@@ -181,6 +183,14 @@ public abstract class AbstractJsonParserTest {
 		assertThat(obj2).hasSize(2).contains(
 			entry("id", 2.0),
 			entry("name", "bar")
+		);
+	}
+
+	@Test
+	void it_should_wrap_errors() {
+		String json = "[ Invalid JSON ]";
+		assertThatThrownBy(() -> parser().parse(json)).isExactlyInstanceOf(
+			JsonException.class
 		);
 	}
 

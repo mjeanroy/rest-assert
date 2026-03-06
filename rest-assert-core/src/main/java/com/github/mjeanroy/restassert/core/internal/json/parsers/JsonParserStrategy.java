@@ -24,10 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import static com.github.mjeanroy.restassert.core.internal.common.ClassUtils.isPresent;
-import static com.github.mjeanroy.restassert.core.internal.json.parsers.GsonJsonParser.gsonParser;
-import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson1JsonParser.jackson1Parser;
-import static com.github.mjeanroy.restassert.core.internal.json.parsers.Jackson2JsonParser.jackson2Parser;
+import com.github.mjeanroy.restassert.core.internal.common.ClassUtils;
 
 /**
  * Access json parser implementation.
@@ -36,10 +33,20 @@ enum JsonParserStrategy {
 	/**
 	 * Json parser using Jackson2 as internal implementation.
 	 */
+	JACKSON3("tools.jackson.databind.ObjectMapper") {
+		@Override
+		JsonParser build() {
+			return Jackson2JsonParser.getInstance();
+		}
+	},
+
+	/**
+	 * Json parser using Jackson2 as internal implementation.
+	 */
 	JACKSON2("com.fasterxml.jackson.databind.ObjectMapper") {
 		@Override
 		JsonParser build() {
-			return jackson2Parser();
+			return Jackson2JsonParser.getInstance();
 		}
 	},
 
@@ -49,7 +56,7 @@ enum JsonParserStrategy {
 	GSON("com.google.gson.Gson") {
 		@Override
 		JsonParser build() {
-			return gsonParser();
+			return GsonJsonParser.getInstance();
 		}
 	},
 
@@ -59,7 +66,7 @@ enum JsonParserStrategy {
 	JACKSON1("org.codehaus.jackson.map.ObjectMapper") {
 		@Override
 		JsonParser build() {
-			return jackson1Parser();
+			return Jackson1JsonParser.getInstance();
 		}
 	};
 
@@ -70,18 +77,22 @@ enum JsonParserStrategy {
 	}
 
 	/**
-	 * Check if given strategy is available.
-	 *
-	 * @return {@code true} if strategy is available, {@code false} otherwise.
-	 */
-	boolean isAvailable() {
-		return isPresent(className);
-	}
-
-	/**
 	 * Get parser instance according to strategy.
 	 *
 	 * @return Parser.
 	 */
 	abstract JsonParser build();
+
+	static JsonParser autoDetect() {
+		for (JsonParserStrategy strategy : JsonParserStrategy.values()) {
+			if (ClassUtils.isPresent(strategy.className)) {
+				return strategy.build();
+			}
+		}
+
+		// Fail if no available implementation found
+		throw new UnsupportedOperationException(
+			"Please add a json parser to your classpath (Jackson2, Jackson1 or Gson)"
+		);
+	}
 }

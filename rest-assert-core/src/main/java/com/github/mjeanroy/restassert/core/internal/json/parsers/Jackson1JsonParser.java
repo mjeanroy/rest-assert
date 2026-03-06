@@ -24,11 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.json.parsers;
 
-import com.github.mjeanroy.restassert.core.internal.json.JsonException;
 import org.codehaus.jackson.map.ObjectMapper;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * Implementation of {@link com.github.mjeanroy.restassert.core.internal.json.parsers.JsonParser}
@@ -37,20 +33,15 @@ import java.util.Map;
  * This class is implemented as a singleton.
  * This class is thread safe.
  */
-public class Jackson1JsonParser extends AbstractJsonParser {
-
-	/**
-	 * Singleton instance.
-	 */
-	private static final Jackson1JsonParser INSTANCE = new Jackson1JsonParser();
+public final class Jackson1JsonParser extends AbstractJsonParser {
 
 	/**
 	 * Get parser.
 	 *
 	 * @return Parser.
 	 */
-	public static Jackson1JsonParser jackson1Parser() {
-		return INSTANCE;
+	public static Jackson1JsonParser getInstance() {
+		return Holder.INSTANCE;
 	}
 
 	/**
@@ -58,34 +49,19 @@ public class Jackson1JsonParser extends AbstractJsonParser {
 	 */
 	private final ObjectMapper mapper;
 
-	private Jackson1JsonParser() {
+	private Jackson1JsonParser(ObjectMapper mapper) {
 		super();
-		this.mapper = new ObjectMapper();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public Map<String, Object> parseObject(String json) {
-		return parse(json, Map.class);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Object> parseArray(String json) {
-		return parse(json, List.class);
+		this.mapper = mapper;
 	}
 
 	@Override
-	Object doParse(String json) {
-		return parse(json, Object.class);
+	<T> T doParse(String json, Class<T> klass) throws Exception {
+		return mapper.readValue(json, klass);
 	}
 
-	private <T> T parse(String json, Class<T> klass) {
-		try {
-			return mapper.readValue(json, klass);
-		}
-		catch (Exception ex) {
-			throw new JsonException(ex);
-		}
+	private static final class Holder {
+		private static final Jackson1JsonParser INSTANCE = new Jackson1JsonParser(
+			new ObjectMapper()
+		);
 	}
 }
