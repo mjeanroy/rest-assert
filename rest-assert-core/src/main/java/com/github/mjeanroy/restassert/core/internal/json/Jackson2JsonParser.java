@@ -60,7 +60,7 @@ final class Jackson2JsonParser extends AbstractJsonParser {
 
 	private static final class Holder {
 		private static final Jackson2JsonParser INSTANCE = new Jackson2JsonParser(
-			new ObjectMapper()
+			new ObjectMapper().findAndRegisterModules()
 		);
 	}
 }

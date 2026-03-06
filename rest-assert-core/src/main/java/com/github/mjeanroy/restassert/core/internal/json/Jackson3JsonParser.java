@@ -62,7 +62,9 @@ final class Jackson3JsonParser extends AbstractJsonParser {
 
 	private static final class Holder {
 		private static final Jackson3JsonParser INSTANCE = new Jackson3JsonParser(
-			JsonMapper.builder().build()
+			JsonMapper.builder()
+				.findAndAddModules()
+				.build()
 		);
 	}
 }
