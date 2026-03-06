@@ -36,6 +36,7 @@ import com.github.mjeanroy.restassert.tests.builders.ok.OkHttpResponseBuilder;
 import com.github.mjeanroy.restassert.tests.builders.spring.SpringMockMvcHttpResponseBuilder;
 import net.bytebuddy.ByteBuddy;
 import net.bytebuddy.description.type.TypeDescription;
+import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.FixedValue;
 import net.bytebuddy.implementation.MethodDelegation;
 import net.bytebuddy.matcher.ElementMatchers;
@@ -135,7 +136,22 @@ final class HttpMatchers {
 			.parameterizedType(HttpMatcher.class, implClass)
 			.build();
 
-		Class<?> dynamicType = new ByteBuddy()
+		try (
+			DynamicType.Unloaded<Object> loader = getDynamicLoader(klass, httpResponseBuilderClass, type);
+		) {
+			Class<?> dynamicType = loader
+				.load(implClass.getClassLoader())
+				.getLoaded();
+
+			return (HttpMatcher<T>) dynamicType.getDeclaredConstructor().newInstance();
+		}
+		catch (Exception ex) {
+			throw new AssertionError();
+		}
+	}
+
+	private static <T> DynamicType.Unloaded<Object> getDynamicLoader(Class<?> klass, Class<? extends HttpResponseBuilder<T>> httpResponseBuilderClass, TypeDescription.Generic type) {
+		return new ByteBuddy()
 			.subclass(Object.class)
 			.implement(type)
 
@@ -156,15 +172,6 @@ final class HttpMatchers {
 			.method(ElementMatchers.named("toString"))
 			.intercept(FixedValue.value(klass.getSimpleName()))
 
-			.make()
-			.load(implClass.getClassLoader())
-			.getLoaded();
-
-		try {
-			return (HttpMatcher<T>) dynamicType.getDeclaredConstructor().newInstance();
-		}
-		catch (Exception ex) {
-			throw new AssertionError();
-		}
+			.make();
 	}
 }
