@@ -107,8 +107,6 @@
     <mockito.version>4.11.0</mockito.version>
     <commons-lang3.version>3.20.0</commons-lang3.version>
     <commons-io.version>2.21.0</commons-io.version>
-    <junit-runif.version>0.2.0</junit-runif.version>
-    <junit-customclassloader.version>0.1.1</junit-customclassloader.version>
     <equalsverifier.version>3.19.4</equalsverifier.version>
     <byte-buddy.version>1.18.7</byte-buddy.version>
     <wiremock.version>2.27.2</wiremock.version>
@@ -256,18 +254,6 @@
         <groupId>commons-io</groupId>
         <artifactId>commons-io</artifactId>
         <version>${commons-io.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.github.mjeanroy</groupId>
-        <artifactId>junit-runif</artifactId>
-        <version>${junit-runif.version}</version>
-        <scope>test</scope>
-      </dependency>
-      <dependency>
-        <groupId>com.github.mjeanroy</groupId>
-        <artifactId>junit-customclassloader</artifactId>
-        <version>${junit-customclassloader.version}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
