@@ -56,6 +56,6 @@ class OkHttpResponseBodyBuilder {
 	ResponseBody build() {
 		MediaType mediaType = MediaType.parse("plain/text");
 		String content = body == null ? "" : body;
-		return ResponseBody.create(mediaType, content);
+		return ResponseBody.create(content, mediaType);
 	}
 }
