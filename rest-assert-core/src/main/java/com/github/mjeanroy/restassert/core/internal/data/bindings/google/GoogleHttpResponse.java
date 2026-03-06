@@ -28,6 +28,7 @@ import com.github.mjeanroy.restassert.core.data.HttpHeader;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.AbstractHttpResponse;
 import com.google.api.client.http.HttpHeaders;
+import com.google.common.io.ByteStreams;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,7 +37,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
-import static com.google.api.client.util.IOUtils.copy;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
@@ -97,7 +97,7 @@ public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResp
 	@Override
 	protected String doGetContent() throws IOException {
 		try (InputStream is = response.getContent(); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-			copy(is, bos);
+			ByteStreams.copy(is, bos);
 			return new String(bos.toByteArray(), response.getContentCharset());
 		}
 	}
