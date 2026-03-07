@@ -38,6 +38,7 @@
 
   <properties>
     <source.generated.path>${project.basedir}/src/main/generated</source.generated.path>
+    <java-module-name>com.github.mjeanroy.restassert.assertj</java-module-name>
   </properties>
 
   <dependencies>

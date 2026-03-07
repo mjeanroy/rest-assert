@@ -36,6 +36,7 @@
 
   <properties>
     <source.generated.path>${project.basedir}/src/main/generated</source.generated.path>
+    <java-module-name>com.github.mjeanroy.restassert.hamcrest</java-module-name>
   </properties>
 
   <dependencies>

@@ -34,6 +34,7 @@
   <artifactId>rest-assert-generator</artifactId>
 
   <properties>
+    <java-module-name>com.github.mjeanroy.restassert.generator</java-module-name>
     <jmustache.version>1.15</jmustache.version>
   </properties>
 

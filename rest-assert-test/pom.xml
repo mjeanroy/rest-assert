@@ -33,6 +33,10 @@
 
   <artifactId>rest-assert-test</artifactId>
 
+  <properties>
+    <java-module-name>com.github.mjeanroy.restassert.test</java-module-name>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.commons</groupId>

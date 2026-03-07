@@ -37,6 +37,10 @@
   <packaging>jar</packaging>
   <url>https://github.com/mjeanroy/rest-assert</url>
 
+  <properties>
+    <java-module-name>com.github.mjeanroy.restassert.core</java-module-name>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
