@@ -27,34 +27,27 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.junitservers.JunitServersHttpResponse;
 
-/**
- * Entry point for assertion methods for JunitServers
- * library.
- */
+/// Entry point for assertion methods for JunitServers library.
 public final class JunitServersHttpAssertions {
 
 	// Ensure non instantiation
 	private JunitServersHttpAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {
 		return HttpResponseAssertions.assertThat(
 			toHttpResponse(actual)
 		);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(com.github.mjeanroy.junit.servers.client.HttpResponse actual) {
 		return JsonAssertions.assertThatJson(
 			toHttpResponse(actual)

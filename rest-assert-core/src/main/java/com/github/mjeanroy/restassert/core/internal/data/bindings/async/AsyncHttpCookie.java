@@ -28,26 +28,19 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.util.Date;
 
-/**
- * Implementation of {@link Cookie}
- * using Async-Http (version &gt;= 2.0.0) framework as real implementation.
- */
+/// Implementation of [Cookie] using Async-Http (version >= 2.0.0)
+/// framework as real implementation.
 public class AsyncHttpCookie implements Cookie {
 
-	/**
-	 * Create new {@link Cookie} using instance
-	 * of {@link io.netty.handler.codec.http.cookie.Cookie}.
-	 *
-	 * @param cookie Original cookie object.
-	 * @return Cookie that can be used with rest-assert.
-	 */
+	/// Create new [Cookie] using instance of [io.netty.handler.codec.http.cookie.Cookie].
+	///
+	/// @param cookie Original cookie object.
+	/// @return Cookie that can be used with rest-assert.
 	public static AsyncHttpCookie create(io.netty.handler.codec.http.cookie.Cookie cookie) {
 		return new AsyncHttpCookie(cookie);
 	}
 
-	/**
-	 * Original async http cookie.
-	 */
+	/// Original async http cookie.
 	private final io.netty.handler.codec.http.cookie.Cookie cookie;
 
 	// Use static factory

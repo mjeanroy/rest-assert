@@ -33,22 +33,15 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusOutOf.shouldHaveStatusOutOf;
 
-/**
- * Assert that a given HTTP status is out of a given range (for example, not between 200 and 299).
- */
+/// Assert that a given HTTP status is out of a given range (for example, not between 200 and 299).
 public class StatusOutOfAssertion extends AbstractStatusRangeAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(StatusOutOfAssertion.class);
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param start Lower bound.
-	 * @param end Upper bound.
-	 */
+	/// Create assertion.
+	///
+	/// @param start Lower bound.
+	/// @param end Upper bound.
 	public StatusOutOfAssertion(int start, int end) {
 		super(start, end);
 	}

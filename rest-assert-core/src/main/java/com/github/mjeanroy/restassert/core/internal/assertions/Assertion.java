@@ -24,18 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.assertions;
 
-/**
- * Handle assertion.
- *
- * @param <T> Type of asserted object.
- */
+/// Handle assertion.
+///
+/// @param <T> Type of asserted object.
 public interface Assertion<T> {
 
-	/**
-	 * Verify input and return assertion result (i.e success or failure).
-	 *
-	 * @param input Input (a.k.a tested object).
-	 * @return Assertion result.
-	 */
+	/// Verify input and return assertion result (i.e success or failure).
+	///
+	/// @param input Input (a.k.a tested object).
+	/// @return Assertion result.
 	AssertionResult handle(T input);
 }

@@ -27,14 +27,10 @@ package com.github.mjeanroy.restassert.tests.builders.ning;
 import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 import com.ning.http.client.cookie.Cookie;
 
-/**
- * Build mock instance of {@link Cookie} class.
- */
+/// Build mock instance of [Cookie] class.
 public class NingHttpCookieBuilder extends AbstractCookieBuilder<Cookie, NingHttpCookieBuilder> {
 
-	/**
-	 * Create builder with default values.
-	 */
+	/// Create builder with default values.
 	public NingHttpCookieBuilder() {
 		super();
 	}

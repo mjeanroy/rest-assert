@@ -40,26 +40,20 @@ import java.util.stream.Collectors;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Implementation of {@link HttpResponse}
- * using Apache HttpClient framework as real implementation.
- */
+/// Implementation of [HttpResponse] using Apache HttpClient
+/// framework as real implementation.
 public class ApacheHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
-	/**
-	 * Create new {@link HttpResponse} using instance of {@link org.apache.http.HttpResponse},
-	 * or returns {@code null} if {@code response} is {@code null}.
-	 *
-	 * @param response Original response object.
-	 * @return Http response that can be used with rest-assert.
-	 */
+	/// Create new [HttpResponse] using instance of [org.apache.http.HttpResponse],
+	/// or returns `null` if `response` is `null`.
+	///
+	/// @param response Original response object.
+	/// @return Http response that can be used with rest-assert.
 	public static ApacheHttpResponse create(org.apache.http.HttpResponse response) {
 		return response == null ? null : new ApacheHttpResponse(response);
 	}
 
-	/**
-	 * Original http response.
-	 */
+	/// Original http response.
 	private final org.apache.http.HttpResponse response;
 
 	// Use static factory

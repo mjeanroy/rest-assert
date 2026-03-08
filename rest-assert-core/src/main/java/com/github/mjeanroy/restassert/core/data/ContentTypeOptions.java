@@ -27,43 +27,29 @@ package com.github.mjeanroy.restassert.core.data;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
-/**
- * Values of valid X-Content-Type-Options value.
- *
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options</a>
- */
+/// Values of valid `X-Content-Type-Options` value ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options))
 public enum ContentTypeOptions implements HttpHeaderValue {
 
-	/**
-	 * The only defined value, "nosniff", prevents Internet Explorer and Google Chrome
-	 * from MIME-sniffing a response away from the declared content-type.
-	 */
+	/// The only defined value, `nosniff``, prevents Internet Explorer and Google Chrome
+	/// from MIME-sniffing a response away from the declared content-type.
 	NO_SNIFF("nosniff");
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final ContentTypeOptionsParser PARSER = new ContentTypeOptionsParser();
 
-	/**
-	 * Get parser for {@link ContentTypeOptions} instances.
-	 *
-	 * @return The parser.
-	 */
+	/// Get parser for [ContentTypeOptions] instances.
+	///
+	/// @return The parser.
 	public static HttpHeaderParser<ContentTypeOptions> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * The value value as specified by official specification.
-	 */
+	/// The value value as specified by official specification.
 	private final String value;
 
-	/**
-	 * Create Content-Type value value.
-	 *
-	 * @param value The value.
-	 */
+	/// Create [ContentTypeOptions] from raw value.
+	///
+	/// @param value The value.
 	ContentTypeOptions(String value) {
 		this.value = value;
 	}
@@ -73,11 +59,9 @@ public enum ContentTypeOptions implements HttpHeaderValue {
 		return value;
 	}
 
-	/**
-	 * Get {@link #value}
-	 *
-	 * @return {@link #value}
-	 */
+	/// Get [#value]
+	///
+	/// @return Returns [#value]
 	String getValue() {
 		return value;
 	}

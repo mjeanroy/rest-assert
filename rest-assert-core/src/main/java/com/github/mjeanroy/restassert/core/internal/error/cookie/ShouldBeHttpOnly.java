@@ -26,9 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when a cookie is (or is not) http only.
- */
+/// Error thrown when a cookie is (or is not) http only.
 public final class ShouldBeHttpOnly extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -36,20 +34,16 @@ public final class ShouldBeHttpOnly extends AbstractError {
 		super(message);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @return Error.
 	public static ShouldBeHttpOnly shouldBeHttpOnly() {
 		return new ShouldBeHttpOnly("Expecting cookie to be 'http only'");
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @return Error.
 	public static ShouldBeHttpOnly shouldNotBeHttpOnly() {
 		return new ShouldBeHttpOnly("Expecting cookie not to be 'http only'");
 	}

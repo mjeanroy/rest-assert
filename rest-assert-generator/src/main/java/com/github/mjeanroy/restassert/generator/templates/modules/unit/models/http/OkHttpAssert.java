@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResp
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import okhttp3.Response;
 
-/**
- * Template model for rest-assert-unit HttpAssert class.
- */
+/// Template model for rest-assert-unit HttpAssert class.
 public final class OkHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final OkHttpAssert INSTANCE = new OkHttpAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel okHttpAssert() {
 		return INSTANCE;
 	}

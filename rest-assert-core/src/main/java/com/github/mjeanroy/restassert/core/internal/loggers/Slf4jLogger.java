@@ -26,20 +26,14 @@ package com.github.mjeanroy.restassert.core.internal.loggers;
 
 import org.slf4j.LoggerFactory;
 
-/**
- * A {@link Logger} implementation delegating everything to an SLF4J Logger.
- */
+/// A [Logger] implementation delegating everything to an SLF4J Logger.
 class Slf4jLogger implements Logger {
-	/**
-	 * The SLF4J Logger.
-	 */
+	/// The SLF4J Logger.
 	private final org.slf4j.Logger logger;
 
-	/**
-	 * Create the logger.
-	 *
-	 * @param klass Logger name.
-	 */
+	/// Create the logger.
+	///
+	/// @param klass Logger name.
 	Slf4jLogger(Class<?> klass) {
 		this.logger = LoggerFactory.getLogger(klass);
 	}

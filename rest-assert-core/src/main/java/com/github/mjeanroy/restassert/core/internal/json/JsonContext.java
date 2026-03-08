@@ -29,10 +29,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isSurroundedBy;
 
-/**
- * Json context (a.k.a current fully qualified entry
- * name).
- */
+/// Json context (a.k.a current fully qualified entry name).
 class JsonContext {
 
 	static JsonContext rootContext(String actual, String expected) {

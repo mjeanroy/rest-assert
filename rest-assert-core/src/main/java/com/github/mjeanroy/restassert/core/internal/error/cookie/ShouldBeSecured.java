@@ -26,10 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when a cookie does not have
- * expected value.
- */
+/// Error thrown when a cookie is (or is not) secured.
 public final class ShouldBeSecured extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -37,20 +34,16 @@ public final class ShouldBeSecured extends AbstractError {
 		super(message);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @return Error.
 	public static ShouldBeSecured shouldBeSecured() {
 		return new ShouldBeSecured("Expecting cookie to be secured");
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @return Error.
 	public static ShouldBeSecured shouldNotBeSecured() {
 		return new ShouldBeSecured("Expecting cookie not to be secured");
 	}

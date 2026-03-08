@@ -26,13 +26,9 @@ package com.github.mjeanroy.restassert.core.internal.json;
 
 import com.github.mjeanroy.restassert.core.internal.common.ClassUtils;
 
-/**
- * Access json parser implementation.
- */
+/// Access json parser implementation.
 enum JsonParserStrategy {
-	/**
-	 * Json parser using Jackson2 as internal implementation.
-	 */
+	/// [JsonParser] using Jackson 3 as internal implementation.
 	JACKSON3("tools.jackson.databind.ObjectMapper") {
 		@Override
 		JsonParser build() {
@@ -40,9 +36,7 @@ enum JsonParserStrategy {
 		}
 	},
 
-	/**
-	 * Json parser using Jackson2 as internal implementation.
-	 */
+	/// [JsonParser] using Jackson 2 as internal implementation.
 	JACKSON2("com.fasterxml.jackson.databind.ObjectMapper") {
 		@Override
 		JsonParser build() {
@@ -50,9 +44,7 @@ enum JsonParserStrategy {
 		}
 	},
 
-	/**
-	 * Json parser using Google Gson as internal implementation.
-	 */
+	/// [JsonParser] using Google Gson as internal implementation.
 	GSON("com.google.gson.Gson") {
 		@Override
 		JsonParser build() {
@@ -60,9 +52,7 @@ enum JsonParserStrategy {
 		}
 	},
 
-	/**
-	 * Json parser using Jackson1 as internal implementation.
-	 */
+	/// [JsonParser] using Jackson 1 as internal implementation.
 	JACKSON1("org.codehaus.jackson.map.ObjectMapper") {
 		@Override
 		JsonParser build() {
@@ -76,11 +66,9 @@ enum JsonParserStrategy {
 		this.className = className;
 	}
 
-	/**
-	 * Get parser instance according to strategy.
-	 *
-	 * @return Parser.
-	 */
+	/// Get parser instance according to strategy.
+	///
+	/// @return Parser.
 	abstract JsonParser build();
 
 	static JsonParser autoDetect() {

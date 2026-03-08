@@ -30,45 +30,36 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheH
 
 import static com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheHttpCookie.create;
 
-/**
- * Entry point for assertion methods for Apache HttpClient
- * library.
- */
+/// Entry point for assertion methods for Apache HttpClient library.
 public final class ApacheHttpAssertions {
 
 	// Ensure non instantiation
 	private ApacheHttpAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(org.apache.http.HttpResponse actual) {
 		return HttpResponseAssertions.assertThat(
 			toHttpResponse(actual)
 		);
 	}
 
-	/**
-	 * Creates a new instance of {@link CookieAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [CookieAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static CookieAssert assertThat(org.apache.http.cookie.Cookie actual) {
 		Cookie cookie = create(actual);
 		return new CookieAssert(cookie);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(org.apache.http.HttpResponse actual) {
 		return JsonAssertions.assertThatJson(
 			toHttpResponse(actual)

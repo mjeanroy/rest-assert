@@ -29,10 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 import java.util.List;
 
-/**
- * Error thrown when an http response should contain
- * specific header.
- */
+/// Error thrown when an http response should contain specific header.
 public final class ShouldHaveHeader extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -45,24 +42,20 @@ public final class ShouldHaveHeader extends AbstractError {
 		super(expectation, mismatch);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param headerName Expected header name.
+	/// @return Error.
 	public static ShouldHaveHeader shouldHaveHeader(String headerName) {
 		return new ShouldHaveHeader(Message.message("Expecting response to have header %s", headerName));
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @param headerValue Expected header value.
-	 * @param actualValues Actual header values.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param headerName Expected header name.
+	/// @param headerValue Expected header value.
+	/// @param actualValues Actual header values.
+	/// @return Error.
 	public static ShouldHaveHeader shouldHaveHeaderWithValue(String headerName, String headerValue, List<String> actualValues) {
 		if (actualValues.size() == 1) {
 			return shouldHaveHeaderWithValue(headerName, headerValue, actualValues.get(0));
@@ -74,14 +67,12 @@ public final class ShouldHaveHeader extends AbstractError {
 		);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @param headerValue Expected header value.
-	 * @param actualValue Actual header value.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param headerName Expected header name.
+	/// @param headerValue Expected header value.
+	/// @param actualValue Actual header value.
+	/// @return Error.
 	public static ShouldHaveHeader shouldHaveHeaderWithValue(String headerName, String headerValue, String actualValue) {
 		return new ShouldHaveHeader(
 			Message.message("Expecting response to have header %s equal to %s", headerName, headerValue),

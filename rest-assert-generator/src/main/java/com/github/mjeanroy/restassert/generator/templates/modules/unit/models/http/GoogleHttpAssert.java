@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleH
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.google.api.client.http.HttpResponse;
 
-/**
- * Template model for rest-assert-unit HttpAssert class.
- */
+/// Template model for rest-assert-unit HttpAssert class.
 public final class GoogleHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final GoogleHttpAssert INSTANCE = new GoogleHttpAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel googleHttpAssert() {
 		return INSTANCE;
 	}

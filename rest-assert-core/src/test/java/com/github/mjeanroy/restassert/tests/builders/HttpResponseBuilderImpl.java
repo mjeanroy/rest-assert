@@ -36,29 +36,21 @@ import java.util.stream.Collectors;
 
 import static java.util.Collections.unmodifiableList;
 
-/**
- * DefaultCookieBuilder used to create mock instance of {@link HttpResponse} class.
- */
+/// Builder used to create mock instance of [HttpResponse] class.
 public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpResponse, HttpResponseBuilderImpl> implements HttpResponseBuilder<HttpResponse> {
 
-	/**
-	 * List of cookies.
-	 */
+	/// List of cookies.
 	private final List<Cookie> cookies;
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	public HttpResponseBuilderImpl() {
 		this.cookies = new ArrayList<>();
 	}
 
-	/**
-	 * Add new cookie.
-	 *
-	 * @param cookie Cookie to add.
-	 * @return Current builder.
-	 */
+	/// Add new cookie.
+	///
+	/// @param cookie Cookie to add.
+	/// @return Current builder.
 	@Override
 	public HttpResponseBuilderImpl addCookie(Cookie cookie, Cookie... other) {
 		addCookie(cookie);
@@ -69,13 +61,11 @@ public class HttpResponseBuilderImpl extends AbstractHttpResponseBuilder<HttpRes
 		return this;
 	}
 
-	/**
-	 * Add new cookie.
-	 *
-	 * @param name Cookie name.
-	 * @param value Cookie value.
-	 * @return Current builder.
-	 */
+	/// Add new cookie.
+	///
+	/// @param name Cookie name.
+	/// @param value Cookie value.
+	/// @return Current builder.
 	public HttpResponseBuilderImpl addCookie(String name, String value) {
 		addCookie(new MockCookieBuilder().setName(name).setValue(value).build());
 		return this;

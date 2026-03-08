@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when a json string should be an object
- * but is an array.
- */
+/// Error thrown when a json string should be an object
+/// but is not.
 public final class ShouldBeAnObject extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -41,12 +39,10 @@ public final class ShouldBeAnObject extends AbstractJsonError {
 		);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @return Error.
 	public static ShouldBeAnObject shouldBeAnObject(String json) {
 		return new ShouldBeAnObject(json);
 	}

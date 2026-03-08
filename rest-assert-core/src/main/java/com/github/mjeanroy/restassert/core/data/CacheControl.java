@@ -32,9 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Cache-Control value value as specified by RFC 7234 (https://tools.ietf.org/html/rfc7234).
- */
+/// Cache-Control value value as specified
+/// by [RFC 7234](https://tools.ietf.org/html/rfc7234).
 public final class CacheControl implements HttpHeaderValue {
 
 	private static final String SEPARATOR = ", ";
@@ -49,163 +48,140 @@ public final class CacheControl implements HttpHeaderValue {
 	private static final String DIR_PUBLIC = "public";
 	private static final String DIR_IMMUTABLE = "immutable";
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final CacheControlParser PARSER = new CacheControlParser();
 
-	/**
-	 * Get parser for {@link CacheControl} instances.
-	 *
-	 * @return The parser.
-	 */
+	/// Get parser for [CacheControl] instances.
+	///
+	/// @return The parser.
 	public static HttpHeaderParser<CacheControl> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * Create new builder for {@link CacheControl}.
-	 *
-	 * @return The builder.
-	 */
+	/// Create new builder for [CacheControl].
+	///
+	/// @return The builder.
 	public static CacheControlBuilder builder() {
 		return new CacheControlBuilder();
 	}
 
-	/**
-	 * Cache-Control visibility.
-	 */
+	/// Cache-Control visibility.
 	public enum Visibility {
-		/**
-		 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.6">RFC 7234</a>:
-		 *
-		 * The "private" response directive indicates that the response message
-		 * is intended for a single user and MUST NOT be stored by a shared
-		 * cache.  A private cache MAY store the response and reuse it for later
-		 * requests, even if the response would normally be non-cacheable.
-		 */
+		/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.6"):
+		///
+		/// The `private` response directive indicates that the response message
+		/// is intended for a single user and MUST NOT be stored by a shared
+		/// cache.
+		///
+		/// A private cache MAY store the response and reuse it for later
+		/// requests, even if the response would normally be non-cacheable.
 		PRIVATE,
 
-		/**
-		 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.5">RFC 7234</a>:
-		 *
-		 * The "public" response directive indicates that any cache MAY store
-		 * the response, even if the response would normally be non-cacheable or
-		 * cacheable only within a private cache.
-		 */
+		/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.5):
+		///
+		/// The `public` response directive indicates that any cache MAY store
+		/// the response, even if the response would normally be non-cacheable or
+		/// cacheable only within a private cache.
 		PUBLIC
 	}
 
-	/**
-	 * Append {@code "visibility"} directive.
-	 *
-	 * Currently, two choices:
-	 *
-	 * <ul>
-	 *   <li>{@code private},</li>
-	 *   <li>{@code public}</li>
-	 * </ul>
-	 */
+	/// Append `"visibility"` directive.
+	///
+	/// Currently, two choices:
+	/// - `private`
+	/// - `public`
 	private final Visibility visibility;
 
-	/**
-	 * Append {@code no-store} directive to the value value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.3">RFC 7234</a>:
-	 *
-	 * The {@code "no-store"} response directive indicates that a cache MUST NOT
-	 * store any part of either the immediate request or response.  This
-	 * directive applies to both private and shared caches.  "MUST NOT
-	 * store" in this context means that the cache MUST NOT intentionally
-	 * store the information in non-volatile storage, and MUST make a
-	 * best-effort attempt to remove the information from volatile storage
-	 * as promptly as possible after forwarding it.
-	 */
+	/// Append `no-store` directive to the value value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.3):
+	///
+	/// The `"no-store"` response directive indicates that a cache MUST NOT
+	/// store any part of either the immediate request or response.
+	///
+	/// This directive applies to both private and shared caches.
+	///
+	/// "MUST NOT store" in this context means that the cache MUST NOT intentionally
+	/// store the information in non-volatile storage, and MUST make a
+	/// best-effort attempt to remove the information from volatile storage
+	/// as promptly as possible after forwarding it.
 	private final boolean noStore;
 
-	/**
-	 * Append {@code no-cache} directive to the value value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.2">RFC 7234</a>:
-	 *
-	 * The {@code "no-cache"} response directive indicates that the response MUST
-	 * NOT be used to satisfy a subsequent request without successful
-	 * validation on the origin server.  This allows an origin server to
-	 * prevent a cache from using it to satisfy a request without contacting
-	 * it, even by caches that have been configured to send stale responses.
-	 */
+	/// Append `no-cache` directive to the value value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.2):
+	///
+	/// The `"no-cache"` response directive indicates that the response MUST
+	/// NOT be used to satisfy a subsequent request without successful
+	/// validation on the origin server.
+	///
+	/// This allows an origin server to prevent a cache from using it to
+	/// satisfy a request without contacting it, even by caches that have
+	/// been configured to send stale responses.
 	private final boolean noCache;
 
-	/**
-	 * Append {@code max-age} directive to the value value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.8">RFC 7234</a>:
-	 *
-	 * The {@code "max-age"} response directive indicates that the response is to be
-	 * considered stale after its age is greater than the specified number
-	 * of seconds.
-	 * This directive uses the token form of the argument syntax: e.g.,
-	 * 'max-age=5' not 'max-age="5"'.  A sender SHOULD NOT generate the
-	 * quoted-string form.
-	 */
+	/// Append `max-age` directive to the value value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.8):
+	///
+	/// The `"max-age"` response directive indicates that the response is to be
+	/// considered stale after its age is greater than the specified number
+	/// of seconds.
+	///
+	/// This directive uses the token form of the argument syntax: e.g.,
+	/// 'max-age=5' not 'max-age="5"'.
+	///
+	/// A sender SHOULD NOT generate the quoted-string form.
 	private final Long maxAge;
 
-	/**
-	 * Append {@code s-maxage} directive to the value value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.9">RFC 7234</a>:
-	 *
-	 * The {@code "s-maxage"} response directive indicates that, in shared caches,
-	 * the maximum age specified by this directive overrides the maximum age
-	 * specified by either the max-age directive or the Expires value
-	 * field.  The s-maxage directive also implies the semantics of the
-	 * proxy-revalidate response directive.
-	 */
+	/// Append `s-maxage` directive to the value value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.9):
+	///
+	/// The `s-maxage` response directive indicates that, in shared caches,
+	/// the maximum age specified by this directive overrides the maximum age
+	/// specified by either the max-age directive or the Expires value
+	/// field.
+	///
+	/// The `s-maxage` directive also implies the semantics of the
+	/// proxy-revalidate response directive.
 	private final Long sMaxAge;
 
-	/**
-	 * Append {@code no-transform} directive to the value value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.4">RFC 7234</a>:
-	 *
-	 * The {@code "no-transform"} response directive indicates that an intermediary
-	 * (regardless of whether it implements a cache) MUST NOT transform the
-	 * payload.
-	 */
+	/// Append `no-transform` directive to the value value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.4):
+	///
+	/// The `no-transform` response directive indicates that an intermediary
+	/// (regardless of whether it implements a cache) MUST NOT transform the
+	/// payload.
 	private final boolean noTransform;
 
-	/**
-	 * Append {@code must-revalidate} directive to the value value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.1">RFC 7234</a>:
-	 *
-	 * The {@code "must-revalidate"} response directive indicates that once it has
-	 * become stale, a cache MUST NOT use the response to satisfy subsequent
-	 * requests without successful validation on the origin server.
-	 */
+	/// Append `must-revalidate` directive to the value value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.1):
+	///
+	/// The `must-revalidate` response directive indicates that once it has
+	/// become stale, a cache MUST NOT use the response to satisfy subsequent
+	/// requests without successful validation on the origin server.
 	private final boolean mustRevalidate;
 
-	/**
-	 * Append {@code proxy-revalidate} directive to the header value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc7234#section-5.2.2.1">RFC 7234</a>:
-	 *
-	 * The {@code "proxy-revalidate"} response directive has the same meaning as the
-	 * {@code "must-revalidate"} response directive, except that it does not apply to
-	 * private caches.
-	 */
+	/// Append `proxy-revalidate` directive to the header value.
+	///
+	/// As specified by [RFC 7234](https://tools.ietf.org/html/rfc7234#section-5.2.2.1):
+	///
+	/// The `proxy-revalidate` response directive has the same meaning as the
+	/// `must-revalidate` response directive, except that it does not apply to
+	/// private caches.
 	private final boolean proxyRevalidate;
 
-	/**
-	 * Append {@code immutable} directive to the header value.
-	 *
-	 * As specified by <a href="https://tools.ietf.org/html/rfc8246">RFC 8246</a>:
-	 *
-	 * When present in an HTTP response, the {@code "immutable"} {@code "Cache-Control"}
-	 * extension indicates that the origin server will not update the
-	 * representation of that resource during the freshness lifetime of the
-	 * response.
-	 */
+	/// Append `immutable` directive to the header value.
+	///
+	/// As specified by [RFC 8246](https://tools.ietf.org/html/rfc8246):
+	///
+	/// When present in an HTTP response, the `immutable` `Cache-Control``
+	/// extension indicates that the origin server will not update the
+	/// representation of that resource during the freshness lifetime of the
+	/// response.
 	private final boolean immutable;
 
 	CacheControl(
@@ -230,83 +206,65 @@ public final class CacheControl implements HttpHeaderValue {
 		this.immutable = immutable;
 	}
 
-	/**
-	 * Get {@link #visibility}
-	 *
-	 * @return {@link #visibility}
-	 */
+	/// Get [#visibility]
+	///
+	/// @return Returns [#visibility]
 	public Visibility getVisibility() {
 		return visibility;
 	}
 
-	/**
-	 * Get {@link #noCache}
-	 *
-	 * @return {@link #noCache}
-	 */
+	/// Get [#noCache]
+	///
+	/// @return Returns [#noCache]
 	public boolean isNoCache() {
 		return noCache;
 	}
 
-	/**
-	 * Get {@link #noStore}
-	 *
-	 * @return {@link #noStore}
-	 */
+	/// Get [#noStore]
+	///
+	/// @return Returns [#noStore]
 	public boolean isNoStore() {
 		return noStore;
 	}
 
-	/**
-	 * Get {@link #maxAge}
-	 *
-	 * @return {@link #maxAge}
-	 */
+	/// Get [#maxAge]
+	///
+	/// @return Returns [#maxAge]
 	public Long getMaxAge() {
 		return maxAge;
 	}
 
-	/**
-	 * Get {@link #sMaxAge}
-	 *
-	 * @return {@link #sMaxAge}
-	 */
+	/// Get [#sMaxAge]
+	///
+	/// @return Returns [#sMaxAge]
 	public Long getSMaxAge() {
 		return sMaxAge;
 	}
 
-	/**
-	 * Get {@link #noTransform}
-	 *
-	 * @return {@link #noTransform}
-	 */
+	/// Get [#noTransform]
+	///
+	/// @return Returns [#noTransform]
 	public boolean isNoTransform() {
 		return noTransform;
 	}
 
-	/**
-	 * Get {@link #mustRevalidate}
-	 *
-	 * @return {@link #mustRevalidate}
-	 */
+	/// Get [#mustRevalidate]
+	///
+	/// @return Returns [#mustRevalidate]
 	public boolean isMustRevalidate() {
 		return mustRevalidate;
 	}
 
-	/**
-	 * Get {@link #proxyRevalidate}
-	 *
-	 * @return {@link #proxyRevalidate}
-	 */
+	/// Get [#proxyRevalidate]
+	///
+	/// @return Returns [#proxyRevalidate]
 	public boolean isProxyRevalidate() {
 		return proxyRevalidate;
 	}
 
-	/**
-	 * Get {@link #immutable}
-	 *
-	 * @return {@link #immutable}
-	 */
+	/// Get [#immutable]
+	///
+	/// @return Returns [#immutable]
 	public boolean isImmutable() {
 		return immutable;
 	}
@@ -512,20 +470,16 @@ public final class CacheControl implements HttpHeaderValue {
 			}
 		};
 
-		/**
-		 * Check if raw value match given directive definition.
-		 *
-		 * @param value Raw value.
-		 * @return {@code true} if {@code value} is a value defining directive, {@code false} otherwise.
-		 */
+		/// Check if raw value match given directive definition.
+		///
+		/// @param value Raw value.
+		/// @return `true` if `value` is a value defining directive, `false` otherwise.
 		abstract boolean match(String value);
 
-		/**
-		 * Parse and update current value in cache-control builder.
-		 *
-		 * @param value The value to parse and set.
-		 * @param builder The builder.
-		 */
+		/// Parse and update current value in [CacheControlBuilder].
+		///
+		/// @param value The value to parse and set.
+		/// @param builder The builder.
 		abstract void setValue(String value, CacheControlBuilder builder);
 	}
 }

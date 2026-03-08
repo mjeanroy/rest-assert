@@ -24,14 +24,13 @@
 
 package com.github.mjeanroy.restassert.unit.api;
 
-/**
- * Abstract assert test.
- * Two methods need to be defined:
- * - First method must execute assert method, without custom message.
- * - Second method must execute assert method, with custom message as first argument.
- *
- * @param <T> Type of actual objects (a.k.a tested object).
- */
+/// Abstract assert test.
+///
+/// Two methods need to be defined:
+/// - First method must execute assert method, without custom message.
+/// - Second method must execute assert method, with custom message as first argument.
+///
+/// @param <T> Type of actual objects (a.k.a tested object).
 public abstract class AbstractAssertTest<T> {
 
 	protected abstract void run(T actual);

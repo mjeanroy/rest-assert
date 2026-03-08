@@ -35,30 +35,22 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldNotHaveCookie;
 
-/**
- * Check that http response does not contains any cookies.
- */
+/// Check that http response does not contains any cookies.
 public class DoesNotHaveCookieAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Cookie name.
-	 */
+	/// Cookie name.
 	private final String name;
 
-	/**
-	 * Create assertion.
-	 */
+	/// Create assertion.
 	public DoesNotHaveCookieAssertion() {
 		this.name = null;
 	}
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Expected cookie name.
-	 * @throws NullPointerException If {@code name} is {@code null}.
-	 * @throws IllegalArgumentException If {@code name} is empty or blank.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Expected cookie name.
+	/// @throws NullPointerException If `name` is `null`.
+	/// @throws IllegalArgumentException If `name` is empty or blank.
 	public DoesNotHaveCookieAssertion(String name) {
 		this.name = notBlank(name, "Cookie name must be defined");
 	}
@@ -70,11 +62,9 @@ public class DoesNotHaveCookieAssertion implements HttpResponseAssertion {
 		return doesNotHave ? success() : getFailure();
 	}
 
-	/**
-	 * Get the {@link AssertionResult} failure instance.
-	 *
-	 * @return The result.
-	 */
+	/// Get the [AssertionResult] failure instance.
+	///
+	/// @return The result.
 	private AssertionResult getFailure() {
 		return failure(name == null ? shouldNotHaveCookie() : shouldNotHaveCookie(name));
 	}

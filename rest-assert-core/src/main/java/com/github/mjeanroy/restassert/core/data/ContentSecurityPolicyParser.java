@@ -34,9 +34,7 @@ import java.util.Set;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_SECURITY_POLICY;
 
-/**
- * Parser for {@link ContentSecurityPolicy} value.
- */
+/// Parser for [ContentSecurityPolicy] value.
 final class ContentSecurityPolicyParser extends AbstractHttpHeaderParser<ContentSecurityPolicy> {
 
 	private static final Logger log = Loggers.getLogger(ContentSecurityPolicyParser.class);

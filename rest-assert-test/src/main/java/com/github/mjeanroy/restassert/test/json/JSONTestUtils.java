@@ -29,9 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Static JSON helpers, to use in tests.
- */
+/// Static JSON helpers, to use in tests.
 public final class JSONTestUtils {
 
 	private static final ObjectMapper objectMapper = new ObjectMapper();
@@ -39,164 +37,134 @@ public final class JSONTestUtils {
 	private JSONTestUtils() {
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with null value.
-	 *
-	 * @param name JSON key.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with null value.
+	///
+	/// @param name JSON key.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name) {
 		return new JSONEntry(name, null);
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with given key and {@code int} value.
-	 *
-	 * @param name JSON key.
-	 * @param value JSON value.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with given key and `int` value.
+	///
+	/// @param name JSON key.
+	/// @param value JSON value.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name, int value) {
 		return new JSONEntry(name, value);
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with given key and {@code double} value.
-	 *
-	 * @param name JSON key.
-	 * @param value JSON value.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with given key and `double` value.
+	///
+	/// @param name JSON key.
+	/// @param value JSON value.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name, double value) {
 		return new JSONEntry(name, value);
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with given key and {@code boolean} value.
-	 *
-	 * @param name JSON key.
-	 * @param value JSON value.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with given key and `boolean` value.
+	///
+	/// @param name JSON key.
+	/// @param value JSON value.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name, boolean value) {
 		return new JSONEntry(name, value);
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with given key and {@code String} value.
-	 *
-	 * @param name JSON key.
-	 * @param value JSON value.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with given key and `String` value.
+	///
+	/// @param name JSON key.
+	/// @param value JSON value.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name, String value) {
 		return new JSONEntry(name, value);
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with null value.
-	 *
-	 * @param name JSON key.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with null value.
+	///
+	/// @param name JSON key.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name, JSONObject object) {
 		return new JSONEntry(name, object.values());
 	}
 
-	/**
-	 * Create JSON entry (i.e JSON object entry) with given key and {@code String} value.
-	 *
-	 * @param name JSON key.
-	 * @param value JSON value.
-	 * @return The JSON entry.
-	 */
+	/// Create JSON entry (i.e JSON object entry) with given key and `String` value.
+	///
+	/// @param name JSON key.
+	/// @param value JSON value.
+	/// @return The JSON entry.
 	public static JSONEntry jsonEntry(String name, JSONArray value) {
 		return new JSONEntry(name, value.values());
 	}
 
-	/**
-	 * Create empty JSON object.
-	 *
-	 * @return JSON Object.
-	 */
+	/// Create empty JSON object.
+	///
+	/// @return JSON Object.
 	public static JSONObject jsonObject() {
 		return new JSONObject();
 	}
 
-	/**
-	 * Create JSON object.
-	 *
-	 * @return JSON Object.
-	 */
+	/// Create JSON object.
+	///
+	/// @return JSON Object.
 	public static JSONObject jsonObject(JSONEntry entry, JSONEntry... others) {
 		return new JSONObject().add(entry, others);
 	}
 
-	/**
-	 * Create empty JSON array.
-	 * @return JSON Array.
-	 */
+	/// Create empty JSON array.
+	/// @return JSON Array.
 	public static JSONArray jsonArray() {
 		return new JSONArray();
 	}
 
-	/**
-	 * Create JSON array.
-	 *
-	 * @param value First value.
-	 * @param others Other values.
-	 * @return JSON Array.
-	 */
+	/// Create JSON array.
+	///
+	/// @param value First value.
+	/// @param others Other values.
+	/// @return JSON Array.
 	public static JSONArray jsonArray(JSONObject value, JSONObject... others) {
 		return new JSONArray().add(value, others);
 	}
 
-	/**
-	 * Create JSON array.
-	 * @param value First value.
-	 * @param others Other values.
-	 * @return JSON Array.
-	 */
+	/// Create JSON array.
+	/// @param value First value.
+	/// @param others Other values.
+	/// @return JSON Array.
 	public static JSONArray jsonArray(int value, int... others) {
 		return new JSONArray().add(value, others);
 	}
 
-	/**
-	 * Create JSON array.
-	 * @param value First value.
-	 * @param others Other values.
-	 * @return JSON Array.
-	 */
+	/// Create JSON array.
+	/// @param value First value.
+	/// @param others Other values.
+	/// @return JSON Array.
 	public static JSONArray jsonArray(double value, double... others) {
 		return new JSONArray().add(value, others);
 	}
 
-	/**
-	 * Create JSON array.
-	 * @param value First value.
-	 * @param others Other values.
-	 * @return JSON Array.
-	 */
+	/// Create JSON array.
+	/// @param value First value.
+	/// @param others Other values.
+	/// @return JSON Array.
 	public static JSONArray jsonArray(String value, String... others) {
 		return new JSONArray().add(value, others);
 	}
 
-	/**
-	 * Serialize entries to a valid JSON object, for example:
-	 *
-	 * <pre><code>
-	 *   String json = toJson(
-	 *     entry("id", 1),
-	 *     entry("name", "John Doe")
-	 *   );
-	 *
-	 *   // Will produce: {"id":1,"name":"John Doe"}
-	 * </code></pre>
-	 *
-	 * @param entry JSON entry.
-	 * @param entries Other JSON entries.
-	 * @return Entries.
-	 */
+	/// Serialize entries to a valid JSON object, for example:
+	///
+	/// ```
+	///   String json = toJson(
+	///     entry("id", 1),
+	///     entry("name", "John Doe")
+	///   );
+	///
+	///   // Will produce: {"id":1,"name":"John Doe"}
+	/// ```
+	///
+	/// @param entry JSON entry.
+	/// @param entries Other JSON entries.
+	/// @return Entries.
 	public static String toJSON(JSONEntry entry, JSONEntry... entries) {
 		Map<String, Object> map = new HashMap<>();
 		map.put(entry.getName(), entry.getValue());
@@ -207,22 +175,18 @@ public final class JSONTestUtils {
 		return serializeToJson(map);
 	}
 
-	/**
-	 * Serialize given array to JSON.
-	 *
-	 * @param array Array to serialize.
-	 * @return The serialized JSON.
-	 */
+	/// Serialize given array to JSON.
+	///
+	/// @param array Array to serialize.
+	/// @return The serialized JSON.
 	public static String toJSON(JSONArray array) {
 		return serializeToJson(array.values());
 	}
 
-	/**
-	 * Serialize given object to JSON.
-	 *
-	 * @param object Object to serialize.
-	 * @return The serialized JSON.
-	 */
+	/// Serialize given object to JSON.
+	///
+	/// @param object Object to serialize.
+	/// @return The serialized JSON.
 	public static String toJSON(JSONObject object) {
 		return serializeToJson(object.values());
 	}

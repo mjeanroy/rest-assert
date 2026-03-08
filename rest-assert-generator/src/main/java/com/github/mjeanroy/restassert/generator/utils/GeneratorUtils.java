@@ -1,32 +1,50 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2014-2026 Mickael Jeanroy
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package com.github.mjeanroy.restassert.generator.utils;
 
-/**
- * Static utilities used by generator.
- */
+/// Static utilities used by generator.
 public final class GeneratorUtils {
 
 	// Ensure non intantiation
 	private GeneratorUtils() {
 	}
 
-	/**
-	 * Generate assertion method name.
-	 * This will build a method name such as:
-	 * isOk ==> assertIsOk
-	 *
-	 * @param methodName Method name.
-	 * @return Assertion method name.
-	 */
+	/// Generate assertion method name.
+	/// This will build a method name such as:
+	/// isOk ==> assertIsOk
+	///
+	/// @param methodName Method name.
+	/// @return Assertion method name.
 	public static String generateAssertMethodName(String methodName) {
 		return "assert" + capitalize(methodName);
 	}
 
-	/**
-	 * Capitalize string.
-	 *
-	 * @param value Value to capitalize.
-	 * @return Capitalized string.
-	 */
+	/// Capitalize string.
+	///
+	/// @param value Value to capitalize.
+	/// @return Capitalized string.
 	private static String capitalize(String value) {
 		return Character.toUpperCase(value.charAt(0)) + value.substring(1);
 	}

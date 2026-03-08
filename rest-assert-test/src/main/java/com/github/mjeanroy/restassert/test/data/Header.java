@@ -30,31 +30,23 @@ import java.util.Objects;
 
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Representation of header.
- * A header is defined by a name and a value.
- */
+/// Representation of header.
+/// A header is defined by a name and a value.
 public final class Header {
 
-	/**
-	 * Create new header.
-	 *
-	 * @param name Header name.
-	 * @param value Header value.
-	 * @return Header.
-	 */
+	/// Create new header.
+	///
+	/// @param name Header name.
+	/// @param value Header value.
+	/// @return Header.
 	public static Header header(String name, String value) {
 		return new Header(name, value);
 	}
 
-	/**
-	 * Header name.
-	 */
+	/// Header name.
 	private final String name;
 
-	/**
-	 * Header value.
-	 */
+	/// Header value.
 	private final String value;
 
 	// Use static factory instead
@@ -63,29 +55,23 @@ public final class Header {
 		this.value = value;
 	}
 
-	/**
-	 * Get {@link #name}
-	 *
-	 * @return {@link #name}
-	 */
+	/// Get [#name]
+	///
+	/// @return Returns [#name]
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Get {@link #value}
-	 *
-	 * @return {@link #value}
-	 */
+	/// Get [#value]
+	///
+	/// @return Returns [#value]
 	public String getValue() {
 		return value;
 	}
 
-	/**
-	 * Get all header values.
-	 *
-	 * @return Header values.
-	 */
+	/// Get all header values.
+	///
+	/// @return Header values.
 	public List<String> getValues() {
 		List<String> values = new ArrayList<>();
 		for (String current : value.split(",")) {

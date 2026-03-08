@@ -33,31 +33,26 @@ import java.util.Objects;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
-/**
- * A parameter that can be displayed in header raw values formatted as {@code "<name>=<value>"}.
- */
+/// A parameter that can be displayed in header raw
+/// values formatted as `"<name>=<value>"`.
 public final class Parameter implements HttpHeaderValue {
 
-	/**
-	 * Create parameter.
-	 *
-	 * @param name Parameter name.
-	 * @param value Parameter value.
-	 * @return The parameter.
-	 * @throws NullPointerException If {@code name} or {@code value} are {@code null}.
-	 * @throws IllegalArgumentException If {@code name} is empty.
-	 */
+	/// Create parameter.
+	///
+	/// @param name Parameter name.
+	/// @param value Parameter value.
+	/// @return The parameter.
+	/// @throws NullPointerException If `name` or `value` are `null`.
+	/// @throws IllegalArgumentException If `name` is empty.
 	public static Parameter parameter(String name, String value) {
 		return new Parameter(name, value);
 	}
 
-	/**
-	 * Parse raw value and create parameter.
-	 *
-	 * @param rawValue Parameter raw value.
-	 * @return The parameter.
-	 * @throws NullPointerException If {@code rawValue} is {@code null}.
-	 */
+	/// Parse raw value and create parameter.
+	///
+	/// @param rawValue Parameter raw value.
+	/// @return The parameter.
+	/// @throws NullPointerException If `rawValue` is `null`.
 	public static Parameter parse(String rawValue) {
 		PreConditions.notNull(rawValue, "Parameter raw value must be defined");
 		String[] parts = rawValue.split("=", 2);
@@ -66,43 +61,33 @@ public final class Parameter implements HttpHeaderValue {
 		return new Parameter(name, value);
 	}
 
-	/**
-	 * Parameter name.
-	 */
+	/// Parameter name.
 	private final String name;
 
-	/**
-	 * Parameter value.
-	 */
+	/// Parameter value.
 	private final String value;
 
-	/**
-	 * Create parameter.
-	 *
-	 * @param name The parameter name.
-	 * @param value The parameter value.
-	 * @throws NullPointerException If {@code name} or {@code value} are {@code null}.
-	 * @throws IllegalArgumentException If {@code name} is empty.
-	 */
+	/// Create parameter.
+	///
+	/// @param name The parameter name.
+	/// @param value The parameter value.
+	/// @throws NullPointerException If `name` or `value` are `null`.
+	/// @throws IllegalArgumentException If `name` is empty.
 	private Parameter(String name, String value) {
 		this.name = notEmpty(name, "Parameter name must be defined");
 		this.value = notNull(value, "Parameter value must be defined");
 	}
 
-	/**
-	 * Get {@link #name}
-	 *
-	 * @return {@link #name}
-	 */
+	/// Get [#name]
+	///
+	/// @return Returns [#name]
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Get {@link #value}
-	 *
-	 * @return {@link #value}
-	 */
+	/// Get [#value]
+	///
+	/// @return Returns [#value]
 	public String getValue() {
 		return value;
 	}

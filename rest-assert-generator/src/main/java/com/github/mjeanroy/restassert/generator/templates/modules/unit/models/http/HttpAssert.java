@@ -27,30 +27,22 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.models.h
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
-/**
- * Template model for rest-assert-unit HttpAssert class.
- */
+/// Template model for rest-assert-unit HttpAssert class.
 public final class HttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final HttpAssert INSTANCE = new HttpAssert(null);
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel httpAssert() {
 		return INSTANCE;
 	}
 
-	/**
-	 * Get new instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get new instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel httpAssert(Class<?> factory) {
 		return new HttpAssert(factory);
 	}

@@ -50,16 +50,12 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.unit.tm
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
-/**
- * Set of processors that will be used to generate assertions
- * classes for rest-assert-unit module.
- */
+/// Set of processors that will be used to generate assertions
+/// classes for rest-assert-unit module.
 public enum UnitProcessor implements Processor {
 
-	/**
-	 * Processor that will generate assert class for http response
-	 * objects.
-	 */
+	/// Processor that will generate assert class for http response
+	/// objects.
 	HTTP_RESPONSE(
 		assertTemplate(),
 		asList(
@@ -74,10 +70,8 @@ public enum UnitProcessor implements Processor {
 		)
 	),
 
-	/**
-	 * Processor that will generate assert class cookies
-	 * objects.
-	 */
+	/// Processor that will generate assert class cookies
+	/// objects.
 	COOKIES(
 		assertTemplate(),
 		asList(
@@ -88,23 +82,17 @@ public enum UnitProcessor implements Processor {
 		)
 	),
 
-	/**
-	 * Processor that will generate assert class json
-	 * objects.
-	 */
+	/// Processor that will generate assert class json
+	/// objects.
 	JSON(
 		assertTemplate(),
 		singletonList(jsonAssert())
 	);
 
-	/**
-	 * Template that will be processed.
-	 */
+	/// Template that will be processed.
 	private final Template template;
 
-	/**
-	 * Data that will be merged into template.
-	 */
+	/// Data that will be merged into template.
 	private final List<TemplateModel> models;
 
 	// Create new processor

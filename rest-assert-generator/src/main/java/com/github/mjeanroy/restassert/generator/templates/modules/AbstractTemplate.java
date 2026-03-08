@@ -27,21 +27,15 @@ package com.github.mjeanroy.restassert.generator.templates.modules;
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.utils.IOUtils;
 
-/**
- * Abstract template.
- */
+/// Abstract template.
 public abstract class AbstractTemplate implements Template {
 
-	/**
-	 * Path of template, relative to classpath.
-	 */
+	/// Path of template, relative to classpath.
 	private final String path;
 
-	/**
-	 * Create new abstract template.
-	 *
-	 * @param prefix Template path prefix.
-	 */
+	/// Create new abstract template.
+	///
+	/// @param prefix Template path prefix.
 	protected AbstractTemplate(String prefix) {
 		this.path = prefix + getClass().getSimpleName() + ".mustache";
 	}

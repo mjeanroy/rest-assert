@@ -27,41 +27,33 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
-/**
- * Entry point for assertion methods for standard Http Response object.
- */
+/// Entry point for assertion methods for standard Http Response object.
 public final class HttpResponseAssertions {
 
 	// Ensure non instantiation
 	private HttpResponseAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [com.github.mjeanroy.restassert.assertj.api.HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(HttpResponse actual) {
 		return new HttpResponseAssert(actual);
 	}
 
-	/**
-	 * Creates a new instance of {@link CookieAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [CookieAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static CookieAssert assertThat(Cookie actual) {
 		return new CookieAssert(actual);
 	}
 
-	/**
-	 * Creates a new instance of {@link com.github.mjeanroy.restassert.assertj.api.JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [com.github.mjeanroy.restassert.assertj.api.JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(HttpResponse actual) {
 		return JsonAssertions.assertThatJson(actual);
 	}

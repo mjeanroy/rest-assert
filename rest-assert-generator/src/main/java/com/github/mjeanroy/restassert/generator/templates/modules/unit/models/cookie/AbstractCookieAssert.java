@@ -29,9 +29,7 @@ import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.Ab
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-/**
- * Template model for rest-assert-unit CookieAssert class.
- */
+/// Template model for rest-assert-unit CookieAssert class.
 public abstract class AbstractCookieAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
 	AbstractCookieAssert() {

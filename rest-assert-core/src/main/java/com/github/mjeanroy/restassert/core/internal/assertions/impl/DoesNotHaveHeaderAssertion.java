@@ -31,17 +31,13 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldNotHaveHeader.shouldNotHaveHeader;
 
-/**
- * Check that http response does not have any header with
- * expected name.
- */
+/// Check that http response does not have any header with
+/// expected name.
 public class DoesNotHaveHeaderAssertion extends AbstractHeaderAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
 	public DoesNotHaveHeaderAssertion(String name) {
 		super(name);
 	}

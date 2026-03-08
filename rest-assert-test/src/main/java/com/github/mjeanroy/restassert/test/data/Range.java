@@ -26,57 +26,43 @@ package com.github.mjeanroy.restassert.test.data;
 
 import java.util.Objects;
 
-/**
- * A status range, with a lower bound and an upper bound.
- */
+/// A status range, with a lower bound and an upper bound.
 public final class Range {
 
-	/**
-	 * Create new range.
-	 *
-	 * @param start The lower bound.
-	 * @param end The upper bound.
-	 * @return The new range.
-	 */
+	/// Create new range.
+	///
+	/// @param start The lower bound.
+	/// @param end The upper bound.
+	/// @return The new range.
 	public static Range range(int start, int end) {
 		return new Range(start, end);
 	}
 
-	/**
-	 * The lower bound.
-	 */
+	/// The lower bound.
 	private final int start;
 
-	/**
-	 * The upper bound.
-	 */
+	/// The upper bound.
 	private final int end;
 
-	/**
-	 * Create the range.
-	 *
-	 * @param start The lower bound.
-	 * @param end The upper bound.
-	 */
+	/// Create the range.
+	///
+	/// @param start The lower bound.
+	/// @param end The upper bound.
 	private Range(int start, int end) {
 		this.start = start;
 		this.end = end;
 	}
 
-	/**
-	 * Get {@link #start}
-	 *
-	 * @return {@link #start}
-	 */
+	/// Get [#start]
+	///
+	/// @return Returns [#start]
 	public int getStart() {
 		return start;
 	}
 
-	/**
-	 * Get {@link #end}
-	 *
-	 * @return {@link #end}
-	 */
+	/// Get [#end]
+	///
+	/// @return Returns [#end]
 	public int getEnd() {
 		return end;
 	}

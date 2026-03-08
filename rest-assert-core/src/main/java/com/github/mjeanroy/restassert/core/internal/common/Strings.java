@@ -30,9 +30,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
-/**
- * Static String Utilities.
- */
+/// Static String Utilities.
 public final class Strings {
 
 	private static final char SINGLE_QUOTE = '\'';
@@ -45,18 +43,14 @@ public final class Strings {
 	private Strings() {
 	}
 
-	/**
-	 * Capitalize string:
-	 * <ul>
-	 *   <li>Returns {@code null} if {@code input} is {@code null}</li>
-	 *   <li>Returns an empty string if {@code input} is empty</li>
-	 *   <li>Returns an uppercase value if {@code input} is one char length.</li>
-	 *   <li>Returns first character as uppercase and rest of input as lowercase.</li>
-	 * </ul>
-	 *
-	 * @param input Input.
-	 * @return Capitalized output.
-	 */
+	/// Capitalize string:
+	/// - Returns `null` if `input` is `null`
+	/// - Returns an empty string if `input` is empty
+	/// - Returns an uppercase value if `input` is one char length.
+	/// - Returns first character as uppercase and rest of input as lowercase.
+	///
+	/// @param input Input.
+	/// @return Capitalized output.
 	public static String capitalize(String input) {
 		if (isEmpty(input)) {
 			return input;
@@ -69,35 +63,31 @@ public final class Strings {
 		return Character.toUpperCase(input.charAt(0)) + input.substring(1).toLowerCase();
 	}
 
-	/**
-	 * Trim given string and returns trimmed value or {@code null} if {@code str} is {@code null}, empty or blank.
-	 *
-	 * @param str Input.
-	 * @return Trimmed output.
-	 */
+	/// Trim given string and returns trimmed value
+	/// or `null` if `str` is `null`, empty or blank.
+	///
+	/// @param str Input.
+	/// @return Trimmed output.
 	public static String trimToNull(String str) {
 		String trimmed = trim(str);
 		return isEmpty(trimmed) ? null : trimmed;
 	}
 
-	/**
-	 * Trim given string and returns trimmed value (returns {@code null} if {@code str} is {@code null}).
-	 *
-	 * @param str Input.
-	 * @return Trimmed output.
-	 */
+	/// Trim given string and returns trimmed value (returns `null`
+	/// if `str` is `null`).
+	///
+	/// @param str Input.
+	/// @return Trimmed output.
 	public static String trim(String str) {
 		return str == null ? null : str.trim();
 	}
 
-	/**
-	 * Repeat given character the specified amount of time to produce
-	 * a final String of given length.
-	 *
-	 * @param c Character to repeat.
-	 * @param length Required length.
-	 * @return The final String.
-	 */
+	/// Repeat given character the specified amount of time to produce
+	/// a final String of given length.
+	///
+	/// @param c Character to repeat.
+	/// @param length Required length.
+	/// @return The final String.
 	public static String repeat(char c, int length) {
 		StringBuilder sb = new StringBuilder(length);
 
@@ -108,12 +98,10 @@ public final class Strings {
 		return sb.toString();
 	}
 
-	/**
-	 * Check if given char is a vowel.
-	 *
-	 * @param c Character.
-	 * @return {@code true} if {@code c} is a vowel, {@code false} otherwise.
-	 */
+	/// Check if given char is a vowel.
+	///
+	/// @param c Character.
+	/// @return `true` if `c` is a vowel, `false` otherwise.
 	public static boolean isVowel(char c) {
 		char lowerC = Character.toLowerCase(c);
 
@@ -126,22 +114,18 @@ public final class Strings {
 		return false;
 	}
 
-	/**
-	 * Surround given input with double quotes.
-	 *
-	 * @param input Input.
-	 * @return Quoted input.
-	 */
+	/// Surround given input with double quotes.
+	///
+	/// @param input Input.
+	/// @return Quoted input.
 	public static String quote(String input) {
 		return input == null ? null : (DOUBLE_QUOTE + input + DOUBLE_QUOTE);
 	}
 
-	/**
-	 * Check if string values is quoted, using single or double quote.
-	 *
-	 * @param value The input value.
-	 * @return {@code true} if {@code value} is quoted, {@code false} otherwise.
-	 */
+	/// Check if string values is quoted, using single or double quote.
+	///
+	/// @param value The input value.
+	/// @return `true` if `value` is quoted, `false` otherwise.
 	public static boolean isQuoted(String value) {
 		return isSurroundedBy(value, SINGLE_QUOTE) || isSurroundedBy(value, DOUBLE_QUOTE);
 	}
@@ -150,14 +134,12 @@ public final class Strings {
 		return isSurroundedBy(value, leftRight, leftRight);
 	}
 
-	/**
-	 * Check that given string value is surrounded by given left and right characters;
-	 *
-	 * @param value Value.
-	 * @param left Left character;
-	 * @param right Right character.
-	 * @return {@code true} if {@code value} is surrounded by {@code left} and {@code right}, {@code false} otherwise.
-	 */
+	/// Check that given string value is surrounded by given left and right characters;
+	///
+	/// @param value Value.
+	/// @param left Left character;
+	/// @param right Right character.
+	/// @return `true` if `value` is surrounded by `left` and `right`, `false` otherwise.
 	public static boolean isSurroundedBy(String value, char left, char right) {
 		if (value == null || value.length() < 2) {
 			return false;
@@ -166,42 +148,34 @@ public final class Strings {
 		return value.charAt(0) == left && value.charAt(value.length() - 1) == right;
 	}
 
-	/**
-	 * Check if given string is {@code null} or empty.
-	 *
-	 * @param value The value.
-	 * @return {@code true} if {@code value} is {@code null} or empty, {@code false} otherwise.
-	 */
+	/// Check if given string is `null` or empty.
+	///
+	/// @param value The value.
+	/// @return `true` if `value` is `null` or empty, `false` otherwise.
 	public static boolean isEmpty(String value) {
 		return value == null || value.isEmpty();
 	}
 
-	/**
-	 * Check that given string value is not {@code null} and not empty.
-	 *
-	 * @param value String value.
-	 * @return {@code true} if {@code value} is not {@code null} and not empty, false otherwise (including blank string).
-	 */
+	/// Check that given string value is not `null` and not empty.
+	///
+	/// @param value String value.
+	/// @return `true` if `value` is not `null` and not empty, false otherwise (including blank string).
 	public static boolean isNotEmpty(String value) {
 		return !isEmpty(value);
 	}
 
-	/**
-	 * Remove quote of given string.
-	 *
-	 * @param value Input string.
-	 * @return Output string.
-	 */
+	/// Remove quote of given string.
+	///
+	/// @param value Input string.
+	/// @return Output string.
 	public static String removeQuote(String value) {
 		return value.substring(1, value.length() - 1);
 	}
 
-	/**
-	 * Serialize given value to a formatted string value.
-	 *
-	 * @param value Value.
-	 * @return The formatted value.
-	 */
+	/// Serialize given value to a formatted string value.
+	///
+	/// @param value Value.
+	/// @return The formatted value.
 	@SuppressWarnings("unchecked")
 	public static String serialize(Object value) {
 		if (value == null) {

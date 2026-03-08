@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
- */
+/// Error thrown when a json string contain an entry
+/// that is not of expected type.
 public final class ShouldHaveEntryEqualTo extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -42,15 +40,13 @@ public final class ShouldHaveEntryEqualTo extends AbstractJsonError {
 		super(json, entryName, expectation, mismatch);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @param entry Entry name.
-	 * @param actualValue Actual value.
-	 * @param expectedValue Expected value.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @param entry Entry name.
+	/// @param actualValue Actual value.
+	/// @param expectedValue Expected value.
+	/// @return Error.
 	public static ShouldHaveEntryEqualTo shouldHaveEntryEqualTo(
 		String json,
 		String entry,

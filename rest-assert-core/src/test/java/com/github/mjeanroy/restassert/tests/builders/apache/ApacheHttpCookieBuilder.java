@@ -28,14 +28,10 @@ import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.cookie.BasicClientCookie;
 
-/**
- * Build mock instance of {@link Cookie} class.
- */
+/// Build mock instance of [Cookie] class.
 public class ApacheHttpCookieBuilder extends AbstractCookieBuilder<Cookie, ApacheHttpCookieBuilder> {
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	public ApacheHttpCookieBuilder() {
 		super();
 	}

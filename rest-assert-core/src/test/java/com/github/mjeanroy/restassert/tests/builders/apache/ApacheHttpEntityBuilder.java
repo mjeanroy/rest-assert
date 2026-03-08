@@ -28,39 +28,29 @@ import org.apache.http.HttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 
-/**
- * DefaultCookieBuilder to create mock instances of {@link HttpEntity} class.
- */
+/// Builder to create mock instances of [HttpEntity] class.
 class ApacheHttpEntityBuilder {
 
-	/**
-	 * Body content.
-	 */
+	/// Body content.
 	private String content;
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	ApacheHttpEntityBuilder() {
 		this.content = "";
 	}
 
-	/**
-	 * Set {@link #content}.
-	 *
-	 * @param content New {@link #content}.
-	 * @return Current builder.
-	 */
+	/// Set [#content].
+	///
+	/// @param content New [#content].
+	/// @return Current builder.
 	ApacheHttpEntityBuilder setContent(String content) {
 		this.content = content;
 		return this;
 	}
 
-	/**
-	 * Create mock instance of {@link HttpEntity} class.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Create mock instance of [HttpEntity] class.
+	///
+	/// @return Mock instance.
 	HttpEntity build() {
 		return new StringEntity(content, ContentType.DEFAULT_TEXT);
 	}

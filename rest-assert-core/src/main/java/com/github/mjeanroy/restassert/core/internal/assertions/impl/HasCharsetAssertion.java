@@ -37,27 +37,18 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCharset.shouldHaveCharset;
 
-/**
- * Check that http response has a content-type header with
- * expected charset.
- */
+/// Check that http response has a `Content-Type` header with
+/// expected charset.
 public class HasCharsetAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(HasCharsetAssertion.class);
 
-	/**
-	 * Expected charset.
-	 */
+	/// Expected charset.
 	private final String expectedCharset;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param expectedCharset Charset name.
-	 */
+	/// Create assertion.
+	///
+	/// @param expectedCharset Charset name.
 	public HasCharsetAssertion(String expectedCharset) {
 		super(HttpHeaders.CONTENT_TYPE.getName());
 		this.expectedCharset = notBlank(expectedCharset, "Charset value must be defined");

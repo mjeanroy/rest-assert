@@ -28,57 +28,43 @@ import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
-/**
- * Create mock instance of {@link RestAssertError} class.
- */
+/// Create mock instance of [RestAssertError] class.
 public class RestAssertErrorBuilder {
 
-	/**
-	 * Error message for expectation field.
-	 */
+	/// Error message for expectation field.
 	private Message expectation;
 
-	/**
-	 * Error message for mismatch field.
-	 */
+	/// Error message for mismatch field.
 	private Message mismatch;
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	public RestAssertErrorBuilder() {
 		this.expectation = Message.message("Expectation");
 	}
 
-	/**
-	 * Set {@link #expectation}.
-	 *
-	 * @param message New {@link #expectation} message.
-	 * @param args New {@link #expectation} arguments.
-	 * @return Current builder.
-	 */
+	/// Set [#expectation].
+	///
+	/// @param message New [#expectation] message.
+	/// @param args New [#expectation] arguments.
+	/// @return Current builder.
 	public RestAssertErrorBuilder setExpectation(String message, Object[] args) {
 		this.expectation = Message.message(message, args);
 		return this;
 	}
 
-	/**
-	 * Set {@link #mismatch}.
-	 *
-	 * @param message New {@link #mismatch} message.
-	 * @param args New {@link #mismatch} arguments.
-	 * @return Current builder.
-	 */
+	/// Set [#mismatch].
+	///
+	/// @param message New [#mismatch] message.
+	/// @param args New [#mismatch] arguments.
+	/// @return Current builder.
 	public RestAssertErrorBuilder setMismatch(String message, Object[] args) {
 		this.mismatch = Message.message(message, args);
 		return this;
 	}
 
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Create mock instance.
+	///
+	/// @return Mock instance.
 	public RestAssertError build() {
 		return new MockRestAssertError(expectation, mismatch);
 	}

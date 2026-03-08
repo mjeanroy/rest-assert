@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when an http response should have specific
- * charset.
- */
+/// Error thrown when an http response should have specific
+/// charset.
 public final class ShouldHaveCharset extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -42,22 +40,18 @@ public final class ShouldHaveCharset extends AbstractError {
 		super(message);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @return Error.
 	public static ShouldHaveCharset shouldHaveCharset() {
 		return new ShouldHaveCharset("Expecting response to have defined charset");
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param expectedCharset Expected charset.
-	 * @param actualCharset Actual charset.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param expectedCharset Expected charset.
+	/// @param actualCharset Actual charset.
+	/// @return Error.
 	public static ShouldHaveCharset shouldHaveCharset(String expectedCharset, String actualCharset) {
 		return new ShouldHaveCharset("Expecting response to have charset %s", expectedCharset, actualCharset);
 	}

@@ -32,21 +32,17 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Static IO Utilities.
- */
+/// Static IO Utilities.
 public final class Ios {
 
 	private Ios() {
 	}
 
-	/**
-	 * Read given URL and returns full output.
-	 *
-	 * @param url URL.
-	 * @return The full output.
-	 * @throws UrlException If an error occurred while reading URL.
-	 */
+	/// Read given URL and returns full output.
+	///
+	/// @param url URL.
+	/// @return The full output.
+	/// @throws UrlException If an error occurred while reading URL.
 	public static String readUrl(URL url) {
 		URLConnection connection = openUrl(url);
 		List<String> lines = new ArrayList<>();
@@ -73,9 +69,7 @@ public final class Ios {
 		}
 	}
 
-	/**
-	 * URL connection exception.
-	 */
+	/// URL connection exception.
 	public static class UrlException extends RuntimeException {
 		private UrlException(Exception cause) {
 			super(cause);

@@ -26,49 +26,36 @@ package com.github.mjeanroy.restassert.core.data;
 
 import java.util.List;
 
-/**
- * HTTP Header, mainly a key-value(s) pair.
- */
+/// HTTP Header, mainly a key-value(s) pair.
 public interface HttpHeader {
 
-	/**
-	 * Header name.
-	 *
-	 * @return Header name.
-	 */
+	/// Header name.
+	///
+	/// @return Header name.
 	String getName();
 
-	/**
-	 * Header value:
-	 *
-	 * <ul>
-	 *   <li>May be {@code null}</li>
-	 *   <li>For multi-value headers, all values are joined with a comma.</li>
-	 * </ul>
-	 *
-	 * @return Header value.
-	 */
+	/// Header value:
+	/// - May be `null`
+	/// - For multi-value headers, all values are joined with a comma.
+	///
+	/// @return Header value.
 	default String getValue() {
 		return String.join(",", getValues());
 	}
 
-	/**
-	 * Get header values, may be empty.
-	 *
-	 * @return Header values.
-	 */
+	/// Get header values, may be empty.
+	///
+	/// @return Header values.
 	List<String> getValues();
 
-	/**
-	 * Create new HTTP Header.
-	 *
-	 * Since HTTP header name is case-insensitive, name is normalized so each call returns a consistent
-	 * output and name can be used as map key.
-	 *
-	 * @param name Name.
-	 * @param values Values.
-	 * @return Header.
-	 */
+	/// Create new HTTP Header.
+	///
+	/// Since HTTP header name is **case-insensitive**, name is normalized so each call returns a consistent
+	/// output and name can be used as map key.
+	///
+	/// @param name Name.
+	/// @param values Values.
+	/// @return Header.
 	static HttpHeader of(String name, List<String> values) {
 		return new DefaultHttpHeader(name, values);
 	}

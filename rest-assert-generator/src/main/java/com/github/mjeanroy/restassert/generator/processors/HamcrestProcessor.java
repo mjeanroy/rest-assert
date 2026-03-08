@@ -47,16 +47,12 @@ import static com.github.mjeanroy.restassert.generator.templates.modules.hamcres
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 
-/**
- * Set of processors that will be used to generate assertions
- * classes for rest-assert-unit module.
- */
+/// Set of processors that will be used to generate assertions
+/// classes for rest-assert-unit module.
 public enum HamcrestProcessor implements Processor {
 
-	/**
-	 * Processor that will generate matchers class for http response
-	 * matchers static factories.
-	 */
+	/// Processor that will generate matchers class for http response
+	/// matchers static factories.
 	HTTP_RESPONSE_MATCHERS(
 		httpResponseMatchersTemplate(),
 		asList(
@@ -71,10 +67,8 @@ public enum HamcrestProcessor implements Processor {
 		)
 	),
 
-	/**
-	 * Processor that will generate matchers class for JSON
-	 * matchers static factories.
-	 */
+	/// Processor that will generate matchers class for JSON
+	/// matchers static factories.
 	JSON_MATCHERS(
 		jsonMatchersTemplate(),
 		singletonList(
@@ -82,14 +76,10 @@ public enum HamcrestProcessor implements Processor {
 		)
 	);
 
-	/**
-	 * Template that will be processed.
-	 */
+	/// Template that will be processed.
 	private final Template template;
 
-	/**
-	 * Data that will be merged into template.
-	 */
+	/// Data that will be merged into template.
 	private final List<TemplateModel> models;
 
 	// Create new processor

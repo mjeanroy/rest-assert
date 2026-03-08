@@ -26,9 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when a json string contain an unexpected entry.
- */
+/// Error thrown when a json string contain an unexpected entry.
 public final class ShouldNotHaveEntry extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -36,13 +34,11 @@ public final class ShouldNotHaveEntry extends AbstractJsonError {
 		super(json, entryName, expectation);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @param entryName Unexpected entry name.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @param entryName Unexpected entry name.
+	/// @return Error.
 	public static ShouldNotHaveEntry shouldNotHaveEntry(String json, String entryName) {
 		return new ShouldNotHaveEntry(
 			json,

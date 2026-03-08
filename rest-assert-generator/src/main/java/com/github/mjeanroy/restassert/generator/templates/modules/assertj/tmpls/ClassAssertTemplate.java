@@ -26,26 +26,21 @@ package com.github.mjeanroy.restassert.generator.templates.modules.assertj.tmpls
 
 import com.github.mjeanroy.restassert.generator.Template;
 
-/**
- * Abstract Assert Class Template.
- * Class that implements this abstraction will be used
- * to generated a full Java class file.
- *
- * This class is thread safe.
- * This class is implemented as a singleton.
- */
+/// Abstract Assert Class Template.
+///
+/// Class that implements this abstraction will be used
+/// to generated a full Java class file.
+///
+/// This class is thread safe.
+/// This class is implemented as a singleton.
 public class ClassAssertTemplate extends AbstractAssertJTemplate implements Template {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final ClassAssertTemplate INSTANCE = new ClassAssertTemplate();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static ClassAssertTemplate classAssertTemplate() {
 		return INSTANCE;
 	}

@@ -39,28 +39,19 @@ import static com.github.mjeanroy.restassert.core.internal.common.Dates.formatHt
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
-/**
- * Check that http response has at least one header with
- * expected date value.
- */
+/// Check that http response has at least one header with
+/// expected date value.
 public class IsDateHeaderEqualToAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(IsDateHeaderEqualToAssertion.class);
 
-	/**
-	 * Expected header value.
-	 */
+	/// Expected header value.
 	private final String value;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 * @param value Header value (will be serialized as a string).
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
+	/// @param value Header value (will be serialized as a string).
 	public IsDateHeaderEqualToAssertion(String name, Date value) {
 		super(name);
 

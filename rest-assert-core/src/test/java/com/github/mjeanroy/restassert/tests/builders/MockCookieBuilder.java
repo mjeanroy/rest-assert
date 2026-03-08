@@ -29,76 +29,58 @@ import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 
 import java.util.Date;
 
-/**
- * Create mock instance of {@link Cookie} class.
- */
+/// Create mock instance of [Cookie] class.
 public class MockCookieBuilder extends AbstractCookieBuilder<Cookie, MockCookieBuilder> implements CookieBuilder<Cookie> {
 
-	/**
-	 * Cookie SameSite flag.
-	 */
+	/// Cookie SameSite flag.
 	private SameSite sameSite;
 
-	/**
-	 * Cookies expires Date.
-	 */
+	/// Cookies expires Date.
 	private Date expires;
 
-	/**
-	 * Create default builder.
-	 */
+	/// Create default builder.
 	public MockCookieBuilder() {
 		this.sameSite = SameSite.LAX;
 	}
 
-	/**
-	 * Set {@link #sameSite}.
-	 *
-	 * @param sameSite New {@link #sameSite}.
-	 * @return Current builder.
-	 */
+	/// Set [#sameSite].
+	///
+	/// @param sameSite New [#sameSite].
+	/// @return Current builder.
 	public MockCookieBuilder setSameSite(SameSite sameSite) {
 		this.sameSite = sameSite;
 		return this;
 	}
 
-	/**
-	 * Set {@link #sameSite}.
-	 *
-	 * @param sameSite New {@link #sameSite}.
-	 * @return Current builder.
-	 */
+	/// Set [#sameSite].
+	///
+	/// @param sameSite New [#sameSite].
+	/// @return Current builder.
 	public MockCookieBuilder setSameSite(String sameSite) {
 		this.sameSite = SameSite.parse(sameSite);
 		return this;
 	}
 
-	/**
-	 * Set {@link #expires}.
-	 *
-	 * @param expires New {@link #expires}.
-	 * @return Current builder.
-	 */
+	/// Set [#expires].
+	///
+	/// @param expires New [#expires].
+	/// @return Current builder.
 	public MockCookieBuilder setExpires(Date expires) {
 		this.expires = expires == null ? null : new Date(expires.getTime());
 		return this;
 	}
 
-	/**
-	 * Set {@link #expires} using given timestamp.
-	 *
-	 * @param time New {@link #expires} time.
-	 * @return Current builder.
-	 */
+	/// Set [#expires] using given timestamp.
+	///
+	/// @param time New [#expires] time.
+	/// @return Current builder.
 	public MockCookieBuilder setExpires(long time) {
 		return setExpires(new Date(time));
 	}
 
-	/**
-	 * Build mock of {@link Cookie} class.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Build mock of [Cookie] class.
+	///
+	/// @return Mock instance.
 	public Cookie build() {
 		return new MockCookie(
 			getName(),

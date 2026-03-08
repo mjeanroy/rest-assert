@@ -28,34 +28,26 @@ import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
-/**
- * Result of assertion test case.
- * A result is a failure or a success.
- * For a success, error object will be always null.
- * For a failure, error object will be always non null.
- */
+/// Result of assertion test case.
+/// A result is a failure or a success:
+/// - For a success, error object will be always null.
+/// - For a failure, error object will be always non null.
 public class AssertionResult {
 
-	/**
-	 * Error object, not null if result is a failure.
-	 */
+	/// Error object, not null if result is a failure.
 	private final RestAssertError error;
 
-	/**
-	 * Build a success result.
-	 *
-	 * @return Success result.
-	 */
+	/// Build a success result.
+	///
+	/// @return Success result.
 	public static AssertionResult success() {
 		return new AssertionResult(null);
 	}
 
-	/**
-	 * Build a failure result.
-	 *
-	 * @param error Error object, must not be null.
-	 * @return Failure result.
-	 */
+	/// Build a failure result.
+	///
+	/// @param error Error object, must not be null.
+	/// @return Failure result.
 	public static AssertionResult failure(RestAssertError error) {
 		return new AssertionResult(notNull(error, "Error object must not be null"));
 	}
@@ -65,31 +57,25 @@ public class AssertionResult {
 		this.error = error;
 	}
 
-	/**
-	 * Check if result is a success result.
-	 *
-	 * @return True if result is a success result, false otherwise.
-	 */
+	/// Check if result is a success result.
+	///
+	/// @return `true` if result is a success result, `false` otherwise.
 	public boolean isSuccess() {
 		return error == null;
 	}
 
-	/**
-	 * Check if result is a failure result.
-	 *
-	 * @return True if result is a failure result, false otherwise.
-	 */
+	/// Check if result is a failure result.
+	///
+	/// @return `true` if result is a failure result, `false` otherwise.
 	public boolean isFailure() {
 		return error != null;
 	}
 
-	/**
-	 * Get error object associated with result.
-	 * Error object will always be null with a success result, and always
-	 * non null with a failure result.
-	 *
-	 * @return Error object.
-	 */
+	/// Get error object associated with result.
+	/// Error object will always be null with a success result, and always
+	/// non-null with a failure result.
+	///
+	/// @return Error object.
 	public RestAssertError getError() {
 		return error;
 	}

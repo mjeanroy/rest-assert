@@ -26,23 +26,19 @@ package com.github.mjeanroy.restassert.core.internal.common;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
-/**
- * Static Number Utilities.
- */
+/// Static Number Utilities.
 public final class Numbers {
 
 	// Ensure non instantiation.
 	private Numbers() {
 	}
 
-	/**
-	 * Parse a given string value to a long number.
-	 *
-	 * @param value Value to parse.
-	 * @param message Error message if conversion fails.
-	 * @return The long value.
-	 * @throws IllegalArgumentException If {@code value} is not a valid number.
-	 */
+	/// Parse a given string value to a long number.
+	///
+	/// @param value Value to parse.
+	/// @param message Error message if conversion fails.
+	/// @return The long value.
+	/// @throws IllegalArgumentException If `value` is not a valid number.
 	public static Long toLong(String value, String message) {
 		notNull(value, message);
 

@@ -30,24 +30,18 @@ import com.samskivert.mustache.Mustache;
 
 import java.util.Map;
 
-/**
- * Mustache {@link TemplateEngine} implementation.
- * <p/>
- * This class is thread safe.
- * This class is implemented as a singleton.
- */
+/// Mustache [TemplateEngine] implementation.
+///
+/// This class is thread safe.
+/// This class is implemented as a singleton.
 public class MustacheTemplateEngine implements TemplateEngine {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final MustacheTemplateEngine INSTANCE = new MustacheTemplateEngine();
 
-	/**
-	 * Get singleton object.
-	 *
-	 * @return Singleton.
-	 */
+	/// Get singleton object.
+	///
+	/// @return Singleton.
 	public static TemplateEngine instance() {
 		return INSTANCE;
 	}

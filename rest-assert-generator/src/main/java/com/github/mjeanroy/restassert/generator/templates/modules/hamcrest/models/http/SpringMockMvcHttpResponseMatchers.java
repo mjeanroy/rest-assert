@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringM
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import org.springframework.test.web.servlet.ResultActions;
 
-/**
- * Template model for rest-assert-hamcrest HttpResponseMatchers class.
- */
+/// Template model for rest-assert-hamcrest HttpResponseMatchers class.
 public class SpringMockMvcHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final SpringMockMvcHttpResponseMatchers INSTANCE = new SpringMockMvcHttpResponseMatchers();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel springMockMvcHttpResponseMatchers() {
 		return INSTANCE;
 	}

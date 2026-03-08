@@ -40,26 +40,19 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Implementation of {@link HttpResponse}
- * using Google Http Client framework as real implementation.
- */
+/// Implementation of [HttpResponse] using Google Http Client framework as real implementation.
 public class GoogleHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
-	/**
-	 * Create new {@link HttpResponse} using instance of {@link com.ning.http.client.Response},
-	 * or returns {@code null} if {@code response} is {@code null}.
-	 *
-	 * @param response Original response object.
-	 * @return Http response that can be used with rest-assert.
-	 */
+	/// Create new [HttpResponse] using instance of [com.ning.http.client.Response],
+	/// or returns `null` if `response` is `null`.
+	///
+	/// @param response Original response object.
+	/// @return Http response that can be used with rest-assert.
 	public static GoogleHttpResponse create(com.google.api.client.http.HttpResponse response) {
 		return response == null ? null : new GoogleHttpResponse(response);
 	}
 
-	/**
-	 * Original Google Http Response.
-	 */
+	/// Original Google Http Response.
 	private final com.google.api.client.http.HttpResponse response;
 
 	// Use static factory

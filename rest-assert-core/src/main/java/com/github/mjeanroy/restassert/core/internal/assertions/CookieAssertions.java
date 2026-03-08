@@ -43,21 +43,15 @@ import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHa
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveSameSite.shouldHaveSameSite;
 import static com.github.mjeanroy.restassert.core.internal.error.cookie.ShouldHaveValue.shouldHaveValue;
 
-/**
- * Re-usable assertion for {@link Cookie} objects.
- */
+/// Re-usable assertion for [Cookie] objects.
 public final class CookieAssertions {
 
-	/**
-	 * Singleton object.
-	 */
+	/// Singleton object.
 	private static final CookieAssertions INSTANCE = new CookieAssertions();
 
-	/**
-	 * Get singleton object.
-	 *
-	 * @return Singleton object.
-	 */
+	/// Get singleton object.
+	///
+	/// @return Singleton object.
 	public static CookieAssertions instance() {
 		return INSTANCE;
 	}
@@ -66,13 +60,11 @@ public final class CookieAssertions {
 	private CookieAssertions() {
 	}
 
-	/**
-	 * Check that cookie has expected name.
-	 *
-	 * @param cookie Cookie.
-	 * @param name Expected name.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected name.
+	///
+	/// @param cookie Cookie.
+	/// @param name Expected name.
+	/// @return Assertion result.
 	public AssertionResult hasName(Cookie cookie, String name) {
 		return assertWith(cookie, () -> {
 			String actualName = cookie.getName();
@@ -80,13 +72,11 @@ public final class CookieAssertions {
 		});
 	}
 
-	/**
-	 * Check that cookie has expected value.
-	 *
-	 * @param cookie Cookie.
-	 * @param value Expected value.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected value.
+	///
+	/// @param cookie Cookie.
+	/// @param value Expected value.
+	/// @return Assertion result.
 	public AssertionResult hasValue(Cookie cookie, String value) {
 		return assertWith(cookie, () -> {
 			String actualValue = cookie.getValue();
@@ -94,13 +84,11 @@ public final class CookieAssertions {
 		});
 	}
 
-	/**
-	 * Check that cookie has expected domain.
-	 *
-	 * @param cookie Cookie.
-	 * @param domain Expected domain.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected domain.
+	///
+	/// @param cookie Cookie.
+	/// @param domain Expected domain.
+	/// @return Assertion result.
 	public AssertionResult hasDomain(Cookie cookie, String domain) {
 		return assertWith(cookie, () -> {
 			String actualDomain = cookie.getDomain();
@@ -108,13 +96,11 @@ public final class CookieAssertions {
 		});
 	}
 
-	/**
-	 * Check that cookie has expected path.
-	 *
-	 * @param cookie Cookie.
-	 * @param path Expected path.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected path.
+	///
+	/// @param cookie Cookie.
+	/// @param path Expected path.
+	/// @return Assertion result.
 	public AssertionResult hasPath(Cookie cookie, String path) {
 		return assertWith(cookie, () -> {
 			String actualPath = cookie.getPath();
@@ -122,13 +108,11 @@ public final class CookieAssertions {
 		});
 	}
 
-	/**
-	 * Check that cookie has expected max age.
-	 *
-	 * @param cookie Cookie.
-	 * @param maxAge Expected max age.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected max age.
+	///
+	/// @param cookie Cookie.
+	/// @param maxAge Expected max age.
+	/// @return Assertion result.
 	public AssertionResult hasMaxAge(Cookie cookie, long maxAge) {
 		return assertWith(cookie, () -> {
 			long actualMaxAge = cookie.getMaxAge();
@@ -136,13 +120,11 @@ public final class CookieAssertions {
 		});
 	}
 
-	/**
-	 * Check that cookie has expected same site.
-	 *
-	 * @param cookie Cookie.
-	 * @param sameSite Expected same site value.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected same site.
+	///
+	/// @param cookie Cookie.
+	/// @param sameSite Expected same site value.
+	/// @return Assertion result.
 	public AssertionResult hasSameSite(Cookie cookie, SameSite sameSite) {
 		return assertWith(cookie, () -> {
 			SameSite actualSameSite = cookie.getSameSite();
@@ -150,61 +132,51 @@ public final class CookieAssertions {
 		});
 	}
 
-	/**
-	 * Check that cookie has expected same site.
-	 *
-	 * @param cookie Cookie.
-	 * @param sameSite Expected same site value.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie has expected same site.
+	///
+	/// @param cookie Cookie.
+	/// @param sameSite Expected same site value.
+	/// @return Assertion result.
 	public AssertionResult hasSameSite(Cookie cookie, String sameSite) {
 		return assertWith(cookie, () -> (
 			hasSameSite(cookie, SameSite.parse(sameSite))
 		));
 	}
 
-	/**
-	 * Check that cookie is secured.
-	 *
-	 * @param cookie Cookie.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie is secured.
+	///
+	/// @param cookie Cookie.
+	/// @return Assertion result.
 	public AssertionResult isSecured(Cookie cookie) {
 		return assertWith(cookie, () -> (
 			cookie.isSecured() ? success() : failure(shouldBeSecured())
 		));
 	}
 
-	/**
-	 * Check that cookie is secured.
-	 *
-	 * @param cookie Cookie.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie is secured.
+	///
+	/// @param cookie Cookie.
+	/// @return Assertion result.
 	public AssertionResult isNotSecured(Cookie cookie) {
 		return assertWith(cookie, () -> (
 			!cookie.isSecured() ? success() : failure(shouldNotBeSecured())
 		));
 	}
 
-	/**
-	 * Check that cookie is flagged as "http only'.
-	 *
-	 * @param cookie Cookie.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie is flagged as "http only".
+	///
+	/// @param cookie Cookie.
+	/// @return Assertion result.
 	public AssertionResult isHttpOnly(Cookie cookie) {
 		return assertWith(cookie, () -> (
 			cookie.isHttpOnly() ? success() : failure(shouldBeHttpOnly())
 		));
 	}
 
-	/**
-	 * Check that cookie is flagged as "http only'.
-	 *
-	 * @param cookie Cookie.
-	 * @return Assertion result.
-	 */
+	/// Check that cookie is **not** flagged as "http only".
+	///
+	/// @param cookie Cookie.
+	/// @return Assertion result.
 	public AssertionResult isNotHttpOnly(Cookie cookie) {
 		return assertWith(cookie, () -> (
 			!cookie.isHttpOnly() ? success() : failure(shouldNotBeHttpOnly())

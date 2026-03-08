@@ -29,21 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpC
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.ning.http.client.cookie.Cookie;
 
-/**
- * Template model for rest-assert-unit CookieAssert class.
- */
+/// Template model for rest-assert-unit CookieAssert class.
 public final class NingHttpCookieAssert extends AbstractCookieAssert implements TemplateModel {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final NingHttpCookieAssert INSTANCE = new NingHttpCookieAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel asyncHttpCookieAssert() {
 		return INSTANCE;
 	}

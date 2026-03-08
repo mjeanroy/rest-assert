@@ -35,9 +35,7 @@ import static com.github.mjeanroy.restassert.core.data.StrictTransportSecurity.D
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isQuoted;
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.removeQuote;
 
-/**
- * Parser for {@link StrictTransportSecurity} value.
- */
+/// Parser for [StrictTransportSecurity] value.
 final class StrictTransportSecurityParser extends AbstractHttpHeaderParser<StrictTransportSecurity> {
 
 	private static final Logger log = Loggers.getLogger(StrictTransportSecurityParser.class);

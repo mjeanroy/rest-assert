@@ -29,23 +29,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * Static Collection Utilities.
- */
+/// Static Collection Utilities.
 public final class Collections {
 
 	// Ensure non instantiation.
 	private Collections() {
 	}
 
-	/**
-	 * Create a list from all parameters.
-	 *
-	 * @param v1 First value.
-	 * @param other Other values.
-	 * @param <T> Type of inputs.
-	 * @return Output list.
-	 */
+	/// Create a list from all parameters.
+	///
+	/// @param v1 First value.
+	/// @param other Other values.
+	/// @param <T> Type of inputs.
+	/// @return Output list.
 	@SafeVarargs
 	public static <T> List<T> toList(T v1, T... other) {
 		return Stream.concat(Stream.of(v1), Arrays.stream(other)).collect(Collectors.toList());

@@ -28,21 +28,17 @@ import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Objects.firstNonNull;
 
-/**
- * Static assertion utilities.
- */
+/// Static assertion utilities.
 public final class AssertUtil {
 
 	// Ensure non instantiation.
 	private AssertUtil() {
 	}
 
-	/**
-	 * Check for assertion result and throws {@link AssertionError} in case of error.
-	 *
-	 * @param message The custom message, a default error message will be used if it is null.
-	 * @param result The assertion result.
-	 */
+	/// Check for assertion result and throws [AssertionError] in case of error.
+	///
+	/// @param message The custom message, a default error message will be used if it is null.
+	/// @param result The assertion result.
 	public static void check(String message, AssertionResult result) {
 		if (result.isFailure()) {
 			throw new AssertionError(firstNonNull(message, result.getError().buildMessage()));

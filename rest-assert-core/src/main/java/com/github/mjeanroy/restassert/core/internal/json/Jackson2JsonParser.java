@@ -26,27 +26,20 @@ package com.github.mjeanroy.restassert.core.internal.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * Implementation of {@link JsonParser}
- * using Jackson2 as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
+/// Implementation of [JsonParser] using Jackson2 as internal implementation.
+///
+/// This class is implemented as a singleton.
+/// This class is thread safe.
 final class Jackson2JsonParser extends AbstractJsonParser {
 
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
+	/// Get parser.
+	///
+	/// @return Parser.
 	static Jackson2JsonParser getInstance() {
 		return Holder.INSTANCE;
 	}
 
-	/**
-	 * Jackson2 parser.
-	 */
+	/// Jackson2 parser.
 	private final ObjectMapper mapper;
 
 	private Jackson2JsonParser(ObjectMapper mapper) {

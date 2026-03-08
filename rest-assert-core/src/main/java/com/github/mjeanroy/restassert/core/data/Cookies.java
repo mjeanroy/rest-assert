@@ -42,31 +42,27 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isInRange;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
-/**
- * Cookies utilities.
- */
+/// Cookies utilities.
 public final class Cookies {
 
 	// Ensure non instantiation.
 	private Cookies() {
 	}
 
-	/**
-	 * Create new cookie.
-	 *
-	 * @param name Cookie name (must not be blank).
-	 * @param value Cookie value (must not be null).
-	 * @param domain Cookie domain.
-	 * @param path Cookie path.
-	 * @param secure Secure flag.
-	 * @param httpOnly Http-Only flag.
-	 * @param sameSite SameSite flag.
-	 * @param maxAge Cookie max-age.
-	 * @param expires Cookies expires value.
-	 * @return The cookie.
-	 * @throws NullPointerException If {@code name} or {@code value} are null.
-	 * @throws IllegalArgumentException If {@code name} is empty or blank.
-	 */
+	/// Create new cookie.
+	///
+	/// @param name Cookie name (must not be blank).
+	/// @param value Cookie value (must not be null).
+	/// @param domain Cookie domain.
+	/// @param path Cookie path.
+	/// @param secure Secure flag.
+	/// @param httpOnly Http-Only flag.
+	/// @param sameSite SameSite flag.
+	/// @param maxAge Cookie max-age.
+	/// @param expires Cookies expires value.
+	/// @return The cookie.
+	/// @throws NullPointerException If `name` or `value` are null.
+	/// @throws IllegalArgumentException If `name` is empty or blank.
 	public static Cookie newCookie(
 		String name,
 		String value,
@@ -89,32 +85,25 @@ public final class Cookies {
 			.build();
 	}
 
-	/**
-	 * Create new builder.
-	 *
-	 * @param name Cookie name, must not be blank.
-	 * @param value Cookie value, must not be null.
-	 * @return The builder.
-	 */
+	/// Create new builder.
+	///
+	/// @param name Cookie name, must not be blank.
+	/// @param value Cookie value, must not be `null`.
+	/// @return The builder.
 	public static CookieBuilder builder(String name, String value) {
 		return new CookieBuilder(name, value);
 	}
 
-	/**
-	 * Check that two {@link Cookie} are equals:
-	 *
-	 * <ul>
-	 *   <li>If both are {@code null}, {@code true} is returned.</li>
-	 *   <li>If one is {@code null}, {@code false} is returned.</li>
-	 *   <li>Otherwise, each cookie fields are compared</li>
-	 * </ul>
-	 *
-	 * <strong>Note: Cookie name comparison is case-insensitive.</strong>
-	 *
-	 * @param c1 First cookie.
-	 * @param c2 Second cookie.
-	 * @return {@code true} if {@code c1} and {@code c2} are equals, {@code false} otherwise.
-	 */
+	/// Check that two [Cookie] are equals:
+	/// - If both are `null`, `true` is returned.
+	/// - If one is `null`, `false` is returned.
+	/// - Otherwise, each cookie fields are compared
+	///
+	/// **Note: Cookie name comparison is case-insensitive.**
+	///
+	/// @param c1 First cookie.
+	/// @param c2 Second cookie.
+	/// @return `true` if `c1` and `c2` are equals, `false` otherwise.
 	public static boolean equals(Cookie c1, Cookie c2) {
 		if (c1 == c2) {
 			return true;
@@ -135,13 +124,11 @@ public final class Cookies {
 			&& Objects.equals(c1.getExpires(), c2.getExpires());
 	}
 
-	/**
-	 * Parse Set-Cookie header field and produce a valid Cookie object.
-	 * Specifications: https://tools.ietf.org/html/rfc6265#page-18
-	 *
-	 * @param setCookie Header field.
-	 * @return Cookie.
-	 */
+	/// Parse Set-Cookie header field and produce a valid Cookie object.
+	/// following [RFC 6265](https://tools.ietf.org/html/rfc6265#page-18).
+	///
+	/// @param setCookie Header field.
+	/// @return Cookie.
 	public static Cookie parse(String setCookie) {
 		notBlank(setCookie, "Header Set-Cookie must be defined");
 
@@ -209,25 +196,23 @@ public final class Cookies {
 		);
 	}
 
-	/**
-	 * First step as specified by RFC6265.
-	 *
-	 * If the set-cookie-string contains a %x3B (";") character:
-	 *
-	 * The name-value-pair string consists of the characters up to,
-	 * but not including, the first %x3B (";"), and the unparsed-
-	 * attributes consist of the remainder of the set-cookie-string
-	 * (including the %x3B (";") in question).
-	 *
-	 * Otherwise:
-	 *
-	 * The name-value-pair string consists of all the characters
-	 * contained in the set-cookie-string, and the unparsed-
-	 * attributes is the empty string.
-	 *
-	 * @param setCookie Set-Cookie Header.
-	 * @return An array containing the name-value pair as the first element and the unparsed string as the second element.
-	 */
+	/// First step as specified by RFC6265.
+	///
+	/// **If the set-cookie-string contains a %x3B (";") character:**
+	///
+	/// The name-value-pair string consists of the characters up to,
+	/// but not including, the first %x3B (";"), and the unparsed-
+	/// attributes consist of the remainder of the set-cookie-string
+	/// (including the %x3B (";") in question).
+	///
+	/// **Otherwise:**
+	///
+	/// The name-value-pair string consists of all the characters
+	/// contained in the set-cookie-string, and the unparsed-
+	/// attributes is the empty string.
+	///
+	/// @param setCookie Set-Cookie Header.
+	/// @return An array containing the name-value pair as the first element and the unparsed string as the second element.
 	private static String[] splitHeader(String setCookie) {
 		StringBuilder nameValuePair = new StringBuilder();
 		StringBuilder unparsedAttributes = new StringBuilder();
@@ -250,31 +235,25 @@ public final class Cookies {
 		};
 	}
 
-	/**
-	 * Parse name-value-pair of Set-Cookie header.
-	 *
-	 * As specified:
-	 *
-	 * 2. If the name-value-pair string lacks a %x3D ("=") character,
-	 * ignore the set-cookie-string entirely.
-	 *
-	 * 3. The (possibly empty) name string consists of the characters up
-	 * to, but not including, the first %x3D ("=") character, and the
-	 * (possibly empty) value string consists of the characters after
-	 * the first %x3D ("=") character.
-	 *
-	 * 4. Remove any leading or trailing WSP characters from the name
-	 * string and the value string.
-	 *
-	 * 5. If the name string is empty, ignore the set-cookie-string
-	 * entirely.
-	 *
-	 * 6. The cookie-name is the name string, and the cookie-value is the
-	 * value string.
-	 *
-	 * @param nameValuePair Name-Value-Pair value.
-	 * @return An array containing the cookie name as first element and the value as second element.
-	 */
+	/// Parse name-value-pair of Set-Cookie header.
+	///
+	/// As specified:
+	///
+	/// 2. If the name-value-pair string lacks a %x3D ("=") character,
+	/// ignore the set-cookie-string entirely.
+	/// 3. The (possibly empty) name string consists of the characters up
+	/// to, but not including, the first %x3D ("=") character, and the
+	/// (possibly empty) value string consists of the characters after
+	/// the first %x3D ("=") character.
+	/// 4. Remove any leading or trailing WSP characters from the name
+	/// string and the value string.
+	/// 5. If the name string is empty, ignore the set-cookie-string
+	/// entirely.
+	/// 6. The cookie-name is the name string, and the cookie-value is the
+	/// value string.
+	///
+	/// @param nameValuePair Name-Value-Pair value.
+	/// @return An array containing the cookie name as first element and the value as second element.
 	private static String[] parseNameValue(String nameValuePair) {
 		StringBuilder nameBuilder = new StringBuilder();
 		StringBuilder valueBuilder = new StringBuilder();
@@ -335,64 +314,52 @@ public final class Cookies {
 		);
 	}
 
-	/**
-	 * Parse "Domain" directive of Set-Cookie header.
-	 * Basically, just return the domain as it appears.
-	 *
-	 * @param domain Domain value.
-	 * @return Domain value.
-	 */
+	/// Parse "Domain" directive of `Set-Cookie` header.
+	/// Basically, just return the domain as it appears.
+	///
+	/// @param domain Domain value.
+	/// @return Domain value.
 	private static String parseDomain(String domain) {
 		return domain;
 	}
 
-	/**
-	 * Parse "Path" directive of Set-Cookie header.
-	 * Basically, just return the path as it appears.
-	 *
-	 * @param path Path value.
-	 * @return Path value.
-	 */
+	/// Parse "Path" directive of `Set-Cookie` header.
+	/// Basically, just return the path as it appears.
+	///
+	/// @param path Path value.
+	/// @return Path value.
 	private static String parsePath(String path) {
 		return path;
 	}
 
-	/**
-	 * Parse "Secure" directive of Set-Cookie header.
-	 * Basically, just return {@code true}.
-	 *
-	 * @return Always {@code true}.
-	 */
+	/// Parse "Secure" directive of `Set-Cookie` header.
+	/// Basically, just return `true`.
+	///
+	/// @return Always `true`.
 	private static boolean parseSecure() {
 		return true;
 	}
 
-	/**
-	 * Parse "SameSite" directive of Set-Cookie header.
-	 *
-	 * @param value The raw {@code SameSite} value.
-	 * @return The SameSite value.
-	 */
+	/// Parse "SameSite" directive of `Set-Cookie` header.
+	///
+	/// @param value The raw `SameSite` value.
+	/// @return The SameSite value.
 	private static SameSite parseSameSite(String value) {
 		return SameSite.parse(value);
 	}
 
-	/**
-	 * Parse "HttpOnly" directive of Set-Cookie header.
-	 * Basically, just return {@code true}.
-	 *
-	 * @return Always {@code true}.
-	 */
+	/// Parse "HttpOnly" directive of `Set-Cookie` header.
+	/// Basically, just return `true`.
+	///
+	/// @return Always `true`.
 	private static boolean parseHttpOnly() {
 		return true;
 	}
 
-	/**
-	 * Parse Max-Age directive of Set-Cookie header.
-	 *
-	 * @param maxAge Max-Age value.
-	 * @return The max-age.
-	 */
+	/// Parse Max-Age directive of `Set-Cookie` header.
+	///
+	/// @param maxAge Max-Age value.
+	/// @return The max-age.
 	private static Long parseMaxAge(String maxAge) {
 		return toLong(maxAge, "Max-Age is not a valid number");
 	}
@@ -402,12 +369,10 @@ public final class Cookies {
 	private static final Pattern MONTH_PATTERN = Pattern.compile("(?i)(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec).*");
 	private static final Pattern DAY_OF_MONTH_PATTERN = Pattern.compile("(\\d{1,2})[^\\d]*");
 
-	/**
-	 * Parse Expires directive of Set-Cookie header.
-	 *
-	 * @param expires Expires value.
-	 * @return The expires date.
-	 */
+	/// Parse Expires directive of Set-Cookie header.
+	///
+	/// @param expires Expires value.
+	/// @return The expires date.
 	private static Date parseExpires(String expires) {
 		int hour = -1;
 		int minute = -1;
@@ -470,12 +435,10 @@ public final class Cookies {
 		return calendar.getTime();
 	}
 
-	/**
-	 * Split cookie date into date-tokens (as specified by RFC 6265).
-	 *
-	 * @param expires Date.
-	 * @return All date tokens.
-	 */
+	/// Split cookie date into date-tokens (as specified by RFC 6265).
+	///
+	/// @param expires Date.
+	/// @return All date tokens.
 	private static List<String> splitTokens(String expires) {
 		List<String> tokens = new LinkedList<>();
 
@@ -507,9 +470,7 @@ public final class Cookies {
 		return !isNonDelimiter(c);
 	}
 
-	/**
-	 * Cookie Metadata Attribute.
-	 */
+	/// Cookie Metadata Attribute.
 	private static class MetaDataAttribute {
 		private final String field;
 		private final String name;

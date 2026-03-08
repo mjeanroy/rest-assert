@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when an http response should not contain
- * specific header.
- */
+/// Error thrown when an http response should not contain
+/// specific header.
 public final class ShouldNotHaveHeader extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -37,12 +35,10 @@ public final class ShouldNotHaveHeader extends AbstractError {
 		super(message, expectedHeaderName);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param headerName Expected header name.
+	/// @return Error.
 	public static ShouldNotHaveHeader shouldNotHaveHeader(String headerName) {
 		return new ShouldNotHaveHeader("Expecting response not to have header %s", headerName);
 	}

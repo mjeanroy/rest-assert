@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpR
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.ning.http.client.Response;
 
-/**
- * Template model for rest-assert-unit HttpAssert class.
- */
+/// Template model for rest-assert-unit HttpAssert class.
 public final class NingHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final NingHttpAssert INSTANCE = new NingHttpAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel ningHttpAssert() {
 		return INSTANCE;
 	}

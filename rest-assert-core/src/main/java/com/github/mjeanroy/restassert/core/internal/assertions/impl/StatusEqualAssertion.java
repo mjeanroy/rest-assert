@@ -34,27 +34,18 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isPositive;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatus.shouldHaveStatus;
 
-/**
- * Check that given http response has expected status code.
- */
+/// Check that given http response has expected status code.
 public class StatusEqualAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(StatusEqualAssertion.class);
 
-	/**
-	 * Expected status code.
-	 */
+	/// Expected status code.
 	private final int status;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param status Expected status.
-	 * @throws IllegalArgumentException If {@code status} is not positive.
-	 */
+	/// Create assertion.
+	///
+	/// @param status Expected status.
+	/// @throws IllegalArgumentException If `status` is not positive.
 	public StatusEqualAssertion(int status) {
 		this.status = isPositive(status, "Http status code must be positive");
 	}

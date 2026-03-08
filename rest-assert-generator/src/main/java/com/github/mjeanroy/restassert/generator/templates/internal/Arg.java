@@ -26,34 +26,25 @@ package com.github.mjeanroy.restassert.generator.templates.internal;
 
 import java.util.Objects;
 
-/**
- * Argument representation.
- * An argument is defined by:
- * - its type (int, java.lang.String etc.).
- * - its name (arg1, arg2 etc).
- * <p/>
- * This class is immutable and thread safe.
- */
+/// Argument representation.
+///
+/// An argument is defined by:
+/// - its type (int, java.lang.String etc.).
+/// - its name (arg1, arg2 etc).
+///
+/// This class is immutable and thread safe.
 public class Arg {
 
-	/**
-	 * Argument index.
-	 */
+	/// Argument index.
 	private final int index;
 
-	/**
-	 * Argument type.
-	 */
+	/// Argument type.
 	private final String type;
 
-	/**
-	 * Argument generic type.
-	 */
+	/// Argument generic type.
 	private final String genericType;
 
-	/**
-	 * Argument name.
-	 */
+	/// Argument name.
 	private final String name;
 
 	public Arg(String type, String genericType, String name, int index) {
@@ -63,40 +54,33 @@ public class Arg {
 		this.index = index;
 	}
 
-	/**
-	 * Get {@link #type}
-	 *
-	 * @return {@link #type}
-	 */
+	/// Get [#type]
+	///
+	/// @return Returns [#type]
 	public String getType() {
 		return type;
 	}
 
-	/**
-	 * Get {@link #name}
-	 *
-	 * @return {@link #name}
-	 */
+	/// Get [#name]
+	///
+	/// @return Returns [#name]
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Get {@link #genericType}
-	 *
-	 * @return {@link #genericType}
-	 */
+	/// Get [#genericType]
+	///
+	/// @return Returns [#genericType]
 	public String getGenericType() {
 		return genericType;
 	}
 
-	/**
-	 * Check if argument is the first of the method.
-	 * This method is used to know if argument must be prepended
-	 * with a comma during rendering.
-	 *
-	 * @return True if argument is the first, false otherwise.
-	 */
+	/// Check if argument is the first of the method.
+	///
+	/// This method is used to know if argument must be prepended
+	/// with a comma during rendering.
+	///
+	/// @return True if argument is the first, false otherwise.
 	public boolean isFirst() {
 		return index == 1;
 	}

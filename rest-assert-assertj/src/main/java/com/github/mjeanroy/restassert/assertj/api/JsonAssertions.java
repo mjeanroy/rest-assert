@@ -27,47 +27,37 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.data.JsonEntry;
 
-/**
- * Entry point for assertion methods for JSON payloads.
- */
+/// Entry point for assertion methods for JSON payloads.
 public class JsonAssertions {
 
 	// Ensure non instantiation.
 	private JsonAssertions() {
 	}
 
-	/**
-	 * Create JSON entry.
-	 *
-	 * <br>
-	 *
-	 * Basically, a shortcut to {@link com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions#jsonEntry(String, Object)}, but
-	 * this method may be used to avoid to import the same class name.
-	 *
-	 * @param key JSON key.
-	 * @param value JSON value.
-	 * @return JSON entry.
-	 */
+	/// Create JSON entry.
+	///
+	/// Basically, a shortcut to [com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions#jsonEntry(String, Object)], but
+	/// this method may be used to avoid to import the same class name.
+	///
+	/// @param key JSON key.
+	/// @param value JSON value.
+	/// @return JSON entry.
 	public static JsonEntry jsonEntry(String key, Object value) {
 		return com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions.jsonEntry(key, value);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(String actual) {
 		return new JsonAssert(actual);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the response http that will be used to extract content body.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the response http that will be used to extract content body.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(HttpResponse actual) {
 		return new JsonAssert(actual.getContent());
 	}

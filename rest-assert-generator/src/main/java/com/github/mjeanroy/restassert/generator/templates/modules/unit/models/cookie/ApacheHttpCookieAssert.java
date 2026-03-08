@@ -29,21 +29,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.apache.ApacheH
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import org.apache.http.cookie.Cookie;
 
-/**
- * Template model for rest-assert-unit CookieAssert class.
- */
+/// Template model for rest-assert-unit CookieAssert class.
 public final class ApacheHttpCookieAssert extends AbstractCookieAssert implements TemplateModel {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final ApacheHttpCookieAssert INSTANCE = new ApacheHttpCookieAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel apacheHttpCookieAssert() {
 		return INSTANCE;
 	}

@@ -1,10 +1,8 @@
-	/**
-	 * @see com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions#isFoo
-	 *
-	 * @param info contains information about the assertion.
-	 * @param actual actual object.
-	 * @throws AssertionError
-	 */
+	/// @see com.github.mjeanroy.restassert.internal.assertions.HttpResponseAssertions#isFoo
+	///
+	/// @param info contains information about the assertion.
+	/// @param actual actual object.
+	/// @throws AssertionError
 	public void assertIsFoo(AssertionInfo info, com.github.mjeanroy.restassert.internal.data.HttpResponse actual) {
 		assertNotNull(info, actual);
 		check(info, assertions.isFoo(actual));

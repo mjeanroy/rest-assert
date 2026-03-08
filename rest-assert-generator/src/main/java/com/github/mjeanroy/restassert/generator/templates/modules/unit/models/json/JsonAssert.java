@@ -30,24 +30,18 @@ import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.Ab
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-/**
- * Template model for rest-assert-unit JsonAssert class.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
+/// Template model for rest-assert-unit JsonAssert class.
+///
+/// This class is implemented as a singleton.
+/// This class is thread safe.
 public final class JsonAssert extends AbstractUnitTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final JsonAssert INSTANCE = new JsonAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel jsonAssert() {
 		return INSTANCE;
 	}

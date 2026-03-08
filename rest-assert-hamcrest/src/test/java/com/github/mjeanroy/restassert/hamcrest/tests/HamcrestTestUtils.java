@@ -29,14 +29,12 @@ public final class HamcrestTestUtils {
 	private HamcrestTestUtils() {
 	}
 
-	/**
-	 * Generate Hamcrest error message, using given expectation message and given mismatch
-	 * description.
-	 *
-	 * @param expectation Expectation message
-	 * @param mismatch Mismatch message.
-	 * @return The message output.
-	 */
+	/// Generate Hamcrest error message, using given expectation message and given mismatch
+	/// description.
+	///
+	/// @param expectation Expectation message
+	/// @param mismatch Mismatch message.
+	/// @return The message output.
 	public static String generateHamcrestErrorMessage(String expectation, String mismatch) {
 		String expectationMsg = "Expected: " + expectation.trim();
 		String mismatchMsg = "     but: " + mismatch.trim();

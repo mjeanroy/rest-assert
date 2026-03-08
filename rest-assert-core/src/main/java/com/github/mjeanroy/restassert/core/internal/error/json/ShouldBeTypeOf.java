@@ -28,10 +28,8 @@ import com.github.mjeanroy.restassert.core.internal.common.Strings;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 
-/**
- * Error thrown when a json string should be an array
- * but is an object.
- */
+/// Error thrown when a json string should be an array
+/// but is an object.
 public final class ShouldBeTypeOf extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -53,14 +51,12 @@ public final class ShouldBeTypeOf extends AbstractJsonError {
 		);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @param expected Expected type.
-	 * @param actual Actual type.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @param expected Expected type.
+	/// @param actual Actual type.
+	/// @return Error.
 	public static ShouldBeTypeOf shouldBeTypeOf(String json, JsonType expected, JsonType actual) {
 		return new ShouldBeTypeOf(
 			json,
@@ -69,15 +65,13 @@ public final class ShouldBeTypeOf extends AbstractJsonError {
 		);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @param entry JSON entry.
-	 * @param expected Expected type.
-	 * @param actual Actual type.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @param entry JSON entry.
+	/// @param expected Expected type.
+	/// @param actual Actual type.
+	/// @return Error.
 	public static ShouldBeTypeOf shouldBeTypeOf(
 		String json,
 		String entry,

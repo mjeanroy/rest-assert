@@ -46,25 +46,18 @@ import static com.github.mjeanroy.restassert.core.internal.json.JsonContext.root
 import static java.lang.String.format;
 import static java.util.Collections.singletonList;
 
-/**
- * Default implementation for {@link JsonComparator}
- * interface.
- */
+/// Default implementation for [JsonComparator] interface.
 public class DefaultJsonComparator implements JsonComparator {
 
-	/**
-	 * JSON parser.
-	 */
+	/// JSON parser.
 	private final JsonParser parser;
 
 	// Use thread local to remains thread safe
 	private final ThreadLocal<JsonContext> contexts = new ThreadLocal<>();
 
-	/**
-	 * Create new comparator with custom option.
-	 *
-	 * @param parser Parser used to extract json data.
-	 */
+	/// Create new comparator with custom option.
+	///
+	/// @param parser Parser used to extract json data.
 	public DefaultJsonComparator(JsonParser parser) {
 		this.parser = parser;
 	}

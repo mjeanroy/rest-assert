@@ -74,14 +74,10 @@ public enum AssertJProcessor implements Processor {
 	),
 	;
 
-	/**
-	 * Template that will be processed.
-	 */
+	/// Template that will be processed.
 	private final Template template;
 
-	/**
-	 * Data that will be merged into template.
-	 */
+	/// Data that will be merged into template.
 	private final TemplateModel model;
 
 	// Create new processor

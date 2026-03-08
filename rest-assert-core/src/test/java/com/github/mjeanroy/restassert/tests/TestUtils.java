@@ -29,26 +29,22 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-/**
- * Static Test Utilities.
- */
+/// Static Test Utilities.
 public final class TestUtils {
 
 	// Ensure non instantiation.
 	private TestUtils() {
 	}
 
-	/**
-	 * Create date using UTC TimeZone.
-	 *
-	 * @param year The year.
-	 * @param month The month, starting at zero.
-	 * @param dayOfMonth The day of month.
-	 * @param hourOfDay The hours of day.
-	 * @param minute The minute.
-	 * @param seconds The seconds.
-	 * @return The UTC Date.
-	 */
+	/// Create date using UTC TimeZone.
+	///
+	/// @param year The year.
+	/// @param month The month, starting at zero.
+	/// @param dayOfMonth The day of month.
+	/// @param hourOfDay The hours of day.
+	/// @param minute The minute.
+	/// @param seconds The seconds.
+	/// @return The UTC Date.
 	public static Date createUtcDate(int year, int month, int dayOfMonth, int hourOfDay, int minute, int seconds) {
 		TimeZone utc = TimeZone.getTimeZone("UTC");
 		Calendar calendar = new GregorianCalendar(utc);

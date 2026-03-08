@@ -24,18 +24,14 @@
 
 package com.github.mjeanroy.restassert.core.internal.exceptions;
 
-/**
- * Exception thrown when a response body cannot
- * be read.
- */
+/// Exception thrown when a response body cannot
+/// be read.
 @SuppressWarnings("serial")
 public class NonParsableResponseBodyException extends RuntimeException {
 
-	/**
-	 * Create exception.
-	 *
-	 * @param ex Original exception.
-	 */
+	/// Create exception.
+	///
+	/// @param ex Original exception.
 	public NonParsableResponseBodyException(Exception ex) {
 		super(ex);
 	}

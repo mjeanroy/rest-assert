@@ -33,11 +33,9 @@ import java.util.Collection;
 
 abstract class AbstractGenerator {
 
-	/**
-	 * Generate classes into target directory.
-	 *
-	 * @param buildDirectory Target directory.
-	 */
+	/// Generate classes into target directory.
+	///
+	/// @param buildDirectory Target directory.
 	final void generate(String buildDirectory) {
 		TemplateEngine templateEngine = MustacheTemplateEngine.instance();
 		Iterable<? extends Processor> templates = getProcessors();
@@ -50,12 +48,10 @@ abstract class AbstractGenerator {
 		}
 	}
 
-	/**
-	 * Get list of processors.
-	 * Each processor will build a class file that can be
-	 * written to disk.
-	 *
-	 * @return Processors.
-	 */
+	/// Get list of processors.
+	/// Each processor will build a class file that can be
+	/// written to disk.
+	///
+	/// @return Processors.
 	abstract Collection<? extends Processor> getProcessors();
 }

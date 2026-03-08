@@ -27,23 +27,19 @@ package com.github.mjeanroy.restassert.core.internal.common;
 import java.util.Collection;
 import java.util.regex.Pattern;
 
-/**
- * Set of pre-conditions.
- */
+/// Set of pre-conditions.
 public final class PreConditions {
 
 	private PreConditions() {
 	}
 
-	/**
-	 * Check that a given string is not empty (i.e not null, not empty).
-	 *
-	 * @param input String to check.
-	 * @param message Error message if {@code obj} is blank.
-	 * @return Original {@code obj}.
-	 * @throws NullPointerException If {@code obj} is null.
-	 * @throws IllegalArgumentException If {@code obj} is empty.
-	 */
+	/// Check that a given string is not empty (i.e not `null``, not empty).
+	///
+	/// @param input String to check.
+	/// @param message Error message if `obj` is blank.
+	/// @return Original `obj`.
+	/// @throws NullPointerException If `obj` is `null`.
+	/// @throws IllegalArgumentException If `obj` is empty.
 	public static String notEmpty(String input, String message) {
 		notNull(input, message);
 
@@ -54,16 +50,14 @@ public final class PreConditions {
 		return input;
 	}
 
-	/**
-	 * Check that a given collection is not empty (i.e not null, not empty).
-	 *
-	 * @param list Collection to check.
-	 * @param message Error message if {@code obj} is blank.
-	 * @param <T> Type of elements in given iterable.
-	 * @return Original {@code obj}.
-	 * @throws NullPointerException If {@code obj} is null.
-	 * @throws IllegalArgumentException If {@code obj} is empty.
-	 */
+	/// Check that a given collection is not empty (i.e not `null``, not empty).
+	///
+	/// @param list Collection to check.
+	/// @param message Error message if `obj` is blank.
+	/// @param <T> Type of elements in given iterable.
+	/// @return Original `obj`.
+	/// @throws NullPointerException If `obj` is `null`.
+	/// @throws IllegalArgumentException If `obj` is empty.
 	public static <T> Iterable<T> notEmpty(Iterable<T> list, String message) {
 		notNull(list, message);
 		if (!list.iterator().hasNext()) {
@@ -73,16 +67,14 @@ public final class PreConditions {
 		return list;
 	}
 
-	/**
-	 * Check that a given collection is not empty (i.e not null, not empty).
-	 *
-	 * @param list Collection to check.
-	 * @param message Error message if {@code obj} is blank.
-	 * @param <T> Type of elements in given collection.
-	 * @return Original {@code obj}.
-	 * @throws NullPointerException If {@code obj} is null.
-	 * @throws IllegalArgumentException If {@code obj} is empty.
-	 */
+	/// Check that a given collection is not empty (i.e not `null`, not empty).
+	///
+	/// @param list Collection to check.
+	/// @param message Error message if `obj` is blank.
+	/// @param <T> Type of elements in given collection.
+	/// @return Original `obj`.
+	/// @throws NullPointerException If `obj` is `null`.
+	/// @throws IllegalArgumentException If `obj` is empty.
 	public static <T> Collection<T> notEmpty(Collection<T> list, String message) {
 		notNull(list, message);
 
@@ -93,15 +85,13 @@ public final class PreConditions {
 		return list;
 	}
 
-	/**
-	 * Check that a given value is greater or equal than given minimum value.
-	 *
-	 * @param val Value to check.
-	 * @param minValue Minimum value.
-	 * @param message Error message.
-	 * @return The original value.
-	 * @throws IllegalArgumentException If {@code val} is less than {@code minValue}.
-	 */
+	/// Check that a given value is greater or equal than given minimum value.
+	///
+	/// @param val Value to check.
+	/// @param minValue Minimum value.
+	/// @param message Error message.
+	/// @return The original value.
+	/// @throws IllegalArgumentException If `val` is less than `minValue`.
 	public static int isGreaterThan(int val, int minValue, String message) {
 		if (val < minValue) {
 			throw new IllegalArgumentException(message);
@@ -110,28 +100,24 @@ public final class PreConditions {
 		return val;
 	}
 
-	/**
-	 * Check that a given value is greater or equal than zero.
-	 *
-	 * @param val Value to check.
-	 * @param message Error message.
-	 * @return The original value.
-	 * @throws IllegalArgumentException If {@code val} is less than zero.
-	 */
+	/// Check that a given value is greater or equal than zero.
+	///
+	/// @param val Value to check.
+	/// @param message Error message.
+	/// @return The original value.
+	/// @throws IllegalArgumentException If `val` is less than zero.
 	public static int isPositive(int val, String message) {
 		return isGreaterThan(val, 0, message);
 	}
 
-	/**
-	 * Check that a given value is in given range (inclusive).
-	 *
-	 * @param val Value to check.
-	 * @param min Minimum value.
-	 * @param max Maximum value.
-	 * @param message Error message.
-	 * @return The original value.
-	 * @throws IllegalArgumentException If {@code val} is less than {@code min} or greater than {@code max}.
-	 */
+	/// Check that a given value is in given range (inclusive).
+	///
+	/// @param val Value to check.
+	/// @param min Minimum value.
+	/// @param max Maximum value.
+	/// @param message Error message.
+	/// @return The original value.
+	/// @throws IllegalArgumentException If `val` is less than `min` or greater than `max`.
 	public static int isInRange(int val, int min, int max, String message) {
 		if (val < min || val > max) {
 			throw new IllegalArgumentException(message);
@@ -140,16 +126,14 @@ public final class PreConditions {
 		return val;
 	}
 
-	/**
-	 * Check that a given string is not blank (i.e not null, not empty
-	 * and contains other characters that whitespaces).
-	 *
-	 * @param obj String value to check.
-	 * @param message Error message if {@code obj} is blank.
-	 * @return Original {@code obj}.
-	 * @throws NullPointerException If {@code obj} is null.
-	 * @throws IllegalArgumentException If {@code obj} is empty or blank.
-	 */
+	/// Check that a given string is not blank (i.e not null, not empty
+	/// and contains other characters that whitespaces).
+	///
+	/// @param obj String value to check.
+	/// @param message Error message if `obj` is blank.
+	/// @return Original `obj`.
+	/// @throws NullPointerException If `obj` is null.
+	/// @throws IllegalArgumentException If `obj` is empty or blank.
 	public static String notBlank(String obj, String message) {
 		notNull(obj, message);
 
@@ -162,16 +146,15 @@ public final class PreConditions {
 		throw new IllegalArgumentException(message);
 	}
 
-	/**
-	 * Check that a given value is not null.
-	 * If value is null, a {@link NullPointerException} will be thrown
-	 * with given message.
-	 *
-	 * @param obj Value to check.
-	 * @param message Message given in {@link NullPointerException}.
-	 * @param <T> Type of object.
-	 * @return Original object if it is not null.
-	 */
+	/// Check that a given value is not null.
+	///
+	/// If value is `null`, a [NullPointerException] will be thrown
+	/// with given message.
+	///
+	/// @param obj Value to check.
+	/// @param message Message given in [NullPointerException].
+	/// @param <T> Type of object.
+	/// @return Original object if it is not null.
 	public static <T> T notNull(T obj, String message) {
 		if (obj == null) {
 			throw new NullPointerException(message);
@@ -179,16 +162,14 @@ public final class PreConditions {
 		return obj;
 	}
 
-	/**
-	 * Check that given string match given pattern.
-	 *
-	 * @param value String value.
-	 * @param pattern Pattern to check.
-	 * @param message Error message.
-	 * @return Original string.
-	 * @throws NullPointerException If {@code value} or {@code pattern} are {@code null}.
-	 * @throws IllegalArgumentException If {@code value} does not match {@code pattern}.
-	 */
+	/// Check that given string match given pattern.
+	///
+	/// @param value String value.
+	/// @param pattern Pattern to check.
+	/// @param message Error message.
+	/// @return Original string.
+	/// @throws NullPointerException If `value` or `pattern` are `null`.
+	/// @throws IllegalArgumentException If `value` does not match `pattern`.
 	public static String match(String value, Pattern pattern, String message) {
 		notNull(value, message);
 		notNull(pattern, message);

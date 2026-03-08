@@ -28,22 +28,17 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import static com.github.mjeanroy.restassert.core.internal.data.bindings.javax.JavaxCookie.create;
 
-/**
- * Entry point for assertion methods for Javax api
- * library.
- */
+/// Entry point for assertion methods for Javax api library.
 public final class JavaxAssertions {
 
 	// Ensure non instantiation
 	private JavaxAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link CookieAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [CookieAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static CookieAssert assertThat(javax.servlet.http.Cookie actual) {
 		Cookie cookie = create(actual);
 		return new CookieAssert(cookie);

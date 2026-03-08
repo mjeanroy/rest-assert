@@ -39,21 +39,17 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Templated message with arguments.
- */
+/// Templated message with arguments.
 public final class Message {
 
 	private static final String LINE_SEPARATOR = System.lineSeparator();
 	private static final String BULLET_PREFIX = "→ ";
 
-	/**
-	 * Concat two messages into a single one.
-	 *
-	 * @param first First message.
-	 * @param second Second message.
-	 * @return Concatenated message.
-	 */
+	/// Concat two messages into a single one.
+	///
+	/// @param first First message.
+	/// @param second Second message.
+	/// @return Concatenated message.
 	static Message concat(Message first, Message second) {
 		if (first == null) {
 			return second;
@@ -78,61 +74,47 @@ public final class Message {
 		);
 	}
 
-	/**
-	 * Create message without any arguments.
-	 *
-	 * @param message The string message.
-	 * @return The message.
-	 */
+	/// Create message without any arguments.
+	///
+	/// @param message The string message.
+	/// @return The message.
 	public static Message message(String message) {
 		return new Message(message, new Object[0]);
 	}
 
-	/**
-	 * Create message with given arguments.
-	 *
-	 * @param message The string message template.
-	 * @param arg First argument.
-	 * @param others Other, optional, arguments.
-	 * @return The message.
-	 */
+	/// Create message with given arguments.
+	///
+	/// @param message The string message template.
+	/// @param arg First argument.
+	/// @param others Other, optional, arguments.
+	/// @return The message.
 	public static Message message(String message, Object arg, Object... others) {
 		Object[] args = Stream.concat(Stream.of(arg), Arrays.stream(others)).toArray(Object[]::new);
 		return new Message(message, args);
 	}
 
-	/**
-	 * Create message with given arguments.
-	 *
-	 * @param message The string message template.
-	 * @param args Arguments.
-	 * @return The message.
-	 */
+	/// Create message with given arguments.
+	///
+	/// @param message The string message template.
+	/// @param args Arguments.
+	/// @return The message.
 	public static Message message(String message, Object[] args) {
 		return new Message(message, Arrays.copyOf(args, args.length));
 	}
 
-	/**
-	 * The message template.
-	 */
+	/// The message template.
 	private final List<String> templates;
 
-	/**
-	 * The message parameters.
-	 */
+	/// The message parameters.
 	private final List<Object[]> args;
 
-	/**
-	 * Total number of arguments.
-	 */
+	/// Total number of arguments.
 	private final int nbArgs;
 
-	/**
-	 * Create message with given arguments.
-	 *
-	 * @param template The message.
-	 * @param args Message arguments.
-	 */
+	/// Create message with given arguments.
+	///
+	/// @param template The message.
+	/// @param args Message arguments.
 	private Message(String template, Object[] args) {
 		this.templates = singletonList(
 			notBlank(template, "Message must be defined")
@@ -142,24 +124,20 @@ public final class Message {
 		this.nbArgs = args.length;
 	}
 
-	/**
-	 * Create message with given arguments.
-	 *
-	 * @param templates All templates.
-	 * @param args Message arguments.
-	 * @param nbArgs Total number of arguments.
-	 */
+	/// Create message with given arguments.
+	///
+	/// @param templates All templates.
+	/// @param args Message arguments.
+	/// @param nbArgs Total number of arguments.
 	private Message(List<String> templates, List<Object[]> args, int nbArgs) {
 		this.templates = unmodifiableList(templates);
 		this.args = unmodifiableList(args);
 		this.nbArgs = nbArgs;
 	}
 
-	/**
-	 * Get {@link #message}
-	 *
-	 * @return {@link #message}
-	 */
+	/// Get [#message]
+	///
+	/// @return Returns [#message]
 	public String getMessage() {
 		if (templates.isEmpty()) {
 			return "";
@@ -174,20 +152,16 @@ public final class Message {
 		);
 	}
 
-	/**
-	 * Check if message contains more than one error.
-	 *
-	 * @return {@code true} if message contains more than one error, {@code false} otherwise.
-	 */
+	/// Check if message contains more than one error.
+	///
+	/// @return `true` if message contains more than one error, `false` otherwise.
 	public boolean isMulti() {
 		return templates.size() > 1;
 	}
 
-	/**
-	 * Get {@link #args}
-	 *
-	 * @return {@link #args}
-	 */
+	/// Get [#args]
+	///
+	/// @return Returns [#args]
 	public Object[] getArgs() {
 		Object[] allArgs = new Object[nbArgs];
 		int i = 0;
@@ -201,20 +175,16 @@ public final class Message {
 		return allArgs;
 	}
 
-	/**
-	 * Format output message.
-	 *
-	 * @return Output message.
-	 */
+	/// Format output message.
+	///
+	/// @return Output message.
 	public String formatMessage() {
 		return String.join(LINE_SEPARATOR, formatMessages());
 	}
 
-	/**
-	 * Format output message.
-	 *
-	 * @return Output message.
-	 */
+	/// Format output message.
+	///
+	/// @return Output message.
 	public List<String> formatMessages() {
 		if (templates.isEmpty()) {
 			return emptyList();
@@ -239,11 +209,9 @@ public final class Message {
 		return String.format(templates.get(i), formattedArgs);
 	}
 
-	/**
-	 * Get number of arguments.
-	 *
-	 * @return The number of arguments.
-	 */
+	/// Get number of arguments.
+	///
+	/// @return The number of arguments.
 	public int getNbArgs() {
 		return nbArgs;
 	}

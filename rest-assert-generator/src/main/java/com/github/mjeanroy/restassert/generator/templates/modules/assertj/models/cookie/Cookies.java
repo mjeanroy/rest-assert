@@ -29,25 +29,19 @@ import com.github.mjeanroy.restassert.generator.TemplateModel;
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-/**
- * Data model to use to produce valid internal assertions for {@link CookieAssertions} class for
- * assertj framework.
- *
- * This class is implemented as singleton.
- * This class is thread safe.
- */
+/// Data model to use to produce valid internal assertions for [CookieAssertions] class for
+/// assertj framework.
+///
+/// This class is implemented as singleton.
+/// This class is thread safe.
 public class Cookies extends AbstractCookieModel implements TemplateModel {
 
-	/**
-	 * Singleton object.
-	 */
+	/// Singleton object.
 	private static final Cookies INSTANCE = new Cookies();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel cookiesModel() {
 		return INSTANCE;
 	}

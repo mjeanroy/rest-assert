@@ -26,9 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.common;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when actual (i.e object under test) is {@code null}.
- */
+/// Error thrown when actual (i.e object under test) is `null`.
 public final class ShouldNotBeNull extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -36,12 +34,10 @@ public final class ShouldNotBeNull extends AbstractError {
 		super(message);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param label Actual label.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param label Actual label.
+	/// @return Error.
 	public static ShouldNotBeNull shouldNotBeNull(String label) {
 		return new ShouldNotBeNull(
 			String.format("Expecting %s not to be null", label)

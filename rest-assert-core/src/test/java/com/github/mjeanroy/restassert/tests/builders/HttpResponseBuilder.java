@@ -29,53 +29,41 @@ import com.github.mjeanroy.restassert.test.data.Header;
 
 public interface HttpResponseBuilder<T> {
 
-	/**
-	 * Set http response status.
-	 *
-	 * @param status New status.
-	 * @return Current builder.
-	 */
+	/// Set http response status.
+	///
+	/// @param status New status.
+	/// @return Current builder.
 	HttpResponseBuilder<T> setStatus(int status);
 
-	/**
-	 * Set http response body.
-	 *
-	 * @param content New content.
-	 * @return Current builder.
-	 */
+	/// Set http response body.
+	///
+	/// @param content New content.
+	/// @return Current builder.
 	HttpResponseBuilder<T> setContent(String content);
 
-	/**
-	 * Add new header.
-	 *
-	 * @param name Header name.
-	 * @param value Header value.
-	 * @return Current builder.
-	 */
+	/// Add new header.
+	///
+	/// @param name Header name.
+	/// @param value Header value.
+	/// @return Current builder.
 	HttpResponseBuilder<T> addHeader(String name, String value);
 
-	/**
-	 * Add new header.
-	 *
-	 * @param header Header.
-	 * @param other Other, optional, headers.
-	 * @return Current builder.
-	 */
+	/// Add new header.
+	///
+	/// @param header Header.
+	/// @param other Other, optional, headers.
+	/// @return Current builder.
 	HttpResponseBuilder<T> addHeader(Header header, Header... other);
 
-	/**
-	 * Add new cookie.
-	 *
-	 * @param cookie Cookie.
-	 * @param other Other, optional, cookies.
-	 * @return Current builder.
-	 */
+	/// Add new cookie.
+	///
+	/// @param cookie Cookie.
+	/// @param other Other, optional, cookies.
+	/// @return Current builder.
 	HttpResponseBuilder<T> addCookie(Cookie cookie, Cookie... other);
 
-	/**
-	 * Build http response.
-	 *
-	 * @return Http response.
-	 */
+	/// Build http response.
+	///
+	/// @return Http response.
 	T build();
 }

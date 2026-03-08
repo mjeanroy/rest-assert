@@ -24,18 +24,13 @@
 
 package com.github.mjeanroy.restassert.core.internal.json;
 
-/**
- * Exception thrown when a json error occurs
- * during parsing.
- */
+/// Exception thrown when a json error occurs during parsing.
 @SuppressWarnings("serial")
 public class JsonException extends RuntimeException {
 
-	/**
-	 * Create exception.
-	 *
-	 * @param th The original cause.
-	 */
+	/// Create exception.
+	///
+	/// @param th The original cause.
 	JsonException(Throwable th) {
 		super(th);
 	}

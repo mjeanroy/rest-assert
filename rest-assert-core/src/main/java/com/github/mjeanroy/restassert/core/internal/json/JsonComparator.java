@@ -28,17 +28,13 @@ import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 
 import java.util.List;
 
-/**
- * Json Comparator.
- */
+/// Json Comparator.
 public interface JsonComparator {
 
-	/**
-	 * Compare functions.
-	 *
-	 * @param actual Actual json representation.
-	 * @param expected Expected json representation.
-	 * @return List of errors (a.k.a differences).
-	 */
+	/// Compare functions.
+	///
+	/// @param actual Actual json representation.
+	/// @param expected Expected json representation.
+	/// @return List of errors (a.k.a differences).
 	List<RestAssertError> compare(String actual, String expected);
 }

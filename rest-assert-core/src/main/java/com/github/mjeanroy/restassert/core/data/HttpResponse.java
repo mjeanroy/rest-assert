@@ -28,56 +28,42 @@ import com.github.mjeanroy.restassert.core.internal.exceptions.NonParsableRespon
 
 import java.util.List;
 
-/**
- * Http response contract.
- */
+/// Http response contract.
 public interface HttpResponse {
 
-	/**
-	 * Get http status of http response.
-	 *
-	 * @return Http status.
-	 */
+	/// Get http status of http response.
+	///
+	/// @return Http status.
 	int getStatus();
 
-	/**
-	 * Check that http response contains header.
-	 * Header name should be case insensitive.
-	 *
-	 * @param name Header name.
-	 * @return True if http response contains header, false otherwise.
-	 */
+	/// Check that http response contains header.
+	///
+	/// Header name must be **case insensitive**.
+	///
+	/// @param name Header name.
+	/// @return True if http response contains header, false otherwise.
 	boolean hasHeader(String name);
 
-	/**
-	 * Get (first) header value.
-	 * If http response does not contain header, it returns
-	 * null.
-	 *
-	 * @param name Header name.
-	 * @return Header value, null if response does not contain header.
-	 */
+	/// Get (first) header value.
+	/// If http response does not contain header, it returns `null`.
+	///
+	/// @param name Header name.
+	/// @return Header value, null if response does not contain header.
 	List<String> getHeader(String name);
 
-	/**
-	 * Get all response HTTP headers.
-	 *
-	 * @return HTTP Headers.
-	 */
+	/// Get all response HTTP headers.
+	///
+	/// @return HTTP Headers.
 	List<HttpHeader> getHeaders();
 
-	/**
-	 * Get response body.
-	 *
-	 * @return Response body.
-	 * @throws NonParsableResponseBodyException If response body cannot be read.
-	 */
+	/// Get response body.
+	///
+	/// @return Response body.
+	/// @throws NonParsableResponseBodyException If response body cannot be read.
 	String getContent();
 
-	/**
-	 * Get the list of cookies (i.e cookie objects defined by {@code Set-Cookie} header.
-	 *
-	 * @return List of cookies, may be empty if {@code Set-Cookie} is missing.
-	 */
+	/// Get the list of cookies (i.e cookie objects defined by `Set-Cookie` header.
+	///
+	/// @return List of cookies, may be empty if `Set-Cookie` is missing.
 	List<Cookie> getCookies();
 }

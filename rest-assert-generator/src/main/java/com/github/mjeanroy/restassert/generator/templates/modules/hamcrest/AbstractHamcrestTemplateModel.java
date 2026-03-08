@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest;
 
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 
-/**
- * Specialized implementation of {@link AbstractTemplateModel} where the package is already
- * fulfilled.
- */
+/// Specialized implementation of [AbstractTemplateModel] where the package is already
+/// fulfilled.
 public abstract class AbstractHamcrestTemplateModel extends AbstractTemplateModel {
 
 	@Override
@@ -37,10 +35,8 @@ public abstract class AbstractHamcrestTemplateModel extends AbstractTemplateMode
 		return "com.github.mjeanroy.restassert.hamcrest.api." + getSubPackage();
 	}
 
-	/**
-	 * Get the subpackage under the core package where to put classes.
-	 *
-	 * @return Subpackage.
-	 */
+	/// Get the subpackage under the core package where to put classes.
+	///
+	/// @return Subpackage.
 	protected abstract String getSubPackage();
 }

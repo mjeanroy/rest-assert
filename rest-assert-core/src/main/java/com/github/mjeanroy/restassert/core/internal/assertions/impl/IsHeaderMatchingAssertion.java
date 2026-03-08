@@ -37,29 +37,21 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
-/**
- * Check that http response has at least one header matching
- * expected header expected object.
- */
+/// Check that http response has at least one header matching
+/// expected header expected object.
 public class IsHeaderMatchingAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Expected header expected.
-	 */
+	/// Expected header expected.
 	private final HttpHeaderValue expected;
 
-	/**
-	 * The parser that will be used to build comparison.
-	 */
+	/// The parser that will be used to build comparison.
 	private final HttpHeaderParser<? extends HttpHeaderValue> parser;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 * @param expected Expected header value.
-	 * @param parser Parser, used to compare both header values.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
+	/// @param expected Expected header value.
+	/// @param parser Parser, used to compare both header values.
 	public IsHeaderMatchingAssertion(String name, HttpHeaderValue expected, HttpHeaderParser<? extends HttpHeaderValue> parser) {
 		super(name);
 		this.expected = notNull(expected, "Header expected value must not be null");

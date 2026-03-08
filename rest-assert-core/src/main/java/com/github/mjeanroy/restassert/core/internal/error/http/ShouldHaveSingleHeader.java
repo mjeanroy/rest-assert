@@ -29,10 +29,8 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 
 import java.util.List;
 
-/**
- * Error thrown when an http response should contain
- * specific header multiple times.
- */
+/// Error thrown when an http response should contain
+/// specific header multiple times.
 public final class ShouldHaveSingleHeader extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -40,13 +38,11 @@ public final class ShouldHaveSingleHeader extends AbstractError {
 		super(expectation, mismatch);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param headerName Expected header name.
-	 * @param values Found values.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param headerName Expected header name.
+	/// @param values Found values.
+	/// @return Error.
 	public static ShouldHaveSingleHeader shouldHaveSingleHeader(String headerName, List<String> values) {
 		return new ShouldHaveSingleHeader(
 			Message.message("Expecting response to contains header %s with a single value", headerName),

@@ -40,9 +40,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
-/**
- * DefaultCookieBuilder to create instance of {@link ResultActions} class.
- */
+/// Builder to create instance of [ResultActions] class.
 public class SpringMockMvcHttpResponseBuilder extends AbstractHttpResponseBuilder<ResultActions, SpringMockMvcHttpResponseBuilder> implements HttpResponseBuilder<ResultActions> {
 
 	@Override

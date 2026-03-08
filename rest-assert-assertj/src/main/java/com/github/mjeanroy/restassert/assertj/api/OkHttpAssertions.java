@@ -28,33 +28,27 @@ import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResponse;
 import okhttp3.Response;
 
-/**
- * Entry point for assertion methods for OkHttp library.
- */
+/// Entry point for assertion methods for OkHttp library.
 public final class OkHttpAssertions {
 
 	// Ensure non instantiation
 	private OkHttpAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(Response actual) {
 		return HttpResponseAssertions.assertThat(
 			toHttpResponse(actual)
 		);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(Response actual) {
 		return JsonAssertions.assertThatJson(
 			toHttpResponse(actual)

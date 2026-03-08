@@ -26,19 +26,13 @@ package com.github.mjeanroy.restassert.test.json;
 
 import java.util.Objects;
 
-/**
- * Implementation of (immutable) JSON object entry.
- */
+/// Implementation of (immutable) JSON object entry.
 public final class JSONEntry {
 
-	/**
-	 * Entry name.
-	 */
+	/// Entry name.
 	private final String name;
 
-	/**
-	 * Entry value.
-	 */
+	/// Entry value.
 	private final Object value;
 
 	JSONEntry(String name, Object value) {
@@ -46,20 +40,16 @@ public final class JSONEntry {
 		this.value = value;
 	}
 
-	/**
-	 * Get {@link #name}
-	 *
-	 * @return {@link #name}
-	 */
+	/// Get [#name]
+	///
+	/// @return Returns [#name]
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Get {@link #value}
-	 *
-	 * @return {@link #value}
-	 */
+	/// Get [#value]
+	///
+	/// @return Returns [#value]
 	public Object getValue() {
 		return value;
 	}

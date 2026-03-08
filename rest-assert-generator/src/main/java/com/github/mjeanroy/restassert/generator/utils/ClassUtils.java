@@ -30,21 +30,17 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Static Class Utilities.
- */
+/// Static Class Utilities.
 public final class ClassUtils {
 
 	// Ensure non instantiation
 	private ClassUtils() {
 	}
 
-	/**
-	 * Get all public methods available on a java class.
-	 *
-	 * @param klass Class.
-	 * @return List of public methods.
-	 */
+	/// Get all public methods available on a java class.
+	///
+	/// @param klass Class.
+	/// @return List of public methods.
 	public static List<Method> findPublicMethods(Class<?> klass) {
 		Method[] methods = klass.getDeclaredMethods();
 		List<Method> results = new ArrayList<>(methods.length);
@@ -57,21 +53,17 @@ public final class ClassUtils {
 		return results;
 	}
 
-	/**
-	 * Turn a package name to file system path.
-	 *
-	 * @param packageName Package name.
-	 * @return Path.
-	 */
+	/// Turn a package name to file system path.
+	///
+	/// @param packageName Package name.
+	/// @return Path.
 	public static String packageNameToDirectory(String packageName) {
 		return packageName.replaceAll("\\.", separator());
 	}
 
-	/**
-	 * Get the file separator value, safe to be used on windows or unix systems.
-	 *
-	 * @return File separator.
-	 */
+	/// Get the file separator value, safe to be used on windows or unix systems.
+	///
+	/// @return File separator.
 	private static String separator() {
 		char separator = File.separatorChar;
 		if (separator == '/') {

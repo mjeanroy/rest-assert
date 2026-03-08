@@ -28,10 +28,7 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when an http response should contains
- * expected cookie.
- */
+/// Error thrown when an http response should contain expected cookie.
 public final class ShouldHaveCookie extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -39,52 +36,42 @@ public final class ShouldHaveCookie extends AbstractError {
 		super(expectation);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param name Cookie name.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param name Cookie name.
+	/// @return Error.
 	public static ShouldHaveCookie shouldHaveCookie(String name) {
 		return new ShouldHaveCookie(Message.message("Expecting http response to contains cookie with name %s", name));
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param name Cookie name.
-	 * @param value Cookie value.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param name Cookie name.
+	/// @param value Cookie value.
+	/// @return Error.
 	public static ShouldHaveCookie shouldHaveCookie(String name, String value) {
 		return new ShouldHaveCookie(Message.message("Expecting http response to contains cookie with name %s and value %s", name, value));
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param cookie Cookie.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param cookie Cookie.
+	/// @return Error.
 	public static ShouldHaveCookie shouldHaveCookie(Cookie cookie) {
 		return new ShouldHaveCookie(Message.message("Expecting http response to contains cookie %s", cookie));
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param name Cookie name.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param name Cookie name.
+	/// @return Error.
 	public static ShouldHaveCookie shouldNotHaveCookie(String name) {
 		return new ShouldHaveCookie(Message.message("Expecting http response not to contains cookie with name %s", name));
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @return Error.
 	public static ShouldHaveCookie shouldNotHaveCookie() {
 		return new ShouldHaveCookie(Message.message("Expecting http response not to contains cookies"));
 	}

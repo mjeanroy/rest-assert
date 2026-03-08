@@ -27,14 +27,10 @@ package com.github.mjeanroy.restassert.core.internal.json;
 import java.util.Arrays;
 import java.util.Map;
 
-/**
- * Set of json types.
- */
+/// Set of json types.
 public enum JsonType {
 
-	/**
-	 * Boolean JSON type.
-	 */
+	/// Boolean JSON type.
 	BOOLEAN {
 		@Override
 		protected boolean isValid(Object object) {
@@ -47,9 +43,7 @@ public enum JsonType {
 		}
 	},
 
-	/**
-	 * Number JSON type.
-	 */
+	/// Number JSON type.
 	NUMBER {
 		@Override
 		protected boolean isValid(Object object) {
@@ -62,9 +56,7 @@ public enum JsonType {
 		}
 	},
 
-	/**
-	 * String JSON type.
-	 */
+	/// String JSON type.
 	STRING {
 		@Override
 		protected boolean isValid(Object object) {
@@ -77,9 +69,7 @@ public enum JsonType {
 		}
 	},
 
-	/**
-	 * Object JSON type.
-	 */
+	/// Object JSON type.
 	OBJECT {
 		@Override
 		protected boolean isValid(Object object) {
@@ -92,9 +82,7 @@ public enum JsonType {
 		}
 	},
 
-	/**
-	 * Array JSON type.
-	 */
+	/// Array JSON type.
 	ARRAY {
 		@Override
 		protected boolean isValid(Object object) {
@@ -108,9 +96,7 @@ public enum JsonType {
 		}
 	},
 
-	/**
-	 * The NULL JSON value.
-	 */
+	/// The NULL JSON value.
 	NULL {
 		@Override
 		protected boolean isValid(Object object) {
@@ -123,28 +109,22 @@ public enum JsonType {
 		}
 	};
 
-	/**
-	 * Check if object is of expected json type.
-	 *
-	 * @param object Object.
-	 * @return True if object is valid for type, false otherwise.
-	 */
+	/// Check if object is of expected json type.
+	///
+	/// @param object Object.
+	/// @return `true` if object is valid for type, `false` otherwise.
 	abstract boolean isValid(Object object);
 
-	/**
-	 * Check if given parsed value is of given type.
-	 *
-	 * @param value Parsed value.
-	 * @return {@code true} if {@code value} if of given type, {@code false} otherwise.
-	 */
+	/// Check if given parsed value is of given type.
+	///
+	/// @param value Parsed value.
+	/// @return `true` if `value` if of given type, `false` otherwise.
 	abstract boolean match(Object value);
 
-	/**
-	 * Find json type of object.
-	 *
-	 * @param object Object.
-	 * @return Json Type.
-	 */
+	/// Find json type of object.
+	///
+	/// @param object Object.
+	/// @return Json Type.
 	public static JsonType parseType(Object object) {
 		return Arrays.stream(JsonType.values())
 			.filter(jsonType -> jsonType.isValid(object))
@@ -152,12 +132,10 @@ public enum JsonType {
 			.orElseThrow(() -> new UnsupportedOperationException("Json type of object " + object + " cannot be found"));
 	}
 
-	/**
-	 * Get type of parsed json value.
-	 *
-	 * @param object Parsed value.
-	 * @return The type.
-	 */
+	/// Get type of parsed json value.
+	///
+	/// @param object Parsed value.
+	/// @return The type.
 	public static JsonType getType(Object object) {
 		return Arrays.stream(JsonType.values())
 			.filter(jsonType -> jsonType.match(object))

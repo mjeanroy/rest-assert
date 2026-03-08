@@ -27,34 +27,27 @@ package com.github.mjeanroy.restassert.assertj.api;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleHttpResponse;
 
-/**
- * Entry point for assertion methods for Google HttpClient
- * library.
- */
+/// Entry point for assertion methods for Google HttpClient library.
 public final class GoogleHttpAssertions {
 
 	// Ensure non instantiation
 	private GoogleHttpAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(com.google.api.client.http.HttpResponse actual) {
 		return HttpResponseAssertions.assertThat(
 			toHttpResponse(actual)
 		);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(com.google.api.client.http.HttpResponse actual) {
 		return JsonAssertions.assertThatJson(
 			toHttpResponse(actual)

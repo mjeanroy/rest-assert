@@ -37,110 +37,76 @@ import static java.util.Arrays.stream;
 import static java.util.Collections.singletonList;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * The list of available content-encoding values.
- */
+/// The list of available content-encoding values.
 public final class ContentEncoding implements HttpHeaderValue {
 
-	/**
-	 * Create {@code "GZIP"} {@code "Content-Encoding"} header.
-	 *
-	 * @return The {@code "Content-Encoding"} header.
-	 */
+	/// Create `GZIP` `Content-Encoding` header.
+	///
+	/// @return The `Content-Encoding` header.
 	public static ContentEncoding gzip() {
 		return new ContentEncoding(singletonList(Directive.GZIP));
 	}
 
-	/**
-	 * Create {@code "DEFLATE"} {@code "Content-Encoding"} header.
-	 *
-	 * @return The {@code "Content-Encoding"} header.
-	 */
+	/// Create `DEFLATE` `Content-Encoding` header.
+	///
+	/// @return The `Content-Encoding` header.
 	public static ContentEncoding deflate() {
 		return new ContentEncoding(singletonList(Directive.DEFLATE));
 	}
 
-	/**
-	 * Create {@code "BR"} {@code "Content-Encoding"} header.
-	 *
-	 * @return The {@code "Content-Encoding"} header.
-	 */
+	/// Create `BR` `Content-Encoding` header.
+	///
+	/// @return The `Content-Encoding` header.
 	public static ContentEncoding br() {
 		return new ContentEncoding(singletonList(Directive.BR));
 	}
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final ContentEncodingParser PARSER = new ContentEncodingParser();
 
-	/**
-	 * Get {@link ContentEncoding} parser.
-	 *
-	 * @return The parser.
-	 */
+	/// Get [ContentEncoding] parser.
+	///
+	/// @return The parser.
 	public static ContentEncodingParser parser() {
 		return PARSER;
 	}
 
-	/**
-	 * Content-Encoding directive.
-	 *
-	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5">https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5</a>
-	 */
+	/// Content-Encoding directive (see [RFC 2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.5)).
 	public enum Directive {
-		/**
-		 * GZIP Encoding.
-		 */
+		/// GZIP Encoding.
 		GZIP("gzip"),
 
-		/**
-		 * Compress Encoding.
-		 */
+		/// Compress Encoding.
 		COMPRESS("compress"),
 
-		/**
-		 * Deflate Encoding.
-		 */
+		/// Deflate Encoding.
 		DEFLATE("deflate"),
 
-		/**
-		 * No Encoding (i.e identity).
-		 */
+		/// No Encoding (i.e identity).
 		IDENTITY("identity"),
 
-		/**
-		 * Brotli Encoding.
-		 */
+		/// Brotli Encoding.
 		BR("br");
 
-		/**
-		 * The directive value, as it should appear in
-		 * header raw value.
-		 */
+		/// The directive value, as it should appear in
+		/// header raw value.
 		private final String value;
 
-		/**
-		 * Create the directive.
-		 *
-		 * @param value The value.
-		 */
+		/// Create the directive.
+		///
+		/// @param value The value.
 		Directive(String value) {
 			this.value = value;
 		}
 
-		/**
-		 * Get {@link #value}
-		 *
-		 * @return {@link #value}
-		 */
+		/// Get [#value]
+		///
+		/// @return Returns [#value]
 		public String getValue() {
 			return value;
 		}
 
-		/**
-		 * Index of directive, each one being indexed by its value.
-		 */
+		/// Index of directive, each one being indexed by its value.
 		private static final Map<String, Directive> map = stream(Directive.values()).collect(
 			Collectors.toMap(
 				Directive::getValue,
@@ -148,37 +114,29 @@ public final class ContentEncoding implements HttpHeaderValue {
 			)
 		);
 
-		/**
-		 * Get the directive element by its value.
-		 *
-		 * @param value Directive value.
-		 * @return The directive.
-		 */
+		/// Get the directive element by its value.
+		///
+		/// @param value Directive value.
+		/// @return The directive.
 		static Directive byValue(String value) {
 			return map.get(value);
 		}
 	}
 
-	/**
-	 * The {@code "Content-Encoding"} directives, order is important here since encoding
-	 * order defines transformation order.
-	 */
+	/// The `Content-Encoding` directives, order is important here since encoding
+	/// order defines transformation order.
 	private final List<Directive> directives;
 
-	/**
-	 * Create the {@code "Content-Encoding"} header.
-	 *
-	 * @param directives List of directives.
-	 */
+	/// Create the `Content-Encoding` header.
+	///
+	/// @param directives List of directives.
 	ContentEncoding(List<Directive> directives) {
 		this.directives = unmodifiableList(directives);
 	}
 
-	/**
-	 * Get {@link #directives}
-	 *
-	 * @return {@link #directives}
-	 */
+	/// Get [#directives]
+	///
+	/// @return Returns [#directives]
 	public List<Directive> getDirectives() {
 		return directives;
 	}

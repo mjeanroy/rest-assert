@@ -28,16 +28,12 @@ import com.github.mjeanroy.restassert.core.internal.assertions.Assertion;
 import com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult;
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 
-/**
- * Assertion for {@link HttpResponse} objects.
- */
+/// Assertion for [HttpResponse] objects.
 interface HttpResponseAssertion extends Assertion<HttpResponse> {
 
-	/**
-	 * Verify http response object.
-	 *
-	 * @param httpResponse Http response.
-	 * @return Assertion result.
-	 */
+	/// Verify http response object.
+	///
+	/// @param httpResponse Http response.
+	/// @return Assertion result.
 	AssertionResult handle(HttpResponse httpResponse);
 }
