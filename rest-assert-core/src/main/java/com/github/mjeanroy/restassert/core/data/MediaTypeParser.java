@@ -26,9 +26,7 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParser;
 
-/**
- * Parser for {@link MediaType} values.
- */
+/// Parser for [MediaType] values.
 final class MediaTypeParser extends AbstractHttpHeaderParser<MediaType> {
 
 	// Ensure no public instantiation.

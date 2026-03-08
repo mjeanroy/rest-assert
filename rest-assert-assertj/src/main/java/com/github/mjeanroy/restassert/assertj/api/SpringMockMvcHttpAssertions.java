@@ -28,33 +28,27 @@ import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringMockMvcHttpResponse;
 import org.springframework.test.web.servlet.ResultActions;
 
-/**
- * Entry point for assertion methods for Spring MockMVC Test Framework.
- */
+/// Entry point for assertion methods for Spring MockMVC Test Framework.
 public final class SpringMockMvcHttpAssertions {
 
 	// Ensure non instantiation
 	private SpringMockMvcHttpAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(ResultActions actual) {
 		return HttpResponseAssertions.assertThat(
 			toHttpResponse(actual)
 		);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(ResultActions actual) {
 		return JsonAssertions.assertThatJson(
 			toHttpResponse(actual)

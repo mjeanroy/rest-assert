@@ -26,59 +26,37 @@ package com.github.mjeanroy.restassert.core.data;
 
 import com.github.mjeanroy.restassert.core.data.CacheControl.Visibility;
 
-/**
- * Build {@link CacheControl} instance.
- */
+/// Build [CacheControl] instance.
 public class CacheControlBuilder {
 
-	/**
-	 * Visibility directive (i.e {@code public} or {@code private}.
-	 */
+	/// Visibility directive (i.e `public` or `private`).
 	private Visibility visibility;
 
-	/**
-	 * Flag for {@code no-store} directive.
-	 */
+	/// Flag for `no-store` directive.
 	private boolean noStore;
 
-	/**
-	 * Flag for {@code no-cache} directive.
-	 */
+	/// Flag for `no-cache` directive.
 	private boolean noCache;
 
-	/**
-	 * Flag for {@code no-transform} directive.
-	 */
+	/// Flag for `no-transform` directive.
 	private boolean noTransform;
 
-	/**
-	 * Flag for {@code must-revalidate} directive.
-	 */
+	/// Flag for `must-revalidate` directive.
 	private boolean mustRevalidate;
 
-	/**
-	 * Flag for {@code proxy-revalidate} directive.
-	 */
+	/// Flag for `proxy-revalidate` directive.
 	private boolean proxyRevalidate;
 
-	/**
-	 * Flag for {@code max-age} directive.
-	 */
+	/// Flag for `max-age` directive.
 	private Long maxAge;
 
-	/**
-	 * Flag for {@code s-maxage} directive.
-	 */
+	/// Flag for `s-maxage` directive.
 	private Long sMaxAge;
 
-	/**
-	 * Flag for {@code immutable} directive.
-	 */
+	/// Flag for `immutable` directive.
 	private boolean immutable;
 
-	/**
-	 * Create the builder with default values initialized.
-	 */
+	/// Create the builder with default values initialized.
 	CacheControlBuilder() {
 		this.noCache = false;
 		this.noStore = false;
@@ -88,104 +66,84 @@ public class CacheControlBuilder {
 		this.immutable = false;
 	}
 
-	/**
-	 * Update {@code "public"} or {@code "private"} directive.
-	 *
-	 * @param visibility New visibility.
-	 * @return Current builder.
-	 */
+	/// Update `public` or `private` directive.
+	///
+	/// @param visibility New visibility.
+	/// @return Current builder.
 	public CacheControlBuilder visibility(Visibility visibility) {
 		this.visibility = visibility;
 		return this;
 	}
 
-	/**
-	 * Enable {@code "no-cache"} directive.
-	 *
-	 * @return Current builder.
-	 */
+	/// Enable `no-cache` directive.
+	///
+	/// @return Current builder.
 	public CacheControlBuilder noCache() {
 		this.noCache = true;
 		return this;
 	}
 
-	/**
-	 * Enable {@code "no-transform"} directive.
-	 *
-	 * @return Current builder.
-	 */
+	/// Enable `no-transform` directive.
+	///
+	/// @return Current builder.
 	public CacheControlBuilder noTransform() {
 		this.noTransform = true;
 		return this;
 	}
 
-	/**
-	 * Enable {@code "must-revalidate"} directive.
-	 *
-	 * @return Current builder.
-	 */
+	/// Enable `must-revalidate` directive.
+	///
+	/// @return Current builder.
 	public CacheControlBuilder mustRevalidate() {
 		this.mustRevalidate = true;
 		return this;
 	}
 
-	/**
-	 * Enable {@code "proxy-revalidate"} directive.
-	 *
-	 * @return Current builder.
-	 */
+	/// Enable `proxy-revalidate` directive.
+	///
+	/// @return Current builder.
 	public CacheControlBuilder proxyRevalidate() {
 		this.proxyRevalidate = true;
 		return this;
 	}
 
-	/**
-	 * Enable {@code "no-store"} directive.
-	 *
-	 * @return Current builder.
-	 */
+	/// Enable `no-store` directive.
+	///
+	/// @return Current builder.
 	public CacheControlBuilder noStore() {
 		this.noStore = true;
 		return this;
 	}
 
-	/**
-	 * Update {@code "max-age"} directive.
-	 *
-	 * @param maxAge Enable {@code "max-age"} directive and update its value.
-	 * @return Current builder.
-	 */
+	/// Update `max-age` directive.
+	///
+	/// @param maxAge Enable `max-age` directive and update its value.
+	/// @return Current builder.
 	public CacheControlBuilder maxAge(long maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
 
-	/**
-	 * Update {@code s-maxage} directive.
-	 *
-	 * @param sMaxAge Enable {@code s-maxage} directive and update its value.
-	 * @return Current builder.
-	 */
+	/// Update `s-maxage` directive.
+	///
+	/// @param sMaxAge Enable `s-maxage` directive and update its value.
+	/// @return Current builder.
 	public CacheControlBuilder sMaxAge(long sMaxAge) {
 		this.sMaxAge = sMaxAge;
 		return this;
 	}
 
-	/**
-	 * Enable {@code "immutable"} directive.
-	 *
-	 * @return Current builder.
-	 */
+	/// Enable `immutable` directive.
+	///
+	/// @return Current builder.
 	public CacheControlBuilder immutable() {
 		this.immutable = true;
 		return this;
 	}
 
-	/**
-	 * Create new {@link CacheControl} value object.
-	 *
-	 * @return Cache-Control value.
-	 */
+	/// Create new [CacheControl] value object.
+	///
+	/// @return Cache-Control value.
 	public CacheControl build() {
 		return new CacheControl(
 			visibility,

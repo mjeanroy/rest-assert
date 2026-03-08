@@ -31,54 +31,46 @@ import org.assertj.core.error.BasicErrorMessageFactory;
 import org.assertj.core.internal.Failures;
 import org.assertj.core.internal.Objects;
 
-/**
- * Commons methods to class assertions.
- */
+/// Commons methods to class assertions.
 abstract class AbstractRestAssertions {
 
-	/**
-	 * Failures object.
-	 */
+	/// Failures object.
 	private final Failures failures = Failures.instance();
 
 	void assertNotNull(AssertionInfo info, Object actual) {
 		Objects.instance().assertNotNull(info, actual);
 	}
 
-	/**
-	 * Check that result is a success or a failure.
-	 * If result is a failure, it will throw an assertion error with
-	 * assertion error message.
-	 *
-	 * @param info Assertion info.
-	 * @param result Assertion result.
-	 */
+	/// Check that result is a success or a failure.
+	///
+	/// If result is a failure, it will throw an assertion error with
+	/// assertion error message.
+	///
+	/// @param info Assertion info.
+	/// @param result Assertion result.
 	void check(AssertionInfo info, AssertionResult result) {
 		if (result.isFailure()) {
 			fail(info, result);
 		}
 	}
 
-	/**
-	 * Throw an assertion error using assertion result.
-	 * Exception message is build as {@link BasicErrorMessageFactory} using
-	 * result message.
-	 *
-	 * @param info Assertion info.
-	 * @param result Assertion result.
-	 */
+	/// Throw an assertion error using assertion result.
+	///
+	/// Exception message is build as [BasicErrorMessageFactory] using
+	/// result message.
+	///
+	/// @param info Assertion info.
+	/// @param result Assertion result.
 	private void fail(AssertionInfo info, AssertionResult result) {
 		RestAssertError error = result.getError();
 		throw failures.failure(info, message(error));
 	}
 
-	/**
-	 * Build a simple {@link BasicErrorMessageFactory} error using
-	 * error message.
-	 *
-	 * @param error Error.
-	 * @return Assertj error message
-	 */
+	/// Build a simple [BasicErrorMessageFactory] error using
+	/// error message.
+	///
+	/// @param error Error.
+	/// @return Assertj error message
 	private BasicErrorMessageFactory message(RestAssertError error) {
 		return new BasicErrorMessageFactory(error.message(), error.args());
 	}

@@ -29,11 +29,10 @@ import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 
-/**
- * Abstract model for {@link HttpResponseAssertions} assertions.
- * Actual object (a.k.a tested object) is an instance of {@link HttpResponse} class.
- * Convention: class name is defined by current model class.
- */
+/// Abstract model for [HttpResponseAssertions] assertions.
+///
+/// Actual object (a.k.a tested object) is an instance of [HttpResponse] class.
+/// Convention: class name is defined by current model class.
 public abstract class AbstractHttpResponseModel extends AbstractTemplateModel implements TemplateModel {
 
 	@Override

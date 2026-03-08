@@ -26,27 +26,20 @@ package com.github.mjeanroy.restassert.core.internal.json;
 
 import org.codehaus.jackson.map.ObjectMapper;
 
-/**
- * Implementation of {@link JsonParser}
- * using Jackson1 as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
+/// Implementation of [JsonParser] using Jackson1 as internal implementation.
+///
+/// This class is implemented as a singleton.
+/// This class is thread safe.
 final class Jackson1JsonParser extends AbstractJsonParser {
 
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
+	/// Get parser.
+	///
+	/// @return Parser.
 	static Jackson1JsonParser getInstance() {
 		return Holder.INSTANCE;
 	}
 
-	/**
-	 * Jackson mapper.
-	 */
+	/// Jackson mapper.
 	private final ObjectMapper mapper;
 
 	private Jackson1JsonParser(ObjectMapper mapper) {

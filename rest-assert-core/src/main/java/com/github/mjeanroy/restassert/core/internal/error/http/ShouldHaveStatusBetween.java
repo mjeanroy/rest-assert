@@ -27,10 +27,8 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when an http response status is not between
- * lower and upper bound
- */
+/// Error thrown when an http response status is not between
+/// lower and upper bound
 public final class ShouldHaveStatusBetween extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -38,14 +36,12 @@ public final class ShouldHaveStatusBetween extends AbstractError {
 		super(expectation, mismatch);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param actualStatus Actual status (a.k.a http response status code).
-	 * @param start Lower bound (inclusive).
-	 * @param end Upper bound (inclusive).
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param actualStatus Actual status (a.k.a http response status code).
+	/// @param start Lower bound (inclusive).
+	/// @param end Upper bound (inclusive).
+	/// @return Error.
 	public static ShouldHaveStatusBetween shouldHaveStatusBetween(int actualStatus, int start, int end) {
 		return new ShouldHaveStatusBetween(
 			Message.message("Expecting status code to be between %s and %s", start, end),

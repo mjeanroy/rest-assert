@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.google.GoogleH
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.google.api.client.http.HttpResponse;
 
-/**
- * Template model for rest-assert-hamcrest HttpResponseMatchers class.
- */
+/// Template model for rest-assert-hamcrest HttpResponseMatchers class.
 public class GoogleHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final GoogleHttpResponseMatchers INSTANCE = new GoogleHttpResponseMatchers();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel googleHttpResponseMatchers() {
 		return INSTANCE;
 	}

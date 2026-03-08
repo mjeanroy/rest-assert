@@ -41,43 +41,28 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveCookie.shouldHaveCookie;
 
-/**
- * Check that http response contains expected cookie.
- */
+/// Check that http response contains expected cookie.
 public class HasCookieAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(HasCookieAssertion.class);
 
-	/**
-	 * Expected cookie.
-	 */
+	/// Expected cookie.
 	private final Cookie cookie;
 
-	/**
-	 * Expected cookie.
-	 */
+	/// Expected cookie.
 	private final String name;
 
-	/**
-	 * Expected cookie.
-	 */
+	/// Expected cookie.
 	private final String value;
 
-	/**
-	 * Predicate used to match cookie.
-	 */
+	/// Predicate used to match cookie.
 	private final Predicate<Cookie> predicate;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Cookie name.
-	 * @throws NullPointerException If {@code name} is {@code null}.
-	 * @throws IllegalArgumentException If {@code name} is empty or blank.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Cookie name.
+	/// @throws NullPointerException If `name` is `null`.
+	/// @throws IllegalArgumentException If `name` is empty or blank.
 	public HasCookieAssertion(String name) {
 		this.name = notBlank(name, "Cookie name must be defined");
 		this.predicate = new CookieNamePredicate(name);
@@ -86,14 +71,12 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		this.cookie = null;
 	}
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Cookie name.
-	 * @param value Cookie value.
-	 * @throws NullPointerException If {@code name} or {code value} are {@code null}.
-	 * @throws IllegalArgumentException If {@code name} is empty or blank.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Cookie name.
+	/// @param value Cookie value.
+	/// @throws NullPointerException If `name` or `value` are `null`.
+	/// @throws IllegalArgumentException If `name` is empty or blank.
 	public HasCookieAssertion(String name, String value) {
 		this.name = notBlank(name, "Cookie name must be defined");
 		this.value = notNull(value, "Cookie value must be defined");
@@ -102,12 +85,10 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		this.cookie = null;
 	}
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param cookie Cookie.
-	 * @throws NullPointerException If {@code cookie} is {@code null}.
-	 */
+	/// Create assertion.
+	///
+	/// @param cookie Cookie.
+	/// @throws NullPointerException If `cookie` is `null`.
 	public HasCookieAssertion(Cookie cookie) {
 		this.cookie = notNull(cookie, "Cookie must be defined");
 		this.predicate = new CookiePredicate(cookie);
@@ -152,21 +133,15 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		return shouldHaveCookie(name, value);
 	}
 
-	/**
-	 * Predicate used to check if a cookie match another cookie.
-	 */
+	/// Predicate used to check if a cookie match another cookie.
 	private static final class CookiePredicate implements Predicate<Cookie> {
-		/**
-		 * Expected cookie.
-		 */
+		/// Expected cookie.
 		private final Cookie cookie;
 
-		/**
-		 * Create predicate.
-		 *
-		 * @param cookie Expected cookie.
-		 * @throws NullPointerException If {@code cookie} is {@code null}.
-		 */
+		/// Create predicate.
+		///
+		/// @param cookie Expected cookie.
+		/// @throws NullPointerException If `cookie` is `null`.
 		private CookiePredicate(Cookie cookie) {
 			this.cookie = notNull(cookie, "Cookie must not be null");
 		}
@@ -177,24 +152,18 @@ public class HasCookieAssertion implements HttpResponseAssertion {
 		}
 	}
 
-	/**
-	 * Predicate used to check if a cookie match expected name
-	 * and value.
-	 */
+	/// Predicate used to check if a cookie match expected name
+	/// and value.
 	private static final class CookieNameValuePredicate extends CookieNamePredicate implements Predicate<Cookie> {
 
-		/**
-		 * Expected value.
-		 */
+		/// Expected value.
 		private final String value;
 
-		/**
-		 * Create predicate.
-		 *
-		 * @param name Expected name.
-		 * @param value Expected value.
-		 * @throws NullPointerException If {@code name} or {@code value} is {@code null}.
-		 */
+		/// Create predicate.
+		///
+		/// @param name Expected name.
+		/// @param value Expected value.
+		/// @throws NullPointerException If `name` or `value` are `null`.
 		private CookieNameValuePredicate(String name, String value) {
 			super(name);
 			this.value = notNull(value, "Cookie value must not be null");

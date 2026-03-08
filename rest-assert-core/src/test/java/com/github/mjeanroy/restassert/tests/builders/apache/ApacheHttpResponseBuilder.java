@@ -34,9 +34,7 @@ import org.apache.http.message.BasicHttpResponse;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Create mock instance of {@link HttpResponse} class.
- */
+/// Create mock instance of [HttpResponse] class.
 public class ApacheHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpResponse, ApacheHttpResponseBuilder> implements HttpResponseBuilder<HttpResponse> {
 
 	@Override

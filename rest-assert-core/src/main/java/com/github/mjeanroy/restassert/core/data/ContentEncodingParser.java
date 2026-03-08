@@ -33,9 +33,7 @@ import java.util.List;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_ENCODING;
 
-/**
- * Parser for {@link ContentEncoding} header.
- */
+/// Parser for [ContentEncoding] header.
 public final class ContentEncodingParser extends AbstractHttpHeaderParser<ContentEncoding> {
 
 	// Ensure no public instantiation.

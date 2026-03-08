@@ -26,23 +26,18 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.tmpls;
 
 import com.github.mjeanroy.restassert.generator.Template;
 
-/**
- * Template used to generate assertions classes.
- * This class is thread safe.
- * This class is implemented as a singleton.
- */
+/// Template used to generate assertions classes.
+///
+/// This class is thread safe.
+/// This class is implemented as a singleton.
 public class AssertTemplate extends AbstractAssertTemplate implements Template {
 
-	/**
-	 * Singleton object.
-	 */
+	/// Singleton object.
 	private static final AssertTemplate INSTANCE = new AssertTemplate();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static AssertTemplate assertTemplate() {
 		return INSTANCE;
 	}

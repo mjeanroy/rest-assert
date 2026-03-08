@@ -33,26 +33,18 @@ import okhttp3.Response;
 import java.util.List;
 import java.util.Map;
 
-/**
- * DefaultCookieBuilder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
- */
+/// Builder to create mock instance of [com.google.api.client.http.HttpResponse] class.
 public class OkHttpResponseBuilder extends AbstractHttpResponseBuilder<Response, OkHttpResponseBuilder> implements HttpResponseBuilder<Response> {
 
-	/**
-	 * Original HTTP request.
-	 * This field is necessary to build a valid HTTP Response.
-	 */
+	/// Original HTTP request.
+	/// This field is necessary to build a valid HTTP Response.
 	private final Request request;
 
-	/**
-	 * Original HTTP protocol.
-	 * This field is necessary to build a valid HTTP Response.
-	 */
+	/// Original HTTP protocol.
+	/// This field is necessary to build a valid HTTP Response.
 	private final Protocol protocol;
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	public OkHttpResponseBuilder() {
 		this.protocol = Protocol.HTTP_1_0;
 		this.request = new Request.Builder().url("http://www.google.fr").build();

@@ -30,26 +30,20 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.StreamSupport.stream;
 
-/**
- * Composite error representation.
- */
+/// Composite error representation.
 public class CompositeError implements RestAssertError {
 
 	private static final String MESSAGES_SEPARATOR = "," + System.lineSeparator();
 
-	/**
-	 * Compose errors.
-	 *
-	 * @param errors Errors.
-	 * @return The joined errors.
-	 */
+	/// Compose errors.
+	///
+	/// @param errors Errors.
+	/// @return The joined errors.
 	public static CompositeError composeErrors(Iterable<RestAssertError> errors) {
 		return new CompositeError(errors);
 	}
 
-	/**
-	 * The original error.
-	 */
+	/// The original error.
 	private final List<RestAssertError> errors;
 
 	private CompositeError(Iterable<RestAssertError> errors) {

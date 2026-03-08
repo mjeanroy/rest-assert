@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 import com.github.mjeanroy.restassert.core.internal.assertions.CookieAssertions;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
-/**
- * Template model for rest-assert-unit CookieAssert class.
- */
+/// Template model for rest-assert-unit CookieAssert class.
 public final class CookieAssert extends AbstractCookieAssert implements TemplateModel {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final CookieAssert INSTANCE = new CookieAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel cookieAssert() {
 		return INSTANCE;
 	}

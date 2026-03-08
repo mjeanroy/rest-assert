@@ -27,99 +27,70 @@ package com.github.mjeanroy.restassert.core.data;
 import java.util.Arrays;
 import java.util.Date;
 
-/**
- * Cookie object: this interface defines what fields may
- * appear in the Set-Cookie header.
- */
+/// Cookie object: this interface defines what fields may
+/// appear in the `Set-Cookie` header.
 public interface Cookie {
 
-	/**
-	 * Cookie name.
-	 *
-	 * @return Name.
-	 */
+	/// Cookie name.
+	///
+	/// @return Name.
 	String getName();
 
-	/**
-	 * Cookie value.
-	 *
-	 * @return Value.
-	 */
+	/// Cookie value.
+	///
+	/// @return Value.
 	String getValue();
 
-	/**
-	 * Cookie domain.
-	 *
-	 * @return Domain.
-	 */
+	/// Cookie domain.
+	///
+	/// @return Domain.
 	String getDomain();
 
-	/**
-	 * Cookie path.
-	 *
-	 * @return path.
-	 */
+	/// Cookie path.
+	///
+	/// @return path.
 	String getPath();
 
-	/**
-	 * Check if cookie is flagged as secured.
-	 *
-	 * @return {@code true} if cookie is secured, false otherwise.
-	 */
+	/// Check if cookie is flagged as secured.
+	///
+	/// @return `true` if cookie is secured, false otherwise.
 	boolean isSecured();
 
-	/**
-	 * Check if cookie is flagged as http only.
-	 *
-	 * @return {@code true} if cookie is "http only", false otherwise.
-	 */
+	/// Check if cookie is flagged as http only.
+	///
+	/// @return `true` if cookie is "http only", false otherwise.
 	boolean isHttpOnly();
 
-	/**
-	 * Get the {@code "SameSite"} value.
-	 *
-	 * @return Cookie {@code "SameSite"} flag.
-	 */
+	/// Get the `"SameSite"` value.
+	///
+	/// @return Cookie `"SameSite"` flag.
 	SameSite getSameSite();
 
-	/**
-	 * Get cookie max age.
-	 * If {@code null} is returned, it means that the max-age field was not defined
-	 * in the Set-Cookie header.
-	 *
-	 * @return Max age (in seconds).
-	 */
+	/// Get cookie max age.
+	///
+	/// If `null` is returned, it means that the `max-age` field was not defined
+	/// in the Set-Cookie header.
+	///
+	/// @return Max age (in seconds).
 	Long getMaxAge();
 
-	/**
-	 * Get cookie expires date (i.e date defined by expires directive).
-	 *
-	 * If {@code null} is returned, it means that the expires field was not defined
-	 * in the Set-Cookie header.
-	 *
-	 * @return Expires date.
-	 */
+	/// Get cookie expires date (i.e date defined by expires directive).
+	///
+	/// If `null` is returned, it means that the `expires` field was not defined
+	/// in the Set-Cookie header.
+	///
+	/// @return Expires date.
 	Date getExpires();
 
-	/**
-	 * The Same-Site enumeration.
-	 *
-	 * @see <a href="https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite">https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite</a>
-	 */
+	/// The [Same-Site](https://developer.mozilla.org/en_US/docs/Web/HTTP/Headers/Set-Cookie/SameSite) enumeration.
 	public enum SameSite {
-		/**
-		 * Lax value for the Same-Site cookie attribute.
-		 */
+		/// Lax value for the Same-Site cookie attribute.
 		LAX("Lax"),
 
-		/**
-		 * Strict value for the Same-Site cookie attribute.
-		 */
+		/// Strict value for the Same-Site cookie attribute.
 		STRICT("Strict"),
 
-		/**
-		 * None value for the Same-Site cookie attribute.
-		 */
+		/// None value for the Same-Site cookie attribute.
 		NONE("None");
 
 		private final String value;
@@ -128,21 +99,17 @@ public interface Cookie {
 			this.value = value;
 		}
 
-		/**
-		 * Get the Same-Site raw value, one that can be used in Cookie serialization.
-		 *
-		 * @return Same-Site value.
-		 */
+		/// Get the Same-Site raw value, one that can be used in Cookie serialization.
+		///
+		/// @return Same-Site value.
 		public String getValue() {
 			return value;
 		}
 
-		/**
-		 * Parse the Same-Site value of a cookie;
-		 *
-		 * @param value Same-Site cookie, may be {@code null} or emptu.
-		 * @return The Same-Site value.
-		 */
+		/// Parse the Same-Site value of a cookie;
+		///
+		/// @param value Same-Site cookie, may be `null` or empty.
+		/// @return The Same-Site value.
 		public static SameSite parse(String value) {
 			if (value == null) {
 				return null;

@@ -28,12 +28,12 @@ import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplateModel;
 
-/**
- * Abstract model for {@link JsonAssertions} assertions.
- * Actual object (a.k.a tested object) is an instance of {@link java.lang.String} class
- * representing json object or array.
- * Convention: class name is defined by current model class.
- */
+/// Abstract model for [JsonAssertions] assertions.
+///
+/// Actual object (a.k.a tested object) is an instance of [java.lang.String] class
+/// representing json object or array.
+///
+/// Convention: class name is defined by current model class.
 public abstract class AbstractJsonsModel extends AbstractTemplateModel implements TemplateModel {
 
 	@Override

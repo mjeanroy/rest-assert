@@ -34,40 +34,32 @@ import org.assertj.core.api.StringAssert;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Assertion methods for JSON payloads.
- * <br>
- * To create an instance of this class, invoke {@link JsonAssertions#assertThatJson(String)}.
- */
+/// Assertion methods for JSON payloads.
+///
+/// To create an instance of this class, invoke [JsonAssertions#assertThatJson(String)].
 public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 
-	/**
-	 * Create new assertion instance.
-	 *
-	 * @param actual JSON payload.
-	 */
+	/// Create new assertion instance.
+	///
+	/// @param actual JSON payload.
 	public JsonAssert(String actual) {
 		super(actual, JsonAssert.class);
 	}
 
-	/**
-	 * Ensure the actual JSON is a valid JSON of type `string`, the parsed value becoming the new value
-	 * under test.
-	 *
-	 * <br>
-	 *
-	 * Examples:
-	 *
-	 * <pre><code class='java'>
-	 *   // assertion succeeds:
-	 *   assertThatJson(&quot;\&quot;Hello world\&quot;&quot;).asString().isEqualTo(
-	 *     &quot;Hello World&quot;
-	 *   );
-	 * </code></pre>
-	 *
-	 * @return a new {@link StringAssert} instance whose value under test is the result of the parse.
-	 * @throws AssertionError if the actual value cannot be parsed as a JSON string.
-	 */
+	/// Ensure the actual JSON is a valid JSON of type `string`, the parsed value becoming the new value
+	/// under test.
+	///
+	/// Examples:
+	///
+	/// ```
+	///   // assertion succeeds:
+	///   assertThatJson("\"Hello world\"").asString().isEqualTo(
+	///     "Hello World"
+	///   );
+	/// ```
+	///
+	/// @return a new [StringAssert] instance whose value under test is the result of the parse.
+	/// @throws AssertionError if the actual value cannot be parsed as a JSON string.
 	public StringAssert asString() {
 		isString();
 		return new StringAssert(
@@ -75,22 +67,18 @@ public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 		);
 	}
 
-	/**
-	 * Ensure the actual JSON is a valid JSON of type `number`, the parsed value becoming the new value
-	 * under test.
-	 *
-	 * <br>
-	 *
-	 * Examples:
-	 *
-	 * <pre><code class='java'>
-	 *   // assertion succeeds:
-	 *   assertThatJson(&quot;0.5&quot;).asNumber().isEqualTo(0.5);
-	 * </code></pre>
-	 *
-	 * @return a new {@link DoubleAssert} instance whose value under test is the result of the parse.
-	 * @throws AssertionError if the actual value cannot be parsed as a JSON number.
-	 */
+	/// Ensure the actual JSON is a valid JSON of type `number`, the parsed value becoming the new value
+	/// under test.
+	///
+	/// Examples:
+	///
+	/// ```
+	///   // assertion succeeds:
+	///   assertThatJson("0.5").asNumber().isEqualTo(0.5);
+	/// ```
+	///
+	/// @return a new [DoubleAssert] instance whose value under test is the result of the parse.
+	/// @throws AssertionError if the actual value cannot be parsed as a JSON number.
 	public DoubleAssert asNumber() {
 		isNumber();
 		return new DoubleAssert(
@@ -98,21 +86,19 @@ public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 		);
 	}
 
-	/**
-	 * Ensure the actual JSON is a valid JSON of type `boolean`, the parsed value becoming the new value
-	 * under test.
-	 *
-	 * Examples:
-	 *
-	 * <pre><code class='java'>
-	 *   // assertion succeeds:
-	 *   assertThatJson(&quot;false&quot;).asBoolean().isFalse();
-	 *   assertThatJson(&quot;true&quot;).asBoolean().isTrue();
-	 * </code></pre>
-	 *
-	 * @return a new {@link BooleanAssert} instance whose value under test is the result of the parse.
-	 * @throws AssertionError if the actual value cannot be parsed as a JSON boolean.
-	 */
+	/// Ensure the actual JSON is a valid JSON of type `boolean`, the parsed value becoming the new value
+	/// under test.
+	///
+	/// Examples:
+	///
+	/// ```
+	///   // assertion succeeds:
+	///   assertThatJson("false").asBoolean().isFalse();
+	///   assertThatJson("true").asBoolean().isTrue();
+	/// ```
+	///
+	/// @return a new [BooleanAssert] instance whose value under test is the result of the parse.
+	/// @throws AssertionError if the actual value cannot be parsed as a JSON boolean.
 	public BooleanAssert asBoolean() {
 		isBoolean();
 		return new BooleanAssert(
@@ -120,21 +106,19 @@ public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 		);
 	}
 
-	/**
-	 * Ensure the actual JSON is a valid JSON of type `array`, the parsed value becoming the new value
-	 * under test.
-	 *
-	 * Examples:
-	 *
-	 * <pre><code class='java'>
-	 *   // assertion succeeds:
-	 *   assertThatJson(&quot;[0,1,2]&quot;).asArray().hasSize(3).containsExactly(0, 1, 2);
-	 *   assertThatJson(&quot;[]&quot;).asArray().isEmpty();
-	 * </code></pre>
-	 *
-	 * @return a new {@link ListAssert} instance whose value under test is the result of the parse.
-	 * @throws AssertionError if the actual value cannot be parsed as a JSON array.
-	 */
+	/// Ensure the actual JSON is a valid JSON of type `array`, the parsed value becoming the new value
+	/// under test.
+	///
+	/// Examples:
+	///
+	/// ```
+	///   // assertion succeeds:
+	///   assertThatJson("[0,1,2]").asArray().hasSize(3).containsExactly(0, 1, 2);
+	///   assertThatJson("[]").asArray().isEmpty();
+	/// ```
+	///
+	/// @return a new [ListAssert] instance whose value under test is the result of the parse.
+	/// @throws AssertionError if the actual value cannot be parsed as a JSON array.
 	public ListAssert<Object> asArray() {
 		isArray();
 		return new ListAssert<Object>(
@@ -142,22 +126,20 @@ public class JsonAssert extends AbstractJsonAssert<JsonAssert> {
 		);
 	}
 
-	/**
-	 * Ensure the actual JSON is a valid JSON of type `object`, the parsed value becoming the new value
-	 * under test.
-	 *
-	 * Examples:
-	 *
-	 * <pre><code class='java'>
-	 *   // assertion succeeds:
-	 *   assertThatJson(&quot;{\&quot;id\&quot;:1}&quot;).asObject().hasSize(1).containsEntry(
-	 *     entry("id", 1)
-	 *   );
-	 * </code></pre>
-	 *
-	 * @return a new {@link MapAssert} instance whose value under test is the result of the parse.
-	 * @throws AssertionError if the actual value cannot be parsed as a JSON object.
-	 */
+	/// Ensure the actual JSON is a valid JSON of type `object`, the parsed value becoming the new value
+	/// under test.
+	///
+	/// Examples:
+	///
+	/// ```
+	///   // assertion succeeds:
+	///   assertThatJson("{\"id\":1}").asObject().hasSize(1).containsEntry(
+	///     entry("id", 1)
+	///   );
+	/// ```
+	///
+	/// @return a new [MapAssert] instance whose value under test is the result of the parse.
+	/// @throws AssertionError if the actual value cannot be parsed as a JSON object.
 	@SuppressWarnings("unchecked")
 	public MapAssert<String, Object> asObject() {
 		isObject();

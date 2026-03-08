@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.spring.SpringM
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import org.springframework.test.web.servlet.ResultActions;
 
-/**
- * Template model for rest-assert-unit spring mockmvc class.
- */
+/// Template model for rest-assert-unit spring mockmvc class.
 public final class SpringMockMvcHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final SpringMockMvcHttpAssert INSTANCE = new SpringMockMvcHttpAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel springMockMvcHttpAssert() {
 		return INSTANCE;
 	}

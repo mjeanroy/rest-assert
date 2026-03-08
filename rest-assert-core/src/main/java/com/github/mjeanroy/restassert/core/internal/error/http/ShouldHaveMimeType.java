@@ -26,10 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when an http response should contain
- * specific mime type.
- */
+/// Error thrown when an http response should contain specific mime type.
 public final class ShouldHaveMimeType extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -37,24 +34,20 @@ public final class ShouldHaveMimeType extends AbstractError {
 		super(message, expected, actual);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param expectedMimeType Expected mime type.
-	 * @param actualMimeType Actual mime type.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param expectedMimeType Expected mime type.
+	/// @param actualMimeType Actual mime type.
+	/// @return Error.
 	public static ShouldHaveMimeType shouldHaveMimeType(String expectedMimeType, String actualMimeType) {
 		return new ShouldHaveMimeType("Expecting response to have mime type %s", expectedMimeType, actualMimeType);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param expectedMimeType Expected mime types.
-	 * @param actualMimeType Actual mime type.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param expectedMimeType Expected mime types.
+	/// @param actualMimeType Actual mime type.
+	/// @return Error.
 	public static ShouldHaveMimeType shouldHaveMimeType(Iterable<String> expectedMimeType, String actualMimeType) {
 		return new ShouldHaveMimeType("Expecting response to have mime type in %s", expectedMimeType, actualMimeType);
 	}

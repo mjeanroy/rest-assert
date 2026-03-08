@@ -32,31 +32,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- * Static IO Test Utilities.
- */
+/// Static IO Test Utilities.
 public final class IoTestUtils {
 
 	// Ensure non instantiation.
 	private IoTestUtils() {
 	}
 
-	/**
-	 * Get resource URL from classpath.
-	 *
-	 * @param path URL path.
-	 * @return URL.
-	 */
+	/// Get resource URL from classpath.
+	///
+	/// @param path URL path.
+	/// @return URL.
 	public static URL urlFromClasspath(String path) {
 		return IoTestUtils.class.getResource(path);
 	}
 
-	/**
-	 * Get resource URI from classpath.
-	 *
-	 * @param path The URI path.
-	 * @return URI.
-	 */
+	/// Get resource URI from classpath.
+	///
+	/// @param path The URI path.
+	/// @return URI.
 	public static URI uriFromClasspath(String path) {
 		try {
 			return urlFromClasspath(path).toURI();
@@ -66,32 +60,26 @@ public final class IoTestUtils {
 		}
 	}
 
-	/**
-	 * Get a file from classpath.
-	 *
-	 * @param path File path.
-	 * @return The file.
-	 */
+	/// Get a file from classpath.
+	///
+	/// @param path File path.
+	/// @return The file.
 	public static File fileFromClasspath(String path) {
 		return new File(uriFromClasspath(path));
 	}
 
-	/**
-	 * Get path from classpath.
-	 *
-	 * @param path The resource path.
-	 * @return The path.
-	 */
+	/// Get path from classpath.
+	///
+	/// @param path The resource path.
+	/// @return The path.
 	public static Path pathFromClasspath(String path) {
 		return Paths.get(uriFromClasspath(path));
 	}
 
-	/**
-	 * Read a file from classpath and returns content.
-	 *
-	 * @param resource Resource path.
-	 * @return File content.
-	 */
+	/// Read a file from classpath and returns content.
+	///
+	/// @param resource Resource path.
+	/// @return File content.
 	public static String readFile(String resource) {
 		try {
 			URL url = IoTestUtils.class.getResource(resource);

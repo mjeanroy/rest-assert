@@ -31,40 +31,30 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * DefaultCookieBuilder used to create mock instance of {@link HttpHeaderValue} class.
- */
+/// Builder used to create mock instance of [HttpHeaderValue] class.
 public class HeaderParserBuilder {
 
-	/**
-	 * Pair of {@link String} to {@link HttpHeaderValue}.
-	 */
+	/// Pair of [String] to [HttpHeaderValue].
 	private final Map<String, HttpHeaderValue> pairs;
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	public HeaderParserBuilder() {
 		this.pairs = new LinkedHashMap<>();
 	}
 
-	/**
-	 * Add new mapping.
-	 *
-	 * @param value Raw value.
-	 * @param headerValue Header value.
-	 * @return Current builder.
-	 */
+	/// Add new mapping.
+	///
+	/// @param value Raw value.
+	/// @param headerValue Header value.
+	/// @return Current builder.
 	public HeaderParserBuilder add(String value, HttpHeaderValue headerValue) {
 		this.pairs.put(value, headerValue);
 		return this;
 	}
 
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Create mock instance.
+	///
+	/// @return Mock instance.
 	public HttpHeaderParser<?> build() {
 		return new MockHttpHeader(pairs);
 	}

@@ -31,63 +31,51 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
-/**
- * Static IO Utilities.
- */
+/// Static IO Utilities.
 public final class IOUtils {
 
 	// Ensure non instantiation
 	private IOUtils() {
 	}
 
-	/**
-	 * Get input stream object from a file relative to classpath.
-	 *
-	 * @param path Path, relative to classpath.
-	 * @return Input stream.
-	 */
+	/// Get input stream object from a file relative to classpath.
+	///
+	/// @param path Path, relative to classpath.
+	/// @return Input stream.
 	public static InputStream fromClasspath(String path) {
 		return IOUtils.class.getResourceAsStream(path);
 	}
 
-	/**
-	 * Read content of a file, available in classpath.
-	 *
-	 * @param path Path, relative to classpath.
-	 * @return File content.
-	 */
+	/// Read content of a file, available in classpath.
+	///
+	/// @param path Path, relative to classpath.
+	/// @return File content.
 	public static String read(String path) {
 		return read(path, "");
 	}
 
-	/**
-	 * Read content of a file, available in classpath.
-	 *
-	 * @param path Path, relative to classpath.
-	 * @param prepend String prepended to each lines.
-	 * @return File content.
-	 */
+	/// Read content of a file, available in classpath.
+	///
+	/// @param path Path, relative to classpath.
+	/// @param prepend String prepended to each lines.
+	/// @return File content.
 	public static String read(String path, String prepend) {
 		return read(fromClasspath(path), prepend);
 	}
 
-	/**
-	 * Read content of an input stream.
-	 *
-	 * @param in Input stream.
-	 * @return File content.
-	 */
+	/// Read content of an input stream.
+	///
+	/// @param in Input stream.
+	/// @return File content.
 	public static String read(InputStream in) {
 		return read(in, "");
 	}
 
-	/**
-	 * Read content of an input stream.
-	 *
-	 * @param in Input stream.
-	 * @param prepend String prepended to each lines.
-	 * @return File content.
-	 */
+	/// Read content of an input stream.
+	///
+	/// @param in Input stream.
+	/// @param prepend String prepended to each lines.
+	/// @return File content.
 	public static String read(InputStream in, String prepend) {
 		try (
 			InputStreamReader is = new InputStreamReader(in);
@@ -109,12 +97,10 @@ public final class IOUtils {
 		}
 	}
 
-	/**
-	 * Write content to a file.
-	 *
-	 * @param file Target file.
-	 * @param content File content.
-	 */
+	/// Write content to a file.
+	///
+	/// @param file Target file.
+	/// @param content File content.
 	public static void write(File file, String content) {
 		try (PrintWriter writer = new PrintWriter(file, "UTF-8")) {
 			writer.println(content);

@@ -38,33 +38,22 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notEmpty;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeaderWithValue;
 
-/**
- * Check that http response has at least one header with
- * a list of expected values (separated by ',').
- */
+/// Check that http response has at least one header with
+/// a list of expected values (separated by `,`).
 public class IsHeaderListEqualToAssertion extends AbstractHeaderEqualToAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(IsHeaderListEqualToAssertion.class);
 
-	/**
-	 * Expected header values.
-	 */
+	/// Expected header values.
 	private final Set<String> values;
 
-	/**
-	 * Expected header values in lowercase (used for case insensitive comparison).
-	 */
+	/// Expected header values in lowercase (used for case insensitive comparison).
 	private final Set<String> lowercaseValues;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 * @param values Header values.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
+	/// @param values Header values.
 	public IsHeaderListEqualToAssertion(String name, Iterable<String> values) {
 		super(name);
 

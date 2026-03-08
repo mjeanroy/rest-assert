@@ -29,10 +29,8 @@ import com.github.mjeanroy.restassert.core.internal.json.JsonType;
 
 import static com.github.mjeanroy.restassert.core.internal.common.Strings.isVowel;
 
-/**
- * Error thrown when a json string contain an entry
- * that is not of expected type.
- */
+/// Error thrown when a json string contain an entry
+/// that is not of expected type.
 public final class ShouldBeEntryOf extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -45,15 +43,13 @@ public final class ShouldBeEntryOf extends AbstractJsonError {
 		super(json, entryName, expectation, mismatch);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @param entry Entry name.
-	 * @param actualType Actual type.
-	 * @param expectedType Expected type.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @param entry Entry name.
+	/// @param actualType Actual type.
+	/// @param expectedType Expected type.
+	/// @return Error.
 	public static ShouldBeEntryOf shouldBeEntryOf(
 		String json,
 		String entry,

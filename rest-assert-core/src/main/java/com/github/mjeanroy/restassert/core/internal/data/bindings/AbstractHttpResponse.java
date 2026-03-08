@@ -37,14 +37,10 @@ import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.SET_
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Template for {@link HttpResponse} interface.
- */
+/// Template for [HttpResponse] interface.
 public abstract class AbstractHttpResponse implements HttpResponse {
 
-	/**
-	 * Default constructor.
-	 */
+	/// Default constructor.
 	protected AbstractHttpResponse() {
 	}
 
@@ -75,13 +71,12 @@ public abstract class AbstractHttpResponse implements HttpResponse {
 		return unmodifiableList(cookies);
 	}
 
-	/**
-	 * Get the content body as a string.
-	 * If an {@link java.io.IOException} is thrown, it will be catched
-	 * by {@link #getContent()} method and rethrows as a {@link NonParsableResponseBodyException}.
-	 *
-	 * @return Response body.
-	 * @throws IOException If an error occurred during parsing.
-	 */
+	/// Get the content body as a string.
+	///
+	/// If an [java.io.IOException] is thrown, it will be catched
+	/// by [#getContent()] method and rethrows as a [NonParsableResponseBodyException].
+	///
+	/// @return Response body.
+	/// @throws IOException If an error occurred during parsing.
 	protected abstract String doGetContent() throws IOException;
 }

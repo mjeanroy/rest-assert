@@ -36,9 +36,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * DefaultCookieBuilder to create instance of {@link HttpResponse} class.
- */
+/// Builder to create instance of [HttpResponse] class.
 public class JunitServersHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpResponse, JunitServersHttpResponseBuilder> implements HttpResponseBuilder<HttpResponse> {
 
 	@Override

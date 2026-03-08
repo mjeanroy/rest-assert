@@ -50,20 +50,12 @@ import static com.github.mjeanroy.restassert.core.data.ContentSecurityPolicy.SCH
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
-/**
- * DefaultCookieBuilder used to create {@link ContentSecurityPolicy} instances.
- */
+/// Builder used to create [ContentSecurityPolicy] instances.
 public class ContentSecurityPolicyBuilder {
-	/**
-	 * List of value directives.
-	 */
+	/// List of value directives.
 	private final Map<SourceDirective, Set<Source>> sources;
 
-	/**
-	 * Pattern used to validate host value.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
-	 */
+	/// Pattern used to validate [host value](https://www.w3.org/TR/CSP/#host_source).
 	private static final Pattern PATTERN_HOST_VALUE = Pattern.compile(
 		"^" +
 			"(" + SCHEME_REGEX + "://)?" +
@@ -75,402 +67,310 @@ public class ContentSecurityPolicyBuilder {
 		Pattern.CASE_INSENSITIVE
 	);
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	ContentSecurityPolicyBuilder() {
 		this.sources = new LinkedHashMap<>();
 	}
 
-	/**
-	 * Add values for {@code base-uri} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-base-uri">https://w3c.github.io/webappsec-csp/#directive-base-uri</a>
-	 */
+	/// Add values for [`base-uri`](https://w3c.github.io/webappsec-csp/#directive-base-uri) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addBaseUri(Source src, Source... other) {
 		return add(SourceDirective.BASE_URI, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code default-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-default-src">https://w3c.github.io/webappsec-csp/#directive-default-src</a>
-	 */
+	/// Add values for [`default-src`](https://w3c.github.io/webappsec-csp/#directive-default-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addDefaultSrc(Source src, Source... other) {
 		return add(SourceDirective.DEFAULT_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code script-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src">https://w3c.github.io/webappsec-csp/#directive-script-src</a>
-	 */
+	/// Add values for [`script-src`](https://w3c.github.io/webappsec-csp/#directive-script-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addScriptSrc(Source src, Source... other) {
 		return add(SourceDirective.SCRIPT_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code script-src-elem} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-elem">https://w3c.github.io/webappsec-csp/#directive-script-src-elem</a>
-	 */
+	/// Add values for [`script-src-elem`](https://w3c.github.io/webappsec-csp/#directive-script-src-elem) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addScriptSrcElem(Source src, Source... other) {
 		return add(SourceDirective.SCRIPT_SRC_ELEM, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code script-src-attr} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-attr">https://w3c.github.io/webappsec-csp/#directive-script-src-attr</a>
-	 */
+	/// Add values for [`script-src-attr`](https://w3c.github.io/webappsec-csp/#directive-script-src-attr) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addScriptSrcAttr(Source src, Source... other) {
 		return add(SourceDirective.SCRIPT_SRC_ATTR, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code style-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src">https://w3c.github.io/webappsec-csp/#directive-style-src</a>
-	 */
+	/// Add values for [`style-src`](https://w3c.github.io/webappsec-csp/#directive-style-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addStyleSrc(Source src, Source... other) {
 		return add(SourceDirective.STYLE_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code style-src-elem} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-elem">https://w3c.github.io/webappsec-csp/#directive-style-src-elem</a>
-	 */
+	/// Add values for [`style-src-elem`](https://w3c.github.io/webappsec-csp/#directive-style-src-elem) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addStyleSrcElem(Source src, Source... other) {
 		return add(SourceDirective.STYLE_SRC_ELEM, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code style-src-attr} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-attr">https://w3c.github.io/webappsec-csp/#directive-style-src-attr</a>
-	 */
+	/// Add values for [`style-src-attr`](https://w3c.github.io/webappsec-csp/#directive-style-src-attr) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addStyleSrcAttr(Source src, Source... other) {
 		return add(SourceDirective.STYLE_SRC_ATTR, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code font-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-font-src">https://w3c.github.io/webappsec-csp/#directive-font-src</a>
-	 */
+	/// Add values for [`font-src`](https://w3c.github.io/webappsec-csp/#directive-font-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addFontSrc(Source src, Source... other) {
 		return add(SourceDirective.FONT_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code object-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-object-src">https://w3c.github.io/webappsec-csp/#directive-object-src</a>
-	 */
+	/// Add values for [`object-src`](https://w3c.github.io/webappsec-csp/#directive-object-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addObjectSrc(Source src, Source... other) {
 		return add(SourceDirective.OBJECT_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code media-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://www.w3.org/TR/CSP/#directive-media-src">https://www.w3.org/TR/CSP/#directive-media-src</a>
-	 */
+	/// Add values for [`media-src`](https://www.w3.org/TR/CSP/#directive-media-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addMediaSrc(Source src, Source... other) {
 		return add(SourceDirective.MEDIA_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code img-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-img-src">https://w3c.github.io/webappsec-csp/#directive-img-src</a>
-	 */
+	/// Add values for [`img-src`](https://w3c.github.io/webappsec-csp/#directive-img-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addImgSrc(Source src, Source... other) {
 		return add(SourceDirective.IMG_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code connect-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-connect-src">https://w3c.github.io/webappsec-csp/#directive-connect-src</a>
-	 */
+	/// Add values for [`connect-src`](https://w3c.github.io/webappsec-csp/#directive-connect-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addConnectSrc(Source src, Source... other) {
 		return add(SourceDirective.CONNECT_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code child-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-child-src">https://w3c.github.io/webappsec-csp/#directive-child-src</a>
-	 */
+	/// Add values for [`child-src`](https://w3c.github.io/webappsec-csp/#directive-child-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addChildSrc(Source src, Source... other) {
 		return add(SourceDirective.CHILD_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code manifest-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://www.w3.org/TR/CSP/#directive-child-src">https://www.w3.org/TR/CSP/#directive-child-src</a>
-	 */
+	/// Add values for [`manifest-src`](https://www.w3.org/TR/CSP/#directive-child-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addManifestSrc(Source src, Source... other) {
 		return add(SourceDirective.MANIFEST_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code frame-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-src">https://w3c.github.io/webappsec-csp/#directive-frame-src</a>
-	 */
+	/// Add values for [`frame-src`](https://w3c.github.io/webappsec-csp/#directive-frame-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addFrameSrc(Source src, Source... other) {
 		return add(SourceDirective.FRAME_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code prefetch-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-prefetch-src">https://w3c.github.io/webappsec-csp/#directive-prefetch-src</a>
-	 */
+	/// Add values for [`prefetch-src`](https://w3c.github.io/webappsec-csp/#directive-prefetch-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addPrefetchSrc(Source src, Source... other) {
 		return add(SourceDirective.PREFETCH_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code worker-src} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-worker-src">https://w3c.github.io/webappsec-csp/#directive-worker-src</a>
-	 */
+	/// Add values for [`worker-src`](https://w3c.github.io/webappsec-csp/#directive-worker-src) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addWorkerSrc(Source src, Source... other) {
 		return add(SourceDirective.WORKER_SRC, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code form-action} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-form-action">https://w3c.github.io/webappsec-csp/#directive-form-action</a>
-	 */
+	/// Add values for [`form-action`](https://w3c.github.io/webappsec-csp/#directive-form-action) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addFormAction(Source src, Source... other) {
 		return add(SourceDirective.FORM_ACTION, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code navigate-to} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-navigate-to">https://w3c.github.io/webappsec-csp/#directive-navigate-to</a>
-	 */
+	/// Add values for [`navigate-to`](https://w3c.github.io/webappsec-csp/#directive-navigate-to) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addNavigateTo(Source src, Source... other) {
 		return add(SourceDirective.NAVIGATE_TO, src, asList(other));
 	}
 
-	/**
-	 * Add values for {@code frame-ancestors} directive.
-	 *
-	 * @param src Source value.
-	 * @param other Optional other source values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-ancestors">https://w3c.github.io/webappsec-csp/#directive-frame-ancestors</a>
-	 */
+	/// Add values for [`frame-ancestors`](https://w3c.github.io/webappsec-csp/#directive-frame-ancestors) directive.
+	///
+	/// @param src Source value.
+	/// @param other Optional other source values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addFrameAncestors(Source src, Source... other) {
 		return add(SourceDirective.FRAME_ANCESTORS, src, asList(other), input ->
 			PreConditions.match(input.getValue(), PATTERN_HOST_VALUE, "Source must be a valid host value")
 		);
 	}
 
-	/**
-	 * Add values for {@code plugin-types} directive.
-	 *
-	 * @param mediaType Media-type value.
-	 * @param other Optional other media-types values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-plugin-types">https://w3c.github.io/webappsec-csp/#directive-plugin-types</a>
-	 */
+	/// Add values for [`plugin-types`](https://w3c.github.io/webappsec-csp/#directive-plugin-types) directive.
+	///
+	/// @param mediaType Media-type value.
+	/// @param other Optional other media-types values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addPluginTypes(String mediaType, String... other) {
 		Source src = new SourceValue(mediaType);
 		List<Source> otherSources = Arrays.stream(other).map(SourceValue::new).collect(Collectors.toList());
 		return add(SourceDirective.PLUGIN_TYPES, src, otherSources);
 	}
 
-	/**
-	 * Add {@code disown-opener} directive.
-	 *
-	 * @return Current builder.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-disown-opener">https://w3c.github.io/webappsec-csp/#directive-disown-opener</a>
-	 */
+	/// Add [`disown-opener`](https://w3c.github.io/webappsec-csp/#directive-disown-opener) directive.
+	///
+	/// @return Current builder.
 	public ContentSecurityPolicyBuilder addDisownOpener() {
 		List<Source> sources = emptyList();
 		return add(SourceDirective.DISOWN_OPENER, sources, null);
 	}
 
-	/**
-	 * Add values for {@code report-uri} directive.
-	 *
-	 * @param uri Uri value.
-	 * @param other Optional other uri values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @throws IllegalArgumentException If at least one uri is not a valid uri value.
-	 * @see <a href="https://www.w3.org/TR/CSP/#directive-report-uri">https://www.w3.org/TR/CSP/#directive-report-uri</a>
-	 */
+	/// Add values for [`report-uri`](https://www.w3.org/TR/CSP/#directive-report-uri) directive.
+	///
+	/// @param uri Uri value.
+	/// @param other Optional other uri values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
+	/// @throws IllegalArgumentException If at least one uri is not a valid uri value.
 	public ContentSecurityPolicyBuilder addReportUri(String uri, String... other) {
 		Source src = new UriSource(uri);
 		List<Source> otherSources = Arrays.stream(other).map(UriSource::new).collect(Collectors.toList());
 		return add(SourceDirective.REPORT_URI, src, otherSources);
 	}
 
-	/**
-	 * Set token value for {@code report-to} directive.
-	 *
-	 * @param token Token Value.
-	 * @return Current builder.
-	 * @throws NullPointerException If {@code token} is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-report-to">https://w3c.github.io/webappsec-csp/#directive-report-to</a>
-	 */
+	/// Set token value for [`report-to`](https://w3c.github.io/webappsec-csp/#directive-report-to) directive.
+	///
+	/// @param token Token Value.
+	/// @return Current builder.
+	/// @throws NullPointerException If `token` is `null`.
 	public ContentSecurityPolicyBuilder setReportTo(String token) {
 		Source src = new SourceValue(token);
 		List<Source> others = emptyList();
 		return add(SourceDirective.REPORT_TO, src, others);
 	}
 
-	/**
-	 * Add values for {@code report-uri} directive.
-	 *
-	 * @param uri Uri value.
-	 * @param other Optional other uri values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://www.w3.org/TR/CSP/#directive-report-uri">https://www.w3.org/TR/CSP/#directive-report-uri</a>
-	 */
+	/// Add values for [`report-uri`](https://www.w3.org/TR/CSP/#directive-report-uri) directive.
+	///
+	/// @param uri Uri value.
+	/// @param other Optional other uri values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addReportUri(URI uri, URI... other) {
 		Source src = new UriSource(uri);
 		List<Source> otherSources = Arrays.stream(other).map(UriSource::new).collect(Collectors.toList());
 		return add(SourceDirective.REPORT_URI, src, otherSources);
 	}
 
-	/**
-	 * Add values for {@code sandbox} directive.
-	 *
-	 * @param sandbox Sandbox value.
-	 * @param other Optional other sandbox values.
-	 * @return Current builder.
-	 * @throws NullPointerException If at least one parameter is {@code null}.
-	 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-sandbox">https://w3c.github.io/webappsec-csp/#directive-sandbox</a>
-	 */
+	/// Add values for [`sandbox`](https://w3c.github.io/webappsec-csp/#directive-sandbox) directive.
+	///
+	/// @param sandbox Sandbox value.
+	/// @param other Optional other sandbox values.
+	/// @return Current builder.
+	/// @throws NullPointerException If at least one parameter is `null`.
 	public ContentSecurityPolicyBuilder addSandbox(Sandbox sandbox, Sandbox... other) {
 		return add(SourceDirective.SANDBOX, sandbox, asList(other));
 	}
 
-	/**
-	 * Enable {@code block-all-mixed-content} directive.
-	 *
-	 * @return Current builder.
-	 * @see <a href="https://w3c.github.io/webappsec-mixed-content">https://w3c.github.io/webappsec-mixed-content</a>
-	 */
+	/// Enable [`block-all-mixed-content`](https://w3c.github.io/webappsec-mixed-content) directive.
+	///
+	/// @return Current builder.
 	public ContentSecurityPolicyBuilder blockAllMixedContent() {
 		List<Source> sources = emptyList();
 		return add(SourceDirective.BLOCK_ALL_MIXED_CONTENT, sources, null);
 	}
 
-	/**
-	 * Enable {@code upgrade-insecure-request} directive.
-	 *
-	 * @return Current builder.
-	 * @see <a href="https://w3c.github.io/webappsec-upgrade-insecure-requests">https://w3c.github.io/webappsec-upgrade-insecure-requests</a>
-	 */
+	/// Enable [`upgrade-insecure-request`](https://w3c.github.io/webappsec-upgrade-insecure-requests) directive.
+	///
+	/// @return Current builder.
 	public ContentSecurityPolicyBuilder upgradeInsecureRequest() {
 		List<Source> sources = emptyList();
 		return add(SourceDirective.UPGRADE_INSECURE_REQUEST, sources, null);
 	}
 
-	/**
-	 * Enable {@code block-all-mixed-content} directive.
-	 *
-	 * @param resource Source directive.
-	 * @param other Other, optional, source directives.
-	 * @return Current builder.
-	 * @see <a href="https://www.w3.org/TR/mixed-content/#strict-checking">https://www.w3.org/TR/mixed-content/#strict-checking</a>
-	 */
+	/// Enable [`block-all-mixed-content`](https://www.w3.org/TR/mixed-content/#strict-checking) directive.
+	///
+	/// @param resource Source directive.
+	/// @param other Other, optional, source directives.
+	/// @return Current builder.
 	public ContentSecurityPolicyBuilder addRequireSriFor(RequireSriFor resource, RequireSriFor... other) {
 		return add(SourceDirective.REQUIRE_SRI_FOR, resource, asList(other));
 	}
@@ -505,18 +405,14 @@ public class ContentSecurityPolicyBuilder {
 		return this;
 	}
 
-	/**
-	 * Create {@link ContentSecurityPolicy} instance.
-	 *
-	 * @return New {@link ContentSecurityPolicy} instance.
-	 */
+	/// Create [ContentSecurityPolicy] instance.
+	///
+	/// @return New [ContentSecurityPolicy] instance.
 	public ContentSecurityPolicy build() {
 		return new ContentSecurityPolicy(sources);
 	}
 
-	/**
-	 * Validator interface.
-	 */
+	/// Validator interface.
 	private interface SourceValidator {
 		void validate(Source src);
 	}

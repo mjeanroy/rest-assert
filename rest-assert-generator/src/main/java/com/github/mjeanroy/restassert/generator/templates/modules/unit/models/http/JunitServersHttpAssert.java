@@ -28,21 +28,15 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.junitservers.JunitServersHttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
-/**
- * Template model for rest-assert-unit spring mockmvc class.
- */
+/// Template model for rest-assert-unit spring mockmvc class.
 public final class JunitServersHttpAssert extends AbstractUnitHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final JunitServersHttpAssert INSTANCE = new JunitServersHttpAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel junitServersHttpAssert() {
 		return INSTANCE;
 	}

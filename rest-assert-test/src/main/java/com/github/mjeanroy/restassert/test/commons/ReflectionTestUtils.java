@@ -26,9 +26,7 @@ package com.github.mjeanroy.restassert.test.commons;
 
 import org.apache.commons.lang3.reflect.FieldUtils;
 
-/**
- * Static Reflection Utilities, to use in unit tests only.
- */
+/// Static Reflection Utilities, to use in unit tests only.
 public final class ReflectionTestUtils {
 
 	private ReflectionTestUtils() {

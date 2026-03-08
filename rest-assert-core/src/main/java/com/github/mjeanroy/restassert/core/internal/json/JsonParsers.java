@@ -24,16 +24,12 @@
 
 package com.github.mjeanroy.restassert.core.internal.json;
 
-/**
- * Static helper that can auto-detect the most appropriate JSON parser.
- */
+/// Static helper that can auto-detect the most appropriate JSON parser.
 public final class JsonParsers {
 
-	/**
-	 * Get JSON parser.
-	 *
-	 * @return JSON parser.
-	 */
+	/// Get JSON parser.
+	///
+	/// @return JSON parser.
 	public static JsonParser getParser() {
 		return Holder.INSTANCE;
 	}

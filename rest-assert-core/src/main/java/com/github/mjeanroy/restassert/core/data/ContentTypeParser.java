@@ -36,11 +36,8 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.isQuot
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.CONTENT_TYPE;
 import static java.util.Collections.unmodifiableMap;
 
-/**
- * Parser that translate {@link String} to {@link ContentType} values.
- *
- * @see <a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>
- */
+/// Parser that translate [String] to [ContentType] values
+/// following [RFC 2045](https://tools.ietf.org/html/rfc2045) specifications.
 final class ContentTypeParser extends AbstractHttpHeaderParser<ContentType> {
 
 	// Ensure no public instantiation.

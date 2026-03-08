@@ -24,38 +24,27 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-/**
- * Standard JSON entry defined by:
- *
- * <ul>
- *   <li>A key</li>
- *   <li>A value</li>
- * </ul>.
- */
+/// Standard JSON entry defined by:
+/// - A key
+/// - A value
 public interface JsonEntry {
 
-	/**
-	 * Get entry key.
-	 *
-	 * @return JSON entry key.
-	 */
+	/// Get entry key.
+	///
+	/// @return JSON entry key.
 	String getKey();
 
-	/**
-	 * Get entry value.
-	 *
-	 * @return JSON entry value.
-	 */
+	/// Get entry value.
+	///
+	/// @return JSON entry value.
 	Object getValue();
 
-	/**
-	 * Create JSON entry object.
-	 *
-	 * @param key Entry key.
-	 * @param value Entry value.
-	 * @return The JSON entry.
-	 * @throws NullPointerException If {@code key} is {code null}.
-	 */
+	/// Create JSON entry object.
+	///
+	/// @param key Entry key.
+	/// @param value Entry value.
+	/// @return The JSON entry.
+	/// @throws NullPointerException If `key` is {code null}.
 	static JsonEntry of(String key, Object value) {
 		return new DefaultJsonEntry(key, value);
 	}

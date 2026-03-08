@@ -29,9 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.data.AbstractHttpHeaderParse
 import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
 import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 
-/**
- * Parser for {@link CacheControl} value.
- */
+/// Parser for [CacheControl] value.
 final class CacheControlParser extends AbstractHttpHeaderParser<CacheControl> {
 
 	private static final Logger log = Loggers.getLogger(StrictTransportSecurityParser.class);

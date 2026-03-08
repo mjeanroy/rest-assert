@@ -33,9 +33,7 @@ import static com.github.mjeanroy.restassert.core.internal.common.Strings.trimTo
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 
-/**
- * Abstract json parser.
- */
+/// Abstract json parser.
 abstract class AbstractJsonParser implements JsonParser {
 
 	AbstractJsonParser() {

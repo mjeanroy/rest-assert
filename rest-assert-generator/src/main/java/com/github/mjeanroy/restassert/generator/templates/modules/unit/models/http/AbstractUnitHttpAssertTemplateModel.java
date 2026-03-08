@@ -31,9 +31,7 @@ import com.github.mjeanroy.restassert.generator.templates.modules.unit.models.Ab
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-/**
- * Abstract structure for HTTP assertions and {@link AbstractUnitTemplateModel}.
- */
+/// Abstract structure for HTTP assertions and [AbstractUnitTemplateModel].
 abstract class AbstractUnitHttpAssertTemplateModel extends AbstractUnitTemplateModel implements TemplateModel {
 
 	AbstractUnitHttpAssertTemplateModel() {

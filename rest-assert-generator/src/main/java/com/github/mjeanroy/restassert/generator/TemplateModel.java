@@ -28,41 +28,31 @@ import java.util.Map;
 
 public interface TemplateModel {
 
-	/**
-	 * Data that will be rendered into template.
-	 *
-	 * @return Data.
-	 */
+	/// Data that will be rendered into template.
+	///
+	/// @return Data.
 	Map<String, Object> data();
 
-	/**
-	 * Get package name of generated class.
-	 *
-	 * @return Package name;
-	 */
+	/// Get package name of generated class.
+	///
+	/// @return Package name;
 	String getPackageName();
 
-	/**
-	 * Get name of generated class.
-	 *
-	 * @return Class name.
-	 */
+	/// Get name of generated class.
+	///
+	/// @return Class name.
 	String getClassName();
 
-	/**
-	 * Get factory name (used to translate object model to rest-assert model).
-	 *
-	 * @return Factory name.
-	 */
+	/// Get factory name (used to translate object model to rest-assert model).
+	///
+	/// @return Factory name.
 	default String getFactory() {
 		return null;
 	}
 
-	/**
-	 * The class being asserted, i.e output of factory or the actual class.
-	 *
-	 * @return Asserted class.
-	 */
+	/// The class being asserted, i.e output of factory or the actual class.
+	///
+	/// @return Asserted class.
 	default String getAssertedClassName() {
 		return null;
 	}

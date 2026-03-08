@@ -27,21 +27,15 @@ package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.mode
 import com.github.mjeanroy.restassert.core.data.HttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
-/**
- * Template model for rest-assert-hamcrest HttpResponseMatchers class.
- */
+/// Template model for rest-assert-hamcrest HttpResponseMatchers class.
 public class HttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final HttpResponseMatchers INSTANCE = new HttpResponseMatchers();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel coreHttpResponseMatchers() {
 		return INSTANCE;
 	}

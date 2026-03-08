@@ -47,10 +47,8 @@ public abstract class AbstractUnitTemplateModelTest extends AbstractTemplateMode
 		};
 	}
 
-	/**
-	 * Get the sub-package name under the main package name that is expected.
-	 *
-	 * @return Sub Package name.
-	 */
+	/// Get the sub-package name under the main package name that is expected.
+	///
+	/// @return Sub Package name.
 	protected abstract String getSubPackage();
 }

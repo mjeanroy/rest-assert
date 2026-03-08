@@ -26,10 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when a cookie does not have
- * expected max-age.
- */
+/// Error thrown when a cookie does not have expected max-age.
 public final class ShouldHaveMaxAge extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -37,13 +34,11 @@ public final class ShouldHaveMaxAge extends AbstractError {
 		super(message, expectedValue, actualValue);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param expectedMaxAge Expected cookie domain.
-	 * @param actualMaxAge Actual cookie domain.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param expectedMaxAge Expected cookie domain.
+	/// @param actualMaxAge Actual cookie domain.
+	/// @return Error.
 	public static ShouldHaveMaxAge shouldHaveMaxAge(long expectedMaxAge, long actualMaxAge) {
 		return new ShouldHaveMaxAge("Expecting cookie to have max-age %s", expectedMaxAge, actualMaxAge);
 	}

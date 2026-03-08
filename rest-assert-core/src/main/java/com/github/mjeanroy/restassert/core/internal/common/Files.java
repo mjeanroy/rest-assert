@@ -29,21 +29,17 @@ import java.nio.charset.Charset;
 import java.nio.file.Path;
 import java.util.List;
 
-/**
- * Static utilities.
- */
+/// Static utilities.
 public final class Files {
 
 	// Private constructor to ensure non instantiation.
 	private Files() {
 	}
 
-	/**
-	 * Read file and return text content.
-	 *
-	 * @param file File.
-	 * @return File content.
-	 */
+	/// Read file and return text content.
+	///
+	/// @param file File.
+	/// @return File content.
 	public static String readFileToString(Path file) {
 		try {
 			List<String> lines = java.nio.file.Files.readAllLines(file, Charset.defaultCharset());
@@ -54,32 +50,24 @@ public final class Files {
 		}
 	}
 
-	/**
-	 * Exception to throw when a file cannot be read and
-	 * fail with {@link IOException}.
-	 */
+	/// Exception to throw when a file cannot be read and
+	/// fail with [IOException].
 	public static class UnreadableFileException extends RuntimeException {
 
-		/**
-		 * Original Path.
-		 */
+		/// Original Path.
 		private final Path path;
 
-		/**
-		 * Create exception.
-		 *
-		 * @param ex Original exception.
-		 */
+		/// Create exception.
+		///
+		/// @param ex Original exception.
 		private UnreadableFileException(Path path, IOException ex) {
 			super(ex);
 			this.path = path;
 		}
 
-		/**
-		 * Get {@link #path}
-		 *
-		 * @return {@link #path}
-		 */
+		/// Get [#path]
+		///
+		/// @return Returns [#path]
 		public Path getPath() {
 			return path;
 		}

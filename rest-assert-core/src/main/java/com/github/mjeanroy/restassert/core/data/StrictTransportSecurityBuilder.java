@@ -24,82 +24,58 @@
 
 package com.github.mjeanroy.restassert.core.data;
 
-/**
- * DefaultCookieBuilder used to create instance of {@link StrictTransportSecurity} object.
- */
+/// Builder used to create instance of [StrictTransportSecurity] object.
 public class StrictTransportSecurityBuilder {
 
-	/**
-	 * {@code max-age} directive.
-	 * The max-age value is required to create value.
-	 */
+	/// The `max-age` directive.
+	/// The max-age value is required to create value.
 	private long maxAge;
 
-	/**
-	 * {@code includeSubDomains} directive.
-	 */
+	/// The `includeSubDomains` directive.
 	private boolean includeSubDomains;
 
-	/**
-	 * {@code preload} directive.
-	 */
+	/// The `preload` directive.
 	private boolean preload;
 
-	/**
-	 * Empty constructor, only used internally.
-	 */
+	/// Empty constructor, only used internally.
 	StrictTransportSecurityBuilder() {
 	}
 
-	/**
-	 * Create builder.
-	 *
-	 * @param maxAge Max-Age value.
-	 * @see <a href="https://tools.ietf.org/html/rfc6797#page-16">https://tools.ietf.org/html/rfc6797#page-16</a>
-	 */
+	/// Create builder.
+	///
+	/// @param maxAge Max-Age value.
 	StrictTransportSecurityBuilder(long maxAge) {
 		this.maxAge = maxAge;
 	}
 
-	/**
-	 * Update {@code maxage} directive.
-	 *
-	 * @param maxAge The max age value.
-	 * @return Current builder.
-	 * @see <a href="https://tools.ietf.org/html/rfc6797#page-16">https://tools.ietf.org/html/rfc6797#page-16</a>
-	 */
+	/// Update `maxage` directive ([RFC 6797](https://tools.ietf.org/html/rfc6797#page-16)).
+	///
+	/// @param maxAge The max age value.
+	/// @return Current builder.
 	public StrictTransportSecurityBuilder maxAge(long maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
 
-	/**
-	 * Enable {@code includeSubDomains} directive.
-	 *
-	 * @return Current builder.
-	 * @see <a href="https://tools.ietf.org/html/rfc6797#section-6.1.2">https://tools.ietf.org/html/rfc6797#section-6.1.2</a>
-	 */
+	/// Enable `includeSubDomains` directive ([RFC 6797](https://tools.ietf.org/html/rfc6797#section-6.1.2)).
+	///
+	/// @return Current builder.
 	public StrictTransportSecurityBuilder includeSubDomains() {
 		this.includeSubDomains = true;
 		return this;
 	}
 
-	/**
-	 * Enable {@code preload} directive.
-	 *
-	 * @return Current builder.
-	 * @see <a href="https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security">https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security</a>
-	 */
+	/// Enable `preload` directive ([MDN](https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security)).
+	///
+	/// @return Current builder.
 	public StrictTransportSecurityBuilder preload() {
 		this.preload = true;
 		return this;
 	}
 
-	/**
-	 * Create {@code Strict-Transport-Security} value.
-	 *
-	 * @return Header.
-	 */
+	/// Create `Strict-Transport-Security` value.
+	///
+	/// @return Header.
 	public StrictTransportSecurity build() {
 		return new StrictTransportSecurity(maxAge, includeSubDomains, preload);
 	}

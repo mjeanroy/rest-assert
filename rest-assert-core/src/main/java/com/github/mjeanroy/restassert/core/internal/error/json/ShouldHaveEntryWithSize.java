@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when a json array is not of expected
- * size.
- */
+/// Error thrown when a json array is not of expected
+/// size.
 public final class ShouldHaveEntryWithSize extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -42,15 +40,13 @@ public final class ShouldHaveEntryWithSize extends AbstractJsonError {
 		super(json, entryName, expectation, mismatch);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON input.
-	 * @param entry Entry name.
-	 * @param actualSize Actual size.
-	 * @param expectedSize Expected size.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON input.
+	/// @param entry Entry name.
+	/// @param actualSize Actual size.
+	/// @param expectedSize Expected size.
+	/// @return Error.
 	public static ShouldHaveEntryWithSize shouldHaveEntryWithSize(
 		String json,
 		String entry,

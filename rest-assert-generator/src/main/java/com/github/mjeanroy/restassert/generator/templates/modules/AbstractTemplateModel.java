@@ -47,32 +47,25 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 import static java.util.Collections.unmodifiableMap;
 
-/**
- * Abstract representation of template model.
- *
- * Each template model must provide at least:
- * <ul>
- *   <li>Package name: package name of generated class.</li>
- *   <li>Class name: name of generated class.</li>
- *   <li>Core class name: class (FQN) that will execute assertion test.</li>
- *   <li>Actual class: class (FQN) of tested object.</li>
- *   <li>Methods: assertion methods.</li>
- * </ul>
- */
+/// Abstract representation of template model.
+///
+/// Each template model must provide at least:
+/// - Package name: package name of generated class.
+/// - Class name: name of generated class.
+/// - Core class name: class (FQN) that will execute assertion test.
+/// - Actual class: class (FQN) of tested object.
+/// - Methods: assertion methods.
+///
 public abstract class AbstractTemplateModel implements TemplateModel {
 
 	private static final List<String> CLASS_NAME_PREFIXES = asList("class ", "interface ");
 
-	/**
-	 * The paranamer instance that will be used to extract parameter name
-	 * from the method instance.
-	 */
+	/// The paranamer instance that will be used to extract parameter name
+	/// from the method instance.
 	private final Paranamer paranamer;
 
-	/**
-	 * Create template model and instantiate paranamer
-	 * value.
-	 */
+	/// Create template model and instantiate paranamer
+	/// value.
 	protected AbstractTemplateModel() {
 		this.paranamer = new BytecodeReadingParanamer();
 	}
@@ -91,41 +84,33 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		return unmodifiableMap(map);
 	}
 
-	/**
-	 * Get Rest-Assert actual class that is tested
-	 * in the generated class.
-	 *
-	 * @return Actual class.
-	 */
+	/// Get Rest-Assert actual class that is tested
+	/// in the generated class.
+	///
+	/// @return Actual class.
 	protected abstract String getActualClass();
 
-	/**
-	 * Get Rest-Assert core class that is proxified
-	 * This assertion class will be used in generated test
-	 * to execute assertion test..
-	 *
-	 * @return Core class.
-	 */
+	/// Get Rest-Assert core class that is proxified
+	/// This assertion class will be used in generated test
+	/// to execute assertion test..
+	///
+	/// @return Core class.
 	protected String getCoreClassName() {
 		// By default
 		return coreClass().getName();
 	}
 
-	/**
-	 * Get Rest-Assert core class that will be used
-	 * to extract assertion methods.
-	 *
-	 * @return Core class.
-	 */
+	/// Get Rest-Assert core class that will be used
+	/// to extract assertion methods.
+	///
+	/// @return Core class.
 	protected abstract Class<?> coreClass();
 
-	/**
-	 * Get list of methods data to proxify.
-	 * These methods will be publicly available for
-	 * assertions.
-	 *
-	 * @return List of methods.
-	 */
+	/// Get list of methods data to proxify.
+	/// These methods will be publicly available for
+	/// assertions.
+	///
+	/// @return List of methods.
 	protected final List<Map<String, Object>> getMethods() {
 		List<Method> methods = findPublicMethods(coreClass());
 
@@ -196,25 +181,21 @@ public abstract class AbstractTemplateModel implements TemplateModel {
 		return unmodifiableMap(map);
 	}
 
-	/**
-	 * Build core method name.
-	 *
-	 * The core method is the name of the method that will internally
-	 * execute assertion test.
-	 *
-	 * For example, in the `rest-assert-unit` context, the returned value
-	 * for method `isOk` will be `assertIsOk`.
-	 *
-	 * @param methodName Current method name that is parsed.
-	 * @return Core method to use.
-	 */
+	/// Build core method name.
+	///
+	/// The core method is the name of the method that will internally
+	/// execute assertion test.
+	///
+	/// For example, in the `rest-assert-unit` context, the returned value
+	/// for method `isOk` will be `assertIsOk`.
+	///
+	/// @param methodName Current method name that is parsed.
+	/// @return Core method to use.
 	protected abstract String buildCoreMethodName(String methodName);
 
-	/**
-	 * Build method name that is generated.
-	 *
-	 * @param methodName Current method name that is parsed.
-	 * @return Method name that is generated.
-	 */
+	/// Build method name that is generated.
+	///
+	/// @param methodName Current method name that is parsed.
+	/// @return Method name that is generated.
 	protected abstract String buildMethodName(String methodName);
 }

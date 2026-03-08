@@ -28,26 +28,19 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.util.Date;
 
-/**
- * Implementation of {@link Cookie}
- * using Apache HttpClient framework as real implementation.
- */
+/// Implementation of [Cookie] using Apache HttpClient
+/// framework as real implementation.
 public class ApacheHttpCookie implements Cookie {
 
-	/**
-	 * Create new {@link Cookie} using instance
-	 * of {@link org.apache.http.cookie.Cookie}.
-	 *
-	 * @param cookie Original cookie object.
-	 * @return Cookie that can be used with rest-assert.
-	 */
+	/// Create new [Cookie] using instance of [org.apache.http.cookie.Cookie].
+	///
+	/// @param cookie Original cookie object.
+	/// @return Cookie that can be used with rest-assert.
 	public static ApacheHttpCookie create(org.apache.http.cookie.Cookie cookie) {
 		return new ApacheHttpCookie(cookie);
 	}
 
-	/**
-	 * Original apache http cookie.
-	 */
+	/// Original apache http cookie.
 	private final org.apache.http.cookie.Cookie cookie;
 
 	// Use static factory

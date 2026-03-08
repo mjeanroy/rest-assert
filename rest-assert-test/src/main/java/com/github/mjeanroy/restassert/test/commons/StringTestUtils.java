@@ -29,20 +29,16 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * Static Test String Utilities.
- */
+/// Static Test String Utilities.
 public final class StringTestUtils {
 
 	// Ensure non instantiation.
 	private StringTestUtils() {
 	}
 
-	/**
-	 * Generate a random string.
-	 *
-	 * @return Random string.
-	 */
+	/// Generate a random string.
+	///
+	/// @return Random string.
 	public static String randomString() {
 		return UUID.randomUUID().toString();
 	}

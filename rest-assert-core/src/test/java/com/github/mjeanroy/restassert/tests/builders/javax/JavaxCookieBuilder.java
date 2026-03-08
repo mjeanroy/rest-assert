@@ -28,14 +28,10 @@ import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 
 import javax.servlet.http.Cookie;
 
-/**
- * Create mock instance of {@link Cookie} class.
- */
+/// Create mock instance of [Cookie] class.
 public class JavaxCookieBuilder extends AbstractCookieBuilder<Cookie, JavaxCookieBuilder> {
 
-	/**
-	 * Create cookie builder with default values.
-	 */
+	/// Create cookie builder with default values.
 	public JavaxCookieBuilder() {
 		super();
 	}

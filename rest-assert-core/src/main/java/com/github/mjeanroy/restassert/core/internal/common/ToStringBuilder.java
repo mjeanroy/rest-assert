@@ -28,41 +28,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * An helper to write {@code toString()} methods easily.
- */
+/// An helper to write `toString()` methods easily.
 public final class ToStringBuilder {
 
 	private static final char OPEN_CHAR = '{';
 	private static final char CLOSE_CHAR = '}';
 	private static final String PARAMETER_SEPARATOR = ", ";
 
-	/**
-	 * Create the builder using the class simple name as first
-	 * prefix.
-	 *
-	 * @param klass The class.
-	 * @return The builder.
-	 */
+	/// Create the builder using the class simple name as first
+	/// prefix.
+	///
+	/// @param klass The class.
+	/// @return The builder.
 	public static ToStringBuilder toStringBuilder(Class<?> klass) {
 		return new ToStringBuilder(klass.getSimpleName());
 	}
 
-	/**
-	 * The output prefix.
-	 */
+	/// The output prefix.
 	private final String prefix;
 
-	/**
-	 * The list of parameters to append to the final output.
-	 */
+	/// The list of parameters to append to the final output.
 	private final List<String> parameters;
 
-	/**
-	 * The current size of the output.
-	 * This value will be used to initialize the final {@link StringBuilder} with the correct
-	 * size.
-	 */
+	/// The current size of the output.
+	///
+	/// This value will be used to initialize the final [StringBuilder] with the correct
+	/// size.
 	private int size;
 
 	private ToStringBuilder(String prefix) {
@@ -71,13 +62,11 @@ public final class ToStringBuilder {
 		this.size = prefix.length();
 	}
 
-	/**
-	 * Append new field to the final output.
-	 *
-	 * @param name Parameter name.
-	 * @param values Parameter value.
-	 * @return The current builder.
-	 */
+	/// Append new field to the final output.
+	///
+	/// @param name Parameter name.
+	/// @param values Parameter value.
+	/// @return The current builder.
 	public ToStringBuilder append(String name, Object[] values) {
 		String parameter = name + "=" + Arrays.toString(values);
 		parameters.add(parameter);
@@ -85,13 +74,11 @@ public final class ToStringBuilder {
 		return this;
 	}
 
-	/**
-	 * Append new field to the final output.
-	 *
-	 * @param name Parameter name.
-	 * @param value Parameter value.
-	 * @return The current builder.
-	 */
+	/// Append new field to the final output.
+	///
+	/// @param name Parameter name.
+	/// @param value Parameter value.
+	/// @return The current builder.
 	public ToStringBuilder append(String name, Object value) {
 		String parameter = name + "=" + value;
 		parameters.add(parameter);
@@ -99,11 +86,9 @@ public final class ToStringBuilder {
 		return this;
 	}
 
-	/**
-	 * Generate the {@code toString} output.
-	 *
-	 * @return The final output.
-	 */
+	/// Generate the `toString` output.
+	///
+	/// @return The final output.
 	public String build() {
 		int finalSize = size + (PARAMETER_SEPARATOR.length() * (parameters.size() - 1)) + 2;
 		return new StringBuilder(finalSize)

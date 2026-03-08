@@ -30,27 +30,19 @@ import java.io.File;
 
 import static com.github.mjeanroy.restassert.generator.utils.ClassUtils.packageNameToDirectory;
 
-/**
- * Class file that will generated and written to disk.
- * Generated class file will be a valid Java file.
- */
+/// Class file that will generated and written to disk.
+/// Generated class file will be a valid Java file.
 public class ClassFile {
 
-	/**
-	 * Target class name.
-	 * This package name will be translated to a path on disk.
-	 */
+	/// Target class name.
+	/// This package name will be translated to a path on disk.
 	private final String packageName;
 
-	/**
-	 * Target class name.
-	 * This class name will be translated to java file name.
-	 */
+	/// Target class name.
+	/// This class name will be translated to java file name.
 	private final String className;
 
-	/**
-	 * Class content (i.e java code written to generated file).
-	 */
+	/// Class content (i.e java code written to generated file).
 	private final String content;
 
 	public ClassFile(String packageName, String className, String content) {
@@ -71,12 +63,10 @@ public class ClassFile {
 		return content;
 	}
 
-	/**
-	 * Write class file to disk into
-	 * target directory.
-	 *
-	 * @param directory Target directory.
-	 */
+	/// Write class file to disk into
+	/// target directory.
+	///
+	/// @param directory Target directory.
 	public void writeTo(String directory) {
 		String separator = File.separator;
 		String dir = directory;

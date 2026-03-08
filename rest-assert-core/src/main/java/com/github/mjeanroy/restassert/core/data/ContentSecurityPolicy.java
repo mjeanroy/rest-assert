@@ -44,47 +44,34 @@ import static java.util.Arrays.stream;
 import static java.util.Collections.unmodifiableMap;
 import static java.util.Collections.unmodifiableSet;
 
-/**
- * Content-Security-Policy Header.
- *
- * @see <a href="https://w3c.github.io/webappsec-csp/">https://w3c.github.io/webappsec-csp/</a>
- * @see <a href="https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy">https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy</a>
- */
+/// Content-Security-Policy Header (a.k.a CSP):
+/// - [W3C Specification](https://w3c.github.io/webappsec-csp/)
+/// - [MDN Documentation](https://developer.mozilla.org/fr/docs/Web/HTTP/Headers/Content-Security-Policy)
 public final class ContentSecurityPolicy implements HttpHeaderValue {
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final ContentSecurityPolicyParser PARSER = new ContentSecurityPolicyParser();
 
-	/**
-	 * Get parser for {@link ContentSecurityPolicy} instances.
-	 *
-	 * @return The parser.
-	 */
+	/// Get parser for [ContentSecurityPolicy] instances.
+	///
+	/// @return The parser.
 	public static HttpHeaderParser<ContentSecurityPolicy> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * Create new builder for {@link CacheControl}.
-	 *
-	 * @return The builder.
-	 */
+	/// Create new builder for [ContentSecurityPolicy].
+	///
+	/// @return The builder.
 	public static ContentSecurityPolicyBuilder builder() {
 		return new ContentSecurityPolicyBuilder();
 	}
 
-	/**
-	 * List of value directives.
-	 */
+	/// List of value directives.
 	private final Map<SourceDirective, Set<Source>> directives;
 
-	/**
-	 * Create CSP value object.
-	 *
-	 * @param directives Header directives.
-	 */
+	/// Create CSP value object.
+	///
+	/// @param directives Header directives.
 	ContentSecurityPolicy(Map<SourceDirective, Set<Source>> directives) {
 		// Make a deep copy.
 		Map<SourceDirective, Set<Source>> clone = new LinkedHashMap<>();
@@ -98,11 +85,9 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		this.directives = unmodifiableMap(clone);
 	}
 
-	/**
-	 * Get {@link #directives}
-	 *
-	 * @return {@link #directives}
-	 */
+	/// Get [#directives]
+	///
+	/// @return Returns [#directives]
 	public Map<SourceDirective, Set<Source>> getDirectives() {
 		return directives;
 	}
@@ -157,15 +142,9 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			.collect(Collectors.joining("; "));
 	}
 
-	/**
-	 * List of CSP directive.
-	 */
+	/// List of CSP directive.
 	public enum SourceDirective {
-		/**
-		 * Handle {@code base-uri} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-base-uri">https://w3c.github.io/webappsec-csp/#directive-base-uri</a>
-		 */
+		/// Handle [`base-uri`](https://w3c.github.io/webappsec-csp/#directive-base-uri) directive.
 		BASE_URI("base-uri") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -173,11 +152,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code default-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-default-src">https://w3c.github.io/webappsec-csp/#directive-default-src</a>
-		 */
+		/// Handle [`default-src`](https://w3c.github.io/webappsec-csp/#directive-default-src) directive.
 		DEFAULT_SRC("default-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -185,11 +160,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code script-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src">https://w3c.github.io/webappsec-csp/#directive-script-src</a>
-		 */
+		/// Handle [`script-src`](https://w3c.github.io/webappsec-csp/#directive-script-src) directive.
 		SCRIPT_SRC("script-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -197,11 +168,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code script-src-elem} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-elem">https://w3c.github.io/webappsec-csp/#directive-script-src-elem</a>
-		 */
+		/// Handle [`script-src-elem`](https://w3c.github.io/webappsec-csp/#directive-script-src-elem) directive.
 		SCRIPT_SRC_ELEM("script-src-elem") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -209,11 +176,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code script-src-attr} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-script-src-attr">https://w3c.github.io/webappsec-csp/#directive-script-src-attr</a>
-		 */
+		/// Handle [`script-src-attr`](https://w3c.github.io/webappsec-csp/#directive-script-src-attr) directive.
 		SCRIPT_SRC_ATTR("script-src-attr") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -221,11 +184,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code style-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src">https://w3c.github.io/webappsec-csp/#directive-style-src</a>
-		 */
+		/// Handle [`style-src`](https://w3c.github.io/webappsec-csp/#directive-style-src) directive.
 		STYLE_SRC("style-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -233,11 +192,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code style-src-elem} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-elem">https://w3c.github.io/webappsec-csp/#directive-style-src-elem</a>
-		 */
+		/// Handle [`style-src-elem`](https://w3c.github.io/webappsec-csp/#directive-style-src-elem) directive.
 		STYLE_SRC_ELEM("style-src-elem") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -245,11 +200,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code style-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-style-src-attr">https://w3c.github.io/webappsec-csp/#directive-style-src-attr</a>
-		 */
+		/// Handle [`style-src`](https://w3c.github.io/webappsec-csp/#directive-style-src-attr) directive.
 		STYLE_SRC_ATTR("style-src-attr") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -257,11 +208,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code object-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-object-src">https://w3c.github.io/webappsec-csp/#directive-object-src</a>
-		 */
+		/// Handle [`object-src`](https://w3c.github.io/webappsec-csp/#directive-object-src) directive.
 		OBJECT_SRC("object-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -269,11 +216,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code media-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-media-src">https://w3c.github.io/webappsec-csp/#directive-media-src</a>
-		 */
+		/// Handle [`media-src`](https://w3c.github.io/webappsec-csp/#directive-media-src) directive.
 		MEDIA_SRC("media-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -281,11 +224,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code img-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-img-src">https://w3c.github.io/webappsec-csp/#directive-img-src</a>
-		 */
+		/// Handle [`img-src`](https://w3c.github.io/webappsec-csp/#directive-img-src) directive.
 		IMG_SRC("img-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -293,11 +232,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code font-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-font-src">https://w3c.github.io/webappsec-csp/#directive-font-src</a>
-		 */
+		/// Handle [`font-src`](https://w3c.github.io/webappsec-csp/#directive-font-src) directive.
 		FONT_SRC("font-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -305,11 +240,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code connect-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-connect-src">https://w3c.github.io/webappsec-csp/#directive-connect-src</a>
-		 */
+		/// Handle [`connect-src`](https://w3c.github.io/webappsec-csp/#directive-connect-src) directive.
 		CONNECT_SRC("connect-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -317,11 +248,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code child-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-child-src">https://w3c.github.io/webappsec-csp/#directive-child-src</a>
-		 */
+		/// Handle [`child-src`](https://w3c.github.io/webappsec-csp/#directive-child-src) directive.
 		CHILD_SRC("child-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -329,11 +256,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code manifest-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-manifest-src">https://w3c.github.io/webappsec-csp/#directive-manifest-src</a>
-		 */
+		/// Handle [`manifest-src`](https://w3c.github.io/webappsec-csp/#directive-manifest-src) directive.
 		MANIFEST_SRC("manifest-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -341,11 +264,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code frame-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-src">https://w3c.github.io/webappsec-csp/#directive-frame-src</a>
-		 */
+		/// Handle [`frame-src`](https://w3c.github.io/webappsec-csp/#directive-frame-src) directive.
 		FRAME_SRC("frame-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -353,11 +272,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code prefetch-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-prefetch-src">https://w3c.github.io/webappsec-csp/#directive-prefetch-src</a>
-		 */
+		/// Handle [`prefetch-src`](https://w3c.github.io/webappsec-csp/#directive-prefetch-src) directive.
 		PREFETCH_SRC("prefetch-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -365,11 +280,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code worker-src} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-worker-src">https://w3c.github.io/webappsec-csp/#directive-worker-src</a>
-		 */
+		/// Handle [`worker-src`](https://w3c.github.io/webappsec-csp/#directive-worker-src) directive.
 		WORKER_SRC("worker-src") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -377,11 +288,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code form-action} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-form-action">https://w3c.github.io/webappsec-csp/#directive-form-action</a>
-		 */
+		/// Handle [`form-action`](https://w3c.github.io/webappsec-csp/#directive-form-action) directive.
 		FORM_ACTION("form-action") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -389,11 +296,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code navigate-to} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-navigate-to">https://w3c.github.io/webappsec-csp/#directive-navigate-to</a>
-		 */
+		/// Handle [`navigate-to`](https://w3c.github.io/webappsec-csp/#directive-navigate-to) directive.
 		NAVIGATE_TO("navigate-to") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -401,11 +304,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code frame-ancestors} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-frame-ancestors">https://w3c.github.io/webappsec-csp/#directive-frame-ancestors</a>
-		 */
+		/// Handle [`frame-ancestors`](https://w3c.github.io/webappsec-csp/#directive-frame-ancestors) directive.
 		FRAME_ANCESTORS("frame-ancestors") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -413,11 +312,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code plugin-types} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-plugin-types">https://w3c.github.io/webappsec-csp/#directive-plugin-types</a>
-		 */
+		/// Handle [`plugin-types`](https://w3c.github.io/webappsec-csp/#directive-plugin-types) directive.
 		PLUGIN_TYPES("plugin-types") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -425,11 +320,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code report-uri} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-report-uri">https://w3c.github.io/webappsec-csp/#directive-report-uri</a>
-		 */
+		/// Handle [`report-uri`](https://w3c.github.io/webappsec-csp/#directive-report-uri) directive.
 		REPORT_URI("report-uri") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -437,11 +328,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code report-to} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-report-to">https://w3c.github.io/webappsec-csp/#directive-report-to</a>
-		 */
+		/// Handle [`report-to`](https://w3c.github.io/webappsec-csp/#directive-report-to) directive.
 		REPORT_TO("report-to") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -449,11 +336,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code sandbox} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-sandbox">https://w3c.github.io/webappsec-csp/#directive-sandbox</a>
-		 */
+		/// Handle [`sandbox`](https://w3c.github.io/webappsec-csp/#directive-sandbox) directive.
 		SANDBOX("sandbox") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -461,11 +344,7 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code report-uri} directive.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-csp/#directive-disown-opener">https://w3c.github.io/webappsec-csp/#directive-disown-opener</a>
-		 */
+		/// Handle [`disown-opener`](https://w3c.github.io/webappsec-csp/#directive-disown-opener) directive.
 		DISOWN_OPENER("disown-opener") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -473,12 +352,10 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code require-sri-for}.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-subresource-integrity">https://w3c.github.io/webappsec-subresource-integrity</a>
-		 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for</a>
-		 */
+		/// Handle [`require-sri-for`](https://w3c.github.io/webappsec-subresource-integrity).
+		///
+		/// See also [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for) for additional
+		/// details.
 		REQUIRE_SRI_FOR("require-sri-for") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -486,12 +363,10 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code upgrade-insecure-request}.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-upgrade-insecure-requests/">https://w3c.github.io/webappsec-upgrade-insecure-requests/</a>
-		 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests</a>
-		 */
+		/// Handle [`upgrade-insecure-request`](https://w3c.github.io/webappsec-upgrade-insecure-requests/).
+		///
+		/// See also [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) for
+		/// additional details.
 		UPGRADE_INSECURE_REQUEST("upgrade-insecure-request") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -499,12 +374,10 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * Handle {@code block-all-mixed-content}.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-mixed-content/">https://w3c.github.io/webappsec-mixed-content/</a>
-		 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content</a>
-		 */
+		/// Handle [`block-all-mixed-content`](https://w3c.github.io/webappsec-mixed-content/).
+		///
+		/// See also [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) for
+		/// additional details.
 		BLOCK_ALL_MIXED_CONTENT("block-all-mixed-content") {
 			@Override
 			void doParse(String value, ContentSecurityPolicyBuilder builder) {
@@ -512,31 +385,25 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		};
 
-		/**
-		 * Name of directive.
-		 * This name is the directive label in CSP value.
-		 */
+		/// Name of directive.
+		/// This name is the directive label in CSP value.
 		private final String name;
 
 		SourceDirective(String name) {
 			this.name = name;
 		}
 
-		/**
-		 * Get {@link #name}.
-		 *
-		 * @return {@link #name}.
-		 */
+		/// Get [#name].
+		///
+		/// @return Returns [#name].
 		String getName() {
 			return name;
 		}
 
-		/**
-		 * Parse value directive value.
-		 *
-		 * @param headerValue Directive value.
-		 * @param builder Current builder.
-		 */
+		/// Parse value directive value.
+		///
+		/// @param headerValue Directive value.
+		/// @param builder Current builder.
 		void parse(String headerValue, ContentSecurityPolicyBuilder builder) {
 			String[] values = headerValue.split(" ");
 			for (String value : values) {
@@ -544,17 +411,13 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			}
 		}
 
-		/**
-		 * Append {@code value} to appropriate section.
-		 *
-		 * @param value Value.
-		 * @param builder DefaultCookieBuilder.
-		 */
+		/// Append `value` to appropriate section.
+		///
+		/// @param value Value.
+		/// @param builder DefaultCookieBuilder.
 		abstract void doParse(String value, ContentSecurityPolicyBuilder builder);
 
-		/**
-		 * Map of directives indexed by name.
-		 */
+		/// Map of directives indexed by name.
 		private static final Map<String, SourceDirective> map = stream(SourceDirective.values()).collect(
 			Collectors.toMap(
 				(input) -> input.getName().toLowerCase(),
@@ -562,35 +425,25 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			)
 		);
 
-		/**
-		 * Get {@link SourceDirective} by name (search is case-insensitive).
-		 *
-		 * @param name Name.
-		 * @return Directive, may be {@code null} if name does not exist.
-		 */
+		/// Get [SourceDirective] by name (search is **case-insensitive**).
+		///
+		/// @param name Name.
+		/// @return Directive, may be `null` if name does not exist.
 		static SourceDirective byName(String name) {
 			return map.get(name.toLowerCase());
 		}
 	}
 
-	/**
-	 * Source item.
-	 * The value must follow Content-Security-Policy RFC.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#source_list">https://www.w3.org/TR/CSP/#source_list</a>
-	 */
+	/// Source item.
+	/// The value must follow [Content-Security-Policy RFC](https://www.w3.org/TR/CSP/#source_list).
 	public interface Source {
-		/**
-		 * Get source value.
-		 *
-		 * @return The source value.
-		 */
+		/// Get source value.
+		///
+		/// @return The source value.
 		String getValue();
 	}
 
-	/**
-	 * Template for {@link Source} implementation.
-	 */
+	/// Template for [Source] implementation.
 	abstract static class AbstractSourceValue implements Source {
 		@Override
 		public String toString() {
@@ -617,22 +470,16 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		}
 	}
 
-	/**
-	 * Simple source item.
-	 */
+	/// Simple source item.
 	static class SourceValue extends AbstractSourceValue implements Source {
-		/**
-		 * Source item value.
-		 */
+		/// Source item value.
 		private final String value;
 
-		/**
-		 * Create source.
-		 *
-		 * @param value Source value.
-		 * @throws NullPointerException If {@code value} is {@code null}.
-		 * @throws IllegalArgumentException If {@code value} is empty or blank.
-		 */
+		/// Create source.
+		///
+		/// @param value Source value.
+		/// @throws NullPointerException If `value` is `null`.
+		/// @throws IllegalArgumentException If `value` is empty or blank.
 		SourceValue(String value) {
 			this.value = PreConditions.notBlank(value, "Source value must be defined");
 		}
@@ -643,47 +490,33 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		}
 	}
 
-	/**
-	 * Host source, defined by:
-	 * <ul>
-	 * <li>Optional scheme.</li>
-	 * <li>Host name (required).</li>
-	 * <li>Optional port.</li>
-	 * <li>Optional path.</li>
-	 * </ul>
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
-	 */
+	/// Host source, defined by:
+	/// - Optional scheme.
+	/// - Host name (required).
+	/// - Optional port.
+	/// - Optional path.
+	///
+	///  See [CSP Host Source Specification](https://www.w3.org/TR/CSP/#host_source) for additional details.
 	private static class Host extends AbstractSourceValue implements Source {
-		/**
-		 * Host scheme, may be {@code null}.
-		 */
+		/// Host scheme, may be `null`.
 		private final String scheme;
 
-		/**
-		 * Host name.
-		 */
+		/// Host name.
 		private final String host;
 
-		/**
-		 * Host port, may be {@code null}.
-		 */
+		/// Host port, may be `null`.
 		private final String port;
 
-		/**
-		 * Host path, may be {@code null}.
-		 */
+		/// Host path, may be `null`.
 		private final String path;
 
-		/**
-		 * Create host.
-		 *
-		 * @param scheme Host scheme.
-		 * @param host Host name.
-		 * @param port Host port.
-		 * @param path Host path.
-		 * @throws NullPointerException If {@code host} is {@code null}.
-		 */
+		/// Create host.
+		///
+		/// @param scheme Host scheme.
+		/// @param host Host name.
+		/// @param port Host port.
+		/// @param path Host path.
+		/// @throws NullPointerException If `host` is `null`.
 		private Host(String scheme, String host, String port, String path) {
 			this.scheme = scheme;
 			this.host = PreConditions.notBlank(host, "Host must be defined");
@@ -721,258 +554,158 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 	static final String HOST_PORT_REGEX = "([0-9]+)|\\*";
 	static final String HOST_PATH_REGEX = "([^?#]*)";
 
-	/**
-	 * Pattern used to validate scheme value.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc3986#section-3.1">https://tools.ietf.org/html/rfc3986#section-3.1</a>
-	 */
+	/// Pattern used to validate scheme value ([RFC 3986](https://tools.ietf.org/html/rfc3986#section-3.1)).
 	private static final Pattern PATTERN_SCHEME = Pattern.compile("^" + SCHEME_REGEX + "$", Pattern.CASE_INSENSITIVE);
 
-	/**
-	 * Pattern used to validate base64 value.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#base64_value">https://www.w3.org/TR/CSP/#base64_value</a>
-	 */
+	/// Pattern used to validate base64 value ([CSP Base 64 value](https://www.w3.org/TR/CSP/#base64_value)).
 	private static final Pattern PATTERN_BASE64 = Pattern.compile("^[a-z0-9+/]+={2}$", Pattern.CASE_INSENSITIVE);
 
-	/**
-	 * Pattern used to validate host name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_part">https://www.w3.org/TR/CSP/#host_part</a>
-	 */
+	/// Pattern used to validate host name ([CSP Host](https://www.w3.org/TR/CSP/#host_part)).
 	private static final Pattern PATTERN_HOST_NAME = Pattern.compile("^" + HOST_NAME_REGEX + "$", Pattern.CASE_INSENSITIVE);
 
-	/**
-	 * Pattern used to validate host port.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#port_part">https://www.w3.org/TR/CSP/#port_part</a>
-	 */
+	/// Pattern used to validate host port ([CSP Host](https://www.w3.org/TR/CSP/#host_part)).
 	private static final Pattern PATTERN_PORT = Pattern.compile("^" + HOST_PORT_REGEX + "$", Pattern.CASE_INSENSITIVE);
 
-	/**
-	 * Pattern used to validate a path value.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc3986#section-3.3">https://tools.ietf.org/html/rfc3986#section-3.3</a>
-	 */
+	/// Pattern used to validate a path value ([RFC 3986](https://tools.ietf.org/html/rfc3986#section-3.3)).
 	private static final Pattern PATTERN_PATH = Pattern.compile(HOST_PATH_REGEX, Pattern.CASE_INSENSITIVE);
 
-	/**
-	 * Self keyword.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// The `'self'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source SELF = new SourceValue("'self'");
 
-	/**
-	 * None Source.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#source_list">https://www.w3.org/TR/CSP/#source_list</a>
-	 */
+	/// The `'none'` Source ([CSP Sources](https://www.w3.org/TR/CSP/#source_list)).
 	private static final Source NONE = new SourceValue("'none'");
 
-	/**
-	 * Unsafe-Eval keyword.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// The `'unsafe-eval'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source UNSAFE_EVAL = new SourceValue("'unsafe-eval'");
 
-	/**
-	 * Unsafe-Hashes keyword.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// The `'unsafe-hashes'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source UNSAFE_HASHES = new SourceValue("'unsafe-hashes'");
 
-	/**
-	 * Strict-Dynamic keyword.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// The `'strict-dynamic'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source STRICT_DYNAMIC = new SourceValue("'strict-dynamic'");
 
-	/**
-	 * Report-Sample keyword.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// The `'report-sample'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source REPORT_SAMPLE = new SourceValue("'report-sample'");
 
-	/**
-	 * Unsafe-Inline keyword.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// The `'unsafe-inline'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source UNSAFE_INLINE = new SourceValue("'unsafe-inline'");
 
-	/**
-	 * HTTP Scheme.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_source">https://www.w3.org/TR/CSP/#scheme_source</a>
-	 */
+	/// The `http` scheme ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source HTTP = scheme("http");
 
-	/**
-	 * HTTPS Scheme.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_source">https://www.w3.org/TR/CSP/#scheme_source</a>
-	 */
+	/// The `'https'` scheme ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source HTTPS = scheme("https");
 
-	/**
-	 * Data Scheme.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_source">https://www.w3.org/TR/CSP/#scheme_source</a>
-	 */
+	/// The `'data'` schele ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
 	private static final Source DATA = scheme("data");
 
-	/**
-	 * All host value
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_part">https://www.w3.org/TR/CSP/#host_part</a>
-	 */
+	/// The "all host" (`*`) value keyword ([CSP Host](https://www.w3.org/TR/CSP/#host_part).
 	private static final Source ALL_HOST = new SourceValue("*");
 
-	/**
-	 * Get the self keyword.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// Get the `'self'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return Self Source.
 	public static Source self() {
 		return SELF;
 	}
 
-	/**
-	 * Get the none value.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#source_list">https://www.w3.org/TR/CSP/#source_list</a>
-	 */
+	/// Get the `'none'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return None Source.
 	public static Source none() {
 		return NONE;
 	}
 
-	/**
-	 * Get the unsafe-eval keyword.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// Get the `'unsafe-eval'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return Unsafe-Eval Source.
 	public static Source unsafeEval() {
 		return UNSAFE_EVAL;
 	}
 
-	/**
-	 * Get the unsafe-hashes keyword.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// Get the `'unsafe-hashed'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return The Unsafe-Hashes Source.
 	public static Source unsafeHashes() {
 		return UNSAFE_HASHES;
 	}
 
-	/**
-	 * Get the unsafe-inline keyword.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// Get the `'unsafe-inline'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return The unsafe-inline Source.
 	public static Source unsafeInline() {
 		return UNSAFE_INLINE;
 	}
 
-	/**
-	 * Get the strict-dynamic keyword.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// Get the `'strict-dynamic'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return The Strict-Dynamic Source.
 	public static Source strictDynamic() {
 		return STRICT_DYNAMIC;
 	}
 
-	/**
-	 * Get the report-sample keyword.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#keyword_source">https://www.w3.org/TR/CSP/#keyword_source</a>
-	 */
+	/// Get the `'report-sample'` keyword ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return The Report-Sample Source.
 	public static Source reportSample() {
 		return REPORT_SAMPLE;
 	}
 
-	/**
-	 * Get the star matching all host.
-	 *
-	 * @return Self Source.
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_part">https://www.w3.org/TR/CSP/#host_part</a>
-	 */
+	/// Get the star matching all host ([CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source)).
+	///
+	/// @return The "ALL HOST" Source.
 	public static Source allHosts() {
 		return ALL_HOST;
 	}
 
-	/**
-	 * Build a new scheme source.
-	 * Note that the last {@code :} character will be appended.
-	 *
-	 * @param scheme Scheme value.
-	 * @return The source item.
-	 * @throws NullPointerException If {@code scheme} is null.
-	 * @throws IllegalArgumentException If {@code scheme} does not match Scheme Pattern.
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_source">https://www.w3.org/TR/CSP/#scheme_source</a>
-	 */
+	/// Build a new scheme source.
+	/// Note that the last `:` character will be appended.
+	///
+	/// See [CSP Keyword Source](https://www.w3.org/TR/CSP/#keyword_source) for additional
+	/// details.
+	///
+	/// @param scheme Scheme value.
+	/// @return The source item.
+	/// @throws NullPointerException If `scheme` is `null`.
+	/// @throws IllegalArgumentException If `scheme` does not match Scheme Pattern.
 	public static Source scheme(String scheme) {
 		PreConditions.notNull(scheme, "Scheme must not be null");
 		PreConditions.match(scheme, PATTERN_SCHEME, String.format("Scheme %s is not a valid scheme", scheme));
 		return new SourceValue(scheme + ":");
 	}
 
-	/**
-	 * Build a new nonce source.
-	 *
-	 * @param base64 Base64 Value.
-	 * @return The source item.
-	 * @throws NullPointerException If {@code base64} is null.
-	 * @throws IllegalArgumentException If {@code base64} does not match Base64	 Pattern.
-	 * @see <a href="https://www.w3.org/TR/CSP/#nonce_source">https://www.w3.org/TR/CSP/#nonce_source</a>
-	 */
+	/// Build a new [nonce source](https://www.w3.org/TR/CSP/#nonce_source).
+	///
+	/// @param base64 Base64 Value.
+	/// @return The source item.
+	/// @throws NullPointerException If `base64` is `null`.
+	/// @throws IllegalArgumentException If `base64` does not match [Base 64 Pattern][#PATTERN_BASE64].
 	public static Source nonce(String base64) {
 		PreConditions.notNull(base64, "Base64 value must not be null");
 		PreConditions.match(base64, PATTERN_BASE64, String.format("%s is not a valid base64 value", base64));
 		return new SourceValue("'nonce-" + base64 + "'");
 	}
 
-	/**
-	 * Get HTTP scheme.
-	 * This is a shortcut for {@link #scheme(String)} method.
-	 *
-	 * @return The source item.
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_part">https://www.w3.org/TR/CSP/#scheme_part</a>
-	 */
+	/// Get [HTTP scheme](https://www.w3.org/TR/CSP/#scheme_part).
+	/// This is a shortcut for [#scheme(String)] method.
+	///
+	/// @return The source item.
 	public static Source http() {
 		return HTTP;
 	}
 
-	/**
-	 * Get HTTPS scheme.
-	 * This is a shortcut for {@link #scheme(String)} method.
-	 *
-	 * @return The source item.
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_part">https://www.w3.org/TR/CSP/#scheme_part</a>
-	 */
+	/// Get [HTTPS scheme](https://www.w3.org/TR/CSP/#scheme_part).
+	/// This is a shortcut for [#scheme(String)] method.
+	///
+	/// @return The source item.
 	public static Source https() {
 		return HTTPS;
 	}
 
-	/**
-	 * Get Data scheme.
-	 * This is a shortcut for {@link #scheme(String)} method.
-	 *
-	 * @return The source item.
-	 * @see <a href="https://www.w3.org/TR/CSP/#scheme_part">https://www.w3.org/TR/CSP/#scheme_part</a>
-	 */
+	/// Get [Data scheme](https://www.w3.org/TR/CSP/#scheme_part).
+	/// This is a shortcut for [#scheme(String)] method.
+	///
+	/// @return The source item.
 	public static Source data() {
 		return DATA;
 	}
@@ -983,62 +716,48 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		return new SourceValue("'" + algo + "-" + base64 + "'");
 	}
 
-	/**
-	 * Build new SHA256 hash source.
-	 *
-	 * @param base64 Hash Value.
-	 * @return Source item.
-	 * @throws NullPointerException If {@code base64} is null.
-	 * @throws IllegalArgumentException If {@code base64} is not a valid base64 value.
-	 * @see <a href="https://www.w3.org/TR/CSP/#hash_value">https://www.w3.org/TR/CSP/#hash_value</a>
-	 */
+	/// Build new [SHA-256 hash source](https://www.w3.org/TR/CSP/#hash_value).
+	///
+	/// @param base64 The hash value as base 64.
+	/// @return Source item.
+	/// @throws NullPointerException If `base64` is `null`.
+	/// @throws IllegalArgumentException If `base64` is not a valid base64 value.
 	public static Source sha256(String base64) {
 		return algo("sha256", base64);
 	}
 
-	/**
-	 * Build new SHA384 hash source.
-	 *
-	 * @param base64 Hash Value.
-	 * @return Source item.
-	 * @throws NullPointerException If {@code base64} is null.
-	 * @throws IllegalArgumentException If {@code base64} is not a valid base64 value.
-	 * @see <a href="https://www.w3.org/TR/CSP/#hash_value">https://www.w3.org/TR/CSP/#hash_value</a>
-	 */
+	/// Build new [SHA-384 hash source](https://www.w3.org/TR/CSP/#hash_value).
+	///
+	/// @param base64 The hash value as base 64.
+	/// @return Source item.
+	/// @throws NullPointerException If `base64` is `null`.
+	/// @throws IllegalArgumentException If `base64` is not a valid base64 value.
 	public static Source sha384(String base64) {
 		return algo("sha384", base64);
 	}
 
-	/**
-	 * Build new SHA512 hash source.
-	 *
-	 * @param base64 Hash Value.
-	 * @return Source item.
-	 * @throws NullPointerException If {@code base64} is null.
-	 * @throws IllegalArgumentException If {@code base64} is not a valid base64 value.
-	 * @see <a href="https://www.w3.org/TR/CSP/#hash_value">https://www.w3.org/TR/CSP/#hash_value</a>
-	 */
+	/// Build new [SHA-512 hash source](https://www.w3.org/TR/CSP/#hash_value).
+	///
+	/// @param base64 The hash value as base 64.
+	/// @return Source item.
+	/// @throws NullPointerException If `base64` is `null`.
+	/// @throws IllegalArgumentException If `base64` is not a valid base64 value.
 	public static Source sha512(String base64) {
 		return algo("sha512", base64);
 	}
 
-	/**
-	 * Build new host source.
-	 *
-	 * @param scheme Host scheme, may be {@code null}.
-	 * @param host Host name.
-	 * @param port Port value, may be {@code null} or {@code *}.
-	 * @param path Path value, may be {@code null}.
-	 * @return Source item.
-	 * @throws NullPointerException If {@code host} is null.
-	 * @throws IllegalArgumentException <ul>
-	 * <li>If {@code scheme} is not a valid scheme value.</li>
-	 * <li>If {@code host} is not a valid host name.</li>
-	 * <li>If {@code port} is not a valid port value.</li>
-	 * <li>If {@code path} is not a valid path value.</li>
-	 * </ul>
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
-	 */
+	/// Build new [host source](https://www.w3.org/TR/CSP/#host_source).
+	///
+	/// @param scheme Host scheme, may be `null`.
+	/// @param host Host name.
+	/// @param port Port value, may be `null` or `*`.
+	/// @param path Path value, may be `null`.
+	/// @return Source item.
+	/// @throws NullPointerException If `host` is `null`.
+	/// @throws IllegalArgumentException If `scheme` is not a valid scheme value.
+	/// @throws IllegalArgumentException If `host` is not a valid host name.
+	/// @throws IllegalArgumentException If `port` is not a valid port value.
+	/// @throws IllegalArgumentException If `path` is not a valid path value.
 	public static Source host(String scheme, String host, String port, String path) {
 		PreConditions.notBlank(host, "Host name must be defined");
 		PreConditions.match(host, PATTERN_HOST_NAME, "Host %s is not valid");
@@ -1058,14 +777,11 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		return new Host(scheme, host, port, path);
 	}
 
-	/**
-	 * Build new host source.
-	 *
-	 * @param url Host url, must not be {@code null}.
-	 * @return Source item.
-	 * @throws NullPointerException If {@code url} is null.
-	 * @see <a href="https://www.w3.org/TR/CSP/#host_source">https://www.w3.org/TR/CSP/#host_source</a>
-	 */
+	/// Build new [host source](https://www.w3.org/TR/CSP/#host_source).
+	///
+	/// @param url Host url, must not be `null`.
+	/// @return Source item.
+	/// @throws NullPointerException If `url` is null.
 	public static Source host(URL url) {
 		PreConditions.notNull(url, "Host url must not be null");
 
@@ -1076,56 +792,36 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 		return new Host(url.getProtocol(), url.getHost(), portValue, url.getPath());
 	}
 
-	/**
-	 * Set of allowed sandbox value.
-	 *
-	 * @see <a href="https://www.w3.org/TR/CSP/#sandbox-usage">https://www.w3.org/TR/CSP/#sandbox-usage</a>
-	 */
+	/// Set of allowed [sandbox value](https://www.w3.org/TR/CSP/#sandbox-usage).
 	public enum Sandbox implements Source {
-		/**
-		 * The 'allow-scripts' sandbox value of a CSP.
-		 */
+		/// The `'allow-scripts'` sandbox value of a CSP.
 		ALLOW_SCRIPTS("allow-scripts"),
 
-		/**
-		 * The 'allow-same-origin' sandbox value of a CSP.
-		 */
+		/// The `'allow-same-origin'` sandbox value of a CSP.
 		ALLOW_SAME_ORIGIN("allow-same-origin"),
 
-		/**
-		 * The 'allow-forms' sandbox value of a CSP.
-		 */
+		/// The `'allow-forms'` sandbox value of a CSP.
 		ALLOW_FORMS("allow-forms"),
 
-		/**
-		 * The 'allow-pointer-lock' sandbox value of a CSP.
-		 */
+		/// The `'allow-pointer-lock'` sandbox value of a CSP.
 		ALLOW_POINTER_LOCK("allow-pointer-lock"),
 
-		/**
-		 * The 'allow-top-navigation' sandbox value of a CSP.
-		 */
+		/// The `'allow-top-navigation'` sandbox value of a CSP.
 		ALLOW_POPUPS("allow-popups"),
 
-		/**
-		 * The 'allow-top-navigation' sandbox value of a CSP.
-		 */
+		/// The `'allow-top-navigation'` sandbox value of a CSP.
 		ALLOW_TOP_NAVIGATION("allow-top-navigation");
 
-		/**
-		 * Label as specified by RFC.
-		 */
+		/// Label as specified by RFC.
 		private final String value;
 
 		Sandbox(String value) {
 			this.value = value;
 		}
 
-		/**
-		 * Label as specified by RFC.
-		 *
-		 * @return Sandbox value appearing in CSP value.
-		 */
+		/// Label as specified by RFC.
+		///
+		/// @return Sandbox value appearing in CSP value.
 		@Override
 		public String getValue() {
 			return value;
@@ -1138,50 +834,36 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			)
 		);
 
-		/**
-		 * Get sandbox item from value.
-		 *
-		 * @param value Value.
-		 * @return Sandbox item, may be {@code null} if {@code value} does not exist.
-		 */
+		/// Get sandbox item from value.
+		///
+		/// @param value Value.
+		/// @return Sandbox item, may be `null` if `value` does not exist.
 		static Sandbox byValue(String value) {
 			return map.get(value.toLowerCase());
 		}
 	}
 
-	/**
-	 * Set of allowed sandbox value.
-	 *
-	 * @see <a href="https://w3c.github.io/webappsec-subresource-integrity/">https://w3c.github.io/webappsec-subresource-integrity/</a>
-	 * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for</a>
-	 */
+	/// Set of allowed [required-sri-for value](https://w3c.github.io/webappsec-subresource-integrity)).
+	///
+	/// See also [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/require-sri-for) for
+	/// additional details.
 	public enum RequireSriFor implements Source {
-		/**
-		 * The script value for the SRI attribute.
-		 */
+		/// The script value for the SRI attribute.
 		SCRIPT("script"),
 
-		/**
-		 * The style value for the SRI attribute.
-		 */
+		/// The style value for the SRI attribute.
 		STYLE("style");
 
-		/**
-		 * Label as specified by <a href="https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for">RFC</a>.
-		 *
-		 * @see <a href="https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for">https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for</a>
-		 */
+		/// Label as specified by [RFC](https://w3c.github.io/webappsec-subresource-integrity/#opt-in-require-sri-for).
 		private final String value;
 
 		RequireSriFor(String value) {
 			this.value = value;
 		}
 
-		/**
-		 * Get {@link #value}
-		 *
-		 * @return {@link #value}
-		 */
+		/// Get [#value]
+		///
+		/// @return Returns [#value]
 		@Override
 		public String getValue() {
 			return value;
@@ -1194,12 +876,10 @@ public final class ContentSecurityPolicy implements HttpHeaderValue {
 			)
 		);
 
-		/**
-		 * Get {@link RequireSriFor} item from value.
-		 *
-		 * @param value Value.
-		 * @return The item, may be {@code null} if {@code value} does not exist.
-		 */
+		/// Get [RequireSriFor] item from value.
+		///
+		/// @param value Value.
+		/// @return The item, may be `null` if `value` does not exist.
 		static RequireSriFor byValue(String value) {
 			return map.get(value.toLowerCase());
 		}

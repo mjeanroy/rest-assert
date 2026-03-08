@@ -28,21 +28,15 @@ import com.github.mjeanroy.junit.servers.client.HttpResponse;
 import com.github.mjeanroy.restassert.core.internal.data.bindings.junitservers.JunitServersHttpResponse;
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 
-/**
- * Template model for rest-assert-hamcrest HttpResponseMatchers class.
- */
+/// Template model for rest-assert-hamcrest HttpResponseMatchers class.
 public class JunitServersHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final JunitServersHttpResponseMatchers INSTANCE = new JunitServersHttpResponseMatchers();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel junitServersHttpResponseMatchers() {
 		return INSTANCE;
 	}

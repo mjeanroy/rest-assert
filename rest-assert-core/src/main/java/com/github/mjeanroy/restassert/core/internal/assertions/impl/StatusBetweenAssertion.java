@@ -33,23 +33,16 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveStatusBetween.shouldHaveStatusBetween;
 
-/**
- * Check that http response status code is between a lower and an upper
- * bound (inclusive).
- */
+/// Check that http response status code is between a lower and an upper
+/// bound (inclusive).
 public class StatusBetweenAssertion extends AbstractStatusRangeAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(StatusBetweenAssertion.class);
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param start Lower bound.
-	 * @param end Upper bound.
-	 */
+	/// Create assertion.
+	///
+	/// @param start Lower bound.
+	/// @param end Upper bound.
 	public StatusBetweenAssertion(int start, int end) {
 		super(start, end);
 	}

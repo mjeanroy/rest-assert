@@ -29,9 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.exceptions.InvalidHeaderValu
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_XSS_PROTECTION;
 
-/**
- * Parser for {@link XssProtection} value.
- */
+/// Parser for [XssProtection] value.
 final class XssProtectionParser extends AbstractHttpHeaderParser<XssProtection> {
 
 	// Ensure no public instantiation.

@@ -36,102 +36,75 @@ import java.util.stream.Collectors;
 import static com.github.mjeanroy.restassert.core.internal.common.Numbers.toLong;
 import static java.util.Arrays.stream;
 
-/**
- * Strict-Transport-Security value.
- * Note that this object handle {@code preload} directive, even if
- * it is not officially defined in the spec.
- *
- * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
- * @see <a href="https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security">https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security</a>
- */
+/// Strict-Transport-Security value:
+/// - [RFC 6797](https://tools.ietf.org/html/rfc6797)
+/// - [MDN](https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security)
+///
+/// Note that this object handle `preload` directive, even if
+/// it is not officially defined in the spec.
 public final class StrictTransportSecurity implements HttpHeaderValue {
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final StrictTransportSecurityParser PARSER = new StrictTransportSecurityParser();
+
 	private static final String MAX_AGE_DIRECTIVE = "max-age";
 	private static final String INCLUDE_SUB_DOMAINS_DIRECTIVE = "includeSubDomains";
 	private static final String PRELOAD_DIRECTIVE = "preload";
 	private static final String SEPARATOR = "; ";
 
-	/**
-	 * Get parser for {@link StrictTransportSecurity} instances.
-	 *
-	 * @return The parser.
-	 */
+	/// Get parser for [StrictTransportSecurity] instances.
+	///
+	/// @return The parser.
 	public static HttpHeaderParser<StrictTransportSecurity> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * Create new builder for {@link StrictTransportSecurity}.
-	 *
-	 * @param maxAge The max-age value.
-	 * @return The builder.
-	 */
+	/// Create new builder for [StrictTransportSecurity].
+	///
+	/// @param maxAge The max-age value.
+	/// @return The builder.
 	public static StrictTransportSecurityBuilder builder(long maxAge) {
 		return new StrictTransportSecurityBuilder(maxAge);
 	}
 
-	/**
-	 * Max-Age value.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc6797#page-16">https://tools.ietf.org/html/rfc6797#page-16</a>
-	 */
+	/// Max-Age value ([RFC 6797](https://tools.ietf.org/html/rfc6797#page-16)).
 	private final long maxAge;
 
-	/**
-	 * Flag for sub-domains inclusion.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc6797#section-6.1.2">https://tools.ietf.org/html/rfc6797#section-6.1.2</a>
-	 */
+	/// Flag for sub-domains inclusion ([RFC 6797](https://tools.ietf.org/html/rfc6797#section-6.1.2)).
 	private final boolean includeSubDomains;
 
-	/**
-	 * Preload flag.
-	 * Not official defined by RFC 6797.
-	 *
-	 * @see <a href="https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security">https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security</a>
-	 */
+	/// Preload flag ([MDN](https://developer.mozilla.org/fr/docs/S%C3%A9curit%C3%A9/HTTP_Strict_Transport_Security)).
+	/// Not official defined by RFC 6797.
 	private final boolean preload;
 
-	/**
-	 * Create value value.
-	 *
-	 * @param maxAge Max-Age value.
-	 * @param includeSubDomains Sub-Domains flag.
-	 * @param preload Preload flag.
-	 */
+	/// Create value value.
+	///
+	/// @param maxAge Max-Age value.
+	/// @param includeSubDomains Sub-Domains flag.
+	/// @param preload Preload flag.
 	StrictTransportSecurity(long maxAge, boolean includeSubDomains, boolean preload) {
 		this.maxAge = maxAge;
 		this.includeSubDomains = includeSubDomains;
 		this.preload = preload;
 	}
 
-	/**
-	 * Get {@link #maxAge}
-	 *
-	 * @return {@link #maxAge}
-	 */
+	/// Get [#maxAge]
+	///
+	/// @return Returns [#maxAge]
 	public long getMaxAge() {
 		return maxAge;
 	}
 
-	/**
-	 * Get {@link #preload}
-	 *
-	 * @return {@link #preload}
-	 */
+	/// Get [#preload]
+	///
+	/// @return Returns [#preload]
 	public boolean isPreload() {
 		return preload;
 	}
 
-	/**
-	 * Get {@link #includeSubDomains}
-	 *
-	 * @return {@link #includeSubDomains}
-	 */
+	/// Get [#includeSubDomains]
+	///
+	/// @return Returns [#includeSubDomains]
 	public boolean isIncludeSubDomains() {
 		return includeSubDomains;
 	}
@@ -182,13 +155,9 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 		return Objects.hash(maxAge, includeSubDomains, preload);
 	}
 
-	/**
-	 * Set of directive that may appear in {@code Strict-Transport-Security} value.
-	 */
+	/// Set of directive that may appear in `Strict-Transport-Security` value.
 	enum Directive {
-		/**
-		 * Max-Age directive.
-		 */
+		/// Max-Age directive.
 		MAX_AGE("max-age") {
 			@Override
 			void parse(String value, StrictTransportSecurityBuilder builder) {
@@ -207,9 +176,7 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * {@code includeSubDomains} directive.
-		 */
+		/// `includeSubDomains` directive.
 		INCLUDE_SUB_DOMAINS(INCLUDE_SUB_DOMAINS_DIRECTIVE) {
 			@Override
 			void parse(String value, StrictTransportSecurityBuilder builder) {
@@ -217,9 +184,7 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * {@code preload} directive.
-		 */
+		/// `preload` directive.
 		PRELOAD(PRELOAD_DIRECTIVE) {
 			@Override
 			void parse(String value, StrictTransportSecurityBuilder builder) {
@@ -227,26 +192,20 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 			}
 		};
 
-		/**
-		 * Name of directive.
-		 */
+		/// Name of directive.
 		private final String name;
 
 		Directive(String name) {
 			this.name = name;
 		}
 
-		/**
-		 * Parse directive value.
-		 *
-		 * @param value The value.
-		 * @param builder The current builder.
-		 */
+		/// Parse directive value.
+		///
+		/// @param value The value.
+		/// @param builder The current builder.
 		abstract void parse(String value, StrictTransportSecurityBuilder builder);
 
-		/**
-		 * List of directives, indexed by lowercase directive name.
-		 */
+		/// List of directives, indexed by lowercase directive name.
 		private static final Map<String, Directive> map = stream(Directive.values()).collect(
 			Collectors.toMap(
 				(input) -> input.name.toLowerCase(),
@@ -254,13 +213,12 @@ public final class StrictTransportSecurity implements HttpHeaderValue {
 			)
 		);
 
-		/**
-		 * Get directive from its name. As specified by RFC 6797, directive name
-		 * is case-insensitive.
-		 *
-		 * @param name Directive name.
-		 * @return Directive object, may be {@code null} if name is not found.
-		 */
+		/// Get directive from its name.
+		///
+		/// As specified by RFC 6797, directive name is **case-insensitive**.
+		///
+		/// @param name Directive name.
+		/// @return Directive object, may be `null` if name is not found.
 		static Directive byName(String name) {
 			return map.get(name.toLowerCase());
 		}

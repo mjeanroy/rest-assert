@@ -26,60 +26,46 @@ package com.github.mjeanroy.restassert.core.internal.exceptions;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderParser;
 
-/**
- * Exception thrown when an {@link HttpHeaderParser} cannot parse
- * header value because of an invalid or a non-authorized value.
- */
+/// Exception thrown when an [HttpHeaderParser] cannot parse
+/// header value because of an invalid or a non-authorized value.
 @SuppressWarnings("serial")
 public class InvalidHeaderValue extends IllegalArgumentException {
 
-	/**
-	 * The header name.
-	 */
+	/// The header name.
 	private final String headerName;
 
-	/**
-	 * The invalid header value.
-	 */
+	/// The invalid header value.
 	private final String headerValue;
 
-	/**
-	 * Create the exception.
-	 *
-	 * @param headerName The header name.
-	 * @param headerValue The invalid header value.
-	 */
+	/// Create the exception.
+	///
+	/// @param headerName The header name.
+	/// @param headerValue The invalid header value.
 	public InvalidHeaderValue(String headerName, String headerValue) {
 		super(createMessage(headerName, headerValue));
 		this.headerName = headerName;
 		this.headerValue = headerValue;
 	}
 
-	/**
-	 * Get {@link #headerName}
-	 *
-	 * @return {@link #headerName}
-	 */
+	/// Get [#headerName]
+	///
+	/// @return Returns [#headerName]
 	public String getHeaderName() {
 		return headerName;
 	}
 
-	/**
-	 * Get {@link #headerValue}
-	 *
-	 * @return {@link #headerValue}
-	 */
+	/// Get [#headerValue]
+	///
+	/// @return Returns [#headerValue]
 	public String getHeaderValue() {
 		return headerValue;
 	}
 
-	/**
-	 * Create error message.
-	 *
-	 * @param headerName The header name.
-	 * @param headerValue The invalid header value.
-	 * @return The error message.
-	 */
+	/// Create error message.
+	///
+	/// @param headerName The header name.
+	/// @param headerValue The invalid header value.
+	/// @return The error message.
 	private static String createMessage(String headerName, String headerValue) {
 		return String.format("%s value '%s' is not a valid one.", headerName, headerValue);
 	}

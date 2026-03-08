@@ -36,26 +36,20 @@ import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.
 import static java.util.Collections.emptyList;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Implementation of {@link HttpResponse}
- * using Async-Http (version &gt;= 2.0.0) framework as real implementation.
- */
+/// Implementation of [HttpResponse] using Async-Http (version >= 2.0.0)
+///  framework as real implementation.
 public class AsyncHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
-	/**
-	 * Create new {@link HttpResponse} using instance of {@link org.asynchttpclient.Response},
-	 * or returns {@code null} if {@code response} is {@code null}.
-	 *
-	 * @param response Original response object.
-	 * @return Http response that can be used with rest-assert.
-	 */
+	/// Create new [HttpResponse] using instance of [org.asynchttpclient.Response],
+	/// or returns `null` if `response` is `null`.
+	///
+	/// @param response Original response object.
+	/// @return Http response that can be used with rest-assert.
 	public static AsyncHttpResponse create(Response response) {
 		return response == null ? null : new AsyncHttpResponse(response);
 	}
 
-	/**
-	 * Original Async-Http response.
-	 */
+	/// Original Async-Http response.
 	private final Response response;
 
 	// Use static factory

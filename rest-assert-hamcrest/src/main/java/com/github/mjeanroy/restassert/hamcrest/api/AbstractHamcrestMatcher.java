@@ -34,18 +34,14 @@ import org.hamcrest.TypeSafeMatcher;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Internal and abstract representation of {@link TypeSafeMatcher}
- *
- * @param <T> Type of object being tested.
- */
+/// Internal and abstract representation of [TypeSafeMatcher]
+///
+/// @param <T> Type of object being tested.
 public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 
 	private AssertionResult assertionResult;
 
-	/**
-	 * Create new instance.
-	 */
+	/// Create new instance.
 	protected AbstractHamcrestMatcher() {
 		this.assertionResult = null;
 	}
@@ -79,12 +75,10 @@ public abstract class AbstractHamcrestMatcher<T> extends TypeSafeMatcher<T> {
 		);
 	}
 
-	/**
-	 * Verify assertion and returns the assertion result.
-	 *
-	 * @param actual Object being tested.
-	 * @return The assertion result.
-	 */
+	/// Verify assertion and returns the assertion result.
+	///
+	/// @param actual Object being tested.
+	/// @return The assertion result.
 	protected abstract AssertionResult verify(T actual);
 
 	private RestAssertError error() {

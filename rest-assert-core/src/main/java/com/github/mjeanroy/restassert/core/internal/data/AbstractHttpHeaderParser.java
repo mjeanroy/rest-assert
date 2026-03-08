@@ -26,16 +26,12 @@ package com.github.mjeanroy.restassert.core.internal.data;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
-/**
- * Abstract template implementation for {@link HttpHeaderParser} interface.
- *
- * @param <T> Type of HTTP header value, output of parsing.
- */
+/// Abstract template implementation for [HttpHeaderParser] interface.
+///
+/// @param <T> Type of HTTP header value, output of parsing.
 public abstract class AbstractHttpHeaderParser<T extends HttpHeaderValue> implements HttpHeaderParser<T> {
 
-	/**
-	 * Create parser.
-	 */
+	/// Create parser.
 	protected AbstractHttpHeaderParser() {
 	}
 
@@ -45,13 +41,12 @@ public abstract class AbstractHttpHeaderParser<T extends HttpHeaderValue> implem
 		return doParse(value.trim());
 	}
 
-	/**
-	 * Parse header value as a raw string and returns valid {@link HttpHeaderValue} instance.
-	 * Note that, unlike {@link #parse(String)} method, this method guarantee that raw value
-	 * is not {@code null} and not blank.
-	 *
-	 * @param value Raw value.
-	 * @return The {@link HttpHeaderValue} instance.
-	 */
+	/// Parse header value as a raw string and returns valid [HttpHeaderValue] instance.
+	///
+	/// Note that, unlike [#parse(String)] method, this method guarantee that raw value
+	/// is not `null` and not blank.
+	///
+	/// @param value Raw value.
+	/// @return The [HttpHeaderValue] instance.
 	protected abstract T doParse(String value);
 }

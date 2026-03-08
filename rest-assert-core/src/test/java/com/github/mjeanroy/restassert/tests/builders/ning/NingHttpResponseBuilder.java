@@ -48,9 +48,7 @@ import static java.nio.charset.Charset.defaultCharset;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 
-/**
- * DefaultCookieBuilder to create mock instance of {@link Response} class.
- */
+/// Builder to create mock instance of [Response] class.
 public class NingHttpResponseBuilder extends AbstractHttpResponseBuilder<Response, NingHttpResponseBuilder> implements HttpResponseBuilder<Response> {
 
 	@Override

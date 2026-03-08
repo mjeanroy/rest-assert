@@ -24,23 +24,18 @@
 
 package com.github.mjeanroy.restassert.core.internal.error;
 
-/**
- * Simple contract to rest-assert json error object.
- * Each json error object must provide:
- * - The entry name that throws the error.
- */
+/// Simple contract to rest-assert json error object.
+/// Each json error object must provide:
+/// - The entry name that throws the error.
+/// - The original JSON payload.
 public interface RestAssertJsonError extends RestAssertError {
-	/**
-	 * Original JSON.
-	 *
-	 * @return Original JSON.
-	 */
+	/// Original JSON.
+	///
+	/// @return Original JSON.
 	String json();
 
-	/**
-	 * Entry name.
-	 *
-	 * @return Entry name.
-	 */
+	/// Entry name.
+	///
+	/// @return Entry name.
 	String entryName();
 }

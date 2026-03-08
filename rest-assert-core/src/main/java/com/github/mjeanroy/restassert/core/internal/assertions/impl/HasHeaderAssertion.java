@@ -33,22 +33,15 @@ import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionR
 import static com.github.mjeanroy.restassert.core.internal.assertions.AssertionResult.success;
 import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHaveHeader.shouldHaveHeader;
 
-/**
- * Check that http response has at least one header with
- * expected name.
- */
+/// Check that http response has at least one header with
+/// expected name.
 public class HasHeaderAssertion extends AbstractHeaderAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(HasHeaderAssertion.class);
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
 	public HasHeaderAssertion(String name) {
 		super(name);
 	}

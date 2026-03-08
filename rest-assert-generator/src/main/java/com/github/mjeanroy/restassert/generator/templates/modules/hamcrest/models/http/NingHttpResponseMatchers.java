@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpR
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import com.ning.http.client.Response;
 
-/**
- * Template model for rest-assert-hamcrest HttpResponseMatchers class.
- */
+/// Template model for rest-assert-hamcrest HttpResponseMatchers class.
 public class NingHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final NingHttpResponseMatchers INSTANCE = new NingHttpResponseMatchers();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel ningHttpResponseMatchers() {
 		return INSTANCE;
 	}

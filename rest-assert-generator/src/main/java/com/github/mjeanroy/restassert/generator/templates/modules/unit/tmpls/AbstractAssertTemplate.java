@@ -27,15 +27,11 @@ package com.github.mjeanroy.restassert.generator.templates.modules.unit.tmpls;
 import com.github.mjeanroy.restassert.generator.Template;
 import com.github.mjeanroy.restassert.generator.templates.modules.AbstractTemplate;
 
-/**
- * Abstract template.
- */
+/// Abstract template.
 abstract class AbstractAssertTemplate extends AbstractTemplate implements Template {
 
-	/**
-	 * Create new abstract template.
-	 * Path of template is retrieved from Java class name.
-	 */
+	/// Create new abstract template.
+	/// Path of template is retrieved from Java class name.
 	AbstractAssertTemplate() {
 		super("/unit/");
 	}

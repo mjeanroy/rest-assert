@@ -26,22 +26,18 @@ package com.github.mjeanroy.restassert.core.internal.loggers;
 
 import com.github.mjeanroy.restassert.core.internal.common.ClassUtils;
 
-/**
- * Static Logger Factory.
- */
+/// Static Logger Factory.
 public final class Loggers {
 
 	// Ensure non instantiation.
 	private Loggers() {
 	}
 
-	/**
-	 * Create logger, returns a no-op logger if slf4j is not available in the
-	 * classpath, or a logger delegating to slf4j otherwise.
-	 *
-	 * @param klass Logger name.
-	 * @return The logger.
-	 */
+	/// Create logger, returns a no-op logger if slf4j is not available in the
+	/// classpath, or a logger delegating to slf4j otherwise.
+	///
+	/// @param klass Logger name.
+	/// @return The logger.
 	public static Logger getLogger(Class<?> klass) {
 		if (ClassUtils.isPresent("org.slf4j.Logger")) {
 			return new Slf4jLogger(klass);

@@ -30,14 +30,10 @@ import java.util.Objects;
 
 import static java.util.Collections.unmodifiableMap;
 
-/**
- * Implementation of (immutable) JSON Object.
- */
+/// Implementation of (immutable) JSON Object.
 public final class JSONObject {
 
-	/**
-	 * Object values.
-	 */
+	/// Object values.
 	private final Map<String, Object> values;
 
 	public JSONObject() {
@@ -48,42 +44,34 @@ public final class JSONObject {
 		this.values = unmodifiableMap(new HashMap<>(values));
 	}
 
-	/**
-	 * Put given entry.
-	 *
-	 * @param entry Entry.
-	 * @param other Other entries.
-	 * @return The JSON object.
-	 */
+	/// Put given entry.
+	///
+	/// @param entry Entry.
+	/// @param other Other entries.
+	/// @return The JSON object.
 	public JSONObject add(JSONEntry entry, JSONEntry... other) {
 		return put(entry, other);
 	}
 
-	/**
-	 * Get value at given path.
-	 *
-	 * @param path The path.
-	 * @return The value.
-	 */
+	/// Get value at given path.
+	///
+	/// @param path The path.
+	/// @return The value.
 	public Object getValue(String path) {
 		String name = path.startsWith("$.") ? path.substring(2) : path;
 		return values.get(name);
 	}
 
-	/**
-	 * Get JSON representation of given array.
-	 *
-	 * @return JSON representation.
-	 */
+	/// Get JSON representation of given array.
+	///
+	/// @return JSON representation.
 	public String toJSON() {
 		return JSONTestUtils.toJSON(this);
 	}
 
-	/**
-	 * Get object size.
-	 *
-	 * @return Size.
-	 */
+	/// Get object size.
+	///
+	/// @return Size.
 	public int size() {
 		return values.size();
 	}

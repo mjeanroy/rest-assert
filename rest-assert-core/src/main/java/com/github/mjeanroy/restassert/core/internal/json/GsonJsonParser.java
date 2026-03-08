@@ -26,27 +26,20 @@ package com.github.mjeanroy.restassert.core.internal.json;
 
 import com.google.gson.Gson;
 
-/**
- * Implementation of {@link JsonParser}
- * using Google Gson as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
+/// Implementation of [JsonParser] using Google Gson as internal implementation.
+///
+/// This class is implemented as a singleton.
+/// This class is thread safe.
 final class GsonJsonParser extends AbstractJsonParser {
 
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
+	/// Get parser.
+	///
+	/// @return Parser.
 	static GsonJsonParser getInstance() {
 		return Holder.INSTANCE;
 	}
 
-	/**
-	 * Internal parser.
-	 */
+	/// Internal parser.
 	private final Gson gson;
 
 	private GsonJsonParser(Gson gson) {

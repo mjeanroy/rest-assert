@@ -26,9 +26,7 @@ package com.github.mjeanroy.restassert.core.internal.error.json;
 
 import com.github.mjeanroy.restassert.core.internal.error.Message;
 
-/**
- * Error thrown when a json string does not contain an expected entry.
- */
+/// Error thrown when a json string does not contain an expected entry.
 public final class ShouldHaveEntry extends AbstractJsonError {
 
 	// Private constructor, use static factory instead
@@ -40,13 +38,11 @@ public final class ShouldHaveEntry extends AbstractJsonError {
 		super(json, entryName, expectation);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param json Original JSON.
-	 * @param entryName Missing entry name.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param json Original JSON.
+	/// @param entryName Missing entry name.
+	/// @return Error.
 	public static ShouldHaveEntry shouldHaveEntry(String json, String entryName) {
 		return new ShouldHaveEntry(
 			json,

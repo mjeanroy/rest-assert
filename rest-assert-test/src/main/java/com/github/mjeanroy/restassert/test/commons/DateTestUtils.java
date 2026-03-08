@@ -30,28 +30,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * Static utilities.
- */
+/// Static utilities.
 public final class DateTestUtils {
 
-	/**
-	 * Pattern used to format / read a date in the internet format
-	 * message defined by RFC 5322 (https://tools.ietf.org/html/rfc5322).
-	 */
+	/// Pattern used to format / read a date in the internet format
+	/// message defined by [RFC 5322](https://tools.ietf.org/html/rfc5322).
 	private static final String IMF_FORMAT = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
 	// Ensure non instantiation.
 	private DateTestUtils() {
 	}
 
-	/**
-	 * Translate date formatted as the Internet Message Format (specified by
-	 * RFC 5322, https://tools.ietf.org/html/rfc5322) to a {@link Date} instance.
-	 *
-	 * @param date Date value.
-	 * @return The date instance.
-	 */
+	/// Translate date formatted as the Internet Message Format (specified by
+	/// [RFC 5322]()https://tools.ietf.org/html/rfc5322)) to a [Date] instance.
+	///
+	/// @param date Date value.
+	/// @return The date instance.
 	public static Date fromInternetMessageFormat(String date) {
 		DateFormat df = new SimpleDateFormat(IMF_FORMAT, Locale.US);
 		try {

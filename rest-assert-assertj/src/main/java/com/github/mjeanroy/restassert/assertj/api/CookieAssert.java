@@ -26,18 +26,14 @@ package com.github.mjeanroy.restassert.assertj.api;
 
 import com.github.mjeanroy.restassert.core.data.Cookie;
 
-/**
- * Assertion methods for {@link Cookie}.
- * <br><br>
- * To create an instance of this class, invoke {@link HttpResponseAssert#extractingCookie(String)}.
- */
+/// Assertion methods for [Cookie].
+///
+/// To create an instance of this class, invoke [HttpResponseAssert#extractingCookie(String)].
 public class CookieAssert extends AbstractCookieAssert<CookieAssert> {
 
-	/**
-	 * Create new assertion instance.
-	 *
-	 * @param actual The cookie.
-	 */
+	/// Create new assertion instance.
+	///
+	/// @param actual The cookie.
 	public CookieAssert(Cookie actual) {
 		super(actual, CookieAssert.class);
 	}

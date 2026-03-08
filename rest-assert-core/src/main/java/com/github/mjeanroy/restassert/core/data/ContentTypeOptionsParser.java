@@ -31,9 +31,7 @@ import java.util.Arrays;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_CONTENT_TYPE_OPTIONS;
 
-/**
- * Parser for {@link ContentTypeOptions}.
- */
+/// Parser for [ContentTypeOptions].
 final class ContentTypeOptionsParser extends AbstractHttpHeaderParser<ContentTypeOptions> {
 
 	// Ensure no public instantiation.

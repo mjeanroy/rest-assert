@@ -27,28 +27,20 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isGreaterThan;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.isPositive;
 
-/**
- * Abstract assertion with range of status code.
- */
+/// Abstract assertion with range of status code.
 abstract class AbstractStatusRangeAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Lower bound.
-	 */
+	/// Lower bound.
 	final int start;
 
-	/**
-	 * Upper bound.
-	 */
+	/// Upper bound.
 	final int end;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param start Lower bound.
-	 * @param end Upper bound.
-	 * @throws IllegalArgumentException If {@code start} or {@code end} are negative or if {@code start} is less than or equals to {@code end}.
-	 */
+	/// Create assertion.
+	///
+	/// @param start Lower bound.
+	/// @param end Upper bound.
+	/// @throws IllegalArgumentException If `start` or `end` are negative or if `start <= end`.
 	AbstractStatusRangeAssertion(int start, int end) {
 		isPositive(start, "Http status code must be positive");
 		isPositive(end, "Http status code must be positive");

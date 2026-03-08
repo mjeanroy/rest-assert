@@ -24,9 +24,7 @@
 
 package com.github.mjeanroy.restassert.core.internal.loggers;
 
-/**
- * A {@link Logger} implementation that does <strong>nothing</strong>.
- */
+/// A [Logger] implementation that does **nothing**.
 class NoOpLogger implements Logger {
 
 	@Override

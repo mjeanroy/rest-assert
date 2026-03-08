@@ -31,192 +31,147 @@ import java.util.Date;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
-/**
- * DefaultCookieBuilder class that can be used to build {@link Cookie} instance.
- */
+/// DefaultCookieBuilder class that can be used to build [Cookie] instance.
 public class CookieBuilder {
-	/**
-	 * Cookie name, mandatory.
-	 */
+	/// Cookie name, mandatory.
 	private final String name;
 
-	/**
-	 * Cookie value, mandatory.
-	 */
+	/// Cookie value, mandatory.
 	private final String value;
 
-	/**
-	 * Cookie domain, optional (default is {@code null}).
-	 */
+	/// Cookie domain, optional (default is `null`).
 	private String domain;
 
-	/**
-	 * Cookie path, optional (default is {@code null}).
-	 */
+	/// Cookie path, optional (default is `null`).
 	private String path;
 
-	/**
-	 * Cookie secure flag, optional (default is {@code false}).
-	 */
+	/// Cookie secure flag, optional (default is `false`).
 	private boolean secure;
 
-	/**
-	 * Cookie httpOnly flag, optional (default is {@code false}).
-	 */
+	/// Cookie httpOnly flag, optional (default is `false`).
 	private boolean httpOnly;
 
-	/**
-	 * Cookie SameSite flag, optional (default is {@code "Lax"}).
-	 */
+	/// Cookie SameSite flag, optional (default is `"Lax"`).
 	private SameSite sameSite;
 
-	/**
-	 * Cookie max-age, optional (default is {@code null}, meaning no max-age).
-	 */
+	/// Cookie max-age, optional (default is `null`, meaning no max-age).
 	private Long maxAge;
 
-	/**
-	 * Cookie expires date, optional (default is {@code null}, meaning no expires value).
-	 */
+	/// Cookie expires date, optional (default is `null`, meaning no expires value).
 	private Date expires;
 
-	/**
-	 * Create builder.
-	 * This constructor is private since {@link Cookies#builder(String, String)} method
-	 * should be used.
-	 *
-	 * @param name Cookie name.
-	 * @param value Cookie value.
-	 */
+	/// Create builder.
+	///
+	/// This constructor is private since [Cookies#builder(String, String)] method
+	/// should be used.
+	///
+	/// @param name Cookie name.
+	/// @param value Cookie value.
 	CookieBuilder(String name, String value) {
 		this.name = notBlank(name, "Cookie name must not be blank");
 		this.value = notNull(value, "Cookie value must not be null");
 		this.sameSite = SameSite.LAX;
 	}
 
-	/**
-	 * Update cookie domain.
-	 *
-	 * @param domain New domain value.
-	 * @return Current builder.
-	 */
+	/// Update cookie domain.
+	///
+	/// @param domain New domain value.
+	/// @return Current builder.
 	public CookieBuilder setDomain(String domain) {
 		this.domain = domain;
 		return this;
 	}
 
-	/**
-	 * Update cookie path.
-	 *
-	 * @param path New path value.
-	 * @return Current builder.
-	 */
+	/// Update cookie path.
+	///
+	/// @param path New path value.
+	/// @return Current builder.
 	public CookieBuilder setPath(String path) {
 		this.path = path;
 		return this;
 	}
 
-	/**
-	 * Set secure flag to {@code true}.
-	 *
-	 * @return Current builder.
-	 */
+	/// Set secure flag to `true`.
+	///
+	/// @return Current builder.
 	public CookieBuilder setSecure() {
 		return setSecure(true);
 	}
 
-	/**
-	 * Set secure flag..
-	 *
-	 * @param secure Secure flag.
-	 * @return Current builder.
-	 */
+	/// Set secure flag..
+	///
+	/// @param secure Secure flag.
+	/// @return Current builder.
 	public CookieBuilder setSecure(boolean secure) {
 		this.secure = secure;
 		return this;
 	}
 
-	/**
-	 * Set httpOnly flag to {@code true}.
-	 *
-	 * @return Current builder.
-	 */
+	/// Set httpOnly flag to `true`.
+	///
+	/// @return Current builder.
 	public CookieBuilder setHttpOnly() {
 		return setHttpOnly(true);
 	}
 
-	/**
-	 * Set httpOnly flag.
-	 *
-	 * @param httpOnly The HttpOnly flag.
-	 * @return Current builder.
-	 */
+	/// Set httpOnly flag.
+	///
+	/// @param httpOnly The HttpOnly flag.
+	/// @return Current builder.
 	public CookieBuilder setHttpOnly(boolean httpOnly) {
 		this.httpOnly = httpOnly;
 		return this;
 	}
 
-	/**
-	 * Update max-age value.
-	 *
-	 * @param maxAge Max-Age value.
-	 * @return Current builder.
-	 */
+	/// Update max-age value.
+	///
+	/// @param maxAge Max-Age value.
+	/// @return Current builder.
 	public CookieBuilder setMaxAge(Long maxAge) {
 		this.maxAge = maxAge;
 		return this;
 	}
 
-	/**
-	 * Update expires value.
-	 *
-	 * @param expires Expires value.
-	 * @return Current builder.
-	 */
+	/// Update expires value.
+	///
+	/// @param expires Expires value.
+	/// @return Current builder.
 	public CookieBuilder setExpires(Date expires) {
 		this.expires = expires;
 		return this;
 	}
 
-	/**
-	 * Update expires value.
-	 *
-	 * @param expires Expires value (timestamp).
-	 * @return Current builder.
-	 */
+	/// Update expires value.
+	///
+	/// @param expires Expires value (timestamp).
+	/// @return Current builder.
 	public CookieBuilder setExpires(long expires) {
 		this.expires = new Date(expires);
 		return this;
 	}
 
-	/**
-	 * Update SameSite value.
-	 *
-	 * @param sameSite SameSite value.
-	 * @return Current builder.
-	 */
+	/// Update SameSite value.
+	///
+	/// @param sameSite SameSite value.
+	/// @return Current builder.
 	public CookieBuilder setSameSite(SameSite sameSite) {
 		this.sameSite = sameSite;
 		return this;
 	}
 
-	/**
-	 * Update SameSite value.
-	 *
-	 * @param sameSite SameSite value.
-	 * @return Current builder.
-	 * @throws IllegalArgumentException If sameSite is not equals (ignoring case) to one of: {@code "Lax"}, {@code "Strict"}, {@code "None"}.
-	 */
+	/// Update SameSite value.
+	///
+	/// @param sameSite SameSite value.
+	/// @return Current builder.
+	/// @throws IllegalArgumentException If `sameSite` is not equals (ignoring case) to one of: `"Lax"`, `"Strict"`, `"None"`.
 	public CookieBuilder setSameSite(String sameSite) {
 		this.sameSite = SameSite.parse(sameSite);
 		return this;
 	}
 
-	/**
-	 * Create cookie.
-	 *
-	 * @return Cookie.
-	 */
+	/// Create cookie.
+	///
+	/// @return [Cookie].
 	public Cookie build() {
 		return new DefaultCookie(
 			name,

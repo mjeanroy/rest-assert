@@ -31,45 +31,37 @@ import com.ning.http.client.Response;
 
 import static com.github.mjeanroy.restassert.core.internal.data.bindings.ning.NingHttpCookie.create;
 
-/**
- * Entry point for assertion methods for Async-Http
- * library (version &lt; 2.0.0).
- */
+/// Entry point for assertion methods for Async-Http
+/// library (version < 2.0.0).
 public final class NingHttpAssertions {
 
 	// Ensure non instantiation
 	private NingHttpAssertions() {
 	}
 
-	/**
-	 * Creates a new instance of {@link HttpResponseAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [HttpResponseAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static HttpResponseAssert assertThat(Response actual) {
 		return HttpResponseAssertions.assertThat(
 			toHttpResponse(actual)
 		);
 	}
 
-	/**
-	 * Creates a new instance of {@link CookieAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [CookieAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static CookieAssert assertThat(com.ning.http.client.cookie.Cookie actual) {
 		Cookie cookie = create(actual);
 		return new CookieAssert(cookie);
 	}
 
-	/**
-	 * Creates a new instance of {@link JsonAssert}.
-	 *
-	 * @param actual the actual value.
-	 * @return the created assertion object.
-	 */
+	/// Creates a new instance of [JsonAssert].
+	///
+	/// @param actual the actual value.
+	/// @return the created assertion object.
 	public static JsonAssert assertThatJson(Response actual) {
 		return JsonAssertions.assertThatJson(
 			toHttpResponse(actual)

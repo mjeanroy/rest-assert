@@ -26,23 +26,17 @@ package com.github.mjeanroy.restassert.core.internal.assertions.impl;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
-/**
- * Abstract assertion for header.
- */
+/// Abstract assertion for header.
 abstract class AbstractHeaderAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Header name.
-	 */
+	/// Header name.
 	final String name;
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 * @throws NullPointerException If {@code name} is null.
-	 * @throws IllegalArgumentException If {@code name} is empty or blank.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
+	/// @throws NullPointerException If `name` is null.
+	/// @throws IllegalArgumentException If `name` is empty or blank.
 	AbstractHeaderAssertion(String name) {
 		this.name = notBlank(name, "Header name cannot be blank");
 	}

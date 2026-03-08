@@ -30,21 +30,15 @@ import java.util.function.Predicate;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
-/**
- * Predicate used to check if a cookie has a given name.
- */
+/// Predicate used to check if a cookie has a given name.
 class CookieNamePredicate implements Predicate<Cookie> {
 
-	/**
-	 * Expected cookie name.
-	 */
+	/// Expected cookie name.
 	private final String name;
 
-	/**
-	 * Create predicate.
-	 *
-	 * @param name Expected name.
-	 */
+	/// Create predicate.
+	///
+	/// @param name Expected name.
 	CookieNamePredicate(String name) {
 		this.name = notNull(name, "Cookie name must not be null");
 	}

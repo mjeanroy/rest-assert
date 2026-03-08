@@ -24,27 +24,22 @@
 
 package com.github.mjeanroy.restassert.generator;
 
-/**
- * Template abstraction.
- * A template can be generated, result will be a valid
- * java class or java fragment (i.e method that can be appended
- * to a java class).
- */
+/// Template abstraction.
+///
+/// A template can be generated, result will be a valid
+/// java class or java fragment (i.e method that can be appended
+/// to a java class).
 public interface Template {
 
-	/**
-	 * Get path of template file (text file).
-	 * The path is relative to the classpath.
-	 *
-	 * @return Path of text file, relative to classpath.
-	 */
+	/// Get path of template file (text file).
+	/// The path is relative to the classpath.
+	///
+	/// @return Path of text file, relative to classpath.
 	String getPath();
 
-	/**
-	 * Get content of template file.
-	 * This is the original content, with placeholders.
-	 *
-	 * @return Template content.
-	 */
+	/// Get content of template file.
+	/// This is the original content, with placeholders.
+	///
+	/// @return Template content.
 	String read();
 }

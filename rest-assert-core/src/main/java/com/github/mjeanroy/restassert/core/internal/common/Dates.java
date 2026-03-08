@@ -34,65 +34,45 @@ import java.util.TimeZone;
 
 import static java.util.Arrays.asList;
 
-/**
- * Static Date Utilities.
- */
+/// Static Date Utilities.
 public final class Dates {
 
 	private Dates() {
 	}
 
-	/**
-	 * Date format pattern used to parse HTTP date headers in RFC 1123 format.
-	 * This should be the default patterns to use.
-	 */
+	/// Date format pattern used to parse HTTP date headers in RFC 1123 format.
+	/// This should be the default patterns to use.
 	private static final String PATTERN_RFC1123 = "EEE, dd MMM yyyy HH:mm:ss zzz";
 
-	/**
-	 * Date format pattern used to parse HTTP date headers in RFC 1036 format.
-	 * This pattern is deprecated but may appear because of old web server.
-	 */
+	/// Date format pattern used to parse HTTP date headers in RFC 1036 format.
+	/// This pattern is deprecated but may appear because of old web server.
 	private static final String PATTERN_RFC1036 = "EEE, dd-MMM-yy HH:mm:ss zzz";
 
-	/**
-	 * Date format pattern used to parse HTTP date headers in ANSI C format.
-	 * This pattern is deprecated but may appear because of old web server.
-	 */
+	/// Date format pattern used to parse HTTP date headers in ANSI C format.
+	/// This pattern is deprecated but may appear because of old web server.
 	private static final String PATTERN_ASCTIME = "EEE MMM d HH:mm:ss yyyy";
 
-	/**
-	 * List of patterns to use to convert http date as string to date object.
-	 */
+	/// List of patterns to use to convert http date as string to date object.
 	private static final List<String> PATTERNS = asList(
 		PATTERN_RFC1123,
 		PATTERN_RFC1036,
 		PATTERN_ASCTIME
 	);
 
-	/**
-	 * Single Quote Character.
-	 */
+	/// Single Quote Character.
 	private static final String SINGLE_QUOTE = "'";
 
-	/**
-	 * Parse HTTP date to get a real {@link Date} object.
-	 *
-	 * This function will use three patterns:
-	 *
-	 * <ul>
-	 *   <li>First is pattern defined by RFC 5322 (most standard).</li>
-	 *   <li>Second is pattern defined by RFC 850 (obsolete).</li>
-	 *   <li>Third is ANSI C's asctime() format (obsolete).</li>
-	 * </ul>
-	 *
-	 * These patterns should still be supported, as stated <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">here</a>.
-	 *
-	 * @param date Date to parse.
-	 * @return Date object, {@code null} if date cannot be parsed.
-	 * @see <a href="https://tools.ietf.org/html/rfc7231#section-7.1.1.1">https://tools.ietf.org/html/rfc7231#section-7.1.1.1</a>
-	 * @see <a href="https://tools.ietf.org/html/rfc5322#section-3.3">https://tools.ietf.org/html/rfc5322#section-3.3</a>
-	 * @see <a href="https://tools.ietf.org/html/rfc850">https://tools.ietf.org/html/rfc850</a>
-	 */
+	/// Parse HTTP date to get a real [Date] object.
+	///
+	/// This function will use three patterns:
+	/// - First is pattern defined by [RFC 5322](https://tools.ietf.org/html/rfc5322#section-3.3) (most standard).
+	/// - Second is pattern defined by [RFC 850](https://tools.ietf.org/html/rfc850) (obsolete).
+	/// - Third is ANSI C's asctime() format (obsolete).
+	///
+	/// These patterns should still be supported, as stated in [RFC 7231](https://tools.ietf.org/html/rfc7231#section-7.1.1.1).
+	///
+	/// @param date Date to parse.
+	/// @return Date object, `null` if date cannot be parsed.
 	public static Date parseHttpDate(String date) {
 		if (date.length() > 1 && date.startsWith(SINGLE_QUOTE) && date.endsWith(SINGLE_QUOTE)) {
 			date = date.substring(1, date.length() - 1);
@@ -113,12 +93,10 @@ public final class Dates {
 		throw new IllegalArgumentException(message);
 	}
 
-	/**
-	 * Format HTTP Date using most common pattern (RFC 1123).
-	 *
-	 * @param date Date to format.
-	 * @return String representation.
-	 */
+	/// Format HTTP Date using most common pattern (RFC 1123).
+	///
+	/// @param date Date to format.
+	/// @return String representation.
 	public static String formatHttpDate(Date date) {
 		DateFormat df = createDateFormat(PATTERN_RFC1123);
 		return df.format(date);

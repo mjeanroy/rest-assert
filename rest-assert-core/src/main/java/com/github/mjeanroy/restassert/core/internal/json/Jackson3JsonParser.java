@@ -27,27 +27,20 @@ package com.github.mjeanroy.restassert.core.internal.json;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.json.JsonMapper;
 
-/**
- * Implementation of {@link JsonParser}
- * using Jackson 3 as internal implementation.
- *
- * This class is implemented as a singleton.
- * This class is thread safe.
- */
+/// Implementation of [JsonParser] using Jackson 3 as internal implementation.
+///
+/// This class is implemented as a singleton.
+/// This class is thread safe.
 final class Jackson3JsonParser extends AbstractJsonParser {
 
-	/**
-	 * Get parser.
-	 *
-	 * @return Parser.
-	 */
+	/// Get parser.
+	///
+	/// @return Parser.
 	static Jackson3JsonParser getInstance() {
 		return Holder.INSTANCE;
 	}
 
-	/**
-	 * Jackson 3 parser.
-	 */
+	/// Jackson 3 parser.
 	private final ObjectMapper mapper;
 
 	private Jackson3JsonParser(ObjectMapper mapper) {

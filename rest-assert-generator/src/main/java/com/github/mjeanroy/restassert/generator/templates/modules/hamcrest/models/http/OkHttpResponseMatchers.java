@@ -28,21 +28,15 @@ import com.github.mjeanroy.restassert.core.internal.data.bindings.ok3.OkHttpResp
 import com.github.mjeanroy.restassert.generator.TemplateModel;
 import okhttp3.Response;
 
-/**
- * Template model for rest-assert-hamcrest HttpResponseMatchers class.
- */
+/// Template model for rest-assert-hamcrest HttpResponseMatchers class.
 public class OkHttpResponseMatchers extends AbstractHamcrestHttpAssertTemplateModel implements TemplateModel {
 
-	/**
-	 * Singleton Instance.
-	 */
+	/// Singleton Instance.
 	private static final OkHttpResponseMatchers INSTANCE = new OkHttpResponseMatchers();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel okHttpResponseMatchers() {
 		return INSTANCE;
 	}

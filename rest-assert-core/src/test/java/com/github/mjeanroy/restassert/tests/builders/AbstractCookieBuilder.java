@@ -28,39 +28,25 @@ import static com.github.mjeanroy.restassert.test.commons.StringTestUtils.random
 
 public abstract class AbstractCookieBuilder<T, SELF extends CookieBuilder<T>> implements CookieBuilder<T> {
 
-	/**
-	 * Cookie name.
-	 */
+	/// Cookie name.
 	private String name;
 
-	/**
-	 * Cookie value.
-	 */
+	/// Cookie value.
 	private String value;
 
-	/**
-	 * Cookie domain.
-	 */
+	/// Cookie domain.
 	private String domain;
 
-	/**
-	 * Cookie path.
-	 */
+	/// Cookie path.
 	private String path;
 
-	/**
-	 * Cookie "http-only" flag.
-	 */
+	/// Cookie "http-only" flag.
 	private boolean httpOnly;
 
-	/**
-	 * Cookie "secure" flag.
-	 */
+	/// Cookie "secure" flag.
 	private boolean secure;
 
-	/**
-	 * Cookie max-age value.
-	 */
+	/// Cookie max-age value.
 	private long maxAge;
 
 	protected AbstractCookieBuilder() {

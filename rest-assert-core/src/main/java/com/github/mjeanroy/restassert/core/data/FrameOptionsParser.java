@@ -31,9 +31,7 @@ import java.util.Arrays;
 
 import static com.github.mjeanroy.restassert.core.internal.data.HttpHeaders.X_FRAME_OPTIONS;
 
-/**
- * Parser for {@link FrameOptions} value.
- */
+/// Parser for [FrameOptions] value.
 final class FrameOptionsParser extends AbstractHttpHeaderParser<FrameOptions> {
 
 	// Ensure no public instantiation.

@@ -29,51 +29,39 @@ import com.github.mjeanroy.restassert.core.internal.error.Message;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertError;
 import com.github.mjeanroy.restassert.core.internal.error.RestAssertJsonError;
 
-/**
- * Abstraction of json error message.
- */
+/// Abstraction of json error message.
 abstract class AbstractJsonError extends AbstractError implements RestAssertJsonError, RestAssertError {
 
 	private final String json;
 
-	/**
-	 * Entry name of json object that throws the error.
-	 */
+	/// Entry name of json object that throws the error.
 	private final String entryName;
 
-	/**
-	 * Build new error.
-	 *
-	 * @param expectation Expectation message.
-	 */
+	/// Build new error.
+	///
+	/// @param expectation Expectation message.
 	AbstractJsonError(String json, Message expectation) {
 		this(json, "", expectation);
 	}
 
-	/**
-	 * Build new error.
-	 *
-	 * @param expectation Expectation message.
-	 */
+	/// Build new error.
+	///
+	/// @param expectation Expectation message.
 	AbstractJsonError(String json, Message expectation, Message mismatch) {
 		this(json, "", expectation, mismatch);
 	}
 
-	/**
-	 * Build new error.
-	 *
-	 * @param expectation Expectation message.
-	 */
+	/// Build new error.
+	///
+	/// @param expectation Expectation message.
 	AbstractJsonError(String json, String entry, Message expectation) {
 		this(json, entry, expectation, null);
 	}
 
-	/**
-	 * Build new error.
-	 *
-	 * @param entryName Entry name that throws error.
-	 * @param expectation Expectation message.
-	 */
+	/// Build new error.
+	///
+	/// @param entryName Entry name that throws error.
+	/// @param expectation Expectation message.
 	AbstractJsonError(
 		String json,
 		String entryName,

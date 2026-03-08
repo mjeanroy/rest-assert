@@ -30,21 +30,15 @@ import com.github.mjeanroy.restassert.generator.TemplateModel;
 
 import javax.servlet.http.Cookie;
 
-/**
- * Template model for rest-assert-unit CookieAssert class.
- */
+/// Template model for rest-assert-unit CookieAssert class.
 public final class JavaxCookieAssert extends AbstractCookieAssert implements TemplateModel {
 
-	/**
-	 * Singleton instance.
-	 */
+	/// Singleton instance.
 	private static final JavaxCookieAssert INSTANCE = new JavaxCookieAssert();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel javaxCookieAssert() {
 		return INSTANCE;
 	}

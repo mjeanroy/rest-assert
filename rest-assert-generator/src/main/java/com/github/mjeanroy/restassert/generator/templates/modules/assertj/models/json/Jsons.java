@@ -29,25 +29,19 @@ import com.github.mjeanroy.restassert.generator.TemplateModel;
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-/**
- * Data model to use to produce valid internal assertions for {@link JsonAssertions} class for
- * assertj framework.
- *
- * This class is implemented as singleton.
- * This class is thread safe.
- */
+/// Data model to use to produce valid internal assertions for [JsonAssertions] class for
+/// assertj framework.
+///
+/// This class is implemented as singleton.
+/// This class is thread safe.
 public class Jsons extends AbstractJsonsModel implements TemplateModel {
 
-	/**
-	 * Singleton object.
-	 */
+	/// Singleton object.
 	private static final Jsons INSTANCE = new Jsons();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static TemplateModel jsonsModel() {
 		return INSTANCE;
 	}

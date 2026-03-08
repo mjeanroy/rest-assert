@@ -26,10 +26,8 @@ package com.github.mjeanroy.restassert.core.internal.error.http;
 
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when an http response status is not equals
- * to an expected status code.
- */
+/// Error thrown when an http response status is not equals
+/// to an expected status code.
 public final class ShouldHaveStatus extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -37,13 +35,11 @@ public final class ShouldHaveStatus extends AbstractError {
 		super(message, expectedStatus, actualStatus);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param actualStatus Actual status (a.k.a http response status code).
-	 * @param expectedStatus Expected status code.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param actualStatus Actual status (a.k.a http response status code).
+	/// @param expectedStatus Expected status code.
+	/// @return Error.
 	public static ShouldHaveStatus shouldHaveStatus(int actualStatus, int expectedStatus) {
 		return new ShouldHaveStatus("Expecting status code to be %s", expectedStatus, actualStatus);
 	}

@@ -28,28 +28,20 @@ import java.util.Objects;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 
-/**
- * Default implement for {@link JsonEntry} interface.
- */
+/// Default implement for [JsonEntry] interface.
 final class DefaultJsonEntry implements JsonEntry {
 
-	/**
-	 * Entry key.
-	 */
+	/// Entry key.
 	private final String key;
 
-	/**
-	 * Entry value.
-	 */
+	/// Entry value.
 	private final Object value;
 
-	/**
-	 * Create JSON entry.
-	 *
-	 * @param key JSON entry (must not be null).
-	 * @param value JSON value.
-	 * @throws NullPointerException If {@code key} is {@code null}.
-	 */
+	/// Create JSON entry.
+	///
+	/// @param key JSON entry (must not be null).
+	/// @param value JSON value.
+	/// @throws NullPointerException If `key` is `null`.
 	DefaultJsonEntry(String key, Object value) {
 		this.key = notNull(key, "JSON key cannot be null");
 		this.value = value;

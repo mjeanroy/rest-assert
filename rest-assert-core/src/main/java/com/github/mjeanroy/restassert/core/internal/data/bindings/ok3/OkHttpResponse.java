@@ -37,25 +37,19 @@ import java.util.stream.Collectors;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Implementation of {@link HttpResponse} using OkHttp framework as real implementation.
- */
+/// Implementation of [HttpResponse] using OkHttp framework as real implementation.
 public class OkHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
-	/**
-	 * Create new {@link HttpResponse} using instance of {@link okhttp3.Response},
-	 * or returns {@code null} if {@code response} is {@code null}.
-	 *
-	 * @param response Original response object.
-	 * @return Http response that can be used with rest-assert.
-	 */
+	/// Create new [HttpResponse] using instance of [okhttp3.Response],
+	/// or returns `null` if `response` is `null`.
+	///
+	/// @param response Original response object.
+	/// @return Http response that can be used with rest-assert.
 	public static OkHttpResponse create(Response response) {
 		return response == null ? null : new OkHttpResponse(response);
 	}
 
-	/**
-	 * Original response.
-	 */
+	/// Original response.
 	private final Response response;
 
 	// Use static factory

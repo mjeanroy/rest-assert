@@ -27,10 +27,7 @@ package com.github.mjeanroy.restassert.core.internal.error.cookie;
 import com.github.mjeanroy.restassert.core.data.Cookie.SameSite;
 import com.github.mjeanroy.restassert.core.internal.error.AbstractError;
 
-/**
- * Error thrown when a cookie does not have
- * expected SameSite.
- */
+/// Error thrown when a cookie does not have expected SameSite.
 public final class ShouldHaveSameSite extends AbstractError {
 
 	// Private constructor, use static factory instead
@@ -38,13 +35,11 @@ public final class ShouldHaveSameSite extends AbstractError {
 		super(message, expectedValue, actualValue);
 	}
 
-	/**
-	 * Build error.
-	 *
-	 * @param expectedSameSite Expected cookie domain.
-	 * @param actualSameSite Actual cookie domain.
-	 * @return Error.
-	 */
+	/// Build error.
+	///
+	/// @param expectedSameSite Expected cookie domain.
+	/// @param actualSameSite Actual cookie domain.
+	/// @return Error.
 	public static ShouldHaveSameSite shouldHaveSameSite(SameSite expectedSameSite, SameSite actualSameSite) {
 		return new ShouldHaveSameSite("Expecting cookie to have SameSite %s", serialize(expectedSameSite), serialize(actualSameSite));
 	}

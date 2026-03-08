@@ -24,144 +24,110 @@
 
 package com.github.mjeanroy.restassert.core.internal.loggers;
 
-/**
- * A logger.
- */
+/// A logger.
 public interface Logger {
 
-	/**
-	 * Log message with DEBUG level.
-	 *
-	 * @param message The message to log.
-	 */
+	/// Log message with DEBUG level.
+	///
+	/// @param message The message to log.
 	void debug(String message);
 
-	/**
-	 * Log message with DEBUG level with a dynamic parameter.
-	 *
-	 * @param message The message to log.
-	 * @param param The message parameter.
-	 */
+	/// Log message with DEBUG level with a dynamic parameter.
+	///
+	/// @param message The message to log.
+	/// @param param The message parameter.
 	void debug(String message, Object param);
 
-	/**
-	 * Log message with DEBUG level with two dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 */
+	/// Log message with DEBUG level with two dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
 	void debug(String message, Object param1, Object param2);
 
-	/**
-	 * Log message with DEBUG level with three dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 * @param param3 The third message parameter.
-	 */
+	/// Log message with DEBUG level with three dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
+	/// @param param3 The third message parameter.
 	void debug(String message, Object param1, Object param2, Object param3);
 
-	/**
-	 * Log message with INFO level.
-	 *
-	 * @param message The message to log.
-	 */
+	/// Log message with INFO level.
+	///
+	/// @param message The message to log.
 	void info(String message);
 
-	/**
-	 * Log message with INFO level with a dynamic parameter.
-	 *
-	 * @param message The message to log.
-	 * @param param The message parameter.
-	 */
+	/// Log message with INFO level with a dynamic parameter.
+	///
+	/// @param message The message to log.
+	/// @param param The message parameter.
 	void info(String message, Object param);
 
-	/**
-	 * Log message with INFO level with two dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 */
+	/// Log message with INFO level with two dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
 	void info(String message, Object param1, Object param2);
 
-	/**
-	 * Log message with INFO level with three dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 * @param param3 The third message parameter.
-	 */
+	/// Log message with INFO level with three dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
+	/// @param param3 The third message parameter.
 	void info(String message, Object param1, Object param2, Object param3);
 
-	/**
-	 * Log message with WARN level.
-	 *
-	 * @param message The message to log.
-	 */
+	/// Log message with WARN level.
+	///
+	/// @param message The message to log.
 	void warn(String message);
 
-	/**
-	 * Log message with WARN level with a dynamic parameter.
-	 *
-	 * @param message The message to log.
-	 * @param param The message parameter.
-	 */
+	/// Log message with WARN level with a dynamic parameter.
+	///
+	/// @param message The message to log.
+	/// @param param The message parameter.
 	void warn(String message, Object param);
 
-	/**
-	 * Log message with WARN level with two dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 */
+	/// Log message with WARN level with two dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
 	void warn(String message, Object param1, Object param2);
 
-	/**
-	 * Log message with WARN level with three dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 * @param param3 The third message parameter.
-	 */
+	/// Log message with WARN level with three dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
+	/// @param param3 The third message parameter.
 	void warn(String message, Object param1, Object param2, Object param3);
 
-	/**
-	 * Log message with ERROR level.
-	 *
-	 * @param message The message to log.
-	 */
+	/// Log message with ERROR level.
+	///
+	/// @param message The message to log.
 	void error(String message);
 
-	/**
-	 * Log message with ERROR level with a dynamic parameter.
-	 *
-	 * @param message The message to log.
-	 * @param param The message parameter.
-	 */
+	/// Log message with ERROR level with a dynamic parameter.
+	///
+	/// @param message The message to log.
+	/// @param param The message parameter.
 	void error(String message, Object param);
 
-	/**
-	 * Log message with ERROR level with two dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 */
+	/// Log message with ERROR level with two dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
 	void error(String message, Object param1, Object param2);
 
-	/**
-	 * Log message with ERROR level with three dynamic parameters.
-	 *
-	 * @param message The message to log.
-	 * @param param1 The first message parameter.
-	 * @param param2 The second message parameter.
-	 * @param param3 The third message parameter.
-	 */
+	/// Log message with ERROR level with three dynamic parameters.
+	///
+	/// @param message The message to log.
+	/// @param param1 The first message parameter.
+	/// @param param2 The second message parameter.
+	/// @param param3 The third message parameter.
 	void error(String message, Object param1, Object param2, Object param3);
 }

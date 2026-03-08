@@ -28,46 +28,34 @@ import org.apache.http.ProtocolVersion;
 import org.apache.http.StatusLine;
 import org.apache.http.message.BasicStatusLine;
 
-/**
- * Build mock instance of {@link StatusLine} class.
- */
+/// Build mock instance of [StatusLine] class.
 class ApacheHttpStatusLineBuilder {
 
-	/**
-	 * Cookie name.
-	 */
+	/// Cookie name.
 	private int statusCode;
 
-	/**
-	 * Protocol version.
-	 * This field is required to build valid status line instances.
-	 */
+	/// Protocol version.
+	/// This field is required to build valid status line instances.
 	private final ProtocolVersion protocolVersion;
 
-	/**
-	 * Create builder.
-	 */
+	/// Create builder.
 	ApacheHttpStatusLineBuilder() {
 		this.statusCode = 200;
 		this.protocolVersion = new ProtocolVersion("http", 1, 0);
 	}
 
-	/**
-	 * Set {@link #statusCode}.
-	 *
-	 * @param statusCode New {@link #statusCode}.
-	 * @return Current builder.
-	 */
+	/// Set [#statusCode].
+	///
+	/// @param statusCode New [#statusCode].
+	/// @return Current builder.
 	ApacheHttpStatusLineBuilder setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
 		return this;
 	}
 
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Create mock instance.
+	///
+	/// @return Mock instance.
 	StatusLine build() {
 		return new BasicStatusLine(protocolVersion, statusCode, null);
 	}

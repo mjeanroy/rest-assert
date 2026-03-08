@@ -24,24 +24,20 @@
 
 package com.github.mjeanroy.restassert.core.internal.common;
 
-/**
- * Static Object Utilities.
- */
+/// Static Object Utilities.
 public final class Objects {
 
 	// Ensure non instantiation.
 	private Objects() {
 	}
 
-	/**
-	 * Get first non null parameter.
-	 * If both parameters are null, null will be returned.
-	 *
-	 * @param obj1 First parameter.
-	 * @param obj2 Second parameter.
-	 * @param <T> Type of parameters.
-	 * @return First non null parameters.
-	 */
+	/// Get first non null parameter.
+	/// If both parameters are null, null will be returned.
+	///
+	/// @param obj1 First parameter.
+	/// @param obj2 Second parameter.
+	/// @param <T> Type of parameters.
+	/// @return First non null parameters.
 	public static <T> T firstNonNull(T obj1, T obj2) {
 		return obj1 != null ? obj1 : obj2;
 	}

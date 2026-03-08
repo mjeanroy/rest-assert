@@ -38,108 +38,82 @@ import static com.github.mjeanroy.restassert.core.data.Parameter.parameter;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.singletonMap;
 
-/**
- * A model for Content-Type values.
- *
- * @see <a href="http://tools.ietf.org/html/rfc2045">http://tools.ietf.org/html/rfc2045</a>
- */
+/// A model for Content-Type values ([RFC 2045](http://tools.ietf.org/html/rfc2045)).
 public final class ContentType implements HttpHeaderValue {
 
 	private static final String CHARSET_PARAMETER_NAME = "charset";
 	private static final String SEPARATOR = "; ";
 
-	/**
-	 * Create content-type with given media type and charset.
-	 *
-	 * @param mediaType The media type.
-	 * @param charset The charset.
-	 * @return The associated {@link ContentType}.
-	 */
+	/// Create content-type with given media type and charset.
+	///
+	/// @param mediaType The media type.
+	/// @param charset The charset.
+	/// @return The associated [ContentType].
 	public static ContentType contentType(MediaType mediaType, Charset charset) {
 		Parameter parameter = parameter(CHARSET_PARAMETER_NAME, charset.displayName().toLowerCase());
 		return new ContentType(mediaType, singletonMap(CHARSET_PARAMETER_NAME, parameter));
 	}
 
-	/**
-	 * Create content-type with given media type without charset information.
-	 *
-	 * @param mediaType The media type.
-	 * @return The associated {@link ContentType}.
-	 */
+	/// Create content-type with given media type without charset information.
+	///
+	/// @param mediaType The media type.
+	/// @return The associated [ContentType].
 	public static ContentType contentType(MediaType mediaType) {
 		return new ContentType(mediaType, java.util.Collections.<String, Parameter>emptyMap());
 	}
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final ContentTypeParser PARSER = new ContentTypeParser();
 
-	/**
-	 * A parser for {@link ContentType} values.
-	 *
-	 * @return The parser instance.
-	 */
+	/// A parser for [ContentType] values.
+	///
+	/// @return The parser instance.
 	public static HttpHeaderParser<ContentType> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * The media type.
-	 */
+	/// The media type.
 	private final MediaType mediaType;
 
-	/**
-	 * The charset, may be {@code null}.
-	 */
+	/// The charset, may be `null`.
 	private final Map<String, Parameter> parameters;
 
-	/**
-	 * Create content-type value.
-	 *
-	 * @param mediaType The media type, must not be {@code null}.
-	 * @param parameters The header parameters, such as charset.
-	 * @throws NullPointerException If {@code mediaType} is {@code null}.
-	 */
+	/// Create content-type value.
+	///
+	/// @param mediaType The media type, must not be `null`.
+	/// @param parameters The header parameters, such as charset.
+	/// @throws NullPointerException If `mediaType` is `null`.
 	ContentType(MediaType mediaType, Map<String, Parameter> parameters) {
 		this.mediaType = notNull(mediaType, "Media Type must not be null");
 		this.parameters = parameters;
 	}
 
-	/**
-	 * Get {@link #mediaType}
-	 *
-	 * @return {@link #mediaType}
-	 */
+	/// Get [#mediaType]
+	///
+	/// @return Returns [#mediaType]
 	public MediaType getMediaType() {
 		return mediaType;
 	}
 
-	/**
-	 * Get {@link #parameters}
-	 *
-	 * @return {@link #parameters}
-	 */
+	/// Get [#parameters]
+	///
+	/// @return Returns [#parameters]
 	public Collection<Parameter> getParameters() {
 		return parameters.values();
 	}
 
-	/**
-	 * Get parameter by its name.
-	 *
-	 * @param name Parameter name.
-	 * @return The parameter, {@code null} if parameter was not defined.
-	 */
+	/// Get parameter by its name.
+	///
+	/// @param name Parameter name.
+	/// @return The parameter, `null` if parameter was not defined.
 	public Parameter getParameter(String name) {
 		return parameters.get(name.toLowerCase());
 	}
 
-	/**
-	 * Get the {@code charset} parameter, this is a shortcut for {@link #getParameter(String)}
-	 * called with {@code "charset"}.
-	 *
-	 * @return The charset parameter, {@code null} if it was not defined.
-	 */
+	/// Get the `charset` parameter, this is a shortcut for [#getParameter(String)]
+	/// called with `"charset"`.
+	///
+	/// @return The charset parameter, `null` if it was not defined.
 	public String getCharset() {
 		Parameter parameter = parameters.get(CHARSET_PARAMETER_NAME);
 		return parameter == null ? null : parameter.getValue();

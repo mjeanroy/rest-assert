@@ -29,182 +29,89 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * List of standards http headers names.
- */
+/// List of standards http headers names.
 public enum HttpHeaders {
 
-	/**
-	 * Content type header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17</a>
-	 */
+	/// Content type header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)).
 	CONTENT_TYPE("Content-Type", true),
 
-	/**
-	 * Content Encoding header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>
-	 */
+	/// Content Encoding header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11)).
 	CONTENT_ENCODING("Content-Encoding", true),
 
-	/**
-	 * Content Length header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13</a>
-	 */
+	/// Content Length header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13)).
 	CONTENT_LENGTH("Content-Length", false),
 
-	/**
-	 * Content Disposition header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1">http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1</a>
-	 */
+	/// Content Disposition header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1)).
 	CONTENT_DISPOSITION("Content-Disposition", true),
 
-	/**
-	 * Last Modified header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29</a>
-	 */
+	/// Last Modified header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.29)).
 	LAST_MODIFIED("Last-Modified", true),
 
-	/**
-	 * Expires header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21</a>
-	 */
+	/// Expires header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21)).
 	EXPIRES("Expires", true),
 
-	/**
-	 * ETag header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19</a>
-	 */
+	/// ETag header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19)).
 	ETAG("ETag", true),
 
-	/**
-	 * Location header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30</a>
-	 */
+	/// Location header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.30)).
 	LOCATION("Location", true),
 
-	/**
-	 * Cache Control header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>
-	 */
+	/// Cache Control header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)).
 	CACHE_CONTROL("Cache-Control", false),
 
-	/**
-	 * Cache Control header name.
-	 *
-	 * @see <a href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>
-	 */
+	/// Cache Control header name ([RFC 2616](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)).
 	CONTENT_SECURITY_POLICY("Content-Security-Policy", false),
 
-	/**
-	 * Pragma header name.
-	 *
-	 * @see <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32</a>
-	 */
+	/// Pragma header name ([RFC 2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32">https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.32)).
 	PRAGMA("Pragma", false),
 
-	/**
-	 * X-XSS-Protection header name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection">https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection</a>
-	 */
+	/// X-XSS-Protection header name ([W3C](https://www.w3.org/TR/2012/WD-CSP11-20121213/#relationship-to-x-xss-protection)).
 	X_XSS_PROTECTION("X-XSS-Protection", false),
 
-	/**
-	 * X-Content-Type-Options header name.
-	 *
-	 * @see <a href="https://fetch.spec.whatwg.org/#x-content-type-options-header">https://fetch.spec.whatwg.org/#x-content-type-options-header</a>
-	 */
+	/// X-Content-Type-Options header name ([WHATWG](https://fetch.spec.whatwg.org/#x-content-type-options-header)).
 	X_CONTENT_TYPE_OPTIONS("X-Content-Type-Options", false),
 
-	/**
-	 * X-Content-Type-Options header name.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
-	 */
+	/// X-Content-Type-Options header name ([RFC 7034](https://tools.ietf.org/html/rfc7034)).
 	X_FRAME_OPTIONS("X-Frame-Options", false),
 
-	/**
-	 * Set-Cookie header name.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc6265">https://tools.ietf.org/html/rfc6265</a>
-	 */
+	/// Set-Cookie header name ([RFC 6265](https://tools.ietf.org/html/rfc6265)).
 	SET_COOKIE("Set-Cookie", false),
 
-	/**
-	 * Access-Control-Allow-Origin name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin</a>
-	 */
+	/// Access-Control-Allow-Origin name ([W3C](https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-origin)).
 	ACCESS_CONTROL_ALLOW_ORIGIN("Access-Control-Allow-Origin", true),
 
-	/**
-	 * Access-Control-Allow-Headers name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers</a>
-	 */
+	/// Access-Control-Allow-Headers name ([W3C](https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-headers)).
 	ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers", true),
 
-	/**
-	 * Access-Control-Allow-Headers name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/cors/#access-control-expose-headers-response-header">https://www.w3.org/TR/cors/#access-control-expose-headers-response-header</a>
-	 */
+	/// Access-Control-Allow-Headers name ([W3C](https://www.w3.org/TR/cors/#access-control-expose-headers-response-header)).
 	ACCESS_CONTROL_EXPOSE_HEADERS("Access-Control-Expose-Headers", true),
 
-	/**
-	 * Access-Control-Allow-Methods name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods</a>
-	 */
+	/// Access-Control-Allow-Methods name ([W3C](https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-methods)).
 	ACCESS_CONTROL_ALLOW_METHODS("Access-Control-Allow-Methods", true),
 
-	/**
-	 * Access-Control-Allow-Credentials name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-credentials">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-credentials</a>
-	 */
+	/// Access-Control-Allow-Credentials name ([W3C](https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-credentials)).
 	ACCESS_CONTROL_ALLOW_CREDENTIALS("Access-Control-Allow-Credentials", true),
 
-	/**
-	 * Access-Control-Allow-Credentials name.
-	 *
-	 * @see <a href="https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-max-age">https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-max-age</a>
-	 */
+	/// Access-Control-Allow-Credentials name ([W3C](https://www.w3.org/TR/2008/WD-access-control-20080912/#access-control-allow-max-age)).
 	ACCESS_CONTROL_ALLOW_MAX_AGE("Access-Control-Allow-Max-Age", true),
 
-	/**
-	 * Strict-Transport-Security name.
-	 *
-	 * @see <a href="https://tools.ietf.org/html/rfc6797">https://tools.ietf.org/html/rfc6797</a>
-	 */
+	/// Strict-Transport-Security name ([RFC 6797](https://tools.ietf.org/html/rfc6797).
 	STRICT_TRANSPORT_SECURITY("Strict-Transport-Security", true);
 
-	/**
-	 * Name of header.
-	 */
+	/// Name of header.
 	private final String name;
 
-	/**
-	 * Flag to check if this header allow multiple values.
-	 * Multiple values is specified by W3C, see: https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2.
-	 *
-	 * Short answer:
-	 *
-	 * Multiple message-header fields with the same field-name MAY be present in a message if and only if
-	 * the entire field-value for that header field is defined as a comma-separated list [i.e., #(values)].
-	 * It MUST be possible to combine the multiple header fields into one "field-name: field-value" pair,
-	 * without changing the semantics of the message, by appending each subsequent field-value to the first,
-	 * each separated by a comma.
-	 */
+	/// Flag to check if this header allow multiple values.
+	///
+	/// Multiple values is specified by [RFC 2616](https://www.w3.org/Protocols/rfc2616/rfc2616-sec4.html#sec4.2).
+	///
+	/// Short answer:
+	///
+	/// Multiple message-header fields with the same field-name MAY be present in a message if and only if
+	/// the entire field-value for that header field is defined as a comma-separated list.
+	/// It MUST be possible to combine the multiple header fields into one "field-name: field-value" pair,
+	/// without changing the semantics of the message, by appending each subsequent field-value to the first,
+	/// each separated by a comma.
 	private final boolean single;
 
 	HttpHeaders(String name, boolean single) {
@@ -212,20 +119,16 @@ public enum HttpHeaders {
 		this.single = single;
 	}
 
-	/**
-	 * Get {@link #name}.
-	 *
-	 * @return {@link #name}
-	 */
+	/// Get [#name].
+	///
+	/// @return Returns [#name]
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * Get {@link #single}.
-	 *
-	 * @return {@link #single}
-	 */
+	/// Get [#single].
+	///
+	/// @return Returns [#single]
 	public boolean isSingle() {
 		return single;
 	}
@@ -238,12 +141,10 @@ public enum HttpHeaders {
 		)
 	);
 
-	/**
-	 * Find header by its name.
-	 *
-	 * @param name Name of header.
-	 * @return Header, null if it is not defined in the enum set.
-	 */
+	/// Find header by its name.
+	///
+	/// @param name Name of header.
+	/// @return Header, null if it is not defined in the enum set.
 	public static HttpHeaders find(String name) {
 		return MAP.get(name.toLowerCase());
 	}

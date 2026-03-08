@@ -39,14 +39,10 @@ import com.google.api.client.testing.http.MockLowLevelHttpResponse;
 import java.util.List;
 import java.util.Map;
 
-/**
- * DefaultCookieBuilder to create mock instance of {@link HttpResponse} class.
- */
+/// Builder to create mock instance of [HttpResponse] class.
 public class GoogleHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpResponse, GoogleHttpResponseBuilder> implements HttpResponseBuilder<HttpResponse> {
 
-	/**
-	 * Create builder for {@link HttpResponse} with default values.
-	 */
+	/// Create builder for [HttpResponse] with default values.
 	public GoogleHttpResponseBuilder() {
 		this.status = 200;
 	}
@@ -79,23 +75,15 @@ public class GoogleHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpR
 		}
 	}
 
-	/**
-	 * A specialized implementation for {@link MockHttpTransport}.
-	 */
+	/// A specialized implementation for [MockHttpTransport].
 	private static class MockHttpTransportImpl extends MockHttpTransport {
-		/**
-		 * Response status code.
-		 */
+		/// Response status code.
 		private final int status;
 
-		/**
-		 * Response content.
-		 */
+		/// Response content.
 		private final String content;
 
-		/**
-		 * Response headers.
-		 */
+		/// Response headers.
 		private final Map<String, List<String>> headers;
 
 		private MockHttpTransportImpl(int status, String content, Map<String, List<String>> headers) {
@@ -110,23 +98,15 @@ public class GoogleHttpResponseBuilder extends AbstractHttpResponseBuilder<HttpR
 		}
 	}
 
-	/**
-	 * A specialized implementation for {@link MockLowLevelHttpRequest}.
-	 */
+	/// A specialized implementation for [MockLowLevelHttpRequest].
 	private static class MockLowLevelHttpRequestImpl extends MockLowLevelHttpRequest {
-		/**
-		 * Response status code.
-		 */
+		/// Response status code.
 		private final int status;
 
-		/**
-		 * Response content.
-		 */
+		/// Response content.
 		private final String content;
 
-		/**
-		 * Response headers.
-		 */
+		/// Response headers.
 		private final Map<String, List<String>> headers;
 
 		private MockLowLevelHttpRequestImpl(int status, String content, Map<String, List<String>> headers) {

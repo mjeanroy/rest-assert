@@ -39,28 +39,22 @@ import java.util.stream.Collectors;
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notNull;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Implementation to integrate spring-test into rest-assert.
- *
- * This implementation translate a {@link ResultActions} (result of {@link MockMvc#perform(RequestBuilder)})
- * to an {@link HttpResponse} that can be used with rest-assert.
- */
+/// Implementation to integrate spring-test into rest-assert.
+///
+/// This implementation translate a [ResultActions] (result of [MockMvc#perform(RequestBuilder)])
+/// to an [HttpResponse] that can be used with rest-assert.
 public class SpringMockMvcHttpResponse extends AbstractHttpResponse implements HttpResponse {
 
-	/**
-	 * Create new {@link HttpResponse} using instance of {@link ResultActions} (result of the {@link MockMvc#perform(RequestBuilder)} method),
-	 * or returns {@code null} if {@code response} is {@code null}.
-	 *
-	 * @param resultActions Original result instance..
-	 * @return Http response that can be used with rest-assert.
-	 */
+	/// Create new [HttpResponse] using instance of [ResultActions] (result of the [MockMvc#perform(RequestBuilder)] method),
+	/// or returns `null` if `response` is `null`.
+	///
+	/// @param resultActions Original result instance..
+	/// @return Http response that can be used with rest-assert.
 	public static SpringMockMvcHttpResponse create(ResultActions resultActions) {
 		return resultActions == null ? null : new SpringMockMvcHttpResponse(resultActions.andReturn().getResponse());
 	}
 
-	/**
-	 * The spring mock implementation of HTTP Servlet Response.
-	 */
+	/// The spring mock implementation of HTTP Servlet Response.
 	private final MockHttpServletResponse response;
 
 	private SpringMockMvcHttpResponse(MockHttpServletResponse response) {

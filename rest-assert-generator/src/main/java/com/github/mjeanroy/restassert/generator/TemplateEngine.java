@@ -26,19 +26,15 @@ package com.github.mjeanroy.restassert.generator;
 
 import java.util.Map;
 
-/**
- * Template Engine.
- * A template engine can be used to generate a valid file
- * using a {@link Template} and placeholders values.
- */
+/// Template Engine.
+/// A template engine can be used to generate a valid file
+/// using a [Template] and placeholders values.
 public interface TemplateEngine {
 
-	/**
-	 * Generate template content.
-	 *
-	 * @param template Template.
-	 * @param context Placeholder values.
-	 * @return Valid content.
-	 */
+	/// Generate template content.
+	///
+	/// @param template Template.
+	/// @param context Placeholder values.
+	/// @return Valid content.
 	String execute(Template template, Map<String, Object> context);
 }

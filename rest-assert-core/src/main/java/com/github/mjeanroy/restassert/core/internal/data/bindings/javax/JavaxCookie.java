@@ -28,26 +28,18 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.util.Date;
 
-/**
- * Implementation of {@link Cookie}
- * using javax servlet api as real implementation.
- */
+/// Implementation of [Cookie] using javax servlet api as real implementation.
 public class JavaxCookie implements Cookie {
 
-	/**
-	 * Create new {@link Cookie} using instance
-	 * of {@link javax.servlet.http.Cookie}.
-	 *
-	 * @param cookie Original cookie object.
-	 * @return Cookie that can be used with rest-assert.
-	 */
+	/// Create new [Cookie] using instance of [javax.servlet.http.Cookie].
+	///
+	/// @param cookie Original cookie object.
+	/// @return Cookie that can be used with rest-assert.
 	public static JavaxCookie create(javax.servlet.http.Cookie cookie) {
 		return new JavaxCookie(cookie);
 	}
 
-	/**
-	 * Original cookie.
-	 */
+	/// Original cookie.
 	private final javax.servlet.http.Cookie cookie;
 
 	// Use static factory

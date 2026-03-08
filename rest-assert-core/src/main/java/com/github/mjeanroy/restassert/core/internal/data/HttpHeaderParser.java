@@ -24,19 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
-/**
- * Header parser that can be used to parse raw string values and
- * produce instance of {@link HttpHeaderValue}.
- *
- * @param <T> Header value implementation.
- */
+/// Header parser that can be used to parse raw string values and
+/// produce instance of [HttpHeaderValue].
+///
+/// @param <T> Header value implementation.
 public interface HttpHeaderParser<T extends HttpHeaderValue> {
 
-	/**
-	 * Parse header value from raw string and build a structured header value.
-	 *
-	 * @param value The raw value.
-	 * @return Header value.
-	 */
+	/// Parse header value from raw string and build a structured header value.
+	///
+	/// @param value The raw value.
+	/// @return Header value.
 	T parse(String value);
 }

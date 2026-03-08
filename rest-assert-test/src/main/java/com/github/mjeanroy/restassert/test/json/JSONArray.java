@@ -32,14 +32,10 @@ import java.util.Objects;
 import static java.util.Collections.addAll;
 import static java.util.Collections.unmodifiableList;
 
-/**
- * Implementations of (immutable) JSON array.
- */
+/// Implementations of (immutable) JSON array.
 public final class JSONArray {
 
-	/**
-	 * Array values.
-	 */
+	/// Array values.
 	private final List<Object> values;
 
 	public JSONArray() {
@@ -50,35 +46,29 @@ public final class JSONArray {
 		this.values = unmodifiableList(values);
 	}
 
-	/**
-	 * Add values to given array.
-	 *
-	 * @param value First value.
-	 * @param other Other values.
-	 * @return The array.
-	 */
+	/// Add values to given array.
+	///
+	/// @param value First value.
+	/// @param other Other values.
+	/// @return The array.
 	public JSONArray add(int value, int... other) {
 		return push(value, Arrays.stream(other).boxed().toArray(Object[]::new));
 	}
 
-	/**
-	 * Add values to given array.
-	 *
-	 * @param value First value.
-	 * @param other Other values.
-	 * @return The array.
-	 */
+	/// Add values to given array.
+	///
+	/// @param value First value.
+	/// @param other Other values.
+	/// @return The array.
 	public JSONArray add(double value, double... other) {
 		return push(value, Arrays.stream(other).boxed().toArray(Object[]::new));
 	}
 
-	/**
-	 * Add values to given array.
-	 *
-	 * @param value First value.
-	 * @param other Other values.
-	 * @return The array.
-	 */
+	/// Add values to given array.
+	///
+	/// @param value First value.
+	/// @param other Other values.
+	/// @return The array.
 	public JSONArray add(boolean value, boolean... other) {
 		Object[] o = new Object[other.length];
 		for (int i = 0; i < other.length; i++) {
@@ -88,42 +78,34 @@ public final class JSONArray {
 		return push(value, o);
 	}
 
-	/**
-	 * Add values to given array.
-	 *
-	 * @param value First value.
-	 * @param other Other values.
-	 * @return The array.
-	 */
+	/// Add values to given array.
+	///
+	/// @param value First value.
+	/// @param other Other values.
+	/// @return The array.
 	public JSONArray add(String value, String... other) {
 		return push(value, Arrays.stream(other).toArray(Object[]::new));
 	}
 
-	/**
-	 * Add values to given array.
-	 *
-	 * @param value First value.
-	 * @param other Other values.
-	 * @return The array.
-	 */
+	/// Add values to given array.
+	///
+	/// @param value First value.
+	/// @param other Other values.
+	/// @return The array.
 	public JSONArray add(JSONObject value, JSONObject... other) {
 		return push(value.values(), Arrays.stream(other).map(JSONObject::values).toArray(Object[]::new));
 	}
 
-	/**
-	 * Get array size.
-	 *
-	 * @return Size.
-	 */
+	/// Get array size.
+	///
+	/// @return Size.
 	public int size() {
 		return values.size();
 	}
 
-	/**
-	 * Get JSON representation of given array.
-	 *
-	 * @return JSON representation.
-	 */
+	/// Get JSON representation of given array.
+	///
+	/// @return JSON representation.
 	public String toJSON() {
 		return JSONTestUtils.toJSON(this);
 	}

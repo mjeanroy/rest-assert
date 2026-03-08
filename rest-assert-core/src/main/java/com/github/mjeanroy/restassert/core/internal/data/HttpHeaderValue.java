@@ -24,15 +24,15 @@
 
 package com.github.mjeanroy.restassert.core.internal.data;
 
-/**
- * Header value that can be checked against string values.
- */
+///
+/// Header value that can be checked against string values.
+///
 public interface HttpHeaderValue {
 
-	/**
-	 * Get header value (as it should appears in HTTP header).
-	 *
-	 * @return Header value.
-	 */
+	///
+	/// Get header value (as it should appears in HTTP header).
+	///
+	/// @return Header value.
+	///
 	String serializeValue();
 }

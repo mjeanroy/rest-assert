@@ -32,136 +32,106 @@ import java.util.Objects;
 
 import static com.github.mjeanroy.restassert.core.internal.common.PreConditions.notBlank;
 
-/**
- * The media type representation.
- *
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types</a>
- */
+/// The media type representation ([MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Complete_list_of_MIME_types)).
 public final class MediaType implements HttpHeaderValue {
 
 	private static final String SEPARATOR = "/";
 
-	/**
-	 * Create {@link MediaType} with {@code "text"} type.
-	 *
-	 * @param subtype The media-type subtype.
-	 * @return The media-type.
-	 * @throws NullPointerException If {@code subtype} is {@code null}.
-	 * @throws IllegalArgumentException If {@code subtype} is empty or blank.
-	 */
+	/// Create [MediaType] with `"text"` type.
+	///
+	/// @param subtype The media-type subtype.
+	/// @return The media-type.
+	/// @throws NullPointerException If `subtype` is `null`.
+	/// @throws IllegalArgumentException If `subtype` is empty or blank.
 	public static MediaType text(String subtype) {
 		return new MediaType("text", subtype);
 	}
 
-	/**
-	 * Create {@link MediaType} with {@code "application"} type.
-	 *
-	 * @param subtype The media-type subtype.
-	 * @return The media-type.
-	 * @throws NullPointerException If {@code subtype} is {@code null}.
-	 * @throws IllegalArgumentException If {@code subtype} is empty or blank.
-	 */
+	/// Create [MediaType] with `"application"` type.
+	///
+	/// @param subtype The media-type subtype.
+	/// @return The media-type.
+	/// @throws NullPointerException If `subtype` is `null`.
+	/// @throws IllegalArgumentException If `subtype` is empty or blank.
 	public static MediaType application(String subtype) {
 		return new MediaType("application", subtype);
 	}
 
-	/**
-	 * Create {@link MediaType} with {@code "audio"} type.
-	 *
-	 * @param subtype The media-type subtype.
-	 * @return The media-type.
-	 * @throws NullPointerException If {@code subtype} is {@code null}.
-	 * @throws IllegalArgumentException If {@code subtype} is empty or blank.
-	 */
+	/// Create [MediaType] with `"audio"` type.
+	///
+	/// @param subtype The media-type subtype.
+	/// @return The media-type.
+	/// @throws NullPointerException If `subtype` is `null`.
+	/// @throws IllegalArgumentException If `subtype` is empty or blank.
 	public static MediaType audio(String subtype) {
 		return new MediaType("audio", subtype);
 	}
 
-	/**
-	 * Create {@link MediaType} with {@code "video"} type.
-	 *
-	 * @param subtype The media-type subtype.
-	 * @return The media-type.
-	 * @throws NullPointerException If {@code subtype} is {@code null}.
-	 * @throws IllegalArgumentException If {@code subtype} is empty or blank.
-	 */
+	/// Create [MediaType] with `"video"` type.
+	///
+	/// @param subtype The media-type subtype.
+	/// @return The media-type.
+	/// @throws NullPointerException If `subtype` is `null`.
+	/// @throws IllegalArgumentException If `subtype` is empty or blank.
 	public static MediaType video(String subtype) {
 		return new MediaType("video", subtype);
 	}
 
-	/**
-	 * Create {@link MediaType} with {@code "image"} type.
-	 *
-	 * @param subtype The media-type subtype.
-	 * @return The media-type.
-	 * @throws NullPointerException If {@code subtype} is {@code null}.
-	 * @throws IllegalArgumentException If {@code subtype} is empty or blank.
-	 */
+	/// Create [MediaType] with `"image"` type.
+	///
+	/// @param subtype The media-type subtype.
+	/// @return The media-type.
+	/// @throws NullPointerException If `subtype` is `null`.
+	/// @throws IllegalArgumentException If `subtype` is empty or blank.
 	public static MediaType image(String subtype) {
 		return new MediaType("image", subtype);
 	}
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final MediaTypeParser PARSER = new MediaTypeParser();
 
-	/**
-	 * Get parser for {@link MediaType} raw value.
-	 *
-	 * @return The parser.
-	 */
+	/// Get parser for [MediaType] raw value.
+	///
+	/// @return The parser.
 	public static HttpHeaderParser<MediaType> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * The media-type main type.
-	 *
-	 * Currently, only following types are "officially" supported:
-	 * <ul>
-	 *   <li>{@code "text"}</li>
-	 *   <li>{@code "application"}</li>
-	 *   <li>{@code "image"}</li>
-	 *   <li>{@code "audio"}</li>
-	 *   <li>{@code "video"}</li>
-	 * </ul>
-	 */
+	/// The media-type main type.
+	///
+	/// Currently, only following types are "officially" supported:
+	/// - `"text"`
+	/// - `"application"`
+	/// - `"image"`
+	/// - `"audio"`
+	/// - `"video"`
 	private final String type;
 
-	/**
-	 * The media-type subtype.
-	 * For example, with a type {@code "text"}, the subtype could be {@code "plain"} or {@code "css"}, etc.).
-	 */
+	/// The media-type subtype.
+	/// For example, with a type `"text"`, the subtype could be `"plain"` or `"css"`, etc.).
 	private final String subtype;
 
-	/**
-	 * Create the media-type value.
-	 *
-	 * @param type The main type.
-	 * @param subtype The subtype.
-	 * @throws NullPointerException If {@code type} or {@code subtype} are {@code null}.
-	 * @throws IllegalArgumentException If {@code type} or {@code subtype} are empty or blank.
-	 */
+	/// Create the media-type value.
+	///
+	/// @param type The main type.
+	/// @param subtype The subtype.
+	/// @throws NullPointerException If `type` or `subtype` are `null`.
+	/// @throws IllegalArgumentException If `type` or `subtype` are empty or blank.
 	MediaType(String type, String subtype) {
 		this.type = notBlank(type, "MediaType type must be defined");
 		this.subtype = notBlank(subtype, "MediaType subtype must be defined");
 	}
 
-	/**
-	 * Get {@link #type}
-	 *
-	 * @return {@link #type}
-	 */
+	/// Get [#type]
+	///
+	/// @return Returns [#type]
 	public String getType() {
 		return type;
 	}
 
-	/**
-	 * Get {@link #subtype}
-	 *
-	 * @return {@link #subtype}
-	 */
+	/// Get [#subtype]
+	///
+	/// @return Returns [#subtype]
 	public String getSubtype() {
 		return subtype;
 	}

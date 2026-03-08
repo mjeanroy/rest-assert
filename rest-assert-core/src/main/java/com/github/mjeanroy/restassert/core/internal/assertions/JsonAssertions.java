@@ -59,41 +59,31 @@ import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHave
 import static com.github.mjeanroy.restassert.core.internal.error.json.ShouldHaveEntryEqualTo.shouldHaveEntryEqualTo;
 import static java.util.Collections.addAll;
 
-/**
- * Set of reusable assertions on json
- * values.
- */
+/// Set of reusable assertions on json
+/// values.
 public final class JsonAssertions {
 
-	/**
-	 * Singleton object.
-	 */
+	/// Singleton object.
 	private static final JsonAssertions INSTANCE = new JsonAssertions();
 
-	/**
-	 * Get singleton object.
-	 *
-	 * @return Singleton object.
-	 */
+	/// Get singleton object.
+	///
+	/// @return Singleton object.
 	public static JsonAssertions instance() {
 		return INSTANCE;
 	}
 
-	/**
-	 * Create JSON entry object.
-	 *
-	 * @param key Entry key.
-	 * @param value Entry value.
-	 * @return The JSON entry.
-	 * @throws NullPointerException If {@code key} is {code null}.
-	 */
+	/// Create JSON entry object.
+	///
+	/// @param key Entry key.
+	/// @param value Entry value.
+	/// @return The JSON entry.
+	/// @throws NullPointerException If `key` is `null`.
 	public static JsonEntry jsonEntry(String key, Object value) {
 		return JsonEntry.of(key, value);
 	}
 
-	/**
-	 * Internal json parser.
-	 */
+	/// Internal json parser.
 	private final JsonParser parser;
 
 	// Private constructor to ensure singleton
@@ -101,77 +91,63 @@ public final class JsonAssertions {
 		this.parser = JsonParsers.getParser();
 	}
 
-	/**
-	 * Check that given json is not null.
-	 *
-	 * @param actual JSON.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is not null.
+	///
+	/// @param actual JSON.
+	/// @return Assertion result.
 	public AssertionResult isNotNull(String actual) {
 		return actual == null ? failure(shouldNotBeNull("json")) : success();
 	}
 
-	/**
-	 * Check that given json is a JSON string type.
-	 *
-	 * @param actual JSON.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON string type.
+	///
+	/// @param actual JSON.
+	/// @return Assertion result.
 	public AssertionResult isString(String actual) {
 		return isType(actual, JsonType.STRING);
 	}
 
-	/**
-	 * Check that given json is a JSON string type.
-	 *
-	 * @param actual JSON.
-	 * @param path Entry path.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON string type.
+	///
+	/// @param actual JSON.
+	/// @param path Entry path.
+	/// @return Assertion result.
 	public AssertionResult isStringEntry(String actual, String path) {
 		return isEntryWithType(actual, path, JsonType.STRING);
 	}
 
-	/**
-	 * Check that given json is a JSON number type.
-	 *
-	 * @param actual JSON.
-	 * @param path Entry path.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON number type.
+	///
+	/// @param actual JSON.
+	/// @param path Entry path.
+	/// @return Assertion result.
 	public AssertionResult isNumberEntry(String actual, String path) {
 		return isEntryWithType(actual, path, JsonType.NUMBER);
 	}
 
-	/**
-	 * Check that given json is a JSON boolean type.
-	 *
-	 * @param actual JSON.
-	 * @param path Entry path.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON boolean type.
+	///
+	/// @param actual JSON.
+	/// @param path Entry path.
+	/// @return Assertion result.
 	public AssertionResult isBooleanEntry(String actual, String path) {
 		return isEntryWithType(actual, path, JsonType.BOOLEAN);
 	}
 
-	/**
-	 * Check that given json is a JSON array type.
-	 *
-	 * @param actual JSON.
-	 * @param path Entry path.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON array type.
+	///
+	/// @param actual JSON.
+	/// @param path Entry path.
+	/// @return Assertion result.
 	public AssertionResult isArrayEntry(String actual, String path) {
 		return isEntryWithType(actual, path, JsonType.ARRAY);
 	}
 
-	/**
-	 * Check that given json is a JSON object type.
-	 *
-	 * @param actual JSON.
-	 * @param path Entry path.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON object type.
+	///
+	/// @param actual JSON.
+	/// @param path Entry path.
+	/// @return Assertion result.
 	public AssertionResult isObjectEntry(String actual, String path) {
 		return isEntryWithType(actual, path, JsonType.OBJECT);
 	}
@@ -186,42 +162,34 @@ public final class JsonAssertions {
 		return isType(actual, path, parsedValue, expectedType);
 	}
 
-	/**
-	 * Check that given json is a JSON number.
-	 *
-	 * @param actual JSON.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON number.
+	///
+	/// @param actual JSON.
+	/// @return Assertion result.
 	public AssertionResult isNumber(String actual) {
 		return isType(actual, JsonType.NUMBER);
 	}
 
-	/**
-	 * Check that given json is a JSON boolean.
-	 *
-	 * @param actual JSON.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON boolean.
+	///
+	/// @param actual JSON.
+	/// @return Assertion result.
 	public AssertionResult isBoolean(String actual) {
 		return isType(actual, JsonType.BOOLEAN);
 	}
 
-	/**
-	 * Check that given json is a JSON array.
-	 *
-	 * @param actual JSON.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON array.
+	///
+	/// @param actual JSON.
+	/// @return Assertion result.
 	public AssertionResult isArray(String actual) {
 		return isType(actual, JsonType.ARRAY);
 	}
 
-	/**
-	 * Check that given json is a JSON object.
-	 *
-	 * @param actual JSON.
-	 * @return Assertion result.
-	 */
+	/// Check that given json is a JSON object.
+	///
+	/// @param actual JSON.
+	/// @return Assertion result.
 	public AssertionResult isObject(String actual) {
 		return isType(actual, JsonType.OBJECT);
 	}
@@ -260,14 +228,12 @@ public final class JsonAssertions {
 		);
 	}
 
-	/**
-	 * Check that given json contains given entries.
-	 *
-	 * @param actual JSON object.
-	 * @param key Entry to check.
-	 * @param other Other entries to check.
-	 * @return Assertion result.
-	 */
+	/// Check that given json contains given entries.
+	///
+	/// @param actual JSON object.
+	/// @param key Entry to check.
+	/// @param other Other entries to check.
+	/// @return Assertion result.
 	public AssertionResult contains(String actual, String key, String... other) {
 		Set<String> entries = new LinkedHashSet<>();
 		entries.add(key);
@@ -275,13 +241,11 @@ public final class JsonAssertions {
 		return contains(actual, entries);
 	}
 
-	/**
-	 * Check that given json contains given entries.
-	 *
-	 * @param actual JSON object.
-	 * @param keys Entries to check.
-	 * @return Assertion result.
-	 */
+	/// Check that given json contains given entries.
+	///
+	/// @param actual JSON object.
+	/// @param keys Entries to check.
+	/// @return Assertion result.
 	public AssertionResult contains(String actual, Iterable<String> keys) {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
@@ -296,14 +260,12 @@ public final class JsonAssertions {
 		return errors.isEmpty() ? success() : failure(composeErrors(errors));
 	}
 
-	/**
-	 * Check that given json contains given entries.
-	 *
-	 * @param actual JSON object.
-	 * @param entry Entry to check.
-	 * @param other Other entries to check.
-	 * @return Assertion result.
-	 */
+	/// Check that given json contains given entries.
+	///
+	/// @param actual JSON object.
+	/// @param entry Entry to check.
+	/// @param other Other entries to check.
+	/// @return Assertion result.
 	public AssertionResult containsEntries(String actual, JsonEntry entry, JsonEntry... other) {
 		Set<JsonEntry> entries = new LinkedHashSet<>();
 		entries.add(entry);
@@ -311,13 +273,11 @@ public final class JsonAssertions {
 		return containsEntries(actual, entries);
 	}
 
-	/**
-	 * Check that given json contains given entries.
-	 *
-	 * @param actual JSON object.
-	 * @param entries Entries to check.
-	 * @return Assertion result.
-	 */
+	/// Check that given json contains given entries.
+	///
+	/// @param actual JSON object.
+	/// @param entries Entries to check.
+	/// @return Assertion result.
 	public AssertionResult containsEntries(String actual, Iterable<JsonEntry> entries) {
 		Set<RestAssertError> errors = new LinkedHashSet<>();
 
@@ -356,46 +316,38 @@ public final class JsonAssertions {
 		return JsonPath.read(actual, path);
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param expected Expected representation.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param expected Expected representation.
+	/// @return Assertion result.
 	public AssertionResult isEqualTo(String actual, String expected) {
 		return doComparison(actual, expected);
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param file Expected representation.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param file Expected representation.
+	/// @return Assertion result.
 	public AssertionResult isEqualTo(String actual, File file) {
 		return isEqualTo(actual, readFileToString(file.toPath()));
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param path Expected representation.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param path Expected representation.
+	/// @return Assertion result.
 	public AssertionResult isEqualTo(String actual, Path path) {
 		return isEqualTo(actual, readFileToString(path));
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param uri Expected representation.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param uri Expected representation.
+	/// @return Assertion result.
 	public AssertionResult isEqualTo(String actual, URI uri) {
 		if (uri == null) {
 			throw new AssertionError("Cannot extract expected JSON from <null> URI");
@@ -404,13 +356,11 @@ public final class JsonAssertions {
 		return isEqualTo(actual, Paths.get(uri));
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param url Expected representation.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param url Expected representation.
+	/// @return Assertion result.
 	public AssertionResult isEqualTo(String actual, URL url) {
 		if (url == null) {
 			throw new AssertionError("Cannot extract expected JSON from <null> URL");
@@ -425,14 +375,12 @@ public final class JsonAssertions {
 		}
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param expected Expected representation.
-	 * @param entries Name of entries to ignore.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param expected Expected representation.
+	/// @param entries Name of entries to ignore.
+	/// @return Assertion result.
 	public AssertionResult isEqualToIgnoring(String actual, String expected, Iterable<String> entries) {
 		final String actualJson;
 		final String expectedJson;
@@ -460,50 +408,42 @@ public final class JsonAssertions {
 		return doComparison(actualJson, expectedJson);
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param file Expected representation.
-	 * @param entries Name of entries to ignore.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param file Expected representation.
+	/// @param entries Name of entries to ignore.
+	/// @return Assertion result.
 	public AssertionResult isEqualToIgnoring(String actual, File file, Iterable<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(file.toPath()), entries);
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param path Expected representation.
-	 * @param entries Name of entries to ignore.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param path Expected representation.
+	/// @param entries Name of entries to ignore.
+	/// @return Assertion result.
 	public AssertionResult isEqualToIgnoring(String actual, Path path, Iterable<String> entries) {
 		return isEqualToIgnoring(actual, readFileToString(path), entries);
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param uri Expected representation.
-	 * @param entries Name of entries to ignore.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param uri Expected representation.
+	/// @param entries Name of entries to ignore.
+	/// @return Assertion result.
 	public AssertionResult isEqualToIgnoring(String actual, URI uri, Iterable<String> entries) {
 		return isEqualToIgnoring(actual, new File(uri), entries);
 	}
 
-	/**
-	 * Check that two json representation are equals.
-	 *
-	 * @param actual Actual representation.
-	 * @param url Expected representation.
-	 * @param entries Name of entries to ignore.
-	 * @return Assertion result.
-	 */
+	/// Check that two json representation are equals.
+	///
+	/// @param actual Actual representation.
+	/// @param url Expected representation.
+	/// @param entries Name of entries to ignore.
+	/// @return Assertion result.
 	public AssertionResult isEqualToIgnoring(String actual, URL url, Iterable<String> entries) {
 		try {
 			return isEqualToIgnoring(actual, new File(url.toURI()), entries);

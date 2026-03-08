@@ -33,32 +33,22 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Skeleton builder for implementation of {@link HttpResponseBuilder}.
- *
- * @param <T> Concrete implementation, used for chaining.
- */
+/// Skeleton builder for implementation of [HttpResponseBuilder].
+///
+/// @param <T> Concrete implementation, used for chaining.
 @SuppressWarnings("unchecked")
 public abstract class AbstractHttpResponseBuilder<U, T extends HttpResponseBuilder<U>> implements HttpResponseBuilder<U> {
 
-	/**
-	 * Http response status code, default is 200.
-	 */
+	/// Http response status code, default is 200.
 	protected int status;
 
-	/**
-	 * Http response body, default is an empty string.
-	 */
+	/// Http response body, default is an empty string.
 	protected String content;
 
-	/**
-	 * Http response headers, default is not headers.
-	 */
+	/// Http response headers, default is not headers.
 	protected final Map<String, List<String>> headers;
 
-	/**
-	 * Create builder with default parameters.
-	 */
+	/// Create builder with default parameters.
 	protected AbstractHttpResponseBuilder() {
 		this.status = 200;
 		this.content = "";

@@ -30,9 +30,7 @@ import com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.Abstr
 
 import static com.github.mjeanroy.restassert.generator.utils.GeneratorUtils.generateAssertMethodName;
 
-/**
- * Abstract structure for HTTP assertions and {@link AbstractHamcrestTemplateModel}.
- */
+/// Abstract structure for HTTP assertions and [AbstractHamcrestTemplateModel].
 abstract class AbstractHamcrestHttpAssertTemplateModel extends AbstractHamcrestTemplateModel implements TemplateModel {
 
 	AbstractHamcrestHttpAssertTemplateModel() {

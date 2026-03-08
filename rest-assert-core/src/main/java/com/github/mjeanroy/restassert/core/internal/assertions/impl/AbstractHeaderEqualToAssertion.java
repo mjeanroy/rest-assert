@@ -37,16 +37,11 @@ import static com.github.mjeanroy.restassert.core.internal.error.http.ShouldHave
 
 abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion implements HttpResponseAssertion {
 
-	/**
-	 * Class logger.
-	 */
 	private static final Logger log = Loggers.getLogger(AbstractHeaderEqualToAssertion.class);
 
-	/**
-	 * Create assertion.
-	 *
-	 * @param name Header name.
-	 */
+	/// Create assertion.
+	///
+	/// @param name Header name.
 	AbstractHeaderEqualToAssertion(String name) {
 		super(name);
 	}
@@ -77,11 +72,9 @@ abstract class AbstractHeaderEqualToAssertion extends HasHeaderAssertion impleme
 		return doAssertion(actualValues);
 	}
 
-	/**
-	 * Do assertion on actual header values.
-	 *
-	 * @param values Header values.
-	 * @return Assertion result.
-	 */
+	/// Do assertion on actual header values.
+	///
+	/// @param values Header values.
+	/// @return Assertion result.
 	abstract AssertionResult doAssertion(List<String> values);
 }

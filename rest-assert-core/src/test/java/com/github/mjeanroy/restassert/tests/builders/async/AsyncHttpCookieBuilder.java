@@ -28,14 +28,10 @@ import com.github.mjeanroy.restassert.tests.builders.AbstractCookieBuilder;
 import io.netty.handler.codec.http.cookie.Cookie;
 import io.netty.handler.codec.http.cookie.DefaultCookie;
 
-/**
- * Build mock instance of {@link Cookie} class.
- */
+/// Build mock instance of [Cookie] class.
 public class AsyncHttpCookieBuilder extends AbstractCookieBuilder<Cookie, AsyncHttpCookieBuilder> {
 
-	/**
-	 * Create builder with default values.
-	 */
+	/// Create builder with default values.
 	public AsyncHttpCookieBuilder() {
 		super();
 	}

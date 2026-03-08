@@ -29,68 +29,46 @@ import com.github.mjeanroy.restassert.core.internal.common.ToStringBuilder;
 import java.util.Date;
 import java.util.Objects;
 
-/**
- * Default cookie representation.
- */
+/// Default cookie representation.
 final class DefaultCookie implements Cookie {
-	/**
-	 * Cookie name.
-	 */
+	/// Cookie name.
 	private final String name;
 
-	/**
-	 * Cookie value.
-	 */
+	/// Cookie value.
 	private final String value;
 
-	/**
-	 * Cookie domain.
-	 */
+	/// Cookie domain.
 	private final String domain;
 
-	/**
-	 * Cookie path.
-	 */
+	/// Cookie path.
 	private final String path;
 
-	/**
-	 * Secure flag.
-	 */
+	/// Secure flag.
 	private final boolean secure;
 
-	/**
-	 * HTTP-Only flag.
-	 */
+	/// HTTP-Only flag.
 	private final boolean httpOnly;
 
-	/**
-	 * SameSite flag.
-	 */
+	/// SameSite flag.
 	private final SameSite sameSite;
 
-	/**
-	 * Cookie max-age value.
-	 */
+	/// Cookie max-age value.
 	private final Long maxAge;
 
-	/**
-	 * Cookie expires date.
-	 */
+	/// Cookie expires date.
 	private final Date expires;
 
-	/**
-	 * Create cookie.
-	 *
-	 * @param name Cookie name, must not be null.
-	 * @param value Cookie value, must not be null.
-	 * @param domain Cookie domain.
-	 * @param path Cookie path.
-	 * @param secure Secure flag.
-	 * @param httpOnly HTTP-Only flag.
-	 * @param sameSite SameSite flag.
-	 * @param maxAge Cookie max-age value.
-	 * @param expires Cookie expires value.
-	 */
+	/// Create cookie.
+	///
+	/// @param name Cookie name, must not be null.
+	/// @param value Cookie value, must not be null.
+	/// @param domain Cookie domain.
+	/// @param path Cookie path.
+	/// @param secure Secure flag.
+	/// @param httpOnly HTTP-Only flag.
+	/// @param sameSite SameSite flag.
+	/// @param maxAge Cookie max-age value.
+	/// @param expires Cookie expires value.
 	DefaultCookie(
 		String name,
 		String value,

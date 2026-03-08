@@ -26,32 +26,24 @@ package com.github.mjeanroy.restassert.tests.builders;
 
 import com.github.mjeanroy.restassert.core.internal.data.HttpHeaderValue;
 
-/**
- * DefaultCookieBuilder used to create mock instance of {@link HttpHeaderValue} class.
- */
+/// Builder used to create mock instance of [HttpHeaderValue] class.
 public class HeaderValueBuilder {
 
-	/**
-	 * String value of header.
-	 */
+	/// String value of header.
 	private String value;
 
-	/**
-	 * Set {@link #value}.
-	 *
-	 * @param value New {@link #value}.
-	 * @return Current builder.
-	 */
+	/// Set [#value].
+	///
+	/// @param value New [#value].
+	/// @return Current builder.
 	public HeaderValueBuilder setValue(String value) {
 		this.value = value;
 		return this;
 	}
 
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Create mock instance.
+	///
+	/// @return Mock instance.
 	public HttpHeaderValue build() {
 		return new MockHttpHeaderValue(value);
 	}

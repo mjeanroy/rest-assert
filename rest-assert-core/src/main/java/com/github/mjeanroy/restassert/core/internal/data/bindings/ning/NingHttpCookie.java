@@ -28,26 +28,18 @@ import com.github.mjeanroy.restassert.core.data.Cookie;
 
 import java.util.Date;
 
-/**
- * Implementation of {@link Cookie}
- * using Async-Http framework as real implementation.
- */
+/// Implementation of [Cookie] using Async-Http framework as real implementation.
 public class NingHttpCookie implements Cookie {
 
-	/**
-	 * Create new {@link Cookie} using instance
-	 * of {@link com.ning.http.client.cookie.Cookie}.
-	 *
-	 * @param cookie Original cookie object.
-	 * @return Cookie that can be used with rest-assert.
-	 */
+	/// Create new [Cookie] using instance of [com.ning.http.client.cookie.Cookie].
+	///
+	/// @param cookie Original cookie object.
+	/// @return Cookie that can be used with rest-assert.
 	public static NingHttpCookie create(com.ning.http.client.cookie.Cookie cookie) {
 		return new NingHttpCookie(cookie);
 	}
 
-	/**
-	 * Original async http cookie.
-	 */
+	/// Original async http cookie.
 	private final com.ning.http.client.cookie.Cookie cookie;
 
 	// Use static factory

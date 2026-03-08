@@ -26,23 +26,18 @@ package com.github.mjeanroy.restassert.generator.templates.modules.hamcrest.tmpl
 
 import com.github.mjeanroy.restassert.generator.Template;
 
-/**
- * Template used to generate assertions classes.
- * This class is thread safe.
- * This class is implemented as a singleton.
- */
+/// Template used to generate assertions classes.
+///
+/// This class is thread safe.
+/// This class is implemented as a singleton.
 public class JsonMatchersTemplate extends AbstractHamcrestTemplate implements Template {
 
-	/**
-	 * Singleton object.
-	 */
+	/// Singleton object.
 	private static final JsonMatchersTemplate INSTANCE = new JsonMatchersTemplate();
 
-	/**
-	 * Get singleton instance.
-	 *
-	 * @return Singleton instance.
-	 */
+	/// Get singleton instance.
+	///
+	/// @return Singleton instance.
 	public static JsonMatchersTemplate jsonMatchersTemplate() {
 		return INSTANCE;
 	}

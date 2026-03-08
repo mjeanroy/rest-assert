@@ -27,32 +27,24 @@ package com.github.mjeanroy.restassert.tests.builders.ok;
 import okhttp3.MediaType;
 import okhttp3.ResponseBody;
 
-/**
- * DefaultCookieBuilder to create mock instance of {@link com.google.api.client.http.HttpResponse} class.
- */
+/// Builder to create mock instance of [com.google.api.client.http.HttpResponse] class.
 class OkHttpResponseBodyBuilder {
 
-	/**
-	 * HTTP Response body.
-	 */
+	/// HTTP Response body.
 	private String body;
 
-	/**
-	 * Set {@link #body}.
-	 *
-	 * @param body New {@link #body}.
-	 * @return Current builder.
-	 */
+	/// Set [#body].
+	///
+	/// @param body New [#body].
+	/// @return Current builder.
 	OkHttpResponseBodyBuilder setBody(String body) {
 		this.body = body;
 		return this;
 	}
 
-	/**
-	 * Create mock instance.
-	 *
-	 * @return Mock instance.
-	 */
+	/// Create mock instance.
+	///
+	/// @return Mock instance.
 	ResponseBody build() {
 		MediaType mediaType = MediaType.parse("plain/text");
 		String content = body == null ? "" : body;

@@ -37,66 +37,50 @@ import java.util.Set;
 import static java.util.Collections.singleton;
 import static java.util.Collections.unmodifiableSet;
 
-/**
- * Values of valid X-Frame-Options directive.
- * Specification: https://tools.ietf.org/html/rfc7034
- *
- * Important: values are case-insensitive!
- *
- * @see <a href="https://tools.ietf.org/html/rfc7034">https://tools.ietf.org/html/rfc7034</a>
- * @see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options</a>
- */
+/// Values of valid `X-Frame-Options` directive:
+/// - [RFC 7034](https://tools.ietf.org/html/rfc7034)
+/// - [MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options)
+///
+/// **Important: values are case-insensitive!**
 public final class FrameOptions implements HttpHeaderValue {
 
 	private static final FrameOptions DENY = new FrameOptions(Directive.DENY);
 	private static final FrameOptions SAME_ORIGIN = new FrameOptions(Directive.SAME_ORIGIN);
 
-	/**
-	 * Get the {@code "DENY"} {@code "X-Frame-Options"} header.
-	 *
-	 * @return The {@code "X-Frame-Options"} header.
-	 */
+	/// Get the `"DENY"` `"X-Frame-Options"` header.
+	///
+	/// @return The `"X-Frame-Options"` header.
 	public static FrameOptions deny() {
 		return DENY;
 	}
 
-	/**
-	 * Get the {@code "SAMEORIGIN"} {@code "X-Frame-Options"} header.
-	 *
-	 * @return The {@code "X-Frame-Options"} header.
-	 */
+	/// Get the `"SAMEORIGIN"` `"X-Frame-Options"` header.
+	///
+	/// @return The `"X-Frame-Options"` header.
 	public static FrameOptions sameOrigin() {
 		return SAME_ORIGIN;
 	}
 
-	/**
-	 * Get the {@code "ALLOW-FROM"} {@code "X-Frame-Options"} header with given URI.
-	 *
-	 * @param uri The given URI.
-	 * @return The {@code "X-Frame-Options"} header.
-	 */
+	/// Get the `"ALLOW-FROM"` `"X-Frame-Options"` header with given URI.
+	///
+	/// @param uri The given URI.
+	/// @return The `"X-Frame-Options"` header.
 	public static FrameOptions allowFrom(String uri) {
 		return allowFrom(URI.create(uri));
 	}
 
-	/**
-	 * Get the {@code "ALLOW-FROM"} {@code "X-Frame-Options"} header with given URI.
-	 *
-	 * @param uri The given URI.
-	 * @return The {@code "X-Frame-Options"} header.
-	 */
+	/// Get the `"ALLOW-FROM"` `"X-Frame-Options"` header with given URI.
+	///
+	/// @param uri The given URI.
+	/// @return The `"X-Frame-Options"` header.
 	public static FrameOptions allowFrom(URI uri) {
 		return new FrameOptions(Directive.ALLOW_FROM, singleton(uri.toString()));
 	}
 
-	/**
-	 * The {@code X-Frame-Options} directives.
-	 */
+	/// The `X-Frame-Options` directives.
 	public enum Directive {
-		/**
-		 * A browser receiving content with this directive MUST NOT display
-		 * this content in any frame.
-		 */
+		/// A browser receiving content with this directive MUST NOT display
+		/// this content in any frame.
 		DENY("DENY") {
 			@Override
 			FrameOptions parse(String value) {
@@ -104,15 +88,13 @@ public final class FrameOptions implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * A browser receiving content with this directive MUST NOT display
-		 * this content in any frame from a page of different origin than
-		 * the content itself.
-		 *
-		 * If a browser or plugin can not reliably determine whether the
-		 * origin of the content and the frame have the same origin, this
-		 * MUST be treated as "DENY".
-		 */
+		/// A browser receiving content with this directive MUST NOT display
+		/// this content in any frame from a page of different origin than
+		/// the content itself.
+		///
+		/// If a browser or plugin can not reliably determine whether the
+		/// origin of the content and the frame have the same origin, this
+		/// MUST be treated as "DENY".
 		SAME_ORIGIN("SAMEORIGIN") {
 			@Override
 			FrameOptions parse(String value) {
@@ -120,13 +102,13 @@ public final class FrameOptions implements HttpHeaderValue {
 			}
 		},
 
-		/**
-		 * A browser receiving content with this directive MUST NOT display
-		 * this content in any frame from a page of different origin than
-		 * the listed origin.  While this can expose the page to risks by
-		 * the trusted origin, in some cases it may be necessary to use
-		 * content from other domains.
-		 */
+		/// A browser receiving content with this directive MUST NOT display
+		/// this content in any frame from a page of different origin than
+		/// the listed origin.
+		///
+		/// While this can expose the page to risks by
+		/// the trusted origin, in some cases it may be necessary to use
+		/// content from other domains.
 		ALLOW_FROM("ALLOW-FROM") {
 			@Override
 			boolean match(String value) {
@@ -153,106 +135,80 @@ public final class FrameOptions implements HttpHeaderValue {
 			}
 		};
 
-		/**
-		 * The directive directive.
-		 */
+		/// The directive prefix.
 		private final String prefix;
 
-		/**
-		 * Create the directive using the directive prefix.
-		 *
-		 * @param prefix Directive prefix.
-		 */
+		/// Create the directive using the directive prefix.
+		///
+		/// @param prefix Directive prefix.
 		Directive(String prefix) {
 			this.prefix = prefix;
 		}
 
-		/**
-		 * Get {@link #prefix}
-		 *
-		 * @return {@link #prefix}
-		 */
+		/// Get [#prefix]
+		///
+		/// @return Returns [#prefix]
 		String getPrefix() {
 			return prefix;
 		}
 
-		/**
-		 * Check if value match given directive name.
-		 *
-		 * @param value The header raw value.
-		 * @return The
-		 */
+		/// Check if value match given directive name.
+		///
+		/// @param value The header raw value.
+		/// @return `true` if `value` match directive, `false` otherwise.
 		boolean match(String value) {
 			return getPrefix().equals(value);
 		}
 
-		/**
-		 * Parse header and return structured {@link FrameOptions} header.
-		 *
-		 * @param value The header raw value.
-		 * @return The header.
-		 */
+		/// Parse header and return structured [FrameOptions] header.
+		///
+		/// @param value The header raw value.
+		/// @return The header.
 		abstract FrameOptions parse(String value);
 	}
 
-	/**
-	 * The parser instance.
-	 */
+	/// The parser instance.
 	private static final FrameOptionsParser PARSER = new FrameOptionsParser();
 
-	/**
-	 * Get parser for {@link FrameOptions} instances.
-	 *
-	 * @return The parser.
-	 */
+	/// Get parser for [FrameOptions] instances.
+	///
+	/// @return The parser.
 	public static HttpHeaderParser<FrameOptions> parser() {
 		return PARSER;
 	}
 
-	/**
-	 * The header directive value.
-	 */
+	/// The header directive value.
 	private final Directive directive;
 
-	/**
-	 * The header directive options.
-	 */
+	/// The header directive options.
 	private final Set<String> options;
 
-	/**
-	 * Create FrameOptions directive.
-	 *
-	 * @param value The directive mode.
-	 * @param options Directive options.
-	 */
+	/// Create [FrameOptions] directive.
+	///
+	/// @param value The directive mode.
+	/// @param options Directive options.
 	private FrameOptions(Directive value, Set<String> options) {
 		this.directive = value;
 		this.options = options;
 	}
 
-	/**
-	 * Create FrameOptions directive without any options.
-	 *
-	 * @param directive The directive mode.
-	 */
+	/// Create [FrameOptions] directive without any options.
+	///
+	/// @param directive The directive mode.
 	private FrameOptions(Directive directive) {
 		this(directive, Collections.<String>emptySet());
 	}
 
-	/**
-	 * Get {@link #directive}
-	 *
-	 * @return {@link #directive}
-	 */
+	/// Get [#directive]
+	///
+	/// @return Returns [#directive]
 	public Directive getDirective() {
 		return directive;
 	}
 
-	/**
-	 * Get {@link #options}
-	 *
-	 * @return {@link #options}
-	 */
+	/// Get [#options]
+	///
+	/// @return Returns [#options]
 	public Set<String> getOptions() {
 		return options;
 	}
