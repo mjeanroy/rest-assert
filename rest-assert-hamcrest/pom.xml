@@ -33,6 +33,9 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>rest-assert-hamcrest</artifactId>
+  <name>rest-assert-hamcrest</name>
+  <packaging>jar</packaging>
+  <url>https://github.com/mjeanroy/rest-assert</url>
 
   <properties>
     <source.generated.path>${project.basedir}/src/main/generated</source.generated.path>
