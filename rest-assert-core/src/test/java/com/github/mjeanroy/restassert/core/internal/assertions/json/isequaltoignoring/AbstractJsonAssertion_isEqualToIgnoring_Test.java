@@ -29,6 +29,7 @@ import com.github.mjeanroy.restassert.core.internal.assertions.JsonAssertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 
 import static com.github.mjeanroy.restassert.tests.AssertionUtils.assertFailureResult;
@@ -50,6 +51,19 @@ abstract class AbstractJsonAssertion_isEqualToIgnoring_Test<T> {
 		String actual = actual();
 		T expected = successObject();
 		List<String> ignoringKeys = asList("str", "nb", "bool");
+		AssertionResult result = run(actual, expected, ignoringKeys);
+
+		assertSuccessResult(result);
+	}
+
+	@Test
+	void it_should_pass_if_key_does_not_exist_in_json() {
+		String actual = actual();
+		T expected = successObject();
+		List<String> ignoringKeys = Collections.singletonList(
+			"key_that_does_not_exist_in_json"
+		);
+
 		AssertionResult result = run(actual, expected, ignoringKeys);
 
 		assertSuccessResult(result);

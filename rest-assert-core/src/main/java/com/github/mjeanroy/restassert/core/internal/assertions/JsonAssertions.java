@@ -32,6 +32,8 @@ import com.github.mjeanroy.restassert.core.internal.json.DefaultJsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.JsonComparator;
 import com.github.mjeanroy.restassert.core.internal.json.JsonParser;
 import com.github.mjeanroy.restassert.core.internal.json.JsonParsers;
+import com.github.mjeanroy.restassert.core.internal.loggers.Logger;
+import com.github.mjeanroy.restassert.core.internal.loggers.Loggers;
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.PathNotFoundException;
@@ -62,6 +64,8 @@ import static java.util.Collections.addAll;
 /// Set of reusable assertions on json
 /// values.
 public final class JsonAssertions {
+
+	private static final Logger log = Loggers.getLogger(JsonAssertions.class);
 
 	/// Singleton object.
 	private static final JsonAssertions INSTANCE = new JsonAssertions();
@@ -371,11 +375,22 @@ public final class JsonAssertions {
 			return isEqualTo(actual, expected);
 		}
 		catch (Ios.UrlException ex) {
+			log.error(ex.getMessage(), ex);
 			throw new AssertionError(ex);
 		}
 	}
 
-	/// Check that two json representation are equals.
+	/// Check that two json representation are equals, ignoring specific entries in given JSON.
+	///
+	/// List of entries can be specified as:
+	/// - JSON Path payload, such as `$.key1.key2`
+	/// - Or, raw path entry, such as `key1.key2`
+	///
+	/// Note that if some keys to ignore are not in the actual or expected JSON payloads, they
+	/// will be silently ignored.
+	///
+	/// To make sure some keys are in a JSON payload, combine with [#containsEntries(String, Iterable)]
+	/// assertion.
 	///
 	/// @param actual Actual representation.
 	/// @param expected Expected representation.
@@ -391,10 +406,14 @@ public final class JsonAssertions {
 			DocumentContext expectedCtx = JsonPath.parse(expected);
 
 			// Remove keys to ignore
+			// If a key to ignore is not present in actual or expected JSON, we just
+			// ignore it, we make sure it does not fail because of a missing key.
+			// To make sure keys are present in expected json, combine with `containsKey`
+			// assertion.
 			for (String entry : entries) {
 				String path = toJsonPath(entry);
-				actualCtx.delete(path);
-				expectedCtx.delete(path);
+				deleteJsonEntry(actualCtx, path);
+				deleteJsonEntry(expectedCtx, path);
 			}
 
 			actualJson = actualCtx.jsonString();
@@ -408,7 +427,26 @@ public final class JsonAssertions {
 		return doComparison(actualJson, expectedJson);
 	}
 
-	/// Check that two json representation are equals.
+	private void deleteJsonEntry(DocumentContext ctx, String jsonPath) {
+		try {
+			ctx.delete(jsonPath);
+		}
+		catch (PathNotFoundException ex) {
+			log.warn(ex.getMessage(), ex);
+		}
+	}
+
+	/// Check that two json representation are equals, ignoring specific entries.
+	///
+	/// List of entries can be specified as:
+	/// - JSON Path payload, such as `$.key1.key2`
+	/// - Or, raw path entry, such as `key1.key2`
+	///
+	/// Note that if some keys to ignore are not in the actual or expected JSON payloads, they
+	/// will be silently ignored.
+	///
+	/// To make sure some keys are in a JSON payload, combine with [#containsEntries(String, Iterable)]
+	/// assertion.
 	///
 	/// @param actual Actual representation.
 	/// @param file Expected representation.
@@ -418,7 +456,17 @@ public final class JsonAssertions {
 		return isEqualToIgnoring(actual, readFileToString(file.toPath()), entries);
 	}
 
-	/// Check that two json representation are equals.
+	/// Check that two json representation are equals, ignoring specific entries.
+	///
+	/// List of entries can be specified as:
+	/// - JSON Path payload, such as `$.key1.key2`
+	/// - Or, raw path entry, such as `key1.key2`
+	///
+	/// Note that if some keys to ignore are not in the actual or expected JSON payloads, they
+	/// will be silently ignored.
+	///
+	/// To make sure some keys are in a JSON payload, combine with [#containsEntries(String, Iterable)]
+	/// assertion.
 	///
 	/// @param actual Actual representation.
 	/// @param path Expected representation.
@@ -428,7 +476,17 @@ public final class JsonAssertions {
 		return isEqualToIgnoring(actual, readFileToString(path), entries);
 	}
 
-	/// Check that two json representation are equals.
+	/// Check that two json representation are equals, ignoring specific entries.
+	///
+	/// List of entries can be specified as:
+	/// - JSON Path payload, such as `$.key1.key2`
+	/// - Or, raw path entry, such as `key1.key2`
+	///
+	/// Note that if some keys to ignore are not in the actual or expected JSON payloads, they
+	/// will be silently ignored.
+	///
+	/// To make sure some keys are in a JSON payload, combine with [#containsEntries(String, Iterable)]
+	/// assertion.
 	///
 	/// @param actual Actual representation.
 	/// @param uri Expected representation.
@@ -438,7 +496,17 @@ public final class JsonAssertions {
 		return isEqualToIgnoring(actual, new File(uri), entries);
 	}
 
-	/// Check that two json representation are equals.
+	/// Check that two json representation are equals, ignoring specific entries.
+	///
+	/// List of entries can be specified as:
+	/// - JSON Path payload, such as `$.key1.key2`
+	/// - Or, raw path entry, such as `key1.key2`
+	///
+	/// Note that if some keys to ignore are not in the actual or expected JSON payloads, they
+	/// will be silently ignored.
+	///
+	/// To make sure some keys are in a JSON payload, combine with [#containsEntries(String, Iterable)]
+	/// assertion.
 	///
 	/// @param actual Actual representation.
 	/// @param url Expected representation.
