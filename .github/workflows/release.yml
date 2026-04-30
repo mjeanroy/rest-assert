@@ -40,6 +40,9 @@ on:
           - 'true'
           - 'false'
 
+permissions:
+  contents: write
+
 jobs:
   build:
 
