@@ -16,21 +16,21 @@ updates:
         update-types: [ "version-update:semver-major" ]
       # mockito >= 5.0.0 requires Java 11
       - dependency-name: org.mockito:mockito-core
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       # async-http-client >= 3.0.0 requires Java 11
       - dependency-name: org.asynchttpclient:async-http-client
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       # jmustache >= 1.16 requires Java 11
       - dependency-name: com.samskivert:jmustache
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
       # wiremock >= 3.0.0 requires Java 11
       - dependency-name: com.github.tomakehurst:wiremock
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       # spring >= 6.0.0 requires Java 17
       - dependency-name: org.springframework:spring-web
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       - dependency-name: org.springframework:spring-test
-        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+        update-types: ["version-update:semver-major"]
       # junit-jupiter >= 6.0.0 requires Java 17
       - dependency-name: org.junit.jupiter:junit-jupiter-api
         update-types: ["version-update:semver-major"]
