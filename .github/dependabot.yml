@@ -27,9 +27,7 @@ updates:
       - dependency-name: com.github.tomakehurst:wiremock
         update-types: ["version-update:semver-major"]
       # spring >= 6.0.0 requires Java 17
-      - dependency-name: org.springframework:spring-web
-        update-types: ["version-update:semver-major"]
-      - dependency-name: org.springframework:spring-test
+      - dependency-name: org.springframework:*
         update-types: ["version-update:semver-major"]
       # junit-jupiter >= 6.0.0 requires Java 17
       - dependency-name: org.junit.jupiter:junit-jupiter-api
